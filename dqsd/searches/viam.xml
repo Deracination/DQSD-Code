@@ -18,15 +18,17 @@
   <form name="viamf"
         method="get"
         action="http://www.viamichelin.com/viamichelin/fra/dyn/controller/ambiguousTest">
-    <input type="hidden" name="act" value="MapHomeVersMapDisplay" />
-    <input type="hidden" name="express" value="true" />
-    <input type="hidden" name="from" value="700" />
-    <input type="hidden" name="intMapScale" value="0" />
+    <input type="hidden" name="strAddress" value="" />
     <input type="hidden" name="strCountry" value="EUR" />
     <input type="hidden" name="strCity" value="" />
-    <input type="hidden" name="strAddress" value="" />
+    <input type="hidden" name="intMapScale" value="0" />
+    <input type="hidden" name="act" value="MapHomeVersMapDisplay" />
+    <input type="hidden" name="expressMap" value="true" />
+    <input type="hidden" name="from" value="700" />
+    <input type="hidden" name="strZipCode" value="" />
+    <input type="hidden" name="hasFamilyList" value="true" />
   </form>
-  <script><![CDATA[
+ <script><![CDATA[
     function viam(q)
     {
       /*

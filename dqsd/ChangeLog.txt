@@ -57,6 +57,7 @@ Modified Searches
 * pw - fixed to work with current web page (can't remember who fixed it)
 * gtwhois - Post url changed, modified search accordingly (Dean Wilson)
 * tvg - Default url broken, modified search accordingly (Shawn K. Hall)
+* viam - Changed to fit site changes
 
 Removed Searches
 
