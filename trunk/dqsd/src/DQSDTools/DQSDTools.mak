@@ -146,7 +146,7 @@ INTDIR=.\ReleaseMinDependency
 OutDir=.\ReleaseMinDependency
 # End Custom Macros
 
-ALL : "$(OUTDIR)\DQSDTools.dll" ".\DQSDTools.tlb" ".\DQSDTools.h" ".\DQSDTools_i.c" "$(OUTDIR)\DQSDTools.bsc" ".\ReleaseMinDependency\regsvr32.trg"
+ALL : "$(OUTDIR)\DQSDTools.dll" "$(OUTDIR)\DQSDTools.bsc" ".\ReleaseMinDependency\regsvr32.trg"
 
 
 CLEAN :
