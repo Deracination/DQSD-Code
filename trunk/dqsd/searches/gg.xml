@@ -1,39 +1,63 @@
 <search function="gg">
   <name>Google</name>
-  <description>Google is reputed to be the fastest web search engine. Search Google's copy of the DMOZ open /directory. Search for /images, /related sites, sites that /link to the search term, or view Google's /cache of a web page. <nobr>Example: "gg david bau /images"</nobr></description>
+  <description>
+    Google is reputed to be the web's fastest search engine.<br/>
+    <a class="helpboxDescLabels">Switches:</a><br/>
+  	<table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">/directory</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Search Google's copy of the DMOZ open directory.</td></tr>
+  		<tr><td class="helpboxDescColumns">/images</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Search for images.</td></tr>
+      <tr><td class="helpboxDescColumns">/related</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Given a URL, finds other sites closely related.</td></tr>
+      <tr><td class="helpboxDescColumns">/link</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Given a URL, finds other sites that link to it.</td></tr>
+      <tr><td class="helpboxDescColumns">/cache</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Given a URL, loads Google's cached copy of the web page.</td></tr>
+  	</table>
+    <a class="helpboxDescLabels">Examples:</a><br/>
+    <table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">gg david bau /images</td></tr>
+  	</table>
+  </description>
   <category>Search the Web</category>
   <link>http://www.google.com/</link>
   <contributor>David Bau, Ryan Edwards</contributor>
+  
   <form name="ggf"
         action="http://www.google.com/search"
         method="get">
     <input type="hidden" name="cat" value=""/>
     <input type="hidden" name="q"/>
   </form>
+  
   <form name="imagef"
         action="http://images.google.com/images"
         method="get">
     <input type="hidden" name="q"/>
   </form>
+  
   <script><![CDATA[
     function gg(q)
     {
-      var args = parseArgs(q, "images, directory, related, similar, cache, link, groups");
+      var args = parseArgs(q, "images, directory, related, cache, link, groups");
       if( args.q == "" )
       {
       	if ( args.switches.length > 0 )
-        {
           switch( args.switches[0].name )
           {
             case "images": openSearchWindow("http://images.google.com/"); return;
             case "directory": openSearchWindow("http://images.google.com/dirhp"); return;
             case "groups": openSearchWindow("http://www.google.com/grphp"); return;
           }
-        }
         openSearchWindow("http://www.google.com/");
       }
+      else if( args.q == "?" )
+        nullArgs("gg","?");
+        
       else if( args.switches.length == 1 )
       {
+        if( (args.switches[0].name == "releated" || args.switches[0].name == "cache" || args.switches[0].name == "link" ) && !isURL(args.q) )
+        {
+          nullArgs("gg","?");
+          return false;
+        }
+          
         switch( args.switches[0].name )
         {
           case "directory":
@@ -46,7 +70,6 @@
             submitForm(imagef);
             break;
           case "related":
-          case "similar":
             document.ggf.q.value="related:" + args.q;
             submitForm(ggf);
             break;
