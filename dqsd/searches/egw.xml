@@ -1,0 +1,34 @@
+<search function="egw">
+  <name>Ellen G. White's Writings</name>
+  <category>Reference</category>
+  <contributor>Brent Beardsley</contributor>
+  <link>http://www.whiteestate.org/search/published_writings.asp</link>
+  <email></email>
+  <description>
+   Search Ellen G. White's writings
+   <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>egw fireproof buildings new york</td></tr>
+  	</table>
+  </description>
+  <form name="egwf"
+        method="post"
+        action="http://www.egwestate.andrews.edu/cgi-bin/search.database/PublishedWritings">
+    <input type="hidden" name="QUERY" value="" />
+    <input type="hidden" name="MAXDOCS" value="20" />
+  </form>
+  <form name="passwordf" action="">
+	<input type="hidden" name="password" value="" />
+	<input type="hidden" name="password_done" value="" />
+  </form>
+  <script><![CDATA[
+    function egw(q)
+    {
+      if( nullArgs("egw", q) )
+        return;
+
+      document.egwf.QUERY.value = q;
+      submitForm(egwf);
+    }
+  ]]></script>
+</search>
