@@ -2,9 +2,9 @@
   <name>WebMD</name>
   <description>
     Search the WebMD medical news site.<br/>
-    <a class="helpboxDescLabels">Example:</a><br/>
-    <table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">md cold</td></tr>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>md cold</td></tr>
   	</table>
   </description>
   <category>Other</category>

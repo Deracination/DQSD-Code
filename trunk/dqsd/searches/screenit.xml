@@ -2,9 +2,9 @@
   <name>ScreenIt</name>
   <description>
     A family-friendly movie search index. Uses Google for searching.<br/>
-    <a class="helpboxDescLabels">Example:</a><br/>
-    <table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">screenit jaws</td></tr>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>screenit jaws</td></tr>
   	</table>
   </description>
   <category>Entertainment</category>

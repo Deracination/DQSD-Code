@@ -2,14 +2,14 @@
   <name>Microsoft Developer Network (MSDN)</name>
   <description>
     Search for articles on the MSDN.<br/>
-    <a class="helpboxDescLabels">Switches:</a><br/>
-  	<table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">/library</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Limits search to the MSDN Library.</td></tr>
+    <div class="helpboxDescLabels">Switches:</div>
+  	<table class="helpboxDescTable">
+  		<tr><td>/library</td><td> - </td><td>Limits search to the MSDN Library.</td></tr>
   	</table>
-    <a class="helpboxDescLabels">Examples:</a><br/>
-    <table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">msdn ocx</td></tr>
-  		<tr><td class="helpboxDescColumns">msdn iframes /library</td></tr>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>msdn ocx</td></tr>
+  		<tr><td>msdn iframes /library</td></tr>
   	</table>
   </description>
   <category>Computers</category>

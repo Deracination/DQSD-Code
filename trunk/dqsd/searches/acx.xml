@@ -2,9 +2,9 @@
   <name>Cambridgesoft ChemACX.com</name>
   <description>
     Search for chemical compounds.<br/>
-    <a class="helpboxDescLabels">Example:</a><br/>
-    <table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">acx chloride</td></tr>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>acx chloride</td></tr>
   	</table>
   </description>
   <category>Other</category>

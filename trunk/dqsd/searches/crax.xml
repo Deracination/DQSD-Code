@@ -2,9 +2,9 @@
   <name>Astalavista</name>
   <description>
     Search Astalavista for software cracks and patches.<br/>
-    <a class="helpboxDescLabels">Example:</a><br/>
-    <table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">crax DQSD</td></tr>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>crax DQSD</td></tr>
   	</table>
   </description>
   <category>Search the Web</category>

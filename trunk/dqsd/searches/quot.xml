@@ -2,9 +2,9 @@
   <name>Bartleby.com</name>
   <description>
     Search several sources for familiar quotations.<br/>
-    <a class="helpboxDescLabels">Example:</a><br/>
-    <table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">quot penny</td></tr>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>quot penny</td></tr>
   	</table>
   </description>
   <category>Reference</category>

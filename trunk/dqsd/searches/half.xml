@@ -2,9 +2,9 @@
   <name>Half.com</name>
   <description>
     Search Half.com for products.<br/>
-    <a class="helpboxDescLabels">Example:</a><br/>
-    <table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">half chaos</td></tr>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>half chaos</td></tr>
   	</table>
   </description>
   <category>Shopping</category>

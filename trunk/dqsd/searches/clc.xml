@@ -2,10 +2,10 @@
   <name>Calculate</name>
   <description>
     Evaluate numeric expressions.<br/>
-    <a class="helpboxDescLabels">Examples:</a><br/>
-    <table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">clc (4+3)*(2+2)</td></tr>
-      <tr><td class="helpboxDescColumns">clc pow(e, pi/2)</td></tr>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>clc (4+3)*(2+2)</td></tr>
+      <tr><td>clc pow(e, pi/2)</td></tr>
   	</table>
   </description>
   <category>Functions</category>

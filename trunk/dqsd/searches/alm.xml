@@ -2,17 +2,17 @@
   <name>All Music Guide (AMG)</name>
   <description>
     Search the AMG for album reviews, track listings, artist discographies and more. Searches for artists by default.<br/>
-    <a class="helpboxDescLabels">Switches:</a><br/>
-  	<table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">/song</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Search for a specific song.</td></tr>
-  		<tr><td class="helpboxDescColumns">/album</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Search for a specific album.</td></tr>
-  		<tr><td class="helpboxDescColumns">/style</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Lookup the history of a particular music style.</td></tr>
-  		<tr><td class="helpboxDescColumns">/label</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Lookup information on a major record label.</td></tr>
+    <div class="helpboxDescLabels">Switches:</div>
+  	<table class="helpboxDescTable">
+  		<tr><td>/song</td><td> - </td><td>Search for a specific song.</td></tr>
+  		<tr><td>/album</td><td> - </td><td>Search for a specific album.</td></tr>
+  		<tr><td>/style</td><td> - </td><td>Lookup the history of a particular music style.</td></tr>
+  		<tr><td>/label</td><td> - </td><td>Lookup information on a major record label.</td></tr>
   	</table>
-    <a class="helpboxDescLabels">Examples:</a><br/>
-    <table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">alm The Beatles</td></tr>
-  		<tr><td class="helpboxDescColumns">alm Revolver /album</td></tr>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>alm The Beatles</td></tr>
+  		<tr><td>alm Revolver /album</td></tr>
   	</table>
   </description>
   <category>Entertainment</category>

@@ -2,9 +2,9 @@
   <name>RGB to Hexidecimal Conversion</name>
   <description>
     Convert RGB integer values to hexidecimal equivalents.<br/>
-    <a class="helpboxDescLabels">Example:</a><br/>
-    <table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">rgb 255110053</td></tr>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>rgb 255110053</td></tr>
   	</table>
   </description>
   <category>Functions</category>

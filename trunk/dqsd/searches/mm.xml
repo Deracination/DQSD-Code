@@ -2,9 +2,9 @@
   <name>Multimap Maps</name>
   <description>
     Search for UK maps.<br/>
-    <a class="helpboxDescLabels">Example:</a><br/>
-    <table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">mm 10 Downing Street, London sw1</td></tr>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>mm 10 Downing Street, London sw1</td></tr>
   	</table>
   </description>
   <category>People and Places</category>

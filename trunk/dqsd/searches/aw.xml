@@ -2,9 +2,9 @@
   <name>AccuWeather Forecast</name>
   <description>
     Search for weather forecasts by zip code.<br/>
-    <a class="helpboxDescLabels">Example:</a><br/>
-    <table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">aw 98052</td></tr>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>aw 98052</td></tr>
   	</table>
   </description>
   <category>News</category>

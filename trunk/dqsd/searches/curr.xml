@@ -2,13 +2,13 @@
   <name>Currency Conversion</name>
   <description>
     Convert from one currency to another using the Universal Currency Converter.<br/>
-    <a class="helpboxDescLabels">Usage:</a><br/>
-  	<table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">curr /from:&lt;<i>curr1</i>&gt; /to:&lt;<i>curr2</i>&gt; &lt;<i>amount</i>&gt;</td></tr>
+    <div class="helpboxDescLabels">Usage:</div>
+  	<table class="helpboxDescTable">
+  		<tr><td>curr /from:&lt;<i>curr1</i>&gt; /to:&lt;<i>curr2</i>&gt; &lt;<i>amount</i>&gt;</td></tr>
    	</table>
-    <a class="helpboxDescLabels">Example:</a><br/>
-    <table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">curr /from:usd /to:gbp 100</td></tr>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>curr /from:usd /to:gbp 100</td></tr>
   	</table>
   </description>
   <category>Reference</category>

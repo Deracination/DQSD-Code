@@ -2,14 +2,14 @@
   <name>The File Extension Source</name>
   <description>
     Lookup the meaning of Windows/DOS file extensions.<br/>
-    <a class="helpboxDescLabels">Usage:</a><br/>
-  	<table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">fe {[a..z] | num | sym }</td></tr>
+    <div class="helpboxDescLabels">Usage:</div>
+  	<table class="helpboxDescTable">
+  		<tr><td>fe {[a..z] | num | sym }</td></tr>
   	</table>
-    <a class="helpboxDescLabels">Example:</a><br/>
-    <table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">fe D</td></tr>
-      <tr><td class="helpboxDescColumns">fe sym</td></tr>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>fe D</td></tr>
+      <tr><td>fe sym</td></tr>
   	</table>
   </description>
   <category>Computers</category>

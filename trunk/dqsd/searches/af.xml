@@ -2,9 +2,9 @@
   <name>AcronymFinder</name>
   <description>
     Find an acronym on AcronymFinder.<br/>
-    <a class="helpboxDescLabels">Example:</a><br/>
-    <table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">af SCUBA</td></tr>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>af SCUBA</td></tr>
   	</table>
   </description>
   <category>Reference</category>

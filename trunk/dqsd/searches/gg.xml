@@ -2,27 +2,27 @@
   <name>Google</name>
   <description>
     Google is reputed to be the web's fastest and most versatile search engine.<br/>
-    <a class="helpboxDescLabels">Switches:</a><br/>
-  	<table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">/ifl</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">"I'm Feeling Lucky": Go directly to Google's top-ranked result.</td></tr>
-  		<tr><td class="helpboxDescColumns">/advanced</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Use the Google Advanced Search page.</td></tr>
-  		<tr><td class="helpboxDescColumns">/groups</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Search Google's newsgroup archive.</td></tr>
-  		<tr><td class="helpboxDescColumns">/directory</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Search Google's copy of the DMOZ open directory.</td></tr>
-  		<tr><td class="helpboxDescColumns">/images</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Search for images.</td></tr>
-      <tr><td class="helpboxDescColumns">/cache</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Given a URL, loads Google's cached copy of the web page.</td></tr>
-      <tr><td class="helpboxDescColumns">/related</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Given a URL, finds other sites closely related.</td></tr>
-      <tr><td class="helpboxDescColumns">/link</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Given a URL, finds other sites that link to it.</td></tr>
+    <div class="helpboxDescLabels">Switches:</div>
+  	<table class="helpboxDescTable">
+  		<tr><td>/ifl</td><td> - </td><td>"I'm Feeling Lucky": Go directly to Google's top-ranked result.</td></tr>
+  		<tr><td>/advanced</td><td> - </td><td>Use the Google Advanced Search page.</td></tr>
+  		<tr><td>/groups</td><td> - </td><td>Search Google's newsgroup archive.</td></tr>
+  		<tr><td>/directory</td><td> - </td><td>Search Google's copy of the DMOZ open directory.</td></tr>
+  		<tr><td>/images</td><td> - </td><td>Search for images.</td></tr>
+      <tr><td>/cache</td><td> - </td><td>Given a URL, loads Google's cached copy of the web page.</td></tr>
+      <tr><td>/related</td><td> - </td><td>Given a URL, finds other sites closely related.</td></tr>
+      <tr><td>/link</td><td> - </td><td>Given a URL, finds other sites that link to it.</td></tr>
     </table>
-    <a class="helpboxDescLabels">Locales:</a><br/>
-  	<table class="helpBoxDescTable">
-      <tr><td class="helpboxDescColumns">/local</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Limits search results to the specified locale.</td></tr>
-      <tr><td class="helpboxDescColumns">/uk</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Use the localized United Kingdom version of Google.</td></tr>
-      <tr><td class="helpboxDescColumns">/canada</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Use the localized Canadian version of Google.</td></tr>
+    <div class="helpboxDescLabels">Locales:</div>
+  	<table class="helpboxDescTable">
+      <tr><td>/local</td><td> - </td><td>Limits search results to the specified locale.</td></tr>
+      <tr><td>/uk</td><td> - </td><td>Use the localized United Kingdom version of Google.</td></tr>
+      <tr><td>/canada</td><td> - </td><td>Use the localized Canadian version of Google.</td></tr>
   	</table>
-    <a class="helpboxDescLabels">Examples:</a><br/>
-    <table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">gg dqsd /images</td></tr>
-      <tr><td class="helpboxDescColumns">gg tony blair /uk /directory</td></tr>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>gg dqsd /images</td></tr>
+      <tr><td>gg tony blair /uk /directory</td></tr>
   	</table>
   </description>
   <category>Search the Web</category>

@@ -2,9 +2,9 @@
   <name>CNET Download.com</name>
   <description>
     Search CNET's shareware archive for Windows software.<br/>
-    <a class="helpboxDescLabels">Example:</a><br/>
-    <table class="helpBoxDescTable">
-		  <tr><td class="helpboxDescColumns">dl Dave's Quick Search</td></tr>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+		  <tr><td>dl Dave's Quick Search</td></tr>
 	  </table>
   </description>
   <category>Computers</category>

@@ -2,9 +2,9 @@
   <name>Encyclopedia.com</name>
   <description>
     Search for encyclopedic articles at Encyclopedia.com.<br/>
-    <a class="helpboxDescLabels">Example:</a><br/>
-    <table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">enc alphabet</td></tr>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>enc alphabet</td></tr>
   	</table>
   </description>
   <category>Reference</category>

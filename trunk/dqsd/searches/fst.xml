@@ -2,9 +2,9 @@
   <name>FAST</name>
   <description>
     Search the frequently-rebuilt AllTheWeb FAST index.<br/>
-    <a class="helpboxDescLabels">Example:</a><br/>
-    <table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">fst jeep</td></tr>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>fst jeep</td></tr>
   	</table>
   </description>
   <category>Search the Web</category>

@@ -2,15 +2,15 @@
   <name>Moviefone</name>
   <description>
     Get information on movies or find local movie listings.<br/>
-    <a class="helpboxDescLabels">Usage:</a><br/>
-  	<table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">Movie Info</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">mf &lt;<i>movie</i>&gt;</td></tr>
-  		<tr><td class="helpboxDescColumns">Local Listings</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">mf /location {&lt;<i>zipcode</i>&gt; | &lt;<i>city</i>&gt; }</td></tr>
+    <div class="helpboxDescLabels">Usage:</div>
+  	<table class="helpboxDescTable">
+  		<tr><td>Movie Info</td><td> - </td><td>mf &lt;<i>movie</i>&gt;</td></tr>
+  		<tr><td>Local Listings</td><td> - </td><td>mf /location {&lt;<i>zipcode</i>&gt; | &lt;<i>city</i>&gt; }</td></tr>
   	</table>
-    <a class="helpboxDescLabels">Example:</a><br/>
-    <table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">mf scorpion king</td></tr>
-      <tr><td class="helpboxDescColumns">mf /location 90210</td></tr>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>mf scorpion king</td></tr>
+      <tr><td>mf /location 90210</td></tr>
   	</table>
   </description>
   <category>Entertainment</category>

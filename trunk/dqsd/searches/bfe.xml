@@ -2,9 +2,9 @@
   <name>Bigfoot Email</name>
   <description>
     Search Bigfoot's index of email addresses by name.<br/>
-    <a class="helpboxDescLabels">Example:</a><br/>
-    <table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">bfe Mark Rafn</td></tr>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>bfe Mark Rafn</td></tr>
   	</table>
   </description>
   <category>People and Places</category>

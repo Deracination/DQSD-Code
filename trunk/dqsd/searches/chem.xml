@@ -2,9 +2,9 @@
   <name>Cambridgesoft Chemfinder</name>
   <description>
     Search for chemicals with the Cambridgesoft Chemfinder.<br/>
-    <a class="helpboxDescLabels">Example:</a><br/>
-    <table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">chem ammonium</td></tr>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>chem ammonium</td></tr>
   	</table>
   </description>
   <category>Other</category>

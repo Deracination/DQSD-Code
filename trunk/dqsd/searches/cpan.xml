@@ -2,15 +2,15 @@
   <name>Comprehensive Perl Archive Network (CPAN)</name>
   <description>
     Search CPAN for Perl software. Searches for modules by default.<br/>
-    <a class="helpboxDescLabels">Switches:</a><br/>
-  	<table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">/author</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Search for authors.</td></tr>
-  		<tr><td class="helpboxDescColumns">/distribution</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Search for distributions.</td></tr>
-      <tr><td class="helpboxDescColumns">/documentation</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Search for distribution documentation.</td></tr>
+    <div class="helpboxDescLabels">Switches:</div>
+  	<table class="helpboxDescTable">
+  		<tr><td>/author</td><td> - </td><td>Search for authors.</td></tr>
+  		<tr><td>/distribution</td><td> - </td><td>Search for distributions.</td></tr>
+      <tr><td>/documentation</td><td> - </td><td>Search for distribution documentation.</td></tr>
    	</table>
-    <a class="helpboxDescLabels">Example:</a><br/>
-    <table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">cpan wrap /author</td></tr>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>cpan wrap /author</td></tr>
   	</table>
   </description>
   <category>Computers</category>

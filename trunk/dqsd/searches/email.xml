@@ -2,9 +2,9 @@
   <name>Email</name>
   <description>
     Send an email using the default handler.<br/>
-    <a class="helpboxDescLabels">Usage:</a><br/>
-    <table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">email &lt;<i>recipient1</i>&gt;[,&lt;<i>recipient2</i>&gt;[,...]]; &lt;<i>subject</i>&gt;; &lt;<i>body</i>&gt;</td></tr>
+    <div class="helpboxDescLabels">Usage:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>email &lt;<i>recipient1</i>&gt;[,&lt;<i>recipient2</i>&gt;[,...]]; &lt;<i>subject</i>&gt;; &lt;<i>body</i>&gt;</td></tr>
   	</table>
   </description>
   <category>Functions</category>

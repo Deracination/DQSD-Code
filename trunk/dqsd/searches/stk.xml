@@ -2,9 +2,9 @@
   <name>Bloomberg Stock Quotes</name>
   <description>
     Get stock quotes by symbol.<br/>
-    <a class="helpboxDescLabels">Example:</a><br/>
-    <table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">stk WMT S</td></tr>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>stk WMT S</td></tr>
   	</table>
   </description>
   <category>Finance</category>

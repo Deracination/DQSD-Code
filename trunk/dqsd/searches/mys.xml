@@ -2,9 +2,9 @@
   <name>MySQL Reference</name>
   <description>
     Lookup on mysql.com.<br/>
-    <a class="helpboxDescLabels">Example:</a><br/>
-    <table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">mysql create table</td></tr>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>mysql create table</td></tr>
   	</table>
   </description>
   <category>Computers</category>

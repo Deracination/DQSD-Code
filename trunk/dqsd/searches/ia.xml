@@ -2,9 +2,9 @@
   <name>Internet Archive</name>
   <description>
     Look at copies of web pages archived at periodic intervals.<br/>
-    <a class="helpboxDescLabels">Example:</a><br/>
-    <table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">ia cnet.com</td></tr>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>ia cnet.com</td></tr>
   	</table>
   </description>
   <category>Fun</category>

@@ -2,9 +2,9 @@
   <name>Dictionary.com</name>
   <description>
     Search for English word definitions.<br/>
-    <a class="helpboxDescLabels">Example:</a><br/>
-    <table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">dic lexical</td></tr>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>dic lexical</td></tr>
   	</table>
   </description>
   <category>Reference</category>

@@ -2,9 +2,9 @@
   <name>Merriam-Webster Dictionary</name>
   <description>
     Search for word definitions.<br/>
-    <a class="helpboxDescLabels">Example:</a><br/>
-    <table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">mwd idempotent</td></tr>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>mwd idempotent</td></tr>
   	</table>
   </description>
   <category>Reference</category>

@@ -2,9 +2,9 @@
   <name>Base Conversion: Hexidecimal</name>
   <description>
     Convert hexidecimal values to decimal, octal and binary equivalents.<br/>
-    <a class="helpboxDescLabels">Example:</a><br/>
-    <table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">hexconv 3A</td></tr>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>hexconv 3A</td></tr>
   	</table>
   </description>
   <category>Functions</category>

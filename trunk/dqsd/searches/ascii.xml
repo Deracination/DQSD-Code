@@ -2,9 +2,9 @@
   <name>Base Conversion: ASCII Character</name>
   <description>
     Convert ASCII characters to decimal, hex, octal and binary equivalents.<br/>
-    <a class="helpboxDescLabels">Example:</a><br/>
-    <table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">ascii B</td></tr>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>ascii B</td></tr>
   	</table>
   </description>
   <category>Functions</category>

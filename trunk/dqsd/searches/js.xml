@@ -2,33 +2,33 @@
   <name>Jobserve</name>
   <description>
     European specialist job search site. The /market switch is required to select the area to search.<br/>
-    <a class="helpboxDescLabels">Usage:</a><br/>
-  	<table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">js &lt;<i>job</i>&gt; /market:&lt;<i>market</i>&gt; [{/permanent | /contract}] [/latest]</td></tr>
+    <div class="helpboxDescLabels">Usage:</div>
+  	<table class="helpboxDescTable">
+  		<tr><td>js &lt;<i>job</i>&gt; /market:&lt;<i>market</i>&gt; [{/permanent | /contract}] [/latest]</td></tr>
   	</table>
-    <a class="helpboxDescLabels">Switches:</a><br/>
-  	<table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">/market</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">
+    <div class="helpboxDescLabels">Switches:</div>
+  	<table class="helpboxDescTable">
+  		<tr><td>/market</td><td> - </td><td>
         Select the job market to search using one of the following codes:<br/>
-        <table class="helpBoxDescTable">
-  		    <tr><td class="helpboxDescColumns"><b>it</b></td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Information Technology</td></tr>
-          <tr><td class="helpboxDescColumns"><b>acc</b></td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Accountancy</td></tr>
-          <tr><td class="helpboxDescColumns"><b>eng</b></td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Engineering</td></tr>
-          <tr><td class="helpboxDescColumns"><b>sal</b></td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Sales &amp; Marketing</td></tr>
-          <tr><td class="helpboxDescColumns"><b>fin</b></td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Finance &amp; Insurance</td></tr>
-          <tr><td class="helpboxDescColumns"><b>sec</b></td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Office &amp; Administration</td></tr>
-          <tr><td class="helpboxDescColumns"><b>leg</b></td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Legal</td></tr>
-          <tr><td class="helpboxDescColumns"><b>med</b></td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Medical</td></tr>
+        <table class="helpboxDescTable">
+  		    <tr><td><b>it</b></td><td> - </td><td>Information Technology</td></tr>
+          <tr><td><b>acc</b></td><td> - </td><td>Accountancy</td></tr>
+          <tr><td><b>eng</b></td><td> - </td><td>Engineering</td></tr>
+          <tr><td><b>sal</b></td><td> - </td><td>Sales &amp; Marketing</td></tr>
+          <tr><td><b>fin</b></td><td> - </td><td>Finance &amp; Insurance</td></tr>
+          <tr><td><b>sec</b></td><td> - </td><td>Office &amp; Administration</td></tr>
+          <tr><td><b>leg</b></td><td> - </td><td>Legal</td></tr>
+          <tr><td><b>med</b></td><td> - </td><td>Medical</td></tr>
   	    </table>
       </td></tr>
-      <tr><td class="helpboxDescColumns">/permanent</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Search for permanent positions only.</td></tr>
-      <tr><td class="helpboxDescColumns">/contract</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Search for temporary/contract positions only.</td></tr>
-      <tr><td class="helpboxDescColumns">/latest</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Search for the latest additions instead of the best overall matches.</td></tr>
+      <tr><td>/permanent</td><td> - </td><td>Search for permanent positions only.</td></tr>
+      <tr><td>/contract</td><td> - </td><td>Search for temporary/contract positions only.</td></tr>
+      <tr><td>/latest</td><td> - </td><td>Search for the latest additions instead of the best overall matches.</td></tr>
   	</table>
-    <a class="helpboxDescLabels">Examples:</a><br/>
-    <table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">js programmer /market:it</td></tr>
-      <tr><td class="helpboxDescColumns">js legal secretary /market:leg /permanent /latest</td></tr>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>js programmer /market:it</td></tr>
+      <tr><td>js legal secretary /market:leg /permanent /latest</td></tr>
   	</table>
   </description>
   <category>Other</category>

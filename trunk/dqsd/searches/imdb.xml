@@ -2,9 +2,9 @@
   <name>Internet Movie Database (IMDB)</name>
   <description>
     Lookup movies, television shows, actors, dicectors and more.<br/>
-    <a class="helpboxDescLabels">Example:</a><br/>
-    <table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">imdb jaws</td></tr>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>imdb jaws</td></tr>
   	</table>
   </description>
   <category>Entertainment</category>

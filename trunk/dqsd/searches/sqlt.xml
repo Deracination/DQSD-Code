@@ -2,9 +2,9 @@
   <name>SQLTeam.com</name>
   <description>
     SQL server reference search.<br/>
-    <a class="helpboxDescLabels">Example:</a><br/>
-    <table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">sqlt create table</td></tr>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>sqlt create table</td></tr>
   	</table>
   </description>
   <category>Computers</category>

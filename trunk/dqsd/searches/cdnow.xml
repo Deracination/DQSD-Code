@@ -2,18 +2,18 @@
   <name>CDNOW</name>
   <description>
     Search for music on CDNOW. Searches for artists by default.<br/>
-    <a class="helpboxDescLabels">Switches:</a><br/>
-  	<table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">/album</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Search for a specific album.</td></tr>
-  		<tr><td class="helpboxDescColumns">/song</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Search for a specific song.</td></tr>
-  		<tr><td class="helpboxDescColumns">/label</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Search for a record label.</td></tr>
-  		<tr><td class="helpboxDescColumns">/video</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Find a music video.</td></tr>
-  		<tr><td class="helpboxDescColumns">/actor</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Find an actor or director from a music video.</td></tr>
+    <div class="helpboxDescLabels">Switches:</div>
+  	<table class="helpboxDescTable">
+  		<tr><td>/album</td><td> - </td><td>Search for a specific album.</td></tr>
+  		<tr><td>/song</td><td> - </td><td>Search for a specific song.</td></tr>
+  		<tr><td>/label</td><td> - </td><td>Search for a record label.</td></tr>
+  		<tr><td>/video</td><td> - </td><td>Find a music video.</td></tr>
+  		<tr><td>/actor</td><td> - </td><td>Find an actor or director from a music video.</td></tr>
    	</table>
-    <a class="helpboxDescLabels">Examples:</a><br/>
-    <table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">cdnow Mansun</td></tr>
-  		<tr><td class="helpboxDescColumns">cdnow Lobster /song</td></tr>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>cdnow Mansun</td></tr>
+  		<tr><td>cdnow Lobster /song</td></tr>
   	</table>
   </description>
   <category>Entertainment</category>

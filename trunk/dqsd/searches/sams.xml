@@ -2,9 +2,9 @@
   <name>Sam Spade Whois Utility</name>
   <description>
     Check internet addresses using SamSpade.org.<br/>
-    <a class="helpboxDescLabels">Example:</a><br/>
-    <table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">sams amazon.com</td></tr>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>sams amazon.com</td></tr>
   	</table>
   </description>
   <category>Computers</category>

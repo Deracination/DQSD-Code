@@ -2,13 +2,13 @@
   <name>MultiSearch</name>
   <description>
     Perform multiple searches with a single command line expression.<br/>
-    <a class="helpboxDescLabels">Usage:</a><br/>
-  	<table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">multi &lt;<i>search1</i>&gt; [&lt;<i>search2</i>&gt; [...]] &lt;<i>term</i>&gt;</td></tr>
+    <div class="helpboxDescLabels">Usage:</div>
+  	<table class="helpboxDescTable">
+  		<tr><td>multi &lt;<i>search1</i>&gt; [&lt;<i>search2</i>&gt; [...]] &lt;<i>term</i>&gt;</td></tr>
   	</table>
-    <a class="helpboxDescLabels">Example:</a><br/>
-    <table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">multi av gg wood planes</td></tr>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>multi av gg wood planes</td></tr>
   	</table>
   </description>
   <category>Search the Web</category>

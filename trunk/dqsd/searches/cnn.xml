@@ -2,9 +2,9 @@
   <name>CNN News</name>
   <description>
     Search for news topics at CNN.com.<br/>
-    <a class="helpboxDescLabels">Example:</a><br/>
-    <table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">cnn Saddam Hussein</td></tr>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>cnn Saddam Hussein</td></tr>
   	</table>
   </description>
   <category>News</category>

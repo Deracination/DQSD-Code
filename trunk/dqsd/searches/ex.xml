@@ -2,9 +2,9 @@
   <name>Excite</name>
   <description>
     Search using Excite.<br/>
-    <a class="helpboxDescLabels">Example:</a><br/>
-    <table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">ex cable modems</td></tr>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>ex cable modems</td></tr>
   	</table>
   </description>
   <category>Search the Web</category>

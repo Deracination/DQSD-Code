@@ -2,9 +2,9 @@
   <name>Cambridge Dictionaries Online</name>
   <description>
     Search for British English word definitions.<br/>
-    <a class="helpboxDescLabels">Example:</a><br/>
-    <table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">cdo lexical</td></tr>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>cdo lexical</td></tr>
   	</table>
   </description>
   <category>Reference</category>

@@ -2,9 +2,9 @@
   <name>WHOIS Domain Lookup</name>
   <description>
     Use BetterWhois.com to lookup domain contact and DNS server information.<br/>
-    <a class="helpboxDescLabels">Example:</a><br/>
-    <table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">whois karynova.com</td></tr>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>whois karynova.com</td></tr>
   	</table>
   </description>
   <category>Computers</category>

@@ -2,9 +2,9 @@
   <name>Merriam-Webster Thesaurus</name>
   <description>
     Search for synonyms.<br/>
-    <a class="helpboxDescLabels">Example:</a><br/>
-    <table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">mwt boggle</td></tr>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>mwt boggle</td></tr>
   	</table>
   </description>
   <category>Reference</category>
