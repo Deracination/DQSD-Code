@@ -16,6 +16,7 @@ New Searches
 * bb - Search BestBuy (from Glenn Carr)
 * lipsum - Generate Lorem Ipsum text (from Glenn Carr)
 * amo - Search Amo's Online Crossword Dictionary (from Matthew McDougal)
+* jsenc - url encrypt/decrypt strings and optionally generate encoded mailto strings to hide from email harvesters
 
 Modified Searches
 
