@@ -137,7 +137,7 @@ function def()
   // Major hack!  Due to 'constructor' being a property of every object, we can't
   // just test for it in the associative 'searches' array later without a
   // script error.
-  if (t == "constructor")
+  if (/^\s*constructor\b/.test(t) )
   {
     performsearch(defaultsearch,t);
     return false;
