@@ -1,93 +1,99 @@
 <search function="comx">
   <name>Comic Strip</name>
   <description>Displays a daily comic strip in a popup window.
-    <div class="helpboxDescLabels">Examples:</div>
+    <div class="helpboxDescLabels">Switches:</div>
+    <div class="helpboxDescLabels">(Note: All the switches can be abbreviated)</div>
     <table class="helpboxDescTable">
-    <tr><td>9 Chickweed Lane</td><td>comx /chick</td></tr>
-    <tr><td>Agnes</td><td>comx /agnes</td></tr>
-    <tr><td>Alley Oop</td><td>comx /alley</td></tr>
-    <tr><td>Andy Capp</td><td>comx /capp</td></tr>
-    <tr><td>Arlo and Janis</td><td>comx /arlo</td></tr>
-    <tr><td>B.C.</td><td>comx /bc</td></tr>
-    <tr><td>Ballard Street</td><td>comx /ballard</td></tr>
-    <tr><td>Ben</td><td>comx /ben</td></tr>
-    <tr><td>Betty</td><td>comx /betty</td></tr>
-    <tr><td>Big Nate</td><td>comx /bignate</td></tr>
-    <tr><td>Bo Nanas</td><td>comx /bonanas</td></tr>
-    <tr><td>The Born Loser</td><td>comx /loser</td></tr>
-    <tr><td>The Buckets</td><td>comx /buckets</td></tr>
-    <tr><td>Bulls N Bears</td><td>comx /bulls</td></tr>
-    <tr><td>Candorville</td><td>comx /candor</td></tr>
-    <tr><td>A Case in Point</td><td>comx /case</td></tr>
-    <tr><td>CEO Dad</td><td>comx /ceo</td></tr>
-    <tr><td>Cheap Thrills</td><td>comx /cheap</td></tr>
-    <tr><td>Committed</td><td>comx /committed</td></tr>
-    <tr><td>Dilbert</td><td>comx /dilbert</td></tr>
-    <tr><td>Drabble</td><td>comx /drabble</td></tr>
-    <tr><td>Fat Cats</td><td>comx /fatcats</td></tr>
-    <tr><td>Ferdnand</td><td>comx /ferd</td></tr>
-    <tr><td>Flight Deck</td><td>comx /fdeck</td></tr>
-    <tr><td>Flo and Friends</td><td>comx /flo</td></tr>
-    <tr><td>For Better or For Worse</td><td>comx /forbetter</td></tr>
-    <tr><td>Frank and Ernest</td><td>comx /frank</td></tr>
-    <tr><td>Frazz</td><td>comx /frazz</td></tr>
-    <tr><td>Geech</td><td>comx /geech</td></tr>
-    <tr><td>Get Fuzzy</td><td>comx /fuzzy</td></tr>
-    <tr><td>Ginger Meggs</td><td>comx /ginger</td></tr>
-    <tr><td>Go Fish</td><td>comx /gofish</td></tr>
-    <tr><td>Graffiti</td><td>comx /graffiti</td></tr>
-    <tr><td>Grand Avenue</td><td>comx /grand</td></tr>
-    <tr><td>The Grizzwells</td><td>comx /grizz</td></tr>
-    <tr><td>Heathcliff</td><td>comx /heath</td></tr>
-    <tr><td>Herb and Jamaal</td><td>comx /herb</td></tr>
-    <tr><td>Herman</td><td>comx /herman</td></tr>
-    <tr><td>Janes World</td><td>comx /jane</td></tr>
-    <tr><td>Jump Start</td><td>comx /jump</td></tr>
-    <tr><td>Kit N Carlyle</td><td>comx /kit</td></tr>
-    <tr><td>Liberty Meadows</td><td>comx /liberty</td></tr>
-    <tr><td>Lil Abner</td><td>comx /abner</td></tr>
-    <tr><td>Luann</td><td>comx /luann</td></tr>
-    <tr><td>Lupo Alberto</td><td>comx /lupo</td></tr>
-    <tr><td>Marmaduke</td><td>comx /marm</td></tr>
-    <tr><td>Meatloaf Night</td><td>comx /meat</td></tr>
-    <tr><td>Meg!</td><td>comx /meg</td></tr>
-    <tr><td>Moderately Confused</td><td>comx /confused</td></tr>
-    <tr><td>Momma</td><td>comx /momma</td></tr>
-    <tr><td>Monty</td><td>comx /monty</td></tr>
-    <tr><td>Motley</td><td>comx /motley</td></tr>
-    <tr><td>Nancy</td><td>comx /nancy</td></tr>
-    <tr><td>Natural Selection</td><td>comx /natural</td></tr>
-    <tr><td>Off The Mark</td><td>comx /off</td></tr>
-    <tr><td>One Big Happy Classics</td><td>comx /happy</td></tr>
-    <tr><td>The Other Coast</td><td>comx /coast</td></tr>
-    <tr><td>Out of the Gene Pool</td><td>comx /genepool</td></tr>
-    <tr><td>Over the Hedge</td><td>comx /hedge</td></tr>
-    <tr><td>PC and Pixel</td><td>comx /pc</td></tr>
-    <tr><td>Peanuts</td><td>comx /peanuts</td></tr>
-    <tr><td>Pearls Before Swine</td><td>comx /pearls</td></tr>
-    <tr><td>Pibgorn</td><td>comx /pibgorn</td></tr>
-    <tr><td>Pickles</td><td>comx /pickles</td></tr>
-    <tr><td>Potluck Parish</td><td>comx /potluck</td></tr>
-    <tr><td>Raising Duncan</td><td>comx /duncan</td></tr>
-    <tr><td>Reality Check</td><td>comx /reality</td></tr>
-    <tr><td>Red and Rover</td><td>comx /red</td></tr>
-    <tr><td>Ripleys Believe It or Not</td><td>comx /ripleys</td></tr>
-    <tr><td>Rose Is Rose</td><td>comx /rose</td></tr>
-    <tr><td>Rubes</td><td>comx /rubes</td></tr>
-    <tr><td>Rudy Park</td><td>comx /rudy</td></tr>
-    <tr><td>Sheldon</td><td>comx /sheldon</td></tr>
-    <tr><td>Shirley And Son</td><td>comx /shirley</td></tr>
-    <tr><td>Soup To Nutz</td><td>comx /soup</td></tr>
-    <tr><td>Speed Bump</td><td>comx /bump</td></tr>
-    <tr><td>Spot The Frog</td><td>comx /spot</td></tr>
-    <tr><td>Strange Brew</td><td>comx /brew</td></tr>
-    <tr><td>The Sunshine Club</td><td>comx /sun</td></tr>
-    <tr><td>Tarzan</td><td>comx /tarzan</td></tr>
-    <tr><td>Thats Life</td><td>comx /life</td></tr>
-    <tr><td>Top of the World!</td><td>comx /top</td></tr>
-    <tr><td>Wizard of Id</td><td>comx /id</td></tr>
-    <tr><td>Working Daze</td><td>comx /daze</td></tr>
-    <tr><td>Working It Out</td><td>comx /working</td></tr>
+    <tr><td>9 Chickweed Lane</td><td>/9chickweed</td></tr>
+    <tr><td>Agnes</td><td>/agnes</td></tr>
+    <tr><td>Alley Oop</td><td>/alleyoop</td></tr>
+    <tr><td>Andy Capp</td><td>/andycapp</td></tr>
+    <tr><td>Arlo and Janis</td><td>/arloandjanis</td></tr>
+    <tr><td>B.C.</td><td>/bc</td></tr>
+    <tr><td>Ballard Street</td><td>/ballardstreet</td></tr>
+    <tr><td>Ben</td><td>/ben</td></tr>
+    <tr><td>Betty</td><td>/betty</td></tr>
+    <tr><td>Big Nate</td><td>/bignate</td></tr>
+    <tr><td>Bo Nanas</td><td>/bonanas</td></tr>
+    <tr><td>The Born Loser</td><td>/bornloser</td></tr>
+    <tr><td>The Buckets</td><td>/buckets</td></tr>
+    <tr><td>Bulls N Bears</td><td>/bullsnbears</td></tr>
+    <tr><td>Candorville</td><td>/candorville</td></tr>
+    <tr><td>A Case in Point</td><td>/caseinpoint</td></tr>
+    <tr><td>CEO Dad</td><td>/ceodad</td></tr>
+    <tr><td>Cheap Thrills</td><td>/cheapthrills</td></tr>
+    <tr><td>Committed</td><td>/committed</td></tr>
+    <tr><td>Dilbert</td><td>/dilbert</td></tr>
+    <tr><td>Drabble</td><td>/drabble</td></tr>
+    <tr><td>Fat Cats</td><td>/fatcats</td></tr>
+    <tr><td>Ferdnand</td><td>/ferdnand</td></tr>
+    <tr><td>Flight Deck</td><td>/flightdeck</td></tr>
+    <tr><td>Flo and Friends</td><td>/floandfriends</td></tr>
+    <tr><td>For Better or For Worse</td><td>/forbetterorforworse</td></tr>
+    <tr><td>Frank and Ernest</td><td>/frankandernest</td></tr>
+    <tr><td>Frazz</td><td>/frazz</td></tr>
+    <tr><td>Geech</td><td>/geech</td></tr>
+    <tr><td>Get Fuzzy</td><td>/getfuzzy</td></tr>
+    <tr><td>Ginger Meggs</td><td>/gingermeggs</td></tr>
+    <tr><td>Go Fish</td><td>/gofish</td></tr>
+    <tr><td>Graffiti</td><td>/graffiti</td></tr>
+    <tr><td>Grand Avenue</td><td>/grandavenue</td></tr>
+    <tr><td>The Grizzwells</td><td>/grizzwells</td></tr>
+    <tr><td>Heathcliff</td><td>/heathcliff</td></tr>
+    <tr><td>Herb and Jamaal</td><td>/herbandjamaal</td></tr>
+    <tr><td>Herman</td><td>/herman</td></tr>
+    <tr><td>Janes World</td><td>/janesworld</td></tr>
+    <tr><td>Jump Start</td><td>/jumpstart</td></tr>
+    <tr><td>Kit N Carlyle</td><td>/kitncarlyle</td></tr>
+    <tr><td>Liberty Meadows</td><td>/libertymeadows</td></tr>
+    <tr><td>Lil Abner</td><td>/lilabner</td></tr>
+    <tr><td>Luann</td><td>/luann</td></tr>
+    <tr><td>Lupo Alberto</td><td>/lupoalberto</td></tr>
+    <tr><td>Marmaduke</td><td>/marmaduke</td></tr>
+    <tr><td>Meatloaf Night</td><td>/meatloafnight</td></tr>
+    <tr><td>Meg!</td><td>/meg</td></tr>
+    <tr><td>Moderately Confused</td><td>/moderatelyconfused</td></tr>
+    <tr><td>Momma</td><td>/momma</td></tr>
+    <tr><td>Monty</td><td>/monty</td></tr>
+    <tr><td>Motley</td><td>/motley</td></tr>
+    <tr><td>Nancy</td><td>/nancy</td></tr>
+    <tr><td>Natural Selection</td><td>/naturalselection</td></tr>
+    <tr><td>Off The Mark</td><td>/offthemark</td></tr>
+    <tr><td>One Big Happy Classics</td><td>/onebighappyclassics</td></tr>
+    <tr><td>The Other Coast</td><td>/othercoast</td></tr>
+    <tr><td>Out of the Gene Pool</td><td>/outofthegenepool</td></tr>
+    <tr><td>Over the Hedge</td><td>/overthehedge</td></tr>
+    <tr><td>PC and Pixel</td><td>/pcandpixel</td></tr>
+    <tr><td>Peanuts</td><td>/peanuts</td></tr>
+    <tr><td>Pearls Before Swine</td><td>/pearlsbeforeswine</td></tr>
+    <tr><td>Pibgorn</td><td>/pibgorn</td></tr>
+    <tr><td>Pickles</td><td>/pickles</td></tr>
+    <tr><td>Potluck Parish</td><td>/potluckparish</td></tr>
+    <tr><td>Raising Duncan</td><td>/raisingduncan</td></tr>
+    <tr><td>Reality Check</td><td>/realitycheck</td></tr>
+    <tr><td>Red and Rover</td><td>/redandrover</td></tr>
+    <tr><td>Ripleys Believe It or Not</td><td>/ripleysbelieveitornot</td></tr>
+    <tr><td>Rose Is Rose</td><td>/roseisrose</td></tr>
+    <tr><td>Rubes</td><td>/rubes</td></tr>
+    <tr><td>Rudy Park</td><td>/rudypark</td></tr>
+    <tr><td>Sheldon</td><td>/sheldon</td></tr>
+    <tr><td>Shirley And Son</td><td>/shirleyandson</td></tr>
+    <tr><td>Soup To Nutz</td><td>/souptonutz</td></tr>
+    <tr><td>Speed Bump</td><td>/speedbump</td></tr>
+    <tr><td>Spot The Frog</td><td>/spotthefrog</td></tr>
+    <tr><td>Strange Brew</td><td>/strangebrew</td></tr>
+    <tr><td>The Sunshine Club</td><td>/sunshineclub</td></tr>
+    <tr><td>Tarzan</td><td>/tarzan</td></tr>
+    <tr><td>Thats Life</td><td>/thatslife</td></tr>
+    <tr><td>Top of the World!</td><td>/topoftheworld</td></tr>
+    <tr><td>Wizard of Id</td><td>/wizardofid</td></tr>
+    <tr><td>Working Daze</td><td>/workingdaze</td></tr>
+    <tr><td>Working It Out</td><td>/workingitout</td></tr>
+    <tr><td>--</td></tr>
+    <tr><td colspan='2'><div class="helpboxDescLabels">Examples:</div></td></tr>
+    <tr><td>comx /wiz   </td><td>(Wizard of Id)</td></tr>
+    <tr><td>comx /workingit  </td><td>(Working it Out)</td></tr>
+    <tr><td>comx /rip   </td><td>(Ripleys Believe it or Not)</td></tr>
     </table>
   </description>
   <link>http://www.comics.com</link>
@@ -113,93 +119,105 @@
     
     var urlstart="http://www.comics.com/";
         
-    var args = parseArgs(q, "agnes,alley,capp,arlo,bc,ballard,ben,betty,bignate,bonanas,loser,buckets,bulls,candor,case,ceo,cheap,chick,committed,drabble,fatcats,ferd,fdeck,flo,forbetter,frank,frazz,geech,fuzzy,ginger,gofish,graffiti,grand,grizz,heath,herb,herman,jane,jump,kit,liberty,abner,luann,lupo,marm,meat,meg,confused,momma,monty,motley,nancy,natural,off,happy,coast,gene,hedge,pc,pearls,pib,pickles,potluck,duncan,reality,red,ripleys,rose,rubes,rudy,sheldon,shirley,soup,bump,spot,brew,sun,tarzan,life,top,id,daze,working,peanuts,dilbert");
+    var args = parseArgs(q, "9chickweedlane,agnes,alleyoop,andycapp,arloandjanis,bc,\
+    ballardstreet,ben,betty,bignate,bonanas,bornloser,buckets,bullsnbears,candorville,\
+    caseinpoint,ceodad,cheapthrills,chickweedlane,committed,drabble,fatcats,ferdnand,\
+    flightdeck,floandfriends,forbetterorforworse,frankandernest,frazz,geech,getfuzzy,\
+    gingermeggs,gofish,graffiti,grandavenue,grizzwells,heathcliff,herbandjamaal,herman,\
+    janesworld,jumpstart,kitncarlyle,libertymeadows,lilabner,luann,lupoalberto,marmaduke,\
+    meatloafnight,meg,moderatelyconfused,momma,monty,motley,nancy,naturalselection,\
+    offthemark,onebighappyclassics,othercoast,outofthegenepool,overthehedge,pcandpixel,\
+    pearlsbeforeswine,pibgorn,pickles,potluckparish,raisingduncan,realitycheck,redandrover,\
+    ripleysbelieveitornot,roseisrose,rubes,rudypark,sheldon,shirleyandson,souptonutz,\
+    speedbump,spotthefrog,strangebrew,sunshineclub,tarzan,thatslife,topoftheworld,\
+    wizardofid,workingdaze,workingitout,peanuts,dilbert");
     if ( args.switches.length > 0 ){
         sw = args.switches[0];
         switch( sw.name ){
+          case "9chickweedlane":var endurl= "comics/chickweed/index.html";sunwindowH = 533;break;
           case "agnes":var endurl= "creators/agnes/index.html";sunwindowH = 272;break;
-          case "alley":var endurl= "comics/alleyoop/index.html";break;
-          case "capp":var endurl= "creators/andycapp/index.html";sunwindowH = 385;break;
-          case "arlo":var endurl= "comics/arlonjanis/index.html";break;
+          case "alleyoop":var endurl= "comics/alleyoop/index.html";break;
+          case "andycapp":var endurl= "creators/andycapp/index.html";sunwindowH = 385;break;
+          case "arloandjanis":var endurl= "comics/arlonjanis/index.html";break;
           case "bc":var endurl= "creators/bc/index.html";sunwindowW = 725; sunwindowH = 521;break;
-          case "ballard":var endurl= "creators/ballardst/index.html";windowW = 300; windowH = 329;sunwindowH = 268;break;
+          case "ballardstreet":var endurl= "creators/ballardst/index.html";windowW = 300; windowH = 329;sunwindowH = 268;break;
           case "ben":var endurl= "comics/ben/index.html";sunwindowW = 600; sunwindowH = 200;break;
           case "betty":var endurl= "comics/betty/index.html";sunwindowH = 378;break;
           case "bignate":var endurl= "comics/bignate/index.html";sunwindowH = 537;break;
           case "bonanas":var endurl= "wash/bonanas/index.html";sunwindowH = 357;break;
-          case "loser":var endurl= "comics/bornloser/index.html";sunwindowH = 542;break;
+          case "bornloser":var endurl= "comics/bornloser/index.html";sunwindowH = 542;break;
           case "buckets":var endurl= "comics/buckets/index.html";sunwindowH = 385;break;
-          case "bulls":var endurl= "comics/bullsnbears/index.html";sunwindowW = 600; sunwindowH = 200;break;
-          case "candor":var endurl= "wash/candorville/index.html";sunwindowH = 513;break;
-          case "case":var endurl= "comics/acaseinpoint/index.html";windowW = 348; windowH = 460;sunwindowW = 348; sunwindowH = 460;break;
-          case "ceo":var endurl= "creators/ceodad/index.html";sunwindowW = 600; sunwindowH = 200;break;
-          case "cheap":var endurl= "wash/cheapthrills/index.html";windowW = 725; windowH = 273;sunwindowH = 273;break;
-          case "chick":var endurl= "comics/chickweed/index.html";sunwindowH = 533;break;
+          case "bullsnbears":var endurl= "comics/bullsnbears/index.html";sunwindowW = 600; sunwindowH = 200;break;
+          case "candorville":var endurl= "wash/candorville/index.html";sunwindowH = 513;break;
+          case "caseinpoint":var endurl= "comics/acaseinpoint/index.html";windowW = 348; windowH = 460;sunwindowW = 348; sunwindowH = 460;break;
+          case "ceodad":var endurl= "creators/ceodad/index.html";sunwindowW = 600; sunwindowH = 200;break;
+          case "cheapthrills":var endurl= "wash/cheapthrills/index.html";windowW = 725; windowH = 273;sunwindowH = 273;break;
+          case "chickweedlane":var endurl= "comics/chickweed/index.html";sunwindowH = 533;break;
           case "committed":var endurl= "comics/committed/index.html";windowW = 321; windowH = 394;sunwindowH = 377;break;
           case "drabble":var endurl= "comics/drabble/index.html";sunwindowH = 525;break;
           case "fatcats":var endurl= "comics/fatcats/index.html";sunwindowW = 600; sunwindowH = 209;break;
-          case "ferd":var endurl= "comics/ferdnand/index.html";windowW = 600; windowH = 177;break;
-          case "fdeck":var endurl= "creators/flightdeck/index.html";windowW = 300; windowH = 332;sunwindowH = 272;break;
-          case "flo":var endurl= "creators/floandfriends/index.html";sunwindowH = 272;break;
-          case "forbetter":var endurl= "comics/forbetter/index.html";sunwindowW = 750; sunwindowH = 575;break;
-          case "frank":var endurl= "comics/franknernest/index.html";break;
+          case "ferdnand":var endurl= "comics/ferdnand/index.html";windowW = 600; windowH = 177;break;
+          case "flightdeck":var endurl= "creators/flightdeck/index.html";windowW = 300; windowH = 332;sunwindowH = 272;break;
+          case "floandfriends":var endurl= "creators/floandfriends/index.html";sunwindowH = 272;break;
+          case "forbetterorforworse":var endurl= "comics/forbetter/index.html";sunwindowW = 750; sunwindowH = 575;break;
+          case "frankandernest":var endurl= "comics/franknernest/index.html";break;
           case "frazz":var endurl= "comics/frazz/index.html";sunwindowH = 385;break;
           case "geech":var endurl= "comics/geech/index.html";break;
-          case "fuzzy":var endurl= "comics/getfuzzy/index.html";sunwindowH = 371;break;
-          case "ginger":var endurl= "comics/gingermeggs/index.html";sunwindowW = 600; sunwindowH = 370;break;
+          case "getfuzzy":var endurl= "comics/getfuzzy/index.html";sunwindowH = 371;break;
+          case "gingermeggs":var endurl= "comics/gingermeggs/index.html";sunwindowW = 600; sunwindowH = 370;break;
           case "gofish":var endurl= "comics/gofish/index.html";windowW = 321; windowH = 352;sunwindowW = 600; sunwindowH = 314;break;
           case "graffiti":var endurl= "comics/graffiti/index.html";windowW = 321; windowH = 541;sunwindowW = 321; sunwindowH = 550;break;
-          case "grand":var endurl= "comics/grandave/index.html";sunwindowH = 370;break;
-          case "grizz":var endurl= "comics/grizzwells/index.html";sunwindowW = 600; sunwindowH = 202;break;
-          case "heath":var endurl= "creators/heathcliff/index.html";windowW = 300; windowH = 331;break;
-          case "herb":var endurl= "creators/herbnjamaal/index.html";break;
+          case "grandavenue":var endurl= "comics/grandave/index.html";sunwindowH = 370;break;
+          case "grizzwells":var endurl= "comics/grizzwells/index.html";sunwindowW = 600; sunwindowH = 202;break;
+          case "heathcliff":var endurl= "creators/heathcliff/index.html";windowW = 300; windowH = 331;break;
+          case "herbandjamaal":var endurl= "creators/herbnjamaal/index.html";break;
           case "herman":var endurl= "comics/herman/index.html";windowW = 300; windowH = 381;break;
-          case "jane":var endurl= "comics/janesworld/index.html";sunwindowW = 600; sunwindowH = 211;break;
-          case "jump":var endurl= "comics/jumpstart/index.html";break;
-          case "kit":var endurl= "comics/kitncarlyle/index.html";windowW = 321; windowH = 349;sunwindowW = 321; sunwindowH = 349;break;
-          case "liberty":var endurl= "creators/liberty/index.html";sunwindowH = 271;break;
-          case "abner":var endurl= "comics/lilabner/index.html";windowW = 800; windowH = 226;sunwindowW = 800; sunwindowH = 228;break;
+          case "janesworld":var endurl= "comics/janesworld/index.html";sunwindowW = 600; sunwindowH = 211;break;
+          case "jumpstart":var endurl= "comics/jumpstart/index.html";break;
+          case "kitncarlyle":var endurl= "comics/kitncarlyle/index.html";windowW = 321; windowH = 349;sunwindowW = 321; sunwindowH = 349;break;
+          case "libertymeadows":var endurl= "creators/liberty/index.html";sunwindowH = 271;break;
+          case "lilabner":var endurl= "comics/lilabner/index.html";windowW = 800; windowH = 226;sunwindowW = 800; sunwindowH = 228;break;
           case "luann":var endurl= "comics/luann/index.html";sunwindowH = 376;break;
-          case "lupo":var endurl= "comics/lupo/index.html";sunwindowW = 600; sunwindowH = 205;break;
-          case "marm":var endurl= "comics/marmaduke/index.html";windowW = 321; windowH = 347;break;
-          case "meat":var endurl= "comics/meatloaf/index.html";sunwindowW = 600; sunwindowH = 197;break;
+          case "lupoalberto":var endurl= "comics/lupo/index.html";sunwindowW = 600; sunwindowH = 205;break;
+          case "marmaduke":var endurl= "comics/marmaduke/index.html";windowW = 321; windowH = 347;break;
+          case "meatloafnight":var endurl= "comics/meatloaf/index.html";sunwindowW = 600; sunwindowH = 197;break;
           case "meg":var endurl= "comics/meg/index.html";sunwindowW = 600; sunwindowH = 200;break;
-          case "confused":var endurl= "comics/moderatelyconfused/index.html";windowW = 321; windowH = 399;sunwindowW = 321; sunwindowH = 399;break;
+          case "moderatelyconfused":var endurl= "comics/moderatelyconfused/index.html";windowW = 321; windowH = 399;sunwindowW = 321; sunwindowH = 399;break;
           case "momma":var endurl= "creators/momma/index.html";sunwindowH = 366;break;
           case "monty":var endurl= "comics/monty/index.html";break;
           case "motley":var endurl= "comics/motley/index.html";windowW = 504; windowH = 146;sunwindowW = 504; sunwindowH = 142;break;
           case "nancy":var endurl= "comics/nancy/index.html";break;
-          case "natural":var endurl= "creators/naturalselection/index.html";windowW = 300; windowH = 356;sunwindowW = 300; sunwindowH = 356;break;
-          case "off":var endurl= "comics/offthemark/index.html";windowW = 321; windowH = 359;sunwindowH = 251;break;
-          case "happy":var endurl= "creators/onebighappy/index.html";sunwindowW = 650; sunwindowH = 300;break;
-          case "coast":var endurl= "creators/othercoast/index.html";sunwindowH = 358;break;
-          case "gene":var endurl= "wash/genepool/index.html";sunwindowH = 356;break;
-          case "hedge":var endurl= "comics/hedge/index.html";break;
-          case "pc":var endurl= "wash/pcnpixel/index.html";sunwindowH = 502;break;
-          case "pearls":var endurl= "comics/pearls/index.html";sunwindowH = 382;break;
-          case "pib":var endurl= "comics/pibgorn/index.html";windowW = 600; windowH = 420;break;
+          case "naturalselection":var endurl= "creators/naturalselection/index.html";windowW = 300; windowH = 356;sunwindowW = 300; sunwindowH = 356;break;
+          case "offthemark":var endurl= "comics/offthemark/index.html";windowW = 321; windowH = 359;sunwindowH = 251;break;
+          case "onebighappyclassics":var endurl= "creators/onebighappy/index.html";sunwindowW = 650; sunwindowH = 300;break;
+          case "othercoast":var endurl= "creators/othercoast/index.html";sunwindowH = 358;break;
+          case "outofthegenepool":var endurl= "wash/genepool/index.html";sunwindowH = 356;break;
+          case "overthehedge":var endurl= "comics/hedge/index.html";break;
+          case "pcandpixel":var endurl= "wash/pcnpixel/index.html";sunwindowH = 502;break;
+          case "pearlsbeforeswine":var endurl= "comics/pearls/index.html";sunwindowH = 382;break;
+          case "pibgorn":var endurl= "comics/pibgorn/index.html";windowW = 600; windowH = 420;break;
           case "pickles":var endurl= "wash/pickles/index.html";sunwindowH = 502;break;
-          case "potluck":var endurl= "comics/potluck/index.html";break;
-          case "duncan":var endurl= "comics/raisingduncan/index.html";sunwindowH = 371;break;
-          case "reality":var endurl= "comics/reality/index.html";windowW = 321; windowH = 340;sunwindowH = 510;break;
-          case "red":var endurl= "wash/redandrover/index.html";sunwindowH = 357;break;
-          case "ripleys":var endurl= "comics/ripleys/index.html";windowW = 315; windowH = 410;sunwindowH = 500;break;
-          case "rose":var endurl= "comics/roseisrose/index.html";break;
+          case "potluckparish":var endurl= "comics/potluck/index.html";break;
+          case "raisingduncan":var endurl= "comics/raisingduncan/index.html";sunwindowH = 371;break;
+          case "realitycheck":var endurl= "comics/reality/index.html";windowW = 321; windowH = 340;sunwindowH = 510;break;
+          case "redandrover":var endurl= "wash/redandrover/index.html";sunwindowH = 357;break;
+          case "ripleysbelieveitornot":var endurl= "comics/ripleys/index.html";windowW = 315; windowH = 410;sunwindowH = 500;break;
+          case "roseisrose":var endurl= "comics/roseisrose/index.html";break;
           case "rubes":var endurl= "creators/rubes/index.html";windowW = 300; windowH = 349;sunwindowH = 385;break;
-          case "rudy":var endurl= "comics/rudypark/index.html";sunwindowH = 382;break;
+          case "rudypark":var endurl= "comics/rudypark/index.html";sunwindowH = 382;break;
           case "sheldon":var endurl= "comics/sheldon/index.html";break;
-          case "shirley":var endurl= "comics/shirleynson/index.html";break;
-          case "soup":var endurl= "comics/soup2nutz/index.html";sunwindowH = 377;break;
-          case "bump":var endurl= "creators/speedbump/index.html";windowW = 300; windowH = 313;sunwindowH = 257;break;
-          case "spot":var endurl= "comics/spotthefrog/index.html";sunwindowH = 377;break;
-          case "brew":var endurl= "creators/strangebrew/index.html";windowW = 300; windowH = 327;sunwindowH = 272;break;
-          case "sun":var endurl= "comics/sunshineclub/index.html";break;
+          case "shirleyandson":var endurl= "comics/shirleynson/index.html";break;
+          case "souptonutz":var endurl= "comics/soup2nutz/index.html";sunwindowH = 377;break;
+          case "speedbump":var endurl= "creators/speedbump/index.html";windowW = 300; windowH = 313;sunwindowH = 257;break;
+          case "spotthefrog":var endurl= "comics/spotthefrog/index.html";sunwindowH = 377;break;
+          case "strangebrew":var endurl= "creators/strangebrew/index.html";windowW = 300; windowH = 327;sunwindowH = 272;break;
+          case "sunshineclub":var endurl= "comics/sunshineclub/index.html";break;
           case "tarzan":var endurl= "comics/tarzan/index.html";break;
-          case "life":var endurl= "wash/thatslife/index.html";windowW = 300; windowH = 364;sunwindowH = 364;break;
-          case "top":var endurl= "comics/topofworld/index.html";sunwindowW = 600; sunwindowH = 206;break;
-          case "id":var endurl= "creators/wizardofid/index.html";break;
-          case "daze":var endurl= "comics/workingdaze/index.html";windowW = 335; windowH = 408;sunwindowW = 335; sunwindowH = 408;break;
-          case "working":var endurl= "creators/workingitout/index.html";windowW = 300; windowH = 332;sunwindowW = 300; sunwindowH = 332;break;
+          case "thatslife":var endurl= "wash/thatslife/index.html";windowW = 300; windowH = 349;sunwindowH = 354;break;
+          case "topoftheworld":var endurl= "comics/topofworld/index.html";sunwindowW = 600; sunwindowH = 206;break;
+          case "wizardofid":var endurl= "creators/wizardofid/index.html";break;
+          case "workingdaze":var endurl= "comics/workingdaze/index.html";windowW = 335; windowH = 408;sunwindowW = 335; sunwindowH = 408;break;
+          case "workingitout":var endurl= "creators/workingitout/index.html";windowW = 300; windowH = 332;sunwindowW = 300; sunwindowH = 332;break;
           // the two oddball ones.. have to have their own rx pattern
           case "peanuts":var endurl= "comics/peanuts/index.html";windowW = 600; windowH = 139;var rx = /.+(\/archive\/images\/\w+\.\w+)"\s+ALT="Today's Strip"/;break;
           case "dilbert":var endurl= "comics/dilbert/index.html";var rx = /.+(\/archive\/images\/\w+\.\w+)"\s+BORDER=0\s+ALT="Today's Dilbert Comic"/;break;
@@ -241,15 +259,16 @@
        comxSearchPopup = window.createPopup();
        var comxSearchPopupBody = comxSearchPopup.document.body;
        var comxSearchPopupBodyCode = "<html><head></head><body><style>" + convertStylesToInline() + "</style>";
-       comxSearchPopupBodyCode += "<center><img src=" + urlstart+urlcat+urldir+r +" width="+windowW+"height="+windowH+">";
-       comxSearchPopupBodyCode += "</center></body></html>";
+       comxSearchPopupBodyCode += "<img src=" + urlstart+urlcat+urldir+r +" width="+windowW+" height="+windowH+">";
+       comxSearchPopupBodyCode += "</body></html>";
        comxSearchPopupBody.innerHTML = comxSearchPopupBodyCode;
        comxSearchPopup.document.body.style.border="outset 1px";
        comxSearchPopup.document.body.style.background='window';
+       comxSearchPopup.document.body.style.overflowY='auto';
+       comxSearchPopup.document.body.style.overflowX='auto';
        //a little window padding
-       windowH+=10;
-       windowW+=8;
-       
+       windowH+=4;
+       windowW+=2;
        comxSearchPopup.show((buttonalign == "left" ? 0 : document.body.clientWidth - windowW), -windowH, windowW, windowH, document.body);
        
        //samples of the html we are parsing for the image urls
