@@ -8,6 +8,7 @@ Enhancements
 * Performance improvement to inline style generation (used by calendar and message boxes) (Will Dean)
 * added edit local stylesheet menu option and a new variable to set for the css editor called cssEditorExe so you can use TopStyle, Dreamweaver, etc (from Brent Beardsley)
 * added Belgian National Holidays (from Joris Verhuyck)
+* Modified the US holidays file for 2003
 
 New Searches
 
