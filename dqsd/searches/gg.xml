@@ -62,6 +62,7 @@
     <input type="hidden" name="hl" value=""/>
     <input type="hidden" name="cat" value=""/>
     <input type="hidden" name="meta" value=""/>
+    <input type="hidden" name="num" value=""/>
     <input type="hidden" name="ie" value="utf-8"/>
     <input type="hidden" name="q"/>
   </form>
@@ -168,6 +169,9 @@
           }
         }
       }
+      
+      // Set number of results
+      if (typeof strGoogleNum != "undefined") document.ggf.num.value = strGoogleNum;
       
       // Change the form data to use the correct locale
       document.ggf.action = document.ggf_ifl.action = "http://www.google." + local_tld + "/search";

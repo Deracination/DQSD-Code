@@ -14,6 +14,7 @@ Enhancements
 * Minor optimization in DQSDTools - install directory name is now cached rather than read from registry at every access (Kim Gräsman)
 * Added week number support for clock - formattable using the W symbol (Kim Gräsman)
 * Swedish holidays for 2005 (woo, early!) (Kim Gräsman)
+* Added ability to set number of results in google search as preference. (Shawn K. Hall)
 
 Bug Fixes
 * Removed 'Type "!<em>prefix</em>" to see only matching entries.' from help. This action launches lucky Google.
