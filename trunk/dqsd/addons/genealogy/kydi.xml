@@ -1,28 +1,20 @@
 <search function="kydi">
-  <COMMENT>
-
-    This search file was initially created by Dave's Quick Search Deskbar
-    Search Wizard version 0.4 (beta) on 08/18/02 at 21:22:24
-
-    Even though this XML search will probably load and is a healthy start
-    toward a completed search, please be aware that this search will probably
-    not work as is and will require some human inspection and modification.
-
-  </COMMENT>
   <name>Kentucky Death Index 1911-2000</name>
   <category>Genealogy</category>
   <contributor>Brent Beardsley</contributor>
   <link>http://vitals.rootsweb.com/ky/death/search.cgi</link>
   <email></email>
   <description>
-  Search Kentucky Death Index 1911-2000
+  Search Kentucky Death Index 1911-2000<br/>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+	<tr><td>kydi brown</td></tr>
+	<tr><td>kydi brown, john</td></tr>
+    </table>
   </description>
   <form name="kydif"
         method="post"
         action="http://vitals.rootsweb.com/ky/death/search.cgi">
-
-    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
-
     <input type="hidden" name="last" value="" />
     <input type="hidden" name="stype" value="" />
     <COMMENT>
@@ -33,7 +25,6 @@
         <option>Metaphone</option>
       </select>
     </COMMENT>
-
     <input type="hidden" name="first" value="" />
     <input type="hidden" name="county" value="" />
     <COMMENT>
@@ -162,10 +153,10 @@
         <option value="WDFRD">WOODFORD</option>
       </select>
     </COMMENT>
-
     <input type="hidden" name="residence" value="" />
     <input type="hidden" name="year" value="" />
   </form>
+
   <script src="addons/genealogy/genealogy_lib.js"></script>
   <script><![CDATA[
     function kydi(q)
@@ -173,20 +164,9 @@
       if( nullArgs("kydi", q) )
         return;
 
-      if( q == "" )
-      {
-        openSearchWindow("http://vitals.rootsweb.com/ky/death/search.cgi");
-        return;
-      }
-
-      // FORM variables for kydif
-
-      // The wizard assigned the search string to this form field value because
-      // this field was the active element when the search file was generated.
-      // Change this to args.q if the search string is parsed with parseArgs.
       document.kydif.last.value = genealogy_parse_surname(q);
-      //document.kydif.stype.value = "";
       document.kydif.first.value = genealogy_parse_givenname(q);
+      //document.kydif.stype.value = "";
       //document.kydif.county.value = "";
       //document.kydif.residence.value = "";
       //document.kydif.year.value = "";
