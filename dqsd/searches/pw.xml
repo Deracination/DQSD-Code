@@ -1,58 +1,40 @@
-  <search function="pw">
-    <name>Pricewatch Search</name>
-    <description>Street Price Search Engine for computer related items.
-      Search through some categories with these codes:  'mb' for motherboards, 'cpu' for processors, 'ram' for RAM, 'hd' for Hard Drives,
-      'cd' for CD-ROM drives, 'v' for Video Cards, 's' for Sound Cards, 'cdrw' for CD Recorders, 'dvd' for DVD drives, 'fd' for Floppy drives, 'mon' for Monitors,
-      'case' for Cases, 'ps' for Power Supplies, and 'bb' for PC Bare Bones kits.  Example:  "pw cpu:Athlon XP 1900"</description>
-    <category>Shopping</category>
-    <contributor>Rick Olson</contributor>
-    <link>http://www.pricewatch.com</link>
-    <script><![CDATA[
-      function pw(q) {
-        if (q == "")
-          openSearchWindow("http://www.pricewatch.com");
-        else {
-          /* mb - Motherboards... cpu - Microprocessors... ram - System Memory... hd - Hard Disk Drives...cd - CD-ROM Drives...  vc - Video Cards... sc - Sound Cards... cdrw - CD Recorders...
-          dvd - DVD Drives... fd - Floppy Drives... mon - Monitors... case - Cases...  ps - Power Supply for Case... bb - Computer Systems - Kits Bare Bones...*/
-          if (res = q.match(/^(\w*):(.*)/)) {
-            switch(res[1]) {
-              case 'mb':
-                pw_q = "Motherboards "+res[2];break;
-              case 'cpu':
-                pw_q = "Microprocessors "+res[2];break;
-              case 'ram':
-                pw_q = "System Memory "+res[2];break;
-              case 'hd':
-                pw_q = "Hard Disk Drives "+res[2];break;
-              case 'cd':
-                pw_q = "CD-ROM Drives "+res[2];break;
-              case 'v':
-                pw_q = "Video Cards "+res[2];break;
-              case 's':
-                pw_q = "Sound Cards "+res[2];break;
-              case 'cdrw':
-                pw_q = "CD Recorders "+res[2];break;
-              case 'dvd':
-                pw_q = "DVD Drives "+res[2];break;
-              case 'fd':
-                pw_q = "Floppy Drives "+res[2];break;
-              case 'mon':
-                pw_q = "Monitors "+res[2];break;
-              case 'case':
-                pw_q = "Cases "+res[2];break;
-              case 'ps':
-                pw_q = "Power Supply for Case "+res[2];break;
-              case 'bb':
-                pw_q = "Computer Systems - Kits Bare Bones "+res[2];break;
-              default:
-                pw_q = res[2];
-            } // end switch
-          } else {
-            // no reg exp match
-            pw_q = q;
-          }
-          openSearchWindow("http://brook.pricewatch.com/search/search.asp?criteria="+escape(pw_q));
+<search function="pw">
+  <name>Pricewatch</name>
+  <description>Street Price Search Engine for computer related items. Search through categories with these codes: /mb for motherboards, /cpu for processors, /ram for RAM, /hd for Hard Drives, /cd for CD-ROM drives, /video for Video Cards, /sound for Sound Cards, /cdrw for CD Recorders, /dvd for DVD drives, /fd for Floppy drives, /monitor for Monitors, /case for Cases, /psu for Power Supplies, and /bb for PC Bare Bones kits. <nobr>Example: "pw Athlon XP 1900 /cpu"</nobr></description>
+  <category>Shopping</category>
+  <link>http://www.pricewatch.com/</link>
+  <switches>mb, motherboard, cpu, ram, hd, cd, video, sound, cdrw, dvd, fd, monitor, case, psu, bb, barebones</switches>
+  <contributor>Rick Olson</contributor>
+  <script><![CDATA[
+    function pw(q, switches) 
+    {
+      if( q == "" )
+        openSearchWindow("http://www.pricewatch.com/");
+      else if( switches.length == 1 )
+      {
+        switch( switches[0] ) 
+        {
+          case "mb": 
+          case "motherboard": pw_q = "Motherboards"; break;
+          case "cpu": pw_q = "Microprocessors"; break;
+          case "ram": pw_q = "System Memory"; break;
+          case "hd": pw_q = "Hard Disk Drives "; break;
+          case "cd": pw_q = "CD-ROM Drives"; break;
+          case "video": pw_q = "Video Cards"; break;
+          case "sound": pw_q = "Sound Cards"; break;
+          case "cdrw": pw_q = "CD Recorders"; break;
+          case "dvd": pw_q = "DVD Drives"; break;
+          case "fd": pw_q = "Floppy Drives"; break;
+          case "monitor": pw_q = "Monitors"; break;
+          case "case": pw_q = "Cases"; break;
+          case "psu": pw_q = "Power Supply for Case"; break;
+          case "bb":
+          case "barebones": pw_q = "Computer Systems - Kits Bare Bones"; break;
         }
-      }
-    ]]></script>
-  </search>
+        openSearchWindow("http://brook.pricewatch.com/search/search.asp?criteria="+escape(pw_q + " " + q));
+      } 
+      else 
+        openSearchWindow("http://brook.pricewatch.com/search/search.asp?criteria="+escape(q));
+    }
+  ]]></script>
+</search>
