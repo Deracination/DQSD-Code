@@ -1,0 +1,95 @@
+<search function="pmid">
+  <COMMENT>
+    Even though this XML search will probably load and is a good start
+    toward a completed search, please be aware that this search will probably
+    not work as is and will probably require some changes.
+  </COMMENT>
+  <name>PubMed</name>
+  <category>Reference<category>General</category></category>
+  <contributor>James Robertson</contributor>
+  <link>http://www.ncbi.nlm.nih.gov/PubMed/</link>
+  <email></email>
+  <description>
+  Search the PubMed journals database
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>pmid 12429004 for a specific publication</td></tr>
+      <tr><td>pmid Reeves Ginifer for a name search</td></tr>
+      <tr><td>pmid transdermal intravenous fentanyl for a keyword search</td></tr>
+    </table>
+  </description>
+  <form name="pmidf"
+        method="post"
+        action="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?SUBMIT=y">
+    <input type="hidden" name="WebEnv" value="0Ps8Nljx0HfQlmZIUjyLx76jZcnna2NhhrUbq6GWTiXgQxfa6EkHAE" />
+    <input type="hidden" name="CMD" value="" />
+    <input type="hidden" name="db" value="PubMed" />
+    <COMMENT>
+      The input element above, "db", was a SELECT element with the following options...
+      <select name="db">
+        <option value="PubMed">PubMed</option>
+        <option value="protein">Protein</option>
+        <option value="nucleotide">Nucleotide</option>
+        <option value="structure">Structure</option>
+        <option value="genome">Genome</option>
+        <option value="books">Books</option>
+        <option value="domains">3D Domains</option>
+        <option value="cdd">Domains</option>
+        <option value="gene">Gene</option>
+        <option value="geo">GEO</option>
+        <option value="gds">GEO DataSets</option>
+        <option value="journals">Journals</option>
+        <option value="mesh">MeSH</option>
+        <option value="ncbisearch">NCBI Web Site</option>
+        <option value="omim">OMIM</option>
+        <option value="pmc">PMC</option>
+        <option value="popset">PopSet</option>
+        <option value="snp">SNP</option>
+        <option value="taxonomy">Taxonomy</option>
+        <option value="unigene">UniGene</option>
+        <option value="UniSts">UniSTS</option>
+      </select>
+    </COMMENT>
+
+    <input type="hidden" name="orig_db" value="PubMed" />
+
+    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
+
+    <input type="hidden" name="term" value="" />
+    <input type="hidden" name="Clear" value="Clear" />
+    <input type="hidden" name="cmd" value="Search" />
+    <input type="hidden" name="cmd_current" value="" />
+  </form>
+  <script><![CDATA[
+    function pmid(q)
+    {
+      if( nullArgs("pmid", q) )
+        return;
+
+      // FORM variables for pmidf
+      //document.pmidf.WebEnv.value = "";
+      //document.pmidf.CMD.value = "";
+      //document.pmidf.db.value = "";
+      //document.pmidf.orig_db.value = "";
+
+      // The wizard assigned the search string to this form field value because
+      // this field was the active element when the search file was generated.
+      // Change this to args.q if the search string is parsed with parseArgs.
+      document.pmidf.term.value = q;
+      //document.pmidf.Clear.value = "";
+      //document.pmidf.cmd.value = "";
+      //document.pmidf.cmd_current.value = "";
+
+      submitForm(pmidf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 01/28/04 at 16:00:24
+    by Dave's Quick Search Deskbar Search Wizard version 1.2,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>
