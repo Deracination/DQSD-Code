@@ -8,13 +8,13 @@
  *  - changed event month to run from 1-12 instead of 0-11
  *  - assume event date to be recurring if month or year attribute
  *    is not specified.
- *
+ * modified by Monty Scroggins  31/03/2002
+ *  - added support for a local events file with referenced by
+ *    a the var 'localeventsfileurl'
  * $Revision$ 
  * $Date$
  *
  * TODO:
- *  - add listing of public holidays in other countries
- *  - add ability to define personal events
  *  - add ability to distingush b/w different kind of events
  *  - add ability to input events directly from search box
  */
@@ -32,6 +32,18 @@ function loadeventslist()
 }
 
 loadeventslist();
+
+function loadlocaleventslist()
+{
+  try
+  {
+    document.write("<xml id='localeventslist' src='" + localeventsfileurl + "'></xml>");
+    lents = document.all("localeventslist").selectSingleNode("events");
+  }
+  catch (ex) {}
+}
+
+loadlocaleventslist();
 
 function yhocal(dat)
 {
@@ -323,10 +335,13 @@ function buildcal()
     if (week_day == 0) cal += TR_end + TR_start;
 
     var ent = null;
+    var lent = null;
     querystr = 'event[date[(@year="'+year+'" || not(@year)) && (@month="'+(month+1)+'" || not(@month)) && @day="'+month_day+'"]]';
     if (ents)
       ent = ents.selectSingleNode(querystr);
-
+    if (lents)
+      lent = lents.selectSingleNode(querystr);
+      
     var highlight = false;
     if( weekday>0 && Today.getDate()==month_day)
       highlight = true;
@@ -345,7 +360,10 @@ function buildcal()
           if (ent)
             cal += eventday_start(Calendar.getTime(), ent.getAttribute("name"));
           else
-            cal += TD_start(Calendar.getTime());
+            if (lent)
+              cal += eventday_start(Calendar.getTime(), lent.getAttribute("name"));
+            else
+              cal += TD_start(Calendar.getTime());
 
       cal += month_day;
 

@@ -66,12 +66,16 @@ cal=true;
 
 
 /* Events file for the popup calendar events 
-* holidays.us.xml - United States
-* holidays.ca.xml - Canada
-* holidays.sg.xml - Singapore
+*  holidays.us.xml - United States
+*  holidays.ca.xml - Canada
+*  holidays.sg.xml - Singapore
 */
 eventsfileurl="holidays.us.xml";
 
+/* Local events file for the popup calendar events 
+*  These events will be added in addition to any holidays events 
+*/
+localeventsfileurl="localevents.xml";
 
 /* Use multi-line searchbar?  Set this to false to prevent word wraps.
 *  true = display multiline (default)
@@ -136,7 +140,7 @@ showbutton = 2;
 //helpoptions = "width=800, height=550" // These are not CSS styles, but window.open() options
 
 /*
- * Turn on/off(default) auto complete
+ *  Turn on/off(default) auto complete
  */
  autocomplete = false;
  
