@@ -406,8 +406,8 @@ LRESULT CDQSDWizardDlg::OnOK(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHa
 							"\r\n    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)"
 							"\r\n  </copyright>"
 							"\r\n  <created_by>"
-							"\r\n    This search file was initially created by on ") + string( szDate ) + _T(" at ") + string( szTime ) + 
-						 _T("\r\n    Dave's Quick Search Deskbar Search Wizard version ") + m_strVersion + _T(","
+							"\r\n    This search file was initially created on ") + string( szDate ) + _T(" at ") + string( szTime ) + 
+						 _T("\r\n    by Dave's Quick Search Deskbar Search Wizard version ") + m_strVersion + _T(","
 							"\r\n    ") + m_strCopyright +
 						 _T("\r\n  </created_by>"
 							"\r\n</search>");
@@ -791,7 +791,7 @@ string CDQSDWizardDlg::GetAbsoluteActionPath( _variant_t& varAction )
 		string strActionPath = strAction;
 		if ( strActionPath[0] == _T('/') )
 		{
-			strAction = string( szScheme ) + _T("//") + szHost + string( szPort ) + strActionPath;
+			strAction = string( szScheme ) + _T("://") + szHost + string( szPort ) + strActionPath;
 		}
 		else
 		{
