@@ -42,6 +42,8 @@ LRESULT CDQSDWizardDlg::OnInitDialog(UINT uMsg, WPARAM wParam, LPARAM lParam, BO
 
 	CenterWindow( GetActiveWindow() ); // ??? should probably use the actual browser window
 
+	m_editSearchName.SubclassWindow( GetDlgItem( IDC_SearchName ) );
+	
 	TCHAR szModule[ MAX_PATH + 1 ];
 	if ( GetModuleFileName( _Module.GetResourceInstance(), szModule, LENGTHOF(szModule) ) )
 	{

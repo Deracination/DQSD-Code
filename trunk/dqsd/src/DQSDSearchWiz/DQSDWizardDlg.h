@@ -3,6 +3,8 @@
 #ifndef __DQSDWIZARDDLG_H_
 #define __DQSDWIZARDDLG_H_
 
+#include "SearchNameEdit.h"
+
 #include "resource.h"       // main symbols
 
 /////////////////////////////////////////////////////////////////////////////
@@ -67,6 +69,8 @@ private:
 	string EscapeXML( string& xml );
 	void SaveFields();
 	void RestoreFields();
+
+	CSearchNameEdit m_editSearchName;
 };
 
 #endif //__DQSDWIZARDDLG_H_
