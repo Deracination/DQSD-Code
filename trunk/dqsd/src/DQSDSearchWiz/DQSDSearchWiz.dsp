@@ -199,6 +199,10 @@ SOURCE=.\normal.ico
 SOURCE=.\SearchWizard.rgs
 # End Source File
 # End Group
+# Begin Source File
+
+SOURCE=.\ChangeLog.txt
+# End Source File
 # End Target
 # End Project
 # Section DQSDSearchWiz : {00000000-0000-0000-0000-800000800000}

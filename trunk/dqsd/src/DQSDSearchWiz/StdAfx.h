@@ -28,6 +28,8 @@ extern CComModule _Module;
 #include <ctype.h>
 #include <time.h>
 #include <atlhost.h>
+#include <atlapp.h>
+#include <atlctrls.h>
 
 #include <string>
 #include <vector>

@@ -6,6 +6,33 @@
 #include "OptionsDlg.h"
 #include "ModulVer.h"
 
+
+void srch_repl( string& s, const string& to_find, const string& repl_with ) 
+{
+	if ( s.find(to_find, 0) == string::npos )
+		return;
+
+	string result;
+	string::size_type pos = 0;
+	
+	while ( true ) 
+	{
+		string::size_type next = s.find( to_find, pos );
+		result.append( s, pos, next - pos );
+		if( next != string::npos ) 
+		{
+			result.append( repl_with );
+			pos = next + to_find.size();
+		} 
+		else 
+		{   
+			break;  // exit loop
+		}
+	} 
+	s.swap( result );
+}
+
+
 /////////////////////////////////////////////////////////////////////////////
 // CDQSDWizardDlg
 
@@ -308,15 +335,15 @@ LRESULT CDQSDWizardDlg::OnOK(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHa
 						"\r\n  </COMMENT>");
 
 	CWindow( GetDlgItem( IDC_SearchTitle ) ).GetWindowText( &bstr );
-	strSearchFile += _T("\r\n  <name>") + string( W2T( bstr ) ) + _T("</name>");
+	strSearchFile += _T("\r\n  <name>") + EscapeXML( string( W2T( bstr ) ) ) + _T("</name>");
 	::SysFreeString( bstr );
 
 	CWindow( GetDlgItem( IDC_Category ) ).GetWindowText( &bstr );
-	strSearchFile += _T("\r\n  <category>") + string( W2T( bstr ) ) + _T("</category>");
+	strSearchFile += _T("\r\n  <category>") + EscapeXML( string( W2T( bstr ) ) ) + _T("</category>");
 	::SysFreeString( bstr );
 	
 	CWindow( GetDlgItem( IDC_Contributor ) ).GetWindowText( &bstr );
-	strSearchFile += _T("\r\n  <contributor>") + string( W2T( bstr ) ) + _T("</contributor>");
+	strSearchFile += _T("\r\n  <contributor>") + EscapeXML( string( W2T( bstr ) ) ) + _T("</contributor>");
 	::SysFreeString( bstr );
 
 	CWindow( GetDlgItem( IDC_Link ) ).GetWindowText( &bstr );
@@ -331,7 +358,7 @@ LRESULT CDQSDWizardDlg::OnOK(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHa
 	CWindow( GetDlgItem( IDC_Description ) ).GetWindowText( &bstr );
 	strSearchFile += _T("\r\n  <description>");
 	if ( _tcslen( W2T( bstr ) ) )
-		strSearchFile += _T("\r\n  ") + string( W2T( bstr ) );
+		strSearchFile += _T("\r\n  ") + EscapeXML( string( W2T( bstr ) ) );
 	strSearchFile += _T("\r\n  </description>");
 	::SysFreeString( bstr );
 
@@ -502,8 +529,10 @@ string CDQSDWizardDlg::GetForms( string& rstrSearchName, string& rstrFormScript 
 					// Skip if the element doesn't have a name
 
 					_variant_t varInputName;
+					string strInputName;
 					if ( SUCCEEDED( spElement->getAttribute( _bstr_t( _T("name") ), 0, &varInputName ) ) && varInputName.bstrVal )
 					{
+						strInputName = W2T( varInputName.bstrVal );
 
 						// Ignore INPUT type=submit
 						_variant_t varInputType;
@@ -520,7 +549,7 @@ string CDQSDWizardDlg::GetForms( string& rstrSearchName, string& rstrFormScript 
 							strFormXML += _T("\r\n    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>");
 						}
 
-						strFormXML += _T("\r\n    <input type=\"hidden\" name=\"") + string( W2T( varInputName.bstrVal ) ) + _T("\"");
+						strFormXML += _T("\r\n    <input type=\"hidden\" name=\"") + strInputName + _T("\"");
 
 						// Stick the value of the field in as well for two reasons... some hidden fields are required 
 						// and the user can enter a string in a visible field to see which field to use.
@@ -528,7 +557,7 @@ string CDQSDWizardDlg::GetForms( string& rstrSearchName, string& rstrFormScript 
 						_variant_t varInputValue;
 						if ( SUCCEEDED( spElement->getAttribute( _bstr_t( _T("value") ), 0, &varInputValue ) ) && varInputValue.bstrVal )
 						{
-							strFormXML += _T(" value=\"") + string( W2T( varInputValue.bstrVal ) ) + _T("\"");
+							strFormXML += _T(" value=\"") + EscapeXML( string( W2T( varInputValue.bstrVal ) ) ) + _T("\"");
 						}
 						else
 						{
@@ -537,23 +566,32 @@ string CDQSDWizardDlg::GetForms( string& rstrSearchName, string& rstrFormScript 
 
 						strFormXML += _T("/>");
 
+						// If there are any non-alpha characters in the INPUT field name, the use different notation in the script
+						string strScriptInputName = _T(".") + strInputName + _T(".value");
+						if ( ( strInputName.find_first_not_of( _T("_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0 ) != string::npos ) ||
+							 ( !_tcsicmp( strInputName.c_str(), _T("target") ) ) ||
+							 ( !_tcsicmp( strInputName.c_str(), _T("submit") ) ) )
+						{
+							strScriptInputName = _T("[\"") + strInputName + _T("\"].value");
+						}
+
 						if ( bActiveElement )
 						{
 							rstrFormScript += _T("\r\n"
 												 "\r\n      // The wizard assigned the search string to this form field value because"
 												 "\r\n      // this field was the active element when the search file was generated."
 												 "\r\n      // Change this to args.q if the search string is parsed with parseArgs."
-												 "\r\n      document.") + strFormName + _T(".") + string( W2T( varInputName.bstrVal ) ) + _T(".value = q;");
+												 "\r\n      document.") + strFormName + strScriptInputName + _T(" = q;");
 						}
 						else
 						{
-							rstrFormScript += _T("\r\n      //document.") + strFormName + _T(".") + string( W2T( varInputName.bstrVal ) ) + _T(".value = \"\";");
+							rstrFormScript += _T("\r\n      //document.") + strFormName + strScriptInputName + _T(" = \"\";");
 						}
 
 						if ( !_tcsicmp( W2T( bstrName ), _T("SELECT") ) )
 						{
 							strFormXML += _T("\r\n    <COMMENT>  The input element above was a SELECT element with the following options...");
-							strFormXML += _T("\r\n      <select name=\"" + string( W2T( varInputName.bstrVal ) ) + "\">");
+							strFormXML += _T("\r\n      <select name=\"" + strInputName + "\">");
 							
 							CComQIPtr< IHTMLSelectElement > spSelect( spElement );
 							if ( spSelect )
@@ -576,7 +614,7 @@ string CDQSDWizardDlg::GetForms( string& rstrSearchName, string& rstrFormScript 
 									
 									strFormXML += _T("\r\n        <option");
 									if ( bstrOptionValue )
-										strFormXML += _T(" value=\"") + string( W2T( bstrOptionValue ) ) + _T("\"");
+										strFormXML += _T(" value=\"") + EscapeXML( string( W2T( bstrOptionValue ) ) ) + _T("\"");
 									strFormXML += _T(">");
 									strFormXML += EscapeXML( string( W2T( bstrOptionText ) ) ) + _T("</option>");
 
@@ -696,12 +734,13 @@ string CDQSDWizardDlg::GetSwitches()
 
 string CDQSDWizardDlg::EscapeXML( string& xml )
 {
-	string strEscapedXML = xml;
+	srch_repl( xml, _T("&"), _T("&amp;") );
+	srch_repl( xml, _T("<"), _T("&lt;") );
+	srch_repl( xml, _T(">"), _T("&gt;") );
+//	srch_repl( xml, _T("'"), _T("&apos;") );
+//	srch_repl( xml, _T("\""), _T("&quot;") );
 
-	// ??? Very quick hack to get rid of ampersands until we figure out a better way
-	replace( strEscapedXML.begin(), strEscapedXML.end(), _T('&'), _T('~') );
-
-	return strEscapedXML;
+	return xml;
 }
 
 void CDQSDWizardDlg::SaveFields()
