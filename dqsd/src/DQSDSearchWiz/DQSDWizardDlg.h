@@ -30,6 +30,7 @@ public:
 BEGIN_MSG_MAP(CDQSDWizardDlg)
 	MESSAGE_HANDLER(WM_INITDIALOG, OnInitDialog)
 	MESSAGE_HANDLER(WM_HELP, OnHelp)
+	MESSAGE_HANDLER(WM_DESTROY, OnDestroy)
 	COMMAND_ID_HANDLER(IDOK, OnOK)
 	COMMAND_ID_HANDLER(IDCANCEL, OnCancel)
 	NOTIFY_HANDLER(IDC_FormList2, LVN_ITEMCHANGED, OnFormListItemChanged)
@@ -48,6 +49,7 @@ END_MSG_MAP()
 
 		return 0;
 	}
+	LRESULT OnDestroy(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 
 	LRESULT OnOK(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHandled);
 
@@ -76,6 +78,7 @@ private:
 	COptions m_options;
 	_bstr_t m_bstrUnselectedStyle;
 	map< int, CComBSTR > m_mapUnselectedStyle;
+	CComPtr< IHTMLStyle > m_spSelectedStyle;
 
 private:
 	string GetAbsoluteActionPath( _variant_t& varAction );
