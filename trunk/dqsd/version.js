@@ -19,7 +19,7 @@ function versionCheck()
   {
     try
     {
-      if(!testObject.VersionIsCorrect(2,5,8,9))
+      if(!testObject.VersionIsCorrect(2,5,8,10))
       {
         throw "DQSDTools out of date";
       }
