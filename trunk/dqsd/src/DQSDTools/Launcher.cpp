@@ -373,9 +373,14 @@ STDMETHODIMP CLauncher::GetFiles(BSTR bstrFileSpec, BSTR *pbstrFiles)
 		if ( !StrCmp( fd.cFileName, _T(".") ) || !StrCmp( fd.cFileName, _T("..") ) )
 			continue;
 
+		if (fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
+			continue;
+
 		bstrFiles.Append( _T("\n") );
 		bstrFiles.Append( fd.cFileName );
 	}
+
+	::FindClose(handle);
 
 	*pbstrFiles = bstrFiles.Detach();
 
@@ -729,6 +734,8 @@ STDMETHODIMP CLauncher::GetFolders(BSTR bstrBaseFolder, BSTR* pbstrFolders)
 		bstrFolders.Append( _T("\n") );
 		bstrFolders.Append( fd.cFileName );
 	}
+
+	::FindClose(handle);
 
 	*pbstrFolders = bstrFolders.Detach();
 	return S_OK;
