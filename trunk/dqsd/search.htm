@@ -441,6 +441,14 @@ function performsearch( fname, term )
 }
 
 
+// a way of executing a specific search while adding the right symbol to the history
+function mnu(text, sym)
+{
+  addhist(document.deff.q.value + sym);
+  performsearch( text, document.deff.q.value );
+}
+
+
 function containsalias(s, t)
 {
   if (t.length >= s.length)
@@ -460,15 +468,6 @@ function containsalias(s, t)
     }
   }
   return false;
-}
-
-
-// a way of executing a specific search
-// while adding the right symbol to the history
-function mnu(text, sym)
-{
-  addhist(document.deff.q.value + sym);
-  performsearch( text, document.deff.q.value );
 }
 
 
@@ -718,7 +717,7 @@ function dodrop()
   document.deff.q.value = q;
 
   rst();
-  mnu( defaultsearch, "");
+  mnu( aliases[""], "");
 }
 
 // rst() called when the texbox loses focus
