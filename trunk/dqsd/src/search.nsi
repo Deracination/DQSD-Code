@@ -123,6 +123,7 @@ Section "Quick Search Deskbar (required)"
   WriteUninstaller "$INSTDIR\uninstall.exe"
 
   ; Put files there
+  File "..\ChangeLog.txt"
   File "..\aliases.txt"
   File "..\calculate.js"
   File "..\calendar.js"
