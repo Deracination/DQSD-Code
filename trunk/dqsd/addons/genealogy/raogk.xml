@@ -14,6 +14,7 @@
   <form name="raogkf">
 
   </form>
+  <script src="addons/genealogy/genealogy_lib.js"></script>
   <script><![CDATA[
     function raogk(q)
     {

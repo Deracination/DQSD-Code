@@ -48,6 +48,7 @@
     <INPUT TYPE="hidden" NAME="tab" VALUE="Y" />
   </form>
   
+  <script src="addons/genealogy/genealogy_lib.js"></script>
   <script><![CDATA[
     function gnis(q)
     {

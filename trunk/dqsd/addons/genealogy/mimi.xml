@@ -125,6 +125,7 @@
     <input type="hidden" name="S_SURNAME" value="" />
     <input type="hidden" name="Clear" value="Clear" />
   </form>
+  <script src="addons/genealogy/genealogy_lib.js"></script>
   <script><![CDATA[
     function mimi(q)
     {

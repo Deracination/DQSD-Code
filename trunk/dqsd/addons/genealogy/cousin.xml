@@ -222,6 +222,7 @@
 
     <input type="hidden" name="pathinfo" value="/0/" />
   </form>
+  <script src="addons/genealogy/genealogy_lib.js"></script>
   <script><![CDATA[
     function cousin(q)
     {

@@ -90,6 +90,7 @@
     <input type="hidden" name="ti" value="0" />
     <input type="hidden" name="gss" value="ansmp" />
   </form>
+  <script src="addons/genealogy/genealogy_lib.js"></script>
   <script><![CDATA[
     function ancestry(q)
     {
