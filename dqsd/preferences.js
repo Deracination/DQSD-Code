@@ -397,3 +397,4 @@ displayHelp = true;
 /* Check web for an updated version each time the toolbar is started
 */
 checkForUpdate = true;
+checkForUpdateDelay = 10000; // millisecond delay after first search

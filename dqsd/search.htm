@@ -185,6 +185,8 @@ function def()
   // anything below adds something to the history
   addhist(t);
 
+  setTimeout( "checkWebForUpdate()", checkForUpdateDelay );
+
   // detect special commands
   if (!special(t))
   {
@@ -209,6 +211,7 @@ function def()
 
   // if there isn't a user-defined default search, fall back to built-in defaultsearch variable
   performsearch(null, t);
+
   return false;
 }
 
@@ -312,7 +315,7 @@ function mnu(text, alias)
 {
   var fn = (alias ? alias : text);
   var search = (fn + ' ' + document.deff.q.value).replace( /^\s*(\S+)\s*$/, "$1" ); // trim leading/trailing whitespace
-  if ( fn != 'about' && !isInternalSearch(fn) )
+  if ( fn != 'about' && !isInternalSearch(fn) && fn != 'checkWebForUpdateNotifyAll' )
     addhist( search );
   performsearch( text, document.deff.q.value );
 }
@@ -874,8 +877,6 @@ function postStartup()
       alert("There was a problem initializing the enhanced keyboard support - some key combinations and hotkeys may not work (Error '" + e.description + "')");
       keyboardHook = null;
   }
-
-  checkWebForUpdate();
 }
 
 

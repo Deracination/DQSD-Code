@@ -8,6 +8,7 @@ function showpop()
   mb.HorizontalAlignment = ( buttonalign == 'left' ? 1 : 2 ); // 1 = left, 2 = right (default)
   
   mb.AppendMenuItem( local(ABOUT_TEXT), "about", "Help on using Dave's Quick Search Deskbar" );
+  mb.AppendMenuItem( "Check for update...", "checkWebForUpdateNotifyAll", "Check for update to Dave's Quick Search Deskbar" );
   mb.AppendSeparator( 0 );
   for (i = 0; i < categoryarray.length; i++)
   {
@@ -61,7 +62,7 @@ function showpop()
     if ( isInternalSearch( fn ) )
       alias = searches[fn].aliases[1];
     mnu( fn, alias );
-    if ( fn != 'about' )
+    if ( fn != 'about' && fn != 'checkWebForUpdateNotifyAll' )
       saveMenuHistory( alias ? alias : fn );
   }
   return false;
