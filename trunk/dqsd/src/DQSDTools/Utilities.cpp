@@ -15,7 +15,7 @@ INTERNET_SCHEME GetScheme(LPCTSTR szURL)
   uc.lpszScheme = buf;
   uc.dwSchemeLength = sizeof buf;
 
-  if (InternetCrackUrl(szURL, _tcsclen(szURL), ICU_DECODE, &uc))
+  if (InternetCrackUrl(szURL, lstrlen(szURL), ICU_DECODE, &uc))
      return uc.nScheme;
   else
      return INTERNET_SCHEME_UNKNOWN;
@@ -30,7 +30,7 @@ int URLMatchesFilename(LPCTSTR szURL, LPCTSTR szFile)
   uc.dwStructSize = sizeof uc;
   uc.lpszUrlPath = pathbuf;
   uc.dwUrlPathLength = sizeof pathbuf;
-  if (!InternetCrackUrl(szURL, _tcsclen(szURL), ICU_DECODE, &uc))
+  if (!InternetCrackUrl(szURL, lstrlen(szURL), ICU_DECODE, &uc))
      return FALSE;
 
   if (uc.nScheme != INTERNET_SCHEME_FILE)
@@ -42,6 +42,65 @@ int URLMatchesFilename(LPCTSTR szURL, LPCTSTR szFile)
   return TRUE;
 }
 
+
+BOOL CALLBACK EnumChildProc(
+  HWND hwnd,      // handle to child window
+  LPARAM lParam   // application-defined value
+)
+{
+	TCHAR className[201];
+
+	UNREFERENCED_PARAMETER(lParam);
+
+	GetClassName(hwnd, className, 200);
+	if(StrCmpI(className, "OCHost") == 0)
+	{
+		// We've found a likely looking window 
+		std::string classList, thisClassName;
+		HWND hWorkingWnd = hwnd;
+		HWND hNextWindow;
+
+		// Go to the bottom of the hierachy
+		while((hNextWindow = GetWindow(hWorkingWnd, GW_CHILD)) != NULL)
+		{
+			hWorkingWnd = hNextWindow;
+		}
+
+		// Work back up
+		do
+		{
+			GetClassName(hWorkingWnd, className, 200);
+//			ATLTRACE("ClassName: %s\n", className);
+			thisClassName = className;
+			thisClassName += ", ";
+			classList.insert(0, thisClassName);
+		}
+		while((hWorkingWnd = GetParent(hWorkingWnd)) != NULL);
+
+		ATLTRACE("ClassList: %s\n", classList.c_str());
+		MessageBox(NULL, classList.c_str(), "DQSD Window Path", MB_OK | MB_ICONINFORMATION);
+	}
+	return TRUE;
+}
+
+
+BOOL CALLBACK TopLevelEnumCallback(
+  HWND hwnd,      
+  LPARAM lParam   
+)
+{
+	UNREFERENCED_PARAMETER(lParam);
+
+	EnumChildWindows(hwnd, EnumChildProc, NULL);
+	return TRUE;
+}
+
+
+static void
+WindowWalker()
+{
+	EnumWindows(TopLevelEnumCallback, NULL);
+}
 
 
 
@@ -113,6 +172,11 @@ UtilitiesFindDQSDWindow(bool bCheckForNonTaskbar)
 				break;
 			}
 		}
+	}
+
+	if(hwndDQSD == NULL)
+	{
+		WindowWalker();
 	}
 
 	ATLTRACE("UtilitiesFindDQSDWindow: Returning 0x%x\n", hwndDQSD);

@@ -34,7 +34,6 @@ extern CComModule _Module;
 #include <shlguid.h>				// SID_SWebBrowserApp, 
 #include <shellapi.h>				// ShellExecute, 
 #include <commctrl.h>
-#include <process.h> 
 
 
 #pragma warning(push, 3)
