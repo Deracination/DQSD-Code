@@ -234,16 +234,8 @@ STDMETHODIMP CLauncher::ReadFile(BSTR bstrFilename, BSTR *pbstrResult)
 	if ( FAILED( hr ) )
 		return hr;
 
-	// Get the installation directory from the registry to use for making sure the filenames are in the install path
-	TCHAR szInstallDir[ _MAX_PATH ];
-	hr = GetInstallationDirectory(szInstallDir, sizeof(szInstallDir));
-	if (FAILED ( hr) )
-		return hr;
-
-	// Make sure from filename is in the installation directory tree
-	if (!VerifyFileInDirectoryTree(szFilename, szInstallDir))
-	{
-		return Error(_T("Filename is not in the installation directory tree."), IID_ILauncher, E_FAIL);
+	if (!IsValidFileDirectory(szFilename)) {
+		return Error(_T("Filename is not in the installation or app data directory trees."), IID_ILauncher, E_FAIL);
 	}
 
 	// Make sure it's extension is not one of the bad extensions
@@ -288,16 +280,8 @@ STDMETHODIMP CLauncher::WriteFile(BSTR bstrFilename, BSTR bstrValue)
 	if ( FAILED( hr ) )
 		return hr;
 
-	// Get the installation directory from the registry to use for making sure the filenames are in the install path
-	TCHAR szInstallDir[ _MAX_PATH ];
-	hr = GetInstallationDirectory(szInstallDir, sizeof(szInstallDir));
-	if (FAILED ( hr) )
-		return hr;
-
-	// Make sure from filename is in the installation directory tree
-	if (!VerifyFileInDirectoryTree(szFilename, szInstallDir))
-	{
-		return Error(_T("Filename is not in the installation directory tree."), IID_ILauncher, E_FAIL);
+	if (!IsValidFileDirectory(szFilename)) {
+		return Error(_T("Filename is not in the installation or app data directory trees."), IID_ILauncher, E_FAIL);
 	}
 
 	// Make sure it's extension is not one of the bad extensions
@@ -757,16 +741,8 @@ STDMETHODIMP CLauncher::FileExists(BSTR bstrFilename, VARIANT_BOOL *pbExists)
 	if ( FAILED( hr ) )
 		return hr;
 
-	// Get the installation directory from the registry to use for making sure the filenames are in the install path
-	TCHAR szInstallDir[ _MAX_PATH ];
-	hr = GetInstallationDirectory(szInstallDir, sizeof(szInstallDir));
-	if (FAILED ( hr) )
-		return hr;
-
-	// Make sure from filename is in the installation directory tree
-	if (!VerifyFileInDirectoryTree(szFilename, szInstallDir))
-	{
-		return Error(_T("Filename is not in the installation directory tree."), IID_ILauncher, E_FAIL);
+	if (!IsValidFileDirectory(szFilename)) {
+		return Error(_T("Filename is not in the installation or app data directory trees."), IID_ILauncher, E_FAIL);
 	}
 
 	DWORD dwAttributes = ::GetFileAttributes(szFilename);
@@ -789,16 +765,8 @@ STDMETHODIMP CLauncher::RenameFile(BSTR bstrFromFilename, BSTR bstrToFilename)
 	if ( FAILED( hr ) )
 		return hr;
 
-	// Get the installation directory from the registry to use for making sure the filenames are in the install path
-	TCHAR szInstallDir[ _MAX_PATH ];
-	hr = GetInstallationDirectory(szInstallDir, sizeof(szInstallDir));
-	if (FAILED ( hr) )
-		return hr;
-
-	// Make sure from filename is in the installation directory tree
-	if (!VerifyFileInDirectoryTree(szFromFilename, szInstallDir))
-	{
-		return Error(_T("Source filename is not in the installation directory tree."), IID_ILauncher, E_FAIL);
+	if (!IsValidFileDirectory(szFromFilename)) {
+		return Error(_T("Filename is not in the installation or app data directory trees."), IID_ILauncher, E_FAIL);
 	}
 
 	// Make sure it's extension is not one of the bad extensions
@@ -830,10 +798,8 @@ STDMETHODIMP CLauncher::RenameFile(BSTR bstrFromFilename, BSTR bstrToFilename)
 	if ( FAILED( hr ) )
 		return hr;
 
-	// Make sure to filename is in the installation directory tree
-	if (!VerifyFileInDirectoryTree(szToFilename, szInstallDir))
-	{
-		return Error(_T("Destination filename is not in the installation directory tree."), IID_ILauncher, E_FAIL);
+	if (!IsValidFileDirectory(szToFilename)) {
+		return Error(_T("Destination filename is not in the installation or app data directory trees."), IID_ILauncher, E_FAIL);
 	}
 
 	// Make sure it's extension is not one of the bad extensions
@@ -962,4 +928,52 @@ BOOL CLauncher::IsFileExtension( LPCTSTR szFilename, LPCTSTR szExts)
 	}
 	free(szTempExts);
 	return retval;
+}
+
+BOOL CLauncher::IsValidFileDirectory(LPCTSTR szFilename)
+{
+	USES_CONVERSION;
+
+	HRESULT hr;
+
+	// Get the installation directory from the registry to use for making sure the filenames are in the install path
+	TCHAR szInstallDir[ _MAX_PATH ];
+	hr = GetInstallationDirectory(szInstallDir, sizeof(szInstallDir));
+	if (FAILED ( hr) )
+		return FALSE;
+
+	// Get the app data directory from the registry to use for making sure the filenames are in the appdata path
+	CComBSTR bstrAppData;
+	hr = get_AppDataDirectory(&bstrAppData);
+	if (FAILED ( hr) )
+		return FALSE;
+
+	// Make sure from filename is in the installation or app data directory trees
+	if (!VerifyFileInDirectoryTree(szFilename, szInstallDir) &&
+		!VerifyFileInDirectoryTree(szFilename, W2CT((BSTR)bstrAppData)))
+	{
+		return FALSE;
+	}
+	return TRUE;
+}
+
+STDMETHODIMP CLauncher::CreateDirectory(BSTR bstrDir)
+{
+	USES_CONVERSION;
+
+	if (!IsValidFileDirectory(W2CT(bstrDir))) {
+		return Error(_T("Can't create directory unless in the app data or installation directory tree."), IID_ILauncher, E_FAIL);
+	}
+	int retval = ::SHCreateDirectoryEx(NULL, W2CT( bstrDir ), NULL );
+	switch (retval) {
+		case ERROR_FILE_EXISTS:
+		case ERROR_ALREADY_EXISTS:
+		case ERROR_SUCCESS:
+			return S_OK;
+		case ERROR_BAD_PATHNAME:
+		case ERROR_FILENAME_EXCED_RANGE:
+		case ERROR_PATH_NOT_FOUND:
+		default:
+			return Error(_T("Failed to create directory."), IID_ILauncher, E_FAIL);
+	}
 }

@@ -37,6 +37,7 @@ import "ocidl.idl";
 		[id(19), helpstring("method FileExists")] HRESULT FileExists([in] BSTR bstrBaseFolder, [out,retval] VARIANT_BOOL *pbExists);
 		[id(20), helpstring("method RenameFile")] HRESULT RenameFile([in] BSTR bstrFromFile, [in] BSTR bstrToFile);
 		[propget, id(21), helpstring("AppDataDirectory")] HRESULT AppDataDirectory([out,retval] BSTR *pbstrDirectory);
+		[id(22), helpstring("method CreateDirectory")] HRESULT CreateDirectory([in] BSTR bstrDirectory);
 	};
 	[
 		object, 

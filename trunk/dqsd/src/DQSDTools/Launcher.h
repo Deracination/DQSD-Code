@@ -88,6 +88,7 @@ public:
 	STDMETHOD(get_VersionIsCorrect)(int v1, int v2, int v3, int v4, /*[out, retval]*/ VARIANT_BOOL *pVal);
 	STDMETHOD(SetSite)(IUnknown* pUnkSite);
 	STDMETHOD(get_AppDataDirectory)(/*[out,retval]*/ BSTR* pbstrDirectory);
+	STDMETHOD(CreateDirectory)(/*[in]*/ BSTR bstrDirectory);
 
 // Implementation
 private:
@@ -104,6 +105,7 @@ private:
 	HRESULT GetFilename( LPCTSTR szName, LPTSTR szResult, LPCTSTR pszDefaultExt = _T(".txt") );
 	HRESULT GetInstallationDirectory( LPTSTR szResult, DWORD dwResultSize);
 	BOOL VerifyFileInDirectoryTree( LPCTSTR szFilename, LPCTSTR szDir);
+	BOOL IsValidFileDirectory(LPCTSTR szFilename);
 	BOOL IsFileExtension( LPCTSTR szFilename, LPCTSTR szExts);
 
 };
