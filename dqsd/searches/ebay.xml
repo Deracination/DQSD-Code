@@ -28,8 +28,10 @@
       
       if( nullArgs("ebay",q) )
         return false;
-      else if( (res = q.match( /^\s*(\d{9,)\s*$/ )) != null )
+      else if ( res = q.match( /^\s*(\d{9,})\s*$/ ) )
+      {
         openSearchWindow('http://cgi.ebay.com/aw-cgi/eBayISAPI.dll?MfcISAPICommand=ViewItem&item=' + res[1]);
+      }
       else
       {
         document.ebayf.query.value = q;
