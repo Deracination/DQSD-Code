@@ -1,9 +1,11 @@
 <search function="jsref">
   <name>Javascript reference</name>
-  <description>Search references of various flavors of Javascript. Uses Google.
+  <description>Search references of various flavors of Javascript.
     <div class="helpboxDescLabels">Usage:</div>
     <table class="helpboxDescTable">
-      <tr><td>jsref &lt;<i>item</i>&gt; [/<i>reference</i>] [/unlucky]</td></tr>
+      <tr><td>jsref &lt;<i>item</i>&gt; [/<i>reference</i>] [/unlucky]<br/>
+        Note: if &lt;<i>item</i>&gt; is empty, the search leads to the appropriate reference page.
+      </td></tr>
     </table>
     <div class="helpboxDescLabels">Switches:</div>
       <table class="helpboxDescTable">
@@ -26,12 +28,14 @@
       </table>
     <div class="helpboxDescLabels">Examples:</div>
     <table class="helpboxDescTable">
+      <tr><td>jsref /1.3</td></tr>
       <tr><td>jsref split</td></tr>
       <tr><td>jsref split /1.5</td></tr>
       <tr><td>jsref split /7</td></tr>
       <tr><td>jsref logical or /unlucky</td></tr>
       <tr><td>jsref abstract /7</td></tr>
       <tr><td>jsref abstract /ms</td></tr>
+      <tr><td>jsref /1.3</td></tr>
     </table>
   </description>
   <link>http://developer.netscape.com/docs/manuals/javascript.html</link>
@@ -131,7 +135,7 @@
               case "ms":
                 k++;
                 ms = true;
-                defpage = 'http://msdn.microsoft.com/library/en-us/jscript7/html/jsoriProgrammingWithJScriptNET.asp';
+                defpage = 'http://msdn.microsoft.com/library/default.asp';
                 query = args.q;
                 myform = document.jsreff_ms;
                 myfield = myform.qu
