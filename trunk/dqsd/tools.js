@@ -219,29 +219,44 @@ function protocolHandled(url)
   return true;
 }
 
-function parseArgs(q, validSwitches)
+// Parse a string containing commandline-like options (switches)
+// into an array.  The first element (0) contains the non-switch
+// part of the string.  Elements 1-n contain the switches.
+// Any abbreviated switches are expanded.
+// 
+// Example:
+//  q = "imagine all the people /ti /so /xyzzy"
+//  var args = parseArgs(q, "song, album, lytitle, artist");
+// Resulting args:
+//  args[0] = "imagine all the people"
+//  args[1] = "title"
+//	args[2] = "song"
+//	args[3] = "xyzzy"
+// Notice that the last switch, xyzzy, is still returned even
+// though it is not specified in the list of expected switches
+function parseArgs(q, expectedSwitches)
 {
   var args = [q];
   var tmpq = q;
   
-  // Remove spaces from list of valid switches
-  validSwitches = validSwitches.replace(/\s*/g, '');
-
   // Grab each token that looks like a switch (/\w+)
   var reSwitch = /\/(\w+)\s*/;
   var res = null;
+  expectedSwitches = ',' + expectedSwitches + ',';
   while (res = tmpq.match(reSwitch))
   {
-    // Return full switch if it's in the list of valid switches
-    var fullswitch = (','+validSwitches+',').match(new RegExp(',('+res[1]+'\\w*),'));
+    // Return full switch if it's in the list of expected switches...
+    var fullswitch = expectedSwitches.match(new RegExp(',\\s*('+res[1]+'\\w*)\\s*,'));
   	if (fullswitch && fullswitch[1])
   	  args.push(fullswitch[1]);
+    else
+      args.push(res[1]); // ...otherwise just return the switch that was found
     
     // Drop switch we just found
     tmpq = tmpq.replace(reSwitch, '');
   }
   
-  // Trim the remaining string which now the string without switches
+  // Trim the remaining string which now contains the string without switches
   args[0] = tmpq.replace(/^\s*/, '').replace(/\s*$/, '');
 
   return args;
