@@ -14,8 +14,8 @@
  * modified by Neel Doshi 31/03/2002
  *  - configured the calendar to use the stylesheet
  *  - fixed the bug where "today" was not being highlighted if today is Sunday
- * $Revision$
- * $Date$
+ * modified by Harry-Anton Talvik 03/11/2002
+ *  - configured the calender to use week start day
  *
  * TODO:
  *  - add ability to distingush b/w different kind of events
@@ -116,6 +116,8 @@ function mozillacal(dat)
 //vars used by the calendar script
 var DAYS_OF_WEEK = 7;    // "constant" for number of days in a week
 var DAYS_OF_MONTH = 31;    // "constant" for number of days in a month
+var CAL_DAY_START = 1;    // "constant" to indicate which date starts a month (usually people like it to be 1. day of the month)
+var WEEK_START_DAY = weekStartDay;    // "constant" to indicate a day which starts a week -- 1=Sun, 2=Mon, .. ; weekStartDay is declared in preferences.js
 
 var Calendar = new Date(); //stores the date the user is looking at
 var Today = new Date(); // stores the date marked as today
@@ -183,14 +185,14 @@ function buildcal()
   var month = Calendar.getMonth();    // Returns month (0-11)
 
   Today = new Date();
-  var weekday = -1;
+  var weekday = -1;  // Just init weekday
 
   if (Today.getMonth() == Calendar.getMonth() && Today.getYear() == Calendar.getYear())
     weekday = Today.getDay();
 
   var cal;    // Used for printing
 
-  Calendar.setDate(1);    // Start the calendar day at '1'
+  Calendar.setDate(CAL_DAY_START);    // Start the calendar day at '1', '2', ..
 
   var TR_start = '<tr>';
   var TR_end = '</tr>';
@@ -279,7 +281,7 @@ function buildcal()
   for(index=0; index < DAYS_OF_WEEK; index++)
   {
     cal += day_start;
-    cal += getDayName(index+7+1);
+    cal += getDayName(DAYS_OF_WEEK + ((index + WEEK_START_DAY - 1) % DAYS_OF_WEEK) + 1);
     cal += day_end;
   }
 
@@ -287,7 +289,8 @@ function buildcal()
 
   //fill spaces until first day in the month
   var whichmonth = -1;
-  var filldays = Calendar.getDay();
+  var filldays = Calendar.getDay() - (WEEK_START_DAY - 1);
+  if (filldays < 0) filldays += DAYS_OF_WEEK;
 
   Calendar.setDate(Calendar.getDate() - filldays);
 
@@ -295,13 +298,12 @@ function buildcal()
   for (index=0; index < DAYS_OF_WEEK * 6; index++)
   {
     var month_day = Calendar.getDate();
-    if (month_day == 1) whichmonth += 1;
+    if (month_day == CAL_DAY_START) whichmonth += 1;
 
     week_day = Calendar.getDay();
 
     // start new row if we hit a new week
-    if (week_day == 0) cal += TR_end + TR_start;
-
+    if (week_day == WEEK_START_DAY - 1) cal += TR_end + TR_start;
     var ent = null;
     var lent = null;
     querystr = 'event[date[(number(@year)="'+year+'" || not(@year)) && (number(@month)="'+(month+1)+'" || not(@month)) && number(@day)="'+month_day+'"]]';
