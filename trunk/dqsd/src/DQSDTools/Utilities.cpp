@@ -1,14 +1,9 @@
-
-
-
 #include "StdAfx.h"
 #include <comdef.h>
 
 #include "Utilities.h"
 
 HWND g_hDQSDWindow;
-
-
 
 INTERNET_SCHEME GetScheme(LPCTSTR szURL)
 {
@@ -18,7 +13,7 @@ INTERNET_SCHEME GetScheme(LPCTSTR szURL)
 
   uc.dwStructSize = sizeof uc;
   uc.lpszScheme = buf;
-  uc.dwSchemeLength = sizeof buf;
+  uc.dwSchemeLength = lengthof(buf);
 
   if (InternetCrackUrl(szURL, lstrlen(szURL), ICU_DECODE, &uc))
      return uc.nScheme;
@@ -34,7 +29,7 @@ int URLMatchesFilename(LPCTSTR szURL, LPCTSTR szFile)
 
   uc.dwStructSize = sizeof uc;
   uc.lpszUrlPath = pathbuf;
-  uc.dwUrlPathLength = sizeof pathbuf;
+  uc.dwUrlPathLength = lengthof(pathbuf);
   if (!InternetCrackUrl(szURL, lstrlen(szURL), ICU_DECODE, &uc))
      return FALSE;
 
@@ -53,12 +48,14 @@ BOOL CALLBACK EnumChildProc(
   LPARAM lParam   // application-defined value
 )
 {
+	USES_CONVERSION;
+
 	TCHAR className[201];
 
 	UNREFERENCED_PARAMETER(lParam);
 
 	GetClassName(hwnd, className, 200);
-	if(StrCmpI(className, "OCHost") == 0)
+	if(StrCmpI(className, _T("OCHost")) == 0)
 	{
 		// We've found a likely looking window 
 		std::string classList, thisClassName;
@@ -75,15 +72,17 @@ BOOL CALLBACK EnumChildProc(
 		do
 		{
 			GetClassName(hWorkingWnd, className, 200);
-//			ATLTRACE("ClassName: %s\n", className);
-			thisClassName = className;
+			// Using conversion macros in a loop is irresponsible, but it should be OK here
+			// since the window hierarchy shouldn't be that deep.
+			// Besides, T2A is a NOOP in ANSI builds.
+			thisClassName = T2A(className); 
 			thisClassName += ", ";
 			classList.insert(0, thisClassName);
 		}
 		while((hWorkingWnd = GetParent(hWorkingWnd)) != NULL);
 
 		ATLTRACE("ClassList: %s\n", classList.c_str());
-		MessageBox(NULL, classList.c_str(), "DQSD Window Path", MB_OK | MB_ICONINFORMATION);
+		MessageBox(NULL, A2CT(classList.c_str()), _T("DQSD Window Path"), MB_OK | MB_ICONINFORMATION);
 	}
 	return TRUE;
 }
@@ -151,8 +150,82 @@ UtilitiesFindDQSDWindow(LPDISPATCH pDispDocument)
 	return NULL;
 }
 
+//
+// Helper to return the screen coordinates as a RECT
+//
+BOOL GetScreenRect(LPRECT lpRect)
+{
+	// We need these without defining WINVER >= 0x0500
+	// They are only used on a valid platform (> Win98)
+	#define DQSD_SM_XVIRTUALSCREEN       76
+	#define DQSD_SM_YVIRTUALSCREEN       77
+	#define DQSD_SM_CXVIRTUALSCREEN      78
+	#define DQSD_SM_CYVIRTUALSCREEN      79
 
+	// Get screen rect depending on OS version
+	OSVERSIONINFO vi = {0};
+	vi.dwOSVersionInfoSize = sizeof(vi);
+	if(!GetVersionEx(&vi))
+		return FALSE;
 
+	if((vi.dwMajorVersion > 4) || (vi.dwMajorVersion == 4 && vi.dwMinorVersion >= 10))
+	{
+		// Win98, ME, 2000, XP - Support for multiple monitors
+		lpRect->top = GetSystemMetrics(DQSD_SM_YVIRTUALSCREEN);
+		lpRect->left = GetSystemMetrics(DQSD_SM_XVIRTUALSCREEN);
+		lpRect->bottom = lpRect->top + GetSystemMetrics(DQSD_SM_CYVIRTUALSCREEN);
+		lpRect->right = lpRect->left + GetSystemMetrics(DQSD_SM_CXVIRTUALSCREEN);
+	}
+	else
+	{
+		// Win95 or other - No support for multiple monitors
+		lpRect->top = 0;
+		lpRect->left = 0;
+		lpRect->bottom = GetSystemMetrics(SM_CYSCREEN);
+		lpRect->right = GetSystemMetrics(SM_CXSCREEN);
+	}
+
+	return TRUE;
+}
+
+// 
+// Attempts to determine whether the window is visible on screen
+//
+BOOL IsWindowOnScreen(HWND hwnd)
+{
+	// Get window dimensions
+	RECT wndRect;
+	GetWindowRect(hwnd, &wndRect);
+
+	// Get screen dimensions
+	RECT screenRect;
+	GetScreenRect(&screenRect);
+
+	// If wndRect is contained in screenRect, it's visible
+	return (wndRect.top >= screenRect.top && wndRect.left >= screenRect.left && wndRect.bottom <= screenRect.bottom && wndRect.right <= screenRect.right);
+}
+
+// 
+// Attempts to determine whether the window is docked on the taskbar or not.
+//
+BOOL IsWindowOnTaskbar(HWND hwnd)
+{
+	// Get window dimensions
+	RECT wndRect;
+	GetWindowRect(hwnd, &wndRect);
+
+	// Find the taskbar window
+	HWND hwndTaskbar = FindWindow(_T("Shell_traywnd"), NULL);
+	RECT taskbarRect;
+	GetWindowRect(hwndTaskbar, &taskbarRect);
+
+	// If wndRect is contained in taskbarRect, it's docked
+	return (wndRect.top >= taskbarRect.top && wndRect.left >= taskbarRect.left && wndRect.bottom <= taskbarRect.bottom && wndRect.right <= taskbarRect.right);
+}
+
+/*
+
+// This code looks untested, risky, not quite correct, and it's unused. (kimgrasman, 2003-06-26)
 
 //
 // Find the DQSD window (usually, but not always, on the taskbar)
@@ -243,3 +316,4 @@ UtilitiesFindDQSDWindow(bool bCheckForNonTaskbar)
 
 	return hwndDQSD;
 }
+*/
