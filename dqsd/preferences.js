@@ -219,7 +219,7 @@ helptime = 3000;
 /* Changes to the size of the help window.
 *  uncomment the bolow line and set the values that you wish to change.
 */
-//helpoptions = "width=800, height=550";
+//helpoptions = "width=800, height=550, top=100, left=100";
 
 
 /* Turn on/off [default] auto complete.  Values are true (for on) and false (for off)
