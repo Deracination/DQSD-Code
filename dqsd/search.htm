@@ -168,6 +168,8 @@ launchmode=2;                  // 0 = use ie; 1 = default browser; 2 = auto
 language = navigator.userLanguage.substr(0,2);
 showbutton = 2;
 
+calwidth=179;
+calheight=148;
 calbackground="menu";
 caltextcolor="menutext";
 calhighbackground="highlight";
@@ -3239,23 +3241,16 @@ var DAYS_OF_WEEK = 7;    // "constant" for number of days in a week
 var DAYS_OF_MONTH = 31;    // "constant" for number of days in a month
 
 var Calendar = new Date(); //stores the date the user is looking at
+var Today = new Date(); // stores the date marked as today
 var popcal = null;
-var popcalisopen = false;
 
 function showcal()
 {
+
   if (ie_version < 5.5)
     return true;
 
-  if (popcal != null)
-  {
-    if (popcalisopen)
-    {
-      popcal.hide();
-      return false;
-    }
-  }
-  else
+  if (popcal == null)
   {
     popcal = window.createPopup();
     popcal.document.body.innerHTML = buildcal();
@@ -3263,8 +3258,12 @@ function showcal()
     popcal.document.body.style.background=calbackground;
     popcal.document.body.style.color=caltextcolor;
   }
-  popcal.show(document.body.clientWidth - 179, -148, 179, 148, document.body);
-  watchpopup("popcal");
+  else if (Today.getDate() != (new Date()).getDate())
+  {
+    popcal.document.body.innerHTML = buildcal();
+  }
+
+  popcal.show(document.body.clientWidth - calwidth, -calheight, calwidth, calheight, document.body);
   return false;
 }
 
@@ -3360,11 +3359,11 @@ function buildcal()
   var year = Calendar.getFullYear();	    // Returns year in 4 digits
   var month = Calendar.getMonth();    // Returns month (0-11)
 
-  var today = new Date();
+  Today = new Date();
   var weekday = -1;
 
-  if (today.getMonth() == Calendar.getMonth() && today.getYear() == Calendar.getYear())
-    weekday = today.getDay(); 
+  if (Today.getMonth() == Calendar.getMonth() && Today.getYear() == Calendar.getYear())
+    weekday = Today.getDay(); 
 
   var cal;    // Used for printing
 
@@ -3501,7 +3500,7 @@ function buildcal()
     // highlight appropriately
     if (whichmonth != 0)
       cal += gray_start(Calendar.getTime()) + Calendar.getDate() + gray_end;
-    else if (weekday >= 0 && today.getDate()==Calendar.getDate())
+    else if (weekday >= 0 && Today.getDate() == Calendar.getDate())
       cal += today_start(Calendar.getTime()) + Calendar.getDate() + today_end;
     else
       cal += TD_start(Calendar.getTime()) + Calendar.getDate() + TD_end;
