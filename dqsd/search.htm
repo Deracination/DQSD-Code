@@ -73,7 +73,6 @@ The deskbar is customizable and completely open-source.
 <script>
 // configuration settings
 
-defaultsearch="goo";           // google is the default search
 defaultcal="yhocal";           // yahoo is the default calendar
 
 historylength=50;
@@ -266,11 +265,13 @@ function def()
 
   // no search: go to Google
 
+  /*
   if (init || t == "")
   {
     openSearchWindow("http://www.google.com/");
     return false;
   }
+  */
 
   // question mark only: show help
   if (t == "?")         { about(); return false; }
@@ -300,8 +301,6 @@ function def()
   // try to execute a shortcut
   if (shortcut(t)) return false;
   
-  // default: Google search
-  eval(defaultsearch + "(document.deff.q.value)");
   return false;
 }
 
@@ -356,6 +355,13 @@ function shortcut(t)
         }
       }
     }
+  }
+
+  // no match, look for empty shortcut
+  if (!search && aliases[""])
+  {
+    search = aliases[""];
+    term = t;
   }
 
   // no match, no dice
@@ -654,7 +660,7 @@ function rst()
 
 
 // an ordinary google search
-function goo(q)
+function gg(q)
 {
   if (q == "")
   {
@@ -662,8 +668,8 @@ function goo(q)
   }
   else
   {
-    document.goof.q.value=q;
-    submitForm(goof);
+    document.ggf.q.value=q;
+    submitForm(ggf);
   }
 }
 
@@ -703,6 +709,7 @@ function reload()
             rows=1
             maxlength=256
             tabindex=0
+            style=top:-100
             autocomplete=off></textarea><script>
 dopopup = (ie_version >= 5.5);
 
@@ -718,6 +725,7 @@ if (dopopup)
   + "       onmouseup=this.className='mogobutton'"
   + "       onmouseover=this.className='mogobutton'"
   + "       onmouseout=this.className='gobutton'"
+  + "       style=top:-100"
   + "       tabindex=-1>");
 }
 </script>
@@ -739,7 +747,7 @@ if (dopopup)
  </table>
 
 <!-- regular google search -->
-<form name=goof
+<form name=ggf
       target=_blank
       action=http://www.google.com/search
       method=get>
@@ -788,14 +796,18 @@ function rsz()
     }
   }
 
-  if (document.body.clientHeight > 128 && document.body.clientWidth > 128)
+  if (document.body.clientHeight > 256 && document.body.clientWidth > 256)
   {
     document.all.info.style.display="block";
+    document.deff.q.style.display="block";
+    document.deff.q.style.top=0;
     document.deff.q.style.height = originaltextheight;
   }
   else
   {
     document.all.info.style.display="none";
+    document.deff.q.style.display="block";
+    document.deff.q.style.top=0;
     document.deff.q.style.height = document.body.clientHeight;
   }
 
@@ -807,6 +819,7 @@ function rsz()
     {
       document.deff.gobutton.style.display ="inline";
       document.deff.gobutton.style.left    = targetwidth;
+      document.deff.gobutton.style.top     = 0;
       document.deff.gobutton.style.height  = document.deff.q.offsetHeight;
     }
     else

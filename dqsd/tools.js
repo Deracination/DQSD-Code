@@ -1,3 +1,31 @@
+// IE 5.0 and earlier don't have splice, push
+if (!Array.prototype.splice)
+{
+  function array_splice(ind,cnt)
+  {
+    removeArray = this.slice(ind,ind+cnt);
+    endArray = this.slice(ind+cnt);
+    this.length = ind;
+    for (var i=2; i < arguments.length; i++)
+      this[this.length] = arguments[i];
+    for (var i=0; i < endArray.length; i++)
+      this[this.length] = endArray[i];
+    return removeArray;
+  }
+  Array.prototype.splice = array_splice;
+}
+
+if (!Array.prototype.push)
+{
+  function array_push()
+  {
+    for (i=0; i<arguments.length; i++)
+      this[this.length] = arguments[i];
+    return this.length;
+  }
+  Array.prototype.push = array_push;
+}
+
 // Tools that rely on DQSDTools.dll
 
 var DQSDLauncher = null;
@@ -91,6 +119,22 @@ function writeFile(filename, contents)
   else
     throw "Unable to write file " + filename;
 }
+
+// read tab-delimited file
+function readTabDelimitedFile(filename)
+{
+  var fileText = "";
+  try {fileText = readFile(filename);} catch (e) {}
+  fileText = fileText.replace(/\r\n/g,"\n");
+  var fileLines = fileText.split("\n");
+  var fileTable = [];
+  for (i = 0; i < fileLines.length; i++)
+  {
+    fileTable.push(fileLines[i].split("\t"));
+  }
+  return fileTable;
+}
+  
 
 
 

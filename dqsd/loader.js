@@ -1,41 +1,15 @@
-// IE 5.0 and earlier don't have splice, push
-if (!Array.prototype.splice)
-{
-  function array_splice(ind,cnt)
-  {
-    removeArray = this.slice(ind,ind+cnt);
-    endArray = this.slice(ind+cnt);
-    this.length = ind;
-    for (var i=2; i < arguments.length; i++)
-      this[this.length] = arguments[i];
-    for (var i=0; i < endArray.length; i++)
-      this[this.length] = endArray[i];
-    return removeArray;
-  }
-  Array.prototype.splice = array_splice;
-}
+// Load the contents of search.xml, aliases, and menu files
 
-if (!Array.prototype.push)
-{
-  function array_push()
-  {
-    for (i=0; i<arguments.length; i++)
-      this[this.length] = arguments[i];
-    return this.length;
-  }
-  Array.prototype.push = array_push;
-}
-
-function addsearch(fname, name, desc, link)
+function addsearch(fname, name, desc, link, cat)
 {
   try
   {
-    var newobj = {fname:fname, name:name, desc:desc, link:link, fun:eval(fname), aliases:[]};
+    var newobj = {fname:fname, name:name, desc:desc, link:link, cat:cat, fun:eval(fname), aliases:[]};
     searches[fname] = newobj;
     if (!aliases[fname])
       addalias(fname, fname);
 
-    helparray.push(newobj);
+    addhelp(newobj);
   }
   catch (ex)
   {
@@ -67,6 +41,10 @@ function addalias(alias, fname)
 }
 
 
+function addhelp(search)
+{
+  helparray.push(search);
+}
 
 
 // the following structures will be defined
@@ -78,7 +56,6 @@ var menuarray = [];
 var helparray = [];
 
 
-
 // 1. load search.xml and merge localsearch.xml
 
 var searchRoot = null;
@@ -86,8 +63,8 @@ try
 {
   searchRoot = document.all("searchxml").selectSingleNode("searches");
   var localSearches = document.all("localsearch").selectNodes("/searches/search");
-  for (var i = 0; i < localSearches.length; i++)
-    searchRoot.appendChild(localSearches[i]);
+  for (var iPrivate = 0; iPrivate < localSearches.length; iPrivate++)
+    searchRoot.appendChild(localSearches[iPrivate]);
 }
 catch (ex) {}
 
@@ -98,14 +75,14 @@ catch (ex) {}
 if (searchRoot)
 {
   var xscripts = searchRoot.selectNodes("search/script");
-  for (var i = 0; i < xscripts.length; i++)
+  for (var iPrivate = 0; iPrivate < xscripts.length; iPrivate++)
   {
-    eval(xscripts[i].text);
+    eval(xscripts[iPrivate].text);
   }
   var xforms = searchRoot.selectNodes("search/form");
-  for (var i = 0; i < xforms.length; i++)
+  for (var iPrivate = 0; iPrivate < xforms.length; iPrivate++)
   {
-    document.write(xforms[i].xml);
+    document.write(xforms[iPrivate].xml);
   }
 }
 
@@ -125,43 +102,50 @@ if (searchRoot)
       var nameNode = searchNode.selectSingleNode("name");
       var descriptionNode = searchNode.selectSingleNode("description");
       var linkNode = searchNode.selectSingleNode("link");
-      addsearch(fn.text, nameNode.text, descriptionNode.xml, (linkNode ? linkNode.text : null));
+      var categoryNode = searchNode.selectSingleNode("category");
+      addsearch(fn.text,
+                (nameNode ? nameNode.text : fn.text),
+                (descriptionNode ? descriptionNode.xml : null),
+                (linkNode ? linkNode.text : null),
+                (categoryNode ? categoryNode.text : null));
     }
   }
 }
 
 
 
-// 4. load the alias file (TBD)
+// 4. load and execute the alias file
 
-var aliasFileText = "";
-try {aliasFileText = readFile("aliases");} catch (e) {}
-aliasFileText = aliasFileText.replace(/\r\n/g,"\n");
-var aliasFileLines = aliasFileText.split("\n");
+var aliasTable = readTabDelimitedFile("aliases");
 
-
-
-// 5. execute the alias file
-
-for (var i = 0; i < aliasFileLines.length; i++)
+for (var iPrivate = 0; iPrivate < aliasTable.length; iPrivate++)
 {
-  var aliasFields = aliasFileLines[i].split("\t");
-  if (aliasFields.length != 2)
+  var fields = aliasTable[iPrivate];
+  if (fields.length != 2)
   {
-    if (aliasFields.length > 2 || !aliasFields[0].match(/^\s*$/))
+    if (fields.length > 2 || !fields[0].match(/^\s*$/))
     {
-      alert("Error on line " + (i + 1) + " of aliases.txt:\n" + aliasFileLines[i]);
+      alert("Error on line " + (i + 1) + " of aliases.txt.");
       break;
     }
   }
-  else if (aliasFields[0] == "menu")
-  {
-    menuarray.push(aliasFields[1]);
-  }
   else
   {
-    addalias(aliasFields[0], aliasFields[1]);
+    addalias(fields[0], fields[1]);
   }
 }
 
 
+// 5. load and execute the menu file
+
+var menuTable = readTabDelimitedFile("menu");
+
+for (var iPrivate = 0; iPrivate < menuTable.length; iPrivate++)
+{
+  var fields = menuTable[iPrivate];
+  if (fields.length > 0 &&
+      (fields[0].length > 0 || fields.length > 1))
+  {
+    menuarray.push(fields[0]);
+  }
+}
