@@ -334,7 +334,8 @@ var useExternalBrowser = (launchmode > 0);
 function ensureLauncher()
 {
   if (triedToCreateLauncher)
-    return;
+    return (DQSDLauncher != null);
+
   triedToCreateLauncher = true;
 
   try
@@ -345,6 +346,7 @@ function ensureLauncher()
   {
     DQSDLauncher = null;
   }
+  return (DQSDLauncher != null);
 }
 
 if (useExternalBrowser)
@@ -381,8 +383,7 @@ function openNamedSearchWindow(url, name)
 // direct shellexecute
 function openDocument(path)
 {
-  ensureLauncher();
-  if (DQSDLauncher)
+  if (ensureLauncher())
   {
     DQSDLauncher.OpenDocument(path);
   }
@@ -397,6 +398,27 @@ function submitForm(form)
     form.submit();
 }
 
+// read file
+function readFile(filename)
+{
+  if (ensureLauncher())
+  {
+    return DQSDLauncher.ReadFile(filename);
+  }
+  else
+    throw "Unable to read file " + filename;
+}
+
+// write file
+function writeFile(filename, contents)
+{
+  if (ensureLauncher())
+  {
+    DQSDLauncher.WriteFile(filename, contents);
+  }
+  else
+    throw "Unable to write file " + filename;
+}
 
 // def() called when the user hits "enter" in the textbox
 function def()
