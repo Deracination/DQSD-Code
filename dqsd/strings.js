@@ -23,7 +23,8 @@ var MONTH_NAMES =
   pt: Array('Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro','Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'),
   it: Array('Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre', 'Gen', 'Feb', 'Mar', 'Apr', 'Mag', 'Giu', 'Lug', 'Ago', 'Set', 'Ott', 'Nov', 'Dic'),
   is: Array('Janúar','Febrúar','Mars','Apríl','Maí','Júní','Júlí','Ágúst','September','Október','Nóvember','Desember','jan.','feb.','mar.','apr.','maí','jún.','júl.','ág.','sep.','okt.','nóv.','des.'),
-  fi: Array('Tammikuu','Helmikuu','Maaliskuu','Huhtikuu','Toukokuu','Kesäkuu','Heinäkuu','Elokuu','Syyskuu','Lokakuu','Marraskuu','Joulu','Tammi','Helmi','Maalis','Huhti','Touko','Kesä','Heinä','Elo','Syys','Loka','Marras','Joulu')
+  fi: Array('Tammikuu','Helmikuu','Maaliskuu','Huhtikuu','Toukokuu','Kesäkuu','Heinäkuu','Elokuu','Syyskuu','Lokakuu','Marraskuu','Joulu','Tammi','Helmi','Maalis','Huhti','Touko','Kesä','Heinä','Elo','Syys','Loka','Marras','Joulu'),
+  et: Array('Jaanuar', 'Veebruar', 'Märts', 'Aprill', 'Mai', 'Juuni', 'Juuli', 'August', 'September', 'Oktoober', 'November', 'Detsember', 'Jaan', 'Veebr', 'Märts', 'Apr', 'Mai', 'Juuni', 'Juuli', 'Aug', 'Sept', 'Okt', 'Nov', 'Dets')
 };
 
 var DAY_NAMES =
@@ -38,8 +39,9 @@ var DAY_NAMES =
   pt: Array('Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Dom','Seg','Ter','Qua','Qui','Sex','Sab'),
   it: Array('Domenica', 'Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato', 'Dom', 'Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab'),
   is: Array('sunnudagur','mánudagur','þriðjudagur','miðvikudagur','fimmtudagur','föstudagur','laugardagur','sun','mán','þri','mið','fim','fös','lau'),
-  fi: Array('Sunnuntai', 'Maanantai', 'Tiistai', 'Keskiviikko', 'Torstai', 'Perjantai', 'Lauantai', 'Su', 'Ma', 'Ti', 'Ke', 'To', 'Pe', 'La')
-};
+  fi: Array('Sunnuntai', 'Maanantai', 'Tiistai', 'Keskiviikko', 'Torstai', 'Perjantai', 'Lauantai', 'Su', 'Ma', 'Ti', 'Ke', 'To', 'Pe', 'La'),
+  et: Array('Pühapäev', 'Esmaspäev', 'Teisipäev', 'Kolmapäev', 'Neljapäev', 'Reede', 'Laupäev', 'P', 'E', 'T', 'K', 'N', 'R', 'L')
+  };
 
 
 var QUICK_SEARCH =
@@ -53,7 +55,8 @@ var QUICK_SEARCH =
   dk: "Hurtig Søgning",
   pt: "Pesquisa Rápida",
   is: "Hraðleit",
-  fi: "Pikahaku"
+  fi: "Pikahaku",
+  et: "Kiirotsing"
 };
 
 var HELP_TEXT =
@@ -67,13 +70,15 @@ var HELP_TEXT =
   dk: "Skriv ? for hjælp",
   pt: "Digite ? para ajuda",
   is: "? gefur hjálp",
-  fi: "Kirjoita ? saadaksesi apua"
+  fi: "Kirjoita ? saadaksesi apua",
+  et: "Abi saamiseks sisesta ?"
 };
 
 var ABOUT_TEXT = 
 {
   en: "Help / About...",
-  fi: "Apua / Tietoja..."
+  fi: "Apua / Tietoja...",
+  et: "Abi / Info..."
 };
 
 var SEARCH_TITLE =
@@ -86,7 +91,8 @@ var SEARCH_TITLE =
   no: "Søk",
   dk: "Søg",
   is: "Leit",
-  fi: "Haku"
+  fi: "Haku",
+  et: "Otsing"
 };
 
 var NEXT_MONTH =
@@ -98,7 +104,8 @@ var NEXT_MONTH =
   no: "Neste måned",
   dk: "Næste måned",
   is: "Næsti mánuður",
-  fi: "Seuraava kuukausi"
+  fi: "Seuraava kuukausi",
+  et: "Järgmine kuu"
 };
 
 var PREV_MONTH =
@@ -110,7 +117,8 @@ var PREV_MONTH =
   no: "Forrige måned",
   dk: "Forrige måned",
   is: "Fyrri mánuður",
-  fi: "Edellinen kuukausi"
+  fi: "Edellinen kuukausi",
+  et: "Eelmine kuu"
 };
 
 var NEXT_YEAR =
@@ -122,7 +130,8 @@ var NEXT_YEAR =
   no: "Neste år",
   dk: "Næste år",
   is: "Næsta ár",
-  fi: "Seuraava vuosi"
+  fi: "Seuraava vuosi",
+  et: "Järgmine aasta"
 };
 
 var PREV_YEAR =
@@ -134,7 +143,8 @@ var PREV_YEAR =
   no: "Forrige år",
   dk: "Forrige år",
   is: "Fyrra ár",
-  fi: "Edellinen vuosi"
+  fi: "Edellinen vuosi",
+  et: "Eelmine aasta"
 };
 
 var GO_TO_TODAY =
@@ -146,7 +156,8 @@ var GO_TO_TODAY =
   no: "Gå til i dag",
   dk: "Gå til i dag",
   is: "Fara á daginn í dag",
-  fi: "Siirry tähän päivään"
+  fi: "Siirry tähän päivään",
+  et: "Tänasele päevale"
 };
 
 

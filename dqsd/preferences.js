@@ -168,6 +168,19 @@ calheight=156;
 calStart=0;
 
 
+/* Calendar start day for a week.
+*  1 - Sunday
+*  2 - Monday
+*  3 - Tuesday
+*  4 - Wednesday
+*  5 - Thursday
+*  6 - Friday
+*  7 - Saturday
+*  default is 1
+*/
+weekStartDay = 1;
+
+
 /* Default calendar. clicking on a calendar day will spawn the defined online calendar.
 *  Valid calendars include:
 *  yhocal - Yahoo Calendar [default]
@@ -190,6 +203,7 @@ defaultcal="yhocal";
 *  holidays.fr.xml - France
 *  holidays.nl.NL.xml - Netherlands (Dutch language)
 *  holidays.nl.EN.xml - Netherlands (English language)
+*  holidays.et.xml - Estonia
 */
 eventsfileurl="holidays.us.xml";
 

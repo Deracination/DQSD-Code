@@ -1,0 +1,51 @@
+<!--
+   This file contains a listing of public holidays in Estonia for the years 2002-2004.
+   TODO: Get parser to support special letters.
+   - Harry-Anton Talvik [harry-anton@gmx.net] (03/11/2002)
+-->
+
+<events>
+  <event name="Uus aasta" type="public_holiday">
+     <date day="1" month="1"/>
+  </event>
+  <event name="Iseseisvusp2ev. EV aastap2ev" type="public_holiday">
+     <date day="24" month="2"/>
+  </event> 
+  <event name="Suur Reede" type="public_holiday">
+     <date day="18" month="4" year="2003"/>
+  </event> 
+  <event name="Ylest6usmispyhade 1. pyha" type="public_holiday">
+     <date day="20" month="4" year="2003"/>
+  </event> 
+  <event name="Kevadpyha" type="public_holiday">
+     <date day="1" month="5"/>
+  </event>
+  <event name="Nelipyhade 1. pyha" type="public_holiday">
+     <date day="8" month="6" year="2003"/>
+  </event>
+  <event name="V6idupyha" type="public_holiday">
+     <date day="23" month="6"/>
+  </event>
+  <event name="Jaanip2ev" type="public_holiday">
+     <date day="24" month="6"/>
+  </event>
+  <event name="Taasiseseisvumisp2ev" type="public_holiday">
+     <date day="20" month="8"/>
+  </event>
+  <event name="Esimene j6ulupyha" type="public_holiday">
+     <date day="25" month="12"/>
+  </event>
+  <event name="Teine j6ulupyha" type="public_holiday">
+     <date day="26" month="12"/>
+  </event>
+  <event name="Suur Reede" type="public_holiday">
+     <date day="9" month="4" year="2004"/>
+  </event> 
+  <event name="Ylest6usmispyhade 1. pyha" type="public_holiday">
+     <date day="11" month="4" year="2004"/>
+  </event> 
+  <event name="Nelipyhade 1. pyha" type="public_holiday">
+     <date day="30" month="5" year="2004"/>
+  </event>
+</events>
+

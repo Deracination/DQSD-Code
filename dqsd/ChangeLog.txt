@@ -5,6 +5,8 @@ Enhancements
 * Added "mozillacal" as an option for the defaultcal preference to bring up the Mozilla calendar (although it doesn't go to the selected date yet)
 * Moved the Computer and Reference searches into menu subcategories.
 * Added parseArgsEx and trimWhitespace functions for additional argument parsing capabilities (from Brent Beardsley)
+* Added ability to change specify the first day of the week (from Harry-Anton Talvik)
+* Added Estonian calendar - holidays.et.xml (from Harry-Anton Talvik)
 
 -- What's new for 3.1.4.4 beta (October 24, 2002)
 
