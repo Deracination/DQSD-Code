@@ -1,7 +1,7 @@
 <search function="dns">
   <name>DNSStuff.com</name>
   <description>
-    A wide variety of DNS lookups<br/>
+    Perform a wide variety of DNS lookups.<br/>
     <a class="helpboxDescLabels">Switches:</a><br/>
   	<table class="helpBoxDescTable">
   		<tr><td class="helpboxDescColumns">/rep</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">DNS Report - Finds lots of common DNS problems. (Enter domain name)</td></tr>
@@ -27,23 +27,27 @@
   <category>Computers</category>
   <link>http://www.dnsstuff.com/</link>
   <contributor>Monty Scroggins</contributor>
+  
   // the basic re-usable single element form for most of the lookups
   <form name="dnsf"
         action="http://www.dnsstuff.com"
 	     method="get">
      <input type="hidden" name="ip" value=""/>
    </form>
+   
   // the two element re-usable form for the rest of the lookups
   <form name="dnslongf"
         method="get">
     <input type="hidden" name="name" value=""/>
     <input type="hidden" name="type" value="A"/>
   </form>
+  
   //special form the the report page
   <form name="dnsrepf"       
         method="get">
     <input type="hidden" name="domain" value=""/>
   </form>  
+  
   <script><![CDATA[
     function dns(q)
     {
