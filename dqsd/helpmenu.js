@@ -126,7 +126,7 @@ function appendMRUMenuSelections( mb )
         {
           if ( menus[i] == search.aliases[iAlias] )
           {
-            var alias = getSearchAlias( search );
+            var alias = getSearchAliases( search );
             mb.AppendMenuItem( "&" + (menus.length - i) + "  " + search.name + '\t' + alias, search.aliases[0], 0 );
             break;
           }
@@ -135,16 +135,6 @@ function appendMRUMenuSelections( mb )
     }
   }
   
-}
-
-function isInternalSearch( fn )
-{
-  return (fn.substr(0,INTERNAL_FUNC_PREFIX.length) == INTERNAL_FUNC_PREFIX)
-}
-
-function getSearchAlias( search )
-{
-  return (search.aliases[0].substr(0,INTERNAL_FUNC_PREFIX.length) == INTERNAL_FUNC_PREFIX) ? search.aliases[1] : search.aliases.join(', ');
 }
 
 function showpop()
@@ -162,7 +152,7 @@ function showpop()
     for (var k = 0; k < helparray.length; k++)
     {
       var search = helparray[k];
-      var alias = getSearchAlias( search );
+      var alias = getSearchAliases( search );
       mb.AppendMenuItem( search.name + '\t' + alias, search.aliases[0], hsubmenu );
     }
   }

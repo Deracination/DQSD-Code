@@ -151,3 +151,13 @@ function readTabDelimitedFile(filename)
   }
   return fileTable;
 }
+
+function isInternalSearch( fn )
+{
+  return (fn.substr(0,INTERNAL_FUNC_PREFIX.length) == INTERNAL_FUNC_PREFIX)
+}
+
+function getSearchAliases( search )
+{
+  return isInternalSearch(search.aliases[0]) ? search.aliases.slice(1).join(', ') : search.aliases.join(', ');
+}
