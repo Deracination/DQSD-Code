@@ -271,17 +271,3 @@ function addAliasesFromFile( aliasFile, category )
       }
     }
   }
-
-
-// 5. load and execute the menu file
-
-var menuTable = readTabDelimitedFile("menu");
-
-for (var iPrivate = 0; iPrivate < menuTable.length; iPrivate++)
-{
-  var fields = menuTable[iPrivate];
-  if (fields.length > 0 && (fields[0].length > 0 || fields.length > 1))
-    menuarray.push(fields[0]);
-}
-
-
