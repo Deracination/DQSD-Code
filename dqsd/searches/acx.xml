@@ -1,9 +1,16 @@
 <search function="acx">
-  <name>Cambridgesoft ChemACX Compound Search</name>
-  <description>Search for chemicals: "acx chloride"</description>
+  <name>Cambridgesoft ChemACX.com</name>
+  <description>
+    Search for chemical compounds.<br/>
+    <a class="helpboxDescLabels">Example:</a><br/>
+    <table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">acx chloride</td></tr>
+  	</table>
+  </description>
   <category>Other</category>
   <link>http://chemacx.cambridgesoft.com/</link>
   <contributor>Stewart Rubenstein</contributor>
+  
   <form name="acxf"
         target="_blank"
         action="http://chemacx.cambridgesoft.com/chemacx/default.asp"
@@ -20,6 +27,7 @@
     <input type="hidden" name="ReturnURL"/>
     <input type="hidden" name="ReturnType"/>
   </form>
+  
   <script><![CDATA[
     function acx(q)
     {

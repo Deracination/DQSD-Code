@@ -1,14 +1,22 @@
 <search function="ana">
   <name>Anagrams</name>
-  <description>Search for anagrams in text: "ana Clint Eastwood"</description>
-  <contributor>Monty Scroggins</contributor>
+  <description>
+    List all possible anagrams for a given text string.<br/>
+    <a class="helpboxDescLabels">Example:</a><br/>
+    <table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">ana Clint Eastwood</td></tr>
+  	</table>
+  </description>
   <category>Fun</category>
   <link>http://www.wordsmith.org/anagram/</link>
+  <contributor>Monty Scroggins</contributor>
+  
   <form name="anaf"
         action="http://www.wordsmith.org/anagram/anagram.cgi"
         method="get">
     <input type="hidden" name="anagram" value=""/>
   </form>
+  
   <script><![CDATA[
   function ana(q)
   {

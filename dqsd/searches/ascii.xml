@@ -1,24 +1,28 @@
 <search function="ascii">
-  <name>Character Conversion</name>
-  <description>Convert ASCII characters to decimal,
-  hex, octal and binary equivalents: "ascii b"</description>
+  <name>ASCII Character Conversion</name>
+  <description>
+    Convert ASCII characters to decimal, hex, octal and binary equivalents.<br/>
+    <a class="helpboxDescLabels">Example:</a><br/>
+    <table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">ascii B</td></tr>
+  	</table>
+  </description>
   <category>Functions</category>
   <contributor>Monty Scroggins</contributor>
+  
   <script><![CDATA[
     function ascii(c)
     {
-    if (c == "")
-    {
-      return;
-    }
-    var char = c.substring(0,1);
-    var dec  = char.charCodeAt(0);
-    document.deff.q.value = "char: "+char +
-    "  dec: "+dec+
-    "  oct: "+dec.toString(8)+
-    "  hex: "+dec.toString(16)+
-    "  bin: "+dec.toString(2);
-    //document.deff.q.createTextRange().select();
+      if (c == "")
+        return;
+      var char = c.substring(0,1);
+      var dec  = char.charCodeAt(0);
+      document.deff.q.value = "char: "+char +
+        "  dec: "+dec+
+        "  oct: "+dec.toString(8)+
+        "  hex: "+dec.toString(16)+
+        "  bin: "+dec.toString(2);
+      //document.deff.q.createTextRange().select();
     }
   ]]></script>
 </search>

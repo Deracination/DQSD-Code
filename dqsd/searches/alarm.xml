@@ -1,13 +1,20 @@
 <search function="alarm">
   <name>Alarm</name>
-  <description>Set an alarm to go off at a 
-  certain time: "alarm 14:00 Staff Meeting". 
-  To cancel a set alarm: "alarm cancel". 
-  The alarm message is optional. 
-  (Note: All times are in military (24-hr) time. 
-  Supports only a single alarm.)</description>
+  <description>
+    Schedule an alarm to go off at a certain time. The alarm message is optional. (All times are in Military (24hr) Time. Supports only a single alarm.)<br/>
+    <a class="helpboxDescLabels">Usage:</a><br/>
+  	<table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">Set alarm.</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">alarm &lt;time&gt; [&lt;message&gt;]</td></tr>
+  		<tr><td class="helpboxDescColumns">Cancel alarm.</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">alarm cancel</td></tr>
+  	</table>
+    <a class="helpboxDescLabels">Example:</a><br/>
+    <table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">alarm 14:00 Staff Meeting</td></tr>
+  	</table>
+  </description>
   <category>Functions</category>
   <contributor>Monty Scroggins</contributor>
+  
   <script><![CDATA[
     var alarmTime;
     var curTime;

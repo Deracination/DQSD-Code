@@ -1,15 +1,49 @@
 <search function="amaz">
   <name>Amazon.com</name>
-  <description>Search specific stores including Books: "amaz harry potter /books", DVDs: "amaz shawshank /dvd", music: "amaz moxy fruvous /music", toys: "amaz mindstorms /toys"</description>
+  <description>
+    Search specific stores on Amazon.com. Searches all stores by default.<br/>
+    <a class="helpboxDescLabels">Switches:</a><br/>
+  	<table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">/books</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Books</td></tr>
+  		<tr><td class="helpboxDescColumns">/music</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Popular Music</td></tr>
+  		<tr><td class="helpboxDescColumns">/classical</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Classical Music</td></tr>
+  		<tr><td class="helpboxDescColumns">/dvd</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">DVDs</td></tr>
+  		<tr><td class="helpboxDescColumns">/vhs</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">VHS Tapes</td></tr>
+  		<tr><td class="helpboxDescColumns">/movies</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Local Movie Showtimes</td></tr>
+  		<tr><td class="helpboxDescColumns">/toys</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Toys</td></tr>
+  		<tr><td class="helpboxDescColumns">/baby</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Baby Products</td></tr>
+  		<tr><td class="helpboxDescColumns">/computers</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">PC Hardware</td></tr>
+  		<tr><td class="helpboxDescColumns">/software</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">PC Software</td></tr>
+  		<tr><td class="helpboxDescColumns">/games</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Video Games</td></tr>
+  		<tr><td class="helpboxDescColumns">/electronics</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Electronics</td></tr>
+  		<tr><td class="helpboxDescColumns">/cellular</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Cellular Phones</td></tr>
+  		<tr><td class="helpboxDescColumns">/photography</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Camera &amp; Photography</td></tr>
+  		<tr><td class="helpboxDescColumns">/tools</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Tools &amp; Hardware</td></tr>
+  		<tr><td class="helpboxDescColumns">/magazines</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Magazines</td></tr>
+  		<tr><td class="helpboxDescColumns">/garden</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Outdoor Living</td></tr>
+  		<tr><td class="helpboxDescColumns">/kitchen</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Kitchen</td></tr>
+  		<tr><td class="helpboxDescColumns">/travel</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Travel</td></tr>
+  		<tr><td class="helpboxDescColumns">/outlet</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Outlet</td></tr>
+  		<tr><td class="helpboxDescColumns">/auctions</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Auctions</td></tr>
+  		<tr><td class="helpboxDescColumns">/zshops</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">zShops</td></tr>
+  	</table>
+    <a class="helpboxDescLabels">Examples:</a><br/>
+    <table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">amaz moxy fruvous /music</td></tr>
+  		<tr><td class="helpboxDescColumns">amaz harry potter /books</td></tr>
+  	</table>
+  </description>
   <category>Shopping</category>
   <link>http://www.amazon.com/</link>
   <contributor>Dan Sanderson, Ryan Edwards</contributor>
+  
   <form name="amazf"
         action="http://www.amazon.com/exec/obidos/search-handle-form"
         method="post">
     <input type="hidden" name="index"/>
     <input type="hidden" name="field-keywords"/>
   </form>
+  
   <script><![CDATA[
     function amaz(q)
     {
