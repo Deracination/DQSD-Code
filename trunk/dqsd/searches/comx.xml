@@ -469,7 +469,7 @@
    
            //put up the window
            if (imgurl != ""){
-              var comxSearchPopupBodyCode = "<html><head></head><body><style>" + convertStylesToInline() + "img {vertical-align:top;text-align:left;}</style>";
+              var comxSearchPopupBodyCode = "<html><head></head><body><style>body {background:#fcfcfc;border:0px;margin:0px;padding:0px;} img {vertical-align:top;text-align:left;}</style>";
               comxSearchPopupBodyCode += "<img src=" +imgurl +" width="+windowW+" height="+windowH+" border=0 alt=\""+imgtitle+"\" onclick='self.close()'; galleryimg='no' />";
               comxSearchPopupBodyCode += "</body></html>";
               var top=((screen.availheight-windowH)-38);
