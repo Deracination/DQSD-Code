@@ -12,6 +12,8 @@ launchmode=2;        // 0=use ie; 1=use default browser; 2=auto
 cal=true;            // right-click shows popup calendar
 defaultcal="yhocal"; // click on a calendar day uses yahoo calendar
 
+//eventsfileurl="events.xml"; //default xml file for the popup calendar events
+
 // Note: valid calendars include
 // yhocal - Yahoo Calendar
 // msncal - MSN Calendar
