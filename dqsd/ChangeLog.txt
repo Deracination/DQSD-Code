@@ -5,6 +5,7 @@ New Searches
 * rfc - search the Internet RFC/STD/FYI/BCP Archives (from Joey Lesh)
 * cp - search for CodeProject, a code sharing site (from Andreas Saurwein)
 * vir - search http://www.virusbtn.com/ for virus information (from John Bairen)
+* infosec - search http://www.infosecuritymag.com/ for security information (from John Bairen)
 
 Modified Searches
 
