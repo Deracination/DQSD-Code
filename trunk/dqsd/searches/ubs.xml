@@ -1,0 +1,89 @@
+<search function="ubs">
+  <name>Used Books Search</name>
+  <category>Books</category>
+  <contributor>John W. Bairen, Jr.</contributor>
+  <link>http://www.used-books.org.uk/cgi/books.cgi</link>
+  <email>john_at_bairen_dot_net</email>
+  <description>
+  Search for used books.  Over 45 million used books available worldwidw.
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/author</td><td> - </td><td></td></tr>
+      <tr><td>/title</td><td> - </td><td></td></tr>
+      <tr><td>/keywords</td><td> - </td><td></td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td></td></tr>
+      <tr><td></td></tr>
+    </table>
+  </description>
+  <form name="ubsf"
+        method="post"
+        action="http://www.used-books.org.uk/cgi/books.cgi">
+    <input type="hidden" name="action" value="Search" />
+    <input type="hidden" name="country" value="Worldwide" />
+    
+    <input type="hidden" name="author" value="" />
+    <input type="hidden" name="title" value="" />
+    <input type="hidden" name="keywords" value="" />
+    
+    <input type="hidden" name="0" value="-1" />
+    <input type="hidden" name="1" value="-1" />
+    <input type="hidden" name="2" value="-1" />
+    <input type="hidden" name="3" value="-1" />
+    <input type="hidden" name="4" value="-1" />
+    <input type="hidden" name="5" value="-1" />
+    <input type="hidden" name="6" value="-1" />
+    <input type="hidden" name="7" value="-1" />
+    <input type="hidden" name="8" value="-1" />
+    <input type="hidden" name="9" value="-1" />
+    <input type="hidden" name="10" value="-1" />
+    <input type="hidden" name="11" value="-1" />
+    <input type="hidden" name="12" value="-1" />
+    <input type="hidden" name="13" value="-1" />
+  </form>
+  <script><![CDATA[
+    function ubs(q)
+    {
+      if( nullArgs("ubs", q) )
+        return;
+
+      var args = parseArgs(q, "author, title, keywords");
+      if ( args.switches.length > 0 )
+      {
+        switch( args.switches[0].name )
+        {
+          case "author":
+            document.ubsf.author.value = q;
+            break;
+          case "title":
+            document.ubsf.title.value = q;
+            break;
+          case "keywords":
+            document.ubsf.keywords.value = q;
+            break;
+          default:
+            document.ubsf.keywords.value = q;
+            break;
+        }
+      }
+
+      else
+      {
+      document.ubsf.keywords.value = q;
+      }
+      
+      submitForm(ubsf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 03/01/03 at 10:40:43
+    by Dave's Quick Search Deskbar Search Wizard version 1.0.1 ,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>

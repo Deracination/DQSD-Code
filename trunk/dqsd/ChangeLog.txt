@@ -35,6 +35,7 @@ New Searches
 * mag - Search newspaper and magazine articles (from viking mel)
 * nyse - enter a company name and get the lookup symbol and a short description of that company (from viking mel)
 * tucows - search tucows (from Sarah S.)
+* ubs - search for used books at http://www.used-books.org.uk/cgi/books.cgi
 
 Bug Fixes
 
