@@ -18,15 +18,19 @@
   <script><![CDATA[
     function gg(q)
     {
-      var args = parseArgs(q, "images, directory, related, similar, cache, link");
+      var args = parseArgs(q, "images, directory, related, similar, cache, link, groups");
       if( args.q == "" )
       {
-        switch( args.switches[0].name )
+      	if ( args.switches.length > 0 )
         {
-          case "images": openSearchWindow("http://images.google.com/"); break;
-          case "directory": openSearchWindow("http://images.google.com/dirhp?hl=en"); break;
-          default: openSearchWindow("http://www.google.com/"); break;
+          switch( args.switches[0].name )
+          {
+            case "images": openSearchWindow("http://images.google.com/"); return;
+            case "directory": openSearchWindow("http://images.google.com/dirhp"); return;
+            case "groups": openSearchWindow("http://www.google.com/grphp"); return;
+          }
         }
+        openSearchWindow("http://www.google.com/");
       }
       else if( args.switches.length == 1 )
       {
