@@ -1,0 +1,57 @@
+<search function="ly"> 
+  <name>Lycos Search</name> 
+  <description> 
+    Search the web with Lycos Search<br/> 
+    <div class="helpboxDescLabels">Switches:</div> 
+    <table class="helpboxDescTable"> 
+      <tr><td>/w</td><td> - </td><td>Web Tab</td></tr> 
+      <tr><td>/n</td><td> - </td><td>News Tab</td></tr> 
+      <tr><td>/s</td><td> - </td><td>Shopping Tab</td></tr> 
+    </table> 
+    <div class="helpboxDescLabels">Example:</div> 
+    <table class="helpboxDescTable"> 
+                  <tr><td>ly jeep</td></tr> 
+                  <tr><td>ly sars /n</td></tr> 
+          </table> 
+  </description> 
+  <category>Search the Web</category> 
+  <link>http://search.lycos.com/</link> 
+  <form name="sf1" 
+        action="http://search.lycos.com/default.asp" 
+        method="get"> 
+    <input type="hidden" name="loc" value="dqsd-ls"/> 
+    <input type="hidden" name="tab"/> 
+    <input type="hidden" name="query"/> 
+  </form> 
+  <script>
+  <![CDATA[ 
+    function ly(q) 
+        //by GAK 
+    { 
+      var args = parseArgs(q, "w, n, s"); 
+          var mode = ""; 
+
+      if( nullArgs("ly", args.q) ) 
+        return false; 
+      else if( args.switches.length == 1 ) 
+      { 
+                        switch (args.switches[0].name) 
+                        { 
+                                case "w": mode = "web"; break; 
+                                case "n": mode = "news"; break; 
+                                case "s": mode = "shopping"; break; 
+                                default: mode = "web"; 
+                        } 
+                document.sf1.tab.value = mode; 
+          }         
+        document.sf1.query.value = args.q; 
+        submitForm(sf1); 
+    } 
+  ]]>
+  </script> 
+  <copyright> 
+        Copyright (c) 2002 Lincoln Jackson 
+        Distributed under the terms of the 
+        GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt) 
+  </copyright> 
+</search>
