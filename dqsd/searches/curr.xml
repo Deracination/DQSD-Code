@@ -16,7 +16,7 @@
   </form>
   <script><![CDATA[
   
-currency_regex = /([0-9]*.?[0-9]*)(\s*)([A-Za-z]{3})\s*([<>]|to)\s*([A-Za-z]{3})/i; 
+currency_regex = /(\d+)(\s*)([A-Za-z]{3})\s*([<>]|to)\s*([A-Za-z]{3})/i; 
 
 // the auto-detection routine used for special handling of strings entered into the
 // toolbar that look like currency conversions.
