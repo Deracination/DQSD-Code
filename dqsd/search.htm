@@ -460,14 +460,7 @@ function okp()
 
     // CTRL-V or SHIFT-INS - PASTE
     case 22:
-//      range = document.selection.createRange();
-//      if (document.name != "q") return true;
       document.execCommand("Paste");
-/*
-        range.execCommand("Paste");
-        range.collapse(false);
-        range.scrollIntoView(false);
-*/
       break;
 
     // CTRL-X or SHIFT-DEL - CUT
@@ -477,23 +470,14 @@ function okp()
       range.execCommand("Cut");
       break;
 
-    // Special forwarded value of DEL from keyboard hook (it's actually a CTRL-A)
+    // CTRL-A - select all
     case 1:
-//      range = document.selection.createRange();
-  //    if (range.parentElement().name != "q") return true;
+      document.execCommand("SelectAll");
+      break;
+
+    // Special forwarded value of DEL from keyboard hook (it's actually a CTRL-D)
+    case 4:
       document.execCommand("Delete");
-/*
-      // Check for the case where there's no current selection
-      if(range.text == "")
-      {
-        range.expand("character");
-        range.execCommand("Delete");
-      }
-      else
-      {
-        range.execCommand("Delete");
-      }
-*/
       break;
 
     // CTRL-P or UP for previous history

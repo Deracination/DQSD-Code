@@ -70,8 +70,8 @@ static LRESULT CALLBACK KeyboardProc(
 				// It's a DEL
 				if(bKeyDown)
 				{
-					// Send a CTRL-A - special handler for this in search.htm
-					SendMessage(GetFocus(), WM_CHAR, 'A'-'@', 0);
+					// Send a CTRL-D - special handler for this in search.htm
+					SendMessage(GetFocus(), WM_CHAR, 'D'-'@', 0);
 					return 0; 
 				}
 			}
