@@ -12,27 +12,6 @@
     // Array used to keep track of reget commands that are pending completion
     regetTracker = new Array();
 
-    // Used to error check the URL arguement.
-	function regetIsURL(t)
-	{
-	  // detect strings that look like URLs or filenames
-	  prot = new RegExp("^(http://|https://|ftp://)([\\-a-z0-9]+\\.)*[\\-a-z0-9]+" +
-	                    "|^[a-z]:($|\\\\)" +
-	                    "|^\\\\\\\\[a-z0-9]+($|\\\\($|[a-z0-9]+($|\\\\)))", "i");
-	  if (prot.exec(t))
-	    return t;
-
-	  // detect strings that look like DNS names
-	  dns = new RegExp("^www\.([\\-a-z0-9]+\\.)+[\\-a-z0-9]+(/\\S*)?$" +
-	                   "|^([\\-a-z0-9]+\\.)+(com|net|org|edu|gov|mil|[a-z]{2})(/\\S*)?$", "i");
-	  if (dns.exec(t))
-	  {
-	    t = "http://" + t;
-	    return t;
-	  }
-	  return false;
-	}
-
 	function regetURLLoad(freq, num, name, reget_code, force_reload, strURL)
     {
       if (force_reload == 1)
@@ -135,7 +114,7 @@
 	  }
 
 	  // Next determine if the next argument has something to open in a browser:
-	  var strURL = regetIsURL(args_rest);
+	  var strURL = isURL(args_rest);
 	  if (args_rest == undefined || strURL == false)
 	  {
 	    alert("The third argument must be a valid URL");
@@ -171,6 +150,5 @@
 
       return true;
     }
-
   ]]></script>
 </search>

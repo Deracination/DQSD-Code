@@ -2,7 +2,7 @@
   <name>Measurement Converter</name>
   <description>Convert units from one unit to another using ConvertIt.com. Example: "conv 1/5 gallon" Use the optional word 'to' to specify the second unit: "conv astronomical unit to football fields"</description>
   <category>Functions</category>
-  <contributor>Monty Scroggins</contributor>
+  <contributor>Monty Scroggins, Neel Doshi</contributor>
   <link>http://www.convertit.com/Go/Entisoft/Measurement/Converter.ASP</link>
   <form name="convf"
         action="http://www.convertit.com/Go/Entisoft/Measurement/Converter.ASP"
@@ -11,19 +11,52 @@
     <input type="hidden" name="To" value=""/>
   </form>
   <script><![CDATA[
-    function conv(q)
-    {
-      if( q == "" )
-        openSearchWindow("http://www.convertit.com/Go/Entisoft/Measurement/Converter.ASP");
-      else 
+	function conv(q)
+	{
+		if( q == "" )
+			openSearchWindow("http://www.convertit.com/Go/Entisoft/Measurement/Converter.ASP");
+		else if ( q == "?" )
+		{
+			openSearchWindow("http://www.convertit.com/Go/Entisoft/Measurement/Units.ASP");
+			alert("Convert one unit or currency to another: To convert 100 tons to pounds:\n \
+'curr /from:tons /to:pounds 100'\n \
+If your search requires multiword expressions you can use an underscore in the arguments: \n \
+'curr /from:metric_tons /to:pounds 100'\n \
+'curr 100 metric tons to pounds'");
+			return false;
+		}
+      else
       {
-        parsedunits = q.split(/ *to */);
-        document.convf.From.value=parsedunits[0];
-        if (parsedunits[1] != undefined)
-          document.convf.To.value=parsedunits[1];
-        submitForm(convf);
-      }
-    }
+			var switch_list = new Array("from", "to");
+			var switch_list_req = new Array("from");
+			var args = parseArgs(q, switch_list);
+
+			var convf_from = "";
+			var convf_to = "";
+
+			// check if the required switches are set
+			if ( typeof args.switch_val["from"] == "undefined" || args.switch_val["from"] == "" )
+			{
+				// Try using the original syntax if the from switch was not found
+				parsedunits = q.split(" to ");
+				convf_from = parsedunits[0];
+				if (parsedunits[1] != undefined)
+					convf_to = parsedunits[1];
+			}
+			else
+			{
+				convf_from = args.q + " " + args.switch_val["from"].replace('_', ' ');
+				if ( typeof args.switch_val["to"] != "undefined" && args.switch_val["to"] != "" )
+				{
+					convf_to = args.switch_val["to"];
+				}
+			}
+			document.convf.From.value = convf_from;
+			document.convf.To.value = convf_to;
+			submitForm(convf);
+			return(true);
+		}
+	}
   ]]></script>
 </search>
  

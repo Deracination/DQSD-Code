@@ -1,55 +1,87 @@
 <search function="curr">
   <name>Currency Conversion</name>
-  <description>Convert one currency to another: ex - to convert 100 US dollars 
-  to United Kingdom pounds: "curr 100 usd to gbp" or "curr 100 usd>gbp"..  
-  90 currencies are supported..
-  </description>
-  <category>Functions</category>
+  <description>Convert one currency to another: To convert 100 US dollars to United Kingdom pounds: "curr /from:usd /to:gbp 100"</description>
+  <category>Reference</category>
   <link>http://www.xe.com/ucc/</link>
-  <contributor></contributor>
+  <contributor>Monty Scroggins, Neel Doshi</contributor>
   <form name="currf"
     action="http://www.xe.com/ucc/convert.cgi"
     method="post">
-    <input type="hidden" name="Amount" value=""/>
-    <input type="hidden" name="From" value=""/>
-    <input type="hidden" name="To" value=""/>
+    <input type="hidden" name="Amount" value="" />
+    <input type="hidden" name="From" value="" />
+    <input type="hidden" name="To" value="" />
   </form>
   <script><![CDATA[
-  
-currency_regex = /(\d+)(\s*)([A-Za-z]{3})\s*([<>]|to)\s*([A-Za-z]{3})/i; 
+	currency_regex = /(\d+)(\s*)([A-Za-z]{3})\s*([<>]|to)\s*([A-Za-z]{3})/i; 
+	
+	// the auto-detection routine used for special handling of strings entered into the
+	// toolbar that look like currency conversions.
+	function autodetect_currency(q)
+	{
+	  // detect strings that look like ABC<CBA or ABC>CBA upper or lower case
+	  var res = q.match(currency_regex);
+	  if (res) {
+	    curr2(q);
+	    return true;
+	  }
+	}
 
-// the auto-detection routine used for special handling of strings entered into the
-// toolbar that look like currency conversions.
-function autodetect_currency(q)
-{
-  // detect strings that look like ABC<CBA or ABC>CBA upper or lower case
-  var res = q.match(currency_regex);
-  if (res) {
-    curr(q);
-    return true;
-  }
-}
+	function curr2(q){
+	  if (q == "")
+	  	openSearchWindow("http://www.xe.com/ucc/");
+	  else
+	  {
+	      // detect strings that look like ABC<CBA or ABC>CBA upper or lower case
+	      var res = q.match(currency_regex);
+	      if (res) {
+	        if (res[4] == '<') {
+	          document.currf.From.value=res[5].toUpperCase();
+	          document.currf.To.value=res[3].toUpperCase();
+	        }else{
+	          document.currf.From.value=res[3].toUpperCase();
+	          document.currf.To.value=res[5].toUpperCase();
+	        }
+	      document.currf.Amount.value=res[1];
+	      submitForm(currf);
+	      }
+	   }
+	}
 
+	function curr(q)
+	{
+		if( q == "" )
+		{
+			openSearchWindow("http://www.xe.com/ucc/");
+			return false;
+		}
+		else if ( q == "?" )
+		{
+			openSearchWindow("http://www.xe.com/iso4217.htm");
+			alert("Convert one currency to another: To convert 100 US dollars to United Kingdom pounds: 'curr /from:usd /to:gbp 100'");
+			return false;
+		}
+		else
+		{
+			var func_name = "curr";
+			var switch_list = new Array("from", "to");
+			var args = parseArgs(q, switch_list);
 
-function curr(q){
-  if (q == "")
-    {  
-      openSearchWindow("http://www.xe.com/ucc/");
-    }else{
-      // detect strings that look like ABC<CBA or ABC>CBA upper or lower case
-      var res = q.match(currency_regex);
-      if (res) {
-        if (res[4] == '<') {
-          document.currf.From.value=res[5].toUpperCase();
-          document.currf.To.value=res[3].toUpperCase();
-        }else{
-          document.currf.From.value=res[3].toUpperCase();
-          document.currf.To.value=res[5].toUpperCase();
-        }
-      document.currf.Amount.value=res[1];
-      submitForm(currf);
-      }
-   }
-}
+			// check if the required switches are set
+			for (var j = 0; j < switch_list.length; j++)
+			{
+				if ( typeof args.switch_val[ switch_list[j] ] == "undefined" || args.switch_val[ switch_list[j] ] == "" )
+				{
+					alert(func_name + ":  /" + switch_list[j] + " switch must be entered.  Type '" + func_name + " ?' to see instructions");
+					return false;
+				}
+			}
+
+			currf.Amount.value = args.q;
+			currf.From.value = args.switch_val["from"].toUpperCase();
+			currf.To.value = args.switch_val["to"].toUpperCase();
+			submitForm(currf);
+			return true;
+		}
+    }
   ]]></script>
 </search>
