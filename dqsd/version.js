@@ -26,7 +26,7 @@ function versionCheck()
     }
     catch(e)
     {
-      alert("The DQSD helper DLL is out of date");
+      alert("The DQSD helper DLL is out of date (error '" + e.description + "')");
       bSuccess = false;
     }
   }

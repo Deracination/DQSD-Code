@@ -413,60 +413,99 @@ STDMETHODIMP CLauncher::get_VersionIsCorrect(int v1, int v2, int v3, int v4, VAR
 {
 	// Check if our version resource is same or later version than 
 	// the one specified by the script in v1.v2.v3.v4
-	LPVOID pVersion;
-	HRSRC hVerRes;
-	HGLOBAL hVerResMem;
-	VS_FIXEDFILEINFO* pFixInfo;
-	
-	hVerRes = FindResource(_Module.GetResourceInstance(), MAKEINTRESOURCE(VS_VERSION_INFO), RT_VERSION);
-	if(hVerRes == NULL)
-	{
-		return Error(IDS_ERR_VERSION_RESOURCE, IID_ILauncher);
-	}
-    hVerResMem = LoadResource (_Module.GetResourceInstance(), hVerRes) ;
-	if(hVerResMem == NULL)
-	{
-		return Error(IDS_ERR_VERSION_RESOURCE, IID_ILauncher);
-	}
-    pVersion   = LockResource (hVerResMem) ;
-	if(hVerResMem == NULL)
-	{
-		return Error(IDS_ERR_VERSION_RESOURCE, IID_ILauncher);
-	}
 
-	UINT length;
-	VerQueryValue(pVersion, _T("\\"), (LPVOID*)&pFixInfo, &length);
-
-	int dllV1, dllV2, dllV3, dllV4;
-	dllV1 = pFixInfo->dwProductVersionMS >> 16;
-	dllV2 = pFixInfo->dwProductVersionMS & 0xffff;
-	dllV3 = pFixInfo->dwProductVersionLS >> 16;
-	dllV4 = pFixInfo->dwProductVersionLS & 0xffff;
-
-	ATLTRACE("CLauncher: DLL Version %d.%d.%d.%d\n", dllV1, dllV2, dllV3, dllV4);
-
-	// Assume we're going to pass
-	*pVal = VARIANT_TRUE;
-
-	// Test the version in order from MS to LS
-	// This could have been done as one 64 bit comparison, but...
-	if(dllV1 < v1)
+	try
 	{
-		*pVal = VARIANT_FALSE;
-	}
-	else if(dllV2 < v2)
-	{
-		*pVal = VARIANT_FALSE;
-	}
-	else if(dllV3 < v3)
-	{
-		*pVal = VARIANT_FALSE;
-	}
-	else if(dllV4 < v4)
-	{
-		*pVal = VARIANT_FALSE;
-	}
+//		LPVOID pVersion;
+//		HRSRC hVerRes;
+//		HGLOBAL hVerResMem;
+		VS_FIXEDFILEINFO* pFixInfo;
 
+		ATLTRACE("CLauncher: Starting get_VersionIsCorrect\n");
 
-	return S_OK; 
+		TCHAR moduleName[MAX_PATH+1];
+		GetModuleFileName(_Module.GetModuleInstance(), moduleName, MAX_PATH);
+		DWORD dummyZero;
+		DWORD versionSize = GetFileVersionInfoSize(moduleName, &dummyZero);
+		if(versionSize == 0)
+		{
+			return Error(IDS_ERR_VERSION_RESOURCE, IID_ILauncher, E_FAIL);
+		}
+		void* pData = malloc(versionSize);
+		if(pData == NULL)
+		{
+			return Error(IDS_ERR_VERSION_RESOURCE, IID_ILauncher, E_FAIL);
+		}
+		if(!GetFileVersionInfo(moduleName, NULL, versionSize, pData))
+		{
+			free(pData);
+			return Error(IDS_ERR_VERSION_RESOURCE, IID_ILauncher, E_FAIL);
+		}
+/*	
+		hVerRes = FindResource(_Module.GetResourceInstance(), MAKEINTRESOURCE(VS_VERSION_INFO), RT_VERSION);
+		if(hVerRes == NULL)
+		{
+			return Error(IDS_ERR_VERSION_RESOURCE, IID_ILauncher, E_FAIL);
+		}
+		hVerResMem = LoadResource (_Module.GetResourceInstance(), hVerRes) ;
+		if(hVerResMem == NULL)
+		{
+			return Error(IDS_ERR_VERSION_RESOURCE, IID_ILauncher, E_FAIL);
+		}
+		pVersion = LockResource (hVerResMem) ;
+		if(pVersion == NULL)
+		{
+			return Error(IDS_ERR_VERSION_RESOURCE, IID_ILauncher, E_FAIL);
+		}
+*/
+		ATLTRACE("CLauncher: About to query value\n");
+
+		UINT length;
+		pFixInfo = NULL;
+		if(!VerQueryValue(pData, _T("\\"), (LPVOID*)&pFixInfo, &length))
+		{
+			free(pData);
+			return Error(IDS_ERR_VERSION_RESOURCE, IID_ILauncher, E_FAIL);
+		}
+
+		ATLTRACE("CLauncher: value queried\n");
+
+		int dllV1, dllV2, dllV3, dllV4;
+		dllV1 = pFixInfo->dwProductVersionMS >> 16;
+		dllV2 = pFixInfo->dwProductVersionMS & 0xffff;
+		dllV3 = pFixInfo->dwProductVersionLS >> 16;
+		dllV4 = pFixInfo->dwProductVersionLS & 0xffff;
+
+		ATLTRACE("CLauncher: DLL Version %d.%d.%d.%d\n", dllV1, dllV2, dllV3, dllV4);
+
+		// Assume we're going to pass
+		*pVal = VARIANT_TRUE;
+
+		// Test the version in order from MS to LS
+		// This could have been done as one 64 bit comparison, but...
+		if(dllV1 < v1)
+		{
+			*pVal = VARIANT_FALSE;
+		}
+		else if(dllV2 < v2)
+		{
+			*pVal = VARIANT_FALSE;
+		}
+		else if(dllV3 < v3)
+		{
+			*pVal = VARIANT_FALSE;
+		}
+		else if(dllV4 < v4)
+		{
+			*pVal = VARIANT_FALSE;
+		}
+
+		free(pData);
+
+		return S_OK; 
+	}
+	catch(...)
+	{
+		return Error(IDS_EXCEPTION_IN_VERSION_CHECK, IID_ILauncher, E_FAIL);
+	}
 }
