@@ -61,8 +61,7 @@ function addalias(alias, fname)
   }
 
   aliases[alias] = fname;
-  searches[fname].aliases.push(alias);
-  
+  searches[fname].aliases.push(alias); 
   if (fname == "ia" || fname == "ggc")
     specialaliasarray.push(alias);
 }
@@ -221,13 +220,15 @@ addAliasesFromFile( localaliases );
 function addAliasesFromFile( aliasFile )
 {
   var aliasTable = readTabDelimitedFile(aliasFile);
+  //sort the list of aliases
+  //aliasTable.sort();
   for (var iPrivate = 0; iPrivate < aliasTable.length; iPrivate++)
   {
     var fields = aliasTable[iPrivate];
       if (fields.length != 2)
       {
         alert("Error on line " + (iPrivate + 1) + " of aliases.txt:\n\n" + aliasTable[iPrivate] + 
-              "\n\n(Make sure there is a tab between the alias and command.)");
+              "\n\n(Make sure there is a tab or \| symbol between the alias and command.)");
         break;
       }
       else

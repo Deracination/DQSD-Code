@@ -1,41 +1,41 @@
 // This is where the default aliases are defined.
 //
-// The format requires a single <tab> separator between the alias
+// The format requires a single <tab> or pipe "|" separator between the alias
 // and the function to be called.
 // 
 // Note:
 // User aliases should be placed in the localaliases.txt file which
 // will not be overwritten when a new version of the toolbar is installed.
 //
-	gg
-!	ifl
-?	yh
--	fst
-^	av
-{	dp
-???	ask
-+	map
-#	sb
-##	sbb
-@	yhe
-@@	bfe
-=	clc
-.	cnn
-*	aw
-$	stk
-:	mwd
-::	dic
-;	ths
-;;	mwt
-[	enc
-]	xref
-&&	ia
->	gga
-$$	dlt
-$$$	pw
-%	ebay
-,	ggn
-,,	faq
->>	dl
-~	uns
-#*	phsp
+|gg
+!|ifl
+?|yh
+-|fst
+^|av
+{|dp
+???|ask
++|map
+#|sb
+##|sbb
+@|yhe
+@@|bfe
+=|clc
+.|cnn
+*|aw
+$|stk
+:|mwd
+::|dic
+;|ths
+;;|mwt
+[|enc
+]|xref
+&&|ia
+>|gga
+$$|dlt
+$$$|pw
+%|ebay
+,|ggn
+,,|faq
+>>|dl
+~|uns
+#*|phsp
