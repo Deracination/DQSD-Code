@@ -1,0 +1,67 @@
+ <search function="setiq">
+   <name>Setiqueue</name>
+   <description>
+      Directly login as an admin to your setiqueue web admin interface without having the hassle to go through the login page.<br/>
+    <a class="helpboxDescLabels">Switches:</a><br />
+    <table class="helpboxDescTable">
+      <tr><td>/server:serveradress</td><td> - Specify server IP address or name (127.0.0.1 if not specified)</td></tr>
+      <tr><td>/port:portnumber</td><td> - Specify port number (5517 if not specified)</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpBoxDescTable">
+      <tr><td>setiq mypassword</td></tr>
+      <tr><td>setiq mypassword /server:localhost /port:6000</td></tr>
+    </table>
+    <div class="helpboxDescLabels" style="color: red">Warning:<br/>
+    <table class="helpBoxDescTable">
+      <tr><td style="color: red">If you are using DQSD v3.0 or earlier and you specify an IP address for the serveraddress parameter, you might need to edit defer_tools.js and change<br/>
+        <nobr><span style="font-family: monospace; color: #000000">  var re_switch = /\/((\w+)(?::?(\w*)))\s*/;</span></nobr><br/>
+        to<br/>
+        <nobr><span style="font-family: monospace; color: #000000">  var re_switch = /\/((\w+)(?::?(\S*)))\s*/;</span></nobr></td></tr>
+    </table>
+    </div>
+   </description>
+  <category>Functions</category>
+  <link>http://www.setiqueue.org</link>
+  <contributor>MLL</contributor>
+  <version>1.0</version>
+
+  <form method="POST" name='setiqf'>
+  <input type="hidden" name="User"/>
+  <input type="hidden" name="Pass"/>
+  </form>
+
+  
+  <script><![CDATA[
+    function setiq(q)
+    {
+      if(nullArgs("setiq", q))
+        return false;
+      else
+      {
+        var switch_list = new Array("server", "port");
+        var args = parseArgs(q, switch_list);
+        
+        var serveraddress="127.0.0.1";
+        if (! ( typeof args.switch_val["server"] == "undefined" || args.switch_val["server"] == "" ) )
+        {
+          serveraddress=args.switch_val["server"];
+        }
+
+        var portnumber="5517";
+        if (! ( typeof args.switch_val["port"] == "undefined" || args.switch_val["port"] == "" ) )
+        {
+          portnumber=args.switch_val["port"];
+        }
+        
+        var formaction = "http://"+serveraddress+":"+portnumber+"/login.htm?";
+
+        setiqf.action = formaction;
+        setiqf.User.value="admin" ;
+        setiqf.Pass.value=args.q ;
+        submitForm(setiqf);
+        return true;
+      }
+    }
+  ]]></script>
+</search>
