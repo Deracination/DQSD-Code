@@ -111,7 +111,7 @@
 
          <faq>
             <question>Where do I go to download searches?</question>
-            <answer>Searches can be downloaded from Source Forge at <link href="http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/dqsd/dqsd/searches/">http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/dqsd/dqsd/searches/</link>.</answer>
+            <answer>Searches can be downloaded from Source Forge at <link href="http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/dqsd/dqsd/searches/">http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/dqsd/dqsd/searches/</link>.  Other more specialized searches can be found here <link href="http://www.dqsd.net/contrib/index.html">http://www.dqsd.net/contrib/index.html</link>.</answer>
          </faq>
 
          <faq>
