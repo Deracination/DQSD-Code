@@ -68,7 +68,7 @@ There had to be an easier way.
 </center>
 </li>
 <li>
-You should see a dialog that looks something like the following.&nbsp;&nbsp;Some of the fields will be automatically filled in.&nbsp;&nbsp;Enter a name and a title for the new search.&nbsp;&nbsp;The name is the string that will invoke the search and will be used name the file, so keep it short and simple.<br/>
+You should see a dialog that looks something like the following.&nbsp;&nbsp;Some of the fields will be automatically filled in.&nbsp;&nbsp;Enter a name and a title for the new search.&nbsp;&nbsp;The name is the string that will invoke the search and will be used for the file name, so keep it short and simple.<br/>
 <center><img src="dqsdsearchwiz.jpg" align="top"></center>
 </li>
 <li>
@@ -251,6 +251,34 @@ document.write( buildEmail( 'glenn', 'glenncarr', 'com', 'Glenn Carr' ) );
 </script>
 <br/>
 August 13, 2002
+
+<h3>To do:</h3>
+Feel free to grab the source and make the following improvements.&nbsp;&nbsp;These are not in any particular order.
+<ul>
+<li>
+Add some context-sensitive help.&nbsp;&nbsp;The little help button is there, but it does nothing.
+</li>
+<li>
+Run this thing through BoundsChecker or Purify.&nbsp;&nbsp;I hacked this together so quickly, I know there are probably some BSTRs not being freed.
+</li>
+<li>
+Display the HTML content of each form in a browser control, instead of as just plain text.&nbsp;&nbsp;Not really sure if this would work without the entire page, but it would be more useful if it did.
+</li>
+<li>
+Add a 'DQSD Search Wizard' menu item to the IE context and tools menus.
+</li>
+</ul>
+
+<h3>Credits</h3>
+<ul>
+<li>
+<a href="http://notesbydave.com">David Bau</a> for such a cool tool.&nbsp;&nbsp;Aren't the best things in life usually the simplest?
+</li>
+<li>
+<a href="http://www.cheztabor.com/projects.htm">Tim Tabor</a> for sharing his code.&nbsp;&nbsp;Probably couldn't (and wouldn't) have done it without those examples.
+</li>
+</ul>
+
 
 </body>
 </html>
