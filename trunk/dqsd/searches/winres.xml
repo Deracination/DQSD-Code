@@ -1,18 +1,16 @@
 <search function="winres">
   <name>WinRes</name>
-  <description>WinRes will open a browser window of a specified
-  size "winres 800 600" will open a broswer window that is 800
-  pixels wide and 600 pixels tall.
+  <description>WinRes will open a browser window of a specified size.
+  "winres 800 600" or "winres /height:800 /width:600"
+  will open a broswer window that is 800 pixels wide and 600 pixels tall.
   </description>
   <contributor>Neel Doshi</contributor>
   <category>Functions</category>
   <script><![CDATA[
 function winres(q) {
-	if ( q == "?" || q == "")
-	{
-		alert("Open a browser window to a specific size:  'winres /height:600 /width:800' OR 'winres 800 600'");
+	if (nullArgs("winres", q))
 		return false;
-	}
+
 	// First parse the arguments
 	var switch_list = new Array("height", "width");
 	var args = parseArgs(q, switch_list);

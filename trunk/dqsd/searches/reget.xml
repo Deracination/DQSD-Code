@@ -2,7 +2,7 @@
   <name>ReGet</name>
   <description>ReGet will auto-reload a URL at a given frequency:
     "reget 10 20 http://www.gymamerica.com" will reload gymamerica every 20 seconds for 10 iterations.
-    "reget 0 20 http://www.yahoo.com /noforce" will reload yahoo every 20 seconds until cancelled without forcing the browser to reload from the server.
+    "reget 0 20 http://www.whitehouse.gov /noforce" will reload whitehouse.gov every 20 seconds until cancelled without forcing the browser to reload from the server.
   </description>
   <switches>noforce</switches>
   <contributor>Neel Doshi</contributor>
@@ -58,9 +58,8 @@
 
 	function reget(q, switches)
 	{
-	  if (q == "")
+	  if (nullArgs("reget", q))
 	  {
-	    alert("ReGet will auto-reload a URL at a given frequency:\n'reget 10 20 http://www.gymamerica.com' will reload gymamerica every 20 seconds for 10 iterations.\n'reget 0 20 http://www.yahoo.com' will reload yahoo every 20 seconds until cancelled.");
 	    return false;
 	  }
 

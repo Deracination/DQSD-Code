@@ -1,6 +1,19 @@
 <search function="freetrans">
   <name>FreeTranslation.com Language Translation</name>
-  <description>Use FreeTranslation.com to translate text from one language to another: "freetrans /from:en /to:es hello how are you" or "freetrans /from:en /to:es http://www.yahoo.com"</description>
+  <description>Use FreeTranslation.com to translate text from one language to another:<br />
+	"freetrans /from:en /to:es hello how are you" or "freetrans /from:en /to:es http://www.whitehouse.gov"<br />
+	/from:en /to:fr - English to French<br />
+	/from:en /to:de - English to German<br />
+	/from:en /to:it - English to Italian<br />
+	/from:en /to:pt - English to Portuguese<br />
+	/from:en /to:es - English to Spanish<br />
+	/from:en /to:no - English to Norwegian<br />
+	/from:fr /to:en - French to English<br />
+	/from:de /to:en - German to English<br />
+	/from:it /to:en - Italian to English<br />
+	/from:pt /to:en - Portuguese to English<br />
+	/from:es /to:en - Spanish to English<br />
+  </description>
   <contributor>Neel Doshi, Greg Mitchell</contributor>
   <category>Reference</category>
   <link>http://www.freetranslation.com</link>
@@ -23,30 +36,8 @@
   <script><![CDATA[
 function freetrans(q)
 {
-	if( q == "" )
-	{
-		openSearchWindow("http://www.freetranslation.com");
+	if(nullArgs("freetrans", q))
 		return false;
-	}
-	else if ( q == "?" )
-	{
-		alert("Use FreeTranslation.com to translate text from one language to another: \n \
-'freetrans /from:en /to:es hello how are you' or 'freetrans /from:en /to:es http://www.yahoo.com' \n \
-Options as of 3/29/2002 are:\n \
-/from:en /to:fr - English to French\n \
-/from:en /to:de - English to German\n \
-/from:en /to:it - English to Italian\n \
-/from:en /to:pt - English to Portuguese\n \
-/from:en /to:es - English to Spanish\n \
-/from:en /to:no - English to Norwegian\n \
-/from:fr /to:en - French to English\n \
-/from:de /to:en - German to English\n \
-/from:it /to:en - Italian to English\n \
-/from:pt /to:en - Portuguese to English\n \
-/from:es /to:en - Spanish to English\n \
-		");
-		return false;
-	}
 	else
 	{
 		var func_name = "freetrans";
