@@ -3,7 +3,8 @@
 REM For this build to work, both the VC tools and
 REM the NSIS tools need to be on your path.
 
-REM call vcvars32.bat
+call vcvars32.bat
+SET PATH=%PATH%;"C:\Program Files\NSIS"
 
 pushd %~dp0
 
