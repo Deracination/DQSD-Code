@@ -83,14 +83,14 @@
 </Program_Descriptions>
 <Web_Info>
 <Application_URLs>
-        <Application_Info_URL>http://notesbydave.com/toolbar/doc.htm</Application_Info_URL>
-        <Application_Order_URL>http://notesbydave.com/toolbar/doc.htm</Application_Order_URL>
-        <Application_Screenshot_URL>http://notesbydave.com/toolbar/toolbar.gif</Application_Screenshot_URL>
-        <Application_Icon_URL>http://notesbydave.com/toolbar/icon.gif</Application_Icon_URL>
-        <Application_XML_File_URL>http://notesbydave.com/toolbar/dqsd.xml</Application_XML_File_URL>
+        <Application_Info_URL>http://dqsd.net/</Application_Info_URL>
+        <Application_Order_URL>http://dqsd.net/</Application_Order_URL>
+        <Application_Screenshot_URL>http://dqsd.net/toolbar.gif</Application_Screenshot_URL>
+        <Application_Icon_URL>http://dqsd.net/icon.gif</Application_Icon_URL>
+        <Application_XML_File_URL>http://dqsd.net/dqsd.xml</Application_XML_File_URL>
     </Application_URLs>
 <Download_URLs>
-        <Primary_Download_URL>http://notesbydave.com/toolbar/dqsd.exe</Primary_Download_URL>
+        <Primary_Download_URL>http://dqsd.net/dqsd.exe</Primary_Download_URL>
         <Secondary_Download_URL />
         <Additional_Download_URL_1 />
         <Additional_Download_URL_2 />
