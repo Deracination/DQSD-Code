@@ -123,6 +123,16 @@
         var sReturnedHTML = oDoc.selectSingleNode("SOAP-ENV:Body/ns1:getServiceResponsePublicResponse/return").text;
         if ( sReturnedHTML != '' )
         {
+          sReturnedHTML = sReturnedHTML.replace( /\n/g, '' )                                            // get rid of newlines
+                                       .replace( /(.*<table>.+<\/table>).*/i, '$1' )                    // get of everything after the last TABLE tag
+                                       .replace( /<script.*<\/script>/i, '' )                           // get rid of SCRIPT tags
+                                       .replace( /(<\/table>.*)<table.*Legal Disclaimer.*/i, '$1' )     // save only stuff before the disclaimer
+                                       .replace( /<tr class="[EO]RL1"><td ><\/td><\/tr>/gi, '' )        // get rid of extra rows at the end of the table
+                                       .replace( /<body.*<div id="main">(.*)/i, '$1' )                  // get rid of the BODY tag and its event handlers
+                                       .replace( /(<td>Word:)([^>]+) > (<\/td>)/i, '$1  <b>$2</b>$3' )  // get rid of weird angle bracket and make word bold
+                                       .replace( /cellPadding="3"/i, 'cellPadding="0"' )                // get rid of some of the whitespace
+          writeFile( "c:\\dicpop.xml", sReturnedHTML );
+
           displayPopupMessage( sReturnedHTML, "<base href=http://www.mybubble.com><link rel=\"stylesheet\" href=\"/mybubbleEntServer/css/layout.css\" />" );
         }
       }
