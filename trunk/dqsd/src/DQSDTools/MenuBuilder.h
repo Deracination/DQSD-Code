@@ -11,7 +11,7 @@ class ATL_NO_VTABLE CMenuBuilder :
 	public CComObjectRootEx<CComSingleThreadModel>,
 	public CComCoClass<CMenuBuilder, &CLSID_MenuBuilder>,
 	public IObjectWithSiteImpl<CMenuBuilder>,
-	public ISupportErrorInfo,
+	public ISupportErrorInfoImpl<&IID_IMenuBuilder>,
 	public IObjectSafetyImpl<CMenuBuilder, INTERFACESAFE_FOR_UNTRUSTED_CALLER>,
 	public IDispatchImpl<IMenuBuilder, &IID_IMenuBuilder, &LIBID_DQSDTOOLSLib>
 {
@@ -37,8 +37,8 @@ BEGIN_COM_MAP(CMenuBuilder)
 END_COM_MAP()
 
 // ISupportsErrorInfo
-public:
-	STDMETHOD(InterfaceSupportsErrorInfo)(REFIID riid);
+//public:
+//	STDMETHOD(InterfaceSupportsErrorInfo)(REFIID riid);
 
 public:
 	STDMETHOD(SetSite)(IUnknown* pUnkSite);
