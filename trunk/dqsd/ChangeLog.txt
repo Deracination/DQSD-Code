@@ -25,6 +25,9 @@ New Searches
 * ct - Search Content Type List (from Brent Beardsley)
 * tldp - Search The Linux Documentation Project (from Brent Beardsley)
 * blb - Search the bible at BlueLetterBible.org (from Brent Beardsley)
+* thelist - Search evlot.org's thelist archives (from Sarah S.)
+* evolt - Search evolt.org (from Sarah S.)
+* htmlh - Search htmlhelp.com (from JB)
 
 Bug Fixes
 
