@@ -1,20 +1,24 @@
 // This is where user aliases can be defined.  Some examples are below.  Remove the 
 // leading comment characters (//) to use these.  
 //
-// The format requires a single <tab> separator between the alias and its
-// definition.
+// Format:
+// <alias>|<search>|<name>|<description>
+//
+// Where:
+//   alias  - alias you enter to invoke search
+//   search - URL or search where all %s will be replaced by the search string
+//   name   - [optional] name of search
+//   desc   - [optional] description of search 
 //
 // Any %s placeholders will be replaced with the search string if any is supplied.
-// E.g., if 'ygg' is defined as below, entering "ygg dqsdd" will take you to
-// http://groups.yahoo.com/group/dqsdd
+// E.g., if 'sfp' is defined as below, entering "sfp dqsd" will take you to
+// http://sourceforge.net/projects/dqsd
 
-// movie	ym
-// sf	http://sourceforge.net/
-// sfp	http://sourceforge.net/projects/%s
-// yg	http://groups.yahoo.com/
-// ygg	http://groups.yahoo.com/group/%s
-// exp	run explorer /e, %s
-// expd	run explorer /e, "C:\Program Files\Quick Search Deskbar"
-// np	run notepad
-// word	run winword
-// excel	run excel
+// movie|ym
+// sf|http://sourceforge.net/|SourceForge|SourceForge main web site
+// sfp|http://sourceforge.net/projects/%s|SourceForge project page|SourceForge project page - Ex. "sfp dqsd"
+// exp|run explorer /e, %s|Explorer|Explore directory with folder pane - Ex. "exp c:\dev\dqsd"
+// expd|run explorer /e, "C:\Program Files\Quick Search Deskbar"
+// np|run notepad
+// word|run winword
+// excel|run excel
