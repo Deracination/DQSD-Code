@@ -1,0 +1,60 @@
+<search function="note">
+  <name>Note</name>
+  <description>
+   save a note for later<br/>
+   <div class="helpboxDescLabels">Usage:</div>
+   <table class="helpboxDescTable">
+    <tr><td>note <I>&lt;clear&gt; information</I> </td></tr>
+   </table>
+   <div class="helpboxDescLabels">Examples:</div>
+   <table class="helpboxDescTable">
+    <tr><td>note Call Pete</td></tr>
+    <tr><td>note</td></tr>
+    <tr><td>note clear</td></tr>
+   </table>
+  </description>
+  <category>Functions</category>
+  <link>http://www.metrocast.net/~peteh</link>
+  <contributor>Peter Heath</contributor>
+  
+  <script><![CDATA[
+
+    var adddate=true;
+
+    function addNote(info) {
+     try {
+       appendFile("note.txt", info+"\r\n");
+     }
+     catch(e) { }
+    }
+
+    function clearNote() {
+     try {
+       writeFile("note.txt", "");
+     }
+     catch(e) { }
+    }
+	
+    function note(info) {
+        if (info == "")
+        {
+                var path = DQSDLauncher.InstallationDirectory;
+                path += "\\note.txt";
+                openSearchWindow(path);
+        }
+
+     else {
+      if (info == "clear") clearNote();
+      else{
+	if (adddate) {
+         var now = new Date();
+         info = formatdate(now, clockformat) + "-   " +  info;
+	}
+	addNote(info);	
+      }
+      document.deff.q.value = "";
+     }
+    }
+  ]]></script>
+</search>
+
