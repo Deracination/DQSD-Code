@@ -48,7 +48,7 @@
          }//switch
       }//for
    }//if
-   
+        
    // Set an array for the days of the week
    // We add a comma and a space to each for presentation
    // get.day will return 0 through 6 as valid values 
@@ -151,15 +151,14 @@
    if (typeof r == 'undefined'){
       return;
    }else{
-      var RacingSearchPopupBodyCode = "<html><head><style>table,td {border:1px solid black;margin:0px;padding-left:2px;border-collapse:collapse;}</style></head><body>";
-      RacingSearchPopupBodyCode += "<center><span style=font-weight:bold;color:#900000;>"+wintitle+" Racing TV times ("+tzname+" Timezone)</span></center><table><tr> "+tableleadin+r+"</body></html>";
-      var top=((screen.availheight-windowH)-38);
-      var left=((screen.width-windowW)-10);
-      popupImage = window.open('','_blank','width='+windowW+', height='+windowH+',toolbar=0,status=0,titlebar=0,location=0,directories=0,menuBar=0,scrollbars=1,resizable=1,left='+left+',top='+top);
-      popupImage.document.open();
-      popupImage.document.write(RacingSearchPopupBodyCode);
-      popupImage.document.close()
-      popupImage.document.title=wintitle+' Racing TV times (Eastern Timezone)';      
+      var RacingSearchBodyCode = "<html><head><style>table,td {border:1px solid black;margin:0px;padding-left:2px;border-collapse:collapse;}</style></head><body>";
+      RacingSearchBodyCode += "<center><span style=font-weight:bold;color:#900000;>"+wintitle+" Racing TV times ("+tzname+" Timezone)</span></center><table><tr> "+tableleadin+r+"</body></html>";
+
+      var racetvoutfile = DQSDLauncher.AppDataDirectory + '\\racetv.html';     
+      writeFile(racetvoutfile, RacingSearchBodyCode);
+
+      openSearchWindow("file://" + racetvoutfile);
+           
    }//if
 } //function
   ]]></script>
