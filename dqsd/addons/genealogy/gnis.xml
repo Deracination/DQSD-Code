@@ -4,23 +4,13 @@
     Search for features in USGS National Mapping Informaion.<br/>
     <div class="helpboxDescLabels">Switches:</div>
   	<table class="helpboxDescTable">
-  		<tr><td>/county</td><td> - </td><td>Specify county name</td></tr>
-  		<tr><td>/state</td><td> - </td><td>Specify state name or abbreviation</td></tr>
+  		<tr><td>/place</td><td> - </td><td>Specify county and state</td></tr>
   		<tr><td>/type</td><td> - </td><td>Specify feature type</td></tr>
   		<tr><td>/variant</td><td> - </td><td>Search variant names</td></tr>
   	</table>
-    <div class="helpboxDescLabels">Search Type Switches:</div>
-  	<table class="helpboxDescTable">
-  		<tr><td>/cemetery</td><td> - </td><td>cemeteries</td></tr>
-  		<tr><td>/popplace</td><td> - </td><td>populated places</td></tr>
-  	</table>
-    <div class="helpboxDescLabels">Usage:</div>
-  	<table class="helpboxDescTable">
-  		<tr><td>gnis /state:&lt;<i>state name</i>&gt; /county:&lt;<i>county name</i>&gt; /type:&lt;<i>feature type</i>&gt; /variant &lt;<i>feature name</i>&gt;</td></tr>
-   	</table>
     <div class="helpboxDescLabels">Example:</div>
     <table class="helpboxDescTable">
-  		<tr><td>gnis /state:CA /county:Santa.Clara San Jose</td></tr>
+  		<tr><td>gnis San Jose /p Santa Clara, CA</td></tr>
   	</table>
   </description>
   <category>Genealogy</category>
@@ -54,54 +44,26 @@
     {
 	if( nullArgs("gnis", q) )
 		return false;
-	else
-  	{
-		var func_name = "gnis";
-		var switch_list = new Array("state", "county", "type", "variant", "cemetery", "popplace");
-		var type_list = new Array("cemetery", "popplace");
-		var args = parseArgs(q, switch_list);
 
-		gnissearch.f_state.value = "";
-		gnissearch.f_cnty.value = "";
-		gnissearch.f_ty.value = "";
-		gnissearch.variant.value = "N";
-		gnissearch.f_ty.value = "";
-		gnissearch.f_ty.value = "";
-		
-		// check if the required switches are set
-		for (var j = 0; j < switch_list.length; j++)
-		{
-			if ( typeof args.switch_val[ switch_list[j] ] != "undefined" && args.switch_val[ switch_list[j] ] != "" )
-			{
-				switch (switch_list[j])
-				{
-			        case "state":
-					gnissearch.f_state.value = args.switch_val["state"]; break;
-				case "county":
-					gnissearch.f_cnty.value = args.switch_val["county"]; break;
-				case "type":
-					gnissearch.f_ty.value = args.switch_val["type"]; break;
-				case "variant":
-					gnissearch.variant.value = "Y"; break;
-				case "cemetery":
-					gnissearch.f_ty.value = "cemetery"; break;
-				case "popplace":
-					gnissearch.f_ty.value = "populated place"; break;
-				}
-			}
-		}
+	var args = genealogy_parseArgs(q, "type, variant, place");
+	var state = "";
+	var county = "";
+	var featureType = "";
+	var searchVariants = genealogy_hasArg(args, "variant") ? true : false;
+	if (genealogy_hasArg(args, "type")) {
+		featureType = args.switch_val["type"];
+	}
+	if (genealogy_hasArg(args, "place")) {
+		state = genealogy_lookup_place_name(genealogy_parse_place_state(args.switch_val["place"]));
+		county = genealogy_parse_place_county(args.switch_val["place"]);
+	}
 
-		if (args.q == "?")
-		{
-			nullArgs("gnis","?");
-		}
-		else
-		{
-			gnissearch.f_name.value = args.q;
-			submitForm(gnissearch);
-		}
-		return true;
-       }
+	document.gnissearch.variant.value = (searchVariants) ? "Y" : "N";
+	document.gnissearch.f_ty.value = featureType;
+	document.gnissearch.f_state.value = state;
+	document.gnissearch.f_cnty.value = county;
+	document.gnissearch.f_name.value = args.q;
+	submitForm(gnissearch);
     }
   ]]></script>
 </search>

@@ -1,0 +1,192 @@
+<search function="cens1880">
+  <name>1880 Census at FamilySearch.org</name>
+  <category>Genealogy
+    <category>Census</category>
+  </category>
+  <contributor>Brent Beardsley</contributor>
+  <link>http://www.familysearch.org/Eng/Search/frameset_search.asp?PAGE=census/search_census.asp</link>
+  <email></email>
+  <description>
+    Search the 1880 Census at FamilySearch.org
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/exact</td><td> - </td><td>Search for exact name</td></tr>
+      <tr><td>/head</td><td> - </td><td>Specify head of household</td></tr>
+      <tr><td>/place</td><td> - </td><td>Limit the search to a particular state</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>cens1880 mcglashan</td></tr>
+      <tr><td>cens1880 mcglashan, alexander /p ny</td></tr>
+      <tr><td>cens1880 mcglashan /p ca /e</td></tr>
+      <tr><td>cens1880 mcglashan /h lytta</td></tr>
+    </table>
+  </description>
+  <form name="cens1880f"
+        method="post"
+        action="http://www.familysearch.org/Eng/Search/census/../customsearchresults.asp">
+    <input type="hidden" name="type" value="6" />
+    <input type="hidden" name="event_index" value="0" />
+    <input type="hidden" name="race_friendly" value="" />
+    <input type="hidden" name="juris1friendly" value="" />
+    <input type="hidden" name="juris2friendly" value="" />
+    <input type="hidden" name="juris3friendly" value="" />
+    <input type="hidden" name="cn_locality" value="" />
+    <input type="hidden" name="cn_name" value="1880 United States Census" />
+    <input type="hidden" name="alreadyposted" value="" />
+    <input type="hidden" name="date_range_index" value="0" />
+    <input type="hidden" name="LDS" value="5" />
+    <input type="hidden" name="CN_CODE" value="1880US" />
+    <input type="hidden" name="first_name" value="" />
+    <input type="hidden" name="last_name" value="" />
+    <input type="hidden" name="cn_hh_first_name" value="" />
+    <input type="hidden" name="cn_hh_last_name" value="" />
+    <input type="hidden" name="juris1" value="" />
+    <input type="hidden" name="juris2" value="" />
+    <input type="hidden" name="juris3" value="" />
+    <input type="hidden" name="from_date" value="" />
+    <input type="hidden" name="date_range" value="0" />
+    <COMMENT>
+      The input element above, "date_range", was a SELECT element with the following options...
+      <select name="date_range">
+        <option value="0"></option>
+        <option value="0">Exact year</option>
+        <option value="2">+ or - 2 years</option>
+        <option value="5">+ or - 5 years</option>
+        <option value="10">+ or - 10 years</option>
+        <option value="20">+ or - 20 years</option>
+      </select>
+    </COMMENT>
+
+    <input type="hidden" name="RACE" value="" />
+    <input type="hidden" name="CN_STATE" value="" />
+    <input type="hidden" name="CN_COUNTY" value="" />
+    <input type="hidden" name="CN_TOWN" value="" />
+    <input type="hidden" name="standardize" value="Y" />
+  </form>
+
+  <script src="addons/genealogy/genealogy_lib.js"></script>
+  <script><![CDATA[
+    function cens1880(q)
+    {
+      if( nullArgs("cens1880", q) )
+        return;
+
+      var args = genealogy_parseArgs(q, "place, exact, race, head");
+      var state_desc = "";
+      var state = "";
+      var race = "";
+      var race_desc = "";
+      var head_surname = "";
+      var head_givenname = "";
+      var exact_spelling = genealogy_hasArg(args, "exact") ? true : false;
+      if (genealogy_hasArg(args, "head")) {
+        var head_name = args.switch_val["head"];
+	head_surname = genealogy_parse_surname(head_name);
+	head_givenname = genealogy_parse_givenname(head_name);
+      }
+      if (genealogy_hasArg(args, "race")) {
+	race = args.switch_val["race"];
+        var raceList =   new Array("Asian", "Black", "Mexican", "Mulatto", "Native American", "White");
+	var raceAbbrev = new Array("A",     "B",     "MX",      "MU",      "NA",              "W");
+	for (var i=0; i < raceList.length; i++) {
+	   if (raceList[i].match(new RegExp("^"+race, "i"))) {
+	     race_desc = raceList[i];
+	     race = raceAbbrev[i];
+	     break;
+	   }
+	}
+	if (i == raceList.length) {
+	  race = "";
+	  race_desc = "";
+	}
+      }
+      if (genealogy_hasArg(args, "place")) {
+         state = genealogy_lookup_place_abbrev(genealogy_parse_place_state(args.switch_val["place"]));
+	 if (state != "") {
+	   switch (state)
+	   {
+	   case "AL": state = "ALAB"; state_desc = "Alabama"; break;
+	   case "AZ": state = "ARIZ"; state_desc = "Arizona"; break;
+	   case "AR": state = "ARK";  state_desc = "Arkansas"; break;
+	   case "CA": state = "CAL";  state_desc = "California"; break;
+	   case "CO": state = "COLR"; state_desc = "Colorado"; break;
+	   case "CT": state = "CONN"; state_desc = "Connecticut"; break;
+	   case "DE": state = "DELA"; state_desc = "Delware"; break;
+	   case "DC": state = "DICO"; state_desc = "District of Columbia"; break;
+	   case "FL": state = "FLOR"; state_desc = "Florida"; break;
+	   case "GA": state = "GEOR"; state_desc = "Georgia"; break;
+	   case "ID": state = "IDAH"; state_desc = "Idaho"; break;
+	   case "IL": state = "ILL";  state_desc = "Illinois"; break;
+	   case "IN": state = "INDN"; state_desc = "Indiana"; break;
+	   case "IA": state = "IOWA"; state_desc = "Iowa"; break;
+	   case "KS": state = "KAN";  state_desc = "Kansas"; break;
+	   case "KY": state = "KTKY"; state_desc = "Kentucky"; break;
+	   case "LA": state = "LOU";  state_desc = "Louisiana"; break;
+	   case "ME": state = "MAIN"; state_desc = "Maine"; break;
+	   case "MD": state = "MARY"; state_desc = "Maryland"; break;
+	   case "MA": state = "MASS"; state_desc = "Massachusetts"; break;
+	   case "MI": state = "MCHI"; state_desc = "Michigan"; break;
+	   case "MN": state = "MINN"; state_desc = "Minnesota"; break;
+	   case "MS": state = "MISP"; state_desc = "Mississippi"; break;
+	   case "MO": state = "MISO"; state_desc = "Missouri"; break;
+	   case "MT": state = "MONT"; state_desc = "Montana"; break;
+	   case "ND": state = "DAKT"; state_desc = "Dakota Territory"; break;
+	   case "NE": state = "NEBR"; state_desc = "Nebraska"; break;
+	   case "NV": state = "NEV";  state_desc = "Nevada"; break;
+	   case "NH": state = "NHAM"; state_desc = "New Hampshire"; break;
+	   case "NJ": state = "NJER"; state_desc = "New Jersey"; break;
+	   case "NM": state = "NMEX"; state_desc = "New Mexico"; break;
+	   case "NY": state = "NYOR"; state_desc = "New York"; break;
+	   case "NC": state = "NCAR"; state_desc = "North Carolina"; break;
+	   case "OH": state = "OHIO"; state_desc = "Ohio"; break;
+	   case "OR": state = "ORE";  state_desc = "Oregon"; break;
+	   case "PA": state = "PENN"; state_desc = "Pennsylvania"; break;
+	   case "RI": state = "RHOI"; state_desc = "Rhode Island"; break;
+	   case "SC": state = "SCAR"; state_desc = "South Carolina"; break;
+	   case "SD": state = "DAKT"; state_desc = "Dakota Territory"; break;
+	   case "TN": state = "TENN"; state_desc = "Tennessee"; break;
+	   case "TX": state = "TEX";  state_desc = "Texas"; break;
+	   case "UT": state = "UTAH"; state_desc = "Utah"; break;
+	   case "VT": state = "VERM"; state_desc = "Vermont"; break;
+	   case "VA": state = "VIR";  state_desc = "Virginia"; break;
+	   case "WA": state = "WASH"; state_desc = "Washington"; break;
+	   case "WV": state = "WVIR"; state_desc = "West Virginia"; break;
+	   case "WI": state = "WISC"; state_desc = "Wisconsin"; break;
+	   case "WY": state = "WYO";  state_desc = "Wyoming"; break;
+	   default:   state = "";     state_desc = ""; break;
+	   }
+	 }
+      }
+
+      // FORM variables for cens1880f
+      //document.cens1880f.type.value = "";
+      //document.cens1880f.event_index.value = "";
+      document.cens1880f.race_friendly.value = race_desc;
+      //document.cens1880f.juris1friendly.value = "";
+      //document.cens1880f.juris2friendly.value = "";
+      //document.cens1880f.juris3friendly.value = "";
+      document.cens1880f.cn_locality.value = state_desc;
+      //document.cens1880f.cn_name.value = "";
+      //document.cens1880f.alreadyposted.value = "";
+      //document.cens1880f.date_range_index.value = "";
+      //document.cens1880f.LDS.value = "";
+      //document.cens1880f.CN_CODE.value = "";
+      document.cens1880f.first_name.value = genealogy_parse_givenname(args.q);
+      document.cens1880f.last_name.value = genealogy_parse_surname(args.q);
+      document.cens1880f.cn_hh_first_name.value = head_givenname;
+      document.cens1880f.cn_hh_last_name.value = head_surname;
+      //document.cens1880f.juris1.value = "";
+      //document.cens1880f.juris2.value = "";
+      //document.cens1880f.juris3.value = "";
+      //document.cens1880f.from_date.value = "";
+      //document.cens1880f.date_range.value = "";
+      document.cens1880f.RACE.value = race;
+      document.cens1880f.CN_STATE.value = state;
+      //document.cens1880f.CN_COUNTY.value = "";
+      //document.cens1880f.CN_TOWN.value = "";
+      document.cens1880f.standardize.value = (exact_spelling) ? "N" : "Y";
+      submitForm(cens1880f);
+    }
+  ]]></script>
+</search>
