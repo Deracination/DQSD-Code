@@ -1,25 +1,28 @@
--- What's new for 
+-- What's new for x.x.x (date xxxxxxxx)
 
 Enhancements
 
-* 
+*
 
 Bug Fixes
 
-* 
+* Fixed a copy paste error in defer_tools.js (Kim Grasman)
+* Fixed translate.js to work with the latest babel and freetranslation search urls (Brent Beardsley)
 
 New Searches
 
-* 
+*
 
 Modified Searches
 
+* freetrans - updated url translate url (Brent Beardsley)
+* pw - updated search url (Brent Beardsley)
+* sf - added dloads switch to go to downloads page (Brent Beardsley)
 * mb removed (has yet to become mp thanks to Gregory Krohne)
 
 Miscellaneous
 
-* 
-
+*
 
 -- What's new for 3.1.6.0 (20-Apr-2003)
 
