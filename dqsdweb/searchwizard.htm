@@ -7,10 +7,17 @@ li { padding-bottom: 1em }
 img { margin: 5px }
 .code { font-size: 80%; color: maroon; background: #eeeeee; border: black 1px solid; padding: 3px 3px }
 </style>
+<script language="Javascript1.2" src="utilities.js"></script>
 </head>
 <body>
 <center>
 <h2><nobr>Dave's Quick Search Deskbar <wbr><span style="color: navy">Search Wizard</span></nobr></h2>
+<div class="lastupdate">
+	<nobr>Last updated:
+		<script>document.write( getDisplayDate( document.lastModified ) );</script>
+	</nobr>
+</div>
+<br/>
 [ <a href="doc.htm">Dave's Quick Search Deskbar</a> ]
 </center>
 
@@ -22,11 +29,7 @@ img { margin: 5px }
 
 <p>
 One of biggest pains when writing a new DQSD search is massaging the correct HTML FORM into well-formed XML.&nbsp;&nbsp;I finally got annoyed enough to
-write a little utility to do some of the work for me.
-</p>
-
-<p>
-I call it <b><a href="http://sourceforge.net/project/showfiles.php?group_id=42081&release_id=104770">Dave's Quick Search Deskbar Search Wizard</a></b>.
+write a little utility to do some of the work for me.&nbsp;&nbsp;I call it <b><a href="http://sourceforge.net/project/showfiles.php?group_id=42081&release_id=104770">Dave's Quick Search Deskbar Search Wizard</a></b>.
 <center>
 <img src="hatwand.jpg">
 </center>
@@ -41,11 +44,11 @@ In a nutshell, it generates a DQSD search from the page currently displayed in y
 </p>
 
 <p>
-If you have no desire to ever write a search for DQSD, then don't read any further.&nbsp;&nbsp;If you do write searches from time to time, or at least want to, then you may find the DQSD Search Wizard useful.&nbsp;&nbsp;At least I do.&nbsp;&nbsp;
+If you have no desire to ever write a search for DQSD, then don't read any further.&nbsp;&nbsp;If you do write searches from time to time, or at least want to, then you may find the wizard useful.
 </p>
 
 <p>
-One of the first things I typically do when creating a new search is to view the source for the page containing the FORM INPUT elements.&nbsp;&nbsp;It's tedious.&nbsp;&nbsp;It's hard to find the right FORM when there are multiple FORMs in the page.&nbsp;&nbsp;It's error-prone because I have to convert the HTML to well-formed XML (and I always forget to close the INPUT elements with "/>").
+One of the first things I typically do when creating a new search is to view the source for the page, and strip out everything but the FORM for the search.&nbsp;&nbsp;But, it's tedious.&nbsp;&nbsp;And, it's hard to find the right FORM when there are multiple FORMs in the page.&nbsp;&nbsp;Also, it's error-prone because I have to convert the HTML to well-formed XML (and I always forget to close the INPUT elements with "/>").
 </p>
 
 <p>
@@ -56,7 +59,7 @@ There had to be an easier way.
 
 <p>
 <ol>
-<li><a href="http://sourceforge.net/project/showfiles.php?group_id=42081&release_id=104770">Install</a> the Search Wizard.</li>
+<li><a href="http://sourceforge.net/project/showfiles.php?group_id=42081&release_id=104770">Install</a> the Search Wizard.</li>&nbsp;&nbsp;You should see a new button on your toolbar.&nbsp;&nbsp;If you don't, simply right-click on the
 <li>Go to the web page with the search.</li>
 <li>Click in the field you want to be receive the search string.</li>
 <li>Start up the wizard by clicking on its Internet Explorer toolbar button:<br/>
@@ -196,14 +199,14 @@ The 'parseArgs' utility method has become the convention for parsing switches fo
       // Arguments:
       //    q                - string from the search function
       //    expectedSwitches - list or array of the expected switch values
-      //    expandSwitches   - optional parameter [default = true] used to determine 
+      //    expandSwitches   - optional parameter [default = true] used to determine
       //                       if the switch shortcuts should be expanded (i.e. /f becomes /foo)
       // Returns an object with these properties:
       //    q        - the input string with the switches removed
       //    switches - array of objects with these two properties:
       //                  name:   expanded name of the matched switch (i.e. foo as in /foo:bar)
       //                  value:  value of switch (i.e. bar as in /foo:bar)
-      //    switch_val - associative array with the switch name as the key with the switch value 
+      //    switch_val - associative array with the switch name as the key with the switch value
       //                 as the value. (i.e. switch_val["foo"] = "bar" as in /foo:bar)
 
       //var args = parseArgs(q, "news, sports, business");
