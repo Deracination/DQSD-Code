@@ -397,6 +397,10 @@ STDMETHODIMP CLauncher::RegisterHotKey(long hotkeyVkCode)
 	return KeyboardInstallHotkey(hotkeyVkCode);
 }
 
+//
+// This allows mapping of a virtual keycode to a character code
+// sent with WM_CHAR in KeyboardProc.  It prevents having to modify
+// KeyboardProc for every
 STDMETHODIMP CLauncher::MapKeyCode(long lVKCode, long lCharCode)
 {
 	g_mapKeyCodeToCharCode[ lVKCode ] = lCharCode;
