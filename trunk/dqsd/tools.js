@@ -161,3 +161,28 @@ function getSearchAliases( search )
 {
   return isInternalSearch(search.aliases[0]) ? search.aliases.slice(1).join(', ') : search.aliases.join(', ');
 }
+
+function getFirstAlias( search )
+{
+  var alias = '';
+  
+  // If it's an internal search, then the first name will be the internal name (_dqsd_internal_fn_??)
+  // so return the second alias which should always be there, _unless_ this is a shortcut (mapping to 
+  // an internal function) defined aliases.txt that was overridden by a shortcut in localaliases.txt.
+  if ( isInternalSearch(search.aliases[0]) )
+  {
+    if ( search.aliases.length > 1 )
+    {
+      alias = search.aliases[1];
+    }
+    else
+    {
+      alias = ''; // could return the internal name here, but that would be weird.
+    }
+  }
+  else
+  {
+    alias = search.aliases[0];
+  }
+  return alias;
+}

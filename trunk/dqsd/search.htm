@@ -289,7 +289,7 @@ function mnu(text, alias)
 {
   var fn = (alias ? alias : text);
   var search = (fn + ' ' + document.deff.q.value).replace( /^\s*(\S+)\s*$/, "$1" ); // trim leading/trailing whitespace
-  if ( fn != 'about' )
+  if ( fn != 'about' && !isInternalSearch(fn) )
     addhist( search );
   performsearch( text, document.deff.q.value );
 }
