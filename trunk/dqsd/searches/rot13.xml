@@ -1,0 +1,50 @@
+<search function="rot13">
+  <name>rot13</name>
+  <description>
+
+    /rot ther'teen/ [Usenet: from "rotate alphabet 13 places"], v.<br/>
+    The simple Caesar-cypher 
+    encryption that replaces each English letter with the one 13 places forward or back along 
+    the alphabet, so that "The butler did it!" becomes "Gur ohgyre qvq vg!" Most Usenet news 
+    reading and posting programs include a rot13 feature. It is used to enclose the text 
+    in a sealed wrapper that the reader must choose to open - e.g. for posting things that 
+    might offend some readers, or spoilers. A major advantage of rot13 over rot(N) for other 
+    N is that it is self-inverse, so the same code can be used for encoding and decoding.
+
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>rot13 Glenn Carr</td></tr>
+      <tr><td>rot13 Tyraa Pnee</td></tr>
+    </table>
+  </description>
+  <contributor>Glenn Carr</contributor>
+  <category>Functions</category>
+  
+  <script><![CDATA[
+    // borrowed from http://developer.irt.org/script/279.htm
+    function rot13(q)
+    {
+      if( nullArgs("rot13",q) )
+        return false;
+      else
+      {
+        var coding = 'ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMabcdefghijklmnopqrstuvwxyzabcdefghijklm';
+        var value = q;
+        for (var text = '', i = 0; i < value.length; i++) 
+        {
+           character = value.charAt(i);
+           position = coding.indexOf(character);
+           if (position > -1)
+               character = coding.charAt(position + 13);
+           text += character;
+        }
+        document.deff.q.value = "rot13 " + text;
+        
+        // Gettin' fancy here... select the converted text for easy copy/paste
+        var range = document.deff.q.createTextRange();
+        range.moveStart( "word" ); // skip first word which should be the function name
+        range.select();
+      }
+    }
+  ]]></script>
+</search>
