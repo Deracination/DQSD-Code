@@ -1,0 +1,37 @@
+<search function="freedb">
+  <name>freedb.org</name>
+  <description>
+    Free service for finding artists or CDs.<br/>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>freedb paul mccartney</td></tr>
+  		<tr><td>freedb u2</td></tr>
+  		<tr><td>freedb abbey road</td></tr>
+  	</table>
+  </description>
+  <category>Entertainment</category>
+  <link>http://www.freedb.org/</link>
+  <contributor>mbingama at students.depaul dot edu</contributor>
+  
+  <form name="freedbf" action="http://www.freedb.org/freedb_search.php" method="get">
+    <input type="hidden" name="words" />
+    <input type="hidden" name="allfields" value="NO" />
+    <input type="hidden" name="fields" value="artist" />
+    <input type="hidden" name="fields" value="title" />
+    <input type="hidden" name="allcats" value="YES" />
+    <input type="hidden" name="grouping" value="none" />
+  </form>
+
+  <script><![CDATA[
+    function freedb(q)
+    {
+      if( nullArgs("freedb", q) )
+        return false;
+      else
+      {
+        document.freedbf.words.value = q;
+        submitForm( freedbf );
+      }
+    }
+  ]]></script>
+</search>
