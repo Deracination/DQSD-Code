@@ -55,7 +55,7 @@
 			var QSFPopup = window.createPopup();
 			var QSFPopupBody = QSFPopup.document.body;
 
-  			var QFSBodyCode = "<table border=0 cellspacing=1 cellpadding=2 width=100%>";
+  			var QFSBodyCode = "<table id=qstable border=0 cellspacing=1 cellpadding=2 width=100% height=100%>";
   			QFSBodyCode += "<tr><td valign=top><style>" + convertStylesToInline() + "</style>";
 
 			//  Loop through the results to build the table in the popup
@@ -124,13 +124,11 @@
 			QSFPopup.hide();
 
 			// Put a cap on the popup height
-			if ( windowH  > window.screen.height-30 )
-			{
-				windowH = window.screen.height-30;
-			}
+			windowH = windowH > window.screen.height-30 ? window.screen.height-30 : windowH;
 
 			//QSFPopup.show(20, -20-windowH, windowW, windowH, document.body);
-			QSFPopup.show((buttonalign == "left" ? 0 : document.body.clientWidth - windowW), -windowH, windowW, windowH, document.body);
+      QSFPopup.show((buttonalign == "left" ? 0 : document.body.clientWidth - windowW), -windowH, windowW, windowH, document.body);
+      
 			return true;
 		}
 		else
