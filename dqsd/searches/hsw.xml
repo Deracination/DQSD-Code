@@ -1,24 +1,25 @@
-	<search function="hsw">
-		<name>Search How Stuff Works.com</name>
-		<link>http://www.howstuffworks.com</link>
-		<description>Search How Stuff Works "hsw jet engines"</description>
-		<category>Other</category>
-		<contributor>John W. Bairen, Jr.</contributor>
-		<form  name="hswf" action="http://www.howstuffworks.com/search.php" method="post">
-			<input type="hidden" name="search" value="SEARCH"/>
-		</form>
-		<script><![CDATA[
-			function hsw(q)
-			{
-				if (q == "")
-				{
-					openSearchWindow("http://www.howstuffworks.com");
-				}
-				else
-				{
-					document.hswf.search.value=q;
-					submitForm(hswf);
-				}
-			}
-		]]></script>
-	</search>
+<search function="hsw">
+  <name>How Stuff Works.com</name>
+  <description>Search How Stuff Works: "hsw jet engines"</description>
+  <category>Other</category>
+  <link>http://www.howstuffworks.com/</link>
+  <contributor>John W. Bairen, Jr.</contributor>
+  <form name="hswf" 
+        target="_blank"
+        action="http://www.howstuffworks.com/search.php" 
+        method="post">
+    <input type="hidden" name="search" value="SEARCH"/>
+  </form>
+  <script><![CDATA[
+  	function hsw(q, switches)
+  	{
+  		if( q == "" )
+  		  openSearchWindow("http://www.howstuffworks.com/");
+  		else
+  		{
+  			document.hswf.search.value = q;
+  			submitForm(hswf);
+  		}
+  	}
+  ]]></script>
+</search>

@@ -1,23 +1,17 @@
-  <search function="ia">
-    <name>Internet Archive</name>
-    <description>Look way back in time on the web: "ia cnet.com"</description>
-    <category>Fun</category>
-    <link>http://web.archive.org/</link>
-    <script><![CDATA[
-      function ia(q)
-      {
-        if (q == "")
-        {
-          openSearchWindow("http://web.archive.org/");
-        }
-        else if (q.indexOf("://") >= 0)
-        {
-          openSearchWindow("http://web.archive.org/web/*/" + q);
-        }
-        else
-        {
-          openSearchWindow("http://web.archive.org/web/*/http://" + q);
-        }
-      }
-    ]]></script>
-  </search>
+<search function="ia">
+  <name>Internet Archive</name>
+  <description>Look way back in time on the web: "ia cnet.com"</description>
+  <category>Fun</category>
+  <link>http://web.archive.org/</link>
+  <script><![CDATA[
+    function ia(q)
+    {
+      if( q == "" )
+        openSearchWindow("http://web.archive.org/");
+      else if (q.indexOf("://") >= 0)
+        openSearchWindow("http://web.archive.org/web/*/" + q);
+      else
+        openSearchWindow("http://web.archive.org/web/*/http://" + q);
+    }
+  ]]></script>
+</search>

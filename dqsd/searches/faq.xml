@@ -1,34 +1,31 @@
-  <search function="faq">
-    <name>Usenet FAQ Search</name>
-    <link>http://www.faqs.org/faqs/</link>
-    <description>Search the Usenet FAQ archives.</description>
-    <category>Other</category>
-    <form name="faqf"
-          target="_blank"
-          method="post"
-          action="http://www.faqs.org/cgi-bin/faqs/faqsearch">
-      <input name="archive" type="hidden" value="faqs"/>
-      <input name="case" type="hidden" value="off"/>
-      <input name="whole" type="hidden" value="on"/>
-      <input name="maxlines" type="hidden" value="30"/>
-      <input name="errors" type="hidden" value="1"/>
-      <input name="maxfiles" type="hidden" value="50"/>
-      <input name="meta" type="hidden" value="enabled"/>
-      <input name="query" type="hidden"/>
-    </form>
-    <script><![CDATA[
-      // Usenet FAQ search
-      function faq(q)
+<search function="faq">
+  <name>Usenet FAQ Search</name>
+  <description>Search the Usenet FAQ archives: "faq fortran"</description>
+  <category>Other</category>
+  <link>http://www.faqs.org/faqs/</link>
+  <form name="faqf"
+        target="_blank"
+        action="http://www.faqs.org/cgi-bin/faqs/faqsearch"
+        method="post">
+    <input type="hidden" name="archive" value="faqs"/>
+    <input type="hidden" name="case" value="off"/>
+    <input type="hidden" name="whole" value="on"/>
+    <input type="hidden" name="maxlines" value="30"/>
+    <input type="hidden" name="errors" value="1"/>
+    <input type="hidden" name="maxfiles" value="50"/>
+    <input type="hidden" name="meta" value="enabled"/>
+    <input type="hidden" name="query"/>
+  </form>
+  <script><![CDATA[
+    function faq(q, switches)
+    {
+      if( q == "" )
+        openSearchWindow("http://www.faqs.org/faqs/");
+      else
       {
-        if (q == "")
-        {
-          openSearchWindow("http://www.faqs.org/faqs/");
-        }
-        else
-        {
-          document.faqf.query.value=q;
-          submitForm(faqf);
-        }
+        document.faqf.query.value = q;
+        submitForm(faqf);
       }
-    ]]></script>
-  </search>
+    }
+  ]]></script>
+</search>

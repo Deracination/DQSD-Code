@@ -1,29 +1,25 @@
-  <search function="half">
-    <name>Half.com Search</name>
-    <description>Search half.com for products: "half chaos"</description>
-    <category>Shopping</category>
-    <link>http://www.half.com/</link>
-    <form name="halff"
-          target="_blank"
-          action="http://www.half.com/search/search.jsp"
-          method="get">
-      <input type="hidden" name="product" value="all"/>
-      <input type="hidden" name="keyword"/>
-    </form>
-
-    <script><![CDATA[
-      // Half
-      function half(q)
+<search function="half">
+  <name>Half.com</name>
+  <description>Search Half.com for products: "half chaos"</description>
+  <category>Shopping</category>
+  <link>http://www.half.com/</link>
+  <form name="halff"
+        target="_blank"
+        action="http://www.half.com/search/search.jsp"
+        method="get">
+    <input type="hidden" name="product" value="all"/>
+    <input type="hidden" name="keyword"/>
+  </form>
+  <script><![CDATA[
+    function half(q, switches)
+    {
+      if( q == "" )
+        openSearchWindow("http://www.half.com/");
+      else
       {
-        if (q == "")
-        {
-          openSearchWindow("http://www.half.com");
-        }
-        else
-        {
-          document.halff.keyword.value = q;
-          submitForm(halff);
-        }
+        document.halff.keyword.value = q;
+        submitForm(halff);
       }
-    ]]></script>
-  </search>
+    }
+  ]]></script>
+</search>
