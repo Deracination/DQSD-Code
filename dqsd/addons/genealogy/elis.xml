@@ -1,0 +1,34 @@
+<search function="elis">
+  <name>Ellis Island Immigration Records 1892-1924</name>
+  <category>Genealogy</category>
+  <contributor>Brent Beardsley</contributor>
+  <link>http://www.ellisislandrecords.org/</link>
+  <email></email>
+  <description>
+  Search Ellis Island Immigration Records
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>elis mcglashan</td></tr>
+      <tr><td>elis mcglashan, alexander</td></tr>
+    </table>
+  </description>
+  <form name="elisf"
+        method="get"
+        action="http://www.ellisislandrecords.org/search/matchmore.asp">
+    <input type="hidden" name="FNM" value="" />
+    <input type="hidden" name="LNM" value="" />
+    <input type="hidden" name="kind" value="exact" />
+  </form>
+  <script src="addons/genealogy/genealogy_lib.js"></script>
+  <script><![CDATA[
+    function elis(q)
+    {
+      if( nullArgs("elis", q) )
+        return;
+
+      document.elisf.FNM.value = genealogy_parse_givenname(q);
+      document.elisf.LNM.value = genealogy_parse_surname(q);
+      submitForm(elisf);
+    }
+  ]]></script>
+</search>
