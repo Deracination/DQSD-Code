@@ -1,42 +1,38 @@
-  <search function="ym">
-    <name>Yahoo Movie Search</name>
-    <description>A zip code is remembered so you don't have to enter it again:
-      "ym 74133 monsters", "ym life as a house";
-    </description>
-    <category>Entertainment</category>
-    <link>http://movies.yahoo.com/</link>
-    <contributor>Glenn Carr</contributor>
-    <email>glenn_at_glenncarr_dot_com</email>
-    <form name="yahoomoviesf" 
-          method="get" 
-          action="http://movies.yahoo.com/showtimes/showtimes.html" 
-          target="_blank">
-      <input type="hidden" name="z" /> <comment> (e.g., 94089 or Sunnyvale, CA - required) </comment>
-      <input type="hidden" name="m" /> <comment> Movie Name </comment>
-      <input type="hidden" name="t" /> <comment> Theater Name </comment>
-      <input type="hidden" name="a" /> <comment> Street Name </comment>
-      <input type="hidden" name="s" value="tm" />
-      <input type="hidden" name="r" value="adv" />
-      <input type="hidden" name="p" value="0" />
-    </form>
-    <script><![CDATA[
-      function ym(q)
+<search function="ym">
+  <name>Yahoo Movie</name>
+  <description>Search for local movie listings. The zip code is stored in a cookie so you don't have to enter it again. <nobr>Examples: "ym 74133 monsters", "ym life as a house"</nobr></description>
+  <category>Entertainment</category>
+  <link>http://movies.yahoo.com/</link>
+  <contributor>Glenn Carr</contributor>
+  <email>glenn_at_glenncarr_dot_com</email>
+  <form name="yahoomoviesf"
+        target="_blank"
+        action="http://movies.yahoo.com/showtimes/showtimes.html" 
+        method="get">
+    <input type="hidden" name="z" /> <comment>(e.g., 94089 or Sunnyvale, CA - required)</comment>
+    <input type="hidden" name="m" /> <comment>Movie Name</comment>
+    <input type="hidden" name="t" /> <comment>Theater Name</comment>
+    <input type="hidden" name="a" /> <comment>Street Name</comment>
+    <input type="hidden" name="s" value="tm" />
+    <input type="hidden" name="r" value="adv" />
+    <input type="hidden" name="p" value="0" />
+  </form>
+  <script><![CDATA[
+    function ym(q)
+    {
+      if (q == "")
+        openSearchWindow("http://movies.yahoo.com/");
+      else
       {
-        if (q == "")
-          openSearchWindow("http://movies.yahoo.com/");
-        else
+        if (result = q.match(/^(\d{5})\s*(.*)/))
         {
-          if (result = q.match(/^(\d{5})\s*(.*)/))
-          {
-            document.yahoomoviesf.z.value=result[1];
-            document.yahoomoviesf.m.value=result[2];
-          }
-          else
-          {
-            document.yahoomoviesf.m.value=q;
-          }
-          submitForm(yahoomoviesf);
+          document.yahoomoviesf.z.value=result[1];
+          document.yahoomoviesf.m.value=result[2];
         }
+        else
+          document.yahoomoviesf.m.value=q;
+        submitForm(yahoomoviesf);
       }
-    ]]></script>
-  </search>
+    }
+  ]]></script>
+</search>

@@ -1,6 +1,6 @@
 <search function="sqlt">
-  <name>SQLTeam.com Search</name>
-  <description>SQL server reference lookup.</description>
+  <name>SQLTeam.com</name>
+  <description>SQL server reference search.</description>
   <category>Computers</category>
   <link>http://www.sqlteam.com/</link>
   <contributor>Damian Maclennan</contributor>

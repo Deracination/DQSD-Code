@@ -1,5 +1,5 @@
 <search function="mf">
-  <name>Moviefone Search</name>
+  <name>Moviefone</name>
   <description>Search local movie listings. /location searches for theaters near an American zip code or city. <nobr>Example: "mf monsters", "mf life as a house"</nobr></description>
   <category>Entertainment</category>
   <link>http://www.moviefone.com/</link>

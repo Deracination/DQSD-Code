@@ -1,27 +1,24 @@
-  <search function="yh">
-    <name>Yahoo Search</name>
-    <description>Search the Yahoo directory: "yh horses"</description>
-    <category>Search the Web</category>
-    <link>http://www.yahoo.com/</link>
-    <contributor></contributor>
-    <form name="yhof"
-        method="get"
+<search function="yh">
+  <name>Yahoo</name>
+  <description>Search the Yahoo directory: "yh horses"</description>
+  <category>Search the Web</category>
+  <link>http://www.yahoo.com/</link>
+  <form name="yhof"
+        target="_blank"
         action="http://search.yahoo.com/bin/search"
-        target="_blank">
-        <input type="hidden" name="p" value=""/>
-    </form>
-    <script><![CDATA[
-      function yh(q)
+        method="get">
+    <input type="hidden" name="p" value=""/>
+  </form>
+  <script><![CDATA[
+    function yh(q)
+    {
+      if (q == "")
+        openSearchWindow("http://www.yahoo.com/");
+      else
       {
-        if (q == "")
-        {
-          openSearchWindow("http://www.yahoo.com/");
-        }
-        else
-        {
-          document.yhof.p.value=q;
-          submitForm(yhof);
-        }
+        document.yhof.p.value=q;
+        submitForm(yhof);
       }
-    ]]></script>
-  </search>
+    }
+  ]]></script>
+</search>
