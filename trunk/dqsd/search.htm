@@ -440,7 +440,7 @@ function showQuickSearch()
 // strt() called on page load; show help message after 4 seconds
 function strt()
 {
-  rsz();
+  setTimeout( postStartup, typeof startupdelay == 'undefined' ? 15000 : parseInt(startupdelay) );
 
   if (!clock || clockdelay > 0)
     showQuickSearch();
@@ -564,6 +564,7 @@ document.write(
   (multiline ? '<textarea ' : '<input ')
   + 'name=q '
   + 'type=text '
+  + 'style="top:-100; display: none;" '
   + 'class=txtfld '
   + 'onfocus=clr() '
   + 'ondragstart="selfdrag=true;" '
@@ -580,7 +581,6 @@ document.write(
   + 'rows=1 '
   + 'maxlength=256 '
   + 'tabindex=0 '
-  + 'style=top:-100 '
   + 'autocomplete=' + (autocomplete ? 'on' : 'off')
   + (multiline ? '></textarea>' : '>'));
 
@@ -598,7 +598,7 @@ if (dopopup)
   + "       onmouseup=this.className='mogobutton'"
   + "       onmouseover=this.className='mogobutton'"
   + "       onmouseout=this.className='gobutton'"
-  + "       style=top:-100"
+  + "       style='top:-100; display: none'"
   + "       tabindex=-1>");
 }
 </script>
@@ -708,8 +708,11 @@ function rsz()
      paintclock();
 }
 
-rsz();
-document.body.onresize=rsz;
+function postStartup()
+{
+  rsz();
+  document.body.onresize=rsz;
+}
 
 </script>
 
