@@ -19,7 +19,7 @@ New Searches
 * sl - Search StudyLight.org for verses and Hebrew and Greek words
 * ebuy - Search ebuyer.com (from Matthew Slight)
 * cpp - Search cppreference.com (from Matthew Slight)
-* ebuy - Search Mathworld.com (from Matthew Slight)
+* mathref - Search Mathworld.com (from Matthew Slight)
 
 Modified Searches
 

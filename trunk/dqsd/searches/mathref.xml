@@ -1,0 +1,39 @@
+<search function="mathref">
+  <name>Mathworld</name>
+  <description>Search Mathworld.com
+  <div class="helpboxDescLabels">Example:</div> 
+  <table class="helpboxDescTable">
+    <tr>
+      <td>mathref prime</td>
+    </tr>
+  </table>
+  </description>
+  <category>Reference</category>
+  <link>http://www.mathworld.com/</link>
+  <contributor>Matthew Slight</contributor>
+  <form name="mathreff" action="http://mathworld.wolfram.com/search/" method="get">
+    <input type="hidden" name="words" value="" />
+    <input type="hidden" name="config" value="scienceworld_wolfram_com" />
+    <input type="hidden" name="restrict" value="http://mathworld.wolfram.com" />
+  </form>
+  <script><![CDATA[
+    function mathref(input)
+    {
+      if( nullArgs( "mathref", input) )
+        return;
+      else
+      {
+        document.mathreff.words.value=input;
+        submitForm(mathreff);
+      }
+    }
+  ]]></script>
+
+  <copyright>
+	Copyright (c) 2002 Matthew Slight
+	Distributed under the terms of the
+	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>
+
+
