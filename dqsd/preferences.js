@@ -250,3 +250,8 @@ hotkeyCharacter = "S";
 hotkeyVkCode = 0;
 
 
+/* How to sort the searches in the help window and the popup menu
+*  'name'  = sort by search name
+*  'alias' = sort by first alias
+*/
+helpSortKey = 'name';
