@@ -224,19 +224,20 @@ Styles for the help box
 .helpboxCategoryTop, .helpboxCategoryCount
 {
   color:silver;
+  font-size: 10px;
+  font-weight:normal;
 }
 .helpboxAlias
 {
   color:lightblue;
 }
-.helpboxCategoryTop, .helpboxCategoryCount
-{
-  font-size: 10px;
-  font-weight:normal;
-}
 .helpbox
 {
   font:menu;
+  border : 0px;
+  border-collapse: collapse;
+  border-spacing: 0;          
+
 }
 .helpboxDescriptions,
 {
