@@ -25,10 +25,14 @@ Enhancements
   with the ftp: protocol.  (Feature request #598368)
 * Brent Beardsley modified the add-on support to load all xml files
   for an add-on, not just one.
-
+* Incorporated Thad Kerosky's changes to googlespell add-on to display
+  results in a popup window.  Added a common method, displayPopupMessage,
+  to defer_tools.js.
 
 Bug Fixes
 
+* Made googlespell add-on function names unique so there would not be
+  any collisions with other methods.
 
 
 -- What's new for 3.0.0.24 (beta)
