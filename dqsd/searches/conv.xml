@@ -45,7 +45,7 @@
   				// Try using the original syntax if the from switch was not found
   				parsedunits = q.split(" to ");
   				convf_from = parsedunits[0];
-  				if (parsedunits[1] != undefined)
+  				if (typeof parsedunits[1] != 'undefined')
   					convf_to = parsedunits[1];
   			}
   			else

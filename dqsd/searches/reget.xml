@@ -50,7 +50,7 @@
       // See if the function should be called again.
       if (--num == 0)
       {
-      	if (regetTimeOut != undefined)
+      	if (typeof regetTimeOut != 'undefined')
       	{
           clearInterval(regetTimeOut);
           delete regetTracker[reget_code];
@@ -85,7 +85,7 @@
   	  {
   	    // The member wants to cancel a particular reget session
   	    var reget_code;
-  	    if (args_freq == undefined)
+  	    if (typeof args_freq == 'undefined')
   	    {
   	      args_freq = reget_base;
   	      reget_code = "";
@@ -93,7 +93,7 @@
   		else
   		  reget_code = args_freq + " ";
   
-  	    if (regetTracker[args_freq] != undefined)
+  	    if (typeof regetTracker[args_freq] != 'undefined')
   	    {
   	      clearInterval(regetTracker[args_freq]);
   	      delete regetTracker[args_freq];
@@ -116,7 +116,7 @@
   	  }
   
   	  // Next determine if the next argument is a valid integer
-  	  if (args_freq == undefined || args_freq.match(/^(\d)+$/) == null || args_freq == 0)
+  	  if (typeof args_freq == 'undefined' || args_freq.match(/^(\d)+$/) == null || args_freq == 0)
   	  {
   	    alert("The second argument must be an integer representing the reload frequency in seconds");
   	    return false;
@@ -124,7 +124,7 @@
   
   	  // Next determine if the next argument has something to open in a browser:
   	  var strURL = isURL(args_rest);
-  	  if (args_rest == undefined || strURL == false)
+  	  if (typeof args_rest == 'undefined' || strURL == false)
   	  {
   	    alert("The third argument must be a valid URL");
   	    return false;
@@ -142,7 +142,7 @@
   	  // so the user doesn't have to keep track of the changing setTimeout handles.
   	  // The array serves the dual purpose of also allowing reget to create a unique
   	  // name for target window so that each reget shows up in a different browser.
-      for (var reget_code = reget_base; regetTracker[reget_code] != undefined; ++reget_code)
+      for (var reget_code = reget_base; typeof regetTracker[reget_code] != 'undefined'; ++reget_code)
 
       var reget_target = "target_" + reget_code;
 
