@@ -1,7 +1,7 @@
 <search function="hexconv">
-  <name>Base Conversion: Hexidecimal</name>
+  <name>Base Conversion: Hexadecimal</name>
   <description>
-    Convert hexidecimal values to decimal, octal and binary equivalents.<br/>
+    Convert hexadecimal values to decimal, octal and binary equivalents.<br/>
     <div class="helpboxDescLabels">Example:</div>
     <table class="helpboxDescTable">
   		<tr><td>hexconv 3A</td></tr>
