@@ -55,6 +55,8 @@ function about()
         for (var j = 0; j < search.aliases.length; j++)
         {
           var alias = search.aliases[j].replace(/&/g, "&amp;").replace(/</g, "&lt;");
+          if (alias.substr(0,INTERNAL_FUNC_PREFIX.length) == INTERNAL_FUNC_PREFIX)
+            continue;
           if (alias == "")
             alias = "<em>Enter</em>";
           helptable += alias;
