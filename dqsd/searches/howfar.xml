@@ -1,0 +1,40 @@
+<search function="howfar">
+  <name>How Far Is It</name>
+  <category>Travel</category>
+  <contributor>John W. Bairen, Jr.</contributor>
+  <link>http://www.indo.com/distance/index.html</link>
+  <email>john_at_bairen_dot_net</email>
+  <description>
+  Indio.com's How Far Is It From City to City Calculator
+  <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>howfar /Pittsburgh, PA /Paris France </td></tr>
+      <tr><td>howfar /Pittsburgh, PA /Chicago, IL</td></tr>
+    </table>
+    </description>
+  <form name="howfarf"
+        method="get"
+        action="http://www.indo.com/cgi-bin/dist">
+
+    <input type="hidden" name="place1" value="" />
+    <input type="hidden" name="place2" value="" />
+  </form>
+  <script><![CDATA[
+    function howfar(q)
+    {
+      if( nullArgs("howfar", q) )
+        return false;
+      else
+      {
+        var howfararray = q.split("/")
+        document.howfarf.place1.value = howfararray[1];
+        document.howfarf.place2.value = howfararray[2];
+      }
+    
+        submitForm(howfarf);
+        return true;
+          
+    }
+
+  ]]></script>
+</search>

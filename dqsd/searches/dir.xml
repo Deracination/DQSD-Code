@@ -1,0 +1,80 @@
+<search function="dir">
+  <name>Driving Directions</name>
+  <description>
+    Get Driving directions from one place to another<br/>
+   <div class="helpboxDescLabels">Useage:</div>
+   <table class="helpboxDescTable">
+    <tr><td>dir <I>[street,] city, state</I> [to <I>[street,] city, state</I>]</td></tr>
+   </table>
+   <div class="helpboxDescLabels">Examples:</div>
+   <table class="helpboxDescTable">
+    <tr><td>dir New York,NY</td></tr>
+    <tr><td>dir Laconia, NH to Bristol, CT</td></tr>
+    <tr><td>dir 1200 Pensylvania Ave, Washington, DC to 1 Duvall St, Key West, FL</td></tr>
+   </table>
+  </description>
+  <category>Functions</category>
+  <link>http://www.mapquest.com</link>
+  <contributor>Peter Heath</contributor>
+  
+  <script><![CDATA[
+  	function dir(q)
+  	{
+		if (q=="") {
+			openSearchWindow("http://service.bfast.com/bfast/click?bfmid=27359743&siteid=31123317&bfpage=drivingdir");
+			return;
+		}
+
+		//DEFAULTS
+		var StartCountry="";
+		var EndCountry="";
+		var StartZip="";
+		var EndZip="";
+		var StartZip4="";
+		var EndZip4="";
+  
+		if ( nullArgs("dir", q) )
+  			return false;
+  		else
+  		{
+    			var start = "";
+    			var finish = "";
+
+			parseddirs = q.split(" to ");
+			start = parseddirs[0];
+			finish = parseddirs[1];
+
+			parsedloc = start.split(",");
+			if (typeof parsedloc[2] == 'undefined'){ //has no Street
+				StartState = (parsedloc[1] ? parsedloc[1] : "");
+				StartCity  = (parsedloc[0] ? parsedloc[0] : "");
+				StartStreet = "";
+			} else { //has street
+				StartState = (parsedloc[2] ? parsedloc[2] : "");
+				StartCity  = (parsedloc[1] ? parsedloc[1] : "");
+				StartStreet= (parsedloc[0] ? parsedloc[0] : "");
+			}
+			if (typeof parseddirs[1] == 'undefined'){ //has only 1 location
+				SearchPage = "http://www.mapquest.com/maps/map.adp?addtohistory=&country="+StartCountry+"&address="+StartStreet+"&city="+StartCity+"&state="+StartState+"&zipcode="+StartZip+"&historyid=&submit.x=0&submit.y=0";
+				openSearchWindow(SearchPage);
+			} else {	//has 2 locations
+				parsedloc = finish.split(",");
+				if (typeof parsedloc[2] == 'undefined'){ //has no Street
+					EndState = (parsedloc[1] ? parsedloc[1] : "");
+					EndCity  = (parsedloc[0] ? parsedloc[0] : "");
+					EndStreet = "";
+				} else { //has street
+					EndState = (parsedloc[2] ? parsedloc[2] : "");
+					EndCity  = (parsedloc[1] ? parsedloc[1] : "");
+					EndStreet= (parsedloc[0] ? parsedloc[0] : "");
+				}
+					
+				var SearchPage="http://www.mapquest.com/directions/main.adp?go=1&do=nw&ct=NA&1y=" + StartCountry + "&1a=" + StartStreet + "&1p=&1c=" + StartCity + "&1s=" + StartState + "&1z=" + StartZip + "&1ah=" + StartZip4 + "&2y=" + EndCountry + "&2a=" + EndStreet + "&2p=&2c=" + EndCity + "&2s=" + EndState + "&2z=" + EndZip + "&2ah=" + EndZip4 + "&lr=2&x=95&y=14";
+			     	openSearchWindow(SearchPage);
+  			}
+
+  		}
+  	}
+  ]]></script>
+</search>
+ 
