@@ -56,8 +56,7 @@ Section "Quick Search Deskbar (required)"
   IntCmp ${IE_MINOR_REQUIRED} $3 ieVersionOK ieVersionOK ieVersionNotOK
 
   ieVersionNotOK:
-    MessageBox MB_YESNO|MB_ICONEXCLAMATION|MB_DEFBUTTON2 "This version of Dave's Quick Search Deskbar requires IE version ${IE_MAJOR_REQUIRED}.${IE_MINOR_REQUIRED} or higher.  You are currently running version $2.$3.$5.$6.$\n$\nWould you like to continue with the installation anyway?" IDNO dontvisitms
-    dontvisitms:
+    MessageBox MB_YESNO|MB_ICONEXCLAMATION|MB_DEFBUTTON2 "This version of Dave's Quick Search Deskbar requires IE version ${IE_MAJOR_REQUIRED}.${IE_MINOR_REQUIRED} or higher.  You are currently running version $2.$3.$\n$\nWould you like to continue with the installation anyway?" IDYES ieVersionOK
     Abort
     
   ieVersionOK:
