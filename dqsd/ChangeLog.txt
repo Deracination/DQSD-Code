@@ -14,6 +14,9 @@ Modified Searches
 
 Enhancements
 
+* Names that resemble FTP servers (i.e., start with "ftp.") are opened 
+  with the ftp: protocol.  (Feature request #598368)
+
 
 Bug Fixes
 
