@@ -341,16 +341,14 @@ STDMETHODIMP CLauncher::GetFiles(BSTR bstrFileSpec, BSTR *pbstrFiles)
 		return HRESULT_FROM_WIN32(::GetLastError());
 	}
 
-	CComBSTR bstrFiles( _T("") );
-	LPCTSTR pszDelim = _T("");
+	CComBSTR bstrFiles( fd.cFileName );
 	while ( ::FindNextFile( handle, &fd ) )
 	{
 		if ( !_tcscmp( fd.cFileName, _T(".") ) || !_tcscmp( fd.cFileName, _T("..") ) )
 			continue;
 
-		bstrFiles.Append( pszDelim );
+		bstrFiles.Append( _T("\n") );
 		bstrFiles.Append( fd.cFileName );
-		pszDelim = _T("\n");
 	}
 
 	*pbstrFiles = bstrFiles.Detach();
