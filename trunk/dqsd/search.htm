@@ -1,7 +1,7 @@
 <html>
 <!--
 Dave's Quick Search Deskbar
-Version 2.5.3 beta 2 - January 5, 2002
+Version 2.5.3 - January 6, 2002
 
 Copyright (c) 2002 David Bau
 
@@ -50,10 +50,10 @@ The deskbar is customizable and completely open-source.
 
 <ul>
 * Edit <a href="view-source:preferences.js">preferences.js</a>
-  to customize your clock, default search, or other things.
+  to customize your clock, default search, fonts, colors, and so on.
 
-* Shortcuts are defined in <a href="view-source:aliases.txt">aliases.txt</a>,
-  and the menu layout is in <a href="view-source:menu.txt">menu.txt</a>.
+* Shortcuts are defined in <a href="view-source:aliases.txt">aliases.txt</a>;
+  the menu in <a href="view-source:menu.txt">menu.txt</a>.
 
 * The search bar is just an HTML page:
   <a href="view-source:search.htm">search.htm</a>.
@@ -259,17 +259,20 @@ selfdrag = false;
 // def() called when the user hits "enter" in the textbox
 function def()
 {
+  // handle things like !! and !foo
+  if (!recent()) return false;
+
+  // grab the contents
   var t = document.deff.q.value;
-
-  addhist(t);
-
-  // no search: go to Google
 
   // question mark only: show help
   if (t == "?")         { about(); return false; }
 
   // exclamation mark only: refresh
   if (t == "!")         { reload(); return false; }
+
+  // anything below adds something to the history
+  addhist(t);
 
   // detect special commands
   if (!special(t))
