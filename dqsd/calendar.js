@@ -234,7 +234,7 @@ function buildcal()
   cal += '<td class=calnavmonth width=0 title="' + local(PREV_MONTH) + '" ' +
          ' onmouseup="parent.movecal(-1);return false;" ' +
          ' onmouseover=this.className="calnavmonthhigh" ' +
-         ' onmouseout=this.className="calnavmonth" >&nbsp;&laquo;&nbsp;</td></tr></table></td>';
+         ' onmouseout=this.className="calnavmonth" >&nbsp;&lsaquo;&nbsp;</td></tr></table></td>';
 
   if (weekday < 0)
   {
@@ -255,7 +255,7 @@ function buildcal()
   cal += '<td class=calnavmonth width=0 title="' + local(NEXT_MONTH) + '" ' +
          ' onmouseup="parent.movecal(+1);return false;" ' +
          ' onmouseover=this.className="calnavmonthhigh" ' +
-         ' onmouseout=this.className="calnavmonth" >&nbsp;&raquo;&nbsp;</td>';
+         ' onmouseout=this.className="calnavmonth" >&nbsp;&rsaquo;&nbsp;</td>';
   cal += '<td class=calnavyear width=0 title="' + local(NEXT_YEAR) + '" ' +
          ' onmouseup="parent.movecal(+12);return false;" ' +
          ' onmouseover=this.className="calnavyearhigh" ' +

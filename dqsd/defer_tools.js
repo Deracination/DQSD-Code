@@ -58,9 +58,12 @@ function submitForm(form)
 function convertStylesToInline()
 {
 	var stylestring = new String();
-	for (var i = 0; i < document.styleSheets[0].rules.length; i++)
+	for (var j = 0; j < document.styleSheets.length; j++)
 	{
-		stylestring += document.styleSheets[0].rules[i].selectorText + ' {' + document.styleSheets[0].rules[i].style.cssText + '}'
+		for (var i = 0; i < document.styleSheets[j].rules.length; i++)
+		{
+			stylestring += document.styleSheets[j].rules[i].selectorText + ' {' + document.styleSheets[j].rules[i].style.cssText + '}'
+		}
 	}
 	return(stylestring);
 }
