@@ -96,11 +96,7 @@
       var args = parseArgs(q, "ifl, advanced, groups, directory, images, news, cache, related, link, local, canada, deutschland, france, italia, uk, language");
       var mode, local, local_meta = "", local_tld = "com", msglang = "";
       
-      if( q == "?" )
-      {
-        nullArgs( "gg", "?" );
-        return false;
-      }
+      if( nullArgs( "gg", args.q ) ) return false;
       
       // Establish the locale and mode the search will run in.
       if( args.switches.length > 0 )

@@ -62,22 +62,19 @@
   <script><![CDATA[
     function acine(q)
     {
+      if( nullArgs( "acine", q ) ) return false;
+      
       var args = parseArgs(q, "place, bywith, movie, theater, news, bio, video, zip");
       var mode, typerech="0";
       
-      //eliminate no query, or more than 1 switch, or ? cases
-      if( args.q == "?" || args.switches.length > 1 )
+      //eliminate cases where you got more than 1 switch
+      if( args.switches.length > 1 )
       {
         nullArgs( "acine", "?" );
         return false;
       }
-      else if( args.q == "" )
-      {
-        openSearchWindow("http://www.allocine.com/");
-        return;
-      }
-      
-      // Establish the mode the search will run in.
+
+      //establish the mode the search will run in.
       if( args.switches.length == 1 ) mode = args.switches[0].name;
 
       //set some parameters and eliminate the unknown switch case
