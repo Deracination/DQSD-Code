@@ -39,26 +39,28 @@ Section "Quick Search Deskbar (required)"
   Delete /REBOOTOK $INSTDIR\dqsdt253.dll
   UnRegDLL $INSTDIR\dqsdt254.dll
   Delete /REBOOTOK $INSTDIR\dqsdt254.dll
+  UnRegDLL $INSTDIR\dqsdt255.dll
+  Delete /REBOOTOK $INSTDIR\dqsdt255.dll
 
   ; install new DLL
   SetOverwrite try
   ClearErrors
-  File "..\dqsdt255.dll"
+  File "..\dqsdt256.dll"
   IfErrors seeifsame register
 
   ; If was unable to upgrade, see if files are the same anyway
   seeifsame:
   ClearErrors
-  GetDLLVersionLocal "..\dqsdt255.dll" $1 $2
-  GetDLLVersion $INSTDIR\dqsdt255.dll $3 $4
+  GetDLLVersionLocal "..\dqsdt256.dll" $1 $2
+  GetDLLVersion $INSTDIR\dqsdt256.dll $3 $4
   IfErrors isdifferent
   IntCmpU $1 $3 test1 isdifferent isdifferent
   test1:
   IntCmpU $2 $4 test2 isdifferent isdifferent
   test2:
   ClearErrors
-  GetFileTimeLocal "..\dqsdt255.dll" $1 $2
-  GetFileTime $INSTDIR\dqsdt255.dll $3 $4
+  GetFileTimeLocal "..\dqsdt256.dll" $1 $2
+  GetFileTime $INSTDIR\dqsdt256.dll $3 $4
   IfErrors isdifferent
   IntCmpU $1 $3 test3 isdifferent isdifferent
   test3:
@@ -71,7 +73,7 @@ Section "Quick Search Deskbar (required)"
 
   ; We can register the dll and continue
   register:
-  RegDLL $INSTDIR\dqsdt255.dll
+  RegDLL $INSTDIR\dqsdt256.dll
 
   SetOverwrite on
 
@@ -287,14 +289,14 @@ Section "Uninstall"
   StrCpy $9 "{226b64e8-dc75-4eea-a6c8-abcb4d1d37ff}"
 
   ; Unegister DQSDTools
-  UnRegDLL $INSTDIR\dqsdt255.dll
+  UnRegDLL $INSTDIR\dqsdt256.dll
 
   ; remove registry keys
   DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\$9"
   DeleteRegKey HKCR "CLSID\$9"
 
   ; remove files
-  Delete /REBOOTOK $INSTDIR\dqsdt255.dll
+  Delete /REBOOTOK $INSTDIR\dqsdt256.dll
   Delete /REBOOTOK $INSTDIR\readme.txt
   Delete /REBOOTOK $INSTDIR\search.htm
   Delete /REBOOTOK $INSTDIR\search.xml
