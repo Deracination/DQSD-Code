@@ -1,6 +1,21 @@
 <search function="tvg">
   <name>TV Guide Online</name>
-  <description>Look up TV programming by keyword: "tvg simpsons". Or list all programming in a particular genre: "tvg /comedy". <nobr>Categories include <wbr/>/action, <wbr/>/comedy, <wbr/>/adult, <wbr/>/movie, <wbr/>/drama, <wbr/>/horror, <wbr/>/mystery, <wbr/>/scifi, <wbr/>/western, <wbr/>/sports, <wbr/>/news, <wbr/>/health, <wbr/>/science, <wbr/>/educational, <wbr/>/family, <wbr/>/childrens, <wbr/>/talk, <wbr/>/soaps, <wbr/>/shopping and <wbr/>/music.</nobr></description>
+  <description>Look up TV programming by keyword, or list all programming 
+  in a particular category - <wbr/>/action, <wbr/>/comedy, <wbr/>/adult, 
+  <wbr/>/movie, <wbr/>/drama, <wbr/>/horror, <wbr/>/mystery, <wbr/>/scifi, 
+  <wbr/>/western, <wbr/>/sports, <wbr/>/news, <wbr/>/health, <wbr/>/science, 
+  <wbr/>/educational, <wbr/>/family, <wbr/>/childrens, <wbr/>/talk, <wbr/>/soaps, 
+  <wbr/>/shopping and <wbr/>/music.
+  <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr>
+        <td>tvg simpsons</td>
+      </tr>
+      <tr>
+        <td>tvg /comedy</td>
+      </tr>
+    </table>
+  </description>
   <category>Entertainment</category>
   <link>http://www.tvguide.com/</link>
   <form name="tvgf"
