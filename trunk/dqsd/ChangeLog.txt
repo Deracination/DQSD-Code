@@ -25,6 +25,10 @@ Modified Searches
 * configure - localized it and added Reload menu option, fixed bug when addons directory did not exist (from Brent Beardsley)
 * amaz - added /referral switch for building referral links for Amazon
 
+Miscellaneous
+
+* Corrected documentation in help for adding a local, user search.
+
 
 -- What's new for 3.1.5 (December 15, 2002)
 
