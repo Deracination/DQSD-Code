@@ -20,6 +20,11 @@ body
  padding: 0;
  background-color: threedface;
 }
+div#delaymsg
+{
+ font: menu;
+ text-align: center;
+}
 td
 {
  font: menu;

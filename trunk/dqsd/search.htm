@@ -118,6 +118,8 @@ ie_version=(uaMatch ? parseFloat(uaMatch[1]) : 0.0);
 
 <body onload=strt() scroll=no>
 
+<div style='display:none' id='delaymsg'></div>
+
 <script>
 init = true;
 selfdrag = false;
@@ -441,9 +443,15 @@ function showQuickSearch()
 function strt()
 {
   if (startupdelay > 0)
+  {
+    document.all.delaymsg.innerText = ' Delaying ' + startupdelay/1000 + ' seconds...'
+    document.all.delaymsg.style.display = '';
     setTimeout( postStartup, startupdelay );
+  }
   else
+  {
     postStartup();
+  }
 
   if (!clock || clockdelay > 0)
     showQuickSearch();
@@ -713,6 +721,7 @@ function rsz()
 
 function postStartup()
 {
+  document.all.delaymsg.style.display = 'none';
   rsz();
   document.body.onresize=rsz;
 }
