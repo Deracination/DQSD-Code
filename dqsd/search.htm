@@ -434,7 +434,10 @@ function performsearch( fname, term )
     switches = tmp;
   }
   
+  if (searches[fname])  
   searches[fname].fun(term + (appterm ? " " + appterm : ""), switches );
+  else
+    eval(fname + "()");
 }
 
 
