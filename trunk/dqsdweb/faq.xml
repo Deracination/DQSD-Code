@@ -60,36 +60,51 @@
       <faq>
         <question>How do I add my own searches?</question>
         <answer>
-          Searches are defined by XML files in the 'searches' 
-          subdirectory.&#160; You need to be comfortable hacking on HTML forms and a bit 
+          Standard searches are defined by XML files in the 'searches' 
+          subdirectory, but the 'localsearches' subdirectory is at your disposal to put your own searches, or searches you may have customised. You need to be comfortable hacking on HTML forms and a bit 
           of JavaScript to add a search to the search bar.<html:br/>
           <html:br/>If you are, here's 
           what you do:<html:br/>
           <html:ol>
-            <html:li>Take a look at the original HTML form for the search, and create your own 
-            HTML form to do the same thing, but where you make all the input fields hidden 
-            instead of visible (i.e., change the type to "hidden"). Be sure to be explicit 
-            about the "action" of the form (it has to be an absolute URL).
+            <html:li>Build your search file. For this, either
+            <html:ul>
+              <html:li>
+              use <html:a href="searchwizard.htm">Dave's Quick Search Deskbar Search Wizard</html:a>, that will save you lots of time.
+              </html:li>
+              <html:li>or:
+              <html:ol>
+                <html:li>
+                Take a look at the original HTML form for the search, and create your own 
+                HTML form to do the same thing, but where you make all the input fields hidden 
+                instead of visible (i.e., change the type to "hidden"). Be sure to be explicit 
+                about the "action" of the form (it has to be an absolute URL).
+                </html:li>
+                <html:li>
+                Write a JavaScript function that takes one text parameter and assigns values 
+                the hidden fields of your form, and then submits it. By convention, if the text 
+                parameter is blank, you should open a window into a useful page that helps you 
+                launch the search -- typically the home page of the search. If there are 
+                multiple fields in the form, then your JavaScript should use a regular 
+                expression of some kind to pull apart the single text field to fill in the 
+                multiple form fields. The easiest way to do this is with the 'parseArgs' 
+                function, which will handle the parsing for optional 'switches' and their 
+                values. 
+                </html:li>
+                <html:li>
+                Paste your new HTML form and your new JavaScript function into its own XML 
+                file (SEARCHNAME).xml - copy the bits of xml from 
+                an existing search xml file - and include the attribute indicating your 
+                JavaScript function name, a short name for the search, a long description, a 
+                link to a description of the search engine, your name, and so on. Be sure to 
+                follow XML rules - all your attributes need to be quoted, remember the trailing 
+                slash in the INPUT tag, etc... 
+                </html:li>
+              </html:ol>
+              </html:li>
+            </html:ul>
             </html:li>
             <html:li>
-            Write a JavaScript function that takes one text parameter and assigns values 
-            the hidden fields of your form, and then submits it. By convention, if the text 
-            parameter is blank, you should open a window into a useful page that helps you 
-            launch the search -- typically the home page of the search. If there are 
-            multiple fields in the form, then your JavaScript should use a regular 
-            expression of some kind to pull apart the single text field to fill in the 
-            multiple form fields. The easiest way to do this is with the 'parseArgs' 
-            function, which will handle the parsing for optional 'switches' and their 
-            values. 
-            </html:li>
-            <html:li>
-            Paste your new HTML form and your new JavaScript function into its own XML 
-            file (SEARCHNAME).xml in the searches sub-directory - copy the bits of xml from 
-            an existing search xml file - and include the attribute indicating your 
-            JavaScript function name, a short name for the search, a long description, a 
-            link to a description of the search engine, your name, and so on. Be sure to 
-            follow XML rules - all your attributes need to be quoted, remember the trailing 
-            slash in the INPUT tag, etc... 
+            Put your (SEARCHNAME).xml file in the 'localsearches' subdirectory (you may need to create the latter).
             </html:li>
             <html:li>
             You can test your xml syntax by opening the xml file directly in IE. It will 

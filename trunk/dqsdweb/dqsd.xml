@@ -22,9 +22,9 @@
         <Contact_Email>davidbau@hotmail.com</Contact_Email>
     </Contact_Info>
 <Support_Info>
-        <Sales_Email>dqsdd@yahoogroups.com</Sales_Email>
-        <Support_Email>dqsdd@yahoogroups.com</Support_Email>
-        <General_Email>dqsdd@yahoogroups.com</General_Email>
+        <Sales_Email>dqsd-users@lists.sourceforge.net</Sales_Email>
+        <Support_Email>dqsd-users@lists.sourceforge.net</Support_Email>
+        <General_Email>dqsd-users@lists.sourceforge.net</General_Email>
         <Sales_Phone />
         <Support_Phone />
         <General_Phone />
@@ -33,9 +33,9 @@
 </Company_Info>
 <Program_Info>
         <Program_Name>Dave's Quick Search Taskbar Toolbar Deskbar</Program_Name>
-        <Program_Version>3.0.0</Program_Version>
-        <Program_Release_Month>06</Program_Release_Month>
-        <Program_Release_Day>29</Program_Release_Day>
+        <Program_Version>3.1.04</Program_Version>
+        <Program_Release_Month>10</Program_Release_Month>
+        <Program_Release_Day>03</Program_Release_Day>
         <Program_Release_Year>2002</Program_Release_Year>
         <Program_Cost_Dollars>0</Program_Cost_Dollars>
         <Program_Cost_Other_Code />
@@ -43,16 +43,16 @@
         <Program_Type>Freeware</Program_Type>
         <Program_Release_Status>New Release</Program_Release_Status>
         <Program_Install_Support>Install and Uninstall</Program_Install_Support>
-        <Program_OS_Support>Win98,WinXP,Windows2000</Program_OS_Support>
+        <Program_OS_Support>Win98,WinMe,WinXP,Windows2000</Program_OS_Support>
         <Program_Language>English</Program_Language>
 <File_Info>
         <Filename_Versioned>dqsd.exe</Filename_Versioned>
         <Filename_Previous>dqsd.exe</Filename_Previous>
         <Filename_Generic>dqsd.exe</Filename_Generic>
         <Filename_Long>dqsd.exe</Filename_Long>
-        <File_Size_Bytes>253602</File_Size_Bytes>
-        <File_Size_K>248</File_Size_K>
-        <File_Size_MB>0.24</File_Size_MB>
+        <File_Size_Bytes>353142</File_Size_Bytes>
+        <File_Size_K>344</File_Size_K>
+        <File_Size_MB>0.34</File_Size_MB>
     </File_Info>
 <Expire_Info>
         <Has_Expire_Info>N</Has_Expire_Info>
@@ -66,7 +66,7 @@
         <Program_Change_Info>Includes a directory of pluggable searchesx.</Program_Change_Info>
         <Program_Specific_Category>Utilities</Program_Specific_Category>
         <Program_Categories>Desktop Enhancements, Internet Search Tools</Program_Categories>
-        <Program_System_Requirements>IE 5.0 (or newer), with Active Desktop</Program_System_Requirements>
+        <Program_System_Requirements>IE 5.5 (or newer)</Program_System_Requirements>
         <Includes_JAVA_VM>N</Includes_JAVA_VM>
         <Includes_VB_Runtime>N</Includes_VB_Runtime>
         <Includes_DirectX>N</Includes_DirectX>
