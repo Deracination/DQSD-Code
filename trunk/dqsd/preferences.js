@@ -429,3 +429,12 @@ checkForUpdateTypes = 'final';
 *  for some with disappearing tray icons at startup.
 */
 refreshIconsAtStartup = true;
+
+/* Startup functions
+*  Used to allow for personalized startup routines through the Quick Search Deskbar.
+*  TIP:  If you wish to call a function, use the escape character to escape parentheses
+*  and quotes:  i.e. in localprefs.js you can state:
+*  startupCommands = "FunctionFoo\(\)";
+*  presuming you have defined FunctionFoo() someplace else.
+*/
+var startupCommands = new String();

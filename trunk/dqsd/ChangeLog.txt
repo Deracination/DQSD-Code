@@ -6,6 +6,7 @@ Enhancements
 * Added httpinst command, which installs new searches straight from an URL (Kim Gräsman)
 * Modified DQSDTools to be TCHAR-correct, i.e. it can be built with UNICODE/_UNICODE defined (Kim Gräsman)
 * Added explicit statement to store query in the windows autocomplete cache (MSKB:Q329156) (Shawn K. Hall)
+* Added startup commands (Neel Doshi)
 
 Bug Fixes
 

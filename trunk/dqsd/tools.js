@@ -298,3 +298,13 @@ function qualifiedalert(s)
 {
   alertmode && alert(s);
 }
+
+// Function used to allow startup options for DQSD.
+function startup()
+{
+	if (startupCommands != "")
+	{
+		eval(startupCommands);
+	}
+	return true;
+}

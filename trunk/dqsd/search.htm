@@ -597,6 +597,12 @@ function strt()
     startbanner(clockdelay);
   else
     startclock(clockdelay);
+    
+  // Allow users to define a startup function to enable customized startups.
+  if ((typeof startup) == 'function')
+  {
+		startup();
+  }    
 }
 
 // starts the banner timer
