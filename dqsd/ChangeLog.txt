@@ -10,6 +10,7 @@ New Searches
 * md5 - calculate an md-5 digest for a string
 * tgn - Search the Getty Thesaurus of Geographical Names (from Tim Aiello)
 * arin - Search the Arin Whois database at www.arin.net/whois (from Tim Aiello)
+* ubl - the Ultimate Band List by ArtistDirect (from Darren Greenberg)
 
 Modified Searches
 

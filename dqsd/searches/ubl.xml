@@ -1,0 +1,128 @@
+<search function="ubl">
+  <name>UBL - the Ultimate Band List by ArtistDirect</name>
+  <description>
+    Search UBL using the following switches. Searches by artist by default.<br/>
+    <div class="helpboxDescLabels">Switches:</div>
+  	<table class="helpboxDescTable">
+  		<tr><td>/artist</td><td> - </td><td>Search for artists.</td></tr>
+  		<tr><td>/album</td><td> - </td><td>Search for albums.</td></tr>
+  		<tr><td>/song</td><td> - </td><td>Search for songs.</td></tr>
+  		<tr><td>/tour</td><td> - </td><td>Search for tour dates.</td></tr>
+  		<tr><td>/label</td><td> - </td><td>Search for record labels.</td></tr>
+  		<tr><td>/radio</td><td> - </td><td>Search for radio stations.</td></tr>
+  		<tr><td>/resource</td><td> - </td><td>Search for musician resources.</td></tr>
+  		<tr><td>/retail</td><td> - </td><td>Search for retail outlets.</td></tr>
+  		<tr><td>/mag</td><td> - </td><td>Search for magazines.</td></tr>
+  		<tr><td>/meta</td><td> - </td><td>Search for meta sites.</td></tr>
+  		<tr><td>/venue</td><td> - </td><td>Search for venues.</td></tr>
+  		<tr><td>/fest</td><td> - </td><td>Search for festivals.</td></tr>
+  		<tr><td>/agent</td><td> - </td><td>Search for promoters and agents..</td></tr>
+  		<tr><td>/tix</td><td> - </td><td>Search for ticket sellers.</td></tr>
+  	</table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>ubl Beck</td></tr>
+  		<tr><td>ubl Roadrunner /label</td></tr>
+  	</table>
+  </description>
+  <category>Entertainment</category>
+  <link>http://www.ubl.com/</link>
+  <contributor>Darren Greenberg</contributor>
+  
+  <form name="ublf"
+        action="http://ubl.artistdirect.com/cgi-bin/gx.cgi/AppLogic+Search"
+        method="get">
+    <input type="hidden" name="searchstr"/>
+    <input type="hidden" name="select"/>
+    <input type="hidden" name="searchtype" value="NormalSearch"/>
+    <input type="hidden" name="start" value="1"/>
+    <input type="hidden" name="from" value="schema"/>
+  </form>
+  
+  <script><![CDATA[
+    function ubl(q)
+    {
+      var args = parseArgs(q, "artist, album, song, tour, label, radio, resource, retail, mag, meta, venue, fest, agent, tix");
+      var formAction = "/cgi-bin/gx.cgi/AppLogic+Search";
+				
+      if( args.switches.length == 0 ) {
+	document.ublf.action = "http://ubl.artistdirect.com" + formAction;
+      }
+      else if (args.switches[0].name == "MusicTitle" || args.switches[0].name == "Songs") {
+          document.ublf.action = "http://store.artistdirect.com" + formAction;
+      }
+      else {
+          document.ublf.action = "http://ubl.artistdirect.com" + formAction;
+        }
+      
+      if( nullArgs("ubl", q) )
+         return false;
+      else if( args.switches.length == 1 )
+      {
+        switch( args.switches[0].name )
+        {
+          case "artist":
+            document.ublf.select.value="MusicArtist"; 
+            break;
+          case "album": 
+            document.ublf.select.value="MusicTitle"; 
+            break;
+          case "song":
+            document.ublf.select.value="Songs";
+            break;
+          case "tour": 
+            document.ublf.select.value="Concert"; 
+            break;
+          case "label":
+            document.ublf.select.value="Label"; 
+            break;
+          case "radio":
+            document.ublf.select.value="Radio";
+            break;
+          case "resource":
+            document.ublf.select.value="Musician_Resource"; 
+            break;
+          case "retail":
+            document.ublf.select.value="Retail"; 
+            break;
+          case "mag": 
+            document.ublf.select.value="Magazine"; 
+            break;
+          case "meta":
+            document.ublf.select.value="Meta";
+            break;
+          case "venue":
+            document.ublf.select.value="Venue"; 
+            break;
+          case "fest":
+            document.ublf.select.value="Festival"; 
+            break;
+          case "agent":
+            document.ublf.select.value="Promoter"; 
+            break;
+          case "tix":
+            document.ublf.select.value="Ticket"; 
+            break;
+        }
+        document.ublf.searchstr.value = args.q;
+        submitForm(ublf);
+      }
+      else if( args.switches.length > 1 )
+        nullArgs("ubl","?");
+      else
+      {
+        document.ublf.select.value="MusicArtist";
+        document.ublf.searchstr.value = args.q;
+        submitForm(ublf);
+      }
+    }
+  ]]> 
+  </script>
+
+  <copyright>
+	Copyright (c) 2002 David Bau
+	Distributed under the terms of the
+	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>
+
