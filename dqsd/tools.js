@@ -193,12 +193,8 @@ function readTabDelimitedFile(filename)
   for (var i = 0; i < fileLines.length; i++)
   {
     if (!fileLines[i].match(/^\s*($|\/\/)/))  // ignore comments (//) and blank lines
-      if (fileLines[i].match(/\t/)) 
-      {
-        fileTable.push(fileLines[i].split("\t"));
-  		}else{
-  		  fileTable.push(fileLines[i].split("\|"));
-  		}
+      //split on the pipe symbol or the tab character 
+      fileTable.push(fileLines[i].split(/[\|\t]/));
   }
   return fileTable;
 }
