@@ -49,14 +49,15 @@ function addhist(t)
   // History edits get cleared whenever something new goes in
   clearhistedits();
   histcurr = i + 1;
-  histedit[histcurr] = t;
 }
 
 // get the current history entry
 function currhistedit()
 {
   if (histedit[histcurr])
-      return histedit[histcurr];
+    return histedit[histcurr];
+  if (histcurr >= histarray.length)
+    return (histcurr > 0 ? histarray[histarray.length - 1] : "");
   return histarray[histcurr];
 }
 
