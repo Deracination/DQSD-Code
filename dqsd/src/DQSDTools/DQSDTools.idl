@@ -27,6 +27,7 @@ import "ocidl.idl";
 		[id(8), helpstring("Get list of files matching file spec")] HRESULT GetFiles([in] BSTR bstrFileSpec, [out,retval] BSTR* pbstrFiles);
 		[id(9), helpstring("Install the keyboard hook which provides full key support (DEL, arrows, etc)")] HRESULT InstallKeyboardHook();
 		[id(10), helpstring("Register a key to be used with the Windows key to jump to the DQSD bar")] HRESULT RegisterHotKey(long hotkeyVkCode);
+		[id(11), helpstring("Map a virtual key code to a character code to be sent to the DQSD bar")] HRESULT MapKeyCode(long lVKCode, long lCharCode);
 	};
 	[
 		object,
