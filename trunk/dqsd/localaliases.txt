@@ -1,11 +1,34 @@
-movie	ym
-sf|http://sourceforge.net/|SourceForge|SourceForge main web site
-sfp|http://sourceforge.net/projects/%s|SourceForge project page|SourceForge project page - Ex. "sfp dqsd"
-word	run winword
-excel	run excel
-exp	run explorer /e, "%s"
-ml	run keyhh -#klink "%s" "E:\Program Files\Microsoft Visual Studio\MSDN\2001JAN\1033\MSDN100.COL"
-tulsa	map %s, Tulsa, OK
-expd	run explorer /e, "E:\Program Files\Quick Search Deskbar"	Run Explorer
-mov	movie
-?	qsfind
+// localaliases.txt
+// ----------------------------------------------------------------------------
+// This is where you can add your own aliases. This file will not be overwritten
+// when the toolbar is updated.
+//
+// The format is as follows: 
+//               <alias>|<action>|<title>|<description>|<category>
+//
+// A single <tab> or pipe "|" is used as a separator.
+// The symbol %s is a placeholder that will be replaced with the user-entered
+// search term upon execution.
+//
+// The <title> and <description> are used in the help window to describe the 
+// purpose of the alias.
+// The <category> can be used to define a category other than the default
+// Shortcuts for the alias to be listed under. 
+//
+// ----------------------------------------------------------------------------
+// The following are some example aliases that you can use or modify for your
+// own purposes:
+//
+// movie	ym
+// sf|http://sourceforge.net/|SourceForge|SourceForge main web site
+// sfp|http://sourceforge.net/projects/%s|SourceForge project page|SourceForge project page - Ex. "sfp dqsd"
+// word	run winword
+// excel	run excel
+// exp	run explorer /e, "%s"
+// ml	run keyhh -#klink "%s" "E:\Program Files\Microsoft Visual Studio\MSDN\2001JAN\1033\MSDN100.COL"
+// tulsa	map %s, Tulsa, OK
+// expd	run explorer /e, "E:\Program Files\Quick Search Deskbar"	Run Explorer
+// mov	movie
+// 
+// ----------------------------------------------------------------------------
+//
