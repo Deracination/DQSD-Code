@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="Windows-1252" ?>
+<XML_DIZ_INFO>
+<MASTER_PAD_VERSION_INFO>
+    <MASTER_PAD_VERSION>1.15</MASTER_PAD_VERSION>
+    <MASTER_PAD_INFO>Portable Application Description, or PAD for short, is a data set that is used by shareware authors to disseminate information to anyone interested in their software products. To find out more go to http://www.asp-shareware.org/pad</MASTER_PAD_INFO>
+</MASTER_PAD_VERSION_INFO>
+<Company_Info>
+        <Company_Name>David Bau</Company_Name>
+        <Address_1 />
+        <Address_2 />
+        <City_Town />
+        <State_Province />
+        <Zip_Postal_Code />
+        <Country />
+        <Company_WebSite_URL>http://www.notesbydave.com</Company_WebSite_URL>
+<Contact_Info>
+        <Author_First_Name>David</Author_First_Name>
+        <Author_Last_Name>Bau</Author_Last_Name>
+        <Author_Email>davidbau@hotmail.com</Author_Email>
+        <Contact_First_Name>David</Contact_First_Name>
+        <Contact_Last_Name>Bau</Contact_Last_Name>
+        <Contact_Email>davidbau@hotmail.com</Contact_Email>
+    </Contact_Info>
+<Support_Info>
+        <Sales_Email>dqsdd@yahoogroups.com</Sales_Email>
+        <Support_Email>dqsdd@yahoogroups.com</Support_Email>
+        <General_Email>dqsdd@yahoogroups.com</General_Email>
+        <Sales_Phone />
+        <Support_Phone />
+        <General_Phone />
+        <Fax_Phone />
+    </Support_Info>
+</Company_Info>
+<Program_Info>
+        <Program_Name>Dave&apos;s Quick Search Taskbar Toolbar Deskbar</Program_Name>
+        <Program_Version>2.4.5</Program_Version>
+        <Program_Release_Month>12</Program_Release_Month>
+        <Program_Release_Day>7</Program_Release_Day>
+        <Program_Release_Year>2001</Program_Release_Year>
+        <Program_Cost_Dollars>0</Program_Cost_Dollars>
+        <Program_Cost_Other_Code />
+        <Program_Cost_Other />
+        <Program_Type>Freeware</Program_Type>
+        <Program_Release_Status>New Release</Program_Release_Status>
+        <Program_Install_Support>Install and Uninstall</Program_Install_Support>
+        <Program_OS_Support>Win98,WinXP,Windows2000</Program_OS_Support>
+        <Program_Language>English</Program_Language>
+<File_Info>
+        <Filename_Versioned>dqsd.exe</Filename_Versioned>
+        <Filename_Previous>dqsd.exe</Filename_Previous>
+        <Filename_Generic>dqsd.exe</Filename_Generic>
+        <Filename_Long />
+        <File_Size_Bytes>77729</File_Size_Bytes>
+        <File_Size_K>76</File_Size_K>
+        <File_Size_MB>0.07</File_Size_MB>
+    </File_Info>
+<Expire_Info>
+        <Has_Expire_Info>N</Has_Expire_Info>
+        <Expire_Count />
+        <Expire_Based_On>Days</Expire_Based_On>
+        <Expire_Other_Info />
+        <Expire_Month />
+        <Expire_Day />
+        <Expire_Year />
+    </Expire_Info>
+        <Program_Change_Info>Now includes Vivisimo search</Program_Change_Info>
+        <Program_Specific_Category>Utilities</Program_Specific_Category>
+        <Program_Categories>Desktop Enhancements, Internet Search Tools</Program_Categories>
+        <Program_System_Requirements>IE 5.0 (or newer), with Active Desktop</Program_System_Requirements>
+        <Includes_JAVA_VM>N</Includes_JAVA_VM>
+        <Includes_VB_Runtime>N</Includes_VB_Runtime>
+        <Includes_DirectX>N</Includes_DirectX>
+</Program_Info>
+<Program_Descriptions>
+<English>
+        <Keywords>search, taskbar, deskbar, toolbar, google, calculator, clock, translator, currency, dictionary, thesaurus, quotes, news, yahoo, quick, dave, dqsd, open source, gpl</Keywords>
+        <Char_Desc_45>Dave&apos;s Quick Search Taskbar Toolbar Deskbar</Char_Desc_45>
+        <Char_Desc_80>Dave&apos;s Quick Search Deskbar launches Google, Yahoo, and dozens of other searches</Char_Desc_80>
+        <Char_Desc_250>Dave&apos;s Quick Search Deskbar launches Google, Yahoo, Switchboard, and dozens of other searches from your desktop taskbar. It is simple yet powerful: from a single tiny textbox it also works as a calculator, clock, translator and currency converter.</Char_Desc_250>
+        <Char_Desc_450>Dave&apos;s Quick Search Deskbar launches Google, Yahoo, Switchboard, and dozens of other searches directly from your desktop taskbar. You type your search and hit Enter for a regular Google search. If you&apos;re feeling lucky, tack an exclamation point on to the end of your search - &quot;pow!&quot; - and go directly to the top ranked hit. The interface is fast, simple, and powerful: it also works as a calculator, clock, translator and currency converter.</Char_Desc_450>
+        <Char_Desc_2000>Dave&apos;s Quick Search Deskbar is a tiny textbox that Dave Bau designed for search hounds with weary mouse-fingers. Unlike the Google Toolbar, this little deskbar lets you launch searches without starting a web browser first, directly from your desktop taskbar. You type your search and hit Enter for a regular Google search. If you&apos;re feeling lucky, tack an exclamation point on to the end of your search - &quot;pow!&quot; - and go directly to the top ranked hit. It is Powered By Google, and Yes it Really Works. Now you can do searches no matter what you are doing - email, word processing, programming, whatever. There&apos;s more. You&apos;re not a captive to Google. Do Yahoo searches with a &quot;question?&quot;, get Merriam-Webster definitions with a &quot;colon:&quot;, get Bloomberg stock quotes like this &quot;msft intc csco$&quot;, and find Switchboard phone numbers by saying &quot;Lois Lane#&quot;. You can search real &quot;news.&quot; search &quot;newsgroups,&quot; check &quot;weather*&quot;, or &quot;comparison shop$$&quot;. There&apos;s a built in calculator when you need to know &quot;pow(1.0625, 30)&quot; is 6.1640785. There&apos;s a currency converter when you need to know &quot;100 usd&gt;gbp&quot; at current rates, and a translator to help you read &quot;algunas palabras es-en&quot;. And so on. Too much to remember? Under IE 5.5 or better there&apos;s a little menu that shows you all your choices. Not enough space on your deskbar? It includes a clock so that you can free up some space by turning off the system deskbar clock. Missing a feature you need? If you know HTML and want to add your own functionality, you can - it is distributed under GPL. It&apos;ll make you super-quick. You&apos;ll be ready to take on the world and surf like never before.</Char_Desc_2000>
+</English>
+</Program_Descriptions>
+<Web_Info>
+<Application_URLs>
+        <Application_Info_URL>http://notesbydave.com/toolbar/doc.htm</Application_Info_URL>
+        <Application_Order_URL>http://notesbydave.com/toolbar/doc.htm</Application_Order_URL>
+        <Application_Screenshot_URL>http://notesbydave.com/toolbar/toolbar.gif</Application_Screenshot_URL>
+        <Application_Icon_URL>http://notesbydave.com/toolbar/icon.gif</Application_Icon_URL>
+        <Application_XML_File_URL>http://notesbydave.com/toolbar/dqsd.xml</Application_XML_File_URL>
+    </Application_URLs>
+<Download_URLs>
+        <Primary_Download_URL>http://notesbydave.com/toolbar/dqsd.exe</Primary_Download_URL>
+        <Secondary_Download_URL />
+        <Additional_Download_URL_1 />
+        <Additional_Download_URL_2 />
+    </Download_URLs>
+</Web_Info>
+<Permissions>
+        <Distribution_Permissions>GPL</Distribution_Permissions>
+        <EULA>GPL</EULA>
+</Permissions>
+<Simtel>
+    <Simtel_Email>davidbau@hotmail.com</Simtel_Email>
+    <Simtel_FORM>Y</Simtel_FORM>
+    <Simtel_DOS_Category>Select - MS-DOS Platform</Simtel_DOS_Category>
+    <Simtel_Win31_Category>Select - Win3 Platform</Simtel_Win31_Category>
+    <Simtel_WinXX_Category>Internet - webbrows Web Page / Browser Utilities</Simtel_WinXX_Category>
+    <Simtel_Category>Internet - Search Tools</Simtel_Category>
+    <SIMTEL_FORM_VER>1.03 04/09/2001</SIMTEL_FORM_VER>
+</Simtel>
+</XML_DIZ_INFO>
