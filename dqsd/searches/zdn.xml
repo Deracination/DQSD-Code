@@ -1,90 +1,78 @@
 <search function="zdn">
-  <name>ZDNet</name>
-  <description>Searches for PC downloads by default. Options include All of ZDNet /all, Mac Downloads /mac, CE Downloads /ce, Linux Downloads /linux, Palm Downloads /palm, The Web /web. <nobr>Example: "zdn quicktime /mac"</nobr></description>
+  <name>ZDNet Downloads</name>
+  <description>Search Ziff-Davis Net for software. Searches for Windows software by default.<br/>
+  <a class="helpboxDescLabels">Switches:</a><br/>
+	<table cellpadding="0" cellspacing="0" border="0">
+		<tr><td class="helpboxDescColumns">/all</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">All Platform Downloads</td></tr>
+		<tr><td class="helpboxDescColumns">/mac</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">MacOS Downloads</td></tr>
+    <tr><td class="helpboxDescColumns">/linux</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Linux Downloads</td></tr>
+    <tr><td class="helpboxDescColumns">/palm</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Palm Downloads</td></tr>
+    <tr><td class="helpboxDescColumns">/ce</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">CE Downloads</td></tr>
+    <tr><td class="helpboxDescColumns">/psion</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Psion/EPOC Downloads</td></tr>
+	</table>
+  <a class="helpboxDescLabels">Example:</a><br/>
+  <table cellpadding="0" cellspacing="0" border="0">
+		<tr><td class="helpboxDescColumns">zdn quicktime /mac</td></tr>
+	</table>
+  </description>
+  
   <category>Computers</category>
   <link>http://www.zdnet.com/downloads/</link>
-  <contributor>John W. Bairen, Jr.</contributor>
-    <form name="zdn1f" method="post" action="http://xlink.zdnet.com/cgi-bin/texis/xlink/xlink/search.html" target="_blank">
-    <input type="hidden" name="Uch" value=""/>
-    <input type="hidden" name="Utype" value="D"/>
-    <input type="hidden" name="Utext"/>
-  </form>
-  <form name="zdn2f" action="http://xlink.zdnet.com/cgi-bin/texis/xlink/websearch/search.html" target="_blank">
-    <input type="hidden" name="cmd" value="zd_qry"/>
-    <input type="hidden" name="Utext" Value="dvd"/>
-  </form>
-  <form method="post" name="zdn3f" action="http://hotfiles.zdnet.com/cgi-bin/texis/swlib/hotfiles/search.html" target="_blank">
-    <input type="hidden" name="Utext" value=""/>
-    <input type="hidden" name="Usrt" value="rel"/>
-    <input type="hidden" name="Usrchtype" value="simple"/>
-  </form>
-  <form method="post" name="zdn4f" action="http://hotfiles.zdnet.com/cgi-bin/texis/swlib/hotfiles/search.html?b=mac" target="_blank">
-    <input type="hidden" name="Utext" value=""/>
-    <input type="hidden" name="Usrt" value="rel"/>
-    <input type="hidden" name="Usrchtype" value="simple"/>
-  </form>
-  <form method="post" name="zdn5f" action="http://hotfiles.zdnet.com/cgi-bin/texis/swlib/hotfiles/search.html?b=zdpalm" target="_blank">
-    <input type="hidden" name="Utext" value=""/>
-    <input type="hidden" name="Usrt" value="rel"/>
-    <input type="hidden" name="Usrchtype" value="simple"/>
-  </form>
-  <form method="post" name="zdn6f" action="http://hotfiles.zdnet.com/cgi-bin/texis/swlib/hotfiles/search.html?b=zdce" target="_blank">
-    <input type="hidden" name="Utext" value=""/>
-    <input type="hidden" name="Usrt" value="rel"/>
-    <input type="hidden" name="Usrchtype" value="simple"/>
-  </form>
-  <form method="post" name="zdn7f" action="http://hotfiles.zdnet.com/cgi-bin/texis/swlib/hotfiles/search.html?b=zdlinux" target="_blank">
-    <input type="hidden" name="Utext" value=""/>
-    <input type="hidden" name="Usrt" value="rel"/>
-    <input type="hidden" name="Uos" value="Linux"/>
-    <input type="hidden" name="Uplat" value="ANY"/>
-    <input type="hidden" name="Usrchtype" value="simple"/>
+  <contributor>John W. Bairen, Jr., Ryan Edwards</contributor>
+  
+  <form name="zdnf" 
+        method="get"
+        action="http://downloads-zdnet.com.com/3120-20-0.html">
+    <input type="hidden" name="titlename" value=""/>
+    <input type="hidden" name="author" value=""/>
+    <input type="hidden" name="desc" value=""/>
+    <input type="hidden" name="qt" value=""/>
+    <input type="hidden" name="ca" value="2001"/>
+    <input type="hidden" name="os" value=""/>
+    <input type="hidden" name="daysback" value=""/>
+    <input type="hidden" name="li" value=""/>
+    <input type="hidden" name="dlcount" value=""/>
+    <input type="hidden" name="dlsize" value=""/>
+    <input type="hidden" name="swlink" value="false"/>
   </form>
   
   <script><![CDATA[
     function zdn(q)
     {
-      var args = parseArgs(q, "all, mac, ce, linux, palm, web");
-      if (q == "")
+      var args = parseArgs(q, "all, mac, ce, linux, palm, psion");
+      if( q == "" )
         openSearchWindow(" http://www.zdnet.com/downloads/");
       else if( args.switches.length == 1 )
       {
         switch( args.switches[0].name )
         {
-        case "mac":
-          document.zdn4f.Utext.value = args.q;
-          submitForm(zdn4f);
-          break;
-        case "linux":
-          document.zdn7f.Utext.value = args.q;
-          submitForm(zdn7f);
-          break;
-        case "palm":
-          document.zdn5f.Utext.value = args.q;
-          submitForm(zdn5f);
-          break
-        case "ce":
-          document.zdn6f.Utext.value = args.q;
-          submitForm(zdn6f);
-          break;
-        case "all":
-          document.zdn1f.Utext.value = args.q;
-          document.zdn1f.Uch.value = '';
-          submitForm(zdn1f);
-          break;
-        case "web":
-          document.zdn2f.Utext.value = args.q; 
-          submitForm(zdn2f);
-          break;
-        default:
-          document.zdn3f.Utext.value = args.q;
-          submitForm(zdn3f);
+          case "all":
+            document.zdnf.ca.value = "";
+            break;
+          case "mac":
+            document.zdnf.ca.value = "2003";
+            break;
+          case "linux":
+            document.zdnf.ca.value = "2002";
+            break;
+          case "palm":
+            document.zdnf.ca.value = "2008";
+            break
+          case "ce":
+            document.zdnf.ca.value = "2009";
+            break;
+          case "psion":
+            document.zdnf.ca.value = "2020";
+            break;
         }
+        document.zdnf.titlename.value = q;
+        submitForm(zdnf);
       }
       else
       {
-        document.zdn3f.Utext.value = args.q;
-        submitForm(zdn3f);
+        document.zdnf.ca.value = "2001";
+        document.zdnf.titlename.value = q;
+        submitForm(zdnf);
       }
    }
   ]]></script>
