@@ -10,12 +10,14 @@
       <tr><td>/freshmeat</td><td> - </td><td>Freshmeat.net</td></tr>
       <tr><td>/project</td><td> - </td><td>Project's summary page</td></tr>
       <tr><td>/cvs</td><td> - </td><td>Browse project's CVS repository</td></tr>
+      <tr><td>/list[:admin]</td><td> - </td><td>Display list info or admin page</td></tr>
     </table>
     <div class="helpboxDescLabels">Examples:</div>
     <table class="helpboxDescTable">
       <tr><td>sf itext</td></tr>
       <tr><td>sf /proj dqsd</td></tr>
       <tr><td>sf /cvs dqsd</td></tr>
+      <tr><td>sf /list dqsd-users</td></tr>
     </table>
   </description>
   <category>Computers<category>Programming</category></category>
@@ -35,7 +37,7 @@
       if( nullArgs("sf", q) )
         return false;
 
-      var args = parseArgs(q, "new, software, people, freshmeat, project, cvs");
+      var args = parseArgs(q, "new, software, people, freshmeat, project, cvs, list");
       if( q == "" )
         openSearchWindow("http://www.sourceforge.net/");
       else if( args.switches.length == 1 )
@@ -54,6 +56,10 @@
             openSearchWindow("http://sourceforge.net/projects/" + args.q); return false;
           case "cvs":
             openSearchWindow("http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/" + args.q); return false;
+          case "list":
+            var listtype = args.switch_val["list"].toLowerCase();
+            openSearchWindow("https://lists.sourceforge.net/lists/" + ( listtype.length && ( listtype == "admin".substr(0, listtype.length) ) ? "admin/" : "listinfo/" ) + args.q); return false;
+            break;
           default:
             document.sfsearch.section.value = args.switches[0].name; break;
         }
