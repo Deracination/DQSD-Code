@@ -1,0 +1,126 @@
+<search function="passgen">
+  <name>Password Generator</name>
+  <description>Generate passwords
+  <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/len</td><td> - </td><td>Limit the password length</td></tr>
+      <tr><td>/lower</td><td> - </td><td>Allow lowercase letters</td></tr>
+      <tr><td>/noupper</td><td> - </td><td>Don't allow uppercase letters</td></tr>
+      <tr><td>/nolower</td><td> - </td><td>Don't allow lowercase letters</td></tr>
+      <tr><td>/nonum</td><td> - </td><td>Don't allow numbers</td></tr>
+      <tr><td>/nosupper</td><td> - </td><td>Don't allow uppercase letters as the starting character</td></tr>
+      <tr><td>/noslower</td><td> - </td><td>Don't allow lowercase letters as the starting character</td></tr>
+      <tr><td>/nosnum</td><td> - </td><td>Don't allow numbers as the starting character</td></tr>
+      <tr><td>/num</td><td> - </td><td>Allow numbers</td></tr>
+      <tr><td>/supper</td><td> - </td><td>Allow uppercase letters as the starting character</td></tr>
+      <tr><td>/slower</td><td> - </td><td>Allow lowercase letters as the starting character</td></tr>
+      <tr><td>/snum</td><td> - </td><td>Allow numbers as the starting character</td></tr>
+      <tr><td>/upper</td><td> - </td><td>Allow uppercase letters</td></tr>
+    </table>
+  <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>passgen /l:5</td></tr>
+    </table>
+  <div class="helpboxDescLabels">localprefs.js variables</div>
+    <table class="helpboxDescTable">
+      <tr><td>passgen_length</td><td> - </td><td>Default length (number > 0)</td></tr>
+      <tr><td>passgen_nolowercase</td><td> - </td><td>Default allow lowercase letters (true or false)</td></tr>
+      <tr><td>passgen_nonumbers</td><td> - </td><td>Default allow numbers (true or false)</td></tr>
+      <tr><td>passgen_nouppercase</td><td> - </td><td>Default allow uppercase letters (true or false)</td></tr>
+      <tr><td>passgen_startlowercase</td><td> - </td><td>Default allow lowercase letters as starting character (true or false)</td></tr>
+      <tr><td>passgen_startnumbers</td><td> - </td><td>Default allow numbers as starting character (true or false)</td></tr>
+      <tr><td>passgen_startuppercase</td><td> - </td><td>Default allow uppercase letters as starting character (true or false)</td></tr>
+    </table>
+  </description>
+  <category>Functions</category>
+  <contributor>Brent Beardsley</contributor>
+  <script><![CDATA[
+    function passgen(q) 
+    {
+      var args = parseArgs(q, "len, noupper, nolower, nonum, nosupper, noslower, nosnum, upper, lower, num, supper, slower, snum");
+      if (q == "?") {
+        nullArgs("passgen", "?");
+        return false;
+      }
+
+      var len = (typeof passgen_length != "undefined") ? passgen_length : 6;
+      var nouppercase = (typeof passgen_nouppercase != "undefined") ? passgen_nouppercase : false;
+      var nolowercase = (typeof passgen_nolowercase != "undefined") ? passgen_nolowercase : false;
+      var nonumbers = (typeof passgen_nonumbers != "undefined") ? passgen_nonumbers : false;
+      var startnumbers = (typeof passgen_startnumbers != "undefined") ? passgen_startnumbers : true;
+      var startuppercase = (typeof passgen_startuppercase != "undefined") ? passgen_startuppercase : true;
+      var startlowercase = (typeof passgen_startlowercase != "undefined") ? passgen_startlowercase : true;
+      for (var i = 0; i < args.switches.length; i++) {
+        switch (args.switches[i].name)
+        {
+        case "len":      len = args.switch_val["len"]; break;
+        case "noupper": nouppercase = true; break;
+        case "upper": nouppercase = false; break;
+        case "nolower": nolowercase = true; break;
+        case "lower":   nolowercase = false; break;
+        case "nonum":   nonumbers   = true; break;
+        case "num":     nonumbers   = false; break;
+        case "nosupper":  startuppercase = false; break;
+        case "supper":    startuppercase = true;  break;
+        case "noslower":  startlowercase = false; break;
+        case "slower":    startlowercase = true;  break;
+        case "nosnum":    startnumbers   = false; break;
+        case "snum":      startnumbers   = true;  break;
+        default:            break;
+        }
+      }
+      var passwd = passgen_generate(len, nouppercase, nolowercase, nonumbers, startuppercase, startlowercase, startnumbers);
+      if (passwd != false) {
+          document.deff.q.value = passwd;
+      } else {
+        alert("passgen_generate returned false");
+        nullArgs("passgen", "?");
+        return false;
+      }
+    }
+
+    function passgen_generate(len, nouppercase, nolowercase, nonumbers, startuppercase, startlowercase, startnumbers)
+    { 
+      var passwd = "";
+      for (var i=0; i < len; i++) {
+        var ch = passgen_random_char(nouppercase || (i == 0 && startuppercase == false), 
+                                     nolowercase || (i == 0 && startlowercase == false),
+                                     nonumbers   || (i == 0 && startnumbers == false));
+        passwd += ch;
+      }
+      if (passwd != "") {
+          return passwd;
+      } else {
+          return false;
+      }
+    }
+
+    function passgen_random_char(nouppercase, nolowercase, nonumbers)
+    {
+      var validchars = "";
+      if (nouppercase == false) {
+        // left out uppercase Oh because it's easily confused with zero
+        validchars += "ABCDEFGHIJKLMNPQRSTUVWXYZ";
+      }
+      if (nolowercase == false) {
+        validchars += "abcdefghijklmnopqrstuvwxyz";
+      }
+      if (nonumbers == false) {
+        validchars += "0123456789";
+      }
+
+      if (validchars == "") {
+        alert("validchars is empty");
+        return false;
+      }
+      var rand_num = Math.floor(Math.random() * validchars.length);
+      return validchars.charAt(rand_num);
+    }
+  ]]></script>
+
+  <copyright>
+	Copyright (c) 2002 Brent Beardsley
+	Distributed under the terms of the
+	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>
