@@ -37,7 +37,9 @@
 			{
 				if (isNaN(i))
 				{
-					if( searches[i].desc.toLowerCase().match(args.q) || searches[i].name.toLowerCase().match(args.q) || (searches[i].link ? searches[i].link.toLowerCase().match(args.q) : 0) )
+					if( (searches[i].desc ? searches[i].desc.toLowerCase().match(args.q) : 0) 
+					    || searches[i].name.toLowerCase().match(args.q) 
+					    || (searches[i].link ? searches[i].link.toLowerCase().match(args.q) : 0) )
 					{
 						SearchResults[i] = searches[i];
 						SearchFound = true;
