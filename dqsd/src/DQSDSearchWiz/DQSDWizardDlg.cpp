@@ -184,7 +184,7 @@ LRESULT CDQSDWizardDlg::OnInitDialog(UINT uMsg, WPARAM wParam, LPARAM lParam, BO
 				if ( FAILED( spForm->getAttribute( _bstr_t(_T("action")), 0, &varAttributeValue ) ) ||
 					 !( VT_BSTR == varAttributeValue.vt && varAttributeValue.bstrVal != NULL ) )
 				{
-					continue; // Ignore if there's no action
+					varAttributeValue = _variant_t( ::SysAllocString( L"" ) );
 				}
 
 				cDisplayedForms += 1;
@@ -767,7 +767,7 @@ string CDQSDWizardDlg::GetAbsoluteActionPath( _variant_t& varAction )
 
 		USES_CONVERSION;
 
-		string strAction = W2T( varAction.bstrVal );
+		string strAction = W2T( varAction.bstrVal == 0 ? L"" : varAction.bstrVal );
 
 		if ( !_tcsnicmp( _T("http"), strAction.c_str(), 4 ) )
 			return strAction;
