@@ -6,6 +6,15 @@
   <todo>add <a href="http://www.briansbuzz.com/search/">advanced search</a> possibilities</todo>
   <description>
   The Windows Tips Search Engine finds information for you from more than a dozen sources of reliable, trusted expertise
+  <div class="helpboxDescLabels">Usage:</div>
+  <table class="helpboxDescTable">
+  	<tr><td>winf &lt;<i>topic</i>&gt;</td></tr>
+  </table>
+  <div class="helpboxDescLabels">Example:</div>
+  <table class="helpboxDescTable">
+    <tr><td>winf activex</td></tr>
+  </table>
+
   </description>
   <form name="winff"
         method="get"

@@ -4,6 +4,15 @@
   <contributor>MLL</contributor>
   <link>http://www.ripe.net/ripencc/pub-services/db/whois/whois.html</link>
   <description>Search the Ripe Whois Database for IP addresses
+  <div class="helpboxDescLabels">Usage:</div>
+  <table class="helpboxDescTable">
+  	<tr><td>rw &lt;<i>domain</i>&gt;</td></tr>
+  </table>
+  <div class="helpboxDescLabels">Example:</div>
+  <table class="helpboxDescTable">
+  	<tr><td>rw dqsd.net</td></tr>
+  </table>
+  
   </description>
   <form name="rwf"
         method="get"

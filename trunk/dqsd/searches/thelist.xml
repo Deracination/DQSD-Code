@@ -6,6 +6,14 @@
   <email>poohbear@designshift.com</email>
   <description>
   Search evolt.org's thelist archives.
+  <div class="helpboxDescLabels">Usage:</div>
+  <table class="helpboxDescTable">
+  	<tr><td>thelist &lt;<i>topic</i>&gt;</td></tr>
+  </table>
+  <div class="helpboxDescLabels">Example:</div>
+  <table class="helpboxDescTable">
+      <tr><td>thelist computer</td></tr>
+  </table>
   </description>
   <form name="thelistf"
         method="get"

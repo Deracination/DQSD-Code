@@ -6,6 +6,15 @@
   <email></email>
   <description>
     Search, and rate the results.
+  <div class="helpboxDescLabels">Usage:</div>
+  <table class="helpboxDescTable">
+  	<tr><td>whitl &lt;<i>topic</i>&gt;</td></tr>
+  </table>
+  <div class="helpboxDescLabels">Example:</div>
+  <table class="helpboxDescTable">
+    <tr><td>whitl dean kamen</td></tr>
+  </table>
+
   </description>
   <form name="whittlef"
         method="post"

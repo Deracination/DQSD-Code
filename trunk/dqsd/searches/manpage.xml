@@ -2,6 +2,15 @@
   <name>Linux man pages</name>
   <description>
     Search Linux man pages.
+    <div class="helpboxDescLabels">Usage:</div>
+  	<table class="helpboxDescTable">
+  		<tr><td>man &lt;<i>topic</i>&gt;</td></tr>
+  	</table>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  	    <tr><td>man crontab</td></tr>
+  	</table>
+
   </description>
   <link>http://www.oreillynet.com/linux/cmd/</link>
   <category>Computers<category>Reference</category></category>
