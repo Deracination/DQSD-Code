@@ -105,6 +105,7 @@ Section "Quick Search Deskbar (required)"
   File "..\translate.js"
   File "..\aliases.txt"
   File "..\menu.txt"
+  File "..\holidays.sg.xml"
   SetOutPath "$INSTDIR\src"
   File "search.ico"
   File "search.nsi"
@@ -206,6 +207,7 @@ Section "Uninstall"
   Delete /REBOOTOK $INSTDIR\strings.js
   Delete /REBOOTOK $INSTDIR\tools.js
   Delete /REBOOTOK $INSTDIR\translate.js"
+  Delete /REBOOTOK $INSTDIR\holidays.sg.xml
   Delete /REBOOTOK $INSTDIR\src\dqsd.xml
   Delete /REBOOTOK $INSTDIR\src\build.cmd
   Delete /REBOOTOK $INSTDIR\src\clean.cmd
