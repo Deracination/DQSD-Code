@@ -76,7 +76,9 @@
         var sSuggestedSpelling = oDoc.selectSingleNode("SOAP-ENV:Body/ns1:doSpellingSuggestionResponse/return").text;
         if ( sSuggestedSpelling != '' )
         {
-          displayPopupMessage( "<b>Google suggests:</b>&nbsp; "+ sSuggestedSpelling );
+          //displayPopupMessage( "<b>Google suggests:</b>&nbsp; "+ sSuggestedSpelling );
+          document.deff.q.value = sSuggestedSpelling;
+          document.deff.q.createTextRange().select();
 
           return true;
         }
@@ -86,9 +88,6 @@
           
           return false;
         }
-
-        // document.deff.q.createTextRange().select();
-
       }
     }
   ]]></script>
