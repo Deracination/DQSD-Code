@@ -35,103 +35,80 @@ static LRESULT CALLBACK KeyboardProc(
 			return CallNextHookEx(hHook, code, wParam, lParam);
 		}
 
-		//-----VVVVV-----NOTE: You need to link with IMM32.LIB---
-		// check if the IME is up
-		{
-			HIMC himc = ImmGetContext(hFocusWnd);
-			bool bImmOn = (ImmGetOpenStatus (himc) != 0);
-			ImmReleaseContext (hFocusWnd, himc);
+		// Check if the IME is up (NOTE: You need to link with IMM32.LIB)
+		HIMC himc = ImmGetContext(hFocusWnd);
+		bool bImmOn = (ImmGetOpenStatus (himc) != 0);
+		ImmReleaseContext (hFocusWnd, himc);
 
-			if (bImmOn)
-			{
-				// This is not us - don't do anything
-				ATLTRACE("IMM is on\n");
-				return CallNextHookEx(hHook, code, wParam, lParam);
-			}
+		if (bImmOn)
+		{
+			// This is not us - don't do anything
+			ATLTRACE("IMM is on\n");
+			return CallNextHookEx(hHook, code, wParam, lParam);
 		}
-		//-----^^^^^^------
 
 		bool bKeyDown = !(lParam & 0x80000000);
-
-		if(wParam == VK_INSERT)
+		if(bKeyDown && IsWindowOnTaskbar(hFocusWnd))
 		{
-			if(GetAsyncKeyState(VK_SHIFT) & 0x80000000)
+			if(wParam == VK_INSERT)
 			{
-				ATLTRACE(_T("Shift-INS: %c\n"), bKeyDown ? 'P' : 'R');
-				if(bKeyDown)
+				if(GetAsyncKeyState(VK_SHIFT) & 0x80000000)
 				{
 					// Shift-INS is paste - send a CTRL-V
+					ATLTRACE(_T("Shift-INS: %c\n"), bKeyDown ? 'P' : 'R');
 					SendMessage(hFocusWnd, WM_CHAR, 'V'-'@', 0);
 					return 0; 
 				}
-			}
-			else if(GetAsyncKeyState(VK_CONTROL) & 0x80000000)
-			{
-				ATLTRACE(_T("Ctrl-INS: %c\n"), bKeyDown ? 'P' : 'R');
-				if(bKeyDown)
+				else if(GetAsyncKeyState(VK_CONTROL) & 0x80000000)
 				{
 					// Ctrl-INS is copy - send a CTRL-C
+					ATLTRACE(_T("Ctrl-INS: %c\n"), bKeyDown ? 'P' : 'R');
 					SendMessage(hFocusWnd, WM_CHAR, 'C'-'@', 0);
 					return 0; 
 				}
 			}
-		}
-		else if(wParam == VK_DELETE)
-		{
-			ATLTRACE(_T("DEL: %c\n"), bKeyDown ? 'P' : 'R');
+			else if(wParam == VK_DELETE)
+			{
+				ATLTRACE(_T("DEL: %c\n"), bKeyDown ? 'P' : 'R');
 
-			if(GetAsyncKeyState(VK_SHIFT) & 0x80000000)
-			{ 
-				ATLTRACE(_T("Shift-DEL: %c\n"), bKeyDown ? 'P' : 'R');
-				if(bKeyDown)
-				{
+				if(GetAsyncKeyState(VK_SHIFT) & 0x80000000)
+				{ 
 					// Shift-DEL is cut - send a CTRL-X
+					ATLTRACE(_T("Shift-DEL: %c\n"), bKeyDown ? 'P' : 'R');
 					SendMessage(hFocusWnd, WM_CHAR, 'X'-'@', 0);
 					return 0; 
 				}
-			}
-			else
-			{
-				// It's a DEL
-				if(bKeyDown)
+				else
 				{
-					// Send a CTRL-D - special handler for this in search.htm
+					// It's a DEL. Send a CTRL-D - special handler for this in search.htm
 					SendMessage(hFocusWnd, WM_CHAR, 'D'-'@', 0);
 					return 0; 
 				}
 			}
-		}
-		else if(wParam == VK_UP)
-		{
-			if ( bKeyDown )
+			else if(wParam == VK_UP)
 			{
 				// Send a CTRL-P
 				SendMessage(hFocusWnd, WM_CHAR, 'P'-'@', 0);
 				return 0;
 			}
-		}
-		else if(wParam == VK_DOWN)
-		{
-			if ( bKeyDown )
+			else if(wParam == VK_DOWN)
 			{
 				// Send a CTRL-N
 				SendMessage(hFocusWnd, WM_CHAR, 'N'-'@', 0);
 				return 0;
 			}
-		}
-		else if(g_mapKeyCodeToCharCode.find( wParam ) != g_mapKeyCodeToCharCode.end() )
-		{
-			if ( bKeyDown )
+			else if(g_mapKeyCodeToCharCode.find(wParam) != g_mapKeyCodeToCharCode.end())
 			{
-				SendMessage(hFocusWnd, WM_CHAR, g_mapKeyCodeToCharCode[ wParam ], 0);
+				SendMessage(hFocusWnd, WM_CHAR, g_mapKeyCodeToCharCode[wParam], 0);
 				return 0;
 			}
-		}
-		else
-		{
-			ATLTRACE(_T("Hook: %d (focus 0x%x)\n"), wParam, GetFocus());
+			else
+			{
+				ATLTRACE(_T("Hook: %d (focus 0x%x)\n"), wParam, GetFocus());
+			}
 		}
 	}
+
 	return CallNextHookEx(hHook, code, wParam, lParam);
 }
 
@@ -171,20 +148,17 @@ LRESULT CALLBACK NotificationWndProc(
 
 	if(uMsg == WM_HOTKEY || (uMsg == WM_TIMER && wParam == 0x5744))
 	{
-//		_RPT0(_CRT_WARN, "HotKey\n");
-//		OutputDebugString("HotKey\n");
-
 		if(uMsg == WM_HOTKEY)
 		{
 			nAttempts = 0;
 		}
 		else
 		{
-			nAttempts++;
-			if(nAttempts > 20)
+			if(++nAttempts > 20)
 			{
-				// We've failed in some way - kill the timer
+				// We've failed in some way - kill the timer and return
 				KillTimer(hwnd, 0x5744);
+				return 0;
 			}
 		}
 
@@ -205,14 +179,11 @@ LRESULT CALLBACK NotificationWndProc(
 		// We do all this larking about with the mouse because
 		// SetForegroundWindow is crippled nowadays, and because the DQSD edit control
 		// doesn't actually seem to get a proper caret if you SFW to it anyway.
-		ATLTRACE("TaskBarRect: %d,%d,%d,%d\n", taskBarRect.left, taskBarRect.top, taskBarRect.right, taskBarRect.bottom);
-		if(taskBarRect.top >= GetSystemMetrics(SM_CYSCREEN) 
-			|| taskBarRect.bottom < 0 
-			|| taskBarRect.left >= GetSystemMetrics(SM_CXSCREEN)
-			|| taskBarRect.right < 0)
+		if(!IsWindowOnScreen(hBarWnd))
 		{
 			// The taskbar is auto-hidden - we need to send more than one click - one to unhide the tool bar, 
 			// and one to set the focus
+			ATLTRACE("Search bar is off-screen - attempt to bring it into the light...\n");
 			SetTimer(hwnd, 0x5744, 50, NULL);
 		}
 		else
@@ -236,7 +207,7 @@ LRESULT CALLBACK NotificationWndProc(
 			}
 		}
 
-		// Calculate the position of a simultated mouse click
+		// Calculate the position of a simulated mouse click
 		// The SendInput structure takes a position scaled 0-65536 across the primary monitor
 		// Hence the muldivs
 		INPUT mouseClick;
@@ -257,7 +228,7 @@ LRESULT CALLBACK NotificationWndProc(
 	}
 	else if(uMsg == WM_DESTROY)
 	{
-//		OutputDebugString("HotKey Destroy\n");
+		ATLTRACE("Unregistering HotKey...\n");
 		UnregisterHotKey(hwnd, GetWindowLong(hwnd, GWL_USERDATA));
 	}
 
@@ -332,7 +303,7 @@ KeyboardInstallHotkey(int vkCode, LPCTSTR pModifierNames, HWND* phwndNotificatio
 	HWND hExistingWindow = FindWindow(wc.lpszClassName, HOTKEY_WINDOW_NAME);
 	if(hExistingWindow != NULL)
 	{
-		// THere's already hotkey window
+		// There's already hotkey window
 		ATLTRACE("HotKey - window exists\n");
 		DestroyWindow(hExistingWindow);
 	}
