@@ -206,11 +206,12 @@ showbutton = 2;
 buttonalign="right";
 
 
-/* help message duration in milliseconds
+/* Display duration for the help message "Press ? for help"
+*  after the initial toolbar startup.
 *  every 1000=1 second ex: 5000=5 seconds
-*  default = 8500
+*  default = 3000
 */
-helptime = 8500;
+helptime = 3000;
 
 
 /* Changes to the size of the help window.
@@ -231,21 +232,27 @@ historylength=50;
 
 
 /* Changes the default alert sensitivity:
+*  Qualified alerts are alerts that will not display unless a particular variable is set.
+*  This setting is mainly used for debugging purposes.
 *  0=no qualified alerts [default]
 *  1=all qualified alerts
 */
 alertmode=0;
 
+
 /* Length of menu Most Recently Used list
 */
 menuMRUlength = 5;
 
+
 /* The character we use with the 'Windows key' as a hotkey to jump to the searchbar
- This should be a single UPPER CASE letter
+*  This should be a single UPPER CASE letter
 */
 hotkeyCharacter = "S";
-/* An alternative if you want to do something more elaborate - set the hotkeyCharacter to "" and use this as a direct vkCode number
- Looking up VK codes is left as a task for the reader....
+
+/* An alternative if you want to do something more elaborate - 
+*  set the hotkeyCharacter to "" and use this as a direct vkCode number
+*  Looking up VK codes is left as a task for the reader....
 */
 hotkeyVkCode = 0;
 
