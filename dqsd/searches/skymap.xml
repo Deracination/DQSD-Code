@@ -33,9 +33,7 @@
   <form name="skymapf"
         method="post"
         action="http://www.fourmilab.ch/cgi-bin/uncgi/Yoursky">
-		<input type="radio" name="date" checked="true" value="0"/>
-		<input type="radio" name="date" value="1"/>
-		<input type="radio" name="date" value="2"/>
+		<input type="hidden" name="date" value="0"/>
     <input type="hidden" name="utc" value="2000-01-01 12:00:00" />
     <input type="hidden" name="jd" value="2451545.00000" />
     <input type="hidden" name="lat" value="47°" />
@@ -129,11 +127,11 @@
 						var result = args.switches[iSwitch].value.match(pattern);
 						if (result != null) {
 							document.skymapf.utc.value = result[0];
-							document.skymapf.date[1].checked=true;
+							document.skymapf.date.value = "1";
 						}
 						break;
 					case "julian":
-						document.skymapf.date[2].checked=true;
+						document.skymapf.date.value = "2";
 						document.skymapf.jd.value = args.switches[iSwitch].value;
 						break;
           case "image":
@@ -174,33 +172,6 @@
 				document.skymapf.lat.value = parsed[0];
 				document.skymapf.lon.value = parsed[1];
 			}
-			
-      // FORM variables for skymapf
-      //document.skymapf.date.value = "";
-      //document.skymapf.utc.value = "";
-      //document.skymapf.jd.value = "";
-      //document.skymapf.lat.value
-      //document.skymapf.ns.value = "";
-      //document.skymapf.lon.value = "";
-      //document.skymapf.ew.value = "";
-      //document.skymapf.coords.value = "";
-      //document.skymapf.moonp.value = "";
-      //document.skymapf.deep.value = "";
-      //document.skymapf.deepm.value = "";
-      //document.skymapf.consto.value = "";
-      //document.skymapf.constn.value = "";
-      //document.skymapf.consta.value = "";
-      //document.skymapf.constb.value = "";
-      //document.skymapf.limag.value = "";
-      //document.skymapf.starn.value = "";
-      //document.skymapf.starnm.value = "";
-      //document.skymapf.starb.value = "";
-      //document.skymapf.starbm.value = "";
-      //document.skymapf.flip.value = "";
-      //document.skymapf.imgsize.value = "";
-      //document.skymapf.scheme.value = "";
-      //document.skymapf.edump.value = "";
-      //document.skymapf.elements.value = "";
 
       submitForm(skymapf);
     }

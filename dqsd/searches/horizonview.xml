@@ -37,9 +37,7 @@
   <form name="horizonviewf"
         method="post"
         action="http://www.fourmilab.ch/cgi-bin/uncgi/Yourhorizon">
-		<input type="radio" name="date" checked="true" value="0"/>
-		<input type="radio" name="date" value="1"/>
-		<input type="radio" name="date" value="2"/>
+		<input type="hidden" name="date" value="0"/>
     <input type="hidden" name="utc" value="2000-01-01 12:00:00" />
     <input type="hidden" name="jd" value="2451545.00000" />
     <input type="hidden" name="azimuth" value="V" />
@@ -147,11 +145,11 @@
 						var result = args.switches[iSwitch].value.match(pattern);
 						if (result != null) {
 							document.horizonviewf.utc.value = result[0];
-							document.horizonviewf.date[1].checked=true;
+							document.horizonviewf.date.value = "1";
 						}
 						break;
 					case "julian":
-						document.horizonviewf.date[2].checked=true;
+						document.horizonviewf.date.value = "2";
 						document.horizonviewf.jd.value = args.switches[iSwitch].value;
 						break;
           case "image":
