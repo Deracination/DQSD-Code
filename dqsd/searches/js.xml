@@ -1,7 +1,7 @@
 <search function="js">
   <name>Jobserve</name>
   <description>
-    European specialist job site. The /market switch is required.<br/>
+    European specialist job search site. The /market switch is required to select the area to search.<br/>
     <a class="helpboxDescLabels">Usage:</a><br/>
   	<table class="helpBoxDescTable">
   		<tr><td class="helpboxDescColumns">js &lt;<i>job</i>&gt; /market:&lt;<i>market</i>&gt; [{/permanent | /contract}] [/latest]</td></tr>
@@ -9,7 +9,7 @@
     <a class="helpboxDescLabels">Switches:</a><br/>
   	<table class="helpBoxDescTable">
   		<tr><td class="helpboxDescColumns">/market</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">
-        A required switch. Select the job market to search using one of the following codes:<br/>
+        Select the job market to search using one of the following codes:<br/>
         <table class="helpBoxDescTable">
   		    <tr><td class="helpboxDescColumns"><b>it</b></td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Information Technology</td></tr>
           <tr><td class="helpboxDescColumns"><b>acc</b></td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Accountancy</td></tr>
@@ -23,17 +23,17 @@
       </td></tr>
       <tr><td class="helpboxDescColumns">/permanent</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Search for permanent positions only.</td></tr>
       <tr><td class="helpboxDescColumns">/contract</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Search for temporary/contract positions only.</td></tr>
-      <tr><td class="helpboxDescColumns">/latest</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Search for the latest additions instead the best overall matches.</td></tr>
+      <tr><td class="helpboxDescColumns">/latest</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Search for the latest additions instead of the best overall matches.</td></tr>
   	</table>
-    <a class="helpboxDescLabels">Example:</a><br/>
+    <a class="helpboxDescLabels">Examples:</a><br/>
     <table class="helpBoxDescTable">
   		<tr><td class="helpboxDescColumns">js programmer /market:it</td></tr>
       <tr><td class="helpboxDescColumns">js legal secretary /market:leg /permanent /latest</td></tr>
   	</table>
   </description>
   <category>Other</category>
-  <link>http://www.jobserve.com</link>
-  <contributor>Tom Corcoran, Ryan Edwards</contributor>
+  <link>http://www.jobserve.com/</link>
+  <contributor>Ryan Edwards, Tom Corcoran</contributor>
   
   <form name="jsf"
         method="get">
@@ -47,10 +47,9 @@
   <script><![CDATA[
     function js(q)
     {
-      document.jsf.action = "http://www.it.jobserve.com/jobserve/searchresults.asp";
       document.jsf.jobType.value = "*";
       document.jsf.order.value = "Rank";
-      var jobMarket = null;
+      var jobMarket;
 
       if( nullArgs("js",q) )
         return false;
