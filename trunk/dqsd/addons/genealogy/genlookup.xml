@@ -1,0 +1,34 @@
+<search function="genlookup">
+  <name>GenLookups.com volunteers</name>
+  <description>
+    Goto GenLookups.com volunteer web pages.<br/>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>genlookup mi</td></tr>
+      <tr><td>genlookup alaska</td></tr>
+    </table>
+  </description>
+  <link>http://www.genlookups.com/</link>
+  <category>Genealogy</category>
+  <contributor>Brent Beardsley</contributor>
+  <form name="genlookuprecf">
+
+  </form>
+  <script><![CDATA[
+    function genlookup(q)
+    {
+      if( nullArgs("genlookup", q) )
+        return false;
+
+      var search_url = "http://www.genlookups.com/";
+      var links = genealogy_get_known_page_links(search_url);
+      var search_place_num = genealogy_lookup_place(q);
+      if (search_place_num >= 0) {
+        openSearchWindow(links[search_place_num]);
+      } else {
+	openSearchWindow(search_url);
+      }
+    }
+    ]]>
+  </script>
+</search>

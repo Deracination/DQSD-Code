@@ -1,0 +1,239 @@
+<search function="midi">
+  <COMMENT>
+
+    This search file was initially created by Dave's Quick Search Deskbar
+    Search Wizard version 0.5 (beta) on 08/21/02 at 18:37:39
+
+    Even though this XML search will probably load and is a healthy start
+    toward a completed search, please be aware that this search will probably
+    not work as is and will require some human inspection and modification.
+
+  </COMMENT>
+  <name>Michigan Death Index 1867-1897</name>
+  <category>Genealogy</category>
+  <contributor>Brent Beardsley</contributor>
+  <link>http://www.mdch.state.mi.us/</link>
+  <email></email>
+  <description>
+  Search the Michigan Death Index 1867-1897
+  </description>
+  <form name="midif"
+        method="post"
+        action="http://www.mdch.state.mi.us/gendisx/scripts/search.idc">
+
+    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
+
+    <input type="hidden" name="LastName" value="" />
+    <input type="hidden" name="FirstName" value="" />
+    <input type="hidden" name="FatherLastName" value="" />
+    <input type="hidden" name="CountyName" value="%%" />
+    <COMMENT>
+      The input element above, "CountyName", was a SELECT element with the following options...
+      <select name="CountyName">
+        <option value="%%">All counties</option>
+        <option value="Alcona">Alcona</option>
+        <option value="Alger">Alger</option>
+        <option value="Allegan">Allegan</option>
+        <option value="Alpena">Alpena</option>
+        <option value="Antrim">Antrim</option>
+        <option value="Arenac">Arenac</option>
+        <option value="Baraga">Baraga</option>
+        <option value="Barry">Barry</option>
+        <option value="Bay">Bay</option>
+        <option value="Benzie">Benzie</option>
+        <option value="Berrien">Berrien</option>
+        <option value="Branch">Branch</option>
+        <option value="Calhoun">Calhoun</option>
+        <option value="Cass">Cass</option>
+        <option value="Charlevoix">Charlevoix</option>
+        <option value="Cheboygan">Cheboygan</option>
+        <option value="Chippewa">Chippewa</option>
+        <option value="Clare">Clare</option>
+        <option value="Clinton">Clinton</option>
+        <option value="Crawford">Crawford</option>
+        <option value="Delta">Delta</option>
+        <option value="Dickinson">Dickinson</option>
+        <option value="Eaton">Eaton</option>
+        <option value="Emmet">Emmet</option>
+        <option value="Genesee">Genesee</option>
+        <option value="Gladwin">Gladwin</option>
+        <option value="Gogebic">Gogebic</option>
+        <option value="Grand Traverse">Grand Traverse</option>
+        <option value="Gratiot">Gratiot</option>
+        <option value="Hillsdale">Hillsdale</option>
+        <option value="Houghton">Houghton</option>
+        <option value="Huron">Huron</option>
+        <option value="Ingham">Ingham</option>
+        <option value="Ionia">Ionia</option>
+        <option value="Iosco">Iosco</option>
+        <option value="Iron">Iron</option>
+        <option value="Isabella">Isabella</option>
+        <option value="Jackson">Jackson</option>
+        <option value="Kalamazoo">Kalamazoo</option>
+        <option value="Kalkaska">Kalkaska</option>
+        <option value="Kent">Kent</option>
+        <option value="Keweenaw">Keweenaw</option>
+        <option value="Lake">Lake</option>
+        <option value="Lapeer">Lapeer</option>
+        <option value="Leelanau">Leelanau</option>
+        <option value="Lenawee">Lenawee</option>
+        <option value="Livingston">Livingston</option>
+        <option value="Luce">Luce</option>
+        <option value="Mackinac">Mackinac</option>
+        <option value="Macomb">Macomb</option>
+        <option value="Manistee">Manistee</option>
+        <option value="Manitou">Manitou</option>
+        <option value="Marquette">Marquette</option>
+        <option value="Mason">Mason</option>
+        <option value="Mecosta">Mecosta</option>
+        <option value="Menominee">Menominee</option>
+        <option value="Midland">Midland</option>
+        <option value="Missaukee">Missaukee</option>
+        <option value="Monroe">Monroe</option>
+        <option value="Montcalm">Montcalm</option>
+        <option value="Montmorency">Montmorency</option>
+        <option value="Muskegon">Muskegon</option>
+        <option value="Newaygo">Newaygo</option>
+        <option value="Oakland">Oakland</option>
+        <option value="Oceana">Oceana</option>
+        <option value="Ogemaw">Ogemaw</option>
+        <option value="Ontonagon">Ontonagon</option>
+        <option value="Osceola">Osceola</option>
+        <option value="Oscoda">Oscoda</option>
+        <option value="Otsego">Otsego</option>
+        <option value="Ottawa">Ottawa</option>
+        <option value="Presque">Presque</option>
+        <option value="Roscommon">Roscommon</option>
+        <option value="Saginaw">Saginaw</option>
+        <option value="Saint Clair">Saint Clair</option>
+        <option value="Saint Joseph">Saint Joseph</option>
+        <option value="Sanilac">Sanilac</option>
+        <option value="Schoolcraft">Schoolcraft</option>
+        <option value="Shiawassee">Shiawassee</option>
+        <option value="Tuscola">Tuscola</option>
+        <option value="Van Buren">Van Buren</option>
+        <option value="Washtenaw">Washtenaw</option>
+        <option value="Wayne">Wayne</option>
+        <option value="Wexford">Wexford</option>
+      </select>
+    </COMMENT>
+
+    <input type="hidden" name="DxLowerYear" value="1867" />
+    <COMMENT>
+      The input element above, "DxLowerYear", was a SELECT element with the following options...
+      <select name="DxLowerYear">
+        <option value="1867">1867</option>
+        <option value="1868">1868</option>
+        <option value="1869">1869</option>
+        <option value="1870">1870</option>
+        <option value="1871">1871</option>
+        <option value="1872">1872</option>
+        <option value="1873">1873</option>
+        <option value="1874">1874</option>
+        <option value="1875">1875</option>
+        <option value="1876">1876</option>
+        <option value="1877">1877</option>
+        <option value="1878">1878</option>
+        <option value="1879">1879</option>
+        <option value="1880">1880</option>
+        <option value="1881">1881</option>
+        <option value="1882">1882</option>
+        <option value="1883">1883</option>
+        <option value="1884">1884</option>
+        <option value="1885">1885</option>
+        <option value="1886">1886</option>
+        <option value="1887">1887</option>
+        <option value="1888">1888</option>
+        <option value="1889">1889</option>
+        <option value="1890">1890</option>
+        <option value="1891">1891</option>
+        <option value="1892">1892</option>
+        <option value="1893">1893</option>
+        <option value="1894">1894</option>
+        <option value="1895">1895</option>
+        <option value="1896">1896</option>
+        <option value="1897">1897</option>
+      </select>
+    </COMMENT>
+
+    <input type="hidden" name="DxUpperYear" value="1897" />
+    <COMMENT>
+      The input element above, "DxUpperYear", was a SELECT element with the following options...
+      <select name="DxUpperYear">
+        <option value="1867">1867</option>
+        <option value="1868">1868</option>
+        <option value="1869">1869</option>
+        <option value="1870">1870</option>
+        <option value="1871">1871</option>
+        <option value="1872">1872</option>
+        <option value="1873">1873</option>
+        <option value="1874">1874</option>
+        <option value="1875">1875</option>
+        <option value="1876">1876</option>
+        <option value="1877">1877</option>
+        <option value="1878">1878</option>
+        <option value="1879">1879</option>
+        <option value="1880">1880</option>
+        <option value="1881">1881</option>
+        <option value="1882">1882</option>
+        <option value="1883">1883</option>
+        <option value="1884">1884</option>
+        <option value="1885">1885</option>
+        <option value="1886">1886</option>
+        <option value="1887">1887</option>
+        <option value="1888">1888</option>
+        <option value="1889">1889</option>
+        <option value="1890">1890</option>
+        <option value="1891">1891</option>
+        <option value="1892">1892</option>
+        <option value="1893">1893</option>
+        <option value="1894">1894</option>
+        <option value="1895">1895</option>
+        <option value="1896">1896</option>
+        <option value="1897">1897</option>
+      </select>
+    </COMMENT>
+
+    <input type="hidden" name="SortClause" value="ORDER BY DecLastName, DecFirstName, DecMiddleName" />
+    <COMMENT>
+      The input element above, "SortClause", was a SELECT element with the following options...
+      <select name="SortClause">
+        <option value="ORDER BY DecLastName, DecFirstName, DecMiddleName">Name</option>
+        <option value="ORDER BY FatherLastName, DecLastName, DecFirstName, DecMiddleName">Father's Last Name</option>
+        <option value="ORDER BY CountyName, DecLastName, DecFirstName, DecMiddleName">County of Death</option>
+        <option value="ORDER BY DxYear, DxMonth, DxDay, DecLastName, DecFirstName, DecMiddleName">Date of Death</option>
+      </select>
+    </COMMENT>
+
+    <input type="hidden" name="RESET" value="Clear Form" />
+  </form>
+  <script><![CDATA[
+    function midi(q)
+    {
+      if( nullArgs("midi", q) )
+        return;
+
+      if( q == "" )
+      {
+        openSearchWindow("http://www.mdch.state.mi.us/");
+        return;
+      }
+
+      // FORM variables for midif
+
+      // The wizard assigned the search string to this form field value because
+      // this field was the active element when the search file was generated.
+      // Change this to args.q if the search string is parsed with parseArgs.
+      document.midif.LastName.value = genealogy_parse_surname(q);
+      document.midif.FirstName.value = genealogy_parse_givenname(q);
+      //document.midif.FatherLastName.value = "";
+      //document.midif.CountyName.value = "";
+      //document.midif.DxLowerYear.value = "";
+      //document.midif.DxUpperYear.value = "";
+      //document.midif.SortClause.value = "";
+      //document.midif.RESET.value = "";
+
+      submitForm(midif);
+    }
+  ]]></script>
+</search>

@@ -1,0 +1,100 @@
+<search function="gnis">
+  <name>USGS GNIS Search</name>
+  <description>
+    Search for features in USGS National Mapping Informaion.<br/>
+    <div class="helpboxDescLabels">Switches:</div>
+  	<table class="helpboxDescTable">
+  		<tr><td>/county</td><td> - </td><td>Specify county name</td></tr>
+  		<tr><td>/state</td><td> - </td><td>Specify state name or abbreviation</td></tr>
+  		<tr><td>/type</td><td> - </td><td>Specify feature type</td></tr>
+  		<tr><td>/variant</td><td> - </td><td>Search variant names</td></tr>
+  	</table>
+    <div class="helpboxDescLabels">Search Type Switches:</div>
+  	<table class="helpboxDescTable">
+  		<tr><td>/cemetery</td><td> - </td><td>cemeteries</td></tr>
+  		<tr><td>/popplace</td><td> - </td><td>populated places</td></tr>
+  	</table>
+    <div class="helpboxDescLabels">Usage:</div>
+  	<table class="helpboxDescTable">
+  		<tr><td>gnis /state:&lt;<i>state name</i>&gt; /county:&lt;<i>county name</i>&gt; /type:&lt;<i>feature type</i>&gt; /variant &lt;<i>feature name</i>&gt;</td></tr>
+   	</table>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>gnis /state:CA /county:Santa.Clara San Jose</td></tr>
+  	</table>
+  </description>
+  <category>Genealogy</category>
+  <link>http://geonames.usgs.gov/pls/gnis/web_query.gnis_web_query_form</link>
+  <contributor>Brent Beardsley</contributor>
+  
+  <form name="gnissearch"
+    action="http://geonames.usgs.gov/pls/gnis/web_query.gnisprod"
+    method="get">
+    <input type="hidden" name="f_name" value="" />
+    <input type="hidden" name="variant" value="N" />
+    <input type="hidden" name="f_state" value="" />
+    <input type="hidden" name="f_cnty" value="" />
+    <input type="hidden" name="f_ty" value="populated place" />
+    <input type="hidden" name="elev1" value="" />
+    <input type="hidden" name="elev2" value="" />
+    <input type="hidden" name="cell" value="" />
+    <input type="hidden" name="pop1" value="" />
+    <input type="hidden" name="pop2" value="" />
+    <INPUT TYPE="hidden" NAME="last_name" VALUE="" />
+    <INPUT TYPE="hidden" NAME="last_state" VALUE="" />
+    <INPUT TYPE="hidden" NAME="last_cnty" VALUE="" />
+    <INPUT TYPE="hidden" NAME="page_cnt" VALUE="" />
+    <INPUT TYPE="hidden" NAME="record_cnt" VALUE="" />
+    <INPUT TYPE="hidden" NAME="tab" VALUE="Y" />
+    <input type="submit" name="my_function" value="Send Query" />
+  </form>
+  
+  <script><![CDATA[
+    function gnis(q)
+    {
+	if( nullArgs("gnis", q) )
+		return false;
+	else
+  	{
+		var func_name = "gnis";
+		var switch_list = new Array("state", "county", "type", "variant", "cemetery", "popplace");
+		var type_list = new Array("cemetery", "popplace");
+		var args = parseArgs(q, switch_list);
+
+		// check if the required switches are set
+		for (var j = 0; j < switch_list.length; j++)
+		{
+			if ( typeof args.switch_val[ switch_list[j] ] != "undefined" && args.switch_val[ switch_list[j] ] != "" )
+			{
+				switch (switch_list[j])
+				{
+			        case "state":
+					gnissearch.f_state.value = args.switch_val["state"]; break;
+				case "county":
+					gnissearch.f_cnty.value = args.switch_val["county"]; break;
+				case "type":
+					gnissearch.f_ty.value = args.switch_val["type"]; break;
+				case "variant":
+					gnissearch.variant.value = "Y"; break;
+				case "cemetery":
+					gnissearch.f_ty.value = "cemetery"; break;
+				case "popplace":
+					gnissearch.f_ty.value = "populated place"; break;
+				}
+			}
+		}
+
+		if (args.q == "?")
+		{
+			nullArgs("gnis","?");
+		}
+		else
+		{
+			gnissearch.f_name.value = args.q;
+			submitForm(gnissearch);
+		}
+		return true;
+       }
+    }
+  ]]></script>
+</search>

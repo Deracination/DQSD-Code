@@ -1,0 +1,33 @@
+<search function="usgx">
+  <name>USGenExchange</name>
+  <description>
+    Goto USGenExchange State web pages.<br/>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>usgx mi</td></tr>
+      <tr><td>usgx virginia</td></tr>
+    </table>
+  </description>
+  <link>http://www.genexchange.org/us.cfm</link>
+  <category>Genealogy</category>
+  <contributor>Brent Beardsley</contributor>
+  <form name="usgxf">
+
+  </form>
+  <script><![CDATA[
+
+    function usgx(q)
+    {
+      if( nullArgs("usgx", q) )
+        return false;
+
+      var state_abbrev = genealogy_lookup_place_abbrev(q)
+      if (state_abbrev.length > 0) {
+        openSearchWindow("http://www.genexchange.org/state.cfm?state="+state_abbrev.toLowerCase());
+      } else {
+	openSearchWindow("http://www.genexchange.org/us.cfm");
+      }
+    }
+    ]]>
+  </script>
+</search>

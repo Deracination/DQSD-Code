@@ -1,0 +1,35 @@
+<search function="accgen">
+  <name>AccessGenealogy.com web pages</name>
+  <description>
+    Goto AccessGenealogy web pages.<br/>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>accgen mi</td></tr>
+      <tr><td>accgen district of columbia</td></tr>
+    </table>
+  </description>
+  <link>http://www.accessgenealogy.com/</link>
+  <category>Genealogy</category>
+  <contributor>Brent Beardsley</contributor>
+  <form name="usgenwebf">
+
+  </form>
+  <script><![CDATA[
+
+    function accgen(q)
+    {
+      if( nullArgs("accgen", q) )
+        return false;
+
+      var search_url = "http://www.accessgenealogy.com/";
+      var links = genealogy_get_known_page_links(search_url);
+      var search_place_num = genealogy_lookup_place(q);
+      if (search_place_num >= 0) {
+        openSearchWindow(links[search_place_num]);
+      } else {
+	openSearchWindow(search_url);
+      }
+    }
+    ]]>
+  </script>
+</search>

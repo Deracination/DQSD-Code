@@ -1,0 +1,34 @@
+<search function="usgw">
+  <name>GenWeb</name>
+  <description>
+    Goto GenWeb State web pages.<br/>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>usgw mi</td></tr>
+      <tr><td>usgw district of columbia</td></tr>
+    </table>
+  </description>
+  <link>http://www.usgenweb.org/statelinks-table.html</link>
+  <category>Genealogy</category>
+  <contributor>Brent Beardsley</contributor>
+  <form name="usgenwebf">
+
+  </form>
+  <script><![CDATA[
+
+    function usgw(q)
+    {
+      if( nullArgs("usgw", q) )
+        return false;
+
+      var links = genealogy_get_known_page_links("http://www.usgenweb.org/statelinkstext.html");
+      var search_place_num = genealogy_lookup_place(q);
+      if (search_place_num >= 0) {
+        openSearchWindow(links[search_place_num]);
+      } else {
+	openSearchWindow("http://www.usgenweb.org/statelinks-table.html");
+      }
+    }
+    ]]>
+  </script>
+</search>

@@ -1,0 +1,54 @@
+<search function="mi1870">
+  <name>Michigan 1870 Census</name>
+  <description>
+    Search Michigan 1870 Census.<br/>
+    <div class="helpboxDescLabels">Switches:</div>
+  	<table class="helpboxDescTable">
+  		<tr><td>/county</td><td> - </td><td>Specify county name</td></tr>
+  	</table>
+    <div class="helpboxDescLabels">Usage:</div>
+  	<table class="helpboxDescTable">
+  		<tr><td>mi1870 /county:&lt;<i>county name</i>&gt; &lt;<i>last name</i>&gt;</td></tr>
+   	</table>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>mi1870 McCoy</td></tr>
+  	</table>
+  </description>
+  <category>Genealogy</category>
+  <link>http://envoy.libofmich.lib.mi.us/1870_census/Search.asp</link>
+  <contributor>Brent Beardsley</contributor>
+  
+  <form name="mi1870f" 
+        method="post"
+        action="http://envoy.libofmich.lib.mi.us/1870_census/NextPage.asp?ComingFrom=SearchInputForm">
+	<input type="hidden" NAME="Last_Name"   value=""/>
+	<input type="hidden" NAME="ln_wildcard" value=""/>
+	<input type="hidden" NAME="First_Name"  value=""/>
+	<input type="hidden" NAME="fn_wildcard" value=""/>
+	<input type="hidden" name="County"      value=""/>
+  </form>
+  
+  <script><![CDATA[
+    function mi1870(q)
+    {
+	if( nullArgs("mi1870", q) )
+		return false;
+
+        document.mi1870f.County.value = "";
+	var args = parseArgs(q, "county");
+	if (args != null) {
+		if (args.switches.length == 1) {
+			if (args.switches[0].name == "county") {
+				document.mi1870f.County.value =  args.switch_val["county"];
+			}
+		}
+		document.mi1870f.Last_Name.value = genealogy_parse_surname(q);
+		document.mi1870f.First_Name.value = genealogy_parse_givenname(q);
+		submitForm(mi1870f);
+		return;
+	}
+	nullArgs("mi1870", "?");
+    }
+  ]]></script>
+</search>

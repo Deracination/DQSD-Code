@@ -1,0 +1,57 @@
+<search function="everton">
+  <COMMENT>
+
+    This search file was initially created by Dave's Quick Search Deskbar
+    Search Wizard version 0.5 (beta) on 08/21/02 at 17:44:54
+
+    Even though this XML search will probably load and is a healthy start
+    toward a completed search, please be aware that this search will probably
+    not work as is and will require some human inspection and modification.
+
+  </COMMENT>
+  <name>Everton Publishers</name>
+  <category>Genealogy</category>
+  <contributor>Brent Beardsley</contributor>
+  <link>http://www.everton.com/</link>
+  <email></email>
+  <description>
+  Search Everton Publishers for your ancestors
+  </description>
+  <form name="evertonf"
+        method="post"
+        action="http://www.everton.com/search/simple.php">
+    <input type="hidden" name="submit" value="Search" />
+    <input type="hidden" name="given_name" value="" />
+
+    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
+
+    <input type="hidden" name="surname" value="" />
+  </form>
+  <script><![CDATA[
+    function everton(q)
+    {
+      if( nullArgs("everton", q) )
+        return;
+
+      if( q == "" )
+      {
+        openSearchWindow("http://www.everton.com/");
+        return;
+      }
+
+      openSearchWindow("http://www.everton.com/search/simple.php?submit=Search"+
+                       "&surname="+genealogy_parse_surname(q)+
+		       "&given_name="+genealogy_parse_givenname(q));
+      // FORM variables for evertonf
+      //document.evertonf["submit"].value = "";
+      //document.evertonf.given_name.value = "";
+
+      // The wizard assigned the search string to this form field value because
+      // this field was the active element when the search file was generated.
+      // Change this to args.q if the search string is parsed with parseArgs.
+      //document.evertonf.given_name.value = genealogy_parse_givenname(q);
+      //document.evertonf.surname.value = genealogy_parse_surname(q);
+      //submitForm(evertonf);
+    }
+  ]]></script>
+</search>

@@ -1,0 +1,33 @@
+<search function="census">
+  <name>Census Online</name>
+  <description>
+    Goto Census Online web pages.<br/>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>census mi</td></tr>
+      <tr><td>census alaska</td></tr>
+    </table>
+  </description>
+  <link>http://www.census-online.com/links/</link>
+  <category>Genealogy</category>
+  <contributor>Brent Beardsley</contributor>
+  <form name="censusf">
+
+  </form>
+  <script><![CDATA[
+    function census(q)
+    {
+      if( nullArgs("census", q) )
+        return false;
+
+      var census_links = genealogy_get_known_page_links("http://www.census-online.com/links/");
+      var search_place_num = genealogy_lookup_place(q);
+      if (search_place_num >= 0) {
+        openSearchWindow(census_links[search_place_num]);
+      } else {
+	openSearchWindow("http://www.census-online.com/links/");
+      }
+    }
+    ]]>
+  </script>
+</search>

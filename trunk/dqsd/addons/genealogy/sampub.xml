@@ -1,0 +1,180 @@
+<search function="sampub">
+  <COMMENT>
+
+    This search file was initially created by Dave's Quick Search Deskbar
+    Search Wizard version 0.4 (beta) on 08/19/02 at 15:23:35
+
+    Even though this XML search will probably load and is a healthy start
+    toward a completed search, please be aware that this search will probably
+    not work as is and will require some human inspection and modification.
+
+  </COMMENT>
+  <name>Sampubco.com</name>
+  <category>Genealogy</category>
+  <contributor>Brent Beardsley</contributor>
+  <link>http://www.sampubco.com/</link>
+  <email></email>
+  <description>
+  Search Sampubco.com for wills, etc
+  </description>
+  <form name="sampubwf"
+        method="get"
+        action="http://sitelevel.whatUseek.com/query.go">
+    <input type="hidden" name="crid" value="40035c8079ac662c" />
+    <COMMENT>
+      The input element above, "crid", was a SELECT element with the following options...
+      <select name="crid">
+        <option value="web">The Web</option>
+        <option value="40035c8079ac662c">This Site</option>
+      </select>
+    </COMMENT>
+    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
+    <input type="hidden" name="query" value="" />
+  </form>
+  <form name="sampubgf"
+        method="get"
+        action="http://sitelevel.whatUseek.com/query.go">
+    <input type="hidden" name="crid" value="119eff1a51023e7e" />
+    <COMMENT>
+      The input element above, "crid", was a SELECT element with the following options...
+      <select name="crid">
+        <option value="web">The Web</option>
+        <option value="119eff1a51023e7e">This Site</option>
+      </select>
+    </COMMENT>
+    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
+    <input type="hidden" name="query" value="" />
+  </form>
+  <form name="sampubnf"
+        method="get"
+        action="http://sitelevel.whatUseek.com/query.go">
+    <input type="hidden" name="crid" value="789e7bc92ea8eba7" />
+    <COMMENT>
+      The input element above, "crid", was a SELECT element with the following options...
+      <select name="crid">
+        <option value="web">The Web</option>
+        <option value="789e7bc92ea8eba7">This Site</option>
+      </select>
+    </COMMENT>
+    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
+    <input type="hidden" name="query" value="" />
+  </form>
+
+  <script><![CDATA[
+    function sampub(q)
+    {
+      if( nullArgs("sampub", q) )
+        return;
+
+      if( q == "" )
+      {
+        openSearchWindow("http://www.sampubco.com/");
+        return;
+      }
+
+      // Parse switches with parseArgs:
+
+      // parseArgs usage:
+      // Arguments:
+      //    q                - string from the search function
+      //    expectedSwitches - list or array of the expected switch values
+      //    expandSwitches   - optional parameter [default = true] used to determine 
+      //                       if the switch shortcuts should be expanded (i.e. /f becomes /foo)
+      // Returns an object with these properties:
+      //    q        - the input string with the switches removed
+      //    switches - array of objects with these two properties:
+      //                  name:   expanded name of the matched switch (i.e. foo as in /foo:bar)
+      //                  value:  value of switch (i.e. bar as in /foo:bar)
+      //    switch_val - associative array with the switch name as the key with the switch value 
+      //                 as the value. (i.e. switch_val["foo"] = "bar" as in /foo:bar)
+
+      var state_param = "";
+      var search_type = "";  // can be guard, nat, will, or blank (default)
+      var args = parseArgs(q, "state, type");
+      for (var i=0; i < args.switches.length; i++) {
+        switch( args.switches[i].name )
+        {
+          case "state":
+	       state_param = args.switch_val["state"];
+               break;
+          case "type":
+	       search_type = args.switch_val["type"].toLowerCase();
+               break;
+          default:
+               break;
+        } //end-switch
+      }
+      var subdir = "";
+      var state_abbrev = genealogy_lookup_place_abbrev(state_param).toLowerCase();
+      var state_name = genealogy_lookup_place_name(state_param).toLowerCase().replace(" ", "");
+      var valid_guard = new Array("NY");
+      var valid_nat = new Array("IA", "MA", "MO", "NY", "OR", "PA", "WI");
+      var valid_will = new Array("AL", "ID", "IA", "KS", "MD", "MA", "NY", "OH", "OR", "PA", "RI", "TN", "VA");
+
+      switch (search_type) {
+      case "nat":
+        subdir = "nats";
+        if (!genealogy_in_array(state_abbrev, valid_nat)) {
+	   state_abbrev = "";
+	   state_name = "";
+	}
+	break;
+      case "guard":
+        subdir = "guard";
+        if (!genealogy_in_array(state_abbrev, valid_guard)) {
+	   state_abbrev = "";
+	   state_name = "";
+	}
+	break;
+      case "will":
+        subdir = "wills";
+        if (!genealogy_in_array(state_abbrev, valid_will)) {
+	   state_abbrev = "";
+	   state_name = "";
+	}
+	break;
+      default:
+        state_abbrev = "";
+	state_name = "";
+	subdir = "";
+	break;
+      }
+
+      if (args.q.length <= 0) {
+        if (subdir.length == 0) {
+          openSearchWindow("http://www.sampubco.com");
+	} else {
+	  if (state_abbrev.length > 0) {
+            openSearchWindow("http://www.sampubco.com/"+subdir+"/"+state_abbrev+"/"+state_name+".htm");
+	  } else {
+            openSearchWindow("http://www.sampubco.com/"+subdir+"/search.htm");
+	  }
+	}
+      } else {
+        var search_name = genealogy_parse_surname(args.q).replace(/\W/g, "");
+	switch (search_type) {
+	case "guard":
+          document.sampubgf.query.value = search_name;
+          submitForm(sampubgf);
+	  break;
+	case "nat":
+          document.sampubnf.query.value = search_name;
+          submitForm(sampubnf);
+	  break;
+	case "will":
+          document.sampubwf.query.value = search_name;
+          submitForm(sampubwf);
+	  break;
+	default:
+          document.sampubgf.query.value = search_name;
+          document.sampubnf.query.value = search_name;
+          document.sampubwf.query.value = search_name;
+          submitForm(sampubgf);
+          submitForm(sampubnf);
+          submitForm(sampubwf);
+	  break;
+	}
+      }
+    }
+  ]]></script>
+</search>

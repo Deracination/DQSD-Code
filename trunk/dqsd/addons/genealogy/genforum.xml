@@ -1,0 +1,103 @@
+<search function="genforum">
+  <COMMENT>
+
+    This search file was initially created by Dave's Quick Search Deskbar
+    Search Wizard version 0.4 (beta) on 08/15/02 at 14:17:00
+
+    Even though this XML search will probably load and is a healthy start
+    toward a completed search, please be aware that this search will probably
+    not work as is and will require some human inspection and modification.
+
+  </COMMENT>
+  <name>GenForum</name>
+  <category>Genealogy</category>
+  <contributor>Brent Beardsley</contributor>
+  <link>http://genforum.genealogy.com/</link>
+  <email></email>
+  <description>
+    Search GenForum<br/>
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/search [default]</td><td> - </td><td>Search for forum</td></tr>
+      <tr><td>/forum</td><td> - </td><td>Search for words in a particular forum</td></tr>
+      <tr><td>/all</td><td> - </td><td>Search for words in all forums</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>genforum /forum:beardsley william</td></tr>
+      <tr><td>genforum brown</td></tr>
+      <tr><td>genforum /all noel</td></tr>
+    </table>
+
+  </description>
+  <form name="genforumf"
+        method="get"
+        action="http://genforum.genealogy.com/cgi-genforum/finder.cgi">
+    <input type="hidden" name="find" value="" />
+  </form>
+  <form name="genforumallf"
+        method="get"
+        action="http://genforum.genealogy.com/cgi-bin/global.cgi">
+    <input type="hidden" name="terms" value="" />
+    <input type="hidden" name="proximity" value="1" />
+  </form>
+  <form name="genforumsearchf"
+        method="get"
+        action="http://genforum.genealogy.com/cgi-bin/search.cgi">
+    <input type="hidden" name="forum" value="" />
+    <input type="hidden" name="url" value="" />
+    <input type="hidden" name="path" value="" />
+    <input type="hidden" name="terms" value="" />
+    <input type="hidden" name="boolean" value="AND" />
+  </form>
+
+  <script><![CDATA[
+    function genforum(q)
+    {
+      if( nullArgs("genforum", q) )
+        return;
+
+      var args = parseArgs(q, "all, forum, search");
+      var search_type = "forum";
+      if (args != null) {
+	if (args.switches.length == 1 ) {
+	      switch( args.switches[0].name )
+	      {
+		  case "all":
+			search_type = "all";
+			break;
+		  case "forum":
+			search_type = "search";
+			break;
+		  default:
+			search_type = "forum";
+			break;
+	      }
+        } else if (args.switches.length > 1) {
+		nullArgs("genforum", "?");
+		return;
+	}
+      }
+      if (search_type == "all") {
+		document.genforumallf.terms.value = args.q;
+		submitForm(genforumallf);
+      } else if (search_type == "search") {
+		var forum_name = args.switch_val["forum"].toLowerCase();
+		if (forum_name == null || forum_name == "") {
+			nullArgs("genforum", "?");
+			return;
+		}
+		document.genforumsearchf.forum.value = forum_name;
+		document.genforumsearchf.url.value = "/" + forum_name + "/";
+		document.genforumsearchf.path.value = "/" + forum_name + "/";
+		document.genforumsearchf.terms.value = args.q;
+		submitForm(genforumsearchf);
+      } else {
+		document.genforumf.find.value = args.q;
+		submitForm(genforumf);
+      }
+      return;
+
+    }
+  ]]></script>
+</search>

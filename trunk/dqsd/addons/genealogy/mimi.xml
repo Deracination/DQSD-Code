@@ -1,0 +1,146 @@
+<search function="mimi">
+  <COMMENT>
+
+    This search file was initially created by Dave's Quick Search Deskbar
+    Search Wizard version 0.4 (beta) on 08/15/02 at 23:22:15
+
+    Even though this XML search will probably load and is a healthy start
+    toward a completed search, please be aware that this search will probably
+    not work as is and will require some human inspection and modification.
+
+  </COMMENT>
+  <name>Michigan Marriage Index</name>
+  <category>Genealogy</category>
+  <contributor>Brent Beardsley</contributor>
+  <link>http://www.mifamilyhistory.org/dibeanindex/dib_marr/search.asp</link>
+  <email></email>
+  <description>
+  Michigan Family History Network Marriage Index
+  </description>
+  <form name="mimif"
+        method="post"
+        action="http://www.mifamilyhistory.org/dibeanindex/dib_marr/results_surname.asp">
+    <input type="hidden" name="SURNAME" value="" />
+    <input type="hidden" name="S_SURNAME" value="" />
+    <input type="hidden" name="Clear" value="Clear" />
+  </form>
+  <form name="mimif2"
+        method="get"
+        action="http://www.mifamilyhistory.org/dibeanindex/dib_marr/results_county.asp">
+    <input type="hidden" name="COUNTY" value="" />
+    <COMMENT>
+      The input element above, "COUNTY", was a SELECT element with the following options...
+      <select name="COUNTY">
+        <option>ALPENA</option>
+        <option>ANTRIM</option>
+        <option>ARENAC</option>
+        <option>BAY</option>
+        <option>BENZIE</option>
+        <option>BERRIEN</option>
+        <option>BRANCH</option>
+        <option>CASS</option>
+        <option>CHIPPEWA</option>
+        <option>CRAWFORD</option>
+        <option>GRAND TRAVERSE</option>
+        <option>GRATIOT</option>
+        <option>HOUGHTON</option>
+        <option>HURON</option>
+        <option>IOSCO</option>
+        <option>JACKSON</option>
+        <option>KALKASKA</option>
+        <option>KEWEENAW</option>
+        <option>LEELANAU</option>
+        <option>LIVINGSTON</option>
+        <option>MACOMB</option>
+        <option>MASON</option>
+        <option>MISSAUKEE</option>
+        <option>MONROE</option>
+        <option>MONTCALM</option>
+        <option>MONTMORENCY</option>
+        <option>PRESQUE ISLE</option>
+        <option>OGEMAW</option>
+        <option>ONTONAGON</option>
+        <option>OSCEOLA</option>
+        <option>OTSEGO</option>
+        <option>ROSCOMMON</option>
+        <option>SANILAC</option>
+        <option>ST CLAIR</option>
+        <option>WEXFORD</option>
+        <option>ISABELLA</option>
+      </select>
+    </COMMENT>
+
+
+    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
+
+    <input type="hidden" name="SURNAME" value="" />
+    <input type="hidden" name="Clear" value="Clear" />
+  </form>
+  <form name="mimif3"
+        method="post"
+        action="http://www.mifamilyhistory.org/dibeanindex/dib_marr/county_S_results.asp">
+    <input type="hidden" name="COUNTY" value="" />
+    <COMMENT>
+      The input element above, "COUNTY", was a SELECT element with the following options...
+      <select name="COUNTY">
+        <option>ALPENA</option>
+        <option>ANTRIM</option>
+        <option>BAY</option>
+        <option>ARENAC</option>
+        <option>BENZIE</option>
+        <option>BERRIEN</option>
+        <option>BRANCH</option>
+        <option>CASS</option>
+        <option>CHIPPEWA</option>
+        <option>CRAWFORD</option>
+        <option>GRAND TRAVERSE</option>
+        <option>GRATIOT</option>
+        <option>HOUGHTON</option>
+        <option>HURON</option>
+        <option>IOSCO</option>
+        <option>JACKSON</option>
+        <option>KALKASKA</option>
+        <option>KEWEENAW</option>
+        <option>LEELANAU</option>
+        <option>LIVINGSTON</option>
+        <option>MACOMB</option>
+        <option>MASON</option>
+        <option>MISSAUKEE</option>
+        <option>MONROE</option>
+        <option>MONTCALM</option>
+        <option>MONTMORENCY</option>
+        <option>PRESQUE ISLE</option>
+        <option>OGEMAW</option>
+        <option>ONTONAGON</option>
+        <option>OSCEOLA</option>
+        <option>OTSEGO</option>
+        <option>ROSCOMMON</option>
+        <option>SANILAC</option>
+        <option>ST CLAIR</option>
+        <option>WEXFORD</option>
+        <option>ISABELLA</option>
+      </select>
+    </COMMENT>
+
+    <input type="hidden" name="S_SURNAME" value="" />
+    <input type="hidden" name="Clear" value="Clear" />
+  </form>
+  <script><![CDATA[
+    function mimi(q)
+    {
+      if( nullArgs("mimi", q) )
+        return;
+
+      if( q == "" )
+      {
+        openSearchWindow("http://www.mifamilyhistory.org/dibeanindex/dib_marr/search.asp");
+        return;
+      }
+
+      // FORM variables for mimif
+      document.mimif.SURNAME.value = genealogy_parse_surname(q);
+
+      submitForm(mimif);
+    }
+  ]]></script>
+</search>

@@ -1,0 +1,281 @@
+<search function="cadi">
+  <COMMENT>
+
+    This search file was initially created by Dave's Quick Search Deskbar
+    Search Wizard version 0.4 (beta) on 08/18/02 at 21:07:59
+
+    Even though this XML search will probably load and is a healthy start
+    toward a completed search, please be aware that this search will probably
+    not work as is and will require some human inspection and modification.
+
+  </COMMENT>
+  <name>California Death Index 1940-1997</name>
+  <category>Genealogy</category>
+  <contributor>Brent Beardsley</contributor>
+  <link>http://userdb.rootsweb.com/ca/death/search.cgi</link>
+  <email></email>
+  <description>
+  </description>
+  <form name="cadif"
+        method="post"
+        action="http://vitals.rootsweb.com/ca/death/search.cgi">
+
+    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
+
+    <input type="hidden" name="surname" value="" />
+    <input type="hidden" name="stype" value="" />
+    <COMMENT>
+      The input element above, "stype", was a SELECT element with the following options...
+      <select name="stype">
+        <option>Exact</option>
+        <option>Soundex</option>
+        <option>Metaphone</option>
+      </select>
+    </COMMENT>
+
+    <input type="hidden" name="given" value="" />
+    <input type="hidden" name="mlast" value="" />
+    <input type="hidden" name="flast" value="" />
+    <input type="hidden" name="sex" value="" />
+    <COMMENT>
+      The input element above, "sex", was a SELECT element with the following options...
+      <select name="sex">
+        <option value="">Any</option>
+        <option value="1">Male</option>
+        <option value="2">Female</option>
+      </select>
+    </COMMENT>
+
+    <input type="hidden" name="year" value="" />
+    <input type="hidden" name="bplace" value="" />
+    <COMMENT>
+      The input element above, "bplace", was a SELECT element with the following options...
+      <select name="bplace">
+        <option value="">All</option>
+        <option value="AL">ALABAMA</option>
+        <option value="AK">ALASKA</option>
+        <option value="AZ">ARIZONA</option>
+        <option value="AR">ARKANSAS</option>
+        <option value="CA">CALIFORNIA</option>
+        <option value="CN">CANADA</option>
+        <option value="CH">CHINA</option>
+        <option value="CO">COLORADO</option>
+        <option value="CT">CONNECTICUT</option>
+        <option value="CU">CUBA</option>
+        <option value="DE">DELAWARE</option>
+        <option value="DC">DIST. OF COLUMBIA</option>
+        <option value="FL">FLORIDA</option>
+        <option value="GA">GEORGIA</option>
+        <option value="GU">GUAM</option>
+        <option value="HI">HAWAII</option>
+        <option value="ID">IDAHO</option>
+        <option value="IL">ILLINOIS</option>
+        <option value="IN">INDIANA</option>
+        <option value="IA">IOWA</option>
+        <option value="JA">JAPAN</option>
+        <option value="KS">KANSAS</option>
+        <option value="KY">KENTUCKY</option>
+        <option value="LA">LOUISIANA</option>
+        <option value="ME">MAINE</option>
+        <option value="MD">MARYLAND</option>
+        <option value="MA">MASSACHUSETTS</option>
+        <option value="MX">MEXICO</option>
+        <option value="MI">MICHIGAN</option>
+        <option value="MN">MINNESOTA</option>
+        <option value="MS">MISSISSIPPI</option>
+        <option value="MO">MISSOURI</option>
+        <option value="MT">MONTANA</option>
+        <option value="NB">NEBRASKA</option>
+        <option value="NV">NEVADA</option>
+        <option value="NH">NEW HAMPSHIRE</option>
+        <option value="NJ">NEW JERSEY</option>
+        <option value="NM">NEW MEXICO</option>
+        <option value="NY">NEW YORK</option>
+        <option value="NC">NORTH CAROLINA</option>
+        <option value="ND">NORTH DAKOTA</option>
+        <option value="OH">OHIO</option>
+        <option value="OK">OKLAHOMA</option>
+        <option value="OR">OREGON</option>
+        <option value="PA">PENNSYLVANIA</option>
+        <option value="PI">PHILIPPINES</option>
+        <option value="PR">PUERTO RICO</option>
+        <option value="RE">REST (OTHER)</option>
+        <option value="RI">RHODE ISLAND</option>
+        <option value="SC">SOUTH CAROLINA</option>
+        <option value="SD">SOUTH DAKOTA</option>
+        <option value="TN">TENNESSEE</option>
+        <option value="TX">TEXAS</option>
+        <option value="NA">UNKNOWN</option>
+        <option value="UT">UTAH</option>
+        <option value="VT">VERMONT</option>
+        <option value="VN">VIETNAM</option>
+        <option value="VI">VIRGIN ISLANDS</option>
+        <option value="VA">VIRGINIA</option>
+        <option value="WA">WASHINGTON</option>
+        <option value="WV">WEST VIRGINIA</option>
+        <option value="WI">WISCONSIN</option>
+        <option value="WY">WYOMING</option>
+      </select>
+    </COMMENT>
+
+    <input type="hidden" name="dyear" value="" />
+    <input type="hidden" name="dplace" value="" />
+    <COMMENT>
+      The input element above, "dplace", was a SELECT element with the following options...
+      <select name="dplace">
+        <option value="">All</option>
+        <option value="AL">ALABAMA</option>
+        <option value="01">ALAMEDA(01)</option>
+        <option value="60">ALAMEDA(60)</option>
+        <option value="AK">ALASKA</option>
+        <option value="02">ALPINE</option>
+        <option value="03">AMADOR</option>
+        <option value="AZ">ARIZONA</option>
+        <option value="AR">ARKANSAS</option>
+        <option value="04">BUTTE</option>
+        <option value="05">CALAVERAS</option>
+        <option value="91">CANADA</option>
+        <option value="CO">COLORADO</option>
+        <option value="06">COLUSA</option>
+        <option value="CT">CONNECTICUT</option>
+        <option value="07">CONTRA COSTA</option>
+        <option value="97">CUBA</option>
+        <option value="08">DEL NORTE</option>
+        <option value="DE">DELAWARE</option>
+        <option value="DC">DIST. OF COLUMBIA</option>
+        <option value="09">EL DORADO</option>
+        <option value="FL">FLORIDA</option>
+        <option value="10">FRESNO</option>
+        <option value="GA">GEORGIA</option>
+        <option value="11">GLENN</option>
+        <option value="94">GUAM</option>
+        <option value="HI">HAWAII</option>
+        <option value="12">HUMBOLDT</option>
+        <option value="ID">IDAHO</option>
+        <option value="IL">ILLINOIS</option>
+        <option value="13">IMPERIAL</option>
+        <option value="IN">INDIANA</option>
+        <option value="14">INYO</option>
+        <option value="IA">IOWA</option>
+        <option value="KS">KANSAS</option>
+        <option value="KY">KENTUCKY</option>
+        <option value="15">KERN</option>
+        <option value="16">KINGS</option>
+        <option value="17">LAKE</option>
+        <option value="18">LASSEN</option>
+        <option value="19">LOS ANGELES(19)</option>
+        <option value="70">LOS ANGELES(70)</option>
+        <option value="LA">LOUISIANA</option>
+        <option value="20">MADERA</option>
+        <option value="ME">MAINE</option>
+        <option value="21">MARIN</option>
+        <option value="22">MARIPOSA</option>
+        <option value="MD">MARYLAND</option>
+        <option value="MA">MASSACHUSETTS</option>
+        <option value="23">MENDOCINO</option>
+        <option value="24">MERCED</option>
+        <option value="92">MEXICO</option>
+        <option value="MI">MICHIGAN</option>
+        <option value="MN">MINNESOTA</option>
+        <option value="MS">MISSISSIPPI</option>
+        <option value="MO">MISSOURI</option>
+        <option value="25">MODOC</option>
+        <option value="26">MONO</option>
+        <option value="MT">MONTANA</option>
+        <option value="27">MONTEREY</option>
+        <option value="28">NAPA</option>
+        <option value="NB">NEBRASKA</option>
+        <option value="NV">NEVADA</option>
+        <option value="29">NEVADA CO</option>
+        <option value="NH">NEW HAMPSHIRE</option>
+        <option value="NJ">NEW JERSEY</option>
+        <option value="NM">NEW MEXICO</option>
+        <option value="NY">NEW YORK</option>
+        <option value="NC">NORTH CAROLINA</option>
+        <option value="ND">NORTH DAKOTA</option>
+        <option value="OH">OHIO</option>
+        <option value="OK">OKLAHOMA</option>
+        <option value="30">ORANGE</option>
+        <option value="OR">OREGON</option>
+        <option value="93">OTHER COUNTRIES</option>
+        <option value="PA">PENNSYLVANIA</option>
+        <option value="31">PLACER</option>
+        <option value="32">PLUMAS</option>
+        <option value="95">PUERTO RICO</option>
+        <option value="RI">RHODE ISLAND</option>
+        <option value="33">RIVERSIDE</option>
+        <option value="34">SACRAMENTO</option>
+        <option value="35">SAN BENITO</option>
+        <option value="36">SAN BERNARDINO</option>
+        <option value="37">SAN DIEGO(37)</option>
+        <option value="80">SAN DIEGO(80)</option>
+        <option value="38">SAN FRANCISCO(38)</option>
+        <option value="90">SAN FRANCISCO(90)</option>
+        <option value="39">SAN JOAQUIN</option>
+        <option value="40">SAN LUIS OBISPO</option>
+        <option value="41">SAN MATEO</option>
+        <option value="42">SANTA BARBARA</option>
+        <option value="43">SANTA CLARA</option>
+        <option value="44">SANTA CRUZ</option>
+        <option value="45">SHASTA</option>
+        <option value="46">SIERRA</option>
+        <option value="47">SISKIYOU</option>
+        <option value="48">SOLANO</option>
+        <option value="49">SONOMA</option>
+        <option value="SC">SOUTH CAROLINA</option>
+        <option value="SD">SOUTH DAKOTA</option>
+        <option value="50">STANISLAUS</option>
+        <option value="51">SUTTER</option>
+        <option value="52">TEHAMA</option>
+        <option value="TN">TENNESSEE</option>
+        <option value="TX">TEXAS</option>
+        <option value="53">TRINITY</option>
+        <option value="54">TULARE</option>
+        <option value="55">TUOLUMNE</option>
+        <option value="UT">UTAH</option>
+        <option value="56">VENTURA</option>
+        <option value="VT">VERMONT</option>
+        <option value="96">VIRGIN ISLANDS</option>
+        <option value="VA">VIRGINIA</option>
+        <option value="WA">WASHINGTON</option>
+        <option value="WV">WEST VIRGINIA</option>
+        <option value="WI">WISCONSIN</option>
+        <option value="WY">WYOMING</option>
+        <option value="57">YOLO</option>
+        <option value="58">YUBA</option>
+      </select>
+    </COMMENT>
+
+  </form>
+  <script><![CDATA[
+    function cadi(q)
+    {
+      if( nullArgs("cadi", q) )
+        return;
+
+      if( q == "" )
+      {
+        openSearchWindow("http://userdb.rootsweb.com/ca/death/search.cgi");
+        return;
+      }
+
+      // FORM variables for cadif
+
+      // The wizard assigned the search string to this form field value because
+      // this field was the active element when the search file was generated.
+      // Change this to args.q if the search string is parsed with parseArgs.
+      document.cadif.surname.value = genealogy_parse_surname(q);
+      document.cadif.stype.value = "";
+      document.cadif.given.value = genealogy_parse_givenname(q);
+      document.cadif.mlast.value = "";
+      document.cadif.flast.value = "";
+      document.cadif.sex.value = "";
+      document.cadif.year.value = "";
+      document.cadif.bplace.value = "";
+      document.cadif.dyear.value = "";
+      document.cadif.dplace.value = "";
+
+      submitForm(cadif);
+    }
+  ]]></script>
+</search>
