@@ -348,9 +348,9 @@ LRESULT CDQSDWizardDlg::OnOK(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHa
 		{
 			strSearchFile += _T("\r\n  <COMMENT>"
 								"\r\n"
-								"\r\n    Even though this XML search will probably load and is a healthy start"
+								"\r\n    Even though this XML search will probably load and is a good start"
 								"\r\n    toward a completed search, please be aware that this search will probably"
-								"\r\n    not work as is and will require some human tweaks."
+								"\r\n    not work as is and will probably require some changes."
 								"\r\n"
 								"\r\n  </COMMENT>");
 		}
