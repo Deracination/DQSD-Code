@@ -19,7 +19,7 @@ function addsearch(fname, name, desc, link, cat)
 internalShortcutIndex = 0;
 INTERNAL_FUNC_PREFIX = "_dqsd_internal_fn_";
 
-function addalias(alias, fname)
+function addalias(alias, fname, name, desc)
 {
   if (!searches[fname]) // no matching searches
   {
@@ -40,7 +40,7 @@ function addalias(alias, fname)
                            "  direct(url.replace( /%s/g, t ));"
                           );
       eval( fname + " = f;" );
-      addsearch( fname, url, "", url.search(/%s/) < 0 ? url : "", "Shortcuts");
+      addsearch( fname, name ? name : url, desc ? desc : "", url.search(/%s/) < 0 ? url : "", "Shortcuts");
     }
     else if ((res = fname.match(/^(\w+) +(.+)/)) && searches[res[1]]) // starts with a valid search function
     {
@@ -51,7 +51,7 @@ function addalias(alias, fname)
                            res[1] + "(cmd.replace( /%s/g, t ));"
                           );
       eval( fname + " = f;" );
-      addsearch( fname, cmd, "", "", "Shortcuts");
+      addsearch( fname, name ? name : cmd, desc ? desc : "", "", "Shortcuts");
     }
     else
     {
@@ -234,7 +234,7 @@ function addAliasesFromFile( aliasFile )
   for (var iPrivate = 0; iPrivate < aliasTable.length; iPrivate++)
   {
     var fields = aliasTable[iPrivate];
-      if (fields.length != 2)
+      if (fields.length < 2)
       {
         alert("Error on line " + (iPrivate + 1) + " of aliases.txt:\n\n" + aliasTable[iPrivate] + 
               "\n\n(Make sure there is a tab or \| symbol between the alias and command.)");
@@ -242,7 +242,7 @@ function addAliasesFromFile( aliasFile )
       }
       else
       {
-        addalias(fields[0], fields[1]);
+        addalias(fields[0], fields[1], fields.length >= 3 ? fields[2] : null);
       }
     }
   }
