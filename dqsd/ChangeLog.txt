@@ -8,7 +8,7 @@ New aliases
 
 New Searches
 
-* 
+* md5 - calculate an md-5 digest for a string
 
 Modified Searches
 
