@@ -1,5 +1,9 @@
-<?xml version="1.0" ?> 
-<definitions name="MyBubbleSoapService" targetNamespace="http://www.mybubble.com/sd/MyBubbleSoapServices.wsdl" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://www.mybubble.com/sd/MyBubbleSoapServices.wsdl">
+<?xml version="1.0" ?><definitions name="MBWSSoapService" 
+targetNamespace="http://www.extensio.com/sd/MBWSSoapServices.wsdl" 
+xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+xmlns="http://schemas.xmlsoap.org/wsdl/" 
+xmlns:tns="http://www.extensio.com/sd/MBWSSoapServices.wsdl">
 <message name="loginRequest">
 <part name="userName" type="xsd:string" /> 
 <part name="authenticationToken" type="xsd:string" /> 
@@ -12,8 +16,7 @@
 </message>
 <message name="logoutResponse">
 <part name="return" type="xsd:string" /> 
-</message>
-<message name="getServiceResponseRequest">
+</message><message name="getServiceResponseRequest">
 <part name="loginToken" type="xsd:string" /> 
 <part name="serviceName" type="xsd:string" /> 
 <part name="inputText" type="xsd:string" /> 
@@ -28,7 +31,7 @@
 <message name="getServiceResponsePublicResponse">
 <part name="return" type="xsd:string" /> 
 </message>
-<portType name="MyBubblePortType">
+<portType name="MBWSPortType">
 <operation name="login">
 <input message="tns:loginRequest" name="login" /> 
 <output message="tns:loginResponse" name="loginResponse" /> 
@@ -39,57 +42,68 @@
 </operation>
 <operation name="getServiceResponse">
 <input message="tns:getServiceResponseRequest" name="getServiceResponse" /> 
-<output message="tns:getServiceResponseResponse" name="getServiceResponseResponse" /> 
-<documentation>The response of this Web Service is HTML and can be viewed in any browser.</documentation> 
+<output message="tns:getServiceResponseResponse" 
+name="getServiceResponseResponse" /> 
+<documentation>The response of this Web Service is HTML and can be viewed in 
+any browser.</documentation> 
 </operation>
 <operation name="getServiceResponsePublic">
-<input message="tns:getServiceResponsePublicRequest" name="getServiceResponsePublic" /> 
-<output message="tns:getServiceResponsePublicResponse" name="getServiceResponsePublicResponse" /> 
-<documentation>The response of this Web Service is HTML and can be viewed in any browser.</documentation>  </operation>
-</portType>
-<binding name="MyBubbleSoapBinding" type="tns:MyBubblePortType">
+<input message="tns:getServiceResponsePublicRequest" 
+name="getServiceResponsePublic" /> 
+<output message="tns:getServiceResponsePublicResponse" 
+name="getServiceResponsePublicResponse" /> 
+<documentation>The response of this Web Service is HTML and can be viewed in 
+any browser.</documentation>  </operation>
+</portType><binding name="MBWSSoapBinding" type="tns:MBWSPortType">
 <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http" /> 
 <operation name="login">
 <soap:operation soapAction="" /> 
 <input>
-<soap:body use="encoded" namespace="urn:MB-SoapServices" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" /> 
+<soap:body use="encoded" namespace="urn:MBWS-SoapServices" 
+encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" /> 
 </input>
 <output>
-<soap:body use="encoded" namespace="urn:MB-SoapServices" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" /> 
+<soap:body use="encoded" namespace="urn:MBWS-SoapServices" 
+encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" /> 
 </output>
 </operation>
 <operation name="logout">
 <soap:operation soapAction="" /> 
 <input>
-<soap:body use="encoded" namespace="urn:MB-SoapServices" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" /> 
+<soap:body use="encoded" namespace="urn:MBWS-SoapServices" 
+encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" /> 
 </input>
 <output>
-<soap:body use="encoded" namespace="urn:MB-SoapServices" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" /> 
+<soap:body use="encoded" namespace="urn:MBWS-SoapServices" 
+encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" /> 
 </output>
 </operation>
 <operation name="getServiceResponse">
 <soap:operation soapAction="" /> 
 <input>
-<soap:body use="encoded" namespace="urn:MB-SoapServices" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" /> 
+<soap:body use="encoded" namespace="urn:MBWS-SoapServices" 
+encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" /> 
 </input>
 <output>
-<soap:body use="encoded" namespace="urn:MB-SoapServices" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" /> 
+<soap:body use="encoded" namespace="urn:MBWS-SoapServices" 
+encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" /> 
 </output>
 </operation>
 <operation name="getServiceResponsePublic">
 <soap:operation soapAction="" /> 
 <input>
-<soap:body use="encoded" namespace="urn:MB-SoapServices" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" /> 
+<soap:body use="encoded" namespace="urn:MBWS-SoapServices" 
+encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" /> 
 </input>
 <output>
-<soap:body use="encoded" namespace="urn:MB-SoapServices" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" /> 
+<soap:body use="encoded" namespace="urn:MBWS-SoapServices" 
+encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" /> 
 </output>
 </operation>
 </binding>
-<service name="MyBubbleSoapService">
+<service name="MBSoapService">
 <documentation></documentation> 
-<port name="MyBubbleSoapPort" binding="tns:MyBubbleSoapBinding">
-<soap:address location="http://www.mybubble.com:8080/mybubbleEntServer/servlet/rpcrouter" /> 
-</port>
-</service>
-</definitions>
+<port name="MBWSSoapPort" binding="tns:MBWSSoapBinding">
+<soap:address 
+location="http://www.extensio.com:8080/ExtensioInfoServer/servlet/rpcrouter" 
+/></port></service></definitions>
