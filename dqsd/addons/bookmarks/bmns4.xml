@@ -53,8 +53,7 @@
 		}
 
 		var bookmarks_full_path = bmk_location+"\\"+bmk_profile+"\\"+bmk_file;
-		var bookmarks_page = bookmarks_get_file(bookmarks_full_path);
-		netscape4_bookmarks_array = bookmarks_get_bookmarks_array_from_netscape(bookmarks_page);
+		netscape4_bookmarks_array = bookmarks_get_bookmarks_array_from_netscape(bookmarks_full_path);
 	}
 	bookmarks_show_menu(netscape4_bookmarks_array);
     }
