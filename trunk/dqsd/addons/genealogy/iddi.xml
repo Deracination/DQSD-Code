@@ -1,22 +1,28 @@
 <search function="iddi">
-  <name>Idaho Death Index</name>
+  <name>Idaho Death Index 1911-1951</name>
   <category>Genealogy</category>
   <contributor>Brent Beardsley</contributor>
   <link>http://abish.byui.edu/</link>
   <email></email>
   <description>
-  Search the Idaho Death Index
+    Search the Idaho Death Index 1911-1951
+    <div class="helpboxDescLabels">Switches:</div>
+  	<table class="helpboxDescTable">
+  		<tr><td>/county</td><td> - </td><td>Specify the county to search in</td></tr>
+	</table>
+    <div class="helpboxDescLabels">Examples:</div>
+	<table class="helpboxDescTable">
+		<tr><td>iddi jones, john w</td></tr>
+		<tr><td>iddi jones</td></tr>
+		<tr><td>iddi /county:gem jones, james</td></tr>
+	</table>
   </description>
   <form name="iddif"
         method="post"
         action="http://abish.byui.edu/specialCollections/fhc/Death/masterForm.cfm">
-
-    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
-
     <input type="hidden" name="name" value="" />
     <input type="hidden" name="county" value="" />
     <COMMENT>
-      The input element above, "county", was a SELECT element with the following options...
       <select name="county">
         <option value="">All Counties</option>
         <option value="Ada">Ada</option>
@@ -73,25 +79,19 @@
       if( nullArgs("iddi", q) )
         return;
 
-      if( q == "" )
-      {
-        openSearchWindow("http://abish.byui.edu/");
+      var args = parseArgs(q, "county");
+      if (args != null) {
+        document.iddif["county"].value = "";
+        if (args.switches.length == 1) {
+          if (args.switches[0].name == "county") {
+            document.iddif["county"].value =  args.switch_val["county"];
+          }
+        }
+        document.iddif.name.value = args.q;
+        submitForm(iddif);
         return;
       }
-
-	var args = parseArgs(q, "county");
-	if (args != null) {
-	        document.iddif["county"].value = "";
-		if (args.switches.length == 1) {
-			if (args.switches[0].name == "county") {
-				document.iddif["county"].value =  args.switch_val["county"];
-			}
-		}
-  	        document.iddif.name.value = args.q;
-		submitForm(iddif);
-		return;
-	}
-	nullArgs("iddi", "?");
+      nullArgs("iddi", "?");
     }
   ]]></script>
 </search>
