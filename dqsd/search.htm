@@ -329,7 +329,7 @@ function performsearch(fname, term)
 function mnu(text, alias)
 {
   var fn = (alias ? alias : text);
-  var search = (fn + ' ' + document.deff.q.value).trimWhitespace( /^\s*(\S+)\s*$/, "$1" ); // trim leading/trailing whitespace
+  var search = trimWhitespace(fn + ' ' + document.deff.q.value); // trim leading/trailing whitespace
   if (searches[fn])
     addhist( search );
   performsearch( text, document.deff.q.value );
