@@ -245,7 +245,7 @@ LRESULT CDQSDWizardDlg::OnInitDialog(UINT uMsg, WPARAM wParam, LPARAM lParam, BO
 
 				cDisplayedForms += 1;
 
-				strAction = GetAbsoluteActionPath( varAttributeValue );
+				strAction = EscapeXML( GetAbsoluteActionPath( varAttributeValue ) );
 
 				CComPtr< IHTMLElement >* pspForm = new CComPtr< IHTMLElement >( spForm ); // these are deleted in the dialog's dtor
 				m_vecFormHTMLs.push_back( pspForm );
@@ -441,7 +441,7 @@ LRESULT CDQSDWizardDlg::OnOK(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHa
 
 		CWindow( GetDlgItem( IDC_Link ) ).GetWindowText( &bstr );
 		string strLink = W2T( bstr );
-		strSearchFile += _T("\r\n  <link>") + strLink + _T("</link>");
+		strSearchFile += _T("\r\n  <link>") + EscapeXML( strLink ) + _T("</link>");
 		::SysFreeString( bstr );
 
 		CWindow( GetDlgItem( IDC_Email ) ).GetWindowText( &bstr );
@@ -590,7 +590,7 @@ string CDQSDWizardDlg::GetForms( const string& rstrSearchName, string& rstrFormS
 				string strAction = _T("");
 				if ( SUCCEEDED( (*pspForm)->getAttribute( _bstr_t(_T("action")), 0, &varAttributeValue ) ) )
 				{
-					strAction = GetAbsoluteActionPath( varAttributeValue );
+					strAction = EscapeXML( GetAbsoluteActionPath( varAttributeValue ) );
 				}
 				strFormXML += _T("\r\n        action=\"") + strAction + _T("\"");;
 
