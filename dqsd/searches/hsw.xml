@@ -1,19 +1,27 @@
 <search function="hsw">
   <name>How Stuff Works.com</name>
-  <description>Search How Stuff Works: "hsw jet engines"</description>
+  <description>
+    Search How Stuff Works.<br/>
+    <a class="helpboxDescLabels">Example:</a><br/>
+    <table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">hsw jet engines</td></tr>
+  	</table>
+  </description>
   <category>Other</category>
   <link>http://www.howstuffworks.com/</link>
   <contributor>John W. Bairen, Jr.</contributor>
+  
   <form name="hswf"
         action="http://www.howstuffworks.com/search.php" 
         method="post">
     <input type="hidden" name="search" value="SEARCH"/>
   </form>
+  
   <script><![CDATA[
   	function hsw(q)
   	{
-  		if( q == "" )
-  		  openSearchWindow("http://www.howstuffworks.com/");
+  		if( nullArgs("hsw",q) )
+        return false;
   		else
   		{
   			document.hswf.search.value = q;

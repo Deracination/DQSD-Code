@@ -1,19 +1,27 @@
 <search function="half">
   <name>Half.com</name>
-  <description>Search Half.com for products: "half chaos"</description>
+  <description>
+    Search Half.com for products.<br/>
+    <a class="helpboxDescLabels">Example:</a><br/>
+    <table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">half chaos</td></tr>
+  	</table>
+  </description>
   <category>Shopping</category>
   <link>http://www.half.com/</link>
+  
   <form name="halff"
         action="http://www.half.com/search/search.jsp"
         method="get">
     <input type="hidden" name="product" value="all"/>
     <input type="hidden" name="keyword"/>
   </form>
+  
   <script><![CDATA[
     function half(q)
     {
-      if( q == "" )
-        openSearchWindow("http://www.half.com/");
+      if( nullArgs("half",q) )
+        return false;
       else
       {
         document.halff.keyword.value = q;
