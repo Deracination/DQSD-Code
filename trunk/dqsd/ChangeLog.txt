@@ -19,6 +19,7 @@ New Searches
 * ccase - new function to convert case of a string - lower, upper, caps. (from Sarah Sweeney)
 * mb - MapBlast.com LineDrive search (from Gregory Krohne)
 * fs - FindSounds.com sound file search (from Gregory Krohne)
+* dqsd - Search the DQSD mail archive (Gregory Krohne)
 * phpb - Search PHPBuilder (from Sarah Sweeney)
 
 Bug Fixes
@@ -39,7 +40,8 @@ Modified Searches
 Miscellaneous
 
 * Corrected documentation in help for adding a local, user search.
-
+* New holiday database - holidays.cs.xml for the Czech Republic (from Jiri Sedlacek)
+* New holiday database - holidays.gb.xml for England and Wales (James Robertson)
 
 -- What's new for 3.1.5 (December 15, 2002)
 
