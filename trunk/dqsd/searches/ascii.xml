@@ -18,11 +18,11 @@
         return false;
       var char = c.substring(0,1);
       var dec  = char.charCodeAt(0);
-      document.deff.q.value = "char: "+char +
+      setSearchWindowText("char: "+char +
         "  dec: "+dec+
         "  oct: "+dec.toString(8)+
         "  hex: "+dec.toString(16)+
-        "  bin: "+dec.toString(2);
+        "  bin: "+dec.toString(2));
     }
   ]]></script>
 

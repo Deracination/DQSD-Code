@@ -79,7 +79,7 @@
       numeral += hundreds_numerals[array[1]];
       numeral += tens_numerals[array[2]];
       numeral += ones_numerals[array[3]];
-      document.deff.q.value = numeral;
+      setSearchWindowText(numeral, true);
     }
     else
     {

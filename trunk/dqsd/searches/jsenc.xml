@@ -39,8 +39,7 @@
             nullArgs("jsenc", "?");
           } else {
             // successfully encoded mailto
-            document.deff.q.value = r;
-            document.deff.q.createTextRange().select();
+            setSearchWindowText(r, true);
           }
           return false;
         } else {
@@ -57,8 +56,7 @@
         // encode
         ret_value = jsenc_encode(str, all_chars);
       }
-      document.deff.q.value = ret_value;
-      document.deff.q.createTextRange().select();
+      setSearchWindowText(ret_value, true);
     }
 
     function jsenc_mailto(q)

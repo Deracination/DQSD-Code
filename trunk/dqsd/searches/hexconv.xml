@@ -47,10 +47,10 @@
     
       var dec = decfromhex(c);
       var int = parseInt(dec);
-      document.deff.q.value = "hex: "+c+
+      setSearchWindowText("hex: "+c+
         "  dec: "+int.toString(10)+
         "  oct: "+int.toString(8)+
-        "  bin: "+int.toString(2);
+        "  bin: "+int.toString(2));
     }
   ]]></script>
 

@@ -22,16 +22,16 @@
       if (args.length == 1)
       {
         var dec = parseInt(c);
-        document.deff.q.value = "dec: "+dec+
+        setSearchWindowText("dec: "+dec+
           "  oct: "+dec.toString(8)+
           "  hex: "+dec.toString(16)+
-          "  bin: "+dec.toString(2);
+          "  bin: "+dec.toString(2));
       }
       else if (args.length == 2)
       {
         var r = parseInt(args[0]);
         var dec = parseInt(args[1]);
-        document.deff.q.value = dec.toString(r);
+        setSearchWindowText(dec.toString(r));
       }
     }
   ]]></script>

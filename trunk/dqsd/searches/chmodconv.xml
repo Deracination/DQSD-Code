@@ -49,13 +49,13 @@
 		  var owner = chmodconv_string_from_digit(q.charAt(0));
 		  var group = chmodconv_string_from_digit(q.charAt(1));
 		  var other = chmodconv_string_from_digit(q.charAt(2))
-		  document.deff.q.value = owner + group + other;
+		  setSearchWindowText(owner + group + other, true);
 	  } else if (q.match(/^((r|-)(w|-)(x|-)){3}$/)) {
 		  // calc num ie: 755
 		  var owner = chmodconv_digit_from_string(q.substr(0,3))*100;
 		  var group = chmodconv_digit_from_string(q.substr(3, 3))*10;
 		  var other = chmodconv_digit_from_string(q.substr(6, 3));
-		  document.deff.q.value = owner + group + other;
+		  setSearchWindowText(owner + group + other, true);
 	  } else {
 		nullArgs("chmodconv","?");
 	  }

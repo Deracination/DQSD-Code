@@ -51,7 +51,7 @@
 
     function blankIM(q)
     {
-      document.deff.q.value = "";
+      setSearchWindowText("");
       document.aolimf.screenname.value = "";
       document.aolimf.message.value = "";
       document.aolimf.submit();

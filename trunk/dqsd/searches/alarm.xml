@@ -31,7 +31,7 @@
       if( t.match(/^cancel *$/i) ) 
       {
         clearInterval(alNum);
-        document.deff.q.value="Alarm Canceled..";
+        setSearchWindowText("Alarm Canceled..");
         setTimeout("document.deff.q.value='';",1000);
       }
       else if( parsedLine = t.match(/(\d\d\:\d\d)\s*(.*)/) ) 
@@ -46,7 +46,7 @@
           alarmMsg = 'Alarm: ' + alarmTime + '\n\n' + parsedMsg;
           
         alarmOn();
-        document.deff.q.value="Alarm Set..";
+        setSearchWindowText("Alarm Set..");
         setTimeout("document.deff.q.value='';",1000);
       }
       else 

@@ -72,8 +72,7 @@
       }
       var passwd = passgen_generate(len, nouppercase, nolowercase, nonumbers, startuppercase, startlowercase, startnumbers);
       if (passwd != false) {
-          document.deff.q.value = passwd;
-          document.deff.q.createTextRange().select();
+        setSearchWindowText(passwd, true);
       } else {
         //alert("passgen_generate returned false");
         nullArgs("passgen", "?");

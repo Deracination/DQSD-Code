@@ -97,7 +97,7 @@
   	    {
   	      clearInterval(regetTracker[args_freq]);
   	      delete regetTracker[args_freq];
-  	      document.deff.q.value = "ReGet " + reget_code + "canceled!";
+  	      setSearchWindowText("ReGet " + reget_code + "canceled!");
   	      setTimeout("document.deff.q.value='';",1000);
   	      return true;
   	    }
@@ -154,7 +154,7 @@
         reget_code = "";
       else
       	reget_code = " " + reget_code;
-      document.deff.q.value = "To cancel: 'reget cancel" + reget_code + "'";
+      setSearchWindowText("To cancel: 'reget cancel" + reget_code + "'");
       setTimeout("document.deff.q.value='';",2000);
 
       return true;

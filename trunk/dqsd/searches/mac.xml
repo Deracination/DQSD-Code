@@ -42,8 +42,7 @@
       if (f.length == 1) { f = "0" + f; }
 
       newaddr = a + b + "." + c + d + "." + e + f;
-      document.deff.q.value = newaddr;
-      document.deff.q.createTextRange().select();
+      setSearchWindowText(newaddr, true);
       return true;
     }
     result = t.match(/([0-9a-f][0-9a-f])([0-9a-f][0-9a-f])\.([0-9a-f][0-9a-f])([0-9a-f][0-9a-f])\.([0-9a-f][0-9a-f])([0-9a-f][0-9a-f])/i);
@@ -51,8 +50,7 @@
     {
       // modify and return here
       newaddr = RegExp.$1 + ":" + RegExp.$2 + ":" + RegExp.$3 + ":" + RegExp.$4 + ":" + RegExp.$5 + ":" + RegExp.$6;
-      document.deff.q.value = newaddr;      
-      document.deff.q.createTextRange().select();
+      setSearchWindowText(newaddr, true);
       return true;
     }
     return false;
