@@ -12,6 +12,7 @@ clocklongwidth=139;  // long form is used if this pixel width is exceeded
 
 clocklongform=" EEE d MMM yyyy h:mm A ";
 clockshortform=" h:mm A ";
+clocktooltipform=" EEEE, MMMM d, yyyy h:mm A "; // Set to null or empty string ("") to turn off tooltip
 
 /*
 Some useful formatting codes:
