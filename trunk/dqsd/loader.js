@@ -47,7 +47,7 @@ function addalias(alias, fname)
       var url = fname;
       fname = INTERNAL_FUNC_PREFIX + (++internalShortcutIndex);
       var f = new Function("t", 
-                           "var url = '" + url + "';" +
+                           "var url = unescape('" + escape(url) + "');" +
                            "if (url.search(/%s/) >= 0 && t == '')" + 
                            "  alert('An argument is required for " + alias + "  (" + url + ")');" + 
                            "else" + 
@@ -61,7 +61,7 @@ function addalias(alias, fname)
       var cmd = fname;
       fname = INTERNAL_FUNC_PREFIX + (++internalShortcutIndex);
       var f = new Function("t", 
-                           "var cmd = '" + res[2] + "';" +
+                           "var cmd = unescape('" + escape(res[2]) + "');" +
                            res[1] + "(cmd.replace( /%s/g, t ));"
                           );
       eval( fname + " = f;" );
