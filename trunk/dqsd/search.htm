@@ -1,7 +1,7 @@
 <html>
 <!--
 Dave's Quick Search Deskbar
-Version 2.5.2 exploded - January 4, 2002
+Version 2.5.2 exploded more - January 4, 2002
 
 Copyright (c) 2002 David Bau
 
@@ -43,7 +43,7 @@ For the latest version and installation instructions, visit
 * Here are some more query codes you can use:
 
 </ul><center><table>
-# automatically generated
+# (this table is automatically generated)
 </table></center>
 
 <p>
@@ -75,7 +75,7 @@ The deskbar is customizable and completely open-source.
 
 defaultcal="yhocal";           // yahoo is the default calendar
 
-historylength=50;
+historylength=50;              // number of searches to remember
 
 clock=true;                    // set to false to remove clock
 clockdelay=5000;               // clock will appear after 5 secs
@@ -83,7 +83,7 @@ clockupdate=1000;              // clock will update every 1 sec
 clocklongwidth=139;            // pixels for the long form
 clocklongform=" EEE d MMM yyyy h:mm A "; // long clock format string
 clockshortform=" h:mm A ";     // short clock format string
-clocktooltipform="EEEE, MMMM d, yyyy h:mm A"; // tooltip clock format string
+clocktooltipform="";           // tooltip clock format string
 clockstyle="";                 // css style overrides for the clock
 
 txtfldstyle="";                // css style overrides for the text field
@@ -93,8 +93,10 @@ localsearchurl="localsearch.xml"; // local search file
 helptime=8500;                 // help message shows for 8.5 secs
 launchmode=2;                  // 0 = use ie; 1 = default browser; 2 = auto
 
-language = navigator.userLanguage.substr(0,2);
-showbutton = 2;
+language=navigator.userLanguage.substr(0,2);
+
+showbutton=2;
+buttonalign="right";
 
 cal=true;
 calwidth=179;
@@ -150,9 +152,7 @@ td
  padding-left:2px;
  padding-right:2px;
  padding-bottom:3px;
- margin-top:0px;
- margin-bottom:0px;
- margin-left:0px;
+ margin:0px;
  position:absolute;
  overflow:hidden;
 }
@@ -166,9 +166,7 @@ td
  padding-left:2px;
  padding-right:2px;
  padding-bottom:3px;
- margin-top:0px;
- margin-bottom:0px;
- margin-left:0px;
+ margin:0px;
  position:absolute;
  cursor:hand;
  text-align:right;
@@ -186,8 +184,7 @@ td
  border-color:threedface;
  background-color:threedface;
  color:buttontext;
- margin-bottom:0px;
- margin-left:0px;
+ margin:0px;
  position:absolute;
 }
 .mogobutton
@@ -202,8 +199,7 @@ td
  border-color:window;
  background-color:threedface;
  color:buttontext;
- margin-bottom:0px;
- margin-left:0px;
+ margin:0px;
  position:absolute;
 }
 .mdgobutton
@@ -218,8 +214,7 @@ td
  border-color:window;
  background-color:threedface;
  color:buttontext;
- margin-bottom:0px;
- margin-left:0px;
+ margin:0px;
  position:absolute;
 }
 </style>
@@ -264,14 +259,6 @@ function def()
   addhist(t);
 
   // no search: go to Google
-
-  /*
-  if (init || t == "")
-  {
-    openSearchWindow("http://www.google.com/");
-    return false;
-  }
-  */
 
   // question mark only: show help
   if (t == "?")         { about(); return false; }
@@ -515,6 +502,7 @@ function okp()
     return false;
   }
 
+  // handle ctrl-p and ctrl-n for history
   if (window.event.keyCode == 16)
     advhist(-1);
   else
@@ -525,6 +513,10 @@ function okp()
     document.deff.q.value = ".";
 
   document.deff.q.value = currhist();
+  range = document.selection.createRange();
+  if (range.parentElement().name != "q") { alert ("foo"); return false; }
+  range.collapse(false);
+  range.scrollIntoView(false);
   return false;
 }
 
@@ -737,7 +729,7 @@ if (dopopup)
    <td id=info style="display:none">
     <img width=0 height=36><br>
     <b><a style=text-decoration:none;color:black href=http://notesbydave.com/toolbar/searchdoc.htm target=_blank tabindex=-1>
-      Dave's Quick Search Taskbar Toolbar</a></b>
+      Dave's Quick Search Taskbar Toolbar Deskbar</a></b>
     <br>
     Designed to be placed on the Windows taskbar.<br>
     For documentation,
@@ -787,13 +779,8 @@ function rsz()
        gowidth = 0.0;
 
     originaltextheight = document.deff.q.offsetHeight;
-
-    // use script to work around padding change in ie5.5
-    if (ie_version >= 5.5)
-    {
-      originaltextheight = originaltextheight + 3;
-      document.deff.q.style.height = originaltextheight;
-    }
+    originaltextheight = originaltextheight + 3;
+    document.deff.q.style.height = originaltextheight;
   }
 
   if (document.body.clientHeight > 256 && document.body.clientWidth > 256)
@@ -818,13 +805,23 @@ function rsz()
     if((showbutton == 1) || ((showbutton == 2) && (targetwidth >= clocklongwidth)))
     {
       document.deff.gobutton.style.display ="inline";
-      document.deff.gobutton.style.left    = targetwidth;
+      if (buttonalign == "left")
+      {
+        document.deff.q.style.left         = gowidth;
+        document.deff.gobutton.style.left  = 0;
+      }
+      else
+      {
+        document.deff.q.style.left         = 0;
+        document.deff.gobutton.style.left  = targetwidth;
+      }
       document.deff.gobutton.style.top     = 0;
       document.deff.gobutton.style.height  = document.deff.q.offsetHeight;
     }
     else
     {
       document.deff.gobutton.style.display = "none";
+      document.deff.q.style.left           = 0;
       targetwidth                          = document.body.clientWidth;
     }
   }

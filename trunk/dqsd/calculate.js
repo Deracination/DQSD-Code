@@ -24,6 +24,7 @@ function calculate(expr)
   {
     document.deff.q.value = expr + "=ERR=";
   }
+  document.deff.q.createTextRange().select();
 }
 
 // constants for use in calculator

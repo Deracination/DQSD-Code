@@ -19,7 +19,7 @@ if (!Array.prototype.push)
 {
   function array_push()
   {
-    for (i=0; i<arguments.length; i++)
+    for (var i=0; i<arguments.length; i++)
       this[this.length] = arguments[i];
     return this.length;
   }
@@ -128,7 +128,7 @@ function readTabDelimitedFile(filename)
   fileText = fileText.replace(/\r\n/g,"\n");
   var fileLines = fileText.split("\n");
   var fileTable = [];
-  for (i = 0; i < fileLines.length; i++)
+  for (var i = 0; i < fileLines.length; i++)
   {
     fileTable.push(fileLines[i].split("\t"));
   }
