@@ -13,8 +13,8 @@
 LPCTSTR CMenuBuilder::DQSD_REG_KEY = _T("CLSID\\{226b64e8-dc75-4eea-a6c8-abcb4d1d37ff}");
 LPCTSTR CMenuBuilder::DQSD_SEC_KEY = _T("CLSID\\{226b64e8-dc75-4eea-a6c8-abcb4d1d37ff}\\SecureFiles");
 
-#define TOOLBAR_TRACKER_WINDOW_CLASS_NAME		"DQSDMenuTrackerClass"
-#define TOOLBAR_TRACKER_WINDOW_NAME				"DQSDMenuTracker"
+#define TOOLBAR_TRACKER_WINDOW_CLASS_NAME		_T("DQSDMenuTrackerClass")
+#define TOOLBAR_TRACKER_WINDOW_NAME				_T("DQSDMenuTracker")
 
 HWND		CMenuBuilder::m_hTooltipWnd;
 
@@ -122,7 +122,7 @@ STDMETHODIMP CMenuBuilder::Display(LPDISPATCH pDispDocument, VARIANT* pvarSelect
 	int iMenuItem = ::TrackPopupMenuEx( m_hMain, menuOptions, nMenuX, rcParentWnd.top, hPopupLinkedWindow, NULL );
 	if ( iMenuItem > 0 )
 	{
-		bstrSelection = ::SysAllocString( T2CW( m_mapKeys[ iMenuItem ].c_str() ) );
+		bstrSelection = A2BSTR( m_mapKeys[ iMenuItem ].c_str() );
 
 		VariantInit( pvarSelection );
 		pvarSelection->bstrVal = bstrSelection;
@@ -150,8 +150,8 @@ STDMETHODIMP CMenuBuilder::AppendMenuItem(BSTR bstrItem, BSTR bstrKey, BSTR bstr
 		return E_FAIL;
 
 	m_nMenuItem++;
-	m_mapKeys[ m_nMenuItem ] = std::string( W2T( bstrKey ) );
-	m_toolTips[m_nMenuItem] = std::string( W2T( bstrToolTip ) );
+	m_mapKeys[ m_nMenuItem ] = std::string( OLE2A( bstrKey ) );
+	m_toolTips[m_nMenuItem] = std::string( OLE2A( bstrToolTip ) );
 
 	return S_OK;
 }
@@ -588,8 +588,8 @@ STDMETHODIMP CMenuBuilder::InsertMenuItem(BSTR bstrItem, BSTR bstrKey, BSTR bstr
 		return E_FAIL;
 
 	m_nMenuItem++;
-	m_mapKeys[ m_nMenuItem ] = std::string( W2T( bstrKey ) );
-	m_toolTips[m_nMenuItem] = std::string( W2T( bstrToolTip ) );
+	m_mapKeys[ m_nMenuItem ] = std::string( OLE2A( bstrKey ) );
+	m_toolTips[m_nMenuItem] = std::string( OLE2A( bstrToolTip ) );
 
 	return S_OK;
 }
