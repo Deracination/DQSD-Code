@@ -134,14 +134,7 @@ Section "Quick Search Deskbar (required)"
   File "..\helpbox.js"
   File "..\helpmenu.js"
   File "..\history.js"
-  File "..\holidays.ausnsw.xml"
-  File "..\holidays.fr.xml"
-  File "..\holidays.ca.xml"
-  File "..\holidays.it.xml"
-  File "..\holidays.nl.NL.xml"
-  File "..\holidays.nl.EN.xml"
-  File "..\holidays.sg.xml"
-  File "..\holidays.us.xml"
+  File "..\holidays.*.xml"
   File "..\loader.js"
   File "..\maximized.htm"
   File "..\preferences.js"
@@ -231,6 +224,7 @@ Section "Quick Search Deskbar (required)"
   Delete $INSTDIR\searches\ifl.xml
   Delete $INSTDIR\searches\law.xml
   Delete $INSTDIR\searches\lottery.xml
+  Delete $INSTDIR\searches\mb.xml
   Delete $INSTDIR\searches\man.xml
   Delete $INSTDIR\searches\map.xml
   Delete $INSTDIR\searches\palm.xml
@@ -317,14 +311,7 @@ Section "Uninstall"
   Delete /REBOOTOK $INSTDIR\helpbox.js
   Delete /REBOOTOK $INSTDIR\helpmenu.js
   Delete /REBOOTOK $INSTDIR\history.js
-  Delete /REBOOTOK $INSTDIR\holidays.ausnsw.xml
-  Delete /REBOOTOK $INSTDIR\holidays.fr.xml
-  Delete /REBOOTOK $INSTDIR\holidays.ca.xml
-  Delete /REBOOTOK $INSTDIR\holidays.it.xml
-  Delete /REBOOTOK $INSTDIR\holidays.nl.NL.xml
-  Delete /REBOOTOK $INSTDIR\holidays.nl.EN.xml
-  Delete /REBOOTOK $INSTDIR\holidays.sg.xml
-  Delete /REBOOTOK $INSTDIR\holidays.us.xml
+  Delete /REBOOTOK $INSTDIR\holidays.*.xml
   Delete /REBOOTOK $INSTDIR\loader.js
   Delete /REBOOTOK $INSTDIR\maximized.htm
   Delete /REBOOTOK $INSTDIR\menu.txt
