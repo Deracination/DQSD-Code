@@ -172,14 +172,23 @@ if (searchRoot)
     // ??? This seems like a hack, but the only way I can determine to load and evaluate
     // external scripts (referenced with the 'src' attribute), is by manually loading them.
     var externalScriptRef = xscripts[iPrivate].attributes.getNamedItem("src");
+    var xScriptVal;
     if ( externalScriptRef )
     {
-      eval( readFile( externalScriptRef.text ) );
-    }
-    else
-    {
-      eval( xscripts[iPrivate].text );
-    }
+		xScriptVal = readFile( externalScriptRef.text );
+	}
+	else
+	{
+		xScriptVal = xscripts[iPrivate].text;
+	}
+	try
+	{
+		eval(xScriptVal);
+	}
+	catch(e)
+	{
+		alert("An error ("+e+") occurred loading script '"+xScriptVal+"'");
+	}
   }
 
 // ??? This XQuery will only allow the searches that are enabled to be evaluated.  This should
