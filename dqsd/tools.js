@@ -139,6 +139,27 @@ function writeFile(filename, contents)
     throw "Unable to write file " + filename;
 }
 
+// Here's a quick hack to append to an existing file, but
+// is very slow because it rewrites the whole file.  If
+// this is needed for anything but debugging, the component
+// should be modified to have something like an AppendToFile 
+// method.
+function appendToFile(filename, contents)
+{
+  if (ensureLauncher())
+  {
+  	var curr = '';
+  	try
+  	{
+      curr = DQSDLauncher.ReadFile(filename);
+    }
+    catch (e) {}
+    DQSDLauncher.WriteFile(filename, curr + contents);
+  }
+  else
+    throw "Unable to append to file " + filename;
+}
+
 // get files
 function getFiles(directory)
 {
