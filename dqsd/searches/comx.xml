@@ -294,6 +294,7 @@
               case "adamathome": imgtitle="Adam at Home";site="ucomics";imgkey="ad";break;
               case "annie": imgtitle="Annie";site="ucomics";imgkey="tmann";break;
               case "baldo": imgtitle="Baldo";site="ucomics";imgkey="ba";ucsunwindowH=298;break;
+              case "bigpicture": imgtitle="Big Picture";site="ucomics";imgkey="bi";windowH=203;ucsunwindowH=298;break;
               case "bigtop": imgtitle="Big Top";site="ucomics";imgkey="bt";ucsunwindowH=298;break;
               case "boondocks": imgtitle="Boondocks";site="ucomics";imgkey="bo";ucsunwindowH=298;break;
               case "boundandgagged": imgtitle="Bound and Gagged";site="ucomics";imgkey="tmbou";ucsunwindowH=296;break;
@@ -312,7 +313,7 @@
               case "fuscobrothers": imgtitle="Fusco Brothers";site="ucomics";imgkey="fu";ucsunwindowH=406;break;
               case "garfield": imgtitle="Garfield";site="ucomics";imgkey="ga";windowH=179;ucsunwindowH=399;break;
               case "gasolinealley": imgtitle="Gasoline Alley";site="ucomics";imgkey="tmgas";break;
-              case "heartofthecity": imgtitle="Heart of the City";site="ucomics";imgkey="hc";ucsunwindowW=400;ucsunwindowH=825;break;
+              case "heartofthecity": imgtitle="Heart of the City";site="ucomics";imgkey="hc";windowH=197;ucsunwindowW=600;ucsunwindowH=293;break;
               case "helenoftheinternet": imgtitle="Helen of the Internet";site="ucomics";imgkey="tmhel";break;
               case "housebroken": imgtitle="Housebroken";site="ucomics";imgkey="tmhou";break;
               case "inthebleachers": imgtitle="In the Bleachers";site="ucomics";imgkey="bl";windowW=300;windowH=385;ucsunwindowH=285;break;
