@@ -1,151 +1,98 @@
 <search function="js">
   <name>Jobserve</name>
-  <description>European specialist job site: "js /s:java netherlands /d:3 /j:c"</description>
+  <description>
+    European specialist job site. The /market switch is required.<br/>
+    <a class="helpboxDescLabels">Usage:</a><br/>
+  	<table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">js &lt;<i>job</i>&gt; /market:&lt;<i>market</i>&gt; [{/permanent | /contract}] [/latest]</td></tr>
+  	</table>
+    <a class="helpboxDescLabels">Switches:</a><br/>
+  	<table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">/market</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">
+        A required switch. Select the job market to search using one of the following codes:<br/>
+        <table class="helpBoxDescTable">
+  		    <tr><td class="helpboxDescColumns"><b>it</b></td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Information Technology</td></tr>
+          <tr><td class="helpboxDescColumns"><b>acc</b></td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Accountancy</td></tr>
+          <tr><td class="helpboxDescColumns"><b>eng</b></td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Engineering</td></tr>
+          <tr><td class="helpboxDescColumns"><b>sal</b></td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Sales &amp; Marketing</td></tr>
+          <tr><td class="helpboxDescColumns"><b>fin</b></td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Finance &amp; Insurance</td></tr>
+          <tr><td class="helpboxDescColumns"><b>sec</b></td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Office &amp; Administration</td></tr>
+          <tr><td class="helpboxDescColumns"><b>leg</b></td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Legal</td></tr>
+          <tr><td class="helpboxDescColumns"><b>med</b></td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Medical</td></tr>
+  	    </table>
+      </td></tr>
+      <tr><td class="helpboxDescColumns">/permanent</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Search for permanent positions only.</td></tr>
+      <tr><td class="helpboxDescColumns">/contract</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Search for temporary/contract positions only.</td></tr>
+      <tr><td class="helpboxDescColumns">/latest</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Search for the latest additions instead the best overall matches.</td></tr>
+  	</table>
+    <a class="helpboxDescLabels">Example:</a><br/>
+    <table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">js programmer /market:it</td></tr>
+      <tr><td class="helpboxDescColumns">js legal secretary /market:leg /permanent /latest</td></tr>
+  	</table>
+  </description>
   <category>Other</category>
   <link>http://www.jobserve.com</link>
-  <contributor>Tom Corcoran</contributor>
+  <contributor>Tom Corcoran, Ryan Edwards</contributor>
+  
   <form name="jsf"
         method="get">
     <input type="hidden" name="page" value="1"/>
     <input type="hidden" name="q" value=""/>
     <input type="hidden" name="jobType" value=""/>
     <input type="hidden" name="order" value=""/>
-    <input type="hidden" name="d" value=""/>
+    <input type="hidden" name="d" value="5"/>
   </form>
+  
   <script><![CDATA[
-   
     function js(q)
     {
-      // initialize to allow for repeated calls
-      var parsedVars;
-      var jobType = "";
-      var order = "Rank";
-      var numberDays = "0";
-      var searchText = "";
-
       document.jsf.action = "http://www.it.jobserve.com/jobserve/searchresults.asp";
-    
-      if ( q == "" )
-        openSearchWindow("http://www.jobserve.com");
+      document.jsf.jobType.value = "*";
+      document.jsf.order.value = "Rank";
+      var jobMarket = null;
+
+      if( nullArgs("js",q) )
+        return false;
       else
       {
-        if ( parsedVars = q.split( '/' ) )
+        var args = parseArgs(q, "market, contract, permanent, latest");
+        
+        if( args.switches.length > 0 )
+          for( var j=0; j<args.switches.length; j++ )
+            switch( args.switches[j].name )
+            {
+              case "market":
+                if(jobMarket) 
+                { 
+                  nullArgs("js","?"); 
+                  return false; 
+                } 
+                else
+                  jobMarket = args.switches[j].value;
+                break;
+                
+              case "contract": document.jsf.jobType.value = "C"; break;
+              case "permanent": document.jsf.jobType.value = "P"; break;
+              case "latest": document.jsf.order.value = "DateTime"; break;
+            }
+        
+        switch( jobMarket )
         {
-          // cycle through number of switches entered (max 4 switches + search text)
-          for ( var i = 0; i <= parsedVars.length-1 && i <= 4; i++ )
-          {
-            // if first split is "" then no text prior to first switch
-            if ( parsedVars[i] == "" )
-              continue;
-            
-            // used if no switches - eg. "js java"   
-            if ( parsedVars.length == 1 )
-            {
-              searchText = parsedVars[0]; 
-              continue;
-            }
-
-            // check if see which job market
-
-            if ( parsedVars[i].substr(0,3) == 'it:' ) 
-            {
-              document.jsf.action = "http://www.it.jobserve.com/jobserve/searchresults.asp";
-              continue;
-            }
-
-            if ( parsedVars[i].substr(0,4) == 'acc:' ) 
-            {
-              document.jsf.action = "http://www.accountancy.jobserve.com/jobserve/searchresults.asp";
-              continue;
-            }
-
-            if ( parsedVars[i].substr(0,4) == 'eng:' ) 
-            {
-              document.jsf.action = "http://www.engineering.jobserve.com/jobserve/searchresults.asp";
-              continue;
-            }
-
-            if ( parsedVars[i].substr(0,4) == 'sal:' ) 
-            {
-              document.jsf.action = "http://www.sales.jobserve.com/jobserve/searchresults.asp";
-              continue;
-            }
-
-            if ( parsedVars[i].substr(0,4) == 'fin:' ) 
-            {
-              document.jsf.action = "http://www.financial.jobserve.com/jobserve/searchresults.asp";
-              continue;
-            }
-
-            if ( parsedVars[i].substr(0,4) == 'sec:' ) 
-            {
-              document.jsf.action = "http://www.secretarial.jobserve.com/jobserve/searchresults.asp";
-              continue;
-            }
-
-            if ( parsedVars[i].substr(0,4) == 'leg:' ) 
-            {
-              document.jsf.action = "http://www.legal.jobserve.com/jobserve/searchresults.asp";
-              continue;
-            }
-
-            if ( parsedVars[i].substr(0,4) == 'med:' ) 
-            {
-              document.jsf.action = "http://www.medical.jobserve.com/jobserve/searchresults.asp";
-              continue;
-            }
-
-            // check for job type
-            if ( parsedVars[i].substr(0,2) == 'j:' ) 
-            {
-              // can be c (contract) or p (permanent)
-              if ( ( parsedVars[i].substr(2,1) == 'c' ) || ( parsedVars[i].substr(2,1) == 'p' ) ) 
-                jobType = parsedVars[i].substr(2,1).toUpperCase();
-              else
-                jobType = "*";
-              continue;
-            }
-
-            // check sort order
-            if ( parsedVars[i].substr(0,2) == 'o:' ) 
-            {
-              // can be l (lastest jobs) or b (best match)
-              if ( parsedVars[i].substr(2,1) == "l" )
-                order = "DateTime";
-              else { if ( parsedVars[i].substr(2,1) == "b" ) 
-                       order = "Rank";
-                   }
-              continue;
-            }
-
-            // check # Working Days
-            if ( parsedVars[i].substr(0,2) == 'd:' ) 
-            {
-              // can get jobs for 0 (today) up to & including last 5 days
-              if ( (parsedVars[i].substr(2,1) >= 0) && (parsedVars[i].substr(2,1) <= 5) ) 
-                numberDays = ( parsedVars[i].substr(2,1) );
-              continue;
-            }
-            
-            if ( parsedVars[i].substr(0,2) == 's:' ) 
-            {
-              searchText = parsedVars[i].substr(2,parsedVars[i].length-1); 
-              continue;
-            }
-            // if got here then search text entered without /s and other switches
-            searchText = parsedVars[i]; 
-
-          } // end for 
-        } // end if ( parsedVars = q.split( '/' ) )
-
-        document.jsf.q.value = searchText;
-        document.jsf.jobType.value = jobType;
-        document.jsf.order.value = order;
-        document.jsf.d.value = numberDays;
-
-        submitForm( jsf );
-
-      } // end else
+          case "it": document.jsf.action = "http://www.it.jobserve.com/jobserve/searchresults.asp"; break;
+          case "acc": document.jsf.action = "http://www.accountancy.jobserve.com/jobserve/searchresults.asp"; break;
+          case "eng": document.jsf.action = "http://www.engineering.jobserve.com/jobserve/searchresults.asp"; break;
+          case "sal": document.jsf.action = "http://www.sales.jobserve.com/jobserve/searchresults.asp"; break;
+          case "fin": document.jsf.action = "http://www.financial.jobserve.com/jobserve/searchresults.asp"; break;
+          case "sec": document.jsf.action = "http://www.secretarial.jobserve.com/jobserve/searchresults.asp"; break;
+          case "leg": document.jsf.action = "http://www.legal.jobserve.com/jobserve/searchresults.asp"; break;
+          case "med": document.jsf.action = "http://www.medical.jobserve.com/jobserve/searchresults.asp"; break;
+          default: nullArgs("js","?"); return false;
+        }
+      }
+      
+      document.jsf.q.value = args.q;
+      submitForm(jsf);
     }
   ]]></script>
 </search>
