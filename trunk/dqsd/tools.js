@@ -218,3 +218,31 @@ function protocolHandled(url)
 
   return true;
 }
+
+function parseArgs(q, validSwitches)
+{
+  var args = [q];
+  var tmpq = q;
+  
+  // Remove spaces from list of valid switches
+  validSwitches = validSwitches.replace(/\s*/g, '');
+
+  // Grab each token that looks like a switch (/\w+)
+  var reSwitch = /\/(\w+)\s*/;
+  var res = null;
+  while (res = tmpq.match(reSwitch))
+  {
+    // Return full switch if it's in the list of valid switches
+    var fullswitch = (','+validSwitches+',').match(new RegExp(',('+res[1]+'\\w*),'));
+  	if (fullswitch && fullswitch[1])
+  	  args.push(fullswitch[1]);
+    
+    // Drop switch we just found
+    tmpq = tmpq.replace(reSwitch, '');
+  }
+  
+  // Trim the remaining string which now the string without switches
+  args[0] = tmpq.replace(/^\s*/, '').replace(/\s*$/, '');
+
+  return args;
+}
