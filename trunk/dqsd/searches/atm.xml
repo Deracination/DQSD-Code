@@ -1,0 +1,31 @@
+<search function="atm">
+	<description>Search for information on almost any subject: "atm civil war"</description>
+	<name>Atomica search</name>
+	<link>http://www.atomica.com/</link>
+	<category>Reference</category>
+	<contributor>Chris Farmer</contributor>
+	<form name="atomf"
+				action="http://lookup.atomica.com/atomica/frame.pl"
+				method="get"
+				target="_blank">
+		<input name="s" type="hidden" />
+		<input name="gwp" type="hidden" value="0" />
+		<input name="cbid" type="hidden" value="" />
+		<input name="fw" type="hidden" value="-1" />
+		<input name="bRegistered" type="hidden" value="1" />
+	</form>
+	<script><![CDATA[
+		function atm(q)
+		{
+			if (q == "")
+			{
+				openSearchWindow("http://www.atomica.com/");
+			}
+			else
+			{
+				document.atomf.s.value=q;
+				submitForm(atomf);
+			}
+		}
+	]]></script>
+</search>
