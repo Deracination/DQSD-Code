@@ -36,6 +36,7 @@ New Searches
 * nyse - enter a company name and get the lookup symbol and a short description of that company (from viking mel)
 * tucows - search tucows (from Sarah S.)
 * ubs - search for used books at http://www.used-books.org.uk/cgi/books.cgi
+* encyfr - Search the encyclopédie Voila with Hachette Multimédia
 
 Bug Fixes
 
@@ -55,6 +56,7 @@ Modified Searches
 * freetrans - updated to work again (from Brent Beardsley)
 * yg - added mygroups switch to go to mygroups page (from Brent Beardsley)
 * php - added ability to search through the Smarty manual and for PEAR packages
+* telfr - updated accordingly to the web site
 
 Miscellaneous
 
