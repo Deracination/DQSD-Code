@@ -1,0 +1,74 @@
+<search function="abt">
+  <name>About</name>
+  <category>Reference<category>General</category></category>
+  <contributor>John W. Bairen, Jr.</contributor>
+  <link>http://www.about.com</link>
+  <email>john_at_bairen_dot_net</email>
+  <description>
+  Search www.about.com.
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/about</td><td> - </td><td>Search the About.com site.</td></tr>
+      <tr><td>/internet</td><td> - </td><td>Search the Internet.</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>abt Jupiter</td></tr>
+      <tr><td>abt Jupiter /internet</td></tr>
+    </table>
+  </description>
+  <form name="abtf"
+        method="get"
+        action="http://search.about.com/fullsearch.htm">
+    <input type="hidden" name="TopNode" value="/" />
+    <input type="hidden" name="zu" value="" />
+    <input type="hidden" name="zi" value="" />
+    <input type="hidden" name="terms" value="" />
+    <input type="hidden" name="type" value="0" />
+    
+  </form>
+  <script><![CDATA[
+    function abt(q)
+    {
+      if( nullArgs("abt", q) )
+        return;
+
+      var args = parseArgs(q, "about, internet");
+      if ( args.switches.length > 0 )
+      {
+        switch( args.switches[0].name )
+        {
+          case "about":
+            document.abtf.TopNode.value = "%2F";
+            document.abtf.terms.value = args.q;
+		    break;
+          case "internet":
+            document.abtf.TopNode.value = "N";
+            document.abtf.terms.value = args.q;
+		    break;
+          default:
+            document.abtf.TopNode.value = "%2F";
+            document.abtf.terms.value = args.q;
+		    break;
+        }
+      }
+
+      else
+      {
+        document.abtf.TopNode.value = "%2F";
+        document.abtf.terms.value = q;
+      }
+
+      submitForm(abtf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 03/08/03 at 11:28:53
+    by Dave's Quick Search Deskbar Search Wizard version 1.0.1 ,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>
