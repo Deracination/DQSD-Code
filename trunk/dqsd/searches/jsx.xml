@@ -1,0 +1,29 @@
+<search function="jsx">
+  <name>Execute Javascript</name>
+  <description>
+    Execute a javascript script.<br/>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>jsx "pneumonoultramicroscopicsilicovolcanoconiosis".length</td></tr>
+      <tr><td>jsx alert("Hello world !")</td></tr>
+      <tr><td>jsx var info="Hello world !";alert(info)</td></tr>
+    </table>
+  </description>
+  <category>Computers<category>Programming</category></category>
+  <link></link>
+  <contributor>MLL</contributor>
+
+  <script><![CDATA[
+    function jsx(q)
+    {
+      if( nullArgs( "jsx", q ) ) return false;
+      setSearchWindowText(eval(q));
+    }
+  ]]></script>
+
+  <copyright>
+	Copyright (c) 2002 David Bau
+	Distributed under the terms of the
+	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>
