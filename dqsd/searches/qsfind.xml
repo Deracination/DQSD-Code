@@ -61,13 +61,13 @@
         }
       }
 
-        //  Define the popup's final width
-        var windowW = 350;
-        var QSFPopup = window.createPopup();
-        var QSFPopupBody = QSFPopup.document.body;
+      //  Define the popup's final width
+      var windowW = 350;
+      var QSFPopup = window.createPopup();
+      var QSFPopupBody = QSFPopup.document.body;
 
-        var QFSBodyCode = "<table id=qstable border=0 cellspacing=1 cellpadding=2 width=100% height=100%>";
-        QFSBodyCode += "<tr><td valign=top><style>" + convertStylesToInline() + "</style>";
+      var QFSBodyCode = "<table id=qstable border=0 cellspacing=1 cellpadding=2 width=100% height=100%>";
+      QFSBodyCode += "<tr><td valign=top><style>" + convertStylesToInline() + "</style>";
 
       if (SearchFound)
       {
