@@ -135,6 +135,24 @@ function writeFile(filename, contents)
     throw "Unable to write file " + filename;
 }
 
+// get files
+function getFiles(directory)
+{
+  if (ensureLauncher())
+  {
+    try
+    {
+      return DQSDLauncher.GetFiles(directory);
+    }
+    catch (e)
+    {
+      return "";
+    }
+  }
+  else
+    throw "Unable to get files from directory " + directory;
+}
+
 // read tab-delimited file
 function readTabDelimitedFile(filename)
 {
