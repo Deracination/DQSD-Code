@@ -1,0 +1,1610 @@
+<html>
+<!--
+Dave's Quick Search Taskbar Toolbar
+Version 2.0.0 - July 22, 2001
+
+Copyright (c) 2001 David Bau
+
+Distributed under the terms of the
+GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.html)
+
+----
+
+This page should be installed on the Windows
+Explorer Taskbar. (That is the gray bar at the bottom of
+your desktop.) It lets you type searches directly into a
+little textbox next to your Start button.
+
+<ul>
+* Type in your search terms and hit Enter to do a Google
+  Search.
+
+* If you're feeling lucky, go directly to Google's first
+  hit by tacking an exclamation point onto your query
+  ("Crest toothpaste!").
+
+* Look up phone numbers and email by using #
+  or @ at the end of the name ("Piper Smith (Ithaca, NY)#",
+  "Bob Jones@"). Two @@ uses Bigfoot.
+
+* Here are some more query suffixes you can use:
+</ul>
+<center>
+<table border=1 cellspacing=0 cellpadding=2>
+<tr><td>?</td><td>Yahoo Search</td>
+<td>&gt</td><td>Google Advanced Search</td></tr>
+<tr><td>??</td><td>Google Web Directory</td>
+<td>.</td><td>CNN News search</td></tr>
+<tr><td>???</td><td>Ask Jeeves</td>
+<td>$</td><td>Bloomberg Stock Quotes</td></tr>
+<tr><td>:</td><td>Merriam Webster Dictionary</td>
+<td>*</td><td>AccuWeather forecast</td></tr>
+<tr><td>;</td><td>Thesaurus.com</td>
+<td>,</td><td>Newsgroup search</td></tr>
+<tr><td>"</td><td>Bartlett's quotations</td>
+<td>$$&nbsp;</td><td>Price comparisons</td></tr>
+<tr><td>[</td><td>Encyclopedia.com</td>
+<td>&lt;</td><td>MSDN DHTML reference</td></tr>
+</table>
+</center>
+
+For the latest version and installation instructions, visit
+<a href=http://notesbydave.com/toolbar/searchdoc.htm target=DavesDoc onclick=window.close()>
+Dave's site</a>.#
+-->
+
+
+<title>Search</title>
+
+<style>
+body
+{
+ margin: 0;
+ border: 0;
+ padding: 0;
+ background-color: threedface;
+}
+td
+{
+ font: menu;
+}
+.btn
+{
+ font: caption;
+ padding-bottom: 1px;
+ padding-top: 1px;
+ padding-right: 1px;
+ padding-left: 1px;
+ border: 2px; 
+ border-style: outset;
+ background-color: threedface
+ color: buttontext;
+ margin-bottom: 0px;
+ margin-left: 2px;
+}
+.txtfld
+{
+ font: caption;
+ background-color: window;
+ color: windowtext;
+ border-style: inset;
+ padding-top:2px;
+ padding-left:2px;
+ padding-right:2px;
+ padding-bottom:3px;
+ margin-top:-1px;
+ margin-bottom:0px;
+ margin-left:0px;
+}
+</style>
+
+<!-- compatibility to take into account IE 5.5 css changes -->
+
+<![if lt IE 5.5000]>
+<style>
+.btn
+{
+ padding-bottom: 0px;
+}
+.txtfld
+{
+ padding: 2px;
+ padding-bottom: 3px;
+}
+</style>
+<![endif]>
+
+<body onload=strt() scroll=no>
+
+<script>
+init = true;
+selfdrag = false;
+
+
+// def() called when the user hits "enter" in the textbox
+function def()
+{
+  var t = document.deff.q.value;
+
+  addhist(t);
+
+  // no search: go to Google
+
+  if (init || t == "")
+  {
+    window.open("http://www.google.com/");
+    return false;
+  }
+
+  // question mark only: show help
+  if (t == "?")         { abt(); return false; }
+
+  // detect URLs, filenames, etc to open directly
+  if (direct(t)) return false;
+
+  // detect strings that look like phone numbers
+  if (phoneno(t)) return false;
+
+  // detect various special prefixes/suffixes
+  if (shortcut(t, "~",   srb)) return false;
+  if (shortcut(t, "-",   faq)) return false;
+  if (shortcut(t, ",",   nsg)) return false;
+  if (shortcut(t, "<",   mws)) return false;
+  if (shortcut(t, "%",   eby)) return false;
+  if (shortcut(t, "$$",  dlt)) return false;
+  if (shortcut(t, ">",   adv)) return false;
+  if (shortcut(t, "/",   yhd)) return false;
+  if (shortcut(t, "&",   che)) return false;
+  if (shortcut(t, "'",   fmq)) return false;
+  if (shortcut(t, "[",   enc)) return false;
+  if (shortcut(t, ";",   ths)) return false;
+  if (shortcut(t, ":",   mwd)) return false;
+  if (shortcut(t, "$",   stk)) return false;
+  if (shortcut(t, "*",   acw)) return false;
+  if (shortcut(t, ".",   cnn)) return false;
+  if (shortcut(t, "+",   map)) return false;
+  if (shortcut(t, "@@",  bfe)) return false;
+  if (shortcut(t, "@",   yhe)) return false;
+  if (shortcut(t, "^",   swc)) return false;
+  if (shortcut(t, "##",  swb)) return false;
+  if (shortcut(t, "#",   swp)) return false;
+  if (shortcut(t, "=",   clc)) return false;
+  if (shortcut(t, "???", ask)) return false;
+  if (shortcut(t, "??",  gwd)) return false;
+  if (shortcut(t, "?",   yho)) return false;
+  if (shortcut(t, "!",   ifl)) return false;
+  
+  // default: Google search
+  goo(document.deff.q.value);
+  return false;
+}
+
+
+// detect and strip suffix or prefix and call function
+function shortcut(t, s, f)
+{
+  var doit = false;
+  var q;
+  if (t.length >= s.length)
+  {
+    if (t.slice(t.length-s.length) == s)
+    {
+      q = t.slice(0, -s.length);
+      doit = true;
+    }
+    else if (t.slice(0, s.length) == s)
+    {
+      q = t.slice(s.length);
+      doit = true;
+    }
+  }
+
+  if (doit)
+  {
+    q = q.replace(/^\s*/, '').replace(/\s*$/, '');
+    f(q);
+    return true;
+  }
+
+  return false;
+}
+
+
+// a way of executing a specific search
+// while adding the right symbol to the history
+function mnu(text, sym)
+{
+  addhist(document.deff.q.value + sym);
+  eval(text + "(document.deff.q.value);");
+}
+
+
+// detect URLs, local filenames, etc to open directly
+function direct(t)
+{
+  // detect strings that look like URLs or filenames
+  prot = new RegExp("^(http://|https://|ftp://)([\\-a-z0-9]+\\.)*[\\-a-z0-9]+" +
+                    "|^[a-z]:($|\\\\)" +
+                    "|^\\\\\\\\[a-z]+($|\\\\($|[a-z]+($|\\\\)))", "i");
+  if (prot.exec(t))
+  {
+    window.open(t);
+    return true;
+  }
+ 
+  // detect strings that look like DNS names
+  dns = new RegExp("^www\.([\\-a-z0-9]+\\.)+[\\-a-z0-9]+$" +
+                   "|^([\\-a-z0-9]+\\.)+(com|net|org|edu|gov|mil|[a-z]{2})$", "i");
+  if (dns.exec(t))
+  {
+    window.open("http://" + t);
+    return true;
+  }
+  return false;
+}
+
+
+// detect phone numbers to do a reverse lookup on
+function phoneno(t)
+{
+  // detect strings that look like phone numbers
+  phn = new RegExp("^([0-9]{3})\\s*-?\\s*([0-9]{3}\\s*-?\\s*[0-9]{4})$" +
+                  "|^\\(([0-9]{3})\\)\\s*([0-9]{3}\\s*-?\\s*[0-9]{4})$", "");
+  res = phn.exec(t);
+  if (res)
+  {
+    if (res[1])
+    {
+      ac=res[1];
+      pn=res[2];
+    }
+    else
+    {
+      ac=res[3];
+      pn=res[4];
+    }
+    rvsphn(ac, pn);
+    return true;
+  }
+  return false;
+}
+
+
+// fancy UI: history and cut and paste (via arrow and control keys)
+
+hist = new Array(50);
+histedit = new Array(hist.length);
+hist[0] = "";
+histcount = 1;
+histcurr = 0;
+histend = 0;
+
+// add an item to the history
+function addhist(t)
+{
+  var i;
+  for (i = 0; i < histcount; i++)
+    histedit[i] = null;
+  hist[histend] = t;
+  histend = histend + 1;
+  if (histend >= hist.length)
+      histend = 0;
+  histcurr = histend;
+  hist[histend] = "";
+  if (histcount < hist.length)
+    histcount = histcount + 1;
+}
+
+// get the current history entry
+function currhist()
+{
+  if (histedit[histcurr])
+      return histedit[histcurr];
+  return hist[histcurr];
+}
+
+// advance the currently viewed history entry +1 or -1
+function advhist(i)
+{
+  if (i > 0 && histcurr == histend) return;
+  if (i < 0 && (histcurr == histend + 1 || histend == histcount - 1 && histcurr == 0)) return;
+
+  if (document.deff.q.value != currhist())
+    histedit[histcurr] = document.deff.q.value;
+
+  histcurr = histcurr + i;
+  if (histcurr >= histcount)
+    histcurr = 0;
+  if (histcurr < 0)
+    histcurr = histcount - 1;
+}
+
+// handle onkeypress: cut-copy-paste, ctrl-n, ctrl-p for next and previous
+// we need to do this because for some reason it's not done for us when
+// we're docked in the taskbar!
+function okp()
+{
+  if (window.event.keyCode != 14 && window.event.keyCode != 16
+      && window.event.keyCode != 3 && window.event.keyCode != 22
+      && window.event.keyCode != 23)
+    return true;
+
+  if (window.event.keyCode == 3)
+  {
+    range = document.selection.createRange();
+    range.execCommand("Copy");
+    return false;
+  }
+  if (window.event.keyCode == 22)
+  {
+    range = document.selection.createRange();
+    if (range.parentElement().name != "q") return true;
+    document.selection.createRange().execCommand("Paste");
+    return false;
+  }
+  if (window.event.keyCode == 23)
+  {
+    range = document.selection.createRange();
+    if (range.parentElement().name != "q") return true;
+    document.selection.createRange().execCommand("Cut");
+    return false;
+  }
+
+  if (window.event.keyCode == 16)
+    advhist(-1);
+  else
+    advhist(1);
+
+  // work around a weird bug
+  if (document.deff.q.value == "")
+    document.deff.q.value = ".";
+
+  document.deff.q.value = currhist();
+  return false;
+}
+
+// onkeydown: handle the up and down arrow keys for history
+function okd()
+{
+  if (window.event.keyCode != 38 && window.event.keyCode != 40)
+    return true;
+  if (window.event.keyCode == 38)
+    advhist(-1);
+  else
+    advhist(1);
+
+  // work around a weird bug
+  if (document.deff.q.value == "")
+    document.deff.q.value = ".";
+
+  document.deff.q.value = currhist();
+  return false;
+}
+
+// stub to be replaced if IE 5.5 or better
+function showpop()
+{
+  return false;
+}
+
+// strt() called on page load; show help message after 4 seconds
+function strt()
+{
+  document.deff.q.value = "Quick Search";
+  bant=window.setTimeout("banner();", 4000);
+}
+
+// banner() called to display help message for 8.5 seconds
+function banner()
+{
+  document.deff.q.value = "Type ? for help";
+  bant=window.setTimeout("unbanner();", 8500);
+}
+
+// called when the banner naturally goes away
+function unbanner()
+{
+  stopbanner();
+  document.deff.q.value = "Quick Search";
+}
+
+// called to forcibly clear the banner
+function stopbanner()
+{
+  if (bant)
+    window.clearTimeout(bant);
+}
+
+
+
+// clr() called when the texbox is given focus
+function clr()
+{
+  if (init)
+  {
+    document.deff.q.value="";
+    init = false;
+  }
+  stopbanner();
+  range = document.deff.q.createTextRange();
+  range.select();
+}
+
+
+// dodrop() called when something is dropped on the textbox
+function dodrop()
+{
+  if (selfdrag) return true;
+
+  if (init)
+  {
+    init = false;
+  }
+  stopbanner();
+
+  window.event.returnValue=false;
+  var q = event.dataTransfer.getData("Text");
+
+  // trim leading and trailing whitespace and punctuation
+  q = q.replace(/^[\s~`!@#$%\^&\*()-=\+{}\[\];:'<>,\.\/\?]*/, '')
+       .replace(/[\s~`!@#$%\^&\*()-=\+{}\[\];:'<>,\.\/\?]*$/, '');
+  document.deff.q.value = q;
+
+  mnu("goo", "");
+}
+
+// rst() called when the texbox loses focus
+function rst()
+{
+  if (init == false && document.deff.q.value=="")
+  {
+    init = true;
+    document.deff.q.value = "Quick Search";
+  }
+}
+
+
+// a feeling lucky search
+function ifl(q)
+{
+  if (q == "")
+  {
+    window.open("http://www.google.com/");
+  }
+  else
+  {
+    document.iflf.q.value=q;
+    document.iflf.submit();
+  }
+}
+
+// an ordinary google search
+function goo(q)
+{
+  if (q == "")
+  {
+    window.open("http://www.google.com/");
+  }
+  else
+  {
+    document.goof.q.value=q;
+    document.goof.submit();
+  }
+}
+
+// do an advanced search
+function adv(q)
+{
+  if (q == "")
+  {
+    window.open("http://www.google.com/advanced_search");
+  }
+  else
+  {
+    document.advf.q.value=q;
+    document.advf.submit();
+  }
+}
+
+// submit search to yahoo
+function yho(q)
+{
+  if (q == "")
+  {
+    window.open("http://www.yahoo.com/");
+  }
+  else
+  {
+    document.yhof.p.value=q;
+    document.yhof.submit();
+  }
+}
+
+// attempt yahoo directory listing
+function yhd(q)
+{
+  if (q == "")
+  {
+    window.open("http://www.yahoo.com/");
+  }
+  else
+  {
+    window.open("http://dir.yahoo.com/" + q);
+  }
+}
+
+// newsgroup search
+function nsg(q)
+{
+  if (q == "")
+  {
+    window.open("http://groups.google.com/");
+  }
+  else
+  {
+    document.nsgf.q.value=q;
+    document.nsgf.submit();
+  }
+}
+
+
+// Google web directory search
+function gwd(q)
+{
+  if (q == "")
+  {
+    window.open("http://www.google.com/");
+  }
+  else
+  {
+    document.gwdf.q.value=q;
+    document.gwdf.submit();
+  }
+}
+
+// Bloomberg stock ticker search
+function stk(q)
+{
+  if (q == "")
+  {
+    window.open("http://www.bloomberg.com/");
+  }
+  else
+  {
+    document.stkf.ticker.value=q;
+    document.stkf.submit();
+  }
+}
+
+// Google cache search
+function che(q)
+{
+  if (q == "")
+  {
+    window.open("http://www.google.com/");
+  }
+  else
+  {
+    document.goof.q.value="cache:" + q;
+    document.goof.submit();
+  }
+}
+
+// Merriam webster dictionary lookup
+function mwd(q)
+{
+  if (q == "")
+  {
+    window.open("http://www.m-w.com/");
+  }
+  else
+  {
+    document.mwdf.va.value=q;
+    document.mwdf.submit();
+  }
+}
+
+// Thesaurus.com search
+function ths(q)
+{
+  if (q == "")
+  {
+    window.open("http://www.thesaurus.com/");
+  }
+  else
+  {
+    document.thsf.words.value=q;
+    document.thsf.submit();
+  }
+}
+
+// Bartleby.com familiar search
+function fmq(q)
+{
+  if (q == "")
+  {
+    window.open("http://www.bartleby.com/100/");
+  }
+  else
+  {
+    document.fmqf.query.value=q;
+    document.fmqf.submit();
+  }
+}
+
+// Unscrambler, to calculate scrabble scores
+function srb(q)
+{
+  if (q == "")
+  {
+    window.open("http://www.concordance.com/unscrambler.htm");
+  }
+  else
+  {
+    document.srbf.letters.value=q;
+    document.srbf.submit();
+  }
+}
+
+// Encyclopedia lookup
+function enc(q)
+{
+  if (q == "")
+  {
+    window.open("http://www.encyclopedia.com/");
+  }
+  else
+  {
+    document.encf.search.value=q;
+    document.encf.submit();
+  }
+}
+
+// Ask Jeeves
+function ask(q)
+{
+  if (q == "")
+  {
+    window.open("http://www.askjeeves.com/");
+  }
+  else
+  {
+    document.askf.ask.value=q;
+    document.askf.submit();
+  }
+}
+
+// DealTime comparison shopping
+function dlt(q)
+{
+  if (q == "")
+  {
+    window.open("http://www.dealtime.com/");
+  }
+  else
+  {
+    document.dltf.keyword.value=q;
+    document.dltf.submit();
+  }
+}
+
+
+// Usenet FAQ search
+function faq(q)
+{
+  if (q == "")
+  {
+    window.open("http://www.faqs.org/faqs/");
+  }
+  else
+  {
+    document.faqf.query.value=q;
+    document.faqf.submit();
+  }
+}
+
+
+// CNN news search
+function cnn(q)
+{
+  if (q == "")
+  {
+    window.open("http://www.cnn.com/");
+  }
+  else
+  {
+    document.cnnf.qt.value=q;
+    document.cnnf.key.value=q;
+    document.cnnf.isp.value="zch";
+    document.cnnf.submit();
+  }
+}
+
+
+// MSDN web reference search
+function mws(q)
+{
+  if (q == "")
+  {
+    window.open("http://msdn.microsoft.com/workshop/c-frame.htm#/workshop/author/default.asp");
+  }
+  else
+  {
+    document.mwsf.qu.value=q;
+    document.mwsf.submit();
+  }
+}
+
+
+
+// ebay item search
+function eby(q)
+{
+  if (q == "")
+  {
+    window.open("http://www.ebay.com/");
+  }
+  else if (Number(q))
+  {
+    if ((Number(q) > '99999999') && (Number(q) < '2147483647')) {
+      window.open('http://cgi.ebay.com/aw-cgi/eBayISAPI.dll?MfcISAPICommand=ViewItem&item=' + q);
+    }
+  }
+  else
+  {
+    document.ebyf.query.value=q;
+    document.ebyf.submit();
+  }
+}
+
+
+// accuweather forecast search
+function acw(q)
+{
+  if (q == "")
+  {
+    window.open("http://www.accuweather.com/adcbin/local_index");
+  }
+  else
+  {
+    document.acwf.thisZip.value=q;
+    document.acwf.submit();
+  }
+}
+
+// reverse phone lookup
+function rvsphn(ac, pn)
+{
+  document.rvsphnf.npa.value=ac;
+  document.rvsphnf.telephone.value=pn;
+  document.rvsphnf.submit();
+}
+
+// mapquest address lookup
+function map(q)
+{
+  res = q.match(/(([^\/;]+)[\/;]\s*|([^,]+),\s*)?(((\w+\s+)*\w+)[,\s]\s*)?(\w\w)(\s+(\d{5}(-\d{4})?))?/i);
+
+  if (!res)
+  {
+    window.open("http://www.mapquest.com/");
+  }
+  else
+  {
+    document.mapf.address.value=(res[2] ? res[2] : (res[3] ? res[3] :""));
+    document.mapf.city.value   =(res[5] ? res[5] : "");
+    document.mapf.State.value  =(res[7] ? res[7].toUpperCase() : "");
+    document.mapf.Zip.value    =(res[9] ? res[9] : "");
+    document.mapf.submit();
+  }
+}
+
+
+// switchboard person lookup
+function swp(q)
+{
+  res = q.match(/(((\w+\s+)?\w+)\s+)?(\w+)(\s*\((([^,]+),?\s+)?(\w\w)\))?/);
+  if (!res)
+  {
+     window.open("http://www.switchboard.com/bin/cgiqa.dll");
+  }
+  else
+  {
+    document.swpf.F.value=(res[2] ? res[2] : "");
+    document.swpf.L.value=(res[4] ? res[4] : "");
+    document.swpf.T.value=(res[7] ? res[7] : "");
+    document.swpf.s.value=(res[8] ? res[8].toUpperCase() : "");
+    document.swpf.submit();
+  }
+}
+
+// switchboard business lookup
+function swb(q)
+{
+  res = q.match(/(\w[^\(]*\w)(\s*\((([^,]+),?\s+)?(\w\w)\))?/);
+  if (!res)
+  {
+     window.open("http://www.switchboard.com/bin/cgidir.dll");
+  }
+  else
+  {
+    document.swbf.TYPE.value="";
+    document.swbf.C.value="";
+    document.swbf.L.value=(res[1] ? res[1] : "");
+    document.swbf.T.value=(res[4] ? res[4] : "");
+    document.swbf.s.value=(res[5] ? res[5].toUpperCase() : "");
+    document.swbf.submit();
+  }
+}
+
+// switchboard business category lookup
+function swc(q)
+{
+  res = q.match(/(\w[^\(]*\w)(\s*\((([^,]+),?\s+)?(\w\w)\))?/);
+  if (!res)
+  {
+     window.open("http://www.switchboard.com/bin/cgidir.dll");
+  }
+  else
+  {
+    // search near location
+    if (res[4])
+      document.swbf.TYPE.value="Search near location";
+    else
+      document.swbf.TYPE.value="";
+    document.swbf.C.value=(res[1] ? res[1] : "");
+    document.swbf.L.value="";
+    document.swbf.T.value=(res[4] ? res[4] : "");
+    document.swbf.s.value=(res[5] ? res[5].toUpperCase() : "");
+    document.swbf.submit();
+  }
+}
+
+// yahoo/411 email lookup
+function yhe(q)
+{
+  res = q.match(/(((\w+\s+)?\w+)\s+)?(\w+)(\s*\(((([^,]+),?\s+)?(\w\w)|((\w+.)+(com|net|org|edu|gov|mil|\w{2})))\))?/);
+  if (!res)
+  {
+     window.open("http://people.yahoo.com/");
+  }
+  else
+  {
+    document.yhef.FirstName.value=(res[2] ? res[2] : "");
+    document.yhef.LastName.value=(res[4] ? res[4] : "");
+    document.yhef.City.value=(res[8] ? res[8] : "");
+    document.yhef.State.value=(res[9] ? res[9].toUpperCase() : "");
+    document.yhef.Domain.value=(res[10] ? res[10].toLowerCase() : "");
+    document.yhef.submit();
+  }
+}
+
+
+
+// bigfoot email lookup
+function bfe(q)
+{
+  res = q.match(/(((\w+\s+)?\w+)\s+)?(\w+)(\s*\((([^,]+),?\s+)?(\w\w)\))?/);
+  if (!res)
+  {
+     window.open("http://www.bigfoot.com/");
+  }
+  else
+  {
+    document.bfef.FirstName.value=(res[2] ? res[2] : "");
+    document.bfef.LastName.value=(res[4] ? res[4] : "");
+    document.bfef.City.value=(res[7] ? res[7] : "");
+    document.bfef.State.value=(res[8] ? res[8].toUpperCase() : "");
+    document.bfef.submit();
+  }
+}
+
+// offline calculator
+function clc(expr)
+{
+  if (expr.match(/=ERR$/))
+    return;
+
+  try
+  {
+    with(Math)
+    {
+      document.deff.q.value = eval(expr);
+    }
+  }
+  catch (exception)
+  {
+    document.deff.q.value = expr + "=ERR=";
+  }
+}
+
+// constants for use in calculator
+pi = Math.PI;
+ln10 = Math.LN10;
+ln2 = Math.LN2;
+log10e = Math.LOG10E;
+log2e = Math.LOG2E;
+sqrt1_2 = Math.SQRT1_2;
+sqrt2 = Math.SQRT2;
+ln = Math.log;
+
+// based log functions
+function log10(n) { return ln(n)/ln10; }
+function log2(n) { return ln(n)/ln2; }
+
+// hex conversion for use in calculator
+function hex(i)
+{
+  hexChars = "0123456789abcdef";
+  var h = "";
+  var n = 256;
+
+  while (i < 0)
+  {
+     if (i + n / 16 > 0) { i += n; break; }
+     n = n * n;
+  }
+
+  while (i > 0)
+  {
+     h = hexChars.charAt(i % 16) + h;
+     i = Math.floor(i / 16);
+  }
+
+  if (h == "")
+     h = "0";
+
+  return "0x" + h;
+}
+
+// octal conversion for use in calculator
+function oct(i)
+{
+  octChars = "01234567";
+  var h = "";
+  var n = 512;
+
+  while (i < 0)
+  {
+     if (i + n / 8 > 0) { i += n; break; }
+     n = n * n;
+  }
+
+  while (i > 0)
+  {
+     h = octChars.charAt(i % 8) + h;
+     i = Math.floor(i / 8);
+  }
+
+  if (h == "")
+     h = "0";
+
+  return "0" + h;
+}
+
+// binary conversion for use in calculator
+function bin(i)
+{
+  binChars = "01";
+  var h = "";
+  var n = 16;
+
+  while (i < 0)
+  {
+     if (i + n / 2 > 0) { i += n; break; }
+     n = n * n;
+  }
+
+  while (i > 0)
+  {
+     h = binChars.charAt(i % 2) + h;
+     i = Math.floor(i / 2);
+  }
+
+  if (h == "")
+     h = "0";
+
+  return h;
+}
+
+
+// the help dialog box
+function abt()
+{
+  if (window.event)
+    window.event.cancelBubble = true;
+
+  var i;
+  for (i = 0; i < 10; i++)
+  {
+    txt = document.all.tags("!").item(i).text.slice(4, -3);
+    if (txt.match(/Copyright/)) break;
+  }
+  if (i >= 10)
+  {
+    txt = "Cannot find documentation.";
+  }
+  
+  txt = txt.replace(/\r\n/g, '\n');
+  txt = txt.replace(/\n\*/g, '<li>');
+  txt = txt.replace(/\nVer/, '</b><br>Ver');
+  txt = txt.replace(/\nCopy/, '<p>Copy');
+  txt = txt.replace(/\nDist/, '<br>Dist');
+  txt = txt.replace(/David Bau/, '<a href=mailto:davidbau@hotmail.com>David Bau</a>');
+  txt = txt.replace(/GNU.*gpl\.html\)/, '<br><a href=http://www.gnu.org/copyleft/gpl.txt target=GNU>GNU Public License, Version 2</a>');
+  txt = txt.replace(/\n\n/g, '<p>');
+  txt = txt.replace(/\n/g, ' ');
+  txt = txt.replace(/----/, '</center>');
+
+  mesg = "about:<title>About Dave's Quick Search Taskbar Toolbar</title>";
+  mesg = mesg + "<style>body{margin:20px;border:0;padding:0;background-color:threedface;font-family:Tahoma;} td{font-size:8pt;border-collapse:collapse}</style>";
+  mesg = mesg + "<body scroll=no><table height=100% width=100%><tr><td><center style=font-size:9pt><b>";
+  mesg = mesg + txt + "</td></tr></table>";
+  opts = "height=490, width=440, menubar=no, scrollbars=no, resizable=yes, toolbar=no, status=yes";
+  w = window.open(mesg, "AboutDqstt", opts);
+  w.focus();
+}
+
+
+
+</script>
+
+<!-- compatibility to take advantage of IE 5.5 popup window -->
+
+<!--[if gte IE 5.5000]>
+<script>
+
+popheight = 4;
+
+function mi(name, func, sym)
+{
+  popheight += 18;
+  return "<tr " +
+    "onmouseover=\"this.style.background='highlight'; this.style.color='highlighttext';\"" +
+    "onmouseout=\"this.style.background='menu'; this.style.color='menutext';\"" +
+    "onmouseup=\"this.style.background='menu'; this.style.color='menutext';parent.mnu('" + func + "', &quot;" + sym + "&quot;);\"" +
+    "style=\"background:menu;height:18px;color:black;font-family:Tahoma;padding:2px;font-size:8pt;\">" +
+    "<td style=padding-left:20px;>" +
+    name +
+    "</td><td style=padding-left:10px;padding-right:10px;>" + sym + "</td></tr>";
+}
+
+function dv()
+{
+  popheight += 10;
+  return "<tr><td colspan=2 style='height:10px;padding-left:2px;padding-right:2px'><hr style='position:absolute;top=" + (popheight-10) + "px;'></td></tr>";
+}
+
+function buildpop()
+{
+  pophelp = window.createPopup();
+  s = "<table cellpadding=0 cellspacing=0 width=100%>" +
+      mi("About This Toolbar", "abt", "") +
+      dv() +
+      mi("Word Descrambler", "srb", "~") +
+      mi("Microsoft DHTML Reference Search", "mws", "<") +
+      dv() +
+      mi("Usenet FAQ Search", "faq", "-") +
+      mi("Newsgroup Search", "nwg", ",") +
+      dv() +
+      mi("Ebay Item Search", "eby", "%") +
+      mi("DealTime Price Comparison", "dlt", "$$") +
+      dv() +
+      mi("Google Advanced Search", "adv", ">") +
+      mi("Yahoo Category", "yhd", "/") +
+      mi("Google Cache", "che", "&") +
+      dv() +
+      mi("Bartlett's Familiar Quotations", "fmq", "'" ) +
+      mi("Encyclopedia.com", "enc", "[") +
+      mi("Thesaurus.com", "ths", ";") +
+      mi("Merriam-Webster Dictionary", "mwd", ":") +
+      dv() +
+      mi("Bloomberg Stock Quotes", "stk", "$") +
+      mi("AccuWeather Forecast", "acw", "*") +
+      mi("CNN News Search", "cnn", ".") +
+      dv() +
+      mi("Bigfoot Email Search", "bfe", "@@") +
+      mi("Yahoo People Email Search", "yhe", "@") +
+      mi("Switchboard Business Category", "swc", "^") +
+      mi("Switchboard Business Name Search", "swb", "##") +
+      mi("Switchboard Individual Name Search", "swp", "#") +
+      mi("Mapquest Street Map", "map", "+") +
+      dv() +
+      mi("Calculate Math Expression", "clc", "=") +
+      dv() +
+      mi("Ask Jeeves", "ask", "???") +
+      mi("Google Web Directory Search", "gwd", "??") +
+      mi("Yahoo Search", "yho", "?") +
+      mi("I'm Feeling Lucky!", "ifl", "!") +
+      "</table>";
+
+  pophelp.document.body.innerHTML = s;
+  pophelp.document.body.style.border="outset 2px";
+  pophelp.document.body.style.background='menu';
+  popwidth = 240;
+}
+
+popclose=false;
+
+function checkpop()
+{
+  popclose = pophelp.isOpen;
+  if (popclose)
+  {
+    window.setTimeout("checkpop();", 100);
+  }
+}
+
+function showpop()
+{
+  window.event.cancelBubble = true;
+  if (popclose)
+    pophelp.hide();
+  else
+  {
+    var rows = pophelp.document.all.tags("TR");
+    var i;
+    for (i = 0; i < rows.length; i++)
+    {
+       rows[i].style.background="menu";
+       rows[i].style.color="menutext";
+    }
+    pophelp.show(document.body.clientWidth - popwidth, -popheight, popwidth, popheight, document.body);
+    window.setTimeout("queuefocus();", 0);
+  }
+  checkpop();
+}
+
+function queuefocus()
+{
+  document.deff.q.focus();
+}
+
+buildpop();
+
+</script>
+<![endif]-->
+
+
+ <table align=left
+        border=0
+        cellpadding=0
+        cellspacing=0>
+  <tr>
+   <form name=deff
+         target=_blank
+         action=http://www.google.com/search
+         method=get
+         onsubmit="return def();">
+    <td>
+     <nobr>
+     <input name=q
+            type=text
+            class=txtfld
+            style=font-weight:lighter;
+            onfocus=clr()
+            ondragstart="selfdrag=true;"
+            ondragend="selfdrag=false;"
+            ondrop=dodrop()
+            onblur=rst()
+            onhelp=showpop()
+            onkeydown="return okd();"
+            onkeypress="return okp();"
+            value="Quick Search"
+            size=20
+            maxlength=256
+            tabindex=0><!--[if gte IE 5.5000]><input
+            type=button
+            class=btn
+            style=font-weight:lighter;
+            name=gobutton
+            value=&#xBB;
+            onmousedown="showpop();"
+            ondblclick="showpop();"
+            tabindex=-1><![endif]-->
+     </nobr>
+    </td>
+   </form>
+  </tr>
+  <tr cellpadding=0>
+   <td id=info style="display:block">
+    <b><a style=text-decoration:none;color:black href=http://notesbydave.com/toolbar/searchdoc.htm target=_blank tabindex=-1>
+      Dave's Quick Search Taskbar Toolbar</a></b>
+    <br>
+    Designed to be placed on the Windows taskbar.<br>
+    For documentation,
+    <a href="about:" onclick="abt(); return false;" tabindex=-1>click here</a>.
+   </td>
+  </tr>
+ </table>
+
+<!-- regular google search -->
+<form name=goof
+      target=_blank
+      action=http://www.google.com/search
+      method=get>
+ <input name=q
+        type=hidden>
+</form>
+
+<!-- feeling lucky search -->
+<form name=iflf
+      target=_blank
+      action=http://www.google.com/search
+      method=get>
+ <input name=q
+        type=hidden>
+ <input name=btnI
+        value="I'm Feeling Lucky"
+        type=hidden>
+</form>
+
+<!-- advanced search -->
+<form name=advf
+      target=_blank
+      action=http://www.google.com/advanced_search
+      method=get>
+ <input name=q
+        type=hidden>
+</form>
+
+<!-- yahoo search -->
+<form name=yhof
+      target=_blank
+      action=http://search.yahoo.com/bin/search
+      method=get>
+ <input name=p
+        type=hidden>
+</form>
+
+<!-- google web directory search -->
+<form name=gwdf
+      target=_blank
+      action=http://www.google.com/search
+      method=get>
+ <input name=cat
+        type=hidden 
+        value=gwd/Top>
+ <input name=q
+        type=hidden>
+</form>
+
+<!-- newsgroup search -->
+<form name=nsgf
+      target=_blank
+      action=http://groups.google.com/groups
+      method=get>
+ <input name=q
+        type=hidden>
+</form>
+
+<!-- merriam webster dictionary search -->
+<form name=mwdf
+      target=_blank
+      action=http://www.m-w.com/cgi-bin/dictionary
+      method=post>
+ <input name=va
+        type=hidden>
+</form>
+
+<!-- thesaurus.com search -->
+<form name=thsf
+      target=_blank
+      action=http://www.thesaurus.com/cgi-bin/search
+      method=get>
+ <input name=config
+        type=hidden
+        value=roget>
+ <input name=words
+        type=hidden>
+</form>
+
+
+<!-- bloomberg stock quote search -->
+<form name=stkf
+      target=_blank
+      action=http://quote.bloomberg.com/analytics/bquote.cgi
+      method=get>
+  <input name=ticker
+         type=hidden>
+</form>
+
+<!-- Bartleby familiar quote search -->
+<form name=fmqf
+      target=_blank
+      action=http://www.bartleby.com/cgi-bin/texis/webinator/sitesearch
+      method=get>
+  <input name=FILTER
+         type=hidden
+         value=col100>
+  <input name=query
+         type=hidden>
+</form>
+
+<!-- scrabble unscrambler -->
+<form name=srbf
+      target=_blank
+      action=http://www.concordance.com/cgi-bin/unscrambler.pl
+      method=post>
+  <input name=letters
+         type=hidden>
+</form>
+
+<!-- encyclopedia lookup -->
+<form name=encf
+      target=_blank
+      action=http://www.encyclopedia.com/cgi-bin/search.cgi
+      method=post>
+  <input name=search
+         type=hidden>
+</form>
+
+<!-- ask jeeves --->
+<form name=askf
+      target=_blank
+      action=http://www.askjeeves.com/main/askjeeves.asp
+      method=post>
+  <input name=ask
+         type=hidden>
+</form>
+
+
+<!-- dealtime comparison shopping search -->
+<form name=dltf
+      target=_blank
+      action=http://www.dealtime.com/GS2/GS2StatReDirect
+      method=get>
+  <input type="hidden" name="nFormID" VALUE="">
+  <input type="hidden" name="nParentFormID" VALUE="0">
+  <input type="hidden" name="NavigationGroupId" VALUE="1">
+  <input type="hidden" name="WeightGroupId" VALUE="1">
+  <input type="hidden" name="bParent" VALUE="on">
+  <input type="hidden" name="uid" VALUE="">
+  <input type="hidden" name="bid" VALUE="1">
+  <input type="hidden" name="Operator" value="2">
+  <input type="hidden" name="keyword">
+</form>
+
+<!-- usenet FAQ search -->
+
+<form name=faqf
+      target=_blank
+      method=post
+      action=http://www.faqs.org/cgi-bin/faqs/faqsearch>
+  <input name=archive type=hidden value=faqs>
+  <input name=case type=hidden value=off>
+  <input name=whole type=hidden value=on>
+  <input name=maxlines type=hidden value=30>
+  <input name=errors type=hidden value=1>
+  <input name=maxfiles type=hidden value=50>
+  <input name=meta type=hidden value=enabled>
+  <input name=query type=hidden>
+</form>
+
+
+<!-- CNN Search via looksmart -->
+
+<form name=cnnf
+      target=_blank
+      method=get
+      action=http://cnn.looksmart.com/r_search>
+  <input name=sites type=hidden value=CNN>
+  <input name=qc type=hidden value="">
+  <input name=col type=hidden value=cnni>
+  <input name=qm type=hidden value=0>
+  <input name=st type=hidden value=1>
+  <input name=nh type=hidden value=10>
+  <input name=lk type=hidden value=1>
+  <input name=rf type=hidden value=1>
+  <input type=hidden name=look value="">
+  <input type=hidden name=key value="">
+  <input type="hidden" name="venue" value="all">
+  <input type="hidden" name="keyword" value="">
+  <input type=hidden name=qp value="">
+  <input type=hidden name=comefrom value="izch-search">
+  <input type=hidden name=isp value=zcb>
+  <input type="hidden" name="search" value="0">
+  <input type="hidden" name=qt>
+</form>
+
+
+
+<!-- MSDN search for DHTML references -->
+
+<form name=mwsf
+      target=_blank
+      action=http://search.microsoft.com/us/dev/default.asp
+      method=get>
+  <input type=hidden name=so value=RECCNT>
+  <input type=hidden name=qu>
+  <input type=hidden name=boolean value=ALL>
+  <input type=hidden name=ig value=02>
+  <input type=hidden name=i value=29>
+  <input type=hidden name=p value=1>
+  <input type=hidden name=nq value=NEW>
+</form>
+
+
+<!-- Ebay search for auction items -->
+
+<form name=ebyf
+      target=_blank
+      action=http://search.ebay.com/search/search.dll
+      method=get>
+  <input type=hidden name="MfcISAPICommand" value="GetResult">
+  <input type=hidden name=ht value=1>
+  <input type=hidden name="SortProperty" value="MetaEndSort">
+  <input type=hidden name=query>
+</form>
+
+
+<!-- Accuweather forecast search -->
+
+<form name=acwf
+      target=_blank
+      action=http://www.accuweather.com/adcbin/local_index
+      method=get>
+  <input type=hidden name=nav value=home>
+  <input type=hidden name=thisZip>
+</form>
+
+
+<!-- AnyWho reverse phone number lookup -->
+
+<form name=rvsphnf
+      target=_blank
+      action=http://www.anywho.com/qry/wp_rl
+      method=get>
+  <input type=hidden name=npa>
+  <input type=hidden name=telephone>
+</form>
+
+
+
+<!-- Mapquest Address Lookup -->
+<form name=mapf
+      target=_blank
+      action=http://www.mapquest.com/cgi-bin/ia_find
+      method="GET">
+  <input type=hidden name=link value=btwn/twn-map_results>
+  <input type=hidden name=random" value=565>
+  <input type=hidden name=event value=find_search>
+  <input type=hidden name=SNVData value="">
+  <input type=hidden name=address>
+  <input type=hidden name=city>
+  <input type=hidden name=State>
+  <input type=hidden name=Zip>
+</form>
+
+
+
+
+<!-- Switchboard business address lookup -->
+<form name=swbf
+      target=_blank
+      action=http://www.switchboard.com/bin/cgidir.dll
+      method=get>
+  <input type=hidden name=FUNC value=FORMATSEARCH>
+  <input type=hidden name=MEM value=1>
+  <input type=hidden name=TYPE>
+  <input type=hidden name=C>
+  <input type=hidden name=L>
+  <input type=hidden name=T>
+  <input type=hidden name=s>
+</form>
+
+<!-- Switchboard personal address lookup -->
+<form name=swpf
+      target=_blank
+      action=http://www.switchboard.com/bin/cgiqa.dll
+      method=get>
+  <input type=hidden name=SR>
+  <input type=hidden name=MEM value=1>
+  <input type=hidden name=F>
+  <input type=hidden name=L>
+  <input type=hidden name=T>
+  <input type=hidden name=s>
+</form>
+
+
+
+
+<!-- Yahoo/411 email lookup -->
+<form name=yhef
+      target=_blank
+      action="http://email.people.yahoo.com/py/psSearch.py"
+      method=get>
+  <input type=hidden name="FirstName">
+  <input type=hidden name="LastName">
+  <input type=hidden name="City">
+  <input type=hidden name="State">
+  <input type=hidden name="Domain">
+  <input type=hidden name="OldEmail">
+  <input type=hidden name="SmartName">
+  <input type=hidden name="OrgName">
+  <input type=hidden name="OrgType" value="n">
+  <input type=hidden name="OrgYrS" value="">
+  <input type=hidden name="OrgYrF" value="">
+  <input type=hidden name="srch" value="adv">
+</FORM>
+
+
+<!-- Bigfoot email lookup -->
+<form name=bfef
+      target=_blank
+      action=http://search.bigfoot.com/SEARCH
+      method=post>
+  <input type=hidden name=FormName value=Listing>
+  <input type=hidden name="locale" value="en">
+  <input type=hidden name="from" value="bigfoot">
+  <!--input type=hidden name="dyn" value="NoRef:20334"-->
+  <input type=hidden name="FirstName">
+  <input type=hidden name="LastName">
+  <input type=hidden name="City">
+  <input type=hidden name="State">
+  <input type=hidden name="EmailSearch" value="1">
+</form>
+
+
+<!-- script to eliminate Go button if window is narrow -->
+<!--[if gte IE 5.5000]>
+
+<script>
+gowidth = -1;
+textheight = -1;
+
+function rsz()
+{
+  if (gowidth < 0)
+  {
+    gowidth = document.deff.gobutton.offsetWidth + 2;
+
+    // use script to work around padding bug in ie5.5
+    if (window.navigator.userAgent.match(/MSIE\s*5.5/))
+    {
+      textheight = document.deff.q.offsetHeight;
+      document.deff.q.style.height = textheight + 3;
+    }
+  }
+
+  if (document.body.clientHeight > 128)
+    document.all.info.style.display="block";
+  else
+    document.all.info.style.display="none";
+
+  var targetwidth = document.body.clientWidth - gowidth;
+  if (targetwidth < gowidth * 6)
+  {
+    document.deff.gobutton.style.display="none";
+    targetwidth = document.body.clientWidth;
+  }
+  else
+  {
+    document.deff.gobutton.style.display="inline";
+  }
+  document.deff.q.style.width=targetwidth;
+}
+
+rsz();
+document.body.onresize=rsz;
+</script>
+<![endif]-->
+
+<!--[if lt IE 5.5000]>
+
+<script>
+function rsz()
+{
+  var targetwidth = document.body.clientWidth;
+  document.deff.q.style.width=targetwidth;
+
+  if (document.body.clientHeight > 128)
+    document.all.info.style.display="block";
+  else
+    document.all.info.style.display="none";
+}
+
+rsz();
+document.body.onresize=rsz;
+</script>
+<![endif]-->
