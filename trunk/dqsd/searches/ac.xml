@@ -1,29 +1,35 @@
 <search function="ac">
-    <name>Area Code Info</name>
-    <link>http://www.getzips.com</link>
-    <description>Search for information on a particular areacode: "ac 741".</description>
-    <category>People and Places</category>
-    <contributor>Stephen Montgomery</contributor>
-    <email>stephenmontgomery_at_ameritech_dot_net</email>
-    <form name="acf" 
-          method="get" 
-          action="http://www.getzips.com/CGI-BIN/ziplook.exe">
-      <input type="hidden" name="What" value="4" />
-      <input type="hidden" name="Area" />
-    </form>
-    <script><![CDATA[
-      function ac(q)
+  <name>Area Code Info</name>
+  <description>
+    Search for information on a North American areacode.<br/>
+    <a class="helpboxDescLabels">Example:</a><br/>
+    <table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">ac 741</td></tr>
+  	</table>
+  </description>
+  <category>People and Places</category>
+  <link>http://www.getzips.com/</link>
+  <contributor>Stephen Montgomery</contributor>
+  <email>stephenmontgomery_at_ameritech_dot_net</email>
+  
+  <form name="acf" 
+        method="get" 
+        action="http://www.getzips.com/CGI-BIN/ziplook.exe">
+    <input type="hidden" name="What" value="4"/>
+    <input type="hidden" name="Area"/>
+  </form>
+  
+  <script><![CDATA[
+    function ac(q)
+    {
+      if (q == "")
+        window.open("http://www.getzips.com");
+      else
       {
-        if (q == "")
-          window.open("http://www.getzips.com");
-        else
-        {
-          if (result = q.match(/^(\d{3})\s*(.*)/))
-          {
-            document.acf.Area.value=result[1];
-          }
-          submitForm(acf);
-        }
+        if (result = q.match(/^(\d{3})\s*(.*)/))
+          document.acf.Area.value=result[1];
+        submitForm(acf);
       }
-    ]]></script>
-  </search>
+    }
+  ]]></script>
+</search>

@@ -1,16 +1,24 @@
 <search function="af">
   <name>AcronymFinder</name>
-  <description>Search for an acronym: "af nasa"</description>
+  <description>
+    Find an acronym on AcronymFinder.<br/>
+    <a class="helpboxDescLabels">Example:</a><br/>
+    <table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">af SCUBA</td></tr>
+  	</table>
+  </description>
   <category>Reference</category>
   <link>http://www.acronymfinder.com/</link>
   <contributor>Nikolai Devereaux</contributor>
   <email>nikolai_at_bigaction_dot_org</email>
+  
   <form name="aff"
         action="http://www.acronymfinder.com/af-query.asp"
         method="get">
     <input type="hidden" name="String" value="exact"/>
     <input type="hidden" name="Acronym"/>
   </form>
+  
   <script><![CDATA[
     function af(q)
     {

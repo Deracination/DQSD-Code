@@ -1,9 +1,16 @@
 <search function="amed">
-  <name>Access Medicine</name>
-  <description>Search for medical information: "amed anthrax"</description>
+  <name>AccessMedicine</name>
+  <description>
+    Search AccessMedicine's database of medical information.<br/>
+    <a class="helpboxDescLabels">Example:</a><br/>
+    <table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">amed anthrax</td></tr>
+  	</table>
+  </description>
   <category>Other</category>
   <link>http://www.accessmedicine.com/</link>
   <contributor>Andrew Gilmartin</contributor>
+  
   <form name="amedf"
         action="http://www.accessmedicine.com/cgi-bin/search_simple.cgi"
         method="get">
@@ -12,6 +19,7 @@
     <input type="hidden" name="category" value="related_sites"/>
     <input type="hidden" name="QueryText"/>
   </form>
+  
   <script><![CDATA[
     function amed(q)
     {
