@@ -35,26 +35,28 @@ Section "Quick Search Deskbar (required)"
   ; Old versions to delete
   UnRegDLL $INSTDIR\DQSDTools.dll
   Delete /REBOOTOK $INSTDIR\DQSDTools.dll
+  UnRegDLL $INSTDIR\dqsdt253.dll
+  Delete /REBOOTOK $INSTDIR\dqsdt253.dll
 
   ; install new DLL
   SetOverwrite try
   ClearErrors
-  File "..\dqsdt253.dll"
+  File "..\dqsdt254.dll"
   IfErrors seeifsame register
 
   ; If was unable to upgrade, see if files are the same anyway
   seeifsame:
   ClearErrors
-  GetDLLVersionLocal "..\dqsdt253.dll" $1 $2
-  GetDLLVersion $INSTDIR\dqsdt253.dll $3 $4
+  GetDLLVersionLocal "..\dqsdt254.dll" $1 $2
+  GetDLLVersion $INSTDIR\dqsdt254.dll $3 $4
   IfErrors isdifferent
   IntCmpU $1 $3 test1 isdifferent isdifferent
   test1:
   IntCmpU $2 $4 test2 isdifferent isdifferent
   test2:
   ClearErrors
-  GetFileTimeLocal "..\dqsdt253.dll" $1 $2
-  GetFileTime $INSTDIR\dqsdt253.dll $3 $4
+  GetFileTimeLocal "..\dqsdt254.dll" $1 $2
+  GetFileTime $INSTDIR\dqsdt254.dll $3 $4
   IfErrors isdifferent
   IntCmpU $1 $3 test3 isdifferent isdifferent
   test3:
@@ -67,7 +69,7 @@ Section "Quick Search Deskbar (required)"
 
   ; We can register the dll and continue
   register:
-  RegDLL $INSTDIR\dqsdt253.dll
+  RegDLL $INSTDIR\dqsdt254.dll
 
   SetOverwrite on
 
@@ -76,6 +78,10 @@ Section "Quick Search Deskbar (required)"
   IfFileExists "$INSTDIR\search.htm" upgradebar
   StrCpy $8 "The Deskbar has been installed.$\n$\nRight-click in your taskbar and select$\n$\n    Toolbar > Add Quick Search...$\n$\nto add the Quick Search Deskbar to your taskbar.$\n$\nDave's Quick Search Deskbar$\nCopyright (c) 2001 David Bau$\nDistributed under the terms of the$\nGNU General Public License, Version 2"
   upgradebar:
+  IfRebootFlag rebootmsg norebootmsg
+  rebootmsg:
+  StrCpy $8 "The Deskbar has been upgraded.$\n$\nYou should reboot your computer now to$\ncomplete the installation.$\n$\nDave's Quick Search Deskbar$\nCopyright (c) 2002 David Bau$\nDistributed under the terms of the$\nGNU General Public License, Version 2"
+  norebootmsg:
 
   
 
@@ -175,14 +181,14 @@ Section "Uninstall"
   StrCpy $9 "{226b64e8-dc75-4eea-a6c8-abcb4d1d37ff}"
 
   ; Unegister DQSDTools
-  UnRegDLL $INSTDIR\dqsdt253.dll
+  UnRegDLL $INSTDIR\dqsdt254.dll
 
   ; remove registry keys
   DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\$9"
   DeleteRegKey HKCR "CLSID\$9"
 
   ; remove files
-  Delete /REBOOTOK $INSTDIR\dqsdt253.dll
+  Delete /REBOOTOK $INSTDIR\dqsdt254.dll
   Delete /REBOOTOK $INSTDIR\readme.txt
   Delete /REBOOTOK $INSTDIR\search.htm
   Delete /REBOOTOK $INSTDIR\search.xml

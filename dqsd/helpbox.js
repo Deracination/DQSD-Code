@@ -31,7 +31,7 @@ function about()
     var i;
     var txt;
     var helptable = "";
-    var jumplist = "";
+    var jumplist = "<center>";
 
     for (i = 0; i < 10; i++)
     {
@@ -75,8 +75,9 @@ function about()
         }
         helptable += "</td></tr>";
       }
-	  jumplist += (i > 0 ? " | " : "") + "<a href=\"\#"+categoryarray[i]+"\">"+ categoryarray[i]+"</a>";
+      jumplist += (i > 0 ? " | " : "") + "<a href=\"\#"+categoryarray[i]+"\">"+ categoryarray[i]+"</a>";
     }
+    jumplist += "</center><p>";
 
     txt = txt.replace(/\r\n/g, '\n');
     txt = txt.replace(/\n\*/g, '<li>');
@@ -86,7 +87,8 @@ function about()
     txt = txt.replace(/(David Bau)/, '<a href=mailto:davidbau@hotmail.com>$1</a>');
     txt = txt.replace(/(GNU.*2)\s\((.*txt)\)/, '<br><a href=$2 target=GNU>$1</a>');
     txt = txt.replace(/\n#[^\n]*/g, '');
-    txt = txt.replace(/<\/table>/,jumplist + helptable + "</table>");
+    txt = txt.replace(/<table/, jumplist + "<table");
+    txt = txt.replace(/<\/table>/, helptable + "</table>");
     txt = txt.replace(/\n\n/g, '<p>');
     txt = txt.replace(/\n/g, ' ');
     txt = txt.replace(/----/, '</center>');
@@ -100,7 +102,7 @@ function about()
            "td{font-size:8pt;border-collapse:collapse} .lg{background:lightgreen;} .lb{background:skyblue;} .top{font-size:9px}</style>";
     mesg += "<body scroll=yes><a name='#top'><table height=100% width=100%><tr><td><center style=font-size:9pt><b>";
     mesg += txt + "</td></tr></table>";
-    opts = "height=480, width=470, menubar=no, scrollbars=yes, resizable=yes, toolbar=no, status=no";
+    opts = "height=480, width=400, menubar=no, scrollbars=yes, resizable=yes, toolbar=no, status=no";
     aboutWindow = window.open("about:blank", "_blank", opts);
     aboutWindow.document.write(mesg);
     aboutWindow.document.close();
