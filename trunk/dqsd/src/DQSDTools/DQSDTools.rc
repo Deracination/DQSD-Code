@@ -119,6 +119,7 @@ BEGIN
     IDS_ERR_UNAUTHCALLER    "DQSDTools.Launcher : unauthorized caller"
     IDS_ERR_REGKEYNOTFOUND  "DQSDTools.Launcher : unable to open registry key"
     IDS_ERR_FILENOTFOUND    "DQSDTools.Launcher : file not found"
+    IDS_ERR_PROTOCOLNOTFOUND "DQSDTools.Launcher : protocol handler not found"
 END
 
 #endif    // English (U.S.) resources

@@ -14,6 +14,7 @@ LPCTSTR CLauncher::DQSD_REG_KEY = _T("CLSID\\{226b64e8-dc75-4eea-a6c8-abcb4d1d37
 
 STDMETHODIMP CLauncher::SetSite(IUnknown* pUnkSite)
 {
+#ifndef DQSD_NOSECURITY
 	USES_CONVERSION;
 
 	HRESULT hr;
@@ -54,6 +55,7 @@ STDMETHODIMP CLauncher::SetSite(IUnknown* pUnkSite)
 		Error(IDS_ERR_UNAUTHCALLER, IID_ILauncher);
 		return E_FAIL;
 	}
+#endif
 
   return S_OK;
 };
@@ -286,6 +288,31 @@ HRESULT CLauncher::GetFilename( LPCTSTR szName, LPTSTR szResult )
 	// Add the install directory and an extension if not supplied
 	::PathCombine( szResult, szInstallDir, szName );
 	::PathAddExtension( szResult, _T(".txt") );
+
+	return S_OK;
+}
+
+STDMETHODIMP CLauncher::GetProtocolHandler(BSTR bstrProtocol, BSTR *pbstrHandler)
+{
+	USES_CONVERSION;
+
+	TCHAR szProtocolHandlerKey[ 128 ];
+	_tcscpy( szProtocolHandlerKey, W2T( bstrProtocol ) );
+	_tcscat( szProtocolHandlerKey, _T("\\shell\\open\\command") );
+
+	TCHAR szProtocolHandler[ _MAX_PATH ];
+	DWORD dwCount = sizeof( szProtocolHandler );
+
+	CRegKey rk;
+	if ( ( ERROR_SUCCESS != rk.Open( HKEY_CLASSES_ROOT, szProtocolHandlerKey, KEY_READ ) )
+		 ||
+	     ( ERROR_SUCCESS != rk.QueryValue( szProtocolHandler, _T(""), &dwCount ) ) )
+	{
+		Error(IDS_ERR_PROTOCOLNOTFOUND, IID_ILauncher);
+		return E_UNEXPECTED;
+	}
+
+	*pbstrHandler = ::SysAllocString( T2W( szProtocolHandler ) );
 
 	return S_OK;
 }
