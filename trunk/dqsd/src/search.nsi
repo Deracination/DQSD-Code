@@ -231,7 +231,7 @@ Section "Uninstall"
   Delete /REBOOTOK $INSTDIR\loader.js
   Delete /REBOOTOK $INSTDIR\menu.txt
   Delete /REBOOTOK $INSTDIR\readme.txt
-  Delete /REBOOTOK $INSTDIR\search.css  
+  Delete /REBOOTOK $INSTDIR\search.css
   Delete /REBOOTOK $INSTDIR\search.htm
   Delete /REBOOTOK $INSTDIR\search.xml
   Delete /REBOOTOK $INSTDIR\strings.js
