@@ -62,18 +62,18 @@ function about()
 
     for (i = 0; i < categoryarray.length; i++)
     {
-    	var enabled=0;
+      var enabled=0;
       var disabled=0;
-			var tarray = categories[categoryarray[i]];
-			for (var k = 0; k < tarray.length; k++){
-	         var tsearch = tarray[k];
-	         if ( !tsearch.enabled )
-	         {
-	           disabled++;
-	         }else{
-	            enabled++;           
-            }
-         }
+      var tarray = categories[categoryarray[i]];
+      for (var k = 0; k < tarray.length; k++){
+        var tsearch = tarray[k];
+        if ( !tsearch.enabled )
+        {
+          disabled++;
+        }else{
+          enabled++;
+        }
+      }
            
       helptable += "<tr><td class=helpboxCategoryExpanderRow colspan=3><table width='100%' border=0 cellpadding=0 cellspacing=0><tr><td class=helpboxCategory><span id='categoryExpander' category='" + categoryarray[i] + "' class='helpboxCategoryExpanderSign'></span>"
       helptable += "&nbsp;" + categoryarray[i] + "&nbsp;";
