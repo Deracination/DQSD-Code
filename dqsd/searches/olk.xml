@@ -1,0 +1,36 @@
+<search function="olk">
+	<name>Onelook</name>
+  <category>Reference<category>Language</category></category>
+  <link>http://onelook.com/</link>
+  <description>
+		Search dictionary web sites for words and phrases. Finds definitions by default.<br/>
+		<div class="helpboxDescLabels">Switches:</div>
+		<table class="helpboxDescTable">
+			<tr><td>/def</td><td> - </td><td>Find definitions</td></tr>
+			<tr><td>/trans</td><td> - </td><td>Find translations</td></tr>
+			<tr><td>/all</td><td> - </td><td>Search all dictionaries</td></tr>
+		</table>
+	</description>
+	<form name="olkf"
+       	method="get"
+        action="http://onelook.com/">
+		<input type="hidden" name="w" value="" />
+		<input type="hidden" name="ls" value="a" />
+	</form>
+	<script><![CDATA[
+		function olk(q)
+		{
+			if( nullArgs("olk", q) )
+				return;
+
+			var args = parseArgs(q, "def, trans, all");
+
+			document.olkf.ls.value = 'a';
+			if (args.switches.length == 1)
+				document.olkf.ls.value = {'def': 'a', 'trans': 'c', 'all': 'b'}[args.switches[0].name];
+			document.olkf.w.value = args.q;
+
+			submitForm(olkf);
+		}
+	]]></script>
+</search>
