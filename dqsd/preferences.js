@@ -123,3 +123,9 @@ clocktooltipform=true;
  */
 showbutton = 2;
 
+/* Styles that can be used to modify the color, font, etc. */
+//txtfldstyle = "background:yellow";
+//clockstyle = "background:threedface;text-align:center;border-width:1px;font-weight:bold";
+//helpstyle = "font-size:12pt;";
+//helpoptions = "width=800, height=550" // These are not CSS styles, but window.open() options
+
