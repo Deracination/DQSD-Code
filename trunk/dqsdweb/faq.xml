@@ -1,404 +1,409 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="faq.xsl"?>
 <faq_document xmlns:html="http://www.w3.org/1999/xhtml">
-  <doc_title>Dave's Quick Search Deskbar FAQ</doc_title>
-  <faqs>
-    <category name="General">
-      <faq>
-        <question>Can I assign a hotkey to it so I don't need to mouse to it?</question>
-        <answer>This feature was added in version 3.0.</answer>
-      </faq>
-      <faq>
-        <question>Why doesn't the DEL or the ctrl-insert key work?</question>
-        <answer>This feature was added in version 3.0.</answer>
-      </faq>
-      <faq>
-        <question>Where can I get the latest version of DQSD?</question>
-        <answer>You can the latest released version at <link href="http://www.dqsd.net">http://www.dqsd.net</link>
-        and the latest beta version at <link href="http://sourceforge.net/projects/dqsd">http://sourceforge.net/projects/dqsd</link>.</answer>
-      </faq>
-      <faq>
-        <question>I've made some preference or style setting changes. How do I apply them?</question>
-        <answer>You can reload the DQSD toolbar by typing ! in the search window and pressing the ENTER key.</answer>
-      </faq>
-      <faq>
-        <question>I use Windows XP. When I open DQSD I only see the word "Search" on my taskbar. Why?</question>
-        <answer>XP has a "lock taskbar" feature set by default. Right click on your taskbar and uncheck Lock taskbar. Then you can drag DQSD all you need and you can disable showing the name (search), etc... When you get it like you want it, you can lock the taskbar again.</answer>
-      </faq>
-      <faq>
-        <question>What are the key bindings used by DQSD?</question>
-        <answer>
-          <key_bindings>
-            <key name="Ctrl-Enter">Adds www. prefix and/or .com suffix to string if necessary and launches URL. Like IE key-binding (only better since the prefix/suffix are only add if needed).</key>
-            <key name="Shift-Enter">Always opens a new window for the search regardless of the reuseWindowMode setting. This works only when IE is the default browser.</key>
-            <key name="Ctrl-B, F8">Search the search history for the current text. (user configurable in localprefs.js)</key>
-            <key name="Shift-Ctrl-B, Shift-F8">>Search forward through the history for the current text. (user configurable in localprefs.js)</key>
-            <key name="Win-S">Make the search bar active (i.e., make it have the current focus). (user configurable in localprefs.js)</key>
-            <key name="F1">Display menu.</key>
-            <key name="Ctrl-P, Up">Display previous search in history.</key>
-            <key name="Ctrl-N, Down">Display next search in history.</key>
-            <key name="Shift [drag-n-drop]">When dragging text to the search bar, if the shift key is held down when dropping the text the default search won't be automatically invoked.</key>
-          </key_bindings>
-        </answer>
-      </faq>
-    </category>
-    <category name="Installation">
-      <faq>
-        <question>I've installed it, but I want to uninstall it, and I can't figure out how! Help!</question>
-        <answer>Right-click on the shoe to the left and choose 'Close Toolbar'. Then find the uninstaller under the control panel. Some people find the control panel entry, but they don't know they need to close DQSD before uninstalling. </answer>
-      </faq>
-      <faq>
-        <question>I'm having trouble upgrading. What do I do?</question>
-        <answer>To be perfectly safe, 1. close the toolbar, 2. reboot the computer, 3. install the upgrade.</answer>
-      </faq>
-    </category>
-    <category name="Searches">
-      <faq>
-        <question>How do I find out what searches are available?</question>
-        <answer>Enter ? as the search or select 'Help / About...' from the menu. The About Box that appears lists all the current searches. </answer>
-      </faq>
-      <faq>
-        <question>How do I add my own searches?</question>
-        <answer>
-          Standard searches are defined by XML files in the 'searches' 
-          subdirectory, but the 'localsearches' subdirectory is at your disposal to put your own searches, or searches you may have customised. You need to be comfortable hacking on HTML forms and a bit 
-          of JavaScript to add a search to the search bar.<html:br/>
-          <html:br/>If you are, here's 
-          what you do:<html:br/>
-          <html:ol>
-            <html:li>Build your search file. For this, either
-            <html:ul>
-              <html:li>
-              use <html:a href="searchwizard.htm">Dave's Quick Search Deskbar Search Wizard</html:a>, that will save you lots of time.
-              </html:li>
-              <html:li>or:
-              <html:ol>
-                <html:li>
-                Take a look at the original HTML form for the search, and create your own 
-                HTML form to do the same thing, but where you make all the input fields hidden 
-                instead of visible (i.e., change the type to "hidden"). Be sure to be explicit 
-                about the "action" of the form (it has to be an absolute URL).
-                </html:li>
-                <html:li>
-                Write a JavaScript function that takes one text parameter and assigns values 
-                the hidden fields of your form, and then submits it. By convention, if the text 
-                parameter is blank, you should open a window into a useful page that helps you 
-                launch the search -- typically the home page of the search. If there are 
-                multiple fields in the form, then your JavaScript should use a regular 
-                expression of some kind to pull apart the single text field to fill in the 
-                multiple form fields. The easiest way to do this is with the 'parseArgs' 
-                function, which will handle the parsing for optional 'switches' and their 
-                values. 
-                </html:li>
-                <html:li>
-                Paste your new HTML form and your new JavaScript function into its own XML 
-                file (SEARCHNAME).xml - copy the bits of xml from 
-                an existing search xml file - and include the attribute indicating your 
-                JavaScript function name, a short name for the search, a long description, a 
-                link to a description of the search engine, your name, and so on. Be sure to 
-                follow XML rules - all your attributes need to be quoted, remember the trailing 
-                slash in the INPUT tag, etc... 
-                </html:li>
-              </html:ol>
-              </html:li>
-            </html:ul>
-            </html:li>
-            <html:li>
-            Put your (SEARCHNAME).xml file in the 'localsearches' subdirectory (you may need to create the latter).
-            </html:li>
-            <html:li>
-            You can test your xml syntax by opening the xml file directly in IE. It will 
-            tell you if you've got a simple syntax error. 
-            </html:li>
-            <html:li>
-            Once your xml file is in good shape, you can "activate" your changes by 
-            typing "!" alone in the search bar. This causes it to reload itself. 
-            </html:li>
-            <html:li>
-            Test things out. It usually takes some twiddling to make sure your shortcut 
-            works, and that you can also see your new search described in the "?" about box. 
-            </html:li>
-            <html:li>
-            Then post your new search onto the Source Forge mailing list to share it 
-            with the world! :-) 
-            </html:li>
-          </html:ol>
-          <html:p>Here is some information about the XML:</html:p>
-          <html:ul>
-            <html:li>
-            Your search will be callable using the function="..." name. E.g., if 
-            function="foo" then you can do the search saying "foo bar". So pick a good short 
-            name for your JavaScript function. 
-            </html:li>
-            <html:li>
-              Every search's NAME attribute will be displayed if the search is put on the 
-              menu, so keep it short and descriptive, like a menu item. 
-            </html:li>
-            <html:li>
-              If you include a LINK attribute, then the link will appear in the ? help box 
-              for the search. 
-            </html:li>
-            <html:li>
-              The DESCRIPTION attribute is also included in the ? help box. 
-            </html:li>
-            <html:li>
-              The CATEGORY attribute defines the name of the category in which the search 
-              appears in the ? help box. 
-            </html:li>
-            <html:li>
-              The CONTRIBUTOR attribute is for your name, and the EMAIL attribute is for 
-              your email address.
-            </html:li>
-          </html:ul>
-        </answer>
-      </faq>
-      <faq>
-        <question>I've written a search of my own. How do I share it with the world?</question>
-        <answer>E-mail it as an attachment to the <link href="https://lists.sourceforge.net/lists/listinfo/dqsd-users">DQSD Users Group</link>.</answer>
-      </faq>
-      <faq>
-        <question>Where do I go to download searches?</question>
-        <answer>Searches can be downloaded from Source Forge at <link href="http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/dqsd/dqsd/searches/">http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/dqsd/dqsd/searches/</link>.</answer>
-      </faq>
-      <faq>
-        <question>Would somebody please create a search file for the new news.google.com and add it to the News category for the next release?</question>
-        <answer>It's already there in the Google search gg /news which is in the Search the Web category.  If you want it to be in the News category you could add an entry to localaliases.txt like the following (all on one line):
-          ggn|gg /news %s|Google News|Google News|News</answer>
-      </faq>
-    </category>
-    <category name="Aliases">
-      <faq>
-        <question>What is an alias?</question>
-        <answer>Aliases are simply other names for existing searches.  Aliases are
-                defined in aliases.txt and/or localaliases.txt, but localaliases.txt is meant
-                to be the user-defined file, and it won't be overwritten on an install. 
-                Aliases also provide substitution of '%s' (no quotes) with the actual search
-                string.  This allows some custom searches to be added very quickly
-                just by adding the URL with '%s' in the query string.  Aliases are also
-                referred to as Shortcuts.</answer>
-      </faq>
-      <faq>
-        <question>I cannot undefine some of my aliases. Why?</question>
-        <answer>There is currently no way to undefine an alias in aliases.txt without
-                removing it or commenting it out in aliases.txt (though this will surely be
-                fixed in an upcoming release).  Be aware that this change will be 
-                overwritten by later installations.<html:br/> Please also note that a local alias
-                overrides an alias if they have the same name.</answer>
-      </faq>
-      <faq>
-        <question>I want to create an alias to an alias.  How should I do this?</question>
-        <answer>An alias must be defined before it can be referenced from another alias. For
-                example these two lines in the localaliases.txt file will show two shortcuts in
-                the helpbox:
-          <html:ul>
-            <html:li>dqsdcvs|http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/dqsd/dqsd/
-            </html:li>
-            <html:li>dqsd|dqsdcvs
-            </html:li>
-          </html:ul>
-          <html:p>But these two lines will only show the dqsdcvs one:</html:p>
-          <html:ul>
-            <html:li>dqsd|dqsdcvs
-          </html:li>
-            <html:li>dqsdcvs|http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/dqsd/dqsd/
-          </html:li>
-          </html:ul>
-          <html:p>The same two lines, but the second set sets an alias to call another alias that
-                  hasn't been defined yet.</html:p>
-        </answer>
-      </faq>
-    </category>
-    <category name="Preferences">
-      <faq>
-        <question>How do I edit preferences for DQSD?</question>
-        <answer>Configuration settings for DQSD are defined in the preferences.js file. User
-                overriding settings are defined in localprefs.js. These files have
-                definitions to control the look and behavior of the toolbar. As new features
-                are added which require new configuration settings, new entries will appear in
-                the preferences.js included in DQSD releases. The preferences.js file
-                gets overwritten during the upgrade process. For this reason the user
-                should make the desired configuration changes to the localprefs.js file.</answer>
-      </faq>
-      <faq>
-        <question>Why are there two preference files (preferences.js and localprefs.js)?</question>
-        <answer>Preferences.js is included in the DQSD release bundle, therefore changes made
-                to the preferences.js file will be lost when a new DQSD release is installed.
-                Preference changes should be made to localprefs.js to be retained from release
-                to release.</answer>
-      </faq>
-      <faq>
-        <question>Why doesn't autocomplete work?</question>
-        <answer>Autocomplete requires two configuration settings to be specifically set in the
-                preference files. By default DQSD does not enable the autocomplete
-                functionality. 'autocomplete' must be set to 'true" and 'multiline' must be set
-                to 'false'.</answer>
-      </faq>
-    </category>
-    <category name="Styles">
-      <faq>
-        <question>How do I edit fonts, colors, etc. for DQSD?</question>
-        <answer>Style settings for DQSD are defined in the search.css file. User overriding
-                settings are defined in localsearch.css. These files have definitions to
-                control the look and styles of the toolbar. As new features are added which
-                require new style settings, new entries will appear in the search.css included
-                in DQSD releases. The search.css file gets overwritten during the upgrade
-                process. For this reason the user should make the desired configuration
-                changes to the localsearch.css file.</answer>
-      </faq>
-      <faq>
-        <question>Why are there two .css files (search.css and localsearch.css)?</question>
-        <answer>Search.css is included in the DQSD release bundle, therefore changes made to
-                the search.css file will be lost when a new DQSD release is installed. Style
-                changes should be made to localsearch.css to be retained from release to
-                release.</answer>
-      </faq>
-    </category>
-    <category name="Coding">
-      <faq>
-        <question>Are there any guidelines I should be aware of when making modifications for DQSD?</question>
-        <answer>Ground rules for checkins into CVS:
-          <html:ul>
-            <html:li>If you want to merge in some changes, just let Dave know which SourceForge
-                     account needs CVS write access. Access is no problem if you're going to
-                     contribute; just don't abuse it.
-            </html:li>
-            <html:li>When you do commit a change, please let Dave and the
-                     <link href="https://lists.sourceforge.net/lists/listinfo/dqsd-users"> DQSD Users Group</link> know.
-            </html:li>
-            <html:li>If you're going to do major rearrangement, broadcast your intent to the
-                     <link href="https://lists.sourceforge.net/lists/listinfo/dqsd-devel"> DQSD Developers Group</link>
-                     ahead of time.
-            </html:li>
-            <html:li>If you're adding novel functionality, please consider including an option for
-                     preferences.js to turn it off. Also please consider making the default "off"
-                     until it's completely tested and polished.
-            </html:li>
-            <html:li>Small changes should have small diffs. Please do not use a wysiwyg HTML editor
-                     that will introduce diffs on every line, or your checkin will be backed out.
-            </html:li>
-            <html:li>In the code, please mimic the prevailing convention for tabbing and spacing:
-            </html:li>
+   <doc_title>Dave's Quick Search Deskbar FAQ</doc_title>
+
+   <faqs>
+      <category name="General">
+         <faq>
+            <question>Can I assign a hotkey to it so I don't need to mouse to it?</question>
+
+            <answer>This feature was added in version 3.0.</answer>
+         </faq>
+
+         <faq>
+            <question>Why doesn't the DEL or the ctrl-insert key work?</question>
+
+            <answer>This feature was added in version 3.0.</answer>
+         </faq>
+
+         <faq>
+            <question>Where can I get the latest version of DQSD?</question>
+
+            <answer>You can the latest released version at 
+            <link href="http://www.dqsd.net">http://www.dqsd.net</link>
+
+            and the latest beta version at 
+            <link href="http://sourceforge.net/projects/dqsd">http://sourceforge.net/projects/dqsd</link>
+
+            .</answer>
+         </faq>
+
+         <faq>
+            <question>I've made some preference or style setting changes. How do I apply them?</question>
+
+            <answer>You can reload the DQSD toolbar by typing ! in the search window and pressing the ENTER key.</answer>
+         </faq>
+
+         <faq>
+            <question>I use Windows XP. When I open DQSD I only see the word "Search" on my taskbar. Why?</question>
+
+            <answer>XP has a "lock taskbar" feature set by default. Right click on your taskbar and uncheck Lock taskbar. Then you can drag DQSD all you need and you can disable showing the name (search), etc... When you get it like you want it, you can lock the taskbar again.</answer>
+         </faq>
+
+         <faq>
+            <question>What are the key bindings used by DQSD?</question>
+
+            <answer>
+               <key_bindings>
+                  <key name="Ctrl-Enter">Adds www. prefix and/or .com suffix to string if necessary and launches URL. Like IE key-binding (only better since the prefix/suffix are only add if needed).</key>
+
+                  <key name="Shift-Enter">Always opens a new window for the search regardless of the reuseWindowMode setting. This works only when IE is the default browser.</key>
+
+                  <key name="Ctrl-B, F8">Search the search history for the current text. (user configurable in localprefs.js)</key>
+
+                  <key name="Shift-Ctrl-B, Shift-F8">&gt;Search forward through the history for the current text. (user configurable in localprefs.js)</key>
+
+                  <key name="Win-S">Make the search bar active (i.e., make it have the current focus). (user configurable in localprefs.js)</key>
+
+                  <key name="F1">Display menu.</key>
+
+                  <key name="Ctrl-P, Up">Display previous search in history.</key>
+
+                  <key name="Ctrl-N, Down">Display next search in history.</key>
+
+                  <key name="Shift [drag-n-drop]">When dragging text to the search bar, if the shift key is held down when dropping the text the default search won't be automatically invoked.</key>
+               </key_bindings>
+            </answer>
+         </faq>
+      </category>
+
+      <category name="Installation">
+         <faq>
+            <question>I've installed it, but I want to uninstall it, and I can't figure out how! Help!</question>
+
+            <answer>Right-click on the shoe to the left and choose 'Close Toolbar'. Then find the uninstaller under the control panel. Some people find the control panel entry, but they don't know they need to close DQSD before uninstalling.</answer>
+         </faq>
+
+         <faq>
+            <question>I'm having trouble upgrading. What do I do?</question>
+
+            <answer>To be perfectly safe, 1. close the toolbar, 2. reboot the computer, 3. install the upgrade.</answer>
+         </faq>
+      </category>
+
+      <category name="Searches">
+         <faq>
+            <question>How do I find out what searches are available?</question>
+
+            <answer>Enter ? as the search or select 'Help / About...' from the menu. The About Box that appears lists all the current searches.</answer>
+         </faq>
+
+         <faq>
+            <question>How do I add my own searches?</question>
+
+            <answer>Standard searches are defined by XML files in the 'searches' subdirectory, but the 'localsearches' subdirectory is at your disposal to put your own searches, or searches you may have customised. You need to be comfortable hacking on HTML forms and a bit of JavaScript to add a search to the search bar. 
+            <html:br />
+
+            <html:br />
+
+            If you are, here's what you do: 
+            <html:br />
+
             <html:ol>
-              <html:li>No tab characters in code please. Use spaces instead. (The exception is where
-                         tabs have semantics of course). Code should be indented two spaces per level.
-                </html:li>
-              <html:li>Please, no space characters after a ( or before a ).
-                </html:li>
-              <html:li>Curlies for a {multiline block} should be on their own line and unindented
-                         (just their contents are indented).
-                </html:li>
+               <html:li>Build your search file. For this, either 
+               <html:ul>
+                  <html:li>use 
+                  <html:a href="searchwizard.htm">Dave's Quick Search Deskbar Search Wizard</html:a>
+
+                  , that will save you lots of time.</html:li>
+
+                  <html:li>or: 
+                  <html:ol>
+                     <html:li>Take a look at the original HTML form for the search, and create your own HTML form to do the same thing, but where you make all the input fields hidden instead of visible (i.e., change the type to "hidden"). Be sure to be explicit about the "action" of the form (it has to be an absolute URL).</html:li>
+
+                     <html:li>Write a JavaScript function that takes one text parameter and assigns values the hidden fields of your form, and then submits it. By convention, if the text parameter is blank, you should open a window into a useful page that helps you launch the search -- typically the home page of the search. If there are multiple fields in the form, then your JavaScript should use a regular expression of some kind to pull apart the single text field to fill in the multiple form fields. The easiest way to do this is with the 'parseArgs' function, which will handle the parsing for optional 'switches' and their values.</html:li>
+
+                     <html:li>Paste your new HTML form and your new JavaScript function into its own XML file (SEARCHNAME).xml - copy the bits of xml from an existing search xml file - and include the attribute indicating your JavaScript function name, a short name for the search, a long description, a link to a description of the search engine, your name, and so on. Be sure to follow XML rules - all your attributes need to be quoted, remember the trailing slash in the INPUT tag, etc...</html:li>
+                  </html:ol>
+                  </html:li>
+               </html:ul>
+               </html:li>
+
+               <html:li>Put your (SEARCHNAME).xml file in the 'localsearches' subdirectory (you may need to create the latter).</html:li>
+
+               <html:li>You can test your xml syntax by opening the xml file directly in IE. It will tell you if you've got a simple syntax error.</html:li>
+
+               <html:li>Once your xml file is in good shape, you can "activate" your changes by typing "!" alone in the search bar. This causes it to reload itself.</html:li>
+
+               <html:li>Test things out. It usually takes some twiddling to make sure your shortcut works, and that you can also see your new search described in the "?" about box.</html:li>
+
+               <html:li>Then post your new search onto the Source Forge mailing list to share it with the world! :-)</html:li>
             </html:ol>
-            <html:li>Also please mimic the prevailing convention for packaging:
-            </html:li>
+
+            <html:p>Here is some information about the XML:</html:p>
+
+            <html:ul>
+               <html:li>Your search will be callable using the function="..." name. E.g., if function="foo" then you can do the search saying "foo bar". So pick a good short name for your JavaScript function.</html:li>
+
+               <html:li>Every search's NAME attribute will be displayed if the search is put on the menu, so keep it short and descriptive, like a menu item.</html:li>
+
+               <html:li>If you include a LINK attribute, then the link will appear in the ? help box for the search.</html:li>
+
+               <html:li>The DESCRIPTION attribute is also included in the ? help box.</html:li>
+
+               <html:li>The CATEGORY attribute defines the name of the category in which the search appears in the ? help box.</html:li>
+
+               <html:li>The CONTRIBUTOR attribute is for your name, and the EMAIL attribute is for your email address.</html:li>
+            </html:ul>
+            </answer>
+         </faq>
+
+         <faq>
+            <question>I've written a search of my own. How do I share it with the world?</question>
+
+            <answer>E-mail it as an attachment to the 
+            <link href="https://lists.sourceforge.net/lists/listinfo/dqsd-users">DQSD Users Group</link>
+
+            .</answer>
+         </faq>
+
+         <faq>
+            <question>Where do I go to download searches?</question>
+
+            <answer>Searches can be downloaded from Source Forge at 
+            <link href="http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/dqsd/dqsd/searches/">http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/dqsd/dqsd/searches/</link>
+
+            .</answer>
+         </faq>
+
+         <faq>
+            <question>Would somebody please create a search file for the new news.google.com and add it to the News category for the next release?</question>
+
+            <answer>It's already there in the Google search gg /news which is in the Search the Web category. If you want it to be in the News category you could add an entry to localaliases.txt like the following (all on one line): ggn|gg /news %s|Google News|Google News|News</answer>
+         </faq>
+      </category>
+
+      <category name="Aliases">
+         <faq>
+            <question>What is an alias?</question>
+
+            <answer>Aliases are simply other names for existing searches. Aliases are defined in aliases.txt and/or localaliases.txt, but localaliases.txt is meant to be the user-defined file, and it won't be overwritten on an install. Aliases also provide substitution of '%s' (no quotes) with the actual search string. This allows some custom searches to be added very quickly just by adding the URL with '%s' in the query string. Aliases are also referred to as Shortcuts.</answer>
+         </faq>
+
+         <faq>
+            <question>I cannot undefine some of my aliases. Why?</question>
+
+            <answer>There is currently no way to undefine an alias in aliases.txt without removing it or commenting it out in aliases.txt (though this will surely be fixed in an upcoming release). Be aware that this change will be overwritten by later installations. 
+            <html:br />
+
+            Please also note that a local alias overrides an alias if they have the same name.</answer>
+         </faq>
+
+         <faq>
+            <question>I want to create an alias to an alias. How should I do this?</question>
+
+            <answer>An alias must be defined before it can be referenced from another alias. For example these two lines in the localaliases.txt file will show two shortcuts in the helpbox: 
+            <html:ul>
+               <html:li>dqsdcvs|http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/dqsd/dqsd/</html:li>
+
+               <html:li>dqsd|dqsdcvs</html:li>
+            </html:ul>
+
+            <html:p>But these two lines will only show the dqsdcvs one:</html:p>
+
+            <html:ul>
+               <html:li>dqsd|dqsdcvs</html:li>
+
+               <html:li>dqsdcvs|http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/dqsd/dqsd/</html:li>
+            </html:ul>
+
+            <html:p>The same two lines, but the second set sets an alias to call another alias that hasn't been defined yet.</html:p>
+            </answer>
+         </faq>
+      </category>
+
+      <category name="Preferences">
+         <faq>
+            <question>How do I edit preferences for DQSD?</question>
+
+            <answer>Configuration settings for DQSD are defined in the preferences.js file. User overriding settings are defined in localprefs.js. These files have definitions to control the look and behavior of the toolbar. As new features are added which require new configuration settings, new entries will appear in the preferences.js included in DQSD releases. The preferences.js file gets overwritten during the upgrade process. For this reason the user should make the desired configuration changes to the localprefs.js file.</answer>
+         </faq>
+
+         <faq>
+            <question>Why are there two preference files (preferences.js and localprefs.js)?</question>
+
+            <answer>Preferences.js is included in the DQSD release bundle, therefore changes made to the preferences.js file will be lost when a new DQSD release is installed. Preference changes should be made to localprefs.js to be retained from release to release.</answer>
+         </faq>
+
+         <faq>
+            <question>Why doesn't autocomplete work?</question>
+
+            <answer>Autocomplete requires two configuration settings to be specifically set in the preference files. By default DQSD does not enable the autocomplete functionality. 'autocomplete' must be set to 'true" and 'multiline' must be set to 'false'.</answer>
+         </faq>
+      </category>
+
+      <category name="Styles">
+         <faq>
+            <question>How do I edit fonts, colors, etc. for DQSD?</question>
+
+            <answer>Style settings for DQSD are defined in the search.css file. User overriding settings are defined in localsearch.css. These files have definitions to control the look and styles of the toolbar. As new features are added which require new style settings, new entries will appear in the search.css included in DQSD releases. The search.css file gets overwritten during the upgrade process. For this reason the user should make the desired configuration changes to the localsearch.css file.</answer>
+         </faq>
+
+         <faq>
+            <question>Why are there two .css files (search.css and localsearch.css)?</question>
+
+            <answer>Search.css is included in the DQSD release bundle, therefore changes made to the search.css file will be lost when a new DQSD release is installed. Style changes should be made to localsearch.css to be retained from release to release.</answer>
+         </faq>
+      </category>
+
+      <category name="Coding">
+         <faq>
+            <question>Are there any guidelines I should be aware of when making modifications for DQSD?</question>
+
+            <answer>Ground rules for checkins into CVS: 
+            <html:ul>
+               <html:li>If you want to merge in some changes, just let Dave know which SourceForge account needs CVS write access. Access is no problem if you're going to contribute; just don't abuse it.</html:li>
+
+               <html:li>When you do commit a change, please let Dave and the 
+               <link href="https://lists.sourceforge.net/lists/listinfo/dqsd-users">DQSD Users Group</link>
+
+               know.</html:li>
+
+               <html:li>If you're going to do major rearrangement, broadcast your intent to the 
+               <link href="https://lists.sourceforge.net/lists/listinfo/dqsd-devel">DQSD Developers Group</link>
+
+               ahead of time.</html:li>
+
+               <html:li>If you're adding novel functionality, please consider including an option for preferences.js to turn it off. Also please consider making the default "off" until it's completely tested and polished.</html:li>
+
+               <html:li>Small changes should have small diffs. Please do not use a wysiwyg HTML editor that will introduce diffs on every line, or your checkin will be backed out.</html:li>
+
+               <html:li>In the code, please mimic the prevailing convention for tabbing and spacing:</html:li>
+
+               <html:ol>
+                  <html:li>No tab characters in code please. Use spaces instead. (The exception is where tabs have semantics of course). Code should be indented two spaces per level.</html:li>
+
+                  <html:li>Please, no space characters after a ( or before a ).</html:li>
+
+                  <html:li>Curlies for a {multiline block} should be on their own line and unindented (just their contents are indented).</html:li>
+               </html:ol>
+
+               <html:li>Also please mimic the prevailing convention for packaging:</html:li>
+
+               <html:ol>
+                  <html:li>Sources should be included in the distribution itself since this is the easiest way to conform to the GPL. So all source files should be listed in "search.nsi"; i.e., you shouldn't need CVS to get a working build.</html:li>
+
+                  <html:li>Please keep "build.cmd" working. In particular this means that DQSDTools.mak needs to be kept up to date. Also, any files that are automatically generated by the build should be deleted by "clean.cmd".</html:li>
+
+                  <html:li>Keep new sources, except for those that are being used at runtime, underneath src/.</html:li>
+               </html:ol>
+
+               <html:li>Keep in mind that you are editing other people's code and that other people will edit your stuff. Please don't be offended if your code is changed or even disabled. Be nice!</html:li>
+
+               <html:li>Dave may decide to turn your access off if things become unmanageable, or if you don't make checkins for a while.</html:li>
+            </html:ul>
+            </answer>
+         </faq>
+
+         <faq>
+            <question>How do I get started with basic Source Forge access?</question>
+
+            <answer>Steps to a working build of DQSD from SourceForge: 
             <html:ol>
-              <html:li>Sources should be included in the distribution itself since this is the easiest
-                         way to conform to the GPL. So all source files should be listed in
-                         "search.nsi"; i.e., you shouldn't need CVS to get a working build.
-                </html:li>
-              <html:li>Please keep "build.cmd" working. In particular this means that DQSDTools.mak
-                         needs to be kept up to date. Also, any files that are automatically generated
-                         by the build should be deleted by "clean.cmd".
-                </html:li>
-              <html:li>Keep new sources, except for those that are being used at runtime, underneath src/.
-                </html:li>
+               <html:li>Make sure you're using Windows 2000 or better.</html:li>
+
+               <html:li>Install cygwin from 
+               <link href="http://cygwin.com/setup.exe">http://cygwin.com/setup.exe</link>
+
+               .</html:li>
+
+               <html:li>Install Microsoft Visual C++ 6.0.</html:li>
+
+               <html:li>Install the 
+               <link href="http://www.microsoft.com/msdownload/platformsdk/sdkupdate/">Microsoft Internet Development SDK</link>
+
+               . Move the SDK path for include files and libraries before the standard Visual C++ header files.</html:li>
+
+               <html:li>Install NSIS - 
+               <link href="http://www.nullsoft.com/free/nsis/">http://www.nullsoft.com/free/nsis/</link>
+
+               .</html:li>
+
+               <html:li>Make sure that MSVC and NSIS are on your path (you can try using Control Panel/System Properties/Environment Variables).</html:li>
+
+               <html:li>From your cygwin prompt, type the following to checkout:</html:li>
+
+               <html:ul>
+                  <html:li>cd ~</html:li>
+
+                  <html:li>cvs -d:pserver:anonymous@c...:/cvsroot/dqsd login</html:li>
+
+                  <html:li>cvs -d:pserver:anonymous@c...:/cvsroot/dqsd co dqsd</html:li>
+               </html:ul>
+
+               <html:li>And whenever you want to get the latest:</html:li>
+
+               <html:ul>
+                  <html:li>cd ~/dqsd</html:li>
+
+                  <html:li>cvs update -dP</html:li>
+               </html:ul>
+
+               <html:li>Type the following to build:</html:li>
+
+               <html:ul>
+                  <html:li>cd ~/dqsd</html:li>
+
+                  <html:li>src/build.cmd</html:li>
+               </html:ul>
+
+               <html:li>In the end, you should get a dqsd/dqsd.exe.</html:li>
+
+               <html:li>To go back to pristine sources, run src/clean.cmd</html:li>
             </html:ol>
-            <html:li>Keep in mind that you are editing other people's code and that other people
-                     will edit your stuff. Please don't be offended if your code is changed or even
-                     disabled. Be nice!
-            </html:li>
-            <html:li>Dave may decide to turn your access off if things become unmanageable, or if
-                     you don't make checkins for a while.
-            </html:li>
-          </html:ul>
-        </answer>
-      </faq>
-      <faq>
-        <question>How do I get started with basic Source Forge access?</question>
-        <answer>Steps to a working build of DQSD from SourceForge:
-          <html:ol>
-            <html:li>Make sure you're using Windows 2000 or better.
-            </html:li>
-            <html:li>Install cygwin from <link href="http://cygwin.com/setup.exe">http://cygwin.com/setup.exe</link>.
-            </html:li>
-            <html:li>Install Microsoft Visual C++ 6.0.
-            </html:li>
-            <html:li>Install the <link href="http://www.microsoft.com/msdownload/platformsdk/sdkupdate/">Microsoft
-                     Internet Development SDK</link>. Move the SDK path for include files and libraries before the
-                     standard Visual C++ header files.
-            </html:li>
-            <html:li>Install NSIS - <link href="http://www.nullsoft.com/free/nsis/">http://www.nullsoft.com/free/nsis/</link>.
-            </html:li>
-            <html:li>Make sure that MSVC and NSIS are on your path 
-                     (you can try using Control Panel/System Properties/Environment Variables).
-            </html:li>
-            <html:li>From your cygwin prompt, type the following to checkout:
-            </html:li>
+
+            The above is for read-only access to the sources. For writable access, you'll need a Source Forge account, and Dave or Glenn will have to grant proper permissions to your account. 
+            <html:br />
+
+            <html:br />
+
+            Alternate CVS Utilities: 
             <html:ul>
-              <html:li>cd ~
-                </html:li>
-              <html:li>cvs -d:pserver:anonymous@c...:/cvsroot/dqsd login
-                </html:li>
-              <html:li>cvs -d:pserver:anonymous@c...:/cvsroot/dqsd co dqsd
-                </html:li>
+               <html:li>WinCVS is a GUI front-end to CVS that you can use. You can pull the latest version here: 
+               <link href="http://sourceforge.net/projects/cvsgui">http://sourceforge.net/projects/cvsgui</link>
+
+               .</html:li>
+
+               <html:li>Check out Tortoise CVS. It adds the most basic/common CVS command functionality to Explorer, so you can update, commit, add, diff, etc.. with a right click from an Explorer window. Get it here: 
+               <link href="http://www.tortoisecvs.org/">http://www.tortoisecvs.org/</link>
+
+               .</html:li>
             </html:ul>
-            <html:li>And whenever you want to get the latest:
-            </html:li>
-            <html:ul>
-              <html:li>cd ~/dqsd
-                </html:li>
-              <html:li>cvs update -dP
-                </html:li>
-            </html:ul>
-            <html:li>Type the following to build:
-            </html:li>
-            <html:ul>
-              <html:li>cd ~/dqsd
-                </html:li>
-              <html:li>src/build.cmd
-                </html:li>
-            </html:ul>
-            <html:li>In the end, you should get a dqsd/dqsd.exe.
-            </html:li>
-            <html:li>To go back to pristine sources, run src/clean.cmd
-            </html:li>
-          </html:ol>
-          The above is for read-only access to the sources. For writable access, you'll
-          need a Source Forge account, and Dave or Glenn will have to grant proper
-          permissions to your account.<html:br/>
-          <html:br/>
-          Alternate CVS Utilities:
-          <html:ul>
-            <html:li>WinCVS is a GUI front-end to CVS that you can use. You can pull the latest
-                     version here: <link href="http://sourceforge.net/projects/cvsgui">http://sourceforge.net/projects/cvsgui</link>.
-            </html:li>
-            <html:li>Check out Tortoise CVS. It adds the most basic/common CVS command functionality
-                     to Explorer, so you can update, commit, add, diff, etc.. with a right click
-                     from an Explorer window. Get it here: <link href="http://www.tortoisecvs.org/">http://www.tortoisecvs.org/</link>.
-            </html:li>
-          </html:ul>
-        </answer>
-      </faq>
-    </category>
-    <category name="Add-ons">
-      <faq>
-        <question>What is an add-on?</question>
-        <answer>At times users may want to add more functionality than is possible or makes sense with a 
-                single .XML search file. Also, it may not make sense to have this new feature be installed 
-                for all users. If so, the ability to add add-ons allows for multiple files to be packaged 
-                together in an optional installation package. Add-ons are installed in the 'addon' 
-                subdirectory.</answer>
-      </faq>
-      <faq>
-        <question>When should I create an add-on rather than a search?</question>
-        <answer>When a new feature is not really a search, and/or it requires more than just a single XML 
-                file, and/or it doesn't have general appeal (i.e., not many will use it) it should be an 
-                optional add-on.</answer>
-      </faq>
-      <faq>
-        <question>How do I create an add-on?</question>
-        <answer>The best place to learn about creating add-ons is to look at the current addon
-                examples (googlespell, etc), and use them as a template for your own.</answer>
-      </faq>
-    </category>
-  </faqs>
+            </answer>
+         </faq>
+      </category>
+
+      <category name="Known Issues">
+         <faq>
+            <question>I'm running the latest DQSD, but my tray icons keep disappearing. Help!</question>
+
+            <answer>There is currently no fix for this problem. Work is in progress though. However several have reported success by using 
+            <link href="http://www.r2.com.au/downloads/index.html?id=startdelay">Startup Delayer.</link>
+
+            Delay startup of some of your programs at 10 second intervals, starting at about 20 seconds.</answer>
+         </faq>
+      </category>
+
+      <category name="Add-ons">
+         <faq>
+            <question>What is an add-on?</question>
+
+            <answer>At times users may want to add more functionality than is possible or makes sense with a single .XML search file. Also, it may not make sense to have this new feature be installed for all users. If so, the ability to add add-ons allows for multiple files to be packaged together in an optional installation package. Add-ons are installed in the 'addon' subdirectory.</answer>
+         </faq>
+
+         <faq>
+            <question>When should I create an add-on rather than a search?</question>
+
+            <answer>When a new feature is not really a search, and/or it requires more than just a single XML file, and/or it doesn't have general appeal (i.e., not many will use it) it should be an optional add-on.</answer>
+         </faq>
+
+         <faq>
+            <question>How do I create an add-on?</question>
+
+            <answer>The best place to learn about creating add-ons is to look at the current addon examples (googlespell, etc), and use them as a template for your own.</answer>
+         </faq>
+      </category>
+   </faqs>
 </faq_document>
+
