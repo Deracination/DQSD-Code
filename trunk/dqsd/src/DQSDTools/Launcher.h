@@ -102,8 +102,11 @@ private:
 //	HWND	m_hBaseTooltipWnd;
 	HWND	m_hHotkeyNotificationWindow;
 
+
 private:
 	HRESULT GetFilename( LPCTSTR szName, LPTSTR szResult, LPCTSTR pszDefaultExt = _T(".txt") );
+	HRESULT GetInstallationDirectory( LPTSTR szResult, DWORD dwResultSize);
+	BOOL VerifyFileInDirectoryTree( LPCTSTR szFilename, LPCTSTR szDir);
 
 };
 
