@@ -1,0 +1,19 @@
+// This is where user aliases can be defined.  Some examples are below.  Remove the 
+// leading comment characters (//) to use these.  
+//
+// The format requires a single <tab> separator between the alias and its
+// definition.
+//
+// Any %s placeholders will be replaced with the search string if any is supplied.
+// E.g., if 'ygg' is defined as below, entering "ygg dqsdd" will take you to
+// http://groups.yahoo.com/group/dqsdd
+
+// movie	ym
+// sf	http://sourceforge.net/
+// sfp	http://sourceforge.net/projects/%s
+// yg	http://groups.yahoo.com/
+// ygg	http://groups.yahoo.com/group/%s
+// exp	run explorer
+// np	run notepad
+// word	run winword
+// excel	run excel

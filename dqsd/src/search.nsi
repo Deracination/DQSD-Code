@@ -228,10 +228,11 @@ Section "Quick Search Deskbar (required)"
   File "DQSDTools\resource.h"
 
 
-  ; Create prefs file if one doesn't exist
+  ; Create files with user preferences if they doesn't exist
   SetOverwrite off
   SetOutPath "$INSTDIR"
   File "..\preferences.js"
+  File "..\localaliases.txt"
   SetOverwrite on
 
   ; old source files used to live here
