@@ -1,4 +1,4 @@
--- What's new for 2.5.8 (June 30, 2002)
+-- What's new for 3.0 (June 28, 2002)
 
 Search bar
 
