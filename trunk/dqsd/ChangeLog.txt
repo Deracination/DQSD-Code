@@ -10,6 +10,7 @@ Bug Fixes
 * Removed 'Type "!<em>prefix</em>" to see only matching entries.' from help. This action launches lucky Google.
 * Fixed clock bug found by John Bairen, where the clock would fail to display if displayHelp was false (Kim Gräsman)
 * Fixed the alias parsing to allow spaces aroung the delimiters (Monty Scroggins)
+* Check to see if startupCommands is defined before trying to use it (Brent Beardsley)
 
 New Searches
 * riaar - riaaradar.org RIAA label and artist membership search. (Thad Kerosky)
@@ -24,6 +25,7 @@ New Searches
 * icap - view sites through other browsers (Shawn H.)
 * nic - IEEE MAC address to company translator (Steve Poirier)
 * a9 - The Amazon.com Search (Gregory Krohne)
+* jd - Search javadocs.org (Brent Beardsley)
 
 Modified Searches
 * jdk - updated urls for j2ee and 1.4, added 1.5, 1.2, 1.1 and api switches (Brent Beardsley)
@@ -39,6 +41,7 @@ Modified Searches
 * so - better handling of arguments
 * encarta - updated to work with site changes and added /dictionary switch (Glenn Carr)
 * mys - updated broken search form (Brent Beardsley)
+* configure - now return "" for the edit functions so they'll work better in aliases (Brent Beardsley)
 
 Removed Searches
 * nwtsr and httpd replaced by whats (Kim Gräsman)
