@@ -1,10 +1,21 @@
 <search function="fedex">
   <name>Track FedEx Packages</name>
-  <description>Separate tracking numbers by commas: "fedex 40012345678, 40012345679"</description>
+  <description>
+    Track multiple FedEx packages using tracking numbers.<br/>
+    <a class="helpboxDescLabels">Usage:</a><br/>
+  	<table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">fedex &lt;<i>number1</i>&gt;[, &lt;<i>number2</i>&gt;[,...]]</td></tr>
+  	</table>
+    <a class="helpboxDescLabels">Example:</a><br/>
+    <table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">fedex 40012345678, 40012345679</td></tr>
+  	</table>
+  </description>
   <category>Shipping</category>
   <link>http://www.fedex.com/</link>
   <contributor>Glenn Carr</contributor>
   <idea>stickyc's buddy</idea>
+  
   <form name="fedexf"
         action="http://www.fedex.com/cgi-bin/tracking"
         method="get">
@@ -13,11 +24,12 @@
     <input type="hidden" name="language" VALUE="english"/>
     <input type="hidden" name="cntry_code" VALUE="us"/>
   </form>
+  
   <script><![CDATA[
     function fedex(q)
     {
-      if( q == "" )
-        openSearchWindow("http://www.fedex.com/");
+      if( nullArgs("fedex",q) )
+        return false;
       else
       {
         document.fedexf.tracknumbers.value = q;

@@ -1,8 +1,15 @@
 <search function="faq">
   <name>Usenet FAQ Search</name>
-  <description>Search the Usenet FAQ archives: "faq fortran"</description>
+  <description>
+    Search the Usenet FAQ archives.<br/>
+    <a class="helpboxDescLabels">Example:</a><br/>
+    <table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">faq fortran</td></tr>
+  	</table>
+  </description>
   <category>Other</category>
   <link>http://www.faqs.org/faqs/</link>
+  
   <form name="faqf"
         action="http://www.faqs.org/cgi-bin/faqs/faqsearch"
         method="post">
@@ -15,11 +22,12 @@
     <input type="hidden" name="meta" value="enabled"/>
     <input type="hidden" name="query"/>
   </form>
+  
   <script><![CDATA[
     function faq(q)
     {
-      if( q == "" )
-        openSearchWindow("http://www.faqs.org/faqs/");
+      if( nullArgs("faq",q) )
+        return false;
       else
       {
         document.faqf.query.value = q;
