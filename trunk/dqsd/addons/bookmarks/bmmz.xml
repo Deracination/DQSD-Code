@@ -57,8 +57,7 @@
 		} else {
 		  bookmarks_full_path = bookmarks_mozilla_location + "\\" + user_file;
 		}
-		var bookmarks_page = bookmarks_get_file(bookmarks_full_path);
-		mozilla_bookmarks_array = bookmarks_get_bookmarks_array_from_netscape(bookmarks_page);
+		mozilla_bookmarks_array = bookmarks_get_bookmarks_array_from_netscape(bookmarks_full_path);
 	}
 	bookmarks_show_menu(mozilla_bookmarks_array);
     }

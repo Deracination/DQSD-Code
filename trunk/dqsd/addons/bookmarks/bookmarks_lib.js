@@ -1,3 +1,4 @@
+
 function bookmarks_get_webpage(webpage_url, cache_file_name, refresh_time)
 {
 	// if cache_file_name not specified || refresh_time == 0 || cache_file_name does not exist || (current date - cache_file_name date) > refresh_time) Re-download from web
@@ -31,49 +32,46 @@ function bookmarks_process_ie_favorites_folder(fso, folder, bookmarks_array, lev
 	var url_regexp = new RegExp(/URL=([^\n]+)/gim); 
 	var fc, ff;
 
+	// add folders
 	fc = new Enumerator(folder.SubFolders);
 	for (; !fc.atEnd(); fc.moveNext()) {
-		var arr_item = "";
-		for (var j=0; j < level; j++) {
-		  arr_item += "\t";
-		}
-		arr_item += "Folder";
-		arr_item += "\t";
-		arr_item += fso.GetBaseName(fc.item());
-		bookmarks_array.push(arr_item);
+		var folderName = fso.GetBaseName(fc.item());
+
+		bookmarks_array.push(bookmarks_build_arr_item(folderName, 'Folder', level));
+
 		bookmarks_process_ie_favorites_folder(fso, fc.item(), bookmarks_array, level+1);
 	}
 
+	// add bookmarks
 	ff = new Enumerator(folder.Files);
 	for (; !ff.atEnd(); ff.moveNext()) {
 		if (fso.GetExtensionName(ff.item()).toUpperCase() != "URL") {
 			continue;
 		}
-		var objTextStream = fso.OpenTextFile (ff.item(), fsoForReading);
-		var cur_url = ff.item();
+		var bookmarkName = fso.GetBaseName(ff.item());
+		var objTextStream = fso.OpenTextFile(ff.item(), fsoForReading);
+		var bookmarkUrl = ff.item();
 		while (!objTextStream.AtEndOfStream) {
 			var line = objTextStream.ReadLine();
 			var url_results = url_regexp.exec(line);
 			if (url_results != null) {
-				cur_url = url_results[1];
+				bookmarkUrl = url_results[1];
 				break;
 			}
 		}
-
-		var arr_item = "";
-		for (var j=0; j < level; j++) {
-		  arr_item += "\t";
-		}
-		arr_item += cur_url;
-		arr_item += "\t";
-		arr_item += fso.GetBaseName(ff.item());
-		bookmarks_array.push(arr_item);
+		bookmarks_array.push(bookmarks_build_arr_item(bookmarkName, bookmarkUrl, level));
 	}
 }
 
-
-function bookmarks_get_bookmarks_array_from_netscape(webpage_source)
+function bookmarks_get_bookmarks_array_from_netscape_old(webpage_url)
 {
+	var webpage_source = '';
+	if (webpage_url.match(/\:\/\//)) {
+		webpage_source = bookmarks_get_webpage(webpage_url);
+	} else {
+		webpage_source = bookmarks_get_file(webpage_url);
+	}
+
 	// tokenize the page
     var parsed_items = new Array();
     var i = 0;
@@ -179,15 +177,7 @@ function bookmarks_get_bookmarks_array_from_netscape(webpage_source)
 		} else {
 			// text
 			if (state == 1 || state == 2) {
-			  var arr_item = "";
-			  for (var j=0; j < level; j++) {
-				  arr_item += "\t";
-			  }
-			  arr_item += cur_href;
-			  arr_item += "\t";
-			  arr_item += cur_item.replace("&amp;", "and");
-			  //alert(""+level+", "+cur_item);
-			  arr[arr_count++] = arr_item;
+			  arr.push(bookmarks_build_arr_item(cur_item, cur_href, level));
 			}
 		}
 	}
@@ -197,6 +187,101 @@ function bookmarks_get_bookmarks_array_from_netscape(webpage_source)
 
 	return arr;
 }
+
+function bookmark_netscape_parse_folder(folder_element, bookmarks_array, level)
+{
+	if (typeof folder_element == "undefined" || folder_element.tagName != "DL") {
+		return;
+	}
+	var i=0;
+/*
+	// load all folders and bookmarks in the order they're in the file
+	// faster but not as nice as having folders first and then bookmarks
+	for (i=0; i < folder_element.children.length; i++) {
+		var folderChild = folder_element.children[i];
+		if (folderChild.tagName != "DT")
+			continue;
+
+		var folderType = folderChild.children[0];
+		if (folderType.tagName == 'H3') {
+			var folderName = folderType.innerText;
+
+			bookmarks_array.push(bookmarks_build_arr_item(folderName, 'Folder', level));
+
+			var folderDLNode = folderChild.children[1];
+			bookmark_netscape_parse_folder(folderDLNode, bookmarks_array, level+1);
+		} else if (folderType.tagName == 'A') {
+			var bookmarkName = folderType.innerText;
+			var bookmarkHref = folderType.getAttribute("HREF");
+
+			bookmarks_array.push(bookmarks_build_arr_item(bookmarkName, bookmarkHref, level));
+		}
+	}
+*/
+	// add folders first and then bookmarks
+	for (i=0; i < folder_element.children.length; i++) {
+		var folderChild = folder_element.children[i];
+		if (folderChild.tagName != "DT")
+			continue;
+		var folderNode = folderChild.children[0];
+		if (folderNode.tagName != "H3")
+			continue;
+
+		var folderName = folderNode.innerText;
+
+		bookmarks_array.push(bookmarks_build_arr_item(folderName, 'Folder', level));
+
+		var folderDLNode = folderChild.children[1];
+		bookmark_netscape_parse_folder(folderDLNode, bookmarks_array, level+1);
+	}
+	for (i=0; i < folder_element.children.length; i++) {
+		var folderChild = folder_element.children[i];
+		if (folderChild.tagName != "DT")
+			continue;
+		var bookmarkNode = folderChild.children[0];
+		if (bookmarkNode.tagName != "A")
+			continue;
+
+		var bookmarkName = bookmarkNode.innerText;
+		var bookmarkHref = bookmarkNode.getAttribute("HREF");
+
+		bookmarks_array.push(bookmarks_build_arr_item(bookmarkName, bookmarkHref, level));
+	}
+}
+
+function bookmarks_build_arr_item(name, href, level)
+{
+	var arr_item = "";
+	for (var j=0; j < level; j++) {
+	  arr_item += "\t";
+	}
+	arr_item += href;
+	arr_item += "\t";
+	arr_item += name.replace("&amp;", "and");
+	return arr_item;
+}
+
+
+function bookmarks_get_bookmarks_array_from_netscape(webpage_url)
+{
+	if (typeof bookmarks_netscape_use_old_method != "undefined" && bookmarks_netscape_use_old_method == true) {
+		return bookmarks_get_bookmarks_array_from_netscape_old(webpage_url);
+	}
+	var ie_obj =  new ActiveXObject("InternetExplorer.Application");
+	ie_obj.visible = false;
+	ie_obj.silent = true;
+	ie_obj.navigate(webpage_url);
+	while(ie_obj.busy);
+	var bmkStartFolder = ie_obj.document.documentElement.children[1].children[1]; // BODY/DL
+	var bookmarks_array = new Array();
+	var level = 0;
+
+	bookmark_netscape_parse_folder(bmkStartFolder, bookmarks_array, level);
+	ie_obj.quit();
+	ie_obj = null;
+	return bookmarks_array;
+}
+
 
 function bookmarks_get_menu(bookmarks_array)
 {

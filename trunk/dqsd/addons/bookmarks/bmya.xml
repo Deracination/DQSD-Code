@@ -39,13 +39,7 @@
 
 	if (yahoo_bookmarks_array == null) {
 	        var bmk_location = (typeof bookmarks_yahoo_location != "undefined" && bookmarks_yahoo_location != "") ? bookmarks_yahoo_location : "http://e.my.yahoo.com/config/export_bookmark?.commit=1";
-		var bookmarks_page = "";
-		if (bmk_location.match(/\:\/\//)) {
-			bookmarks_page = bookmarks_get_webpage(bmk_location);
-		} else {
-			bookmarks_page = bookmarks_get_file(bmk_location);
-		}
-		yahoo_bookmarks_array = bookmarks_get_bookmarks_array_from_netscape(bookmarks_page);
+		yahoo_bookmarks_array = bookmarks_get_bookmarks_array_from_netscape(bmk_location);
 	}
 	bookmarks_show_menu(yahoo_bookmarks_array);
     }
