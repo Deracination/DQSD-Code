@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="ISO-8859-1"?> <!-- allows the use of accentuated characters -->
+
+<search function="acine">
+  <name>Allocine.com</name>
+  <description>
+    <i>The</i> french site about cinema, stars, theaters schedules, critics, trailers, etc...<br/>
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td colspan="3">Narrow your search to...</td></tr>
+      <tr><td>/place</td><td> - </td><td>movies playing near your place (name or zip code)</td></tr>
+      <tr><td>/zip:[number]</td><td> - </td><td>movies playing near your zip code (direct search)<br/>
+                                                optional : <i>number</i> forces to find <i>number</i> theaters</td></tr>
+      <tr><td>/bywith</td><td> - </td><td>movies by its director or one of its actor</td></tr>
+      <tr><td>/movie</td><td> - </td><td>informations on a movie (part or whole of the name)</td></tr>
+      <tr><td>/theater</td><td> - </td><td>what's playing in a theater (theater or city name)</td></tr>
+      <tr><td>/news</td><td> - </td><td>latest news about somebody, a movie, a company</td></tr>
+      <tr><td>/bio</td><td> - </td><td>the biography of a celebrity</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>acine meilleurs copains</td></tr>
+      <tr><td>acine marseille /place</td></tr>
+      <tr><td>acine 13001 /zip:30</td></tr>
+      <tr><td>acine jean-pierre melville /bywith</td></tr>
+      <tr><td>acine meilleurs copains /movie</td></tr>
+      <tr><td>acine le grand rex /theater</td></tr>
+      <tr><td>acine reno /news</td></tr>
+      <tr><td>acine adjani /bio</td></tr>
+    </table>
+  </description>
+  <category>Entertainment</category>
+  <link>http://www.allocine.com/</link>
+  <contributor>MLL</contributor>
+
+
+  <form name="acinef_general"
+        action="http://www.allocine.com/recherche/default.html"
+        method="get">
+    <input type="hidden" name="motcle" value=""/>
+  </form>
+
+  
+  <form name="acinef_rubrique"
+        action="http://www.allocine.com/recherche/rubrique.html"
+        method="get">
+    <!-- they seem to have changed their parameter name <input type="hidden" name="type" value=""/> -->
+    <input type="hidden" name="typerecherche" value=""/>
+    <input type="hidden" name="motcle" value=""/>
+  </form>
+
+  
+  <form name="acinef_salleproche"
+        action="http://www.allocine.com/seance/salleproche.html"
+        method="get">
+    <input type="hidden" name="codepostal" value=""/>
+    <input type="hidden" name="nb" value=""/>
+  </form>
+
+  
+  <script><![CDATA[
+    function acine(q)
+    {
+      var args = parseArgs(q, "place, bywith, movie, theater, news, bio, zip");
+      var mode, typerech="0";
+      
+      //eliminate no query, or more than 1 switch, or ? cases
+      if( args.q == "?" || args.switches.length > 1 )
+      {
+        nullArgs( "acine", "?" );
+        return false;
+      }
+      else if( args.q == "" )
+      {
+        openSearchWindow("http://www.allocine.com/");
+        return;
+      }
+      
+      // Establish the mode the search will run in.
+      if( args.switches.length == 1 ) mode = args.switches[0].name;
+
+      //set some parameters and eliminate the unknown switch case
+      switch( mode )
+      {
+        /* they seem to have changed their parameter name
+        case "place": document.acinef.type.value = "3"; break;
+        case "bywith": document.acinef.type.value = "2"; break;
+        case "theater": document.acinef.type.value = "9"; break;
+        case "news": document.acinef.type.value = "4"; break;
+        case "bio": document.acinef.type.value = "7"; break;
+        */
+        case "place": typerech = "9"; break;
+        case "bywith": typerech = "4"; break;
+        case "movie" : typerech = "3"; break;
+        case "theater": typerech = "8"; break;
+        case "news": typerech = "12"; break;
+        case "bio": typerech = "10"; break;
+
+        case "zip": break;
+            
+        default:
+          if( mode ) 
+          { 
+            nullArgs("acine","?"); 
+            return false; 
+          } 
+          break;
+      }
+      
+      //launch the search
+      if ( typerech != "0" )
+      {
+        document.acinef_rubrique.motcle.value = args.q;
+        document.acinef_rubrique.typerecherche.value = typerech;
+        submitForm(acinef_rubrique);
+      }
+      else if ( mode == "zip" )
+      {
+        document.acinef_salleproche.codepostal.value = args.q;
+        document.acinef_salleproche.nb.value = args.switch_val["zip"];
+        submitForm(acinef_salleproche);
+      }
+      else
+      {
+        document.acinef_general.motcle.value = args.q;
+        submitForm(acinef_general);
+      }
+    }
+  ]]></script>
+</search>
+
