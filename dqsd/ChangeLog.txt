@@ -5,6 +5,8 @@ New Searches
 * dseek - downseek.com software search
 Bug Fixes
 Modified Searches
+* fe - now allows you to specify an extension name instead of only the first letter (from Matthew McDougal)
+* configure - localized it and added Reload menu option (from Brent Beardsley)
 
 -- What's new for 3.1.5 (December 15, 2002)
 
