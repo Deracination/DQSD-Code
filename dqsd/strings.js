@@ -34,13 +34,17 @@ var DAY_NAMES =
   dk: Array('Søndag', 'Mandag', 'Tirsdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lørdag', 'Søn', 'Man', 'Tir', 'Ons', 'Tor', 'Fre', 'Lør'),
   pt: Array('Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Dom','Seg','Ter','Qua','Qui','Sex','Sab'),
   it: Array('Domenica', 'Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato', 'Dom', 'Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab')
- };
+};
+
+
+
 
 var QUICK_SEARCH =
 {
   en: "Quick Search",
   es: "Búsqueda Rápida",
   fr: "Recherche Rapide",
+  de: "Schnelle Suche",
   no: "Hurtigsøk",
   nl: "Snelzoek",
   dk: "Hurtig Søgning",
@@ -52,6 +56,7 @@ var HELP_TEXT =
   en: "Type ? for help",
   es: "Escriba ? para ayuda",
   fr: "Saisir ? pour l'aide",
+  de: "? für Hilfe",
   no: "Skriv ? for hjelp",
   nl: "Typ ? voor hulp",
   dk: "Skriv ? for hjælp",
@@ -62,37 +67,61 @@ var SEARCH_TITLE =
 {
   en: "Search",
   es: "Buscar",
-  fr: "Chercher"
+  fr: "Chercher",
+  de: "Suchen",
+  nl: "Zoek",
+  no: "Søk",
+  dk: "Søg"
 };
 
 var NEXT_MONTH =
 {
   en: "Next month",
-  es: "Mes siguiente"
+  es: "Mes siguiente",
+  de: "Nächster Monat",
+  nl: "Volgende maand",
+  no: "Neste måned",
+  dk: "Næste måned"
 };
 
 var PREV_MONTH =
 {
   en: "Previous month",
-  es: "Mes anterior"
+  es: "Mes anterior",
+  de: "Voriger Monat",
+  nl: "Vorige maand",
+  no: "Forrige måned",
+  dk: "Forrige måned"
 };
 
 var NEXT_YEAR =
 {
   en: "Next year",
-  es: "Año siguiente"
+  es: "Año siguiente",
+  de: "Nächstes Jahr",
+  nl: "Volgend jaar",
+  no: "Neste år",
+  dk: "Næste år"
 };
 
 var PREV_YEAR =
 {
   en: "Previous year",
-  es: "Año anterior"
+  es: "Año anterior",
+  de: "Voriges Jahr",
+  nl: "Vorig jaar",
+  no: "Forrige år",
+  dk: "Forrige år"
 };
 
 var GO_TO_TODAY =
 {
   en: "Go to today",
-  es: "Ir a hoy"
+  es: "Ir a hoy",
+  de: "Wechselt auf aktuelles Datum",
+  nl: "Ga naar vandaag",
+  no: "Gå til i dag",
+  dk: "Gå til i dag"
 };
 
 

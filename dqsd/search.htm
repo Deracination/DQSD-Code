@@ -279,9 +279,12 @@ function def()
   // detect special commands
   if (!special(t))
   {
+    // detect translations
+    if (translate(t)) return false;
+
     // detect URLs, filenames, etc to open directly
     if (direct(t)) return false;
-    
+
     // detect strings that look like phone numbers
     if (phoneno(t)) return false;
 
@@ -290,9 +293,6 @@ function def()
 
     // detect math expressions
     if (mathexp(t)) return false;
-
-    // detect translations
-    if (translate(t)) return false;
   }
 
   // try to execute a shortcut
@@ -423,7 +423,7 @@ function direct(t)
   // detect strings that look like URLs or filenames
   prot = new RegExp("^(http://|https://|ftp://)([\\-a-z0-9]+\\.)*[\\-a-z0-9]+" +
                     "|^[a-z]:($|\\\\)" +
-                    "|^\\\\\\\\[a-z]+($|\\\\($|[a-z]+($|\\\\)))", "i");
+                    "|^\\\\\\\\[a-z0-9]+($|\\\\($|[a-z0-9]+($|\\\\)))", "i");
   if (prot.exec(t))
   {
     openSearchWindow(t);
