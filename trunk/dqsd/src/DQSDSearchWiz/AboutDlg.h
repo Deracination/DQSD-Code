@@ -68,6 +68,10 @@ END_MSG_MAP()
 			}
 		}
 
+		CString csURL;
+		csURL.LoadString( IDS_AboutURL );
+		m_hlAboutURL.SetHyperLink( csURL );
+		m_hlAboutURL.SubclassWindow( GetDlgItem( IDC_Caption ) );
 
 		return 1;  // Let the system set the focus
 	}
@@ -83,6 +87,10 @@ END_MSG_MAP()
 		EndDialog(wID);
 		return 0;
 	}
+
+private:
+	CHyperLink m_hlAboutURL;
+
 };
 
 #endif //__ABOUTDLG_H_

@@ -8,8 +8,10 @@
 #define IDD_OPTIONSDLG                  103
 #define IDD_ABOUTDLG                    104
 #define IDD_DWMESSAGEBOX                105
+#define IDS_AboutURL                    200
 #define IDI_NORMAL                      201
 #define IDC_FormList                    201
+#define IDS_AboutURLText                201
 #define IDI_HOT                         202
 #define IDC_FormList2                   202
 #define IDC_SearchTitle                 203
@@ -40,6 +42,7 @@
 #define IDC_ShowHideHTML                237
 #define IDC_DescSwitches                238
 #define IDC_DescExamples                239
+#define IDC_Caption                     240
 
 // Next default values for new objects
 // 
@@ -47,7 +50,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        206
 #define _APS_NEXT_COMMAND_VALUE         32768
-#define _APS_NEXT_CONTROL_VALUE         240
+#define _APS_NEXT_CONTROL_VALUE         241
 #define _APS_NEXT_SYMED_VALUE           106
 #endif
 #endif

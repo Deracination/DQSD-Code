@@ -1,3 +1,7 @@
+Version 0.9 (beta) ???
+
+* Added link to DQSD search wizard page on About dialog
+
 Version 0.8 (beta) 16-Sep-2002
 
 * Added options for including switches and examples in description
