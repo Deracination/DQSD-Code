@@ -131,8 +131,6 @@
                                        .replace( /<body.*<div id="main">(.*)/i, '$1' )                  // get rid of the BODY tag and its event handlers
                                        .replace( /(<td>Word:)([^>]+) > (<\/td>)/i, '$1  <b>$2</b>$3' )  // get rid of weird angle bracket and make word bold
                                        .replace( /cellPadding="3"/i, 'cellPadding="0"' )                // get rid of some of the whitespace
-          writeFile( "c:\\dicpop.xml", sReturnedHTML );
-
           displayPopupMessage( sReturnedHTML, "<base href=http://www.mybubble.com><link rel=\"stylesheet\" href=\"/mybubbleEntServer/css/layout.css\" />" );
         }
       }
