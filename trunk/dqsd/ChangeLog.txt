@@ -10,6 +10,7 @@ Enhancements
 * added Belgian National Holidays (from Joris Verhuyck)
 * Modified the US holidays file for 2003
 * created an empty localsearches folder
+* added swedish strings to strings.js
 
 New Searches
 
