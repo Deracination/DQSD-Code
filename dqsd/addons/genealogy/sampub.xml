@@ -5,7 +5,21 @@
   <link>http://www.sampubco.com/</link>
   <email></email>
   <description>
-  Search Sampubco.com for wills, etc
+  Search Sampubco.com for wills, naturalizations, and guardianships
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/all [default]</td><td> - </td><td>Search all three types of records </td></tr>
+      <tr><td>/guardianships</td><td> - </td><td>Limit the search to guardianships</td></tr>
+      <tr><td>/naturalizations</td><td> - </td><td>Limit the search to naturalizations</td></tr>
+      <tr><td>/state</td><td> - </td><td>Go to specific state - ignored if a search value is specified</td></tr>
+      <tr><td>/wills</td><td> - </td><td>Limit the search to wills</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>sampub mcglashen</td><td> - </td><td>Search for mcglashen in all of the indexes</td></tr>
+      <tr><td>sampub mcglashen /will</td><td> - </td><td>Search for mcglashen in the wills index</td></tr>
+      <tr><td>sampub /s ny /w</td><td> - </td><td>Goto the New York wills index page</td></tr>
+    </table>
   </description>
   <form name="sampubwf"
         method="get"
@@ -59,16 +73,22 @@
 
       var state_param = "";
       var search_type = "";  // can be guard, nat, will, or blank (default)
-      var args = genealogy_parseArgs(q, "state, type");
+      var args = genealogy_parseArgs(q, "state, wills, guardianships, naturalizations, all");
       for (var i=0; i < args.switches.length; i++) {
         switch( args.switches[i].name )
         {
           case "state":
 	       state_param = args.switch_val["state"];
                break;
-          case "type":
-	       search_type = args.switch_val["type"].toLowerCase();
+          case "wills":
+	       search_type = "will";
                break;
+	  case "guardianships":
+               search_type = "guard";
+	       break;
+	  case "naturalizations":
+	       search_type = "nat";
+	       break;
           default:
                break;
         } //end-switch
