@@ -27,6 +27,7 @@ New Searches
 * banyg - A search to ban email addresses from several yahoogroups at once. (Shawn H.)
 * mefi - An XML file to enable searching for the Metafilter community weblog (Pete M.)
 * ts - A search to access the Terminal Services/RD Web Client. (shawn H.)
+* gos - Search www.gospelcom.net (JB)
 
 Modified Searches
 
@@ -40,6 +41,7 @@ Modified Searches
 * alarm - "minutes from now" option, several bugs fixed (Ben Williams)
 * js - one can set the number of working days (Tom Corcoran)
 * tucows - more approriate category (Sarah Sweeney)
+* pw - fixed to work with current web page (can't remember who fixed it)
 
 Removed Searches
 
