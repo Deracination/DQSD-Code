@@ -85,7 +85,11 @@ function submitForm(form, dontChangeTarget)
       }
       w.history.back(1);
     }
-    form.submit();
+    if (typeof form.onsubmit == "function") {
+      form.fireEvent("onsubmit");
+    } else {
+      form.submit();
+    }
   }
 
   if (oldtarget)
