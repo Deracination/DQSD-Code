@@ -21,7 +21,6 @@ Bug Fixes
 * Fixed the alias parsing to allow spaces around the delimiters (Monty Scroggins)
 * Check to see if startupCommands is defined before trying to use it (Brent Beardsley)
 * Removed creation of temporary .html file by DQSDTools.dll on startup to determine default browser. (Glenn Carr)
-* Added the nifty line to search.htm to workaround the XP SP2 activex security problem. (Lee Hasiuk)
 
 New Searches
 * riaar - riaaradar.org RIAA label and artist membership search. (Thad Kerosky)
@@ -54,6 +53,7 @@ New Searches
 * ggd - Google Desktop Search (Shawn K. Hall)
 * koders - Koders.com Search (Shawn K. Hall)
 * copys - CopyScape Search (Shawn K. Hall)
+* note.xml - Nifty quick note search (Peter Heath)
 
 Modified Searches
 * jdk - updated urls for j2ee and 1.4, added 1.5, 1.2, 1.1 and api switches (Brent Beardsley)
