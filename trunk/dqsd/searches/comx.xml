@@ -340,7 +340,7 @@
               case "tankmcnamara": imgtitle="Tank Mcnamara";site="ucomics";imgkey="tm";ucsunwindowH=295;break;
               case "willynethel": imgtitle="Willy n Ethel";site="ucomics";imgkey="wes";ucsunwindowH=295;break;
               case "ziggy": imgtitle="Ziggy";site="ucomics";imgkey="zi";windowW=300;windowH=299;break;
-              case "calvinandhobbes": imgtitle="Calvin And Hobbes";site="ucomics";imgkey="ch";break;
+              case "calvinandhobbes": imgtitle="Calvin And Hobbes";site="ucomics";imgkey="ch";windowH=190;break;
               default:endurl=null;imgkey=null;break;
            }//switch
         
@@ -387,12 +387,8 @@
            if (month<10) month= '0'+month;
                    
            //special handling for the calvinandhobbes comic.. It displays for year 1993
-           if (args.switches[i].name == "calvinandhobbes") {
-              year=1993; subyear=93;
-              if (today==6) {windowW=600;windowH=421;}
-              ucsunwindowW = 600; ucsunwindowH = 215;
-           }           
-           
+           if (args.switches[i].name == "calvinandhobbes") {year=1993; subyear=93;}
+              
            //if the day is Sunday, use the larger Sunday comics sizes for ucomics..
            if (today == 0) {
               windowW=ucsunwindowW;
