@@ -1,0 +1,45 @@
+<search function="nge">
+  <name>New Georgia Encyclopedia</name>
+  <category>Reference<category>General</category></category>
+  <contributor>Gregory Krohne</contributor>
+  <link>http://www.georgiaencyclopedia.org/nge/Home.jsp</link>
+  <email>zeakz1d02@sneakemail.com</email>
+  <description>
+  Everything about the state of Georgia, USA
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>nge Stone Mountain</td></tr>
+      <tr><td>nge Martin Luther King</td></tr>
+      <tr><td>nge Atlanta Braves</td></tr>
+      <tr><td>nge Georgia Tech</td></tr>
+    </table>
+  </description>
+  <form name="ngef"
+        method="post"
+        action="http://www.georgiaencyclopedia.org/nge/SearchResult.jsp">
+    <input type="hidden" name="order" value="all" />
+    <input type="hidden" name="groups" value="nge_article" />
+    <input type="hidden" name="groups" value="quickfacts" />
+    <input type="hidden" name="searchTerms" value="" />
+  </form>
+  <script><![CDATA[
+    function nge(q)
+    {
+      if( nullArgs("nge", q) )
+        return;
+
+      document.ngef.searchTerms.value = q;
+
+      submitForm(ngef);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 09/02/04 at 10:25:13
+    by Dave's Quick Search Deskbar Search Wizard version 1.3,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>

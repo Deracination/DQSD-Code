@@ -47,6 +47,7 @@ New Searches
 * wiq - wordiq.com search (Tom Corcoran)
 * virtel - Your Sky virtual telescope (Gregory Krohne)
 * moonview - Your Sky moon view (Gregory Krohne)
+* nge - The New Georgia Encyclopedia (NGE), a reference for the state of Georgia, USA (Gregory Krohne)
 
 Modified Searches
 * jdk - updated urls for j2ee and 1.4, added 1.5, 1.2, 1.1 and api switches (Brent Beardsley)
