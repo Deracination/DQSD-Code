@@ -843,20 +843,29 @@ STDMETHODIMP CLauncher::RenameFile(BSTR bstrFromFilename, BSTR bstrToFilename)
 // Private methods
 HRESULT CLauncher::GetInstallationDirectory( LPTSTR szResult, DWORD dwResultSize )
 {
-	// Get the installation directory from the registry to use for making sure the filenames are in the install path
-	CRegKey rk;
-	if ( ERROR_SUCCESS != rk.Open( HKEY_CLASSES_ROOT, DQSD_REG_KEY, KEY_READ ) )
+	// Cache install directory, so we don't have to hit the registry as much
+	if(m_szInstallDir[0] == 0)
 	{
-		Error(IDS_ERR_REGKEYNOTFOUND, IID_ILauncher);
-		return E_UNEXPECTED;
+		// Get the installation directory from the registry to use for making sure the filenames are in the install path
+		CRegKey rk;
+		LONG ret = rk.Open( HKEY_CLASSES_ROOT, DQSD_REG_KEY, KEY_READ );
+		if ( ERROR_SUCCESS != ret)
+		{
+			Error(IDS_ERR_REGKEYNOTFOUND, IID_ILauncher);
+			return HRESULT_FROM_WIN32(ret);
+		}
+
+		DWORD dwCount = sizeof(m_szInstallDir);
+		ret = rk.QueryValue( m_szInstallDir, _T("InstallDir"), &dwCount );
+		if ( ERROR_SUCCESS != ret )
+		{
+			Error(IDS_ERR_REGKEYNOTFOUND, IID_ILauncher);
+			return HRESULT_FROM_WIN32(ret);
+		}
 	}
 
-	DWORD dwCount = dwResultSize;
-	if ( ERROR_SUCCESS != rk.QueryValue( szResult, _T("InstallDir"), &dwCount ) )
-	{
-		Error(IDS_ERR_REGKEYNOTFOUND, IID_ILauncher);
-		return E_UNEXPECTED;
-	}
+	lstrcpyn( szResult, m_szInstallDir, dwResultSize / sizeof(TCHAR) );
+	
 	return S_OK;
 }
 
@@ -883,23 +892,14 @@ BOOL CLauncher::VerifyFileInDirectoryTree( LPCTSTR szFilename, LPCTSTR szDir)
 
 HRESULT CLauncher::GetFilename( LPCTSTR szName, LPTSTR szResult, LPCTSTR pszDefaultExt /*= _T(".txt")*/ )
 {
+	HRESULT hr;
+	
 	USES_CONVERSION;
 
 	// Get the installation directory from the registry
-	CRegKey rk;
-	if ( ERROR_SUCCESS != rk.Open( HKEY_CLASSES_ROOT, DQSD_REG_KEY, KEY_READ ) )
-	{
-		Error(IDS_ERR_REGKEYNOTFOUND, IID_ILauncher);
-		return E_UNEXPECTED;
-	}
-
 	TCHAR szInstallDir[ _MAX_PATH ];
-	DWORD dwCount = sizeof( szInstallDir );
-	if ( ERROR_SUCCESS != rk.QueryValue( szInstallDir, _T("InstallDir"), &dwCount ) )
-	{
-		Error(IDS_ERR_REGKEYNOTFOUND, IID_ILauncher);
-		return E_UNEXPECTED;
-	}
+	hr = GetInstallationDirectory(szInstallDir, sizeof(szInstallDir));
+	if(FAILED(hr)) return hr;
 
 	// Add the install directory and an extension if not supplied
 	::PathCombine( szResult, szInstallDir, szName );
