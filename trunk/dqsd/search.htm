@@ -282,7 +282,7 @@ function shortcut(t)
     return false;
 
   // search is there, but disabled
-  if ( !searches[search].enabled )
+  if (!searches[search].enabled)
     return false;
 
   // execute search
@@ -291,11 +291,18 @@ function shortcut(t)
 }
 
 
-function performsearch( fname, term )
+function performsearch(fname, term)
 {
-  if( !fname ) fname = defaultsearch;                         // if the specified search does not exist (ie. no default search), set to defaultsearch
-  term = term.replace(/^\s+/g, '').replace(/\s+$/g, '')       // strip out leading and trailing spaces
+  // if the specified search does not exist (ie. no default search), set to defaultsearch
+  if (!fname)
+  {
+    if (!defaultsearch || !searches[defaultsearch]) // bad defaultsearch variable (e.g., old localprefs.js) -> use gg instead of failing
+       fname = "gg";
+    else
+       fname = defaultsearch;
+  }
 
+  term = term.replace(/^\s+/g, '').replace(/\s+$/g, '')       // strip out leading and trailing spaces
   if (searches[fname])
     searches[fname].fun(term);
   else
