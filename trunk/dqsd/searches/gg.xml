@@ -343,20 +343,20 @@
         //case 4:  // CTRL+D : Definitions
         //  return gg(document.deff.q.value + " /define");
         case 6:  // CTRL+F : Froogle
-          return gg(document.deff.q.value + " /froogle");
+          gg(document.deff.q.value + " /froogle"); return true;
         case 9:  // CTRL+I : Images
-          return gg(document.deff.q.value + " /images");
+          gg(document.deff.q.value + " /images"); return true;
         case 12: // CTRL+L : I'm Feeling Lucky
-          return gg(document.deff.q.value + " /ifl");
+          gg(document.deff.q.value + " /ifl"); return true;
       //CTRL+N doesn't work because it's trapped by IE
         //case 14: // CTRL+N : News
         //  return gg(document.deff.q.value + " /news");
         case 19: // CTRL+S : Stock Quotes
-          return gg("stocks: " + document.deff.q.value);
+          gg("stocks: " + document.deff.q.value); return true;
         case 20: // CTRL+T : Thesaurus
-          return gg(document.deff.q.value + " /glossary");
+          gg(document.deff.q.value + " /glossary"); return true;
         case 21: // CTRL+U : Google Groups
-          return gg(document.deff.q.value + " /groups");
+          gg(document.deff.q.value + " /groups"); return true;
         default:
           return false;
       }
