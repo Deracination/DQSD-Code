@@ -1,0 +1,60 @@
+<search function="bg">
+  <name>Bible Search</name>
+  <description>
+    Search The Bible Gateway for a scripture reference.<br/>
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/NIV</td><td> - </td><td>Search the New International Version (default).</td></tr>
+      <tr><td>/AMP</td><td> - </td><td>Search the Amplified Bible.</td></tr>
+      <tr><td>/ASV</td><td> - </td><td>Search the American Standard Version.</td></tr>
+      <tr><td>/DARBY</td><td> - </td><td>Search the Darby Translation.</td></tr>
+      <tr><td>/ESV</td><td> - </td><td>Search the English Standard Version.</td></tr>
+      <tr><td>/KJ21</td><td> - </td><td>Search the 21st Century King James Version.</td></tr>
+      <tr><td>/KJV</td><td> - </td><td>Search the King James Version.</td></tr>
+      <tr><td>/NASB</td><td> - </td><td>Search the New American Standard Bible.</td></tr>
+      <tr><td>/NKJV</td><td> - </td><td>Search the New King James Version.</td></tr>
+      <tr><td>/WE</td><td> - </td><td>Search the Worldwide English Version.</td></tr>
+      <tr><td>/YLT</td><td> - </td><td>Search Young's Literal Translation.</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>bg 1 cor 13:4-7</td></tr>
+      <tr><td>bg rom 6:23 /KJV</td></tr>
+    </table>
+  </description>
+  <category>Reference</category>
+  <link>http://www.biblegateway.com/</link>
+  <contributor>Glenn Carr, David Thompson</contributor>
+
+  <form name="bgf"
+        action="http://www.biblegateway.com/cgi-bin/bible"
+        method="GET">
+    <input type="hidden" name="passage"/>
+    <input type="hidden" name="version" value="NIV"/>
+    <input type="hidden" name="showfn" value="yes"/>
+    <input type="hidden" name="showxref" value="yes"/>
+    <input type="hidden" name="language" value="english"/>
+  </form>
+
+  <script><![CDATA[
+    function bg(q)
+    {
+      if( nullArgs("bg", q) )
+        return;
+
+      var args = parseArgs(q, "NIV, NASB, AMP, NLT, KJV, ESV, NKJV, KJ21, ASV, WE, YLT, DARBY");
+      if ( args.switches.length > 0 )
+      {
+        document.bgf.version.value = args.switches[0].name.toUpperCase();
+      }
+      document.bgf.passage.value = args.q;
+      submitForm(bgf);
+    }
+  ]]></script>
+
+  <copyright>
+	Copyright (c) 2002 David Bau
+	Distributed under the terms of the
+	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>

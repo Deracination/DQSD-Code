@@ -1,4 +1,13 @@
--- What's new for 3.1.1 (September 6, 2002)
+-- What's new for 3.1.2 (September 8, 2002)
+
+Modified Searches
+* bible - renamed to bg (Bible Gateway) to avoid English word "Bible"
+
+Enhancements
+* Installer fixed to delete old names for *.xml searches.
+* Gg bug fixed where /directory would "stick" and apply to the next gg search.
+
+-- What's new for 3.1.1 beta (September 6, 2002)
 
 New Searches
 
@@ -31,6 +40,11 @@ Modified Searches
 * lottery - renamed to lottogen to avoid English word "lottery"; and modified to handle arbitrary number ranges.
 * base - renamed to radix to avoid English word "base"; and modified to take an optional arbitrary radix.
 * so - now name / chairman / department / APE searches possible
+* ask - renamed to aj to avoid English word "ask"
+* aim - renamed to aolim to avoid English word "aim"
+* law - renamed to findlaw to avoid English word "law"
+* palm - renamed to palmgear to avoid English word "palm"
+* start - renamed to nlstart to avoid English word "start"
 
 Enhancements
 

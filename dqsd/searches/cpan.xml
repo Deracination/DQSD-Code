@@ -1,5 +1,5 @@
 <search function="cpan">
-  <name>Comprehensive Perl Archive Network (CPAN)</name>
+  <name>Comprehensive Perl Archive Network</name>
   <description>
     Search CPAN for Perl software. Searches for modules by default.<br/>
     <div class="helpboxDescLabels">Switches:</div>

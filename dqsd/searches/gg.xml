@@ -250,16 +250,19 @@
             case "related":
               document.ggf.q.value="related:" + args.q;
               document.ggf.hl.value = msglang;
+              document.ggf.cat.value = "";
               submitForm(ggf);
               break;
             case "cache":
               document.ggf.q.value="cache:" + args.q;
               document.ggf.hl.value = msglang;
+              document.ggf.cat.value = "";
               submitForm(ggf);
               break;
             case "link":
               document.ggf.q.value="link:" + args.q;
               document.ggf.hl.value = msglang;
+              document.ggf.cat.value = "";
               submitForm(ggf);
               break;
             case "groups":
@@ -278,6 +281,7 @@
         {
           document.ggf.q.value = args.q;
           document.ggf.hl.value = msglang;
+          document.ggf.cat.value = "";
           submitForm(ggf);
         }
       }
