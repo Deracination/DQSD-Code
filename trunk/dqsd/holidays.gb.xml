@@ -1,0 +1,126 @@
+<!--
+   This file contains a listing of the expected public holidays in England and Wales (NOT Northern Ireland)
+   for the years 2002-2005.
+   URL for official listings of public holidays is http://www.cst.gov.uk/er/bankhol.htm
+   Note that the following are included although they are NOT public holidays:
+    Burns Night
+    Valentines Day
+    Commonwealth Day
+    Shrove Tuesday (Pancake Day) (2005 not included)
+    St. David's Day (Patron Saint of Wales)
+    Mothering Sunday (2005 not included)
+    St. George's Day (Patron Saint of England)
+    Fathers' Day (3rd Sunday in June)
+    Halloween 
+    Guy Fawkes' Day
+    Remembrance Day (2 minutes silence at 11am)
+    Remembrance Sunday
+   April Fool's Day (1 April) not included since it clashes with Good Friday in 2002
+   - James Robertson (30 Oct 2002)
+-->
+
+<events>
+  <event name="New Year's Day" type="public_holiday">
+     <date day="1" month="1"/>
+  </event>
+  <event name="New Year's Day Holiday" type="public_holiday">
+     <date day="3" month="1" year="2005"/>
+  </event> 
+  <event name="Burns Night" type="public_holiday">
+     <date day="25" month="1"/>
+  </event>
+  <event name="Valentines Day" type="public_holiday">
+     <date day="14" month="2"/>
+  </event>
+  <event name="Commonwealth Day" type="public_holiday">
+     <date day="11" month="3" year="2002"/>
+     <date day="10" month="3" year="2003"/>
+     <date day="8" month="3" year="2004"/>
+     <date day="14" month="3" year="2005"/>
+  </event>
+  <event name="Shrove Tuesday (Pancake Day)" type="public_holiday">
+     <date day="12" month="2" year="2002"/>
+     <date day="4" month="3" year="2003"/>
+     <date day="24" month="2" year="2004"/>
+  </event>
+  <event name="St David's Day" type="public_holiday">
+     <date day="1" month="3"/>
+  </event>
+  <event name="Mothering Sunday" type="public_holiday">
+     <date day="10" month="3" year="2002"/>
+     <date day="30" month="3" year="2003"/>
+     <date day="21" month="3" year="2004"/>
+  </event>
+  <event name="Good Friday" type="public_holiday">
+     <date day="29" month="3" year="2002"/>
+     <date day="18" month="4" year="2003"/>
+     <date day="9" month="4" year="2004"/>
+     <date day="25" month="3" year="2005"/>
+  </event> 
+  <event name="Easter Monday" type="public_holiday">
+     <date day="1" month="4" year="2002"/>
+     <date day="21" month="4" year="2003"/>
+     <date day="12" month="4" year="2004"/>
+     <date day="28" month="3" year="2005"/>
+  </event> 
+  <event name="St. George's Day" type="public_holiday">
+     <date day="23" month="4"/>
+  </event>
+  <event name="Early May Bank Holiday" type="public_holiday">
+     <date day="6" month="5" year="2002"/>
+     <date day="5" month="5" year="2003"/>
+     <date day="3" month="5" year="2004"/>
+     <date day="2" month="5" year="2005"/>
+  </event> 
+  <event name="Golden Jubilee Bank Holiday" type="public_holiday">
+     <date day="3" month="6" year="2002"/>
+  </event>
+  <event name="Spring Bank Holiday" type="public_holiday">
+     <date day="4" month="6" year="2002"/>
+     <date day="26" month="5" year="2003"/>
+     <date day="31" month="5" year="2004"/>
+     <date day="30" month="5" year="2005"/>
+  </event> 
+  <event name="Fathers' Day" type="public_holiday">
+     <date day="16" month="6" year="2002"/>
+     <date day="15" month="6" year="2003"/>
+     <date day="20" month="6" year="2004"/>
+     <date day="19" month="6" year="2005"/>
+  </event> 
+  <event name="Summer Bank Holiday" type="public_holiday">
+     <date day="26" month="8" year="2002"/>
+     <date day="25" month="8" year="2003"/>
+     <date day="30" month="8" year="2004"/>
+     <date day="29" month="8" year="2005"/>
+  </event> 
+  <event name="Halloween" type="public_holiday">
+     <date day="31" month="10"/>
+  </event>
+  <event name="Guy Fawkes' Day" type="public_holiday">
+     <date day="5" month="11"/>
+  </event> 
+  <event name="Remembrance Day" type="public_holiday">
+     <date day="11" month="11"/>
+  </event> 
+  <event name="Remembrance Sunday" type="public_holiday">
+     <date day="10" month="11" year="2002"/>
+     <date day="9" month="11" year="2003"/>
+     <date day="14" month="11" year="2004"/>
+     <date day="13" month="11" year="2005"/>
+  </event> 
+  <event name="Christmas Day" type="public_holiday">
+     <date day="25" month="12"/>
+  </event>
+  <event name="Boxing Day" type="public_holiday">
+     <date day="26" month="12"/>
+  </event> 
+  <event name="Substitute Bank Holiday in lieu of 26th" type="public_holiday">
+     <date day="27" month="12" year="2004"/>
+  </event>
+  <event name="Substitute Bank Holiday in lieu of 25th" type="public_holiday">
+     <date day="28" month="12" year="2004"/>
+     <date day="27" month="12" year="2005"/>
+  </event>
+</events>
+
+
