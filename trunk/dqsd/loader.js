@@ -4,7 +4,7 @@ function addsearch(fname, name, desc, link, cat)
 {
   try
   {
-    searches[fname] = {fname:fname, name:name, desc:desc, link:link, cat:cat, fun:eval(fname), aliases:[]};
+    searches[fname] = {fname:fname, name:name, desc:desc, link:link, cat:cat, fun:eval(fname), aliases:[], enabled:!disabledsearches[fname]};
     if( !aliases[fname] )
       addalias( fname, fname );
     addhelp( searches[fname] );
@@ -90,6 +90,12 @@ var menuarray = [];
 var categories = {};
 var categoryarray = [];
 
+// 0. Get disabled searches
+
+var d = readTabDelimitedFile("disabledsearches.txt");
+var disabledsearches = new Object();
+for ( var i = 0; i < d.length; i++ )
+  disabledsearches[d[i]] = true;
 
 // 1. load search.xml (if present), merge localsearch.xml (if present), merge files in 'searches' subdirectory
 

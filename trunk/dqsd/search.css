@@ -199,6 +199,7 @@ Styles for the help box
 .helpboxCategoryExpander, .helpboxCategoryExpanderSign
 {
   behavior: url(categoryExpander.htc);
+  vertical-align:top;
 }
 .helpboxCategoryExpander, .helpboxCategoryExpanderSign,
 {
@@ -236,24 +237,30 @@ Styles for the help box
 {
   font:menu;
 }
-.helpboxDescriptions,
+.helpboxDescriptions, .helpboxToggle
 {
   font:menu;
   background-color:window;
   width:99%;
+  vertical-align:top;
+}
+.helpboxToggle
+{
+  width:1px;
 }
 .helpboxCommands
 {
   font-weight:bold;
   background-color:highlight;
   color:white;
+  vertical-align:top;
 }
 .helpboxDescLabels
 {
   font-weight:bold;
   color:activeCaption;
 }
-TR.disabledSearch TD, TR.disabledSearch TD TABLE.helpboxDescTable TD, TR.disabledSearch DIV.helpboxDescLabels, TR.disabledSearch A.helpboxLink, TR.disabledSearch A.helpboxLink:VISITED, TR.disabledSearch .helpboxSearchName, TR.disabledSearch A.helpboxAlias
+TR.disabledSearch TD, TR.disabledSearch TD TABLE.helpboxDescTable TD, TR.disabledSearch .helpboxDescLabels, TR.disabledSearch A.helpboxLink, TR.disabledSearch A.helpboxLink:VISITED, TR.disabledSearch .helpboxSearchName, TR.disabledSearch A.helpboxAlias
 {
   background: scrollbar;
   color: graytext;

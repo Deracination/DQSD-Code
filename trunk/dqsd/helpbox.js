@@ -62,7 +62,7 @@ function about()
 
     for (i = 0; i < categoryarray.length; i++)
     {
-      helptable += "<tr><td class=helpboxCategoryExpanderRow valign=top colspan=2><table width='100%' border=0 cellpadding=0 cellspacing=0><tr><td class=helpboxCategory><span id='categoryExpander' category='" + categoryarray[i] + "' class='helpboxCategoryExpanderSign'></span>"
+      helptable += "<tr><td class=helpboxCategoryExpanderRow colspan=3><table width='100%' border=0 cellpadding=0 cellspacing=0><tr><td class=helpboxCategory><span id='categoryExpander' category='" + categoryarray[i] + "' class='helpboxCategoryExpanderSign'></span>"
       helptable += "&nbsp;" + categoryarray[i] + "&nbsp;";
       helptable += "<span id='categoryCount' class=helpboxCategoryCount></span><a name=\""+categoryarray[i]+"\"></td><td align=right class=helpboxCategoryTop>[ <a class=helpboxLinkTop href='#top'>top</a> ]</td></tr></table></td></tr>";
       var helparray = categories[categoryarray[i]];
@@ -70,7 +70,13 @@ function about()
       for (var k = 0; k < helparray.length; k++)
       {
         var search = helparray[k];
-        helptable += "<tr id='" + categoryarray[i] + "'><td valign=top class=helpboxCommands>";
+        var checked = 'checked';
+        if ( !search.enabled )
+        {
+          checked =  '';
+          rowclassname = 'class=disabledSearch';
+        }
+        helptable += "<tr " + rowclassname + " id='" + categoryarray[i] + "'><td class=helpboxCommands>";
         for (var j = 0; j < search.aliases.length; j++)
         {
           var alias = search.aliases[j].replace(/&/g, "&amp;").replace(/</g, "&lt;");
@@ -86,7 +92,8 @@ function about()
           if (j < search.aliases.length)
             helptable += "<br>"
         }
-        helptable += "</td><td valign=top class=helpboxDescriptions>";
+        var rowclassname = '';
+        helptable += "</td><td class=helpboxToggle><input name='" + search.fname + "' id=search_enabled type='checkbox' onclick='toggleEnabledSearch()' " + checked + "></td><td class=helpboxDescriptions>";
         if (search.link)
           helptable += "<a target=info class=helpboxLink href=\"" + search.link + "\">" + search.name + "</a>";
         else
@@ -124,11 +131,12 @@ function about()
     var mesg = "<title>About Dave's Quick Search Deskbar</title>";
 
     mesg += "<head><link rel=stylesheet type=text/css href=search.css>"
-	// Add a call to the overwriting stylesheet if necessary
-	if (typeof localstylesurl != "undefined" && localstylesurl != "")
-		mesg += "<link rel='stylesheet' type='text/css' href='" + localstylesurl + "'>";
-	mesg += "</head>"
-    mesg += "<body scroll=yes><a name='#top'><table height=100% width=100% cellpadding=20><tr><td class=helpbox><center><b>";
+    // Add a call to the overwriting stylesheet if necessary
+    if (typeof localstylesurl != "undefined" && localstylesurl != "")
+      mesg += "<link rel='stylesheet' type='text/css' href='" + localstylesurl + "'>";
+    mesg += "<script src='savesearchsettings.js'></script>";
+    mesg += "</head>"
+    mesg += "<body scroll=yes onunload='saveSearchSettings()'><a name='#top'><table height=100% width=100% cellpadding=20><tr><td class=helpbox><center><b>";
     mesg += txt + "</td></tr></table>";
     opts = "height=480, width=441, menubar=no, scrollbars=yes, resizable=yes, toolbar=no, status=no";
     if (typeof helpoptions != 'undefined' && helpoptions != "")

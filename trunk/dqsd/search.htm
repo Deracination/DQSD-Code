@@ -233,6 +233,10 @@ function shortcut(t)
   // no match, no dice
   if (!search)
     return false;
+    
+  // search is there, but disabled
+  if ( !searches[search].enabled )
+    return false;
 
   // execute search
   performsearch(search, term);
