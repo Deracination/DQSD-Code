@@ -1,0 +1,41 @@
+<search function="nic">
+  <name>IEEE</name>
+  <category>Computers<category>Networking</category></category>
+  <contributor>Steve Poirier</contributor>
+  <link>http://standards.ieee.org/regauth/oui/index.shtml</link>
+  <email>stevepoirier at usa dot net</email>
+  <description>
+  IEEE MAC address to company translator<br/><br/>
+  Input at least the first six digits of the MAC address<br/><br/>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>nic 00-0D-56-10-20-30</td></tr>
+      <tr><td>nic 000D56</td></tr>
+    </table>
+  </description>
+  <form name="nicf"
+        method="post"
+        action="http://standards.ieee.org/cgi-bin/ouisearch">
+    <input type="hidden" name="x" value="" />
+  </form>
+  <script><![CDATA[
+    function nic(q)
+    {
+      if( nullArgs("nic", q) )
+        return;
+
+      document.nicf.x.value = q.replace(/[^A-Fa-f0-9]/g, "").substring(0, 6);
+
+      submitForm(nicf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 02/26/04 at 09:26:01
+    by Dave's Quick Search Deskbar Search Wizard version 1.2,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>
