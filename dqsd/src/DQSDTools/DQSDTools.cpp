@@ -5,9 +5,9 @@
 #include "DQSDTools.h"
 
 #include "DQSDTools_i.c"
+#include "KeyboardHook.h"
 #include "Launcher.h"
 #include "MenuBuilder.h"
-#include "KeyboardHook.h"
 
 #ifdef _MERGE_PROXYSTUB
 extern "C" HINSTANCE hProxyDll;

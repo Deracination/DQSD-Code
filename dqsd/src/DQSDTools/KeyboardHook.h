@@ -5,7 +5,9 @@
 #if !defined(KEYBOARDHOOK_H)
 #define KEYBOARDHOOK_H
 
-HRESULT KeyboardHookInstall(HWND hWnd);
+HRESULT KeyboardHookInstall(HWND hWnd, HHOOK& hInstalledHook);
+void KeyboardHookRemove(HHOOK hInstalledHook);
+
 
 //
 // Install a hotkey
