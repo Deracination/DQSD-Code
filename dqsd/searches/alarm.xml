@@ -14,6 +14,7 @@
   </description>
   <category>Functions</category>
   <contributor>Monty Scroggins</contributor>
+  <contributor>Ben Williams (bw@webmedia.com.au)</contributor>
   
   <script><![CDATA[
     var alarmTime;
@@ -28,16 +29,24 @@
       if( nullArgs("alarm",t) )
         return false;
         
-      if( t.match(/^cancel *$/i) ) 
+      if( t.match(/^cancel.*$/i) ) 
       {
         clearInterval(alNum);
-        setSearchWindowText("Alarm Canceled..");
+        setSearchWindowText("Alarm Canceled.");
         setTimeout("document.deff.q.value='';",1000);
       }
-      else if( parsedLine = t.match(/(\d\d\:\d\d)\s*(.*)/) ) 
+      else if( parsedLine = t.match(/(\d\d\:\d\d)\s+(.*)/) ) 
       {
-        if( parsedLine[1] != null && parsedLine[1].length != 0) 
-          alarmTime = parsedLine[1];
+		if( parsedLine[1] != null && parsedLine[1].length != 0) { 
+		  if(parsedTime = parsedLine[1].match(/(\d\d):(\d\d)/)) {
+			alarmTimeHours = parsedTime[1];
+			alarmTimeMins = parsedTime[2];
+
+			if(alarmTimeHours > 23) alarmTimeHours = 23;
+			if(alarmTimeMins > 59) alarmTimeMins = 59;
+			alarmTime = alarmTimeHours+":"+alarmTimeMins;
+		  }
+		}
           
         parsedMsg = parsedLine[2];
         alarmMsg =  'Alarm: ' + alarmTime + '\n\nAlarm has Expired';
@@ -46,12 +55,32 @@
           alarmMsg = 'Alarm: ' + alarmTime + '\n\n' + parsedMsg;
           
         alarmOn();
-        setSearchWindowText("Alarm Set..");
-        setTimeout("document.deff.q.value='';",1000);
+		setSearchWindowText("Alarm Set for "+alarmTime+".");
+		setTimeout("document.deff.q.value='';",1000);
       }
+	  else if( parsedLine = t.match(/^(\d+)\s+(.*)$/) )
+	  {
+        if( parsedLine[1] != null && parsedLine[1].length != 0) {
+		  var dt = new Date();
+		  minutesToAdd = parsedLine[1];
+		  alarmTimeMs = Date.parse(dt.toString()) + (minutesToAdd * 60000);
+		  alarmTimeDate = dt.setTime(alarmTimeMs);
+		  alarmTime = IfZero(dt.getHours()) + ":" + IfZero(dt.getMinutes());
+		}
+		
+        parsedMsg = parsedLine[2];
+        alarmMsg =  'Alarm: ' + alarmTime + '\n\nAlarm has Expired';
+          
+        if(parsedMsg != null && parsedMsg.length != 0 )
+          alarmMsg = 'Alarm: ' + alarmTime + '\n\n' + parsedMsg;
+          
+        alarmOn();
+		setSearchWindowText("Alarm Set for "+alarmTime+".");
+        setTimeout("document.deff.q.value='';",1000);
+	  }
       else 
-      {
-        window.alert("Bad Timestamp Entered. Should be HH:MM in Military Time");
+	  {
+		window.alert("Sorry, the timestamp you entered for the alarm could not be read.\n\nThe format should be HH:MM in 24-hour time, or the number of minutes from now for the alarm to go off.");
         return;
       }
     }
