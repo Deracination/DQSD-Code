@@ -22,8 +22,8 @@
   <script><![CDATA[
     function bomis(q)
     {
-      if( q == "" )
-        openSearchWindow("http://www.bomis.com/");
+      if( nullArgs("bomis", q) )
+        return false;
       else
       {
         document.bomisf.request.value = q;

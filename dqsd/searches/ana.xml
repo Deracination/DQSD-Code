@@ -20,8 +20,8 @@
   <script><![CDATA[
   function ana(q)
   {
-    if (q == "")
-      openSearchWindow("http://www.wordsmith.org/anagram/");
+    if( nullArgs("ana", q) )
+      return false;
     else
     {
       document.anaf.anagram.value = q;

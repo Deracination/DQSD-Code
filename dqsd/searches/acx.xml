@@ -31,8 +31,8 @@
   <script><![CDATA[
     function acx(q)
     {
-      if( q == "" )
-        openSearchWindow("http://chemacx.cambridgesoft.com/");
+      if( nullArgs("acx", q) )
+        return false;
       else
       {
         // check to see if it's a cas registry number

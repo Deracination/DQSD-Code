@@ -24,8 +24,8 @@
 	<script><![CDATA[
 		function atm(q)
 		{
-			if (q == "")
-			  openSearchWindow("http://www.atomica.com/");
+			if( nullArgs("atm", q) )
+			  return false;
 			else
 			{
 				document.atmf.s.value = q;

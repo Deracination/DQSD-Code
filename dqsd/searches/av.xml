@@ -21,8 +21,8 @@
   <script><![CDATA[
     function av(q)
     {
-      if( q == "" )
-        openSearchWindow("http://www.altavista.com/");
+      if( nullArgs("av", q) )
+        return false;
       else
       {
         document.avf.q.value = q;
