@@ -21,14 +21,14 @@
     </table>
   </description>
   <category>Functions</category>
-  <link>http://www.ReliableAnswers.com/x/dqsd/</link>
+  <link>http://ReliableAnswers.com/x/dqsd/</link>
   <contributor>Shawn K. Hall</contributor>
   <requirements>
     <scripting>vbscript</scripting>
   </requirements>
   
   <form name="rh2tf"
-    action="http://www.ReliableAnswers.com/x/dqsd/"
+    action="http://ReliableAnswers.com/x/dqsd/"
     method="post">
     <textarea style="display: none;" name="q"></textarea>
     <textarea style="display: none;" name="vbscode"><![CDATA[
