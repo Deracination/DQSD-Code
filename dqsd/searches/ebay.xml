@@ -2,15 +2,30 @@
   <name>eBay</name>
   <description>
     Search eBay by description or by item number.<br/>
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/about</td><td> - </td><td>View username's About Me page</td></tr>
+      <tr><td>/all</td><td> - </td><td>Search auctions by username including completed</td></tr>
+      <tr><td>/feedback</td><td> - </td><td>Display feedback on an ebay user</td></tr>
+      <tr><td>/items</td><td> - </td><td>Search items by username</td></tr>
+      <tr><td>/my</td><td> - </td><td>Open MyEbay page</td></tr>
+      <tr><td>/user</td><td> - </td><td>Search current auctions by username</td></tr>
+    </table>
     <div class="helpboxDescLabels">Examples:</div>
     <table class="helpboxDescTable">
-  		<tr><td>ebay guitars</td></tr>
+      <tr><td>ebay guitars</td></tr>
       <tr><td>ebay 1503826268</td></tr>
+      <tr><td>ebay /ab music-brokers</td></tr>
+      <tr><td>ebay /all mickey</td></tr>
+      <tr><td>ebay /f mickey</td></tr>
+      <tr><td>ebay /i music-brokers</td></tr>
+      <tr><td>ebay /my</td></tr>
+      <tr><td>ebay /u mickey</td></tr>
   	</table>
   </description>
   <category>Shopping</category>
   <link>http://www.ebay.com/</link>
-  <contributor>Ryan Edwards</contributor>
+  <contributor>Ryan Edwards, Darrick, Brent Beardsley</contributor>
   
   <form name="ebayf"
         action="http://search.ebay.com/search/search.dll"
@@ -24,17 +39,36 @@
   <script><![CDATA[
     function ebay(q)
     {
-      var res = null;
-      
       if( nullArgs("ebay",q) )
         return false;
-      else if ( res = q.match( /^\s*(\d{9,})\s*$/ ) )
+
+      var args = parseArgs(q, "all, about, feedback, items, my, user");
+
+      if (args.switches.length > 0) {
+        switch (args.switches[0].name)
+        {
+        case "about": openSearchWindow('http://members.ebay.com/aboutme/' + args.q +'/'); return false;
+        case "all": openSearchWindow('http://cgi.ebay.com/aw-cgi/eBayISAPI.dll?' +
+                                     'MfcISAPICommand=ViewBidItems&userid=' + args.q +
+                                     '&completed=1&sort=3&all=1&rows=25'); return false;
+        case "feedback": openSearchWindow('http://cgi.ebay.com/aw-cgi/eBayISAPI.dll?ViewFeedback&userid=' + args.q); return false;
+        case "items": openSearchWindow('http://cgi.ebay.com/ws/eBayISAPI.dll?ViewSellersOtherItems&userid=' + args.q + 
+                                       '&include=0&since=-1&sort=3&rows=25'); return false;
+        case "my": openSearchWindow('http://cgi.ebay.com/aw-cgi/eBayISAPI.dll?MyEbayLogin'); return false;
+        case "user": openSearchWindow('http://cgi.ebay.com/aw-cgi/eBayISAPI.dll?' +
+                                      'MfcISAPICommand=ViewBidItems&userid=' + args.q +
+                                      '&completed=0&sort=3&all=1&rows=25'); return false;
+        }
+      }
+
+      var res = null;
+      if ( res = args.q.match( /^\s*(\d{9,})\s*$/ ) )
       {
         openSearchWindow('http://cgi.ebay.com/aw-cgi/eBayISAPI.dll?MfcISAPICommand=ViewItem&item=' + res[1]);
       }
       else
       {
-        document.ebayf.query.value = q;
+        document.ebayf.query.value = args.q;
         submitForm(ebayf);
       }
     }
