@@ -141,7 +141,7 @@
       }
       document.ildif.LastName.value = genealogy_parse_surname(args.q);
       document.ildif.FirstName.value = genealogy_parse_givenname(args.q);
-      submitForm(ildif);
+      genealogy_submitForm(ildif, "ildi", q);
     }
   ]]></script>
   <copyright>

@@ -21,7 +21,7 @@
         return;
 
       document.gendexf.prefix.value = genealogy_parse_surname(q);
-      submitForm(gendexf);
+      genealogy_submitForm(gendexf, "gendex", q);
     }
   ]]></script>
   <copyright>

@@ -13,9 +13,7 @@
 	<category>Lookups</category>
   </category>
   <contributor>Brent Beardsley</contributor>
-  <form name="raogkf">
 
-  </form>
   <script src="addons/genealogy/genealogy_lib.js"></script>
   <script><![CDATA[
     function raogk(q)
@@ -29,7 +27,7 @@
       if (search_place_num >= 0) {
         search_url = links[search_place_num];
       }
-      openSearchWindow(search_url);
+      genealogy_openSearchWindow(search_url, "raogk", q);
     }
     ]]>
   </script>

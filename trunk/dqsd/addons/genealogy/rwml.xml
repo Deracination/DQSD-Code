@@ -43,27 +43,27 @@
       var query = "";
       if (genealogy_hasArg(args, "board")) {
         board = args.switch_val["board"].toUpperCase();
-	query = args.q;
+	    query = args.q;
       } else {
-	board = args.q.toUpperCase();
+	    board = args.q.toUpperCase();
       }
 
       if (query == "") {
         // browse
-	document.rwmlbrowsef.list.value = board;
-	submitForm(rwmlbrowsef);
+	    document.rwmlbrowsef.list.value = board;
+	    genealogy_submitForm(rwmlbrowsef, "rwml", q);
       } else {
         // search
-	var year = "";
-	if (genealogy_hasArg(args, "year")) {
-	  year = args.switch_val["year"];
-	} else {
-	  year = new Date().getYear();
-	}
-	document.rwmlsearchf.ISEARCH_TERM.value = query;
-	document.rwmlsearchf.DBPATH.value = "/u1/textindices/"+board.substring(0,1)+"/"+board;
-	document.rwmlsearchf.DATABASE.value = year;
-	submitForm(rwmlsearchf);
+     	var year = "";
+	    if (genealogy_hasArg(args, "year")) {
+	      year = args.switch_val["year"];
+	    } else {
+	      year = new Date().getYear();
+	    }
+	    document.rwmlsearchf.ISEARCH_TERM.value = query;
+	    document.rwmlsearchf.DBPATH.value = "/u1/textindices/"+board.substring(0,1)+"/"+board;
+	    document.rwmlsearchf.DATABASE.value = year;
+	    genealogy_submitForm(rwmlsearchf, "rwml", q);
       }
     }
     ]]>

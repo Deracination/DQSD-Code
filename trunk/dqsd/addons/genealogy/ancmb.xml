@@ -97,7 +97,7 @@
 	   query = args.q;
 	}
 	document.ancmbfindf.query.value = query;
-	submitForm(ancmbfindf);
+	genealogy_submitForm(ancmbfindf);
       } else {
 	var query = "";
 	if (genealogy_hasArg(args, "query")) {
@@ -120,7 +120,7 @@
 		    search_url += (".counties."+county);
 		  }
 		}
-		openSearchWindow(search_url);
+		genealogy_openSearchWindow(search_url, "ancmb", q);
 	  } else if (genealogy_hasArg(args, "surname")) {
 		var surname_value = args.switch_val["surname"];
 		if (surname_value == "") {
@@ -128,7 +128,7 @@
 		}
 		surname_value = surname_value.replace(/\s/g, "-20-");
 		var search_url = "http://boards.ancestry.com/mbexec?htx=board&r=an&p=surnames."+surname_value;
-		openSearchWindow(search_url);
+		genealogy_openSearchWindow(search_url, "ancmb", q);
 	  } else {
 		nullArgs("amb", "?");
 	  }
@@ -179,7 +179,7 @@
 	  document.ancmbf.classification.value = type;
 	  document.ancmbf.fields.value = specified_fields;
 	  document.ancmbf.period.value = days;
-	  submitForm(ancmbf);
+	  genealogy_submitForm(ancmbf, "ancmb", q);
         }
       }
     }

@@ -103,9 +103,6 @@
       //document.melvylf.SSTSst.value = "";
       //document.melvylf.S00Icon1.value = "";
 
-      // The wizard assigned the search string to this form field value because
-      // this field was the active element when the search file was generated.
-      // Change this to args.q if the search string is parsed with parseArgs.
       document.melvylf.S00Wcon1.value = q;
       //document.melvylf.S00BLlanguage.value = "";
       //document.melvylf.S00ILlanguage.value = "";
@@ -114,7 +111,7 @@
       //document.melvylf.S00ILclib.value = "";
       //document.melvylf.S0rWLclib.value = "";
 
-      submitForm(melvylf);
+      genealogy_submitForm(melvylf, "melvyl", q);
     }
   ]]></script>
   <copyright>

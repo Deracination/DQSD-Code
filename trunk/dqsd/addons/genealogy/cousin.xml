@@ -14,9 +14,6 @@
   <form name="cousinf"
         method="post"
         action="http://www.cousinconnect.com/search">
-
-    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
-
     <input type="hidden" name="surname" value="" />
     <input type="hidden" name="location" value="0" />
     <COMMENT>
@@ -233,11 +230,12 @@
       var links = genealogy_get_known_page_links(search_url);
       var search_place_num = genealogy_lookup_place(q);
       if (search_place_num >= 0) {
-        openSearchWindow(links[search_place_num]);
+        search_url = links[search_place_num];
+        genealogy_openSearchWindow(search_url, "cousin", q);
       } else {
         // assume it's a surname and do a search
-	document.cousinf.surname.value = genealogy_parse_surname(q);
-	submitForm(cousinf);
+     	document.cousinf.surname.value = genealogy_parse_surname(q);
+	    genealogy_submitForm(cousinf, "cousin", q);
       }
     }
     ]]>

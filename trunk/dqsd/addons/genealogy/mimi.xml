@@ -1,14 +1,4 @@
 <search function="mimi">
-  <COMMENT>
-
-    This search file was initially created by Dave's Quick Search Deskbar
-    Search Wizard version 0.4 (beta) on 08/15/02 at 23:22:15
-
-    Even though this XML search will probably load and is a healthy start
-    toward a completed search, please be aware that this search will probably
-    not work as is and will require some human inspection and modification.
-
-  </COMMENT>
   <name>Michigan Marriage Index</name>
   <category>Genealogy</category>
   <contributor>Brent Beardsley</contributor>
@@ -69,10 +59,6 @@
         <option>ISABELLA</option>
       </select>
     </COMMENT>
-
-
-    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
-
     <input type="hidden" name="SURNAME" value="" />
     <input type="hidden" name="Clear" value="Clear" />
   </form>
@@ -132,16 +118,10 @@
       if( nullArgs("mimi", q) )
         return;
 
-      if( q == "" )
-      {
-        openSearchWindow("http://www.mifamilyhistory.org/dibeanindex/dib_marr/search.asp");
-        return;
-      }
-
       // FORM variables for mimif
       document.mimif.SURNAME.value = genealogy_parse_surname(q);
 
-      submitForm(mimif);
+      genealogy_submitForm(mimif, "mimi", q);
     }
   ]]></script>
   <copyright>

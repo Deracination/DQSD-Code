@@ -218,13 +218,13 @@
         document.midif.CountyName.value = "%%";
       }
       if (genealogy_hasArg(args, "father")) {
-	 document.midif.FatherLastName.value = genealogy_parse_surname(args.switch_val["father"]);
+	    document.midif.FatherLastName.value = genealogy_parse_surname(args.switch_val["father"]);
       } else {
-	 document.midif.FatherLastName.value = "";
+	    document.midif.FatherLastName.value = "";
       }	 
       document.midif.LastName.value = genealogy_parse_surname(args.q);
       document.midif.FirstName.value = genealogy_parse_givenname(args.q);
-      submitForm(midif);
+      genealogy_submitForm(midif, "midi", q);
     }
   ]]></script>
   <copyright>

@@ -27,7 +27,7 @@
         return;
 
       document.rwsndxf.surname.value = genealogy_parse_surname(q);
-      submitForm(rwsndxf);
+      genealogy_submitForm(rwsndxf, "rwsndx", q);
     }
   ]]></script>
   <copyright>

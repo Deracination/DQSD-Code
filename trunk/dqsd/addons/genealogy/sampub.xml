@@ -78,19 +78,19 @@
         switch( args.switches[i].name )
         {
           case "state":
-	       state_param = args.switch_val["state"];
-               break;
+	        state_param = args.switch_val["state"];
+            break;
           case "wills":
-	       search_type = "will";
-               break;
-	  case "guardianships":
-               search_type = "guard";
-	       break;
-	  case "naturalizations":
-	       search_type = "nat";
-	       break;
+	        search_type = "will";
+            break;
+	      case "guardianships":
+            search_type = "guard";
+	        break;
+	      case "naturalizations":
+	        search_type = "nat";
+	        break;
           default:
-               break;
+            break;
         } //end-switch
       }
       var subdir = "";
@@ -104,65 +104,66 @@
       case "nat":
         subdir = "nats";
         if (!genealogy_in_array(state_abbrev, valid_nat)) {
-	   state_abbrev = "";
-	   state_name = "";
-	}
-	break;
+	      state_abbrev = "";
+	      state_name = "";
+	    }
+	    break;
       case "guard":
         subdir = "guard";
         if (!genealogy_in_array(state_abbrev, valid_guard)) {
-	   state_abbrev = "";
-	   state_name = "";
-	}
-	break;
+	      state_abbrev = "";
+	      state_name = "";
+	    }
+ 	    break;
       case "will":
         subdir = "wills";
         if (!genealogy_in_array(state_abbrev, valid_will)) {
-	   state_abbrev = "";
-	   state_name = "";
-	}
-	break;
+	      state_abbrev = "";
+	      state_name = "";
+	    }
+	    break;
       default:
         state_abbrev = "";
-	state_name = "";
-	subdir = "";
-	break;
+	    state_name = "";
+	    subdir = "";
+	    break;
       }
 
       if (args.q.length <= 0) {
         if (subdir.length == 0) {
-          openSearchWindow("http://www.sampubco.com");
-	} else {
-	  if (state_abbrev.length > 0) {
-            openSearchWindow("http://www.sampubco.com/"+subdir+"/"+state_abbrev+"/"+state_name+".htm");
-	  } else {
-            openSearchWindow("http://www.sampubco.com/"+subdir+"/search.htm");
-	  }
-	}
+          genealogy_openSearchWindow("http://www.sampubco.com", "sampub", q);
+	    } else {
+	      if (state_abbrev.length > 0) {
+            genealogy_openSearchWindow("http://www.sampubco.com/"+subdir+"/"+state_abbrev+"/"+state_name+".htm", "sampub", q);
+	      } else {
+            genealogy_openSearchWindow("http://www.sampubco.com/"+subdir+"/search.htm", "sampub", q);
+	      }
+	    }
       } else {
         var search_name = genealogy_parse_surname(args.q).replace(/\W/g, "");
-	switch (search_type) {
-	case "guard":
+	    switch (search_type)
+        {
+	    case "guard":
           document.sampubgf.query.value = search_name;
-          submitForm(sampubgf);
-	  break;
-	case "nat":
+          genealogy_submitForm(sampubgf, "sampub", q);
+	      break;
+	    case "nat":
           document.sampubnf.query.value = search_name;
-          submitForm(sampubnf);
-	  break;
-	case "will":
+          genealogy_submitForm(sampubnf, "sampub", q);
+	      break;
+	    case "will":
           document.sampubwf.query.value = search_name;
-          submitForm(sampubwf);
-	  break;
-	default:
+          genealogy_submitForm(sampubwf, "sampub", q);
+	      break;
+	    default:
           document.sampubgf.query.value = search_name;
           document.sampubnf.query.value = search_name;
           document.sampubwf.query.value = search_name;
-          submitForm(sampubgf);
-          submitForm(sampubnf);
-          submitForm(sampubwf);
-	  break;
-	}
+          genealogy_submitForm(sampubgf, "sampub", q);
+          genealogy_submitForm(sampubnf, "sampub", q);
+          genealogy_submitForm(sampubwf, "sampub", q);
+	      break;
+	    }
       }
     }
   ]]></script>

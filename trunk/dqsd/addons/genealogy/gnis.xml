@@ -63,7 +63,7 @@
 	document.gnissearch.f_state.value = state;
 	document.gnissearch.f_cnty.value = county;
 	document.gnissearch.f_name.value = args.q;
-	submitForm(gnissearch);
+	genealogy_submitForm(gnissearch, "gnis", q);
     }
   ]]></script>
   <copyright>

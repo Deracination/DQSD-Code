@@ -146,22 +146,22 @@
       if (genealogy_hasArg(args, "county")) {
         document.ilmif.county.value = args.switch_val["county"].toUpperCase();
       } else {
-	document.ilmif.county.value = "STATEWIDE";
+	    document.ilmif.county.value = "STATEWIDE";
       }
       if (genealogy_hasArg(args, "bride")) {
         document.ilmif.bride.value = args.switch_val["bride"];
       } else {
-	document.ilmif.bride.value = "";
+	    document.ilmif.bride.value = "";
       }
       if (genealogy_hasArg(args, "groom")) {
         document.ilmif.groom.value = args.switch_val["groom"]; 
       } else {
-	document.ilmif.groom.value = "";
+	    document.ilmif.groom.value = "";
       }
       if (document.ilmif.groom.value == "" && document.ilmif.bride.value == "") {
         nullArgs("ilmi", "?");
       } else {
-        submitForm(ilmif);
+        genealogy_submitForm(ilmif, "ilmi", q);
       }
     }
   ]]></script>

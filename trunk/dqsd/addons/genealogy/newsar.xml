@@ -37,7 +37,7 @@
       }
       
       document.newsarf.SearchString.value = qry;
-      submitForm(newsarf);
+      genealogy_submitForm(newsarf, "newsar", q);
     }
   ]]></script>
   <copyright>

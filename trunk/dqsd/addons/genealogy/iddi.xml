@@ -86,7 +86,7 @@
         document.iddif["county"].value = "";
       }
       document.iddif.name.value = args.q;
-      submitForm(iddif);
+      genealogy_submitForm(iddif, "iddi", q);
     }
   ]]></script>
   <copyright>

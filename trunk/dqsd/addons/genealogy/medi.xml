@@ -1,14 +1,4 @@
 <search function="medi">
-  <COMMENT>
-
-    This search file was initially created by Dave's Quick Search Deskbar
-    Search Wizard version 0.4 (beta) on 08/18/02 at 21:24:36
-
-    Even though this XML search will probably load and is a healthy start
-    toward a completed search, please be aware that this search will probably
-    not work as is and will require some human inspection and modification.
-
-  </COMMENT>
   <name>Maine Death Index 1960-1997</name>
   <category>Genealogy</category>
   <contributor>Brent Beardsley</contributor>
@@ -42,12 +32,6 @@
       if( nullArgs("medi", q) )
         return;
 
-      if( q == "" )
-      {
-        openSearchWindow("http://vitals.rootsweb.com/me/death/search.cgi");
-        return;
-      }
-
       // FORM variables for medif
       document.medif.last.value = genealogy_parse_surname(q);
       document.medif.stype.value = "";
@@ -55,7 +39,7 @@
       document.medif.place.value = "";
       document.medif.year.value = "";
 
-      submitForm(medif);
+      genealogy_submitForm(medif, "medi", q);
     }
   ]]></script>
   <copyright>

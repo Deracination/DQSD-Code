@@ -29,7 +29,7 @@
         return;
 
       document.newsplf.sid.value = genealogy_lookup_place_abbrev(genealogy_parse_place_state(q)).toUpperCase();
-      submitForm(newsplf);
+      genealogy_submitForm(newsplf, "newspl", q);
     }
   ]]></script>
   <copyright>

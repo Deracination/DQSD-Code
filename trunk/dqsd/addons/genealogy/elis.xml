@@ -28,7 +28,7 @@
 
       document.elisf.FNM.value = genealogy_parse_givenname(q);
       document.elisf.LNM.value = genealogy_parse_surname(q);
-      submitForm(elisf);
+      genealogy_submitForm(elisf, "elis", q);
     }
   ]]></script>
   <copyright>

@@ -82,83 +82,82 @@
       var exact_spelling = genealogy_hasArg(args, "exact") ? true : false;
       if (genealogy_hasArg(args, "head")) {
         var head_name = args.switch_val["head"];
-	head_surname = genealogy_parse_surname(head_name);
-	head_givenname = genealogy_parse_givenname(head_name);
+    	head_surname = genealogy_parse_surname(head_name);
+	    head_givenname = genealogy_parse_givenname(head_name);
       }
       if (genealogy_hasArg(args, "race")) {
-	race = args.switch_val["race"];
+	    race = args.switch_val["race"];
         var raceList =   new Array("Asian", "Black", "Mexican", "Mulatto", "Native American", "White");
-	var raceAbbrev = new Array("A",     "B",     "MX",      "MU",      "NA",              "W");
-	for (var i=0; i < raceList.length; i++) {
-	   if (raceList[i].match(new RegExp("^"+race, "i"))) {
-	     race_desc = raceList[i];
-	     race = raceAbbrev[i];
-	     break;
-	   }
-	}
-	if (i == raceList.length) {
-	  race = "";
-	  race_desc = "";
-	}
+	    var raceAbbrev = new Array("A",     "B",     "MX",      "MU",      "NA",              "W");
+	    for (var i=0; i < raceList.length; i++) {
+	      if (raceList[i].match(new RegExp("^"+race, "i"))) {
+	        race_desc = raceList[i];
+	        race = raceAbbrev[i];
+	        break;
+	      } 
+	    }
+	    if (i == raceList.length) {
+	      race = "";
+	      race_desc = "";
+	    }
       }
       if (genealogy_hasArg(args, "place")) {
-         state = genealogy_lookup_place_abbrev(genealogy_parse_place_state(args.switch_val["place"]));
-	 if (state != "") {
-	   switch (state)
-	   {
-	   case "AL": state = "ALAB"; state_desc = "Alabama"; break;
-	   case "AZ": state = "ARIZ"; state_desc = "Arizona"; break;
-	   case "AR": state = "ARK";  state_desc = "Arkansas"; break;
-	   case "CA": state = "CAL";  state_desc = "California"; break;
-	   case "CO": state = "COLR"; state_desc = "Colorado"; break;
-	   case "CT": state = "CONN"; state_desc = "Connecticut"; break;
-	   case "DE": state = "DELA"; state_desc = "Delware"; break;
-	   case "DC": state = "DICO"; state_desc = "District of Columbia"; break;
-	   case "FL": state = "FLOR"; state_desc = "Florida"; break;
-	   case "GA": state = "GEOR"; state_desc = "Georgia"; break;
-	   case "ID": state = "IDAH"; state_desc = "Idaho"; break;
-	   case "IL": state = "ILL";  state_desc = "Illinois"; break;
-	   case "IN": state = "INDN"; state_desc = "Indiana"; break;
-	   case "IA": state = "IOWA"; state_desc = "Iowa"; break;
-	   case "KS": state = "KAN";  state_desc = "Kansas"; break;
-	   case "KY": state = "KTKY"; state_desc = "Kentucky"; break;
-	   case "LA": state = "LOU";  state_desc = "Louisiana"; break;
-	   case "ME": state = "MAIN"; state_desc = "Maine"; break;
-	   case "MD": state = "MARY"; state_desc = "Maryland"; break;
-	   case "MA": state = "MASS"; state_desc = "Massachusetts"; break;
-	   case "MI": state = "MCHI"; state_desc = "Michigan"; break;
-	   case "MN": state = "MINN"; state_desc = "Minnesota"; break;
-	   case "MS": state = "MISP"; state_desc = "Mississippi"; break;
-	   case "MO": state = "MISO"; state_desc = "Missouri"; break;
-	   case "MT": state = "MONT"; state_desc = "Montana"; break;
-	   case "ND": state = "DAKT"; state_desc = "Dakota Territory"; break;
-	   case "NE": state = "NEBR"; state_desc = "Nebraska"; break;
-	   case "NV": state = "NEV";  state_desc = "Nevada"; break;
-	   case "NH": state = "NHAM"; state_desc = "New Hampshire"; break;
-	   case "NJ": state = "NJER"; state_desc = "New Jersey"; break;
-	   case "NM": state = "NMEX"; state_desc = "New Mexico"; break;
-	   case "NY": state = "NYOR"; state_desc = "New York"; break;
-	   case "NC": state = "NCAR"; state_desc = "North Carolina"; break;
-	   case "OH": state = "OHIO"; state_desc = "Ohio"; break;
-	   case "OR": state = "ORE";  state_desc = "Oregon"; break;
-	   case "PA": state = "PENN"; state_desc = "Pennsylvania"; break;
-	   case "RI": state = "RHOI"; state_desc = "Rhode Island"; break;
-	   case "SC": state = "SCAR"; state_desc = "South Carolina"; break;
-	   case "SD": state = "DAKT"; state_desc = "Dakota Territory"; break;
-	   case "TN": state = "TENN"; state_desc = "Tennessee"; break;
-	   case "TX": state = "TEX";  state_desc = "Texas"; break;
-	   case "UT": state = "UTAH"; state_desc = "Utah"; break;
-	   case "VT": state = "VERM"; state_desc = "Vermont"; break;
-	   case "VA": state = "VIR";  state_desc = "Virginia"; break;
-	   case "WA": state = "WASH"; state_desc = "Washington"; break;
-	   case "WV": state = "WVIR"; state_desc = "West Virginia"; break;
-	   case "WI": state = "WISC"; state_desc = "Wisconsin"; break;
-	   case "WY": state = "WYO";  state_desc = "Wyoming"; break;
-	   default:   state = "";     state_desc = ""; break;
-	   }
-	 }
+        state = genealogy_lookup_place_abbrev(genealogy_parse_place_state(args.switch_val["place"]));
+	    if (state != "") {
+	      switch (state)
+	      {
+	      case "AL": state = "ALAB"; state_desc = "Alabama"; break;
+	      case "AZ": state = "ARIZ"; state_desc = "Arizona"; break;
+  	      case "AR": state = "ARK";  state_desc = "Arkansas"; break;  
+  	      case "CA": state = "CAL";  state_desc = "California"; break;
+  	      case "CO": state = "COLR"; state_desc = "Colorado"; break;
+	      case "CT": state = "CONN"; state_desc = "Connecticut"; break;
+  	      case "DE": state = "DELA"; state_desc = "Delware"; break;
+	      case "DC": state = "DICO"; state_desc = "District of Columbia"; break;
+	      case "FL": state = "FLOR"; state_desc = "Florida"; break;
+	      case "GA": state = "GEOR"; state_desc = "Georgia"; break;
+	      case "ID": state = "IDAH"; state_desc = "Idaho"; break;
+	      case "IL": state = "ILL";  state_desc = "Illinois"; break;
+  	      case "IN": state = "INDN"; state_desc = "Indiana"; break;
+	      case "IA": state = "IOWA"; state_desc = "Iowa"; break;
+  	      case "KS": state = "KAN";  state_desc = "Kansas"; break;
+	      case "KY": state = "KTKY"; state_desc = "Kentucky"; break;
+	      case "LA": state = "LOU";  state_desc = "Louisiana"; break;
+	      case "ME": state = "MAIN"; state_desc = "Maine"; break;
+	      case "MD": state = "MARY"; state_desc = "Maryland"; break;
+	      case "MA": state = "MASS"; state_desc = "Massachusetts"; break;
+	      case "MI": state = "MCHI"; state_desc = "Michigan"; break;
+	      case "MN": state = "MINN"; state_desc = "Minnesota"; break;
+	      case "MS": state = "MISP"; state_desc = "Mississippi"; break;
+	      case "MO": state = "MISO"; state_desc = "Missouri"; break;
+	      case "MT": state = "MONT"; state_desc = "Montana"; break;
+	      case "ND": state = "DAKT"; state_desc = "Dakota Territory"; break;
+	      case "NE": state = "NEBR"; state_desc = "Nebraska"; break;
+	      case "NV": state = "NEV";  state_desc = "Nevada"; break;
+	      case "NH": state = "NHAM"; state_desc = "New Hampshire"; break;
+	      case "NJ": state = "NJER"; state_desc = "New Jersey"; break;
+	      case "NM": state = "NMEX"; state_desc = "New Mexico"; break;
+	      case "NY": state = "NYOR"; state_desc = "New York"; break;
+	      case "NC": state = "NCAR"; state_desc = "North Carolina"; break;
+	      case "OH": state = "OHIO"; state_desc = "Ohio"; break;
+	      case "OR": state = "ORE";  state_desc = "Oregon"; break;
+	      case "PA": state = "PENN"; state_desc = "Pennsylvania"; break;
+	      case "RI": state = "RHOI"; state_desc = "Rhode Island"; break;
+	      case "SC": state = "SCAR"; state_desc = "South Carolina"; break;
+  	      case "SD": state = "DAKT"; state_desc = "Dakota Territory"; break;
+	      case "TN": state = "TENN"; state_desc = "Tennessee"; break;
+	      case "TX": state = "TEX";  state_desc = "Texas"; break;
+	      case "UT": state = "UTAH"; state_desc = "Utah"; break;
+	      case "VT": state = "VERM"; state_desc = "Vermont"; break;
+	      case "VA": state = "VIR";  state_desc = "Virginia"; break;
+	      case "WA": state = "WASH"; state_desc = "Washington"; break;
+	      case "WV": state = "WVIR"; state_desc = "West Virginia"; break;
+	      case "WI": state = "WISC"; state_desc = "Wisconsin"; break;
+	      case "WY": state = "WYO";  state_desc = "Wyoming"; break;
+	      default:   state = "";     state_desc = ""; break;
+	      }
+	    }
       }
-
       // FORM variables for cens1880f
       //document.cens1880f.type.value = "";
       //document.cens1880f.event_index.value = "";
@@ -186,7 +185,7 @@
       //document.cens1880f.CN_COUNTY.value = "";
       //document.cens1880f.CN_TOWN.value = "";
       document.cens1880f.standardize.value = (exact_spelling) ? "N" : "Y";
-      submitForm(cens1880f);
+      genealogy_submitForm(cens1880f, "cens1880", q);
     }
   ]]></script>
   <copyright>

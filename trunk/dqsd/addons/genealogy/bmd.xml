@@ -76,7 +76,7 @@
             countyName = args.switch_val["state"];
             break;
           case "state":
-	    stateAbbrev = genealogy_lookup_place_abbrev(args.switch_val["state"]);
+    	    stateAbbrev = genealogy_lookup_place_abbrev(args.switch_val["state"]);
             break;
           default:
             break;
@@ -88,37 +88,37 @@
 
       lastName = genealogy_parse_surname(args.q);
       if (lastName.length == 0) {
-	errMsg = "No surname specified.";
-	errCount++;
+	    errMsg = "No surname specified.";
+	    errCount++;
       }
     
       switch (recordType) {
       case 'B':
-         if (!genealogy_in_array(stateAbbrev, validBirthStates)) {
-           errCount++;
-	   errMsg = "State has no birth records available.";
-	 }
-	 break;
+        if (!genealogy_in_array(stateAbbrev, validBirthStates)) {
+          errCount++;
+	      errMsg = "State has no birth records available.";
+	    }
+	    break;
       case 'M':
-         if (!genealogy_in_array(stateAbbrev, validMarriageStates)) {
-           errCount++;
-	   errMsg = "State has no marriage records available.";
-	 }
-	 break;
+        if (!genealogy_in_array(stateAbbrev, validMarriageStates)) {
+          errCount++;
+	      errMsg = "State has no marriage records available.";
+	    }
+	    break;
       case 'D':
-         if (!genealogy_in_array(stateAbbrev, validDeathStates)) {
-           errCount++;
-	   errMsg = "State has no death records available.";
-	 }
-	 break;
+        if (!genealogy_in_array(stateAbbrev, validDeathStates)) {
+          errCount++;
+	      errMsg = "State has no death records available.";
+	    }
+	    break;
       default:
         errCount++;
         errMsg = "Invalid record type specified.";
-	break;
+	    break;
       }
       if (stateAbbrev.length == 0) {
-	errMsg = "Invalid state specified.";
-	errCount++;
+	    errMsg = "Invalid state specified.";
+	    errCount++;
       }
 
       document.bmdf.t.value = recordType;
@@ -127,9 +127,9 @@
       document.bmdf.first.value = genealogy_parse_givenname(args.q);
     
       if (errCount == 0) {
-        submitForm(bmdf);
+        genealogy_submitForm(bmdf, "bmd", q);
       } else {
-	displayPopupMessage(errMsg);
+	    displayPopupMessage(errMsg);
       }
     }
   ]]></script>

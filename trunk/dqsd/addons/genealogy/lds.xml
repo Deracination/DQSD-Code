@@ -32,30 +32,35 @@
 
       var args = genealogy_parseArgs(q, "all, af, igi, ssdi");
       if (args != null && args.switches.length > 0) {
-	if (args.switches.length > 1) {
-	  nullArgs("lds", "?");
-	  return;
-	}
-	switch (args.switches[0].name)
-	{
-		case 'af':
-			openSearchWindow("http://www.familysearch.org/Eng/Search/frameset_search.asp?PAGE=af/search_AF.asp&clear_form=true");
-			return;
-		case 'ssdi':
-			openSearchWindow("http://www.familysearch.org/Eng/Search/frameset_search.asp?PAGE=ssdi/search_ssdi.asp&clear_form=true");
-			return;
-		case 'igi':
-			openSearchWindow("http://www.familysearch.org/Eng/Search/frameset_search.asp?PAGE=igi/search_IGI.asp&clear_form=true");
-			return;
-		default:
-			openSearchWindow("http://www.familysearch.org/Eng/Search/frameset_search.asp?PAGE=search_all1.asp&clear_form=true");
-			return;
+    	if (args.switches.length > 1) {
+  	      nullArgs("lds", "?");
+    	  return;
+	    }
+        var search_url = null;
+	    switch (args.switches[0].name)
+	    {
+	    case 'af':
+		  search_url = "http://www.familysearch.org/Eng/Search/frameset_search.asp?PAGE=af/search_AF.asp&clear_form=true";
+		  break;
+	    case 'ssdi':
+	 	  search_url = "http://www.familysearch.org/Eng/Search/frameset_search.asp?PAGE=ssdi/search_ssdi.asp&clear_form=true";
+		  break;
+	    case 'igi':
+		  search_url = "http://www.familysearch.org/Eng/Search/frameset_search.asp?PAGE=igi/search_IGI.asp&clear_form=true";
+		  break;
+        case 'all':
+	    default:
+    	  search_url = "http://www.familysearch.org/Eng/Search/frameset_search.asp?PAGE=search_all1.asp&clear_form=true";
+	      break;
+        }
+        if (search_url != null) {
+            genealogy_openSearchWindow(search_url, "lds", q);
+            return;
         }
       }
-
       document.ldsf.last_name.value = genealogy_parse_surname(args.q);
       document.ldsf.first_name.value = genealogy_parse_givenname(args.q);
-      submitForm(ldsf);
+      genealogy_submitForm(ldsf, "lds", q);
     }
   ]]></script>
   <copyright>

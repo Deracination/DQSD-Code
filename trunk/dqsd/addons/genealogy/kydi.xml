@@ -171,7 +171,7 @@
       //document.kydif.residence.value = "";
       //document.kydif.year.value = "";
 
-      submitForm(kydif);
+      genealogy_submitForm(kydif, "kydi", q);
     }
   ]]></script>
   <copyright>

@@ -25,10 +25,9 @@
       var links = genealogy_get_known_page_links(search_url, "(.*?) Table of Contents$");
       var search_place_num = genealogy_lookup_place(q);
       if (search_place_num >= 0) {
-        openSearchWindow(links[search_place_num]);
-      } else {
-	openSearchWindow(search_url);
+        search_url = links[search_place_num];
       }
+	  genealogy_openSearchWindow(search_url, "gwar", q);
     }
     ]]>
   </script>

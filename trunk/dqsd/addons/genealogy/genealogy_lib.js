@@ -5,7 +5,7 @@ Distributed under the terms of the GNU Lesser General Public License Version 2.1
 (http://www.gnu.org/licenses/lgpl.txt)
 **********************************************************************************/
 	var genealogy_debug = 0;
-    var genealogy_lib_version = "1.8";
+    var genealogy_lib_version = "1.9";
 
 	var genealogy_month_names = new Array("JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER");
 	var genealogy_date_format_1 = "([0-9]{1,2})\\s*(?:/|-)\\s*([0-9]{1,2})\\s*(?:/|-)\\s*([0-9]{4})";
@@ -777,6 +777,18 @@ function genealogy_hasArg(args, argname)
 		}
 	}
 	return false;
+}
+
+function genealogy_submitForm(form, searchName, searchArgs)
+{
+	genealogy_alert("genealogy_submitForm called with "+form.action+", "+searchName + ", "+searchArgs);
+	submitForm(form);
+}
+
+function genealogy_openSearchWindow(searchUrl, searchName, searchArgs)
+{
+	genealogy_alert("genealogy_openSearchWindow called with "+searchUrl+", "+searchName + ", "+searchArgs);
+	openSearchWindow(searchUrl);
 }
 
 function genealogy_check_dqsd_version(majorHi, majorLo, minorHi, minorLo)

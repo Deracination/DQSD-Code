@@ -14,9 +14,10 @@
       if( nullArgs("everton", q) )
         return;
 
-      openSearchWindow("http://www.everton.com/search/simple.php?submit=Search"+
-                       "&amp;surname="+genealogy_parse_surname(q)+
-		       "&amp;given_name="+genealogy_parse_givenname(q));
+      var surname = genealogy_parse_surname(q);
+      var givenname = genealogy_parse_givenname(q);
+      genealogy_openSearchWindow("http://www.everton.com/search/simple.php?submit=Search"+
+               "&amp;surname="+surname+"&amp;given_name="+givenname, "everton", q);
     }
   ]]></script>
   <copyright>

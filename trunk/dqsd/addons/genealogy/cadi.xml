@@ -249,31 +249,31 @@
       var args = genealogy_parseArgs(q, "birthplace, sex, type, mother, father"); 
       var sex = "";
       if (genealogy_hasArg(args, "sex")) {
-	sex = args.switch_val["sex"];
+    	sex = args.switch_val["sex"];
         var sexList =   new Array("Any", "Male", "Female");
-	var sexValue =  new Array("",    "1",     "2");
-	for (var i=0; i < sexList.length; i++) {
-	   if (sexList[i].match(new RegExp("^"+sex, "i"))) {
-	     sex = sexValue[i];
-	     break;
-	   }
-	}
-	if (i == sexList.length) {
-	  sex = "";
-	}
+	    var sexValue =  new Array("",    "1",     "2");
+	    for (var i=0; i < sexList.length; i++) {
+	      if (sexList[i].match(new RegExp("^"+sex, "i"))) {
+	        sex = sexValue[i];
+	        break;
+	      }
+	    }
+	    if (i == sexList.length) {
+	      sex = "";
+	    }
       }
       var birthplace = "";
       if (genealogy_hasArg(args, "birthplace")) {
-	birthplace = genealogy_lookup_place_abbrev(args.switch_val["birthplace"]).toUpperCase();
+	    birthplace = genealogy_lookup_place_abbrev(args.switch_val["birthplace"]).toUpperCase();
       }
 
       var fatherlast = "";
       if (genealogy_hasArg(args, "father")) {
-	fatherlast = genealogy_parse_surname(args.switch_val["father"]);
+	    fatherlast = genealogy_parse_surname(args.switch_val["father"]);
       }
       var motherlast = "";
       if (genealogy_hasArg(args, "mother")) {
-	motherlast = genealogy_parse_surname(args.switch_val["mother"]);
+	    motherlast = genealogy_parse_surname(args.switch_val["mother"]);
       }
 
       document.cadif.surname.value = genealogy_parse_surname(args.q);
@@ -287,7 +287,7 @@
       document.cadif.dyear.value = "";
       document.cadif.dplace.value = "";
 
-      submitForm(cadif);
+      genealogy_submitForm(cadif, "cadi", q);
     }
   ]]></script>
   <copyright>
