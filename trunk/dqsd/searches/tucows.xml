@@ -1,0 +1,48 @@
+<search function="tucows">
+  <name>Tucows Downloads</name>
+  <category>Computers/Software</category>
+  <contributor>Sarah Sweeney</contributor>
+  <link>http://www.tucows.com/</link>
+  <email>poohbear@designshift.com</email>
+  <description>
+  Search freeware and shareware at tucows.com.
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+      <tr><td>tucows editplus</td></tr>
+    </table>
+  </description>
+  <form name="tucowsf"
+        method="post"
+        action="http://www.tucows.com/search">
+    <input type="hidden" name="search" />
+    <input type="hidden" name="key" value="all" />
+    <input type="hidden" name="do" value="search" />
+    <input type="hidden" name="user_platform" value="" />
+    <input type="hidden" name="browser" value="I)" />
+    <input type="hidden" name="platform_id" value="5,6,7,8,9,11,12,13,14,26,27,28,29,30,31,1565,1584,1569,1570,1571,1645,89,120,121,122,129,130,131,137,1364,1647,1665,1685,1686,1687,1688,1705,1706,1725,1726,1727,1728,1729,1730,1745,1746,1747,1748,1749,1750,1765" />
+    <input type="hidden" name="language_id" value="1" />
+    <input type="hidden" name="type" value="exactany" />
+    <input type="hidden" name="site_detail_id" value="653" />
+    <input type="hidden" name="ref" value="" />
+  </form>
+  <script><![CDATA[
+    function tucows(q)
+    {
+      if( nullArgs("tucows", q) )
+        return;
+
+      document.tucowsf.search.value = q;
+
+      submitForm(tucowsf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 02/25/03 at 12:09:10
+    by Dave's Quick Search Deskbar Search Wizard version 1.0.1 ,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>

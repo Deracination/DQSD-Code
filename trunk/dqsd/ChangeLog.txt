@@ -34,6 +34,7 @@ New Searches
 * bio - Search the Biography.com database (from viking mel)
 * mag - Search newspaper and magazine articles (from viking mel)
 * nyse - enter a company name and get the lookup symbol and a short description of that company (from viking mel)
+* tucows - search tucows (from Sarah S.)
 
 Bug Fixes
 
