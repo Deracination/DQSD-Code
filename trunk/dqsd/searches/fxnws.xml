@@ -1,0 +1,59 @@
+<search function="fxnws">
+  <COMMENT>
+
+    Even though this XML search will probably load and is a good start
+    toward a completed search, please be aware that this search will probably
+    not work as is and will probably require some changes.
+
+  </COMMENT>
+  <name>Fow News</name>
+  <category>News</category>
+  <contributor>John W. Bairen, Jr.</contributor>
+  <link>http://www.foxnews.com/</link>
+  <email>john_at_bairen_dot_net</email>
+  <description>
+  Search Fox News
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td></td></tr>
+      <tr><td></td></tr>
+    </table>
+  </description>
+  <form name="fxnwsf"
+        method="get"
+        action="http://search.foxnews.com/info.foxnws/redirs_all.htm">
+    <input type="hidden" name="pgtarg" value="wbsdogpile" />
+    <input type="hidden" name="qcat" value="web" />
+
+    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
+
+    <input type="hidden" name="qkw" value="" />
+  </form>
+  <script><![CDATA[
+    function fxnws(q)
+    {
+      if( nullArgs("fxnws", q) )
+        return;
+
+      // FORM variables for fxnwsf
+      //document.fxnwsf.pgtarg.value = "";
+      //document.fxnwsf.qcat.value = "";
+
+      // The wizard assigned the search string to this form field value because
+      // this field was the active element when the search file was generated.
+      // Change this to args.q if the search string is parsed with parseArgs.
+      document.fxnwsf.qkw.value = q;
+
+      submitForm(fxnwsf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 12/30/04 at 22:47:12
+    by Dave's Quick Search Deskbar Search Wizard version 1.2,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>
