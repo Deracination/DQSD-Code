@@ -2,6 +2,9 @@
 
 Enhancements
 
+* versionCheck() in version.js now checks scripting engine version as well, and requires 5.6 (Kim Gräsman)
+* Added httpinst command, which installs new searches straight from an URL (Kim Gräsman)
+
 Bug Fixes
 
 * Fixed a copy paste error in defer_tools.js (Kim Grasman)
