@@ -2,28 +2,35 @@
   <name>DQSD Mail Archive</name>
   <category>Computers</category>
   <contributor>Gregory Krohne</contributor>
-  <link>http://www.mail-archive.com/dqsd-users@lists.sourceforge.net/</link>
+  <link>http://sourceforge.net/mailarchive/forum.php?forum_id=8601</link>
   <email>Gregory.Krohne@afrc.af.mil</email>
   <description>
-  Search the Mail Archive for Dave's QuickSearch Deskbar (DQSD)
+  Search the mail archives for Dave's QuickSearch Deskbar (DQSD).
+  The search engine only seems to work for single words.
+  To get results, limit your search to a single word.
+  Searches the users mail archive, by default.
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+	  <tr><td>dqsd search-word [/users|/devel/announce]</td></tr>
+      <tr><td>/users</td><td> - </td><td>Users mailing list</td></tr>
+      <tr><td>/developers</td><td> - </td><td>Developers mailing list</td></tr>
+      <tr><td>/announcements</td><td> - </td><td>Annoucements</td></tr>
+    </table>
     <div class="helpboxDescLabels">Examples:</div>
     <table class="helpboxDescTable">
-      <tr><td>dqsd Gregory Krohne</td></tr>
+      <tr><td>dqsd .xml</td></tr>
       <tr><td>dqsd froogle</td></tr>
+	  <tr><td>dqsd bug /announce</td></tr>
+	  <tr><td>dqsd args /devel</td></tr>
     </table>
   </description>
   <form name="dqsdf"
-        method="get"
-        action="http://www.mail-archive.com/cgi-bin/htsearch">
-    <input type="hidden" name="method" value="and" />
-    <input type="hidden" name="format" value="short" />
-    <input type="hidden" name="config" value="dqsd-users_lists_sourceforge_net" />
-    <input type="hidden" name="restrict" value="" />
-    <input type="hidden" name="exclude" value="" />
-
-    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
-
-    <input type="hidden" name="words" value="forum" />
+        method="post"
+        action="http://sourceforge.net/search/">
+    <input type="hidden" name="type_of_search" value="mlists" />
+    <input type="hidden" name="forum_id" value="8601" />
+    <input type="hidden" name="group_id" value="42081" />
+    <input type="hidden" name="words" value="" />
   </form>
   <script><![CDATA[
     function dqsd(q)
@@ -31,18 +38,36 @@
       if( nullArgs("dqsd", q) )
         return;
 
-      // FORM variables for dqsdf
-      //document.dqsdf.method.value = "";
-      //document.dqsdf.format.value = "";
-      //document.dqsdf.config.value = "";
-      //document.dqsdf.restrict.value = "";
-      //document.dqsdf.exclude.value = "";
+      var args = parseArgs(q, "users,developers,announcements");
+	  
+	  // default to users' mail archive
+	  document.dqsdf.forum_id.value = "8601";
 
-      // The wizard assigned the search string to this form field value because
-      // this field was the active element when the search file was generated.
-      // Change this to args.q if the search string is parsed with parseArgs.
-      document.dqsdf.words.value = q;
+      for (var iSwitch = 0; iSwitch < args.switches.length; iSwitch++)
+      {
+		  switch(args.switches[0].name)
+		  {
+			case "users":
+				// dqsd-users; the default
+				document.dqsdf.forum_id.value = "8601";
+				break;
+			case "developers":
+				// dqsd-devel
+				document.dqsdf.forum_id.value = "9694";
+				break;
+			case "announcements":
+				// dqsd-announce
+				document.dqsdf.forum_id.value = "8603";
+				break;
+			default:
+				// dqsd-users; the default
+				document.dqsdf.forum_id.value = "8601";
+				break;
+		  }
+      }
 
+      document.dqsdf.words.value = args.q;
+	  
       submitForm(dqsdf);
     }
   ]]></script>
@@ -54,5 +79,7 @@
     This search file was initially created on 12/17/02 at 16:20:15
     by Dave's Quick Search Deskbar Search Wizard version 1.0.1 ,
     Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+	Modified by Gregory Krohne on 04/28/03
   </created_by>
 </search>
+
