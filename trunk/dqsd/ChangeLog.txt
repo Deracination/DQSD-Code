@@ -18,7 +18,7 @@ Enhancements
 
 Bug Fixes
 
-* 
+* Fix for tooltips problem on scrolling menus (bug 617639)  (DQSDTools.DLL changes, version.js NOT changed to force upgrade)
 
 
 -- What's new for 3.1.4 (October 3, 2002)

@@ -1,8 +1,11 @@
 // MenuBuilder.cpp : Implementation of CMenuBuilder
 #include "stdafx.h"
+#include <windowsx.h>		// For GET_X_LPARAM, etc macros
+
 #include "DQSDTools.h"
 #include "MenuBuilder.h"
 #include "Utilities.h"
+
 
 /////////////////////////////////////////////////////////////////////////////
 // CMenuBuilder
@@ -218,7 +221,8 @@ LRESULT CALLBACK CMenuBuilder::TrackerWndProc(
 	LPARAM lParam   // second message parameter
 	)
 {
-	static BOOL bAdded[100];
+//	static BOOL bAdded[500];
+	static bool bAdded;
 
 	if(uMsg == WM_INITMENUPOPUP)
 	{
@@ -239,7 +243,8 @@ LRESULT CALLBACK CMenuBuilder::TrackerWndProc(
 
 			}
 		}
-		ZeroMemory(bAdded, sizeof(bAdded));
+//		ZeroMemory(bAdded, sizeof(bAdded));
+		bAdded = false;
 	}
 	if(uMsg == WM_MENUSELECT)
 	{
@@ -258,6 +263,9 @@ LRESULT CALLBACK CMenuBuilder::TrackerWndProc(
 			// Is there a tooltip for this item?
 			if(pThis != NULL && pThis->m_toolTips.count(itemId) > 0)
 			{
+
+/*
+Even worse!  This doesn't work on scrolling menus...
 				// The GetMenuItemRect call requires the zero-based position of the menu item
 				// Unfortunately, I only have the ID in this message call.
 				// To look up the position, I think I need to loop through the items until I find a 
@@ -273,6 +281,32 @@ LRESULT CALLBACK CMenuBuilder::TrackerWndProc(
 						break;
 					}
 				}
+*/
+				// It's worse than I thought.
+				// Because very long menus can scroll, nItemPosition needs to be relative
+				// to the topmost DISPLAYED item, rather than the top of the whole menu.
+				// I've resorted to hit-testing each item rectangle, to find the one that we want
+				// Because I'm too lazy to change the code, there's a redudant second look-up
+				// of the item rectangle after this loop completes.
+				POINT cursorPos;
+				DWORD messagePos = GetMessagePos();
+				cursorPos.x = GET_X_LPARAM(messagePos);
+				cursorPos.y = GET_Y_LPARAM(messagePos);
+
+				int nItems = GetMenuItemCount(hMenu);
+				int nItemPosition;
+				for(nItemPosition = 0; nItemPosition < nItems; nItemPosition++)
+				{
+					RECT itemRect;
+					GetMenuItemRect(NULL, hMenu, nItemPosition, &itemRect);
+					if(PtInRect(&itemRect, cursorPos))
+					{
+						// We've found our item
+						break;
+					}
+				}
+
+//				ATLTRACE("ItemId: %d\n", itemId);
 
 				// If we don't find it, nItemPosition will be == nItems, so the GetMenuItemRect call will fail
 				// and we'll cope with that
@@ -286,6 +320,13 @@ LRESULT CALLBACK CMenuBuilder::TrackerWndProc(
 					ZeroMemory(&ti, sizeof(ti));
 					ti.cbSize = sizeof(ti);
 
+					if(bAdded)
+					{
+						::SendMessage(m_hTooltipWnd, TTM_GETTOOLINFO, 0, (LPARAM)&ti);
+					}
+
+//					Rectangle(GetDC(NULL), itemRect.left, itemRect.top, itemRect.right, itemRect.bottom);
+
 					POINT topLeft;
 					topLeft.x = itemRect.left;
 					topLeft.y = itemRect.top;
@@ -294,32 +335,50 @@ LRESULT CALLBACK CMenuBuilder::TrackerWndProc(
 					ti.hwnd = WindowFromPoint(topLeft);
 
 					ti.uFlags = TTF_TRANSPARENT;
-					ti.uId = itemId;		
+					ti.uId = 1;		
 
 					// This looks horrible, because I'm casting away the const, but it's safe
 					// because I don't ask the ToolTip window to overwrite any data
 					ti.lpszText = (LPTSTR)(pThis->m_toolTips[itemId].c_str());
 
+//					char tipTraceBuffer[100];
+//					tipTraceBuffer[0] = '\0';
+//					strncat(tipTraceBuffer, ti.lpszText, 99);
+//					ATLTRACE("TipText: '%s'\n", tipTraceBuffer);
+
+					// Map the rectangle relative to the menu window
+//					RECT menuWindowRect;
+//					::GetWindowRect(ti.hwnd, &menuWindowRect);
+//					ATLTRACE("Menu Window: %d,%d,%d,%d\n", menuWindowRect.left, menuWindowRect.top, menuWindowRect.right, menuWindowRect.bottom);
+
+//					itemRect.left -= menuWindowRect.left;
+//					itemRect.top -= menuWindowRect.top;
+//					itemRect.right -= menuWindowRect.left;
+//					itemRect.bottom -= menuWindowRect.top;
+
 					MapWindowPoints(NULL, ti.hwnd, (LPPOINT)&itemRect, 2);
 					ti.rect = itemRect;
 					
 //					ATLTRACE("ToolRect: (wnd %x) %d,%d,%d,%d\n", ti.hwnd, ti.rect.left, ti.rect.top, ti.rect.right, ti.rect.bottom);
-				
-					if(bAdded[nItemPosition])
+			
+					if(bAdded)
 					{
-						ATLTRACE("Moving\n");
+//						ATLTRACE("Moving\n");
+						::SendMessage(m_hTooltipWnd, TTM_UPDATETIPTEXT, 0, (LPARAM)&ti);
+
+						::SendMessage(m_hTooltipWnd, TTM_SETTOOLINFO, 0, (LPARAM)&ti);
 						::SendMessage(m_hTooltipWnd, TTM_NEWTOOLRECT, 0, (LPARAM)&ti);
 					}
 					else
 					{
-						ATLTRACE("Adding\n");
+//						ATLTRACE("Adding\n");
 						if(!::SendMessage(m_hTooltipWnd, TTM_ADDTOOL, 0, (LPARAM)&ti))
 						{
 							ATLTRACE("AddTool failed\n");
 						}
 						else
 						{
-							bAdded[nItemPosition] = TRUE;
+							bAdded = true;
 						}
 					}
 
@@ -327,8 +386,11 @@ LRESULT CALLBACK CMenuBuilder::TrackerWndProc(
 					static MSG msgHere = { NULL,WM_MOUSEMOVE,0,0,0,0 };
 					msgHere.hwnd = ti.hwnd;
 					msgHere.lParam = MAKELPARAM(ti.rect.left, ti.rect.top);
-					msgHere.pt.x = ti.rect.left;
-					msgHere.pt.y = ti.rect.top;
+					msgHere.pt.x = ti.rect.left + 5;
+					msgHere.pt.y = ti.rect.top + 5;
+
+//					ATLTRACE("Sending mouse move %d,%d\n", ti.rect.left, ti.rect.top);
+
 					::SendMessage(m_hTooltipWnd, TTM_RELAYEVENT, 0, (LPARAM)&msgHere);
 				}
 			}
