@@ -1,31 +1,29 @@
-  <search function="chem">
-    <name>Cambridgesoft Chemfinder Search</name>
-    <description>Chemical search</description>
-    <category>Other</category>
-    <link>http://www.screenit.com/</link>
-    <contributor>Stewart Rubenstein</contributor>
-    <form name="chmfrm"
-          target="_blank"
-          action="http://chemfinder.cambridgesoft.com/result.asp"
-          method="GET">
-      <input type="hidden" name="polyQuery"/>
-      <input type="hidden" name="returnURL" value=""/>
-      <input type="hidden" name="returnType" value=""/>
-      <input type="hidden" name="userHeader" value="on"/>
-      <input type="hidden" name="DisplayMessage" value=""/>
-    </form>
-    <script><![CDATA[
-      function chem(q)
+<search function="chem">
+  <name>Cambridgesoft Chemfinder</name>
+  <description>Search for chemicals: "chem ammonium"</description>
+  <category>Other</category>
+  <link>http://chemfinder.cambridgesoft.com/</link>
+  <contributor>Stewart Rubenstein</contributor>
+  <form name="chmfrm"
+        target="_blank"
+        action="http://chemfinder.cambridgesoft.com/result.asp"
+        method="get">
+    <input type="hidden" name="polyQuery"/>
+    <input type="hidden" name="returnURL" value=""/>
+    <input type="hidden" name="returnType" value=""/>
+    <input type="hidden" name="userHeader" value="on"/>
+    <input type="hidden" name="DisplayMessage" value=""/>
+  </form>
+  <script><![CDATA[
+    function chem(q, switches)
+    {
+      if( q == "" )
+        openSearchWindow("http://chemfinder.cambridgesoft.com/");
+      else
       {
-        if (q == "")
-        {
-          openSearchWindow("http://chemfinder.cambridgesoft.com/");
-        }
-        else
-        {
-          document.chmfrm.polyQuery.value=q;
-          submitForm(chmfrm);
-        }
+        document.chmfrm.polyQuery.value = q;
+        submitForm(chmfrm);
       }
-    ]]></script>
-  </search>
+    }
+  ]]></script>
+</search>

@@ -1,26 +1,24 @@
-  <search function="crax">
-    <name>AstaLaVista Crack Search</name>
-    <description>Search the depths of Asta La Vista</description>
-    <category>Search the Web</category>
-    <link>http://astalavista.box.sk</link>
-    <form name="craxf"
-        method="get"
+<search function="crax">
+  <name>Astalavista</name>
+  <description>Search Astalavista for software cracks and patches.</description>
+  <category>Search the Web</category>
+  <link>http://astalavista.box.sk/</link>
+  <form name="craxf"
+        target="_blank"
         action="http://astalavista.box.sk/cgi-bin/robot"
-        target="_blank">
-      <input type="hidden" name="srch" value=""/>
-    </form>
-    <script><![CDATA[
-      function crax(q)
+        method="get">
+    <input type="hidden" name="srch"/>
+  </form>
+  <script><![CDATA[
+    function crax(q, switches)
+    {
+      if( q == "" )
+        openSearchWindow("http://astalavista.box.sk/");
+      else
       {
-        if (q == "")
-        {
-           openSearchWindow("http://astalavista.box.sk");
-        }
-        else
-        {
-           document.craxf.srch.value=q;
-           submitForm(craxf);
-        }
+        document.craxf.srch.value=q;
+        submitForm(craxf);
       }
-    ]]></script>
-  </search>
+    }
+  ]]></script>
+</search>

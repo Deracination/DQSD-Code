@@ -1,28 +1,27 @@
-  <search function="bomis">
-    <name>Bomis.com search</name>
-    <link>http://bomis.com/</link>
-    <category>Other</category>
-    <contributor>Reginald Braithwaite-Lee</contributor>
-    <email>raganwald_at_yahoo_dot_com</email>
-    <form name="bomisf"
-          action="http://www.bomis.com/searchring.fcgi"
-          method="get"
-          target="_blank">
-      <input name="db" type="hidden" value="bomis" />
-      <input name="request" type="hidden" />
-    </form>
-    <script><![CDATA[
-      function bomis(q)
+<search function="bomis">
+  <name>Bomis</name>
+  <description>Search through Bomis.com Internet rings: "bomis firewalls"</description>
+  <category>Search the Web</category>
+  <link>http://www.bomis.com/</link>
+  <contributor>Reginald Braithwaite-Lee</contributor>
+  <email>raganwald_at_yahoo_dot_com</email>
+  <form name="bomisf"
+        target="_blank"
+        action="http://www.bomis.com/searchring.fcgi"
+        method="get">
+    <input type="hidden" name="db" value="bomis"/>
+    <input type="hidden" name="request"/>
+  </form>
+  <script><![CDATA[
+    function bomis(q, switches)
+    {
+      if( q == "" )
+        openSearchWindow("http://www.bomis.com/");
+      else
       {
-        if (q == "")
-        {
-          openSearchWindow("http://www.bomis.com/");
-        }
-        else
-        {
-          document.bomisf.request.value=q;
-          submitForm(bomisf);
-        }
+        document.bomisf.request.value = q;
+        submitForm(bomisf);
       }
-    ]]></script>
-  </search>
+    }
+  ]]></script>
+</search>

@@ -1,31 +1,25 @@
-  <search function="dic">
-    <name>Dictionary.com</name>
-    <description>Search for definitions: "dic lexical"</description>
-    <category>Reference</category>
-    <link>http://dictionary.com/</link>
-    <form name="dicf"
-          target="_blank"
-          action="http://www.dictionary.com/cgi-bin/dict.pl"
-          method="get">
-     <input name="term"
-            type="hidden"/>
-     <input name="db"
-            value="*"
-            type="hidden"/>
-    </form>
-    <script><![CDATA[
-      // Dictionary.com search
-      function dic(q)
+<search function="dic">
+  <name>Dictionary.com</name>
+  <description>Search for English word definitions: "dic lexical"</description>
+  <category>Reference</category>
+  <link>http://www.dictionary.com/</link>
+  <form name="dicf"
+        target="_blank"
+        action="http://www.dictionary.com/cgi-bin/dict.pl"
+        method="get">
+    <input type="hidden" name="term"/>
+    <input type="hidden" name="db" value="*"/>
+  </form>
+  <script><![CDATA[
+    function dic(q, switches)
+    {
+      if( q == "" )
+        openSearchWindow("http://www.dictionary.com/");
+      else
       {
-        if (q == "")
-        {
-          openSearchWindow("http://www.dictionary.com/");
-        }
-        else
-        {
-          document.dicf.term.value=q;
-          submitForm(dicf);
-        }
+        document.dicf.term.value = q;
+        submitForm(dicf);
       }
-    ]]></script>
-  </search>
+    }
+  ]]></script>
+</search>

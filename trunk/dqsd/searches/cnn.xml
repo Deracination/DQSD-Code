@@ -1,44 +1,42 @@
-  <search function="cnn">
-    <name>CNN News Search</name>
-    <description>Search for news topics: "cnn Saddam"</description>
-    <category>News</category>
-    <link>http://cnn.com/</link>
-    <form name="cnnf"
-        method="get"
+<search function="cnn">
+  <name>CNN News</name>
+  <description>Search for news topics: "cnn Saddam"</description>
+  <category>News</category>
+  <link>http://www.cnn.com/</link>
+  <form name="cnnf"
+        target="_blank"
         action="http://cnn.looksmart.com/r_search"
-        target="_blank">
-        <input name="sites" type="hidden" value="CNN"/>
-      <input type="hidden"  name="qc" value=""/>
-      <input type="hidden" name="col" value="cnni"/>
-      <input type="hidden" name="qm"  value="0"/>
-      <input type="hidden" name="st"  value="1"/>
-      <input type="hidden" name="nh"  value="10"/>
-      <input type="hidden" name="lk"  value="1"/>
-      <input type="hidden" name="rf"  value="1"/>
-      <input type="hidden" name="look" value=""/>
-      <input type="hidden" name="key" value=""/>
-      <input type="hidden" name="venue" value="all"/>
-      <input type="hidden" name="keyword" value=""/>
-      <input type="hidden" name="qp" value=""/>
-      <input type="hidden" name="comefrom" value="izch-search"/>
-      <input type="hidden" name="isp" value="zcb"/>
-      <input type="hidden" name="search" value="0"/>
-      <input type="hidden" name="qt" value=""/>
-    </form>
-    <script><![CDATA[
-    function cnn(q)
+        method="get">
+    <input type="hidden" name="sites" value="CNN"/>
+    <input type="hidden" name="qc" value=""/>
+    <input type="hidden" name="col" value="cnni"/>
+    <input type="hidden" name="qm" value="0"/>
+    <input type="hidden" name="st" value="1"/>
+    <input type="hidden" name="nh" value="10"/>
+    <input type="hidden" name="lk" value="1"/>
+    <input type="hidden" name="rf" value="1"/>
+    <input type="hidden" name="look" value=""/>
+    <input type="hidden" name="key" value=""/>
+    <input type="hidden" name="venue" value="all"/>
+    <input type="hidden" name="keyword" value=""/>
+    <input type="hidden" name="qp" value=""/>
+    <input type="hidden" name="comefrom" value="izch-search"/>
+    <input type="hidden" name="isp" value="zcb"/>
+    <input type="hidden" name="search" value="0"/>
+    <input type="hidden" name="qt" value=""/>
+  </form>
+  <script><![CDATA[
+    function cnn(q, switches)
     {
-      if (q == "")
-      {
+      if( q == "" )
         openSearchWindow("http://www.cnn.com/");
-      }
       else
       {
-        document.cnnf.qt.value=q;
-        document.cnnf.key.value=q;
-        document.cnnf.isp.value="zch";
+        document.cnnf.qt.value = q;
+        document.cnnf.key.value = q;
+        document.cnnf.isp.value = "zch";
         submitForm(cnnf);
       }
     }
-    ]]></script>
-  </search>  
+  ]]></script>
+</search>  
