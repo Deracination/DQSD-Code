@@ -1,0 +1,51 @@
+<search function="patapp">
+
+<COMMENT>Copied from pat.xml.  Remember, field names are CASE SENSITIVE, 
+at least at the Patent Office site.</COMMENT>
+
+  <name>Patent Application Search</name>
+  <contributor>Gerald Gray</contributor>
+  <description>Retrieve a (published) patent application from U.S. PTO using a Boolean search terms.<br/>
+  <div class="helpboxDescLabels">Example:</div>
+  <table class="helpboxDescTable">
+    <tr><td>patapp implement</td></tr>
+    <tr><td>patapp "sharp implement"</td></tr>
+    <tr><td>patapp IN/Fred AND whistle</td></tr>
+  </table>
+
+  If more than one word is used, either quote all the words or put operators between them.
+  </description>
+  <category>Legal</category>
+
+<link>http://appft1.uspto.gov/netahtml/PTO/search-adv.html</link>
+  <form name="appf" ACTION="http://appft1.uspto.gov/netacgi/nph-Parser" METHOD="GET">
+        <INPUT TYPE="HIDDEN" NAME="Query" VALUE="" />
+        <INPUT TYPE="HIDDEN" NAME="Sect1" VALUE="PTO2" />
+        <INPUT TYPE="HIDDEN" NAME="Sect2" VALUE="HITOFF" />
+        <INPUT TYPE="HIDDEN" NAME="u"     VALUE="/netahtml/PTO/search-adv.html" />
+        <INPUT TYPE="HIDDEN" NAME="r"     VALUE="0" />
+        <INPUT TYPE="HIDDEN" NAME="p"     VALUE="1" />
+        <INPUT TYPE="HIDDEN" NAME="f"     VALUE="S" />
+        <INPUT TYPE="HIDDEN" NAME="l"     VALUE="50" />
+        <INPUT TYPE="HIDDEN" NAME="d"     VALUE="PG01" />
+  </form>
+  
+  <script><![CDATA[
+    function patapp(q)
+    {
+      if( nullArgs("patapp", q) )
+        return;
+
+      document.appf.Query.value = q;
+      submitForm(appf);
+    }
+  ]]></script>
+
+  <copyright>
+	Copyright (c) 2002 David Bau
+	Mods copyright Philip Albert 2002
+	copyright Gerald Gray 2002
+	Distributed under the terms of the
+	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>

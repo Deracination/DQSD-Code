@@ -57,6 +57,7 @@ New Searches
 * rxlib - Search the Regular Expression library at RegExLib.com (Shawn K. Hall)
 * crit - Metacritic compiles reviews from respected critics and publications for film, video/dvd, music and games (Tom C.)
 * guardster - Guardster web encryption service (Gregory Krohne)
+* pat, patapp and patno - Patent database searches (Phil Albert)
 
 Modified Searches
 
