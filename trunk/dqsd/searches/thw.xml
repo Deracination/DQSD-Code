@@ -1,28 +1,75 @@
 <search function="thw">
   <name>Tom's Hardware</name>
-  <description>Search Articles at Tom's Hardware.com  "thw abit"</description>
+  <description>Search Articles at Tom's Hardware.com <br/>
+    <div class="helpboxDescLabels">Usage:</div>
+    <table class="helpboxDescTable">
+      <tr><td>thw &lt;<i>what</i>&gt; [/category:&lt;<i>category</i>&gt;]</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Switch:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/category</td><td> - </td>
+        <td>Narrow your search to one of the following categories:<br/>
+        <table class="helpboxDescTable">
+          <tr><td><b>all</b></td><td> - </td><td>all categories (default)</td></tr>
+          <tr><td><b>mainboard</b></td><td> - </td><td>IMainboard</td></tr>
+          <tr><td><b>cpu</b></td><td> - </td><td>ICPU</td></tr>
+          <tr><td><b>graphic</b></td><td> - </td><td>IGraphic</td></tr>
+          <tr><td><b>display</b></td><td> - </td><td>IDisplay</td></tr>
+          <tr><td><b>video</b></td><td> - </td><td>IAudio/Video</td></tr>
+          <tr><td><b>storage</b></td><td> - </td><td>IStorage</td></tr>
+          <tr><td><b>network</b></td><td> - </td><td>INetwork</td></tr>
+          <tr><td><b>mobile</b></td><td> - </td><td>IMobile Devices</td></tr>
+          <tr><td><b>consumer</b></td><td> - </td><td>IPeripherals &amp; Consumer</td></tr>
+          <tr><td><b>howto</b></td><td> - </td><td>IHowTo</td></tr>
+          <tr><td><b>business</b></td><td> - </td><td>IBusiness</td></tr>
+        </table>
+      </td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>thw abit</td></tr>
+      <tr><td>thw duron /category:mainboard</td></tr>
+    </table>
+</description>
   <category>Computers</category>
   <link>http://www.tomshardware.com</link>
   <contributor>John W. Bairen, Jr.</contributor>
+
   <form name="thwf"
-        action="http://www6.tomshardware.com/cgi-bin/htsearch" 
+        action="http://www6.tomshardware.com/search/search.html" 
         method="get">
     <input type="hidden" name="words" value=""/>
-    <input type="hidden" name="format" value="builtin-long"/>
-    <input type="hidden" name="method" value="and"/>
-    <input type="hidden" name="sort" value="score"/>
-    <input type="hidden" name="config" value="content"/>
-    <input type="hidden" name="restrict" value=""/>
-    <input type="hidden" name="exclude" value=""/>
+    <input type="hidden" name="category" value="all"/>
   </form>
+
   <script><![CDATA[
     function thw(q)
     {
-      if (q == "")
-        openSearchWindow("http://www.tomshardware.com");
+      if( nullArgs("thw",q) )
+        return false;
       else
       {
-        document.thwf.words.value=q;
+        var args = parseArgs(q, "category");
+        var category = args.switch_val["category"];
+        if( typeof category == "undefined" ) category = "all";
+        switch( category )
+        {
+          case "all": break;
+          case "mainboard": break;
+          case "cpu": break;
+          case "graphic": break;
+          case "display": break;
+          case "video": break;
+          case "storage": break;
+          case "network": break;
+          case "mobile": break;
+          case "consumer": break;
+          case "howto": break;
+          case "business": break;
+          default: nullArgs("thw","?"); return false;
+        }
+        document.thwf.words.value = args.q;
+        document.thwf.category.value = category;
         submitForm(thwf);
       }
     }
