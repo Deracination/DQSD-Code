@@ -35,6 +35,22 @@ static LRESULT CALLBACK KeyboardProc(
 			return CallNextHookEx(hHook, code, wParam, lParam);
 		}
 
+		//-----VVVVV-----NOTE: You need to link with IMM32.LIB---
+		// check if the IME is up
+		{
+			HIMC himc = ImmGetContext(hFocusWnd);
+			bool bImmOn = (ImmGetOpenStatus (himc) != 0);
+			ImmReleaseContext (hFocusWnd, himc);
+
+			if (bImmOn)
+			{
+				// This is not us - don't do anything
+				ATLTRACE("IMM is on\n");
+				return CallNextHookEx(hHook, code, wParam, lParam);
+			}
+		}
+		//-----^^^^^^------
+
 		bool bKeyDown = !(lParam & 0x80000000);
 
 		if(wParam == VK_INSERT)

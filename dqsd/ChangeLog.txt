@@ -1,4 +1,5 @@
--- What's new for x.x.x(date xxxxxxxx)
+-- What's new for x.x.x (date xxxxxxxx)
+
 Enhancements
 
 * Moved txp search to computers->reference subcategory.  Added a usage example.
@@ -11,13 +12,16 @@ New Searches
 * otn - Oracle Technology Network search (from Gregory Krohne)
 
 Bug Fixes
+
 * Installation script now sets approved shell extension registry key for WinNT and it's descendants (from Brent Beardsley)
+* Fix for bug [ 643947 ] up/down keys incompatible with Japanese (from Gregg Tavares)
 
 Modified Searches
 
 * fe - now allows you to specify an extension name instead of only the first letter (from Matthew McDougal)
 * configure - localized it and added Reload menu option, fixed bug when addons directory did not exist (from Brent Beardsley)
 * amaz - added /referral switch for building referral links for Amazon
+
 
 -- What's new for 3.1.5 (December 15, 2002)
 
