@@ -83,6 +83,7 @@ Modified Searches
 * banyg - Removed client-based server authentication code so it used only a single auth scheme (Shawn K. Hall)
 * tvg - Corrected to work with new (limited) TVGuide search engine (Shawn K. Hall)
 * icap - Corrected Safari 1.2 form parameter (Shawn K. Hall)
+* ts - Corrected default action to hit default Terminal Server (Shawn K. Hall)
 
 Removed Searches
 * nwtsr and httpd replaced by whats (Kim Gräsman)

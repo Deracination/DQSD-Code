@@ -2,7 +2,7 @@
   <name>Terminal Services</name>
   <category>Computers<category>Networking</category></category>
   <contributor>Shawn K. Hall</contributor>
-  <link>http://ReliableAnswers.com/x/dqsd/</link>
+  <link>http://www.ReliableAnswers.com/x/dqsd/</link>
   <email>Shawn[@]ReliableAnswers.com</email>
   <description>
     Load Terminal Services to a specific domain or site. 
@@ -57,7 +57,7 @@
   <script><![CDATA[
     function ts(q)
     {
-      if( nullArgs( "ts", q ) ) return false;
+      // if( nullArgs( "ts", q ) ) return false;
 
       document.tsf.Server.value = "";
 
