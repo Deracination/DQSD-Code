@@ -131,6 +131,15 @@ BEGIN
                             "Invalid HorizontalAlignment property value: 0 - Center, 1 - Left, 2 - Right"
     IDS_ERR_CANT_INSTALL_KEYBOARD_HOOK 
                             "DQSDTools.KeyboardHook - Can't install hook"
+    IDS_ERR_HOTKEY_NO_BAR_WINDOW 
+                            "The hotkey couldn't be registered because the DQSD window couldn't be located."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ERR_HOTKEY_WINDOW_FAILED 
+                            "The hotkey notification window couldn't be created"
+    IDS_ERR_HOTKEY_REG_FAILED "Hotkey registration failed"
 END
 
 #endif    // English (U.S.) resources

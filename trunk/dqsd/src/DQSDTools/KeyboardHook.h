@@ -8,4 +8,14 @@
 
 HHOOK KeyboardHookInstall();
 
+//
+// Install a hotkey
+//
+// Return:
+//		HRESULT
+//
+HRESULT
+KeyboardInstallHotkey(int vkCode);
+
+
 #endif // KEYBOARDHOOK_H

@@ -5,6 +5,7 @@
 
 #include "DQSDTools.h"
 #include "KeyboardHook.h" 
+#include "Launcher.h" 
 
 // The handle of our hook
 static HHOOK hHook;
@@ -116,6 +117,60 @@ static BOOL CALLBACK EnumProc(
 	return TRUE;
 }
 
+HWND hBarWnd = NULL;
+
+LRESULT CALLBACK NotificationWndProc(
+	HWND hwnd,      // handle to window
+	UINT uMsg,      // message identifier
+	WPARAM wParam,  // first message parameter
+	LPARAM lParam   // second message parameter
+	)
+{
+	if(uMsg == WM_HOTKEY)
+	{
+//		_RPT0(_CRT_WARN, "HotKey\n");
+//		OutputDebugString("HotKey\n");
+
+		// Find our window
+		RECT taskBarRect;
+		GetWindowRect(hBarWnd, &taskBarRect);
+
+		// We do all this larking about with the mouse because
+		// SetForegroundWindow is crippled nowadays, and because the DQSD edit control
+		// doesn't actually seem to get a proper caret if you SFW to it anyway.
+
+		// Save the mouse position before these games...
+		POINT mousePoint;
+		GetCursorPos(&mousePoint);
+
+		// Calculate the position of a simultated mouse click
+		// The SendInput structure takes a position scaled 0-65536 across the primary monitor
+		// Hence the muldivs
+		INPUT mouseClick;
+		ZeroMemory(&mouseClick, sizeof(mouseClick));
+		mouseClick.type = INPUT_MOUSE;
+		mouseClick.mi.dx = (taskBarRect.left + taskBarRect.right) / 2;
+		mouseClick.mi.dx = MulDiv(mouseClick.mi.dx, 65536, GetSystemMetrics(SM_CXSCREEN));
+		mouseClick.mi.dy = (taskBarRect.top + taskBarRect.bottom) / 2;
+		mouseClick.mi.dy = MulDiv(mouseClick.mi.dy, 65536, GetSystemMetrics(SM_CYSCREEN));
+		mouseClick.mi.dwFlags = MOUSEEVENTF_LEFTDOWN | MOUSEEVENTF_ABSOLUTE | MOUSEEVENTF_MOVE;
+		SendInput(1, &mouseClick, sizeof(mouseClick));
+
+		mouseClick.mi.dwFlags = MOUSEEVENTF_LEFTUP;
+		SendInput(1, &mouseClick, sizeof(mouseClick));
+
+		// Put the mouse back where we found it, because we're nice like that
+		SetCursorPos(mousePoint.x, mousePoint.y);
+
+	}
+	else if(uMsg == WM_DESTROY)
+	{
+		OutputDebugString("HotKey Destroy\n");
+		UnregisterHotKey(hwnd, GetWindowLong(hwnd, GWL_USERDATA));
+	}
+
+	return DefWindowProc(hwnd, uMsg,wParam,lParam);
+}
 
 //
 // Install a keyboard hook on the search deskbars message handler thread
@@ -131,8 +186,6 @@ HHOOK KeyboardHookInstall()
 		MessageBox(NULL, _T("Can't find tray window"), NULL, MB_OK);
 		return FALSE;
 	}
-
-	HWND hBarWnd = NULL;
 
 	// Look through its children to find the search window
 	EnumChildWindows(hTrayWnd, EnumProc, (LPARAM)&hBarWnd);
@@ -156,3 +209,62 @@ HHOOK KeyboardHookInstall()
 	return hHook;
 }
 
+
+//
+// Install a hotkey
+//
+// Return:
+//		HRESULT
+//
+HRESULT
+KeyboardInstallHotkey(int vkCode)
+{
+	if(hBarWnd == NULL)
+	{
+		return CLauncher::Error(IDS_ERR_HOTKEY_NO_BAR_WINDOW, IID_ILauncher, E_FAIL);
+	}
+
+	char buffer[100];
+	wsprintf(buffer, "HotKeyReg: %d", vkCode);
+	OutputDebugString(buffer);
+
+
+	// Create a window which we use to receive notifications
+	WNDCLASS wc;
+	ZeroMemory(&wc, sizeof(wc));
+	wc.lpfnWndProc = NotificationWndProc;
+	wc.lpszClassName = _T("DQSDHotKeyWindowClass");
+
+	HWND hNotificationWindow;
+
+	HWND hExistingWindow = FindWindow(wc.lpszClassName, _T("DQSDHotKeyWindow"));
+	if(hExistingWindow != NULL)
+	{
+		// THere's already hotkey window
+		OutputDebugString("Hotkey - wnd exists");
+		DestroyWindow(hExistingWindow);
+	}
+	else
+	{
+		RegisterClass(&wc);
+	}
+
+	hNotificationWindow = CreateWindow(wc.lpszClassName, _T("DQSDHotKeyWindow"), 0, 0, 0, 0, 0, hBarWnd, NULL, NULL, NULL);
+	if(hNotificationWindow == NULL)
+	{
+		_RPT0(_CRT_WARN, "Failed to create a window for hotkeys\n");
+		return CLauncher::Error(IDS_ERR_HOTKEY_WINDOW_FAILED, IID_ILauncher, E_FAIL);
+	}
+
+	// Make an ID for the window and store it in the windows userdata slot
+	// so that it can be used to unregister the hotkey
+	ATOM hotKeyId = GlobalAddAtom(_T("DQSDHotKeyAtom"));
+	SetWindowLong(hNotificationWindow, GWL_USERDATA, hotKeyId);
+
+	if(!RegisterHotKey(hNotificationWindow, hotKeyId, MOD_WIN, vkCode))
+	{
+		return CLauncher::Error(IDS_ERR_HOTKEY_REG_FAILED, IID_ILauncher, E_FAIL);
+	}
+
+	return S_OK;
+}
