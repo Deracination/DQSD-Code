@@ -7,6 +7,8 @@ Version 0.4 (beta) - 12-Aug-2002
 * Fix XML and script generated for radio buttons, checkboxes, TEXTAREAs
 * URL truncation bug fix
 * Options for including comments and warning about active element
+* Bug fix for display of change log in About dialog
+* Bug fix for extra '/'s in FORM action attribute
 
 Version 0.3 (beta) - 08-Aug-2002
 
