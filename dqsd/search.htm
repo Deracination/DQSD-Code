@@ -95,6 +95,7 @@ txtfldstyle="";                // css style overrides for the text field
 buttonstyle="";                // css style overrides for the button
 menustyle="";                  // css style overrides for the menu
 localsearchurl="localsearch.xml"; // local search file
+localaliases="localaliases.txt";  // local aliases file
 helptime=8500;                 // help message shows for 8.5 secs
 launchmode=2;                  // 0 = use ie; 1 = default browser; 2 = auto
 reuseBrowserWindowMode=0;      // 0=new window always; 1=single window for all; 2=single window for each search type
@@ -576,7 +577,7 @@ function strt()
   rsz();
 
   if (!clock || clockdelay > 0)
-    showQuickSearch;
+    showQuickSearch();
 
   if (helptime > 0)
   {
