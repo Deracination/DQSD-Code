@@ -34,8 +34,8 @@
 <Program_Info>
         <Program_Name>Dave&apos;s Quick Search Taskbar Toolbar Deskbar</Program_Name>
         <Program_Version>2.5.2</Program_Version>
-        <Program_Release_Month>1</Program_Release_Month>
-        <Program_Release_Day>1</Program_Release_Day>
+        <Program_Release_Month>01</Program_Release_Month>
+        <Program_Release_Day>01</Program_Release_Day>
         <Program_Release_Year>2002</Program_Release_Year>
         <Program_Cost_Dollars>0</Program_Cost_Dollars>
         <Program_Cost_Other_Code />
@@ -49,7 +49,7 @@
         <Filename_Versioned>dqsd.exe</Filename_Versioned>
         <Filename_Previous>dqsd.exe</Filename_Previous>
         <Filename_Generic>dqsd.exe</Filename_Generic>
-        <Filename_Long />
+        <Filename_Long>dqsd.exe</Filename_Long>
         <File_Size_Bytes>113897</File_Size_Bytes>
         <File_Size_K>111</File_Size_K>
         <File_Size_MB>0.11</File_Size_MB>
@@ -77,7 +77,7 @@
         <Char_Desc_45>Dave's Quick Search Taskbar Toolbar Deskbar</Char_Desc_45>
         <Char_Desc_80>Dave's Quick Search Deskbar launches Google, Yahoo, and dozens of other searches</Char_Desc_80>
         <Char_Desc_250>Dave's Quick Search Deskbar launches Google, Yahoo, Switchboard, and dozens of other searches from your desktop taskbar. Its interface is clean but packs power: it also provides a calculator, clock, calendar, translator and currency converter.</Char_Desc_250>
-        <Char_Desk_450>This is a clean, fast Internet search add-on for your desktop toolbar. The search bar does Google searches by default and lets you go directly to the top-ranked hit if you add an exclamation point at the end of your search terms. You can specify a Yahoo search by adding a question mark, a Merriam-Webster definition by adding a colon, a Bloomberg stock quotes by adding a dollar sign, and find Switchboard phone numbers by typing in a pound sign.</Char_Desk_450>
+        <Char_Desc_450>This is a clean, fast Internet search add-on for your desktop toolbar. The search bar does Google searches by default and lets you go directly to the top-ranked hit if you add an exclamation point at the end of your search terms. You can specify a Yahoo search by adding a question mark, a Merriam-Webster definition by adding a colon, a Bloomberg stock quotes by adding a dollar sign, and find Switchboard phone numbers by typing in a pound sign.</Char_Desc_450>
         <Char_Desc_2000>This is a clean, fast Internet search add-on for your desktop toolbar. The search bar does Google searches by default and lets you go directly to the top-ranked hit if you add an exclamation point at the end of your search terms. You can specify a Yahoo search by adding a question mark, a Merriam-Webster definition by adding a colon, a Bloomberg stock quotes by adding a dollar sign, and find Switchboard phone numbers by typing in a name followed by a pound sign. There's a built-in calculator, currency converter, translator, clock, and calendar.</Char_Desc_2000>
 </English>
 </Program_Descriptions>
