@@ -1,0 +1,66 @@
+<search function="gfaq">
+  <name>Gamefaqs.com</name>
+  <description>
+    Search for FAQs and walkthroughs on GameFAQs.com<br/>
+    <div class="helpboxDescLabels">Switches:</div>
+  	<table class="helpboxDescTable">
+  		<tr><td>/all</td><td> - </td><td>Search for game on all platforms (default).</td></tr>
+  		<tr><td>/dc</td><td> - </td><td>Search for Sega Dreamcast games only.</td></tr>
+  		<tr><td>/pc</td><td> - </td><td>Search for PC games only.</td></tr>
+  		<tr><td>/psx</td><td> - </td><td>Search for Sony Playstation games only.</td></tr>
+  		<tr><td>/ps2</td><td> - </td><td>Search for Sony Playstation 2 games only.</td></tr>
+  		<tr><td>/xbox</td><td> - </td><td>Search for Microsoft Xbox games only.</td></tr>
+  		<tr><td>/gc</td><td> - </td><td>Search for Nintendo Gamecube games only.</td></tr>
+  		<tr><td>/n64</td><td> - </td><td>Search for Nintendo 64 games only.</td></tr>
+   	</table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>gfaq Medal of Honor</td></tr>
+  		<tr><td>gfaq max payne /pc</td></tr>
+  		<tr><td>gfaq fishing /dc</td></tr>
+  	</table>
+  </description>
+  <category>Entertainment</category>
+  <link>http://www.gamefaqs.com/</link>
+  <contributor>Casper Kvan Clausen</contributor>
+  
+  <form name="gfaqf" action="http://www.gamefaqs.com/search/index.asp"
+        method="post">
+    <input type="hidden" name="system"/>
+    <input type="hidden" name="game"/>
+    <input type="hidden" name="sub"/>
+  </form>
+  
+  <script><![CDATA[
+    function gfaq(q)
+    {
+      var args = parseArgs(q,"dc, gc, pc, psx, ps2, xbox, n64, all");
+      if( nullArgs("gfaq",q) )
+        return false;
+      else if( args.switches.length == 1 )
+      {
+        switch( args.switches[0].name )
+        {
+          case "dc": document.gfaqf.system.value = "49"; break;
+          case "gc": document.gfaqf.system.value = "65"; break;
+          case "pc": document.gfaqf.system.value = "36"; break;
+          case "psx": document.gfaqf.system.value = "3"; break;
+          case "ps2": document.gfaqf.system.value = "61"; break;
+          case "xbox": document.gfaqf.system.value = "66"; break;
+          case "n64": document.gfaqf.system.value = "10"; break;
+          case "all": document.gfaqf.system.value = "0"; break;
+        }
+        document.gfaqf.game.value = args.q;
+        document.gfaqf.sub.value = "Search GameFAQs";
+        submitForm(gfaqf);
+      }
+      else
+      {
+        document.gfaqf.system.value = "0";
+        document.gfaqf.game.value = args.q;
+        document.gfaqf.sub.value = "Search GameFAQs";
+        submitForm(gfaqf);
+      }
+    }
+  ]]></script>
+</search>
