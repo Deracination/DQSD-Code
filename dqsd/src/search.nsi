@@ -15,7 +15,7 @@ Name "Dave's Quick Search Deskbar"
 !Define DQSD_TITLE "Dave's Quick Search Deskbar"
 
 ; Silent install
-DirShow hide
+;DirShow hide
 CRCCheck on
 SetDatablockOptimize on
 Icon search.ico
@@ -362,6 +362,14 @@ Section "Uninstall"
   Delete /REBOOTOK $INSTDIR\localsearch_blue.css
   Delete /REBOOTOK $INSTDIR\preferences.js
   Delete /REBOOTOK $INSTDIR\uninstall.exe
+
+; Ask to delete local files
+  MessageBox MB_YESNO|MB_ICONINFORMATION|MB_DEFBUTTON2 "Uninstall local settings too?" IDYES fulluninstall IDNO partialuninstall
+  fulluninstall:
+  RmDir /r $INSTDIR
+
+  
+  partialuninstall:
   RmDir /r $INSTDIR\src
   RmDir /r $INSTDIR\searches
   RmDir /r $INSTDIR\addons
