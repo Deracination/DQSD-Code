@@ -229,10 +229,10 @@ helptime = 3000;
 autocomplete = false;
 
 
-/* Number of searches to remember
-*  default = 50;
+/* Number of searches to remember.  Lower this if you notice poor performance
+*  after a search.  (The entire history is written to disk after each search.)
 */
-historylength=50;
+historylength=1000;
 
 
 /* Changes the default alert sensitivity:
