@@ -17,49 +17,32 @@ function bookmarks_get_file(filename)
 	return readFile(filename);
 }
 
-function bookmarks_get_bookmarks_array_from_ie(fav_location) 
+function bookmarks_get_bookmarks_array_from_ie(fav_location)
 {
-	var fso = new ActiveXObject("Scripting.FileSystemObject");
 	var arr = new Array();
-	bookmarks_process_ie_favorites_folder(fso, fso.GetFolder(fav_location), arr, 0);
-	fso = null;
+	bookmarks_process_ie_favorites_folder(fav_location+"\\", arr, 0);
 	return arr;
 }
 
-function bookmarks_process_ie_favorites_folder(fso, folder, bookmarks_array, level) 
+function bookmarks_process_ie_favorites_folder(folder, bookmarks_array, level)
 {
-    var fsoForReading = 1;
-	var url_regexp = new RegExp(/URL=([^\n]+)/gim); 
-	var fc, ff;
-
-	// add folders
-	fc = new Enumerator(folder.SubFolders);
-	for (; !fc.atEnd(); fc.moveNext()) {
-		var folderName = fso.GetBaseName(fc.item());
+	var folders = getFolders(folder).split('\n');
+	for (var i=0; i < folders.length; i++) {
+		var folderName = folders[i];
+		if (folderName == ".")
+			continue;
 
 		bookmarks_array.push(bookmarks_build_arr_item(folderName, 'Folder', level));
-
-		bookmarks_process_ie_favorites_folder(fso, fc.item(), bookmarks_array, level+1);
+		bookmarks_process_ie_favorites_folder(folder+folderName+"\\", bookmarks_array, level+1);
 	}
 
-	// add bookmarks
-	ff = new Enumerator(folder.Files);
-	for (; !ff.atEnd(); ff.moveNext()) {
-		if (fso.GetExtensionName(ff.item()).toUpperCase() != "URL") {
+	var files = getFiles(folder).split('\n');
+	for (var i=0; i < files.length; i++) {
+		var bookmarkName = files[i];
+		if (!bookmarkName.match(/\.URL$/i))
 			continue;
-		}
-		var bookmarkName = fso.GetBaseName(ff.item());
-		var objTextStream = fso.OpenTextFile(ff.item(), fsoForReading);
-		var bookmarkUrl = ff.item();
-		while (!objTextStream.AtEndOfStream) {
-			var line = objTextStream.ReadLine();
-			var url_results = url_regexp.exec(line);
-			if (url_results != null) {
-				bookmarkUrl = url_results[1];
-				break;
-			}
-		}
-		bookmarks_array.push(bookmarks_build_arr_item(bookmarkName, bookmarkUrl, level));
+		var bookmarkUrl = (folder+files[i]).replace(/\\/g, "\\\\");
+		bookmarks_array.push(bookmarks_build_arr_item(bookmarkName.replace(/\.URL$/i, ""), bookmarkUrl, level));
 	}
 }
 
@@ -283,19 +266,14 @@ function bookmarks_get_bookmarks_array_from_netscape(webpage_url)
 }
 
 
-function bookmarks_get_menu(bookmarks_array)
+function bookmarks_get_menu(bookmarks_array, mb, hmenu)
 {
-	// build the menu
-	var mb = new ActiveXObject("DQSDTools.MenuBuilder");
-    // Align the menu with the button
-    mb.HorizontalAlignment = ( buttonalign == 'left' ? 1 : 2 ); // 1 = left, 2 = right (default)
-
     var hsubmenu_stack = new Array();
 	var hsubmenu = null;
     var last_level = 0;
     var arr_regexp = new RegExp(/(\t*)([^\t]+)\t(.*)/);
 
-	hsubmenu_stack[last_level] = null;
+	hsubmenu_stack[last_level] = hmenu;
 	for (i=0; i < bookmarks_array.length; i++) {
 		var arr_item = arr_regexp.exec(bookmarks_array[i]);
 		if (arr_item == null || arr_item.length < 4)
@@ -312,7 +290,17 @@ function bookmarks_get_menu(bookmarks_array)
 			hsubmenu = mb.AppendSubMenu(cur_name, hsubmenu);
 			hsubmenu_stack[cur_level+1] = hsubmenu;
 		} else {
-			mb.AppendMenuItem(cur_name, cur_url, '', hsubmenu);
+			var isURL = cur_url.match(/^(ftp|http|https)\:\/\//);
+			if (!isURL)  {
+				if (cur_url.match(/\s/)) {
+					// escape spaces
+					cur_url = '\"' + cur_url + '\"';
+				}
+				cur_url = "openDocument('"+cur_url+"')";
+			} else {
+				cur_url = "openSearchWindow('"+cur_url+"')";
+			}
+			mb.AppendMenuItem(cur_name, cur_url, cur_name+" Bookmark", hsubmenu);
 		}
 	}
     return mb;
@@ -320,13 +308,51 @@ function bookmarks_get_menu(bookmarks_array)
 
 function bookmarks_show_menu(bookmarks_array)
 {
-	var bookmarks_menu = bookmarks_get_menu(bookmarks_array);
-	if (bookmarks_menu != null) {
-		var fn = bookmarks_menu.Display(document);
-		if (fn) {
-			openSearchWindow(fn);
-		}
-		bookmarks_menu = null;
-	}
+	// build the menu
+	var mb = new ActiveXObject("DQSDTools.MenuBuilder");
+	if (mb != null)	{
+      // Align the menu with the button
+      mb.HorizontalAlignment = ( buttonalign == 'left' ? 1 : 2 ); // 1 = left, 2 = right (default)
 
+	  bookmarks_get_menu(bookmarks_array, mb, null);
+      var fn = mb.Display(document);
+      if (fn) {
+        eval(fn);
+      }
+      mb = null;
+    }
 }
+
+function bookmarksMenuHook(mb) {
+	var hm = bookmarksGetMenu(mb);
+	if (hm > 0) {
+		mb.InsertMenuItem("Help / About Bookmarks...", "openSearchWindow(\"addons/bookmarks/readme.txt\")", "Help for Bookmarks add-on", 0, hm);
+		mb.InsertSeparator(1, hm);
+    }
+}
+
+function bookmarksGetMenu(mb)
+{
+	var menuName = "Bookmarks";
+	var hm = mb.FindSubMenu(menuName);
+	if (hm <= 0) {
+		var insertPosition = bookmarksFindInsertPosition(mb, menuName);
+		hm = mb.InsertSubMenu(menuName, insertPosition);
+	}
+	return hm;
+}
+
+function bookmarksFindInsertPosition(mb, menuName)
+{
+	var menuItemCount = mb.GetMenuItemCount();
+	for (var i = menuItemCount - 1; i >= 0; i--) {
+		var curMenuName = mb.GetMenuString(i);
+		if (curMenuName < menuName) {
+			return i+1;
+		}
+	}
+	// give up and add it at the end
+	return menuItemCount;
+}
+
+registerMenuHook(bookmarksMenuHook);

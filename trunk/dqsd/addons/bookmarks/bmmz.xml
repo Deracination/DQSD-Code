@@ -14,12 +14,39 @@
     </table>
   </description>
   <link></link>
-  <category>Bookmarks</category>
+  <category nomenu="true">Bookmarks</category>
   <contributor>Brent Beardsley</contributor>
 
   <script src="addons/bookmarks/bookmarks_lib.js"></script>
   <script><![CDATA[
     var mozilla_bookmarks_array = null;
+
+    function bmmz_get_bookmarks_array()
+    {
+	if (mozilla_bookmarks_array == null) {
+		var bookmarks_full_path = "";
+		var user_specified_dir = (typeof bookmarks_mozilla_location != "undefined" && bookmarks_mozilla_location != "");
+		var user_profile = (typeof bookmarks_mozilla_profile != "undefined" && bookmarks_mozilla_profile != "") ? bookmarks_mozilla_profile : "default";
+		var user_file = (typeof bookmarks_mozilla_file != "undefined" && bookmarks_mozilla_file != "") ? bookmarks_mozilla_file : "bookmarks.html";
+		if (!user_specified_dir) {
+			ensureLauncher();
+			var bmk_folder = DQSDLauncher.GetSpecialFolderLocation("AppData") + "\\Mozilla\\Profiles\\"+user_profile+"\\";
+			// appears that there is a random directory below the profile directory so get it and if it's there add it to the path
+			var folders = getFolders(bmk_folder).split('\n');
+			for (var i=0; i < folders.length; i++) {
+				if (folders[i] == ".")
+					continue;
+				bmk_folder += (folders[i]+"\\");
+				break;
+			}
+			bookmarks_full_path = bmk_folder + user_file;
+		} else {
+		  bookmarks_full_path = bookmarks_mozilla_location + "\\" + user_file;
+		}
+		mozilla_bookmarks_array = bookmarks_get_bookmarks_array_from_netscape(bookmarks_full_path);
+	}
+	return mozilla_bookmarks_array;
+    }
 
     function bmmz(q)
     {
@@ -37,30 +64,23 @@
 		return;
 	}
 
-	if (mozilla_bookmarks_array == null) {
-		var bookmarks_full_path = "";
-		var user_specified_dir = (typeof bookmarks_mozilla_location != "undefined" && bookmarks_mozilla_location != "");
-		var user_profile = (typeof bookmarks_mozilla_profile != "undefined" && bookmarks_mozilla_profile != "") ? bookmarks_mozilla_profile : "default";
-		var user_file = (typeof bookmarks_mozilla_file != "undefined" && bookmarks_mozilla_file != "") ? bookmarks_mozilla_file : "bookmarks.html";
-		if (!user_specified_dir) {
-			var shell_obj = new ActiveXObject("WScript.Shell");
-			var bmk_folder = shell_obj.SpecialFolders("AppData") + "\\Mozilla\\Profiles\\"+user_profile;
-			// appears that there is a random directory below the profile directory so get it and if it's there add it to the path
-			var fso = new ActiveXObject("Scripting.FileSystemObject");
-			var fc = new Enumerator(fso.GetFolder(bmk_folder).SubFolders);
-			if (!fc.atEnd()) {
-			  bmk_folder += ("\\" + fso.GetFileName(fc.item()));
-			}
-			fso = null;
-			bookmarks_full_path = bmk_folder + "\\" + user_file;
-			shell_obj = null;
-		} else {
-		  bookmarks_full_path = bookmarks_mozilla_location + "\\" + user_file;
-		}
-		mozilla_bookmarks_array = bookmarks_get_bookmarks_array_from_netscape(bookmarks_full_path);
-	}
-	bookmarks_show_menu(mozilla_bookmarks_array);
+	bookmarks_show_menu(bmmz_get_bookmarks_array());
     }
+
+    function bmmzMenuHook(mb)
+    {
+	if (typeof bookmarks_type == "undefined" || bookmarks_type != "bmmz")
+		return;
+
+	var hBookmarksMenu = bookmarksGetMenu(mb);
+	if (hBookmarksMenu > 0) {
+	  bookmarks_get_menu(bmmz_get_bookmarks_array(), mb, hBookmarksMenu);
+	}
+
+    }
+
+    registerMenuHook(bmmzMenuHook);
+
     ]]>
   </script>
 </search>
