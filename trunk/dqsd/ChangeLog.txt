@@ -10,6 +10,7 @@ New Searches
 * wik - Wikipedia search (from Thad Kerosky)
 * nup - Nupedia (from Thad Kerosky)
 * exp - Expedia (from Allen B. MacKenzie)
+* spcs - Send Sprint PCS One-Way web messages (from Rick Olson)
 
 Modified Searches
 

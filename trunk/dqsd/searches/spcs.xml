@@ -1,0 +1,80 @@
+<search function="spcs">
+  <name>Sprint PCS One-Way Message</name>
+  <description>
+    Send a Web Message to a Sprint PCS User<br/>
+    <div class="helpboxDescLabels">Usage:</div>
+    <table class="helpboxDescTable">
+      <tr><td>spcs [&lt;<i>Receiver's Number</i>&gt;; ] &lt;<i>Message</i>&gt;; [&lt;<i>Callback Number</i>&gt;]</td></tr>
+    </table>
+  </description>
+  <category>People and Places</category>
+  <contributor>Rick Olson</contributor>
+  <form name="spcsf"
+        action="http://messaging.sprintpcs.com/sml/guestCompose.do"
+        method="post">
+    <input type="hidden" name="post"/>
+    <input type="hidden" name="recipientsAsString"/>
+    <input type="hidden" name="mobileNumber"/>
+    <input type="hidden" name="body"/>
+    <input type="hidden" name="callback"/>
+  </form>
+  <script><![CDATA[
+    function spcs(q)
+    {
+      if( nullArgs("spcs",q) )
+        return false;
+
+      var tokens = q.split( ';' );
+      var arg = Number(tokens[0]); // change 1st arg to a number...
+      var callbackNum = "";
+
+      if ( arg > 0 ) // hey this is a phone number!
+      {
+        var sprintNum = tokens[0];
+        var msg = tokens[1];
+        n = 2; // then the callback is the 2nd index
+      }
+      else // ok it's not a number, use the default
+      {
+        // modify this to put a default number in it
+        var sprintNum = '0000000000';
+        var msg = tokens[0];
+        n = 1; // now, the callback is the 1st index
+      }
+      if ( tokens[n] ) // if a callback is given...
+      {
+        var callbackNum = tokens[n];
+      }
+
+      //validate!
+      if ( msg.length > 160 )
+      {
+        alert("Sorry, your message excedes the 160 character limit.");
+        return false;
+      }
+
+      else if ( ( sprintNum.length != 10 ) && ( Number(sprintNum) > 0 ) )
+      {
+        alert("The phone number must be 10 digits long.");
+        return false;
+      }
+
+      else if ( ( callbackNum.length != 10 ) && ( callbackNum.length != 0 ) )
+      {
+        alert("The callback (if given) must be 10 digits long.");
+        return false;
+      }
+
+      else
+      {
+        document.spcsf.post.value = "Send";
+        document.spcsf.recipientsAsString.value = sprintNum;
+        document.spcsf.mobileNumber.value = sprintNum;
+        document.spcsf.body.value = msg;
+        document.spcsf.callback.value = callbackNum;
+        submitForm(spcsf);
+        return true;
+      }
+    }
+  ]]></script>
+</search>
