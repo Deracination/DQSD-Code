@@ -16,12 +16,16 @@ New Searches
 * shack - Search the shacknews.com comments database (from Wolfgang Deutsch)
 * dps - Search for the best DVD prices from several online merchants (from Steven J. Heil)
 * pgrab - Price searches, product info, vendor ratings & reviews. (from Andrew D. Myers)
+* httpd - Netcraft's "Whats that site running" database/web server information
+* archi - Archive.org's Way Back Machine.
 
 Modified Searches
 
 * setiq - yet another cosmetic change (use of <div> rather than <a>)
 * yg - Added /number switch for jumping directly to a message number in the archive
 * &, gg /cache - Moved from 'Other' category to 'Search the Web'
+* pg - Added /ebi switch to search Tecriture.com's Ebook Initiative site.
+* af - changed the default search to use an GET instead of a POST. Improved load time in mozilla.
 
 Enhancements
 
