@@ -30,6 +30,7 @@
 
 #include "DQSDTools_i.c"
 #include "Launcher.h"
+#include "MenuBuilder.h"
 
 #ifdef _MERGE_PROXYSTUB
 extern "C" HINSTANCE hProxyDll;
@@ -39,6 +40,7 @@ CComModule _Module;
 
 BEGIN_OBJECT_MAP(ObjectMap)
 OBJECT_ENTRY(CLSID_Launcher, CLauncher)
+OBJECT_ENTRY(CLSID_MenuBuilder, CMenuBuilder)
 END_OBJECT_MAP()
 
 /////////////////////////////////////////////////////////////////////////////

@@ -1,0 +1,26 @@
+HKCR
+{
+	DQSDTools.MenuBuilder.1 = s 'MenuBuilder Class'
+	{
+		CLSID = s '{A045AB88-C1A6-43A6-8C53-3D7F08F11F5F}'
+	}
+	DQSDTools.MenuBuilder = s 'MenuBuilder Class'
+	{
+		CLSID = s '{A045AB88-C1A6-43A6-8C53-3D7F08F11F5F}'
+		CurVer = s 'DQSDTools.MenuBuilder.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {A045AB88-C1A6-43A6-8C53-3D7F08F11F5F} = s 'MenuBuilder Class'
+		{
+			ProgID = s 'DQSDTools.MenuBuilder.1'
+			VersionIndependentProgID = s 'DQSDTools.MenuBuilder'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			'TypeLib' = s '{4323AAF6-488C-4921-A605-6E22E13332E4}'
+		}
+	}
+}

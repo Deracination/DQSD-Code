@@ -18,11 +18,6 @@
 #define __LAUNCHER_H_A43187EC_B518_40a5_9615_C628D10567E4__
 
 #include "resource.h"       // main symbols
-#include <atlctl.h>					// IObjectSafety,
-#include <exdisp.h>					// IWebBrowser2,
-#include <mshtml.h>
-#include <shlguid.h>				// SID_SWebBrowserApp, 
-#include <shellapi.h>				// ShellExecute, 
 
 /////////////////////////////////////////////////////////////////////////////
 // CLauncher
@@ -62,9 +57,9 @@ public:
 	STDMETHOD(ReadFile)(/*[in]*/ BSTR bstrFilename, /*[out,retval]*/ BSTR* pbstrResult);
 	STDMETHOD(WriteFile)(/*[in]*/ BSTR bstrFilename, /*[in]*/ BSTR bstrValue);
 	STDMETHOD(GetProtocolHandler)(/*[in]*/ BSTR bstrProtocol, /*[out,retval]*/ BSTR* pbstrHandler);
+	STDMETHOD(GetFiles)(/*[in]*/ BSTR bstrFileSpec, /*[out,retval]*/ BSTR* pbstrFiles);
 
 public:
-	STDMETHOD(GetFiles)(/*[in]*/ BSTR bstrFileSpec, /*[out,retval]*/ BSTR* pbstrFiles);
 	STDMETHOD(SetSite)(IUnknown* pUnkSite);
 
 // Implementation

@@ -26,6 +26,22 @@ import "ocidl.idl";
 		[id(7), helpstring("Get protocol handler for specified protocol")] HRESULT GetProtocolHandler([in] BSTR bstrProtocol, [out,retval] BSTR* pbstrHandler);
 		[id(8), helpstring("Get list of files matching file spec")] HRESULT GetFiles([in] BSTR bstrFileSpec, [out,retval] BSTR* pbstrFiles);
 	};
+	[
+		object,
+		uuid(C20983D5-DFC2-4C10-8267-E23217466E28),
+		dual,
+		helpstring("IMenuBuilder Interface"),
+		pointer_default(unique)
+	]
+	interface IMenuBuilder : IDispatch
+	{
+		[id(1), helpstring("method Display")] HRESULT Display( [out,retval] VARIANT* pvarSelection );
+		[id(2), helpstring("method AppendMenuItem")] HRESULT AppendMenuItem([in] BSTR bstrItem, [in] BSTR bstrKey, [in] long hmenu);
+		[id(3), helpstring("method AppendSubMenu")] HRESULT AppendSubMenu([in] BSTR bstrName, [out,retval] long* phmenu);
+		[id(4), helpstring("method AppendSeparator")] HRESULT AppendSeparator([in] long hmenu);
+		[propget, id(5), helpstring("property HorizontalAlignment")] HRESULT HorizontalAlignment([out, retval] short *pVal);
+		[propput, id(5), helpstring("property HorizontalAlignment")] HRESULT HorizontalAlignment([in] short newVal);
+	};
 
 [
 	uuid(4323AAF6-488C-4921-A605-6E22E13332E4),
@@ -44,5 +60,13 @@ library DQSDTOOLSLib
 	coclass Launcher
 	{
 		[default] interface ILauncher;
+	};
+	[
+		uuid(A045AB88-C1A6-43A6-8C53-3D7F08F11F5F),
+		helpstring("MenuBuilder Class")
+	]
+	coclass MenuBuilder
+	{
+		[default] interface IMenuBuilder;
 	};
 };
