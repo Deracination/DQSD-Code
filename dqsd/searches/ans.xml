@@ -1,0 +1,36 @@
+<search function="ans">
+  <name>Answers.com search</name>
+  <category>Reference<category>General</category></category>
+  <contributor>MLL</contributor>
+  <link>http://answers.com/</link>
+  <description>
+  Search a term or name within over 100 authoritative encyclopedias, dictionaries, glossaries and atlases
+  </description>
+  <form name="ansf"
+        method="get"
+        action="http://answers.com/main/ntquery">
+
+    <input type="hidden" name="s" value="" />
+    <input type="hidden" name="gwp" value="8" />
+  </form>
+  <script><![CDATA[
+    function ans(q)
+    {
+      if( nullArgs("ans", q) )
+        return;
+
+      document.ansf.s.value = q;
+
+      submitForm(ansf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 01/26/05 at 17:39:33
+    by Dave's Quick Search Deskbar Search Wizard version 1.2,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>
