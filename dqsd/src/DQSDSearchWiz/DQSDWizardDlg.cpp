@@ -32,6 +32,17 @@ void srch_repl( string& s, const string& to_find, const string& repl_with )
 	s.swap( result );
 }
 
+struct CRadioButtonInfo
+{
+	CRadioButtonInfo( const string& rstrValue, BOOL bActiveElement = FALSE, BOOL bChecked = FALSE ) 
+		: m_strValue( rstrValue )
+		, m_bActiveElement( bActiveElement ) 
+		, m_bChecked( bChecked )
+	{ }
+	string	m_strValue;
+	BOOL	m_bActiveElement;
+	BOOL	m_bChecked;
+};
 
 /////////////////////////////////////////////////////////////////////////////
 // CDQSDWizardDlg
@@ -514,7 +525,9 @@ string CDQSDWizardDlg::GetForms( string& rstrSearchName, string& rstrFormScript 
 			if ( SUCCEEDED( spFormElement->get_length( &cFormElements ) ) )
 			{
 				// Map a radio button to its values
-//				map< string, string > mapRadioButtons;
+				typedef vector< CRadioButtonInfo > RadioButtonValues_t;
+				typedef map< string, RadioButtonValues_t > RadioButtonMap_t;
+				RadioButtonMap_t mapRadioButtons;
 
 				rstrFormScript += _T("\r\n\r\n      // FORM variables for ") + strFormName;
 				
@@ -541,8 +554,13 @@ string CDQSDWizardDlg::GetForms( string& rstrSearchName, string& rstrFormScript 
 
 						// Ignore INPUT type=submit
 
+						string strInputType = _T("");
 						_variant_t varInputType;
-						if ( ( SUCCEEDED( spElement->getAttribute( _bstr_t( _T("type") ), 0, &varInputType ) ) && varInputType.bstrVal ) && !wcsicmp( L"submit", varInputType.bstrVal ) )
+						if ( SUCCEEDED( spElement->getAttribute( _bstr_t( _T("type") ), 0, &varInputType ) ) )
+						{
+							strInputType = W2T( varInputType.bstrVal );
+						}
+						if ( !_tcsicmp( _T("submit"), strInputType.c_str() ) )
 							continue;
 
 						// Was this the active element?
@@ -550,47 +568,59 @@ string CDQSDWizardDlg::GetForms( string& rstrSearchName, string& rstrFormScript 
 						CComPtr< IUnknown > spElementUnk = spElement;
 						BOOL bActiveElement = spElementUnk.IsEqualObject( spActiveElementUnk );
 
-						if ( bActiveElement )
-						{
-							strFormXML += _T("\r\n    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>");
-						}
 
-						strFormXML += _T("\r\n    <input type=\"hidden\" name=\"") + strInputName + _T("\"");
+						// Get the value
+
+						_variant_t varInputValue;
+						string strInputValue = _T("");
+						if ( SUCCEEDED( spElement->getAttribute( _bstr_t( _T("value") ), 0, &varInputValue ) ) && varInputValue.bstrVal )
+						{
+							strInputValue = EscapeXML( string( W2T( varInputValue.bstrVal ) ) );
+						}
 
 						// Stick the value of the field in as well for two reasons... some hidden fields are required 
 						// and the user can enter a string in a visible field to see which field to use.
 						
-						_variant_t varInputValue;
-						if ( SUCCEEDED( spElement->getAttribute( _bstr_t( _T("value") ), 0, &varInputValue ) ) && varInputValue.bstrVal )
+						if ( !_tcsicmp( _T("radio"), strInputType.c_str() ) )
 						{
-							strFormXML += _T(" value=\"") + EscapeXML( string( W2T( varInputValue.bstrVal ) ) ) + _T("\"");
-						}
-						else
-						{
-							strFormXML += _T(" value=\"\"");
-						}
+							BOOL bChecked = FALSE;
+							_variant_t varChecked;
+							if ( SUCCEEDED( spElement->getAttribute( _bstr_t( _T("checked") ), 0, &varChecked ) ) )
+							{
+								bChecked = varChecked.boolVal;
+							}
 
-//						map< string, string >::iterator itFound;
-//						if ( varInputType.bstrVal && !wcsicmp( L"radio", varInputType.bstrVal ) )
-//						{
-//							itFound = mapRadioButtons.find( W2T( varInputType.bstrVal ) );
-//							if ( itFound != mapRadioButtons.end() )
-//							{
-//								string strCurrValues = itFound->second;
-//								mapRadioButtons[ W2T( varInputType ) ] = strCurrentValues + _T(" ") + EscapeXML( string( W2T( varInputValue.bstrVal ) ) );
-//							}
-//						}
-
-						strFormXML += _T("/>");
+							RadioButtonMap_t::iterator itFound = mapRadioButtons.find( strInputName );
+							RadioButtonValues_t radioValues;
+							if ( itFound != mapRadioButtons.end() )
+							{
+								itFound->second.push_back( CRadioButtonInfo( strInputValue, bActiveElement, bChecked ) );
+								ATLTRACE( _T("%s = %d\n"), strInputName.c_str(), itFound->second.size() );
+							}
+							else
+							{
+								radioValues.push_back( CRadioButtonInfo( strInputValue, bActiveElement, bChecked ) );
+								mapRadioButtons.insert( RadioButtonMap_t::value_type( strInputName, radioValues ) );
+							}
+							continue;
+						}
 
 						// If there are any non-alpha characters in the INPUT field name, the use different notation in the script
+						
 						string strScriptInputName = _T(".") + strInputName + _T(".value");
-						if ( ( strInputName.find_first_not_of( _T("_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0 ) != string::npos ) ||
+						if ( ( strInputName.find_first_not_of( _T("_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"), 0 ) != string::npos ) ||
 							 ( !_tcsicmp( strInputName.c_str(), _T("target") ) ) ||
 							 ( !_tcsicmp( strInputName.c_str(), _T("submit") ) ) )
 						{
 							strScriptInputName = _T("[\"") + strInputName + _T("\"].value");
 						}
+
+						if ( bActiveElement )
+						{
+							strFormXML += _T("\r\n    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>");
+						}
+
+						strFormXML += _T("\r\n    <input type=\"hidden\" name=\"") + strInputName + _T("\" value=\"") + strInputValue + _T("\" />");
 
 						if ( bActiveElement )
 						{
@@ -607,8 +637,9 @@ string CDQSDWizardDlg::GetForms( string& rstrSearchName, string& rstrFormScript 
 
 						if ( !_tcsicmp( W2T( bstrTagName ), _T("SELECT") ) )
 						{
-							strFormXML += _T("\r\n    <COMMENT>  The input element above was a SELECT element with the following options...");
-							strFormXML += _T("\r\n      <select name=\"" + strInputName + "\">");
+							strFormXML += _T("\r\n    <COMMENT>"
+											 "\r\n      The input element above, \"") + strInputName + _T("\", was a SELECT element with the following options..."
+											 "\r\n      <select name=\"" + strInputName + "\">");
 							
 							CComQIPtr< IHTMLSelectElement > spSelect( spElement );
 							if ( spSelect )
@@ -641,19 +672,71 @@ string CDQSDWizardDlg::GetForms( string& rstrSearchName, string& rstrFormScript 
 
 							strFormXML += _T("\r\n      </select>"
 											 "\r\n    </COMMENT>");
-						}
-					}
+						
+						} // end-if SELECT
+					
+					} // end-if INPUT element had a 'name' attribute
 
 					::SysFreeString( bstrTagName );
+				
+				} // end-for each form element
+
+
+				// Append radio INPUT elements
+
+				if ( mapRadioButtons.size() > 0 )
+				{
+					RadioButtonMap_t::const_iterator itElements = mapRadioButtons.begin();
+					for ( ; itElements != mapRadioButtons.end(); itElements++ )
+					{
+						string strRadioElement = _T("\r\n    <input type=\"hidden\" name=\"") + itElements->first + _T("\" value=\"");
+						string strRadioValues =  _T("\r\n    <COMMENT>"
+													"\r\n      The input element above, \"") + itElements->first + ("\" was a set of radio buttons with the following options...");
+
+						RadioButtonValues_t::const_iterator itValues = itElements->second.begin();
+						string strDelim = _T("\r\n      ");
+						for ( ; itValues != itElements->second.end(); itValues++ )
+						{
+							strRadioValues += strDelim + _T("\"") + itValues->m_strValue + _T("\"");
+							strDelim = _T(", ");
+							if ( itValues->m_bChecked )
+							{
+								strRadioElement += itValues->m_strValue;
+							}
+						}
+						
+						string strScriptInputName = _T(".") + itElements->first + _T(".value");
+						if ( ( itElements->first.find_first_not_of( _T("_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"), 0 ) != string::npos ) ||
+							 ( !_tcsicmp( itElements->first.c_str(), _T("target") ) ) ||
+							 ( !_tcsicmp( itElements->first.c_str(), _T("submit") ) ) )
+						{
+							strScriptInputName = _T("[\"") + itElements->first + _T("\"].value");
+						}
+						rstrFormScript += _T("\r\n      //document.") + strFormName + strScriptInputName + _T(" = \"\";");
+
+						strRadioElement += _T("\" />");
+
+						strRadioValues += _T("\r\n    <COMMENT>");
+
+						strFormXML += strRadioElement;
+						strFormXML += strRadioValues;
+					}
 				}
-			}
+
+			
+			} // end-if able to get form element count
 
 			
 			strFormXML += _T("\r\n  </form>");
 
 			++iSelectedForms;
-		}
-	}
+		
+		} // end-if this form was selected by user
+	
+	} // end-for each form
+
+	
+	// If there were no forms, then go ahead and create a template for one
 
 	if ( 0 == cForms )
 	{
