@@ -1,0 +1,132 @@
+<search function="walmart">
+  <COMMENT>
+
+    This search file was initially created by Dave's Quick Search Deskbar
+    Search Wizard version 0.5 (beta) on 08/28/02 at 10:50:17
+
+    Even though this XML search will probably load and is a healthy start
+    toward a completed search, please be aware that this search will probably
+    not work as is and will require some human inspection and modification.
+
+  </COMMENT>
+  <name>Wal-Mart</name>
+  <category></category>
+  <contributor>Glenn Carr</contributor>
+  <link>http://www.walmart.com/</link>
+  <email>glenn at glenncarr dot com</email>
+  <description>
+  Search Wal-Mart Online
+    <table class="helpboxDescTable">
+      <tr><td>[/all] - Entire Site (default)</td></tr>
+      <tr><td>/books</td></tr>
+      <tr><td>/electronics</td></tr>
+      <tr><td>/garden</td></tr>
+      <tr><td>/gifts</td></tr>
+      <tr><td>/hardware</td></tr>
+      <tr><td>/home</td></tr>
+      <tr><td>/jewelry</td></tr>
+      <tr><td>/movies</td></tr>
+      <tr><td>/music</td></tr>
+      <tr><td>/photo</td></tr>
+      <tr><td>/sporting</td></tr>
+      <tr><td>/toys</td></tr>
+      <tr><td>/videogames</td></tr>
+    </table>
+  </description>
+  <form name="walmartf"
+        method="get"
+        action="http://www.walmart.com/catalog/search-ng.gsp">
+    <input type="hidden" name="search_constraint" value="0" />
+    <input type="hidden" name="search_query" value="" />
+    <COMMENT>
+      The input element above, "search_constraint", was a SELECT element with the following options...
+      <select name="search_constraint">
+        <option value="0">Entire Site</option>
+        <option value="3944">Electronics</option>
+        <option value="5428">Garden &amp; Hardware</option>
+        <option value="5426">Photo</option>
+        <option value="2636">Video Games</option>
+        <option value="4171">Toys</option>
+        <option value="2637">Gifts</option>
+        <option value="3891">Jewelry</option>
+        <option value="4044">Home</option>
+        <option value="4125">Sporting Goods</option>
+        <option value="4096">Movies</option>
+        <option value="3920">Books</option>
+        <option value="4104">Music</option>
+      </select>
+    </COMMENT>
+  </form>
+  <script><![CDATA[
+    function walmart(q)
+    {
+      if( nullArgs("walmart", q) )
+        return;
+
+      var args = parseArgs(q, "all, books, electronics, garden, gifts, hardware, home, jewelry, movies, music, photo, sporting, toys, videogames");
+      if ( args.switches.length > 0 )
+      {
+        switch( args.switches[0].name )
+        {
+          case "electronics":
+              document.walmartf.search_constraint.value = "3944";
+              break;
+
+          case "toys":
+              document.walmartf.search_constraint.value = "4171";
+              break;
+
+          case "garden":
+          case "hardware":
+              document.walmartf.search_constraint.value = "5428";
+              break;
+
+          case "photo":
+              document.walmartf.search_constraint.value = "5426";
+              break;
+              
+          case "videogames":
+              document.walmartf.search_constraint.value = "2636";
+              break;
+              
+          case "gifts":
+              document.walmartf.search_constraint.value = "2637";
+              break;
+              
+          case "jewelry":
+              document.walmartf.search_constraint.value = "3891";
+              break;
+              
+          case "home":
+              document.walmartf.search_constraint.value = "4044";
+              break;
+              
+          case "sporting":
+              document.walmartf.search_constraint.value = "4125";
+              break;
+              
+          case "movies":
+              document.walmartf.search_constraint.value = "4096";
+              break;
+              
+          case "books":
+              document.walmartf.search_constraint.value = "3920";
+              break;
+              
+          case "music":
+              document.walmartf.search_constraint.value = "4104";
+              break;
+              
+          case "all":
+          default:
+              break;
+
+        }
+      }
+
+      document.walmartf.search_query.value = args.q;
+
+      submitForm(walmartf);
+    }
+  ]]></script>
+</search>
