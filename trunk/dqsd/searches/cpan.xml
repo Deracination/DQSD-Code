@@ -7,11 +7,13 @@
   		<tr><td>/author</td><td> - </td><td>Search for authors.</td></tr>
   		<tr><td>/distribution</td><td> - </td><td>Search for distributions.</td></tr>
       <tr><td>/documentation</td><td> - </td><td>Search for distribution documentation.</td></tr>
+	  <tr><td>/new</td><td> - </td><td>View recent additions to CPAN.</td></tr>
    	</table>
     <div class="helpboxDescLabels">Example:</div>
     <table class="helpboxDescTable">
   		<tr><td>cpan wrap</td></tr>
   		<tr><td>cpan wall /author</td></tr>
+		<tr><td>cpan /new </td></tr>
   	</table>
   </description>
   <category>Computers<category>Programming</category></category>
@@ -28,7 +30,7 @@
   <script><![CDATA[
     function cpan(q)
     {
-      var args = parseArgs(q, "author, distribution, documentation");
+      var args = parseArgs(q, "author, distribution, documentation, new");
       
       if( nullArgs("cpan", q) )
         return false;
@@ -39,6 +41,7 @@
           case "author": document.cpanf.mode.value = "author"; break;
           case "distribution": document.cpanf.mode.value = "dist"; break;
           case "documentation": document.cpanf.mode.value = "doc"; break;
+          case "new": openSearchWindow("http://search.cpan.org/recent"); return;
         }
         document.cpanf.query.value = args.q;
         submitForm(cpanf);
