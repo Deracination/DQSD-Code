@@ -61,6 +61,7 @@ public:
 	STDMETHOD(put_Debug)(/*[in]*/ VARIANT_BOOL bDebug );
 	STDMETHOD(ReadFile)(/*[in]*/ BSTR bstrFilename, /*[out,retval]*/ BSTR* pbstrResult);
 	STDMETHOD(WriteFile)(/*[in]*/ BSTR bstrFilename, /*[in]*/ BSTR bstrValue);
+	STDMETHOD(GetProtocolHandler)(/*[in]*/ BSTR bstrProtocol, /*[out,retval]*/ BSTR* pbstrHandler);
 
 public:
 	STDMETHOD(SetSite)(IUnknown* pUnkSite);

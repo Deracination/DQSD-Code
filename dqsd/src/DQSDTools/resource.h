@@ -10,6 +10,7 @@
 #define IDS_ERR_UNAUTHCALLER            515
 #define IDS_ERR_REGKEYNOTFOUND          516
 #define IDS_ERR_FILENOTFOUND            517
+#define IDS_ERR_PROTOCOLNOTFOUND        518
 
 // Next default values for new objects
 // 
