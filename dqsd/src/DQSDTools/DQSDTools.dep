@@ -1,0 +1,21 @@
+# Microsoft Developer Studio Generated Dependency File, included by DQSDTools.mak
+
+.\DQSDTools.cpp : \
+	".\dlldatax.h"\
+	".\Launcher.h"\
+	".\StdAfx.h"\
+	
+
+.\DQSDTools.rc : \
+	".\Launcher.rgs"\
+	
+
+.\Launcher.cpp : \
+	".\Launcher.h"\
+	".\StdAfx.h"\
+	".\Utilities.h"\
+	
+
+.\StdAfx.cpp : \
+	".\StdAfx.h"\
+	
