@@ -145,7 +145,7 @@ function parseArgs(q, expectedSwitches, expandSwitches)
   var args_array = q.split(' ');
 
   // Regular expression that defines switches
-  var re_switch = /\/((\w+)(?::?(\w*)))\s*/;
+  var re_switch = /\/((\w+)(?::?(\S*)))\s*/;
   var re_res_args;
   var re_res_switch;
 
