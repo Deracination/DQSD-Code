@@ -78,6 +78,7 @@ The deskbar is customizable and completely open-source.
 // configuration settings
 
 defaultcal="yhocal";           // yahoo is the default calendar
+eventsfileurl=""               // default no events
 
 historylength=50;              // number of searches to remember
 
@@ -111,6 +112,10 @@ calbackground="menu";
 caltextcolor="menutext";
 calhighbackground="highlight";
 calhightext="highlighttext";
+caleventdaybackground="menu";
+caleventdaytext="red";
+caltodayeventbackground="window";
+caltodayeventtext="red";
 caltodaybackground="window";
 caltodaytext="windowtext";
 calgraybackground="menu";
@@ -120,6 +125,9 @@ calnavstyle="font-family:Tahoma;font-size:8pt;font-weight:bold;border-width:1;bo
 caldaystyle="font-family:Tahoma;font-size:8pt;border-width:1;border-style:solid;border-color:menu";
 caldowstyle="font-family:Tahoma;font-size:8pt;border-width:1;border-style:solid;border-color:menu";
 caltodaystyle="font-family:Tahoma;font-size:8pt;font-weight:bold;border-width:1;border-style:solid;border-color:windowtext";
+caleventdaystyle="font-family:Tahoma;font-size:8pt;border-width:1;border-style:solid;border-color:menu" + ";color:" + caleventdaytext;
+caltodayeventstyle="font-family:Tahoma;font-size:8pt;font-weight:bold;border-width:1;border-style:solid;border-color:windowtext" + ";color:" + caltodayeventtext;
+
 
 // catch errors
 function handleerror(msg, url, lineno)
