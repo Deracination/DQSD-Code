@@ -28,9 +28,10 @@ import "ocidl.idl";
 		[id(9), helpstring("Install the keyboard hook which provides full key support (DEL, arrows, etc)")] HRESULT InstallKeyboardHook();
 		[id(10), helpstring("Register a key to be used with the Windows key to jump to the DQSD bar")] HRESULT RegisterHotKey(long hotkeyVkCode);
 		[id(11), helpstring("Map a virtual key code to a character code to be sent to the DQSD bar")] HRESULT MapKeyCode(long lVKCode, long lCharCode);
+		[propget, id(12), helpstring("Check if the DLL is of at least the specified version")] HRESULT VersionIsCorrect(int v1, int v2, int v3, int v4, [out, retval] VARIANT_BOOL *pVal);
 	};
 	[
-		object,
+		object, 
 		uuid(C20983D5-DFC2-4C10-8267-E23217466E28),
 		dual,
 		helpstring("IMenuBuilder Interface"),

@@ -35,9 +35,14 @@ BOOL WINAPI DllMain(HINSTANCE hInstance, DWORD dwReason, LPVOID lpReserved)
     {
         _Module.Init(ObjectMap, hInstance, &LIBID_DQSDTOOLSLib);
         DisableThreadLibraryCalls(hInstance);
+
+		OutputDebugString("DQSDTools loading\n");
     }
     else if (dwReason == DLL_PROCESS_DETACH)
+	{
         _Module.Term();
+		OutputDebugString("DQSDTools unloading\n");
+	}
     return TRUE;    // ok
 }
 
@@ -46,11 +51,25 @@ BOOL WINAPI DllMain(HINSTANCE hInstance, DWORD dwReason, LPVOID lpReserved)
 
 STDAPI DllCanUnloadNow(void)
 {
+	ATLTRACE("DQSD: DllCanUnloadNow called (lockcount %d)\n", _Module.GetLockCount());
+
 #ifdef _MERGE_PROXYSTUB
     if (PrxDllCanUnloadNow() != S_OK)
-        return S_FALSE;
+	{
+
+	}
 #endif
-    return (_Module.GetLockCount()==0) ? S_OK : S_FALSE;
+
+    if(_Module.GetLockCount()==0)
+	{
+		ATLTRACE("DQSD: DllCanUnloadNow returns S_OK\n");
+		return S_OK;
+	}
+	else
+	{
+		ATLTRACE("DQSD: DllCanUnloadNow returns S_FALSE\n");
+		return S_FALSE;
+	}
 }
 
 /////////////////////////////////////////////////////////////////////////////
