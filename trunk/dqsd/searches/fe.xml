@@ -1,0 +1,28 @@
+<search function="fe">
+  <name>File Ext</name>
+  <description>The File Extension Source fe {[a..z] | num | sym }: "fe d"</description>
+  <category>Computers</category>
+  <link>http://www.filext.com/</link>
+  <form name="filextf"
+        target="_blank"
+        method="get">
+  </form>
+  <script><![CDATA[
+    function fe(q)
+    {
+      if( q == "" )
+      {
+        openSearchWindow("http://www.filext.com/");
+      }
+      else
+      {
+        q = q.toLowerCase();
+        if ( /^[a-z]$/i.test(q) || ( q == 'sym' ) || ( q == 'num' ) )
+          document.filextf.action = "http://www.filext.com/" + q + ".htm";
+        else
+          document.filextf.action = "http://www.filext.com/";
+          submitForm(filextf);
+      }
+    }
+  ]]></script>
+</search>
