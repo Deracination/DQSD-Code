@@ -1,6 +1,6 @@
 <search function="hs">
-  <name>HotScripts.com Search</name>
-  <description>Search for code in a multitude of programming languages. Searches all languages by default. Options include: ASP /asp, C or C++ /c, Java /java, Javascript /javascript, PHP /php, Perl /perl, Python /python, Tools and Utilities /tools or /utils, Remote Hosts /rh or /remotehosts, XML /xml.</description>
+  <name>HotScripts.com</name>
+  <description>Search for code snippets in a multitude of programming languages. Searches all languages by default. Options include: ASP (/asp), C or C++ (/c), Java (/java), Javascript (/javascript), PHP (/php), Perl (/perl), Python (/python), Tools and Utilities (/tools or /utils), Remote Hosts (/rh or /remotehosts), XML (/xml).</description>
   <category>Computers</category>
   <link>http://www.hotscripts.com/</link>
   <switches>asp, c, java, javascript, php, perl, python, tools, utils, rh, remotehosts, xml</switches>
