@@ -1,0 +1,26 @@
+<search function="tw">
+  <name>TechWeb Encyclopedia</name>
+  <description>TechEncyclopedia More than 20,000 IT terms : "tw xpath"</description>
+  <category>Computers</category>
+  <link>http://www.techweb.com/encyclopedia/</link>
+  <contributor>Tom Corcoran</contributor>
+  <form name="twf"
+        action="http://www.techweb.com/encyclopedia/defineterm"
+        method="get">
+    <input type="hidden" name="term" value=""/>
+  </form>
+  <script><![CDATA[
+    function tw(q)
+    {
+      if (q == "")
+      {
+        openSearchWindow("http://www.techweb.com/encyclopedia/");
+      }
+      else
+      {
+        document.twf.term.value=q;
+        submitForm(twf);
+      }
+    }
+  ]]></script>
+</search>

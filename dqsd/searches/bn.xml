@@ -1,0 +1,99 @@
+<search function="bn">
+  <name>Borland Newsgroups</name>
+  <description>Search Borland Newsgroup Database : "bn "delphi 7""<br/>
+Usage: bn searchString | /t: searchstring [/r:a|t] [/s:r|d]<br/>
+/t: Text search string<br/>
+/r: Results (article/thread, default is article)<br/>
+/s: Sort (rank/date, default is rank)<br/>
+<br/>
+Note : <br/>
+- the searchString is all that is needed, all the other switches will default if excluded<br/>
+- if the searchString is first the /s: can be left out<br/>
+<br/>
+Examples :<br/>
+bn /s:d /t:jbuilder linux kde<br/>
+bn "delphi 7"<br/>
+bn kylix c# "Anders Hejlsberg" /r:t /s:d<br/>
+</description>
+  <category>Computers</category>
+  <link>http://www.tamaracka.com/search.htm</link>
+  <contributor>Tom Corcoran</contributor>
+  <form name="bnf"
+        action="http://216.101.185.148/scripts/isapi.dll/execute"
+        method="post">
+    <input type="hidden" name="SearchFor" value=""/>
+    <input type="hidden" name="Display" value=""/>
+    <input type="hidden" name="Sort" value=""/>
+  </form>
+  <script><![CDATA[
+    function bn(q)
+    {
+      // initialize to allow for repeated calls
+      var parsedVars;
+      var sort = "Rank";
+      var results = "Article";
+      var searchText = "";
+
+      if (q == "")
+      {
+        openSearchWindow("http://www.tamaracka.com/search.htm");
+      }
+      else
+      {
+        q = q.toLowerCase();
+        if ( parsedVars = q.split( '/' ) )
+        {
+          // cycle through number of switches entered (max 2 switches + search text)
+          for ( var i = 0; i <= parsedVars.length-1 && i <= 2; i++ )
+          {
+            // if first split is "" then no text prior to first switch
+            if ( parsedVars[i] == "" )
+              continue;
+            
+            // used if no switches - eg. "js java"   
+            if ( parsedVars.length == 1 )
+            {
+              searchText = parsedVars[0]; 
+              continue;
+            }
+
+            // check for results type
+            if ( parsedVars[i].substr(0,2) == 'r:' ) 
+            {
+              // can be a (article) or t (thread)
+              if ( parsedVars[i].substr(2,1) == 'a' ) 
+                results = "Article";
+              if ( parsedVars[i].substr(2,1) == 't' )
+                results = "Thread";
+              continue;
+            }
+
+            // check for sort type
+            if ( parsedVars[i].substr(0,2) == 's:' ) 
+            {
+              // can be r (rank) or d (date)
+              if ( parsedVars[i].substr(2,1) == 'r' ) 
+                sort = "Rank";
+              if ( parsedVars[i].substr(2,1) == 'd' )
+                sort = "Date";
+              continue;
+            }
+
+            if ( parsedVars[i].substr(0,2) == 't:' ) 
+            {
+              searchText = parsedVars[i].substr(2,parsedVars[i].length-1); 
+              continue;
+            }
+            // if got here then search text entered without /s and other switches
+            searchText = parsedVars[i]; 
+          }
+        }
+
+        document.borlandf.SearchFor.value = searchText;
+        document.borlandf.Display.value = results;
+        document.borlandf.Sort.value = sort;
+        submitForm(borlandf);
+      }
+    }
+  ]]></script>
+</search>
