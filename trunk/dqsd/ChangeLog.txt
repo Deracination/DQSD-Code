@@ -119,3 +119,6 @@ New / Modified Searches
     - The Weather Network Forecast
     - Snopes.com Urban Legends
 * telfr - French telephone lookup (telfr)
+* googletrans - Google.com Language Translation
+* dicfr - Search French words definition
+
