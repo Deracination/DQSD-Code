@@ -1,5 +1,5 @@
     var genealogy_debug = 0;
-    var genealogy_lib_version = "1.6";
+    var genealogy_lib_version = "1.7";
 
 	var genealogy_month_names = new Array("JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER");
 	var genealogy_date_format_1 = "([0-9]{1,2})\\s*(?:/|-)\\s*([0-9]{1,2})\\s*(?:/|-)\\s*([0-9]{4})";
@@ -52,29 +52,33 @@
 	);
 
 	var genealogy_countries = new Array(
-	"ARGENTINA", "AUSTRALIA", "BELGIUM", "BRAZIL", "CANADA", "DENMARK", "ENGLAND", "FINLAND", "FRANCE", "GERMANY", "GREAT BRITAIN", "ICELAND", "ITALY",
-	"LIECHTENSTEIN", "NETHERLANDS", "NEW ZELAND", "NORWAY", "PAPUA NEW GUINEA", "RUSSIA", "SOUTH AFRICA", "SWEDEN",
-	"SWITZERLAND", "UNITED KINGDOM", "ZIMBABWE", "PUERTO RICO", "SCOTLAND"
+	"ACADIA", "AFGHANISTAN", "ALBANIA", "ALGERIA", "AMERICA", "AMERICAN SAMOA", "ANDORRA", "ANGOLA", "ANGUILLA", "ANTARCTICA", "ARGENTINA", "ARMENIA", "ARUBA", "AUSTRALIA", "AUSTRIA",
+	"BAHAMAS", "BAHRAIN", "BANGLADESH", "BARBADOS", "BELARUS", "BELGIUM", "BELIZE", "BERMUDA", "BHUTAN", "BOLIVIA", "BOSNIA", "BOTSWANA", "BRAZIL", "BULGARIA", "BURKINA FASO", "BURMA", "BURUNDI",
+	"CAMBODIA", "CANADA", "CHILE", "CHINA", "COLOMBIA", "COSTA RICA", "CUBA", "CYPRUS", "CZECHOSLOVAKIA",
+	"DENMARK", "DEUTSCHLAND", "DJIBOUTI", "DOMINICAN REPUBLIC",
+	"EGYPT", "ENGLAND",
+	"FIJI", "FINLAND", "FRANCE",
+	"GERMANY", "GREAT BRITAIN",
+	"ICELAND", "INDIA", "INDONESIA", "IRAN", "IRAQ", "IRELAND", "ISREAL", "ITALY",
+	"JAMAICA", "JAPAN", "JORDAN", 
+	"KENYA", "KIRIBATI", "KUWAIT", "KYRGYZSTAN", 
+	"LAOS", "LATVIA", "LEBANON", "LESOTHO", "LIBERIA", "LIBYA", "LIECHTENSTEIN", "LITHUANIA", "LUXEMBOURG", 
+	"MALAYSIA", "MALTA", "MEXICO", "MOZAMBIQUE", 
+	"NETHERLANDS", "NEPAL", "NEW ZELAND", "NICARAGUA", "NIGERIA", "NORTH KOREA", "NORWAY",
+	"PANAMA", "PARAGUAY", "PAKISTAN", "PAPUA NEW GUINEA", "PERU", "PHILLIPINES", "POLAND", "PORTUGAL", "PUERTO RICO",
+	"ROMANIA", "RUSSIA", "RWANDA",
+	"SCOTLAND", "SINGAPORE", "SOMALIA", "SOUTH AFRICA", "SOUTH KOREA", "SPAIN", "SUDAN", "SWEDEN", "SWITZERLAND",
+	"TAIWAN", "THAILAND", "TURKEY", 
+	"UGANDA", "UKRAINE", "UNITED ARAB EMIRATES", "UNITED KINGDOM", "UNITED STATES", "URUGUAY", "UZBEKISTAN",
+	"VANUATU", "VENEZUELA", "VIET NAM", "VIRGIN ISLANDS", 
+	"WALES", 
+	"YEMEN", "YUGOSLAVIA",
+	"ZAIRE", "ZAMBIA", "ZIMBABWE" 
 	);
 
 function genealogy_trim(str)
 {
-   var start = 0;
-   var end = str.length-1;
-   while (str.charAt(start) == ' ') {
-	   start++;
-   }
-   if (start >= end)   {
-	   return "";
-   }
-   while (str.charAt(end) == ' ') {
-	   end--;
-   }
-   if (start != 0 || end != str.length-1) {
-	   return str.substring(start, end+1);
-   } else {
-       return str;
-   }
+  return str.replace(/^\s+/, "").replace(/\s+$/, "");
 }
 
 function genealogy_strip_tags(str)
@@ -158,7 +162,9 @@ function genealogy_lookup_place_abbrev(place)
 {
 	var place_num= genealogy_lookup_place(place);
 	if (place_num >= 0)	{
-		return genealogy_states_abbrev[place_num];
+		if (place_num < genealogy_states.length) {
+			return genealogy_states_abbrev[place_num];
+		}
 	}
 	return "";
 }
@@ -167,7 +173,11 @@ function genealogy_lookup_place_name(place)
 {
 	var place_num= genealogy_lookup_place(place);
 	if (place_num >= 0)	{
-		return genealogy_states[place_num];
+		if (place_num < genealogy_states.length) {
+		    return genealogy_states[place_num];
+		} else if (place_num < genealogy_countries.length) {
+			return genealogy_countries[place_num-genealogy_states.length];
+		}
 	}
 	return "";
 }
@@ -680,6 +690,87 @@ function genealogy_parse_date(dateString)
 	} else {
 		return false;
 	}
+}
+
+/*
+ * genealogy_parseArgs is similar to parseArgs except that
+ * it isn't split on spaces but instead the /
+ * This means that args.q will be the value before the
+ * first slash and the parameter value is everything after
+ * the arg name until the next slash.  Also the arg name
+ * and value are separated by a space not a : like parseArgs.
+ * This will also allow you to have spaces in the argument value
+ * as well.
+ */
+function genealogy_parseArgs(q, expectedSwitches, expandSwitches)
+{
+  // In case the caller does not pass in a value
+  if (typeof expandSwitches == 'undefined')
+    expandSwitches = 1;
+
+  // In case the caller uses a delimited (;,<space>) string
+  if (typeof expectedSwitches[0] == 'undefined')
+    expectedSwitches = expectedSwitches.split( /[,;/\s]/ );
+
+  var switches = [];
+  var switch_val = [];
+  var args_array = q.split('/');
+  for (var i=0; i < args_array.length; i++)
+  {
+	  var one_arg = genealogy_trim(args_array[i]);
+	  if (one_arg == "") {
+		  continue;
+	  }
+	  var argRegExp = /(\S+)(\s+(.*))?/g;
+	  var reResult = argRegExp.exec(one_arg);
+	  if (reResult == null || reResult[1] == "") {
+		  continue;
+	  }
+      var argName = reResult[1];
+	  var argValue = genealogy_trim(reResult[2]);
+	  var re_res_switch;
+
+	  for (var j = 0; j < expectedSwitches.length && !re_res_switch; j++)
+      {
+        var expect_regex = new RegExp(
+            '^(' + argName.replace('.', '\\.') +
+             ')' + (expandSwitches ? '' : '$'), 'i');
+
+        re_res_switch = expectedSwitches[j].match(expect_regex);
+
+        //  If there is a match, adjust the args_array, and save the values.
+        if (re_res_switch) {
+		  argName = expectedSwitches[j];
+          switch_val[argName] = argValue;
+          switches.push( {name:argName.toLowerCase(), value:argValue} );
+		}
+	  }
+      re_res_switch = "";
+  }
+  if (q.match(/^\s*\//))
+  {
+	// if it starts with a slash there are no non-switch values
+	q = "";
+  } else {
+	// only the part before the first slash is returned in args.q
+	var firstSlash = q.indexOf('/');
+	if (firstSlash != -1) {
+		q = q.substring(0, firstSlash);
+	}
+	q = genealogy_trim(q);
+  }
+  return { q:q, switches:switches, switch_val:switch_val };
+}
+
+function genealogy_hasArg(args, argname)
+{
+	argname = argname.toLowerCase();
+	for (var i=0; i < args.switches.length; i++) {
+		if (args.switches[i].name == argname) {
+			return true;
+		}
+	}
+	return false;
 }
 
 function genealogy_check_dqsd_version(majorHi, majorLo, minorHi, minorLo)

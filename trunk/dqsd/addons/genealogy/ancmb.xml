@@ -1,24 +1,53 @@
-<search function="ancmb">
+<search function="amb">
   <name>Ancestry.com Message Boards</name>
   <description>
     Search or go to Ancestry.com Message Board web pages.<br/>
-    <div class="helpboxDescLabels">Switches:</div>
+    <div class="helpboxDescLabels">Search Type Switches:</div>
     <table class="helpboxDescTable">
-      <tr><td>/search</td><td> - </td><td>Search for term in the message boards</td></tr>
       <tr><td>/find</td><td> - </td><td>Find specified message board</td></tr>
+      <tr><td>/search [default]</td><td> - </td><td>Search the message boards, goes to forum if no query specified</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Search Specific Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/author</td><td> - </td><td>Search for messages by specified author</td></tr>
+      <tr><td>/days</td><td> - </td><td>Search for messages within the last specified days</td></tr>
+      <tr><td>/place</td><td> - </td><td>Search for messages in the specified locality</td></tr>
+      <tr><td>/subject</td><td> - </td><td>Search for messages with the specified subject</td></tr>
+      <tr><td>/surname</td><td> - </td><td>Search for messages with the specified surname</td></tr>
+      <tr><td>/type</td><td> - </td><td>Search for messages with the specified message type (see Message Type Switch Values) </td></tr>
+    </table>
+    <div class="helpboxDescLabels">Message Type Switch Values</div>
+    <table class="helpboxDescTable">
+	<tr><td>queries</td></tr>
+	<tr><td>bible</td></tr>
+	<tr><td>biography</td></tr>
+	<tr><td>birth</td></tr>
+	<tr><td>cemetery</td></tr>
+	<tr><td>census</td></tr>
+	<tr><td>death</td></tr>
+	<tr><td>deed</td></tr>
+	<tr><td>immigration</td></tr>
+	<tr><td>lookup</td></tr>
+	<tr><td>marriage</td></tr>
+	<tr><td>military</td></tr>
+	<tr><td>obituary</td></tr>
+	<tr><td>pension</td></tr>
+	<tr><td>will</td></tr>
     </table>
     <div class="helpboxDescLabels">Examples:</div>
     <table class="helpboxDescTable">
-      <tr><td>ancmb berrien, mi</td><td> - </td><td>Go to the Berrien county, Michigan message board</td></tr>
-      <tr><td>ancmb alaska</td><td> - </td><td>Go to the Alaska state message board</td></tr>
-      <tr><td>ancmb /s:beardsley</td><td> - </td><td>Search for the term beardsley in all message boards</td></tr>
-      <tr><td>ancmb /s:beardsley ny</td><td> - </td><td>Search for the term beardsley in all New York state message boards</td></tr>
-      <tr><td>ancmb /s:beardsley clinton, new york</td><td> - </td><td>Search for the term beardsley in the Clinton county,  New York state message board</td></tr>
+      <tr><td>ancmb /p berrien, mi</td><td> - </td><td>Go to the Berrien county, Michigan message board</td></tr>
+      <tr><td>ancmb /p alaska</td><td> - </td><td>Go to the Alaska state message board</td></tr>
+      <tr><td>ancmb beardsley</td><td> - </td><td>Search for the term beardsley in all message boards</td></tr>
+      <tr><td>ancmb beardsley /p ny</td><td> - </td><td>Search for the term beardsley in all New York state message boards</td></tr>
+      <tr><td>ancmb beardsley /p clinton, new york</td><td> - </td><td>Search for the term beardsley in the Clinton county,  New York state message board</td></tr>
       <tr><td>ancmb /f beardsley</td><td> - </td><td>Search for a forum matching term beardsley</td></tr>
     </table>
   </description>
-  <link>http://boards.ancestry.com/mbexec/board/an/localities.northam.usa.states</link>
-  <category>Genealogy</category>
+  <link>http://boards.ancestry.com/</link>
+  <category>Genealogy
+	<category>Message Boards</category>
+  </category>
   <contributor>Brent Beardsley</contributor>
   <form name="ancmbf"
         method="get"
@@ -29,6 +58,12 @@
     <input type="hidden" name="application" value="public" />
     <input type="hidden" name="query" value="" />
     <input type="hidden" name="filter" value="" />
+    <input type="hidden" name="subject" value="" />
+    <input type="hidden" name="author" value="" />
+    <input type="hidden" name="period" value="0" />
+    <input type="hidden" name="classification" value="" />
+    <input type="hidden" name="surnames" value="" />
+    <input type="hidden" name="fields" value="" />
   </form>
   <form name="ancmbfindf"
         method="get"
@@ -43,50 +78,110 @@
 
   <script src="addons/genealogy/genealogy_lib.js"></script>
   <script><![CDATA[
-    function ancmb(q)
+    function amb(q)
     {
-      if( nullArgs("ancmb", q) )
+      if( nullArgs("amb", q) )
         return false;
 
-      var args = parseArgs(q, "find, search");
-      if (args == null)
-	return false;
+      if (!genealogy_check_lib_version("1.7"))
+        return false;
 
-      if (args.switches.length >= 1) {
-        if (args.switches[0].name == "search") {
-          var state = genealogy_parse_place_state(args.q);
-          var county = genealogy_parse_place_county(args.q).toLowerCase().replace(/\s/gim, "");
-          var state_name = genealogy_lookup_place_name(state).toLowerCase().replace(/\s/gim, "");
-	  var filter = "";
-	  if (state_name.length > 0) {
-	    filter = "localities.northam.usa.states."+state_name;
-	    if (county.length > 0) {
-	      filter += (".counties."+county);
+      var args = genealogy_parseArgs(q, "author, days, find, place, query, surname, subject, type");
+      if (genealogy_hasArg(args, "find")) {
+        alert("find");
+	// find board with name
+	var query = args.switch_val["find"];
+	if (query == "" && genealogy_hasArg(args, "query")) {
+	   query = args.switch_val["query"];
+	}
+	if (query == "") {
+	   query = args.q;
+	}
+	document.ancmbfindf.query.value = query;
+	submitForm(ancmbfindf);
+      } else {
+	var query = "";
+	if (genealogy_hasArg(args, "query")) {
+	  query = args.switch_val["query"];
+	}
+	if (query == "") {
+           query = args.q;
+	}
+	if (query == "") {
+	  // goto board
+	  if (genealogy_hasArg(args, "place")) {
+		var place_value = args.switch_val["place"];
+		var search_url = "http://boards.ancestry.com/mbexec/board/an/localities.northam.usa.states";
+		var state = genealogy_parse_place_state(place_value);
+		var county = genealogy_parse_place_county(place_value).toLowerCase().replace(/\s/gim, "");
+		var state_name = genealogy_lookup_place_name(state).toLowerCase().replace(/\s/gim, "");
+		if (state_name.length > 0) {
+		  search_url += "."+state_name;
+		  if (county.length > 0) {
+		    search_url += (".counties."+county);
+		  }
+		}
+		openSearchWindow(search_url);
+	  } else if (genealogy_hasArg(args, "surname")) {
+		var surname_value = args.switch_val["surname"];
+		if (surname_value == "") {
+		   surname_value = args.q;
+		}
+		surname_value = surname_value.replace(/\s/g, "-20-");
+		var search_url = "http://boards.ancestry.com/mbexec?htx=board&r=an&p=surnames."+surname_value;
+		openSearchWindow(search_url);
+	  } else {
+		nullArgs("amb", "?");
+	  }
+        } else {
+	  // search boards
+	  var specified_fields = "surnames";
+          var author = "";
+	  if (genealogy_hasArg(args, "author")) {
+	    author = args.switch_val["author"];
+	  }
+	  var subject = "";
+	  if (genealogy_hasArg(args, "subject")) {
+            subject = args.switch_val["subject"];
+	  }
+	  var type = "";
+	  if (genealogy_hasArg(args, "type")) {
+	    type = args.switch_val["type"].toLowerCase();
+	    if (type != "") {
+	      specified_fields += ",classification";
 	    }
 	  }
-	  document.ancmbf.query.value = args.switch_val["search"];
+	  var days = "0";
+	  if (genealogy_hasArg(args, "days")) {
+	    days = args.switch_val["days"];
+	  }
+
+          var filter = "";
+	  if (genealogy_hasArg(args, "place")) {
+	    var place_value = args.switch_val["place"];
+	    var state = genealogy_parse_place_state(place_value);
+	    var county = genealogy_parse_place_county(place_value).toLowerCase().replace(/\s/gim, "");
+	    var state_name = genealogy_lookup_place_name(state).toLowerCase().replace(/\s/gim, "");
+	    if (state_name != "") {
+	      filter = "localities.northam.usa.states."+state_name;
+	      if (county != "") {
+	        filter += (".counties."+county);
+	      }
+	    }
+	  } else if (genealogy_hasArg(args, "surname")) {
+	     var surname_value = args.switch_val["surname"].replace(/\s/g, "-20-");
+	     filter = "surnames."+ surname_value;
+	  }
+	  document.ancmbf.query.value = query;
 	  document.ancmbf.p.value = filter;
 	  document.ancmbf.filter.value = filter;
+	  document.ancmbf.author.value = author;
+	  document.ancmbf.subject.value = subject;
+	  document.ancmbf.classification.value = type;
+	  document.ancmbf.fields.value = specified_fields;
+	  document.ancmbf.period.value = days;
 	  submitForm(ancmbf);
-	} else if (args.switches[0].name == "find") {
-	  document.ancmbfindf.query.value = args.q;
-	  submitForm(ancmbfindf);
-	} else {
-          nullArgs("ancmb", "?");
-	}
-      } else {
-        // for surnames: http://boards.ancestry.com/mbexec?htx=board&r=an&p=surnames.beardsley
-        var search_url = "http://boards.ancestry.com/mbexec/board/an/localities.northam.usa.states";
-        var state = genealogy_parse_place_state(args.q);
-        var county = genealogy_parse_place_county(args.q).toLowerCase().replace(/\s/gim, "");
-        var state_name = genealogy_lookup_place_name(state).toLowerCase().replace(/\s/gim, "");
-        if (state_name.length > 0) {
-          search_url = "http://boards.ancestry.com/mbexec/board/an/localities.northam.usa.states."+state_name;
-	  if (county.length > 0) {
-	    search_url += (".counties."+county);
-	  }
         }
-        openSearchWindow(search_url);
       }
     }
     ]]>
