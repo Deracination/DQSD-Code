@@ -25,6 +25,7 @@ function restoreHistory()
   }
   histarray.reverse();
   histcurr = histarray.length;
+  histedit[histarray.length] = "";
 }
 
 // add an item to the history
