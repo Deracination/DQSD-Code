@@ -1,0 +1,49 @@
+﻿<!--
+
+   This file contains a listing of public holidays in Portugal for the year 2005.
+   (Paulo Ferrão | mesh@netcabo.pt)
+   
+-->
+
+<events>
+  <event name="Ano Novo" type="public_holiday">
+     <date day="1" month="1"/>
+  </event>
+  <event name="Carnaval" type="public_holiday">
+     <date day="8" month="2"/>
+  </event>
+  <event name="P&aacute;scoa" type="public_holiday">
+     <date day="25" month="3"/>
+  </event>
+  <event name="Dia da Liberdade" type="public_holiday">
+     <date day="25" month="4"/>
+  </event>
+  <event name="Dia do Trabalhador" type="public_holiday">
+     <date day="1" month="5"/>
+  </event>
+  <event name="Corpo de Deus" type="public_holiday">
+     <date day="19" month="6"/>
+  </event>
+  <event name="Dia de Portugal" type="public_holiday">
+     <date day="10" month="7"/>
+  </event>
+  <event name="Assun&ccedil;&atilde;o de Nossa Senhora" type="public_holiday">
+     <date day="15" month="8"/>
+  </event>
+  <event name="Implanta&ccedil;&atilde;o da Rep&uacute;blica" type="public_holiday">
+     <date day="5" month="10"/>
+  </event>
+  <event name="Dia de Todos-os-Santos" type="public_holiday">
+     <date day="1" month="11"/>
+  </event>
+  <event name="Restaura&ccedil;&atilde;o da Rep&uacute;blica" type="public_holiday">
+     <date day="1" month="12"/>
+  </event>
+  <event name="Imaculada Con&ccedil;ei&ccedil;&atilde;o" type="public_holiday">
+     <date day="8" month="12"/>
+  </event>
+  <event name="Natal" type="public_holiday">
+     <date day="25" month="12"/>
+  </event>
+</events>
+
