@@ -3194,19 +3194,19 @@ function rsz()
     document.all.info.style.display="none";
 
   var targetwidth = document.body.clientWidth - gowidth;
-
-  if (dopopup)
+  
+  if(dopopup)
   {
-    if (targetwidth < clocklongwidth)
+    if((showbutton == 1) || ((showbutton == 2) && (targetwidth >= clocklongwidth)))
     {
-      document.deff.gobutton.style.display="none";
-      targetwidth = document.body.clientWidth;
+      document.deff.gobutton.style.display ="inline";
+      document.deff.gobutton.style.left    = targetwidth;
+      document.deff.gobutton.style.height  = textheight;
     }
     else
     {
-      document.deff.gobutton.style.display="inline";
-      document.deff.gobutton.style.left = targetwidth;
-      document.deff.gobutton.style.height = textheight;
+      document.deff.gobutton.style.display = "none";
+      targetwidth                          = document.body.clientWidth;
     }
   }
 
