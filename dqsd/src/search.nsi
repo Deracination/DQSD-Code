@@ -285,7 +285,6 @@ Section "Quick Search Deskbar (required)"
   Delete $INSTDIR\searches\ifl.xml
   Delete $INSTDIR\searches\law.xml
   Delete $INSTDIR\searches\lottery.xml
-  Delete $INSTDIR\searches\mb.xml
   Delete $INSTDIR\searches\man.xml
   Delete $INSTDIR\searches\map.xml
   Delete $INSTDIR\searches\palm.xml

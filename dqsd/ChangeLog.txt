@@ -4,6 +4,7 @@ Enhancements
 
 Bug Fixes
 * Clock tooltip no longer off by 3 days - thanks to Ed Stegman for the exquisit bug report
+* Installer no longer removes deprecated mb.xml, since it was re-added as a new search in 3.1.9.1
 
 New Searches
 
