@@ -29,7 +29,7 @@ LRESULT COptionsDlg::OnClickedBrowse(WORD wNotifyCode, WORD wID, HWND hWndCtl, B
 	}
 	catch ( ... )
 	{
-		MessageBox( _T("An enternal error was encountered:  COptionsDlg::OnClickedBrowse"), _T("DQSD Search Wizard Exception"), MB_OK|MB_ICONERROR );
+		MessageBox( _T("An internal error was encountered:  COptionsDlg::OnClickedBrowse"), _T("DQSD Search Wizard Exception"), MB_OK|MB_ICONERROR );
 	}
 
 	return 0;

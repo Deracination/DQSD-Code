@@ -36,7 +36,7 @@ void srch_repl( string& s, const string& to_find, const string& repl_with )
 	}
 	catch ( ... )
 	{
-		MessageBox( ::GetForegroundWindow(), _T("An enternal error was encountered:  srch_repl"), _T("DQSD Search Wizard Exception"), MB_OK|MB_ICONERROR );
+		MessageBox( ::GetForegroundWindow(), _T("An internal error was encountered:  srch_repl"), _T("DQSD Search Wizard Exception"), MB_OK|MB_ICONERROR );
 	}
 }
 
@@ -295,7 +295,7 @@ LRESULT CDQSDWizardDlg::OnInitDialog(UINT uMsg, WPARAM wParam, LPARAM lParam, BO
 	}
 	catch ( ... )
 	{
-		MessageBox( _T("An enternal error was encountered:  CDQSDWizardDlg::OnInitDialog"), _T("DQSD Search Wizard Exception"), MB_OK|MB_ICONERROR );
+		MessageBox( _T("An internal error was encountered:  CDQSDWizardDlg::OnInitDialog"), _T("DQSD Search Wizard Exception"), MB_OK|MB_ICONERROR );
 	}
 
 	m_spWB2->put_StatusText( _bstr_t( ( _T("DQSD Search Wizard - Version ") + m_strVersion + _T(", ") + m_strCopyright ).c_str() ) );
@@ -361,7 +361,7 @@ LRESULT CDQSDWizardDlg::OnFormListItemChanged(int idCtrl, LPNMHDR pNMHDR, BOOL& 
 	}
 	catch ( ... )
 	{
-		MessageBox( _T("An enternal error was encountered:  CDQSDWizardDlg::OnFormListItemChanged"), _T("DQSD Search Wizard Exception"), MB_OK|MB_ICONERROR );
+		MessageBox( _T("An internal error was encountered:  CDQSDWizardDlg::OnFormListItemChanged"), _T("DQSD Search Wizard Exception"), MB_OK|MB_ICONERROR );
 	}
 
 	return 1;
@@ -545,7 +545,7 @@ LRESULT CDQSDWizardDlg::OnOK(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHa
 	}
 	catch ( ... )
 	{
-		MessageBox( _T("An enternal error was encountered:  CDQSDWizardDlg::OnOK"), _T("DQSD Search Wizard Exception"), MB_OK|MB_ICONERROR );
+		MessageBox( _T("An internal error was encountered:  CDQSDWizardDlg::OnOK"), _T("DQSD Search Wizard Exception"), MB_OK|MB_ICONERROR );
 	}
 
 	return 0;
@@ -645,17 +645,6 @@ string CDQSDWizardDlg::GetForms( const string& rstrSearchName, string& rstrFormS
 							strInputName = W2T( varInputName.bstrVal );
 
 							string strInputType = _T("");
-
-							// Ignore INPUT type=submit
-/*
-							_variant_t varInputType;
-							if ( SUCCEEDED( spElement->getAttribute( _bstr_t( _T("type") ), 0, &varInputType ) ) )
-							{
-								strInputType = W2T( varInputType.bstrVal );
-							}
-							if ( !_tcsicmp( _T("submit"), strInputType.c_str() ) )
-								continue;
-*/
 
 							// Was this the active element?
 
@@ -844,7 +833,7 @@ string CDQSDWizardDlg::GetForms( const string& rstrSearchName, string& rstrFormS
 	}
 	catch ( ... )
 	{
-		MessageBox( _T("An enternal error was encountered:  CDQSDWizardDlg::GetForms"), _T("DQSD Search Wizard Exception"), MB_OK|MB_ICONERROR );
+		MessageBox( _T("An internal error was encountered:  CDQSDWizardDlg::GetForms"), _T("DQSD Search Wizard Exception"), MB_OK|MB_ICONERROR );
 	}
 
 	return strFormXML;
@@ -899,7 +888,7 @@ string CDQSDWizardDlg::GetAbsoluteActionPath( _variant_t& varAction )
 	}
 	catch ( ... )
 	{
-		MessageBox( _T("An enternal error was encountered:  CDQSDWizardDlg::GetAbsoluteActionPath"), _T("DQSD Search Wizard Exception"), MB_OK|MB_ICONERROR );
+		MessageBox( _T("An internal error was encountered:  CDQSDWizardDlg::GetAbsoluteActionPath"), _T("DQSD Search Wizard Exception"), MB_OK|MB_ICONERROR );
 	}
 
 	return _T("");
@@ -989,7 +978,7 @@ string CDQSDWizardDlg::GetSwitches( vector< string >& rvecSwitches )
 	}
 	catch ( ... )
 	{
-		MessageBox( _T("An enternal error was encountered:  CDQSDWizardDlg::GetSwitches"), _T("DQSD Search Wizard Exception"), MB_OK|MB_ICONERROR );
+		MessageBox( _T("An internal error was encountered:  CDQSDWizardDlg::GetSwitches"), _T("DQSD Search Wizard Exception"), MB_OK|MB_ICONERROR );
 	}
 
 	return strSwitches;
@@ -1040,7 +1029,7 @@ string CDQSDWizardDlg::EscapeXML( string& xml )
 	}
 	catch ( ... )
 	{
-		MessageBox( _T("An enternal error was encountered:  CDQSDWizardDlg::EscapeXML"), _T("DQSD Search Wizard Exception"), MB_OK|MB_ICONERROR );
+		MessageBox( _T("An internal error was encountered:  CDQSDWizardDlg::EscapeXML"), _T("DQSD Search Wizard Exception"), MB_OK|MB_ICONERROR );
 	}
 
 	return xml;
@@ -1076,7 +1065,7 @@ void CDQSDWizardDlg::SaveFields()
 	}
 	catch ( ... )
 	{
-		MessageBox( _T("An enternal error was encountered:  CDQSDWizardDlg::SaveFields"), _T("DQSD Search Wizard Exception"), MB_OK|MB_ICONERROR );
+		MessageBox( _T("An internal error was encountered:  CDQSDWizardDlg::SaveFields"), _T("DQSD Search Wizard Exception"), MB_OK|MB_ICONERROR );
 	}
 }
 
@@ -1134,7 +1123,7 @@ void CDQSDWizardDlg::RestoreFields()
 	}
 	catch ( ... )
 	{
-		MessageBox( _T("An enternal error was encountered:  CDQSDWizardDlg::RestoreFields"), _T("DQSD Search Wizard Exception"), MB_OK|MB_ICONERROR );
+		MessageBox( _T("An internal error was encountered:  CDQSDWizardDlg::RestoreFields"), _T("DQSD Search Wizard Exception"), MB_OK|MB_ICONERROR );
 	}
 }
 
@@ -1171,7 +1160,7 @@ string CDQSDWizardDlg::GetScriptFieldName( const string& rstrFieldName )
 	}
 	catch ( ... )
 	{
-		MessageBox( _T("An enternal error was encountered:  CDQSDWizardDlg::GetScriptFieldName"), _T("DQSD Search Wizard Exception"), MB_OK|MB_ICONERROR );
+		MessageBox( _T("An internal error was encountered:  CDQSDWizardDlg::GetScriptFieldName"), _T("DQSD Search Wizard Exception"), MB_OK|MB_ICONERROR );
 	}
 	return _T("");
 }

@@ -75,8 +75,8 @@ STDMETHODIMP CSearchWizard::Exec(const GUID*, DWORD nCmdID, DWORD, VARIANTARG*, 
 		if ( cForms == 0 && cFrames > 0 )
 		{
 			if ( IDNO == ::MessageBox( hwndBrowser, 
-									   _T("There are multiple frames in the current document, none of which are active.  "
-										  "Would you like to continue and create an empty search template?  "
+									   _T("There are multiple frames in the current document, none of which are active. "
+										  "Would you like to continue and create an empty search template? "
 										  "If no, click in a frame or field to activate the frame, then try again."), 
 									   _T("DQSD Search Wizard"), MB_YESNO|MB_ICONQUESTION|MB_DEFBUTTON2 ) )
 			{
@@ -106,7 +106,7 @@ STDMETHODIMP CSearchWizard::Exec(const GUID*, DWORD nCmdID, DWORD, VARIANTARG*, 
 		{
 			string strMsg = string( _T("Sorry, no FORMs were found in the current ") ) + 
 									  ( ( cFrames > 0 ) ? _T("frame") : _T("document") ) +
-							string( _T(".  Would you like to continue and create an empty search template?") );
+							string( _T(". Would you like to continue and create an empty search template?") );
 			if ( IDNO == ::MessageBox( hwndBrowser, strMsg.c_str(),
 									   _T("DQSD Search Wizard"), MB_YESNO|MB_ICONQUESTION|MB_DEFBUTTON2 ) )
 			{
@@ -130,7 +130,12 @@ STDMETHODIMP CSearchWizard::Exec(const GUID*, DWORD nCmdID, DWORD, VARIANTARG*, 
 					CComPtr< IHTMLTextAreaElement > spActiveTextAreaElement;
 					if(FAILED(spActiveElement.QueryInterface(&spActiveTextAreaElement)))
 					{
-						bWarn = true;
+						// See if a SELECT element is selected
+						CComPtr< IHTMLSelectElement > spActiveSelectElement;
+						if(FAILED(spActiveElement.QueryInterface(&spActiveSelectElement)))
+						{
+							bWarn = true;
+						}
 					}
 				}
 			}
@@ -138,7 +143,7 @@ STDMETHODIMP CSearchWizard::Exec(const GUID*, DWORD nCmdID, DWORD, VARIANTARG*, 
 			if(bWarn)
 			{
 				if ( IDNO == ::MessageBox( hwndBrowser, 
-								   _T("No fields have been selected.  Selecting or clicking in the field which contains the search "
+								   _T("No fields have been selected. Selecting or clicking in the field which contains the search "
 									  "string will add some helpful information to the search and make "
 									  "it more complete.\r\n\r\n"
 									  "Would you like to continue anyway?"), 
@@ -197,7 +202,7 @@ CComPtr<IHTMLDocument2> CSearchWizard::GetActiveFrame( CComPtr<IHTMLDocument2>& 
 	}
 	catch ( ... )
 	{
-		MessageBox( ::GetForegroundWindow(), _T("An enternal error was encountered:  CSearchWizard::GetActiveFrame"), _T("DQSD Search Wizard Exception"), MB_OK|MB_ICONERROR );
+		MessageBox( ::GetForegroundWindow(), _T("An internal error was encountered:  CSearchWizard::GetActiveFrame"), _T("DQSD Search Wizard Exception"), MB_OK|MB_ICONERROR );
 	}
 
 	return spDoc;
