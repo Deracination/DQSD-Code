@@ -11,9 +11,8 @@
   <link>http://www.bloomberg.com/</link>
   
   <form name="stkf"
-        action="http://quote.bloomberg.com/analytics/bquote.cgi"
+        action="http://quote.bloomberg.com/apps/quote"
         method="get">
-    <input type="hidden" name="version" value="markets99.cfg"/>
     <input type="hidden" name="ticker" value=""/>
   </form>
   
