@@ -17,7 +17,7 @@
   <description>
   Search Illinois Death Certificates 1916-1950
   </description>
-  <form name="ildcf"
+  <form name="ildif"
         method="get"
         action="http://www.cyberdriveillinois.com/Genealogy/IDPHDeathSearchServlet">
     <input type="hidden" name="internal" value="external" />
@@ -141,7 +141,7 @@
   </form>
   <script src="addons/genealogy/genealogy_lib.js"></script>
   <script><![CDATA[
-    function ildc(q)
+    function ildi(q)
     {
       if( nullArgs("ildi", q) )
         return;
@@ -153,19 +153,19 @@
       }
 	var args = parseArgs(q, "county");
 	if (args != null) {
-	        document.ildcf.FirstName.value = "";
-	        document.ildcf.MiddleName.value = "";
-	        document.ildcf.county.value = "";
-	        document.ildcf.more.value = "";
-		document.ildcf.county.value = "";
+	        document.ildif.FirstName.value = "";
+	        document.ildif.MiddleName.value = "";
+	        document.ildif.county.value = "";
+	        document.ildif.more.value = "";
+		document.ildif.county.value = "";
 		if (args.switches.length == 1) {
 			if (args.switches[0].name == "county") {
-				document.ildcf.county.value =  args.switch_val["county"].toUpperCase();
+				document.ildif.county.value =  args.switch_val["county"].toUpperCase();
 			}
 		}
-		document.ildcf.LastName.value = genealogy_parse_surname(args.q);
-		document.ildcf.FirstName.value = genealogy_parse_givenname(args.q);
-		submitForm(ildcf);
+		document.ildif.LastName.value = genealogy_parse_surname(args.q);
+		document.ildif.FirstName.value = genealogy_parse_givenname(args.q);
+		submitForm(ildif);
 		return;
 	}
 	nullArgs("ildi", "?");

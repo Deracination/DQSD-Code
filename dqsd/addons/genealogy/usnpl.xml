@@ -1,27 +1,27 @@
-<search function="cemetery">
-  <name>Cemetery Junction</name>
+<search function="usnpl">
+  <name>US Newspaper List</name>
   <description>
-    Goto Cemetery Junction web pages.<br/>
+    Goto US Newspaper List web pages.<br/>
     <div class="helpboxDescLabels">Examples:</div>
     <table class="helpboxDescTable">
-      <tr><td>cemetery mi</td></tr>
-      <tr><td>cemetery alaska</td></tr>
+      <tr><td>usnpl mi</td></tr>
+      <tr><td>usnpl alaska</td></tr>
     </table>
   </description>
-  <link>http://www.cemeteryjunction.com/</link>
+  <link>http://www.usnpl.com/</link>
   <category>Genealogy</category>
   <contributor>Brent Beardsley</contributor>
-  <form name="cemeteryf">
+  <form name="usnplf">
 
   </form>
   <script src="addons/genealogy/genealogy_lib.js"></script>
   <script><![CDATA[
-    function cemetery(q)
+    function usnpl(q)
     {
-      if( nullArgs("cemetery", q) )
+      if( nullArgs("usnpl", q) )
         return false;
 
-      var search_url = "http://www.daddezio.com/cemetery/junction/index.html";
+      var search_url = "http://www.usnpl.com/";
       var links = genealogy_get_known_page_links(search_url);
       var search_place_num = genealogy_lookup_place(q);
       if (search_place_num >= 0) {

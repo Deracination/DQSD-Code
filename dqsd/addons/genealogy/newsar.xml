@@ -1,0 +1,36 @@
+<search function="newsar">
+  <name>NewspaperArchive.com</name>
+  <category>Genealogy</category>
+  <contributor>Brent Beardsley</contributor>
+  <link>http://www.newspaperarchive.com/</link>
+  <email></email>
+  <description>
+  Search NewspaperArchive.com for your ancestors
+  </description>
+  <form name="newsarf"
+        method="post"
+        action="http://www.newspaperarchive.com//members/Results.asp">
+	<input type="hidden" name="Action" value="Search" />
+	<input type="hidden" name="SearchString" value="" />
+	<input type="hidden" name="search_mode" value="exact" />
+  </form>
+  <script src="addons/genealogy/genealogy_lib.js"></script>
+  <script><![CDATA[
+    function newsar(q)
+    {
+      if( nullArgs("newsar", q) )
+        return;
+
+      var surname = genealogy_parse_surname(q);
+      var givenname = genealogy_parse_givenname(q);
+
+      var qry = surname;
+      if (givenname.length > 0) {
+        qry = givenname+" "+surname;
+      }
+      
+      document.newsarf.SearchString.value = qry;
+      submitForm(newsarf);
+    }
+  ]]></script>
+</search>

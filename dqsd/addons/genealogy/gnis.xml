@@ -61,6 +61,13 @@
 		var type_list = new Array("cemetery", "popplace");
 		var args = parseArgs(q, switch_list);
 
+		gnissearch.f_state.value = "";
+		gnissearch.f_cnty.value = "";
+		gnissearch.f_ty.value = "";
+		gnissearch.variant.value = "N";
+		gnissearch.f_ty.value = "";
+		gnissearch.f_ty.value = "";
+		
 		// check if the required switches are set
 		for (var j = 0; j < switch_list.length; j++)
 		{
