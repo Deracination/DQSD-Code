@@ -1,3 +1,8 @@
+Version 0.9.1 (beta) 21-Sep-2002
+
+* Fixed bug with 'Show help' toggle button
+* Removed 'Cancel' button from About dialog
+
 Version 0.9 (beta) 20-Sep-2002
 
 * Added links to DQSD search wizard web site on About dialog
