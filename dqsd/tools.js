@@ -219,24 +219,28 @@ function protocolHandled(url)
   return true;
 }
 
-// Parse a string containing commandline-like options (switches)
-// into an array.  The first element (0) contains the non-switch
-// part of the string.  Elements 1-n contain the switches.
+// Parse a string containing commandline-like options (in
+// the format "/xxx").  The result is an object containing 
+// these two properties:
+//    q: args minus any switches
+//    switches: array of switches ("/xxx")
 // Any abbreviated switches are expanded.
 // 
 // Example:
 //  q = "imagine all the people /ti /so /xyzzy"
 //  var args = parseArgs(q, "song, album, lytitle, artist");
 // Resulting args:
-//  args[0] = "imagine all the people"
-//  args[1] = "title"
-//	args[2] = "song"
-//	args[3] = "xyzzy"
+//  args.q = "imagine all the people"
+//  args.switches[0] = "title"
+//	args.switches[1] = "song"
+//	args.switches[2] = "xyzzy"
 // Notice that the last switch, xyzzy, is still returned even
 // though it is not specified in the list of expected switches
-function parseArgs(q, expectedSwitches)
+function parseArgs(
+  q, /* string to be parsed */
+  expectedSwitches /* list of expected switches, used to expand abbreviated switches */)
 {
-  var args = [q];
+  var switches = [];
   var tmpq = q;
   
   // Grab each token that looks like a switch (/\w+)
@@ -248,16 +252,16 @@ function parseArgs(q, expectedSwitches)
     // Return full switch if it's in the list of expected switches...
     var fullswitch = expectedSwitches.match(new RegExp(',\\s*('+res[1]+'\\w*)\\s*,'));
   	if (fullswitch && fullswitch[1])
-  	  args.push(fullswitch[1]);
+  	  switches.push(fullswitch[1]);
     else
-      args.push(res[1]); // ...otherwise just return the switch that was found
+      switches.push(res[1]); // ...otherwise just return the switch that was found
     
     // Drop switch we just found
     tmpq = tmpq.replace(reSwitch, '');
   }
   
   // Trim the remaining string which now contains the string without switches
-  args[0] = tmpq.replace(/^\s*/, '').replace(/\s*$/, '');
+  q = tmpq.replace(/^\s*/, '').replace(/\s*$/, '');
 
-  return args;
+  return { q:q, switches:switches };
 }
