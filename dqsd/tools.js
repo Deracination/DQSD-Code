@@ -46,6 +46,7 @@ function ensureLauncher()
     }
     catch (e)
     {
+      alert('Unable to instantiate DQSDTools.Launcher:\n' + e.description);
       DQSDLauncher = null;
     }
   }

@@ -62,6 +62,7 @@ The deskbar is customizable and completely open-source.
 -->
 
 <title>Search</title>
+<link rel="stylesheet" type="text/css" href="search.css">
 
 <xml id='searchxml' src='search.xml'></xml>
 
@@ -103,26 +104,6 @@ buttonalign="right";
 cal=true;
 calwidth=179;
 calheight=156;
-calbackground="menu";
-caltextcolor="menutext";
-calhighbackground="highlight";
-calhightext="highlighttext";
-caleventdaybackground="menu";
-caleventdaytext="red";
-caltodayeventbackground="window";
-caltodayeventtext="red";
-caltodaybackground="window";
-caltodaytext="windowtext";
-calgraybackground="menu";
-calgraytext="graytext";
-calmonthstyle="font-family:Tahoma;font-size:8pt;font-weight:bold";
-calnavstyle="font-family:Tahoma;font-size:8pt;font-weight:bold;border-width:1;border-style:solid;border-color:menu";
-caldaystyle="font-family:Tahoma;font-size:8pt;border-width:1;border-style:solid;border-color:menu";
-caldowstyle="font-family:Tahoma;font-size:8pt;border-width:1;border-style:solid;border-color:menu";
-caltodaystyle="font-family:Tahoma;font-size:8pt;font-weight:bold;border-width:1;border-style:solid;border-color:windowtext";
-caleventdaystyle="font-family:Tahoma;font-size:8pt;border-width:1;border-style:solid;border-color:menu" + ";color:" + caleventdaytext;
-caltodayeventstyle="font-family:Tahoma;font-size:8pt;font-weight:bold;border-width:1;border-style:solid;border-color:windowtext" + ";color:" + caltodayeventtext;
-
 
 // catch errors
 function handleerror(msg, url, lineno)
@@ -144,96 +125,6 @@ function qualifiedalert(s)
 }
 </script>
 
-<style>
-body
-{
- margin: 0px;
- border: 0;
- padding: 0;
- background-color: threedface;
-}
-td
-{
- font: menu;
-}
-.txtfld
-{
- font: menu;
- background-color: window;
- color: windowtext;
- border-style: inset;
- padding-top:2px;
- padding-left:2px;
- padding-right:2px;
- padding-bottom:3px;
- margin:0px;
- position:absolute;
- overflow:hidden;
- word-break:break-all;
-}
-.clock
-{
- font:menu;
- background-color: window;
- color: windowtext;
- border-style: inset;
- padding-top:2px;
- padding-left:2px;
- padding-right:2px;
- padding-bottom:3px;
- margin:0px;
- position:absolute;
- cursor:hand;
- text-align:right;
- overflow:hidden;
-}
-.gobutton
-{
- font:menu;
- padding-bottom:1px;
- padding-top:1px;
- padding-right:1px;
- padding-left:1px;
- border:2px;
- border-style:solid;
- border-color:threedface;
- background-color:threedface;
- color:buttontext;
- margin:0px;
- position:absolute;
-}
-.mogobutton
-{
- font:menu;
- padding-bottom:1px;
- padding-top:1px;
- padding-right:1px;
- padding-left:1px;
- border:2px;
- border-style:outset;
- border-color:window;
- background-color:threedface;
- color:buttontext;
- margin:0px;
- position:absolute;
-}
-.mdgobutton
-{
- font:menu;
- padding-bottom:1px;
- padding-top:1px;
- padding-right:1px;
- padding-left:1px;
- border:2px;
- border-style:inset;
- border-color:window;
- background-color:threedface;
- color:buttontext;
- margin:0px;
- position:absolute;
-}
-</style>
-
 <script>
 <!--
 uaMatch=navigator.userAgent.toLowerCase().match("msie\\s+(\\d+\\.\\d*)");
@@ -253,10 +144,7 @@ ie_version=(uaMatch ? parseFloat(uaMatch[1]) : 0.0);
                         ".mogobutton{" + buttonstyle + "} " +
                         ".mdgobutton{" + buttonstyle + "} " +
                         ".clock{" + clockstyle + "}</style>");
-  actualmenustyle =
-      "background:menu;height:18px;cursor:default;" +
-      "color:menutext;font-family:Tahoma;padding:1px;font-size:8pt;" +
-      menustyle;
+  actualmenustyle = menustyle;
 
 </script>
 
@@ -684,7 +572,6 @@ function rst()
   }
   startclock(clockdelay);
 }
-
 
 function reload()
 {

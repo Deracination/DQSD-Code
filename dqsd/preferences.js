@@ -1,28 +1,43 @@
-
 /* Configuration for Dave's Quick Search Deskbar features.
-*  After you've saved your changes, enter "!" in the deskbar 
+*  After you've saved your changes, enter "!" in the deskbar
 *  to reload.
 */
+
+/* Personalization variables
+*  Variables can be used in searches as default parameters.
+*/
+/*
+user_address = "1600 Pennsylvania Ave"
+user_city = "Washington"
+user_state = "DC"
+user_zip = "20509"
+*/
+
+/* help message duration in milliseconds
+*  every 1000=1 second ex: 5000=5 seconds
+*/
+helptime = 0;
+
 
 /* Display the clock?
 *  true = display
 *  false = do not display
 */
-clock=true;          
+clock=true;
 
 
-/* clock display delay in seconds
+/* clock display delay in milliseconds
 *  every 1000=1 second ex: 5000=5 seconds
 */
 clockdelay=5000;
 
 
-/* clock update rate in seconds
+/* clock update rate in milliseconds
 *  every 1000=1 second
 */
 clockupdate=1000;
 
-/* clock long form width.  
+/* clock long form width.
 *  long form is used if this pixel width is exceeded
 */
 clocklongwidth=139;
@@ -37,7 +52,7 @@ clocklongwidth=139;
 *  1=single window for all
 *  2=single window for each search type
 */
-reuseBrowserWindowMode = 2;
+reuseBrowserWindowMode = 0;
 
 
 /* Browser launch mode
@@ -65,15 +80,15 @@ launchmode=2;
 cal=true;
 
 
-/* Events file for the popup calendar events 
+/* Events file for the popup calendar events
 *  holidays.us.xml - United States
 *  holidays.ca.xml - Canada
 *  holidays.sg.xml - Singapore
 */
 eventsfileurl="holidays.us.xml";
 
-/* Local events file for the popup calendar events 
-*  These events will be added in addition to any holidays events 
+/* Local events file for the popup calendar events
+*  These events will be added in addition to any holidays events
 */
 localeventsfileurl="localevents.xml";
 
@@ -83,8 +98,7 @@ localeventsfileurl="localevents.xml";
 */
 //multiline=false;
 
-
-/* Default calendar. clicking on a calendar day will spawn the defined online calendar. 
+/* Default calendar. clicking on a calendar day will spawn the defined online calendar.
 *  Valid calendars include:
 *  yhocal - Yahoo Calendar
 *  msncal - MSN Calendar
@@ -116,7 +130,7 @@ defaultcal="yhocal";
 *  EEEE - day-of-week full name (Monday)
 *  EEE  - day-of-week abbreviation (Mon)
 */
-clocklongform=" EEE d MMM yyyy h:mm A ";
+clocklongform=" EEE MMM d, yyyy h:mm A ";
 clockshortform=" h:mm A ";
 
 
@@ -131,8 +145,8 @@ clocktooltipform=true;
  */
 showbutton = 2;
 
-/* 
- * Styles that can be used to modify the color, font, etc. 
+/*
+ * Styles that can be used to modify the color, font, etc.
  */
 //txtfldstyle = "background:yellow";
 //clockstyle = "background:threedface;text-align:center;border-width:1px;font-weight:bold";
@@ -140,7 +154,6 @@ showbutton = 2;
 //helpoptions = "width=800, height=550" // These are not CSS styles, but window.open() options
 
 /*
- *  Turn on/off(default) auto complete
+ *  Turn on/off(default) auto complete.  Values are true (on) and false (off)
  */
- autocomplete = false;
- 
+autocomplete = false;

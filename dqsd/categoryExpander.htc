@@ -8,20 +8,15 @@
   {
     var el = event.srcElement;
 
-    el.style.cursor = 'hand';
-    el.style.color = "#800080";
-
     if ( type )
     {
       el.title = (type == 'expandall' ? 'Expand all category groupings.  (Very helpful if searching this window.)' : 'Collapse all category groupings');
       return;
     }
-    
+
     el.innerText = '[-]';
-    el.style.fontFamily = 'Courier New';
-    el.style.fontSize = '11px';
     el.title = 'Collapse list of searches for this category';
-    
+
     doClick();
 
     var elTable = el.parentElement;
@@ -55,7 +50,7 @@
         }
         return;
       }
-    
+
       var elTable = el.parentElement;
       while ( elTable && elTable.tagName != 'TABLE' )
         elTable = elTable.parentElement;
@@ -63,7 +58,7 @@
       elTable = elTable.parentElement;
       while ( elTable && elTable.tagName != 'TBODY' )
         elTable = elTable.parentElement;
-        
+
       var expand = el.innerText.substring( 0, 3 ) == '[+]';
 
       var rows = elTable.children[ category ];
@@ -71,10 +66,9 @@
         rows = new Array( rows );
       for ( var i = 0; i < rows.length; i++ )
         rows[i].style.display = (expand ? '' : 'none');
-        
+
       el.innerText = '[' + (expand ? '-' : '+') + ']';
       el.title = (expand ? 'Collapse' : 'Expand') + ' list of searches for this category';
-
     }
     catch ( e )
     {
