@@ -38,7 +38,9 @@ New Searches
 * ubs - search for used books at http://www.used-books.org.uk/cgi/books.cgi
 * encyfr - Search the encyclopédie Voila with Hachette Multimédia
 * wa - Search WebAttack for shareware and freeware
-* abt - Search About.com.
+* abt - Search About.com
+* alistapart - Search the A List Apart site (from Sarah S.)
+* mg - Search MajorGeeks site for shareware and freeware
 
 Bug Fixes
 

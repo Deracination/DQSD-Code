@@ -1,0 +1,218 @@
+<search function="mg">
+  <name>MajorGeeks</name>
+  <category>Computers</category>
+  <contributor>John W. Bairen, Jr.</contributor>
+  <link>http://majorgeeks.com/search.php?</link>
+  <email>john_at_bairen_dot_net</email>
+  <description>
+  Search MajorGeeks.com for software.
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/all</td><td> - </td><td>Search entire site.</td></tr>
+      <tr><td>/admin_tools</td><td> - </td><td>Search for Admin tools.</td></tr>
+      <tr><td>/all_in_one</td><td> - </td><td>Search for All In One tools.</td></tr>
+      <tr><td>/antivirus</td><td> - </td><td>Search for Anti-Virus tools.</td></tr>
+      <tr><td>/appearance</td><td> - </td><td>Search for tools to change the way Windows looks.</td></tr>
+      <tr><td>/backup</td><td> - </td><td>Search for Back-up tools.</td></tr>
+      <tr><td>/benchmarking</td><td> - </td><td>Search for Benchmarking tools.</td></tr>
+      <tr><td>/bios</td><td> - </td><td>Search for BIOS tools.</td></tr>
+      <tr><td>/browsers</td><td> - </td><td>Search for Browsers and Browser tools</td></tr>
+      <tr><td>/covert_ops</td><td> - </td><td>Search for Discovery and Reconnaissance</td></tr>
+      <tr><td>/diagnostics</td><td> - </td><td>Search for Diagnostic tools.</td></tr>
+      <tr><td>/drive_cleaners</td><td> - </td><td>Search for Drive Cleaning tools.</td></tr>
+      <tr><td>/drive_utils</td><td> - </td><td>Search for Drive utilities.</td></tr>
+      <tr><td>/driver_tools</td><td> - </td><td>Search for Driver tools.</td></tr>
+      <tr><td>/ergonomics</td><td> - </td><td>Search for Ergonomic tools.</td></tr>
+      <tr><td>/game_tweaks</td><td> - </td><td>Search for Game Tweak tools.</td></tr>
+      <tr><td>/input_devices</td><td> - </td><td>Search for Input Device tools.</td></tr>
+      <tr><td>/internet_tools</td><td> - </td><td>Search for Internet tools</td></tr>
+      <tr><td>/mail_utils</td><td> - </td><td>Search for Mail utilities</td></tr>
+      <tr><td>/memory</td><td> - </td><td>Search for Memory tools.</td></tr>
+      <tr><td>/monitoring</td><td> - </td><td>Search for Monitoring tools.</td></tr>
+      <tr><td>/news</td><td> - </td><td>Search for News.</td></tr>
+      <tr><td>/processor</td><td> - </td><td>Search for Processor tools.</td></tr>
+      <tr><td>/registry</td><td> - </td><td>Search for Registry tools.</td></tr>
+      <tr><td>/reviews</td><td> - </td><td>Search for Review information.</td></tr>
+      <tr><td>/security</td><td> - </td><td>Search for Security tools.</td></tr>
+      <tr><td>/spyware_tools</td><td> - </td><td>Search for Spyware tools.</td></tr>
+      <tr><td>/system_info</td><td> - </td><td>Search for System Information tools.</td></tr>
+      <tr><td>/video</td><td> - </td><td>Search for Video tools.</td></tr>
+      <tr><td>/misc</td><td> - </td><td>Search for Miscellaneous tools.</td></tr>
+      <tr><td>/off_base</td><td> - </td><td>Search for Off Base features.</td></tr>
+      <tr><td>/way_off_base</td><td> - </td><td>Search for Way Off Base features.</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>mg AntiVir</td></tr>
+      <tr><td>mg AntiVir /antivirus</td></tr>
+    </table>
+  </description>
+  <form name="mgf"
+        method="get"
+        action="http://majorgeeks.com/search.php">
+    <input type="hidden" name="query" value="" />
+    <input type="hidden" name="topic" value="" />
+    <input type="hidden" name="days" value="0" />
+  </form>
+  <script><![CDATA[
+    function mg(q)
+    {
+      if( nullArgs("mg", q) )
+        return;
+
+      var args = parseArgs(q, "all, admin_tools, all_in_one, antivirus, appearance, backup, benchmarking, bios, browsers, covert_ops, diagnostics, drive_cleaners, drive_utils, driver_tools, ergonomics, game_tweaks, input_devices, internet_tools, mail_utils, monitoring, memory, news, off_base, processor, registry, reviews, security, spyware_tools, system_info, video, misc, way_off_base");
+      if ( args.switches.length > 0 )
+      {
+        switch( args.switches[0].name )
+        {
+          case "all":
+             document.mgf.query.value = args.q;
+             document.mgf.topic.value = "";
+            break;
+          case "admin_tools":
+             document.mgf.query.value = args.q;
+             document.mgf.topic.value = "2";
+            break;
+          case "all_in_one":
+             document.mgf.query.value = args.q;
+             document.mgf.topic.value = "1";
+            break;
+          case "antivirus":
+             document.mgf.query.value = args.q;
+             document.mgf.topic.value = "29";
+            break;
+          case "appearance":
+             document.mgf.query.value = args.q;
+             document.mgf.topic.value = "23";
+            break;
+          case "backup":
+             document.mgf.query.value = args.q;
+             document.mgf.topic.value = "3";
+            break;
+          case "benchmarking":
+             document.mgf.query.value = args.q;
+             document.mgf.topic.value = "4";
+            break;
+          case "bios":
+             document.mgf.query.value = args.q;
+             document.mgf.topic.value = "25";
+            break;
+          case "browsers":
+             document.mgf.query.value = args.q;
+             document.mgf.topic.value = "5";
+            break;
+          case "covert_ops":
+             document.mgf.query.value = args.q;
+             document.mgf.topic.value = "6";
+            break;
+          case "diagnostics":
+             document.mgf.query.value = args.q;
+             document.mgf.topic.value = "7";
+            break;
+          case "drive_cleaners":
+             document.mgf.query.value = args.q;
+             document.mgf.topic.value = "12";
+            break;
+          case "drive_utils":
+             document.mgf.query.value = args.q;
+             document.mgf.topic.value = "8";
+            break;
+          case "driver_tools":
+             document.mgf.query.value = args.q;
+             document.mgf.topic.value = "28";
+            break;
+          case "ergonomics":
+             document.mgf.query.value = args.q;
+             document.mgf.topic.value = "30";
+            break;
+          case "game_tweaks":
+             document.mgf.query.value = args.q;
+             document.mgf.topic.value = "27";
+            break;
+          case "input_devices":
+             document.mgf.query.value = args.q;
+             document.mgf.topic.value = "24";
+            break;
+          case "internet_tools":
+             document.mgf.query.value = args.q;
+             document.mgf.topic.value = "13";
+            break;
+          case "mail_utils":
+             document.mgf.query.value = args.q;
+             document.mgf.topic.value = "10";
+            break;
+          case "monitoring":
+             document.mgf.query.value = args.q;
+             document.mgf.topic.value = "11";
+            break;
+          case "memory":
+             document.mgf.query.value = args.q;
+             document.mgf.topic.value = "26";
+            break;
+          case "news":
+             document.mgf.query.value = args.q;
+             document.mgf.topic.value = "18";
+            break;
+          case "off_base":
+             document.mgf.query.value = args.q;
+             document.mgf.topic.value = "20";
+            break;
+          case "processor":
+             document.mgf.query.value = args.q;
+             document.mgf.topic.value = "14";
+            break;
+          case "registry":
+             document.mgf.query.value = args.q;
+             document.mgf.topic.value = "15";
+            break;
+          case "reviews":
+             document.mgf.query.value = args.q;
+             document.mgf.topic.value = "19";
+            break;
+          case "security":
+             document.mgf.query.value = args.q;
+             document.mgf.topic.value = "16";
+            break;
+          case "spyware_tools":
+             document.mgf.query.value = args.q;
+             document.mgf.topic.value = "31";
+            break;
+          case "system_info":
+             document.mgf.query.value = args.q;
+             document.mgf.topic.value = "9";
+            break;
+          case "video":
+             document.mgf.query.value = args.q;
+             document.mgf.topic.value = "22";
+            break;
+          case "misc":
+             document.mgf.query.value = args.q;
+             document.mgf.topic.value = "17";
+            break;
+          case "way_off_base":
+             document.mgf.query.value = args.q;
+             document.mgf.topic.value = "21";
+            break;
+          default:
+             document.mgf.query.value = args.q;
+             document.mgf.topic.value = "";
+            break;
+        }
+      }
+      else{
+        document.mgf.query.value = q;
+        document.mgf.topic.value = "";
+      }
+      submitForm(mgf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 03/12/03 at 23:17:46
+    by Dave's Quick Search Deskbar Search Wizard version 1.0.1 ,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>
