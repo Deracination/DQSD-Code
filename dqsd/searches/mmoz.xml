@@ -1,0 +1,33 @@
+<search function="mmoz">
+  <name>MusicMoz search</name>
+  <category>Entertainment</category>
+  <contributor>MLL</contributor>
+  <link>http://musicmoz.org/</link>
+  <email></email>
+  <description>Search for music info at MusicMoz.org</description>
+  <form name="mmozf"
+        method="get"
+        action="http://musicmoz.org/search/search.cgi">
+    <input type="hidden" name="search" value="" />
+  </form>
+  <script><![CDATA[
+    function mmoz(q)
+    {
+      if( nullArgs("mmoz", q) )
+        return;
+
+      document.mmozf.search.value = q;
+
+      submitForm(mmozf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 06/08/03 at 16:51:58
+    by Dave's Quick Search Deskbar Search Wizard version 1.2,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>
