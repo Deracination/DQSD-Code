@@ -2,8 +2,9 @@
  * DQSD Stylesheet
  * added by Neel Doshi (neel_doshi@hotmail.com) 3/31/2002
  * modified by Neel Doshi (neel_doshi@hotmail.com) 4/03/2002
- * $Revision$
- * $Date$
+ * modified by Neel Doshi (neel_doshi@hotmail.com) 4/09/2002
+ * $Revision: 1.2
+ * $Date: 2002/04/09 00:03:00
  *
  * TODO:
  * - Check each individual style to make sure this is the minium requrired set of instructions.
@@ -256,7 +257,11 @@ A.helpboxLinkJump:ACTIVE,  A.helpboxLinkJump:LINK, A.helpboxLinkJump:VISITED, A.
 {
   color:blue;
 }
-A.helpboxLinkTop:HOVER, A.helpboxLink:HOVER, A.helpboxLinkJump:HOVER
+A.helpboxCommandLink:ACTIVE, A.helpboxCommandLink:LINK, A.helpboxCommandLink:VISITED, A.helpboxCommandLink:HOVER
+{
+  color:white;
+}
+A.helpboxLinkTop:HOVER, A.helpboxLink:HOVER, A.helpboxLinkJump:HOVER, A.helpboxCommandLink:HOVER
 {
   color:red
 }
