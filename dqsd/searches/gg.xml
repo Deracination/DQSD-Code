@@ -1,14 +1,15 @@
 <search function="gg">
   <name>Google</name>
-  <description>Google is reputed to be the fastest web search engine. Search for /images, /related sites, or sites that /link to the search term. <nobr>Example: "gg david bau /images"</nobr></description>
+  <description>Google is reputed to be the fastest web search engine. Search Google's copy of the DMOZ open /directory. Search for /images, /related sites, sites that /link to the search term, or view Google's /cache of a web page. <nobr>Example: "gg david bau /images"</nobr></description>
   <category>Search the Web</category>
-  <link>http://www.google.com</link>
-  <switches>images, related, similar, cache, link</switches>
+  <link>http://www.google.com/</link>
+  <switches>images, directory, related, similar, cache, link</switches>
   <contributor>David Bau, Ryan Edwards</contributor>
   <form name="ggf"
         target="_blank"
         action="http://www.google.com/search"
         method="get">
+    <input type="hidden" name="cat" value=""/>
     <input type="hidden" name="q"/>
   </form>
   <form name="imagef"
@@ -20,12 +21,23 @@
   <script><![CDATA[
     function gg(q, switches)
     {
-      if (q == "")
-        openSearchWindow("http://www.google.com/");
-      else if( switches.length == 1 )
+      if( q == "" )
       {
         switch( switches[0] )
         {
+          case "images": openSearchWindow("http://images.google.com/"); break;
+          case "directory": openSearchWindow("http://images.google.com/dirhp?hl=en"); break;
+          default: openSearchWindow("http://www.google.com/"); break;
+        }
+      }
+      else if( switches.length == 1 )
+        switch( switches[0] )
+        {
+          case "directory":
+            document.ggf.q.value = q;
+            document.ggf.cat.value = "gwd/Top";
+            submitForm(ggf);
+            break;
           case "images":
             document.imagef.q.value = q;
             submitForm(imagef);
@@ -44,7 +56,6 @@
             submitForm(ggf);
             break;
         }
-      }   
       else
       {
         document.ggf.q.value = q;
