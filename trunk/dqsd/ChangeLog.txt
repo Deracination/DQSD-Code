@@ -4,6 +4,7 @@ New Searches
 
 * smlnk - smLNK is a link-shortening redirector where the URLs are as short as possible (from Jonathon Marshall)
 * cjfr - Get the conjugation for a french verb
+* synfr - get synonyms for a french word
 * webpoll - displays a graph illustrating the timings of the objects on a web page (from Dean Wilson)
 * dg - DynaGen Domain Search; finds variations of domain names for any word or domain name (from Glenn Carr)
 
