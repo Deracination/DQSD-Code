@@ -1,0 +1,31 @@
+<search function="pclmap">
+  <name>Perry Castaneda Library Map Collection</name>
+  <description>
+    Goto Perry Castaneda Library Map Collection web pages.<br/>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>pclmap michigan</td></tr>
+      <tr><td>pcmlap brown, wi</td></tr>
+    </table>
+  </description>
+  <link>http://www.lib.utexas.edu/maps/united_states.html</link>
+  <category>Genealogy</category>
+  <contributor>Brent Beardsley</contributor>
+
+  <script src="addons/genealogy/genealogy_lib.js"></script>
+  <script><![CDATA[
+    function pclmap(q)
+    {
+      if( nullArgs("pclmap", q) )
+        return false;
+
+      var state_name = genealogy_lookup_place_name(genealogy_parse_place_state(q)).replace(/\s/g, "_").toLowerCase();
+      if (state_name == "" || state_name == "district_of_columbia") {
+        state_name = "united_states";
+      }
+      var search_url = "http://www.lib.utexas.edu/maps/"+state_name+".html";
+      openSearchWindow(search_url);
+    }
+    ]]>
+  </script>
+</search>

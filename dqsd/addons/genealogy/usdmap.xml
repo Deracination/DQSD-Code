@@ -1,0 +1,52 @@
+<search function="usdmap">
+  <name>United States Digital Map library</name>
+  <description>
+    Goto United States Digital Map library web pages.<br/>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>usdmap michigan</td></tr>
+      <tr><td>usdmap brown, wi</td></tr>
+    </table>
+  </description>
+  <link>http://www.rootsweb.com/~usgenweb/maps/table2.html</link>
+  <category>Genealogy</category>
+  <contributor>Brent Beardsley</contributor>
+
+  <script src="addons/genealogy/genealogy_lib.js"></script>
+  <script><![CDATA[
+    function usdmap(q)
+    {
+      if( nullArgs("usdmap", q) )
+        return false;
+
+      var search_url = "http://www.rootsweb.com/~usgenweb/maps/table2.html";
+      var links = genealogy_get_known_page_links(search_url);
+      var state = genealogy_parse_place_state(q);
+      var county = genealogy_parse_place_county(q);
+      var search_place_num = genealogy_lookup_place(state);
+      if (search_place_num >= 0) {
+        search_url = links[search_place_num];
+	if (county != "" ) {
+	  var page_src = genealogy_webpage_get(search_url);
+	  links = genealogy_webpage_get_links(page_src);
+	  if (links.length == 1) {
+	    // if only one link assume it's a redirect
+	    genealogy_alert("only one link available assuming it's a redirect.");
+	    search_url = genealogy_build_url(search_url, genealogy_link_get_href(links[0]));
+	    page_src = genealogy_webpage_get(search_url);
+	    links = genealogy_webpage_get_links(page_src)
+	  }
+          var county_regex = new RegExp("^"+county+"( County)?", "i");
+	  genealogy_alert("looking for "+county);
+	  var matching_links = genealogy_links_get_matching_named_links(links, county_regex, null);
+	  if (matching_links.length > 0) {
+	    // found the county link
+	    search_url = genealogy_build_url(search_url, genealogy_link_get_href(matching_links[0]));		
+	  }
+	}
+      }
+      openSearchWindow(search_url);
+    }
+    ]]>
+  </script>
+</search>

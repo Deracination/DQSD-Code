@@ -1,0 +1,53 @@
+<search function="age">
+  <name>Age Calculator</name>
+  <category>Genealogy</category>
+  <contributor>Brent Beardsley</contributor>
+  <link></link>
+  <email></email>
+  <description>
+  Calculate age between two dates. The start date is specified first
+  and if no end date is specified, the current date is used for the end date.
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>age startDate [endDate]</td></tr>
+      <tr><td>age 1 Feb 1954 8/22/1979</td></tr>
+      <tr><td>age 1 Feb 1954 22 August 1979</td></tr>
+      <tr><td>age 1 Feb 1954 22 Aug 1979</td></tr>
+      <tr><td>age 12 Feb 1927</td></tr>
+      <tr><td>age 2/12/1927</td></tr>
+    </table>
+  </description>
+  <script src="addons/genealogy/genealogy_lib.js"></script>
+  <script><![CDATA[
+    function age(q)
+    {
+      if( nullArgs("age", q) )
+        return;
+
+      if (!genealogy_check_lib_version("1.5")) {
+	return false;
+      }
+
+      var startDate = null;
+      var endDate = null;
+      var result = "Invalid date(s) specified.";
+      var twoDatesRegEx = new RegExp("^\\s*"+genealogy_date_format_all+"\\s+"+genealogy_date_format_all+"\\s*$");
+      var oneDateRegEx = new RegExp("^\\s*"+genealogy_date_format_all+"\\s*$");
+      if (q.match(twoDatesRegEx))	{
+            var r = twoDatesRegEx.exec(q);
+            if (r != null) {
+                  startDate = genealogy_parse_date(r[6]);
+                  endDate = genealogy_parse_date(r[10]);
+                  result = genealogy_age_calc(startDate, endDate);
+            }
+      } else if (q.match(oneDateRegEx)) {
+            var r = oneDateRegEx.exec(q);
+            if (r != null) {
+                  startDate = genealogy_parse_date(r[6]);
+                  result = genealogy_age_calc(startDate);
+            }
+      }
+      document.deff.q.value = result;
+    }
+  ]]></script>
+</search>

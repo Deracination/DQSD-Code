@@ -1,0 +1,33 @@
+<search function="ustmap">
+  <name>United States Territorial Map library</name>
+  <description>
+    Goto a map showing the states and territories for a given year.<br/>
+    Valid years are: 1775, 1790, 1800, 1810, 1820, 1830, 1840, 1850, 1860, 1870, 1880, 1900, 1920
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>ustmap</td><td> - </td><td>Show an overview of when all the states became states.</td></tr>
+      <tr><td>ustmap 1790</td><td> - </td><td>Show an overview of the states and territories in 1775.</td></tr>
+      <tr><td>ustmap 1920</td><td> - </td><td>Show an overview of the states in 1920.</td></tr>
+    </table>
+  </description>
+  <link>http://xroads.virginia.edu/~MAP/TERRITORY/territor.html</link>
+  <category>Genealogy</category>
+  <contributor>Brent Beardsley</contributor>
+
+  <script src="addons/genealogy/genealogy_lib.js"></script>
+  <script><![CDATA[
+    function ustmap(q)
+    {
+      if( nullArgs("ustmap", q) )
+        return false;
+
+      var valid_years = new Array("1775", "1790", "1800", "1810", "1820", "1830", "1840", "1850", "1860", "1870", "1880", "1900", "1920");
+      if (!genealogy_in_array(q, valid_years)) {
+	nullArgs("ustmap", "?");
+	return false;
+      }
+      openSearchWindow("http://xroads.virginia.edu/~MAP/TERRITORY/"+q+"map.html");
+    }
+    ]]>
+  </script>
+</search>
