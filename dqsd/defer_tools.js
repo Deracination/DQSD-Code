@@ -34,6 +34,9 @@ function openDocument(path)
 // Submit a form either with the default browser or with IE
 function submitForm(form, dontChangeTarget)
 {
+  var oldtarget;
+  var newtarget;
+
   //allow the Override
   if ( !dontChangeTarget )
   {
@@ -46,17 +49,37 @@ function submitForm(form, dontChangeTarget)
     // Reuse a single window if the user wants to and the target is _blank
     // Don't override targets with any other name because some searches may want
     // their own window.
-    if ((getReuseBrowserWindowMode() > 0) && form.attributes["target"].nodeValue && (form.attributes["target"].nodeValue == '_blank'))
+
+    oldtarget = form.attributes["target"].nodeValue;
+    newtarget = oldtarget;
+
+    if ((getReuseBrowserWindowMode() > 0) && oldtarget && (oldtarget == '_blank'))
     {
       // 1=same window always; 2=new window for each search type
-      form.attributes["target"].nodeValue = ((getReuseBrowserWindowMode() == 1) ? DQSD_BROWSER_WINDOW_NAME : (DQSD_BROWSER_WINDOW_NAME + '_' + form.name));
+      newtarget = ((getReuseBrowserWindowMode() == 1) ? DQSD_BROWSER_WINDOW_NAME : (DQSD_BROWSER_WINDOW_NAME + '_' + form.name));
     }
+    else
+    {
+      newtarget = DQSD_BROWSER_WINDOW_NAME + "_" + submitcount;
+      submitcount = submitcount + 1;
+    }
+    form.attributes["target"].nodeValue = newtarget;
   }
 
   if (useExternalBrowser && DQSDLauncher)
     DQSDLauncher.SubmitForm(form);
   else
+  {
+    if (newtarget && pagetemplate)
+    {
+      var w = window.open(pagetemplate, newtarget);
+      w.history.back(1);
+    }
     form.submit();
+  }
+
+  if (oldtarget)
+    form.attributes["target"].nodeValue = oldtarget;
 }
 
 // Used by the calendar and the menu (or anything that uses IE window.createPopup method), which cannot call
