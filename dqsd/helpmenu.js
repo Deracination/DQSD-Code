@@ -134,7 +134,7 @@ function makeToolTipString(search)
     var firstBracket = helpString.indexOf('<', 1);
     if ( firstBracket != -1 )
       helpString = helpString.slice(0, firstBracket);
-    return helpString.replace(/\r\n/g, '').replace( /^\s+/, '');
+    return helpString.replace(/\r\n/g, '').replace( /(^\s+|\s+$)/g, '');
   }
   else
   {
