@@ -18,6 +18,7 @@
 #define IDS_ERR_HOTKEY_NO_BAR_WINDOW    703
 #define IDS_ERR_HOTKEY_WINDOW_FAILED    704
 #define IDS_ERR_HOTKEY_REG_FAILED       705
+#define IDS_ERR_VERSION_RESOURCE        706
 
 // Next default values for new objects
 // 

@@ -22,6 +22,13 @@ public:
 	, m_nHorizontalAlignment( 2 )
 	{
 		m_hMain = ::CreatePopupMenu();
+		ATLTRACE("CMenuBuilder - created\n");
+	}
+
+	virtual ~CMenuBuilder()
+	{
+		ATLTRACE("CMenuBuilder - destroyed\n");
+		ATLTRACE("DQSDTools: Lock count %d\n", _Module.GetLockCount());
 	}
 
 DECLARE_REGISTRY_RESOURCEID(IDR_MENUBUILDER)

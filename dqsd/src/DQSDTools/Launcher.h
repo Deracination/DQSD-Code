@@ -33,6 +33,13 @@ public:
 	CLauncher()
 	: m_bDebug(false)
 	{
+		ATLTRACE("CLauncher - created\n");
+	}
+
+	virtual ~CLauncher()
+	{
+		ATLTRACE("CLauncher - destroyed\n");
+		ATLTRACE("DQSDTools: Lock count %d\n", _Module.GetLockCount());
 	}
 
 DECLARE_REGISTRY_RESOURCEID(IDR_LAUNCHER)
@@ -65,6 +72,7 @@ public:
 	STDMETHOD(MapKeyCode)(long lVKCode, long lCharCode);
 
 public:
+	STDMETHOD(get_VersionIsCorrect)(int v1, int v2, int v3, int v4, /*[out, retval]*/ VARIANT_BOOL *pVal);
 	STDMETHOD(SetSite)(IUnknown* pUnkSite);
 
 // Implementation

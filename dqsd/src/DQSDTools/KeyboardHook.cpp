@@ -182,6 +182,27 @@ LRESULT CALLBACK NotificationWndProc(
 	return DefWindowProc(hwnd, uMsg,wParam,lParam);
 }
 
+/*
+// Will Dean - this was just an experiment to do with termination
+// it doesn't work, but I'm still thinking about it...
+
+#include <process.h>
+
+void KillerThread(void*)
+{
+	HANDLE hEvent = CreateEvent(NULL, TRUE, FALSE, "DQSDStopperEvent");
+
+	ResetEvent(hEvent);
+	WaitForSingleObject(hEvent, INFINITE);
+
+	ATLTRACE("Killer Invoked\n");
+	CoFreeUnusedLibraries();
+
+	DeleteObject(hEvent);
+}
+*/
+
+
 //
 // Install a keyboard hook on the search deskbars message handler thread
 //
@@ -215,6 +236,11 @@ HHOOK KeyboardHookInstall()
 	hHook = SetWindowsHookEx(WH_KEYBOARD, KeyboardProc, _Module.GetModuleInstance(), threadId);
 
 	_RPT1(_CRT_WARN, "hHook 0x%x\n", hHook);
+
+
+//	_beginthread(KillerThread, 0, NULL);
+
+
 
 	return hHook;
 }
