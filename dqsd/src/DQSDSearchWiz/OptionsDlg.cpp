@@ -1,0 +1,6 @@
+// OptionsDlg.cpp : Implementation of COptionsDlg
+#include "stdafx.h"
+#include "OptionsDlg.h"
+
+/////////////////////////////////////////////////////////////////////////////
+// COptionsDlg
