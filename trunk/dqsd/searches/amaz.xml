@@ -75,6 +75,9 @@
 
       document.amazf.action = "http://www.amazon."+defaultDomain+"/exec/obidos/external-search";
       document.amazf.mode.value = "blended";
+	  if (typeof amazTag != "undefined") 
+		  document.amazf.tag.value = amazTag;
+
 
       var args = parseArgs(q, "domain, books, music, classical-music, music-dd, mp3, dvd, video, vhs, movies, theatrical, restaurants, toys, baby, computers, pc-hardware, software, games, electronics, photography, tools, magazines, garden, kitchen, travel, cellular, wireless-phones, outlet, auctions, zshops, scientific, medical, industrial, cars, home, lifestyle, pets, arts, referral");
       if( q == "" )
