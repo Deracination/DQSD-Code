@@ -55,10 +55,10 @@
           case "bb":
           case "barebones": pw_q = "Computer Systems - Kits Bare Bones"; break;
         }
-        openSearchWindow("http://brook.pricewatch.com/search/search.asp?c=" + escape(pw_q)+ "&s=" + escape(args.q));
+        openSearchWindow("http://www.pricewatch.com/s/search.asp?s=" + escape(args.q) + "&c=" + escape(pw_q));
       } 
       else 
-        openSearchWindow("http://brook.pricewatch.com/search/search.asp?s=" + escape(q));
+        openSearchWindow("http://www.pricewatch.com/s/search.asp?s=" + escape(q));
     }
   ]]></script>
 
