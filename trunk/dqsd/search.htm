@@ -1,7 +1,7 @@
 <html>
 <!--
 Dave's Quick Search Deskbar
-Version 2.5.8-Beta 8 - May 15, 2002
+Version 2.5.8-Beta 9 - June 6, 2002
 
 Copyright (c) 2002 David Bau
 
@@ -142,7 +142,7 @@ function def()
     performsearch(defaultsearch,t);
     return false;
   };
-    
+
   // question mark only: show help
   if (t == "?")         { about(); return false; }
 
@@ -242,7 +242,7 @@ function shortcut(t)
   // no match, no dice
   if (!search)
     return false;
-    
+
   // search is there, but disabled
   if ( !searches[search].enabled )
     return false;
@@ -791,7 +791,7 @@ function postStartup()
   {
 	  keyboardHook = new ActiveXObject("DQSDTools.Launcher");
 	  keyboardHook.InstallKeyboardHook();
-  
+
 	  if(hotkeyCharacter != "")
 		keyboardHook.RegisterHotKey(hotkeyCharacter.charCodeAt(0));
 	  else if(hotkeyVkCode != 0)
@@ -800,7 +800,7 @@ function postStartup()
   catch(e)
   {
 	  alert("There was a problem initializing the enhanced keyboard support - some key combinations and hotkeys may not work");
-	  keyboardHook = null;	
+	  keyboardHook = null;
   }
 }
 
