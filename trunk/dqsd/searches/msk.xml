@@ -1,10 +1,11 @@
 <search function="msk">
   <name>Microsoft Knowledge Base</name>
-  <description>Search the Microsoft Knowledge Base using either a 6-digit "Q" code (the leading "Q" is optional) or a regular search expression. Examples: "msk 252795", "msk Windows Bugs"</description>
+  <description>Search the Microsoft Knowledge Base using either a regular search expression or a 6-digit "Q" code.<br/>
+  "msk Windows Bugs" or "msk q252795"
+  </description>
   <link>http://support.microsoft.com/default.aspx?scid=fh;en-us;kbinfo</link>
   <category>Computers</category>
   <contributor>Ryan Edwards</contributor>
-  <email>ryan_at_karynova_dot_com</email>
   <script><![CDATA[
     function msk(q)
     {

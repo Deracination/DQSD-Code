@@ -1,10 +1,15 @@
 <search function="msdn">
   <name>Microsoft Developer Network (MSDN)</name>
-  <description>Searches all of MSDN by default, /library limits searches to only the MSDN Library. Examples: "msdn ocx", "msdn iframes /library"</description>
+  <description>Search for articles on the MSDN.<br/>
+  "msdn ocx" or "msdn iframes /library"<br/>
+  <a class="helpboxDescLabels">Switches:</a><br/>
+	<table cellpadding="0" cellspacing="0" border="0">
+		<tr><td class="helpboxDescColumns">/library</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Limits search to the MSDN Library.</td></tr>
+	</table>
+  </description>
   <category>Computers</category>
   <link>http://msdn.microsoft.com/</link>
   <contributor>Ryan Edwards</contributor>
-  <email>ryan_at_karynova_dot_com</email>
   <form name="msdnf"
         action="http://msdn.microsoft.com/library/shared/searchtab/searchHandoff.asp" 
         method="get">
