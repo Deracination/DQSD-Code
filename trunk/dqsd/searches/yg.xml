@@ -1,6 +1,6 @@
 <search function="yg">
   <name>Yahoo Groups</name>
-  <description>Search yahoo groups for messages or members.  Usage: "yg &lt;groupname&gt; [/messages:string] [/members:name]".  E.g., "yg dqsdd /mes:localpreferences" or "yg dqsdd /mem:carr"</description>
+  <description>Search yahoo groups for messages or members.  Usage: "yg {groupname} [/messages:string] [/members:name]".  E.g., "yg dqsdd /mes:localpreferences" or "yg dqsdd /mem:carr"</description>
   <category>Search the Web</category>
   <link>http://groups.yahoo.com/</link>
   <contributor>Glenn Carr</contributor>
@@ -14,12 +14,11 @@
   <script><![CDATA[
     function yg(q)
     {
+      if( nullArgs("yg", q) )
+        return false;
+
       var args = parseArgs(q, "messages, members");
-      if( args.q == "" || args.switches.length == 0)
-      {
-        openSearchWindow("http://groups.yahoo.com/");
-      }
-      else if( args.switches.length >= 1 )
+      if( args.switches.length >= 1 )
       {
         document.ygf.query.value = args.switches[0].value;
         switch( args.switches[0].name )
