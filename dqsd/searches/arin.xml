@@ -12,9 +12,9 @@
   <contributor>Tim Aiello</contributor>
   <email>tsaiello@kosmoNOSPAM.com</email>
   <form name="arinform"
-	method="post"
-	action="http://ws.arin.net/cgi-bin/whois.pl">
-    <input type="text" name="queryinput" value="Search" />
+        method="post"
+        action="http://ws.arin.net/cgi-bin/whois.pl">
+    <input type="hidden" name="queryinput" value="Search" />
   </form>
   <script><![CDATA[
     function arin(q, switches)
@@ -31,4 +31,9 @@
       }
     }
   ]]></script>
+  <copyright>
+    Copyright (c) 2002 David Bau
+    Distributed under the terms of the
+    GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
 </search>

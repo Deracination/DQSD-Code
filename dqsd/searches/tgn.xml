@@ -14,11 +14,9 @@
   <form name="tgnform"
 	method="get"
 	action="http://vocab.pub.getty.edu/cgi-bin/tgn_browser/tgn.spl">
-    <input type="text" name="keywords" value="Search" />
+    <input type="hidden" name="keywords" value="Search" />
     <input type="hidden" name="file" value="/tgn_browser/index.html" />
     <input type="hidden" name="searchtype" value="keyword" />
-    <INPUT TYPE="submit" VALUE="Search" />
-    <INPUT TYPE="reset" VALUE="Clear" />
   </form>
   <script><![CDATA[
     function tgn(q, switches)
@@ -35,4 +33,9 @@
       }
     }
   ]]></script>
+  <copyright>
+    Copyright (c) 2002 David Bau
+    Distributed under the terms of the
+    GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
 </search>
