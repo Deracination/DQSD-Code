@@ -1,60 +1,62 @@
-  <search function="alarm">
-    <name>Alarm timer with alert</name>
-    <description>"alarm 09:00 Staff Meeting".. 
-       to cancel a set alarm - "alarm cancel"..  
-       Note - Time is in military time.
-       Only one alarm can be set
-       The alarm message is optional and defaults to "Alarm has Expired"
-     </description>
-    <category>Other</category>
-    <contributor>Monty Scroggins</contributor>
-    <script><![CDATA[
-       var alarmTime;
-       var curTime;
-       var alarmMsg;
-       var alNum;
-       var parsedLine;
-       var parsedMsg;
-       function alarm(t) {
-          if (t.match(/^cancel *$/i)) {
-             clearInterval(alNum);
-             document.deff.q.value="Alarm Canceled..";
-             setTimeout("document.deff.q.value='';",1000);
-             return;
-             }
-         if (parsedLine = t.match(/(\d\d\:\d\d)\s*(.*)/)) {
-            if( parsedLine[1] != null && parsedLine[1].length != 0) {
-	       alarmTime = parsedLine[1];
-               }
-            parsedMsg = parsedLine[2];
-            alarmMsg =  'Alarm: ' + alarmTime + '\n\nAlarm has Expired';
-            if(parsedMsg != null && parsedMsg.length != 0 ) {
-               alarmMsg = 'Alarm: ' + alarmTime + '\n\n' + parsedMsg;
-               }
-            alarmOn();
-            document.deff.q.value="Alarm Set..";
-            setTimeout("document.deff.q.value='';",1000);
-            }
-            else {
-               window.alert("Bad Timestamp Entered. Should be HH:MM in Military Time");
-               return;
-               }
-         }//end function
+<search function="alarm">
+  <name>Countdown Timer with Alarm</name>
+  <description>Set an alarm to go off at a certain time: "alarm 09:00 Staff Meeting". To cancel a set alarm: "alarm cancel". The alarm message is optional and defaults to "Alarm has Expired". (Note: All times are in military (24-hr) time. Supports only a single alarm.)</description>
+  <category>Other</category>
+  <contributor>Monty Scroggins</contributor>
+  <script><![CDATA[
+    var alarmTime;
+    var curTime;
+    var alarmMsg;
+    var alNum;
+    var parsedLine;
+    var parsedMsg;
+     
+    function alarm(t, switches) 
+    {
+      if( t.match(/^cancel *$/i) ) 
+      {
+        clearInterval(alNum);
+        document.deff.q.value="Alarm Canceled..";
+        setTimeout("document.deff.q.value='';",1000);
+      }
+      else if( parsedLine = t.match(/(\d\d\:\d\d)\s*(.*)/) ) 
+      {
+        if( parsedLine[1] != null && parsedLine[1].length != 0) 
+          alarmTime = parsedLine[1];
+          
+        parsedMsg = parsedLine[2];
+        alarmMsg =  'Alarm: ' + alarmTime + '\n\nAlarm has Expired';
+          
+        if(parsedMsg != null && parsedMsg.length != 0 )
+          alarmMsg = 'Alarm: ' + alarmTime + '\n\n' + parsedMsg;
+          
+        alarmOn();
+        document.deff.q.value="Alarm Set..";
+        setTimeout("document.deff.q.value='';",1000);
+      }
+      else 
+      {
+        window.alert("Bad Timestamp Entered. Should be HH:MM in Military Time");
+        return;
+      }
+    }
 
-      function IfZero(num) {
-         return ((num <= 9) ? ("0" + num) : num);
-         }//end function
+    function IfZero( num ) 
+    {
+      return (num <= 9) ? ("0" + num) : num;
+    }
 
-      function alarmOn() {
-         var dt = new Date();
-         curTime = (IfZero(dt.getHours()) + ":" + IfZero(dt.getMinutes()));
-         if (alarmTime == curTime) {
-            clearInterval(alNum);
-            window.alert(alarmMsg);
-            }
-         else {
-            alNum=setTimeout("alarmOn()", 6000)
-            }
-         }//end function
-    ]]></script>
-  </search>
+    function alarmOn() 
+    {
+      var dt = new Date();
+      curTime = IfZero(dt.getHours()) + ":" + IfZero(dt.getMinutes());
+      if( alarmTime == curTime )
+      {
+        clearInterval(alNum);
+        window.alert(alarmMsg);
+      }
+      else
+        alNum=setTimeout("alarmOn()", 6000)
+    }
+  ]]></script>
+</search>

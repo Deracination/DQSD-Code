@@ -1,29 +1,27 @@
 <search function="atm">
+  <name>Atomica</name>
 	<description>Search for information on almost any subject: "atm civil war"</description>
-	<name>Atomica search</name>
 	<link>http://www.atomica.com/</link>
 	<category>Reference</category>
 	<contributor>Chris Farmer</contributor>
 	<form name="atomf"
+        target="_blank"
 				action="http://lookup.atomica.com/atomica/frame.pl"
-				method="get"
-				target="_blank">
-		<input name="s" type="hidden" />
-		<input name="gwp" type="hidden" value="0" />
-		<input name="cbid" type="hidden" value="" />
-		<input name="fw" type="hidden" value="-1" />
-		<input name="bRegistered" type="hidden" value="1" />
+				method="get">
+		<input type="hidden" name="s"/>
+		<input type="hidden" name="gwp" value="0"/>
+		<input type="hidden" name="cbid" value=""/>
+		<input type="hidden" name="fw" value="-1"/>
+		<input type="hidden" name="bRegistered" value="1"/>
 	</form>
 	<script><![CDATA[
-		function atm(q)
+		function atm(q, switches)
 		{
 			if (q == "")
-			{
-				openSearchWindow("http://www.atomica.com/");
-			}
+			  openSearchWindow("http://www.atomica.com/");
 			else
 			{
-				document.atomf.s.value=q;
+				document.atomf.s.value = q;
 				submitForm(atomf);
 			}
 		}

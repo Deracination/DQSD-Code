@@ -1,33 +1,26 @@
-  <search function="av">
-    <name>AltaVista Search</name>
-    <description>This was the one of the first fulltext web indexes: "av digital"</description>
-    <category>Search the Web</category>
-    <link>http://altavista.com/</link>
-    <form name="altf"
-          target="_blank"
-          action="http://www.altavista.com/sites/search/web"
-          method="get">
-      <input name="q"
-             type="hidden"/>
-      <input name="pg"
-             type="hidden"
-             value="q"/>
-      <input name="kl"
-             type="hidden"
-             value="XX"/>
-    </form>
-    <script><![CDATA[
-      function av(q)
+<search function="av">
+  <name>AltaVista</name>
+  <description>Search with AltaVista: "av digital"</description>
+  <category>Search the Web</category>
+  <link>http://www.altavista.com/</link>
+  <form name="altf"
+        target="_blank"
+        action="http://www.altavista.com/sites/search/web"
+        method="get">
+    <input type="hidden" name="q"/>
+    <input type="hidden" name="pg" value="q"/>
+    <input type="hidden" name="kl" value="XX"/>
+  </form>
+  <script><![CDATA[
+    function av(q, switches)
+    {
+      if( q == "" )
+        openSearchWindow("http://www.altavista.com/");
+      else
       {
-        if (q == "")
-        {
-          openSearchWindow("http://www.altavista.com/");
-        }
-        else
-        {
-          document.altf.q.value=q;
-          submitForm(altf);
-        }
+        document.altf.q.value = q;
+        submitForm(altf);
       }
-    ]]></script>
-  </search>
+    }
+  ]]></script>
+</search>
