@@ -1,0 +1,37 @@
+<search function="zc">
+    <name>Zip Code Info</name>
+    <description>Search for information on a particular zipcode: "zc 74133" or "zc Glen Ellyn"</description>
+    <link>http://www.zipinfo.com</link>
+    <category>People and Places</category>
+    <contributor>Stephen Montgomery</contributor>
+    <email>stephenmontgomery_at_ameritech_dot_net</email>
+    <form name="zipcode" 
+          method="get" 
+          action="http://www.zipinfo.com/cgi-local/zipsrch.exe" 
+          target="_blank">
+      <input type="hidden" name="zip" />
+      <input type="hidden" name="cnty" value="cnty" />
+      <input type="hidden" name="ac" value="ac" />
+      <input type="hidden" name="tz" value="tz" />
+      <input type="hidden" name="ll" value="ll" />
+      <input type="hidden" name="msa" value="msa" />
+    </form>
+    <script><![CDATA[
+      function zc(q, switches)
+      {
+        if (q == "")
+          window.open("http://www.zipinfo.com");
+        else
+        {
+          if (result = q.match(/^(\d{5})\s*(.*)/))
+          {
+            document.zipcode.zip.value=result[1];
+          } else if (result = q.match(/^(.*)/))
+          {
+            document.zipcode.zip.value=result[1];
+          }
+          document.zipcode.submit();
+        }
+      }
+    ]]></script>
+  </search>
