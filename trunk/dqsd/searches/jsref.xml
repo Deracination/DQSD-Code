@@ -104,18 +104,18 @@
                 break;
               case "1.3":
                 k++;
-                defpage = 'http://developer.netscape.com/docs/manuals/js/client/jsref/index.htm';
-                query = args.q + ' inurl:jsref -inurl:ix -inurl:whatsnew site:developer.netscape.com';
+                defpage = 'http://devedge.netscape.com/library/manuals/2000/javascript/1.3/reference/';
+                query = args.q + ' inurl:1.3 -inurl:ix -inurl:whatsnew site:devedge.netscape.com';
                 break;
               case "1.4":
                 k++;
-                defpage = 'http://developer.netscape.com/docs/manuals/js/core/jsref14/index.htm';
-                query = args.q + ' inurl:jsref14 -inurl:ix site:developer.netscape.com';
+                defpage = 'http://devedge.netscape.com/library/manuals/2000/javascript/1.4/reference/';
+                query = args.q + ' inurl:1.4 -inurl:ix site:devedge.netscape.com';
                 break;
               case "1.5":
                 k++;
-                defpage = 'http://developer.netscape.com/docs/manuals/js/core/jsref15/contents.html';
-                query = args.q + ' inurl:jsref15 -inurl:ix site:developer.netscape.com';
+                defpage = 'http://devedge.netscape.com/library/manuals/2000/javascript/1.5/reference/';
+                query = args.q + ' inurl:1.5 -inurl:ix site:devedge.netscape.com';
                 break;
               case "5.6":
                 k++;
