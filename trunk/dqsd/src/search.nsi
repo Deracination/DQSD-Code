@@ -113,7 +113,7 @@ Section "Quick Search Deskbar (required)"
   RegDLL $INSTDIR\DQSDTools.dll
 
   ; Determine if this is an upgrade
-  StrCpy $8 "The Deskbar has been upgraded.$\n$\n${HOW_TO_TURN_ON_TOOLBAR}$\n$\nIf the search bar is already present on your$\ntaskbar, right-click on the handle to the left of$\nthe search bar and select 'Refresh' to reload it.$\n$\n${TITLE_AND_COPYRIGHT}"
+  StrCpy $8 "The Deskbar has been upgraded.  $\nIf the search bar is already present $\non your taskbar, right-click on $\nthe handle to the left of the search bar $\nand select 'Refresh' to reload it.  $\nIf the search bar is not present, $\n${HOW_TO_TURN_ON_TOOLBAR}$\n$\n${TITLE_AND_COPYRIGHT}"
   IfFileExists "$INSTDIR\search.htm" upgradebar
   StrCpy $8 "The Deskbar has been installed.$\n$\n${HOW_TO_TURN_ON_TOOLBAR}$\n$\n${TITLE_AND_COPYRIGHT}"
   upgradebar:
@@ -232,8 +232,8 @@ Section "Quick Search Deskbar (required)"
   ; Message box
   IfRebootFlag rebootmsg norebootmsg
     rebootmsg:
-      MessageBox MB_YESNO|MB_ICONINFORMATION|MB_DEFBUTTON1 "The Deskbar has been upgraded.  You must reboot before using the new version.$\nAfter rebooting, ${HOW_TO_TURN_ON_TOOLBAR}$\n$\nWould you like to reboot now (recommended)?." IDYES doreboot
-      MessageBox MB_OK|MB_ICONINFORMATION "Please remember to reboot before using the search bar.$\n$\n${TITLE_AND_COPYRIGHT}"
+      MessageBox MB_YESNO|MB_ICONINFORMATION|MB_DEFBUTTON1 "The Deskbar has been upgraded.$\nYou must reboot before it will work correctly.$\nAfter rebooting, if the search bar$\nis not visible, ${HOW_TO_TURN_ON_TOOLBAR}$\n$\nWould you like to reboot now (recommended)?" IDYES doreboot
+      ; MessageBox MB_OK|MB_ICONINFORMATION "Please remember to reboot before using the search bar.$\n$\n${TITLE_AND_COPYRIGHT}"
       Goto endinstall
     
     norebootmsg:
