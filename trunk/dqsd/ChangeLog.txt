@@ -3,6 +3,7 @@
 New Searches
 
 * newsau - Search for news topics at news.com.au, from Steve Lin
+* hv - Rex Swain's HTTP Viewer; See exactly what an HTTP request returns to your browser
 
 Modified Searches
 
