@@ -6,7 +6,7 @@ RELEASE PROCEDURE FOR DQSD - Kim Gräsman, December 2003
 		NSIS paths
 
 - Update version stuff in scripts
-	- Update version in version.xml (DON'T COMMIT YET!)
+	- Update version in version.xml
 	- Update version.js to check for the new version of DQSDTools.dll
 
 - Build DLL and installer
@@ -18,6 +18,8 @@ RELEASE PROCEDURE FOR DQSD - Kim Gräsman, December 2003
 	- Generates dqsd.exe
 	- Rename to dqsd-<ver>-<type>.exe, e.g. dqsd-318-beta.exe or 
 		dqsd-318.exe for a final version
+		
+- Test newly-built installer
 
 - Put a new release up on SF
 	- Transfer installer to SF via anonymous FTP
@@ -45,6 +47,10 @@ RELEASE PROCEDURE FOR DQSD - Kim Gräsman, December 2003
 		- [Submit/Refresh]
 	- [Send Notice]
 	
+- Commit all DQSD files
+- Set a CVS tag on the DQSD module called rel-<ver>-<type>, e.g. 
+	"rel-3-1-8-0-beta" or "rel-3-1-8-0" for a final version
+
 - Update the site
 	- Check out the dqsdweb module from CVS
 	- Modify doc.htm
@@ -56,13 +62,10 @@ RELEASE PROCEDURE FOR DQSD - Kim Gräsman, December 2003
 		- Upload dqsd.exe (latest release must have this name)
 		- Upload dqsd<ver>.exe, e.g. dqsd318.exe
 		- Add general release notes under What's New
+  - Copy version.xml from dqsd module
 	- Commit changes to CVS - the files will be automatically distributed
-		to dqsd.net after a while
-
-- Commit all DQSD files, including version.xml, which will cause the 
-	update notifications to start happening.
-- Set a CVS tag on the DQSD module called rel-<ver>-<type>, e.g. 
-	"rel-3-1-8-0-beta" or "rel-3-1-8-0" for a final version
+		to dqsd.net and update notification will be triggered by the new 
+		version.xml, in due time.
 
 - Send an announcement to dqsd-announce@lists.sourceforge.net 
 	(see: http://sourceforge.net/mailarchive/forum.php?forum_id=8603)
