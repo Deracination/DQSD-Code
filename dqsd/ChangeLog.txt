@@ -3,6 +3,8 @@
 New aliases
 
 * dhr and w3r, from Glenn Carr and Will Dean
+* tgn - Search the Getty Thesaurus of Geographical Names (from Tim Aiello)
+* arin - Search the Arin Whois database at www.arin.net/whois (from Tim Aiello)
 
 New Searches
 

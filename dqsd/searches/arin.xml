@@ -1,0 +1,34 @@
+<search function="arin">
+  <name>ARIN Whois Database Search</name>
+  <description>
+    Search the Arin Whois database at www.arin.net/whois<br/>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+      <tr><td>arin 192.23.43.21</td></tr>
+    </table>
+  </description>
+  <category>Computers</category>
+  <link>http://www.arin.net/whois</link>
+  <contributor>Tim Aiello</contributor>
+  <email>tsaiello@kosmoNOSPAM.com</email>
+  <form name="arinform"
+	method="post"
+	action="http://ws.arin.net/cgi-bin/whois.pl">
+    <input type="text" name="queryinput" value="Search" />
+  </form>
+  <script><![CDATA[
+    function arin(q, switches)
+    { 
+      if( nullArgs("arin",q) )
+        return false;
+
+      if( q == "" )
+        openSearchWindow("http://www.arin.net/whois");
+      else
+      {
+        document.arinform["queryinput"].value = q;
+        submitForm(arinform);
+      }
+    }
+  ]]></script>
+</search>
