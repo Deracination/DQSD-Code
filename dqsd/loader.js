@@ -76,7 +76,7 @@ function addalias(alias, fname, name, desc, cat)
                            "  direct(url.replace( /%s/g, t ));"
                           );
       eval( fname + " = f;" );
-      addsearch( fname, name ? name : url, desc ? desc : "", url.search(/%s/) < 0 ? url : "", cat);
+      addsearch( fname, name ? name : url, desc ? desc : url, url.search(/%s/) < 0 ? url : "", cat);
     }
     else if ((res = fname.match(/^(\w+) +(.+)/)) && searches[res[1]]) // starts with a valid search function
     {
@@ -87,7 +87,7 @@ function addalias(alias, fname, name, desc, cat)
                            res[1] + "(cmd.replace( /%s/g, t ));"
                           );
       eval( fname + " = f;" );
-      addsearch( fname, name ? name : cmd, desc ? desc : "", "", cat);
+      addsearch( fname, name ? name : cmd, desc ? desc : cmd, "", cat);
     }
     else
     {

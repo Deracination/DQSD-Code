@@ -139,16 +139,19 @@ function appendMRUMenuSelections( mb )
 function makeToolTipString(search)
 {
   var tip = '';
-  if(helpMenuToolTipsEnabled && search.desc != '')
+  if ( helpMenuToolTipsEnabled )
   {
-    tip = search.desc
-                .replace( /<[^>]+>/g, '' )          // any tags
-                .replace( /(^\s*)|(\s*$)/g, '' )    // leading/trailing whitespace
-                .replace( /\r\n\s*\r\n/g, '\r\n' )  // blank lines
-                .replace( /&gt;/g, '>' )            // HTML gunk
-                .replace( /&lt;/g, '<' )
-                .replace( /&amp;/g, '&' )
-                .replace( /\t/g, '    ' )           // reduce indentation
+    if ( search.desc != '' && search.desc != search.name )
+    {
+      tip = search.desc
+                  .replace( /<[^>]+>/g, '' )          // any tags
+                  .replace( /(^\s*)|(\s*$)/g, '' )    // leading/trailing whitespace
+                  .replace( /\r\n\s*\r\n/g, '\r\n' )  // blank lines
+                  .replace( /&gt;/g, '>' )            // HTML gunk
+                  .replace( /&lt;/g, '<' )
+                  .replace( /&amp;/g, '&' )
+                  .replace( /\t/g, '    ' )           // reduce indentation
+    }
   }
   return tip;
 }
