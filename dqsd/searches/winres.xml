@@ -2,7 +2,7 @@
   <name>WinRes</name>
   <description>WinRes will open a browser window of a specified size.
   "winres 800 600" or "winres /height:800 /width:600"
-  will open a broswer window that is 800 pixels wide and 600 pixels tall.
+  will open a browser window that is 800 pixels wide and 600 pixels tall.
   Optionally, specify a URL as the last argument: "winres 800 600 http://www.mysite.com" or "winres http://www.mysite.com /w:800 /h:600"
   </description>
   <contributor>Neel Doshi</contributor>
