@@ -9,3 +9,9 @@ function getDisplayDate(passedDate) {
   sDisplayDate = getDisplayMonth(theDate.getMonth()) + " " + theDate.getDate() + ", " + theDate.getFullYear();
   return sDisplayDate;
 }
+
+function buildEmail( nm, sld, tld, txt )
+{
+  var mailto = '<a href="mailto:' + nm + '@' + sld + '.' + tld + '">' + txt + '</a>';
+  return mailto;
+}
