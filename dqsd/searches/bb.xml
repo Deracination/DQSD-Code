@@ -1,0 +1,111 @@
+<search function="bb">
+  <name>BestBuy</name>
+  <category>Shopping</category>
+  <contributor>Glenn Carr</contributor>
+  <link>http://www.bestbuy.com/</link>
+  <email>glenn at glenncarr dot com</email>
+  <description>
+  Search BestBuy
+  </description>
+
+    <comment>
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/computers</td><td> - </td><td></td></tr>
+      <tr><td>/home</td><td> - </td><td></td></tr>
+      <tr><td>/car</td><td> - </td><td></td></tr>
+      <tr><td>/personal</td><td> - </td><td></td></tr>
+      <tr><td>/photo</td><td> - </td><td></td></tr>
+      <tr><td>/soho</td><td> - </td><td></td></tr>
+      <tr><td>/appliances</td><td> - </td><td></td></tr>
+      <tr><td>/accessories</td><td> - </td><td></td></tr>
+      <tr><td>/music</td><td> - </td><td></td></tr>
+      <tr><td>/movies</td><td> - </td><td></td></tr>
+      <tr><td>/software</td><td> - </td><td></td></tr>
+      <tr><td>/games</td><td> - </td><td></td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td></td></tr>
+      <tr><td></td></tr>
+    </table>
+    </comment>
+
+  <form name="bbf"
+        method="post"
+        action="http://www.bestbuy.com/search/res.asp?m=0&amp;cat=0&amp;scat=0">
+    <input type="hidden" name="SV" value="" />
+    <input type="hidden" name="SC" value="site" />
+  </form>
+  <script><![CDATA[
+    function bb(q)
+    {
+      if( nullArgs("bb", q) )
+        return;
+
+      // Parse switches with parseArgs:
+
+      // parseArgs usage:
+      // Arguments:
+      //    q                - string from the search function
+      //    expectedSwitches - list or array of the expected switch values
+      //    expandSwitches   - optional parameter [default = true] used to determine 
+      //                       if the switch shortcuts should be expanded (i.e. /f becomes /foo)
+      // Returns an object with these properties:
+      //    q        - the input string with the switches removed
+      //    switches - array of objects with these two properties:
+      //                  name:   expanded name of the matched switch (i.e. foo as in /foo:bar)
+      //                  value:  value of switch (i.e. bar as in /foo:bar)
+      //    switch_val - associative array with the switch name as the key with the switch value 
+      //                 as the value. (i.e. switch_val["foo"] = "bar" as in /foo:bar)
+
+      //var args = parseArgs(q, "computers, home, car, personal, photo, soho, appliances, accessories, music, movies, software, games");
+      //if ( args.switches.length > 0 )
+      //{
+      //  switch( args.switches[0].name )
+      //  {
+      //    case "computers":
+      //      break;
+      //    case "home":
+      //      break;
+      //    case "car":
+      //      break;
+      //    case "personal":
+      //      break;
+      //    case "photo":
+      //      break;
+      //    case "soho":
+      //      break;
+      //    case "appliances":
+      //      break;
+      //    case "accessories":
+      //      break;
+      //    case "music":
+      //      break;
+      //    case "movies":
+      //      break;
+      //    case "software":
+      //      break;
+      //    case "games":
+      //      break;
+      //    default:
+      //      break;
+      //  }
+      //}
+
+      document.bbf.SV.value = q;
+      //document.bbf.SC.value = "";
+
+      submitForm(bbf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 11/15/02 at 08:54:59
+    by Dave's Quick Search Deskbar Search Wizard version 1.0.0 ,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>
