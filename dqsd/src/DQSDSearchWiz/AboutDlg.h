@@ -4,6 +4,7 @@
 #define __ABOUTDLG_H_
 
 #include "resource.h"       // main symbols
+#include "modulver.h"
 #include <atlhost.h>
 
 /////////////////////////////////////////////////////////////////////////////
@@ -35,6 +36,17 @@ END_MSG_MAP()
 	LRESULT OnInitDialog(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 	{
 		CenterWindow( GetActiveWindow() );
+
+		TCHAR szModule[ MAX_PATH + 1 ];
+		if ( GetModuleFileName( _Module.GetResourceInstance(), szModule, LENGTHOF(szModule) ) )
+		{
+			CModuleVersion moduleVersion;
+			if ( moduleVersion.GetFileVersionInfo( szModule ) )
+			{
+				CWindow( GetDlgItem( IDC_Version ) ).SetWindowText( ( _T("Version ") + moduleVersion.GetValue( _T("ProductVersion") ) + _T(" ") + moduleVersion.GetValue( _T("SpecialBuild") ) ).c_str() );
+			}
+		}
+
 		return 1;  // Let the system set the focus
 	}
 

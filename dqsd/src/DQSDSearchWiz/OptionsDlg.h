@@ -28,6 +28,7 @@ BEGIN_MSG_MAP(COptionsDlg)
 	MESSAGE_HANDLER(WM_INITDIALOG, OnInitDialog)
 	COMMAND_ID_HANDLER(IDOK, OnOK)
 	COMMAND_ID_HANDLER(IDCANCEL, OnCancel)
+	COMMAND_HANDLER(IDC_EditXML, BN_CLICKED, OnClickedEditXML)
 END_MSG_MAP()
 // Handler prototypes:
 //  LRESULT MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
@@ -41,6 +42,8 @@ END_MSG_MAP()
 		CWindow( GetDlgItem( IDC_EditXML ) ).SendMessage( BM_SETCHECK, m_bEditResult ? BST_CHECKED : BST_UNCHECKED );
 
 		CWindow( GetDlgItem( IDC_Editor ) ).SetWindowText( m_strEditor.c_str() );
+
+		OnClickedEditXML(0, 0, 0, bHandled );
 
 		return 1;  // Let the system set the focus
 	}
@@ -63,6 +66,12 @@ END_MSG_MAP()
 	LRESULT OnCancel(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHandled)
 	{
 		EndDialog(wID);
+		return 0;
+	}
+
+	LRESULT OnClickedEditXML(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHandled)
+	{
+		CWindow( GetDlgItem( IDC_Editor ) ).EnableWindow( CWindow( GetDlgItem( IDC_EditXML ) ).SendMessage( BM_GETCHECK, 0, 0 ) == BST_CHECKED );
 		return 0;
 	}
 
