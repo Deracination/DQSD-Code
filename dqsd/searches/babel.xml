@@ -1,33 +1,39 @@
 <search function="babel">
-  <name>Babelfish Language Translation</name>
-  <description>Use the BabelFish to translate text from one language to another:<br />
-	"babel /from:en /to:es hello how are you" or "babel /from:en /to:es http://www.whitehouse.gov"<br />
-	<a class="helpboxDescLabels">Switches:</a><br />
-	<table cellpadding="0" cellspacing="0" border="0">
-		<tr><td class="helpboxDescColumns">/from:en</td><td class="helpboxDescColumns">/to:zh</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">English to Chinese</td></tr>
-		<tr><td class="helpboxDescColumns">/from:en</td><td class="helpboxDescColumns">/to:fr</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">English to French</td></tr>
-		<tr><td class="helpboxDescColumns">/from:en</td><td class="helpboxDescColumns">/to:de</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">English to German</td></tr>
-		<tr><td class="helpboxDescColumns">/from:en</td><td class="helpboxDescColumns">/to:it</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">English to Italian</td></tr>
-		<tr><td class="helpboxDescColumns">/from:en</td><td class="helpboxDescColumns">/to:ja</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">English to Japanese</td></tr>
-		<tr><td class="helpboxDescColumns">/from:en</td><td class="helpboxDescColumns">/to:ko</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">English to Korean</td></tr>
-		<tr><td class="helpboxDescColumns">/from:en</td><td class="helpboxDescColumns">/to:pt</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">English to Portuguese</td></tr>
-		<tr><td class="helpboxDescColumns">/from:en</td><td class="helpboxDescColumns">/to:es</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">English to Spanish</td></tr>
-		<tr><td class="helpboxDescColumns">/from:zh</td><td class="helpboxDescColumns">/to:en</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Chinese to English</td></tr>
-		<tr><td class="helpboxDescColumns">/from:fr</td><td class="helpboxDescColumns">/to:en</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">French to English</td></tr>
-		<tr><td class="helpboxDescColumns">/from:fr</td><td class="helpboxDescColumns">/to:de</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">French to German</td></tr>
-		<tr><td class="helpboxDescColumns">/from:de</td><td class="helpboxDescColumns">/to:en</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">German to English</td></tr>
-		<tr><td class="helpboxDescColumns">/from:de</td><td class="helpboxDescColumns">/to:fr</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">German to French</td></tr>
-		<tr><td class="helpboxDescColumns">/from:it</td><td class="helpboxDescColumns">/to:en</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Italian to English</td></tr>
-		<tr><td class="helpboxDescColumns">/from:ja</td><td class="helpboxDescColumns">/to:en</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Japanese to English</td></tr>
-		<tr><td class="helpboxDescColumns">/from:ko</td><td class="helpboxDescColumns">/to:en</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Korean to English</td></tr>
-		<tr><td class="helpboxDescColumns">/from:pt</td><td class="helpboxDescColumns">/to:en</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Portuguese to English</td></tr>
-		<tr><td class="helpboxDescColumns">/from:ru</td><td class="helpboxDescColumns">/to:en</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Russian to English</td></tr>
-		<tr><td class="helpboxDescColumns">/from:es</td><td class="helpboxDescColumns">/to:en</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Spanish to English</td></tr>
-	</table>
+  <name>Babel Fish Language Translation</name>
+  <description>
+    Use the Babel Fish to translate text or webpages from one language to another.<br/>
+  	<a class="helpboxDescLabels">Switches:</a><br />
+  	<table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">/from:en</td><td class="helpboxDescColumns">/to:zh</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">English to Chinese</td></tr>
+  		<tr><td class="helpboxDescColumns">/from:en</td><td class="helpboxDescColumns">/to:fr</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">English to French</td></tr>
+  		<tr><td class="helpboxDescColumns">/from:en</td><td class="helpboxDescColumns">/to:de</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">English to German</td></tr>
+  		<tr><td class="helpboxDescColumns">/from:en</td><td class="helpboxDescColumns">/to:it</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">English to Italian</td></tr>
+  		<tr><td class="helpboxDescColumns">/from:en</td><td class="helpboxDescColumns">/to:ja</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">English to Japanese</td></tr>
+  		<tr><td class="helpboxDescColumns">/from:en</td><td class="helpboxDescColumns">/to:ko</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">English to Korean</td></tr>
+  		<tr><td class="helpboxDescColumns">/from:en</td><td class="helpboxDescColumns">/to:pt</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">English to Portuguese</td></tr>
+  		<tr><td class="helpboxDescColumns">/from:en</td><td class="helpboxDescColumns">/to:es</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">English to Spanish</td></tr>
+  		<tr><td class="helpboxDescColumns">/from:zh</td><td class="helpboxDescColumns">/to:en</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Chinese to English</td></tr>
+  		<tr><td class="helpboxDescColumns">/from:fr</td><td class="helpboxDescColumns">/to:en</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">French to English</td></tr>
+  		<tr><td class="helpboxDescColumns">/from:fr</td><td class="helpboxDescColumns">/to:de</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">French to German</td></tr>
+  		<tr><td class="helpboxDescColumns">/from:de</td><td class="helpboxDescColumns">/to:en</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">German to English</td></tr>
+  		<tr><td class="helpboxDescColumns">/from:de</td><td class="helpboxDescColumns">/to:fr</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">German to French</td></tr>
+  		<tr><td class="helpboxDescColumns">/from:it</td><td class="helpboxDescColumns">/to:en</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Italian to English</td></tr>
+  		<tr><td class="helpboxDescColumns">/from:ja</td><td class="helpboxDescColumns">/to:en</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Japanese to English</td></tr>
+  		<tr><td class="helpboxDescColumns">/from:ko</td><td class="helpboxDescColumns">/to:en</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Korean to English</td></tr>
+  		<tr><td class="helpboxDescColumns">/from:pt</td><td class="helpboxDescColumns">/to:en</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Portuguese to English</td></tr>
+  		<tr><td class="helpboxDescColumns">/from:ru</td><td class="helpboxDescColumns">/to:en</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Russian to English</td></tr>
+  		<tr><td class="helpboxDescColumns">/from:es</td><td class="helpboxDescColumns">/to:en</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Spanish to English</td></tr>
+  	</table>
+    <a class="helpboxDescLabels">Examples:</a><br/>
+    <table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">babel /from:en /to:es hello how are you</td></tr>
+      <tr><td class="helpboxDescColumns">babel /from:en /to:es http://www.whitehouse.gov</td></tr>
+  	</table>
   </description>
-  <contributor>Neel Doshi, Greg Mitchell</contributor>
   <category>Reference</category>
   <link>http://babelfish.altavista.com</link>
+  <contributor>Neel Doshi, Greg Mitchell</contributor>
+  
   <form name="babelf"
         action="http://babelfish.altavista.com/tr"
         method="post">
@@ -37,45 +43,46 @@
     <input type="hidden" name="urltext" />
     <input type="hidden" name="url" />
   </form>
+  
   <script><![CDATA[
-function babel(q)
-{
-	if( nullArgs("babel", q) )
-		return false;
-	else
-	{
-		var func_name = "babel";
-		var switch_list = new Array("from", "to");
-		var switch_vals = new Array();
-		var args = parseArgs(q, switch_list);
-
-		// check if the required switches are set
-		for (var j = 0; j < switch_list.length; j++)
-		{
-			if ( typeof args.switch_val[ switch_list[j] ] == "undefined" || args.switch_val[ switch_list[j] ] == "" )
-			{
-				alert(func_name + ":  /" + switch_list[j] + " switch must be entered.  Type '" + func_name + " ?' to see instructions");
-				return false;
-			}
-		}
-
-		// Determine if the string is a url or not
-		var strURL = isURL(args.q);
-		if (strURL)
-		{
-			babelf.tt.value = "url";
-			babelf.url.value = strURL;
-		}
-		else
-		{
-			babelf.tt.value = "urltext";
-			babelf.urltext.value = args.q;
-		}
-
-		babelf.lp.value =  args.switch_val["from"] + "_" +  args.switch_val["to"];
-		submitForm(babelf);
-		return true;
-	}
-}
+    function babel(q)
+    {
+      if( nullArgs("babel", q) )
+        return false;
+      else
+      {
+        var func_name = "babel";
+        var switch_list = new Array("from", "to");
+        var switch_vals = new Array();
+        var args = parseArgs(q, switch_list);
+    
+        // check if the required switches are set
+        for (var j = 0; j < switch_list.length; j++)
+        {
+          if ( typeof args.switch_val[ switch_list[j] ] == "undefined" || args.switch_val[ switch_list[j] ] == "" )
+          {
+            alert(func_name + ":  /" + switch_list[j] + " switch must be entered.  Type '" + func_name + " ?' to see instructions");
+            return false;
+          }
+        }
+    
+        // Determine if the string is a url or not
+        var strURL = isURL(args.q);
+        if (strURL)
+        {
+          babelf.tt.value = "url";
+          babelf.url.value = strURL;
+        }
+        else
+        {
+          babelf.tt.value = "urltext";
+          babelf.urltext.value = args.q;
+        }
+    
+        babelf.lp.value =  args.switch_val["from"] + "_" +  args.switch_val["to"];
+        submitForm(babelf);
+        return true;
+      }
+    }
   ]]></script>
 </search>

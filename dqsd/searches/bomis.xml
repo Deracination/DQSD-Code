@@ -1,16 +1,24 @@
 <search function="bomis">
   <name>Bomis</name>
-  <description>Search through Bomis.com Internet rings: "bomis firewalls"</description>
+  <description>
+    Search through Bomis.com Internet rings.<br/>
+    <a class="helpboxDescLabels">Example:</a><br/>
+    <table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">bomis firewalls</td></tr>
+  	</table>
+  </description>
   <category>Search the Web</category>
   <link>http://www.bomis.com/</link>
   <contributor>Reginald Braithwaite-Lee</contributor>
   <email>raganwald_at_yahoo_dot_com</email>
+  
   <form name="bomisf"
         action="http://www.bomis.com/searchring.fcgi"
         method="get">
     <input type="hidden" name="db" value="bomis"/>
     <input type="hidden" name="request"/>
   </form>
+  
   <script><![CDATA[
     function bomis(q)
     {

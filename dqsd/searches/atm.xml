@@ -1,9 +1,16 @@
 <search function="atm">
   <name>Atomica</name>
-	<description>Search for information on almost any subject: "atm civil war"</description>
+	<description>
+    Search for information on almost any subject.<br/>
+    <a class="helpboxDescLabels">Example:</a><br/>
+    <table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">atm civil war</td></tr>
+  	</table>
+  </description>
+  <category>Reference</category>
 	<link>http://www.atomica.com/</link>
-	<category>Reference</category>
 	<contributor>Chris Farmer</contributor>
+  
 	<form name="atmf"
 				action="http://lookup.atomica.com/atomica/frame.pl"
 				method="get">
@@ -13,6 +20,7 @@
 		<input type="hidden" name="fw" value="-1"/>
 		<input type="hidden" name="bRegistered" value="1"/>
 	</form>
+  
 	<script><![CDATA[
 		function atm(q)
 		{

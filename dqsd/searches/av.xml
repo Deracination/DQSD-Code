@@ -1,8 +1,15 @@
 <search function="av">
   <name>AltaVista</name>
-  <description>Search with AltaVista: "av digital"</description>
+  <description>
+    Search with AltaVista.com.<br/>
+    <a class="helpboxDescLabels">Example:</a><br/>
+    <table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">av digital</td></tr>
+  	</table>
+  </description>
   <category>Search the Web</category>
   <link>http://www.altavista.com/</link>
+  
   <form name="avf"
         action="http://www.altavista.com/sites/search/web"
         method="get">
@@ -10,6 +17,7 @@
     <input type="hidden" name="pg" value="q"/>
     <input type="hidden" name="kl" value="XX"/>
   </form>
+  
   <script><![CDATA[
     function av(q)
     {
