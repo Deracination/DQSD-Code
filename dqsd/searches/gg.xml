@@ -4,6 +4,7 @@
     Google is reputed to be the web's fastest and most versatile search engine.<br/>
     <a class="helpboxDescLabels">Switches:</a><br/>
   	<table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">/ifl</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">"I'm Feeling Lucky": Go directly to Google's top-ranked result.</td></tr>
   		<tr><td class="helpboxDescColumns">/advanced</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Use the Google Advanced Search page.</td></tr>
   		<tr><td class="helpboxDescColumns">/groups</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Search Google's newsgroup archive.</td></tr>
   		<tr><td class="helpboxDescColumns">/directory</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Search Google's copy of the DMOZ open directory.</td></tr>
@@ -41,6 +42,14 @@
     <input type="hidden" name="q"/>
   </form>
   
+  <form name="ggf_ifl"
+        action="http://www.google.com/search"
+        method="get">
+    <input type="hidden" name="q"/>
+    <input type="hidden" name="meta" value=""/>
+    <input type="hidden" name="btnI" value="I'm Feeling Lucky"/>
+  </form>
+  
   <form name="ggf_image"
         action="http://images.google.com/images"
         method="get">
@@ -58,7 +67,7 @@
   <script><![CDATA[
     function gg(q)
     {
-      var args = parseArgs(q, "advanced, images, directory, related, cache, link, groups, uk, canada, local");
+      var args = parseArgs(q, "ifl, advanced, groups, directory, images, cache, related, link, local, uk, canada");
       var mode, local, locale_meta = "", locale_tld = "com";
       
       // Establish the locale and mode the search will run in.
@@ -80,25 +89,22 @@
           }
       
       // Change the form data to use the correct locale
-      document.ggf.action = "http://www.google." + locale_tld + "/search";
+      document.ggf.action = document.ggf_ifl.action = "http://www.google." + locale_tld + "/search";
       document.ggf_adv.action = "http://www.google." + locale_tld + "/advanced_search";
       document.ggf_image.action = "http://images.google." + locale_tld + "/images";
       document.ggf_news.action = "http://groups.google." + locale_tld + "/groups";
       
       // If the user specified to search localized content only, restrict it now.
       if(local)
-      {
-        document.ggf.meta.value = locale_meta;
-        document.ggf_image.meta.value = locale_meta;
-        document.ggf_news.meta.value = locale_meta;
-      }
+        document.ggf.meta.value = document.ggf_ifl.meta.value = document.ggf_image.meta.value = document.ggf_news.meta.value = locale_meta;
       else
-        document.ggf.meta.value = document.ggf_image.meta.value = document.ggf_news.meta.value = "";
+        document.ggf.meta.value = document.ggf_ifl.meta.value = document.ggf_image.meta.value = document.ggf_news.meta.value = "";
       
       // No parameters, so go to the appropriate web page.
       if( args.q == "" )
         switch( mode )
         {
+          case "ifl": openSearchWindow("http://www.google." + locale_tld + "/help/features.html#lucky"); return;
           case "advanced": openSearchWindow("http://www.google." + locale_tld + "/advanced_search"); return;
           case "images": openSearchWindow("http://images.google." + locale_tld); return;
           case "directory": openSearchWindow("http://images.google." + locale_tld + "/dirhp"); return;
@@ -118,6 +124,10 @@
         
         switch( mode )
         {
+          case "ifl":
+            document.ggf_ifl.q.value = args.q;
+            submitForm(ggf_ifl);
+            break;
           case "advanced":
             document.ggf_adv.q.value = args.q;
             submitForm(ggf_adv);
