@@ -57,7 +57,8 @@ Section "TimeSync"
   SetOutPath $WINDIR\system32
 
   SetOverwrite ifnewer
-  IfFileExists CTimeSynch.ocx Ureg Reg
+  IfFileExists $WINDIR\system32\CTimeSynch.ocx Ureg Reg
+
   Ureg:
   Exec "regsvr32 /u /s CTimeSynch.ocx"
 
