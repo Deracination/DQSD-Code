@@ -1,11 +1,11 @@
-  <search function="clc">
-    <name>Calculate</name>
-    <category>Calculations</category>
-    <description>Enter a numeric expression: "clc (4+3)*(2+2)" or "clc pow(e, pi/2)"</description>
-    <script><![CDATA[
-      function clc(q)
-      {
-        calculate(q);
-      }
-    ]]></script>
-  </search>
+<search function="clc">
+  <name>Calculate</name>
+  <category>Calculations</category>
+  <description>Evaluates numeric expressions: "clc (4+3)*(2+2)" or "clc pow(e, pi/2)"</description>
+  <script><![CDATA[
+    function clc(q)
+    {
+      calculate(q);
+    }
+  ]]></script>
+</search>

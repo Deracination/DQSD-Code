@@ -1,28 +1,26 @@
-  <search function="cdo">
-    <name>Cambridge Dictionaries Online</name>
-    <description>Search for British English definitions: "cdo lexical"</description>
-    <category>Reference</category>
-    <idea>David Brake david.brake@ukonline.co.uk</idea>
-    <link>http://dictionary.cambridge.org/</link>
-    <form name="cdoform"
-          action="http://dictionary.cambridge.org/cmd_search.asp"
-          method="post"
-          target="_blank">
-      <input type="hidden" name="searchword"/>
-      <input type="hidden" name="dict" value="B"/>
-    </form>
-    <script><![CDATA[
-      function cdo(q)
+<search function="cdo">
+  <name>Cambridge Dictionaries Online</name>
+  <description>Search for British English definitions: "cdo lexical"</description>
+  <category>Reference</category>
+  <link>http://dictionary.cambridge.org/</link>
+  <idea>David Brake david.brake@ukonline.co.uk</idea>
+  <form name="cdoform"
+        target="_blank"
+        action="http://dictionary.cambridge.org/cmd_search.asp"
+        method="post">
+    <input type="hidden" name="searchword"/>
+    <input type="hidden" name="dict" value="B"/>
+  </form>
+  <script><![CDATA[
+    function cdo(q, switches)
+    {
+      if( q == "" )
+        openSearchWindow("http://dictionary.cambridge.org/");
+      else
       {
-        if (q == "")
-        {
-          openSearchWindow("http://dictionary.cambridge.org/");
-        }
-        else
-        {
-          document.cdoform.searchword.value=q;
-          submitForm(cdoform);
-        }
+        document.cdoform.searchword.value = q;
+        submitForm(cdoform);
       }
-    ]]></script>
-  </search>
+    }
+  ]]></script>
+</search>

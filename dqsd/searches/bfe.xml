@@ -1,39 +1,35 @@
-  <search function="bfe">
-    <name>Bigfoot Email Search</name>
-    <description>Search Bigfoot's index of email addresses with a name: "bfe Mark Rafn"</description>
-    <category>People and Places</category>
-    <link>http://search.bigfoot.com/</link>
-    <form name="bfef"
-          target="_blank"
-          action="http://search.bigfoot.com/SEARCH"
-          method="post">
-      <input type="hidden" name="FormName" value="Listing"/>
-      <input type="hidden" name="locale" value="en"/>
-      <input type="hidden" name="from" value="bigfoot"/>
-      <input type="hidden" name="FirstName"/>
-      <input type="hidden" name="LastName"/>
-      <input type="hidden" name="City"/>
-      <input type="hidden" name="State"/>
-      <input type="hidden" name="EmailSearch" value="1"/>
-    </form>
-
-    <script><![CDATA[
-      // bigfoot email lookup
-      function bfe(q)
+<search function="bfe">
+  <name>Bigfoot Email</name>
+  <description>Search Bigfoot's index of email addresses by name: "bfe Mark Rafn"</description>
+  <category>People and Places</category>
+  <link>http://search.bigfoot.com/</link>
+  <form name="bfef"
+        target="_blank"
+        action="http://search.bigfoot.com/SEARCH"
+        method="post">
+    <input type="hidden" name="FormName" value="Listing"/>
+    <input type="hidden" name="locale" value="en"/>
+    <input type="hidden" name="from" value="bigfoot"/>
+    <input type="hidden" name="FirstName"/>
+    <input type="hidden" name="LastName"/>
+    <input type="hidden" name="City"/>
+    <input type="hidden" name="State"/>
+    <input type="hidden" name="EmailSearch" value="1"/>
+  </form>
+  <script><![CDATA[
+    function bfe(q, switches)
+    {
+      res = q.match(/(((\w+\s+)?\w+)\s+)?(\w+)(\s*\((([^,]+),?\s+)?(\w\w)\))?/);
+      if( !res )
+        openSearchWindow("http://www.bigfoot.com/");
+      else
       {
-        res = q.match(/(((\w+\s+)?\w+)\s+)?(\w+)(\s*\((([^,]+),?\s+)?(\w\w)\))?/);
-        if (!res)
-        {
-           openSearchWindow("http://www.bigfoot.com/");
-        }
-        else
-        {
-          document.bfef.FirstName.value=(res[2] ? res[2] : "");
-          document.bfef.LastName.value=(res[4] ? res[4] : "");
-          document.bfef.City.value=(res[7] ? res[7] : "");
-          document.bfef.State.value=(res[8] ? res[8].toUpperCase() : "");
-          submitForm(bfef);
-        }
+        document.bfef.FirstName.value=(res[2] ? res[2] : "");
+        document.bfef.LastName.value=(res[4] ? res[4] : "");
+        document.bfef.City.value=(res[7] ? res[7] : "");
+        document.bfef.State.value=(res[8] ? res[8].toUpperCase() : "");
+        submitForm(bfef);
       }
-    ]]></script>
-  </search>
+    }
+  ]]></script>
+</search>

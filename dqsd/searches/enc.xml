@@ -1,25 +1,25 @@
-  <search function="enc">
-    <name>Encyclopedia.com</name>
-    <description>Search for articles: "enc alphabet"</description>
-    <category>Reference</category>
-    <link>http://encyclopedia.com/</link>
-    <contributor></contributor>
-    <form name="encf"
-          method="post"
-          action="http://www.encyclopedia.com/cgi-bin/search.cgi"
-          target="_blank">
-      <input type="hidden" name="search" value=""/>
-    </form>
-    <script><![CDATA[
-      function enc(q)
+<search function="enc">
+  <name>Encyclopedia.com</name>
+  <description>Search for encyclopedic articles at Encyclopedia.com: "enc alphabet"</description>
+  <category>Reference</category>
+  <link>http://www.encyclopedia.com/</link>
+  <contributor></contributor>
+  <form name="encf"
+        target="_blank"
+        action="http://www.encyclopedia.com/cgi-bin/search.cgi"
+        method="post">
+    <input type="hidden" name="search" value=""/>
+  </form>
+  <script><![CDATA[
+    function enc(q, switches)
+    {
+      if( q == "" )
+        openSearchWindow("http://www.encyclopedia.com/");
+      else
       {
-        if (q == "")
-          openSearchWindow("http://www.encyclopedia.com/");
-        else
-        {
-          document.encf.search.value=q;
-          submitForm(encf);
-        }
+        document.encf.search.value = q;
+        submitForm(encf);
       }
-    ]]></script>
-  </search>
+    }
+  ]]></script>
+</search>
