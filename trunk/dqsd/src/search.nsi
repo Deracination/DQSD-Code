@@ -25,6 +25,47 @@ SilentInstall silent
 ; The file to write
 OutFile "..\dqsd.exe"
 
+;--------------------------------
+; GetWindowsXPTheme
+; returns "" for windows classic
+; returns "blue" for xp blue
+; returns "silver" for xp silver
+; returns "olive" for xp olive
+Function GetWindowsXPTheme
+  Push $0
+  Push $1
+
+  ReadRegStr $1 HKCU "Software\Microsoft\Windows\CurrentVersion\ThemeManager" "ThemeActive"
+  StrCmp $1 "1" 0 noXPTheme
+
+  ;has XP Theme
+  ReadRegStr $1 HKCU "Software\Microsoft\Windows\CurrentVersion\ThemeManager" "ColorName"
+  ; blue check
+  StrCmp $1 "NormalColor" 0 +3
+  StrCpy $0 "blue"
+  goto doneXPTheme
+  ; olive check
+  StrCmp $1 "HomeStead" 0 +3
+  StrCpy $0 "olive"
+  goto doneXPTheme
+  ; silver check
+  StrCmp $1 "Metallic" 0 +3
+  StrCpy $0 "silver"
+  Goto doneXPTheme
+  ; unknown
+  StrCpy $0 ""
+  goto doneXPTheme
+
+  noXPTheme:
+    ; no theme active
+    StrCpy $0 ""
+    Goto doneXPTheme
+
+  doneXPTheme:
+    Pop $1
+    Exch $0
+FunctionEnd
+
 ; The default installation directory
 InstallDir "$PROGRAMFILES\Quick Search Deskbar"
 
@@ -37,7 +78,6 @@ DirText "Choose a directory to install in to:"
 
 ; The stuff to install
 Section "Quick Search Deskbar (required)"
-
   ; Set output path to the installation directory.
   SetOutPath $INSTDIR
 
@@ -154,10 +194,11 @@ Section "Quick Search Deskbar (required)"
   File "..\xptoolbar2_olive.bmp"
   File "..\xptoolbar1_blue.bmp"
   File "..\xptoolbar2_blue.bmp"
-  File "..\localsearch_default.css"
-  File "..\localsearch_silver.css"
-  File "..\localsearch_olive.css"
-  File "..\localsearch_blue.css"
+  File "..\theme_default.css"
+  File "..\theme_silver.css"
+  File "..\theme_olive.css"
+  File "..\theme_blue.css"
+  File "..\theme.css"
   
   SetOutPath "$INSTDIR\searches"
   File "..\searches\*.xml"
@@ -215,6 +256,10 @@ Section "Quick Search Deskbar (required)"
   Delete $INSTDIR\xplocalsearch.css
   Delete $INSTDIR\xptoolbarbot.bmp
   Delete $INSTDIR\xptoolbartop.bmp
+  Delete $INSTDIR\localsearch_default.css"
+  Delete $INSTDIR\localsearch_silver.css"
+  Delete $INSTDIR\localsearch_olive.css"
+  Delete $INSTDIR\localsearch_blue.css"
 
   ; Remove stuff introduced by 3.1.8 beta-1
   Delete $INSTDIR\dqsd.gif
@@ -288,6 +333,23 @@ Section "Quick Search Deskbar (required)"
   ; Uninstallation keys
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${DQSD_CLSID}" "DisplayName" "${DQSD_TITLE} (remove only)"
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${DQSD_CLSID}" "UninstallString" '"$INSTDIR\uninstall.exe"'
+
+  ; xp theme css installer
+  Call GetWindowsXPTheme
+  Pop $0
+  StrCmp $0 "" defaultTheme
+  StrCmp $0 "blue" 0 +3
+  CopyFiles /SILENT /FILESONLY $INSTDIR\theme_blue.css $INSTDIR\theme.css
+  goto doneXPTheme
+  StrCmp $0 "olive" 0 +3
+  CopyFiles /SILENT /FILESONLY $INSTDIR\theme_olive.css $INSTDIR\theme.css
+  goto doneXPTheme
+  StrCmp $0 "silver" 0 +3
+  CopyFiles /SILENT /FILESONLY $INSTDIR\theme_silver.css $INSTDIR\theme.css
+  goto doneXPTheme
+  defaultTheme:
+  ; none
+  doneXPTheme:
 
   ; Message box
   IfRebootFlag rebootmsg norebootmsg
