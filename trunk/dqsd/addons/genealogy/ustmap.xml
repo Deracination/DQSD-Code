@@ -11,7 +11,9 @@
     </table>
   </description>
   <link>http://xroads.virginia.edu/~MAP/TERRITORY/territor.html</link>
-  <category>Genealogy</category>
+  <category>Genealogy
+	<category>Maps</category>
+  </category>
   <contributor>Brent Beardsley</contributor>
 
   <script src="addons/genealogy/genealogy_lib.js"></script>

@@ -1,11 +1,18 @@
 <search function="newsar">
   <name>NewspaperArchive.com</name>
-  <category>Genealogy</category>
+  <category>Genealogy
+	<category>Newspapers</category>
+  </category>
   <contributor>Brent Beardsley</contributor>
   <link>http://www.newspaperarchive.com/</link>
   <email></email>
   <description>
   Search NewspaperArchive.com for your ancestors
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>newsar smith, john</td></tr>
+      <tr><td>newsar jones</td></tr>
+    </table>
   </description>
   <form name="newsarf"
         method="post"

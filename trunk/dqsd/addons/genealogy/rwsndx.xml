@@ -1,6 +1,8 @@
 <search function="rwsndx">
   <name>Rootsweb Soundex Calculator</name>
-  <category>Genealogy</category>
+  <category>Genealogy
+	<category>Calculators</category>
+  </category>
   <contributor>Brent Beardsley</contributor>
   <link>http://resources.rootsweb.com/cgi-bin/soundexconverter</link>
   <email></email>

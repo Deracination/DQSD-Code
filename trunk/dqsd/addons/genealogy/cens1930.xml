@@ -1,6 +1,8 @@
 <search function="cens1930">
   <name>Census - 1930 Microfilm Locator </name>
-  <category>Genealogy</category>
+  <category>Genealogy
+	<category>Census</category>
+  </category>
   <contributor>Brent Beardsley</contributor>
   <link>http://1930census.archives.gov/beginSearch.asp</link>
   <email></email>

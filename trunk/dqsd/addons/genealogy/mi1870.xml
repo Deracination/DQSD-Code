@@ -15,7 +15,9 @@
   		<tr><td>mi1870 McCoy</td></tr>
   	</table>
   </description>
-  <category>Genealogy</category>
+  <category>Genealogy
+	<category>Census</category>
+  </category>
   <link>http://envoy.libofmich.lib.mi.us/1870_census/Search.asp</link>
   <contributor>Brent Beardsley</contributor>
   

@@ -9,7 +9,9 @@
     </table>
   </description>
   <link>http://www.census-online.com/links/</link>
-  <category>Genealogy</category>
+  <category>Genealogy
+	<category>Census</category>
+  </category>
   <contributor>Brent Beardsley</contributor>
   <form name="censusf">
 
