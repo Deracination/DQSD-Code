@@ -9,6 +9,7 @@ New Searches
 * pg - Project Gutenberg/Public Domain book (pg) search (from Thad Kerosky)
 * slash - Search Slashdot (from Paul Bowers)
 * short - Abbreviate long and convoluted URLs (from Reginald Braithwaite-Lee)
+* palm - PalmGear.com search (from Herman Fuchs)
 
 Modified Searches
 
