@@ -1,0 +1,25 @@
+  <search function="enc">
+    <name>Encyclopedia.com</name>
+    <description>Search for articles: "enc alphabet"</description>
+    <category>Reference</category>
+    <link>http://encyclopedia.com/</link>
+    <contributor></contributor>
+    <form name="encf"
+          method="post"
+          action="http://www.encyclopedia.com/cgi-bin/search.cgi"
+          target="_blank">
+      <input type="hidden" name="search" value=""/>
+    </form>
+    <script><![CDATA[
+      function enc(q)
+      {
+        if (q == "")
+          openSearchWindow("http://www.encyclopedia.com/");
+        else
+        {
+          document.encf.search.value=q;
+          submitForm(encf);
+        }
+      }
+    ]]></script>
+  </search>

@@ -1,0 +1,31 @@
+  <search function="mf">
+    <name>Moviefone Search</name>
+    <description>
+      Search local movie listings: "mf monsters", "mf life as a house".
+      Be sure to tell moviefone your zip code so that it can search local theaters.
+    </description>
+    <category>Entertainment</category>
+    <link>http://www.moviefone.com/</link>
+    <contributor>Glenn Carr, suggested by Nik Devereaux</contributor>
+    <email>glenn_at_glenncarr_dot_com</email>
+    <form name="mfform"
+          method="get"
+          action="http://www.moviefone.com/showtimes/moviesearch.adp"
+          target="_blank">
+      <input type="hidden" name="action" value="title" />
+      <input type="hidden" name="query" />
+    </form>
+      <input type="hidden" name="csz" /> <comment> Can't figure out how to search for both title and location (zip) at the same time</comment>
+    <script><![CDATA[
+      function mf(q)
+      {
+        if (q == "")
+          openSearchWindow("http://www.moviefone.com/");
+        else
+        {
+          document.mfform.query.value=q;
+          submitForm(mfform);
+        }
+      }
+    ]]></script>
+  </search>

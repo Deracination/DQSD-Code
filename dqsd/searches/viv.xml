@@ -1,0 +1,171 @@
+  <search function="viv">
+    <name>Vivisimo Search</name>
+    <description>"viv anything"; options include Top News /tn, Business News /tb, Tech News /tt, Sports News /ts, <nobr><wbr/>/yaa, <wbr/>/ebay, <wbr/>/yas, <wbr/>/pubmed, <wbr/>/usgov, <wbr/>/patent, <wbr/>/gorp, <wbr/>/buscom, <wbr/>/brit, <wbr/>/yahoo, <wbr/>/msn, <wbr/>/fast, <wbr/>/netscape, <wbr/>/od, <wbr/>/excite, <wbr/>/dh, <wbr/>/ls, <wbr/>/aj, <wbr/>/lycos, <wbr/>/aol, <wbr/>/hb, <wbr/>/cnn, <wbr/>/nyt, <wbr/>/yn, <wbr/>/wn, <wbr/>/bbc, <wbr/>/sfg, <wbr/>/cnnfn, <wbr/>/ybn, <wbr/>/wired, <wbr/>/ytn, <wbr/>/ysn,</nobr> for example "viv president /cnn"</description>
+    <category>Search the Web</category>
+    <link>http://www.vivisimo.com</link>
+    <contributor>Sam Gera</contributor>
+    <form name="vivisimof" method="get" action="http://vivisimo.com/search" target="_blank">
+      <input type="hidden" name="query" />
+      <input type="hidden" name="se" value=""/>
+    </form>
+    <script><![CDATA[
+      function viv(q)
+      {
+        var suffix;
+        var result;
+        var se = "Yahoo,MSN,Fast,Netscape,OD,Excite,Looksmart,AskJeeves";  // Web Search
+
+        if (q == "")
+        {
+          openSearchWindow("http://vivisimo.com/");
+        }
+        else
+        {
+          // Check for / suffix, 
+          if (result = q.match(/^(.*)\/(\w+)/))
+          {
+            suffix = result[2];
+            q = result[1];
+            switch ( suffix.toLowerCase() )
+            {
+            case "tn":
+            case "topnews":
+              se = "CNN,NYTimes,YahooNews,WorldNews";
+              break;
+            case "tb":
+            case "topbus":
+              se = "CNNfn,YahooBizNews";
+              break;
+            case "tt":
+            case "toptech":
+              se = "Wired,YahooTechNews";
+              break;
+            case "ts":
+            case "topsports":
+              se = "YahooSportNews,CNNSI";
+              break;
+            case "yaa":
+            case "yahooauctions":
+              se = "YahooAuctions";
+              break;
+            case "ebay":
+              se = "Ebay";
+              break;
+            case "yas":
+            case "yahooshop":
+              se = "YahooShopping";
+              break;
+            case "pubmed":
+              se = "PubMed";
+              break;
+            case "usgov":
+              se = "FirstGov";
+              break;
+            case "patent":
+            case "delphion":
+              se = "Delphion";
+              break;
+            case "gorp":
+              se = "Gorp";
+              break;
+            case "buscom":
+            case "business":
+              se = "Business";
+              break;
+            case "brit":
+            case "britannica":
+              se = "Britannica";
+              break;
+            case "yahoo":
+              se = "Yahoo";
+              break;
+            case "msn":
+              se = "MSN";
+              break;
+            case "fast":
+              se = "Fast";
+              break;
+            case "netscape":
+              se = "Netscape";
+              break;
+            case "od":
+              se = "OD";
+              break;
+            case "excite":
+              se = "Excite";
+              break;
+            case "dh":
+            case "directhit":
+              se = "DirectHit";
+              break;
+            case "ls":
+            case "looksmart":
+              se = "Looksmart";
+              break;
+            case "aj":
+            case "askjeeves":
+              se = "AskJeeves";
+              break;
+            case "lycos":
+              se = "Lycos";
+              break;
+            case "aol":
+              se = "AOL";
+              break;
+            case "hb":
+            case "hotbot":
+              se = "HotBot";
+              break;
+            case "cnn":
+              se = "CNN";
+              break;
+            case "nyt":
+            case "nytimes":
+              se = "NYTimes";
+              break;
+            case "yn":
+            case "yahoonews":
+              se = "YahooNews";
+              break;
+            case "wn":
+            case "worldnews":
+              se = "WorldNews";
+              break;
+            case "bbc":
+              se = "BBC";
+              break;
+            case "sfg":
+            case "sfgate":
+              se = "SFGate";
+              break;
+            case "cnnfn":
+              se = "CNNfn";
+              break;
+            case "ybn":
+            case "yahoobiznews":
+              se = "YahooBizNews";
+              break;
+            case "wired":
+              se = "Wired";
+              break;
+            case "ytn":
+            case "yahootechnews":
+              se = "YahooTechNews";
+              break;
+            case "ysn":
+            case "yahoosportnews":
+              se = "YahooSportNews";
+              break;
+            default:
+              se = "Yahoo,MSN,Fast,Netscape,OD,Excite,Looksmart,AskJeeves";  // Web Search
+              break;
+            }
+          }
+
+          document.vivisimof.query.value=q;
+          document.vivisimof.se.value=se;
+          submitForm(vivisimof);
+        }
+      }
+    ]]></script>
+  </search>

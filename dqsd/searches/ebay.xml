@@ -1,0 +1,36 @@
+  <search function="ebay">
+    <name>Ebay Item Search</name>
+    <description>By name or number: "ebay guitars"</description>
+    <category>Shopping</category>
+    <link>http://www.ebay.com/</link>
+    <form name="ebyf"
+        method="get"
+        action="http://search.ebay.com/search/search.dll"
+        target="_blank">
+        <input type="hidden" name="MfcISAPICommand" value="GetResult"/>
+        <input type="hidden" name="ht" value="1"/>
+        <input type="hidden" name="SortProperty" value="MetaEndSort"/>
+        <input type="hidden" name="query" value=""/>
+    </form>
+    <script><![CDATA[
+      function ebay(q)
+      {
+        if (q == "")
+        {
+          openSearchWindow("http://www.ebay.com/");
+        }
+        else if (Number(q))
+        {
+          if ((Number(q) > '99999999') && (Number(q) < '2147483647'))
+          {
+            openSearchWindow('http://cgi.ebay.com/aw-cgi/eBayISAPI.dll?MfcISAPICommand=ViewItem&item=' + q);
+          }
+        }
+        else
+        {
+          document.ebyf.query.value=q;
+          submitForm(ebyf);
+        }
+      }
+    ]]></script>
+  </search>

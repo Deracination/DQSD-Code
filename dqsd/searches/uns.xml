@@ -1,0 +1,24 @@
+  <search function="uns">
+    <name>Word Unscrambler</name>
+    <description>To calculate scrabble scores: for example, "uns inourdnas"</description>
+    <category>Fun</category>
+    <link>http://www.concordance.com/unscrambler.htm</link>
+    <form name="srbf"
+          method="post"
+          action="http://www.concordance.com/cgi-bin/unscrambler.pl"
+          target="_blank">
+      <input type="hidden" name="letters" value=""/>
+    </form>
+    <script><![CDATA[
+      function uns(q)
+      {
+        if (q == "")
+          openSearchWindow("http://www.concordance.com/unscrambler.htm");
+        else
+        {
+          document.srbf.letters.value=q;
+          submitForm(srbf);
+        }
+      }
+    ]]></script>
+  </search>

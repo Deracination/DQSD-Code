@@ -1,0 +1,26 @@
+  <search function="fedex">
+    <name>Track FedEx Packages</name>
+    <description>Separated by commas: "fedex 40012345678, 40012345679"</description>
+    <category>Shipping</category>
+    <link>http://www.fedex.com</link>
+    <idea>stickyc's buddy</idea>
+    <contributor>Glenn Carr</contributor>
+    <form name="fedexf" action="http://www.fedex.com/cgi-bin/tracking" target="_blank">
+      <input type="hidden" name="tracknumbers" />
+      <input type="hidden" name="action" VALUE="track" />
+      <input type="hidden" name="language" VALUE="english" />
+      <input type="hidden" name="cntry_code" VALUE="us" />
+    </form>
+    <script><![CDATA[
+    function fedex(q)
+    {
+      if (q == "")
+        openSearchWindow("http://www.fedex.com");
+      else
+      {
+        document.fedexf.tracknumbers.value=q;
+        submitForm(fedexf);
+      }
+    }
+    ]]></script>
+  </search>

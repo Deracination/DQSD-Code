@@ -1,0 +1,28 @@
+  <search function="mys">
+    <name>MySQL Reference</name>
+    <description>Lookup on mysql.com: "mysql create table"</description>
+    <category>Computers</category>
+    <link>http://www.mysql.com/</link>
+    <form name="mysf"
+          target="_blank"
+          action="http://www.mysql.com/doc/manual.php"
+          method="get">
+      <input type="hidden" name="search_query"/>
+      <input type="hidden" name="depth" value="0"/>
+    </form>
+    <script><![CDATA[
+      // performs the search at http://www.mysql.com/doc
+      function mys(q)
+      {
+        if (q == "")
+        {
+          openSearchWindow("http://www.mysql.com/");
+        }
+        else
+        {
+          document.mysf.search_query.value=q;
+          submitForm(mysf);
+        }
+      }
+    ]]></script>
+  </search>

@@ -1,0 +1,29 @@
+  <search function="aw">
+    <name>AccuWeather Forecast</name>
+    <description>Search by zip code: "aw 98052" </description>
+    <category>News</category>
+    <link>http://accuweather.com/</link>
+    <contributor></contributor>
+    <form name="acwf"
+        method="get"
+        action="http://www.accuweather.com/adcbin/local_index"
+        target="_blank">
+      <input type="hidden" name="nav" value="home"/>
+      <input type="hidden" name="thisZip" value=""/>
+    </form>
+    <script><![CDATA[
+    function aw(q)
+    {
+      if (q == "")
+      {
+        openSearchWindow("http://www.accuweather.com/adcbin/local_index");
+      }
+      else
+      {
+        document.acwf.thisZip.value=q;
+        submitForm(acwf);
+      }
+    }
+
+    ]]></script>
+  </search>  

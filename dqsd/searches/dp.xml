@@ -1,0 +1,29 @@
+  <search function="dp">
+    <name>Dogpile Search</name>
+    <description>Parallel search via a popular metasearch: "dp travel"</description>
+    <category>Search the Web</category>
+    <link>http://www.dogpile.com/</link>
+    <contributor></contributor>
+    <form name="dogf"
+        method="get"
+        action="http://search.dogpile.com/texis/search"
+        target="_blank">
+      <input type="hidden" name="fs" value="web"/>
+      <input type="hidden" name="geo" value="no"/>
+      <input type="hidden" name="q" value=""/>
+    </form>
+    <script><![CDATA[
+      function dp(q)
+      {
+       if (q == "")
+       {
+         openSearchWindow("http://www.dogpile.com/");
+       }
+       else
+       {
+         document.dogf.q.value=q;
+         submitForm(dogf);
+       }
+      }
+    ]]></script>
+  </search>

@@ -1,0 +1,27 @@
+  <search function="yh">
+    <name>Yahoo Search</name>
+    <description>Search the Yahoo directory: "yh horses"</description>
+    <category>Search the Web</category>
+    <link>http://www.yahoo.com/</link>
+    <contributor></contributor>
+    <form name="yhof"
+        method="get"
+        action="http://search.yahoo.com/bin/search"
+        target="_blank">
+        <input type="hidden" name="p" value=""/>
+    </form>
+    <script><![CDATA[
+      function yh(q)
+      {
+        if (q == "")
+        {
+          openSearchWindow("http://www.yahoo.com/");
+        }
+        else
+        {
+          document.yhof.p.value=q;
+          submitForm(yhof);
+        }
+      }
+    ]]></script>
+  </search>

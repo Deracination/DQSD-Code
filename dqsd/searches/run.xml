@@ -1,0 +1,25 @@
+  <search function="run">
+    <name>Run Program</name>
+    <description>Replacement for the Start menu's Run command: "run winword" runs Microsoft Word.</description>
+    <category>Other</category>
+    <script>
+      function run(q)
+      {
+        if (q == "")
+        {
+          alert("Type run programname, e.g., \"run winword\" to run Microsoft Word.");
+        }
+        else
+        {
+          try
+          {
+            openDocument(q);
+          }
+          catch (e)
+          {
+            alert("Could not run " + q);
+          }
+        }
+      }
+    </script>
+  </search>

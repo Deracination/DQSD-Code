@@ -1,0 +1,25 @@
+  <search function="sqlt">
+    <name>SQLTeam.com Search</name>
+    <description>SQL server reference lookup</description>
+    <category>Computers</category>
+    <link>http://www.sqlteam.com/</link>
+    <contributor>Damian Maclennan</contributor>
+    <form name="sqlteam"
+          method="get"
+          action="http://www.sqlteam.com/SearchResults.asp"
+          target="_blank">
+      <input type="hidden" name="SearchTerms" value=""/>
+    </form>
+    <script><![CDATA[
+      function sqlt(q)
+      {
+        if (q == "")
+          openSearchWindow("http://www.sqlteam.com");
+        else
+        {
+          document.sqlteam.SearchTerms.value=q;
+          submitForm(sqlteam);
+        }
+      }
+    ]]></script>
+  </search>

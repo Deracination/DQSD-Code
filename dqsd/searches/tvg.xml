@@ -1,0 +1,23 @@
+<search function="tvg">
+   <name>TVGuide Search</name>
+   <description>Look up tv programming by keyword: "tvg simpsons"</description>
+   <category>Entertainment</category>
+   <link>http://www.tvguide.com</link>
+   <contributor></contributor>
+   <form name="tvgf"
+      method="get"
+      action="http://www.tvguide.com/listings/search/SearchResults.asp">
+      <input type="hidden" name="FormText" value=""/>
+    </form>
+    <script><![CDATA[
+    function tvg(q) {
+       if (q=="") {
+          openSearchWindow("http://www.tvguide.com/listings/search/Search.asp");
+          }
+       else{
+          document.tvgf.FormText.value=q;
+          submitForm(tvgf)
+          }
+       }//func
+    ]]></script>
+  </search>

@@ -1,0 +1,25 @@
+	<search function="md">
+		<name>WebMD Search</name>
+		<link>http://www.webmd.com/</link>
+		<description>Search WebMD "md cold"</description>
+		<category>Other</category>
+		<contributor>John W. Bairen, Jr.</contributor>
+		<form name="mdf" action="http://my.webmd.com/search_results" method="post" title="search">        
+			<input type="hidden" name="query" />
+			<input type="hidden" name="filter" value="library_filter" />
+		</form>	
+		<script><![CDATA[
+			function md(q)
+			{
+				if (q == "")
+				{
+					openSearchWindow("http://www.webmd.com");
+				}
+				else
+				{
+					document.mdf.query.value=q;
+					submitForm(mdf);
+				}
+			}
+		]]></script>
+	</search>

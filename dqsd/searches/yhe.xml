@@ -1,0 +1,43 @@
+  <search function="yhe">
+    <name>Yahoo Email Search</name>
+    <description>Search for email addresses by name: "yhe Roger Weber" </description>
+    <category>People and Places</category>
+    <link>http://email.people.yahoo.com/</link>
+    <contributor></contributor>
+    <form name="yhef"
+        method="get"
+        action="http://email.people.yahoo.com/py/psSearch.py"
+        target="_blank">
+      <input type="hidden" name="FirstName"/>
+      <input type="hidden" name="LastName"/>
+      <input type="hidden" name="City"/>
+      <input type="hidden" name="State"/>
+      <input type="hidden" name="Domain"/>
+      <input type="hidden" name="OldEmail"/>
+      <input type="hidden" name="SmartName"/>
+      <input type="hidden" name="OrgName"/>
+      <input type="hidden" name="OrgType" value="n"/>
+      <input type="hidden" name="OrgYrS" value=""/>
+      <input type="hidden" name="OrgYrF" value=""/>
+      <input type="hidden" name="srch" value="adv"/>
+    </form>
+    <script><![CDATA[
+    function yhe(q)
+    {
+      res = q.match(/(((\w+\s+)?\w+)\s+)?(\w+)(\s*\(((([^,]+),?\s+)?(\w\w)|((\w+.)+(com|net|org|edu|gov|mil|\w{2})))\))?/);
+      if (!res)
+      {
+         openSearchWindow("http://people.yahoo.com/");
+      }
+      else
+      {
+        document.yhef.FirstName.value=(res[2] ? res[2] : "");
+        document.yhef.LastName.value=(res[4] ? res[4] : "");
+        document.yhef.City.value=(res[8] ? res[8] : "");
+        document.yhef.State.value=(res[9] ? res[9].toUpperCase() : "");
+        document.yhef.Domain.value=(res[10] ? res[10].toLowerCase() : "");
+        submitForm(yhef);
+      }
+    }
+    ]]></script>
+  </search>   

@@ -1,0 +1,33 @@
+  <search function="thw">
+    <name>Tom's Hardware Search</name>
+    <description>Search Articles at Tom's Hardware.com</description>
+    <contributor>John W. Bairen, Jr.</contributor>
+    <category>Computers</category>
+    <link>http://www.tomshardware.com</link>
+    <form name="thwf" method="get" 
+        action="http://www6.tomshardware.com/cgi-bin/htsearch" 
+        target="_blank">
+      <input type="hidden" name="words" value=""/>
+      <input type="hidden" name="format" value="builtin-long"/>
+      <input type="hidden" name="method" value="and"/>
+      <input type="hidden" name="sort" value="score"/>
+      <input type="hidden" name="config" value="content"/>
+      <input type="hidden" name="restrict" value=""/>
+      <input type="hidden" name="exclude" value=""/>
+    </form>
+
+    <script><![CDATA[
+      function thw(q)
+      {
+        if (q == "")
+        {
+          openSearchWindow("http://www.tomshardware.com");
+        }
+        else
+        {
+          document.thwf.words.value=q;
+          submitForm(thwf);
+        }
+      }
+    ]]></script>
+  </search>

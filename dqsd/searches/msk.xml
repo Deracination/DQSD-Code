@@ -1,0 +1,26 @@
+<search function="msk">
+  <name>Microsoft Knowledge Base Search</name>
+  <description>Search the Microsoft Knowledge Base using either a 6-digit 
+  "Q" code (the leading "Q" is optional) or a regular search expression: msk
+  252795, msk Windows Bugs</description>
+  <link>http://support.microsoft.com/default.aspx?scid=fh;en-us;kbinfo</link>
+  <category>Computers</category>
+  <contributor>Ryan Edwards</contributor>
+  <email>ryan_at_karynova_dot_com</email>
+<script>
+<![CDATA[
+      function msk(q)
+      {
+        var res;
+        if (q == "")
+		     openSearchWindow("http://support.microsoft.com/default.aspx?scid=fh;en-us;kbinfo");
+        else if( q.match( /(.+\s+.+)/ ) == null && (res = q.match(/^\s*[qQ]?(\d{6})(\s+|$)/ )) != null )
+			  openSearchWindow('http://support.microsoft.com/default.aspx?scid=kb;en-us;'+ "Q" + res[1]);
+		  else
+		openSearchWindow('http://search.support.microsoft.com/search/default.aspx?Catalog=LCID%3D1033%26CDID%3DEN-US-KB%26PRODLISTSRC%3DON&Product=msall&Query='+ q.replace(/\s+/g,'%2520') + '&Queryc=' + q.replace(/\s+/g,'+')+'&withinResults=false&srchstep=0&KeywordType=ALL&Titles=false&numDays=&maxResults=25');
+      }
+
+
+  ]]>
+  </script>
+</search>

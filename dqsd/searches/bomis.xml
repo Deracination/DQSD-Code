@@ -1,0 +1,28 @@
+  <search function="bomis">
+    <name>Bomis.com search</name>
+    <link>http://bomis.com/</link>
+    <category>Other</category>
+    <contributor>Reginald Braithwaite-Lee</contributor>
+    <email>raganwald_at_yahoo_dot_com</email>
+    <form name="bomisf"
+          action="http://www.bomis.com/searchring.fcgi"
+          method="get"
+          target="_blank">
+      <input name="db" type="hidden" value="bomis" />
+      <input name="request" type="hidden" />
+    </form>
+    <script><![CDATA[
+      function bomis(q)
+      {
+        if (q == "")
+        {
+          openSearchWindow("http://www.bomis.com/");
+        }
+        else
+        {
+          document.bomisf.request.value=q;
+          submitForm(bomisf);
+        }
+      }
+    ]]></script>
+  </search>

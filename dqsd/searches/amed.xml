@@ -1,0 +1,28 @@
+  <search function="amed">
+    <name>Access Medicine Search</name>
+    <description>For example, "amed anthrax"</description>
+    <category>Other</category>
+    <link>http://www.accessmedicine.com/</link>
+    <contributor>Andrew Gilmartin</contributor>
+    <form name="accessmedicinef"
+          method="get"
+          action="http://www.accessmedicine.com/cgi-bin/search_simple.cgi"
+          target="_blank">
+      <input type="hidden" name="category"  value="chapters_updates"/>
+      <input type="hidden" name="category"  value="tables_figures"/>
+      <input type="hidden" name="category"  value="related_sites"/>
+      <input type="hidden" name="QueryText" value=""/>
+    </form>
+    <script><![CDATA[
+      function amed(q)
+      {
+        if (q == "")
+          openSearchWindow("http://www.accessmedicine.com/harrisons/public/su_search/advanced_search.html");
+        else
+        {
+          document.accessmedicinef.QueryText.value = q;
+          submitForm(accessmedicinef);
+        }
+      }
+    ]]></script>
+  </search>
