@@ -11,12 +11,12 @@
       <tr><td>howfar /Pittsburgh, PA /Paris France </td></tr>
       <tr><td>howfar /Pittsburgh, PA /Chicago, IL</td></tr>
       <tr><td>howfar /Pittsburgh, PA</td></tr>
+      <tr><td>howfar Pittsburgh, PA</td></tr>      
     </table>
     </description>
   <form name="howfarf"
         method="get"
         action="http://www.indo.com/cgi-bin/dist">
-
     <input type="hidden" name="place1" value="" />
     <input type="hidden" name="place2" value="" />
   </form>
@@ -32,17 +32,14 @@
         if (howfararray[1])
           document.howfarf.place1.value = howfararray[1];
         else
-          document.howfarf.place1.value = "";
+          document.howfarf.place1.value = q;
         if (howfararray[2])
           document.howfarf.place2.value = howfararray[2];
         else
           document.howfarf.place2.value = "";
       }
-    
-        submitForm(howfarf);
+    submitForm(howfarf);
 	return true;
-          
     }
-
   ]]></script>
 </search>
