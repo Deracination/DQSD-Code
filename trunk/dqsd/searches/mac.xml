@@ -4,60 +4,64 @@
     Convert between a router MAC address format to a switch MAC address format.<br/>
     <div class="helpboxDescLabels">Usage:</div>
     <table class="helpboxDescTable">
-  		<tr><td>mac </td><td> - </td><td><i>&lt;MAC address&gt;</i></td></tr>
-  	  </table>
+      <tr><td>mac </td><td> - </td><td><i>&lt;MAC address&gt;</i></td></tr>
+      </table>
     <div class="helpboxDescLabels">Examples:</div>
     <table class="helpboxDescTable">
-  		<tr><td>mac 0000.0a0a.0b0b</td></tr>
-  	 </table>
+      <tr><td>mac 0000.0a0a.0b0b</td></tr>
+     </table>
   </description>
   <category>Functions</category>
   <contributor>Mark Notarus</contributor>
   
   <script><![CDATA[
-function mac(t)
-{
+  function mac(t)
+  {
+    if( nullArgs("mac", t) )
+      return false;
+
     var result = null;
     var newaddr = null;
     var a = null; var b = null; var c = null;
     var d = null; var e = null; var f = null;
     result = t.match(/([0-9a-f]?[0-9a-f])[:-]([0-9a-f]?[0-9a-f])[:-]([0-9a-f]?[0-9a-f])[:-]([0-9a-f]?[0-9a-f])[:-]([0-9a-f]?[0-9a-f])[:-]([0-9a-f]?[0-9a-f])/i);
-    if (result){
-         // modify and return here
-         a = RegExp.$1;
-         b = RegExp.$2;
-         c = RegExp.$3;
-         d = RegExp.$4;
-         e = RegExp.$5;
-         f = RegExp.$6;
-         if (a.length == 1) { a = "0" + a; }
-         if (b.length == 1) { b = "0" + b; }
-         if (c.length == 1) { c = "0" + c; }
-         if (d.length == 1) { d = "0" + d; }
-         if (e.length == 1) { e = "0" + e; }
-         if (f.length == 1) { f = "0" + f; }
+    if (result)
+    {
+      // modify and return here
+      a = RegExp.$1;
+      b = RegExp.$2;
+      c = RegExp.$3;
+      d = RegExp.$4;
+      e = RegExp.$5;
+      f = RegExp.$6;
+      if (a.length == 1) { a = "0" + a; }
+      if (b.length == 1) { b = "0" + b; }
+      if (c.length == 1) { c = "0" + c; }
+      if (d.length == 1) { d = "0" + d; }
+      if (e.length == 1) { e = "0" + e; }
+      if (f.length == 1) { f = "0" + f; }
 
-         
-         newaddr = a + b + "." + c + d + "." + e + f;
-         document.deff.q.value = newaddr;
-         document.deff.q.createTextRange().select();
-         return true;
-     }
-     result = t.match(/([0-9a-f][0-9a-f])([0-9a-f][0-9a-f])\.([0-9a-f][0-9a-f])([0-9a-f][0-9a-f])\.([0-9a-f][0-9a-f])([0-9a-f][0-9a-f])/i);
-     if (result){
-           // modify and return here
-         newaddr = RegExp.$1 + ":" + RegExp.$2 + ":" + RegExp.$3 + ":" + RegExp.$4 + ":" + RegExp.$5 + ":" + RegExp.$6;
-         document.deff.q.value = newaddr;      
-         document.deff.q.createTextRange().select();
-         return true;
-     }
-     return false;
-}    
+      newaddr = a + b + "." + c + d + "." + e + f;
+      document.deff.q.value = newaddr;
+      document.deff.q.createTextRange().select();
+      return true;
+    }
+    result = t.match(/([0-9a-f][0-9a-f])([0-9a-f][0-9a-f])\.([0-9a-f][0-9a-f])([0-9a-f][0-9a-f])\.([0-9a-f][0-9a-f])([0-9a-f][0-9a-f])/i);
+    if (result)
+    {
+      // modify and return here
+      newaddr = RegExp.$1 + ":" + RegExp.$2 + ":" + RegExp.$3 + ":" + RegExp.$4 + ":" + RegExp.$5 + ":" + RegExp.$6;
+      document.deff.q.value = newaddr;      
+      document.deff.q.createTextRange().select();
+      return true;
+    }
+    return false;
+  }    
   ]]></script>
 
   <copyright>
-	Copyright (c) 2002 David Bau
-	Distributed under the terms of the
-	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+    Copyright (c) 2002 David Bau
+    Distributed under the terms of the
+    GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
   </copyright>
 </search>

@@ -8,7 +8,7 @@
   TinyURL makes a short URL for your long URL so you can paste it in email messages.
     <div class="helpboxDescLabels">Examples:</div>
     <table class="helpboxDescTable">
-      <tr><td>tinyurl http://wwww.reallyreallyreallylongurltoannoyyou.com</td></tr>
+      <tr><td>tinyurl http://wwww.reallyreallylongurltoannoyyou.com</td></tr>
     </table>
   </description>
   <form name="tinyurlf"
