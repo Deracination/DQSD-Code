@@ -1,0 +1,167 @@
+<search function="cwss">
+  <name>Civil War Soldiers and Sailors System</name>
+  <category>Genealogy</category>
+  <contributor>Brent Beardsley</contributor>
+  <link>http://www.itd.nps.gov/cwss/</link>
+  <email></email>
+  <description>
+  Search the Civil War Soldiers and Sailors System from the National Park Service
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/place</td><td> - </td><td>State of origin</td></tr>
+      <tr><td>/function</td><td> - </td><td></td></tr>
+      <tr><td>/union</td><td> - </td><td></td></tr>
+      <tr><td>/confederate</td><td> - </td><td></td></tr>
+      <tr><td>/unit</td><td> - </td><td></td></tr>
+    </table>
+  </description>
+  <form name="cwssf"
+        method="post"
+        action="http://www.itd.nps.gov/cwss/Personz_Results.cfm?RequestTimeOut=500">
+    <input type="hidden" name="PER_SUR_NAME_ORIG" value="" />
+    <input type="hidden" name="PER_GIV_NAME_ORIG" value="" />
+    <input type="hidden" name="PER_SIDE" value="" />
+    <COMMENT>
+      The input element above, "PER_SIDE", was a SELECT element with the following options...
+      <select name="PER_SIDE">
+        <option value=""></option>
+        <option value="U">Union</option>
+        <option value="C">Confederate</option>
+      </select>
+    </COMMENT>
+
+    <input type="hidden" name="PER_ORIGIN" value="" />
+    <COMMENT>
+      The input element above, "PER_ORIGIN", was a SELECT element with the following options...
+      <select name="PER_ORIGIN">
+        <option value=""></option>
+        <option value="AL">Alabama</option>
+        <option value="AR">Arkansas</option>
+        <option value="AZ">Arizona Territory</option>
+        <option value="CA">California</option>
+        <option value="CO">Colorado Territory</option>
+        <option value="CS">Confederate Troops</option>
+        <option value="CT">Connecticut</option>
+        <option value="DC">District of Columbia</option>
+        <option value="DE">Delaware</option>
+        <option value="DT">Dakota Territory</option>
+        <option value="FL">Florida</option>
+        <option value="GA">Georgia</option>
+        <option value="IA">Iowa</option>
+        <option value="IL">Illinois</option>
+        <option value="IN">Indiana</option>
+        <option value="KS">Kansas</option>
+        <option value="KY">Kentucky</option>
+        <option value="LA">Louisiana</option>
+        <option value="MA">Massachusetts</option>
+        <option value="MD">Maryland</option>
+        <option value="ME">Maine</option>
+        <option value="MI">Michigan</option>
+        <option value="MN">Minnesota</option>
+        <option value="MO">Missouri</option>
+        <option value="MS">Mississippi</option>
+        <option value="NC">North Carolina</option>
+        <option value="NE">Nebraska Territory</option>
+        <option value="NH">New Hampshire</option>
+        <option value="NJ">New Jersey</option>
+        <option value="NM">New Mexico Territory</option>
+        <option value="NV">Nevada</option>
+        <option value="NY">New York</option>
+        <option value="OH">Ohio</option>
+        <option value="OR">Oregon</option>
+        <option value="PA">Pennsylvania</option>
+        <option value="RI">Rhode Island</option>
+        <option value="SC">South Carolina</option>
+        <option value="TN">Tennessee</option>
+        <option value="TX">Texas</option>
+        <option value="UR">Union Regular Army</option>
+        <option value="US">US Colored Troops</option>
+        <option value="UT">Utah Territory</option>
+        <option value="UV">Union Volunteers</option>
+        <option value="VA">Virginia</option>
+        <option value="VR">Veteran Reserve Corps</option>
+        <option value="VT">Vermont</option>
+        <option value="WA">Washington Territory</option>
+        <option value="WI">Wisconsin</option>
+        <option value="WV">West Virginia</option>
+      </select>
+    </COMMENT>
+
+    <input type="hidden" name="PER_ORDINAL" value="" />
+    <input type="hidden" name="PER_FUNCTION" value="" />
+    <COMMENT>
+      The input element above, "PER_FUNCTION", was a SELECT element with the following options...
+      <select name="PER_FUNCTION">
+        <option value=""></option>
+        <option value="I">Infantry</option>
+        <option value="C">Cavalry</option>
+        <option value="A">Artillery</option>
+        <option value="S">Sharpshooters</option>
+        <option value="E">Engineers</option>
+      </select>
+    </COMMENT>
+    <input type="hidden" name="reset" value="Reset Query" />
+  </form>
+  <script src="addons/genealogy/genealogy_lib.js"></script>
+  <script><![CDATA[
+    function cwss(q)
+    {
+      if( nullArgs("cwss", q) )
+        return;
+
+	  var cw_place = "";
+	  var cw_side = "";
+	  var cw_ordinal = "";
+	  var cw_function = "";
+      var args = genealogy_parseArgs(q, "place, union, confederate, unit, infantry, cavalry, artillery, sharpshooters, engineers");
+	  for (var i=0; i < args.switches.length; i++) {
+		switch( args.switches[i].name )
+        {
+          case "place":
+		    cw_place = genealogy_lookup_place_abbrev(genealogy_parse_place_state(args.switch_val["place"]));
+            break;
+          case "union":
+		    cw_side = "U";
+            break;
+          case "confederate":
+		    cw_side = "C";
+            break;
+          case "unit":
+		    cw_ordinal = args.switch_val["unit"];
+            break;
+		  case "infantry":
+		    cw_function = "I";
+			break;
+		  case "cavalry":
+		    cw_function = "C";
+			break;
+		  case "artillery":
+		    cw_function = "A";
+			break;
+		  case "sharpshooters":
+		    cw_function = "S";
+		    break;
+		  case "engineers":
+		    cw_function = "E";
+		    break;
+          default:
+            break;
+        }
+      }
+
+      document.cwssf.PER_SUR_NAME_ORIG.value = genealogy_parse_surname(args.q);
+      document.cwssf.PER_GIV_NAME_ORIG.value = genealogy_parse_givenname(args.q);
+      document.cwssf.PER_ORIGIN.value = cw_place;
+      document.cwssf.PER_SIDE.value = cw_side;
+      document.cwssf.PER_ORDINAL.value = cw_ordinal;
+      document.cwssf.PER_FUNCTION.value = cw_function;
+
+      genealogy_submitForm(cwssf, "cwss", q);
+    }
+  ]]></script>
+  <copyright>
+  	Copyright (c) 2003 Brent Beardsley
+	Distributed under the terms of the
+	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>
