@@ -34,18 +34,26 @@ function buildpop()
       "<table cellpadding=0 cellspacing=0 width=100%>" +
       mi("About This Toolbar", "about", "");
   var i;
+  var div = false;
   for (i = menuarray.length - 1; i >= 0; i--)
   {
     var entry = menuarray[i];
     if (entry == "separator")
     {
-       menucode += dv();
+       if (!div) // don't add consecutive separators
+       {
+         menucode += dv();
+         div = true;
+       }
     }
     else
     {
        var search = searches[aliases[entry]];
        if (search)
+       {
          menucode += mi(search.name, search.fname, entry);
+         div = false;
+       }
     }
   }
   menucode += "</table></td><tr></table>";
