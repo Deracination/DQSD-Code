@@ -1,0 +1,38 @@
+<search function="guidgen">
+  <name>GUID Generator</name>
+  <category>Computers<category>Programming</category></category>
+  <contributor>Glenn Carr</contributor>
+  <link></link>
+  <email>glenn at glenncarr dot com</email>
+  <description>
+  Generate a GUID using the scriptlet.typelib ActiveX component.  No arguments need to be specified.
+  <!--
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td></td></tr>
+      <tr><td></td></tr>
+    </table>
+  -->
+  </description>
+  <script><![CDATA[
+    function guidgen(q)
+    {
+			try
+			{
+				var guid = new ActiveXObject("scriptlet.typelib").guid.substr(0,38);
+				setSearchWindowText(guid);
+
+				var range = document.deff.q.createTextRange();
+				range.select();
+			}
+			catch ( e )
+			{
+				alert( 'There was a problem creating the ActiveX component needed to generate GUID, or you simply need to click "Yes" in the dialog that pops up.  Reload the toolbar (type !) and try again.' );
+			}
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>
