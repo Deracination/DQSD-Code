@@ -1,0 +1,129 @@
+<search function="rh2t">
+  <name>Registry Hex to Text Converter</name>
+  <description>
+    Converts a registry hex-encoded binary value to text.
+    If the hex string is not passed on the command, the 
+    clipboard will be parsed by default.<br />
+    <div class="helpboxDescLabels">Usage:</div>
+    <table class="helpboxDescTable">
+      <tr><td>rh2t <strong>[![string]]|[hex]</strong></td></tr>
+    </table>
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>!</td><td>Reverse action - convert the value, either from the clipboard or following the !, to a registry-compatible hex-encoded binary value</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+      <tr><td>rh2t</td></tr>
+      <tr><td>rh2t 64,71,73,64,20,72,6F,63,6B,73,21</td></tr>
+      <tr><td>rh2t !DQSD Rocks</td></tr>
+      <tr><td>rh2t !</td></tr>
+    </table>
+  </description>
+  <category>Functions</category>
+  <link>http://www.ReliableAnswers.com/</link>
+  <contributor>Shawn K. Hall</contributor>
+  
+  <form name="rh2tf"
+    action="http://reliableanswers.com/x/"
+    method="post">
+    <textarea style="display: none;" name="q"></textarea>
+    <textarea style="display: none;" name="vbscode"><![CDATA[
+
+Dim q, qsHex
+q = document.rh2tf.q.value & ""
+If Trim( q ) = "" Then
+  qsHex = ClipBoardGetText()
+  Call ClipBoardSetText( JoinHex( qsHex ) )
+Else
+  If Left(q, 1) = "!" Then
+    If q = "!" Then
+      qsHex = ClipBoardGetText()
+      Call ClipBoardSetText( SplitHex( qsHex ) )
+    Else
+      qsHex = SplitHex( Right(q, Len(q)-1) )
+      document.deff.q.value = qsHex
+    End If
+  Else
+    qsHex = JoinHex( q )
+    document.deff.q.value = qsHex
+  End If
+End If
+Function JoinHex( sVals )
+  Dim lIter, sBuild, aHex
+  sBuild = sVals
+  sBuild = Replace(sBuild, " ", "")
+  sBuild = Replace(sBuild, "\", "")
+  sBuild = Replace(sBuild, vbCrLf, "")
+  aHex = Split(sBuild, ",")
+  For lIter = LBound(aHex) To UBound(aHex)
+    If aHex(lIter) = "00" Then
+      aHex(lIter) = "-"
+    Else
+      aHex(lIter) = Chr(CInt("&h" & aHex(lIter)))
+    End If
+  Next
+  JoinHex = Join(aHex, "")
+End Function
+Function SplitHex( sString )
+  Dim lIter, sBuild, sChar, aHex
+  aHex = Split(Space(Len(sString)-1), " ")
+  For lIter = LBound(aHex) To UBound(aHex)
+    aHex(lIter) = Right("00" & Hex(Asc(NewMid(sString, lIter, 1))), 2)
+  Next
+  SplitHex = Join(aHex, ",")
+End Function
+Function NewMid(sString, lStart, lLength)
+  Dim s, l
+  On Error Resume Next
+  l = Len(sString) - lStart
+  If l > 0 Then
+    s = Right(sString, l)
+    If lLength > Len(s) Then
+      s = Left(s, lLength)
+    End If
+  Else
+    s = ""
+  End If
+  NewMid = s
+End Function
+Function ClipBoardSetText( sText )
+  ClipBoardSetText = window.clipboardData.SetData( "Text", sText )
+End Function
+Function ClipBoardGetText()
+  ClipBoardGetText = window.clipboardData.GetData( "Text" )
+End Function
+
+    ]]></textarea>
+  </form>
+
+  <script><![CDATA[
+
+  function rh2t (q)
+  {
+    document.rh2tf.q.value = q;
+
+  //get the vbs code
+    var rh2tt = "";
+    rh2tt = document.rh2tf.vbscode.value;
+
+  //remove CDATA prefix and trailer
+    rh2tt = rh2tt.replace( /(\<\!\[CDATA\[)/g, '' ).replace( /(\]\]\>)/g, '' );
+
+  //trim it
+    rh2tt = rh2tt.replace(/^\s+/g, '' ).replace(/\s+$/g, '' );
+
+  //run the script
+    window.execScript( rh2tt, "vbscript" );
+
+  //return
+    return ( true );
+  }
+
+  ]]></script>
+  <copyright>
+	Copyright (c) 2002 David Bau
+	Distributed under the terms of the
+	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>

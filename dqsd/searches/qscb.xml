@@ -1,0 +1,153 @@
+<search function="qscb">
+  <name>VB Script - QuickSort Clipboard</name>
+  <description>
+    QuickSorts every line of text on the clipboard and 
+    places it back onto the clipboard.<br />
+    <div class="helpboxDescLabels">Usage:</div>
+    <table class="helpboxDescTable">
+      <tr><td>qscb <strong>[/trim]</strong></td></tr>
+    </table>
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/trim</td><td> - </td><td>Trim each line before sort</td></tr>
+      <tr><td>/1</td><td> - </td><td>Include any specific line only once</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+      <tr><td>qscb</td></tr>
+      <tr><td>qscb /trim</td></tr>
+    </table>
+  </description>
+  <category>Functions</category>
+  <link>http://www.ReliableAnswers.com/</link>
+  <contributor>Shawn K. Hall</contributor>
+  
+  <form name="qscbf"
+    action="http://reliableanswers.com/x/"
+    method="post">
+    <input type="hidden" name="q" value="" />
+    <textarea name="vbscode" style="display: none;"><![CDATA[
+
+Dim q, qbTrim, qbSingle
+q = document.qscbf.q.value
+If InStr( 1, q, "/trim", 1) > 0 Then
+  qbTrim = True
+Else
+  qbTrim = False
+End If
+If InStr( 1, q, "/1", 1) > 0 Then
+  qbSingle = True
+Else
+  qbSingle = False
+End If
+Call QuickSortClipboard( qbTrim, qbSingle )
+
+Sub QuickSortClipboard( bTrim, bSingle )
+  Dim a, s, lIter
+  a = Split( ClipBoardGetText, vbCrLf )
+  If bTrim Then
+    For lIter = LBound( a ) To UBound( a )
+      a(lIter) = Trim( a(lIter) )
+    Next
+  End If
+  Call QuickSortA( a, LBound( a ), UBound( a ) )
+  s = Join(a, vbCrLf)
+  If bSingle Then
+    s = SortSingle( s )
+  End If
+  Call ClipBoardSetText( s )
+  Erase a
+End Sub
+Public Function SortSingle(sValues)
+  Dim sBuild, lIter, sLine, Values, Min, Max
+  Values = Split(sValues, vbCrLf)
+  Min = LBound(Values)
+  Max = UBound(Values)
+  sLine = ""
+  For lIter = Min To Max
+    If sLine = Values(lIter) Then
+      Values(lIter) = ""
+    Else
+      sLine = Values(lIter)
+    End If
+  Next
+  sBuild = Join(Values, vbCrLf)
+  While InStr(1, sBuild, vbCrLf & vbCrLf, 1)
+    sBuild = Replace(sBuild, vbCrLf & vbCrLf, vbCrLf)
+  Wend
+  SortSingle = sBuild
+End Function
+Sub QuickSortA( ByRef Values, ByVal Min, ByVal Max )
+  Dim sMed, sMedL, lHi, lLo, lIter
+  If Min >= Max Then Exit Sub
+  lIter = Min + Int( Rnd( Max - Min + 1 ) )
+  sMed = Values( lIter )
+  sMedL = LCase( Values( lIter ) )
+  Values( lIter ) = Values( Min )
+  lLo = Min
+  lHi = Max
+  Do
+    Do While LCase( Values( lHi ) ) >= sMedL
+      lHi = lHi - 1
+      If lHi <= lLo Then Exit Do
+    Loop
+    If lHi <= lLo Then
+      Values( lLo ) = sMed
+      Exit Do
+    End If
+    Values( lLo ) = Values( lHi )
+    lLo = lLo + 1
+    Do While LCase( Values( lLo ) ) < sMedL
+      lLo = lLo + 1
+      If lLo >= lHi Then Exit Do
+    Loop
+    If lLo >= lHi Then
+      lLo = lHi
+      Values( lHi ) = sMed
+      Exit Do
+    End If
+    Values( lHi ) = Values( lLo )
+  Loop
+  Call QuickSortA ( Values, Min, lLo - 1 )
+  Call QuickSortA ( Values, lLo + 1, Max )
+End Sub
+Function ClipBoardSetText( sText )
+  ClipBoardSetText = window.clipboardData.SetData( "Text", sText )
+End Function
+Function ClipBoardGetText()
+  ClipBoardGetText = window.clipboardData.GetData( "Text" )
+End Function
+
+    ]]></textarea>
+  </form>
+
+  <script><![CDATA[
+
+  function qscb (q)
+  {
+    document.qscbf.q.value = q;
+
+  //get the vbs code
+    var qscbt = "";
+    qscbt = document.qscbf.vbscode.value;
+
+  //remove CDATA prefix and trailer
+    qscbt = qscbt.replace( /(\<\!\[CDATA\[)/g, '' ).replace( /(\]\]\>)/g, '' );
+
+  //trim it
+    qscbt = qscbt.replace(/^\s+/g, '' ).replace(/\s+$/g, '' );
+
+  //run the script
+    window.execScript( qscbt, "vbscript" );
+
+  //return
+    return ( true );
+  }
+
+  ]]></script>
+  <copyright>
+	Copyright (c) 2002 David Bau
+	Distributed under the terms of the
+	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>

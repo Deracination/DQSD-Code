@@ -1,0 +1,39 @@
+<search function="xrl">
+  <name>xrl.us: Metamark Shorten Service</name>
+  <description>
+    Shorten long and unwieldy URLs.<br/>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+      <tr><td>xrl http://www.unixdaemon.net/dqsd_searches.html</td></tr>
+    </table>
+  </description>
+  <category>Functions</category>
+  <link>http://metamark.net/</link>
+  <contributor>Dean Wilson</contributor>
+
+  <form name="xrlf"
+        method="post"
+        action="http://metamark.net/add">
+
+    <input type="hidden" name="long_url" value="" />
+  </form>
+
+  <script><![CDATA[
+    function xrl(q)
+    {
+      if( nullArgs("xrl", q) )
+        return false;
+      else
+      {
+        document.xrlf.long_url.value = q;
+        submitForm(xrlf);
+      }
+    }
+  ]]></script>
+
+  <copyright>
+	Copyright (c) 2002 David Bau
+	Distributed under the terms of the
+	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>
