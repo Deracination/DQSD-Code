@@ -9,11 +9,11 @@
   	</table>
   </description>
   <category>Computers<category>Networking</category></category>
-  <link>http://geektools.com/cgi-bin/proxy.cgi</link>
+  <link>http://www.geektools.com/whois.php</link>
   <contributor>Monty Scroggins</contributor>
   
   <form name="gtwhoisf"
-        action="http://geektools.com/cgi-bin/proxy.cgi"
+        action="http://www.geektools.com/whois.php"
         method="post">
     <input type="hidden" name="query" value=""/>
     <input type="hidden" name="targetnic" value="auto"/>
