@@ -2,22 +2,27 @@
 <?xml-stylesheet type="text/xsl" href="faq.xsl"?>
 <faqs>
 
-	<category name="General">
-		<faq>
-			<question>Can I assign a hotkey to it so I don't need to mouse to it?</question>
-			<answer>This feature was added in version 3.0.</answer>
-		</faq>
-		<faq>
-			<question>Why doesn't the DEL or the ctrl-insert key work?</question>
-			<answer>This feature was added in version 3.0.</answer>
-		</faq>
-	</category>
+  <category name="General">
+    <faq>
+      <question>Can I assign a hotkey to it so I don't need to mouse to it?</question>
+      <answer>This feature was added in version 3.0.</answer>
+    </faq>
+    <faq>
+      <question>Why doesn't the DEL or the ctrl-insert key work?</question>
+      <answer>This feature was added in version 3.0.</answer>
+    </faq>
+    <faq>
+      <question>Where can I get the latest version of DQSD?</question>
+      <answer>You can the latest released version at <a href="http://www.dqsd.net">http://www.dqsd.net</a>
+      and the latest beta version at <a href="http://sourceforge.net/projects/dqsd">http://sourceforge.net/projects/dqsd</a>.</answer>
+    </faq>
+  </category>
 
-	<category name="Installation">
-		<faq>
-			<question>I've installed it, but I want to uninstall it, and I can't figure out how! Help!</question>
-			<answer>Right-click on the shoe to the left and choose 'Close Toolbar'. Then find the uninstaller under the control panel. Some people find the control panel entry, but they don't know they need to close DQSD before uninstalling. </answer>
-		</faq>
-	</category>
+  <category name="Installation">
+    <faq>
+      <question>I've installed it, but I want to uninstall it, and I can't figure out how! Help!</question>
+      <answer>Right-click on the shoe to the left and choose 'Close Toolbar'. Then find the uninstaller under the control panel. Some people find the control panel entry, but they don't know they need to close DQSD before uninstalling. </answer>
+    </faq>
+  </category>
 
 </faqs>
