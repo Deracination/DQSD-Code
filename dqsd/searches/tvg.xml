@@ -29,7 +29,7 @@
     {
       var args = parseArgs(q, "action, comedy, adult, movie, drama, horror, mystery, scifi, western, sports, news, health, science, educational, family, childrens, talk, soaps, shopping, music");
       if (q == "")
-        openSearchWindow("http://www.tvguide.com/listings/search/Search.asp");
+        openSearchWindow("http://www.tvguide.com/listings/");
       else if( args.switches.length == 1 )
       {
         switch( args.switches[0].name )
