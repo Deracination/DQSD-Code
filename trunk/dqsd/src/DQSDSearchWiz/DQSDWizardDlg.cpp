@@ -513,6 +513,9 @@ string CDQSDWizardDlg::GetForms( string& rstrSearchName, string& rstrFormScript 
 			long cFormElements = 0;
 			if ( SUCCEEDED( spFormElement->get_length( &cFormElements ) ) )
 			{
+				// Map a radio button to its values
+//				map< string, string > mapRadioButtons;
+
 				rstrFormScript += _T("\r\n\r\n      // FORM variables for ") + strFormName;
 				
 				for ( int iFormElem = 0; iFormElem < cFormElements; iFormElem++ )
@@ -525,8 +528,8 @@ string CDQSDWizardDlg::GetForms( string& rstrSearchName, string& rstrFormScript 
 					if ( !spElement )
 						continue;
 
-					BSTR bstrName = NULL;
-					spElement->get_tagName( &bstrName );
+					BSTR bstrTagName = NULL;
+					spElement->get_tagName( &bstrTagName );
 
 					// Skip if the element doesn't have a name
 
@@ -537,6 +540,7 @@ string CDQSDWizardDlg::GetForms( string& rstrSearchName, string& rstrFormScript 
 						strInputName = W2T( varInputName.bstrVal );
 
 						// Ignore INPUT type=submit
+
 						_variant_t varInputType;
 						if ( ( SUCCEEDED( spElement->getAttribute( _bstr_t( _T("type") ), 0, &varInputType ) ) && varInputType.bstrVal ) && !wcsicmp( L"submit", varInputType.bstrVal ) )
 							continue;
@@ -566,6 +570,17 @@ string CDQSDWizardDlg::GetForms( string& rstrSearchName, string& rstrFormScript 
 							strFormXML += _T(" value=\"\"");
 						}
 
+//						map< string, string >::iterator itFound;
+//						if ( varInputType.bstrVal && !wcsicmp( L"radio", varInputType.bstrVal ) )
+//						{
+//							itFound = mapRadioButtons.find( W2T( varInputType.bstrVal ) );
+//							if ( itFound != mapRadioButtons.end() )
+//							{
+//								string strCurrValues = itFound->second;
+//								mapRadioButtons[ W2T( varInputType ) ] = strCurrentValues + _T(" ") + EscapeXML( string( W2T( varInputValue.bstrVal ) ) );
+//							}
+//						}
+
 						strFormXML += _T("/>");
 
 						// If there are any non-alpha characters in the INPUT field name, the use different notation in the script
@@ -590,7 +605,7 @@ string CDQSDWizardDlg::GetForms( string& rstrSearchName, string& rstrFormScript 
 							rstrFormScript += _T("\r\n      //document.") + strFormName + strScriptInputName + _T(" = \"\";");
 						}
 
-						if ( !_tcsicmp( W2T( bstrName ), _T("SELECT") ) )
+						if ( !_tcsicmp( W2T( bstrTagName ), _T("SELECT") ) )
 						{
 							strFormXML += _T("\r\n    <COMMENT>  The input element above was a SELECT element with the following options...");
 							strFormXML += _T("\r\n      <select name=\"" + strInputName + "\">");
@@ -629,7 +644,7 @@ string CDQSDWizardDlg::GetForms( string& rstrSearchName, string& rstrFormScript 
 						}
 					}
 
-					::SysFreeString( bstrName );
+					::SysFreeString( bstrTagName );
 				}
 			}
 
