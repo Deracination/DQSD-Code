@@ -134,6 +134,15 @@ function def()
   // grab the contents
   var t = document.deff.q.value;
 
+  // Major hack!  Due to 'constructor' being a property of every object, we can't
+  // just test for it in the associative 'searches' array later without a
+  // script error.
+  if (t == "constructor")
+  {
+    performsearch(defaultsearch,t);
+    return false;
+  };
+    
   // question mark only: show help
   if (t == "?")         { about(); return false; }
 
