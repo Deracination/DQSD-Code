@@ -48,6 +48,12 @@
       var args = parseArgs(q, "prenom, adresse, localite, departement");
       if( nullArgs("wpfr", args.q) )
         return;
+
+      document.wpfrf.FRM_PRENOM.value = "";
+      document.wpfrf.FRM_ADRESSE.value = "";
+      document.wpfrf.FRM_LOCALITE.value = "";
+      document.wpfrf.FRM_DEPARTEMENT.value = "";
+
       for (var iSwitch = 0; iSwitch < args.switches.length; iSwitch++)
       {
         switch( args.switches[iSwitch].name )
