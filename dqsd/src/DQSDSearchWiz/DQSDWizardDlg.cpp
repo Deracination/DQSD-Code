@@ -428,54 +428,59 @@ string CDQSDWizardDlg::GetForms( string& rstrSearchName, string& rstrFormScript 
 					spFormElement->item( varItem, varItem, &spIDisp );
 
 					CComQIPtr< IHTMLElement > spElement( spIDisp );
+					if ( !spElement )
+						continue;
 
 					BSTR bstrName = NULL;
 					spElement->get_tagName( &bstrName );
 
-					strFormXML += _T("\r\n    <input type=\"hidden\" value=\"\"");
+					// Skip if the element doesn't have a name
 
 					_variant_t varInputName;
-					if ( SUCCEEDED( spElement->getAttribute( _bstr_t( _T("name") ), 0, &varInputName ) ) )
+					if ( SUCCEEDED( spElement->getAttribute( _bstr_t( _T("name") ), 0, &varInputName ) ) && varInputName.bstrVal )
 					{
+						strFormXML += _T("\r\n    <input type=\"hidden\" value=\"\"");
 						strFormXML += _T(" name=\"") + string( W2T( varInputName.bstrVal ) ) + _T("\"");
-					}
-					strFormXML += _T("/>");
+						strFormXML += _T("/>");
+						rstrFormScript += _T("\r\n      //document.") + strFormName + _T(".") + string( W2T( varInputName.bstrVal ) ) + _T(".value = \"\";");
 
-					rstrFormScript += _T("\r\n      //document.") + strFormName + _T(".") + string( W2T( varInputName.bstrVal ) ) + _T(".value = \"\";");
-
-					if ( !_tcsicmp( W2T( bstrName ), _T("SELECT") ) )
-					{
-						strFormXML += _T("\r\n      <COMMENT>  The input element above was a SELECT element with the following options...");
-						strFormXML += _T("\r\n        <select name=\"" + string( W2T( varInputName.bstrVal ) ) + "\">");
-						
-						CComQIPtr< IHTMLSelectElement > spSelect( spElement );
-						if ( spSelect )
+						if ( !_tcsicmp( W2T( bstrName ), _T("SELECT") ) )
 						{
-							long cOptions = 0;
-							spSelect->get_length( &cOptions );
-							for ( int iOption = 0; iOption < cOptions; iOption++ )
+							strFormXML += _T("\r\n      <COMMENT>  The input element above was a SELECT element with the following options...");
+							strFormXML += _T("\r\n        <select name=\"" + string( W2T( varInputName.bstrVal ) ) + "\">");
+							
+							CComQIPtr< IHTMLSelectElement > spSelect( spElement );
+							if ( spSelect )
 							{
-								CComPtr< IDispatch > spOptionDisp;
-								_variant_t varOption( static_cast<long>(iOption), VT_I4 );
-								spSelect->item( varOption, varOption, &spOptionDisp );
+								long cOptions = 0;
+								spSelect->get_length( &cOptions );
+								for ( int iOption = 0; iOption < cOptions; iOption++ )
+								{
+									CComPtr< IDispatch > spOptionDisp;
+									_variant_t varOption( static_cast<long>(iOption), VT_I4 );
+									spSelect->item( varOption, varOption, &spOptionDisp );
 
-								CComQIPtr< IHTMLOptionElement > spOption( spOptionDisp );
-								
-								BSTR bstrOptionValue = NULL;
-								spOption->get_value( &bstrOptionValue );
-								
-								BSTR bstrOptionText = NULL;
-								spOption->get_text( &bstrOptionText );
-								
-								strFormXML += _T("\r\n          <option value=\"") + string( W2T( bstrOptionValue ) ) + _T("\">");
-								strFormXML += EscapeXML( string( W2T( bstrOptionText ) ) ) + _T("</option>");
+									CComQIPtr< IHTMLOptionElement > spOption( spOptionDisp );
+									
+									BSTR bstrOptionValue = NULL;
+									spOption->get_value( &bstrOptionValue );
+									
+									BSTR bstrOptionText = NULL;
+									spOption->get_text( &bstrOptionText );
+									
+									strFormXML += _T("\r\n          <option");
+									if ( bstrOptionValue )
+										strFormXML += _T(" value=\"") + string( W2T( bstrOptionValue ) ) + _T("\"");
+									strFormXML += _T(">");
+									strFormXML += EscapeXML( string( W2T( bstrOptionText ) ) ) + _T("</option>");
 
-								::SysFreeString( bstrOptionValue );
+									::SysFreeString( bstrOptionValue );
+								}
 							}
-						}
 
-						strFormXML += _T("\r\n        </select>");
-						strFormXML += _T("\r\n      </COMMENT>\r\n");
+							strFormXML += _T("\r\n        </select>");
+							strFormXML += _T("\r\n      </COMMENT>\r\n");
+						}
 					}
 
 					::SysFreeString( bstrName );
