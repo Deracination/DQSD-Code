@@ -42,6 +42,7 @@ New Searches
 * aspfaq - Search the Active Server Pages FAQ (Shawn K. Hall)
 * mnr - Check Mailinator.com email account
 * guidgen - Generate a GUID (Globally Unique Identifier)
+* jsx - new name for jsexec so that it fits the naming scheme of vbsx
 
 Modified Searches
 
@@ -63,6 +64,7 @@ Modified Searches
 Removed Searches
 
 * webpoll - discontinued (Dean Wilson)
+* jsexec - renamed to jsx
 
 Miscellaneous
 
