@@ -170,7 +170,7 @@ function savevars()
     var vartype = eval("typeof " + varname);
     if (vartype == "number" || vartype == "string")
     {
-       savetext += varname + "\t" + vartype + "\t" + eval(varname) + "\r\n";
+       savetext += varname + "\t" + vartype + "\t" + escape(eval(varname)) + "\r\n";
     }
   }
   for (var ii = 'A'.charCodeAt(0); ii <= 'Z'.charCodeAt(0); ii++)
@@ -179,7 +179,7 @@ function savevars()
     var vartype = eval("typeof " + varname);
     if (vartype == "number" || vartype == "string")
     {
-       savetext += varname + "\t" + vartype + "\t" + eval(varname) + "\r\n";
+       savetext += varname + "\t" + vartype + "\t" + escape(eval(varname)) + "\r\n";
     }
   }
   writeFile("calcmem", savetext);
@@ -195,11 +195,12 @@ function loadvars()
     {
       if (value[1] == "number")
       {
-        eval(value[0] + " = " + value[2]);
+        eval(value[0] + " = " + unescape(value[2]));
       }
       else if (value[1] == "string")
       {
-        eval(value[0] + " = \"" + value[2] + "\"");
+        var strval = unescape(value[2]);
+        eval(value[0] + " = strval");
       }
     }
   }

@@ -94,6 +94,8 @@ Section "Quick Search Deskbar (required)"
   File "..\strings.js"
   File "..\tools.js"
   File "..\translate.js"
+  File "..\aliases.txt"
+  File "..\menu.txt"
   SetOutPath "$INSTDIR\src"
   File "search.ico"
   File "search.nsi"
@@ -125,8 +127,6 @@ Section "Quick Search Deskbar (required)"
   SetOverwrite off
   SetOutPath "$INSTDIR"
   File "..\preferences.js"
-  File "..\aliases.txt"
-  File "..\menu.txt"
   SetOverwrite on
 
   ; old source files used to live here
