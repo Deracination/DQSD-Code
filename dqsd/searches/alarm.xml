@@ -1,7 +1,12 @@
 <search function="alarm">
-  <name>Countdown Timer with Alarm</name>
-  <description>Set an alarm to go off at a certain time: "alarm 09:00 Staff Meeting". To cancel a set alarm: "alarm cancel". The alarm message is optional and defaults to "Alarm has Expired". (Note: All times are in military (24-hr) time. Supports only a single alarm.)</description>
-  <category>Other</category>
+  <name>Alarm</name>
+  <description>Set an alarm to go off at a 
+  certain time: "alarm 14:00 Staff Meeting". 
+  To cancel a set alarm: "alarm cancel". 
+  The alarm message is optional. 
+  (Note: All times are in military (24-hr) time. 
+  Supports only a single alarm.)</description>
+  <category>Functions</category>
   <contributor>Monty Scroggins</contributor>
   <script><![CDATA[
     var alarmTime;

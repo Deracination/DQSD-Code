@@ -1,7 +1,7 @@
 <search function="run">
   <name>Run Program</name>
   <description>Replacement for the Start menu's Run command: "run winword" runs Microsoft Word.</description>
-  <category>Other</category>
+  <category>Functions</category>
   <script>
     function run(q)
     {

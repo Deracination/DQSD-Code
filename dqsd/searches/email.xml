@@ -1,7 +1,7 @@
 <search function="email">
   <name>Email</name>
   <description>Send an email using default handler: "email recepient(s); subject; body"</description>
-  <category>Other</category>
+  <category>Functions</category>
   <contributor>Glenn Carr</contributor>
   <idea>Nikolai Devereaux</idea>
   <script><![CDATA[

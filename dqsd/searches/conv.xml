@@ -1,7 +1,7 @@
 <search function="conv">
   <name>Measurement Converter</name>
   <description>Convert units from one unit to another using ConvertIt.com. Example: "conv 1/5 gallon" Use the optional word 'to' to specify the second unit: "conv astronomical unit to football fields"</description>
-  <category>Calculations</category>
+  <category>Functions</category>
   <contributor>Monty Scroggins</contributor>
   <link>http://www.convertit.com/Go/Entisoft/Measurement/Converter.ASP</link>
   <form name="convf"
