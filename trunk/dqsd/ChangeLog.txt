@@ -7,7 +7,7 @@ Enhancements
 * Modified DQSDTools to be TCHAR-correct, i.e. it can be built with UNICODE/_UNICODE defined (Kim Gräsman)
 * Added explicit statement to store query in the windows autocomplete cache (MSKB:Q329156) (Shawn K. Hall)
 * Added startup commands (Neel Doshi)
-* Added ability to display graphic icon/logo in search bar (Shawn K. Hall)
+* Added ability (as DEFAULT) to display graphic icon/logo in search bar, which functions as a 'GO' button. (Shawn K. Hall)
 
 Bug Fixes
 
