@@ -107,6 +107,7 @@ private:
 	HRESULT GetFilename( LPCTSTR szName, LPTSTR szResult, LPCTSTR pszDefaultExt = _T(".txt") );
 	HRESULT GetInstallationDirectory( LPTSTR szResult, DWORD dwResultSize);
 	BOOL VerifyFileInDirectoryTree( LPCTSTR szFilename, LPCTSTR szDir);
+	BOOL IsFileExtension( LPCTSTR szFilename, LPCTSTR szExts);
 
 };
 

@@ -234,6 +234,25 @@ STDMETHODIMP CLauncher::ReadFile(BSTR bstrFilename, BSTR *pbstrResult)
 	HRESULT hr = GetFilename( W2CT( bstrFilename ), szFilename );
 	if ( FAILED( hr ) )
 		return hr;
+
+	// Get the installation directory from the registry to use for making sure the filenames are in the install path
+	TCHAR szInstallDir[ _MAX_PATH ];
+	hr = GetInstallationDirectory(szInstallDir, sizeof(szInstallDir));
+	if (FAILED ( hr) )
+		return hr;
+
+	// Make sure from filename is in the installation directory tree
+	if (!VerifyFileInDirectoryTree(szFilename, szInstallDir))
+	{
+		return Error(_T("Filename is not in the installation directory tree."), IID_ILauncher, E_FAIL);
+	}
+
+	// Make sure it's extension is not one of the bad extensions
+	TCHAR *szBadExtensions = _T(".exe;.dll");
+	if (IsFileExtension(szFilename, szBadExtensions))
+	{
+		return Error(_T("Can't read that type of file."), IID_ILauncher, E_FAIL);
+	}
 	
 	// Try to open the file
 	HANDLE hFile = ::CreateFile( szFilename, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, 0, NULL);
@@ -269,6 +288,25 @@ STDMETHODIMP CLauncher::WriteFile(BSTR bstrFilename, BSTR bstrValue)
 	HRESULT hr = GetFilename( W2CT( bstrFilename ), szFilename );
 	if ( FAILED( hr ) )
 		return hr;
+
+	// Get the installation directory from the registry to use for making sure the filenames are in the install path
+	TCHAR szInstallDir[ _MAX_PATH ];
+	hr = GetInstallationDirectory(szInstallDir, sizeof(szInstallDir));
+	if (FAILED ( hr) )
+		return hr;
+
+	// Make sure from filename is in the installation directory tree
+	if (!VerifyFileInDirectoryTree(szFilename, szInstallDir))
+	{
+		return Error(_T("Filename is not in the installation directory tree."), IID_ILauncher, E_FAIL);
+	}
+
+	// Make sure it's extension is not one of the bad extensions
+	TCHAR *szBadExtensions = _T(".exe;.dll");
+	if (IsFileExtension(szFilename, szBadExtensions))
+	{
+		return Error(_T("Can't write that type of file."), IID_ILauncher, E_FAIL);
+	}
 	
 	HANDLE hFile = ::CreateFile( szFilename, GENERIC_WRITE, FILE_SHARE_READ, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 	if ( INVALID_HANDLE_VALUE == hFile )
@@ -703,6 +741,18 @@ STDMETHODIMP CLauncher::FileExists(BSTR bstrFilename, VARIANT_BOOL *pbExists)
 	if ( FAILED( hr ) )
 		return hr;
 
+	// Get the installation directory from the registry to use for making sure the filenames are in the install path
+	TCHAR szInstallDir[ _MAX_PATH ];
+	hr = GetInstallationDirectory(szInstallDir, sizeof(szInstallDir));
+	if (FAILED ( hr) )
+		return hr;
+
+	// Make sure from filename is in the installation directory tree
+	if (!VerifyFileInDirectoryTree(szFilename, szInstallDir))
+	{
+		return Error(_T("Filename is not in the installation directory tree."), IID_ILauncher, E_FAIL);
+	}
+
 	DWORD dwAttributes = ::GetFileAttributes(szFilename);
 #pragma warning(disable: 4310) // cast truncates constant value
 	*pbExists = ( (dwAttributes == -1) ? VARIANT_FALSE : VARIANT_TRUE);
@@ -735,6 +785,13 @@ STDMETHODIMP CLauncher::RenameFile(BSTR bstrFromFilename, BSTR bstrToFilename)
 		return Error(_T("Source filename is not in the installation directory tree."), IID_ILauncher, E_FAIL);
 	}
 
+	// Make sure it's extension is not one of the bad extensions
+	TCHAR *szBadExtensions = _T(".exe;.dll;.bat;.cmd");
+	if (IsFileExtension(szFromFilename, szBadExtensions))
+	{
+		return Error(_T("Can't rename that type of file."), IID_ILauncher, E_FAIL);
+	}
+
 	// add extra \0 for SHFileOperation call
 	szFromFilename[lstrlen(szFromFilename)+1] = '\0';
 
@@ -761,6 +818,12 @@ STDMETHODIMP CLauncher::RenameFile(BSTR bstrFromFilename, BSTR bstrToFilename)
 	if (!VerifyFileInDirectoryTree(szToFilename, szInstallDir))
 	{
 		return Error(_T("Destination filename is not in the installation directory tree."), IID_ILauncher, E_FAIL);
+	}
+
+	// Make sure it's extension is not one of the bad extensions
+	if (IsFileExtension(szToFilename, szBadExtensions))
+	{
+		return Error(_T("Can't rename that type of file."), IID_ILauncher, E_FAIL);
 	}
 
 	// add extra \0 for SHFileOperation call
@@ -861,4 +924,26 @@ HRESULT CLauncher::GetFilename( LPCTSTR szName, LPTSTR szResult, LPCTSTR pszDefa
 	::PathAddExtension( szResult, pszDefaultExt );
 
 	return S_OK;
+}
+
+BOOL CLauncher::IsFileExtension( LPCTSTR szFilename, LPCTSTR szExts)
+{
+	// szExts expects a string in the format ".ext1;.ext2" - notice the . must be included as well
+	LPTSTR szFileExt = ::PathFindExtension(szFilename);
+	LPTSTR szSeps = _T(";");
+	LPTSTR szTempExts = _tcsdup(szExts);  // make a copy of szExts because it modifies the buffer
+	LPTSTR szToken = _tcstok( szTempExts, szSeps);
+	BOOL retval = FALSE;
+
+	while (szToken != NULL)
+	{
+		if (_tcsicmp(szFileExt, szToken) == 0)
+		{
+			retval = TRUE;
+			break;
+		}
+		szToken = _tcstok( NULL, szSeps);
+	}
+	free(szTempExts);
+	return retval;
 }
