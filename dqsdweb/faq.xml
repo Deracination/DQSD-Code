@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="faq.xsl"?>
 <faq_document xmlns:html="http://www.w3.org/1999/xhtml">
-
   <doc_title>Dave's Quick Search Deskbar FAQ</doc_title>
-
   <faqs>
     <category name="General">
       <faq>
@@ -30,52 +28,19 @@
       <faq>
         <question>What are the key bindings used by DQSD?</question>
         <answer>
-          <html:table class="keybindings">
-            <html:tr>
-              <html:td class="keyname">Ctrl-Enter</html:td>
-              <html:td>Adds www. prefix and/or .com suffix to string if necessary and launches URL. Like IE key-binding (only better since the prefix/suffix are only add if needed).</html:td>
-            </html:tr>
-            <html:tr>
-              <html:td class="keyname">Shift-Enter</html:td>
-              <html:td>Always opens a new window for the search regardless of the reuseWindowMode setting. This works only when IE is the default browser.
-              </html:td>
-            </html:tr>
-            <html:tr>
-              <html:td class="keyname">Ctrl-B / F8</html:td>
-              <html:td>Search the search history for the current text. (user configurable in localprefs.js)
-              </html:td>
-            </html:tr>
-            <html:tr>
-              <html:td class="keyname">Shift-Ctrl-B / Shift-F8</html:td>
-              <html:td>Search forward through the history for the current text. (user configurable in localprefs.js)
-              </html:td>
-            </html:tr>
-            <html:tr>
-              <html:td class="keyname">Win-S</html:td>
-              <html:td>Make the search bar active (i.e., make it have the current focus). (user configurable in localprefs.js)
-              </html:td>
-            </html:tr>
-            <html:tr>
-              <html:td class="keyname">F1</html:td>
-              <html:td>Display menu.
-              </html:td>
-            </html:tr>
-            <html:tr>
-              <html:td class="keyname">Ctrl-P / Up</html:td>
-              <html:td>Display previous search in history.
-              </html:td>
-            </html:tr>
-            <html:tr>
-              <html:td class="keyname">Ctrl-N / Down</html:td>
-              <html:td>Display next search in history.
-              </html:td>
-            </html:tr>
-          </html:table>
+          <key_bindings>
+            <key name="Ctrl-Enter">Adds www. prefix and/or .com suffix to string if necessary and launches URL. Like IE key-binding (only better since the prefix/suffix are only add if needed).</key>
+            <key name="Shift-Enter">Always opens a new window for the search regardless of the reuseWindowMode setting. This works only when IE is the default browser.</key>
+            <key name="Ctrl-B, F8">Search the search history for the current text. (user configurable in localprefs.js)</key>
+            <key name="Shift-Ctrl-B, Shift-F8">>Search forward through the history for the current text. (user configurable in localprefs.js)</key>
+            <key name="Win-S">Make the search bar active (i.e., make it have the current focus). (user configurable in localprefs.js)</key>
+            <key name="F1">Display menu.</key>
+            <key name="Ctrl-P, Up">Display previous search in history.</key>
+            <key name="Ctrl-N, Down">Display next search in history.</key>
+          </key_bindings>
         </answer>
       </faq>
     </category>
-
-    
     <category name="Installation">
       <faq>
         <question>I've installed it, but I want to uninstall it, and I can't figure out how! Help!</question>
@@ -86,8 +51,6 @@
         <answer>To be perfectly safe, 1. close the toolbar, 2. reboot the computer, 3. install the upgrade.</answer>
       </faq>
     </category>
-
-    
     <category name="Searches">
       <faq>
         <question>How do I find out what searches are available?</question>
@@ -98,9 +61,9 @@
         <answer>
           Searches are defined by XML files in the 'searches' 
           subdirectory.&#160; You need to be comfortable hacking on HTML forms and a bit 
-          of JavaScript to add a search site to the search bar.<html:br/><html:br/>If you are, here's 
+          of JavaScript to add a search to the search bar.<html:br/>
+          <html:br/>If you are, here's 
           what you do:<html:br/>
-
           <html:ol>
             <html:li>Take a look at the original HTML form for the search, and create your own 
             HTML form to do the same thing, but where you make all the input fields hidden 
@@ -144,7 +107,6 @@
             with the world! :-) 
             </html:li>
           </html:ol>
-
           <html:p>Here is some information about the XML:</html:p>
           <html:ul>
             <html:li>
@@ -183,8 +145,6 @@
         <answer>Searches can be downloaded from Source Forge at <link href="http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/dqsd/dqsd/searches/">http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/dqsd/dqsd/searches/</link>.</answer>
       </faq>
     </category>
-    
-    
     <category name="Aliases">
       <faq>
         <question>What is an alias?</question>
@@ -203,7 +163,7 @@
                 fixed in an upcoming release).  Be aware that this change will be 
                 overwritten by later installations.<html:br/> Please also note that a local alias
                 overrides an alias if they have the same name.</answer>
-      </faq>        
+      </faq>
       <faq>
         <question>I want to create an alias to an alias.  How should I do this?</question>
         <answer>An alias must be defined before it can be referenced from another alias. For
@@ -217,9 +177,9 @@
           </html:ul>
           <html:p>But these two lines will only show the dqsdcvs one:</html:p>
           <html:ul>
-          <html:li>dqsd|dqsdcvs
+            <html:li>dqsd|dqsdcvs
           </html:li>
-          <html:li>dqsdcvs|http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/dqsd/dqsd/
+            <html:li>dqsdcvs|http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/dqsd/dqsd/
           </html:li>
           </html:ul>
           <html:p>The same two lines, but the second set sets an alias to call another alias that
@@ -227,8 +187,6 @@
         </answer>
       </faq>
     </category>
-    
-    
     <category name="Preferences">
       <faq>
         <question>How do I edit preferences for DQSD?</question>
@@ -255,8 +213,6 @@
                 to 'false'.</answer>
       </faq>
     </category>
-    
-    
     <category name="Styles">
       <faq>
         <question>How do I edit fonts, colors, etc. for DQSD?</question>
@@ -276,8 +232,6 @@
                 release.</answer>
       </faq>
     </category>
-    
-    
     <category name="Coding">
       <faq>
         <question>Are there any guidelines I should be aware of when making modifications for DQSD?</question>
@@ -303,30 +257,30 @@
             </html:li>
             <html:li>In the code, please mimic the prevailing convention for tabbing and spacing:
             </html:li>
-              <html:ol>
-                <html:li>No tab characters in code please. Use spaces instead. (The exception is where
+            <html:ol>
+              <html:li>No tab characters in code please. Use spaces instead. (The exception is where
                          tabs have semantics of course). Code should be indented two spaces per level.
                 </html:li>
-                <html:li>Please, no space characters after a ( or before a ).
+              <html:li>Please, no space characters after a ( or before a ).
                 </html:li>
-                <html:li>Curlies for a {multiline block} should be on their own line and unindented
+              <html:li>Curlies for a {multiline block} should be on their own line and unindented
                          (just their contents are indented).
                 </html:li>
-              </html:ol>
+            </html:ol>
             <html:li>Also please mimic the prevailing convention for packaging:
             </html:li>
-              <html:ol>
-                <html:li>Sources should be included in the distribution itself since this is the easiest
+            <html:ol>
+              <html:li>Sources should be included in the distribution itself since this is the easiest
                          way to conform to the GPL. So all source files should be listed in
                          "search.nsi"; i.e., you shouldn't need CVS to get a working build.
                 </html:li>
-                <html:li>Please keep "build.cmd" working. In particular this means that DQSDTools.mak
+              <html:li>Please keep "build.cmd" working. In particular this means that DQSDTools.mak
                          needs to be kept up to date. Also, any files that are automatically generated
                          by the build should be deleted by "clean.cmd".
                 </html:li>
-                <html:li>Keep new sources, except for those that are being used at runtime, underneath src/.
+              <html:li>Keep new sources, except for those that are being used at runtime, underneath src/.
                 </html:li>
-              </html:ol>
+            </html:ol>
             <html:li>Keep in mind that you are editing other people's code and that other people
                      will edit your stuff. Please don't be offended if your code is changed or even
                      disabled. Be nice!
@@ -334,7 +288,8 @@
             <html:li>Dave may decide to turn your access off if things become unmanageable, or if
                      you don't make checkins for a while.
             </html:li>
-          </html:ul></answer>
+          </html:ul>
+        </answer>
       </faq>
       <faq>
         <question>How do I get started with basic Source Forge access?</question>
@@ -357,30 +312,30 @@
             </html:li>
             <html:li>From your cygwin prompt, type the following to checkout:
             </html:li>
-              <html:ul>
-                <html:li>cd ~
+            <html:ul>
+              <html:li>cd ~
                 </html:li>
-                <html:li>cvs -d:pserver:anonymous@c...:/cvsroot/dqsd login
+              <html:li>cvs -d:pserver:anonymous@c...:/cvsroot/dqsd login
                 </html:li>
-                <html:li>cvs -d:pserver:anonymous@c...:/cvsroot/dqsd co dqsd
+              <html:li>cvs -d:pserver:anonymous@c...:/cvsroot/dqsd co dqsd
                 </html:li>
-              </html:ul>
+            </html:ul>
             <html:li>And whenever you want to get the latest:
             </html:li>
-              <html:ul>
-                <html:li>cd ~/dqsd
+            <html:ul>
+              <html:li>cd ~/dqsd
                 </html:li>
-                <html:li>cvs update -dP
+              <html:li>cvs update -dP
                 </html:li>
-              </html:ul>
+            </html:ul>
             <html:li>Type the following to build:
             </html:li>
-              <html:ul>
-                <html:li>cd ~/dqsd
+            <html:ul>
+              <html:li>cd ~/dqsd
                 </html:li>
-                <html:li>src/build.cmd
+              <html:li>src/build.cmd
                 </html:li>
-              </html:ul>
+            </html:ul>
             <html:li>In the end, you should get a dqsd/dqsd.exe.
             </html:li>
             <html:li>To go back to pristine sources, run src/clean.cmd
@@ -388,7 +343,8 @@
           </html:ol>
           The above is for read-only access to the sources. For writable access, you'll
           need a Source Forge account, and Dave or Glenn will have to grant proper
-          permissions to your account.<html:br/> <html:br/>
+          permissions to your account.<html:br/>
+          <html:br/>
           Alternate CVS Utilities:
           <html:ul>
             <html:li>WinCVS is a GUI front-end to CVS that you can use. You can pull the latest
@@ -398,11 +354,10 @@
                      to Explorer, so you can update, commit, add, diff, etc.. with a right click
                      from an Explorer window. Get it here: <link href="http://www.tortoisecvs.org/">http://www.tortoisecvs.org/</link>.
             </html:li>
-          </html:ul></answer>
+          </html:ul>
+        </answer>
       </faq>
     </category>
-
-    
     <category name="Add-ons">
       <faq>
         <question>What is an add-on?</question>
@@ -423,8 +378,6 @@
         <answer>The best place to learn about creating add-ons is to look at the current addon
                 examples (googlespell, etc), and use them as a template for your own.</answer>
       </faq>
-
     </category>
   </faqs>
 </faq_document>
-
