@@ -1,7 +1,7 @@
 <search function="so">
   <name>Societe.com</name>
   <description>
-    Lookup info on French companies using a SIREN number. Non-digits characters are removed.<br/>
+    Lookup info on French companies using a SIREN number. Non-digits characters are removed. Only the first 9 digits are used (SIRET number case).<br/>
     <div class="helpboxDescLabels">Usage:</div>
     <table class="helpboxDescTable">
       <tr><td>so &lt;<i>name_or_SIREN_number</i>&gt; [/identique] [/dirigeant:<i>chairman_last_name</i>] [/prenom:<i>chairman_first_name</i>] [/ape:<i>APE code</i>] [/departement:<i>department</i>]</td></tr>
@@ -42,8 +42,8 @@
 
       // Replace non-digits with nothing
       var re = new RegExp( "[^0-9]", "g" );
-      var siren = q.replace( re, "" );
-      if( isNaN( siren ) || siren < 100000000 || siren > 999999999 )
+      var SIREN = q.replace( re, "" );
+      if( isNaN( SIREN ) || SIREN < 100000000 )
       {
         //lets initialize the fields : they're persistent
         document.sof.exa.value = "";
@@ -84,7 +84,8 @@
       else
       {
         if( args.switches.length > 0 ) return nullArgs("so", "?");
-        openSearchWindow("http://societe.com/cgi-bin/recherche?rncs=" + siren);
+        if( SIREN > 999999999 ) SIREN = String(SIREN).substring(0,9);
+        openSearchWindow("http://societe.com/cgi-bin/recherche?rncs=" + SIREN);
       }
       return true;
     }
