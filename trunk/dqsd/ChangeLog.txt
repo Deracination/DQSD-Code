@@ -29,6 +29,7 @@ New Searches
 * thelist - Search evlot.org's thelist archives (from Sarah S.)
 * evolt - Search evolt.org (from Sarah S.)
 * htmlh - Search htmlhelp.com (from JB)
+* wf - Search Watchman Fellowship for info on cults (from JB)
 
 Bug Fixes
 
