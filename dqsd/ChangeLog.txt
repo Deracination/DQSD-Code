@@ -1,26 +1,67 @@
--- What's new for 3.0.0.???
+-- What's new for 3.1 (August 27, 2002)
 
 New Searches
 
-* wn - WordNet online lexical reference system search (from Princeton)
-       contributed by Shakeel Mahate.
-* wgn - Search Windows Guide Network (from John Bairen).
-* howfar - Find out how far it is from city to city (from John Bairen).
-* dir - Get driving directions from one place to another (from Pete H).
-* wik - Wikipedia search (from Thad Kerosky)
-* nup - Nupedia (from Thad Kerosky)
-* exp - Expedia (from Allen B. MacKenzie)
-* spcs - Send Sprint PCS One-Way web messages (from Rick Olson)
-* pinp - ServiceObjects' DOTS GeoPinpoint IP address Location converter (from Thad Kerosky)
+* acine - Search allocine.com, THE french site about movies, stars, theaters schedules, critics, trailers, etc...
 * bq - Search Bartlett's Familiar Quotations at http://www.online-literature.com
+* cp - search for CodeProject, a code sharing site (from Andreas Saurwein)
+* dicit - Italian dictionary + Italian-English dictionary from Tom Creek
+* dir - Get driving directions from one place to another (from Pete H).
+* exp - Expedia (from Allen B. MacKenzie)
+* fm - Freshmeat.net search from Brent Beardsley
+* fv - FlightView search (from Allen B. MacKenzie)
+* gfaq - GameFAQs.com from Casper Kvan Clausen
+* guiasp - Find maps and addresses in Brazil; from Andrew Francis
+* howfar - Find out how far it is from city to city (from John Bairen).
+* hv - Rex Swain's HTTP Viewer; See exactly what an HTTP request returns to your browser
+* infosec - search http://www.infosecuritymag.com/ for security information (from John Bairen)
+* jdk - searches the Sun JDK
+* law - FindLaw Law Library from John W. Bairen, Jr.
+* newsau - Search for news topics at news.com.au, from Steve Lin
+* nup - Nupedia (from Thad Kerosky)
+* palm - PalmGear.com search (from Herman Fuchs)
+* pg - Project Gutenberg/Public Domain book (pg) search (from Thad Kerosky)
+* pinp - ServiceObjects' DOTS GeoPinpoint IP address Location converter (from Thad Kerosky)
+* que - Interface with Queue (http://www.irondust.com/queue) from Nick Tornow
+* rfc - search the Internet RFC/STD/FYI/BCP Archives (from Joey Lesh)
+* rot13 - Glenn added a rot13 converter function
+* setiq - Login as an admin to your setiqueue web admin interface - from MLL
+* sf - Sourceforget.net search from Brent Beardsley 
+* short - Abbreviate long and convoluted URLs (from Reginald Braithwaite-Lee)
+* slash - Search Slashdot (from Paul Bowers)
+* spcs - Send Sprint PCS One-Way web messages (from Rick Olson)
+* ulwhois - whois information from whois.userland.com
+* vir - search http://www.virusbtn.com/ for virus information (from John Bairen)
+* wgn - Search Windows Guide Network (from John Bairen).
+* wik - Wikipedia search (from Thad Kerosky)
+* wn - WordNet online lexical reference system search (from Princeton) contributed by Shakeel Mahate.
+* wotsit - Programmers File Format Reference
+* yp - Yellow pages search from Tim Danner
 
 Modified Searches
 
-* ups - Tim Dierks fixed to zero out old search values from the form and 
-        edit out non-alphanumerics (since value was used in eval, single 
-        quotes could cause JS errors).
+* acine - added /video switch and better use of nullargs
+* amaz - now tags to dqsd associate account, and added switches for catalog areas and restaurants
+* conv - missing "/" in the usage section
+* dicfr, gg, googletrans, telfr - better use of nullargs
+* ebay - Fixed regular expression so "ebay <itemnumber>" will work correctly.
 * fv - Allen B. MacKenzie fixed a bug.
+* gg - /fresh switch disappeared (/since is enough) - /since now allows a number of days in addition to t,y,w,m, and gets independent of goosearch
+* gg - added /fresh switch to find pages index over the last day, week, month
+* gg - MLL added /news and more language switches (type "gg ?")
+* hs - added /new from Brent Beardsley
+* jdk - added /1.4, /1.3, /tutorial, /all, /j2ee, /jls, /jvm options
+* multi - apostrophes (') in the query now don't generate errors
 * pcm - Thad K. updated.
+* qsfind - Changed to display a popup window instead of an alert dialog when no match is found.
+* setiq - MLL added warning to description about password retention
+* setiq - new switches : connect and display
+* so - Non-digits characters are removed form the search string
+* temp - Steven Ehrbar added Kelvin and Rankine conversions, /centigrade switch
+* thw - updated the search (the form changed on the site) and added /category switch
+* ups - now allows spaces in tracking number(s)
+* ups - Tim Dierks fixed to zero out old search values from the form and edit out non-alphanumerics (since value was used in eval, single quotes could cause JS errors).
+* yp - Tim Dierks added support for addresses
 
 Enhancements
 
@@ -32,61 +73,10 @@ Enhancements
   results in a popup window.  Added a common method, displayPopupMessage,
   to defer_tools.js.
 * dictionarypop add-on is now available (from Thad Kerosky)
-
-Bug Fixes
-
-* Made googlespell add-on function names unique so there would not be
-  any collisions with other methods.
-
-
--- What's new for 3.0.0.24 (beta)
-
-New Searches
-
-* rfc - search the Internet RFC/STD/FYI/BCP Archives (from Joey Lesh)
-* cp - search for CodeProject, a code sharing site (from Andreas Saurwein)
-* vir - search http://www.virusbtn.com/ for virus information (from John Bairen)
-* infosec - search http://www.infosecuritymag.com/ for security information (from John Bairen)
-* pg - Project Gutenberg/Public Domain book (pg) search (from Thad Kerosky)
-* slash - Search Slashdot (from Paul Bowers)
-* short - Abbreviate long and convoluted URLs (from Reginald Braithwaite-Lee)
-* palm - PalmGear.com search (from Herman Fuchs)
-* fv - FlightView search (from Allen B. MacKenzie)
-
-Modified Searches
-
-* yp - Tim Dierks added support for addresses
-* temp - Steven Ehrbar added Kelvin and Rankine conversions, /centigrade switch
-
-Enhancements
-
 * install now bundled with xplocalsearch.css, to be used as localsearch.css to make
   things match with XP default theme.
 * changed default length of retained search history from 50 to 1000.
 * Added Finnish translation (from Toni Viemero)
-
-Bug Fixes
-
-* changed progid for MSXML component from MSXML.DOMDocument to MSXML2.DOMDocument
-
-
--- What's new for 3.0.0.23 (beta)
-
-New Searches
-
-* que - Interface with Queue (http://www.irondust.com/queue) from Nick Tornow
-* wotsit - Programmers File Format Reference
-
-Modified Searches
-
-* gg - /fresh switch disappeared (/since is enough) - /since now allows a 
-       number of days in addition to t,y,w,m, and gets independent of goosearch
-* hs - added /new from Brent Beardsley
-* jdk - added /1.4, /1.3, /tutorial, /all, /j2ee, /jls, /jvm options
-* multi - apostrophes (') in the query now don't generate errors
-
-Enhancements
-
 * switches now can contain . and -. This is used here: jdk HashMap /1.3
 * changed defer_tools.js for special searches like setiq.xml that need 
   several forms opened in one window
@@ -94,40 +84,6 @@ Enhancements
   requiring user to create them if they don't exist.
 * Shift-F8 and Shift-Ctrl-B now search forward through the history
   instead of searching for a prefix
-
-Bug Fixes
-
-* curr - fixed bug with decimal currency conversion (1.23 usd>cad)
-* If you have an old localprefs.js that sets defaultsearch to a nonexistent search, gg is used.
-* A local alias can now override a search name.  This was causing a script error
-  when the menu was invoked.
-* Search forms can now have input elements named "target" without causing a script error
-* Labor day in holidays.nl.*.xml files now happens every year (thanks MLL and Johan Geertsma)
-* Ctrl-A now correctly does "Select All" rather than DEL.
-
-
--- What's new for 3.0.0.22 (beta)
-
-New Searches
-
-* fm - Freshmeat.net search from Brent Beardsley
-* sf - Sourceforget.net search from Brent Beardsley 
-* jdk - searches the Sun JDK
-* guiasp - Find maps and addresses in Brazil; from Andrew Francis
-
-Modified Searches
-
-* acine - added /video switch and better use of nullargs
-* amaz - now tags to dqsd associate account, and added switches for catalog areas and restaurants
-* thw - updated the search (the form changed on the site) and added /category switch
-* ups - now allows spaces in tracking number(s)
-* setiq - new switches : connect and display
-* conv - missing "/" in the usage section
-* dicfr, gg, googletrans, telfr - better use of nullargs
-* gg - added /fresh switch to find pages index over the last day, week, month
-
-Enhancements
-
 * Dutch holidays to 2013 (in both Dutch and English language) from Johan Geertsma 
 * Modified 'shortcut' detection to allow shortcuts starting with numbers
 * Andrew Francis added basic character escaping to the date/time format string.  
@@ -135,92 +91,40 @@ Enhancements
   as date/time formats.
 * Modified automatic update notification to default to only final releases.  This
   can customized to notify for final or beta and final releases.
-
-Bug Fixes
-
-* URLs, filenames, etc. are now detected with leading whitespace
-* Will Dean added a possible fix for missing tray icons at startup.  Also,
-  refreshing icons can be done explicitly by typing 'refreshicons'.
-
-
--- What's new for 3.0.0.20 (beta)
-
-New Searches
-
-* newsau - Search for news topics at news.com.au, from Steve Lin
-* hv - Rex Swain's HTTP Viewer; See exactly what an HTTP request returns to your browser
-* law - FindLaw Law Library from John W. Bairen, Jr.
-* dicit - Italian dictionary + Italian-English dictionary from Tom Creek
-* acine - Search allocine.com, THE french site about movies, stars, theaters schedules, critics, trailers, etc...
-
-Modified Searches
-
-* 
-
-Enhancements
-
 * Modified update check to display a message box if there
   was an error (e.g., no internet) and there was an explicit
   check.
 * Italian holidays thru 2020 from Tom Creek
-
-Bug Fixes
-
-* updated the link to the FAQ in the about box.
-
-
--- What's new for 3.0.0.19 (beta)
-
-New Searches
-
-* rot13 - Glenn add a rot13 converter function
-* gfaq - GameFAQs.com from Casper Kvan Clausen
-* ulwhois - whois information from whois.userland.com
-
-Modified Searches
-
-* gg - MLL added /news and more language switches (type "gg ?")
-* setiq - MLL added warning to description about password retention
-* so - Non-digits characters are removed form the search string
-
-Enhancements
-
 * Sean Farrell added Microsoft Outlook option for calendar
 * 2002 Italian holidays from Tom Creek
 * 2002-2020 French holidays
 * 2002-2005 Australia NSW holidays from Steve Lin
 * Added check for newer version
+* Will rewrote the 'window finding' code to use a 'document' object 
+  passed-in from the script, rather than the original method of wandering 
+  around class names.   The latter always looked fragile, and has proved to 
+  be so in real life.
 
 Bug Fixes
 
+* Made googlespell add-on function names unique so there would not be
+  any collisions with other methods.
+* changed progid for MSXML component from MSXML.DOMDocument to MSXML2.DOMDocument
+* curr - fixed bug with decimal currency conversion (1.23 usd>cad)
+* If you have an old localprefs.js that sets defaultsearch to a nonexistent search, gg is used.
+* A local alias can now override a search name.  This was causing a script error
+  when the menu was invoked.
+* Search forms can now have input elements named "target" without causing a script error
+* Labor day in holidays.nl.*.xml files now happens every year (thanks MLL and Johan Geertsma)
+* Ctrl-A now correctly does "Select All" rather than DEL.
+* URLs, filenames, etc. are now detected with leading whitespace
+* Will Dean added a possible fix for missing tray icons at startup.  Also,
+  refreshing icons can be done explicitly by typing 'refreshicons'.
+* updated the link to the FAQ in the about box.
 * Will fixed problem with leading zeros in XML holiday files
-
-
--- What's new for 3.0.0.18 (beta)
-
-New Searches
-
-* yp - Yellow pages search from Tim Danner
-* setiq - Login as an admin to your setiqueue web admin interface - from MLL
-
-Modified Searches
-
-* qsfind - Changed to display a popup window instead of an alert dialog when
-           no match is found.
-* ebay - Fixed regular expression so "ebay <itemnumber>" will work correctly.
-
-Bug Fixes
-
 * Changed regex in parseArgs to allow any non-whitespace character in switch values.  
   Previously it only allowed identifier characters which excluded periods, etc.
 * Can now set category for searches in localaliases.txt
-
-Miscellaneous
-
-* Will rewrote the 'window finding' code to use a 'document' object 
-passed-in from the script, rather than the original method of wandering 
-around class names.   The latter always looked fragile, and has proved to 
-be so in real life.
 
 
 -- What's new for 3.0 (June 28, 2002)
