@@ -12,6 +12,7 @@
       <tr><td>/news</td><td> - </td><td>Search for news (<i>warning : still in beta, .com/english only</i>).</td></tr>
       <tr><td>/froogle</td><td> - </td><td>Find products for sale online(<i>warning : still in beta, .com/english only</i>).</td></tr>
       <tr><td>/glossary</td><td> - </td><td>Find definitions for words, phrases and acronyms(<i>warning : still in beta, .com/english only</i>).</td></tr>
+      <tr><td>/define</td><td> - </td><td>Find Google's own definitions for words, phrases and acronyms(<i>warning : english only</i>).</td></tr>
       <tr><td>/keys</td><td> - </td><td>Navigate search results without using your mouse (<i>warning : still in beta, .com/english only</i>).</td></tr>
       <tr><td>/since:days</td><td> - </td><td>Search pages based on when they were indexed.  Use either a number to specify when, or 
         <div style="padding: 0 0 0 20px">
@@ -49,6 +50,7 @@
       <tr><td>gg tony blair /uk /directory</td></tr>
       <tr><td>gg /froogle cd clock radio</td></tr>
       <tr><td>gg /glossary wrt</td></tr>
+      <tr><td>gg /define wrt</td></tr>
     </table>
   </description>
   <category>Search the Web</category>
@@ -131,7 +133,7 @@
     function gg(q)
     //by MLL: warning : news service is still in beta stage, so URLs below may change
     {
-      var args = parseArgs(q, "ifl, advanced, groups, directory, images, news, since, cache, related, link, froogle, glossary, keys, local, canada, deutschland, france, italia, uk, language");
+      var args = parseArgs(q, "ifl, advanced, groups, directory, images, news, since, cache, related, link, froogle, glossary, define, keys, local, canada, deutschland, france, italia, uk, language");
       var mode, local, local_meta = "", local_tld = "com", msglang = "";
       
       if( nullArgs( "gg", q ) ) return false;
@@ -194,6 +196,7 @@
           case "news":      googleURL = "http://www.google." + local_tld + "/news"; break;
           case "froogle":   googleURL = "http://froogle.google.com/froogle"; break;
           case "glossary":  googleURL = "http://labs.google.com/glossary"; break;
+          case "define":    googleURL = "http://www.google." + local_tld + "/help/operators.html#define"; break;
           case "keys":      googleURL = "http://labs.google.com/keys"; break;
           default: 
         }
@@ -297,6 +300,12 @@
             case "glossary":
               document.ggf_glossary.q.value = args.q;
               submitForm(ggf_glossary);
+              break;
+            case "define":
+              document.ggf.q.value = "define:" + args.q;
+              document.ggf.hl.value = msglang;
+              document.ggf.cat.value = "";
+              submitForm(ggf);
               break;
             case "keys":
               document.ggf_keys.q.value = args.q;
