@@ -1,8 +1,9 @@
-Version 0.4 (beta) - 08-Aug-2002
+Version 0.4 (beta) - 09-Aug-2002
 
-* Form element names with weird characters ([^_a-zA-Z])
-  are now referenced correctly.
-* Escape <,>,& characters in user text and HTML text
+* Form element names with weird characters ([^_a-zA-Z]) are now referenced correctly.
+* Escape characters < > & in user text and HTML text
+* Restrict search name to lowercase and valid filename characters
+* Minor UI changes - about box, icon, etc.
 
 Version 0.3 (beta) - 08-Aug-2002
 

@@ -36,6 +36,7 @@ END_MSG_MAP()
 	{
 		CenterWindow( GetActiveWindow() );
 
+		// Get file version
 		TCHAR szModule[ MAX_PATH + 1 ];
 		if ( GetModuleFileName( _Module.GetResourceInstance(), szModule, LENGTHOF(szModule) ) )
 		{
@@ -45,6 +46,25 @@ END_MSG_MAP()
 				CWindow( GetDlgItem( IDC_Version ) ).SetWindowText( ( _T("Version ") + moduleVersion.GetValue( _T("ProductVersion") ) + _T(" ") + moduleVersion.GetValue( _T("SpecialBuild") ) ).c_str() );
 			}
 		}
+
+		// Get change log history
+		HRSRC hrsc = FindResource( _Module.GetResourceInstance(), MAKEINTRESOURCE(IDR_CHANGELOG), _T("TEXT") );
+		if ( hrsc )
+		{
+			HGLOBAL hdata = LoadResource( _Module.GetResourceInstance(), hrsc );
+			if ( hdata )
+			{
+				LPCTSTR pszChangeLog = (LPCTSTR)LockResource( hdata );
+				if ( pszChangeLog )
+				{
+					CWindow ctlHistory( GetDlgItem( IDC_ChangeHistory ) );
+					ctlHistory.SetWindowText( pszChangeLog );
+					UnlockResource( hdata );
+				}
+				FreeResource( hdata );
+			}
+		}
+
 
 		return 1;  // Let the system set the focus
 	}

@@ -143,6 +143,10 @@ SOURCE=.\OptionsDlg.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\SearchNameEdit.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\SearchWizard.cpp
 # End Source File
 # Begin Source File
@@ -176,6 +180,10 @@ SOURCE=.\Resource.h
 # End Source File
 # Begin Source File
 
+SOURCE=.\SearchNameEdit.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\SearchWizard.h
 # End Source File
 # Begin Source File
@@ -188,6 +196,10 @@ SOURCE=.\StdAfx.h
 # PROP Default_Filter "ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe"
 # Begin Source File
 
+SOURCE=.\ChangeLog.txt
+# End Source File
+# Begin Source File
+
 SOURCE=.\hot.ico
 # End Source File
 # Begin Source File
@@ -198,11 +210,11 @@ SOURCE=.\normal.ico
 
 SOURCE=.\SearchWizard.rgs
 # End Source File
-# End Group
 # Begin Source File
 
-SOURCE=.\ChangeLog.txt
+SOURCE=.\wizard.ico
 # End Source File
+# End Group
 # End Target
 # End Project
 # Section DQSDSearchWiz : {00000000-0000-0000-0000-800000800000}
