@@ -27,6 +27,8 @@ Enhancements
 
 * Added InstallationDirectory property to Launcher
 * Added FindSubMenu, FindMenuItem, GetMenuItemCount, InsertMenuItem, InsertSeparator, InsertSubMenu functions to MenuBuilder
+* Added GetSpecialFolderLocation and GetFolders functions to Launcher
+* Added GetMenuString, GetMenuItemID, EnableMenuItem, DisableMenuItem functions to MenuBuilder
 
 Bug Fixes
 
