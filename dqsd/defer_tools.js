@@ -146,8 +146,6 @@ function isURL(t)
   return false;
 }
 
-// parseArgs (Neel Doshi - 03/31/2002)
-//
 // Used to parse standard switches (/foo or /foo:bar).  Takes the following parameters:
 //    q - string from the search function
 //    expectedSwitches - list or array of the expected switch values
@@ -209,6 +207,90 @@ function parseArgs(q, expectedSwitches, expandSwitches)
   }
   q = args_array.join(' ');
   return { q:q, switches:switches, switch_val:switch_val };
+}
+
+/*
+ * parseArgsEx is similar to parseArgs except that
+ * it isn't split on spaces but instead the /
+ * This means that args.q will be the value before the
+ * first slash and the parameter value is everything after
+ * the arg name until the next slash.  Also the arg name
+ * and value are separated by a space not a : like parseArgs.
+ * This will also allow you to have spaces in the argument value
+ * as well.
+ * [Brent Beardsley - 10/31/2002]
+ */
+function parseArgsEx(q, expectedSwitches, expandSwitches)
+{
+  // In case the caller does not pass in a value
+  if (typeof expandSwitches == 'undefined')
+    expandSwitches = 1;
+
+  // In case the caller uses a delimited (;,<space>) string
+  if (typeof expectedSwitches[0] == 'undefined')
+    expectedSwitches = expectedSwitches.split( /[,;/\s]/ );
+
+  var switches = [];
+  var switch_val = [];
+  var args_array = q.split('/');
+  for (var i=0; i < args_array.length; i++)
+  {
+    var one_arg = trimWhitespace(args_array[i]);
+    if (one_arg == "") 
+    {
+      continue;
+    }
+    var argRegExp = /(\S+)(\s+(.*))?/g;
+    var reResult = argRegExp.exec(one_arg);
+    if (reResult == null || reResult[1] == "") 
+    {
+      continue;
+    }
+    var argName = reResult[1];
+    var argValue = trimWhitespace(reResult[2]);
+    var re_res_switch;
+
+    for (var j = 0; j < expectedSwitches.length && !re_res_switch; j++)
+    {
+      var expect_regex = new RegExp(
+          '^(' + argName.replace('.', '\\.') +
+           ')' + (expandSwitches ? '' : '$'), 'i');
+
+      re_res_switch = expectedSwitches[j].match(expect_regex);
+
+      //  If there is a match, adjust the args_array, and save the values.
+      if (re_res_switch) 
+      {
+        argName = expectedSwitches[j];
+        switch_val[argName] = argValue;
+        switches.push( {name:argName.toLowerCase(), value:argValue} );
+      }
+    }
+    re_res_switch = "";
+  }
+
+  if (q.match(/^\s*\//))
+  {
+    // if it starts with a slash there are no non-switch values
+    q = "";
+  } 
+  else 
+  {
+    // only the part before the first slash is returned in args.q
+    var firstSlash = q.indexOf('/');
+    if (firstSlash != -1) 
+    {
+      q = q.substring(0, firstSlash);
+    }
+    q = trimWhitespace(q);
+  }
+  return { q:q, switches:switches, switch_val:switch_val };
+}
+
+
+function trimWhitespace( s )
+{
+  return s.replace(/^\s+/, "").replace(/\s+$/, "");
 }
 
 
