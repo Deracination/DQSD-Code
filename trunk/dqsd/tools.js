@@ -219,23 +219,12 @@ function protocolHandled(url)
   return true;
 }
 
-// Parse a string containing commandline-like options (in
-// the format "/xxx").  The result is an object containing 
-// these two properties:
-//    q: args minus any switches
-//    switches: array of switches ("/xxx")
-// Any abbreviated switches are expanded.
-// 
-// Example:
-//  q = "imagine all the people /ti /so /xyzzy"
-//  var args = parseArgs(q, "song, album, lytitle, artist");
-// Resulting args:
-//  args.q = "imagine all the people"
-//  args.switches[0] = "title"
-//	args.switches[1] = "song"
-//	args.switches[2] = "xyzzy"
-// Notice that the last switch, xyzzy, is still returned even
-// though it is not specified in the list of expected switches
+// Returns an object with two properties:
+//   q:        string with switches removed
+//   switches: array of objects with these two properties:
+//      s:  name of switch, expanded if it matches the prefix
+//          of a switch in the list of expectedSwitches arg
+//      v:  value of switch.  I.e., /switch:value
 function parseArgs(
   q, /* string to be parsed */
   expectedSwitches /* list of expected switches, used to expand abbreviated switches */)
@@ -244,18 +233,21 @@ function parseArgs(
   var tmpq = q;
   
   // Grab each token that looks like a switch (/\w+)
-  var reSwitch = /\/(\w+)\s*/;
+  var reSwitch = /\/((\w+)(?::?(\w*)))\s*/;
   var res = null;
   expectedSwitches = ',' + expectedSwitches + ',';
   while (res = tmpq.match(reSwitch))
   {
-    // Return full switch if it's in the list of expected switches...
-    var fullswitch = expectedSwitches.match(new RegExp(',\\s*('+res[1]+'\\w*)\\s*,'));
+    // Expand switch if it's in the list of expected switches...
+    var fullswitch = expectedSwitches.match(new RegExp(',\\s*('+res[2]+'\\w*)\\s*,'));
   	if (fullswitch && fullswitch[1])
-  	  switches.push(fullswitch[1]);
+  	  switches.push( {s:fullswitch[1], v:res[3]} );
     else
-      switches.push(res[1]); // ...otherwise just return the switch that was found
-    
+    {
+      var o = {s:res[2], v:res[3]};
+      switches.push( o ); // ...otherwise just return the switch that was found
+    }
+      
     // Drop switch we just found
     tmpq = tmpq.replace(reSwitch, '');
   }
