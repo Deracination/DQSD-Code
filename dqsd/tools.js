@@ -98,9 +98,9 @@ function appendFile(filename, contents)
 {
   if (ensureLauncher())
   {
-  	var curr = '';
-  	try
-  	{
+    var curr = '';
+    try
+    {
       curr = DQSDLauncher.ReadFile(filename);
     }
     catch (e) {}
@@ -185,4 +185,12 @@ function getFirstAlias( search )
     alias = search.aliases[0];
   }
   return alias;
+}
+
+// This method just is just a convenience for instantiating the same
+// same MSXML DOM each time.  Allows us to change the progid in only
+// one place, if it needs to be changed in the future.
+function getMSXMLDOMDocumentInstance()
+{
+  return new ActiveXObject("Msxml2.DOMDocument");
 }

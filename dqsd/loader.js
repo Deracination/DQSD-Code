@@ -151,14 +151,14 @@ catch (e) {}
 // If there's no searchxml XML, then create an empty search root
 if (!searchRoot)
 {
-  var searchDOM = new ActiveXObject("MSXML.DOMDocument");
+  var searchDOM = getMSXMLDOMDocumentInstance();
   searchDOM.async = false;
   searchRoot = searchDOM.createElement("searches");
 }
 
 try
 {
-  var xmldoc = new ActiveXObject( "MSXML.DOMDocument" );
+  var xmldoc = getMSXMLDOMDocumentInstance();
   xmldoc.async = false;
 
   // Get optional searches in localsearch.xml
