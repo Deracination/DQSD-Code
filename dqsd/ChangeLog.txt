@@ -27,6 +27,8 @@ Modified Searches
 * fe - now allows you to specify an extension name instead of only the first letter (from Matthew McDougal)
 * configure - localized it and added Reload menu option, fixed bug when addons directory did not exist (from Brent Beardsley)
 * amaz - added /referral switch for building referral links for Amazon
+* ebay - added about, all, feedback, items, my, and user switches (from Darrick ? and Brent Beardsley)
+* sf - added status switch (from Brent Beardsley)
 
 Miscellaneous
 
