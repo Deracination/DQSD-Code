@@ -332,6 +332,7 @@ LRESULT CALLBACK CMenuBuilder::TrackerWndProc(
 					// Find the menu's window
 					ti.hwnd = WindowFromPoint(topLeft);
 
+					ti.uFlags = TTF_TRANSPARENT;
 					ti.uId = itemId;		
 
 					// This looks horrible, because I'm casting away the const, but it's safe
