@@ -76,6 +76,8 @@ public:
 	STDMETHOD(GetProtocolHandler)(/*[in]*/ BSTR bstrProtocol, /*[out,retval]*/ BSTR* pbstrHandler);
 	STDMETHOD(GetFiles)(/*[in]*/ BSTR bstrFileSpec, /*[out,retval]*/ BSTR* pbstrFiles);
 	STDMETHOD(get_InstallationDirectory)(/*[out,retval]*/ BSTR* pbstrDirectory);
+	STDMETHOD(GetSpecialFolderLocation)(/*[in]*/ BSTR bstrSpecialFolder, /*[out,retval]*/ BSTR* pbstrLocation);
+	STDMETHOD(GetFolders)(/*[in]*/ BSTR bstrBaseFolder, /*[out,retval]*/ BSTR* pbstrFolders);
 
 public:
 	STDMETHOD(RegisterHotKey)(long hotkeyVkCode, BSTR bstrModifierName, LPDISPATCH pDispDocument);
