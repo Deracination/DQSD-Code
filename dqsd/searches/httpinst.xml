@@ -4,14 +4,16 @@
     Install DQSD search from a given URL.<br/>
     <div class="helpboxDescLabels">Switches:</div>
     <table class="helpboxDescTable">
-      <tr><td>/o</td><td> - </td><td>Overwrite existing search unconditionally.</td></tr>
+      <tr><td>/filename</td><td> - </td><td>Set the filename instead of deriving it from the url.</td></tr>
       <tr><td>/local</td><td> - </td><td>Put search in localsearches folder.</td></tr>
+      <tr><td>/overwrite</td><td> - </td><td>Overwrite existing search unconditionally.</td></tr>
     </table>
     <div class="helpboxDescLabels">Example:</div>
     <table class="helpboxDescTable">
   		<tr><td>httpinst http://www.example.com/dqsd/coolsearch.xml</td></tr>
   		<tr><td>httpinst /local http://www.example.com/dqsd/localsearch.xml</td></tr>
   		<tr><td>httpinst /o http://www.example.com/dqsd/whois.xml</td></tr>
+  		<tr><td>httpinst /f:test.xml /o http://www.example.com/dqsd/gensearch/?dynamically=1</td></tr>
   	</table>
   </description>
   <category>Functions</category>
@@ -26,8 +28,9 @@
     	// Parse arguments
     	var destinationFolder = 'searches';
     	var forceOverwrite = false;
+		var filename = "";
 
-    	var args = parseArgs(q, "local, o");
+    	var args = parseArgs(q, "filename, local, overwrite");
     	for(var n = 0; n < args.switches.length; ++n)
     	{
     		switch(args.switches[n].name)
@@ -35,10 +38,19 @@
     		case "local":
     			destinationFolder = "localsearches";
     			break;
-    		case "o":
+    		case "overwrite":
     			forceOverwrite = true;
     			break;
-    		}
+			case "filename":
+				filename = args.switches[n].value;
+	    		// Must end with ".xml"
+				if(!/\.xml$/.test(filename))
+    			{
+					alert("Not a valid search filename: " + filename);
+					return false;
+    			}		
+				break;
+    		} 
     	}
 
     	// Validate URL arg
@@ -50,19 +62,21 @@
     	else
     	{		
     		// Call worker	
-    		installFromUrl(searchUrl, destinationFolder, forceOverwrite);
+    		installFromUrl(searchUrl, filename, destinationFolder, forceOverwrite);
     	}
 
     	return true;
     }
 
     // Reads XML file from searchUrl and writes it to destFolder, silently overwriting existing files if forceOverwrite is true
-    function installFromUrl(searchUrl, destFolder, forceOverwrite)
+    function installFromUrl(searchUrl, searchName, destFolder, forceOverwrite)
     {
       try
       { 
     		// Parse out search filename
-    		var searchName = searchFilenameFromUrl(searchUrl);
+			if (searchName == null || searchName == "") {
+				searchName = searchFilenameFromUrl(searchUrl);
+			}
       	var outputFilePath = destFolder + "/" + searchName;
 
       	// Request search xml from provided URL
