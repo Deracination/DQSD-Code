@@ -105,6 +105,7 @@ Section "Quick Search Deskbar (required)"
   File "..\phoneno.js"
   File "..\strings.js"
   File "..\tools.js"
+  File "..\defer_tools.js"
   File "..\translate.js"
   File "..\aliases.txt"
   File "..\menu.txt"
@@ -315,7 +316,9 @@ Section "Uninstall"
   Delete /REBOOTOK $INSTDIR\phoneno.js
   Delete /REBOOTOK $INSTDIR\strings.js
   Delete /REBOOTOK $INSTDIR\tools.js
+  Delete /REBOOTOK $INSTDIR\defer_tools.js
   Delete /REBOOTOK $INSTDIR\translate.js
+  Delete /REBOOTOK $INSTDIR\categoryExpander.htc
   Delete /REBOOTOK $INSTDIR\holidays.sg.xml
   Delete /REBOOTOK $INSTDIR\holidays.us.xml
   RmDir /r $INSTDIR\src
