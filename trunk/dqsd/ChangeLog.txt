@@ -20,7 +20,9 @@ Enhancements
 
 * Dutch holidays to 2013 (in both Dutch and English language) from Johan Geertsma 
 * Modified 'shortcut' detection to allow shortcuts starting with numbers
-
+* Andrew Francis added basic character escaping to the date/time format string.  
+  Allows use of literal characters like 'd' that would normally be interpreted 
+  as date/time formats.
 
 Bug Fixes
 
