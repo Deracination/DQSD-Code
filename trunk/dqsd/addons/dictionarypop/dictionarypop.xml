@@ -36,7 +36,7 @@
   <script><![CDATA[
 
 //See: http://www.xmethods.com/ve2/ViewListing.po?serviceid=7328
-//and demo: http://soapclient.com/soapclient?fn=soapform&template=/clientform.html&soaptemplate=/soapresult.html&soapwsdl=http://www.mybubble.com:8080/mybubbleEntServer/MBSoapServices.wsdl
+//and demo: http://soapclient.com/soapclient?fn=soapform&template=/clientform.html&soaptemplate=/soapresult.html&soapwsdl=http://www.extensio.com:8080/ExtensioInfoServer/mbsoap/MBWSSoapServices.wsdl
 
     function dictionarypop(q)
     {
@@ -77,7 +77,7 @@
     {
       try 
       {
-        document.all.dictionaryWebService.useService("http://www.mybubble.com:8080/mybubbleEntServer/MBSoapServices.wsdl", "MyBubbleSoapService");
+        document.all.dictionaryWebService.useService("http://www.extensio.com:8080/ExtensioInfoServer/mbsoap/MBWSSoapServices.wsdl", "ExtensioSoapService");
 
         return true;
       } 
@@ -99,7 +99,7 @@
         //sServiceName can be either Meaning, Synonym,  StockNews, StockProfile, or StockQuote
         try 
         {
-          iCallID = document.all.dictionaryWebService.MyBubbleSoapService.callService(objCall, sServiceName , sSearch);
+          iCallID = document.all.dictionaryWebService.ExtensioSoapService.callService(objCall, sServiceName , sSearch);
          
         } 
         catch (ex) 
@@ -115,7 +115,7 @@
     {
       if(event.result.error) 
       {
-       displayPopupMessage("Error contacting web service. Check that your firewall is allowing Windows Explorer to access this web service. (www.mybubble.com:8080) (" +
+        displayPopupMessage("Error contacting web service. Check that your firewall is allowing Windows Explorer to access this web service. (www.extensio.com:8080) (" +
         event.result.errorDetail.code + ", " + event.result.errorDetail.string + " " + event.result.errorDetail.raw + ")");
       } 
       else 
