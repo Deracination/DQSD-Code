@@ -1,3 +1,5 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
 <html>
 <!--
 Dave's Quick Search Deskbar
@@ -11,7 +13,7 @@ GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
 ----
 
 This deskbar lets you launch searches from the Windows Explorer Taskbar.
-For the latest version and installation instructions, visit <nobr><a href=http://notesbydave.com/toolbar/doc.htm target=DavesDoc onclick=window.close()>Dave's site</a></nobr>.<ul>
+For the latest version and installation instructions, visit <nobr><a href=http://notesbydave.com/toolbar/doc.htm target=DavesDoc onclick=window.close()>Dave's site</a></nobr> <nobr>or check the <a href="http://sourceforge.net/docman/display_doc.php?docid=10846&group_id=42081" target="_blank" onclick=window.close()>FAQ</a>.</nobr><ul>
 
 #* Type in your search terms and hit Enter to do a Google search.
 
@@ -59,6 +61,7 @@ The deskbar is customizable and completely open-source.
 * If you have questions or contributions, please post them to the
   <a target=dqsdd onclick=window.close() href="http://lists.sourceforge.net/lists/listinfo/dqsd-users">discussion group</a>
   and share them with the community.  Report bugs or feature requests <a target=dqsdd onclick=window.close() href="http://sourceforge.net/tracker/?group_id=42081">here</a>.
+
 </ul>
 
 -->
@@ -66,12 +69,12 @@ The deskbar is customizable and completely open-source.
   <title>Search</title>
   <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1">
   <link rel="stylesheet" type="text/css" href="search.css">
-  <script>
+  <script type='text/Jscript'>
     // default language setting
     language=navigator.userLanguage.substr(0,2);
   </script>
-  <script src=preferences.js></script>
-  <script>
+  <script type='text/Jscript' src=preferences.js></script>
+  <script type='text/Jscript'>
     // include local preferences file
     if (typeof localprefs != "undefined" != undefined && localprefs != "")
       document.write("</" + "script" + "><script src=" + localprefs + "></" + "script" + ">");
@@ -80,16 +83,15 @@ The deskbar is customizable and completely open-source.
     if (typeof localstylesurl != "undefined" && localstylesurl != "")
       document.write("<link rel='stylesheet' type='text/css' href='" + localstylesurl + "'>");
   </script>
-</head>
 
-<xml id='searchxml' src='search.xml'></xml>
-<script>
+<!--  <xml id='searchxml' src='search.xml'></xml>  -->
+<script type='text/Jscript'>
   // include the localsearch file if necessary
   if (typeof localsearchurl != "undefined" && localsearchurl != "")
     document.write("<xml id='localsearch' src='" + localsearchurl + "'></xml>");
 </script>
 
-<script>
+<script type='text/Jscript'>
 
 // catch errors
 function handleerror(msg, url, lineno)
@@ -110,18 +112,20 @@ function qualifiedalert(s)
 }
 </script>
 
-<script>
+<script type='text/Jscript'>
 <!--
 uaMatch=navigator.userAgent.toLowerCase().match("msie\\s+(\\d+\\.\\d*)");
 ie_version=(uaMatch ? parseFloat(uaMatch[1]) : 0.0);
 -->
 </script>
 
-<body onload=strt() scroll=no>
+</head>
+
+<body onload='strt()' scroll='no'>
 
 <div style='display:none' id='delaymsg'></div>
 
-<script>
+<script type='text/Jscript'>
 init = true;
 selfdrag = false;
 
@@ -617,19 +621,20 @@ function reload()
   window.location.reload(false);
 }
 </script>
-  <table align=left
+  <table align='left'
         border=0
         cellpadding=0
         cellspacing=0>
    <tr>
-   <form name=deff
-         target=_blank
-         action=http://www.google.com/search
-         method=get
-         onsubmit="return def();">
      <td>
-     <nobr>
-     <script>
+       <form name='deff'
+         target='_blank'
+         action='http://www.google.com/search'
+         method='get'
+         onsubmit="return def();">
+       <nobr>
+       <script type='text/Jscript'>
+<!--
 document.write(
   (multiline ? '<textarea ' : '<input ')
   + 'name=q '
@@ -652,7 +657,7 @@ document.write(
   + 'maxlength=256 '
   + 'tabindex=0 '
   + 'autocomplete=' + (autocomplete ? 'on' : 'off')
-  + (multiline ? '></textarea>' : '>'));
+  + (multiline ? "></textarea>" : ">"));
 
 dopopup = (ie_version >= 5.5);
 
@@ -671,15 +676,16 @@ if (dopopup)
   + "       style='top:-100'"
   + "       tabindex=-1>");
 }
-</script>
-</nobr>
-    </td>
-   </form>
+-->
+        </script>
+      </nobr>
+     </form>
+   </td>
   </tr>
-  <tr cellpadding=0>
-   <td id=info style="display:none">
+  <tr>
+   <td id='info' style='display:none'>
     <img width=0 height=36><br>
-    <b><a style=text-decoration:none;color:black href=http://notesbydave.com/toolbar/searchdoc.htm target=_blank tabindex=-1>
+    <b><a style='text-decoration:none;color:black' href='http://notesbydave.com/toolbar/searchdoc.htm' target='_blank' tabindex='-1'>
       Dave's Quick Search Deskbar</a></b>
     <br>
     Designed to be placed on the Windows taskbar.<br>
@@ -689,20 +695,20 @@ if (dopopup)
   </tr>
  </table>
 
-<script src="version.js"></script>
-<script src="tools.js"></script>
-<script src="strings.js"></script>
-<script src="loader.js"></script>
-<script src="history.js"></script>
-<script src="calculate.js"></script>
-<script src="translate.js"></script>
-<script src="clock.js"></script>
-<script src="calendar.js"></script>
-<script defer src="defer_tools.js"></script>
-<script defer src="helpbox.js"></script>
-<script defer src="helpmenu.js"></script>
+<script type='text/Jscript' src="version.js"></script>
+<script type='text/Jscript' src="tools.js"></script>
+<script type='text/Jscript' src="strings.js"></script>
+<script type='text/Jscript' src="loader.js"></script>
+<script type='text/Jscript' src="history.js"></script>
+<script type='text/Jscript' src="calculate.js"></script>
+<script type='text/Jscript' src="translate.js"></script>
+<script type='text/Jscript' src="clock.js"></script>
+<script type='text/Jscript' src="calendar.js"></script>
+<script defer type='text/Jscript' src="defer_tools.js"></script>
+<script defer type='text/Jscript' src="helpbox.js"></script>
+<script defer type='text/Jscript' src="helpmenu.js"></script>
 
-<script>
+<script type='text/Jscript'>
 // show localized title string
 document.title=local(SEARCH_TITLE);
 
@@ -711,7 +717,7 @@ document.title=local(SEARCH_TITLE);
 gowidth = -1;
 textheight = -1;
 
-function rsz()
+function handleResize()
 {
   if (gowidth < 0)
   {
@@ -784,8 +790,8 @@ var keyboardHook;
 function postStartup()
 {
   document.all.delaymsg.style.display = 'none';
-  rsz();
-  document.body.onresize=rsz;
+  handleResize();
+  document.body.onresize=handleResize;
 
   try
   {
@@ -805,3 +811,6 @@ function postStartup()
 }
 
 </script>
+
+</body>
+</html>
