@@ -14,7 +14,7 @@
  * modified by Neel Doshi 31/03/2002
  *  - configured the calendar to use the stylesheet
  *  - fixed the bug where "today" was not being highlighted if today is Sunday
- * $Revision$ 
+ * $Revision$
  * $Date$
  *
  * TODO:
@@ -157,7 +157,7 @@ function opencal(d)
 
 function buildcalhtmlhead()
 {
-	return '<table class=cal width=100% height=100% cellpadding=0 cellspacing=0 border=0><tr><td><style>' + convertStylesToInline() + '</style>';
+  return '<table class=cal width=100% height=100% cellpadding=0 cellspacing=0 border=0><tr><td><style>' + convertStylesToInline() + '</style>';
 }
 
 function buildcalheader()
@@ -188,37 +188,37 @@ function buildcal()
   function eventday_start(d, ttl)
   {
     return '<td class=caleventday' +
-			(defaultcal ? ' onmouseover=this.className="caleventdayhigh" onmouseout=this.className="caleventday" onmouseup=this.className="caleventday";parent.opencal(' + d + ');' : ' ') +
-			' title="' + ttl + '">';
+      (defaultcal ? ' onmouseover=this.className="caleventdayhigh" onmouseout=this.className="caleventday" onmouseup=this.className="caleventday";parent.opencal(' + d + ');' : ' ') +
+      ' title="' + ttl + '">';
   }
   var eventday_end   = '</td>';
 
   function todayevent_start(d, ttl)
   {
     return '<td class=caltodayevent' +
-			(defaultcal ? ' onmouseover=this.className="caltodayeventhigh" onmouseout=this.className="caltodayevent" onmouseup=this.className="caltodayevent";parent.opencal(' + d + ');' : ' ') +
-			' title="' + ttl + '"' + '>';
+      (defaultcal ? ' onmouseover=this.className="caltodayeventhigh" onmouseout=this.className="caltodayevent" onmouseup=this.className="caltodayevent";parent.opencal(' + d + ');' : ' ') +
+      ' title="' + ttl + '"' + '>';
   }
   var todayevent_end   = '</td>';
 
   function today_start(d)
   {
     return '<td class=caltoday' +
-    		(defaultcal ? ' onmouseover=this.className="caltodayhigh" onmouseout=this.className="caltoday" onmouseup=this.className="caltoday";parent.opencal(' + d + ');' : ' ') + '>';
+        (defaultcal ? ' onmouseover=this.className="caltodayhigh" onmouseout=this.className="caltoday" onmouseup=this.className="caltoday";parent.opencal(' + d + ');' : ' ') + '>';
   }
   var today_end   = '</td>';
 
   function gray_start(d)
   {
      return '<td class=calgray' +
-     		(defaultcal ? ' onmouseover=this.className="calgrayhigh" onmouseout=this.className="calgray" onmouseup=this.className="calgray";parent.opencal(' + d + ');' : ' ') + '>';
+         (defaultcal ? ' onmouseover=this.className="calgrayhigh" onmouseout=this.className="calgray" onmouseup=this.className="calgray";parent.opencal(' + d + ');' : ' ') + '>';
   }
   var gray_end   = '</td>';
 
   function TD_start(d)
   {
     return '<td class=calday' +
-    		(defaultcal ? ' onmouseover=this.className="caldayhigh" onmouseout=this.className="calday" onmouseup=this.className="calday";parent.opencal(' + d + ');' : ' ') + '>';
+        (defaultcal ? ' onmouseover=this.className="caldayhigh" onmouseout=this.className="calday" onmouseup=this.className="calday";parent.opencal(' + d + ');' : ' ') + '>';
   }
   var TD_end = '</td>';
 
@@ -239,9 +239,9 @@ function buildcal()
   if (weekday < 0)
   {
     cal += '<td id=calhead class=calmonth title="' + local(GO_TO_TODAY) + '" ' +
-			' onmouseup="parent.Calendar=new Date();parent.movecal(0);" ' +
-			' onmouseover=this.className="calmonthhigh" ' +
-			' onmouseout=this.className="calmonth" >';
+      ' onmouseup="parent.Calendar=new Date();parent.movecal(0);" ' +
+      ' onmouseover=this.className="calmonthhigh" ' +
+      ' onmouseout=this.className="calmonth" >';
   }
   else
   {

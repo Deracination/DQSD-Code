@@ -57,15 +57,15 @@ function submitForm(form)
 // the stylesheet directly.
 function convertStylesToInline()
 {
-	var stylestring = new String();
-	for (var j = 0; j < document.styleSheets.length; j++)
-	{
-		for (var i = 0; i < document.styleSheets[j].rules.length; i++)
-		{
-			stylestring += document.styleSheets[j].rules[i].selectorText + ' {' + document.styleSheets[j].rules[i].style.cssText + '}'
-		}
-	}
-	return(stylestring);
+  var stylestring = new String();
+  for (var j = 0; j < document.styleSheets.length; j++)
+  {
+    for (var i = 0; i < document.styleSheets[j].rules.length; i++)
+    {
+      stylestring += document.styleSheets[j].rules[i].selectorText + ' {' + document.styleSheets[j].rules[i].style.cssText + '}'
+    }
+  }
+  return(stylestring);
 }
 
 function protocolHandled(url)
@@ -97,83 +97,83 @@ function protocolHandled(url)
 // returned.
 function isURL(t)
 {
-	// detect strings that look like URLs or filenames
-	prot = new RegExp("^(http://|https://|ftp://)([\\-a-z0-9]+\\.)*[\\-a-z0-9]+" +
-					"|^[a-z]:($|\\\\)" +
-					"|^\\\\\\\\[a-z0-9]+($|\\\\($|[a-z0-9]+($|\\\\)))", "i");
-	if (prot.exec(t))
-		return t;
+  // detect strings that look like URLs or filenames
+  prot = new RegExp("^(http://|https://|ftp://)([\\-a-z0-9]+\\.)*[\\-a-z0-9]+" +
+          "|^[a-z]:($|\\\\)" +
+          "|^\\\\\\\\[a-z0-9]+($|\\\\($|[a-z0-9]+($|\\\\)))", "i");
+  if (prot.exec(t))
+    return t;
 
-	// detect strings that look like DNS names
-	dns = new RegExp("^www\.([\\-a-z0-9]+\\.)+[\\-a-z0-9]+(/\\S*)?$" +
-					"|^([\\-a-z0-9]+\\.)+(com|net|org|edu|gov|mil|[a-z]{2})(/\\S*)?$", "i");
-	if (dns.exec(t))
-	{
-		t = "http://" + t;
-		return t;
-	}
-	return false;
+  // detect strings that look like DNS names
+  dns = new RegExp("^www\.([\\-a-z0-9]+\\.)+[\\-a-z0-9]+(/\\S*)?$" +
+          "|^([\\-a-z0-9]+\\.)+(com|net|org|edu|gov|mil|[a-z]{2})(/\\S*)?$", "i");
+  if (dns.exec(t))
+  {
+    t = "http://" + t;
+    return t;
+  }
+  return false;
 }
 
 // parseArgs
 //
 // Used to parse standard switches (/foo or /foo:bar).  Takes the following parameters:
-//		q - string from the search function
-//		expectedSwitches - list or array of the expected switch values
-//		expandSwitches - optional parameter used to determine if the switch shortcuts should be expanded (i.e. /f becomes /foo)
+//    q - string from the search function
+//    expectedSwitches - list or array of the expected switch values
+//    expandSwitches - optional parameter used to determine if the switch shortcuts should be expanded (i.e. /f becomes /foo)
 // Function returns an object with three properties
-//		q - the input string with the switches removed
-//		switches - array of objects with these two properties:
-//			     name:   expanded name of the matched switch (i.e. foo as in /foo:bar)
-//     			 value:  value of switch (i.e. bar as in /foo:bar)
-//		switch_val - associative array with the switch name as the key with the switch value as the value. (i.e. switch_val["foo"] = "bar" as in /foo:bar)
+//    q - the input string with the switches removed
+//    switches - array of objects with these two properties:
+//           name:   expanded name of the matched switch (i.e. foo as in /foo:bar)
+//            value:  value of switch (i.e. bar as in /foo:bar)
+//    switch_val - associative array with the switch name as the key with the switch value as the value. (i.e. switch_val["foo"] = "bar" as in /foo:bar)
 //
 function parseArgs(q, expectedSwitches, expandSwitches)
 {
-	// In case the caller does not pass in a value
-	if (expandSwitches == undefined)
-		expandSwitches = 1;
+  // In case the caller does not pass in a value
+  if (expandSwitches == undefined)
+    expandSwitches = 1;
 
-	// In case the caller uses a comma-space delimited string
-	if (expectedSwitches[0] == undefined)
-		expectedSwitches = expectedSwitches.split(', ');
+  // In case the caller uses a comma-space delimited string
+  if (expectedSwitches[0] == undefined)
+    expectedSwitches = expectedSwitches.split(', ');
 
-	var switches = [];
-	var switch_val = [];
+  var switches = [];
+  var switch_val = [];
 
-	// Split the query to allow for easy looping.
-	var args_array = q.split(' ');
+  // Split the query to allow for easy looping.
+  var args_array = q.split(' ');
 
-	// Regular expression that defines switches
-	var re_switch = /\/((\w+)(?::?(\w*)))\s*/;
-	var re_res_args;
-	var re_res_switch;
+  // Regular expression that defines switches
+  var re_switch = /\/((\w+)(?::?(\w*)))\s*/;
+  var re_res_args;
+  var re_res_switch;
 
-	// Loop through the q array and see if any of the q's look like switches
-	for (var i = 0; i < args_array.length; i++)
-	{
-		// If a q looks like a switch, loop through the switch array and see if any of the switches match.
-		re_res_args = args_array[i].match(re_switch);
-		if (re_res_args)
-		{
-			for (var j = 0; j < expectedSwitches.length && !re_res_switch; j++)
-			{
-				if (expandSwitches)
-					re_res_switch = expectedSwitches[j].match(new RegExp('^(' + re_res_args[2] + ')', 'i'));
-				else
-					re_res_switch = expectedSwitches[j].match(new RegExp('^(' + re_res_args[2] + ')$', 'i'));
-				//  If there is a match, adjust the args_array, and save the values.
-				if (re_res_switch)
-				{
-					switch_val[expectedSwitches[j]] = re_res_args[3];
-					switches.push( {name:expectedSwitches[j].toLowerCase(), value:re_res_args[3]} );
-					args_array.splice(i, 1);
-					i--;
-				}
-			}
-			re_res_switch = "";
-		}
-	}
-	q = args_array.join(' ');
-	return { q:q, switches:switches, switch_val:switch_val };
+  // Loop through the q array and see if any of the q's look like switches
+  for (var i = 0; i < args_array.length; i++)
+  {
+    // If a q looks like a switch, loop through the switch array and see if any of the switches match.
+    re_res_args = args_array[i].match(re_switch);
+    if (re_res_args)
+    {
+      for (var j = 0; j < expectedSwitches.length && !re_res_switch; j++)
+      {
+        if (expandSwitches)
+          re_res_switch = expectedSwitches[j].match(new RegExp('^(' + re_res_args[2] + ')', 'i'));
+        else
+          re_res_switch = expectedSwitches[j].match(new RegExp('^(' + re_res_args[2] + ')$', 'i'));
+        //  If there is a match, adjust the args_array, and save the values.
+        if (re_res_switch)
+        {
+          switch_val[expectedSwitches[j]] = re_res_args[3];
+          switches.push( {name:expectedSwitches[j].toLowerCase(), value:re_res_args[3]} );
+          args_array.splice(i, 1);
+          i--;
+        }
+      }
+      re_res_switch = "";
+    }
+  }
+  q = args_array.join(' ');
+  return { q:q, switches:switches, switch_val:switch_val };
 }
