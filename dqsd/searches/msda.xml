@@ -11,6 +11,7 @@
       <tr><td colspan="4"><i>One of the following is required:</i></td></tr>
       <tr><td> </td><td>/atl</td><td> - </td><td>Search ATL list archives</td></tr>
       <tr><td> </td><td>/javacom</td><td> - </td><td>Search Java-COM list archives</td></tr>
+      <tr><td> </td><td>/dcom</td><td> - </td><td>Search DCOM list archives</td></tr>
       <tr><td colspan="4"><hr size="1"/></td></tr>
       <tr><td colspan="4"><i>Optional:</i></td></tr>
       <tr><td> </td><td>/substring</td><td> - </td><td>By default, searches will only match full words. But if you check the "substring search" box, your search will match any word containing the string you have entered.</td></tr>
@@ -27,7 +28,7 @@
   <form name="msdaf"
         method="post"
         action="http://discuss.microsoft.com/SCRIPTS/WA-MSD.EXE">
-    <input type="hidden" name="S2" value="" />
+    <input type="hidden" name="S2" value="dqsd" />
     <input type="hidden" name="L" value="" />
     <COMMENT>
       The input element above, "L", was a SELECT element with the following options...
@@ -78,7 +79,7 @@
       if( nullArgs("msda", q) )
         return;
 
-      var args = parseArgs(q, "atl, javacom, substring, author, since, until");
+      var args = parseArgs(q, "atl, javacom, dcom, substring, author, since, until");
       for (var iSwitch = 0; iSwitch < args.switches.length; iSwitch++)
       {
         switch( args.switches[iSwitch].name )
@@ -89,6 +90,9 @@
           case "javacom":
             document.msdaf.L.value = "Java-COM";
             break;
+          case "dcom":
+            document.msdaf.L.value = "DCOM";
+            break;            
           case "substring":
             document.msdaf["0"].value = "S";
             break;
