@@ -85,6 +85,7 @@
                 k++;
                 break;
               case "1.5":
+                //http://devedge.netscape.com/library/manuals/2000/javascript/1.5/reference/ could be used as an alternative
                 defpage = 'http://developer.netscape.com/docs/manuals/js/core/jsref15/contents.html';
                 query = args.q + ' inurl:jsref15 -inurl:ix site:developer.netscape.com';
                 k++;
