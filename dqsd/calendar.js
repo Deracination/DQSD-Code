@@ -4,6 +4,13 @@
  * modified by Sidney Chong (sidney@gamebox.net) 15/01/2002
  *  - added display of events (eg holidays) specified
  *    in a file referenced by the var 'eventsfileurl'
+ * modified by Sidney Chong (sidney@gamebox.net) 16/01/2002
+ *  - changed event month to run from 1-12 instead of 0-11
+ *  - assume event date to be recurring if month or year attribute
+ *    is not specified.
+ *
+ * $Revision$ 
+ * $Date$
  *
  * TODO:
  *  - add listing of public holidays in other countries
@@ -316,7 +323,7 @@ function buildcal()
     if (week_day == 0) cal += TR_end + TR_start;
 
     var ent = null;
-    querystr = 'event[date[(@year="'+year+'" || @year="all") && (@month="'+month+'" || @month="all") && @day="'+month_day+'"]]';
+    querystr = 'event[date[(@year="'+year+'" || not(@year)) && (@month="'+(month+1)+'" || not(@month)) && @day="'+month_day+'"]]';
     if (ents)
       ent = ents.selectSingleNode(querystr);
 
