@@ -285,6 +285,12 @@ for (var iSearch = 0; iSearch < searchNodes.length; iSearch++)
             localsearch,
             searchCategories.slice( 1 ),
             nomenu);
+
+  // this gets called after addsearch so you can call addalias, etc
+  var onloadNode = searchNode.selectSingleNode("onload");
+  if (onloadNode != null) {
+	  eval(onloadNode.text);
+  }
 }
 
 function getCategories( categoryNode, categories )
