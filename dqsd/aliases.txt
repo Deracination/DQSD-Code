@@ -7,6 +7,12 @@
 // User aliases should be placed in the localaliases.txt file which
 // will not be overwritten when a new version of the toolbar is installed.
 //
+ggn|gg %s /groups
+,|ggn
+gga|gg %s /advanced
+>|gga
+gguk|gg %s /uk
+ggca|gg %s /canada
 !|ifl
 ?|yh
 -|fst
@@ -29,11 +35,9 @@ $|stk
 [|enc
 ]|xref
 &&|ia
->|gga
 $$|dlt
 $$$|pw
 %|ebay
-,|ggn
 ,,|faq
 >>|dl
 ~|uns
