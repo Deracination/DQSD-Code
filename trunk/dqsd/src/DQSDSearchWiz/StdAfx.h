@@ -25,6 +25,7 @@ extern CComModule _Module;
 #include <commctrl.h>
 #include <wininet.h>
 #include <msxml.h>
+#include <ctype.h>
 
 #include <string>
 #include <vector>
