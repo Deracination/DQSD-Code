@@ -1,0 +1,77 @@
+<search function="tr">
+  <name>Thomas Register</name>
+  <category>Search the Web</category>
+  <contributor>Brent Beardsley</contributor>
+  <link>http://www.thomasregister.com/</link>
+  <email></email>
+  <description>
+  Search ThomasRegister.com - the most comprehensive online resource for finding companies and products manufactured in North America
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/product</td><td> - </td><td>Search for products</td></tr>
+      <tr><td>/service</td><td> - </td><td>Search for services</td></tr>
+      <tr><td>/company</td><td> - </td><td>Search for companies</td></tr>
+      <tr><td>/brand</td><td> - </td><td>Search for brands</td></tr>
+    </table>
+  </description>
+  <form name="trf"
+        method="post"
+        action="http://www.thomasregister.com/red_search.fnc">
+    <input type="hidden" name="search_string" value="" />
+    <input type="hidden" name="browser_stat" value="" />
+    <input type="hidden" name="json" value="n" />
+    <input type="hidden" name="indexpage" value="n" />
+    <input type="hidden" name="script_name" value="TRpsrch.cgi" />
+	<input type="hidden" name="search_type"	 value="product" />
+    <COMMENT>
+      The input element above, "script_name" was a set of radio buttons with the following options...
+      "TRpsrch.cgi", "TRcsrch.cgi", "TRbsrch.cgi"
+    </COMMENT>
+  </form>
+  <script><![CDATA[
+    function tr(q)
+    {
+      if( nullArgs("tr", q) )
+        return;
+
+      var args = parseArgs(q, "brand, company, product, service");
+	  var scriptName = "TRpsrch.cgi";
+	  var searchType = "product";
+      if (args.switches.length > 0)
+      {
+        switch( args.switches[0].name )
+        {
+          case "product":
+		    scriptName = "TRpsrch.cgi";
+			searchType = "product";
+            break;
+          case "service":
+		    scriptName = "TRpsrch.cgi";
+			searchType = "product";
+            break;
+          case "company":
+		    scriptName = "TRcsrch.cgi";
+			searchType = "company";
+            break;
+          case "brand":
+		    scriptName = "TRbsrch.cgi";
+			searchType = "brand";
+            break;
+          default:
+		    scriptName = "TRpsrch.cgi";
+			searchType = "product";
+            break;
+        }
+      }
+
+      document.trf.search_string.value = args.q;
+	  document.trf.search_type.value = searchType;
+      document.trf.script_name.value = scriptName;
+
+      submitForm(trf);
+    }
+  ]]></script>
+  <copyright>
+    Copyright (c) 2003 Brent Beardsley; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>
