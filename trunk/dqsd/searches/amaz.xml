@@ -6,10 +6,12 @@
   	<table class="helpboxDescTable">
   		<tr><td>/books</td><td> - </td><td>Books</td></tr>
   		<tr><td>/music</td><td> - </td><td>Popular Music</td></tr>
+  		<tr><td>/mp3</td><td> - </td><td>Music Downloads</td></tr>
   		<tr><td>/classical</td><td> - </td><td>Classical Music</td></tr>
   		<tr><td>/dvd</td><td> - </td><td>DVDs</td></tr>
   		<tr><td>/vhs</td><td> - </td><td>VHS Tapes</td></tr>
   		<tr><td>/movies</td><td> - </td><td>Local Movie Showtimes</td></tr>
+  		<tr><td>/restaurants</td><td> - </td><td>Restaurants</td></tr>
   		<tr><td>/toys</td><td> - </td><td>Toys</td></tr>
   		<tr><td>/baby</td><td> - </td><td>Baby Products</td></tr>
   		<tr><td>/computers</td><td> - </td><td>PC Hardware</td></tr>
@@ -26,6 +28,14 @@
   		<tr><td>/outlet</td><td> - </td><td>Outlet</td></tr>
   		<tr><td>/auctions</td><td> - </td><td>Auctions</td></tr>
   		<tr><td>/zshops</td><td> - </td><td>zShops</td></tr>
+  		<tr><td>/scientific</td><td> - </td><td>Sci. Supplies</td></tr>
+  		<tr><td>/medical</td><td> - </td><td>Med. Supplies</td></tr>
+  		<tr><td>/industrial</td><td> - </td><td>Indust. Supplies</td></tr>
+  		<tr><td>/cars</td><td> - </td><td>Car Parts</td></tr>
+  		<tr><td>/home</td><td> - </td><td>Home Furnishings</td></tr>
+  		<tr><td>/lifestyle</td><td> - </td><td>Lifestyle</td></tr>
+  		<tr><td>/pets</td><td> - </td><td>Pet Toys</td></tr>
+  		<tr><td>/arts</td><td> - </td><td>Arts and Hobbies</td></tr>
   	</table>
     <div class="helpboxDescLabels">Examples:</div>
     <table class="helpboxDescTable">
@@ -38,10 +48,11 @@
   <contributor>Dan Sanderson, Ryan Edwards</contributor>
   
   <form name="amazf"
-        action="http://www.amazon.com/exec/obidos/search-handle-form"
-        method="post">
-    <input type="hidden" name="index"/>
-    <input type="hidden" name="field-keywords"/>
+        action="http://www.amazon.com/exec/obidos/external-search"
+        method="get">
+    <input type="hidden" name="mode"/>
+    <input type="hidden" name="keyword"/>
+    <input type="hidden" name="tag" value="dqsd-20"/>
   </form>
   
   <script><![CDATA[
@@ -50,7 +61,7 @@
       if( nullArgs("amaz", q) )
         return false;
 
-      var args = parseArgs(q, "books, music, classical, dvd, vhs, movies, toys, baby, computers, software, games, electronics, photography, tools, magazines, garden, kitchen, travel, cellular, outlet, auctions, zshops");
+      var args = parseArgs(q, "books, music, classical-music, music-dd, mp3, dvd, video, vhs, movies, theatrical, restaurants, toys, baby, computers, pc-hardware, software, games, electronics, photography, tools, magazines, garden, kitchen, travel, cellular, wireless-phones, outlet, auctions, zshops, scientific, medical, industrial, cars, home, lifestyle, pets, arts");
       if( q == "" )
         openSearchWindow("http://www.amazon.com/");
       else if( args.switches.length == 1 )
@@ -58,31 +69,51 @@
         switch( args.switches[0].name )
         {
           case "movies":
-            document.amazf.index.value = "theatrical"; break;
+            document.amazf.mode.value = "theatrical"; break;
+          case "video":
+            document.amazf.mode.value = "vhs"; break;
+          case "mp3":
+            document.amazf.mode.value = "music-dd"; break;
           case "computers":
-            document.amazf.index.value = "pc-hardware"; break;
+            document.amazf.mode.value = "pc-hardware"; break;
           case "games":
-            document.amazf.index.value = "videogames"; break;
+            document.amazf.mode.value = "videogames"; break;
           case "photography":
-            document.amazf.index.value = "photo"; break;
+            document.amazf.mode.value = "photo"; break;
           case "cellular":
-            document.amazf.index.value = "wireless-phones"; break;
+            document.amazf.mode.value = "wireless-phones"; break;
           case "auctions":
-            document.amazf.index.value = "auction-redirect"; break;
+            document.amazf.mode.value = "auction-redirect"; break;
           case "zshops":
-            document.amazf.index.value = "fixed-price-redirect"; break;
+            document.amazf.mode.value = "fixed-price-redirect"; break;
+          case "scientific":
+            document.amazf.mode.value = "moc-scientific-supplies"; break;
+          case "medical":
+            document.amazf.mode.value = "moc-medical-supplies"; break;
+          case "industrial":
+            document.amazf.mode.value = "moc-industrial-supplies"; break;
+          case "cars":
+            document.amazf.mode.value = "moc-cars"; break;
+          case "home":
+            document.amazf.mode.value = "moc-home-furnishings"; break;
+          case "lifestyle":
+            document.amazf.mode.value = "moc-lifestyle"; break;
+          case "pets":
+            document.amazf.mode.value = "moc-pet-toys"; break;
+          case "arts":
+            document.amazf.mode.value = "moc-arts-hobby"; break;
           default:
-            document.amazf.index.value = args.switches[0].name;
+            document.amazf.mode.value = args.switches[0].name;
         }
-        document.amazf["field-keywords"].value = args.q;
+        document.amazf.keyword.value = args.q;
         submitForm(amazf);
       }
       else if( args.switches.length > 1 )
         nullArgs("amaz","?");
       else
       {
-        document.amazf.index.value = "blended";
-        document.amazf["field-keywords"].value = args.q;
+        document.amazf.mode.value = "blended";
+        document.amazf.keyword.value = args.q;
         submitForm(amazf);
       }
     }

@@ -136,6 +136,8 @@ Section "Quick Search Deskbar (required)"
   File "..\holidays.fr.xml"
   File "..\holidays.ca.xml"
   File "..\holidays.it.xml"
+  File "..\holidays.nl.NL.xml"
+  File "..\holidays.nl.EN.xml"
   File "..\holidays.sg.xml"
   File "..\holidays.us.xml"
   File "..\loader.js"
@@ -285,6 +287,8 @@ Section "Uninstall"
   Delete /REBOOTOK $INSTDIR\holidays.fr.xml
   Delete /REBOOTOK $INSTDIR\holidays.ca.xml
   Delete /REBOOTOK $INSTDIR\holidays.it.xml
+  Delete /REBOOTOK $INSTDIR\holidays.nl.NL.xml
+  Delete /REBOOTOK $INSTDIR\holidays.nl.EN.xml
   Delete /REBOOTOK $INSTDIR\holidays.sg.xml
   Delete /REBOOTOK $INSTDIR\holidays.us.xml
   Delete /REBOOTOK $INSTDIR\loader.js
