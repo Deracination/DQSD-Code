@@ -114,6 +114,7 @@ Section "Quick Search Deskbar (required)"
   File "..\strings.js"
   File "..\tools.js"
   File "..\translate.js"
+  File "..\version.js"
   SetOutPath "$INSTDIR\searches"
   File "..\searches\*.xml"
   SetOutPath "$INSTDIR\src"
@@ -138,6 +139,8 @@ Section "Quick Search Deskbar (required)"
   File "DQSDTools\MenuBuilder.rgs"
   File "DQSDTools\MenuBuilder.h"
   File "DQSDTools\MenuBuilder.cpp"
+  File "DQSDTools\KeyboardHook.h"
+  File "DQSDTools\KeyboardHook.cpp"
   File "DQSDTools\License.txt"
   File "DQSDTools\StdAfx.cpp"
   File "DQSDTools\StdAfx.h"
@@ -241,6 +244,7 @@ Section "Uninstall"
   Delete /REBOOTOK $INSTDIR\strings.js
   Delete /REBOOTOK $INSTDIR\tools.js
   Delete /REBOOTOK $INSTDIR\translate.js
+  Delete /REBOOTOK $INSTDIR\version.js
   RmDir /r $INSTDIR\src
   RmDir /r $INSTDIR\searches
 
