@@ -1,29 +1,27 @@
-  <search function="mm">
-    <name>Multimap Maps</name>
-    <description>Get UK maps: "mm 10 Downing Street, London"</description>
-    <category>People and Places</category>
-    <link>http://www.multimap.com</link>
-    <idea>David Brake david.brake@ukonline.co.uk</idea>
-    <form name="mmform"
-        method="get"
+<search function="mm">
+  <name>Multimap Maps</name>
+  <description>Search for UK maps: "mm 10 Downing Street, London"</description>
+  <category>People and Places</category>
+  <link>http://www.multimap.com/</link>
+  <idea>David Brake david.brake@ukonline.co.uk</idea>
+  <form name="mmform"
+        target="_blank"
         action="http://uk2.multimap.com/map/places.cgi"
-        target="_blank">
-	<input type="hidden" name="source" value="quicksearch"/>
-	<input type="hidden" name="client" value="M6"/>
-	<input type="hidden" name="quicksearch"/>
-    </form>
-    <script><![CDATA[
-      function mm(q)
+        method="get">
+    <input type="hidden" name="source" value="quicksearch"/>
+    <input type="hidden" name="client" value="M6"/>
+    <input type="hidden" name="quicksearch"/>
+  </form>
+  <script><![CDATA[
+    function mm(q, switches)
+    {
+      if( q == "" )
+        openSearchWindow("http://www.multimap.com/");
+      else
       {
-        if (q == "")
-        {
-          openSearchWindow("http://www.multimap.com/");
-        }
-        else
-        {
-          document.mmform.quicksearch.value=q;
-          submitForm(mmform);
-        }
+        document.mmform.quicksearch.value = q;
+        submitForm(mmform);
       }
-    ]]></script>
-  </search>
+    }
+  ]]></script>
+</search>
