@@ -5,6 +5,8 @@ New Searches
 * wn - WordNet online lexical reference system search (from Princeton)
        contributed by Shakeel Mahate.
 * wgn - Search Windows Guide Network (from John Bairen).
+* howfar - Find out how far it is from city to city (from John Bairen).
+* dir - Get driving directions from one place to another (from Pete H).
 
 Modified Searches
 
