@@ -1,15 +1,18 @@
 <search function="so">
   <name>Societe.com</name>
   <description>
-    Lookup info on French companies using a SIREN number.<br/>
-    <div class="helpboxDescLabels">Example:</div>
+    Lookup info on French companies using a SIREN number. Non-digits characters are removed.<br/>
+    <div class="helpboxDescLabels">Examples:</div>
     <table class="helpboxDescTable">
-  		<tr><td>so 352568091</td></tr>
-  	</table>
+      <tr><td>so 352568091</td></tr>
+      <tr><td>so 352.568.091</td></tr>
+      <tr><td>so 352 568 091</td></tr>
+    </table>
   </description>
   <category>People and Places</category>
   <link>http://www.societe.com/</link>
   <contributor>MLL</contributor>
+  <version>1.2</version>
   
   <script><![CDATA[
     function so(q)
@@ -17,7 +20,12 @@
       if( nullArgs("so",q) )
         return false;
       else
+        {
+        // Replace non-digits with nothing
+        var re = new RegExp("[^0-9]", "g");
+        q = q.replace(re, "");
         openSearchWindow("http://societe.com/cgi-bin/recherche?rncs=" + q);
+      }
     }
   ]]></script>
 </search>
