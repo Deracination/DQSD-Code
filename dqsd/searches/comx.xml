@@ -305,7 +305,7 @@
               case "fuscobrothers": imgtitle="Fusco Brothers";site="ucomics";imgkey="fu";break;
               case "garfield": imgtitle="Garfield";site="ucomics";imgkey="ga";break;
               case "gasolinealley": imgtitle="Gasoline Alley";site="ucomics";imgkey="tmgas";break;
-              case "heartofthecity": imgtitle="Heart of the City";site="ucomics";imgkey="hc";ucbreak;
+              case "heartofthecity": imgtitle="Heart of the City";site="ucomics";imgkey="hc";break;
               case "helenoftheinternet": imgtitle="Helen of the Internet";site="ucomics";imgkey="tmhel";break;
               case "housebroken": imgtitle="Housebroken";site="ucomics";imgkey="tmhou";break;
               case "inthebleachers": imgtitle="In the Bleachers";site="ucomics";imgkey="bl";break;
@@ -328,7 +328,7 @@
               case "popculture": imgtitle="Pop Culture";site="ucomics";imgkey="pop";break;
               case "preteena": imgtitle="Preteena";site="ucomics";imgkey="pr";break;
               case "reallife": imgtitle="Real Life";site="ucomics";imgkey="rl";break;
-              case "reynoldsunwrapped": imgtitle="Reynolds Unwrapped";site="ucomics";imgkey="rw";ucbreak;
+              case "reynoldsunwrapped": imgtitle="Reynolds Unwrapped";site="ucomics";imgkey="rw";break;
               case "shoe": imgtitle="Shoe";site="ucomics";imgkey="tmsho";break;
               case "stonesoup": imgtitle="Stone Soup";site="ucomics";imgkey="ss";break;
               case "tankmcnamara": imgtitle="Tank Mcnamara";site="ucomics";imgkey="tm";break;
