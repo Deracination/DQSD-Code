@@ -52,7 +52,7 @@ static LRESULT CALLBACK KeyboardProc(
 				_RPT1(_CRT_WARN, _T("Shift-DEL: %c\n"), bKeyDown ? 'P' : 'R');
 				if(bKeyDown)
 				{
-					// Shift-INS is cut - send a CTRL-X
+					// Shift-DEL is cut - send a CTRL-X
 					SendMessage(GetFocus(), WM_CHAR, 'X'-'@', 0);
 					return 0; 
 				}
