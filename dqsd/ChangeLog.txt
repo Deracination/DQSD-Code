@@ -82,6 +82,7 @@ Modified Searches
 * gg - added /define (thanks to Tom Corcoran for the hint)
 * whatis - Made sure it accepts ? to show help (Kim Gräsman)
 * php - fixed smarty search (Brent Beardsley)
+* uns - now uses wordsmith.com - the original service is gone (Thad Kerosky)
 
 Removed Searches
 
