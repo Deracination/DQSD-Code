@@ -74,6 +74,8 @@ private:
 	string m_strCopyright;
 	CSearchNameEdit m_editSearchName;
 	COptions m_options;
+	_bstr_t m_bstrUnselectedStyle;
+	map< int, CComBSTR > m_mapUnselectedStyle;
 
 private:
 	string GetAbsoluteActionPath( _variant_t& varAction );

@@ -245,13 +245,30 @@ LRESULT CDQSDWizardDlg::OnFormListItemChanged(int idCtrl, LPNMHDR pNMHDR, BOOL& 
 
 		NM_LISTVIEW* pNMListView = (NM_LISTVIEW*)pNMHDR;
 
-		if ( pNMListView->uNewState != 3 )
+		ATLTRACE( _T("pNMListView->uNewState = %d\n"), pNMListView->uNewState );
+		ATLTRACE( _T("pNMListView->iItem = %d\n"), pNMListView->iItem );
+
+		CWindow ctlFormList = GetDlgItem( IDC_FormList2 );
+
+		if ( pNMListView->uNewState == 0 )
+		{
+			LVITEM lvi;
+			memset( &lvi, 0, sizeof lvi );
+			lvi.mask = LVIF_PARAM;
+			lvi.iItem = pNMListView->iItem;
+			ctlFormList.SendMessage( LVM_GETITEM, pNMListView->iItem, (LPARAM)&lvi );
+			CComPtr< IHTMLElement >* pspForm = reinterpret_cast<CComPtr< IHTMLElement >*>(lvi.lParam);
+
+			CComPtr< IHTMLStyle > spStyle;
+			(*pspForm)->get_style( &spStyle );
+
+			spStyle->put_cssText( m_mapUnselectedStyle[ pNMListView->iItem ] );
 			return 1;
+		}
 
 		// Get the current FORM selection and display it's HTML
 		// just to help the user know which form to use
 
-		CWindow ctlFormList = GetDlgItem( IDC_FormList2 );
 		const int cSelected = ctlFormList.SendMessage( LVM_GETSELECTEDCOUNT, 0, 0 );
 		if ( cSelected > 0 )
 		{
@@ -277,6 +294,11 @@ LRESULT CDQSDWizardDlg::OnFormListItemChanged(int idCtrl, LPNMHDR pNMHDR, BOOL& 
 
 					CComPtr< IHTMLStyle > spStyle;
 					(*pspForm)->get_style( &spStyle );
+
+					CComBSTR bstrStyleText;
+					spStyle->get_cssText( &bstrStyleText );
+					m_mapUnselectedStyle[ i ] = bstrStyleText;
+
 					spStyle->put_backgroundColor( _variant_t( _bstr_t( _T("Yellow") ) ) );
 					spStyle->put_border( _bstr_t( _T("5px dotted red") ) );
 					return 1;
