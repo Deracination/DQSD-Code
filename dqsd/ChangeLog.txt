@@ -1,3 +1,25 @@
+-- What's new for ???? (date ????)
+
+Enhancements
+* 
+
+Bug Fixes
+* 
+
+New Searches
+* 
+
+Modified Searches
+* acine - fit site changes (MLL)
+* cjfr - fit site changes (MLL)
+* jsref - attempts at fitting site changes (MLL)
+
+Removed Searches
+* dicfr - site discontinued (MLL)
+
+Miscellaneous
+* 
+
 -- What's new for 3.1.9 (date 2004-12-01)
 
 Enhancements

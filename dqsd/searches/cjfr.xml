@@ -7,33 +7,28 @@
     Get the conjugation for a french verb.<br/>
     <div class="helpboxDescLabels">Usage:</div>
     <table class="helpboxDescTable">
-      <tr><td>cjfr &lt;<i>verb</i>&gt; [/1] [/2] [/3]</td></tr>
+      <tr><td>cjfr &lt;<i>verb</i>&gt; [/1] [/2]</td></tr>
     </table>
     <div class="helpboxDescLabels">Switches:</div>
     <table class="helpboxDescTable">
       <tr><td><b>/1</b></td><td> - </td><td>use <a href="http://www.leconjugueur.com/">web reference 1</a>. Also gives useful notes <b>(default)</b>.</td></tr>
-      <tr><td>/2</td><td> - </td><td>use <a href="http://www.urbietorbi.com/">web reference 2</a>. Also gives english equivalents.</td></tr>
-      <tr><td>/3</td><td> - </td><td>use <a href="http://bach.arts.kuleuven.ac.be/~piet/morlex/conjug.html">web reference 3</a>. Quite roughly presented, but exhaustive, results.</td></tr>
+      <tr><td>/2</td><td> - </td><td>use <a href="http://bach.arts.kuleuven.ac.be/~piet/morlex/conjug.html">web reference 2</a>. Quite roughly presented, but exhaustive, results.</td></tr>
     </table>
     <div class="helpboxDescLabels">Example:</div>
     <table class="helpboxDescTable">
-      <tr><td>cjfr vouloir /1 /3</td></tr>
+      <tr><td>cjfr vouloir /1 /2</td></tr>
     </table>
   </description>
 
   <form name="cjfrf_1"
         method="post"
-        action="http://www.leconjugueur.com/php/frconjugue.php">
+        action="http://www.leconjugueur.com/php/newconjugue.php">
+    <input type="hidden" name="lang" value="fr" />
+    <input type="hidden" name="oblige" value="N" />
     <input type="hidden" name="verbe" value="" />
   </form>
 
   <form name="cjfrf_2"
-        method="post"
-        action="http://www24.brinkster.com/zazaweb/cherche1.asp">
-    <input type="hidden" name="Recherche" value="" />
-  </form>
-
-  <form name="cjfrf_3"
         method="get"
         action="http://bach.arts.kuleuven.ac.be/cgi-bin/conjugfr.pl">
     <input type="hidden" name="command" value="generate_paradigm" />
@@ -44,7 +39,7 @@
   <script><![CDATA[
     function cjfr(q)
     {
-      var args = parseArgs(q, "1, 2, 3");
+      var args = parseArgs(q, "1, 2");
       if( args.q == "?" ) return nullArgs( "cjfr", "?" );
 
       var cjfr_do = new Array(0, 0, 0);
@@ -60,28 +55,25 @@
           cjfr_do[args.switches[j].name-1] = 1;
         }
       }
-      var newwindow = (cjfr_do[0] + cjfr_do[1] + cjfr_do[2] > 1);
+      var newwindow = (cjfr_do[0] + cjfr_do[1] > 1);
 
       var cjfr_pages = new Array
       (
         'http://www.leconjugueur.com/',
-        'http://www.urbietorbi.com/',
         'http://bach.arts.kuleuven.ac.be/~piet/morlex/conjug.html'
       );
       var cjfr_forms = new Array
       (
         document.cjfrf_1,
-        document.cjfrf_2,
-        document.cjfrf_3
+        document.cjfrf_2
       );
       var cjfr_fields = new Array
       (
         document.cjfrf_1.verbe,
-        document.cjfrf_2.Recherche,
-        document.cjfrf_3.infinitive
+        document.cjfrf_2.infinitive
       );
 
-      for( var k=0; k<=2; k++ )
+      for( var k=0; k<=1; k++ )
       {
         if( cjfr_do[k] )
         {
@@ -90,6 +82,7 @@
           {
             cjfr_fields[k].value = args.q;
             if( newwindow ) cjfr_forms[k].target = "_blank";
+//the setTimeout here is a hack so that an non-ie browser has the time to launch both of the forms
             submitForm(cjfr_forms[k], newwindow);
           }
         }
