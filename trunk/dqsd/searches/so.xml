@@ -2,36 +2,97 @@
   <name>Societe.com</name>
   <description>
     Lookup info on French companies using a SIREN number. Non-digits characters are removed.<br/>
+    <div class="helpboxDescLabels">Usage:</div>
+    <table class="helpboxDescTable">
+      <tr><td>so &lt;<i>name_or_SIREN_number</i>&gt; [/identique] [/dirigeant:<i>chairman_last_name</i>] [/prenom:<i>chairman_first_name</i>] [/ape:<i>APE code</i>] [/departement:<i>department</i>]</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Switches:</div>
+      <table class="helpboxDescTable">
+        <tr><td>/identique</td><td> - </td><td>exact name search</td></tr>
+        <tr><td colspan="3">the other switches are self-explanatory</td></tr>
+      </table>
     <div class="helpboxDescLabels">Examples:</div>
     <table class="helpboxDescTable">
       <tr><td>so 352568091</td></tr>
       <tr><td>so 352.568.091</td></tr>
-      <tr><td>so 352 568 091</td></tr>
+      <tr><td>so martin /identique /departement:75</td></tr>
     </table>
   </description>
   <category>People and Places</category>
   <link>http://www.societe.com/</link>
   <contributor>MLL</contributor>
-  <version>1.2</version>
+  <version>2</version>
+
+  <form name="sof"
+        method="get"
+        action="http://www.societe.com/cgi-bin/liste">
+    <input type="hidden" name="nom" value="" />
+    <input type="hidden" name="exa" value="" />
+    <input type="hidden" name="dirig" value="" />
+    <input type="hidden" name="pre" value="" />
+    <input type="hidden" name="ape" value="" />
+    <input type="hidden" name="dep" value="" />
+  </form>
   
   <script><![CDATA[
     function so(q)
     {
-      if( nullArgs("so",q) )
-        return false;
-      else
+      var args = parseArgs(q, "identique, dirigeant, prenom, ape, departement");
+      if( nullArgs("so", args.q) ) return false;
+
+      // Replace non-digits with nothing
+      var re = new RegExp( "[^0-9]", "g" );
+      var siren = q.replace( re, "" );
+      if( isNaN( siren ) || siren < 100000000 || siren > 999999999 )
+      {
+        //lets initialize the fields : they're persistent
+        document.sof.exa.value = "";
+        document.sof.dirig.value = "";
+        document.sof.pre.value = "";
+        document.sof.ape.value = "";
+        document.sof.dep.value = "";
+        if( args.switches.length > 0 )
         {
-        // Replace non-digits with nothing
-        var re = new RegExp("[^0-9]", "g");
-        q = q.replace(re, "");
-        openSearchWindow("http://societe.com/cgi-bin/recherche?rncs=" + q);
+          for( var j=0; j<args.switches.length; j++ )
+          {
+            switch( args.switches[j].name )
+            {
+              case "identique":
+                document.sof.exa.value = "on";
+                break;
+              case "dirigeant":
+                document.sof.dirig.value = args.switch_val["dirigeant"];
+                break;
+              case "prenom":
+                document.sof.pre.value = args.switch_val["prenom"];
+                break;
+              case "ape":
+                document.sof.ape.value = args.switch_val["ape"];
+                break;
+              case "departement":
+                document.sof.dep.value = args.switch_val["departement"];
+                break;
+              default:
+                return nullArgs("so", "?");
+                break;
+            } //end-switch
+          }
+        }
+        document.sof.nom.value = args.q;
+        submitForm(sof);
       }
+      else
+      {
+        if( args.switches.length > 0 ) return nullArgs("so", "?");
+        openSearchWindow("http://societe.com/cgi-bin/recherche?rncs=" + siren);
+      }
+      return true;
     }
   ]]></script>
 
   <copyright>
-	Copyright (c) 2002 David Bau
-	Distributed under the terms of the
-	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  Copyright (c) 2002 David Bau
+  Distributed under the terms of the
+  GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
   </copyright>
 </search>

@@ -17,6 +17,7 @@ Modified Searches
 * msk - added /google switch
 * setiq - cosmetic change
 * wfb - standardized layout
+* so - now name / chairman / department / APE searches possible
 
 Enhancements
 
