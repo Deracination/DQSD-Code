@@ -1,14 +1,22 @@
 <search function="gg">
   <name>Google</name>
   <description>
-    Google is reputed to be the web's fastest search engine.<br/>
+    Google is reputed to be the web's fastest and most versatile search engine.<br/>
     <a class="helpboxDescLabels">Switches:</a><br/>
   	<table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">/advanced</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Use the Google Advanced Search page.</td></tr>
+  		<tr><td class="helpboxDescColumns">/groups</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Search Google's newsgroup archive.</td></tr>
   		<tr><td class="helpboxDescColumns">/directory</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Search Google's copy of the DMOZ open directory.</td></tr>
   		<tr><td class="helpboxDescColumns">/images</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Search for images.</td></tr>
+      <tr><td class="helpboxDescColumns">/cache</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Given a URL, loads Google's cached copy of the web page.</td></tr>
       <tr><td class="helpboxDescColumns">/related</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Given a URL, finds other sites closely related.</td></tr>
       <tr><td class="helpboxDescColumns">/link</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Given a URL, finds other sites that link to it.</td></tr>
-      <tr><td class="helpboxDescColumns">/cache</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Given a URL, loads Google's cached copy of the web page.</td></tr>
+    </table>
+    <a class="helpboxDescLabels">Locals:</a><br/>
+  	<table class="helpBoxDescTable">
+      <tr><td class="helpboxDescColumns">/local</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">If a local has been specified, this switch limits search results to that local.</td></tr>
+      <tr><td class="helpboxDescColumns">/uk</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Use the localized United Kingdom version of Google.</td></tr>
+      <tr><td class="helpboxDescColumns">/canada</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Use the localized Canadian version of Google.</td></tr>
   	</table>
     <a class="helpboxDescLabels">Examples:</a><br/>
     <table class="helpBoxDescTable">
@@ -17,57 +25,111 @@
   </description>
   <category>Search the Web</category>
   <link>http://www.google.com/</link>
-  <contributor>David Bau, Ryan Edwards</contributor>
+  <contributor>Ryan Edwards, David Bau</contributor>
   
   <form name="ggf"
         action="http://www.google.com/search"
         method="get">
     <input type="hidden" name="cat" value=""/>
+    <input type="hidden" name="meta" value=""/>
     <input type="hidden" name="q"/>
   </form>
   
-  <form name="imagef"
+  <form name="ggf_adv"
+        action="http://www.google.com/advanced_search"
+        method="get">
+    <input type="hidden" name="q"/>
+  </form>
+  
+  <form name="ggf_image"
         action="http://images.google.com/images"
         method="get">
     <input type="hidden" name="q"/>
+    <input type="hidden" name="meta" value=""/>
+  </form>
+  
+  <form name="ggf_news"
+        action="http://groups.google.com/groups"
+        method="get">
+    <input type="hidden" name="q"/>
+    <input type="hidden" name="meta" value=""/>
   </form>
   
   <script><![CDATA[
     function gg(q)
     {
-      var args = parseArgs(q, "images, directory, related, cache, link, groups");
-      if( args.q == "" )
-      {
-      	if ( args.switches.length > 0 )
-          switch( args.switches[0].name )
+      var args = parseArgs(q, "advanced, images, directory, related, cache, link, groups, uk, canada, local");
+      var mode, local, local_meta = "", local_tld = "com";
+      
+      // Establish the local and mode the search will run in.
+      if( args.switches.length > 0 )
+        for( var j=0; j<args.switches.length; j++ )
+          switch( args.switches[j].name )
           {
-            case "images": openSearchWindow("http://images.google.com/"); return;
-            case "directory": openSearchWindow("http://images.google.com/dirhp"); return;
-            case "groups": openSearchWindow("http://www.google.com/grphp"); return;
+            case "uk": local_tld = "co.uk"; local_meta = "cr=countryUK|countryGB"; break;
+            case "canada": local_tld = "ca"; local_meta = "cr=countryCA"; break;
+            
+            case "local": local = true; break;
+            
+            default:
+              if(mode) { 
+                nullArgs("gg","?"); return false; } 
+              else
+                mode = args.switches[j].name;
+              break;
           }
-        openSearchWindow("http://www.google.com/");
+      
+      // Change the form data to use the correct local
+      document.ggf.action = "http://www.google." + local_tld + "/search";
+      document.ggf_adv.action = "http://www.google." + local_tld + "/advanced_search";
+      document.ggf_image.action = "http://images.google." + local_tld + "/images";
+      document.ggf_news.action = "http://groups.google." + local_tld + "/groups";
+      
+      // If the user specified to search localized content only, restrict it now.
+      if(local)
+      {
+        document.ggf.meta.value = local_meta;
+        document.ggf_image.meta.value = local_meta;
+        document.ggf_news.meta.value = local_meta;
       }
+      else
+        document.ggf.meta.value = document.ggf_image.meta.value = document.ggf_news.meta.value = "";
+      
+      // No parameters, so go to the appropriate web page.
+      if( args.q == "" )
+        switch( mode )
+        {
+          case "advanced": openSearchWindow("http://www.google." + local_tld + "/advanced_search"); return;
+          case "images": openSearchWindow("http://images.google." + local_tld); return;
+          case "directory": openSearchWindow("http://images.google." + local_tld + "/dirhp"); return;
+          case "groups": openSearchWindow("http://www.google." + local_tld + "/grphp"); return;
+          default: openSearchWindow("http://www.google." + local_tld); return;
+        }
+        
+      // Show the help pop-up
       else if( args.q == "?" )
         nullArgs("gg","?");
-        
-      else if( args.switches.length == 1 )
+      
+      else if( mode )
       {
-        if( (args.switches[0].name == "releated" || args.switches[0].name == "cache" || args.switches[0].name == "link" ) && !isURL(args.q) )
+        // Perform a validity check on the specified switch
+        if((mode == "related" || mode == "cache" || mode == "link") && !isURL(args.q)) {
+          nullArgs("gg","?"); return false; }
+        
+        switch( mode )
         {
-          nullArgs("gg","?");
-          return false;
-        }
-          
-        switch( args.switches[0].name )
-        {
+          case "advanced":
+            document.ggf_adv.q.value = args.q;
+            submitForm(ggf_adv);
+            break;
           case "directory":
             document.ggf.q.value = args.q;
             document.ggf.cat.value = "gwd/Top";
             submitForm(ggf);
             break;
           case "images":
-            document.imagef.q.value = args.q;
-            submitForm(imagef);
+            document.ggf_image.q.value = args.q;
+            submitForm(ggf_image);
             break;
           case "related":
             document.ggf.q.value="related:" + args.q;
@@ -80,6 +142,10 @@
           case "link":
             document.ggf.q.value="link:" + args.q;
             submitForm(ggf);
+            break;
+          case "groups":
+            document.ggf_news.q.value = args.q;
+            submitForm(ggf_news);
             break;
         }
       }
