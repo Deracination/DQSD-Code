@@ -5,7 +5,7 @@
   	the search text box with the function name: "qsfind phone number"
   </description>
   <contributor>Neel Doshi</contributor>
-  <category>Quick Search Administration</category>
+  <category>Functions</category>
   <script><![CDATA[
     function qsfind(q)
     {
