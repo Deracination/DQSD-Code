@@ -1,43 +1,74 @@
 <search function="chap">
-  <name>Chapters|Indigo</name>
+  <name>Chapters</name>
+  <category>Shopping</category>
+  <contributor>Sarah Sweeney</contributor>
+  <link>http://www.chapters.indigo.ca/search/default.asp</link>
+  <email>poohbear@designshift.com</email>
   <description>
-    Search books, videos, DVDs at Chapters.Indigo.ca.<br/>
-    <div class="helpboxDescLabels">Example:</div>
+     Search books, videos, DVDs at Chapters.Indigo.ca. Switches:<br/>
     <table class="helpboxDescTable">
-      <tr><td>chap Ender's Game</td></tr>
+      <tr><td>/Books</td><td> - </td><td>Books</td></tr>
+      <tr><td>/DVD</td><td> - </td><td>DVDs</td></tr>
+      <tr><td>/Video</td><td> - </td><td>VHS Videos</td></tr>
+      <tr><td>/Gifts</td><td> - </td><td>Gifts</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>chap ender's game</td></tr>
+      <tr><td>chap the matrix /dvd</td></tr>
     </table>
   </description>
-  <category>Shopping</category>
-  <link>http://chapters.indigo.ca/</link>
-  <contributor>Sarah Sweeney</contributor>
-  <email>sarah@designshift.com</email>
-  <form name="chaptersform"
-        action="http://chapters.indigo.ca/search/default.asp"
-        method="post">
+  <form name="chapf"
+        method="post"
+        action="http://www.chapters.indigo.ca/search/default.asp?Section=home&amp;Lang=en&amp;mscssid=4T526RGNNLHT8JWXBS1AP6B17WGEDLK7&amp;WSID=1101A8E64229AA0F435795D4AEA3AC3A5A2A2620">
     <input type="hidden" name="Search_Method" value="QuickSearch" />
     <input type="hidden" name="Search_Phrase_QuickSearch" />
     <input type="hidden" name="Search_Modifier_QuickSearch" value="QuickSearch" />
-    <input type="hidden" name="Search_Catalog" value="Books,Video,DVD" />
+    <input type="hidden" name="Search_Catalog" value="Books" />
   </form>
   <script><![CDATA[
-    function chap(q, switches)
-    { 
+    function chap(q)
+    {
       if( nullArgs("chap", q) )
-        return false;
+        return;
 
-      if( q == "" )
-        openSearchWindow("http://chapters.indigo.ca/");
-      else
+      var args = parseArgs(q, "books, dvd, video, gifts, all");
+      if ( args.switches.length > 0 )
       {
-        document.chaptersform["Search_Phrase_QuickSearch"].value = q;
-        submitForm(chaptersform);
+        switch( args.switches[0].name )
+        {
+          case "books":
+            document.chapf.Search_Catalog.value = "Books";
+            break;
+          case "dvd":
+            document.chapf.Search_Catalog.value = "DVD";
+            break;
+          case "video":
+            document.chapf.Search_Catalog.value = "Video";
+            break;
+          case "gifts":
+            document.chapf.Search_Catalog.value = "Gifts";
+            break;
+          case "all":
+            document.chapf.Search_Catalog.value = "Books,Video,DVD,Gifts";
+            break;
+          default:
+            document.chapf.Search_Catalog.value = "Books";
+            break;
+        }
       }
+      document.chapf.Search_Phrase_QuickSearch.value = args.q;
+
+      submitForm(chapf);
     }
   ]]></script>
-
   <copyright>
-	Copyright (c) 2002 David Bau
-	Distributed under the terms of the
-	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
   </copyright>
+  <created_by>
+    This search file was initially created on 01/20/03 at 12:42:17
+    by Dave's Quick Search Deskbar Search Wizard version 1.0.1 ,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
 </search>
