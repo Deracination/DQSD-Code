@@ -3,6 +3,7 @@
 Enhancements
 
 * Moved txp search to computers->reference subcategory.  Added a usage example.
+* Added windowOpenFeatures that can be set in local preferences to further customize the search windows that open up (from anonymous poster via Brent Beardsley)
 
 New Searches
 
