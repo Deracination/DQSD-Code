@@ -1,5 +1,11 @@
-    var genealogy_debug = 0;
-    var genealogy_lib_version = "1.7";
+/**********************************************************************************
+Genealogy Javascript Library for Genealogy Add-on for Dave's Quick Search Desk Bar
+Copyright (c) 2002 Brent Beardsley
+Distributed under the terms of the GNU Lesser General Public License Version 2.1 at
+(http://www.gnu.org/licenses/lgpl.txt)
+**********************************************************************************/
+	var genealogy_debug = 0;
+    var genealogy_lib_version = "1.8";
 
 	var genealogy_month_names = new Array("JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER");
 	var genealogy_date_format_1 = "([0-9]{1,2})\\s*(?:/|-)\\s*([0-9]{1,2})\\s*(?:/|-)\\s*([0-9]{4})";
