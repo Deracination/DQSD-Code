@@ -1,3 +1,9 @@
+-- What's new for 3.1.4.4 beta (October 24, 2002)
+
+Bug Fixes
+
+* Popup menu fix - 'Configure' was showing up in the list of search categories
+
 -- What's new for 3.1.4.3 beta (October 23, 2002)
 
 New aliases
