@@ -92,13 +92,18 @@ function mycal(dat)
   openNamedSearchWindow("http://www.mycalendar.com/?act=thisday&curdate=" + (dobj.getMonth() + 1) + "/" + dobj.getDate() + "/" + yy, "dqsdcal");
 }
 
-
 function evcal(dat)
 {
   var dobj = new Date(dat);
   var yy = dobj.getYear();
   if (yy < 100) yy += 1900;
   openNamedSearchWindow("http://www.evite.com/welcome?date=" + (dobj.getMonth() + 1) + "%2F" + dobj.getDate() + "%2F" + yy, "dqsdcal");
+}
+
+function outlook(dat)
+{
+  // TODO - find out how to open at a particular date
+  openDocument("outlook:calendar");
 }
 
 //vars used by the calendar script

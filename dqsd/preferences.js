@@ -173,6 +173,7 @@ calStart=0;
 *  nsccal - Netscape Calendar
 *  mycal  - MyCalendar.com
 *  evcal  - Evite.com
+*  outlook - MS Outlook default calendar
 */
 defaultcal="yhocal";
 
