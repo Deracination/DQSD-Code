@@ -31,6 +31,10 @@ Section "Quick Search Deskbar (required)"
 
   ; Set output path to the installation directory.
   SetOutPath $INSTDIR
+  
+  MessageBox MB_YESNO|MB_ICONINFORMATION|MB_DEFBUTTON2 "This will install Dave's Quick Search Deskbar.  Would you like to continue?" IDYES userconfirmedinstall
+  Abort
+  userconfirmedinstall:
 
   ; Old versions to delete
   UnRegDLL $INSTDIR\DQSDTools.dll
