@@ -1,6 +1,13 @@
 <search function="tw">
   <name>TechWeb Encyclopedia</name>
-  <description>TechEncyclopedia More than 20,000 IT terms : "tw xpath"</description>
+  <description>TechEncyclopedia More than 20,000 IT terms
+  <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+      <tr>
+        <td>tw xpath</td>
+      </tr>
+    </table>
+  </description>
   <category>Computers</category>
   <link>http://www.techweb.com/encyclopedia/</link>
   <contributor>Tom Corcoran</contributor>

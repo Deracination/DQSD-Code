@@ -1,8 +1,8 @@
 <search function="uktv">
   <name>UK TV Guide</name>
-  <description>UK Television guide - for today's channel 4 listing : "uktv 4"<br />
-    Sample channels :
-      <table style="margin-left: 20px" cellpadding="0" cellspacing="0" border="0">
+  <description>UK Television guide
+  <div class="helpboxDescLabels">Examples:</div>
+      <table class="helpboxDescTable">
       <tr><td width="100px">bbc 1</td><td>            uktv 1</td></tr>
       <tr><td>bbc 2</td><td>            uktv 2</td></tr>
       <tr><td>itv1</td><td>             uktv 3</td></tr>
