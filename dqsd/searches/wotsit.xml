@@ -7,7 +7,7 @@
       <tr><td>wotsit dbf</td></tr>
     </table>
   </description>
-  <category>Computers<category>Networking</category></category>
+  <category>Computers<category>Reference</category></category>
   <link>http://www.wotsit.org/</link>
   <contributor></contributor>
   
@@ -23,18 +23,8 @@
       if( nullArgs("wotsit", q) )
         return false;
 
-      var args = parseArgs(q, "all");
-      if( q == "" )
-        openSearchWindow("http://www.wotsit.org/");
-      else if( args.switches.length == 0 )
-      {
-        document.wotsitsearch.target.value = args.q;
-        submitForm(wotsitsearch); 
-      }
-      else
-      {
-        nullArgs("wotsit","?");
-      }
+      document.wotsitsearch.target.value = q;
+      submitForm(wotsitsearch); 
     }
   ]]></script>
 
