@@ -5,6 +5,7 @@ New Searches
 * fm - Freshmeat.net search from Brent Beardsley
 * sf - Sourceforget.net search from Brent Beardsley 
 * jdk - searches the Sun JDK
+* guiasp - Find maps and addresses in some cities of Brazil; from Andrew Francis
 
 Modified Searches
 
