@@ -11,6 +11,7 @@ Enhancements
 * Added a SPAN element to provide DQSD-based changes internal to the search, providing an alternate viewport. (Shawn K. Hall)
 * version.js now checks DQSD version asynchronously so as to not lock up explorer.exe (Kim Gräsman)
 * Added key-handlers for performing several google search-types in the style of the Google Deskbar (Shawn K. Hall)
+* Now builds installer with bz2-compression
 
 Bug Fixes
 
