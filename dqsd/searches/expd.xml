@@ -1,0 +1,64 @@
+<search function="expd">
+  <name>expedia.com</name>
+  <description>
+    Find the lowest roundtrip fares published by the airlines and when they are available.  
+    <br/><br/>
+    The easiest way to use this search is if you already know the airport codes for the airports from which you are traveling.  In that case simply type "expd ORG DES" where ORG and DES are the airport codes of your origin and destination, respectively.  If you wish to search for cities by name, seperate the cities with a semicolon; searching by city will often return several airport choices for each city.  You can also use the semicolon if you know one airport code but not the other.
+
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>expd ith sea</td></tr>
+  		<tr><td>expd new york; london</td></tr>
+                <tr><td>expd lhr; berlin</td></tr>
+    </table>
+  </description>
+  <category>Travel</category>
+  <link>http://www.expedia.com/</link>
+  <contributor>Allen B. MacKenzie</contributor>
+  
+  <form name="expdf"
+        action="http://www.expedia.com/pub/agent.dll"
+        method="post">
+    <input type="hidden" name="qscr" value="fpfl" />
+    <input type="hidden" name="flag" value="q" />
+    <input type="hidden" name="subm" value="" />
+    <input type="hidden" name="wsds" value="" />
+    <input type="hidden" name="trpt" value="2" />
+    <input type="hidden" name="frwd" value="0" />
+    <input type="hidden" name="pcit1" value="" />
+    <input type="hidden" name="city1" id="edCity1" value="" />
+    <input type="hidden" name="airp1" value="" />
+    <input type="hidden" name="pctd1" value="" />
+    <input type="hidden" name="citd1" id="edCitd1" value="" />
+    <input type="hidden" name="dair1" value="" />
+
+  </form>
+  
+  <script><![CDATA[
+    function expd(q)
+    {
+      if( nullArgs("expd", q) )
+        return false;
+
+      vars_semi = q.split(";")
+      if (vars_semi.length == 2)
+      {
+        document.expdf.city1.value = vars_semi[0];
+        document.expdf.citd1.value = vars_semi[1];
+        submitForm(expdf);
+      } else if (vars_semi.length = 1)
+      {
+        vars_space = q.split(" ")
+        if (vars_space.length == 2) {
+          document.expdf.city1.value = vars_space[0];
+          document.expdf.citd1.value = vars_space[1];
+          submitForm(expdf);
+        } else {
+          nullArgs("expd","?");
+        }
+      } else {
+        nullArgs("expd","?");
+      }
+    }
+  ]]></script>
+</search>

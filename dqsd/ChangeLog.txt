@@ -9,12 +9,14 @@ New Searches
 * dir - Get driving directions from one place to another (from Pete H).
 * wik - Wikipedia search (from Thad Kerosky)
 * nup - Nupedia (from Thad Kerosky)
+* exp - Expedia (from Allen B. MacKenzie)
 
 Modified Searches
 
 * ups - Tim Dierks fixed to zero out old search values from the form and 
         edit out non-alphanumerics (since value was used in eval, single 
         quotes could cause JS errors)
+* fv - Allen B. MacKenzie fixed a bug
 
 Enhancements
 

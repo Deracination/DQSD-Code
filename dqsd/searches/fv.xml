@@ -45,20 +45,15 @@
       if( nullArgs("fv", q) )
         return false;
 
-      if( q == "" )
-        openSearchWindow("http://www.flightview.com/");
-      else 
+      vars = q.split(" ")
+      if (vars.length == 2)
       {
-        vars = q.split(" ")
-        if (vars.length = 2)
-        {
-          document.fvf.AL.value = vars[0].toUpperCase();
-          document.fvf.acid.value= vars[1];
-          submitForm(fvf);
-        }
-        else
-          nullArgs("fv","?");
+        document.fvf.AL.value = vars[0].toUpperCase();
+        document.fvf.acid.value= vars[1];
+        submitForm(fvf);
       }
+      else
+        nullArgs("fv","?");
     }
   ]]></script>
 </search>
