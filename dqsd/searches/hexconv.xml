@@ -12,42 +12,28 @@
   
   <script><![CDATA[
     function decfromhex(num) 
-    {    
-      while (num.length < 4)
-        num = "0" + num;
-      return (eval(getnum(num.substring(3,4))) + eval(getnum(num.substring(2,3))) * 16 +eval(getnum(num.substring(1,2))) * 256 + eval(getnum(num.substring(0,1))) * 4096);
-    }
-
-    function getnum(letter)
-    {
-      if (letter <= "9")
-        return letter;
-      else
-      {      
-        if ((letter == "a") || (letter == "A"))
-          return 10;
-        if ((letter == "b") || (letter == "B"))
-          return 11;
-        if ((letter == "c") || (letter == "C"))
-          return 12;
-        if ((letter == "d") || (letter == "D"))
-          return 13;
-        if ((letter == "e") || (letter == "E"))
-          return 14;
-        if ((letter == "f") || (letter == "F"))
-          return 15;
-        return 0;    
-      }
+    {   
+      return eval('0x' + num);
     }
 
     function hexconv(c)
     {
       if( nullArgs("hexconv",c) )
         return false;
+
+	  var hex;
+      if(c.substr(0,2) == '0x')
+      { 
+        hex = c.substr(2);
+      }
+      else
+      {
+        hex = c;
+      }
     
-      var dec = decfromhex(c);
+      var dec = decfromhex(hex);
       var int = parseInt(dec);
-      setSearchWindowText("hex: "+c+
+      setSearchWindowText("hex: "+hex+
         "  dec: "+int.toString(10)+
         "  oct: "+int.toString(8)+
         "  bin: "+int.toString(2));
