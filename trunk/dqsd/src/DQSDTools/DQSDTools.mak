@@ -25,10 +25,6 @@ NULL=
 NULL=nul
 !ENDIF 
 
-CPP=cl.exe
-MTL=midl.exe
-RSC=rc.exe
-
 !IF  "$(CFG)" == "DQSDTools - Win32 Debug"
 
 OUTDIR=.\Debug
@@ -71,7 +67,42 @@ CLEAN :
 "$(OUTDIR)" :
     if not exist "$(OUTDIR)/$(NULL)" mkdir "$(OUTDIR)"
 
+CPP=cl.exe
 CPP_PROJ=/nologo /MLd /W4 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /FR"$(INTDIR)\\" /Fp"$(INTDIR)\DQSDTools.pch" /Yu"stdafx.h" /Fo"$(INTDIR)\\" /Fd"$(INTDIR)\\" /FD /GZ /c 
+
+.c{$(INTDIR)}.obj::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+.cpp{$(INTDIR)}.obj::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+.cxx{$(INTDIR)}.obj::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+.c{$(INTDIR)}.sbr::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+.cpp{$(INTDIR)}.sbr::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+.cxx{$(INTDIR)}.sbr::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+MTL=midl.exe
+MTL_PROJ=
+RSC=rc.exe
 RSC_PROJ=/l 0x409 /fo"$(INTDIR)\DQSDTools.res" /d "_DEBUG" 
 BSC32=bscmake.exe
 BSC32_FLAGS=/nologo /o"$(OUTDIR)\DQSDTools.bsc" 
@@ -158,7 +189,42 @@ CLEAN :
 "$(OUTDIR)" :
     if not exist "$(OUTDIR)/$(NULL)" mkdir "$(OUTDIR)"
 
+CPP=cl.exe
 CPP_PROJ=/nologo /ML /W4 /GX /O1 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /D "_ATL_STATIC_REGISTRY" /FR"$(INTDIR)\\" /Fp"$(INTDIR)\DQSDTools.pch" /Yu"stdafx.h" /Fo"$(INTDIR)\\" /Fd"$(INTDIR)\\" /FD /c 
+
+.c{$(INTDIR)}.obj::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+.cpp{$(INTDIR)}.obj::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+.cxx{$(INTDIR)}.obj::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+.c{$(INTDIR)}.sbr::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+.cpp{$(INTDIR)}.sbr::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+.cxx{$(INTDIR)}.sbr::
+   $(CPP) @<<
+   $(CPP_PROJ) $< 
+<<
+
+MTL=midl.exe
+MTL_PROJ=
+RSC=rc.exe
 RSC_PROJ=/l 0x409 /fo"$(INTDIR)\DQSDTools.res" /d "NDEBUG" 
 BSC32=bscmake.exe
 BSC32_FLAGS=/nologo /o"$(OUTDIR)\DQSDTools.bsc" 
@@ -208,37 +274,6 @@ SOURCE="$(InputPath)"
 
 !ENDIF 
 
-.c{$(INTDIR)}.obj::
-   $(CPP) @<<
-   $(CPP_PROJ) $< 
-<<
-
-.cpp{$(INTDIR)}.obj::
-   $(CPP) @<<
-   $(CPP_PROJ) $< 
-<<
-
-.cxx{$(INTDIR)}.obj::
-   $(CPP) @<<
-   $(CPP_PROJ) $< 
-<<
-
-.c{$(INTDIR)}.sbr::
-   $(CPP) @<<
-   $(CPP_PROJ) $< 
-<<
-
-.cpp{$(INTDIR)}.sbr::
-   $(CPP) @<<
-   $(CPP_PROJ) $< 
-<<
-
-.cxx{$(INTDIR)}.sbr::
-   $(CPP) @<<
-   $(CPP_PROJ) $< 
-<<
-
-MTL_PROJ=
 
 !IF "$(NO_EXTERNAL_DEPS)" != "1"
 !IF EXISTS("DQSDTools.dep")
@@ -256,6 +291,9 @@ SOURCE=.\DQSDTools.cpp
 
 
 SOURCE=.\DQSDTools.idl
+
+!IF  "$(CFG)" == "DQSDTools - Win32 Debug"
+
 MTL_SWITCHES=/tlb ".\DQSDTools.tlb" /h "DQSDTools.h" /iid "DQSDTools_i.c" /Oicf 
 
 ".\DQSDTools.tlb"	".\DQSDTools.h"	".\DQSDTools_i.c" : $(SOURCE) "$(INTDIR)"
@@ -263,6 +301,18 @@ MTL_SWITCHES=/tlb ".\DQSDTools.tlb" /h "DQSDTools.h" /iid "DQSDTools_i.c" /Oicf
   $(MTL_SWITCHES) $(SOURCE)
 <<
 
+
+!ELSEIF  "$(CFG)" == "DQSDTools - Win32 Release MinDependency"
+
+MTL_SWITCHES=/tlb ".\DQSDTools.tlb" /h "DQSDTools.h" /iid "DQSDTools_i.c" /Oicf 
+
+".\DQSDTools.tlb"	".\DQSDTools.h"	".\DQSDTools_i.c" : $(SOURCE) "$(INTDIR)"
+	$(MTL) @<<
+  $(MTL_SWITCHES) $(SOURCE)
+<<
+
+
+!ENDIF 
 
 SOURCE=.\DQSDTools.rc
 

@@ -87,17 +87,6 @@ BSC32=bscmake.exe
 LINK32=link.exe
 # ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:windows /dll /machine:I386
 # ADD LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shlwapi.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib wininet.lib imm32.lib /nologo /base:"0x4000000" /subsystem:windows /dll /machine:I386
-# Begin Custom Build - Performing registration
-OutDir=.\ReleaseMinDependency
-TargetPath=.\ReleaseMinDependency\DQSDTools.dll
-InputPath=.\ReleaseMinDependency\DQSDTools.dll
-SOURCE="$(InputPath)"
-
-"$(OutDir)\regsvr32.trg" : $(SOURCE) "$(INTDIR)" "$(OUTDIR)"
-	regsvr32 /s /c "$(TargetPath)" 
-	echo regsvr32 exec. time > "$(OutDir)\regsvr32.trg" 
-	
-# End Custom Build
 
 !ENDIF 
 

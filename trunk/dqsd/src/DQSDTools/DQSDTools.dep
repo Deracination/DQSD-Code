@@ -3,7 +3,9 @@
 .\DQSDTools.cpp : \
 	".\DQSDTools.h"\
 	".\DQSDTools_i.c"\
+	".\KeyboardHook.h"\
 	".\Launcher.h"\
+	".\MenuBuilder.h"\
 	
 
 .\DQSDTools.rc : \
@@ -15,22 +17,39 @@
 .\KeyboardHook.cpp : \
 	".\DQSDTools.h"\
 	".\KeyboardHook.h"\
-	".\StdAfx.h"\
+	".\Launcher.h"\
+	".\Utilities.h"\
 	
 
 .\Launcher.cpp : \
 	".\DQSDTools.h"\
+	".\KeyboardHook.h"\
 	".\Launcher.h"\
 	".\Utilities.h"\
+	"c:\program files\microsoft sdk\include\shobjidl.h"\
 	
 
 .\MenuBuilder.cpp : \
 	".\DQSDTools.h"\
 	".\MenuBuilder.h"\
-	".\StdAfx.h"\
+	".\Utilities.h"\
 	
 
 .\StdAfx.cpp : \
-	"..\..\..\..\..\..\program files\microsoft visual studio\vc98\include\basetsd.h"\
 	".\StdAfx.h"\
+	".\Utilities.h"\
+	"c:\program files\microsoft sdk\include\basetsd.h"\
+	"c:\program files\microsoft sdk\include\dimm.h"\
+	"c:\program files\microsoft sdk\include\guiddef.h"\
+	"c:\program files\microsoft sdk\include\propidl.h"\
+	"c:\program files\microsoft sdk\include\reason.h"\
+	"c:\program files\microsoft sdk\include\shldisp.h"\
+	"c:\program files\microsoft sdk\include\shtypes.h"\
+	"c:\program files\microsoft sdk\include\stralign.h"\
+	"c:\program files\microsoft sdk\include\tvout.h"\
+	"c:\program files\microsoft sdk\include\winefs.h"\
+	
+
+.\Utilities.cpp : \
+	".\Utilities.h"\
 	
