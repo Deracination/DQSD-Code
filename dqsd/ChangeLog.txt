@@ -34,6 +34,7 @@ Modified Searches
 * msda - Added a required form value (S2) in msda.xml. Searches failed without it - seems like a ListServ upgrade (Kim Gräsman)
 * msda - Added /dcom switch for searching the DCOM list as well (Kim Gräsman)
 * alarm - "minutes from now" option, several bugs fixed (Ben Williams)
+* js - one can set the number of working days (Tom Corcoran)
 
 Removed Searches
 
