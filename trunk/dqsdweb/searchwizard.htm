@@ -24,12 +24,12 @@ img { margin: 5px }
 <hr size="1">
 
 <div align="center">
-<b><a href="http://sourceforge.net/project/showfiles.php?group_id=42081&release_id=106391">Download version 0.5 now!</a></b>
- (<a href="http://sourceforge.net/project/shownotes.php?release_id=106391">What's New</a>)</div>
+<b><a href="http://sourceforge.net/project/showfiles.php?group_id=42081&release_id=108860">Download version 0.6!</a></b><br/>released 4-Sep-2002<br/>
+ (<a href="http://sourceforge.net/project/shownotes.php?release_id=108860">What's New</a>)</div>
 
 <p>
 One of biggest pains when writing a new DQSD search is massaging the correct HTML FORM into well-formed XML.&nbsp;&nbsp;I finally got annoyed enough to
-write a little utility to do some of the work for me.&nbsp;&nbsp;I call it <b><a href="http://sourceforge.net/project/showfiles.php?group_id=42081&release_id=104770">Dave's Quick Search Deskbar Search Wizard</a></b>.
+write a little utility to do some of the work for me.&nbsp;&nbsp;I call it <b><a href="http://sourceforge.net/project/showfiles.php?group_id=42081&release_id=108860">Dave's Quick Search Deskbar Search Wizard</a></b>.
 <center>
 <img src="hatwand.jpg">
 </center>
@@ -93,12 +93,9 @@ The resulting XML file search file will look something like <a href="#searchxml"
 <search function="msnbc">
   <COMMENT>
 
-    This search file was initially created by Dave's Quick Search Deskbar
-    Search Wizard version 0.4 (beta) on 08/12/02 at 23:09:04
-
     Even though this XML search will probably load and is a healthy start
     toward a completed search, please be aware that this search will probably
-    not work as is and will require some human inspection and modification.
+    not work as is and will require some human tweaks.
 
   </COMMENT>
   <name>MSNBC</name>
@@ -111,7 +108,7 @@ The resulting XML file search file will look something like <a href="#searchxml"
   </description>
   <form name="msnbcf"
         method="post"
-        action="http://www.msnbc.com/modules/bom/findlog.asp">
+        action="http//www.msnbc.com/modules/bom/findlog.asp">
 
     <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
 
@@ -123,12 +120,6 @@ The resulting XML file search file will look something like <a href="#searchxml"
       if( nullArgs("msnbc", q) )
         return;
 
-      if( q == "" )
-      {
-        openSearchWindow("http://www.msnbc.com/");
-        return;
-      }
-
       // FORM variables for msnbcf
 
       // The wizard assigned the search string to this form field value because
@@ -139,6 +130,15 @@ The resulting XML file search file will look something like <a href="#searchxml"
       submitForm(msnbcf);
     }
   ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created by on 09/04/02 at 10:13:03
+    Dave's Quick Search Deskbar Search Wizard version 0.6 (beta),
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
 </search>
 </xmp>
 </div>
@@ -156,12 +156,9 @@ The 'parseArgs' utility method has become the convention for parsing switches fo
 <search function="msnbc">
   <COMMENT>
 
-    This search file was initially created by Dave's Quick Search Deskbar
-    Search Wizard version 0.4 (beta) on 08/12/02 at 23:38:36
-
     Even though this XML search will probably load and is a healthy start
     toward a completed search, please be aware that this search will probably
-    not work as is and will require some human inspection and modification.
+    not work as is and will require some human tweaks.
 
   </COMMENT>
   <name>MSNBC</name>
@@ -174,7 +171,7 @@ The 'parseArgs' utility method has become the convention for parsing switches fo
   </description>
   <form name="msnbcf"
         method="post"
-        action="http://www.msnbc.com/modules/bom/findlog.asp">
+        action="http//www.msnbc.com/modules/bom/findlog.asp">
 
     <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
 
@@ -185,12 +182,6 @@ The 'parseArgs' utility method has become the convention for parsing switches fo
     {
       if( nullArgs("msnbc", q) )
         return;
-
-      if( q == "" )
-      {
-        openSearchWindow("http://www.msnbc.com/");
-        return;
-      }
 </xmp><xmp style="color: red">
       // Parse switches with parseArgs:
 
@@ -234,6 +225,15 @@ The 'parseArgs' utility method has become the convention for parsing switches fo
       submitForm(msnbcf);
     }
   ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created by on 09/04/02 at 10:14:22
+    Dave's Quick Search Deskbar Search Wizard version 0.6 (beta),
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
 </search>
 </xmp>
 </div>
