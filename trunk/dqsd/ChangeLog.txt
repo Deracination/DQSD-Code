@@ -1,4 +1,4 @@
--- What's new for x.x.x (date xxxxxxxx)
+-- What's new for 3.1.8 (date 2003-12-02)
 
 Enhancements
 
