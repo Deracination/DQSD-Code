@@ -296,7 +296,7 @@
               case "catswithhands": imgtitle="Cats With Hands";site="ucomics";imgkey="tmcat";break;
               case "cleats": imgtitle="Cleats";site="ucomics";imgkey="cle";break;
               case "closetohome": imgtitle="Close to Home";site="ucomics";imgkey="cl";break;
-              case "cornered": imgtitle="Cornered";site="ucomics";imgkey="co";uc;break;
+              case "cornered": imgtitle="Cornered";site="ucomics";imgkey="co";break;
               case "dicktracy": imgtitle="Dick Tracy";site="ucomics";imgkey="tmdic";break;
               case "doonesbury": imgtitle="Doonesbury";site="ucomics";imgkey="db";break;
               case "duplex": imgtitle="Duplex";site="ucomics";imgkey="dp";break;
