@@ -2,7 +2,7 @@
 *
 *  In order to avoid losing configuration changes during upgrades
 *  the preferred way to make changes is to redefine the variable in
-*  your localprefs file (defaulted to localpreferences.js).  If this file
+*  your localprefs file (defaulted to localprefs.js).  If this file
 *  does not exist, you should create it.
 *
 *  After you've saved your changes, enter "!" in the deskbar
@@ -13,11 +13,11 @@
 *  settings.  They will not be replaced during upgrade installations.
 *
 *  Defaults:
-*  localeventsfileurl	=	"localevents.xml"
-*  localsearchurl		=	"localsearch.xml"
-*  localaliases			=	"localaliases.txt"
-*  localstylesurl		=	"localsearch.css"
-*  localprefs			=	"localprefs.js"
+*  localeventsfileurl = "localevents.xml"
+*  localsearchurl     = "localsearch.xml"
+*  localaliases       = "localaliases.txt"
+*  localstylesurl     = "localsearch.css"
+*  localprefs         = "localprefs.js"
 *
 *  NOTE:
 *  localeventsfileurl - the format of this file is just like a standard events file (holidays.us.xml)
@@ -26,11 +26,11 @@
 *  localstylesurl - this is a standard cascading stylesheet
 *  localprefs - this is a standard javascript source file
 */
-localeventsfileurl	=	"localevents.xml";		// local events to be added to the calendar
-localsearchurl		=	"localsearch.xml"; 		// local search file
-localaliases		=	"localaliases.txt";		// local aliases file
-localstylesurl		=	"localsearch.css";		// local stylsheet (to overwrite defaults in search.css)
-localprefs			=	"localprefs.js";		// local preferences (to overwrite defaults in this file)
+localeventsfileurl = "localevents.xml";   // local events to be added to the calendar
+localsearchurl     = "localsearch.xml";   // local search file
+localaliases       = "localaliases.txt";  // local aliases file
+localstylesurl     = "localsearch.css";   // local stylsheet (to overwrite defaults in search.css)
+localprefs         = "localprefs.js";     // local preferences (to overwrite defaults in this file)
 
 
 /* Personalization variables
@@ -39,9 +39,9 @@ localprefs			=	"localprefs.js";		// local preferences (to overwrite defaults in 
 */
 /*
 user_address = "1600 Pennsylvania Ave"
-user_city = "Washington"
-user_state = "DC"
-user_zip = "20509"
+user_city    = "Washington"
+user_state   = "DC"
+user_zip     = "20509"
 */
 
 /* Display the clock?

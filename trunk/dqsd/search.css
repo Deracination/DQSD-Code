@@ -1,0 +1,288 @@
+/*
+ * DQSD Stylesheet
+ * added by Neel Doshi (neel_doshi@hotmail.com) 3/31/2002
+ * modified by Neel Doshi (neel_doshi@hotmail.com) 4/03/2002
+ * $Revision$
+ * $Date$
+ *
+ * TODO:
+ * - Check each individual style to make sure this is the minium requrired set of instructions.
+*/
+
+/*
+Styles for the search field
+*/
+body
+{
+ margin: 0px;
+ border: 0;
+ padding: 0;
+ background-color: threedface;
+}
+td
+{
+ font: menu;
+}
+.txtfld, .clock
+{
+ font : menu;
+ background-color: window;
+ color: windowtext;
+ border-style: inset;
+ border-width:1px;
+ padding-top:2px;
+ padding-left:2px;
+ padding-right:2px;
+ padding-bottom:3px;
+ margin:0px;
+ position:absolute;
+ overflow:hidden;
+ word-break:break-all;
+}
+.clock
+{
+ background-color: menu;
+ color: windowtext;
+ cursor:hand;
+ text-align:right;
+}
+.gobutton, .mogobutton, .mdgobutton
+{
+ font : menu;
+ padding-bottom:1px;
+ padding-top:1px;
+ padding-right:1px;
+ padding-left:1px;
+ border:2px;
+ border-style:solid;
+ border-color:threedface;
+ background-color:threedface;
+ color:buttontext;
+ margin:0px;
+ position:absolute;
+}
+.mogobutton
+{
+ border-style:outset;
+ border-color:window;
+}
+.mdgobutton
+{
+ padding-bottom:0px;
+ padding-top:2px;
+ padding-right:0px;
+ padding-left:2px;
+ border-style:inset;
+ border-color:window;
+}
+
+/*
+Styles for the calendar
+*/
+
+.cal
+{
+  border:2px;
+  border-style:outset;
+}
+.calnavmonth, .calnavmonthhigh, .calnavyear, .calnavyearhigh
+{
+  font-weight:bold;
+  border-width:1;
+  border-style:solid;
+  border-color:menu;
+  color:red;
+}
+.calnavyear, .calnavyearhigh
+{
+  color:firebrick;
+}
+.calmonth, .calmonthhigh
+{
+  font-weight:bold;
+}
+.caleventday, .caleventdayhigh
+{
+  color:red;
+}
+.caltodayevent, .caltodayeventhigh
+{
+  color:red;
+  background-color:window;
+  font-weight:bold;
+  border-width:1;
+  border-style:solid;
+  border-color:threedshadow;
+}
+.caltoday, .caltodayhigh
+{
+  background-color:window;
+  font-weight:bold;
+  border-width:1;
+  border-style:solid;
+  border-color:threedshadow;
+}
+.calgray, .calgrayhigh
+{
+  color:graytext;
+}
+.caldow
+{
+  text-align:center;
+}
+.calmonth, .calnavmonth, .calnavyear, .calday, .caleventday, .caltodayevent, .caltoday, .calgray
+{
+  text-align:center;
+  cursor:hand;
+}
+.calmonthhigh, .calnavmonthhigh, .calnavyearhigh, .caldayhigh, .caleventdayhigh, .caltodayeventhigh, .caltodayhigh, .calgrayhigh
+{
+  cursor:hand;
+  background-color:highlight;
+  color:highlighttext;
+  text-align:center;
+}
+.calmonth
+{
+  cursor:default;
+}
+
+/*
+Styles for the menu
+*/
+.menuCommands
+{
+  padding-left:20px;
+}
+.menuAlias
+{
+  padding-left:10px;
+  padding-right:10px;
+  color:red;
+}
+.menuRow, .menuRowHigh
+{
+  height:18px;
+  background-color:menu;
+  color:menutext;
+  cursor:hand;
+}
+.menuRowHigh
+{
+  background-color:highlight;
+  color:highlighttext;
+}
+.menuSeparator
+{
+  height:1px;
+  padding-top:0px;
+  padding-bottom:0px;
+  padding-left:4px;
+  padding-right:4px;
+}
+.menuHR
+{
+  height:2px;
+}
+
+/*
+Styles for the help box
+*/
+
+.helpboxCategoryExpander, .helpboxCategoryExpanderSign
+{
+  behavior: url(categoryExpander.htc);
+}
+.helpboxCategoryExpander, .helpboxCategoryExpanderSign,
+{
+  cursor:hand;
+  font-size: 9px;
+  font-weight:normal;
+  color: blue;
+}
+.helpboxCategoryExpanderSign
+{
+  color: silver;
+  font-family: "Courier New", Courier, monospace;
+}
+.helpboxCategory, .helpboxCategoryTop, .helpboxCategoryCount, .helpboxCategoryExpanderRow
+{
+  font:menu;
+  background-color:highlight;
+}
+.helpboxCategory
+{
+  font-weight:bold;
+  color:white;
+}
+.helpboxCategoryTop, .helpboxCategoryCount
+{
+  color:silver;
+}
+.helpboxAlias
+{
+  color:lightblue;
+}
+.helpboxCategoryTop, .helpboxCategoryCount
+{
+  font-size: 10px;
+  font-weight:normal;
+}
+.helpbox
+{
+  font:menu;
+}
+.helpboxDescriptions,
+{
+  font:menu;
+  background-color:window;
+  width:99%;
+}
+.helpboxCommands
+{
+  font:menu;
+  background-color:highlight;
+  color:white;
+}
+A.helpboxLink:ACTIVE, A.helpboxLink:LINK, A.helpboxLink:VISITED, A.helpboxLink:HOVER, .helpboxSearchName
+{
+  color:blue;
+}
+A.helpboxLinkTop:ACTIVE,  A.helpboxLinkTop:LINK, A.helpboxLinkTop:VISITED, A.helpboxLinkTop:HOVER
+{
+  color:silver;
+}
+A.helpboxLinkJump:ACTIVE,  A.helpboxLinkJump:LINK, A.helpboxLinkJump:VISITED, A.helpboxLinkJump:HOVER
+{
+  color:blue;
+}
+A.helpboxLinkTop:HOVER, A.helpboxLink:HOVER, A.helpboxLinkJump:HOVER
+{
+  color:red
+}
+
+/* STYLES FOR ORIGINAL HELP BOX :: Uncomment these styles to make the help box look like the original help box */
+/*
+.helpboxDescriptions
+{
+  background-color:lightgreen;
+}
+.helpboxCommands, .helpboxCategory, .helpboxCategoryTop, .helpboxCategoryCount, .helpboxCategoryExpanderRow
+{
+  background-color:skyblue;
+  color:black;
+}
+.helpboxAlias
+{
+  color:black;
+}
+A.helpboxLinkTop:ACTIVE,  A.helpboxLinkTop:LINK, A.helpboxLinkTop:VISITED, A.helpboxLinkTop:HOVER, .helpboxCategoryTop, .helpboxCategoryExpanderSign
+{
+  color:blue;
+}
+A.helpboxLinkTop:HOVER, A.helpboxLink:HOVER, A.helpboxLinkJump:HOVER
+{
+  color:red
+}
+*/
+/* END STYLES FOR ORIGINAL HELP BOX */
