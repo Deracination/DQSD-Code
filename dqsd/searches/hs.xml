@@ -1,87 +1,49 @@
-  <search function="hs">
-    <name>HotScripts.com Search</name>
-    <description>Search for code in a multitude of programming languages and a few code categories: "hs search string" Options include All languages /all, ASP /asp, C or C++ /c, Java /java, Javascript /js or /jscript or /javascript, PHP /php, Perl /pl, Python /py or /python, Tools and Utilities /tools or /utils, Remote Hosts /rh or /remhosts.. (language defaults to /all)</description>
-    <category>Computers</category>
-    <link>http://www.hotscripts.com/</link>
-    <contributor>Monty Scroggins</contributor>
-    <form name="hsf"
-       method="get"
-       action="http://www.hotscripts.com/search"
-       target="_blank">
-       <input type="hidden" name="query" value=""/>
-       <input type="hidden" name="category" value=""/>
-       <input type="hidden" name="bool" value="AND"/>
-    </form>
-    <script><![CDATA[
-      function hs(q)
+<search function="hs">
+  <name>HotScripts.com Search</name>
+  <description>Search for code in a multitude of programming languages. Searches all languages by default. Options include: ASP /asp, C or C++ /c, Java /java, Javascript /javascript, PHP /php, Perl /perl, Python /python, Tools and Utilities /tools or /utils, Remote Hosts /rh or /remotehosts, XML /xml.</description>
+  <category>Computers</category>
+  <link>http://www.hotscripts.com/</link>
+  <switches>asp, c, java, javascript, php, perl, python, tools, utils, rh, remotehosts, xml</switches>
+  <contributor>Monty Scroggins, Ryan Edwards</contributor>
+  <form name="hsf"
+        target="_blank"
+        action="http://www.hotscripts.com/search/"
+        method="get">
+    <input type="hidden" name="query"/>
+    <input type="hidden" name="category" value=""/>
+    <input type="hidden" name="bool" value="AND"/>
+  </form>
+  <script><![CDATA[
+    function hs(q, switches)
+    {
+      if( q == "" )
+        openSearchWindow("http://www.hotscripts.com/");
+      else if( switches.length == 1 )
       {
-        var suffix;
-        var result;
-        var category = "All Categories";  // Web Search
-        if (q == "")
-          openSearchWindow("http://www.hotscripts.com");
-        else
+        switch( switches[0] )
         {
-          // Check for / suffix, 
-          if (result = q.match(/^(.*)\/(\w+)/))
-          {
-            suffix = result[2];
-            q = result[1];
-            switch ( suffix.toLowerCase() )
-            {
-            case "asp":
-              category = "ASP";
-              break;
-            case "c":
-            case "c++":
-              category = "C";
-              break;
-            case "java":
-              category = "Java";
-              break;
-            case "js":
-            case "javascript":
-            case "jscript":
-              category = "JavaScript";
-              break;
-            case "php":
-              category = "PHP";
-              break;
-            case "pl":
-            case "perl":
-              category = "Perl";
-              break;
-            case "py":
-            case "python":
-              category = "Python";
-              break;
-            case "rh":
-            case "remhosts":
-              category = "Remote_Hosts";
-              break;
-            case "tools":
-            case "utils":
-              category = "Tools";
-              break;
-            case "xml":
-              category = "XML";
-              break;
-            case "all":
-              category = "all";
-              break;
-            default:
-              category = "all";  // All categories Search by default
-              break;
-            }
-          }
-          else
-          {
-            category = "all";
-          }
-          document.hsf.query.value=q;
-          document.hsf.category.value=category;
-          submitForm(hsf);
+          case "asp": document.hsf.category.value = "ASP"; break;
+          case "c": document.hsf.category.value = "C"; break;
+          case "java": document.hsf.category.value = "Java"; break;
+          case "javascript": document.hsf.category.value = "JavaScript"; break;
+          case "php": document.hsf.category.value = "PHP"; break;
+          case "perl": document.hsf.category.value = "Perl"; break;
+          case "python": document.hsf.category.value = "Python"; break;
+          case "rh": 
+          case "remotehosts": document.hsf.category.value = "Remote_Hosts"; break;
+          case "tools":
+          case "utils": document.hsf.category.value = "Tools"; break;
+          case "xml": document.hsf.category.value = "XML"; break;
         }
+        document.hsf.query.value = q;
+        submitForm(hsf);
       }
-    ]]></script>
-  </search>
+      else
+      {
+        document.hsf.category.value = "all";
+        document.hsf.query.value = q;
+        submitForm(hsf);
+      }
+    }
+  ]]></script>
+</search>
