@@ -23,7 +23,7 @@
           {
             document.areacode.Area.value=result[1];
           }
-          document.areacode.submit();
+          submitForm(areacode);
         }
       }
     ]]></script>

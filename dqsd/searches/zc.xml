@@ -30,7 +30,7 @@
           {
             document.zipcode.zip.value=result[1];
           }
-          document.zipcode.submit();
+          submitForm(zipcode);
         }
       }
     ]]></script>
