@@ -117,6 +117,8 @@ BEGIN
     IDS_ERR_NEEDFORMNAME    "FORM needs to have a valid NAME"
     IDS_BANNER              "<!--Searching...-->"
     IDS_ERR_UNAUTHCALLER    "DQSDTools.Launcher : unauthorized caller"
+    IDS_ERR_REGKEYNOTFOUND  "DQSDTools.Launcher : unable to open registry key"
+    IDS_ERR_FILENOTFOUND    "DQSDTools.Launcher : file not found"
 END
 
 #endif    // English (U.S.) resources

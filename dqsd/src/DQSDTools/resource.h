@@ -8,6 +8,8 @@
 #define IDS_ERR_NEEDFORMNAME            513
 #define IDS_BANNER                      514
 #define IDS_ERR_UNAUTHCALLER            515
+#define IDS_ERR_REGKEYNOTFOUND          516
+#define IDS_ERR_FILENOTFOUND            517
 
 // Next default values for new objects
 // 

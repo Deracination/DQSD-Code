@@ -2,10 +2,6 @@
 #ifndef __UTILITIES_B16F5720_3657_43ed_8D07_49F9347F85BA__
 #define __UTILITIES_B16F5720_3657_43ed_8D07_49F9347F85BA__
 
-#include <wininet.h>
-
-
-
 INTERNET_SCHEME GetScheme(LPCTSTR szURL)
 {
   TCHAR             buf[32];
