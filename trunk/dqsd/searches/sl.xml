@@ -1,0 +1,122 @@
+<search function="sl">
+  <name>StudyLight.org</name>
+  <category>Reference</category>
+  <contributor>Brent Beardsley</contributor>
+  <link>http://www.studylight.org/</link>
+  <email></email>
+  <description>
+    Search StudyLight.org bibles and lexicons
+    <div class="helpboxDescLabels">Bible versions:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/asv [default]</td><td> - </td><td>American Standard Version</td></tr>
+      <tr><td>/bbe</td><td> - </td><td>The Bible in Basic English</td></tr>
+      <tr><td>/cev</td><td> - </td><td>Contemporary English Version</td></tr>
+      <tr><td>/dby</td><td> - </td><td>The Darby Translation</td></tr>
+      <tr><td>/erv</td><td> - </td><td>Easy-to-Read Version</td></tr>
+      <tr><td>/gnt</td><td> - </td><td>Good News Translation</td></tr>
+      <tr><td>/gwd</td><td> - </td><td>GOD'S WORD Translation</td></tr>
+      <tr><td>/hcs</td><td> - </td><td>Christian Standard Bible</td></tr>
+      <tr><td>/hnv</td><td> - </td><td>Hebrew Names Version</td></tr>
+      <tr><td>/isv</td><td> - </td><td>International Standard Version</td></tr>
+      <tr><td>/jps</td><td> - </td><td>JPS Old Testament (1917)</td></tr>
+      <tr><td>/kjv</td><td> - </td><td>King James Version</td></tr>
+      <tr><td>/nas</td><td> - </td><td>New American Standard</td></tr>
+      <tr><td>/nkj</td><td> - </td><td>New King James Version</td></tr>
+      <tr><td>/nlt</td><td> - </td><td>New Living Translation</td></tr>
+      <tr><td>/nrs</td><td> - </td><td>New Revised Standard</td></tr>
+      <tr><td>/nsn</td><td> - </td><td>NAS with Strong's Numbers</td></tr>
+      <tr><td>/reb</td><td> - </td><td>The Emphasized Bible</td></tr>
+      <tr><td>/rhe</td><td> - </td><td>Douay-Rheims Bible</td></tr>
+      <tr><td>/rsv</td><td> - </td><td>Revised Standard Version</td></tr>
+      <tr><td>/str</td><td> - </td><td>KJV with Strong's Numbers</td></tr>
+      <tr><td>/tmb</td><td> - </td><td>Third Millennium Bible</td></tr>
+      <tr><td>/tyn</td><td> - </td><td>Tyndale New Testament (1525)</td></tr>
+      <tr><td>/wbt</td><td> - </td><td>The Webster Bible</td></tr>
+      <tr><td>/web</td><td> - </td><td>World English Bible</td></tr>
+      <tr><td>/wnt</td><td> - </td><td>Weymouth New Testament</td></tr>
+      <tr><td>/wyc</td><td> - </td><td>The Wycliffe Bible (1395)</td></tr>
+      <tr><td>/ylt</td><td> - </td><td>Young's Literal Translation</td></tr>
+      <tr><td>/vul</td><td> - </td><td>The Latin Vulgate (425)</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Lexicons:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/greek</td><td> - </td><td>New Testament Greek Lexicon</td></tr>
+      <tr><td>/hebrew</td><td> - </td><td>Old Testament Hebrew Lexicon</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>sl jn 3:16</td></tr>
+      <tr><td>sl matt 24 /str</td></tr>
+      <tr><td>sl acknowledge him</td></tr>
+      <tr><td>sl /greek trumpet</td></tr>
+      <tr><td>sl /greek 4536</td></tr>
+      <tr><td>sl /hebrew Sabbath</td></tr>
+      <tr><td>sl /hebrew 7673</td></tr>
+    </table>
+  </description>
+  <form name="slgreekf"
+        method="get"
+        action="http://www.studylight.org/lex/grk/search.cgi">
+    <input type="hidden" name="word" value="" />
+  </form>
+  <form name="slhebrewf"
+        method="get"
+        action="http://www.studylight.org/lex/heb/search.cgi">
+    <input type="hidden" name="word" value="" />
+  </form>
+  <form name="slbiblef"
+        method="get"
+        action="http://www.studylight.org/desk/">
+    <input type="hidden" name="query" value="" />
+    <input type="hidden" name="section" value="0" />
+    <input type="hidden" name="translation" value="asv" />
+    <input type="hidden" name="language" value="en" />
+  </form>
+
+  <script><![CDATA[
+    function sl(q)
+    {
+      if( nullArgs("sl", q) )
+        return;
+
+      var bibleVersion = "asv";
+
+      var bibleVersions = "asv, nas, nlt, cev, gnt, kjv, nkj, tmb, rsv, nrs, erv, rhe, str, nsn, reb, gwd, web, bbe, dby, hnv, wbt, ylt, vul, wyc, tyn, jps, hcs, isv, wnt";
+      var bibleVersionsList = bibleVersions.split(/[,;\s]/);
+      var args = parseArgs(q, bibleVersions + ", greek, hebrew");
+      if (args.switches.length > 0) {
+        for (var i = 0; i < args.switches.length; i++) {
+	  var switchName = args.switches[i].name.toLowerCase();
+	  if (switchName == "greek") {
+            document.slgreekf.word.value = args.q;
+            submitForm(slgreekf);
+	    return;
+	  } else if (switchName == "hebrew") {
+	    document.slhebrewf.word.value = args.q;
+            submitForm(slhebrewf);
+	    return;
+	  }
+	  var isBibleVersion = false;
+	  for (var j = 0; j < bibleVersionsList.length; j++) {
+	    if (switchName == bibleVersionsList[j]) {
+              isBibleVersion = true;
+              bibleVersion = switchName;
+              break;
+            }
+	  }
+	  if (!isBibleVersion) {
+            nullArgs("sl", "?");
+            return;
+	  }
+	}
+      }
+      document.slbiblef.query.value = args.q;
+      document.slbiblef.translation.value = bibleVersion;
+      submitForm(slbiblef);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>
