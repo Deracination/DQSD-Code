@@ -84,6 +84,18 @@
     	  xmlHttp.open("GET", searchUrl, false);
     	  xmlHttp.send();
 
+          // if we don't get a http status of 200 abort
+          if (xmlHttp.status != 200) {
+              throw new Error(0, "Search failed to be retrieved from the specified url.\nHTTP status: " + xmlHttp.status);
+		  }
+
+		  // validate that the contents starts with <search function=... and ends with </search>
+          var searchContent = xmlHttp.responseText;
+          var validContentsRegex = /^\s*\<search\s+functio.*?\>/m;
+          if (!validContentsRegex.test(searchContent)) {
+              throw new Error(0, "Search is not well-formed.\nIt should begin with a <search function=...>");
+          }
+
     		// Verify that response is well-formed
     		var xmlDom = xmlHttp.responseXml;
     	  if(xmlDom.parseError.errorCode != 0)
