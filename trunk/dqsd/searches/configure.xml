@@ -1,0 +1,36 @@
+<search function="configureDQSD">
+  <name>Configure DQSD</name>
+  <description>
+    Configure DQSD<br/>
+  </description>
+  <link></link>
+  <category nomenu="true">Configure</category>
+  <contributor>Brent Beardsley</contributor>
+
+  <script><![CDATA[
+	function editConfigFile(strFilename)
+	{
+		var myEditor = (typeof configureEditorExe != "undefined") ? configureEditorExe : "notepad";
+		var install_dir = ".";
+		if (ensureLauncher())
+		{
+			install_dir = DQSDLauncher.InstallationDirectory;
+		}
+		var cmd = "\""+myEditor+"\" "+install_dir+"\\"+strFilename;
+		openDocument(cmd);
+	}
+
+	function configureMenuHook(mb)
+	{
+		var confhmenu = mb.InsertSubMenu("Configure", 2);
+		mb.AppendMenuItem( "Local Aliases", "editConfigFile(\"localaliases.txt\")", "Edit local aliases", confhmenu);
+		mb.AppendMenuItem( "Local Preferences", "editConfigFile(\"localprefs.js\")", "Edit local preferences", confhmenu);
+		mb.AppendSeparator(confhmenu);
+		mb.AppendMenuItem( "System Aliases", "editConfigFile(\"aliases.txt\")", "Edit system aliases", confhmenu);
+		mb.AppendMenuItem( "System Preferences", "editConfigFile(\"preferences.js\")", "Edit system preferences", confhmenu);
+	}
+	
+	registerMenuHook(configureMenuHook);
+    ]]>
+  </script>
+</search>
