@@ -1,0 +1,96 @@
+<search function="fs">
+  <name>FindSounds sound files</name>
+  <category>Search the Web</category>
+  <contributor>Gregory Krohne</contributor>
+  <link>http://www.findsounds.com/</link>
+  <email>Gregory.Krohne@afrc.af.mil</email>
+  <description>
+  Search the Web for sounds
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>fs homer simpson</td></tr>
+      <tr><td>fs whale song</td></tr>
+    </table>
+  </description>
+  <form name="fsf"
+        method="post"
+        action="http://www.findsounds.com/ISAPI/search.dll">
+
+    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
+
+    <input type="hidden" name="keywords" value="" />
+    <input type="hidden" name="format" value="aiff" />
+    <input type="hidden" name="format" value="au" />
+    <input type="hidden" name="format" value="wave" />
+    <input type="hidden" name="channels" value="mono" />
+    <input type="hidden" name="channels" value="stereo" />
+    <input type="hidden" name="minres" value="8" />
+    <COMMENT>
+      The input element above, "minres", was a SELECT element with the following options...
+      <select name="minres">
+        <option value="8">8-bit</option>
+        <option value="16">16-bit</option>
+      </select>
+    </COMMENT>
+
+    <input type="hidden" name="minrate" value="8000" />
+    <COMMENT>
+      The input element above, "minrate", was a SELECT element with the following options...
+      <select name="minrate">
+        <option value="8000">8000 Hz</option>
+        <option value="11025">11025 Hz</option>
+        <option value="22050">22050 Hz</option>
+        <option value="44100">44100 Hz</option>
+      </select>
+    </COMMENT>
+
+    <input type="hidden" name="maxsize" value="2097152" />
+    <COMMENT>
+      The input element above, "maxsize", was a SELECT element with the following options...
+      <select name="maxsize">
+        <option value="2097152">2 MB</option>
+        <option value="1048576">1 MB</option>
+        <option value="524288">512k</option>
+        <option value="262144">256k</option>
+        <option value="131072">128k</option>
+        <option value="65536">64k</option>
+        <option value="32768">32k</option>
+        <option value="16384">16k</option>
+      </select>
+    </COMMENT>
+
+  </form>
+  <script><![CDATA[
+    function fs(q)
+    {
+      if( nullArgs("fs", q) )
+        return;
+
+      // FORM variables for fsf
+
+      // The wizard assigned the search string to this form field value because
+      // this field was the active element when the search file was generated.
+      // Change this to args.q if the search string is parsed with parseArgs.
+      document.fsf.keywords.value = q;
+      //document.fsf.format.value = "";
+      //document.fsf.format.value = "";
+      //document.fsf.format.value = "";
+      //document.fsf.channels.value = "";
+      //document.fsf.channels.value = "";
+      //document.fsf.minres.value = "";
+      //document.fsf.minrate.value = "";
+      //document.fsf.maxsize.value = "";
+
+      submitForm(fsf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 01/16/03 at 12:14:41
+    by Dave's Quick Search Deskbar Search Wizard version 1.0.1 ,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>
