@@ -61,6 +61,7 @@ New Searches
 * note.xml - Nifty quick note search (Peter Heath)
 * floax - 'mouser' interaction in the alternate viewport (read the help) (Shawn K. Hall)
 * mb - Search the online user-contributed MusicBrainz music database
+*fxnws - Search Fox News (John Bairen)
 
 Modified Searches
 * jdk - updated urls for j2ee and 1.4, added 1.5, 1.2, 1.1 and api switches (Brent Beardsley)
