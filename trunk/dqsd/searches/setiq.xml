@@ -59,7 +59,7 @@
   </form>
 
   <form name="setiqlf"
-        method="post">
+        method="get">
   </form>
 
 
@@ -126,7 +126,6 @@
           submitForm(document.setiqcf);
         }
 
-        //debugger;
         if( !( typeof args.switch_val["display"] == "undefined" || args.switch_val["display"] == "" ) )
         {
           //mmh... I use a form, but I'm sure it's overkill. How to change the location URL of the opened window?
