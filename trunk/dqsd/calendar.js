@@ -1,7 +1,30 @@
 /**
  * script to display a popup calendar
- * added by Sidney Chong (sidney@allomail.com) 12/12/2001
+ * added by Sidney Chong (sidney@gamebox.net) 12/12/2001
+ * modified by Sidney Chong (sidney@gamebox.net) 15/01/2002
+ *  - added display of events (eg holidays) specified
+ *    in a file referenced by the var 'eventsfileurl'
+ *
+ * TODO:
+ *  - add listing of public holidays in other countries
+ *  - add ability to define personal events
+ *  - add ability to distingush b/w different kind of events
+ *  - add ability to input events directly from search box
  */
+
+var ents = null;
+
+function loadeventslist()
+{
+  try
+  {
+    document.write("<xml id='eventslist' src='" + eventsfileurl + "'></xml>");
+    ents = document.all("eventslist").selectSingleNode("events");
+  }
+  catch (ex) {}
+}
+
+loadeventslist();
 
 function yhocal(dat)
 {
@@ -140,6 +163,34 @@ function buildcal()
   var TR_end = '</TR>';
   var day_start = '<TD width=14.2857% style="' + caldowstyle + '"><CENTER>';
   var day_end = '</CENTER></TD>';
+  function eventday_start(d, ttl)
+  {
+    return '<TD style="cursor:default;background-color:' + caleventdaybackground + ';' + caleventdaystyle + '" ' +
+           (defaultcal ? ' onmouseover=this.style.background="' + calhighbackground +
+               '";this.style.color="' + calhightext +
+               '"; onmouseout=this.style.background="' + caleventdaybackground +
+               '";this.style.color="' + caleventdaytext +
+               '" onmouseup=parent.opencal(' + d + ');' +
+               'this.style.background="' + caleventdaybackground +
+               '";this.style.color="' + caleventdaytext + '"' : '') +
+               ' title="' + ttl + '"' +
+           '><CENTER>';
+  }
+  var eventday_end   = '</CENTER></TD>';
+  function todayevent_start(d, ttl)
+  {
+    return '<TD style="cursor:default;background-color:' + caltodayeventbackground + ';' + caltodayeventstyle + '" ' +
+           (defaultcal ? ' onmouseover=this.style.background="' + calhighbackground +
+               '";this.style.color="' + calhightext +
+               '"; onmouseout=this.style.background="' + caltodayeventbackground +
+               '";this.style.color="' + caltodayeventtext +
+               '" onmouseup=parent.opencal(' + d + ');' +
+               'this.style.background="' + caltodayeventbackground +
+               '";this.style.color="' + caltodayeventtext + '"' : '') +
+               ' title="' + ttl + '"' +
+           '><CENTER>';
+  }
+  var todayevent_end   = '</CENTER></TD>';
   function today_start(d)
   {
     return '<TD style="cursor:default;background-color:' + caltodaybackground + ';' + caltodaystyle + '" ' +
@@ -256,20 +307,52 @@ function buildcal()
   //draw six weeks loop for each day in the month
   for (index=0; index < DAYS_OF_WEEK * 6; index++)
   {
-    if (Calendar.getDate() == 1) whichmonth += 1;
+    var month_day = Calendar.getDate();
+    if (month_day == 1) whichmonth += 1;
 
     week_day = Calendar.getDay();
 
     // start new row if we hit a new week
     if (week_day == 0) cal += TR_end + TR_start;
 
+    var ent = null;
+    querystr = 'event[date[(@year="'+year+'" || @year="all") && (@month="'+month+'" || @month="all") && @day="'+month_day+'"]]';
+    if (ents)
+      ent = ents.selectSingleNode(querystr);
+
+    var highlight = false;
+    if( weekday>0 && Today.getDate()==month_day)
+      highlight = true;
+
     // highlight appropriately
     if (whichmonth != 0)
-      cal += gray_start(Calendar.getTime()) + Calendar.getDate() + gray_end;
-    else if (weekday >= 0 && Today.getDate() == Calendar.getDate())
-      cal += today_start(Calendar.getTime()) + Calendar.getDate() + today_end;
+      cal += gray_start(Calendar.getTime()) + month_day + gray_end;
     else
-      cal += TD_start(Calendar.getTime()) + Calendar.getDate() + TD_end;
+    {
+      if (highlight && ent)
+        cal += todayevent_start(Calendar.getTime(), ent.getAttribute("name"));
+      else
+        if (highlight)
+          cal += today_start(Calendar.getTime());
+        else
+          if (ent)
+            cal += eventday_start(Calendar.getTime(), ent.getAttribute("name"));
+          else
+            cal += TD_start(Calendar.getTime());
+
+      cal += month_day;
+
+      if (highlight && ent)
+        cal += todayevent_end;
+      else
+        if (highlight)
+          cal += today_end;
+        else 
+          if (ent)
+            cal += eventday_end;
+          else
+            cal += TD_end;
+    }
 
     //advance the date for next iteration
     Calendar.setDate(Calendar.getDate()+1);
