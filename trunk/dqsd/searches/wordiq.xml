@@ -1,0 +1,86 @@
+<search function="wordiq">
+  <name>Word iQ</name>
+  <category>Reference<category>General</category></category>
+  <contributor>Gregory Krohne</contributor>
+  <link>http://www.wordiq.com/</link>
+  <email>zeakz1d02@sneakemail.com</email>
+  <description>
+  A combined search of multiple references and sources including the encyclopedia, dictionary, thesaurus, the web, eBooks, and even dream interpretation.
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/encyclopedia</td><td> - </td><td>(default) WordIQ's own cross-linked encyclopedia</td></tr>
+      <tr><td>/dictionary</td><td> - </td><td>multiple English- and topic-based dictionaries</td></tr>
+      <tr><td>/thesaurus</td><td> - </td><td>WordIQ's thesaurus, plus others</td></tr>
+      <tr><td>/web</td><td> - </td><td>No search engine credits, but good results</td></tr>
+      <tr><td>/books|ebooks</td><td> - </td><td>eBooks by title, author, and subject. Read the text online.</td></tr>
+      <tr><td>/dreams</td><td> - </td><td>WordIQ's dream elements and meanings</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>wordiq snogging /t</td></tr>
+      <tr><td>wordiq kiss /dic</td></tr>
+      <tr><td>wordiq kissing /web</td></tr>
+      <tr><td>wordiq kissing /dreams</td></tr>
+      <tr><td>wordiq Kissing number problem /enc</td></tr>
+      <tr><td>wordiq shakespeare /books</td></tr>
+    </table>
+  </description>
+  <form name="wordiqf"
+        method="get"
+        action="http://www.wordiq.com/cgi-bin/smartsearch/smartsearch.cgi">
+    <input type="hidden" name="radio_type" value="knowledge" />
+    <input type="hidden" name="keywords" value="" />
+    <input type="hidden" name="search" value="SEARCH NOW" />
+  </form>
+  <script><![CDATA[
+    function wordiq(q)
+    {
+      if( nullArgs("wordiq", q) )
+        return;
+
+      // Parse switches with parseArgs:
+      var args = parseArgs(q, "encyclopedia, dictionary, thesaurus, web, ebooks, books, dreams");
+      if ( args.switches.length > 0 )
+      {
+        switch( args.switches[0].name )
+        {
+          case "encyclopedia":
+						document.wordiqf.radio_type.value = "knowledge";
+            break;
+          case "dictionary":
+						document.wordiqf.radio_type.value = "dictionary";
+            break;
+          case "thesaurus":
+						document.wordiqf.radio_type.value = "thesaurus";
+            break;
+          case "web":
+						document.wordiqf.radio_type.value = "web";
+            break;
+          case "ebooks":
+          case "books":
+						document.wordiqf.radio_type.value = "book";
+            break;
+          case "dreams":
+						document.wordiqf.radio_type.value = "dreams";
+            break;
+          default:
+						document.wordiqf.radio_type.value = "knowledge";
+            break;
+        }
+      }
+
+      document.wordiqf.keywords.value = args.q;
+
+      submitForm(wordiqf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 07/22/04 at 13:13:31
+    by Dave's Quick Search Deskbar Search Wizard version 1.3,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>
