@@ -218,9 +218,18 @@ if (searchRoot)
       var descriptionNode = searchNode.selectSingleNode("description");
       var linkNode = searchNode.selectSingleNode("link");
       var categoryNode = searchNode.selectSingleNode("category");
+      var descriptonXml = null;
+      if(descriptionNode)
+      {
+        // There may be a better way to do this - I'm
+		// trying to remove the <description> tags which end-up bracketing
+		// the description XML
+        descriptionXml = descriptionNode.xml.replace(/\<description\>/, '');
+        descriptionXml = descriptionXml.replace(/\<\/description\>/, '');
+      }
       addsearch(fn.text,
                 (nameNode ? nameNode.text : fn.text),
-                (descriptionNode ? descriptionNode.xml : null),
+                descriptionXml,
                 (linkNode ? linkNode.text : null),
                 (categoryNode ? categoryNode.text : null));
     }
