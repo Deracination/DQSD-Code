@@ -1,49 +1,54 @@
 <search function="rgb">
   <name>RGB to Hexidecimal Conversion</name>
-  <description>Convert RGB integer values to hexidecimal
-  equivalents: "rgb 255110053"</description>
+  <description>
+    Convert RGB integer values to hexidecimal equivalents.<br/>
+    <a class="helpboxDescLabels">Example:</a><br/>
+    <table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">rgb 255110053</td></tr>
+  	</table>
+  </description>
   <category>Functions</category>
   <contributor>Monty Scroggins</contributor>
+  
   <script><![CDATA[
+    function remleadzeros(str) 
+    {
+      while (str.charAt(0) == "0" && str.length > 1) // if has leading zero (but not just "0")
+        str= str.substring(1, str.length); // remove any leading zeros (otherwise assumes octal)
+      return(parseInt(str));
+    }
 
-function remleadzeros(str) {
-  while (str.charAt(0)=="0" && str.length>1) // if has leading zero (but not just "0")
-  str= str.substring(1, str.length); // remove any leading zeros (otherwise assumes octal)
-    return(parseInt(str));
-}
-
-function rgb(c) 
-{
-	if (c.length<9 || c.match(/\D/))
-	{
-     alert("Red Green and Blue values must be between 0 and 255\nwith leading zeros if needed.\nex - 255034101 = r255 g034 b101");
-     return false;
-   }
-   //var red=parseInt(c.substr(0,3));
-   var red=c.substr(0,3);
-   var grn=c.substr(3,3);
-   var blu=c.substr(6,3);
-   red=remleadzeros(red);
-   grn=remleadzeros(grn);
-   blu=remleadzeros(blu);
-   red=red.toString(16);
-   grn=grn.toString(16);
-   blu=blu.toString(16);
-   if (red.length <2) 
-   {
-     red = "0" + red; 
-   }
-   if (grn.length <2) 
-   {
-     grn = "0" + grn; 
-   }
-   if (blu.length <2) 
-   {
-     blu = "0" + blu; 
-   }
+    function rgb(c) 
+    {
+	    if( nullArgs("rgb",c) )
+        return false;
+      
+      if (c.length<9 || c.match(/\D/))
+	    {
+        alert("Red Green and Blue values must be between 0 and 255\nwith leading zeros if needed.\nex - 255034101 = r255 g034 b101");
+        return false;
+      }
    
-   //document.deff.q.value ="red "+red+" green "+grn+" blue "+blu;
-   document.deff.q.value ="RGB: "+c+" Hex: "+red+grn+blu;
-}
+      //var red=parseInt(c.substr(0,3));
+      var red=c.substr(0,3);
+      var grn=c.substr(3,3);
+      var blu=c.substr(6,3);
+      red=remleadzeros(red);
+      grn=remleadzeros(grn);
+      blu=remleadzeros(blu);
+      red=red.toString(16);
+      grn=grn.toString(16);
+      blu=blu.toString(16);
+      
+      if (red.length <2)
+        red = "0" + red;
+      if (grn.length <2)
+        grn = "0" + grn;
+      if (blu.length <2)
+        blu = "0" + blu;
+   
+      //document.deff.q.value ="red "+red+" green "+grn+" blue "+blu;
+      document.deff.q.value ="RGB: "+c+" Hex: "+red+grn+blu;
+    }
   ]]></script>
 </search>

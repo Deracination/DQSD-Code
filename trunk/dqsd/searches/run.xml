@@ -1,14 +1,19 @@
 <search function="run">
-  <name>Run Program</name>
-  <description>Replacement for the Start menu's Run command: "run winword" runs Microsoft Word.</description>
+  <name>Run</name>
+  <description>
+    Replacement for the Windows Start menu Run command.<br/>
+    <a class="helpboxDescLabels">Example:</a><br/>
+    <table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">run winword</td></tr>
+  	</table>
+  </description>
   <category>Functions</category>
+  
   <script>
     function run(q)
     {
-      if (q == "")
-      {
-        alert("Type run programname, e.g., \"run winword\" to run Microsoft Word.");
-      }
+      if( nullArgs("run",q) )
+        return false;
       else
       {
         try
