@@ -57,6 +57,21 @@ STDMETHODIMP CSearchWizard::Exec(const GUID*, DWORD nCmdID, DWORD, VARIANTARG*, 
 		return S_OK;
 	}
 
+	// Give the user a chance to select a FORM field
+	CComPtr< IHTMLElement > spActiveElement;
+	spDoc2->get_activeElement( &spActiveElement );
+	CComPtr< IHTMLInputElement > spActiveInputElement;
+	if ( !spActiveElement || FAILED( spActiveElement.QueryInterface( &spActiveInputElement ) ) )
+	{
+		if ( IDYES == ::MessageBox( hwndBrowser, 
+						   _T("Selecting or clicking in the field which contains the search string will add some helpful information to the search and make it more complete.\r\n\r\n"
+							  "Would you like to select a form field and then run the wizard again?"), 
+						   _T("DQSD Search Wizard"), MB_YESNO|MB_ICONQUESTION ) )
+		{
+			return S_OK;
+		}
+	}
+	
 	CDQSDWizardDlg dlg;
 	dlg.m_spDoc2 = spDoc2;
 	dlg.DoModal( hwndBrowser, cForms );
