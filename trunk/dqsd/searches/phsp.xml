@@ -1,19 +1,28 @@
 <search function="phsp">
   <name>Phone Number Speller</name>
-  <description>Spells out phone numbers: "phsp 227-4332" or "phsp bar-idea"</description>
+  <description>
+    Spells out phone numbers.<br/>
+    <a class="helpboxDescLabels">Examples:</a><br/>
+    <table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">phsp 227-4332</td></tr>
+      <tr><td class="helpboxDescColumns">phsp bar-idea</td></tr>
+  	</table>
+  </description>
   <category>Fun</category>
   <link>http://www.phonespell.org/</link>
   <contributor>Chris Sells</contributor>
+  
   <form name="phspf"
         action="http://www.phonespell.org/combo.cgi"
         method="get">
     <input type="hidden" name="n" value=""/>
   </form>
+  
   <script><![CDATA[
     function phsp(q)
     {
-      if (q == "")
-        openSearchWindow("http://www.phonespell.org/");
+      if( nullArgs("phsp",q) )
+        return false;
       else
       {
         document.phspf.n.value = q;
