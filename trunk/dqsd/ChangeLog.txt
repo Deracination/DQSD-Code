@@ -19,6 +19,8 @@ Modified Searches
 * pw - updated search url (Brent Beardsley)
 * sf - added dloads switch to go to downloads page (Brent Beardsley)
 * mb changed to mp thanks to Gregory Krohne
+* dqsd updated thanks to Gregory Krohne
+
 
 Miscellaneous
 
