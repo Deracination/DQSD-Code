@@ -18,7 +18,7 @@ Modified Searches
 * freetrans - updated url translate url (Brent Beardsley)
 * pw - updated search url (Brent Beardsley)
 * sf - added dloads switch to go to downloads page (Brent Beardsley)
-* mb removed (has yet to become mp thanks to Gregory Krohne)
+* mb changed to mp thanks to Gregory Krohne
 
 Miscellaneous
 
