@@ -4,13 +4,14 @@
     Performs Visual Basic Script code interpretation.<br />
     <div class="helpboxDescLabels">Usage:</div>
     <table class="helpboxDescTable">
-      <tr><td>vbsx <em>[?]vb-script</em></td></tr>
+      <tr><td>vbsx <em>[?][:][=][!]vb-script</em></td></tr>
     </table>
     <div class="helpboxDescLabels">Switches:</div>
     <table class="helpboxDescTable">
       <tr><td>?</td><td> - </td><td>Return value is to appear in DQSD, like the Debug Window of Visual Basic</td></tr>
       <tr><td>=</td><td> - </td><td>Return value is to replace the text in DQSD, like using Debug.Clear before Debug.Print in Visual Basic</td></tr>
       <tr><td>:</td><td> - </td><td>Return value is to be placed on the clipboard</td></tr>
+      <tr><td>!</td><td> - </td><td>Return value is popped in a message box</td></tr>
     </table>
     <div class="helpboxDescLabels">Supporting Functions:</div>
     <table class="helpboxDescTable">
@@ -25,17 +26,18 @@
     <div class="helpboxDescLabels">Example:</div>
     <table class="helpboxDescTable">
       <tr><td>vbsx msgbox("hi")</td></tr>
+      <tr><td>vbsx !"hi"</td></tr>
       <tr><td>vbsx ?Replace("This ugly text", "ugly ", "")</td></tr>
       <tr><td>vbsx ClipBoardSetText Replace(ClipBoardGetText, vbCrLf, " ")</td></tr>
       <tr><td>vbsx ClipBoardSetText UCase(ClipBoardGetText)</td></tr>
     </table>
   </description>
   <category>Computers<category>Programming</category></category>
-  <link>http://www.ReliableAnswers.com/</link>
+  <link>http://www.ReliableAnswers.com/x/dqsd/</link>
   <contributor>Shawn K. Hall</contributor>
   
   <form name="vbsxf"
-    action="http://reliableanswers.com/x/"
+    action="http://www.ReliableAnswers.com/x/dqsd/"
     method="post">
     <input type="hidden" name="qs" value="" />
     <textarea name="vbscode" style="display: none;"><![CDATA[
@@ -91,7 +93,6 @@ End Function
 
   function vbsx (q)
   {
-  //set debug mode
     var qs = q;
     if (q.length == 1) {
       switch (qs.charAt(0)){
@@ -100,24 +101,26 @@ End Function
         case "!":
         case ":":
           //show help
-            window.execScript ("qsfind('vbsx');", "javascript");
-            return ( true );
+            qs = "?";
       }
-    }else{
-      switch (qs.charAt(0)){
-        case "=":
-          qs = "Call DebugClear() \nDebugPrint " + qs.substring(1, qs.length);
-          break;
-        case "?":
-          qs = "DebugPrint " + qs.substring(1, qs.length);
-          break;
-        case "!":
-          qs = "MsgBox " + qs.substring(1, qs.length);
-          break;
-        case ":":
-          qs = "ClipboardSetText " + qs.substring(1, qs.length);
-          break;
-      }
+    }
+
+    if (nullArgs( "vbsx", qs )) return false;
+
+  //set debug mode
+    switch (qs.charAt(0)){
+      case "=":
+        qs = "Call DebugClear() \nDebugPrint " + qs.substring(1, qs.length);
+        break;
+      case "?":
+        qs = "DebugPrint " + qs.substring(1, qs.length);
+        break;
+      case "!":
+        qs = "MsgBox " + qs.substring(1, qs.length);
+        break;
+      case ":":
+        qs = "ClipboardSetText " + qs.substring(1, qs.length);
+        break;
     }
 
   //get the vbs code

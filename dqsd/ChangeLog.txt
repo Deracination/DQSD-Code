@@ -44,6 +44,7 @@ New Searches
 * guidgen - Generate a GUID (Globally Unique Identifier)
 * jsx - new name for jsexec so that it fits the naming scheme of vbsx
 * ggl - Search Google Glossary (still in beta, but sooo useful already!).
+* loc - Search the Library of Congress 'Thomas' system (Shawn K. Hall)
 
 Modified Searches
 
@@ -60,12 +61,10 @@ Modified Searches
 * pw - fixed to work with current web page (can't remember who fixed it)
 * gtwhois - Post url changed, modified search accordingly (Dean Wilson)
 * tvg - Default url broken, modified search accordingly (Shawn K. Hall)
-* viam - Changed to fit site changes
 
 Removed Searches
 
 * webpoll - discontinued (Dean Wilson)
-* jsexec - renamed to jsx
 
 Miscellaneous
 
