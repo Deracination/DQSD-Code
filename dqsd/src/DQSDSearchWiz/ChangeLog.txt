@@ -1,5 +1,8 @@
 Version 0.6 (beta) - ???
 
+* Display outerHTML for FORM elements instead of innerHTML
+* Added <copyright> to search files
+* Fixed bugs causing incorrect URLs for the <LINK> and the form 'action'
 * Removed unnecessary generated script for opening a window, because 
   nullArgs does it automatically if a <LINK> is supplied.
 * Fixed crash when an OPTION tag with no value and no text is encountered.
