@@ -1,4 +1,4 @@
--- What's new for 3.0.0.???
+-- What's new for 3.0.0.24 (beta)
 
 New Searches
 
@@ -29,7 +29,7 @@ Bug Fixes
 * changed progid for MSXML component from MSXML.DOMDocument to MSXML2.DOMDocument
 
 
--- What's new for 3.0.0.23
+-- What's new for 3.0.0.23 (beta)
 
 New Searches
 
