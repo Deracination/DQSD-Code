@@ -6,6 +6,7 @@ New Searches
 * hv - Rex Swain's HTTP Viewer; See exactly what an HTTP request returns to your browser
 * law - FindLaw Law Library from John W. Bairen, Jr.
 * dicit - Italian dictionary + Italian-English dictionary from Tom Creek
+* acine - Search allocine.com, THE french site about movies, stars, theaters schedules, critics, trailers, etc...
 
 Modified Searches
 
