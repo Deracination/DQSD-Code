@@ -10,6 +10,7 @@ import "ocidl.idl";
 		object,
 		uuid(1A93D4C6-A0B1-41EC-8153-FD7F5500CEA0),
 		dual,
+		oleautomation,
 		helpstring("DQSD Launcher Interface"),
 		pointer_default(unique)
 	]
