@@ -6,97 +6,139 @@
   <email>glenn at glenncarr dot com</email>
   <description>
   Search BestBuy
-  </description>
 
-    <comment>
-    <div class="helpboxDescLabels">Switches:</div>
-    <table class="helpboxDescTable">
-      <tr><td>/computers</td><td> - </td><td></td></tr>
-      <tr><td>/home</td><td> - </td><td></td></tr>
-      <tr><td>/car</td><td> - </td><td></td></tr>
-      <tr><td>/personal</td><td> - </td><td></td></tr>
-      <tr><td>/photo</td><td> - </td><td></td></tr>
-      <tr><td>/soho</td><td> - </td><td></td></tr>
-      <tr><td>/appliances</td><td> - </td><td></td></tr>
-      <tr><td>/accessories</td><td> - </td><td></td></tr>
-      <tr><td>/music</td><td> - </td><td></td></tr>
-      <tr><td>/movies</td><td> - </td><td></td></tr>
-      <tr><td>/software</td><td> - </td><td></td></tr>
-      <tr><td>/games</td><td> - </td><td></td></tr>
-    </table>
-    <div class="helpboxDescLabels">Examples:</div>
-    <table class="helpboxDescTable">
-      <tr><td></td></tr>
-      <tr><td></td></tr>
-    </table>
-    </comment>
+  <div class="helpboxDescLabels">Switches:</div>
+  <table class="helpboxDescTable">
+    <tr><td><b>/all</b></td><td> default </td><td> Entire site </td></tr>
+    <tr><td>/computers /pc /hw</td><td> - </td><td> Computers and peripherals </td></tr>
+    <tr><td>/phone</td><td> - </td><td> Telephone and communications </td></tr>
+    <tr><td>/electronics /elec</td><td> - </td><td> Electronics </td></tr>
+    <tr><td>/photo /camera /video</td><td> - </td><td> Photography, Cameras and Video </td></tr>
+    <tr><td>/soho /office</td><td> - </td><td> Office Products </td></tr>
+    <tr><td>/appliances /appl /home</td><td> - </td><td> Home Appliances </td></tr>
+    <tr><td>/music /audio</td><td> - </td><td> Music </td></tr>
+    <tr><td>  /album /albums </td><td> - </td><td> Music by Album </td></tr>
+    <tr><td>  /artist /artists </td><td> - </td><td> Music by Artist </td></tr>
+    <tr><td>/movie /movies</td><td> - </td><td> Movies </td></tr>
+    <tr><td>  /title</td><td> - </td><td> Movies by Title </td></tr>
+    <tr><td>  /person /actor</td><td> - </td><td> Movies by Person/Actor </td></tr>
+    <tr><td>/software /soft</td><td> - </td><td> Software </td></tr>
+    <tr><td>/games /g</td><td> - </td><td> Video Games  </td></tr>
+    <tr><td>/resources /res</td><td> - </td><td> Resources </td></tr>
+  </table>
+  <div class="helpboxDescLabels">Examples:</div>
+  <table class="helpboxDescTable">
+    <tr><td> bb john lennon /artist </td></tr>
+    <tr><td> bb 35mm /photo </td></tr>
+    <tr><td> bb 3200c /pc </td></tr>
+    <tr><td> bb return policy </td></tr>
+    <tr><td> bb lord of the rings /movie </td></tr>
+    <tr><td> bb 3d /games </td></tr>
+  </table>
+  </description>
 
   <form name="bbf"
         method="post"
-        action="http://www.bestbuy.com/search/res.asp?m=0&amp;cat=0&amp;scat=0">
-    <input type="hidden" name="SV" value="" />
-    <input type="hidden" name="SC" value="site" />
+        action="http://www.bestbuy.com/site/index.jsp?_DARGS=/site/en_US/global/nav/olssimplesearch.jsp">
+    <input type="hidden" name="_dyncharset" value="ASCII" />
+    <input type="hidden" name="_D:Search" value=" " />
+    <input type="hidden" name="Search" value="ALL" />
+    <input type="hidden" name="txtkeywords" value="" />
+
+    <input type="hidden" name="_D:txtkeywords" value=" " />
+    <input type="hidden" name="_D:searchButton" value=" " />
+
+    <input type="hidden" name="/bestbuy/digiterra/atg/search/formhandler/SearchFormHandler.successURL" value="http://www.bestbuy.com/site/olspage.jsp?id=cat12085&amp;type=page" />
+    <input type="hidden" name="_D:/bestbuy/digiterra/atg/search/formhandler/SearchFormHandler.successURL" value=" " />
+    <input type="hidden" name="/bestbuy/digiterra/atg/search/utilities/SearchParameterHolder.newSearch" value="true" />
+    <input type="hidden" name="_D:/bestbuy/digiterra/atg/search/utilities/SearchParameterHolder.newSearch" value=" " />
+    <input type="hidden" name="/bestbuy/digiterra/atg/search/utilities/SearchParameterHolder.startPageIndex" value="1" />
+    <input type="hidden" name="_D:/bestbuy/digiterra/atg/search/utilities/SearchParameterHolder.startPageIndex" value=" " />
+    <input type="hidden" name="/bestbuy/digiterra/atg/search/utilities/SearchParameterHolder.endPageIndex" value="10" />
+    <input type="hidden" name="_D:/bestbuy/digiterra/atg/search/utilities/SearchParameterHolder.endPageIndex" value=" " />
+    <input type="hidden" name="/bestbuy/digiterra/atg/search/utilities/SearchParameterHolder.currentPage" value="1" />
+    <input type="hidden" name="_D:/bestbuy/digiterra/atg/search/utilities/SearchParameterHolder.currentPage" value=" " />
+    <input type="hidden" name="/bestbuy/digiterra/atg/search/utilities/SearchParameterHolder.maxItemsPerPage" value="10" />
+    <input type="hidden" name="_D:/bestbuy/digiterra/atg/search/utilities/SearchParameterHolder.maxItemsPerPage" value=" " />
+    <input type="hidden" name="/bestbuy/digiterra/atg/search/utilities/SearchParameterHolder.canGoPreviousPage" value="false" />
+    <input type="hidden" name="_D:/bestbuy/digiterra/atg/search/utilities/SearchParameterHolder.canGoPreviousPage" value=" " />
+    <input type="hidden" name="/bestbuy/digiterra/atg/search/utilities/SearchParameterHolder.sortParameter" value="Relevance" />
+    <input type="hidden" name="_D:/bestbuy/digiterra/atg/search/utilities/SearchParameterHolder.sortParameter" value=" " />
+    <input type="hidden" name="/bestbuy/digiterra/atg/search/formhandler/SearchFormHandler.veritySearch" value="dummy value" />
+    <input type="hidden" name="_D:/bestbuy/digiterra/atg/search/formhandler/SearchFormHandler.veritySearch" value=" " />
+    <input type="hidden" name="_DARGS" value="/site/en_US/global/nav/olssimplesearch.jsp" />
   </form>
   <script><![CDATA[
-    function bb(q)
-    {
+    function bb(q){
       if( nullArgs("bb", q) )
-        return;
+        return false;
 
-      // Parse switches with parseArgs:
+      var bbSection = "ALL";
+      var args = parseArgs(q, "all, pc, hw, cpu, computers, phone, electronics, elec, res, resources, photo, cam, cameras, camera, soho, office, work, app, appliances, home, audio, music, album, albums, artist, artists, movies, movie, video, title, titles, person, actor, sw, software, games");
+      if ( args.switches.length > 0 ){
+        sw = args.switches[0];
+        switch( sw.name ){
+          case "all":
+		bbSection = "ALL";	 	break;
+          case "pc":
+          case "cpu":
+          case "hw":
+          case "computers":
+		bbSection = "Computers"; 	break;
+          case "phone":
+		bbSection = "Phones &amp; Communications";break;
+          case "electronics":
+          case "elec":
+	 	bbSection = "Electronics"; 	break;
+          case "resources":
+          case "res":
+		bbSection = "Resources"; 	break;
+          case "photo":
+          case "cam":
+          case "camera":
+          case "cameras":
+          case "video":
+		bbSection = "Cameras &amp; Camcorders"; break;
+          case "soho":
+          case "office":
+          case "work":
+		bbSection = "Office Products"; 	break;
+          case "appliances":
+          case "app":
+          case "home":
+		bbSection = "Home Appliances"; 	break;
+          case "music":
+		bbSection = "Music"; 		break;
+          case "album":
+          case "albums":
+		bbSection = "Album Title"; 	break;
+          case "artist":
+          case "artists":
+		bbSection = "Artist"; 		break;
+          case "movie":
+          case "movies":
+		bbSection = "Movies"; 		break;
+          case "title":
+          case "titles":
+		bbSection = "Title"; 		break;
+          case "person":
+          case "actor":
+		bbSection = "Person"; 		break;
+          case "software":
+          case "sw":
+		bbSection = "Software"; 	break;
+          case "game":
+          case "games":
+		bbSection = "Games"; 		break;
+          default:
+		bbSection = "ALL"; 		break;
+        }
+      }
 
-      // parseArgs usage:
-      // Arguments:
-      //    q                - string from the search function
-      //    expectedSwitches - list or array of the expected switch values
-      //    expandSwitches   - optional parameter [default = true] used to determine 
-      //                       if the switch shortcuts should be expanded (i.e. /f becomes /foo)
-      // Returns an object with these properties:
-      //    q        - the input string with the switches removed
-      //    switches - array of objects with these two properties:
-      //                  name:   expanded name of the matched switch (i.e. foo as in /foo:bar)
-      //                  value:  value of switch (i.e. bar as in /foo:bar)
-      //    switch_val - associative array with the switch name as the key with the switch value 
-      //                 as the value. (i.e. switch_val["foo"] = "bar" as in /foo:bar)
+      document.bbf.txtkeywords.value = q;
+      document.bbf.Search.value = bbSection;
 
-      //var args = parseArgs(q, "computers, home, car, personal, photo, soho, appliances, accessories, music, movies, software, games");
-      //if ( args.switches.length > 0 )
-      //{
-      //  switch( args.switches[0].name )
-      //  {
-      //    case "computers":
-      //      break;
-      //    case "home":
-      //      break;
-      //    case "car":
-      //      break;
-      //    case "personal":
-      //      break;
-      //    case "photo":
-      //      break;
-      //    case "soho":
-      //      break;
-      //    case "appliances":
-      //      break;
-      //    case "accessories":
-      //      break;
-      //    case "music":
-      //      break;
-      //    case "movies":
-      //      break;
-      //    case "software":
-      //      break;
-      //    case "games":
-      //      break;
-      //    default:
-      //      break;
-      //  }
-      //}
-
-      document.bbf.SV.value = q;
-      //document.bbf.SC.value = "";
-
-      submitForm(bbf);
+      submitForm( bbf );
     }
   ]]></script>
   <copyright>
@@ -108,4 +150,9 @@
     by Dave's Quick Search Deskbar Search Wizard version 1.0.0 ,
     Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
   </created_by>
+  <revised>
+   <by>Shawn K. Hall</by>
+   <at>2004/01/31 23:45-0500</at>
+   <info>Corrected params, post address and description information to work with the revised BestBuy.com site.</info>
+  </revised>
 </search>
