@@ -340,7 +340,7 @@ LRESULT CALLBACK CMenuBuilder::TrackerWndProc(
 
 
 // WGD - This was a sub-class WndProc for the tip window, while I was learning about how TTs work...
-
+/*
 WNDPROC lpfnOldWndProc;
 LONG FAR PASCAL ToolTipSubClassFunc(   HWND hWnd,
                UINT uMsg,
@@ -353,7 +353,7 @@ LONG FAR PASCAL ToolTipSubClassFunc(   HWND hWnd,
 		ATLTRACE("WM_PAINT\n");    
 	}
 	else if(uMsg == WM_ACTIVATE)
-	{
+	{ 
 		ATLTRACE("WM_ACTIVATE\n");
 	}
 	else if(uMsg == WM_WINDOWPOSCHANGING)
@@ -362,7 +362,7 @@ LONG FAR PASCAL ToolTipSubClassFunc(   HWND hWnd,
 		ATLTRACE("WM_WINDOWPOSCHANGING (%d) (%d,%d, 0x%x)\n", IsWindowVisible(hWnd), pWndPos->cx, pWndPos->cy, pWndPos->flags);
 	}
 	else if(uMsg == WM_TIMER || uMsg == WM_NCHITTEST)
-	{
+	{ 
 
 	}
 	else if(uMsg < 0x400)
@@ -409,6 +409,7 @@ LONG FAR PASCAL ToolTipSubClassFunc(   HWND hWnd,
 	return CallWindowProc(lpfnOldWndProc, hWnd, uMsg, wParam, lParam);
 
 }
+*/
 
 // Set up the tracking window which can follow the menu position and display tooltips
 STDMETHODIMP CMenuBuilder::InitialiseTooltips(long displayTimeMultiplier)
@@ -486,7 +487,7 @@ STDMETHODIMP CMenuBuilder::InitialiseTooltips(long displayTimeMultiplier)
 	::SendMessage(m_hTooltipWnd, TTM_SETDELAYTIME, TTDT_AUTOPOP, GetDoubleClickTime()*10*displayTimeMultiplier);
 
 // Subclass the tooltip window - just for debugging
-	lpfnOldWndProc = (WNDPROC)SetWindowLong(m_hTooltipWnd, GWL_WNDPROC, (DWORD)ToolTipSubClassFunc);
+//	lpfnOldWndProc = (WNDPROC)SetWindowLong(m_hTooltipWnd, GWL_WNDPROC, (DWORD)ToolTipSubClassFunc);
 
 	return S_OK;
 }

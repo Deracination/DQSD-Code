@@ -17,8 +17,6 @@ std::map< long, long > g_mapKeyCodeToCharCode;
 // The handle of our hook
 static HHOOK hHook;
 
-//HWND hHotkeyNotificationWindow;
-
 
 static LRESULT CALLBACK KeyboardProc(
 							  int code,       // hook code
@@ -159,8 +157,6 @@ LRESULT CALLBACK NotificationWndProc(
 		RECT taskBarRect;
 		GetWindowRect(hBarWnd, &taskBarRect);
 
-		SetForegroundWindow(hBarWnd);
-
 		// We do all this larking about with the mouse because
 		// SetForegroundWindow is crippled nowadays, and because the DQSD edit control
 		// doesn't actually seem to get a proper caret if you SFW to it anyway.
@@ -175,6 +171,21 @@ LRESULT CALLBACK NotificationWndProc(
 		{
 			// The taskbar is not autohidden - don't send any timer messages
 			KillTimer(hwnd, 0x5744);
+
+			// Test if our window is visible (rather than overlayed by something else)
+			// This only happens if you have a taskbar without always-on-top set
+			POINT topLeft;
+			topLeft.x = taskBarRect.left;
+			topLeft.y = taskBarRect.top;
+			HWND hTestWindow = WindowFromPoint(topLeft);
+			ATLTRACE("HotKey: Test window 0x%x, DQSD Window 0x%x\n", hTestWindow, hBarWnd);
+			if(hBarWnd != hTestWindow)
+			{
+				SetForegroundWindow(hBarWnd);
+				// Take the focus off the bar wnd, so that we get the normal 
+				// 'highlight everything' behaviour when simulating a click into the bar
+				SetFocus(GetParent(hBarWnd));
+			}
 		}
 
 		// Calculate the position of a simultated mouse click

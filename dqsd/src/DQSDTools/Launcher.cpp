@@ -127,7 +127,7 @@ STDMETHODIMP CLauncher::SubmitForm(VARIANT idForm)
 		TCHAR szPath[_MAX_PATH];
 		::GetTempPath(cbPath, szPath);
 
-		_tcscat(szPath, _T("DQSDLaunch.html"));
+		StrCatBuff(szPath, _T("DQSDLaunch.html"), sizeof(szPath)/sizeof(TCHAR));
 		HANDLE hFile = ::CreateFile(szPath, GENERIC_WRITE, FILE_SHARE_READ, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 		if (hFile == INVALID_HANDLE_VALUE)
 			return HRESULT_FROM_WIN32(::GetLastError());
@@ -192,7 +192,7 @@ STDMETHODIMP CLauncher::get_pathDefaultBrowser(BSTR *pVal)
 
 	// Create temp file with desired .html extension
 	::GetTempPath(cbDocPath, szDocPath);
-	_tcscat(szDocPath, _T("DQSDLaunch.html"));
+	StrCatBuff(szDocPath, _T("DQSDLaunch.html"), sizeof(szDocPath)/sizeof(TCHAR));
 	HANDLE hFile = ::CreateFile(szDocPath, GENERIC_WRITE, FILE_SHARE_READ, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 	if (hFile == INVALID_HANDLE_VALUE)
 		return HRESULT_FROM_WIN32(::GetLastError());
@@ -277,7 +277,7 @@ STDMETHODIMP CLauncher::WriteFile(BSTR bstrFilename, BSTR bstrValue)
 		HRESULT_FROM_WIN32(::GetLastError());
 
 	DWORD dwBytesWritten = 0;
-	BOOL bResult = ::WriteFile( hFile, W2CT( bstrValue ), wcslen( bstrValue ), &dwBytesWritten, NULL );
+	BOOL bResult = ::WriteFile( hFile, W2CT( bstrValue ), lstrlenW( bstrValue ), &dwBytesWritten, NULL );
 	::FlushFileBuffers( hFile );
 	::CloseHandle( hFile );
 	
@@ -321,8 +321,8 @@ STDMETHODIMP CLauncher::GetProtocolHandler(BSTR bstrProtocol, BSTR *pbstrHandler
 	USES_CONVERSION;
 
 	TCHAR szProtocolHandlerKey[ 128 ];
-	_tcscpy( szProtocolHandlerKey, W2T( bstrProtocol ) );
-	_tcscat( szProtocolHandlerKey, _T("\\shell\\open\\command") );
+	StrCpyN( szProtocolHandlerKey, W2T( bstrProtocol ), sizeof(szProtocolHandlerKey)/sizeof(TCHAR));
+	StrCatBuff( szProtocolHandlerKey, _T("\\shell\\open\\command"), sizeof(szProtocolHandlerKey)/sizeof(TCHAR) );
 
 	TCHAR szProtocolHandler[ _MAX_PATH ];
 	DWORD dwCount = sizeof( szProtocolHandler );
@@ -365,7 +365,7 @@ STDMETHODIMP CLauncher::GetFiles(BSTR bstrFileSpec, BSTR *pbstrFiles)
 	CComBSTR bstrFiles( fd.cFileName );
 	while ( ::FindNextFile( handle, &fd ) )
 	{
-		if ( !_tcscmp( fd.cFileName, _T(".") ) || !_tcscmp( fd.cFileName, _T("..") ) )
+		if ( !StrCmp( fd.cFileName, _T(".") ) || !StrCmp( fd.cFileName, _T("..") ) )
 			continue;
 
 		bstrFiles.Append( _T("\n") );
@@ -426,14 +426,14 @@ STDMETHODIMP CLauncher::get_VersionIsCorrect(int v1, int v2, int v3, int v4, VAR
 		{
 			return Error(IDS_ERR_VERSION_RESOURCE, IID_ILauncher, E_FAIL);
 		}
-		void* pData = malloc(versionSize);
+		BYTE* pData = new BYTE[versionSize];
 		if(pData == NULL)
 		{
 			return Error(IDS_ERR_VERSION_RESOURCE, IID_ILauncher, E_FAIL);
 		}
 		if(!GetFileVersionInfo(moduleName, NULL, versionSize, pData))
 		{
-			free(pData);
+			delete [] pData;
 			return Error(IDS_ERR_VERSION_RESOURCE, IID_ILauncher, E_FAIL);
 		}
 /*	
@@ -459,7 +459,7 @@ STDMETHODIMP CLauncher::get_VersionIsCorrect(int v1, int v2, int v3, int v4, VAR
 		pFixInfo = NULL;
 		if(!VerQueryValue(pData, _T("\\"), (LPVOID*)&pFixInfo, &length))
 		{
-			free(pData);
+			delete [] pData;
 			return Error(IDS_ERR_VERSION_RESOURCE, IID_ILauncher, E_FAIL);
 		}
 
@@ -495,7 +495,7 @@ STDMETHODIMP CLauncher::get_VersionIsCorrect(int v1, int v2, int v3, int v4, VAR
 			*pVal = VARIANT_FALSE;
 		}
 
-		free(pData);
+		delete [] pData;
 
 		return S_OK; 
 	}
@@ -518,9 +518,8 @@ __declspec(dllexport) void CALLBACK RestartExplorer(HWND hParent, HINSTANCE hIns
 	::WinExec("Explorer.exe",SW_SHOW);
 }
 
-void ShutdownThread(void*)
+DWORD WINAPI ShutdownThread(void*)
 {
-	ATLTRACE("ShutdownThread: Starting\n");
 	// Wait for DQSD to be gone
 	LONG startTime = GetTickCount();
 	while(((LONG)GetTickCount() - startTime) < 10000)
@@ -528,14 +527,14 @@ void ShutdownThread(void*)
 		if(!IsWindow(UtilitiesFindDQSDWindow(false)))
 		{
 			// We're gone
-			ATLTRACE("ShutdownThread: DQSD Gone\n");
 
 			// Restart Explorer
 			RestartExplorer(NULL,NULL,NULL,0);
-			return;
+			return 0;
 		}
 		Sleep(100);
 	}
+	return 0;
 }
 
 
@@ -585,7 +584,8 @@ STDMETHODIMP CLauncher::ShutdownBar()
 				ATLTRACE("Destroying band window: 0x%x\n", hRebarBand);
 				DestroyWindow(hRebarBand);
 
-				_beginthread(ShutdownThread, 0, NULL);
+				DWORD threadId;
+				::CreateThread(NULL, 0, ShutdownThread, NULL,0, &threadId);
 
 				return S_OK;
 			}
