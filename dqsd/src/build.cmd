@@ -9,12 +9,14 @@ SET PATH=%PATH%;"C:\Program Files\NSIS"
 pushd %~dp0
 
 pushd DQSDTools
-nmake -f "DQSDTools.mak" CFG="DQSDTools - Win32 Release MinDependency"
+
+REM This seems to work sooo much better than NMAKE, and we don't need a makefile
+msdev DQSDTools.dsp /MAKE "DQSDTools - Win32 Release MinDependency" /REBUILD
 
 copy /y ReleaseMinDependency\DQSDTools.dll ..\..\DQSDTools.dll
 popd
 
-REM NSIS-compile with bz2 compression - saves 120K off installer size
-makensis.exe /X"SetCompressor bzip2" search.nsi
+REM The LZMA compressor should yield the smallest installer with NSIS 2.0
+makensis /X"SetCompressor /FINAL lzma" search.nsi
 
 popd
