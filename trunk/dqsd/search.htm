@@ -737,6 +737,22 @@ function reload()
       <nobr>
       <script type='text/jscript'>
         <!--
+        if (typeof bannerurl      == "undefined") { bannerurl    = ""; }
+        if (bannerurl != "") {
+          if (typeof bannerheight == "undefined") { bannerheight = "-1"; }
+          if (typeof bannerwidth  == "undefined") { bannerwidth  = "-1"; }
+          document.write(
+            '<img src=\"'
+            + bannerurl + '\" '
+            + (bannerheight != "-1" ? 'height=\"' + bannerheight + '\"' : '')
+            + (bannerwidth  != "-1" ? 'width=\"'  + bannerwidth  + '\"' : '')
+            + 'id=\"banner\" />'
+            + '<nobr>');
+        }
+        -->
+      </script>
+      <script type='text/jscript'>
+        <!--
         document.write(
           (multiline ? '<textarea ' : '<input ')
           + 'name=q '
@@ -808,6 +824,19 @@ function reload()
 
 function handleResize()
 {
+  if (typeof bannerurl    == "undefined") { bannerurl    = ""; }
+  if (bannerurl == "") {
+      bannerwidth  = "-1";
+      bannerheight = "-1";
+  } else {
+    if (typeof bannerheight == "undefined") { bannerheight = "-1"; }
+    if (bannerwidth == 0) // 0 := autodetect
+        bannerwidth = document.deff.banner.width;
+    if (typeof bannerwidth  == "undefined") { bannerwidth  = "-1"; }
+    if (bannerheight == 0) // 0 := autodetect
+        bannerheight = document.deff.banner.height;
+  }
+
   if (typeof gowidth == "undefined") { gowidth = -1; }
   if (gowidth < 0)
   {
@@ -837,7 +866,7 @@ function handleResize()
     document.deff.q.style.height = document.body.clientHeight;
   }
 
-  var targetwidth = document.body.clientWidth - gowidth;
+  var targetwidth = document.body.clientWidth - gowidth - bannerwidth;
 
   if(dopopup)
   {
@@ -846,22 +875,47 @@ function handleResize()
       document.deff.gobutton.style.display ="inline";
       if (buttonalign == "left")
       {
-        document.deff.q.style.left         = gowidth;
-        document.deff.gobutton.style.left  = 0;
+        if (bannerwidth != -1)
+        {
+          document.deff.q.style.left         = gowidth + bannerwidth + 2;
+          document.deff.gobutton.style.left  = 0 + bannerwidth + 2;
+        }
+        else
+        {
+          document.deff.q.style.left         = gowidth;
+          document.deff.gobutton.style.left  = 0;
+        }
       }
       else
       {
-        document.deff.q.style.left         = 0;
-        document.deff.gobutton.style.left  = targetwidth;
+        if (bannerwidth != -1)
+        {
+          document.deff.q.style.left         = 0 + bannerwidth + 2;
+          document.deff.gobutton.style.left  = targetwidth + bannerwidth + 2;
+        }
+        else
+        {
+          document.deff.q.style.left         = 0;
+          document.deff.gobutton.style.left  = targetwidth;
+        }
       }
       document.deff.gobutton.style.top     = 0;
       document.deff.gobutton.style.height  = document.deff.q.offsetHeight;
     }
     else
     {
-      document.deff.gobutton.style.display = "none";
-      document.deff.q.style.left           = 0;
-      targetwidth                          = document.body.clientWidth;
+      if (bannerwidth != -1)
+      {
+        document.deff.gobutton.style.display = "none";
+        document.deff.q.style.left           = 0 + bannerwidth + 2;
+        targetwidth                          = document.body.clientWidth - bannerwidth + 2;
+      }
+      else
+      {
+        document.deff.gobutton.style.display = "none";
+        document.deff.q.style.left           = 0;
+        targetwidth                          = document.body.clientWidth;
+      }
     }
   }
 
