@@ -13,8 +13,8 @@
   <script><![CDATA[
     function ascii(c)
     {
-      if (c == "")
-        return;
+      if( nullArgs("ascii",c) )
+        return false;
       var char = c.substring(0,1);
       var dec  = char.charCodeAt(0);
       document.deff.q.value = "char: "+char +
