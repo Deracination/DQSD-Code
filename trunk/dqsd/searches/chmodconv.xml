@@ -1,0 +1,70 @@
+<search function="chmodconv">
+  <name>chmod conversion</name>
+  <description>
+    Convert chmod strings to numbers and numbers to strings.<br/>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>chmodconv 755</td><td>returns rwxr-xr-x in the edit box</td></tr>
+  		<tr><td>chmodconv rwxr-x---</td><td>returns 750 in the edit box</td></tr>
+  	</table>
+  </description>
+  <category>Functions</category>
+  <contributor>Brent Beardsley</contributor>
+  
+  <script><![CDATA[
+	function chmodconv_string_from_digit(dig)
+	{
+	  var result = "";
+	  result += (dig & 4) ? "r" : "-";
+	  result += (dig & 2) ? "w" : "-";
+	  result += (dig & 1) ? "x" : "-";
+	  return result;
+	}
+
+	function chmodconv_digit_from_string(str)
+	{
+	  var result = 0;
+	  for (var i=0; i < 3; i++) {
+		  var ch = str.charAt(i);
+		  switch (ch)
+		  {
+		  case 'r': result += 4; break;
+		  case 'w': result += 2; break;
+		  case 'x': result += 1; break;
+		  }
+	  }
+	  return result;
+	}
+
+	function chmodconv(q)
+	{
+	}
+    function chmodconv(q)
+    {
+      if( nullArgs("chmodconv",q) )
+        return false;
+
+      if (q.match(/^[0-9]{3}$/)) {
+		  // calc string ie: rwxrwxrwx
+		  var owner = chmodconv_string_from_digit(q.charAt(0));
+		  var group = chmodconv_string_from_digit(q.charAt(1));
+		  var other = chmodconv_string_from_digit(q.charAt(2))
+		  document.deff.q.value = ""+owner + group + other+"";
+	  } else if (q.match(/^((r|-)(w|-)(x|-)){3}$/)) {
+		  // calc num ie: 755
+		  var owner = chmodconv_digit_from_string(q.substr(0,3))*100;
+		  var group = chmodconv_digit_from_string(q.substr(3, 3))*10;
+		  var other = chmodconv_digit_from_string(q.substr(6, 3));
+		  document.deff.q.value = ""+owner + group + other+"";
+	  } else {
+		nullArgs("chmodconv","?");
+	  }
+    }
+  ]]></script>
+
+  <copyright>
+	Copyright (c) 2002 David Bau
+	Distributed under the terms of the
+	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>
