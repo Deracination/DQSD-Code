@@ -140,8 +140,14 @@
     <tr><td>Wizard of Id</td><td>/wizardofid</td></tr>
     <tr><td>Working Daze</td><td>/workingdaze</td></tr>
     <tr><td>Working It Out</td><td>/workingitout</td></tr>
-    <tr><td>Ziggy</td><td>/ziggy</td></tr><tr><td>--</td></tr>
-    <tr><td colspan="2"><div class="helpboxDescLabels">Examples:</div></td></tr><tr><td>comx /wiz   </td><td>(Wizard of Id)</td></tr><tr><td>comx /workingit  </td><td>(Working it Out)</td></tr><tr><td>comx /rip   </td><td>(Ripleys Believe it or Not)</td></tr><tr><td>comx /wiz /workingit /rip</td><td>(Opens all three)</td></tr></table></description>
+    <tr><td>Ziggy</td><td>/ziggy</td></tr>
+    <tr><td colspan="2"><div class="helpboxDescLabels">Examples:</div></td></tr>
+    <tr><td>comx /wiz   </td><td>(Wizard of Id)</td></tr>
+    <tr><td>comx /workingit  </td><td>(Working it Out)</td></tr>
+    <tr><td>comx /rip   </td><td>(Ripleys Believe it or Not)</td></tr>
+    <tr><td>comx /wiz /workingit /rip</td><td>(Opens all three)</td></tr>
+    </table>
+    </description>
     <category>Fun</category>
     <script><![CDATA[
 
