@@ -12,11 +12,14 @@ SET PATH=%PATH%;"C:\Program Files\NSIS"
 pushd %~dp0
 
 pushd DQSDSearchWiz
-nmake -f "DQSDSearchWiz.mak" CFG="DQSDSearchWiz - Win32 Release MinDependency"
+
+REM This seems to work sooo much better than NMAKE, and we don't need a makefile
+msdev DQSDSearchWiz.dsp /MAKE "DQSDSearchWiz - Win32 Release MinDependency" /REBUILD
 
 copy /y ReleaseMinDependency\DQSDSearchWiz.dll ..\..\DQSDSearchWiz.dll
 popd
 
-makensis searchwiz.nsi
+REM The LZMA compressor should yield the smallest installer with NSIS 2.0
+makensis /X"SetCompressor /FINAL lzma" searchwiz.nsi
 
 popd
