@@ -11,7 +11,7 @@
 // CLauncher
 
 LPCTSTR CLauncher::DQSD_REG_KEY = _T("CLSID\\{226b64e8-dc75-4eea-a6c8-abcb4d1d37ff}");
-
+LPCTSTR CLauncher::DQSD_SEC_KEY = _T("CLSID\\{226b64e8-dc75-4eea-a6c8-abcb4d1d37ff}\\SecureFiles");
 STDMETHODIMP CLauncher::SetSite(IUnknown* pUnkSite)
 {
 #if defined(DQSD_NOSECURITY) && defined(_DEBUG)
@@ -36,27 +36,37 @@ STDMETHODIMP CLauncher::SetSite(IUnknown* pUnkSite)
 		return hr;
 
 	HKEY hDqsdKey;
-	if (ERROR_SUCCESS != RegOpenKey(HKEY_CLASSES_ROOT, DQSD_REG_KEY, &hDqsdKey))
+	if (ERROR_SUCCESS != RegOpenKey(HKEY_CLASSES_ROOT, DQSD_SEC_KEY, &hDqsdKey))
 	{
 		Error(IDS_ERR_UNAUTHCALLER, IID_ILauncher);
 		return E_FAIL;
 	}
+
 	
 	DWORD dt;
-	TCHAR filebuf[1024];
+	TCHAR filebuf[MAX_PATH];
 	DWORD filelen = sizeof(filebuf);
+	DWORD idw = 0;
+	BOOL success = FALSE;
 
-	if (ERROR_SUCCESS != RegQueryValueEx(hDqsdKey, "SecureFile",  0, &dt, (LPBYTE)filebuf, &filelen))
+	while (ERROR_SUCCESS == RegEnumValue(hDqsdKey, idw, filebuf, &filelen, NULL, &dt, NULL, NULL))
+	{
+		idw++;
+		if (URLMatchesFilename(OLE2T(bstrURL), filebuf))
+		{
+			success = TRUE;
+			break;
+		}
+
+		filelen = sizeof(filebuf);
+	}
+
+    if (success == FALSE)
 	{
 		Error(IDS_ERR_UNAUTHCALLER, IID_ILauncher);
 		return E_FAIL;
 	}
 
-	if (!URLMatchesFilename(OLE2T(bstrURL), filebuf))
-	{
-		Error(IDS_ERR_UNAUTHCALLER, IID_ILauncher);
-		return E_FAIL;
-	}
 #endif
 
   return S_OK;
