@@ -6,6 +6,10 @@
   <email>zeakz1d02@sneakemail.com</email>
   <description>
   Use A9 to search the web and "Search Inside the Book™" on Amazon.com. Includes helpful search history features.
+  <div class="helpboxDescLabels">Example:</div>
+  <table class="helpboxDescTable">
+     <tr><td>a9 windows crash</td></tr>
+  </table>
   </description>
 
   <script><![CDATA[
