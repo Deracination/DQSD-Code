@@ -7,7 +7,7 @@ Bug Fixes
 * 
 
 New Searches
-* 
+* mb - Search the online user-contributed MusicBrainz music database
 
 Modified Searches
 * acine - fit site changes (MLL)
