@@ -1,4 +1,4 @@
--- What's new for 3.?.?
+-- What's new for 3.0.0.18 (beta)
 
 New Searches
 
@@ -16,6 +16,13 @@ Bug Fixes
 * Changed regex in parseArgs to allow any non-whitespace character in switch values.  
   Previously it only allowed identifier characters which excluded periods, etc.
 * Can now set category for searches in localaliases.txt
+
+Miscellaneous
+
+* Will rewrote the 'window finding' code to use a 'document' object 
+passed-in from the script, rather than the original method of wandering 
+around class names.   The latter always looked fragile, and has proved to 
+be so in real life.
 
 
 -- What's new for 3.0 (June 28, 2002)
