@@ -28,6 +28,14 @@ clocklongform=" EEE d MMM yyyy h:mm A ";
 clockshortform=" h:mm A ";
 clocktooltipform=" EEEE, MMMM d, yyyy h:mm A "; // Set to null or empty string ("") to turn off tooltip
 
+
+/* show the menu popup button?
+ *   0 = never
+ *   1 = always
+ *   2 = if search bar width is greater than clocklongwidth [DEFAULT]
+ */
+showbutton = 2;
+
 /*
 Some useful formatting codes:
 
