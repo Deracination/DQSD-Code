@@ -250,8 +250,6 @@ addAliasesFromFile( localaliases, "Shortcuts" );
 function addAliasesFromFile( aliasFile, category )
 {
   var aliasTable = readTabDelimitedFile(aliasFile);
-  //sort the list of aliases
-  //aliasTable.sort();
   for (var iPrivate = 0; iPrivate < aliasTable.length; iPrivate++)
   {
     var fields = aliasTable[iPrivate];
