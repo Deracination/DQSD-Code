@@ -1,0 +1,59 @@
+<search function="ispb">
+  <name>Reverse Business Phone Lookup</name>
+  <description>
+    Find a business and address in Canada by telephone number.<br/>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+      <tr><td>ispb 902-555-1212</td></tr>
+    </table>
+  </description>
+  <category>People and Places</category>
+  <link>http://ypng.infospace.com/canada/ypv3ca/reverse.htm?fromform=revphone</link>
+  <contributor>Sarah Sweeney</contributor>
+  <email>sarah@designshift.com</email>
+  <form name="reversephoneformb"
+    action="http://ypng.infospace.com/canada/ypv3ca/redir.htm"
+    method="get">
+    <input type="hidden" name="searchtype" value="all" />
+    <input type="hidden" name="fromform" value="revphone" />
+    <input type="hidden" name="ClickTRK" value="REVRP3" />
+    <input type="hidden" name="QP" />
+    <input type="hidden" name="wqp" />
+  </form>
+  <script><![CDATA[
+    function ispb(q)
+    {
+      if( nullArgs("ispb",q) )
+        return false
+
+      if (q == "")
+      {  
+        openSearchWindow("http://www.infospace.com/canada.widept/reverse_ca.htm");
+      }else{
+        // detect strings that look like phone numbers
+        res = phone_regex.exec(q);
+        if (res)
+        {
+          if (res[1])
+          {
+            ac=res[1].replace( / /, "", "g");
+            pn=res[2].replace( / /, "", "g");
+          }
+          else
+          {
+            ac=res[3].replace( / /, "", "g");
+            pn=res[4].replace( / /, "", "g");;
+          }
+        document.reversephoneformb.QP.value=ac + "-" + pn;
+        //1=home, blank=work
+        document.reversephoneformb.wqp.value="";
+        submitForm(reversephoneformb);
+        }
+        else
+        {
+        return false;
+        }
+      }
+    }
+  ]]></script>
+</search>

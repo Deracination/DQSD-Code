@@ -1,0 +1,33 @@
+<search function="twn">
+  <name>The Weather Network Forecast</name>
+  <description>
+    Search for Canadian weather forecasts by city.<br/>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+      <tr><td>twn Halifax</td></tr>
+    </table>
+  </description>
+  <category>News</category>
+  <link>http://www.theweathernetwork.com/</link>
+  <contributor>Sarah Sweeney</contributor>
+  <email>sarah@designshift.com</email>
+  <form name="weathernetworkform"
+        action="http://www.theweathernetwork.com/services/search/search.asp"
+        method="post">
+    <input type="hidden" name="recherche"/>
+  </form>
+  <script><![CDATA[
+    function twn(q)
+    {
+      if( nullArgs("twn",q) )
+        return false;
+      if( q == "" )
+        openSearchWindow("http://www.theweathernetwork.com/");
+      else
+      {
+        document.weathernetworkform.recherche.value = q;
+        submitForm(weathernetworkform);
+      }
+    }
+  ]]></script>
+</search>  

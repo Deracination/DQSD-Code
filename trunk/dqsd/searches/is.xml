@@ -1,0 +1,45 @@
+<search function="is">
+  <name>InfoSpace.ca Individual Search</name>
+  <description>
+    Look up phone numbers and addresses in Canada.<br/>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+      <tr><td>is John Smith (Halifax, NS)</td></tr>
+    </table>
+  </description>
+  <category>People and Places</category>
+  <link>http://www.infospace.com/canada/redirs_all.htm?pgtarg=ppli</link>
+  <contributor>Sarah Sweeney</contributor>
+  <email>sarah@designshift.com</email>
+  <form name="infospaceform"
+        action="http://kevdb.infospace.com/canada/kevdb"
+        method="get">
+    <input type="hidden" name="OTMPL" value="res/r1.html" />
+    <input type="hidden" name="QFM" value="N" />
+    <input type="hidden" name="QK" value="5" />
+    <input type="hidden" name="KCFG" value="CA" />
+    <input type="hidden" name="QN" />
+    <input type="hidden" name="QF" />
+    <input type="hidden" name="QC" />
+    <input type="hidden" name="QS" />
+  </form>
+  <script><![CDATA[
+    function is(q)
+    {
+      if( nullArgs("is", q) )
+        return false;
+
+      res = q.match(/(((\w+\s+)?\w+)\s+)?(\w+)(\s*\((([^,]+),?\s*)?(\w\w)\))?/);
+      if (!res)
+        openSearchWindow("http://www.infospace.com/canada/redirs_all.htm?pgtarg=ppli&");
+      else
+      {
+        document.infospaceform.QF.value=(res[2] ? res[2] : "");
+        document.infospaceform.QN.value=(res[4] ? res[4] : "");
+        document.infospaceform.QC.value=(res[7] ? res[7] : "");
+        document.infospaceform.QS.value=(res[8] ? res[8].toUpperCase() : "");
+        submitForm(infospaceform);
+      }
+    }
+  ]]></script>
+</search>

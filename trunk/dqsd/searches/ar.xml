@@ -1,0 +1,36 @@
+<search function="ar">
+  <name>All Recipes</name>
+  <description>
+    Search for recipes and meal ideas at AllRecipes.com.<br/>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+      <tr><td>ar cheesecake</td></tr>
+    </table>
+  </description>
+  <category>Other</category>
+  <link>http://www.allrecipes.com/</link>
+  <contributor>Sarah Sweeney</contributor>
+  <email>sarah@designshift.com</email>
+  <form name="allrecipesform"
+        action="http://search.allrecipes.com/SearchResults.asp"
+        method="get">
+    <input type="hidden" name="site" value="allrecipes" />
+    <input type="hidden" name="allrecipes" value="allrecipes" />
+    <input type="hidden" name="q1" />
+  </form>
+  <script><![CDATA[
+    function ar(q, switches)
+    { 
+      if( nullArgs("ar", q) )
+        return false;
+
+      if( q == "" )
+        openSearchWindow("http://www.allrecipes.com/");
+      else
+      {
+        document.allrecipesform["q1"].value = q;
+        submitForm(allrecipesform);
+      }
+    }
+  ]]></script>
+</search>

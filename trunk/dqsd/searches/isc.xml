@@ -1,0 +1,42 @@
+<search function="isc">
+  <name>InfoSpace.ca Category Search</name>
+  <description>
+    Search business categories in Canada.<br/>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+      <tr><td>isc tailors (Halifax, NS)</td></tr>
+    </table>
+  </description>
+  <category>People and Places</category>
+  <link>http://www.infospace.com/canada/redirs_all.htm?pgtarg=ylwi</link>
+  <contributor>Sarah Sweeney</contributor>
+  <email>sarah@designshift.com</email>
+  <form name="infospacecform"
+        action="http://ypng.infospace.com/canada/ypv3ca/redir.htm"
+        method="get">
+    <input type="hidden" name="fromform" value="qsearch" />	
+    <input type="hidden" name="qhqn" />
+    <input type="hidden" name="wqhqn" />
+    <input type="hidden" name="qc" />
+    <input type="hidden" name="QS" />
+  </form>
+  <script><![CDATA[
+    function isc(q)
+    {
+      if( nullArgs("isc",q) )
+        return false;
+
+      res = q.match(/(\w[^\(]*\w)(\s*\((([^,]+),?\s*)?(\w\w)\))?/);
+      if (!res)
+        openSearchWindow("http://www.infospace.com/canada/redirs_all.htm?pgtarg=ylwi&");
+      else
+      {
+        document.infospacebform.wqhqn.value="1";
+        document.infospacebform.qhqn.value=(res[1] ? res[1] : "");
+        document.infospacebform.qc.value=(res[4] ? res[4] : "");
+        document.infospacebform.QS.value=(res[5] ? res[5].toUpperCase() : "");
+        submitForm(infospacebform);
+      }
+    }
+  ]]></script>
+</search>
