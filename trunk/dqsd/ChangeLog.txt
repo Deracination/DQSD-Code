@@ -1,5 +1,9 @@
 -- What's new for ???
 
+New Searches
+
+* rot13 - Glenn add a rot13 converter function
+
 Modified Searches
 
 * gg - MLL added /news and more language switches (type "gg ?")
