@@ -3,26 +3,26 @@
   <description>
     Look up people and businesses by name or telephone number or browse all businesses in a given category. The location can be just a state or the city and state separated by a comma.<br/>
     <div class="helpboxDescLabels">Usage:</div>
-  	<table class="helpboxDescTable">
-  		<tr><td>Person/Business</td><td> - </td><td>sb &lt;<i>name</i>&gt; [(&lt;<i>location</i>&gt;)] {/person | /business | /category}</td></tr>
+    <table class="helpboxDescTable">
+      <tr><td>Person/Business</td><td> - </td><td>sb &lt;<i>name</i>&gt; [(&lt;<i>location</i>&gt;)] {/person | /business | /category}</td></tr>
       <tr><td>Telephone</td><td> - </td><td>sb &lt;<i>number</i>&gt; {/person | /business}</td></tr>
-  	</table>
+    </table>
     <div class="helpboxDescLabels">Switches:</div>
-  	<table class="helpboxDescTable">
-  		<tr><td>/person</td><td> - </td><td>Search for a person at the given location.</td></tr>
+    <table class="helpboxDescTable">
+      <tr><td>/person</td><td> - </td><td>Search for a person at the given location.</td></tr>
       <tr><td>/business</td><td> - </td><td>Search for a business at the given location.</td></tr>
       <tr><td>/category</td><td> - </td><td>Searches for all businesses of the given category at the given location.</td></tr>
-  	</table>
+    </table>
     <div class="helpboxDescLabels">Examples:</div>
     <table class="helpboxDescTable">
-      
-  		<tr><td>sb barbers (Pittsford, NY) /business</td></tr>
+
+      <tr><td>sb barbers (Pittsford, NY) /business</td></tr>
       <tr><td>sb John Doe (IL) /person</td></tr>
       <tr><td>sb Barbers (Los Angelas, CA) /category</td></tr>
       <tr><td>sb 214-555-9090</td></tr>
       <tr><td>sb 214.555.9090 /person</td></tr>
-  		<tr><td>sb 2145559090 /business</td></tr>
-  	</table>
+      <tr><td>sb 2145559090 /business</td></tr>
+    </table>
   </description>
   <category>People and Places</category>
   <link>http://www.switchboard.com/</link>
@@ -84,11 +84,7 @@
               case "category": searchGroup = 2; break;
             }
         }
-        else
-        {
-          nullArgs( "sb", "?" );
-          return false;
-        }
+        // else ... default to person search
         
         // The search was for a phone number, so do a reverse lookup.
         var parsed = args.q.match( /(\d{3})-*\.*(\d{3})-*\.*(\d{4})/ );
