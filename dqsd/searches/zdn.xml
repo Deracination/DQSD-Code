@@ -1,99 +1,81 @@
-  <search function="zdn">
-    <name>ZDNet Search</name>
-    <description>Search ZDNet: "zdn dave's quick search /option" options
-      include all ZDNet /zd, PC Downloads /pc, MAC Downloads /mac, CE Downloads
-      /ce, Linux Downloads /linux, Palm Downloads /plam, The Web /web.  Default
-      is PC Downloads.
-    </description>
-    <contributor>John W. Bairen, Jr.</contributor>
-    <category>Computers</category>
-    <link> http://www.zdnet.com/downloads</link>
-    <form name="downloadform" method="post"
+<search function="zdn">
+  <name>ZDNet</name>
+  <description>Searches for PC downloads by default. Options include /all of ZDNet, Mac Downloads /mac, CE Downloads /ce, Linux Downloads /linux, Palm Downloads /palm, The Web /web. <nobr>Example: "zdn quicktime /mac"</nobr></description>
+  <category>Computers</category>
+  <link>http://www.zdnet.com/downloads/</link>
+  <switches>all, zd, mac, ce, linux, palm, web</switches>
+  <contributor>John W. Bairen, Jr.</contributor>
+  <form name="downloadform"
+        target="_blank"
         action="http://hotfiles.zdnet.com/cgi-bin/texis/swlib/hotfiles/search.html"
-        target="_blank">
-      <input type="hidden" name="Utext" value="" />
-      <input type="hidden" name="Usrt" value="rel" />
-      <input type="hidden" name="Usrchtype" value="simple" />
-      <input type="hidden" name="b" value="" />
-    </form>
-    <form name="zdform" method="post"
+        method="post">
+    <input type="hidden" name="Utext" value=""/>
+    <input type="hidden" name="Usrt" value="rel"/>
+    <input type="hidden" name="Usrchtype" value="simple"/>
+    <input type="hidden" name="b" value=""/>
+  </form>
+  <form name="zdform"
+        target="_blank"
         action="http://xlink.zdnet.com/cgi-bin/texis/xlink/xlink/search.html"
-        target="_blank">
-      <input type="hidden" name="Uch" value="" />
-      <input type="hidden" name="Utype" value="D" />
-      <input type="hidden" name="Utext" value="" />
-      <input type="hidden" name="db" value="" />
-    </form>
-    <form name="mainform" method="post"
-        action=" http://xlink.zdnet.com/cgi-bin/texis/xlink/websearch/search.html"
-        target="_blank">
-      <input type="hidden" name="cmd" value="zd_qry" />
-      <input type="hidden" name="Utext" value="" />
-    </form>
-    <script><![CDATA[
-      function zdn (q)
+        method="post">
+    <input type="hidden" name="Uch" value=""/>
+    <input type="hidden" name="Utype" value="D"/>
+    <input type="hidden" name="Utext" value=""/>
+    <input type="hidden" name="db" value=""/>
+  </form>
+  <form name="mainform" 
+        target="_blank"
+        action="http://xlink.zdnet.com/cgi-bin/texis/xlink/websearch/search.html"
+        method="post">
+    <input type="hidden" name="cmd" value="zd_qry"/>
+    <input type="hidden" name="Utext" value=""/>
+  </form>
+  <script><![CDATA[
+    function zdn(q, switches)
+    {
+      if (q == "")
+        openSearchWindow(" http://www.zdnet.com/downloads/");
+      else if( switches.length == 1 )
       {
-        if (q == "")
+        switch( switches[0] )
         {
-          openSearchWindow(" http://www.zdnet.com/downloads");
-        }
-        else
-        {
-          var result = q.match(/^(.*)\/(\w+)/)
-          var suffix;
-          if (result)
-          {
-            suffix = result[2];
-            q = result[1];
-            switch(suffix.toLowerCase())
-            {
-            case "pc":
-              document.downloadform.b.value="";
-              document.downloadform.Utext.value=q;
-              submitForm(downloadform);
-              break;
-            case "mac":
-              document.downloadform.b.value="mac";
-              document.downloadform.Utext.value=q;
-              submitForm(downloadform);
-              break;
-            case "linux":
-              document.downloadform.b.value="zdlinux";
-              document.downloadform.Utext.value=q;
-              submitForm(downloadform);
-              break;
-            case "palm":
-              document.downloadform.b.value="zdpalm";
-              document.downloadform.Utext.value=q;
-              submitForm(downloadform);
-              break
-            case "ce":
-              document.downloadform.b.value="zdce";
-              document.downloadform.Utext.value=q;
-              submitForm(downloadform);
-              break;
-            case "zd":
-              document.zdform.Utext.value=q;
-              submitForm(zdform);
-              break;
-            case "web":
-              document.mainform.Utext.value=q;
-              submitForm(mainform);
-              break;
-            default:
-              document.downloadform.b.value="";
-              document.downloadform.Utext.value=q;
-              submitForm(downloadform);
-              break;
-            }
-          }
-          else
-          {
-            document.downloadform.b.value="";
+          case "mac":
+            document.downloadform.b.value="mac";
             document.downloadform.Utext.value=q;
             submitForm(downloadform);
-          }
+            break;
+          case "linux":
+            document.downloadform.b.value="zdlinux";
+            document.downloadform.Utext.value=q;
+            submitForm(downloadform);
+            break;
+          case "palm":
+            document.downloadform.b.value="zdpalm";
+            document.downloadform.Utext.value=q;
+            submitForm(downloadform);
+            break
+          case "ce":
+            document.downloadform.b.value="zdce";
+            document.downloadform.Utext.value=q;
+            submitForm(downloadform);
+            break;
+          case "zd":
+          case "all":
+            document.zdform.Utext.value=q;
+            submitForm(zdform);
+            break;
+          case "web":
+            document.mainform.Utext.value=q;
+            submitForm(mainform);
+            break;
         }
       }
-    ]]></script>
-  </search>
+      else
+      {
+        document.downloadform.b.value="";
+        document.downloadform.Utext.value=q;
+        submitForm(downloadform);
+      }
+    }
+  ]]></script>
+</search>
