@@ -267,14 +267,14 @@ function performsearch( fname, term )
     searches[fname].fun(term);
   else
   {
-	try
-	{
-		eval(fname + "()");
-	}
-	catch(e)
-	{
-		alert('An error occurred while trying to run the search "'+fname+'()'+'"');
-	}
+    try
+    {
+        eval(fname + "()");
+    }
+    catch(e)
+    {
+        alert('An error occurred while trying to run the search "'+fname+'()'+'"');
+    }
   }
 }
 
@@ -359,110 +359,117 @@ function okp()
   // Reset override each time
   reuseBrowserWindowModeOverride = reuseBrowserWindowMode;
 
-  if (window.event.keyCode != 14 && window.event.keyCode != 16
-      && window.event.keyCode != 3 && window.event.keyCode != 22
-      && window.event.keyCode != 24 && window.event.keyCode != 10
-      && window.event.keyCode != 13 && window.event.keyCode != 1
-      && window.event.keyCode != 2)
-    return true;
-
+// Not sure how this is supposed to work - histsearch loops for ever when I try it...
   if (window.event.keyCode == 2)
   {
-  	histsearch( document.deff.q.value, window.event.shiftKey );
-  	return false;
+    histsearch( document.deff.q.value, window.event.shiftKey );
+    return false;
   }
 
   searchPrefix = '';
 
-  if (window.event.keyCode == 13)
+  switch(window.event.keyCode)
   {
-    if (window.event.shiftKey)
+    // Return
+    case 13:
+      if (window.event.shiftKey)
+      {
         reuseBrowserWindowModeOverride = 0; // If they hold down the shift key, open a new window
-    def();
-    return false;
+      }
+      def();
+      break;
+
+    // ctrl-enter just like IE's address bar - Joel's suggestion
+    case 10:
+      var origt = document.deff.q.value;
+      var t = origt;
+
+      // trim leading and trailing whitespace and punctuation
+      t = t.replace(/^[\s~`!@#$%\^&\*()\-=\+{}\[\];:'<>,\.\/\?]*/, '')
+           .replace(/[\s~`!@#$%\^&\*()\-=\+{}\[\];:'<>,\.\/\?]*$/, '');
+
+      // append .com if it looks like it needs it
+      dns = new RegExp("^([\\-a-z0-9]+\\.)+(com|net|org|edu|gov|mil|int|arpa|info|biz|name|museum|coop|aero|pro|[a-z]{2})(/\S*)?$", "i");
+
+      if (!dns.exec(t))
+      {
+        var slashpos = t.indexOf('/');
+        if (slashpos < 0) slashpos = t.length;
+        t = t.substr(0, slashpos) + ".com" + t.substr(slashpos);
+      }
+
+      // prepend www. if there are fewer than three parts in the dns name
+      if (!t.match(/^[\w\-]+\.[\w\-]+\.[\w\-]+/))
+        t = "www." + t;
+
+      // if it all looks good as a dns name, then history it
+      if (direct(t) || direct(t = origt))
+      {
+        document.deff.q.value = t;
+        addhist(t);
+        document.deff.q.createTextRange().select();
+      }
+      break;
+
+    // CTRL-C or CTRL-INS (the latter from the keyboard hook) - COPY
+    case 3:
+      range = document.selection.createRange();
+      range.execCommand("Copy");
+      break;
+
+    // CTRL-V or SHIFT-INS - PASTE
+    case 22:
+//      range = document.selection.createRange();
+//      if (document.name != "q") return true;
+      document.execCommand("Paste");
+/*
+        range.execCommand("Paste");
+        range.collapse(false);
+        range.scrollIntoView(false);
+*/
+      break;
+
+    // CTRL-X or SHIFT-DEL - CUT
+    case 24:
+      range = document.selection.createRange();
+      if (range.parentElement().name != "q") return true;
+      range.execCommand("Cut");
+      break;
+
+    // Special forwarded value of DEL from keyboard hook (it's actually a CTRL-A)
+    case 1:
+//      range = document.selection.createRange();
+  //    if (range.parentElement().name != "q") return true;
+      document.execCommand("Delete");
+/*
+      // Check for the case where there's no current selection
+      if(range.text == "")
+      {
+        range.expand("character");
+        range.execCommand("Delete");
+      }
+      else
+      {
+        range.execCommand("Delete");
+      }
+*/
+      break;
+
+    // CTRL-P or UP for previous history
+    case 16:
+      prevnext(-1);
+      break;
+
+    // CTRL-N or DOWN for next history
+    case 14:
+      prevnext(1);
+      break;
+    
+    default:
+      return true;
   }
 
-  // ctrl-enter just like IE's address bar - Joel's suggestion
-  if (window.event.keyCode == 10)
-  {
-    var origt = document.deff.q.value;
-    var t = origt;
-
-    // trim leading and trailing whitespace and punctuation
-    t = t.replace(/^[\s~`!@#$%\^&\*()\-=\+{}\[\];:'<>,\.\/\?]*/, '')
-         .replace(/[\s~`!@#$%\^&\*()\-=\+{}\[\];:'<>,\.\/\?]*$/, '');
-
-    // append .com if it looks like it needs it
-    dns = new RegExp("^([\\-a-z0-9]+\\.)+(com|net|org|edu|gov|mil|int|arpa|info|biz|name|museum|coop|aero|pro|[a-z]{2})(/\S*)?$", "i");
-
-    if (!dns.exec(t))
-    {
-      var slashpos = t.indexOf('/');
-      if (slashpos < 0) slashpos = t.length;
-      t = t.substr(0, slashpos) + ".com" + t.substr(slashpos);
-    }
-
-    // prepend www. if there are fewer than three parts in the dns name
-    if (!t.match(/^[\w\-]+\.[\w\-]+\.[\w\-]+/))
-      t = "www." + t;
-
-    // if it all looks good as a dns name, then history it
-    if (direct(t) || direct(t = origt))
-    {
-       document.deff.q.value = t;
-       addhist(t);
-       document.deff.q.createTextRange().select();
-    }
-
-    return false;
-  }
-  if (window.event.keyCode == 3)
-  {
-    range = document.selection.createRange();
-    range.execCommand("Copy");
-    return false;
-  }
-  if (window.event.keyCode == 22)
-  {
-    range = document.selection.createRange();
-    if (range.parentElement().name != "q") return true;
-    range.execCommand("Paste");
-    range.collapse(false);
-    range.scrollIntoView(false);
-    return false;
-  }
-  if (window.event.keyCode == 24)
-  {
-    range = document.selection.createRange();
-    if (range.parentElement().name != "q") return true;
-    range.execCommand("Cut");
-    return false;
-  }
-
-  if (window.event.keyCode == 1)
-  {
-    // DEL key forwarded as CTRL-A from KeyboardHook
-    range = document.selection.createRange();
-    if (range.parentElement().name != "q") return true;
-
-    if(range.text == "")
-    {
-      range.expand("character");
-      range.execCommand("Delete");
-    }
-    else
-    {
-      range.execCommand("Delete");
-    }
-    return false;
-  }
-
-  // handle ctrl-p and ctrl-n for history
-  if (window.event.keyCode == 16)
-    prevnext(-1);
-  else
-    prevnext(1);
-
+  // If we get here, we've come through a 'break' in the switch - so the key's been handled
   return false;
 }
 
@@ -807,12 +814,12 @@ function postStartup()
     else if(hotkeyVkCode != 0)
       keyboardHook.RegisterHotKey(hotkeyVkCode, hotkeyModifiers);
     
-//	keyboardHook.InitialiseBaseTooltip();
+//  keyboardHook.InitialiseBaseTooltip();
   }
   catch(e)
   {
-	  alert("There was a problem initializing the enhanced keyboard support - some key combinations and hotkeys may not work (Error '" + e.description + "')");
-	  keyboardHook = null;
+      alert("There was a problem initializing the enhanced keyboard support - some key combinations and hotkeys may not work (Error '" + e.description + "')");
+      keyboardHook = null;
   }
 }
 </script>
