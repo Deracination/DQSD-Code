@@ -22,6 +22,7 @@ New Searches
 * ch - UK Companies House (James R.)
 * comx - search comics.com and display any of 130+ daily comics in popup window (Monty Scroggins)
 * icap - view sites through other browsers (Shawn H.)
+* nic - IEEE MAC address to company translator (Steve Poirier)
 
 Modified Searches
 * jdk - updated urls for j2ee and 1.4, added 1.5, 1.2, 1.1 and api switches (Brent Beardsley)
