@@ -1,0 +1,55 @@
+<search function="fandango">
+  <name>Fandango</name>
+  <description>
+    Find movie information, listings, and buy tickets online.<br/>
+    <div class="helpboxDescLabels">Usage:</div>
+    <table class="helpboxDescTable">
+      <tr><td>Movie Info</td><td> - </td><td>fandango &lt;<i>movie</i>&gt;</td></tr>
+      <tr><td>Local Listings</td><td> - </td><td>fandango /location {&lt;<i>zipcode</i>&gt; | &lt;<i>city</i>&gt; }</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+      <tr><td>fandango harry potter</td></tr>
+      <tr><td>fandango /location San Diego</td></tr>
+    </table>
+  </description>
+  <category>Entertainment</category>
+  <link>http://www.fandango.com/</link>
+  <contributor>Nikolai Devereaux</contributor>
+  <idea>Nikolai Devereaux</idea>
+  <form name="fandangof"
+        action="http://www.fandango.com/my_box_office.asp"
+        method="get">
+    <input type="hidden" name="txtMovieTitle" />
+    <input type="hidden" name="txtCityZip" />
+  </form>
+
+  <script><![CDATA[
+    function fandango(q)
+    {
+      var args = parseArgs(q, "location");
+      if( nullArgs("fandango",q) )
+        return false;
+      if( args.switches.length == 1 && args.switches[0].name == "location" )
+      {
+        document.fandangof.txtCityZip.value = args.q;
+        submitForm(fandangof);
+      }
+      else if( args.switches.length > 1 )
+      {
+        nullArgs("fandango","?");
+      }
+      else
+      {
+        document.fandangof.txtMovieTitle.value = args.q;
+        submitForm(fandangof);
+      }
+    }
+  ]]></script>
+
+  <copyright>
+    Copyright (c) 2002 David Bau
+    Distributed under the terms of the
+    GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>
