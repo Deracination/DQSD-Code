@@ -1,7 +1,7 @@
 <search function="ac">
   <name>Area Code Info</name>
   <description>
-    Search for information on a North American areacode.<br/>
+    Search for information on a North American telephone area code.<br/>
     <a class="helpboxDescLabels">Example:</a><br/>
     <table class="helpBoxDescTable">
   		<tr><td class="helpboxDescColumns">ac 741</td></tr>

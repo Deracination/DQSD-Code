@@ -4,8 +4,8 @@
     Schedule an alarm to go off at a certain time. The alarm message is optional. (All times are in Military (24hr) Time. Supports only a single alarm.)<br/>
     <a class="helpboxDescLabels">Usage:</a><br/>
   	<table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">Set alarm.</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">alarm &lt;time&gt; [&lt;message&gt;]</td></tr>
-  		<tr><td class="helpboxDescColumns">Cancel alarm.</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">alarm cancel</td></tr>
+  		<tr><td class="helpboxDescColumns">Set Alarm</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">alarm &lt;<i>time</i>&gt; [&lt;<i>message</i>&gt;]</td></tr>
+  		<tr><td class="helpboxDescColumns">Cancel Alarm</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">alarm cancel</td></tr>
   	</table>
     <a class="helpboxDescLabels">Example:</a><br/>
     <table class="helpBoxDescTable">
@@ -25,6 +25,9 @@
      
     function alarm(t) 
     {
+      if( nullArgs("alarm",t) )
+        return false;
+        
       if( t.match(/^cancel *$/i) ) 
       {
         clearInterval(alNum);
