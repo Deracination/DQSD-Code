@@ -1,0 +1,38 @@
+<search function="qrz">
+  <name>QRZ Amateur Radio Callsign Lookup</name>
+  <description>
+    Look up profile information from amateur radio callsign.<br/>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>qrz KC5PTF</td></tr>
+  	</table>
+  </description>
+  <category>Fun</category>
+  <link>http://www.qrz.com</link>
+  <contributor>Matthew McDougal</contributor>
+  
+  <form name="qrzf"
+        action="http://www.qrz.com/callsign"
+        method="get">
+    <input type="hidden" name="callsign"/>
+  </form>
+  
+  <script><![CDATA[
+    function qrz(q)
+    {
+      if( nullArgs("qrz",q) )
+        return false;
+      else
+      {
+        document.qrzf.callsign.value = q;
+        submitForm(qrzf);
+      }
+    }
+  ]]></script>
+
+  <copyright>
+	Copyright (c) 2002 David Bau
+	Distributed under the terms of the
+	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>
