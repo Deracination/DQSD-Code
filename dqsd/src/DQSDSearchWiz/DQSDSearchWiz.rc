@@ -54,8 +54,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 0,0,6,1
- PRODUCTVERSION 0,0,6,1
+ FILEVERSION 0,0,7,0
+ PRODUCTVERSION 0,0,7,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x21L
@@ -73,14 +73,14 @@ BEGIN
             VALUE "Comments", "\0"
             VALUE "CompanyName", "http://www.glenncarr.com/\0"
             VALUE "FileDescription", "Dave's Quick Search Deskbar Search Wizard\0"
-            VALUE "FileVersion", "0.6.1\0"
+            VALUE "FileVersion", "0.7\0"
             VALUE "InternalName", "DQSDSearchWiz\0"
             VALUE "LegalCopyright", "Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2\0"
             VALUE "LegalTrademarks", "\0"
             VALUE "OriginalFilename", "DQSDSearchWiz.DLL\0"
             VALUE "PrivateBuild", "\0"
             VALUE "ProductName", "Dave's Quick Search Deskbar Search Wizard\0"
-            VALUE "ProductVersion", "0.6.1\0"
+            VALUE "ProductVersion", "0.7\0"
             VALUE "SpecialBuild", "(beta)\0"
         END
     END
@@ -116,7 +116,7 @@ IDI_WIZARD              ICON    DISCARDABLE     "wizard.ico"
 // Dialog
 //
 
-IDD_DQSDWIZARDDLG DIALOGEX 0, 0, 380, 274
+IDD_DQSDWIZARDDLG DIALOGEX 0, 0, 380, 271
 STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 EXSTYLE WS_EX_CONTEXTHELP
 CAPTION "DQSD Search Wizard"
@@ -147,16 +147,16 @@ BEGIN
     LTEXT           "* &FORMs on current page:",IDC_STATIC,6,97,84,8
     CONTROL         "List2",IDC_FormList2,"SysListView32",LVS_REPORT | 
                     LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_NOSORTHEADER | 
-                    WS_BORDER | WS_TABSTOP,6,107,368,47,WS_EX_CLIENTEDGE
-    LTEXT           "&HTML for selected FORM:",IDC_STATIC,6,156,84,8
-    EDITTEXT        IDC_FormFields,6,167,368,92,ES_MULTILINE | 
+                    WS_BORDER | WS_TABSTOP,6,107,315,47,WS_EX_CLIENTEDGE
+    EDITTEXT        IDC_FormFields,6,165,368,102,ES_MULTILINE | 
                     ES_AUTOVSCROLL | ES_READONLY | WS_VSCROLL
-    LTEXT           "* = Required",IDC_STATIC,6,260,40,8
     DEFPUSHBUTTON   "OK",1,324,6,50,14
     PUSHBUTTON      "Cancel",2,324,22,50,14
     PUSHBUTTON      "O&ptions...",IDC_Options,324,39,50,14
     PUSHBUTTON      "&About...",IDC_About,324,77,50,14
-    ICON            IDI_WIZARD,IDC_STATIC,7,4,20,20
+    ICON            IDI_WIZARD,IDC_STATIC,7,4,21,20
+    PUSHBUTTON      "&HTML >>",IDC_ShowHideHTML,324,140,50,14
+    LTEXT           "* = Required",IDC_STATIC,6,155,40,8
 END
 
 IDD_OPTIONSDLG DIALOG DISCARDABLE  0, 0, 253, 111
@@ -217,6 +217,7 @@ BEGIN
         LEFTMARGIN, 6
         RIGHTMARGIN, 374
         VERTGUIDE, 307
+        VERTGUIDE, 321
         TOPMARGIN, 6
         BOTTOMMARGIN, 268
         HORZGUIDE, 49

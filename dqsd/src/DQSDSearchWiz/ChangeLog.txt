@@ -1,8 +1,9 @@
-Version 0.7 (beta) 7-Sep-2002
+Version 0.7 (beta) 9-Sep-2002
 
 * Fixed indentation of 'break' in gen'd code
 * Added option for mutually exclusive switches which changes gen'd code for parsing switches
 * Added feature to highlight selected FORM with user-configurable color/border
+* Added button to show/hide HTML of selected FORM
 
 Version 0.6.1 (beta) - 5-Sep-2002
 

@@ -15,6 +15,7 @@ class CDQSDWizardDlg :
 {
 public:
 	CDQSDWizardDlg()
+		: m_nTallDialogHeight( 0 )
 	{
 	}
 
@@ -36,6 +37,8 @@ BEGIN_MSG_MAP(CDQSDWizardDlg)
 	NOTIFY_HANDLER(IDC_FormList2, LVN_ITEMCHANGED, OnFormListItemChanged)
 	COMMAND_HANDLER(IDC_About, BN_CLICKED, OnClickedAbout)
 	COMMAND_HANDLER(IDC_Options, BN_CLICKED, OnClickedOptions)
+	COMMAND_HANDLER(IDC_ShowHideHTML, BN_CLICKED, OnClickedShowHideHTML)
+	COMMAND_HANDLER(IDC_Switches, EN_CHANGE, OnChangeSwitches)
 END_MSG_MAP()
 // Handler prototypes:
 //  LRESULT MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
@@ -62,6 +65,8 @@ END_MSG_MAP()
 	LRESULT OnFormListItemChanged(int idCtrl, LPNMHDR pNMHDR, BOOL& bHandled);
 	LRESULT OnClickedAbout(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHandled);
 	LRESULT OnClickedOptions(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHandled);
+	LRESULT OnClickedShowHideHTML(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHandled);
+	LRESULT OnChangeSwitches(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHandled);
 
 public:
 	CComPtr<IHTMLDocument2> m_spDoc2;
@@ -79,6 +84,7 @@ private:
 	_bstr_t m_bstrUnselectedStyle;
 	map< int, CComBSTR > m_mapUnselectedStyle;
 	CComPtr< IHTMLStyle > m_spSelectedStyle;
+	int m_nTallDialogHeight;
 
 private:
 	string GetAbsoluteActionPath( _variant_t& varAction );
@@ -88,6 +94,8 @@ private:
 	void SaveFields();
 	void RestoreFields();
 	string GetScriptFieldName( const string& rstrFieldName );
+	void ShrinkDialog();
+	void GrowDialog();
 };
 
 #endif //__DQSDWIZARDDLG_H_
