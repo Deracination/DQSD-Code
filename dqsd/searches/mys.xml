@@ -4,17 +4,18 @@
     Lookup on mysql.com.<br/>
     <div class="helpboxDescLabels">Example:</div>
     <table class="helpboxDescTable">
-  		<tr><td>mysql create table</td></tr>
+  		<tr><td>mys create table</td></tr>
   	</table>
   </description>
   <category>Computers<category>Programming</category></category>
-  <link>http://www.mysql.com/</link>
+  <link>http://dev.mysql.com/</link>
   
   <form name="mysf"
-        action="http://www.mysql.com/doc/manual.php"
+        action="http://dev.mysql.com/doc/mysql/search.php"
         method="get">
-    <input type="hidden" name="search_query"/>
-    <input type="hidden" name="depth" value="0"/>
+    <input type="hidden" name="q"/>
+	<input type="hidden" name="from" value="/doc/mysql/en/index.html" />
+	<input type="hidden" name="lang" value="en" />
   </form>
   
   <script><![CDATA[
@@ -22,11 +23,9 @@
     {
       if( nullArgs("mys",q) )
         return false;
-      else
-      {
-        document.mysf.search_query.value = q;
-        submitForm(mysf);
-      }
+
+      document.mysf.q.value = q;
+      submitForm(mysf);
     }
   ]]></script>
 
