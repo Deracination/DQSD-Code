@@ -21,7 +21,8 @@ LRESULT CDQSDWizardDlg::OnInitDialog(UINT uMsg, WPARAM wParam, LPARAM lParam, BO
 		CModuleVersion moduleVersion;
 		if ( moduleVersion.GetFileVersionInfo( szModule ) )
 		{
-			SetWindowText( ( _T("DQSD Search Wizard - Version ") + moduleVersion.GetValue( _T("ProductVersion") ) + _T(" ") + moduleVersion.GetValue( _T("SpecialBuild") ) ).c_str() );
+			m_strVersion = moduleVersion.GetValue( _T("ProductVersion") ) + _T(" ") + moduleVersion.GetValue( _T("SpecialBuild") );
+			SetWindowText( ( _T("DQSD Search Wizard - Version ") + m_strVersion ).c_str() );
 		}
 	}
 
@@ -180,6 +181,8 @@ LRESULT CDQSDWizardDlg::OnInitDialog(UINT uMsg, WPARAM wParam, LPARAM lParam, BO
 		}
 	}
 
+	// If there's only one form, select it
+
 	if ( cDisplayedForms == 1 )
 		ListView_SetCheckState( ctlFormList2.m_hWnd, 0, TRUE );
 
@@ -281,6 +284,22 @@ LRESULT CDQSDWizardDlg::OnOK(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHa
 	string strSearchName = W2T( bstrSearchName.m_str );
 	strSearchFile += _T("<search function=\"") + strSearchName + _T("\">");
 
+	TCHAR szDate[ 128 ];
+	_tstrdate( szDate );
+	TCHAR szTime[ 128 ];
+	_tstrtime( szTime );
+
+	strSearchFile += _T("\r\n  <COMMENT>"
+						"\r\n"
+						"\r\n    This search file was initially created by Dave's Quick Search Deskbar"
+						"\r\n    Search Wizard version ") + m_strVersion + _T(" on ") + string( szDate ) + _T(" at ") + string( szTime );
+	strSearchFile += _T("\r\n"
+						"\r\n    Even though this XML search will probably load and is a healthy start"
+						"\r\n    toward a completed search, please be aware that this search will probably"
+						"\r\n    not work as is and will require some human modification, especially the script."
+						"\r\n"
+						"\r\n  </COMMENT>");
+
 	CWindow( GetDlgItem( IDC_SearchTitle ) ).GetWindowText( &bstr );
 	strSearchFile += _T("\r\n  <name>") + string( W2T( bstr ) ) + _T("</name>");
 	::SysFreeString( bstr );
@@ -327,7 +346,8 @@ LRESULT CDQSDWizardDlg::OnOK(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHa
 	strSearchFile += GetSwitches();
 
 	strSearchFile += strFormScript;
-    strSearchFile += _T("\r\n      submitForm(") + strSearchName + _T("f);");
+    
+	strSearchFile += _T("\r\n      submitForm(") + strSearchName + _T("f);");
     strSearchFile += _T("\r\n    }");
 	strSearchFile += _T("\r\n  ]]></script>");
 
@@ -471,9 +491,31 @@ string CDQSDWizardDlg::GetForms( string& rstrSearchName, string& rstrFormScript 
 					_variant_t varInputName;
 					if ( SUCCEEDED( spElement->getAttribute( _bstr_t( _T("name") ), 0, &varInputName ) ) && varInputName.bstrVal )
 					{
-						strFormXML += _T("\r\n    <input type=\"hidden\" value=\"\"");
+
+						// Ignore INPUT type=submit
+						_variant_t varInputType;
+						if ( ( SUCCEEDED( spElement->getAttribute( _bstr_t( _T("type") ), 0, &varInputType ) ) && varInputType.bstrVal ) && !wcsicmp( L"submit", varInputType.bstrVal ) )
+							continue;
+
+						strFormXML += _T("\r\n    <input type=\"hidden\"");
+
 						strFormXML += _T(" name=\"") + string( W2T( varInputName.bstrVal ) ) + _T("\"");
+
+						// Stick the value of the field in as well for two reasons... some hidden fields are required 
+						// and the user can enter a string in a visible field to see which field to use.
+						
+						_variant_t varInputValue;
+						if ( SUCCEEDED( spElement->getAttribute( _bstr_t( _T("value") ), 0, &varInputValue ) ) && varInputValue.bstrVal )
+						{
+							strFormXML += _T(" value=\"") + string( W2T( varInputValue.bstrVal ) ) + _T("\"");
+						}
+						else
+						{
+							strFormXML += _T(" value=\"\"");
+						}
+
 						strFormXML += _T("/>");
+
 						rstrFormScript += _T("\r\n      //document.") + strFormName + _T(".") + string( W2T( varInputName.bstrVal ) ) + _T(".value = \"\";");
 
 						if ( !_tcsicmp( W2T( bstrName ), _T("SELECT") ) )

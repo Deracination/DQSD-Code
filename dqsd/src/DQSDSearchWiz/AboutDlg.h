@@ -5,7 +5,6 @@
 
 #include "resource.h"       // main symbols
 #include "modulver.h"
-#include <atlhost.h>
 
 /////////////////////////////////////////////////////////////////////////////
 // CAboutDlg
