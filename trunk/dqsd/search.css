@@ -25,7 +25,7 @@ div#delaymsg
  font: menu;
  text-align: center;
 }
-td
+td, th
 {
  font: menu;
 }
@@ -314,6 +314,33 @@ A.helpboxCommandLink:ACTIVE, A.helpboxCommandLink:LINK, A.helpboxCommandLink:VIS
 A.helpboxLinkTop:HOVER, A.helpboxLink:HOVER, A.helpboxLinkJump:HOVER, A.helpboxCommandLink:HOVER
 {
   color:red
+}
+
+TABLE#keybindings
+{
+  margin-left: 1em;
+  border: 1px inset;
+  margin-top: 5px;
+}
+
+TABLE#keybindings TD
+{
+  vertical-align: top;
+  border: 1px inset;
+  padding: 1px 1px;
+}
+
+TABLE#keybindings TD.keyname
+{
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+TABLE#keybindings TH
+{
+  border: 1px outset;
+  font-style: italic;
+  font-weight: bold;
 }
 
 
