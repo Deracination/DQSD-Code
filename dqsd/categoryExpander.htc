@@ -13,7 +13,7 @@
 
     if ( type )
     {
-      el.title = (type == 'expandall' ? 'Expand all category groupings.  (Very helpful if searching this window)' : 'Collapse all category groupings');
+      el.title = (type == 'expandall' ? 'Expand all category groupings.  (Very helpful if searching this window.)' : 'Collapse all category groupings');
       return;
     }
     
