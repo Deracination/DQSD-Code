@@ -15,13 +15,29 @@
     <input type="hidden" name="To" value=""/>
   </form>
   <script><![CDATA[
+  
+currency_regex = /([0-9]*.?[0-9]*)(\s*)([A-Za-z]{3})\s*([<>]|to)\s*([A-Za-z]{3})/i; 
+
+// the auto-detection routine used for special handling of strings entered into the
+// toolbar that look like currency conversions.
+function autodetect_currency(q)
+{
+  // detect strings that look like ABC<CBA or ABC>CBA upper or lower case
+  var res = q.match(currency_regex);
+  if (res) {
+    curr(q);
+    return true;
+  }
+}
+
+
 function curr(q){
   if (q == "")
     {  
       openSearchWindow("http://www.xe.com/ucc/");
     }else{
       // detect strings that look like ABC<CBA or ABC>CBA upper or lower case
-      var res = q.match(/([0-9]*.?[0-9]*)(\s*)([A-Za-z]{3})\s*([<>]|to)\s*([A-Za-z]{3})/i);
+      var res = q.match(currency_regex);
       if (res) {
         if (res[4] == '<') {
           document.currf.From.value=res[5].toUpperCase();
