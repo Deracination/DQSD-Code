@@ -1,7 +1,7 @@
 <html>
 <!--
 Dave's Quick Search Deskbar
-Version 2.4.5 with changes - December 16, 2001
+Version 2.5.0 beta - December 18, 2001
 
 Copyright (c) 2001 David Bau
 
@@ -3212,11 +3212,11 @@ function buildcal()
   var TD_end = '</CENTER></TD>';
 
   cal = '<TABLE WIDTH=100% HEIGHT=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR style=\"font:menu;\">';
-  cal += '<TD><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD title="show previous year" style="cursor:hand" onmousedown="parent.movecal(-12);">&nbsp;&lt;</TD><TD title="show previous month" style="cursor:hand" onmousedown="parent.movecal(-1);">&nbsp;&lt;</TD></TR></TABLE></TD>';
+  cal += '<TD><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD title="show previous year" style="cursor:hand" onmouseup="parent.movecal(-12);" >&nbsp;&lt;</TD><TD title="show previous month" style="cursor:hand" onmouseup="parent.movecal(-1);" >&nbsp;&lt;</TD></TR></TABLE></TD>';
   cal += '<TD COLSPAN="' + (DAYS_OF_WEEK - 2) + '"><CENTER>';
   if (weekday <0)
   {
-    cal += '<a title="show this month" style="cursor:hand" onmouseover="this.style.cursor=\'hand\'" onmousedown="parent.Calendar=new Date();parent.movecal(0);">';
+    cal += '<a title="show this month" style="cursor:hand" onmouseup="parent.Calendar=new Date();parent.movecal(0);">';
   }
   cal += '<B>' + getMonthName(month+1)  + '   ' + year + '</B>';
   if (weekday <0)
@@ -3224,7 +3224,7 @@ function buildcal()
     cal += '</a>'; 
   }
   cal += TD_end;
-  cal += '<TD><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD title="show next month" style="cursor:hand" onmousedown="parent.movecal(+1);">&gt;&nbsp;</TD><TD title="show next year" style="cursor:hand" onmousedown="parent.movecal(+12);">&gt;&nbsp;</TD></TR></TABLE></TD>';
+  cal += '<TD><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD title="show next month" style="cursor:hand" onmouseup="parent.movecal(+1);" >&gt;&nbsp;</TD><TD title="show next year" style="cursor:hand" onmouseup="parent.movecal(+12);" >&gt;&nbsp;</TD></TR></TABLE></TD>';
   cal += TR_end + TR_start;
 
   //printing day labels
