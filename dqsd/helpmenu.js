@@ -3,7 +3,7 @@ function showpop()
   document.deff.q.focus();
   document.deff.q.createTextRange().select();
   var mb = new ActiveXObject("DQSDTools.MenuBuilder");
-  mb.AppendMenuItem( local(ABOUT_TEXT), "about" );
+  mb.AppendMenuItem( local(ABOUT_TEXT), "about", "Help on using Dave's Quick Search Deskbar" );
   mb.AppendSeparator( 0 );
   for (i = 0; i < categoryarray.length; i++)
   {
@@ -25,12 +25,25 @@ function showpop()
     {
       var search = helparray[k];
       var alias = getSearchAliases( search );
+
       if ( search.enabled )
-        mb.AppendMenuItem( search.name + '\t' + alias.replace(/&/g, '&&'), search.aliases[0], hsubmenu );
+        mb.AppendMenuItem( search.name + '\t' + alias.replace(/&/g, '&&'), search.aliases[0], makeToolTipString(search), hsubmenu );
     }
   }
   
   appendMRUMenuSelections( mb );
+
+  if(helpMenuToolTipsEnabled)
+  {
+    try
+    {
+      mb.InitialiseTooltips();
+    }
+    catch(e)
+    {
+      alert("Error initialising tooltips for menus: " + e.description);
+    }
+  }
 
   var fn = mb.Display();
   if ( fn )
@@ -100,7 +113,7 @@ function appendMRUMenuSelections( mb )
             // Create 'mneumonic' using the last digit of the number
             var mnemonic = (menus.length - i).toString();
             mnemonic = mnemonic.substr( 0, mnemonic.length - 1 ) + "&" + mnemonic.substr( mnemonic.length - 1 );
-            mb.AppendMenuItem( mnemonic + "  " + search.name + '\t' + alias, search.aliases[0] );
+            mb.AppendMenuItem( mnemonic + "  " + search.name + '\t' + alias, search.aliases[0], makeToolTipString(search) );
             break;
           }
         }
@@ -108,4 +121,21 @@ function appendMRUMenuSelections( mb )
     }
   }
   
+}
+
+
+function makeToolTipString(search)
+{
+  if(helpMenuToolTipsEnabled)
+  {
+    var helpString = search.desc;
+    helpString = helpString.replace(/<description>/, '');
+    // Break the string at the first bit of HTML markup (usually a <BR />)
+    helpString = helpString.slice(0, helpString.indexOf('<', 1));
+    return helpString.replace(/\r\n/g, '');
+  }
+  else
+  {
+    return '';
+  }
 }

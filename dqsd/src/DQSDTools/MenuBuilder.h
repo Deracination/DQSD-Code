@@ -22,11 +22,23 @@ public:
 	, m_nHorizontalAlignment( 2 )
 	{
 		m_hMain = ::CreatePopupMenu();
+
 		ATLTRACE("CMenuBuilder - created\n");
+		m_hTrackerWnd = NULL;
+		m_hTooltipWnd = NULL;
 	}
 
 	virtual ~CMenuBuilder()
 	{
+		if(m_hTrackerWnd != NULL)
+		{
+			DestroyWindow(m_hTrackerWnd);
+		}
+		if(m_hTooltipWnd != NULL)
+		{
+			DestroyWindow(m_hTooltipWnd);
+		}
+
 		ATLTRACE("CMenuBuilder - destroyed\n");
 		ATLTRACE("DQSDTools: Lock count %d\n", _Module.GetLockCount());
 	}
@@ -52,10 +64,11 @@ public:
 
 // IMenuBuilder
 public:
+	STDMETHOD(InitialiseTooltips)();
 	STDMETHOD(get_HorizontalAlignment)(/*[out, retval]*/ short *pVal);
 	STDMETHOD(put_HorizontalAlignment)(/*[in]*/ short newVal);
 	STDMETHOD(AppendSubMenu)(/*[in]*/ BSTR bstrName, VARIANT* pvParentMenu, /*[out,retval]*/ long* phmenu);
-	STDMETHOD(AppendMenuItem)(/*[in]*/ BSTR bstrItem, /*[in]*/ BSTR bstrKey, /*[in,optional]*/ VARIANT* pvhMenu);
+	STDMETHOD(AppendMenuItem)(/*[in]*/ BSTR bstrItem, /*[in]*/ BSTR bstrKey, /*[in]*/ BSTR bstrToolTip, /*[in,optional]*/ VARIANT* pvhMenu);
 	STDMETHOD(AppendSeparator)(/*[in]*/ long hmenu);
 	STDMETHOD(Display)(VARIANT* pbstrSelection);
 
@@ -68,12 +81,28 @@ protected:
 	HMENU			m_hMain;
 	int				m_nMenuItem;
 	std::map< int, std::string > m_mapKeys;
+	std::map< int, std::string > m_toolTips;
+	
 	UINT			m_nHorizontalAlignment;
 
 	CComPtr<IHTMLWindow2> m_spIHTMLWindow2;
 	CComPtr<IHTMLDocument2> m_spIHTMLDoc2;
 
 	UINT getHorizontalAlignment();
+
+protected:
+	static LRESULT CALLBACK TrackerWndProc(
+	HWND hwnd,      // handle to window
+	UINT uMsg,      // message identifier
+	WPARAM wParam,  // first message parameter
+	LPARAM lParam   // second message parameter
+	);
+
+	HWND			m_hTrackerWnd;
+	static HWND		m_hTooltipWnd;
+//	static HWND		m_hToolWnd;
+	
+
 };
 
 #endif //__MENUBUILDER_H_
