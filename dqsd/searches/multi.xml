@@ -1,8 +1,8 @@
 <search function="multi">
   <name>MultiSearch</name>
-  <description>Multi search allows the user to run multiple searches with
-one command line expression: "multi av gg wood planes" will search both alta
-vista and google for "wood planes".</description>
+  <description>Multi search allows the user to run multiple searches with one command line expression:
+    "multi av gg wood planes" will search both alta vista and google for "wood planes".
+  </description>
   <contributor>Neel Doshi</contributor>
   <category>Search the Web</category>
   <script><![CDATA[
@@ -75,12 +75,11 @@ vista and google for "wood planes".</description>
     {
       if ( reuseBrowserWindowMode == 1 )
       {
-       alert("Multisearch requires the reuseBrowserWindowMode parameter to be set to zero or two.  Otherwise, all the searches will be spawned in the same window.");
-       return false;
+        alert("Multisearch requires the reuseBrowserWindowMode parameter to be set to zero or two.  Otherwise, all the searches will be spawned in the same window.");
+        return false;
       }
-      if (q == "")
+      if ( nullArgs("multi", q) )
       {
-        alert("Multisearch needs at least one search type parameter.");
         return false;
       }
       else

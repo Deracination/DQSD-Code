@@ -1,6 +1,27 @@
 <search function="babel">
   <name>Babelfish Language Translation</name>
-  <description>Use the BabelFish to translate text from one language to another: "babel /from:en /to:es hello how are you" or "babel /from:en /to:es http://www.yahoo.com"</description>
+  <description>Use the BabelFish to translate text from one language to another:<br />
+	"babel /from:en /to:es hello how are you" or "babel /from:en /to:es http://www.whitehouse.gov"<br />
+	/from:en /to:zh - English to Chinese<br />
+	/from:en /to:fr - English to French<br />
+	/from:en /to:de - English to German<br />
+	/from:en /to:it - English to Italian<br />
+	/from:en /to:ja - English to Japanese<br />
+	/from:en /to:ko - English to Korean<br />
+	/from:en /to:pt - English to Portuguese<br />
+	/from:en /to:es - English to Spanish<br />
+	/from:zh /to:en - Chinese to English<br />
+	/from:fr /to:en - French to English<br />
+	/from:fr /to:de - French to German<br />
+	/from:de /to:en - German to English<br />
+	/from:de /to:fr - German to French<br />
+	/from:it /to:en - Italian to English<br />
+	/from:ja /to:en - Japanese to English<br />
+	/from:ko /to:en - Korean to English<br />
+	/from:pt /to:en - Portuguese to English<br />
+	/from:ru /to:en - Russian to English<br />
+	/from:es /to:en - Spanish to English<br />
+  </description>
   <contributor>Neel Doshi, Greg Mitchell</contributor>
   <category>Reference</category>
   <link>http://babelfish.altavista.com</link>
@@ -16,38 +37,8 @@
   <script><![CDATA[
 function babel(q)
 {
-	if( q == "" )
-	{
-		openSearchWindow("http://babelfish.altavista.com/");
+	if( nullArgs("babel", q) )
 		return false;
-	}
-	else if ( q == "?" )
-	{
-		alert("Use the BabelFish to translate text from one language to another:\n \
-'babel /from:en /to:es hello how are you' or 'babel /from:en /to:es http://www.yahoo.com' \n \
-Options as of 3/29/2002 are:\n \
-/from:en /to:zh - English to Chinese\n \
-/from:en /to:fr - English to French\n \
-/from:en /to:de - English to German\n \
-/from:en /to:it - English to Italian\n \
-/from:en /to:ja - English to Japanese\n \
-/from:en /to:ko - English to Korean\n \
-/from:en /to:pt - English to Portuguese\n \
-/from:en /to:es - English to Spanish\n \
-/from:zh /to:en - Chinese to English\n \
-/from:fr /to:en - French to English\n \
-/from:fr /to:de - French to German\n \
-/from:de /to:en - German to English\n \
-/from:de /to:fr - German to French\n \
-/from:it /to:en - Italian to English\n \
-/from:ja /to:en - Japanese to English\n \
-/from:ko /to:en - Korean to English\n \
-/from:pt /to:en - Portuguese to English\n \
-/from:ru /to:en - Russian to English\n \
-/from:es /to:en - Spanish to English\n \
-	");
-		return false;
-	}
 	else
 	{
 		var func_name = "babel";

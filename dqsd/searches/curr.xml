@@ -1,6 +1,7 @@
 <search function="curr">
   <name>Currency Conversion</name>
-  <description>Convert one currency to another: To convert 100 US dollars to United Kingdom pounds: "curr /from:usd /to:gbp 100"</description>
+  <description>Convert one currency to another:
+    To convert 100 US dollars to United Kingdom pounds: "curr /from:usd /to:gbp 100"</description>
   <category>Reference</category>
   <link>http://www.xe.com/ucc/</link>
   <contributor>Monty Scroggins, Neel Doshi</contributor>
@@ -49,17 +50,13 @@
 
 	function curr(q)
 	{
-		if( q == "" )
-		{
-			openSearchWindow("http://www.xe.com/ucc/");
-			return false;
-		}
-		else if ( q == "?" )
+		if( q == "?" )
 		{
 			openSearchWindow("http://www.xe.com/iso4217.htm");
-			alert("Convert one currency to another: To convert 100 US dollars to United Kingdom pounds: 'curr /from:usd /to:gbp 100'");
-			return false;
 		}
+		if ( nullArgs("curr", q) )
+			return false;
+
 		else
 		{
 			var func_name = "curr";
