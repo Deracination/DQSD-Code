@@ -1,22 +1,30 @@
 <search function="sqlt">
   <name>SQLTeam.com</name>
-  <description>SQL server reference search.  "sqlt create table"</description>
+  <description>
+    SQL server reference search.<br/>
+    <a class="helpboxDescLabels">Example:</a><br/>
+    <table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">sqlt create table</td></tr>
+  	</table>
+  </description>
   <category>Computers</category>
   <link>http://www.sqlteam.com/</link>
   <contributor>Damian Maclennan</contributor>
+  
   <form name="sqltf"
         action="http://www.sqlteam.com/SearchResults.asp"
         method="get">
     <input type="hidden" name="SearchTerms" value=""/>
   </form>
+  
   <script><![CDATA[
     function sqlt(q)
     {
-      if (q == "")
-        openSearchWindow("http://www.sqlteam.com");
+      if( nullArgs("sqlt",q) )
+        return false;
       else
       {
-        document.sqltf.SearchTerms.value=q;
+        document.sqltf.SearchTerms.value = q;
         submitForm(sqltf);
       }
     }
