@@ -1,0 +1,34 @@
+<search function="ix">
+  <name>Ixquick</name>
+  <category>Search the Web</category>
+  <link>http://www.ixquick.com/</link>
+  <description>Search the Ixquick metasearch engine
+      <div class="helpboxDescLabels">Examples:</div>
+      <table class="helpboxDescTable">
+        <tr>
+          <td>ix lions</td>
+        </tr>
+      </table>
+  </description>
+  <contributor>Marcus Murray</contributor>
+  <form name="ixf"
+        method="get"
+        action="http://ixquick.com/do/metasearch.pl">
+    <input type="hidden" name="cat" value="web" />
+    <input type="hidden" name="query" value="" />
+  </form>
+  <script><![CDATA[
+    function ix(q)
+    {
+      if( nullArgs("ix", q) )
+        return;
+
+      document.ixf.query.value = q;
+      submitForm(ixf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>

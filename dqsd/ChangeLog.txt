@@ -1,4 +1,26 @@
--- What's new for 3.1.9 (date xxxx-xx-xx)
+-- What's new for 3.1.9.1 (date 2005-01-xx)
+
+Enhancements
+* Added IP autodetection. (Shawn K. Hall)
+
+Bug Fixes
+
+New Searches
+* ix - Search IxQuick meta search engine (Marcus Murray)
+* fxnws - Search Fox News (John Bairen)
+
+Modified Searches
+* winres - changed parsing to correct 'undefined' error and added ability to use preference variables (Shawn K. Hall)
+* enc - changed according to site changes (MLL)
+* wik - now supports international versions (MLL)
+
+Removed Searches
+* encyfr - site discontinued (MLL)
+
+Miscellaneous
+
+
+-- What's new for 3.1.9.0 (date 2004-12-24)
 
 Enhancements
 * Support for Czech month- and day names (Jiri Sedlacek)
@@ -16,7 +38,6 @@ Enhancements
 * Swedish holidays for 2005 (woo, early!) (Kim Gräsman)
 * Added ability to set number of results in google search as preference. (Shawn K. Hall)
 * configure.xml - modified to include dynamically loadable color schemes. CSS files renamed (Monty Scroggins)
-* Added IP autodetection. (Shawn K. Hall)
 
 Bug Fixes
 * Removed 'Type "!<em>prefix</em>" to see only matching entries.' from help. This action launches lucky Google.
@@ -61,7 +82,7 @@ New Searches
 * note.xml - Nifty quick note search (Peter Heath)
 * floax - 'mouser' interaction in the alternate viewport (read the help) (Shawn K. Hall)
 * mb - Search the online user-contributed MusicBrainz music database
-*fxnws - Search Fox News (John Bairen)
+
 
 Modified Searches
 * jdk - updated urls for j2ee and 1.4, added 1.5, 1.2, 1.1 and api switches (Brent Beardsley)
@@ -94,16 +115,12 @@ Modified Searches
 * acine - fit site changes (MLL)
 * cjfr - fit site changes (MLL)
 * jsref - attempts at fitting site changes (MLL)
-* winres - changed parsing to correct 'undefined' error and added ability to use preference variables (Shawn K. Hall)
-* enc - changed according to site changes (MLL)
-* wik - now supports international versions (MLL)
 
 Removed Searches
 * nwtsr and httpd replaced by whats (Kim Gräsman)
 * dicfr - site discontinued (MLL)
 * pcm - site modified, search no longer works (John Bairen)
 * wiq - duplicate of wordiq (John Bairen)
-* encyfr - site discontinued (MLL)
 
 Miscellaneous
 * Installer now lives by the following rules: (Kim Gräsman)
