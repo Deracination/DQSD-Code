@@ -152,6 +152,9 @@ Section "Quick Search Deskbar (required)"
   File "..\version.js"
   File "..\version.xml"
   File "..\versiondialog.htm"
+  File "..\xplocalsearch.css"
+  File "..\xptoolbarbot.htm"
+  File "..\xptoolbartop.htm"
   SetOutPath "$INSTDIR\searches"
   File "..\searches\*.xml"
   SetOutPath "$INSTDIR\src"
@@ -292,6 +295,9 @@ Section "Uninstall"
   Delete /REBOOTOK $INSTDIR\version.js
   Delete /REBOOTOK $INSTDIR\version.xml
   Delete /REBOOTOK $INSTDIR\versiondialog.htm
+  Delete /REBOOTOK $INSTDIR\xplocalsearch.css
+  Delete /REBOOTOK $INSTDIR\xptoolbarbot.htm
+  Delete /REBOOTOK $INSTDIR\xptoolbartop.htm
   RmDir /r $INSTDIR\src
   RmDir /r $INSTDIR\searches
 
