@@ -116,12 +116,14 @@ catch (e) {}
 if (!searchRoot)
 {
   var searchDOM = new ActiveXObject("MSXML.DOMDocument");
+  searchDOM.async = false;
   searchRoot = searchDOM.createElement("searches");
 }
 
 try
 {
   var xmldoc = new ActiveXObject( "MSXML.DOMDocument" );
+  xmldoc.async = false;
 
   // Get optional searches in localsearch.xml
   var localSearches = document.all("localsearch").selectNodes("/searches/search");
