@@ -197,6 +197,9 @@ Section "Quick Search Deskbar (required)"
   File "..\localsearch.css"
   File "..\localprefs.js"
   SetOverwrite on
+  
+  ; Create subdirectory for user searches
+  CreateDirectory "localsearches"
 
   ; old source files used to live here
   Delete $INSTDIR\license.txt
@@ -320,6 +323,7 @@ Section "Uninstall"
   Delete /REBOOTOK $INSTDIR\holidays.sg.xml
   Delete /REBOOTOK $INSTDIR\holidays.us.xml
   Delete /REBOOTOK $INSTDIR\loader.js
+  Delete /REBOOTOK $INSTDIR\maximized.htm
   Delete /REBOOTOK $INSTDIR\menu.txt
   Delete /REBOOTOK $INSTDIR\readme.txt
   Delete /REBOOTOK $INSTDIR\search.css
@@ -336,6 +340,7 @@ Section "Uninstall"
   Delete /REBOOTOK $INSTDIR\xptoolbartop.bmp
   RmDir /r $INSTDIR\src
   RmDir /r $INSTDIR\searches
+  RmDir /r $INSTDIR\addons
 
   ; Remove preferences too
   Delete /REBOOTOK $INSTDIR\preferences.js

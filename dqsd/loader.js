@@ -190,10 +190,13 @@ try
 catch (except) {}
 
 // Load searches from search directory
-loadSearches();
+loadSearchesFromDir( "searches" );
 
 // Load optional add-ons from addons directory
 loadAddons();
+
+// Load local searches
+loadSearchesFromDir( "localsearches" );
 
 // 2. eval all the scripts and doc.write all the forms
 
@@ -317,13 +320,13 @@ function addAliasesFromFile( aliasFile, category )
   }
 
 
-function loadSearches()
+function loadSearchesFromDir( directory )
 {
 
   try
   {
     // Get searches in the 'searches' subdirectory
-    var fileSearches = getFiles( "searches\\*.xml" ).split('\n');
+    var fileSearches = getFiles( directory + "\\*.xml" ).split('\n');
     
     for ( var i = 0; i < fileSearches.length; i++ )
     {
@@ -332,7 +335,7 @@ function loadSearches()
       if ( !/\.xml$/.test( fileSearches[i] ) )
         continue;
       
-      loadSearchFile( "searches\\" + fileSearches[i] );
+      loadSearchFile( directory + "\\" + fileSearches[i] );
 
     }
   }

@@ -26,6 +26,7 @@ Enhancements
 * pagetemplate preference - set to "maximized.htm" to maximize results window; or set to any HTML
   page that sets up the browser window the way you want it for your results. 
 * Fixed some descriptions in various searches; moved some searches to more appropriate categories
+* User-defined searches can be added to a 'localsearches' subdirectory.  These will not be overwritten on upgrading.
 
 Bug Fixes
 
