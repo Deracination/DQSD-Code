@@ -79,21 +79,28 @@
               alias = default_alias_text;
             }
 
-            if (j > 0)
+            if (!search.enabled)
             {
-              // because some puctuation causes problems with the javascript
-              // text box population, create an alias link only if there
-              // isn't punctuation in the alias.
-              if (alias != "" && alias != " " && alias.search(/\W/) == -1 )
-                QFSBodyCode += "<a class=helpboxAlias onMouseUp=parent.document.deff.q.value='" + alias + "'>";
-              else
-                QFSBodyCode += "<a class=helpboxAlias>"
+              QFSBodyCode += "<a class=helpboxCommandLink>";
             }
             else
             {
-              // Create a link that allows the user to populate the form field with
-              // the function name
-              QFSBodyCode += "<a class=helpboxCommandLink href='' onMouseUp=parent.document.deff.q.value='" + alias + "'>";
+              if (j > 0)
+              {
+                // because some puctuation causes problems with the javascript
+                // text box population, create an alias link only if there
+                // isn't punctuation in the alias.
+                if (alias != "" && alias != " " && alias.search(/\W/) == -1 )
+                  QFSBodyCode += "<a class=helpboxAlias onMouseUp=parent.document.deff.q.value='" + alias + "'>";
+                else
+                  QFSBodyCode += "<a class=helpboxAlias>"
+              }
+              else
+              {
+                // Create a link that allows the user to populate the form field with
+                // the function name
+                QFSBodyCode += "<a class=helpboxCommandLink href='' onMouseUp=parent.document.deff.q.value='" + alias + "'>";
+              }
             }
 
             QFSBodyCode += alias;
