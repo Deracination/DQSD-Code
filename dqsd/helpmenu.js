@@ -6,6 +6,31 @@ function registerMenuHook( menuHook )
   menuHooks.push( menuHook );
 }
 
+function searchCompareWithSubcatPath( s1, s2 )
+{
+  var s1_subcatPath = "";
+  var s2_subcatPath = "";
+
+  if ( s1.subcats && s1.subcats.length >= 1 ) {
+    for ( var isubmenu = 0; isubmenu < s1.subcats.length; isubmenu++ ) {
+      s1_subcatPath += '~' + s1.subcats[ isubmenu ].toLowerCase();
+	}
+  }
+
+  if ( s2.subcats && s2.subcats.length >= 1 ) {
+    for ( var isubmenu = 0; isubmenu < s2.subcats.length; isubmenu++ ) {
+      s2_subcatPath += '~' + s2.subcats[ isubmenu ].toLowerCase();
+	}
+  }
+
+  if (s1_subcatPath == "" && s2_subcatPath != "") return 1;
+  if (s1_subcatPath != "" && s2_subcatPath == "") return -1;
+  if (s1_subcatPath < s2_subcatPath) return -1;
+  if (s1_subcatPath > s2_subcatPath) return 1;
+
+  return searchCompare(s1, s2)
+}
+
 function showpop()
 {
   document.deff.q.focus();
@@ -36,7 +61,7 @@ function showpop()
       continue;
 
     var hcatmenu = mb.AppendSubMenu( categoryName );
-    helparray.sort( searchCompare );
+    helparray.sort( searchCompareWithSubcatPath );
     for (var k = 0; k < helparray.length; k++)
     {
       var search = helparray[k];
