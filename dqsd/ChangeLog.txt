@@ -11,6 +11,7 @@ Bug Fixes
 New Searches
 
 * dmda - Searches DevelopMentor's list archives (Kim Gräsman)
+* ly - Lycos search (Lincoln Jackson)
 
 Modified Searches
 
