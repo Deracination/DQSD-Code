@@ -4,6 +4,7 @@ New Searches
 
 * smlnk - smLNK is a link-shortening redirector where the URLs are as short as possible (from Jonathon Marshall)
 * cjfr - Get the conjugation for a french verb
+* webpoll - displays a graph illustrating the timings of the objects on a web page (from Dean Wilson)
 
 Modified Searches
 
