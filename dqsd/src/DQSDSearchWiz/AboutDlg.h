@@ -54,9 +54,11 @@ END_MSG_MAP()
 			HGLOBAL hdata = LoadResource( _Module.GetResourceInstance(), hrsc );
 			if ( hdata )
 			{
-				LPCTSTR pszChangeLog = (LPCTSTR)LockResource( hdata );
+				const DWORD dwResLen = SizeofResource( _Module.GetResourceInstance(), hrsc );
+				LPTSTR pszChangeLog = (LPTSTR)LockResource( hdata );
 				if ( pszChangeLog )
 				{
+					pszChangeLog[ dwResLen * sizeof TCHAR ] = _T('\0');
 					CWindow ctlHistory( GetDlgItem( IDC_ChangeHistory ) );
 					ctlHistory.SetWindowText( pszChangeLog );
 					UnlockResource( hdata );

@@ -748,20 +748,20 @@ string CDQSDWizardDlg::GetAbsoluteActionPath( _variant_t& varAction )
 {
 	USES_CONVERSION;
 
-	string strAction = _T("");
+	string strAction = W2T( varAction.bstrVal );
 
-	if ( !_tcsnicmp( _T("http"), W2CT(varAction.bstrVal), 4 ) )
+	if ( !_tcsnicmp( _T("http"), strAction.c_str(), 4 ) )
+		return strAction;
+
+	else if ( strAction.length() == 0 )
+		return m_strBaseURL;
+
+	string strActionPath = strAction;
+	if ( strActionPath[0] == _T('/') )
 	{
-		strAction = W2A( varAction.bstrVal );
+		strActionPath.erase( strActionPath.begin() );
 	}
-	else if ( _tcslen( W2CT(varAction.bstrVal) ) == 0 )
-	{
-		strAction = m_strBaseURL;
-	}
-	else
-	{
-		strAction = m_strBaseURL + ( *varAction.bstrVal != L'/' ? _T("/") : _T("") ) + W2A( varAction.bstrVal );
-	}
+	strAction = m_strBaseURL + ( m_strBaseURL[ m_strBaseURL.length() - 1 ] == _T('/') ? _T("") : _T("/") ) + strActionPath;
 
 	return strAction;
 }
