@@ -18,6 +18,7 @@ New Searches
 * amo - Search Amo's Online Crossword Dictionary (from Matthew McDougal)
 * jsenc - url encrypt/decrypt strings and optionally generate encoded mailto strings to hide from email harvesters (from Brent Beardsley)
 * passgen - password generator (from Brent Beardsley)
+* qrz - search QRZ Ham Radio Callsign Database (from Matthew McDougal)
 
 Modified Searches
 
