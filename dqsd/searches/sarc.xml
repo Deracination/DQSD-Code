@@ -1,0 +1,96 @@
+<search function="sarc">
+  <name>sarc</name>
+  <category>Computers<category>Reference</category></category>
+  <link>http://sarc.com/</link>
+  <contributor>Shawn K. Hall</contributor>
+  <email>Shawn[@]ReliableAnswers.com</email>
+  <description>
+    Searches the Symantec AntiVirus Research Corp (SARC) site.<br />
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+	<tr><td> [search]	</td><td> Search for this term </td></tr>
+
+	<tr><td> /advisories	</td><td> SARC Advisories </td></tr>
+	<tr><td> /scan		</td><td> SARC Scan </td></tr>
+	<tr><td> /tools		</td><td> SARC Removal Tools </td></tr>
+
+	<tr><td> /us		</td><td> Limit results to United States  </td></tr>
+	<tr><td> /americas	</td><td> Limit results to Americas (excluding US) </td></tr>
+	<tr><td> /japan		</td><td> Limit results to Japan </td></tr>
+	<tr><td> /asia		</td><td> Limit results to Asia Pacific </td></tr>
+	<tr><td> /east		</td><td> Limit results to Europe, Middle East and Africa </td></tr>
+
+	<tr><td> /product	</td><td> Search Product Updates </td></tr>
+	<tr><td> /kb		</td><td> Search Knowledge Base </td></tr>
+	<tr><td> /virus		</td><td> Search Viruses, Trojan horses, Worms and Macros </td></tr>
+	<tr><td> /vulnerabilities	</td><td> Search Vulnerabilities and Exploits </td></tr>
+	<tr><td> /enterprise	</td><td> Search Enterprise Products </td></tr>
+	<tr><td> /pc		</td><td> Search Home Computing Products </td></tr>
+	<tr><td> /smallbiz	</td><td> Search Small Business Products </td></tr>
+	<tr><td> /xsp		</td><td> Search xSP's and Carrier Solutions </td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+	<tr><td> sarc whatever </td></tr>
+    </table>
+  </description>
+  <comment>
+	This is pretty spiffy, eh?
+  </comment>
+
+  <form name="sarcf" method="POST"
+	action="http://search.symantec.com/custom/us/query.html">
+	<input type="hidden" name="lk"  value="1" />
+	<input type="hidden" name="rf"  value="0" />
+	<input type="hidden" name="qt"  value="" />
+	<input type="hidden" name="qp"  value="" />
+	<input type="hidden" name="col" value="" />
+  </form>
+
+  <script><![CDATA[
+    function sarc(q){
+      if( nullArgs( "sarc", q ) ){
+        return false;
+      }
+
+      document.sarcf.col.value = "";
+      document.sarcf.qp.value = "";
+
+      var args = parseArgs(q, "us, americas, japan, asia, east, product, kb, virus, vulnerabilities, enterprise, pc, smallbiz, xsp, advisories, scan, tools");
+      for (var i = 0; i < args.switches.length; i++){
+        sw = args.switches[i];
+        switch(sw.name){
+	 case "us":		document.sarcf.col.value += ",us kb"; break;
+	 case "americas":	document.sarcf.col.value += ",americas kb"; break;
+	 case "japan":		document.sarcf.col.value += ",japan kb"; break;
+	 case "asia":		document.sarcf.col.value += ",asiapac kb"; break;
+	 case "east":		document.sarcf.col.value += ",emea kb"; break;
+	 case "product":	document.sarcf.qp.value += ",url:http://www.symantec.com/product/ url:http://www.symantec.com/techsupp/files url:/files_"; break;
+	 case "kb":		document.sarcf.qp.value += ",url:http://service1.symantec.com/support/ url:http://service2.symantec.com/support/ url:http://service4.symantec.com/support/"; break;
+	 case "virus":		document.sarcf.qp.value += ",url:http://securityresponse.symantec.com/avcenter/venc/data url:/avcenter/venc/auto/index"; break;
+	 case "vulnerabilities":	document.sarcf.qp.value += ",url:/avcenter/security/Content"; break;
+	 case "enterprise":	document.sarcf.qp.value += ",url:http://enterprisesecurity.symantec.com/products/"; break;
+	 case "pc":		document.sarcf.qp.value += ",url:http://www.symantec.com/homecomputing/ url:/sabu/ url:/nav/ url:/nu/"; break;
+	 case "smallbiz":	document.sarcf.qp.value += ",url:http://smallbiz.symantec.com/ url:/sabu/ url:/pcanywhere/consumer/ /url:/winfax/ url:/nav/ url:/nu/ url:/sav/"; break;
+	 case "xsp":		document.sarcf.qp.value += ",url:/spsd/"; break;
+         case "advisories":	openSearchWindow("http://sarc.com/avcenter/security/Advisories.html"); break;
+         case "scan":		openSearchWindow("http://security.symantec.com/default.asp?productid=symhome&langid=ie&venid=sym"); break;
+         case "tools":		openSearchWindow("http://sarc.com/avcenter/tools.list.html"); break;
+	 default:
+        }
+      }
+	if(document.sarcf.qp.value == ""){
+	  document.sarcf.qp.value = "url:http://securityresponse.symantec.com/avcenter/venc/data url:/avcenter/venc/auto/index";
+	}
+	q = args.q.replace(/^([\,]*)(.*)$/g,"$2");
+	if(q != ""){
+	  document.sarcf.qt.value = q;
+	  submitForm( sarcf );
+	}
+    }
+  ]]></script>
+  <created_by>
+    This search file was created on 2005/01/17 by Shawn K. Hall
+    Copyright © 2004 Shawn K. Hall; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>

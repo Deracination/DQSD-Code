@@ -7,6 +7,7 @@ Bug Fixes
 * Installer no longer removes deprecated mb.xml, since it was re-added as a new search in 3.1.9.1
 
 New Searches
+* sarc - Searches the Symantec AntiVirus Research Corp (SARC) site. (Shawn K. Hall)
 
 Modified Searches
 * tinyurl - changed it to copy the tinyurl into the DQSD text box and select it instead of popping up the tinyurl webpage. (Brent Beardsley)
