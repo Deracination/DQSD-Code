@@ -109,32 +109,28 @@
           }
         }
 
-        //hack to get all 3 forms to open in same window
-        var tempreuseBrowserWindowModeOverride = reuseBrowserWindowModeOverride;
-        reuseBrowserWindowModeOverride = 1;
-
         document.setiqf.action = "http://"+serveraddress+":"+portnumber+"/login.htm?";
         document.setiqf.User.value="admin";
         document.setiqf.Pass.value=args.q;
-        submitForm(document.setiqf);
+        document.setiqf.target=DQSD_BROWSER_WINDOW_NAME + '_setiqf';
+        submitForm(document.setiqf, true);
 
         if( duration )
         {
           document.setiqcf.action = "http://"+serveraddress+":"+portnumber+"/connect.htm?";
           document.setiqcf.Connect.value=duration;
           document.setiqcf.target=document.setiqf.target;
-          submitForm(document.setiqcf);
+          setTimeout( "submitForm(document.setiqcf, true);", 250 );
         }
 
         if( !( typeof args.switch_val["display"] == "undefined" || args.switch_val["display"] == "" ) )
         {
           //mmh... I use a form, but I'm sure it's overkill. How to change the location URL of the opened window?
           document.setiqlf.action = "http://"+serveraddress+":"+portnumber+"/" + args.switch_val["display"] + ".htm";
-          document.setiqlf.target=document.setiqcf.target;
-          submitForm(document.setiqlf);
+          document.setiqlf.target=document.setiqf.target;
+          setTimeout( "submitForm(document.setiqlf, true);", 250 );
         }
 
-        reuseBrowserWindowModeOverride = tempreuseBrowserWindowModeOverride;
         return true;
       }
     }
