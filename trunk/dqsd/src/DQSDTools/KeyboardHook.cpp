@@ -165,7 +165,7 @@ LRESULT CALLBACK NotificationWndProc(
 	}
 	else if(uMsg == WM_DESTROY)
 	{
-		OutputDebugString("HotKey Destroy\n");
+//		OutputDebugString("HotKey Destroy\n");
 		UnregisterHotKey(hwnd, GetWindowLong(hwnd, GWL_USERDATA));
 	}
 
@@ -224,9 +224,9 @@ KeyboardInstallHotkey(int vkCode)
 		return CLauncher::Error(IDS_ERR_HOTKEY_NO_BAR_WINDOW, IID_ILauncher, E_FAIL);
 	}
 
-	char buffer[100];
-	wsprintf(buffer, "HotKeyReg: %d", vkCode);
-	OutputDebugString(buffer);
+//	char buffer[100];
+//	wsprintf(buffer, "HotKeyReg: %d", vkCode);
+//	OutputDebugString(buffer);
 
 
 	// Create a window which we use to receive notifications
@@ -241,7 +241,7 @@ KeyboardInstallHotkey(int vkCode)
 	if(hExistingWindow != NULL)
 	{
 		// THere's already hotkey window
-		OutputDebugString("Hotkey - wnd exists");
+//		OutputDebugString("Hotkey - wnd exists");
 		DestroyWindow(hExistingWindow);
 	}
 	else
