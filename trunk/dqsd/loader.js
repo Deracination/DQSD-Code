@@ -221,7 +221,6 @@ addAliasesFromFile( localaliases );
 function addAliasesFromFile( aliasFile )
 {
   var aliasTable = readTabDelimitedFile(aliasFile);
-  aliasTable.sort();
   for (var iPrivate = 0; iPrivate < aliasTable.length; iPrivate++)
   {
     var fields = aliasTable[iPrivate];
