@@ -1,0 +1,38 @@
+<search function="copys">
+  <name>copys.com</name>
+  <category>Legal</category>
+  <contributor>Shawn K. Hall</contributor>
+  <link>http://www.copyscape.com/</link>
+  <email>Shawn[@]ReliableAnswers.com</email>
+  <description>
+    Find copies of your content on the web.<br />
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+	<tr><td> [url] </td><td> Search for copies of this page </td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+	<tr><td> copys reliableanswers.com </td></tr>
+	<tr><td> copys http://dqsd.net/ </td></tr>
+    </table>
+  </description>
+  <comment>
+    This is pretty spiffy, eh?
+  </comment>
+
+  <form name="copysf" method="POST" action="http://www.copyscape.com/">
+	<input type="hidden" name="q" value="" />
+	<input type="hidden" value="Copyscape Search" />
+  </form>
+  <script><![CDATA[
+    function copys(q){
+      if( nullArgs("copys", q) ){return false;}
+      document.copysf.q.value = q;
+      submitForm(copysf);
+    }
+  ]]></script>
+  <created_by>
+    This search file was created on 2004/11/12 by Shawn K. Hall
+    Copyright © 2004 Shawn K. Hall; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>
