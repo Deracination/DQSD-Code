@@ -22,8 +22,8 @@ function closeabout()
 function searchCompare( s1, s2 )
 {
 
-  var alias1 = (s1.aliases[0].substr(0,INTERNAL_FUNC_PREFIX.length) == INTERNAL_FUNC_PREFIX) ? s1.aliases[1] : s1.aliases[0];
-  var alias2 = (s2.aliases[0].substr(0,INTERNAL_FUNC_PREFIX.length) == INTERNAL_FUNC_PREFIX) ? s2.aliases[1] : s2.aliases[0];
+  var alias1 = isInternalSearch(s1.aliases[0]) ? s1.aliases[1] : s1.aliases[0];
+  var alias2 = isInternalSearch(s2.aliases[0]) ? s2.aliases[1] : s2.aliases[0];
   if ( alias1 < alias2 ) return -1;
   if ( alias1 > alias2 ) return 1;
 
@@ -67,7 +67,7 @@ function about()
         for (var j = 0; j < search.aliases.length; j++)
         {
           var alias = search.aliases[j].replace(/&/g, "&amp;").replace(/</g, "&lt;");
-          if (alias.substr(0,INTERNAL_FUNC_PREFIX.length) == INTERNAL_FUNC_PREFIX)
+          if (isInternalSearch(alias))
             continue;
           if (alias == "")
             alias = "<em>Enter</em>";
