@@ -46,7 +46,6 @@
     <INPUT TYPE="hidden" NAME="page_cnt" VALUE="" />
     <INPUT TYPE="hidden" NAME="record_cnt" VALUE="" />
     <INPUT TYPE="hidden" NAME="tab" VALUE="Y" />
-    <input type="submit" name="my_function" value="Send Query" />
   </form>
   
   <script><![CDATA[
