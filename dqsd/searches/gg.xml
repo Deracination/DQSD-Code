@@ -333,6 +333,49 @@
        }
        return jd;
     }
+
+    function gg_keypressHook(keypressEvent)
+    {
+      switch(keypressEvent.keyCode){
+      //CTRL+D doesn't work because it's trapped by IE
+        //case 4:  // CTRL+D : Definitions
+        //  return gg(document.deff.q.value + " /define");
+        case 6:  // CTRL+F : Froogle
+          return gg(document.deff.q.value + " /froogle");
+        case 9:  // CTRL+I : Images
+          return gg(document.deff.q.value + " /images");
+        case 12: // CTRL+L : I'm Feeling Lucky
+          return gg(document.deff.q.value + " /ifl");
+      //CTRL+N doesn't work because it's trapped by IE
+        //case 14: // CTRL+N : News
+        //  return gg(document.deff.q.value + " /news");
+        case 19: // CTRL+S : Stock Quotes
+          return gg("stocks: " + document.deff.q.value);
+        case 20: // CTRL+T : Thesaurus
+          return gg(document.deff.q.value + " /glossary");
+        case 21: // CTRL+U : Google Groups
+          return gg(document.deff.q.value + " /groups");
+        default:
+          return false;
+      }
+    }
+
+    function gg_keypressHook_okp()
+    {
+      if (okp() == false) {
+	return false;
+      } else {
+	return (gg_keypressHook(window.event) == false) ? true : false;
+      }
+    }
+
+  //register google hot-keys
+    if (typeof registerKeypressHook == "function") {
+      registerKeypressHook(gg_keypressHook);
+    } else {
+      document.onkeypress = gg_keypressHook_okp;
+    }
+
   ]]></script>
 
   <copyright>
@@ -341,4 +384,3 @@
   GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
   </copyright>
 </search>
-
