@@ -225,11 +225,20 @@ function getMSXMLDOMDocumentInstance()
 {
   try
   {
-     return new ActiveXObject("Msxml2.DOMDocument");
+    var xmlDom = new ActiveXObject("Msxml2.DOMDocument.4.0");
+    xmlDom.setProperty("NewParser", true); // this is much faster, but doesn't support asynchronous parsing
+    return xmlDom;
   }
   catch(e)
   {
-     return new ActiveXObject("Msxml.DOMDocument");
+    try
+    {
+      return new ActiveXObject("Msxml2.DOMDocument");
+    }
+    catch(e)
+    {
+      return new ActiveXObject("Msxml.DOMDocument");
+    }
   }
 }
 
