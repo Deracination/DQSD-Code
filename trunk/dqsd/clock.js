@@ -91,6 +91,15 @@ function formatdate(date,format)
     // Get next token from format string
     c = format.charAt(i_format);
     token = "";
+
+	// Basic character escaping
+    if ((format.charAt(i_format) == '\\') && (i_format < format.length - 1))
+    {
+      result = result + format.charAt(++i_format);
+      i_format++;
+	  continue;
+    }
+
     while ((format.charAt(i_format) == c) && (i_format < format.length))
     {
       token += format.charAt(i_format);
