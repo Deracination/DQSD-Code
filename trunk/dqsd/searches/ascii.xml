@@ -1,5 +1,5 @@
 <search function="ascii">
-  <name>ASCII Character Conversion</name>
+  <name>Base Conversion: ASCII Character</name>
   <description>
     Convert ASCII characters to decimal, hex, octal and binary equivalents.<br/>
     <a class="helpboxDescLabels">Example:</a><br/>
@@ -22,7 +22,6 @@
         "  oct: "+dec.toString(8)+
         "  hex: "+dec.toString(16)+
         "  bin: "+dec.toString(2);
-      //document.deff.q.createTextRange().select();
     }
   ]]></script>
 </search>

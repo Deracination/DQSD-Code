@@ -1,14 +1,22 @@
 <search function="aw">
   <name>AccuWeather Forecast</name>
-  <description>Search for weather forecasts by zip code: "aw 98052"</description>
+  <description>
+    Search for weather forecasts by zip code.<br/>
+    <a class="helpboxDescLabels">Example:</a><br/>
+    <table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">aw 98052</td></tr>
+  	</table>
+  </description>
   <category>News</category>
   <link>http://www.accuweather.com/</link>
+  
   <form name="awf"
         action="http://www.accuweather.com/adcbin/local_index"
         method="get">
     <input type="hidden" name="nav" value="home"/>
     <input type="hidden" name="thisZip"/>
   </form>
+  
   <script><![CDATA[
     function aw(q)
     {

@@ -1,8 +1,15 @@
 <search function="bfe">
   <name>Bigfoot Email</name>
-  <description>Search Bigfoot's index of email addresses by name: "bfe Mark Rafn"</description>
+  <description>
+    Search Bigfoot's index of email addresses by name.<br/>
+    <a class="helpboxDescLabels">Example:</a><br/>
+    <table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">bfe Mark Rafn</td></tr>
+  	</table>
+  </description>
   <category>People and Places</category>
   <link>http://search.bigfoot.com/</link>
+  
   <form name="bfef"
         action="http://search.bigfoot.com/SEARCH"
         method="post">
@@ -15,6 +22,7 @@
     <input type="hidden" name="State"/>
     <input type="hidden" name="EmailSearch" value="1"/>
   </form>
+  
   <script><![CDATA[
     function bfe(q)
     {

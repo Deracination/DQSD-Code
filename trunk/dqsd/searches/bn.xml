@@ -1,20 +1,22 @@
 <search function="bn">
   <name>Borland Newsgroups</name>
-  <description>Search the Borland Newsgroup Database. Results are sorted by rank and article.<br/>
-  <a class="helpboxDescLabels">Switches:</a><br/>
-	<table cellpadding="0" cellspacing="0" border="0">
-		<tr><td class="helpboxDescColumns">/thread</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Sort results by thread instead of by article.</td></tr>
-		<tr><td class="helpboxDescColumns">/date</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Sort results by date instead of by rank.</td></tr>
- 	</table>
-  <a class="helpboxDescLabels">Examples:</a><br/>
-  <table cellpadding="0" cellspacing="0" border="0">
-		<tr><td class="helpboxDescColumns">bn delphi 7</td></tr>
-    <tr><td class="helpboxDescColumns">bn jbuilder linux kde /date /thread</td></tr>
-	</table>
+  <description>
+    Search the Borland Newsgroup Database. Results are sorted by rank and article.<br/>
+    <a class="helpboxDescLabels">Switches:</a><br/>
+  	<table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">/thread</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Sort results by thread instead of by article.</td></tr>
+  		<tr><td class="helpboxDescColumns">/date</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Sort results by date instead of by rank.</td></tr>
+   	</table>
+    <a class="helpboxDescLabels">Examples:</a><br/>
+    <table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">bn delphi 7</td></tr>
+      <tr><td class="helpboxDescColumns">bn jbuilder linux kde /date /thread</td></tr>
+  	</table>
   </description>
   <category>Computers</category>
   <link>http://www.tamaracka.com/search.htm</link>
   <contributor>Tom Corcoran, Ryan Edwards</contributor>
+  
   <form name="bnf"
         action="http://216.101.185.148/scripts/isapi.dll/execute"
         method="post">
@@ -22,6 +24,7 @@
     <input type="hidden" name="Display" value=""/>
     <input type="hidden" name="Sort" value=""/>
   </form>
+  
   <script><![CDATA[
     function bn(q)
     {
