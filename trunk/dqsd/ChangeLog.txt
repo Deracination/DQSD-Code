@@ -12,6 +12,7 @@ Enhancements
 
 * install now bundled with xplocalsearch.css, to be used as localsearch.css to make
   things match with XP default theme.
+* changed default length of retained search history from 50 to 1000.
 
 Bug Fixes
 
