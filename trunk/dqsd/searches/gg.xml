@@ -3,35 +3,47 @@
   <description>
     Google is reputed to be the web's fastest and most versatile search engine.<br/>
     <div class="helpboxDescLabels">Switches:</div>
-  	<table class="helpboxDescTable">
-  		<tr><td>/ifl</td><td> - </td><td>"I'm Feeling Lucky": Go directly to Google's top-ranked result.</td></tr>
-  		<tr><td>/advanced</td><td> - </td><td>Use the Google Advanced Search page.</td></tr>
-  		<tr><td>/groups</td><td> - </td><td>Search Google's newsgroup archive.</td></tr>
-  		<tr><td>/directory</td><td> - </td><td>Search Google's copy of the DMOZ open directory.</td></tr>
-  		<tr><td>/images</td><td> - </td><td>Search for images.</td></tr>
+    <table class="helpboxDescTable">
+      <tr><td>/ifl</td><td> - </td><td>"I'm Feeling Lucky": Go directly to Google's top-ranked result.</td></tr>
+      <tr><td>/advanced</td><td> - </td><td>Use the Google Advanced Search page.</td></tr>
+      <tr><td>/groups</td><td> - </td><td>Search Google's newsgroup archive.</td></tr>
+      <tr><td>/directory</td><td> - </td><td>Search Google's copy of the DMOZ open directory.</td></tr>
+      <tr><td>/images</td><td> - </td><td>Search for images.</td></tr>
+      <tr><td>/news</td><td> - </td><td>Search for news (<i>warning : google news still in beta, .com only, english only mode</i>).</td></tr>
       <tr><td>/cache</td><td> - </td><td>Given a URL, loads Google's cached copy of the web page.</td></tr>
       <tr><td>/related</td><td> - </td><td>Given a URL, finds other sites closely related.</td></tr>
       <tr><td>/link</td><td> - </td><td>Given a URL, finds other sites that link to it.</td></tr>
     </table>
     <div class="helpboxDescLabels">Locales:</div>
-  	<table class="helpboxDescTable">
+    <table class="helpboxDescTable">
       <tr><td>/local</td><td> - </td><td>Limits search results to the specified locale.</td></tr>
       <tr><td>/uk</td><td> - </td><td>Use the localized United Kingdom version of Google.</td></tr>
-      <tr><td>/canada</td><td> - </td><td>Use the localized Canadian version of Google.</td></tr>
-  	</table>
+      <tr><td>/canada</td><td> - </td><td>Use the localized canadian version of Google.</td></tr>
+      <tr><td>/france</td><td> - </td><td>Use the localized french version of Google.</td></tr>
+      <tr><td>/deutschland</td><td> - </td><td>Use the localized german version of Google.</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Language:</div>
+    <table class="helpboxDescTable">
+      <tr><td colspan="3">Display Google tips and messages in...</td></tr>
+      <tr><td>/language:de</td><td> - </td><td>german</td></tr>
+      <tr><td>/language:es</td><td> - </td><td>spanish</td></tr>
+      <tr><td>/language:fr</td><td> - </td><td>french</td></tr>
+      <tr><td colspan="3">and many more... see <a href="http://www.google.com/help/customize.html#displang" target="_new">www.google.com/help/customize.html#displang</a></td></tr>
+    </table>
     <div class="helpboxDescLabels">Examples:</div>
     <table class="helpboxDescTable">
-  		<tr><td>gg dqsd /images</td></tr>
+      <tr><td>gg dqsd /images</td></tr>
       <tr><td>gg tony blair /uk /directory</td></tr>
-  	</table>
+    </table>
   </description>
   <category>Search the Web</category>
   <link>http://www.google.com/</link>
-  <contributor>Ryan Edwards, David Bau</contributor>
+  <contributor>Ryan Edwards, David Bau, news and language switches by MLL</contributor>
   
   <form name="ggf"
         action="http://www.google.com/search"
         method="get">
+    <input type="hidden" name="hl" value=""/>
     <input type="hidden" name="cat" value=""/>
     <input type="hidden" name="meta" value=""/>
     <input type="hidden" name="q"/>
@@ -40,12 +52,14 @@
   <form name="ggf_adv"
         action="http://www.google.com/advanced_search"
         method="get">
+    <input type="hidden" name="hl" value=""/>
     <input type="hidden" name="q"/>
   </form>
   
   <form name="ggf_ifl"
         action="http://www.google.com/search"
         method="get">
+    <input type="hidden" name="hl" value=""/>
     <input type="hidden" name="q"/>
     <input type="hidden" name="meta" value=""/>
     <input type="hidden" name="btnI" value="I'm Feeling Lucky"/>
@@ -54,20 +68,31 @@
   <form name="ggf_image"
         action="http://images.google.com/images"
         method="get">
+    <input type="hidden" name="hl" value=""/>
+    <input type="hidden" name="q"/>
+  </form>
+  
+  <form name="ggf_groups"
+        action="http://groups.google.com/groups"
+        method="get">
+    <input type="hidden" name="hl" value=""/>
     <input type="hidden" name="q"/>
   </form>
   
   <form name="ggf_news"
-        action="http://groups.google.com/groups"
+        action="http://news.google.com/news"
         method="get">
-    <input type="hidden" name="q"/>
+  	<!-- commented out for test <input type="hidden" name="hl" value="en"/> -->
+    <input type="hidden" name="hl" value=""/>
+	  <input type="hidden" name="q"/>
   </form>
   
   <script><![CDATA[
+  //by MLL: warning : news service is still in beta stage, so URLs below may change
     function gg(q)
     {
-      var args = parseArgs(q, "ifl, advanced, groups, directory, images, cache, related, link, local, uk, canada");
-      var mode, local, local_meta = "", local_tld = "com";
+      var args = parseArgs(q, "ifl, advanced, groups, directory, images, news, cache, related, link, local, uk, canada, france, deutschland, language");
+      var mode, local, local_meta = "", local_tld = "com", msglang = "";
       
       if( q == "?" )
       {
@@ -82,8 +107,12 @@
           {
             case "uk": local_tld = "co.uk"; local_meta = "cr=countryUK|countryGB"; break;
             case "canada": local_tld = "ca"; local_meta = "cr=countryCA"; break;
+            case "france": local_tld = "fr"; local_meta = "cr=countryFR"; break;
+            case "deutschland": local_tld = "de"; local_meta = "cr=countryDE"; break;
             
             case "local": local = true; break;
+            
+            case "language": msglang = args.switch_val["language"]; break;
             
             default:
               if(mode) 
@@ -100,7 +129,8 @@
       document.ggf.action = document.ggf_ifl.action = "http://www.google." + local_tld + "/search";
       document.ggf_adv.action = "http://www.google." + local_tld + "/advanced_search";
       document.ggf_image.action = "http://images.google." + local_tld + "/images";
-      document.ggf_news.action = "http://groups.google." + local_tld + "/groups";
+      document.ggf_groups.action = "http://groups.google." + local_tld + "/groups";
+      document.ggf_news.action = "http://news.google." + local_tld + "/news";
       
       // If the user specified to search localized content only, restrict it now.
       if(local)
@@ -117,6 +147,7 @@
           case "images": openSearchWindow("http://images.google." + local_tld); return;
           case "directory": openSearchWindow("http://images.google." + local_tld + "/dirhp"); return;
           case "groups": openSearchWindow("http://www.google." + local_tld + "/grphp"); return;
+          case "news": openSearchWindow("http://www.google." + local_tld + "/news"); return;
           default: openSearchWindow("http://www.google." + local_tld); return;
         }
       
@@ -133,35 +164,48 @@
         {
           case "ifl":
             document.ggf_ifl.q.value = args.q;
+            document.ggf_ifl.hl.value = msglang;
             submitForm(ggf_ifl);
             break;
           case "advanced":
             document.ggf_adv.q.value = args.q;
+            document.ggf_adv.hl.value = msglang;
             submitForm(ggf_adv);
             break;
           case "directory":
             document.ggf.q.value = args.q;
+            document.ggf.hl.value = msglang;
             document.ggf.cat.value = "gwd/Top";
             submitForm(ggf);
             break;
           case "images":
             document.ggf_image.q.value = args.q;
+            document.ggf_image.hl.value = msglang;
             submitForm(ggf_image);
             break;
           case "related":
             document.ggf.q.value="related:" + args.q;
+            document.ggf.hl.value = msglang;
             submitForm(ggf);
             break;
           case "cache":
             document.ggf.q.value="cache:" + args.q;
+            document.ggf.hl.value = msglang;
             submitForm(ggf);
             break;
           case "link":
             document.ggf.q.value="link:" + args.q;
+            document.ggf.hl.value = msglang;
             submitForm(ggf);
             break;
           case "groups":
+            document.ggf_groups.q.value = args.q;
+            document.ggf_groups.hl.value = msglang;
+            submitForm(ggf_groups);
+            break;
+          case "news":
             document.ggf_news.q.value = args.q;
+            document.ggf_news.hl.value = msglang;
             submitForm(ggf_news);
             break;
         }
@@ -169,8 +213,10 @@
       else
       {
         document.ggf.q.value = args.q;
+        document.ggf.hl.value = msglang;
         submitForm(ggf);
       }
     }
   ]]></script>
 </search>
+
