@@ -176,7 +176,8 @@ calStart=0;
 *  nsccal - Netscape Calendar
 *  mycal  - MyCalendar.com
 *  evcal  - Evite.com
-*  outlook - MS Outlook default calendar
+*  outlook - MS Outlook default calendar (won't go to the current day, yet)
+*  mozillacal - Mozilla calendar (won't go to the current day, yet)
 */
 defaultcal="yhocal";
 
