@@ -1,21 +1,24 @@
 <search function="encarta">
   <name>Encarta Online Deluxe Search</name>
   <category>Reference<category>General</category></category>
-  <contributor> Andrew N. Carpenter</contributor>
+  <contributor>Andrew N. Carpenter</contributor>
   <link>http://encarta.msn.com/</link>
   <email>andy@andrewcarpenter.net</email>
   <description>
   Search Microsoft Encarta Encyclopedia
-  <div class="helpboxDescLabels">Example:</div> 
+    <div class="helpboxDescLabels">Switches:</div>
     <table class="helpboxDescTable">
-      <tr>
-        <td>encarta tuscanny</td>
-      </tr>
+      <tr><td>/encyclopedia (default)</td><td> - </td><td>Search Encyclopedia</td></tr>
+      <tr><td>/dictionary</td><td> - </td><td>Search dictionary</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>encarta tuscany</td></tr>
     </table>
   </description>
   <form name="encartaf"
         method="get"
-        action="http://encarta.msn.com/encarta/search.asp">
+        action="http://encarta.msn.com/encnet/refpages/SRPage.aspx">
 
     <input type="hidden" name="search" value="" />
   </form>
@@ -25,13 +28,24 @@
       if( nullArgs("encarta", q) )
         return;
 
-      document.encartaf.search.value = q;
+      var args = parseArgs(q, "dictionary, encyclopedia");
+      if ( args.switches.length > 0 )
+      {
+        switch( args.switches[0].name )
+        {
+          case "dictionary":
+            document.encartaf.action = "http://encarta.msn.com/encnet/features/dictionary/DictionaryResults.aspx"
+            break;
+        }
+      }
+
+      document.encartaf.search.value = args.q;
 
       submitForm(encartaf);
     }
   ]]></script>
   <copyright>
-	Copyright (c) 2002 David Bau
+	Copyright (c) 2002-2004 David Bau
 	Distributed under the terms of the
 	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
   </copyright>

@@ -35,6 +35,7 @@ Modified Searches
 * bg - now able to search the Message Bible as well as set version/etc preferences in localprefs.js - see the help for preference variables (Brent Beardsley)
 * tm - tm? now behaves correctly
 * so - better handling of arguments
+* encarta - updated to work with site changes and added /dictionary switch (Glenn Carr)
 
 Removed Searches
 * nwtsr and httpd replaced by whats (Kim Gräsman)
