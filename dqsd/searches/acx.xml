@@ -12,7 +12,6 @@
   <contributor>Stewart Rubenstein</contributor>
   
   <form name="acxf"
-        target="_blank"
         action="http://chemacx.cambridgesoft.com/chemacx/default.asp"
         method="GET">
     <input type="hidden" name="formgroup" value="basenp_form_group"/>

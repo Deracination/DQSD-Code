@@ -1,0 +1,37 @@
+<search function="chap">
+  <name>Chapters|Indigo</name>
+  <description>
+    Search books, videos, DVDs at Chapters.Indigo.ca.<br/>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+      <tr><td>chap Ender's Game</td></tr>
+    </table>
+  </description>
+  <category>Shopping</category>
+  <link>http://chapters.indigo.ca/</link>
+  <contributor>Sarah Sweeney</contributor>
+  <email>sarah@designshift.com</email>
+  <form name="chaptersform"
+        action="http://chapters.indigo.ca/search/default.asp"
+        method="post">
+    <input type="hidden" name="Search_Method" value="QuickSearch" />
+    <input type="hidden" name="Search_Phrase_QuickSearch" />
+    <input type="hidden" name="Search_Modifier_QuickSearch" value="QuickSearch" />
+    <input type="hidden" name="Search_Catalog" value="Books,Video,DVD" />
+  </form>
+  <script><![CDATA[
+    function chap(q, switches)
+    { 
+      if( nullArgs("chap", q) )
+        return false;
+
+      if( q == "" )
+        openSearchWindow("http://chapters.indigo.ca/");
+      else
+      {
+        document.chaptersform["Search_Phrase_QuickSearch"].value = q;
+        submitForm(chaptersform);
+      }
+    }
+  ]]></script>
+</search>

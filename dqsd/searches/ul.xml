@@ -1,0 +1,45 @@
+<search function="ul">
+  <name>Snopes.com Urban Legends</name>
+  <description>
+    Search for urban legends, email hoaxes, rumours, etc, at Snopes.com.<br/>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+      <tr><td>ul flashing headlights</td></tr>
+    </table>
+  </description>
+  <category>Reference</category>
+  <link>http://www.snopes2.com/ulindex.asp</link>
+  <contributor>Sarah Sweeney</contributor>
+  <email>sarah@designshift.com</email>
+  <form name="snopesform"
+	method="get"
+	action="http://search.atomz.com/search/">
+    <input type="hidden" value=" Search " />
+    <input type="hidden" name="sp-q" />
+    <input type="hidden" name="sp-a" value="00062d45-sp00000000" />
+    <input type="hidden" name="sp-advanced" value="1" />
+    <input type="hidden" name="sp-p" value="all" />
+    <input type="hidden" name="sp-w-control" value="1" />
+    <input type="hidden" name="sp-w" value="alike" />
+    <input type="hidden" name="sp-date-range" value="-1" />
+    <input type="hidden" name="sp-x" value="any" />
+    <input type="hidden" name="sp-c" value="100" />
+    <input type="hidden" name="sp-m" value="1" />
+    <input type="hidden" name="sp-s" value="0" />
+  </form>
+  <script><![CDATA[
+    function ul(q, switches)
+    { 
+      if( nullArgs("ul",q) )
+        return false;
+
+      if( q == "" )
+        openSearchWindow("http://www.snopes2.com/ulindex.asp");
+      else
+      {
+        document.snopesform["sp-q"].value = q;
+        submitForm(snopesform);
+      }
+    }
+  ]]></script>
+</search>

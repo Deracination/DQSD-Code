@@ -7,8 +7,7 @@
   <email>stephenmontgomery_at_ameritech_dot_net</email>
   <form name="tccf" 
         method="get" 
-        action="http://www.primeris.com/fonefind/findint.php" 
-        target="_blank">
+        action="http://www.primeris.com/fonefind/findint.php">
     <input type="hidden" name="intlnum" />
     <input type="hidden" name="intlname" />
     <input type="hidden" name="intlquery" />

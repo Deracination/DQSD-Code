@@ -1,0 +1,34 @@
+<search function="rt">
+  <name>Rotten Tomatoes</name>
+  <description>
+    Search for movie info and reviews on RottenTomatoes.com.<br/>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+      <tr><td>rt Shawshank Redemption</td></tr>
+    </table>
+  </description>
+  <category>Entertainment</category>
+  <link>http://www.rottentomatoes.com/</link>
+  <contributor>Sarah Sweeney</contributor>
+  <email>sarah@designshift.com</email>
+  <form name="rtmf"
+        action="http://www.rottentomatoes.com/search/movie.php"
+        method="post">
+    <input type="hidden" name="search"/>
+  </form>
+  <script><![CDATA[
+    function rt(q, switches)
+    { 
+      if( nullArgs("rt",q) )
+        return false;
+
+      if( q == "" )
+        openSearchWindow("http://www.rottentomatoes.com/");
+      else
+      {
+        document.rtmf["search"].value = q;
+        submitForm(rtmf);
+      }
+    }
+  ]]></script>
+</search>
