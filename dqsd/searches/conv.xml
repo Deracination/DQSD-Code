@@ -11,7 +11,7 @@
     <input type="hidden" name="To" value=""/>
   </form>
   <script><![CDATA[
-    function conv(q, switches)
+    function conv(q)
     {
       if( q == "" )
         openSearchWindow("http://www.convertit.com/Go/Entisoft/Measurement/Converter.ASP");

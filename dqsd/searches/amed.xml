@@ -13,7 +13,7 @@
     <input type="hidden" name="QueryText"/>
   </form>
   <script><![CDATA[
-    function amed(q, switches)
+    function amed(q)
     {
       if( q == "" )
         openSearchWindow("http://www.accessmedicine.com/harrisons/public/su_search/advanced_search.html");

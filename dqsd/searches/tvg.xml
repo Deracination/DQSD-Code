@@ -10,13 +10,14 @@
     <input type="hidden" name="FormCategories" value=""/>
   </form>
   <script><![CDATA[
-    function tvg(q, switches) 
+    function tvg(q) 
     {
-      if (q=="")
+      var args = parseArgs(q, "action, comedy, adult, movie, drama, horror, mystery, scifi, western, sports, news, health, science, educational, family, childrens, talk, soaps, shopping, music");
+      if (q == "")
         openSearchWindow("http://www.tvguide.com/listings/search/Search.asp");
-      else if( switches.length == 1 )
+      else if( args.switches.length == 1 )
       {
-        switch( switches[0] )
+        switch( args.switches[0].name )
         {
           case "action": genre = "action & adventure"; break;
           case "comedy": genre = "comedy"; break;
@@ -39,13 +40,13 @@
           case "shopping": genre = "shopping & classifieds"; break;
           case "music": genre = "music"; break;
         }
-        document.tvgf.FormText.value = ""
+        document.tvgf.FormText.value = "";
         document.tvgf.FormCategories.value = genre;
         submitForm(tvgf);
       }
       else
       {
-        document.tvgf.FormText.value = q;
+        document.tvgf.FormText.value = args.q;
         document.tvgf.FormCategories.value = "";
         submitForm(tvgf)
       }

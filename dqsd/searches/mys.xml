@@ -10,7 +10,7 @@
     <input type="hidden" name="depth" value="0"/>
   </form>
   <script><![CDATA[
-    function mys(q, switches)
+    function mys(q)
     {
       if( q == "" )
         openSearchWindow("http://www.mysql.com/");

@@ -17,7 +17,7 @@
     <input type="hidden" name="keyword" value=""/>
   </form>
   <script><![CDATA[
-    function dlt(q, switches)
+    function dlt(q)
     {
       if( q == "" )
         openSearchWindow("http://www.dealtime.com/");

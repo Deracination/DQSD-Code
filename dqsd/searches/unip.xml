@@ -3,7 +3,6 @@
   <description>Dig on a DNS address: "unip yahoo.com", or "unip email.com /MX"</description>
   <category>Computers</category>
   <link>http://www.uniplus.ch/cgi-bin/dig.cgi</link>
-  <switches>mx</switches>
   <contributor>Bjorn Jonson</contributor>
   <email>bjornjonson2000_at_yahoo_dot_com</email>
   <form name="unipf"
@@ -16,25 +15,26 @@
     <input type="hidden" name="y" value="0"/>
   </form>
   <script><![CDATA[
-    function unip(q,switches)
+    function unip(q)
     {
       var suffix;
       var result;
 
+      var args = parseArgs(q, "mx");
       if (q == "")
         openSearchWindow("http://www.uniplus.ch/cgi-bin/dig.cgi");
-      else if( switches.length == 1 )
+      else if( args.switches.length == 1 )
       {
-        if( switches[0] == "mx" )
+        if( args.switches[0].name == "mx" )
         {
-          document.unipf.domain.value = q;
+          document.unipf.domain.value = args.q;
           document.unipf.type.value = "MX";
           submitForm(unipf);
         }
       }
       else
       {
-        document.unipf.domain.value = q;
+        document.unipf.domain.value = args.q;
         document.unipf.type.value = "ANY";
         submitForm(unipf);
       }

@@ -12,7 +12,7 @@
     <input type="hidden" name="q"/>
   </form>
   <script><![CDATA[
-    function dp(q, switches)
+    function dp(q)
     {
       if( q == "" )
         openSearchWindow("http://www.dogpile.com/");

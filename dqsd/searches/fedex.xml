@@ -14,7 +14,7 @@
     <input type="hidden" name="cntry_code" VALUE="us"/>
   </form>
   <script><![CDATA[
-    function fedex(q, switches)
+    function fedex(q)
     {
       if( q == "" )
         openSearchWindow("http://www.fedex.com/");

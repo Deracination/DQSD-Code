@@ -12,7 +12,7 @@
     <input type="hidden" name="request"/>
   </form>
   <script><![CDATA[
-    function bomis(q, switches)
+    function bomis(q)
     {
       if( q == "" )
         openSearchWindow("http://www.bomis.com/");

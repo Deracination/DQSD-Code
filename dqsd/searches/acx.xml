@@ -21,7 +21,7 @@
     <input type="hidden" name="ReturnType"/>
   </form>
   <script><![CDATA[
-    function acx(q, switches)
+    function acx(q)
     {
       if( q == "" )
         openSearchWindow("http://chemacx.cambridgesoft.com/");

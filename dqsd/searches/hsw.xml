@@ -10,7 +10,7 @@
     <input type="hidden" name="search" value="SEARCH"/>
   </form>
   <script><![CDATA[
-  	function hsw(q, switches)
+  	function hsw(q)
   	{
   		if( q == "" )
   		  openSearchWindow("http://www.howstuffworks.com/");

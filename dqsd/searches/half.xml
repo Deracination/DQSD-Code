@@ -10,7 +10,7 @@
     <input type="hidden" name="keyword"/>
   </form>
   <script><![CDATA[
-    function half(q, switches)
+    function half(q)
     {
       if( q == "" )
         openSearchWindow("http://www.half.com/");

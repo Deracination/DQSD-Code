@@ -12,7 +12,7 @@
       <input type="hidden" name="Area" />
     </form>
     <script><![CDATA[
-      function ac(q, switches)
+      function ac(q)
       {
         if (q == "")
           window.open("http://www.getzips.com");

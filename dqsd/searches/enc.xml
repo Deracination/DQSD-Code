@@ -10,7 +10,7 @@
     <input type="hidden" name="search" value=""/>
   </form>
   <script><![CDATA[
-    function enc(q, switches)
+    function enc(q)
     {
       if( q == "" )
         openSearchWindow("http://www.encyclopedia.com/");

@@ -10,7 +10,7 @@
     <input type="hidden" name="db" value="*"/>
   </form>
   <script><![CDATA[
-    function dic(q, switches)
+    function dic(q)
     {
       if( q == "" )
         openSearchWindow("http://www.dictionary.com/");

@@ -3,7 +3,6 @@
   <description>Google is reputed to be the fastest web search engine. Search Google's copy of the DMOZ open /directory. Search for /images, /related sites, sites that /link to the search term, or view Google's /cache of a web page. <nobr>Example: "gg david bau /images"</nobr></description>
   <category>Search the Web</category>
   <link>http://www.google.com/</link>
-  <switches>images, directory, related, similar, cache, link</switches>
   <contributor>David Bau, Ryan Edwards</contributor>
   <form name="ggf"
         action="http://www.google.com/search"
@@ -17,46 +16,49 @@
     <input type="hidden" name="q"/>
   </form>
   <script><![CDATA[
-    function gg(q, switches)
+    function gg(q)
     {
-      if( q == "" )
+      var args = parseArgs(q, "images, directory, related, similar, cache, link");
+      if( args.q == "" )
       {
-        switch( switches[0] )
+        switch( args.switches[0].name )
         {
           case "images": openSearchWindow("http://images.google.com/"); break;
           case "directory": openSearchWindow("http://images.google.com/dirhp?hl=en"); break;
           default: openSearchWindow("http://www.google.com/"); break;
         }
       }
-      else if( switches.length == 1 )
-        switch( switches[0] )
+      else if( args.switches.length == 1 )
+      {
+        switch( args.switches[0].name )
         {
           case "directory":
-            document.ggf.q.value = q;
+            document.ggf.q.value = args.q;
             document.ggf.cat.value = "gwd/Top";
             submitForm(ggf);
             break;
           case "images":
-            document.imagef.q.value = q;
+            document.imagef.q.value = args.q;
             submitForm(imagef);
             break;
           case "related":
           case "similar":
-            document.ggf.q.value="related:" + q;
+            document.ggf.q.value="related:" + args.q;
             submitForm(ggf);
             break;
           case "cache":
-            document.ggf.q.value="cache:" + q;
+            document.ggf.q.value="cache:" + args.q;
             submitForm(ggf);
             break;
           case "link":
-            document.ggf.q.value="link:" + q;
+            document.ggf.q.value="link:" + args.q;
             submitForm(ggf);
             break;
         }
+      }
       else
       {
-        document.ggf.q.value = q;
+        document.ggf.q.value = args.q;
         submitForm(ggf);
       }
     }

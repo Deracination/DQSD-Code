@@ -1,24 +1,10 @@
 // Load the contents of search.xml, aliases, and menu files
 
-function addsearch(fname, name, desc, link, cat, switches)
+function addsearch(fname, name, desc, link, cat)
 {
   try
   {
-    // Parse the switches string into individual words and store in the switches array
-    var result = [];
-    if( switches )
-    {
-      if( switches.match( /[`~!@#$%^*()-+\=\[\]{}\|\\:;'".\/\?]+/ ) )
-        throw { description:"<switches></switches> tag contains invalid characters." };
-      for( var i=0; switches.length > 0 ; i++ )
-      {
-        var tmp = switches.match( /^\s*(\w+)(\s*,?\s+|$)/ );
-        result[i] = tmp[1].toLowerCase();
-        switches = switches.substring( tmp[1].length + tmp[2].length , switches.length );
-      }
-    }
-    
-    searches[fname] = {fname:fname, name:name, desc:desc, link:link, cat:cat, fun:eval(fname), aliases:[], switches:result};
+    searches[fname] = {fname:fname, name:name, desc:desc, link:link, cat:cat, fun:eval(fname), aliases:[]};
     if( !aliases[fname] )
       addalias( fname, fname );
     addhelp( searches[fname] );
@@ -54,7 +40,7 @@ function addalias(alias, fname)
                            "  direct(url.replace( /%s/g, t ));"
                           );
       eval( fname + " = f;" );
-      addsearch( fname, url, "", url.search(/%s/) < 0 ? url : "", "Shortcuts", null );
+      addsearch( fname, url, "", url.search(/%s/) < 0 ? url : "", "Shortcuts");
     }
     else if ((res = fname.match(/^(\w+) +(.+)/)) && searches[res[1]]) // starts with a valid search function
     {
@@ -65,7 +51,7 @@ function addalias(alias, fname)
                            res[1] + "(cmd.replace( /%s/g, t ));"
                           );
       eval( fname + " = f;" );
-      addsearch( fname, cmd, "", "", "Shortcuts", null );
+      addsearch( fname, cmd, "", "", "Shortcuts");
     }
     else
     {
@@ -217,13 +203,11 @@ if (searchRoot)
       var descriptionNode = searchNode.selectSingleNode("description");
       var linkNode = searchNode.selectSingleNode("link");
       var categoryNode = searchNode.selectSingleNode("category");
-      var switchesNode = searchNode.selectSingleNode("switches");
       addsearch(fn.text,
                 (nameNode ? nameNode.text : fn.text),
                 (descriptionNode ? descriptionNode.xml : null),
                 (linkNode ? linkNode.text : null),
-                (categoryNode ? categoryNode.text : null),
-                (switchesNode ? switchesNode.text : null));
+                (categoryNode ? categoryNode.text : null));
     }
   }
 }

@@ -382,54 +382,11 @@ function shortcut(t)
 
 function performsearch( fname, term )
 {
-  var switches = [], i = 0, arg = null, appterm = "";
-  
   if( !fname ) fname = defaultsearch;                         // if the specified search does not exist (ie. no default search), set to defaultsearch
   term = term.replace(/^\s*/, '').replace(/\s*$/, '');        // strip out leading and trailing spaces
-  
-  while( (arg = term.match(/\/(\w+)\s*$/)) != null )          // search for possible switches in term
-  {
-    var arg1 = arg[1].toLowerCase();
-    for( var j=0; j < searches[fname].switches.length; j++ )  // check if the switch found matches any registered values
-      if( arg1 == searches[fname].switches[j].substring(0,arg[1].length) ) 
-      {                                                       // we have a possible partial or full match
-        var dup = false;
-        
-        if( arg1 != searches[fname].switches[j] )             // check to see this is a unique partial match
-          for( var k=0; k < searches[fname].switches.length; k++ )
-            if( arg1 == searches[fname].switches[k].substring(0,arg[1].length)
-                && searches[fname].switches[k] != searches[fname].switches[j] )
-              dup = true;       
-        
-        for( var k=0; k < switches.length; k++ )              // make sure we haven't added this switch to the list already
-          if( switches[k] == searches[fname].switches[j] )
-            dup = true;
-        
-        if( dup == false )
-        {
-          switches[i] = searches[fname].switches[j];          // everything looks good, so add the switch
-          break;
-        }
-      }
-    
-    appterm = (switches[i] ? appterm : term.substring( term.length - arg1.length - 1, 
-                                       term.length ) + (appterm ? " " + appterm : ""));
-    term = term.substring( 0, term.length - arg1.length - 1 ).replace(/\s*$/, '');
-    if( switches[i] ) i++;
-  }
-  
-  // because we parse the string backwards, we need to switch the data around so
-  // that it reflects the order in which it was typed and not confuse the search programmer
-  if( switches )
-  {
-    var tmp = [];
-    for( var i=0; i < switches.length; i++ )
-      tmp[i] = switches[switches.length-i-1];
-    switches = tmp;
-  }
-  
+
   if (searches[fname])  
-  searches[fname].fun(term + (appterm ? " " + appterm : ""), switches );
+    searches[fname].fun(term);
   else
     eval(fname + "()");
 }

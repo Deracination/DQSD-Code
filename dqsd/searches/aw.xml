@@ -10,7 +10,7 @@
     <input type="hidden" name="thisZip"/>
   </form>
   <script><![CDATA[
-    function aw(q, switches)
+    function aw(q)
     {
       if( q == "" )
         openSearchWindow("http://www.accuweather.com/adcbin/local_index");

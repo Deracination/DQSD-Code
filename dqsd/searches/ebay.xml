@@ -12,7 +12,7 @@
     <input type="hidden" name="query"/>
   </form>
   <script><![CDATA[
-    function ebay(q, switches)
+    function ebay(q)
     {
       var res = null;
       

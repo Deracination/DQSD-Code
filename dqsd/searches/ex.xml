@@ -10,7 +10,7 @@
     <input type="hidden" name="search"/>
   </form>
   <script><![CDATA[
-    function ex(q, switches)
+    function ex(q)
     {
       if( q == "" )
         openSearchWindow("http://www.excite.com/");
