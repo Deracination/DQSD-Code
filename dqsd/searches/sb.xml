@@ -1,37 +1,33 @@
-  <search function="sb">
-    <name>Switchboard Individual Search</name>
-    <description>Look up phone numbers and addresses like this: 
-    "sb Bob Jones (Wichita, KS)"</description>
-    <category>People and Places</category>
-    <link>http://switchboard.com/</link>
-    <contributor></contributor>
-    <form name="sbf"
-        method="get"
+<search function="sb">
+  <name>Switchboard Individual Search</name>
+  <description>Look up phone numbers and addresses like this: "sb Bob Jones (Wichita, KS)"</description>
+  <category>People and Places</category>
+  <link>http://www.switchboard.com/</link>
+  <form name="sbf"
+        target="_blank"
         action="http://www.switchboard.com/bin/cgiqa.dll"
-        target="_blank">
-      <input type="hidden" name="SR" value=""/>
-      <input type="hidden" name="MEM" value="1"/>
-      <input type="hidden" name="F" value=""/>
-      <input type="hidden" name="L" value=""/>
-      <input type="hidden" name="T" value=""/>
-      <input type="hidden" name="s" value=""/>
-    </form>
-    <script><![CDATA[
-   function sb(q)
-   {
-     res = q.match(/(((\w+\s+)?\w+)\s+)?(\w+)(\s*\((([^,]+),?\s*)?(\w\w)\))?/);
-     if (!res)
-     {
+        method="get">
+    <input type="hidden" name="SR" value=""/>
+    <input type="hidden" name="MEM" value="1"/>
+    <input type="hidden" name="F" value=""/>
+    <input type="hidden" name="L" value=""/>
+    <input type="hidden" name="T" value=""/>
+    <input type="hidden" name="s" value=""/>
+  </form>
+  <script><![CDATA[
+    function sb(q)
+    {
+      res = q.match(/(((\w+\s+)?\w+)\s+)?(\w+)(\s*\((([^,]+),?\s*)?(\w\w)\))?/);
+      if (!res)
         openSearchWindow("http://www.switchboard.com/bin/cgiqa.dll");
-     }
-     else
-     {
-       document.sbf.F.value=(res[2] ? res[2] : "");
-       document.sbf.L.value=(res[4] ? res[4] : "");
-       document.sbf.T.value=(res[7] ? res[7] : "");
-       document.sbf.s.value=(res[8] ? res[8].toUpperCase() : "");
-       submitForm(sbf);
-     }
-   }
-    ]]></script>
-  </search>
+      else
+      {
+        document.sbf.F.value=(res[2] ? res[2] : "");
+        document.sbf.L.value=(res[4] ? res[4] : "");
+        document.sbf.T.value=(res[7] ? res[7] : "");
+        document.sbf.s.value=(res[8] ? res[8].toUpperCase() : "");
+        submitForm(sbf);
+      }
+    }
+  ]]></script>
+</search>

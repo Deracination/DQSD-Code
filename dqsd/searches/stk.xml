@@ -1,27 +1,24 @@
-  <search function="stk">
-    <name>Bloomberg Stock Quotes</name>
-    <description>Bloomberg quotes by symbol: "stk WMT S"</description>
-    <category>News</category>
-    <link>href="http://bloomberg.com/</link>
-    <contributor></contributor>
-    <form name="stkf"
-        method="get"
+<search function="stk">
+  <name>Bloomberg Stock Quotes</name>
+  <description>Bloomberg quotes by symbol: "stk WMT S"</description>
+  <category>News</category>
+  <link>href="http://www.bloomberg.com/</link>
+  <form name="stkf"
+        target="_blank"
         action="http://quote.bloomberg.com/analytics/bquote.cgi"
-        target="_blank">
-      <input type="hidden" name="ticker" value=""/>
-    </form>
-    <script><![CDATA[
-    function stk(q)
+        method="get">
+    <input type="hidden" name="ticker" value=""/>
+  </form>
+  <script><![CDATA[
+  function stk(q)
+  {
+    if (q == "")
+      openSearchWindow("http://www.bloomberg.com/");
+    else
     {
-      if (q == "")
-      {
-        openSearchWindow("http://www.bloomberg.com/");
-      }
-      else
-      {
-        document.stkf.ticker.value=q;
-        submitForm(stkf);
-      }
+      document.stkf.ticker.value = q;
+      submitForm(stkf);
     }
-    ]]></script>
-  </search>  
+  }
+  ]]></script>
+</search>  
