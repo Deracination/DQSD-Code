@@ -12,13 +12,14 @@
 // Shortcuts that reference a function name only, have the menu text extracted
 // from the function definition directly.
 //
-!|gg %s /ifl|I'm Feeling Lucky!|Automatically takes you to the first web page returned for your query|Search the Web
-,|gg %s /groups|Google Groups|Search Usenet discussion forums|Search the Web
->|gg %s /advanced|Google Advanced|Google Advanced Search|Search the Web
+!|gg %s /ifl|I'm Feeling Lucky!|Go directly to Google's top-ranked result.|Search the Web
+,|gg %s /groups|Google Groups|Search Google's newsgroup archive.|Search the Web
+>|gg %s /advanced|Google Advanced|Use the Google Advanced Search page.|Search the Web
 ?|qsfind
 -|fst
 ^|av
 {|dp
+??|gg %s /directory|Google Directory|Search Google's copy of the DMOZ open directory.|Search the Web
 ???|ask
 +|map
 #|sb
@@ -35,6 +36,7 @@ $|stk
 ;;|mwt
 [|enc
 ]|xref
+&|gg %s /cache|Google Cache|Given a URL, loads Google's cached copy of the web page.|Other
 &&|ia
 $$|dlt
 $$$|pw
