@@ -37,6 +37,7 @@ New Searches
 * tucows - search tucows (from Sarah S.)
 * ubs - search for used books at http://www.used-books.org.uk/cgi/books.cgi
 * encyfr - Search the encyclopédie Voila with Hachette Multimédia
+* wa - Search WebAttack for shareware and freeware
 
 Bug Fixes
 
