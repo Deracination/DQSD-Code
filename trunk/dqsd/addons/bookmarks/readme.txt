@@ -1,4 +1,4 @@
-Dave's Quick Search Taskbar Toolbar - Bookmarks Addon
+Dave's Quick Search Taskbar Toolbar - Bookmarks Addon v0.1
 Copyright (c) 2002 Brent Beardsley
 Contact brentbeardsley@yahoo.com
 
@@ -22,9 +22,9 @@ Windows Scripting Host is required and will popup security confirmation
 dialogs the first time you try to do view some of the bookmarks - so
 just say click 'Yes'.  Look at the code if you don't trust it :)
 
-If you only use one you can disable the rest in the help menu.
-
-If you don't like the search names you can add a mapping in localaliases.txt.
+You can type bmie, bmns4, bmmz, or bmya into the dqsd edit box to bring
+up that particular favorites menu. If you don't like the search names 
+you can add a mapping in localaliases.txt.
 
 You can customize the defaults by placing the following variables in 
 your localprefs.js file.
