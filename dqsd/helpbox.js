@@ -52,7 +52,7 @@ function about()
     opts += ", " + helpoptions;
 
   aboutWindow = window.open("about:blank", "_blank", opts);
-  aboutWindow.document.write("<I>Please wait, generating help...</I>");
+  aboutWindow.document.write("<body bgcolor=threedface style=border:0><table height=90% width=100%><tr><td><center style=font:menu>Generating Help...</td></tr></table>");
  
   {
     var i;
