@@ -46,7 +46,7 @@ function versionCheck()
   	
   	if(instMajor < reqMajor || (instMajor == reqMajor && instMinor < reqMinor))
   	{
-  		alert("Your version of the Windows Script Components (" + instMajor + "." + instMinor + ") is outdated.\nGet the latest from http://msdn.microsoft.com/downloads/list/webdev.asp");
+  		alert("Dave's Quick Search Deskbar:\nYour version of the Windows Script Components (" + instMajor + "." + instMinor + ") is outdated.\nGet the latest from http://msdn.microsoft.com/downloads/list/webdev.asp");
   		bSuccess = false;
   	}
   }
@@ -73,7 +73,7 @@ function checkWebForUpdateNotifyAll()
 // asynchronous load to work properly.
 var checkUpdateOnlineVersionDOM = null;
 var checkUpdateQuiet = true;
-var DQSD_CHECKUPDATE_URL = "http://cvs.sourceforge.net/viewcvs.py/*checkout*/dqsd/dqsd/version.xml?rev=HEAD&content-type=text/xml";
+var DQSD_CHECKUPDATE_URL = "http://www.dqsd.net/version.xml";
 
 function checkWebForUpdate()
 {
@@ -97,7 +97,7 @@ function checkWebForUpdate()
   catch(e)
   {
     if ( !checkUpdateQuiet )
-      alert("Unable to check for update.  Check your internet connection.");
+      alert("Dave's Quick Search Deskbar:\nUnable to check for update. Check your internet connection.");
   }
   
   checkForUpdate = false;  // only display once per session  
@@ -127,7 +127,7 @@ function onVersionLoadReadyStateChange()
     }
     else
     {
-      alert( "Failed to parse on-line version information. Error message: " + checkUpdateOnlineVersionDOM.parseError.reason );
+      alert( "Dave's Quick Search Deskbar:\nFailed to parse on-line version information. Error message: " + checkUpdateOnlineVersionDOM.parseError.reason );
     }
   }
 }
