@@ -128,7 +128,7 @@ STDMETHODIMP CLauncher::SubmitForm(VARIANT idForm)
 		TCHAR szPath[_MAX_PATH];
 		::GetTempPath(cbPath, szPath);
 
-		StrCatBuff(szPath, _T("DQSDLaunch.html"), sizeof(szPath)/sizeof(TCHAR));
+		StrNCat(szPath, _T("DQSDLaunch.html"), sizeof(szPath)/sizeof(TCHAR)-_tcslen(szPath)-1);
 		HANDLE hFile = ::CreateFile(szPath, GENERIC_WRITE, FILE_SHARE_READ, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 		if (hFile == INVALID_HANDLE_VALUE)
 			return HRESULT_FROM_WIN32(::GetLastError());
@@ -193,7 +193,7 @@ STDMETHODIMP CLauncher::get_pathDefaultBrowser(BSTR *pVal)
 
 	// Create temp file with desired .html extension
 	::GetTempPath(cbDocPath, szDocPath);
-	StrCatBuff(szDocPath, _T("DQSDLaunch.html"), sizeof(szDocPath)/sizeof(TCHAR));
+	StrNCat(szDocPath, _T("DQSDLaunch.html"), sizeof(szDocPath)/sizeof(TCHAR)-_tcslen(szDocPath)-1);
 	HANDLE hFile = ::CreateFile(szDocPath, GENERIC_WRITE, FILE_SHARE_READ, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 	if (hFile == INVALID_HANDLE_VALUE)
 		return HRESULT_FROM_WIN32(::GetLastError());
@@ -323,7 +323,7 @@ STDMETHODIMP CLauncher::GetProtocolHandler(BSTR bstrProtocol, BSTR *pbstrHandler
 
 	TCHAR szProtocolHandlerKey[ 128 ];
 	StrCpyN( szProtocolHandlerKey, W2T( bstrProtocol ), sizeof(szProtocolHandlerKey)/sizeof(TCHAR));
-	StrCatBuff( szProtocolHandlerKey, _T("\\shell\\open\\command"), sizeof(szProtocolHandlerKey)/sizeof(TCHAR) );
+	StrNCat( szProtocolHandlerKey, _T("\\shell\\open\\command"), sizeof(szProtocolHandlerKey)/sizeof(TCHAR)-lstrlenW(bstrProtocol)-1);
 
 	TCHAR szProtocolHandler[ _MAX_PATH ];
 	DWORD dwCount = sizeof( szProtocolHandler );
