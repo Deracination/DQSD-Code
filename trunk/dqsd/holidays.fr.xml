@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+This file contains a listing of public holidays in France for the years 2002-2020. The previous statement allows the u	se of accentuated characters.
+- MLL (12/07/2002)
+-->
+
+<events>
+  <event name="Jour de l'an" type="public_holiday">
+    <date day="1" month="1"></date>
+  </event>
+  <event name="Pâques" type="public_holiday">
+    <date day="31" month="3" year="2002"></date>
+    <date day="20" month="4" year="2003"></date>
+    <date day="11" month="4" year="2004"></date>
+    <date day="27" month="3" year="2005"></date>
+    <date day="16" month="4" year="2006"></date>
+    <date day="8" month="4" year="2007"></date>
+    <date day="23" month="3" year="2008"></date>
+    <date day="12" month="4" year="2009"></date>
+    <date day="4" month="4" year="2010"></date>
+    <date day="24" month="4" year="2011"></date>
+    <date day="8" month="4" year="2012"></date>
+    <date day="31" month="3" year="2013"></date>
+    <date day="20" month="4" year="2014"></date>
+    <date day="5" month="4" year="2015"></date>
+    <date day="27" month="3" year="2016"></date>
+    <date day="16" month="4" year="2017"></date>
+    <date day="1" month="4" year="2018"></date>
+    <date day="21" month="4" year="2019"></date>
+    <date day="12" month="4" year="2020"></date>
+  </event>
+  <event name="Lundi de Pâques" type="public_holiday">
+    <date day="1" month="4" year="2002"></date>
+    <date day="21" month="4" year="2003"></date>
+    <date day="12" month="4" year="2004"></date>
+    <date day="28" month="3" year="2005"></date>
+    <date day="17" month="4" year="2006"></date>
+    <date day="9" month="4" year="2007"></date>
+    <date day="24" month="3" year="2008"></date>
+    <date day="13" month="4" year="2009"></date>
+    <date day="5" month="4" year="2010"></date>
+    <date day="25" month="4" year="2011"></date>
+    <date day="9" month="4" year="2012"></date>
+    <date day="1" month="4" year="2013"></date>
+    <date day="21" month="4" year="2014"></date>
+    <date day="6" month="4" year="2015"></date>
+    <date day="28" month="3" year="2016"></date>
+    <date day="17" month="4" year="2017"></date>
+    <date day="2" month="4" year="2018"></date>
+    <date day="22" month="4" year="2019"></date>
+    <date day="13" month="4" year="2020"></date>
+  </event>
+  <event name="Fête du travail" type="public_holiday">
+    <date day="1" month="5"></date>
+  </event>
+  <event name="Anniversaire 1945" type="public_holiday">
+    <date day="8" month="5"></date>
+  </event>
+  <event name="Ascension" type="public_holiday">
+    <date day="9" month="5" year="2002"></date>
+    <date day="29" month="5" year="2003"></date>
+    <date day="20" month="5" year="2004"></date>
+    <date day="5" month="5" year="2005"></date>
+    <date day="25" month="5" year="2006"></date>
+    <date day="17" month="5" year="2007"></date>
+    <date day="1" month="5" year="2008"></date>
+    <date day="21" month="5" year="2009"></date>
+    <date day="13" month="5" year="2010"></date>
+    <date day="2" month="6" year="2011"></date>
+    <date day="17" month="5" year="2012"></date>
+    <date day="9" month="5" year="2013"></date>
+    <date day="29" month="5" year="2014"></date>
+    <date day="14" month="5" year="2015"></date>
+    <date day="5" month="5" year="2016"></date>
+    <date day="25" month="5" year="2017"></date>
+    <date day="10" month="5" year="2018"></date>
+    <date day="30" month="5" year="2019"></date>
+    <date day="21" month="5" year="2020"></date>
+  </event>
+  <event name="Pentecôte" type="public_holiday">
+    <date day="19" month="5" year="2002"></date>
+    <date day="8" month="6" year="2003"></date>
+    <date day="30" month="5" year="2004"></date>
+    <date day="15" month="5" year="2005"></date>
+    <date day="4" month="6" year="2006"></date>
+    <date day="27" month="5" year="2007"></date>
+    <date day="11" month="5" year="2008"></date>
+    <date day="31" month="5" year="2009"></date>
+    <date day="23" month="5" year="2010"></date>
+    <date day="12" month="6" year="2011"></date>
+    <date day="27" month="5" year="2012"></date>
+    <date day="19" month="5" year="2013"></date>
+    <date day="8" month="6" year="2014"></date>
+    <date day="24" month="5" year="2015"></date>
+    <date day="15" month="5" year="2016"></date>
+    <date day="4" month="6" year="2017"></date>
+    <date day="20" month="5" year="2018"></date>
+    <date day="9" month="6" year="2019"></date>
+    <date day="31" month="5" year="2020"></date>
+  </event>
+  <event name="Lundi de la Pentecôte" type="public_holiday">
+    <date day="20" month="5" year="2002"></date>
+    <date day="9" month="6" year="2003"></date>
+    <date day="31" month="5" year="2004"></date>
+    <date day="16" month="5" year="2005"></date>
+    <date day="5" month="6" year="2006"></date>
+    <date day="28" month="5" year="2007"></date>
+    <date day="12" month="5" year="2008"></date>
+    <date day="1" month="6" year="2009"></date>
+    <date day="24" month="5" year="2010"></date>
+    <date day="13" month="6" year="2011"></date>
+    <date day="28" month="5" year="2012"></date>
+    <date day="20" month="5" year="2013"></date>
+    <date day="9" month="6" year="2014"></date>
+    <date day="25" month="5" year="2015"></date>
+    <date day="16" month="5" year="2016"></date>
+    <date day="5" month="6" year="2017"></date>
+    <date day="21" month="5" year="2018"></date>
+    <date day="10" month="6" year="2019"></date>
+    <date day="1" month="6" year="2020"></date>
+  </event>
+  <event name="Fête Nationale" type="public_holiday">
+    <date day="14" month="7"></date>
+  </event>
+  <event name="Assomption" type="public_holiday">
+    <date day="15" month="8"></date>
+  </event>
+  <event name="Toussaint" type="public_holiday">
+    <date day="1" month="11"></date>
+  </event>
+  <event name="Armistice 1918" type="public_holiday">
+    <date day="11" month="11"></date>
+  </event>
+  <event name="Noël" type="public_holiday">
+    <date day="25" month="12"></date>
+  </event>
+</events>
