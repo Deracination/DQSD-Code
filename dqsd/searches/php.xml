@@ -1,13 +1,20 @@
 <search function="php">
   <name>PHP Reference</name>
-  <description>Lookup on php.net: "php fopen"</description>
+  <description>
+    Lookup on php.net.<br/>
+    <a class="helpboxDescLabels">Example:</a><br/>
+    <table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">php fopen</td></tr>
+  	</table>
+  </description>
   <category>Computers</category>
   <link>http://www.php.net/</link>
+  
   <script><![CDATA[
     function php(q)
     {
-      if (q == "")
-        openSearchWindow("http://www.php.net/");
+      if( nullArgs("php",q) )
+        return false;
       else
         openSearchWindow("http://www.php.net/" + q);
     }
