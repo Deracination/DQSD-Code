@@ -1,0 +1,36 @@
+<html>
+<head>
+<title>DQSD Update Available&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</title>
+<style>
+TD, P, BODY, BUTTON { font: menu; }
+BUTTON#close { width: 100px }
+</style>
+</head>
+<body onkeydown="if ( event.keyCode == 27 ) window.close();">
+<table align="center" width="100%" height="100%">
+<tr><td valign="top" height="99%">
+<div align="center" style="padding: 10px 10px;">
+<script>
+var rversion = window.dialogArguments.rversion;
+var srversion = new Array ( rversion.majorHi, rversion.majorLo, rversion.minorHi, rversion.minorLo ).join( "." );
+var lversion = window.dialogArguments.lversion;
+var slversion = new Array ( lversion.majorHi, lversion.majorLo, lversion.minorHi, lversion.minorLo ).join( "." );
+document.write(
+	rversion.htmlDescription
+		.replace( /%lv/g, slversion )
+		.replace( /%rv/g, srversion )
+		.replace( /%ld/g, lversion.date )
+		.replace( /%rd/g, rversion.date )
+		.replace( /%lt/g, lversion.type )
+		.replace( /%rt/g, rversion.type )
+	);
+</script>
+</div>
+
+</td></tr>
+<tr><td align="center">
+<button id="close" onclick="window.close(); return false">Close</button>
+</td></tr>
+</table>
+</body>
+</html>
