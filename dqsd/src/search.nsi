@@ -186,15 +186,12 @@ Section "Quick Search Deskbar (required)"
   File "..\version.js"
   File "..\version.xml"
   File "..\versiondialog.htm"
-  File "..\xptoolbar2_default.bmp"
-  File "..\xptoolbar1_default.bmp"
   File "..\xptoolbar1_silver.bmp"
   File "..\xptoolbar2_silver.bmp"
   File "..\xptoolbar1_olive.bmp"
   File "..\xptoolbar2_olive.bmp"
   File "..\xptoolbar1_blue.bmp"
   File "..\xptoolbar2_blue.bmp"
-  File "..\theme_default.css"
   File "..\theme_silver.css"
   File "..\theme_olive.css"
   File "..\theme_blue.css"
@@ -256,10 +253,12 @@ Section "Quick Search Deskbar (required)"
   Delete $INSTDIR\xplocalsearch.css
   Delete $INSTDIR\xptoolbarbot.bmp
   Delete $INSTDIR\xptoolbartop.bmp
-  Delete $INSTDIR\localsearch_default.css"
-  Delete $INSTDIR\localsearch_silver.css"
-  Delete $INSTDIR\localsearch_olive.css"
-  Delete $INSTDIR\localsearch_blue.css"
+  Delete $INSTDIR\localsearch_default.css
+  Delete $INSTDIR\localsearch_silver.css
+  Delete $INSTDIR\localsearch_olive.css
+  Delete $INSTDIR\localsearch_blue.css
+  Delete $INSTDIR\xptoolbar2_default.bmp
+  Delete $INSTDIR\xptoolbar1_default.bmp
 
   ; Remove stuff introduced by 3.1.8 beta-1
   Delete $INSTDIR\dqsd.gif
