@@ -78,7 +78,7 @@ function openNamedSearchWindow(url, name)
   if (useExternalBrowser && DQSDLauncher)
     DQSDLauncher.OpenDocument(url);
   else
-    window.open(url, name).focus();
+    window.open(url, name);
 }
 
 // direct shellexecute
