@@ -1,7 +1,7 @@
 <html>
 <!--
 Dave's Quick Search Deskbar
-Version 2.5.4 - January 14, 2002
+Version 2.5.5 - February 4, 2002
 
 Copyright (c) 2002 David Bau
 
@@ -77,7 +77,6 @@ The deskbar is customizable and completely open-source.
 <script>
 // configuration settings
 
-defaultsearch="gg";
 defaultcal="yhocal";           // yahoo is the default calendar
 eventsfileurl="";              // default no events
 
@@ -311,11 +310,11 @@ function def()
     if (mathexp(t)) return false;
   }
 
-  // try to execute a shortcut
+  // try to execute a shortcut - this should perform the default search
   if (shortcut(t)) return false;
 
-  // if all else fails, do a google search
-  performsearch( defaultsearch, t );
+  // if there isn't even a default search, do a google search
+  performsearch("gg", t);
   return false;
 }
 
@@ -384,7 +383,7 @@ function shortcut(t)
     return false;
     
   // execute search
-  performsearch( search, term );  
+  performsearch(search, term);  
   return true;
 }
 

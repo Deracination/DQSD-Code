@@ -145,7 +145,11 @@ try
       }
     }
   }
+}
+catch (except) {}
 
+try
+{
   // Get searches in the 'searches' subdirectory
   var searches = getFiles( "searches\\*.xml" );
   searches = searches.split('\n');
