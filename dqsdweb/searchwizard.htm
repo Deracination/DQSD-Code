@@ -24,8 +24,8 @@ img { margin: 5px }
 <hr size="1">
 
 <div align="center">
-<b><a href="http://sourceforge.net/project/showfiles.php?group_id=42081&release_id=109729">Download version 0.7!</a></b><br/>released 9-Sep-2002<br/>
- (<a href="http://sourceforge.net/project/shownotes.php?release_id=109729">What's New</a>)</div>
+<b><a href="http://prdownloads.sourceforge.net/dqsd/dqsdwiz1.0.0.exe?download">Download version 1.0</a></b><br/>released 23-Oct-2002<br/>
+<span class="footnote">(This version is a rollup of the 10+ beta releases.)</span></div>
 
 <p>
 One of biggest pains when writing a new DQSD search is massaging the correct HTML FORM into well-formed XML.&nbsp;&nbsp;I finally got annoyed enough to
@@ -64,11 +64,16 @@ If you don't, simply right-click on the IE toolbar, and click 'Customize...'.&nb
 <li>Click in the field that contains the search string.</li>
 <li>Start up the wizard by clicking on its Internet Explorer toolbar button.</li>
 <li>
-You should see a dialog that looks something like the following.&nbsp;&nbsp;Some of the fields will be automatically filled in.&nbsp;&nbsp;Enter a name and a title for the new search.&nbsp;&nbsp;The name is the string that will invoke the search and will be used for the file name, so keep it short and simple.<br/>
-<center><img src="dqsdsearchwiz.jpg" align="top"></center>
+You should see a dialog that looks something like the following.&nbsp;&nbsp;Some of the fields will be automatically filled in.&nbsp;&nbsp;Enter an abbreviation and a title for the new search.&nbsp;&nbsp;The abbreviation is the string that will invoke the search and will be used for the file name, so keep it short and simple.<br/><br/>
+<center>
+
+<!-- <div style="font-size: xx-small">(Hold your cursor over the fields to seea description.)</div> -->
+<img border="0" src="dqsdsearchwiz.jpg" align="top">
+
+</center>
 </li>
 <li>
-In the list of FORM elements, make sure at least one FORM is checked.&nbsp;&nbsp;If you clicked in a field before invoking the wizard, the FORM containing that field should be already be checked.&nbsp;&nbsp;Selecting a FORM in the list will show the HTML content of the FORM in the area below the list.&nbsp;&nbsp;This is really just to provide some help in determining which FORM(s) you need.&nbsp;&nbsp;You can check multiple FORMs, all of which will be included in the search file.
+In the list of FORM elements, make sure at least one FORM is checked.&nbsp;&nbsp;If you clicked in a field before invoking the wizard, the FORM containing that field should be already be checked.&nbsp;&nbsp;Selecting a FORM in the list and expanding the dialog by clicking the HTML button will show the HTML content of the FORM.&nbsp;&nbsp;Selecting a FORM will also change the background and outline of the FORM on the web page in most cases.&nbsp;&nbsp;This is really just to provide some help in determining which FORM(s) you need include.&nbsp;&nbsp;You can check multiple FORMs, all of which will be included in the search file.
 </li>
 <li>Hit OK and you'll be prompted to save the search file to your DQSD 'searches' directory.</li>
 <li>After saving the file, it will come up in Notepad by default.&nbsp;&nbsp;(Click 'Options...' to change the editor to something other than Notepad.)
@@ -78,9 +83,9 @@ In the list of FORM elements, make sure at least one FORM is checked.&nbsp;&nbsp
 <h3>Example</h3>
 
 <p>
-In the screen shot above, I went to <a href="http://www.msnbc.com">http://www.msnbc.com</a>, clicked in the search field...<br/>
-<center><img src="msnbc.jpg"></center>
-Then I clicked the 'DQSD Search Wizard' button.&nbsp;&nbsp;All the FORM elements in the page are listed, with the one checked that contains the 'active' element.&nbsp;&nbsp;I entered 'msnbc' for the name and 'MSNBC News' for the title (the title is what appears in the menu and help).&nbsp;&nbsp;Finally, I hit OK and I was prompted to save 'msnbc.xml' to the 'searches' subdirectory of my DQSD installation.
+In the screenshot above, I went to <a href="http://www.loc.gov">http://www.loc.gov</a> (the US Library of Congress) and clicked in the search field...<br/>
+<center><img src="loc.jpg"></center>
+Then I clicked the 'DQSD Search Wizard' button.&nbsp;&nbsp;All FORM elements in the page are listed (in this case only one), with the one checked that contains the 'active' element.&nbsp;&nbsp;I entered an abbreviation and a title (the title appears in the menu and help).&nbsp;&nbsp;Finally, I pressed 'OK' and I was prompted to save 'loc.xml' to the 'searches' subdirectory of my DQSD installation.
 </p>
 
 <p>
@@ -90,44 +95,49 @@ The resulting XML file search file will look something like <a href="#searchxml"
 <a name="searchxml" />
 <div class="code">
 <xmp>
-<search function="msnbc">
+<search function="loc">
   <COMMENT>
 
-    Even though this XML search will probably load and is a healthy start
+    Even though this XML search will probably load and is a good start
     toward a completed search, please be aware that this search will probably
-    not work as is and will require some human tweaks.
+    not work as is and will probably require some changes.
 
   </COMMENT>
-  <name>MSNBC</name>
-  <category>News</category>
+  <name>Library of Congress</name>
+  <category>Reference</category>
   <contributor>Glenn Carr</contributor>
-  <link>http://www.msnbc.com/</link>
+  <link>http://www.loc.gov/</link>
   <email>glenn at glenncarr dot com</email>
   <description>
-  MSNBC Search
+  Search the Library of Congress
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td></td></tr>
+      <tr><td></td></tr>
+    </table>
   </description>
-  <form name="msnbcf"
-        method="post"
-        action="http://www.msnbc.com/modules/bom/findlog.asp">
+  <form name="locf"
+        method="get"
+        action="http://search.loc.gov:8765/query.html">
 
     <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
 
     <input type="hidden" name="qt" value="" />
   </form>
   <script><![CDATA[
-    function msnbc(q)
+    function loc(q)
     {
-      if( nullArgs("msnbc", q) )
+      if( nullArgs("loc", q) )
         return;
 
-      // FORM variables for msnbcf
+      // FORM variables for locf
 
       // The wizard assigned the search string to this form field value because
       // this field was the active element when the search file was generated.
       // Change this to args.q if the search string is parsed with parseArgs.
-      document.msnbcf.qt.value = q;
+      document.locf.qt.value = q;
 
-      submitForm(msnbcf);
+      submitForm(locf);
     }
   ]]></script>
   <copyright>
@@ -135,8 +145,8 @@ The resulting XML file search file will look something like <a href="#searchxml"
     Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
   </copyright>
   <created_by>
-    This search file was initially created by on 09/04/02 at 10:13:03
-    Dave's Quick Search Deskbar Search Wizard version 0.6 (beta),
+    This search file was initially created on 10/21/02 at 23:26:55
+    by Dave's Quick Search Deskbar Search Wizard version 0.9.1 (beta),
     Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
   </created_by>
 </search>
@@ -153,36 +163,6 @@ The 'parseArgs' utility method has become the convention for parsing switches fo
 
 <div class="code">
 <xmp>
-<search function="msnbc">
-  <COMMENT>
-
-    Even though this XML search will probably load and is a healthy start
-    toward a completed search, please be aware that this search will probably
-    not work as is and will require some human tweaks.
-
-  </COMMENT>
-  <name>MSNBC</name>
-  <category>News</category>
-  <contributor>Glenn Carr</contributor>
-  <link>http://www.msnbc.com/</link>
-  <email>glenn at glenncarr dot com</email>
-  <description>
-  MSNBC Search
-  </description>
-  <form name="msnbcf"
-        method="post"
-        action="http://www.msnbc.com/modules/bom/findlog.asp">
-
-    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
-
-    <input type="hidden" name="qt" value="" />
-  </form>
-  <script><![CDATA[
-    function msnbc(q)
-    {
-      if( nullArgs("msnbc", q) )
-        return;
-</xmp><xmp style="color: red">
       // Parse switches with parseArgs:
 
       // parseArgs usage:
@@ -214,27 +194,6 @@ The 'parseArgs' utility method has become the convention for parsing switches fo
       //         break;
       //  } //end-switch
       //}
-</xmp><xmp>
-      // FORM variables for msnbcf
-
-      // The wizard assigned the search string to this form field value because
-      // this field was the active element when the search file was generated.
-      // Change this to args.q if the search string is parsed with parseArgs.
-      document.msnbcf.qt.value = q;
-
-      submitForm(msnbcf);
-    }
-  ]]></script>
-  <copyright>
-    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
-    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
-  </copyright>
-  <created_by>
-    This search file was initially created by on 09/04/02 at 10:14:22
-    Dave's Quick Search Deskbar Search Wizard version 0.6 (beta),
-    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
-  </created_by>
-</search>
 </xmp>
 </div>
 
@@ -246,24 +205,7 @@ Anyway, that's the gist of it.&nbsp;&nbsp;It still needs a lot of testing, and t
 document.write( buildEmail( 'glenn', 'glenncarr', 'com', 'Glenn Carr' ) );
 </script>
 <br/>
-August 20, 2002
-
-<h3>To do:</h3>
-Feel free to grab the source and make the following improvements.&nbsp;&nbsp;These are not in any particular order.
-<ul>
-<li>
-Add some context-sensitive help.&nbsp;&nbsp;The little help button is there, but it does nothing.
-</li>
-<li>
-Run this thing through BoundsChecker or Purify.&nbsp;&nbsp;I hacked this together so quickly, I know there are probably some BSTRs not being freed.
-</li>
-<li>
-Display the HTML content of each form in a browser control, instead of as just plain text.&nbsp;&nbsp;Not really sure if this would work without the entire page, but it would be more useful if it did.
-</li>
-<li>
-Add a 'DQSD Search Wizard' menu item to the IE context and tools menus.
-</li>
-</ul>
+October 23, 2002
 
 <h3>Credits</h3>
 <ul>
