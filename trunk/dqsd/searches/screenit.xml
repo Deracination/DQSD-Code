@@ -1,25 +1,32 @@
 <search function="screenit">
   <name>ScreenIt</name>
-  <description>A family-friendly movie search index. 
-  Uses Google for searching. "screenit jaws"</description>
+  <description>
+    A family-friendly movie search index. Uses Google for searching.<br/>
+    <a class="helpboxDescLabels">Example:</a><br/>
+    <table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">screenit jaws</td></tr>
+  	</table>
+  </description>
   <category>Entertainment</category>
   <link>http://www.screenit.com/</link>
+  
   <form name="screenitf"
         action="http://www.google.com/custom"
-        method="GET">
+        method="get">
     <input type="hidden" name="q" value=""/>
     <input type="hidden" name="cof" VALUE="LW:350;L:http://www.screenit.com/images/screenit_logo_350x139.jpg;LH:139;AH:center;AWFID:c094116f3ec01b5d;"/>
     <input type="hidden" name="domains" value="screenit.com"/>
     <input type="hidden" name="sitesearch" value="screenit.com"/>
   </form>
+  
   <script><![CDATA[
     function screenit(q)
     {
-      if (q == "")
-        openSearchWindow("http://www.screenit.com/");
+      if( nullArgs("screenit",q) )
+        return false;
       else
       {
-        document.screenitf.q.value=q;
+        document.screenitf.q.value = q;
         submitForm(screenitf);
       }
     }
