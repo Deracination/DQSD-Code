@@ -197,13 +197,19 @@ defaultcal="yhocal";
 
 /* Events file for the popup calendar events
 *  holidays.us.xml - United States [default]
+*  holidays.be.NL.xml - Belgium (Dutch language)
+*  holidays.be.EN.xml - Belgium (English language)
 *  holidays.ca.xml - Canada
-*  holidays.sg.xml - Singapore
-*  holidays.it.xml - Italy
+*  holidays.cs.xml - Czech Republic
+*  holidays.et.xml - Estonia
 *  holidays.fr.xml - France
+*  holidays.gb.xml - England and Wales
+*  holidays.it.xml - Italy
 *  holidays.nl.NL.xml - Netherlands (Dutch language)
 *  holidays.nl.EN.xml - Netherlands (English language)
-*  holidays.et.xml - Estonia
+*  holidays.pt.xml - Portugal
+*  holidays.se.sv.xml - Sweden
+*  holidays.sg.xml - Singapore
 */
 eventsfileurl="holidays.us.xml";
 
