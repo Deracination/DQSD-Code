@@ -147,6 +147,8 @@ Section "Quick Search Deskbar (required)"
   File "..\tools.js"
   File "..\translate.js"
   File "..\version.js"
+  File "..\version.xml"
+  File "..\versiondialog.htm"
   SetOutPath "$INSTDIR\searches"
   File "..\searches\*.xml"
   SetOutPath "$INSTDIR\src"
@@ -295,6 +297,8 @@ Section "Uninstall"
   Delete /REBOOTOK $INSTDIR\tools.js
   Delete /REBOOTOK $INSTDIR\translate.js
   Delete /REBOOTOK $INSTDIR\version.js
+  Delete /REBOOTOK $INSTDIR\version.xml
+  Delete /REBOOTOK $INSTDIR\versiondialog.htm
   RmDir /r $INSTDIR\src
   RmDir /r $INSTDIR\searches
 
