@@ -201,10 +201,10 @@ Section "Quick Search Deskbar (required)"
   File "..\mrumenu.txt"
   File "..\localsearch.css"
   File "..\localprefs.js"
-  SetOverwrite on
   
   ; Create subdirectory for user searches
-  CreateDirectory "localsearches"
+  CreateDirectory "$INSTDIR\localsearches"
+  SetOverwrite on
 
   ; old source files used to live here
   Delete $INSTDIR\license.txt
