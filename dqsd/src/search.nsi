@@ -252,6 +252,7 @@ Section "Quick Search Deskbar (required)"
   Delete $INSTDIR\searches\sbp.xml
   Delete $INSTDIR\searches\short.xml
   Delete $INSTDIR\searches\slash.xml
+  Delete $INSTDIR\searches\smlnk.xml
   Delete $INSTDIR\searches\start.xml
   Delete $INSTDIR\searches\tel.xml
   Delete $INSTDIR\searches\tvgc.xml
