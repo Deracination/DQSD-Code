@@ -327,22 +327,37 @@ selfdrag = false;
 
 // Try to instantiate the launcher tool
 var DQSDLauncher = null;
+var triedToCreateLauncher = false;
 var useExternalBrowser = (launchmode > 0);
 
-try 
+
+function ensureLauncher()
 {
-  if (useExternalBrowser)
-    DQSDLauncher = new ActiveXObject("DQSDTools.Launcher");
-    
-  // If IE is the default browser, then no need to launch it externally
-  if (DQSDLauncher)
+  if (triedToCreateLauncher)
+    return;
+  triedToCreateLauncher = true;
+
+  try
   {
-    var browserPath = DQSDLauncher.pathDefaultBrowser
-    if (launchmode == 2 && browserPath.toLowerCase().indexOf("iexplore.exe") > 0)
-      useExternalBrowser = false;
+    DQSDLauncher = new ActiveXObject("DQSDTools.Launcher");
+  }
+  catch (e)
+  {
+    DQSDLauncher = null;
   }
 }
-catch (e)  // Gracefully ignore problems creating the control.
+
+if (useExternalBrowser)
+  ensureLauncher();
+    
+// If IE is the default browser, then no need to launch it externally
+if (DQSDLauncher)
+{
+  var browserPath = DQSDLauncher.pathDefaultBrowser
+  if (launchmode == 2 && browserPath.toLowerCase().indexOf("iexplore.exe") > 0)
+    useExternalBrowser = false;
+}
+else  // Gracefully ignore problems creating the control.
 {
   useExternalBrowser = false;
 }
@@ -361,6 +376,16 @@ function openNamedSearchWindow(url, name)
     DQSDLauncher.OpenDocument(url);
   else 
     window.open(url, name);
+}
+
+// direct shellexecute
+function openDocument(path)
+{
+  ensureLauncher();
+  if (DQSDLauncher)
+  {
+    DQSDLauncher.OpenDocument(path);
+  }
 }
 
 // Submit a form either with the default browser or with IE
