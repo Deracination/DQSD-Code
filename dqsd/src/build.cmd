@@ -10,8 +10,11 @@ pushd %~dp0
 
 pushd DQSDTools
 
-REM This seems to work sooo much better than NMAKE, and we don't need a makefile
+REM We don't need a makefile if we run msdev.exe directly
 msdev DQSDTools.dsp /MAKE "DQSDTools - Win32 Release MinDependency" /REBUILD
+
+REM Use this instead if you only have VS.NET 2003 - make sure DQSDTools.mak is up to date
+REM nmake -f "DQSDTools.mak" CFG="DQSDTools - Win32 Release MinDependency"
 
 copy /y ReleaseMinDependency\DQSDTools.dll ..\..\DQSDTools.dll
 popd
