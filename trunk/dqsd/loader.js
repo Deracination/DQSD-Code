@@ -12,7 +12,7 @@ function addsearch(fname, name, desc, link, cat, local)
                        fun:eval(fname), 
                        aliases:[], 
                        enabled:!disabledsearches[fname], 
-                       menudisplay:true, 
+                       aliasmenudisplay:true, 
                        local:(typeof local != 'undefined' ? local : false)};
     if( !aliases[fname] )
       addalias( fname, fname );
@@ -56,7 +56,7 @@ function addalias(alias, fname, name, desc, cat)
         // but don't display the alias on the menu because
         // there's a local alias that is overriding it.
         searches[prevfname].aliases = [ prevfname ];
-        searches[prevfname].menudisplay = false;
+        searches[prevfname].aliasmenudisplay = false;
       }
     }
     catch (e)
@@ -242,7 +242,7 @@ if (searchRoot)
     }
     catch(e)
     {
-      alert("An error (" + e + ") occurred loading script '" + xScriptVal + "'");
+      alert("Error '" + e.description + "', " + (e.number & 0xffff) + " occurred loading script '" + xScriptVal + "'");
     }
   }
 

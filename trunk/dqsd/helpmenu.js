@@ -1,3 +1,11 @@
+function registerMenuHook( menuHook )
+{
+  if ( typeof menuHooks == 'undefined' )
+    menuHooks = new Array();
+    
+  menuHooks.push( menuHook );
+}
+
 function showpop()
 {
   document.deff.q.focus();
@@ -32,13 +40,22 @@ function showpop()
       var alias = getSearchAliases( search );
 
       if ( search.enabled )
-        mb.AppendMenuItem( search.name + (search.local ? ' [local]' : '' )  + '\t' + (search.menudisplay ? alias.replace(/&/g, '&&') : ""),  // menu text along with alias
+        mb.AppendMenuItem( search.name + (search.local ? ' [local]' : '' )  + '\t' + (search.aliasmenudisplay ? alias.replace(/&/g, '&&') : ""),  // menu text along with alias
                            search.aliases[0],         // function invoked when user selects menu item
                            makeToolTipString(search), 
                            hsubmenu );
     }
   }
   
+  // Add any hooks created by searches or add-ons
+  if ( typeof menuHooks != 'undefined' )
+  {
+    for ( var i = 0; i < menuHooks.length; i++ )
+    {
+      menuHooks[i]( mb );        
+    }
+  }
+
   appendMRUMenuSelections( mb );
 
   if(helpMenuToolTipsEnabled)

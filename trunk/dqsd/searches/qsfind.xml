@@ -81,7 +81,7 @@
             rowclass = 'class=disabledSearch';
 
           QFSBodyCode += "<tr " + rowclass + "><td class=helpboxCommands>";
-          for (var j = 0; search.menudisplay && (j < search.aliases.length); j++)
+          for (var j = 0; search.aliasmenudisplay && (j < search.aliases.length); j++)
           {
             var alias = search.aliases[j].replace(/&/g, "&amp;").replace(/</g, "&lt;");
             if (isInternalSearch(alias))
