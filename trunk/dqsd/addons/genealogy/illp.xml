@@ -1,28 +1,27 @@
 <search function="illp">
-  <COMMENT>
-
-    This search file was initially created by Dave's Quick Search Deskbar
-    Search Wizard version 0.4 (beta) on 08/15/02 at 22:58:10
-
-    Even though this XML search will probably load and is a healthy start
-    toward a completed search, please be aware that this search will probably
-    not work as is and will require some human inspection and modification.
-
-  </COMMENT>
   <name>Illinois Land Sales Database</name>
-  <category>Genealogy</category>
+  <category>Genealogy
+    <category>Land Records</category>
+  </category>
   <contributor>Brent Beardsley</contributor>
   <link>http://www.cyberdriveillinois.com/departments/archives/genealogy/landsrch.html</link>
   <email></email>
   <description>
   Search the Illinois Public Domain Land Tract Sales Database
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/county</td><td> - </td><td>Limit the search to a specified county</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>illp jones</td></tr>
+      <tr><td>illp jones, fred</td></tr>
+      <tr><td>illp /county:ogle jones</td></tr>
+    </table>
   </description>
   <form name="illpf"
         method="post"
         action="http://cyberdriveillinois.com/cgi-bin/archives/land.s">
-
-    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
-
     <input type="hidden" name="name" value="" />
     <input type="hidden" name="county" value="" />
     <COMMENT>
@@ -142,29 +141,25 @@
       if( nullArgs("illp", q) )
         return;
 
-      if( q == "" )
-      {
-        openSearchWindow("http://www.cyberdriveillinois.com/departments/archives/genealogy/landsrch.html");
-        return;
-      }
+      document.illpf.county.value = "";
+      document.illpf.name.value = "";
 
       var args = parseArgs(q, "county");
-      if (args == null) {
-	nullArgs("illp", "?");
-	return;
+      if (args.switches.length > 0) {
+        for (var i=0; i < args.switches.length; i++) {
+          switch (args.switches[i].name)
+	  {
+          case "county": document.illpf.county.value = args.switch_val["county"].toUpperCase(); break;
+          }
+        }
       }
-	document.illpf.county.value = "";
-	document.illpf.name.value = "";
-	if (args.switches.length > 0) {
-		for (var i=0; i < args.switches.length; i++) {
-		  switch (args.switches[i].name)
-		  {
-			case "county": document.illpf.county.value = args.switch_val["county"].toUpperCase(); break;
-		  }
-		}
-	}
-	document.illpf.name.value = args.q;
-	submitForm(illpf);
+      var search_name = genealogy_parse_surname(args.q);
+      var first_name = genealogy_parse_givenname(args.q);
+      if (first_name != "") {
+        search_name += ", " + first_name;
+      }
+      document.illpf.name.value = search_name;
+      submitForm(illpf);
     }
   ]]></script>
 </search>

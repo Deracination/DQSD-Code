@@ -1,21 +1,23 @@
 <search function="blm">
-  <COMMENT>
-
-    This search file was initially created by Dave's Quick Search Deskbar
-    Search Wizard version 0.4 (beta) on 08/18/02 at 21:53:25
-
-    Even though this XML search will probably load and is a healthy start
-    toward a completed search, please be aware that this search will probably
-    not work as is and will require some human inspection and modification.
-
-  </COMMENT>
   <name>BLM GLO Land Patents</name>
-  <category>Genealogy</category>
+  <category>Genealogy
+    <category>Land Records</category>
+  </category>
   <contributor>Brent Beardsley</contributor>
   <link>http://www.glorecords.blm.gov/PatentSearch/Default.asp?Tab1=2</link>
   <email></email>
   <description>
   Search the BLM GLO Records
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/state</td><td> - </td><td>Limit the search to a specified state</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>blm jones</td></tr>
+      <tr><td>blm jones, francis</td></tr>
+      <tr><td>blm /state:il jones, francis</td></tr>
+    </table>
   </description>
   <form name="blmf"
         method="post"
@@ -61,10 +63,6 @@
         <option value="Any">-------------- ALL STATES --------------</option>
       </select>
     </COMMENT>
-
-
-    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
-
     <input type="hidden" name="f6" value="" />
     <input type="hidden" name="f9" value="" />
     <input type="hidden" name="f4" value="" />
@@ -188,14 +186,6 @@
       if( nullArgs("blm", q) )
         return;
 
-      if( q == "" )
-      {
-        openSearchWindow("http://www.glorecords.blm.gov/PatentSearch/Default.asp?Tab1=2");
-        return;
-      }
-
-      // FORM variables for blmf
-      //document.blmf.SelectedTab.value = "";
       document.blmf.f1.value = "";
 
       var args = parseArgs(q, "state");
@@ -208,7 +198,7 @@
 		switch (args.switches[i].name)
 		{
 		case "state":
-			document.blmf.f1.value = args.switch_val["state"];
+			document.blmf.f1.value = genealogy_lookup_place_abbrev(genealogy_parse_place_state(args.switch_val["state"])).toUpperCase();
 			break;
 		default:
 			break;
@@ -216,34 +206,8 @@
 	}
       }
 
-      // The wizard assigned the search string to this form field value because
-      // this field was the active element when the search file was generated.
-      // Change this to args.q if the search string is parsed with parseArgs.
       document.blmf.f6.value = genealogy_parse_surname(args.q);
-      //document.blmf.f9.value = "";
       document.blmf.f4.value = genealogy_parse_givenname(args.q);
-      //document.blmf.f7.value = "";
-      //document.blmf.f5.value = "";
-      //document.blmf.f8.value = "";
-      //document.blmf.f10.value = "";
-      //document.blmf.f15.value = "";
-      //document.blmf.f16.value = "";
-      //document.blmf.f13.value = "";
-      //document.blmf.f17.value = "";
-      //document.blmf.f18.value = "";
-      //document.blmf.f14.value = "";
-      //document.blmf.f19.value = "";
-      //document.blmf.f21.value = "";
-      //document.blmf.f20.value = "";
-      //document.blmf.f22.value = "";
-      //document.blmf.f11.value = "";
-      //document.blmf.f23.value = "";
-      //document.blmf.f33.value = "";
-      //document.blmf.f12.value = "";
-      //document.blmf.f25.value = "";
-      //document.blmf.f26.value = "";
-      //document.blmf.f24.value = "";
-
       submitForm(blmf);
     }
   ]]></script>
