@@ -204,6 +204,41 @@ Section "Quick Search Deskbar (required)"
   Delete $INSTDIR\dqsd.xml
   Delete $INSTDIR\search.xml
 
+  ; old versions of searches to delete; most renamed or consolidated
+  Delete $INSTDIR\searches\aim.xml
+  Delete $INSTDIR\searches\ask.xml
+  Delete $INSTDIR\searches\at.xml
+  Delete $INSTDIR\searches\base.xml
+  Delete $INSTDIR\searches\bible.xml
+  Delete $INSTDIR\searches\cf.xml
+  Delete $INSTDIR\searches\chart.xml
+  Delete $INSTDIR\searches\day.xml
+  Delete $INSTDIR\searches\drink.xml
+  Delete $INSTDIR\searches\fc.xml
+  Delete $INSTDIR\searches\foldoc.xml
+  Delete $INSTDIR\searches\gga.xml
+  Delete $INSTDIR\searches\ggi.xml
+  Delete $INSTDIR\searches\ggc.xml
+  Delete $INSTDIR\searches\ggn.xml
+  Delete $INSTDIR\searches\gguk.xml
+  Delete $INSTDIR\searches\gwd.xml
+  Delete $INSTDIR\searches\ifl.xml
+  Delete $INSTDIR\searches\law.xml
+  Delete $INSTDIR\searches\lottery.xml
+  Delete $INSTDIR\searches\man.xml
+  Delete $INSTDIR\searches\map.xml
+  Delete $INSTDIR\searches\palm.xml
+  Delete $INSTDIR\searches\phone.xml
+  Delete $INSTDIR\searches\roman.xml
+  Delete $INSTDIR\searches\sbb.xml
+  Delete $INSTDIR\searches\sbc.xml
+  Delete $INSTDIR\searches\sbp.xml
+  Delete $INSTDIR\searches\short.xml
+  Delete $INSTDIR\searches\slash.xml
+  Delete $INSTDIR\searches\start.xml
+  Delete $INSTDIR\searches\tel.xml
+  Delete $INSTDIR\searches\tvgc.xml
+
   ; The unique uuid for our taskbar
   StrCpy $9 "{226b64e8-dc75-4eea-a6c8-abcb4d1d37ff}"
 
