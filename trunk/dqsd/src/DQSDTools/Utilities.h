@@ -33,9 +33,5 @@ BOOL IsWindowOnTaskbar(HWND hwnd);
 //
 BOOL IsWindowOnScreen(HWND hwnd);
 
-// 
-// Helper to return the screen dimensions as a RECT
-// 
-BOOL GetScreenRect(LPRECT lpRect);
 
 #endif //__UTILITIES_H__
