@@ -13,7 +13,7 @@
 Name "${APPNAME}"
 
 ; Silent install
-DirShow show
+; DirShow show ; DirShow no longer works in NSIS 2.0
 CRCCheck on
 SetDatablockOptimize on
 Icon search.ico
@@ -71,6 +71,8 @@ SectionEnd
 ; Uninstall stuff
 
 UninstallText "Click next to uninstall ${APPNAME}."
+UninstallIcon search.ico
+
 Section "Uninstall"
   SetDetailsView show
   
