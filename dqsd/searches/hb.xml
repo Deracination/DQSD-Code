@@ -20,7 +20,7 @@
   <form name="hbf"
         action="http://www.hotbot.com/default.asp"
         method="get">
-    <input type="radio" name="prov"/>
+    <input type="hidden" name="prov"/>
     <input type="hidden" name="ps" value=""/>
     <input type="hidden" name="loc" value="searchbox"/>
     <input type="hidden" name="tab" value="web"/>
