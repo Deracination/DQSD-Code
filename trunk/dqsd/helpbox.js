@@ -78,7 +78,7 @@ function about()
       jumplist += (i > 0 ? " | " : "") + "<a href=\"\#"+categoryarray[i]+"\">"+ categoryarray[i]+"</a>";
     }
     jumplist += "</center>";
-    jumplist += "<div align='center' style='margin: 5px 0px 5px 0px; font-size: 10px'>[ <span class='categoryExpander' type='expandall'>expand all</span> ]  [ <span class='categoryExpander' type='collapseall'>collapse all</span> ]</div>";
+    jumplist += "<div align='center' style='margin: 5px 0px 5px 0px;'>[ <span class='categoryExpander' type='expandall'>expand all</span> ]  [ <span class='categoryExpander' type='collapseall'>collapse all</span> ]</div>";
 
     txt = txt.replace(/\r\n/g, '\n');
     txt = txt.replace(/\n\*/g, '<li>');
@@ -106,10 +106,15 @@ function about()
     txt = txt.replace(/(view-source:)/g, '$1' + basedir);
     var mesg = "<title>About Dave's Quick Search Deskbar</title>";
     mesg += "<head><style>body{margin:20px;border:0;padding:0;background-color:threedface;font-family:Tahoma,Arial;scrollbar-track-color:threedface}" +
-           "td{font-size:8pt;border-collapse:collapse} .lg{background:lightgreen;} .lb{background:skyblue;} .top{font-size:9px} SPAN.categoryExpander { behavior: url(categoryExpander.htc); } #categoryCount { font-size: 10px }</style></head>";
-    mesg += "<body scroll=yes><a name='#top'><table height=100% width=100%><tr><td><center style=font-size:9pt><b>";
+           "td{font-size:8pt;border-collapse:collapse} .lg{background:lightgreen;} .lb{background:skyblue;} .top{font-size:60%} SPAN.categoryExpander { font-size: 80%; behavior: url(categoryExpander.htc); } #categoryCount { font-size: 70% }</style>"
+    if (typeof helpstyle == 'undefined')
+      helpstyle = '';
+    mesg += "<style>TD {" + helpstyle + "}</style></head>";
+    mesg += "<body scroll=yes><a name='#top'><table height=100% width=100%><tr><td><center><b>";
     mesg += txt + "</td></tr></table>";
     opts = "height=480, width=441, menubar=no, scrollbars=yes, resizable=yes, toolbar=no, status=no";
+    if (typeof helpoptions != 'undefined' && helpoptions != "")
+      opts += ", " + helpoptions;
     aboutWindow = window.open("about:blank", "_blank", opts);
     aboutWindow.document.write(mesg);
     aboutWindow.document.close();
