@@ -1,21 +1,8 @@
--- What's new for 3.1.1 beta (September 6, 2002)
-
-New Searches
-
-* 
-
-Modified Searches
-
-* 
-
-Enhancements
-
-* 
+-- What's new for 3.1.3 (September 9, 2002)
 
 Bug Fixes
 
 * aliases.txt - corrected 2 aliases to reflect the change of searches names that occured in v 3.1.1
-
 
 -- What's new for 3.1.2 (September 8, 2002)
 
