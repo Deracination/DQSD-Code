@@ -232,7 +232,6 @@ LRESULT CALLBACK CMenuBuilder::TrackerWndProc(
 	LPARAM lParam   // second message parameter
 	)
 {
-//	static BOOL bAdded[500];
 	static bool bAdded;
 
 	if(uMsg == WM_INITMENUPOPUP)
@@ -254,7 +253,6 @@ LRESULT CALLBACK CMenuBuilder::TrackerWndProc(
 
 			}
 		}
-//		ZeroMemory(bAdded, sizeof(bAdded));
 		bAdded = false;
 	}
 	if(uMsg == WM_MENUSELECT)
@@ -274,25 +272,6 @@ LRESULT CALLBACK CMenuBuilder::TrackerWndProc(
 			// Is there a tooltip for this item?
 			if(pThis != NULL && pThis->m_toolTips.count(itemId) > 0)
 			{
-
-/*
-Even worse!  This doesn't work on scrolling menus...
-				// The GetMenuItemRect call requires the zero-based position of the menu item
-				// Unfortunately, I only have the ID in this message call.
-				// To look up the position, I think I need to loop through the items until I find a 
-				// matching ID - very clunky, but the only conversion functions seem to go
-				// Pos->ID, and not the other way
-				int nItems = GetMenuItemCount(hMenu);
-				int nItemPosition;
-				for(nItemPosition = 0; nItemPosition < nItems; nItemPosition++)
-				{
-					if(GetMenuItemID(hMenu, nItemPosition) == itemId)
-					{
-						// We've found it
-						break;
-					}
-				}
-*/
 				// It's worse than I thought.
 				// Because very long menus can scroll, nItemPosition needs to be relative
 				// to the topmost DISPLAYED item, rather than the top of the whole menu.
@@ -352,36 +331,33 @@ Even worse!  This doesn't work on scrolling menus...
 					// because I don't ask the ToolTip window to overwrite any data
 					ti.lpszText = (LPTSTR)(pThis->m_toolTips[itemId].c_str());
 
-//					char tipTraceBuffer[100];
-//					tipTraceBuffer[0] = '\0';
-//					strncat(tipTraceBuffer, ti.lpszText, 99);
-//					ATLTRACE("TipText: '%s'\n", tipTraceBuffer);
-
 					// Map the rectangle relative to the menu window
-//					RECT menuWindowRect;
-//					::GetWindowRect(ti.hwnd, &menuWindowRect);
-//					ATLTRACE("Menu Window: %d,%d,%d,%d\n", menuWindowRect.left, menuWindowRect.top, menuWindowRect.right, menuWindowRect.bottom);
-
-//					itemRect.left -= menuWindowRect.left;
-//					itemRect.top -= menuWindowRect.top;
-//					itemRect.right -= menuWindowRect.left;
-//					itemRect.bottom -= menuWindowRect.top;
-
 					MapWindowPoints(NULL, ti.hwnd, (LPPOINT)&itemRect, 2);
 					ti.rect = itemRect;
 					
 //					ATLTRACE("ToolRect: (wnd %x) %d,%d,%d,%d\n", ti.hwnd, ti.rect.left, ti.rect.top, ti.rect.right, ti.rect.bottom);
 			
+					// We only have one tool tip - if it's already been created,
+					// we move it to the new position and change its text
+
+
 					if(bAdded)
 					{
 //						ATLTRACE("Moving\n");
-						::SendMessage(m_hTooltipWnd, TTM_UPDATETIPTEXT, 0, (LPARAM)&ti);
+						// When we just move an existing tooltip, we deactivate it
+						// then reactivate it in the new position.  This has the effect of starting
+						// the display delay again, which is an improvement (and makes the tt behaviour
+						// closer to that of the XP start menu)
+						::SendMessage(m_hTooltipWnd, TTM_ACTIVATE, FALSE, 0);
 
+						::SendMessage(m_hTooltipWnd, TTM_UPDATETIPTEXT, 0, (LPARAM)&ti);
 						::SendMessage(m_hTooltipWnd, TTM_SETTOOLINFO, 0, (LPARAM)&ti);
 						::SendMessage(m_hTooltipWnd, TTM_NEWTOOLRECT, 0, (LPARAM)&ti);
+
+						::SendMessage(m_hTooltipWnd, TTM_ACTIVATE, TRUE, 0);
 					}
 					else
-					{
+					{ 
 //						ATLTRACE("Adding\n");
 						if(!::SendMessage(m_hTooltipWnd, TTM_ADDTOOL, 0, (LPARAM)&ti))
 						{
@@ -411,78 +387,6 @@ Even worse!  This doesn't work on scrolling menus...
 	return DefWindowProc(hwnd, uMsg,wParam,lParam);
 }
 
-
-// WGD - This was a sub-class WndProc for the tip window, while I was learning about how TTs work...
-/*
-WNDPROC lpfnOldWndProc;
-LONG FAR PASCAL ToolTipSubClassFunc(   HWND hWnd,
-               UINT uMsg,
-               WPARAM wParam,
-               LONG lParam)
-{
-
-	if(uMsg == WM_PAINT)
-	{   
-		ATLTRACE("WM_PAINT\n");    
-	}
-	else if(uMsg == WM_ACTIVATE)
-	{ 
-		ATLTRACE("WM_ACTIVATE\n");
-	}
-	else if(uMsg == WM_WINDOWPOSCHANGING)
-	{
-		LPWINDOWPOS pWndPos = (LPWINDOWPOS)lParam;
-		ATLTRACE("WM_WINDOWPOSCHANGING (%d) (%d,%d, 0x%x)\n", IsWindowVisible(hWnd), pWndPos->cx, pWndPos->cy, pWndPos->flags);
-	}
-	else if(uMsg == WM_TIMER || uMsg == WM_NCHITTEST)
-	{ 
-
-	}
-	else if(uMsg < 0x400)
-	{
-		ATLTRACE("WM_ 0x%x\n", uMsg);
-	}
-
-
-
-	if(0) // uMsg != TTM_GETTOOLINFO)
-	{
-		ATLTRACE("ToolTipSubClassFunc - msg 0x%x\n", uMsg);
-
-		if(uMsg == TTM_RELAYEVENT)
-		{
-			MSG* pMsg = (MSG*)lParam;
-
-//			if(pMsg->message != WM_MOUSEMOVE)
-			{
-				ATLTRACE("Relayed msg = 0x%x @ %d,%d\n", pMsg->message, LOWORD(pMsg->lParam), HIWORD(pMsg->lParam));
-			}
-		}
-		else if(uMsg == TTM_HITTEST)
-		{
-			TTHITTESTINFO* pHti = (TTHITTESTINFO*)lParam;
-			BOOL bResult = CallWindowProc(lpfnOldWndProc, hWnd, uMsg, wParam, lParam);
-			ATLTRACE("Hittest %d,%d, result %d\n", pHti->pt.x, pHti->pt.y, bResult);
-			return bResult;
-		}
-		else if(uMsg == TTM_WINDOWFROMPOINT)
-		{
-			POINT* pPoint = (POINT*)lParam;
-			HANDLE result = (HANDLE)CallWindowProc(lpfnOldWndProc, hWnd, uMsg, wParam, lParam);
-			ATLTRACE("WndFromPoint %d,%d, result 0x%x\n", pPoint->x, pPoint->y, result);
-			if(pPoint->x == 0 && pPoint->y == 0)
-			{
-				return 0;
-			}
-			return (LONG)result;
-		}
-		
-	}
- 
-	return CallWindowProc(lpfnOldWndProc, hWnd, uMsg, wParam, lParam);
-
-}
-*/
 
 // Set up the tracking window which can follow the menu position and display tooltips
 STDMETHODIMP CMenuBuilder::InitialiseTooltips(long displayTimeMultiplier)
