@@ -35,6 +35,7 @@ Modified Searches
 * msda - Added /dcom switch for searching the DCOM list as well (Kim Gräsman)
 * alarm - "minutes from now" option, several bugs fixed (Ben Williams)
 * js - one can set the number of working days (Tom Corcoran)
+* tucows - more approriate category (Sarah Sweeney)
 
 Removed Searches
 
