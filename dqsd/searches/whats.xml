@@ -6,6 +6,14 @@
   <email></email>
   <description>
   Check Netcraft's "Whats that site running?" HTTPD database for a specific web site to get information on a web server.
+  <div class="helpboxDescLabels">Usage:</div>
+  <table class="helpboxDescTable">
+  	<tr><td>whats &lt;<i>site</i>&gt;</td></tr>
+  </table>
+  <div class="helpboxDescLabels">Example:</div>
+  <table class="helpboxDescTable">
+     <tr><td>whats apache.org</td></tr>
+  </table>
   </description>
   <form name="whatsf"
         method="get"

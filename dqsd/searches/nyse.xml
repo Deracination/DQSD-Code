@@ -1,11 +1,4 @@
 <search function="nyse">
-  <COMMENT>
-
-    Even though this XML search will probably load and is a good start
-    toward a completed search, please be aware that this search will probably
-    not work as is and will probably require some changes.
-
-  </COMMENT>
   <name>NYSE Listed Companies </name>
   <category>Finance</category>
   <contributor>Glenn Carr</contributor>
@@ -13,6 +6,15 @@
   <email></email>
   <description>
   Input a company name  and get the stock symbol and a small description of the company
+  <div class="helpboxDescLabels">Usage:</div>
+  <table class="helpboxDescTable">
+  	<tr><td>nyse &lt;<i>symbol</i>&gt;</td></tr>
+  </table>
+  <div class="helpboxDescLabels">Example:</div>
+  <table class="helpboxDescTable">
+     <tr><td>nyse ibm</td></tr>
+  </table>
+
   </description>
   <form name="nysef"
         method="get"

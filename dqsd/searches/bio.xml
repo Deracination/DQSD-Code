@@ -1,11 +1,4 @@
 <search function="bio">
-  <COMMENT>
-
-    Even though this XML search will probably load and is a good start
-    toward a completed search, please be aware that this search will probably
-    not work as is and will probably require some changes.
-
-  </COMMENT>
   <name>Biographies</name>
   <category>People and Places</category>
   <contributor>Mel Neff</contributor>
@@ -13,6 +6,15 @@
   <email>cybermel716@hotmail.com</email>
   <description>
   Search the Biography.com database. Has  over 25,000 different listings.
+  <div class="helpboxDescLabels">Usage:</div>
+  <table class="helpboxDescTable">
+  	<tr><td>bio &lt;<i>name</i>&gt;</td></tr>
+  </table>
+  <div class="helpboxDescLabels">Example:</div>
+  <table class="helpboxDescTable">
+    <tr><td>bio dean kamen</td></tr>
+  </table>
+
   </description>
   <form name="biof"
         method="get"

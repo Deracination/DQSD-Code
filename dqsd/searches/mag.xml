@@ -1,11 +1,4 @@
 <search function="mag">
-  <COMMENT>
-
-    Even though this XML search will probably load and is a good start
-    toward a completed search, please be aware that this search will probably
-    not work as is and will probably require some changes.
-
-  </COMMENT>
   <name>Newspapers &amp; Magazines</name>
   <category>Reference<category>General</category></category>
   <contributor>Glenn Carr</contributor>
@@ -13,6 +6,15 @@
   <email></email>
   <description>
   Search online library of periodicals, journals, and reference books.
+  <div class="helpboxDescLabels">Usage:</div>
+  <table class="helpboxDescTable">
+  	<tr><td>mag &lt;<i>name</i>&gt;</td></tr>
+  </table>
+  <div class="helpboxDescLabels">Example:</div>
+  <table class="helpboxDescTable">
+    <tr><td>mag van morrison</td></tr>
+  </table>
+ 
   </description>
   <form name="magf"
         method="get"

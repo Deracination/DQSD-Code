@@ -1,14 +1,4 @@
 <search function="archi">
-  <COMMENT>
-
-    This search file was initially created by Dave's Quick Search Deskbar
-    Search Wizard version 0.5 (beta) on 09/25/02 at 20:38:19
-
-    Even though this XML search will probably load and is a healthy start
-    toward a completed search, please be aware that this search will probably
-    not work as is and will require some human inspection and modification.
-
-  </COMMENT>
   <name>Way Back Machine</name>
   <category>Search the Web</category>
   <contributor>Thad Kerosky</contributor>
@@ -16,6 +6,15 @@
   <email></email>
   <description>
   Look into the extensive incremental archives of the internet. Some date back to 1998.
+  <div class="helpboxDescLabels">Usage:</div>
+  <table class="helpboxDescTable">
+  	<tr><td>archi &lt;<i>topic</i>&gt;</td></tr>
+  </table>
+  <div class="helpboxDescLabels">Example:</div>
+  <table class="helpboxDescTable">
+    <tr><td>archi voip</td></tr>
+  </table>
+
   </description>
   <form name="wbmf"
         method="get"
