@@ -1,18 +1,30 @@
 <search function="reget">
   <name>ReGet</name>
-  <description>ReGet will auto-reload a URL at a given frequency:
-    "reget 10 20 http://www.gymamerica.com" will reload gymamerica every 20 seconds for 10 iterations.
-    "reget 0 20 http://www.whitehouse.gov /noforce" will reload whitehouse.gov every 20 seconds until cancelled without forcing the browser to reload from the server.
+  <description>
+    ReGet will auto-reload a URL at a given frequency. The first argument is an integer representing the number of page reloads, The second is an integer representing the reload frequency in seconds. Settings the number of iterations to 0 will cause the cycle to continue indefinately.<br/>
+    <a class="helpboxDescLabels">Usage:</a><br/>
+  	<table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">Set</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">reget &lt;<i>iterations</i>&gt; &lt;<i>interval</i>&gt; &lt;<i>url</i>&gt; [/noforce]</td></tr>
+      <tr><td class="helpboxDescColumns">Cancel</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">reget cancel</td></tr>
+  	</table>
+    <a class="helpboxDescLabels">Switches:</a><br/>
+  	<table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">/noforce</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Forces ReGet to use the cached copy of the web page when reloading.</td></tr>
+  	</table>
+    <a class="helpboxDescLabels">Example:</a><br/>
+    <table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">reget 10 20 http://www.gymamerica.com</td></tr>
+      <tr><td class="helpboxDescColumns">reget 0 20 http://www.whitehouse.gov /noforce</td></tr>
+  	</table>
   </description>
-  <switches>noforce</switches>
-  <contributor>Neel Doshi</contributor>
   <category>Functions</category>
+  <contributor>Neel Doshi</contributor>
+  
   <script><![CDATA[
-
     // Array used to keep track of reget commands that are pending completion
     regetTracker = new Array();
 
-	function regetURLLoad(freq, num, name, reget_code, force_reload, strURL)
+    function regetURLLoad(freq, num, name, reget_code, force_reload, strURL)
     {
       if (force_reload == 1)
       {
@@ -56,82 +68,80 @@
     }
 
 
-	function reget(q, switches)
-	{
-	  if (nullArgs("reget", q))
-	  {
-	    return false;
-	  }
-
+  	function reget(q, switches)
+  	{
+  	  if (nullArgs("reget", q))
+  	    return false;
+  
   	  // First parse the arguments
   	  var args_array = q.split(' ');
   	  var args_num = args_array.shift();
   	  var args_freq = args_array.shift();
   	  var args_rest = args_array.join(' ');
   	  var reget_base = 1;
-
-	  // Does the member want to cancel a previous reget
-	  if (args_num == 'cancel')
-	  {
-	    // The member wants to cancel a particular reget session
-	    var reget_code;
-	    if (args_freq == undefined)
-	    {
-	      args_freq = reget_base;
-	      reget_code = "";
-	    }
-		else
-		  reget_code = args_freq + " ";
-
-	    if (regetTracker[args_freq] != undefined)
-	    {
-	      clearInterval(regetTracker[args_freq]);
-	      delete regetTracker[args_freq];
-	      document.deff.q.value = "reget " + reget_code + "canceled";
-	      setTimeout("document.deff.q.value='';",1000);
-	      return true;
-	    }
-	    else
-	    {
-	      alert("reget not found");
-	      return false;
-	  	}
-	  }
-
-	  // Next determine if the first argument is an integer or not.
-	  if ( !(args_num.match(/^(\d)+$/)) )
-	  {
-	    alert("The first argument must be an integer representing the number of page reloads");
-	    return false;
-	  }
-
-	  // Next determine if the next argument is a valid integer
-	  if (args_freq == undefined || args_freq.match(/^(\d)+$/) == null || args_freq == 0)
-	  {
-	    alert("The second argument must be an integer representing the reload frequency in seconds");
-	    return false;
-	  }
-
-	  // Next determine if the next argument has something to open in a browser:
-	  var strURL = isURL(args_rest);
-	  if (args_rest == undefined || strURL == false)
-	  {
-	    alert("The third argument must be a valid URL");
-	    return false;
-	  }
-
-      // Determine if the reload forcing string should be used or not.
-	  var bforce_reload = 1;
-	  if (switches == "noforce")
-	    bforce_reload = 0
-
-	  // Generate a reget code and target name
-	  // The purpose of the reget code is to allow the user to cancel a
-	  // reget once it has begun.  The regetTracker array will keep track of
-	  // all of the active regets and associate a reget code to a setTimeout handle
-	  // so the user doesn't have to keep track of the changing setTimeout handles.
-	  // The array serves the dual purpose of also allowing reget to create a unique
-	  // name for target window so that each reget shows up in a different browser.
+  
+  	  // Does the member want to cancel a previous reget
+  	  if (args_num == 'cancel')
+  	  {
+  	    // The member wants to cancel a particular reget session
+  	    var reget_code;
+  	    if (args_freq == undefined)
+  	    {
+  	      args_freq = reget_base;
+  	      reget_code = "";
+  	    }
+  		else
+  		  reget_code = args_freq + " ";
+  
+  	    if (regetTracker[args_freq] != undefined)
+  	    {
+  	      clearInterval(regetTracker[args_freq]);
+  	      delete regetTracker[args_freq];
+  	      document.deff.q.value = "ReGet " + reget_code + "canceled!";
+  	      setTimeout("document.deff.q.value='';",1000);
+  	      return true;
+  	    }
+  	    else
+  	    {
+  	      alert("ReGet not found!");
+  	      return false;
+  	  	}
+  	  }
+  
+  	  // Next determine if the first argument is an integer or not.
+  	  if ( !(args_num.match(/^(\d)+$/)) )
+  	  {
+  	    alert("The first argument must be an integer representing the number of page reloads");
+  	    return false;
+  	  }
+  
+  	  // Next determine if the next argument is a valid integer
+  	  if (args_freq == undefined || args_freq.match(/^(\d)+$/) == null || args_freq == 0)
+  	  {
+  	    alert("The second argument must be an integer representing the reload frequency in seconds");
+  	    return false;
+  	  }
+  
+  	  // Next determine if the next argument has something to open in a browser:
+  	  var strURL = isURL(args_rest);
+  	  if (args_rest == undefined || strURL == false)
+  	  {
+  	    alert("The third argument must be a valid URL");
+  	    return false;
+  	  }
+  
+        // Determine if the reload forcing string should be used or not.
+  	  var bforce_reload = 1;
+  	  if (switches == "noforce")
+  	    bforce_reload = 0
+  
+  	  // Generate a reget code and target name
+  	  // The purpose of the reget code is to allow the user to cancel a
+  	  // reget once it has begun.  The regetTracker array will keep track of
+  	  // all of the active regets and associate a reget code to a setTimeout handle
+  	  // so the user doesn't have to keep track of the changing setTimeout handles.
+  	  // The array serves the dual purpose of also allowing reget to create a unique
+  	  // name for target window so that each reget shows up in a different browser.
       for (var reget_code = reget_base; regetTracker[reget_code] != undefined; ++reget_code)
 
       var reget_target = "target_" + reget_code;
