@@ -93,7 +93,7 @@ function about()
             helptable += "<br>"
         }
         var rowclassname = '';
-        helptable += "</td><td class=helpboxToggle><input name='" + search.fname + "' id=search_enabled type='checkbox' onclick='toggleEnabledSearch()' " + checked + "></td><td class=helpboxDescriptions>";
+        helptable += "</td><td class=helpboxToggle><input title='Enable/disable search' name='" + search.fname + "' id=search_enabled type='checkbox' onclick='toggleEnabledSearch()' " + checked + "></td><td class=helpboxDescriptions>";
         if (search.link)
           helptable += "<a target=info class=helpboxLink href=\"" + search.link + "\">" + search.name + "</a>";
         else
