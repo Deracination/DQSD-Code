@@ -238,4 +238,4 @@ alertmode=0;
 
 /* Length of menu Most Recently Used list
 */
-menuMRUlength = 6;
+menuMRUlength = 5;
