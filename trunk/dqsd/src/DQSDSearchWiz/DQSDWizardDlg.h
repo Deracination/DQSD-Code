@@ -18,6 +18,9 @@ public:
 
 	~CDQSDWizardDlg()
 	{
+		vector< CComBSTR* >::iterator it = m_vecFormHTMLs.begin();
+		for ( ; it != m_vecFormHTMLs.end(); it++ )
+			delete *it;
 	}
 
 	enum { IDD = IDD_DQSDWIZARDDLG };
@@ -26,6 +29,7 @@ BEGIN_MSG_MAP(CDQSDWizardDlg)
 	MESSAGE_HANDLER(WM_INITDIALOG, OnInitDialog)
 	COMMAND_ID_HANDLER(IDOK, OnOK)
 	COMMAND_ID_HANDLER(IDCANCEL, OnCancel)
+	NOTIFY_HANDLER(IDC_FormList2, LVN_ITEMCHANGED, OnFormListItemChanged)
 END_MSG_MAP()
 // Handler prototypes:
 //  LRESULT MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
@@ -46,8 +50,13 @@ END_MSG_MAP()
 		return 0;
 	}
 
+	LRESULT OnFormListItemChanged(int idCtrl, LPNMHDR pNMHDR, BOOL& bHandled);
+
 public:
 	CComPtr<IHTMLDocument2> m_spDoc2;
+
+private:
+	vector< CComBSTR* > m_vecFormHTMLs;
 
 };
 
