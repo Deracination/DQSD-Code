@@ -1,11 +1,11 @@
 <search function="qscb">
-  <name>VB Script - QuickSort Clipboard</name>
+  <name>QuickSort Clipboard</name>
   <description>
     QuickSorts every line of text on the clipboard and 
     places it back onto the clipboard.<br />
     <div class="helpboxDescLabels">Usage:</div>
     <table class="helpboxDescTable">
-      <tr><td>qscb <strong>[/trim]</strong></td></tr>
+      <tr><td>qscb <strong>[/trim] [/1]</strong></td></tr>
     </table>
     <div class="helpboxDescLabels">Switches:</div>
     <table class="helpboxDescTable">
@@ -16,6 +16,8 @@
     <table class="helpboxDescTable">
       <tr><td>qscb</td></tr>
       <tr><td>qscb /trim</td></tr>
+      <tr><td>qscb /1</td></tr>
+      <tr><td>qscb /trim /1</td></tr>
     </table>
   </description>
   <category>Functions</category>
@@ -25,17 +27,20 @@
   <form name="qscbf"
     action="http://reliableanswers.com/x/dqsd/"
     method="post">
-    <input type="hidden" name="q" value="" />
+    <input type="hidden" value="" name="q"        />
+    <input type="hidden" value="" name="single"   />
+    <input type="hidden" value="" name="trim"     />
+    <input type="hidden" value="qscb" name="dqsd" />
     <textarea name="vbscode" style="display: none;"><![CDATA[
 
 Dim q, qbTrim, qbSingle
 q = document.qscbf.q.value
-If InStr( 1, q, "/trim", 1) > 0 Then
+If document.qscbf.trim.value <> "" Then
   qbTrim = True
 Else
   qbTrim = False
 End If
-If InStr( 1, q, "/1", 1) > 0 Then
+If document.qscbf.single.value <> "" Then
   qbSingle = True
 Else
   qbSingle = False
@@ -125,8 +130,25 @@ End Function
 
   function qscb (q)
   {
-    if( nullArgs( "qscb", q ) ) return false;
+    if( q.length != 0 ) {
+      if( nullArgs( "qscb", q ) ) return false;
+    }
 
+    var args = parseArgs(q, "1, s, single, t, trim");
+    for (var i = 0; i < args.switches.length; i++)
+    {
+      sw = args.switches[i];
+      switch(sw.name)
+      {
+        case "1":
+        case "s":
+        case "single":
+          document.qscbf.single.value = "1"; break;
+        case "t":
+        case "trim":
+          document.qscbf.trim.value   = "1"; break;
+      }
+    }
     document.qscbf.q.value = q;
 
   //get the vbs code

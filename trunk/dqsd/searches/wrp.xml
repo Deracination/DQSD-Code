@@ -32,47 +32,32 @@
   <form name="wrpf"
     action="http://www.ReliableAnswers.com/x/dqsd/"
     method="post">
-    <input type="hidden" name="q" value="" />
+    <input type="hidden" name="pre"  value="" />
+    <input type="hidden" name="prf"  value="" />
+    <input type="hidden" name="nor"  value="" />
+    <input type="hidden" name="max"  value="" />
+    <input type="hidden" name="dqsd" value="wrp" />
     <textarea name="vbscode" style="display: none;"><![CDATA[
 
-Dim lq, lqe, qsPrefix, qlMax, qbRemove, q
-q = document.wrpf.q.value
-lq = InStr(1, q, "/np", 1)
-If lq > 0 Then
+Dim qsPrefix, qlMax, qbRemove, q
+If document.wrpf.prf.value <> "" Then
   qsPrefix = ""
 Else
-  lq = InStr(1, q, "/pre", 1)
-  If lq > 0 Then
-    lq = lq + 5
-    lqe = InStr(lq, q, "/", 1)
-    If lqe > 0 Then
-      lqe = lqe - lq
-      qsPrefix = Mid(q, lq, lqe)
-    Else
-      qsPrefix = Mid(q, lq)
-    End If
+  If document.wrpf.pre.value <> "" Then
+    qsPrefix = document.wrpf.pre.value
   Else
     qsPrefix = "> "
   End If
 End If
-lq = InStr(1, q, "/max", 1)
-If lq > 0 Then
-  lq = lq + 5
-  lqe = InStr(lq, q, "/", 1)
-  If lqe > 0 Then
-    lqe = lqe - lq
-    qlMax = CLng(Trim(Mid(q, lq, lqe)))
-  Else
-    qlMax = CLng(Trim(Mid(q, lq)))
-  End If
+If document.wrpf.max.value <> "" Then
+  qlMax = CLng(document.wrpf.max.value)
 Else
   qlMax = 64
 End If
-If qlMax < 0 Then
+If (qlMax < 0) Or Not IsNumeric(qlMax) Then
   qlMax = 64
 End If
-lq = InStr(1, q, "/no", 1)
-If lq > 0 Then
+If document.wrpf.nor.value <> "" Then
   qbRemove = False
 Else
   qbRemove = True
@@ -139,8 +124,30 @@ End Function
         if (nullArgs( "wrp", "?" )) return true;
       }
     }
-
-    document.wrpf.q.value = q;
+    var wrppre = "> ";
+    var wrpprf = "";
+    var wrpnor = "";
+    var wrpmax = 64;
+    var args = parseArgs(q, "np, pre, max, no");
+    for (var i = 0; i < args.switches.length; i++)
+    {
+      sw = args.switches[i];
+      switch(sw.name)
+      {
+        case "pre":
+          wrppre = sw.value; break;
+        case "np":
+          wrpprf = 1; break;
+        case "no":
+          wrpnor = 1; break;
+        case "max":
+          wrpmax = sw.value; break;
+      }
+    }
+    document.wrpf.pre.value = wrppre;
+    document.wrpf.prf.value = wrpprf;
+    document.wrpf.nor.value = wrpnor;
+    document.wrpf.max.value = wrpmax;
 
   //get the vbs code
     var wrpt = "";
@@ -165,4 +172,8 @@ End Function
 	Distributed under the terms of the
 	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
   </copyright>
+  <created_by>
+    This search file was created by Shawn K. Hall
+    Copyright (c) 2003 Shawn K. Hall; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
 </search>
