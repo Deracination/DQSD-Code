@@ -768,7 +768,7 @@ STDMETHODIMP CLauncher::RenameFile(BSTR bstrFromFilename, BSTR bstrToFilename)
 	HRESULT hr;
 
 	// Get the full from pathname after applying some defaults
-	TCHAR szFromFilename[ _MAX_PATH ];
+	TCHAR szFromFilename[ _MAX_PATH + 1];
 	hr = GetFilename( W2CT( bstrFromFilename ), szFromFilename );
 	if ( FAILED( hr ) )
 		return hr;
@@ -786,7 +786,7 @@ STDMETHODIMP CLauncher::RenameFile(BSTR bstrFromFilename, BSTR bstrToFilename)
 	}
 
 	// Make sure it's extension is not one of the bad extensions
-	TCHAR *szBadExtensions = _T(".exe;.dll;.bat;.cmd");
+	TCHAR *szBadExtensions = _T(".386;.bat;.cmd;.com;.cpl;.dll;.drv;.eml;.exe;.hta;.js;.jse;.lnk;.mht;.mhtm;.mhtml;.msi;.ocx;.ovl;.ovr;.pif;.reg;.scr;.sct;.shb;.shs;.sys;.vbs;.vbx;.vxd;.wsc;.wsf;.wsh");
 	if (IsFileExtension(szFromFilename, szBadExtensions))
 	{
 		return Error(_T("Can't rename that type of file."), IID_ILauncher, E_FAIL);
@@ -809,7 +809,7 @@ STDMETHODIMP CLauncher::RenameFile(BSTR bstrFromFilename, BSTR bstrToFilename)
 #pragma warning(default: 4310) // cast truncates constant value
 
 	// Get the full to pathname after applying some defaults
-	TCHAR szToFilename[ _MAX_PATH ];
+	TCHAR szToFilename[ _MAX_PATH + 1 ];
 	hr = GetFilename( W2CT( bstrToFilename ), szToFilename );
 	if ( FAILED( hr ) )
 		return hr;
