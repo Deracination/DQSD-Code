@@ -1,0 +1,59 @@
+<search function="guiasp">
+  <name>GuiaSP - Mapas</name>
+  <description>
+    Find maps and addresses in some cities of Brazil. Both number and city are optional. Sao Paulo is default and the other available cities are Rio de Janeiro, Belo Horizonte and Salvador.<br/>
+    <div class="helpboxDescLabels">Usage:</div>
+    <table class="helpboxDescTable">
+      <tr><td>guiasp &lt;<i>street name</i>&gt; [&lt;<i>number</i>&gt;] [({sp | rj | bh | sa})]</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>guiasp paulista 1000</td></tr>
+      <tr><td>guiasp brasil 200 (rj)</td></tr>
+    </table>
+  </description>
+  <category>People and Places</category>
+  <link>http://mapas.guiasp.com.br/nacidade/</link>
+  <contributor>Andrew Francis</contributor>
+  <email>afrancis@zipmail.com.br</email>
+
+  
+  <form name="guiaspf"
+        action="http://mapas.guiasp.com.br/nacidade/default.asp"
+        method="get">
+    <input type="hidden" name="cid" value="sp"/>
+    <input type="hidden" name="BtBusca" value="Ver mapa" />
+    <input type="hidden" name="Rua" />
+    <input type="hidden" name="Num" />
+  </form>
+  
+  <script><![CDATA[
+    function guiasp(q)
+    {
+      if( nullArgs("guiasp", q) )
+        return false;
+      else
+      {
+        document.guiaspf.cid.value = "sp";
+        document.guiaspf.Num.value = "";
+        document.guiaspf.Rua.value = "";
+     
+        result = q.split(/\s+/);
+        max = result.length - 1;
+        if (city = result[max].match(/^\((\w{2})\)$/)) {
+          document.guiaspf.cid.value = city[1];
+          max--;
+        }
+        if (result[max].match(/^\d+$/)) {
+          document.guiaspf.Num.value = result[max];
+          max--;
+        }
+        document.guiaspf.Rua.value = result[0];
+        for (i = 1; i <= max; i++)
+          document.guiaspf.Rua.value += " " + result[i];
+      
+        submitForm(guiaspf);
+      }
+    }
+  ]]></script>
+</search>
