@@ -1,18 +1,22 @@
 <search function="sf">
   <name>Sourceforge.net</name>
   <description>
-    Search open source projects on SourceForge.net.<br/>
+    Search or go to open source projects on SourceForge.net.<br/>
     <div class="helpboxDescLabels">Switches:</div>
-  	<table class="helpboxDescTable">
-  		<tr><td>/new</td><td> - </td><td>New Releases</td></tr>
-  		<tr><td>/software</td><td> - </td><td>Software</td></tr>
-  		<tr><td>/people</td><td> - </td><td>People</td></tr>
-  		<tr><td>/freshmeat</td><td> - </td><td>Freshmeat.net</td></tr>
-  	</table>
+    <table class="helpboxDescTable">
+      <tr><td>/software [default]</td><td> - </td><td>Software</td></tr>
+      <tr><td>/new</td><td> - </td><td>New Releases</td></tr>
+      <tr><td>/people</td><td> - </td><td>People</td></tr>
+      <tr><td>/freshmeat</td><td> - </td><td>Freshmeat.net</td></tr>
+      <tr><td>/project</td><td> - </td><td>Project's summary page</td></tr>
+      <tr><td>/cvs</td><td> - </td><td>Browse project's CVS repository</td></tr>
+    </table>
     <div class="helpboxDescLabels">Examples:</div>
     <table class="helpboxDescTable">
-  		<tr><td>sf itext</td></tr>
-  	</table>
+      <tr><td>sf itext</td></tr>
+      <tr><td>sf /proj dqsd</td></tr>
+      <tr><td>sf /cvs dqsd</td></tr>
+    </table>
   </description>
   <category>Computers</category>
   <link>http://www.sourceforge.net/</link>
@@ -31,21 +35,25 @@
       if( nullArgs("sf", q) )
         return false;
 
-      var args = parseArgs(q, "new, software, people, freshmeat");
+      var args = parseArgs(q, "new, software, people, freshmeat, project, cvs");
       if( q == "" )
         openSearchWindow("http://www.sourceforge.net/");
       else if( args.switches.length == 1 )
       {
         switch( args.switches[0].name )
         {
-	  case "new":
-	    openSearchWindow("http://www.sourceforge.net/new/"); return false;
+          case "new":
+            openSearchWindow("http://www.sourceforge.net/new/"); return false;
           case "software":
             document.sfsearch.type_of_search.value = "soft"; break;
           case "people":
             document.sfsearch.type_of_search.value = "people"; break;
           case "freshmeat":
             document.sfsearch.type_of_search.value = "freshmeat"; break;
+          case "project":
+            openSearchWindow("http://sourceforge.net/projects/" + args.q); return false;
+          case "cvs":
+            openSearchWindow("http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/" + args.q); return false;
           default:
             document.sfsearch.section.value = args.switches[0].name; break;
         }
