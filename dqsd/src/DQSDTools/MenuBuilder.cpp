@@ -149,11 +149,17 @@ STDMETHODIMP CMenuBuilder::Display( VARIANT* pvarSelection )
 	return S_OK;
 }
 
-STDMETHODIMP CMenuBuilder::AppendMenuItem(BSTR bstrItem, BSTR bstrKey, long hmenu)
+STDMETHODIMP CMenuBuilder::AppendMenuItem(BSTR bstrItem, BSTR bstrKey, VARIANT* pvhMenu )
 {
 	USES_CONVERSION;
 
-	BOOL bSuccess = ::AppendMenu( (hmenu ? (HMENU)hmenu : m_hMain), MF_STRING, ++m_nMenuItem, W2T( bstrItem ) );
+	HMENU hmenu = (HMENU)m_hMain;
+	if (pvhMenu && ((VT_I4 == pvhMenu->vt) || (VT_I2 == pvhMenu->vt)) )
+	{
+		hmenu = pvhMenu->intVal ? (HMENU)pvhMenu->intVal : (HMENU)m_hMain;
+	}
+
+	BOOL bSuccess = ::AppendMenu( hmenu, MF_STRING, ++m_nMenuItem, W2T( bstrItem ) );
 	if ( !bSuccess )
 		return E_FAIL;
 
@@ -162,13 +168,19 @@ STDMETHODIMP CMenuBuilder::AppendMenuItem(BSTR bstrItem, BSTR bstrKey, long hmen
 	return S_OK;
 }
 
-STDMETHODIMP CMenuBuilder::AppendSubMenu(BSTR bstrName, long *phmenu)
+STDMETHODIMP CMenuBuilder::AppendSubMenu(BSTR bstrName, VARIANT* pvParentMenu, long *phmenu)
 {
 	*phmenu = (long)::CreatePopupMenu();
 
 	USES_CONVERSION;
 
-	::AppendMenu( (HMENU)m_hMain, MF_POPUP, (UINT_PTR)*phmenu, W2T( bstrName ) );
+	HMENU hmenu = (HMENU)m_hMain;
+	if (pvParentMenu && ((VT_I4 == pvParentMenu->vt) || (VT_I2 == pvParentMenu->vt)) )
+	{
+		hmenu = pvParentMenu->intVal ? (HMENU)pvParentMenu->intVal : (HMENU)m_hMain;
+	}
+
+	::AppendMenu( hmenu, MF_POPUP, (UINT_PTR)*phmenu, W2T( bstrName ) );
 
 	return S_OK;
 }

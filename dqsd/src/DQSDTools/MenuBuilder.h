@@ -47,8 +47,8 @@ public:
 public:
 	STDMETHOD(get_HorizontalAlignment)(/*[out, retval]*/ short *pVal);
 	STDMETHOD(put_HorizontalAlignment)(/*[in]*/ short newVal);
-	STDMETHOD(AppendSubMenu)(/*[in]*/ BSTR bstrName, /*[out,retval]*/ long* phmenu);
-	STDMETHOD(AppendMenuItem)(/*[in]*/ BSTR bstrItem, /*[in]*/ BSTR bstrKey, /*[in]*/ long hmenu);
+	STDMETHOD(AppendSubMenu)(/*[in]*/ BSTR bstrName, VARIANT* pvParentMenu, /*[out,retval]*/ long* phmenu);
+	STDMETHOD(AppendMenuItem)(/*[in]*/ BSTR bstrItem, /*[in]*/ BSTR bstrKey, /*[in,optional]*/ VARIANT* pvhMenu);
 	STDMETHOD(AppendSeparator)(/*[in]*/ long hmenu);
 	STDMETHOD(Display)(VARIANT* pbstrSelection);
 
