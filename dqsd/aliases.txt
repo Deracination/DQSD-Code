@@ -9,7 +9,7 @@
 !|gg %s /ifl|I'm Feeling Lucky!|Automatically takes you to the first web page returned for your query|Search the Web
 ,|gg %s /groups|Google Groups|Search Usenet discussion forums|Search the Web
 >|gg %s /advanced|Google Advanced|Google Advanced Search|Search the Web
-?|yh
+?|qsfind
 -|fst
 ^|av
 {|dp
