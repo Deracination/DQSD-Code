@@ -32,7 +32,7 @@ function showpop()
       var alias = getSearchAliases( search );
 
       if ( search.enabled )
-        mb.AppendMenuItem( search.name + '\t' + (search.menudisplay ? alias.replace(/&/g, '&&') : ""),  // menu text along with alias
+        mb.AppendMenuItem( search.name + (search.local ? ' [local]' : '' )  + '\t' + (search.menudisplay ? alias.replace(/&/g, '&&') : ""),  // menu text along with alias
                            search.aliases[0],         // function invoked when user selects menu item
                            makeToolTipString(search), 
                            hsubmenu );

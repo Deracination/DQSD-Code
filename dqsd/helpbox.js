@@ -58,6 +58,7 @@ function about()
     var i;
     var txt;
     var helptable = "";
+    helptable += "<tr><td align=center colspan=50><table><tr class='localSearch'><td class='helpboxCommands' style='width: 12px;'></td><td>&nbsp;- indicates a local search (loaded from 'localsearches' subdirectory)</td></tr></table></td></tr>\n";
 
     for (i = 0; i < 10; i++)
     {
@@ -82,15 +83,19 @@ function about()
         var search = helparray[k];
         var rowclassname = '';
         var sortText = '';
+        
+        if (search.local)
+        {
+          rowclassname = 'class="localSearch"';
+        }
 
-        var checked;
+        var checked = '';
         if (search.enabled)
         {
           checked = 'checked';
         }
         else
         {
-          checked =  '';
           rowclassname = 'class="disabledSearch" ';
         }
         sortText += "<tr " + rowclassname + "id='" + categoryarray[i] + "'><td class=helpboxCommands>";
