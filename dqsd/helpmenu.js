@@ -92,7 +92,10 @@ function showpop()
        rows[i].style.background="menu";
        rows[i].style.color="menutext";
     }
-    pophelp.show(document.body.clientWidth - popwidth, -popheight, popwidth, popheight, document.body);
+    
+    pophelp.show((buttonalign == "left" ? 0 : document.body.clientWidth - popwidth),
+                 -popheight, popwidth, popheight, document.body);
+                 
     window.setTimeout("queuefocus();", 0);
     watchpopup("pophelp");
     return false;
