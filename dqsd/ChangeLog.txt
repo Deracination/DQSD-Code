@@ -4,6 +4,7 @@ New Searches
 
 * wn - WordNet online lexical reference system search (from Princeton)
        contributed by Shakeel Mahate.
+* wgn - Search Windows Guide Network (from John Bairen).
 
 Modified Searches
 
