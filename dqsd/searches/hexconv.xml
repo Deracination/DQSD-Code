@@ -1,0 +1,53 @@
+<search function="hexconv">
+  <name>Hexidecimal Conversion</name>
+  <description>Convert hex values to decimal, octal and binary 
+  equivalents: "hexconv 3A"</description>
+  <category>Functions</category>
+  <contributor>Monty Scroggins</contributor>
+  <script><![CDATA[
+
+  function decfromhex(num) {    
+    while (num.length < 4) {      
+     num = "0" + num;    
+   }        
+    return (eval(getnum(num.substring(3,4))) + eval(getnum(num.substring(2,3))) * 16 +eval(getnum(num.substring(1,2))) * 256 + eval(getnum(num.substring(0,1))) * 4096);      
+    }    
+
+  function getnum(letter) {    
+    if (letter <= "9") {      
+      return letter;    
+    }
+
+  else {      
+    if ((letter == "a") || (letter == "A")) { 
+      return 10 }      
+    if ((letter == "b") || (letter == "B")) { 
+      return 11 }      
+    if ((letter == "c") || (letter == "C")) { 
+      return 12 }      
+    if ((letter == "d") || (letter == "D")) { 
+      return 13 }      
+    if ((letter == "e") || (letter == "E")) { 
+      return 14 }      
+    if ((letter == "f") || (letter == "F")) { 
+      return 15 }      
+      return 0;    
+    }  
+  }    
+
+  function hexconv(c)
+  {
+    if (c == "")
+    {
+      return;
+    }
+    var dec=decfromhex(c);
+    var int=parseInt(dec);
+    document.deff.q.value = 
+    "hex: "+c+
+    "  dec: "+int.toString(10)+
+    "  oct: "+int.toString(8)+
+    "  bin: "+int.toString(2);
+    }
+  ]]></script>
+</search>
