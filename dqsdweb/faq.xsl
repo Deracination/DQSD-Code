@@ -36,6 +36,17 @@
         </SCRIPT>
       </HEAD>
       <BODY>
+      <center>
+      <h2>DQSD Frequently Asked Questions</h2>
+      <div class="lastupdate"><nobr><i>Last updated:
+      <script>document.write( getDisplayDate( document.lastModified ) );</script>
+      </i>
+      </nobr>
+      </div>
+      <div>
+      <br/>[ <a href="doc.htm">Dave's Quick Search Deskbar</a> ]
+      </div>
+      </center>
       <xsl:for-each select="/faqs/category">
         <div class="category">
           <xsl:variable name="category_num" select="position()"/>
@@ -55,6 +66,10 @@
           </div>
         </xsl:for-each>
       </xsl:for-each>
+      <br/>
+      <br/>
+      <div align="center">[ <a href="doc.htm">DQSD home page</a> ]
+      </div>
       </BODY>
     </HTML>
   </xsl:template>
