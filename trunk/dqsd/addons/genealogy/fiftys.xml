@@ -9,7 +9,9 @@
     </table>
   </description>
   <link>http://www.50states.com/</link>
-  <category>Genealogy</category>
+  <category>Genealogy
+    <category>Reference</category>
+  </category>
   <contributor>Brent Beardsley</contributor>
 
   <script src="addons/genealogy/genealogy_lib.js"></script>
