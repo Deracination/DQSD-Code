@@ -131,7 +131,23 @@ function histsearch( t, shift )
   if ( searchPrefix == '' )
     searchPrefix = t;
 
-  var re = new RegExp( (shift ? "^" : "") + searchPrefix, "i" );
+  // Escape every letter in the searchPrefix, because it might contain chars with special meaning in a regexp
+  var escapedString = '';
+  for(var i = 0; i < searchPrefix.length; i++)
+  {
+    escapedString += "\\x" + searchPrefix.charCodeAt(i).toString(16);
+  }
+
+  var re;
+  try
+  {
+    re = new RegExp( (shift ? "^" : "") + escapedString, "i" );
+  }
+  catch(e)
+  {
+    alert("An error (" + e.description + ") occurred during the history search");
+    return;
+  }
   for ( var i = histcurr - 1; i >= 0; i-- )
   {
     if ( histarray[i].match( re ) )
