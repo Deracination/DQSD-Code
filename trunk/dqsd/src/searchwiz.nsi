@@ -1,0 +1,72 @@
+; searchwiz.nsi
+;
+; Installs Dave's Quick Search Deskbar Search Wizard
+;
+
+!Define APPNAME       "Dave's Quick Search Deskbar Search Wizard"
+!Define ADDON_SUBDIR  "$INSTDIR\Search Wizard"
+!Define INSTALL_PKG   "..\dqsdwiz.exe"
+
+!Define DQSD_UUID     "{226b64e8-dc75-4eea-a6c8-abcb4d1d37ff}"
+
+; The name of the installer
+Name "${APPNAME}"
+
+; Silent install
+DirShow show
+CRCCheck on
+SetDatablockOptimize on
+Icon search.ico
+SilentInstall normal
+ShowInstDetails show
+
+; The installation package to create
+OutFile "${INSTALL_PKG}"
+
+InstallDirRegKey HKCR "CLSID\${DQSD_UUID}" "InstallDir"
+
+; The stuff to install
+Section "DQSDSearchWizard"
+  IfFileExists $INSTDIR\search.htm Installed
+    SetAutoClose true
+    MessageBox MB_OK|MB_ICONEXCLAMATION "Unable to find installation of Dave's Quick Search Deskbar.$\n$\nPlease install the latest version of Dave's Quick Search Deskbar."
+    Quit
+
+Installed:
+  StrCpy $R1 "${ADDON_SUBDIR}"
+  StrCpy $R3 "${DQSD_UUID}"
+
+  ; Set output path to the add-on installation directory.
+  SetOutPath $R1
+
+  StrCpy $R2 "$R1\uninstall.exe"
+  WriteUninstaller $R2  
+
+  SetOverwrite on
+
+  File /oname=DQSDSearchWiz.dll.ins "..\DQSDSearchWiz.dll"
+  Rename /REBOOTOK "${ADDON_SUBDIR}\DQSDSearchWiz.dll.ins" "${ADDON_SUBDIR}\DQSDSearchWiz.dll"
+  RegDLL "${ADDON_SUBDIR}\DQSDSearchWiz.dll"
+
+  ; Uninstallation keys
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\$R3" "DisplayName" "${APPNAME} (remove only)"
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\$R3" "UninstallString" '"$R2"'
+  
+SectionEnd
+
+; Uninstall stuff
+
+UninstallText "Click next to uninstall ${APPNAME}."
+Section "Uninstall"
+  SetDetailsView show
+  
+  UnRegDLL $INSTDIR\DQSDSearchWiz.dll
+  Delete /REBOOTOK $INSTDIR\*.*
+  RMDir /r $INSTDIR
+
+  IfRebootFlag rebootmsg norebootmsg
+    rebootmsg:
+    MessageBox MB_OK "${APPNAME} has been uninstalled.$\n$\nYou should reboot your computer now to$\ncomplete the removal.$\n$\nDave's Quick Search Deskbar Search Wizard$\nCopyright (c) 2002 Glenn Carr$\nDistributed under the terms of the$\nGNU General Public License, Version 2"
+  norebootmsg:
+
+SectionEnd
