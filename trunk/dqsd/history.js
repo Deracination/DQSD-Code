@@ -137,30 +137,56 @@ function histsearch( t, shift )
   var re;
   try
   {
-    re = new RegExp( (shift ? "^" : "") + escapedString, "i" );
+    re = new RegExp( escapedString, "i" );
   }
   catch(e)
   {
     alert("An error (" + e.description + ") occurred during the history search");
     return;
   }
-  for ( var i = histcurr - 1; i >= 0; i-- )
+  
+  if (!shift) // Search back through history
   {
-    if ( histarray[i].match( re ) )
+    for ( var i = histcurr - 1; i >= 0; i-- )
     {
-      histcurr = i;
-      document.deff.q.value = currhistedit();
-      return;
+      if ( histarray[i].match( re ) )
+      {
+        histcurr = i;
+        document.deff.q.value = currhistedit();
+        return;
+      }
+    }
+
+    for ( var i = histarray.length - 1; i >= histcurr; i-- )
+    {
+      if ( histarray[i].match( re ) )
+      {
+        histcurr = i;
+        document.deff.q.value = currhistedit();
+        return;
+      }
     }
   }
-
-  for ( var i = histarray.length - 1; i >= histcurr; i-- )
+  else // Search forward through history
   {
-    if ( histarray[i].match( re ) )
+    for ( var i = histcurr + 1; i < histarray.length; i++ )
     {
-      histcurr = i;
-      document.deff.q.value = currhistedit();
-      return;
+      if ( histarray[i].match( re ) )
+      {
+        histcurr = i;
+        document.deff.q.value = currhistedit();
+        return;
+      }
+    }
+
+    for ( var i = 0; i <= histcurr; i++ )
+    {
+      if ( histarray[i].match( re ) )
+      {
+        histcurr = i;
+        document.deff.q.value = currhistedit();
+        return;
+      }
     }
   }
 }
