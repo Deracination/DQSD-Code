@@ -14,6 +14,7 @@ New Searches
 * wpfr - Get an address from a name in France
 * msda - Microsoft Discussion Archive search
 * shack - Search the shacknews.com comments database (from Wolfgang Deutsch)
+* dps - Search for the best DVD prices from several online merchants (from Steven J. Heil)
 
 Modified Searches
 

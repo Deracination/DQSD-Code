@@ -1,0 +1,76 @@
+<search function="dps">
+  <name>DVDPriceSearch.com</name>
+  <description>Search for the best DVD prices from several online merchants.  Default search is by title.<br/>
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/person</td><td> - </td><td>Actor/Director search</td></tr>
+      <tr><td>/more</td><td> - </td><td>Price greater than...</td></tr>
+      <tr><td>/less</td><td> - </td><td>Price less than...</td></tr>
+      <tr><td>/range</td><td> - </td><td>Price range (e.g. 5-9)</td></tr>
+      <tr><td>/msrp</td><td> - </td><td>Percent Off MSRP</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>dps kevin spacey /person</td></tr>
+      <tr><td>dps 14.99 /less</td></tr>
+    </table>
+  </description>
+  <category>Shopping</category>
+  <link>http://www.dvdpricesearch.com/</link>
+  <contributor>Steven J. Heil</contributor>
+  <email>sjheil_at_hotmail_dot_com</email>
+  <form name="dpsf"
+        action="http://www.dvdpricesearch.com/cgi-bin/dvdsearch2"
+        method="post">
+    <input type="hidden" name="cmd" value="simpleSearch"/>
+    <input type="hidden" name="sstype" value="title"/>
+    <input type="hidden" name="ssstore" value="ALL"/>
+    <input type="hidden" name="sstext" value=""/>
+  </form>
+  <script><![CDATA[
+    function dps(q)
+    {
+      if( nullArgs("dps", q) )
+        return false;
+
+      var args = parseArgs(q, "person, more, less, range, msrp");
+
+      if( q == "" )
+        openSearchWindow("http://www.dvdpricesearch.com/");
+
+      else if( args.switches.length == 1 )
+      {
+        switch( args.switches[0].name )
+        {
+          case "more":
+            document.dpsf.sstype.value = "moreThan"; break;
+          case "less":
+            document.dpsf.sstype.value = "lessThan"; break;
+          case "range":
+            document.dpsf.sstype.value = "priceRange"; break;
+          case "person":
+            document.dpsf.sstype.value = "person"; break;
+          case "msrp":
+            document.dpsf.sstype.value = "msrp"; break;
+          case "title":
+          default:
+            document.dpsf.sstype.value = "title"; break;
+        }
+        document.dpsf.sstext.value = args.q;
+        submitForm(dpsf);
+      }
+      else if( args.switches.length > 1 )
+        nullArgs("dps","?");
+      else
+      {
+        document.dpsf.sstext.value = q;
+        submitForm(dpsf);
+      }
+    }
+  ]]></script>
+  <copyright>
+	Copyright (c) 2002 David Bau
+	Distributed under the terms of the
+	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>
