@@ -15,6 +15,7 @@ New Searches
 * chmodconv - convert chmod numbers to strings and vice versa (from Brent Beardsley)
 * bb - Search BestBuy (from Glenn Carr)
 * lipsum - Generate Lorem Ipsum text (from Glenn Carr)
+* amo - Search Amo's Online Crossword Dictionary (from Matthew McDougal)
 
 Modified Searches
 
