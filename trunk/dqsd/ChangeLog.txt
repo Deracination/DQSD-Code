@@ -12,6 +12,7 @@ New Searches
 * usps - Track USPS packages
 * abex - Track Airborne Express packages
 * wpfr - Get an address from a name in France
+* msda - Microsoft Discussion Archive search
 
 Modified Searches
 

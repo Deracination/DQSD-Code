@@ -1,0 +1,129 @@
+<search function="msda">
+  <name>Microsoft Discussion List Archive</name>
+  <category>Computers</category>
+  <contributor>Glenn Carr</contributor>
+  <link>http://discuss.microsoft.com/archives/index.html</link>
+  <email>glenn at glenncarr dot com</email>
+  <description>
+  Search the discuss.microsoft.com archive
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td colspan="3"><i>One of the following is required:</i></td></tr>
+      <tr><td>/atl</td><td> - </td><td>Search ATL list archives</td></tr>
+      <tr><td>/javacom</td><td> - </td><td>Search Java-COM list archives</td></tr>
+      <tr><td colspan="3"><hr size="1"/></td></tr>
+      <tr><td colspan="3"><i>Optional:</i></td></tr>
+      <tr><td>/substring</td><td> - </td><td>By default, searches will only match full words. But if you check the "substring search" box, your search will match any word containing the string you have entered.</td></tr>
+      <tr><td>/author</td><td> - </td><td>Restrict your search to messages posted by a particular person</td></tr>
+      <tr><td>/since</td><td> - </td><td>Search for messages only since the specified date.</td></tr>
+      <tr><td>/until</td><td> - </td><td>Search for messages only before the specified date</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>msda /atl /s tooltip /since:2002</td><td>Search the ATL list for tooltip substrings since 1-Jan-2002</td></tr>
+      <tr><td></td></tr>
+    </table>
+  </description>
+  <form name="msdaf"
+        method="post"
+        action="http://discuss.microsoft.com/SCRIPTS/WA-MSD.EXE">
+    <input type="hidden" name="S2" value="" />
+    <input type="hidden" name="L" value="" />
+    <COMMENT>
+      The input element above, "L", was a SELECT element with the following options...
+      <select name="L">
+        <option value="ATL">ATL ATL - Active Template Library</option>
+        <option value="AUTHENTICODE">AUTHENTICODE Microsoft Authenticode(TM) technology</option>
+        <option value="CAPICOM">CAPICOM Microsoft Capicom List</option>
+        <option value="CIFS">CIFS Common Internet File System</option>
+        <option value="CryptoAPI">CryptoAPI Microsoft Cryptographic API</option>
+        <option value="DCOM">DCOM Distributed COM-Based Code</option>
+        <option value="DOTNET-LANGUAGE-DEVS">DOTNET-LANGUAGE-DEVS Compiler Developers for .NET</option>
+        <option value="Java-COM">Java-COM Java and COM</option>
+        <option value="OSPF">OSPF Mailing List</option>
+        <option value="Scriptlets">Scriptlets Scriptlets</option>
+        <option value="SmartCardDDK">SmartCardDDK SmartCardDDK</option>
+        <option value="SmartCardSDK">SmartCardSDK SmartCardSDK</option>
+        <option value="WMTalk">WMTalk WMTalk</option>
+      </select>
+    </COMMENT>
+    <input type="hidden" name="q" value="" />
+    <input type="hidden" name="0" value="" /> <comment> Substring </comment>
+    <input type="hidden" name="s" value="" /> <comment> subject </comment>
+    <input type="hidden" name="f" value="" /> <comment> Author </comment>
+    <input type="hidden" name="a" value="" /> <comment> Since </comment>
+    <input type="hidden" name="b" value="" /> <comment> Until </comment>
+    <input type="hidden" name="I" value="-3" /> <comment> Sort By </comment>
+    <COMMENT>
+      The input element above, "I", was a SELECT element with the following options...
+      <select name="I">
+        <option value="0">Nothing</option>
+        <option value="1">Item No.</option>
+        <option value="-1">Item No., desc.</option>
+        <option value="3">Date/Time</option>
+        <option value="-3">Date/Time, desc.</option>
+        <option value="4">Lines</option>
+        <option value="-4">Lines, desc.</option>
+        <option value="6">Subject</option>
+        <option value="-6">Subject, desc.</option>
+        <option value="7">List name</option>
+        <option value="-7">List name, desc.</option>
+      </select>
+    </COMMENT>
+
+  </form>
+  <script><![CDATA[
+    function msda(q)
+    {
+      if( nullArgs("msda", q) )
+        return;
+
+      var args = parseArgs(q, "atl, javacom, substring, author, since, until");
+      for (var iSwitch = 0; iSwitch < args.switches.length; iSwitch++)
+      {
+        switch( args.switches[iSwitch].name )
+        {
+          case "atl":
+            document.msdaf.L.value = "ATL";
+            break;
+          case "javacom":
+            document.msdaf.L.value = "Java-COM";
+            break;
+          case "substring":
+            document.msdaf["0"].value = "S";
+            break;
+          case "author":
+            document.msdaf.f.value = args.switches[ iSwitch ].value;
+            break;
+          case "since":
+            document.msdaf.a.value = args.switches[ iSwitch ].value;
+            break;
+          case "until":
+            document.msdaf.b.value = args.switches[ iSwitch ].value;
+            break;
+          default:
+            break;
+        }
+      }
+      
+      if ( document.msdaf.L.value == "" )
+      {
+        nullArgs("msda", "?");
+        return;
+      }
+      
+      document.msdaf.q.value = args.q;
+
+      submitForm(msdaf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 09/23/02 at 11:25:51
+    by Dave's Quick Search Deskbar Search Wizard version 0.9 (beta),
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>
