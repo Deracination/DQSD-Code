@@ -30,7 +30,6 @@ BEGIN_MSG_MAP(CDQSDWizardDlg)
 	COMMAND_ID_HANDLER(IDOK, OnOK)
 	COMMAND_ID_HANDLER(IDCANCEL, OnCancel)
 	NOTIFY_HANDLER(IDC_FormList2, LVN_ITEMCHANGED, OnFormListItemChanged)
-	COMMAND_HANDLER(IDC_SearchName, EN_CHANGE, OnChangeSearchName)
 END_MSG_MAP()
 // Handler prototypes:
 //  LRESULT MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
@@ -48,7 +47,6 @@ END_MSG_MAP()
 	}
 
 	LRESULT OnFormListItemChanged(int idCtrl, LPNMHDR pNMHDR, BOOL& bHandled);
-	LRESULT OnChangeSearchName(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHandled);
 
 public:
 	CComPtr<IHTMLDocument2> m_spDoc2;
@@ -56,9 +54,12 @@ public:
 private:
 	vector< CComPtr< IHTMLElement >* > m_vecFormHTMLs;
 	string m_strInstallDir;
+	string m_strBaseURL;
 
 private:
-	void SetOKSensitivity();
+	string GetAbsoluteActionPath( _variant_t& varAction );
+	string GetForms( string& rstrSearchName, string& rstrFormScript );
+	string GetSwitches();
 };
 
 #endif //__DQSDWIZARDDLG_H_

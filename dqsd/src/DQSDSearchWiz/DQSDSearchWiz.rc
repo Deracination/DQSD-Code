@@ -112,39 +112,41 @@ IDI_HOT                 ICON    DISCARDABLE     "hot.ico"
 // Dialog
 //
 
-IDD_DQSDWIZARDDLG DIALOGEX 0, 0, 368, 230
+IDD_DQSDWIZARDDLG DIALOGEX 0, 0, 368, 274
 STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_CONTEXTHELP
 CAPTION "DQSD Search Wizard"
 FONT 8, "MS Sans Serif"
 BEGIN
-    RTEXT           "&Title:",IDC_STATIC,6,9,45,8
-    EDITTEXT        IDC_SearchTitle,53,6,102,14,ES_AUTOHSCROLL
-    RTEXT           "&Name:",IDC_STATIC,6,24,45,8
-    EDITTEXT        IDC_SearchName,53,21,102,14,ES_AUTOHSCROLL
-    RTEXT           "&Link:",IDC_STATIC,6,39,45,8
-    EDITTEXT        IDC_Link,53,36,102,14,ES_AUTOHSCROLL
-    RTEXT           "&Category:",IDC_STATIC,6,53,45,8
-    COMBOBOX        IDC_Category,53,51,102,127,CBS_DROPDOWN | CBS_SORT | 
+    RTEXT           "* &Name:",IDC_STATIC,6,9,45,8
+    EDITTEXT        IDC_SearchName,53,6,102,14,ES_AUTOHSCROLL
+    RTEXT           "* &Title:",IDC_STATIC,6,24,45,8
+    EDITTEXT        IDC_SearchTitle,53,21,102,14,ES_AUTOHSCROLL
+    RTEXT           "&Link:",IDC_STATIC,6,38,45,8
+    EDITTEXT        IDC_Link,53,35,102,14,ES_AUTOHSCROLL
+    RTEXT           "&Category:",IDC_STATIC,6,52,45,8
+    COMBOBOX        IDC_Category,53,50,102,127,CBS_DROPDOWN | CBS_SORT | 
                     WS_VSCROLL | WS_TABSTOP
-    RTEXT           "C&ontributor:",IDC_STATIC,6,67,45,8
-    EDITTEXT        IDC_Contributor,53,64,102,14,ES_AUTOHSCROLL
-    RTEXT           "&Email:",IDC_STATIC,6,82,45,8
-    EDITTEXT        IDC_Email,53,79,102,14,ES_AUTOHSCROLL
+    RTEXT           "C&ontributor:",IDC_STATIC,6,66,45,8
+    EDITTEXT        IDC_Contributor,53,63,102,14,ES_AUTOHSCROLL
+    RTEXT           "&Email:",IDC_STATIC,6,81,45,8
+    EDITTEXT        IDC_Email,53,78,102,14,ES_AUTOHSCROLL
     RTEXT           "&Description:",IDC_STATIC,158,8,45,8
     EDITTEXT        IDC_Description,205,6,102,39,ES_MULTILINE | 
                     ES_WANTRETURN | WS_VSCROLL
     LTEXT           "&Switches:",IDC_STATIC,171,49,32,8
     EDITTEXT        IDC_Switches,205,47,102,39,ES_MULTILINE | ES_WANTRETURN | 
                     WS_VSCROLL
-    LTEXT           "&FORMs:",IDC_STATIC,6,97,27,8
+    LTEXT           "* &FORMs on current page:",IDC_STATIC,6,97,84,8
     CONTROL         "List2",IDC_FormList2,"SysListView32",LVS_REPORT | 
                     LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_NOSORTHEADER | 
                     WS_BORDER | WS_TABSTOP,6,107,356,47,WS_EX_CLIENTEDGE
     LTEXT           "&HTML for selected FORM:",IDC_STATIC,6,156,84,8
-    EDITTEXT        IDC_FormFields,6,167,356,57,ES_MULTILINE | 
+    EDITTEXT        IDC_FormFields,6,167,356,92,ES_MULTILINE | 
                     ES_AUTOVSCROLL | ES_READONLY | WS_VSCROLL
     DEFPUSHBUTTON   "OK",1,312,6,50,14
     PUSHBUTTON      "Cancel",2,312,23,50,14
+    LTEXT           "* = Required",IDC_STATIC,6,260,40,8
 END
 
 
@@ -161,8 +163,7 @@ BEGIN
         LEFTMARGIN, 6
         RIGHTMARGIN, 362
         TOPMARGIN, 6
-        BOTTOMMARGIN, 224
-        HORZGUIDE, 134
+        BOTTOMMARGIN, 268
     END
 END
 #endif    // APSTUDIO_INVOKED
