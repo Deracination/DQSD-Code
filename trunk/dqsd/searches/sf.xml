@@ -5,6 +5,7 @@
     <div class="helpboxDescLabels">Switches:</div>
     <table class="helpboxDescTable">
       <tr><td>/cvs</td><td> - </td><td>Browse project's CVS repository</td></tr>
+      <tr><td>/dloads</td><td> - </td><td>Browse project's downloadable files</td></tr>
       <tr><td>/exact</td><td> - </td><td>Require all words in when searching</td></tr>
       <tr><td>/foundry</td><td> - </td><td>Goto a Sourceforge foundry</td></tr>
       <tr><td>/freshmeat</td><td> - </td><td>Freshmeat.net</td></tr>
@@ -45,15 +46,17 @@
         return false;
 
       var exact = false;
-      var args = parseArgs(q, "exact, new, software, people, freshmeat, project, cvs, list, foundry, status");
+      var args = parseArgs(q, "dloads, exact, new, software, people, freshmeat, project, cvs, list, foundry, status");
       if( args.switches.length == 1 )
       {
         switch( args.switches[0].name )
         {
-	  case "exact":
-	    exact = true; break;
-	  case "foundry":
-	    openSearchWindow("http://"+args.q.toLowerCase()+".foundries.sourceforge.net/"); return false;
+          case "exact":
+            exact = true; break;
+          case "foundry":
+            openSearchWindow("http://"+args.q.toLowerCase()+".foundries.sourceforge.net/"); return false;
+		  case "dloads":
+		    openSearchWindow("http://prdownloads.sourceforge.net/" + args.q); return false;
           case "new":
             openSearchWindow("http://www.sourceforge.net/new/"); return false;
           case "software":
