@@ -4,6 +4,7 @@ function addsearch(fname, name, desc, link, cat)
 {
   try
   {
+    if (name == null) name = fname;
     var newobj = {fname:fname, name:name, desc:desc, link:link, cat:cat, fun:eval(fname), aliases:[]};
     searches[fname] = newobj;
     if (!aliases[fname])
