@@ -117,16 +117,22 @@ try
   {
     var localSearchFile = document.all("localsearch").src;
     if (!xmldoc.loadXML(readFile(localSearchFile)))
+    {
       alert('Unable to load search from ' + localSearchFile + ':  ' + xmldoc.parseError.reason );
+    }
     else
     {
-    for (var iPrivate = 0; iPrivate < localSearches.length; iPrivate++)
+      for (var iPrivate = 0; iPrivate < localSearches.length; iPrivate++)
       {
         var searchNode = localSearches[iPrivate];
-        if (searchNode.selectSingleNode("FORM") && !searchNode.selectSingleNode("form"))
-          alert('Search "' + searchNode.attributes.getNamedItem("function").text + '" needs lowercase <form> element');
+        if (alertmode && searchNode.selectSingleNode("FORM") && !searchNode.selectSingleNode("form"))
+        {
+          qualifiedalert('Search "' + searchNode.attributes.getNamedItem("function").text + '" needs lowercase <form> element');
+        }
         else
-      searchRoot.appendChild(localSearches[iPrivate]);
+        {
+          searchRoot.appendChild(localSearches[iPrivate]);
+        }
       }
     }
   }
@@ -138,6 +144,7 @@ try
   // Get searches in the 'searches' subdirectory
   var searches = getFiles( "searches\\*.xml" );
   searches = searches.split('\n');
+  
   //sort the list of searches
   searches.sort(); 
   
@@ -153,17 +160,19 @@ try
     {
       var searchNode = xmldoc.selectSingleNode("/search");
       var funcname = searchNode.attributes.getNamedItem("function").text;
-      if (searchRoot.selectSingleNode("/searches/search[@function='" + funcname + "']"))
+      if (alertmode && searchRoot.selectSingleNode("/searches/search[@function='" + funcname + "']"))
       {
         qualifiedalert('Search "' + funcname + '" found in ' + "searches\\" + searches[i] + ' already exists.');
         continue;
       }
-      else if (searchNode.selectSingleNode("/search/FORM"))
+      else if (alertmode && searchNode.selectSingleNode("/search/FORM"))
       {
         alert('Search "' + funcname + '" has a <FORM> element which probably needs to be lowercased (<form>)');
       }
       else
+      {
         searchRoot.appendChild(searchNode);
+      }
     }
   }
 }
