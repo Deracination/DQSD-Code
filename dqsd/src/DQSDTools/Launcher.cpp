@@ -9,6 +9,9 @@
 
 LPCTSTR CLauncher::DQSD_REG_KEY = _T("CLSID\\{226b64e8-dc75-4eea-a6c8-abcb4d1d37ff}");
 LPCTSTR CLauncher::DQSD_SEC_KEY = _T("CLSID\\{226b64e8-dc75-4eea-a6c8-abcb4d1d37ff}\\SecureFiles");
+
+int URLMatchesFilename(LPCTSTR szURL, LPCTSTR szFile);
+
 STDMETHODIMP CLauncher::SetSite(IUnknown* pUnkSite)
 {
 #if defined(DQSD_NOSECURITY) && defined(_DEBUG)

@@ -1,24 +1,11 @@
-// This is where user aliases can be defined.  Some examples are below.  Remove the 
-// leading comment characters (//) to use these.  
-//
-// Format:
-// <alias>|<search>|<name>|<description>
-//
-// Where:
-//   alias  - alias you enter to invoke search
-//   search - URL or search where all %s will be replaced by the search string
-//   name   - [optional] name of search
-//   desc   - [optional] description of search 
-//
-// Any %s placeholders will be replaced with the search string if any is supplied.
-// E.g., if 'sfp' is defined as below, entering "sfp dqsd" will take you to
-// http://sourceforge.net/projects/dqsd
-
-// movie|ym
-// sf|http://sourceforge.net/|SourceForge|SourceForge main web site
-// sfp|http://sourceforge.net/projects/%s|SourceForge project page|SourceForge project page - Ex. "sfp dqsd"
-// exp|run explorer /e, %s|Explorer|Explore directory with folder pane - Ex. "exp c:\dev\dqsd"
-// expd|run explorer /e, "C:\Program Files\Quick Search Deskbar"
-// np|run notepad
-// word|run winword
-// excel|run excel
+movie	ym
+sf|http://sourceforge.net/|SourceForge|SourceForge main web site
+sfp|http://sourceforge.net/projects/%s|SourceForge project page|SourceForge project page - Ex. "sfp dqsd"
+word	run winword
+excel	run excel
+exp	run explorer /e, "%s"
+ml	run keyhh -#klink "%s" "E:\Program Files\Microsoft Visual Studio\MSDN\2001JAN\1033\MSDN100.COL"
+tulsa	map %s, Tulsa, OK
+expd	run explorer /e, "E:\Program Files\Quick Search Deskbar"	Run Explorer
+mov	movie
+?	qsfind

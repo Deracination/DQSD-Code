@@ -254,7 +254,7 @@ function performsearch( fname, term )
 // a way of executing a specific search while adding the right symbol to the history
 function mnu(text, sym)
 {
-  addhist(document.deff.q.value + sym);
+  addhist(text + ' ' + document.deff.q.value);
   performsearch( text, document.deff.q.value );
 }
 
