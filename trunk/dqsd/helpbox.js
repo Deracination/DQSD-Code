@@ -31,6 +31,7 @@ function about()
     var i;
     var txt;
     var helptable = "";
+    var jumplist = "";
 
     for (i = 0; i < 10; i++)
     {
@@ -44,9 +45,9 @@ function about()
 
     for (i = 0; i < categoryarray.length; i++)
     {
-      helptable += "<tr><td valign=top class=lb colspan=2><b>"
+      helptable += "<tr><td valign=top class=lb colspan=2><table width='100%' border=0 cellpadding=0 cellspacing=0><tr><td><b>"
       helptable += categoryarray[i];
-      helptable += "</b></td></tr>";
+      helptable += "</b><a name=\""+categoryarray[i]+"\"></td><td align=right class='top'>[ <a href='#top'>top</a> ]</td></tr></table></td></tr>";
       var helparray = categories[categoryarray[i]];
       for (var k = 0; k < helparray.length; k++)
       {
@@ -74,6 +75,7 @@ function about()
         }
         helptable += "</td></tr>";
       }
+	  jumplist += (i > 0 ? " | " : "") + "<a href=\"\#"+categoryarray[i]+"\">"+ categoryarray[i]+"</a>";
     }
 
     txt = txt.replace(/\r\n/g, '\n');
@@ -84,19 +86,21 @@ function about()
     txt = txt.replace(/(David Bau)/, '<a href=mailto:davidbau@hotmail.com>$1</a>');
     txt = txt.replace(/(GNU.*2)\s\((.*txt)\)/, '<br><a href=$2 target=GNU>$1</a>');
     txt = txt.replace(/\n#[^\n]*/g, '');
-    txt = txt.replace(/<\/table>/, helptable + "</table>");
+    txt = txt.replace(/<\/table>/,jumplist + helptable + "</table>");
     txt = txt.replace(/\n\n/g, '<p>');
     txt = txt.replace(/\n/g, ' ');
     txt = txt.replace(/----/, '</center>');
+    txt +=jumplist;
+    
     var basedir = window.location.href;
     basedir = basedir.substring(0, basedir.lastIndexOf('/') + 1);
     txt = txt.replace(/(view-source:)/g, '$1' + basedir);
     var mesg = "<title>About Dave's Quick Search Deskbar</title>";
     mesg += "<style>body{margin:20px;border:0;padding:0;background-color:threedface;font-family:Tahoma,Arial;scrollbar-track-color:threedface}" +
-           "td{font-size:8pt;border-collapse:collapse} .lg{background:lightgreen;} .lb{background:skyblue;}</style>";
-    mesg += "<body scroll=yes><table height=100% width=100%><tr><td><center style=font-size:9pt><b>";
+           "td{font-size:8pt;border-collapse:collapse} .lg{background:lightgreen;} .lb{background:skyblue;} .top{font-size:9px}</style>";
+    mesg += "<body scroll=yes><a name='#top'><table height=100% width=100%><tr><td><center style=font-size:9pt><b>";
     mesg += txt + "</td></tr></table>";
-    opts = "height=480, width=420, menubar=no, scrollbars=yes, resizable=yes, toolbar=no, status=no";
+    opts = "height=480, width=470, menubar=no, scrollbars=yes, resizable=yes, toolbar=no, status=no";
     aboutWindow = window.open("about:blank", "_blank", opts);
     aboutWindow.document.write(mesg);
     aboutWindow.document.close();
