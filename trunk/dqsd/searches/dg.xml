@@ -1,0 +1,85 @@
+<search function="dg">
+  <name>DynaGen Domain Search</name>
+  <category>Computers</category>
+  <contributor>Glenn Carr</contributor>
+  <link>http://registrar.godaddy.com/register.asp?pl_id=1</link>
+  <email>glenn at glenncarr dot com</email>
+  <description>
+    DynaGen will find variations of domain names for any word or domain name.
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>[/com]</td><td> - </td><td>(default) Search all TLDs (.com,.net,.org)</td></tr>
+      <tr><td>/com</td><td> - </td><td>Search .com TLD</td></tr>
+      <tr><td>/net</td><td> - </td><td>Search .net TLD</td></tr>
+      <tr><td>/org</td><td> - </td><td>Search .org TLD</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>dg glenncarr</td></tr>
+      <tr><td>dg glenncarr /com /net</td></tr>
+    </table>
+  </description>
+  <form name="dgf"
+        method="post"
+        action="http://registrar.godaddy.com/register.asp?pl_id=1">
+    <input type="hidden" name="prevSelCount" value="1" />
+    <input type="hidden" name="checkAvail" value="0" />
+    <input type="hidden" name="Validate" value="0" />
+    <input type="hidden" name="currStep" value="-1" />
+    <input type="hidden" name="display" value="" />
+    <input type="hidden" name="domainIdx" value="0" />
+    <input type="hidden" name="queryOingo" value="1" />
+    <input type="hidden" name="cancelOingo" value="0" />
+    <input type="hidden" name="comTLD" value="1" />
+    <input type="hidden" name="netTLD" value="1" />
+    <input type="hidden" name="orgTLD" value="1" />
+    <input type="hidden" name="nameToOingo" value="" />
+  </form>
+  <script><![CDATA[
+    function dg(q)
+    {
+      if( nullArgs("dg", q) )
+        return;
+      var args = parseArgs(q, "com, net, org, all");
+      if ( args.switches.length )
+      {
+        q = args.q;
+        document.dgf.comTLD.value = "";
+        document.dgf.netTLD.value = "";
+        document.dgf.orgTLD.value = "";
+        for (var iSwitch = 0; iSwitch < args.switches.length; iSwitch++)
+        {
+          switch( args.switches[iSwitch].name )
+          {
+            case "com":
+              document.dgf.comTLD.value = "1";
+              break;
+            case "net":
+              document.dgf.netTLD.value = "1";
+              break;
+            case "org":
+              document.dgf.orgTLD.value = "1";
+              break;
+            default:
+              document.dgf.comTLD.value = "1";
+              document.dgf.netTLD.value = "1";
+              document.dgf.orgTLD.value = "1";
+              break;
+          }
+        }
+      }
+
+      document.dgf.nameToOingo.value = q;
+      submitForm(dgf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 09/12/02 at 19:24:33
+    by Dave's Quick Search Deskbar Search Wizard version 0.7 (beta),
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>
