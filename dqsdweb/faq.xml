@@ -251,7 +251,7 @@
       <category name="Known Issues">
          <faq>
             <question>I'm running the latest DQSD, but my tray icons keep disappearing. Help!</question>
-            <answer>There is currently no fix for this problem. Work is in progress though. However several have reported success by using <link href="http://www.r2.com.au/downloads/index.html?id=startdelay">Startup Delayer</link>.  Delay startup of some of your programs at 10 second intervals, starting at about 20 seconds.</answer>
+            <answer>There is currently no fix for this problem. Work is in progress though. However several have reported success by using <link href="http://www.r2.com.au">Startup Delayer</link> by r2 studios.  Delay startup of some of your programs at 10 second intervals, starting at about 20 seconds.</answer>
          </faq>
          <faq>
             <question>The default browser option does not seem to be working.  Is this a known problem?</question>
