@@ -969,7 +969,12 @@ STDMETHODIMP CLauncher::CreateDirectory(BSTR bstrDir)
 	if (!IsValidFileDirectory(W2CT(bstrDir))) {
 		return Error(_T("Can't create directory unless in the app data or installation directory tree."), IID_ILauncher, E_FAIL);
 	}
-	int retval = ::SHCreateDirectoryEx(NULL, W2CT( bstrDir ), NULL );
+
+	// TODO: Re-implement later to support recursive dir creation
+	// like SHCreateDirectoryEx. The latter cannot be used, since it's
+	// not supported on pre-Win2k
+	::CreateDirectoryEx(NULL, W2CT(bstrDir), NULL);
+	int retval = ::GetLastError();
 	switch (retval) {
 		case ERROR_FILE_EXISTS:
 		case ERROR_ALREADY_EXISTS:

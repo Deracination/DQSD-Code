@@ -10,7 +10,7 @@ Name "Dave's Quick Search Deskbar"
 !Define IE_MAJOR_REQUIRED  5
 !Define IE_MINOR_REQUIRED  5
 !Define HOW_TO_TURN_ON_TOOLBAR "Right-click in your taskbar and select$\n$\n    Toolbar > Add Quick Search...$\n$\nto add the Quick Search Deskbar to your taskbar."
-!Define TITLE_AND_COPYRIGHT "Dave's Quick Search Deskbar$\nCopyright © 2002-2004 David Bau$\nDistributed under the terms of the$\nGNU General Public License, Version 2"
+!Define TITLE_AND_COPYRIGHT "Dave's Quick Search Deskbar$\nCopyright © 2002-2005 David Bau$\nDistributed under the terms of the$\nGNU General Public License, Version 2"
 !Define DQSD_CLSID "{226b64e8-dc75-4eea-a6c8-abcb4d1d37ff}"
 !Define DQSD_TITLE "Dave's Quick Search Deskbar"
 
@@ -82,7 +82,7 @@ Section "Quick Search Deskbar (required)"
   SetOutPath $INSTDIR
 
   ; Confirm that the user really does want to install  
-  MessageBox MB_YESNO|MB_ICONINFORMATION|MB_DEFBUTTON2 "This will install ${DQSD_TITLE}.  Would you like to continue?" IDYES userconfirmedinstall
+  MessageBox MB_YESNO|MB_ICONINFORMATION|MB_DEFBUTTON2 "This will install ${DQSD_TITLE}.$\nYou should run this installer as an administrator of this machine, or it will not complete correctly.$\n$\nWould you like to continue?" IDYES userconfirmedinstall
   Abort
   userconfirmedinstall:
 
@@ -312,13 +312,11 @@ Section "Quick Search Deskbar (required)"
 
   ; Write the installation path into the registry
   WriteRegStr HKCR "CLSID\${DQSD_CLSID}" "InstallDir" "$INSTDIR"
-  IfErrors registry_error
   
   ; ??? Keep this for a while for backward compatibility
   WriteRegStr HKCR "CLSID\${DQSD_CLSID}" "SecureFile" "$INSTDIR\search.htm"
   WriteRegDWORD HKCR "CLSID\${DQSD_CLSID}\SecureFiles" "$INSTDIR\search.htm" 0
   WriteRegDWORD HKCR "CLSID\${DQSD_CLSID}\SecureFiles" "$INSTDIR\settings.htm" 0
-  IfErrors registry_error
 
   ; Registry settings needed to function
   WriteRegStr HKCR "CLSID\${DQSD_CLSID}" "" "Quick Search"
@@ -329,25 +327,15 @@ Section "Quick Search Deskbar (required)"
   WriteRegStr HKCR "CLSID\${DQSD_CLSID}\InprocServer32" "ThreadingModel" "Apartment"
   WriteRegStr HKCR "CLSID\${DQSD_CLSID}\Instance" "CLSID" "{7BA4C742-9E81-11CF-99D3-00AA004AE837}"
   WriteRegStr HKCR "CLSID\${DQSD_CLSID}\Instance\InitPropertyBag" "Url" "$INSTDIR\search.htm"
-  IfErrors registry_error
   
   ; Add dqsd clsid to approved shell extensions - irrelevant on non-NT based OS - but doesn't hurt anything per
   ; http://msdn.microsoft.com/library/en-us/shellcc/platform/Shell/programmersguide/shell_int/shell_int_extending/extensionhandlers/shell_ext.asp
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Shell Extensions\Approved" "${DQSD_CLSID}" "${DQSD_TITLE}"
-  IfErrors registry_error
   
   ; Uninstallation keys
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${DQSD_CLSID}" "DisplayName" "${DQSD_TITLE} (remove only)"
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${DQSD_CLSID}" "UninstallString" '"$INSTDIR\uninstall.exe"'
-  IfErrors registry_error
-  
-  goto registry_success
 
-registry_error:
-  MessageBox MB_OK|MB_ICONEXCLAMATION "Failed to write information to your registry.$\nWhile installing, you must be logged in as a user with permissions to write to the registry, preferrably an Administrator.$\nThe installation will now abort."
-  Abort
-
-registry_success:
   ; xp theme css installer
   Call GetWindowsXPTheme
   Pop $0
@@ -449,7 +437,6 @@ Section "Uninstall"
   fulluninstall:
   RmDir /r $INSTDIR
 
-  
   partialuninstall:
   RmDir /r $INSTDIR\src
   RmDir /r $INSTDIR\searches
