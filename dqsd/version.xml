@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <dqsd_version_info>
-    <type>final</type>
+    <type>beta</type>
     <version>
         <majorhi>3</majorhi>
         <majorlo>0</majorlo>
@@ -8,9 +8,10 @@
         <minorlo>18</minorlo>
     </version>
     <date>
-    7-Jul-2002
+        7-Jul-2002
     </date>
     <html_description>
-    A new update is available for download at <a href="http://www.dqsd.net">www.dqsd.net</a>
+        You are currently running version %lv <nobr>(%ld)</nobr> of <a href="http://www.dqsd.net" onclick="window.close();">Dave's Quick Search Deskbar</a>.<br/><br/>
+        Version %rv <nobr>(%rd)</nobr> is now available at <a href="http://www.dqsd.net" onclick="window.close();">www.dqsd.net</a>.<br/>
     </html_description>
 </dqsd_version_info>
