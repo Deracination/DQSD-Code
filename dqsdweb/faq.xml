@@ -75,6 +75,7 @@
       </faq>
     </category>
 
+    
     <category name="Installation">
       <faq>
         <question>I've installed it, but I want to uninstall it, and I can't figure out how! Help!</question>
@@ -86,6 +87,7 @@
       </faq>
     </category>
 
+    
     <category name="Searches">
       <faq>
         <question>How do I find out what searches are available?</question>
@@ -181,6 +183,8 @@
         <answer>Searches can be downloaded from Source Forge at <link href="http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/dqsd/dqsd/searches/">http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/dqsd/dqsd/searches/</link>.</answer>
       </faq>
     </category>
+    
+    
     <category name="Aliases">
       <faq>
         <question>What is an alias?</question>
@@ -218,10 +222,13 @@
           <html:li>dqsdcvs|http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/dqsd/dqsd/
           </html:li>
           </html:ul>
-    <html:p>The same two lines, but the second set sets an alias to call another alias that
-                  hasn't been defined yet.</html:p></answer>
+          <html:p>The same two lines, but the second set sets an alias to call another alias that
+                  hasn't been defined yet.</html:p>
+        </answer>
       </faq>
     </category>
+    
+    
     <category name="Preferences">
       <faq>
         <question>How do I edit preferences for DQSD?</question>
@@ -248,6 +255,8 @@
                 to 'false'.</answer>
       </faq>
     </category>
+    
+    
     <category name="Styles">
       <faq>
         <question>How do I edit fonts, colors, etc. for DQSD?</question>
@@ -267,6 +276,8 @@
                 release.</answer>
       </faq>
     </category>
+    
+    
     <category name="Coding">
       <faq>
         <question>Are there any guidelines I should be aware of when making modifications for DQSD?</question>
@@ -391,6 +402,7 @@
       </faq>
     </category>
 
+    
     <category name="Add-ons">
       <faq>
         <question>What is an add-on?</question>
