@@ -1,0 +1,28 @@
+<search function="jd">
+  <name>Javadoc.org Search</name>
+  <description>Search Sun's JDK Javadoc. Uses Javadoc.org.
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+      <tr><td>jd HashMap </td></tr>
+    </table>
+  </description>
+  <link>http://www.javadocs.org/</link>
+  <category>Computers<category>Programming</category></category>
+  <contributor>Brent Beardsley</contributor>
+  
+  <script><![CDATA[
+    function jd(q)
+    {
+      if( nullArgs("jd", q) )
+        return false;
+
+      openSearchWindow('http://www.javadocs.org/' + q + '/');
+    }
+  ]]></script>
+
+  <copyright>
+	Copyright (c) 2004 Brent Beardsley
+	Distributed under the terms of the
+	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>
