@@ -33,6 +33,7 @@ Modified Searches
 * yh - now able to search images, news, and products as well. (Brent Beardsley)
 * bg - now able to search the Message Bible as well as set version/etc preferences in localprefs.js - see the help for preference variables (Brent Beardsley)
 * tm - tm? now behaves correctly
+* so - better handling of arguments
 
 Removed Searches
 * nwtsr and httpd replaced by whats (Kim Gräsman)
