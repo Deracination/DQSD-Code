@@ -15,13 +15,15 @@ New Searches
 * cowp - Search for lyrics and chords for country songs (from Brent Beardsley)
 * egw - Search Ellen G. White's writings (from Brent Beardsley)
 * ostk - Search Overstock.com for items (from Brent Beardsley)
-* tinyurl - tinyurl.com is a link-shortening redirector (from Brent Beardsley) 
+* tinyurl - tinyurl.com is a link-shortening redirector (from Brent Beardsley)
+* sl - Search StudyLight.org for verses and Hebrew and Greek words
 
 Modified Searches
 
 * ascii - added link to www asciitable com so an ascii table will pop up if no parameters are specified
 * multi - added ability to have multiple searches with different arguments and allow commas in arguments
 * setiq - added delay parameter
+* bg    - added ability to search for phrases
 
 Enhancements
 
