@@ -109,6 +109,13 @@ during update installations.  Make changes to the default values in localprefs.j
 <script type="text/jscript" src="preferences.js"></script>
 
 <!--
+Include any selected theme styles
+-->
+<script type='text/jscript'>
+document.write("<link rel='stylesheet' type='text/css' href='theme.css'>");
+</script>
+
+<!--
 Include overrides for user-customizable preferences.  This file will not be
 overwritten when installing updates.
 -->
