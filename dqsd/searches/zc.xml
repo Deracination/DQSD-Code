@@ -1,6 +1,13 @@
 <search function="zc">
   <name>Zip Code Info</name>
-  <description>Search for information on a particular zcf: "zc 74133" or "zc Glen Ellyn"</description>
+  <description>Search for information on a particular zcf
+  <div class="helpboxDescLabels">Examples:</div> 
+  <table class="helpboxDescTable">
+    <tr>
+      <td>zc 74133 or zc Glen Ellyn</td>
+  </tr>
+  </table>
+  </description>
   <link>http://www.zipinfo.com/</link>
   <category>People and Places</category>
   <contributor>Stephen Montgomery</contributor>

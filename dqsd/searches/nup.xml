@@ -1,20 +1,17 @@
 <search function="nup">
-  <COMMENT>
-
-    This search file was initially created by Dave's Quick Search Deskbar
-    Search Wizard version 0.5 (beta) on 08/25/02 at 00:39:15
-
-    Even though this XML search will probably load and is a healthy start
-    toward a completed search, please be aware that this search will probably
-    not work as is and will require some human inspection and modification.
-
-  </COMMENT>
   <name>Nupedia</name>
   <category>Reference</category>
   <contributor>Thad Kerosky</contributor>
   <link>http://www.nupedia.com/</link>
   <description>
-  Nupedia is a new online, peer-reviewed, international encyclopedia.  It is searchable and will also be organized hierarchically and alphabetically.  Nupedia is "open content" or "free"; we want the contents of the encyclopedia to receive the widest possible distribution.  Reading Nupedia.com will always be free of charge and therefore the project of building it depends on volunteers--possibly you! 
+  Nupedia is a new online, peer-reviewed, international encyclopedia.  
+  It is searchable and will also be organized hierarchically and alphabetically.  
+  <div class="helpboxDescLabels">Examples:</div> 
+    <table class="helpboxDescTable">
+      <tr>
+        <td>nup ivory</td>
+      </tr>
+    </table>
   </description>
   <form name="nupf"
         method="get"

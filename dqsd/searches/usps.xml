@@ -6,7 +6,12 @@
   <email>davidbau@hotmail.com</email>
   <description>
   Tracks a USPS package by the number from the shipping receipt:
-  <br/>usps [tracking #]
+  <div class="helpboxDescLabels">Example:</div> 
+  <table class="helpboxDescTable">
+    <tr>
+      <td>usps [tracking #]</td>
+    </tr>
+  </table>
   </description>
   <form name="uspsf"
         method="post"

@@ -5,8 +5,13 @@
   <link>http://www.dhl-usa.com/tracking</link>
   <email>davidbau@hotmail.com</email>
   <description>
-  Track DHL packages by Airwaybill numbers (up to 10):
-  <br/>dhl [tracking #1] [tracking #2]
+  Track DHL packages by Airwaybill numbers (up to 10)
+  <div class="helpboxDescLabels">Example:</div> 
+  <table class="helpboxDescTable">
+    <tr>
+      <td>dhl [tracking #1] [tracking #2]</td>
+    </tr>
+  </table>
   </description>
   <form name="dhlf"
         method="get"

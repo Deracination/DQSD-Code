@@ -1,14 +1,4 @@
 <search function="walmart">
-  <COMMENT>
-
-    This search file was initially created by Dave's Quick Search Deskbar
-    Search Wizard version 0.5 (beta) on 08/28/02 at 10:50:17
-
-    Even though this XML search will probably load and is a healthy start
-    toward a completed search, please be aware that this search will probably
-    not work as is and will require some human inspection and modification.
-
-  </COMMENT>
   <name>Wal-Mart</name>
   <category>Shopping</category>
   <contributor>Glenn Carr</contributor>
@@ -32,6 +22,12 @@
       <tr><td>/toys</td></tr>
       <tr><td>/videogames</td></tr>
     </table>
+  <div class="helpboxDescLabels">Example:</div> 
+  <table class="helpboxDescTable">
+    <tr>
+      <td>walmart sanyo /electronics</td>
+    </tr>
+  </table>
   </description>
   <form name="walmartf"
         method="get"

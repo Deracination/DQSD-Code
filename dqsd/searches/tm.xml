@@ -1,6 +1,13 @@
 <search function="tm">
   <name>Teoma Search</name>
-  <description>Teoma search using Subject Specific Popularity : "tm denali"</description>
+  <description>Teoma search using Subject Specific Popularity
+  <div class="helpboxDescLabels">Example:</div> 
+  <table class="helpboxDescTable">
+    <tr>
+      <td>tm denali</td>
+    </tr>
+  </table>
+  </description>
   <category>Search the Web</category>
   <link>http://www.teoma.com/</link>
   <form name="tmf"

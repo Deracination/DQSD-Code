@@ -1,6 +1,13 @@
 <search function="yhe">
   <name>Yahoo Email</name>
-  <description>Search for email addresses by name: "yhe Roger Weber" </description>
+  <description>Search for email addresses by name
+  <div class="helpboxDescLabels">Example:</div> 
+  <table class="helpboxDescTable">
+    <tr>
+      <td>yhe Roger Weber</td>
+  </tr>
+  </table>
+  </description>
   <category>People and Places</category>
   <link>http://email.people.yahoo.com/</link>
   <form name="yhef"

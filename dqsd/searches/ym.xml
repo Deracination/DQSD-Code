@@ -1,6 +1,16 @@
 <search function="ym">
   <name>Yahoo Movie</name>
-  <description>Search for local movie listings. The zip code is stored in a cookie so you don't have to enter it again. <nobr>Examples: "ym 74133 monsters", "ym life as a house"</nobr></description>
+  <description>Search for local movie listings. The zip code is stored in a cookie so you don't have to enter it again.
+  <div class="helpboxDescLabels">Examples:</div> 
+  <table class="helpboxDescTable">
+    <tr>
+      <td>ym 74133 monsters</td>
+    </tr>
+    <tr>
+      <td>ym life as a house</td>
+    </tr>
+  </table>
+  </description>
   <category>Entertainment</category>
   <link>http://movies.yahoo.com/</link>
   <contributor>Glenn Carr</contributor>

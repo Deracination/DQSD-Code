@@ -1,7 +1,14 @@
 <search function="tcc">
   <name>Telephone Country Code Info</name>
   <link>http://www.primeris.com</link>
-  <description>Search for information on a particular country code: "tcc 227" or "tcc Haiti".</description>
+  <description>Search for information on a particular country code
+  <div class="helpboxDescLabels">Examples:</div> 
+  <table class="helpboxDescTable">
+    <tr>
+      <td>tcc 227" or "tcc Haiti"</td>
+    </tr>
+  </table>
+  </description>
   <category>People and Places</category>
   <contributor>Stephen Montgomery</contributor>
   <email>stephenmontgomery_at_ameritech_dot_net</email>

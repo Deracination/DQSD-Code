@@ -1,7 +1,13 @@
 <search function="ups">
   <name>Track UPS Packages</name>
   <description>Track UPS packages by tracking number (up to 20):
-    <br/>ups [tracking#1], [tracking#2]</description>
+  <div class="helpboxDescLabels">Example:</div> 
+  <table class="helpboxDescTable">
+    <tr>
+      <td>ups [tracking#1], [tracking#2]</td>
+    </tr>
+  </table>
+  </description>
   <category>Shipping</category>
   <link>http://www.ups.com/tracking/tracking.html</link>
   <contributor>Glenn Carr</contributor>
