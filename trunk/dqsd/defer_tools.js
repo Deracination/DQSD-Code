@@ -9,8 +9,11 @@ function openNamedSearchWindow(url, name)
 {
   if (useExternalBrowser && DQSDLauncher)
     DQSDLauncher.OpenDocument(url);
-  else
+  else if (typeof windowOpenFeatures != "undefined") {
+    window.open(url, name, windowOpenFeatures);
+  } else {
     window.open(url, name);
+  }
 }
 
 // direct shellexecute
@@ -74,7 +77,12 @@ function submitForm(form, dontChangeTarget)
   {
     if (newtarget && pagetemplate)
     {
-      var w = window.open(pagetemplate, newtarget);
+      var w = null;
+      if (typeof windowOpenFeatures != "undefined") {
+        w = window.open(url, name, windowOpenFeatures);
+      } else {
+        w = window.open(url, name);
+      }
       w.history.back(1);
     }
     form.submit();
