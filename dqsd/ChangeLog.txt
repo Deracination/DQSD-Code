@@ -16,6 +16,7 @@ Enhancements
 * Swedish holidays for 2005 (woo, early!) (Kim Gräsman)
 * Added ability to set number of results in google search as preference. (Shawn K. Hall)
 * configure.xml - modified to include dynamically loadable color schemes. CSS files renamed (Monty Scroggins)
+* Added IP autodetection. (Shawn K. Hall)
 
 Bug Fixes
 * Removed 'Type "!<em>prefix</em>" to see only matching entries.' from help. This action launches lucky Google.
@@ -93,6 +94,7 @@ Modified Searches
 * cjfr - fit site changes (MLL)
 * jsref - attempts at fitting site changes (MLL)
 * encyfr - moved to right category (MLL)
+* winres - changed parsing to correct 'undefined' error and added ability to use preference variables (Shawn K. Hall)
 
 Removed Searches
 * nwtsr and httpd replaced by whats (Kim Gräsman)
