@@ -5,14 +5,13 @@
   <link>http://www.viamichelin.com/</link>
   <description>
   Find a map to any place in Europe with viamichelin.com
-    <div class="helpboxDescLabels">Optional switches:</div>
+    <div class="helpboxDescLabels">Optional switch:</div>
     <table class="helpboxDescTable">
-      <tr><td>/address</td><td> - </td><td>address</td></tr>
       <tr><td>/size:{0|100|25|5|1}</td><td> - </td><td>map size (in km). Defaults to 0 (automatic).</td></tr>
     </table>
     <div class="helpboxDescLabels">Examples:</div>
     <table class="helpboxDescTable">
-      <tr><td>viam bordeaux /address:berland</td></tr>
+      <tr><td>viam place Berland, Bordeaux</td></tr>
       <tr><td>viam rimini /size:100</td></tr>
     </table>
   </description>
@@ -34,30 +33,68 @@
       todo:
       - add support for their very powerful driving directions
         (but wonder if it's worth it : *lots* of switches needed)
-      - have it behave like mq.xml, so they can be easily exchanged in aliases etc...
-      ...but at least this is a start :)
       */
       
-      var args = parseArgs(q, "address, size");
+      var args = parseArgs(q, "size");
 
       if( nullArgs("viam", args.q) )
         return;
 
-      var myaddress ="";
-      if( !( typeof args.switch_val["address"] == "undefined" || args.switch_val["address"] == "" ) )
-      {
-        myaddress=args.switch_val["address"];
-      }
-
-      var mysize = "0";
+      var size = "0";
       if( !( typeof args.switch_val["size"] == "undefined" || args.switch_val["size"] == "" ) )
       {
-        mysize=args.switch_val["size"];
+        size=args.switch_val["size"];
       }
 
-      document.viamf.strAddress.value = myaddress;
-      document.viamf.intMapScale.value = mysize;
-      document.viamf.strCity.value = args.q;
+      // What follows is a fairly "ergonomic" parser for addresses I got & simplified from mp.xml.
+
+      var address = "";
+      var city = "";
+
+      // detect leading ### w w w st
+      var res = q.match(/^\s*(\d+(\s+\w+)+\s+(st|ave|rd|ln|dr|blvd|cir|ct|pkwy|pl|way|aly|pk|sq|ter|plz|rue|bd))[\s\.,;]*(.*)$/i);
+      if (res && res[1])
+      {
+        address = res[1];
+        city = res[4];
+      }
+
+      // detect trailing comma or semicolon; prefer this way of finding city
+      res = q.match(/[\.,;]\s*([^\d][^,;]+)[\s\.,;]*$/i);
+      if (res && res[1])
+      {
+        city = res[1];
+        address = q.substring(0, res.index);
+      }
+
+      // last resorts: we really want a city
+      if (city == "")
+      {
+        // drop requirement for street number and precise abbreviation and look for street
+        res = q.match(/^\s*((\w+\s+)+(st|ave|rd|ln|dr|blvd|cir|ct|pkwy|pl|way|aly|pk|sq|ter|plz|street|avenue|road|lane|drive|boulevard|circle|court|parkway|place|loop|alley|park|square|terrace|plaza|mall))[\s\.,;]*(.*)$/i);
+        if (res && res[1])
+        {
+          address = res[1];
+          city = res[4];
+        }
+        // has a number: city is last word
+        else if (q.match(/^\s*\d/))
+        {
+          res = q.match(/(\w+)[\s\.,;]*$/);
+          city = res[1];
+          address = q.substring(0, res.index);
+        }
+        // otherwise, looks like it doesn't have a street; city is whole thing
+        else
+        {
+          city = q;
+          address = "";
+        }
+      }
+
+      document.viamf.strAddress.value = address;
+      document.viamf.intMapScale.value = size;
+      document.viamf.strCity.value = city;
 
       submitForm(viamf);
     }
