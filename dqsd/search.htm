@@ -3218,7 +3218,7 @@ function rsz()
   else
     clockformat = clocklongform;
 
-  document.deff.q.style.width=targetwidth;
+  document.deff.q.style.width=(targetwidth < 0 ? 0 : targetwidth);
 
   if (clockrunning)
      paintclock();
