@@ -17,7 +17,6 @@ New Searches
 * dps - Search for the best DVD prices from several online merchants (from Steven J. Heil)
 * pgrab - Price searches, product info, vendor ratings & reviews. (from Andrew D. Myers)
 
-
 Modified Searches
 
 * setiq - yet another cosmetic change (use of <div> rather than <a>)
@@ -30,6 +29,8 @@ Enhancements
   page that sets up the browser window the way you want it for your results. 
 * Fixed some descriptions in various searches; moved some searches to more appropriate categories
 * User-defined searches can be added to a 'localsearches' subdirectory.  These will not be overwritten on upgrading.
+* Modified to display command as tooltip for shortcut on the menu if a name for the shortcut was supplied.  
+  This is helpful to see what the actual command is from the shortcuts menu without having to open up localaliases.txt.
 
 Bug Fixes
 
