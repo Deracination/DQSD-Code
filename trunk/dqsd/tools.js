@@ -135,6 +135,23 @@ function readTabDelimitedFile(filename)
   return fileTable;
 }
   
+function protocolHandled(url)
+{
+  if (!ensureLauncher())
+    return true; // what else can we do except assume the protocol is handled?
+  
+  var results = url.match(/(\w+):/);
+  if (!results)
+    return false; // not a valid url
+    
+  try
+  {
+    var handler = DQSDLauncher.GetProtocolHandler(results[1]);
+  }
+  catch (e)
+  {
+    return false;
+  }
 
-
-
+  return true;
+}
