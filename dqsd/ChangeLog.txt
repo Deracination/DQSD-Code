@@ -13,6 +13,7 @@ Modified Searches
 * acine - fit site changes (MLL)
 * cjfr - fit site changes (MLL)
 * jsref - attempts at fitting site changes (MLL)
+* encyfr - moved to right category (MLL)
 
 Removed Searches
 * dicfr - site discontinued (MLL)
