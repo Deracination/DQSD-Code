@@ -11,6 +11,7 @@ LPCTSTR CMenuBuilder::DQSD_SEC_KEY = _T("CLSID\\{226b64e8-dc75-4eea-a6c8-abcb4d1
 
 int URLMatchesFilename(LPCTSTR szURL, LPCTSTR szFile);
 
+/*
 STDMETHODIMP CMenuBuilder::InterfaceSupportsErrorInfo(REFIID riid)
 {
 	static const IID* arr[] = 
@@ -24,6 +25,7 @@ STDMETHODIMP CMenuBuilder::InterfaceSupportsErrorInfo(REFIID riid)
 	}
 	return S_FALSE;
 }
+*/
 
 STDMETHODIMP CMenuBuilder::SetSite(IUnknown* pUnkSite)
 {
