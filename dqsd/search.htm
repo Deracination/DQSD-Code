@@ -261,7 +261,16 @@ function performsearch( fname, term )
   if (searches[fname])
     searches[fname].fun(term);
   else
-    eval(fname + "()");
+  {
+	try
+	{
+		eval(fname + "()");
+	}
+	catch(e)
+	{
+		alert('An error occurred while trying to run the search "'+fname+'()'+'"');
+	}
+  }
 }
 
 
@@ -680,6 +689,7 @@ if (dopopup)
   </tr>
  </table>
 
+<script src="version.js"></script>
 <script src="tools.js"></script>
 <script src="strings.js"></script>
 <script src="loader.js"></script>
@@ -777,13 +787,21 @@ function postStartup()
   rsz();
   document.body.onresize=rsz;
 
-  keyboardHook = new ActiveXObject("DQSDTools.Launcher");
-  keyboardHook.InstallKeyboardHook();
+  try
+  {
+	  keyboardHook = new ActiveXObject("DQSDTools.Launcher");
+	  keyboardHook.InstallKeyboardHook();
   
-  if(hotkeyCharacter != "")
-    keyboardHook.RegisterHotKey(hotkeyCharacter.charCodeAt(0));
-  else if(hotkeyVkCode != 0)
-    keyboardHook.RegisterHotKey(hotkeyVkCode);
+	  if(hotkeyCharacter != "")
+		keyboardHook.RegisterHotKey(hotkeyCharacter.charCodeAt(0));
+	  else if(hotkeyVkCode != 0)
+		keyboardHook.RegisterHotKey(hotkeyVkCode);
+  }
+  catch(e)
+  {
+	  alert("There was a problem initializing the enhanced keyboard support - some key combinations and hotkeys may not work");
+	  keyboardHook = null;	
+  }
 }
 
 </script>
