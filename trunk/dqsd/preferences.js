@@ -245,7 +245,7 @@ menuMRUlength = 5;
 */
 hotkeyCharacter = "S";
 /* An alternative if you want to do something more elaborate - set the hotkeyCharacter to "" and use this as a direct vkCode number
- Looking up VK codes is left as an task for the reader....
+ Looking up VK codes is left as a task for the reader....
 */
 hotkeyVkCode = 0;
 
