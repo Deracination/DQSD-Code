@@ -358,9 +358,9 @@ function special(t)
 function direct(t)
 {
   // detect strings that look like URLs or filenames
-  prot = new RegExp("^(http://|https://|ftp://)([\\-a-z0-9]+\\.)*[\\-a-z0-9]+" +
-                    "|^[a-z]:($|\\\\)" +
-                    "|^\\\\\\\\[\\w]+[\\w\$]*($|\\\\($|[\\w\$]+($|\\\\)))", "i");
+  prot = new RegExp("^\\s*((http://|https://|ftp://)([\\-a-z0-9]+\\.)*[\\-a-z0-9]+" +
+                    "|[a-z]:($|\\\\)" +
+                    "|\\\\\\\\[\\w]+[\\w\$]*($|\\\\($|[\\w\$\&]+($|\\\\))))", "i");
   if (prot.exec(t))
   {
     openSearchWindow(t);
@@ -368,12 +368,12 @@ function direct(t)
   }
 
   // detect strings that look like DNS names
-  dns = new RegExp("^www\.([\\-a-z0-9]+\\.)+[\\-a-z0-9]+(/\\S*)?$" +
-                   "|^([\\-a-z0-9]+\\.)+(com|net|org|edu|gov|mil|int|arpa|info|biz|name|museum|coop|aero|pro|[a-z]{2})(/\\S*)?$", "i");
+  dns = new RegExp("^\\s*(www\.([\\-a-z0-9]+\\.)+[\\-a-z0-9]+(/\\S*)?" +
+                   "|([\\-a-z0-9]+\\.)+(com|net|org|edu|gov|mil|int|arpa|info|biz|name|museum|coop|aero|pro|[a-z]{2})(/\\S*)?)$", "i");
 
   if (dns.exec(t))
   {
-    openSearchWindow("http://" + t);
+    openSearchWindow("http://" + t.replace( /^\s(.*)/, "$1") );
     return true;
   }
   return false;

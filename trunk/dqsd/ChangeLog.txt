@@ -23,7 +23,7 @@ Enhancements
 
 Bug Fixes
 
-* 
+* URLs, filenames, etc. are now detected with leading whitespace
 
 
 -- What's new for 3.0.0.20 (beta)
