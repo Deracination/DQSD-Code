@@ -3,7 +3,7 @@
   <description>Generate passwords
   <div class="helpboxDescLabels">Switches:</div>
     <table class="helpboxDescTable">
-      <tr><td>/len</td><td> - </td><td>Limit the password length</td></tr>
+      <tr><td nowrap="nowrap">/length[:n]</td><td> - </td><td>Limit the password length.  Defaults to 'passgen_length' or 6.</td></tr>
       <tr><td>/lower</td><td> - </td><td>Allow lowercase letters</td></tr>
       <tr><td>/noupper</td><td> - </td><td>Don't allow uppercase letters</td></tr>
       <tr><td>/nolower</td><td> - </td><td>Don't allow lowercase letters</td></tr>
@@ -21,6 +21,7 @@
     <table class="helpboxDescTable">
       <tr><td>passgen /l:5</td></tr>
     </table>
+  <br/>
   <div class="helpboxDescLabels">localprefs.js variables</div>
     <table class="helpboxDescTable">
       <tr><td>passgen_length</td><td> - </td><td>Default length (number > 0)</td></tr>
@@ -37,7 +38,7 @@
   <script><![CDATA[
     function passgen(q) 
     {
-      var args = parseArgs(q, "len, noupper, nolower, nonum, nosupper, noslower, nosnum, upper, lower, num, supper, slower, snum");
+      var args = parseArgs(q, "length, noupper, nolower, nonum, nosupper, noslower, nosnum, upper, lower, num, supper, slower, snum");
       if (q == "?") {
         nullArgs("passgen", "?");
         return false;
@@ -53,27 +54,28 @@
       for (var i = 0; i < args.switches.length; i++) {
         switch (args.switches[i].name)
         {
-        case "len":      len = args.switch_val["len"]; break;
-        case "noupper": nouppercase = true; break;
-        case "upper": nouppercase = false; break;
-        case "nolower": nolowercase = true; break;
-        case "lower":   nolowercase = false; break;
-        case "nonum":   nonumbers   = true; break;
-        case "num":     nonumbers   = false; break;
-        case "nosupper":  startuppercase = false; break;
-        case "supper":    startuppercase = true;  break;
-        case "noslower":  startlowercase = false; break;
-        case "slower":    startlowercase = true;  break;
-        case "nosnum":    startnumbers   = false; break;
-        case "snum":      startnumbers   = true;  break;
-        default:            break;
+        case "length":   len = args.switch_val["length"]; break;
+        case "noupper":  nouppercase = true; break;
+        case "upper":    nouppercase = false; break;
+        case "nolower":  nolowercase = true; break;
+        case "lower":    nolowercase = false; break;
+        case "nonum":    nonumbers   = true; break;
+        case "num":      nonumbers   = false; break;
+        case "nosupper": startuppercase = false; break;
+        case "supper":   startuppercase = true;  break;
+        case "noslower": startlowercase = false; break;
+        case "slower":   startlowercase = true;  break;
+        case "nosnum":   startnumbers   = false; break;
+        case "snum":     startnumbers   = true;  break;
+        default:         break;
         }
       }
       var passwd = passgen_generate(len, nouppercase, nolowercase, nonumbers, startuppercase, startlowercase, startnumbers);
       if (passwd != false) {
           document.deff.q.value = passwd;
+          document.deff.q.createTextRange().select();
       } else {
-        alert("passgen_generate returned false");
+        //alert("passgen_generate returned false");
         nullArgs("passgen", "?");
         return false;
       }
@@ -110,7 +112,7 @@
       }
 
       if (validchars == "") {
-        alert("validchars is empty");
+        //alert("validchars is empty");
         return false;
       }
       var rand_num = Math.floor(Math.random() * validchars.length);
@@ -119,8 +121,8 @@
   ]]></script>
 
   <copyright>
-	Copyright (c) 2002 Brent Beardsley
-	Distributed under the terms of the
-	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  Copyright (c) 2002 Brent Beardsley
+  Distributed under the terms of the
+  GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
   </copyright>
 </search>
