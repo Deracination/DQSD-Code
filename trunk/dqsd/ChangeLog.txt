@@ -1,3 +1,10 @@
+-- What's new for x.x.x(date xxxxxxxx)
+Enhancements
+* Moved txp search to computers->reference subcategory.  Added a usage example.
+New Searches
+Bug Fixes
+Modified Searches
+
 -- What's new for 3.1.5 (December 15, 2002)
 
 Enhancements
