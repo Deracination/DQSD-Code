@@ -62,6 +62,7 @@ Modified Searches
 * gtwhois - Post url changed, modified search accordingly (Dean Wilson)
 * tvg - Default url broken, modified search accordingly (Shawn K. Hall)
 * viam - Changed to fit site changes
+* sd - changed for a correct example
 
 Removed Searches
 
