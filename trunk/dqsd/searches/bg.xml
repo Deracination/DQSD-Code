@@ -4,16 +4,22 @@
     Search The Bible Gateway for a scripture reference.<br/>
     <div class="helpboxDescLabels">Bible Versions:</div>
     <table class="helpboxDescTable">
-      <tr><td>/NIV</td><td> - </td><td>Search the New International Version (default).</td></tr>
       <tr><td>/AMP</td><td> - </td><td>Search the Amplified Bible.</td></tr>
       <tr><td>/ASV</td><td> - </td><td>Search the American Standard Version.</td></tr>
+      <tr><td>/CEV</td><td> - </td><td>Search the Contemporary English Version.</td></tr>
       <tr><td>/DARBY</td><td> - </td><td>Search the Darby Translation.</td></tr>
       <tr><td>/ESV</td><td> - </td><td>Search the English Standard Version.</td></tr>
       <tr><td>/KJ21</td><td> - </td><td>Search the 21st Century King James Version.</td></tr>
       <tr><td>/KJV</td><td> - </td><td>Search the King James Version.</td></tr>
+      <tr><td>/MSG</td><td> - </td><td>Search the Message Bible.</td></tr>
       <tr><td>/NASB</td><td> - </td><td>Search the New American Standard Bible.</td></tr>
+      <tr><td>/NIV</td><td> - </td><td>Search the New International Version (default).</td></tr>
+      <tr><td>/NIV-UK</td><td> - </td><td>Search the New International Version - UK.</td></tr>
       <tr><td>/NKJV</td><td> - </td><td>Search the New King James Version.</td></tr>
-      <tr><td>/WE</td><td> - </td><td>Search the Worldwide English Version.</td></tr>
+      <tr><td>/NLT</td><td> - </td><td>Search the New Living Translation.</td></tr>
+      <tr><td>/NLV</td><td> - </td><td>Search the New Life Version.</td></tr>
+      <tr><td>/WE</td><td> - </td><td>Search the Worldwide English (New Testament).</td></tr>
+      <tr><td>/WYC</td><td> - </td><td>Search the Wycliffe New Testament.</td></tr>
       <tr><td>/YLT</td><td> - </td><td>Search Young's Literal Translation.</td></tr>
     </table>
     <div class="helpboxDescLabels">Search Types:</div>
@@ -26,8 +32,11 @@
     </table>
     <div class="helpboxDescLabels">Misc Search Options:</div>
     <table class="helpboxDescTable">
-      <tr><td>/word</td><td> - </td><td>Search whole words only</td></tr>
       <tr><td>/link</td><td> - </td><td>Show only links to verses not the text of the verses themselves</td></tr>
+      <tr><td>/nofootnotes</td><td> - </td><td>Don't show footnotes</td></tr>
+      <tr><td>/nocrossreferences</td><td> - </td><td>Don't show cross references</td></tr>
+      <tr><td>/print</td><td> - </td><td>Display printer friendly view</td></tr>
+      <tr><td>/word</td><td> - </td><td>Search whole words only</td></tr>
     </table>
     <div class="helpboxDescLabels">Examples:</div>
     <table class="helpboxDescTable">
@@ -39,6 +48,15 @@
       <tr><td>bg /any alpha omega /kjv /word</td></tr>
       <tr><td>bg /all famine earthquake /link</td></tr>
     </table>
+    <div class="helpboxDescLabels">Preferences: (define in localprefs.js)</div>
+    <table class="helpboxDescTable">
+      <tr><td>bgBibleVersion (String: default is "NIV")</td></tr>
+      <tr><td>bgWholeWords (Boolean: default is false)</td></tr>
+      <tr><td>bgPrinterFriendly (Boolean: default is false)</td></tr>
+      <tr><td>bgShowFootnotes (Boolean: default is true)</td></tr>
+      <tr><td>bgShowCrossReferences (Boolean: default is true)</td></tr>
+      <tr><td>bgLanguage (String: default is "english")</td></tr>
+    </table>
   </description>
   <category>Reference<category>General</category></category>
   <link>http://www.biblegateway.com/</link>
@@ -49,9 +67,10 @@
         method="GET">
     <input type="hidden" name="passage"/>
     <input type="hidden" name="version" value="NIV"/>
-    <input type="hidden" name="showfn" value="yes"/>
-    <input type="hidden" name="showxref" value="yes"/>
+    <input type="hidden" name="showfn" value="on"/>
+    <input type="hidden" name="showxref" value="on"/>
     <input type="hidden" name="language" value="english"/>
+    <input type="hidden" name="interface" value=""/>
   </form>
 
   <form name="bgwordsearchf"
@@ -87,13 +106,17 @@
         return;
 
       var searchType = "";
-      var bibleVersion = "NIV";
-      var wholeWords = false;
+      var bibleVersion = (typeof bgBibleVersion != "undefined") ? bgBibleVersion : "NIV";
+      var wholeWords = (typeof bgWholeWords != "undefined") ? bgWholeWords : false;
+	  var printerFriendly = (typeof bgPrinterFriendly != "undefined") ? bgPrinterFriendly : false;
+	  var showFootnotes = (typeof bgShowFootnotes != "undefined") ? bgShowFootnotes : true;
+	  var showCrossReferences = (typeof bgShowCrossReferences != "undefined") ? bgShowCrossReferences : true;
+	  var language = (typeof bgLanguage != "undefined") ? bgLanguage : "english";
       var resultsAsReferences = false;
 
-      var bibleVersions = "NIV, NASB, AMP, NLT, KJV, ESV, NKJV, KJ21, ASV, WE, YLT, DARBY";
+      var bibleVersions = "AMP,ASV,CEV,DARBY,ESV,KJV,KJ21,MSG,NASB,NIV,NIV-UK,NKJV,NLT,NLV,WE,WYC,YLT";
       var bibleVersionsList = bibleVersions.split(/[,;\s]/);
-      var args = parseArgs(q, bibleVersions+", EXACT, ALL, ANY, APPROXIMATE, COUNT, WORD, LINK");
+      var args = parseArgs(q, bibleVersions+", EXACT, ALL, ANY, APPROXIMATE, COUNT, WORD, LINK, NOFOOTNOTES, NOCROSSREFERENCES, PRINT");
       if ( args.switches.length > 0 )
       {
         for (var i=0; i < args.switches.length; i++)
@@ -115,13 +138,16 @@
 	  {
             switch (switchName)
 	    {
-            case "EXACT":       searchType = "EXACT";       break;
+        case "EXACT":       searchType = "EXACT";       break;
 	    case "ALL":         searchType = "AND";         break;
 	    case "ANY":         searchType = "OR";          break;
 	    case "APPROXIMATE": searchType = "FULL_TEXT";   break;
 	    case "COUNT":       searchType = "COUNT";       break;
 	    case "WORD":        wholeWords = true;          break;
 	    case "LINK":        resultsAsReferences = true; break;
+		case "NOFOOTNOTES": showFootnotes = false; break;
+		case "NOCROSSREFERENCES": showCrossReferences = false; break;
+		case "PRINT": printerFriendly = true; break;
 	    }
 	  }
 	}
@@ -130,7 +156,11 @@
       if (searchType == "")
       {
         document.bgf.version.value = bibleVersion;
-	document.bgf.passage.value = args.q;
+		document.bgf.passage.value = args.q;
+		document.bgf.interface.value = printerFriendly ? "print" : "";
+		document.bgf.showfn.value = showFootnotes ? "on" : "off";
+		document.bgf.showxref.value = showCrossReferences ? "on" : "off";
+		document.bgf.language.value = language;
         submitForm(bgf);
       }
       else

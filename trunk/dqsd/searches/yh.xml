@@ -1,6 +1,14 @@
 <search function="yh">
   <name>Yahoo</name>
   <description>Search the Yahoo directory
+  <div class="helpboxDescLabels">Switches:</div>
+  <table class="helpboxDescTable">
+    <tr><td>/directory</td><td> - </td><td>Search Yahoo Directory</td></tr>
+    <tr><td>/images</td><td> - </td><td>Search Yahoo Images</td></tr>
+    <tr><td>/news</td><td> - </td><td>Search Yahoo News</td></tr>
+    <tr><td>/number</td><td> - </td><td>number of results per page</td></tr>
+    <tr><td>/products</td><td> - </td><td>Search Yahoo Products</td></tr>
+  </table>
   <div class="helpboxDescLabels">Example:</div> 
   <table class="helpboxDescTable">
     <tr>
@@ -11,20 +19,104 @@
   <category>Search the Web</category>
   <link>http://www.yahoo.com/</link>
   <form name="yhf"
-        action="http://search.yahoo.com/bin/search"
+        action="http://search.yahoo.com/search"
         method="get">
     <input type="hidden" name="p" value=""/>
+    <input type="hidden" name="vst" value="0"/>
+    <input type="hidden" name="fl" value="0"/>
+    <input type="hidden" name="ei" value="ISO-8859-1"/>
+    <input type="hidden" name="vm" value="p"/>
+    <input type="hidden" name="n" value="20"/>
+  </form>
+  <form name="yhnewsf"
+        action="http://search.news.yahoo.com/search/news/"
+        method="get">
+    <input type="hidden" name="p" value=""/>
+    <input type="hidden" name="vst" value="0"/>
+    <input type="hidden" name="fl" value="0"/>
+    <input type="hidden" name="ei" value="ISO-8859-1"/>
+    <input type="hidden" name="vm" value="p"/>
+    <input type="hidden" name="n" value="20"/>
+  </form>
+  <form name="yhimagesf"
+        action="http://images.search.yahoo.com/search/images"
+        method="get">
+    <input type="hidden" name="p" value=""/>
+    <input type="hidden" name="vst" value="0"/>
+    <input type="hidden" name="fl" value="0"/>
+    <input type="hidden" name="ei" value="ISO-8859-1"/>
+    <input type="hidden" name="vm" value="p"/>
+    <input type="hidden" name="n" value="20"/>
+  </form>
+  <form name="yhdirf"
+        action="http://search.yahoo.com/search/dir"
+        method="get">
+    <input type="hidden" name="p" value=""/>
+    <input type="hidden" name="vst" value="0"/>
+    <input type="hidden" name="fl" value="0"/>
+    <input type="hidden" name="ei" value="ISO-8859-1"/>
+    <input type="hidden" name="vm" value="p"/>
+    <input type="hidden" name="n" value="20"/>
+  </form>
+  <form name="yhproductsf"
+        action="http://search.shopping.yahoo.com/search"
+        method="get">
+    <input type="hidden" name="p" value=""/>
+    <input type="hidden" name="vst" value="0"/>
+    <input type="hidden" name="fl" value="0"/>
+    <input type="hidden" name="ei" value="ISO-8859-1"/>
+    <input type="hidden" name="vm" value="p"/>
+    <input type="hidden" name="n" value="20"/>
   </form>
   <script><![CDATA[
     function yh(q)
     {
-      if (q == "")
-        openSearchWindow("http://www.yahoo.com/");
-      else
-      {
-        document.yhf.p.value=q;
-        submitForm(yhf);
-      }
+      if( nullArgs("yh", q) )
+        return false;
+
+	  var searchType = "";
+	  var ei = "ISO-8859-1";
+	  var num = 20;
+      var args = parseArgs(q, "directory, images, news, number, products"); 
+      for (var i = 0; i < args.switches.length; i++) {
+          sw = args.switches[i];
+          switch(sw.name) {
+			case "directory":
+			case "images":
+			case "news":
+			case "products":
+			    searchType = sw.name;
+				break;
+			case "number": num = sw.value; break;	
+		  }
+	  }
+
+	  if (searchType == "directory") {
+          document.yhdirf.p.value = args.q;
+		  document.yhdirf.n.value = num;
+		  document.yhdirf.ei.value = ei;
+		  submitForm(yhdirf);
+	  } else if (searchType == "images") {
+          document.yhimagesf.p.value = args.q;
+		  document.yhimagesf.n.value = num;
+		  document.yhdirf.ei.value = ei;
+		  submitForm(yhimagesf);
+	  } else if (searchType == "news") {
+          document.yhnewsf.p.value = args.q;
+		  document.yhnewsf.n.value = num;
+		  document.yhdirf.ei.value = ei;
+		  submitForm(yhnewsf);
+	  } else if (searchType == "products") {
+          document.yhproductsf.p.value = args.q;
+		  document.yhproductsf.n.value = num;
+		  document.yhdirf.ei.value = ei;
+		  submitForm(yhproductsf);
+	  } else {
+	      document.yhf.p.value=args.q;
+		  document.yhf.n.value=num;
+		  document.yhdirf.ei.value = ei;
+	      submitForm(yhf);
+	  }
     }
   ]]></script>
 
