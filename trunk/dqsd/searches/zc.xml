@@ -25,17 +25,15 @@
   <script><![CDATA[
     function zc(q)
     {
-      if (q == "")
-        window.open("http://www.zipinfo.com");
-      else
-      {
-        if (result = q.match(/^(\d{5})\s*(.*)/))
-          document.zcf.zip.value = result[1];
-        else if (result = q.match(/^(.*)/))
-          document.zcf.zip.value = result[1];
-        
-        submitForm(zcf);
-      }
+      if( nullArgs("zc", q) )
+        return false;
+
+      if (result = q.match(/^(\d{5})\s*(.*)/))
+        document.zcf.zip.value = result[1];
+      else if (result = q.match(/^(.*)/))
+        document.zcf.zip.value = result[1];
+
+      submitForm(zcf);
     }
   ]]></script>
 
