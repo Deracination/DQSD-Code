@@ -19,6 +19,7 @@ New Searches
 * httpd - Netcraft's "Whats that site running" database/web server information
 * archi - Archive.org's Way Back Machine.
 * videoeta - Search the videoeta.com site for video release information
+* npdr - Search www.nursespdr.com database for drug information.(from John W. Bairen, Jr.)
 
 Modified Searches
 
