@@ -135,7 +135,7 @@ launchmode=2;
 pagetemplate="";
 
 
-/* Default language - uncomment to override default language (which is determined programatically)*/
+/* Default language - uncomment to override default language (which is determined programmatically)*/
 // language="en";
 
 
@@ -436,15 +436,15 @@ refreshIconsAtStartup = true;
 *                performs search)?
 *  bannerurl     Identifies the resource to use, either a url or file 
 *                reference from the DQSD install directory.
-*  bannerwidth   Specify the width of the banner image, or "0" to autodetect
-*  bannerheight  Specify the height of the banner image, or "0" to autodetect
+*  bannerwidth   Specify the width of the banner image, or -1 to autodetect
+*  bannerheight  Specify the height of the banner image, or -1 to autodetect
 *  bannerlink    Specify a destination url/action when clicking banner/logo 
 *                without a search in the box
 */
 bannerasgo   = false;
-bannerurl    = "dqsd.png"; // "http://reliableanswers.com/x/dqsd/dqsd.gif"
-bannerwidth  =  21;        // 0 := autodetect banner size
-bannerheight =  19;        // 0 := autodetect banner size
+bannerurl    = "dqsd.png";  // "http://reliableanswers.com/x/dqsd/dqsd.gif"
+bannerwidth  = -1;          // -1 == autodetect banner size
+bannerheight = -1;          // -1 == autodetect banner size
 bannerlink   = "http://www.dqsd.net/";  // examples:
                                         //   (action)="floax";
                                         //   (action)="gg";
