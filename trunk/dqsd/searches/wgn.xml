@@ -1,0 +1,90 @@
+<search function="wgn">
+
+  <name>Windows Guide Network</name>
+  <category>Computers</category>
+  <contributor>John W. Bairen, Jr.</contributor>
+  <link>http://www.winguides.com/</link>
+  <email>john_at_bairen_dot_net</email>
+  <description>
+  Search Windows Guide Network for technical resources and support to tweak, manage and secure the Windows operating system.
+  <br/>
+    <div class="helpboxDescLabels">Switches:</div>
+  	<table class="helpboxDescTable">
+  		<tr><td>/all</td><td> - </td><td>Search All Sections</td></tr>
+  		<tr><td>/articles</td><td> - </td><td>Search Article Library.</td></tr>
+  		<tr><td>/dictionary</td><td> - </td><td>Search Dictionary.</td></tr>
+  		<tr><td>/drivers</td><td> - </td><td>Search Driver Guide.</td></tr>
+  		<tr><td>/forums</td><td> - </td><td>Search Discussion Forums.</td></tr>
+  		<tr><td>/registry</td><td> - </td><td>Search registry Database.</td></tr>
+  		<tr><td>/script</td><td> - </td><td>Search Script Library.</td></tr>
+  		<tr><td>/security</td><td> - </td><td>Search Security Database.</td></tr>
+   	</table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>wgn Internet Explorer hacks</td></tr>
+  		<tr><td>wgn Internet Explorer /registry</td></tr>
+  	</table>
+  </description>
+  <form name="wgnf"
+        method="get"
+        action="http://www.winguides.com/search.php">
+
+    <input type="hidden" name="keywords" value="" />
+    <input type="hidden" name="mode" value="or" />
+    <input type="hidden" name="target" value="all" />
+    <input type="hidden" name="hits" value="50" />
+    <input type="hidden" name="guide" value="site" />
+  </form>
+  <script><![CDATA[
+    function wgn(q)
+    {
+      if( nullArgs("wgn", q) )
+        return;
+
+      if( q == "" )
+      {
+        openSearchWindow("http://www.winguides.com/");
+        return;
+      }
+
+      var args = parseArgs(q, "all, article, dictionary, drivers, forums, registry, script, security");
+      if ( args.switches.length > 0 )
+      {
+        switch( args.switches[0].name )
+        {
+          case "all":
+               document.wgnf["target"].value = "all";
+               break;
+          case "article":
+               document.wgnf["target"].value = "articles";
+               break;
+          case "dictionary":
+               document.wgnf["target"].value = "dictionary";
+               break;
+          case "drivers":
+               document.wgnf["target"].value = "drivers";
+               break;
+          case "forums":
+               document.wgnf["target"].value = "community";
+               break;
+          case "registry":
+               document.wgnf["target"].value = "registry"; 
+               break;
+          case "script":
+               document.wgnf["target"].value = "scripting";
+               break;
+          case "security":
+               document.wgnf["target"].value = "security";
+               break;
+          default:
+               document.wgnf["target"].value = "all";
+               break;
+        } //end-switch
+      }
+
+      document.wgnf.keywords.value = q;
+
+      submitForm(wgnf);
+    }
+  ]]></script>
+</search>
