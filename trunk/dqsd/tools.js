@@ -192,7 +192,8 @@ function readTabDelimitedFile(filename)
   var fileTable = [];
   for (var i = 0; i < fileLines.length; i++)
   {
-    fileTable.push(fileLines[i].split("\t"));
+    if (!fileLines[i].match(/^\s*($|\/\/)/))  // ignore comments (//) and blank lines
+      fileTable.push(fileLines[i].split("\t"));
   }
   return fileTable;
 }

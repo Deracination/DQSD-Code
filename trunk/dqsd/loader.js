@@ -237,12 +237,10 @@ addAliasesFromFile( localaliases );
 function addAliasesFromFile( aliasFile )
 {
   var aliasTable = readTabDelimitedFile(aliasFile);
-  
+  aliasTable.sort();
   for (var iPrivate = 0; iPrivate < aliasTable.length; iPrivate++)
   {
     var fields = aliasTable[iPrivate];
-    if (!fields.join('').match(/^\s*($|\/\/)/)) // not a comment (//)
-    {
       if (fields.length != 2)
       {
         alert("Error on line " + (iPrivate + 1) + " of aliases.txt:\n\n" + aliasTable[iPrivate] + 
@@ -255,7 +253,6 @@ function addAliasesFromFile( aliasFile )
       }
     }
   }
-}
 
 
 // 5. load and execute the menu file
