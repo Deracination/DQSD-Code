@@ -10,3 +10,6 @@
 #endif
 
 #include <atlimpl.cpp>
+
+#include "utilities.h"
+

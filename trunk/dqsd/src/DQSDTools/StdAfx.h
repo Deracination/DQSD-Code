@@ -23,6 +23,15 @@ extern CComModule _Module;
 #include <shlwapi.h>
 #include <wininet.h>
 
+#include <atlctl.h>					// IObjectSafety,
+#include <exdisp.h>					// IWebBrowser2,
+#include <mshtml.h>
+#include <shlguid.h>				// SID_SWebBrowserApp, 
+#include <shellapi.h>				// ShellExecute, 
+
+#include <map>
+#include <string>
+
 //{{AFX_INSERT_LOCATION}}
 // Microsoft Visual C++ will insert additional declarations immediately before the previous line.
 

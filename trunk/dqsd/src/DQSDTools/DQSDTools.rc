@@ -100,6 +100,7 @@ END
 //
 
 IDR_LAUNCHER            REGISTRY DISCARDABLE    "Launcher.rgs"
+IDR_MENUBUILDER         REGISTRY DISCARDABLE    "MenuBuilder.rgs"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -120,6 +121,13 @@ BEGIN
     IDS_ERR_REGKEYNOTFOUND  "DQSDTools.Launcher : unable to open registry key"
     IDS_ERR_FILENOTFOUND    "DQSDTools.Launcher : file not found"
     IDS_ERR_PROTOCOLNOTFOUND "DQSDTools.Launcher : protocol handler not found"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_ERR_CANTFINDDQSD    "Cannot locate DQSD window"
+    IDS_ERR_INVALIDHORIZALIGNMENT 
+                            "Invalid HorizontalAlignment property value: 0 - Center, 1 - Left, 2 - Right"
 END
 
 #endif    // English (U.S.) resources
