@@ -184,6 +184,8 @@ defaultcal="yhocal";
 *  holidays.sg.xml - Singapore
 *  holidays.it.xml - Italy
 *  holidays.fr.xml - France
+*  holidays.nl.NL.xml - Netherlands (Dutch language)
+*  holidays.nl.EN.xml - Netherlands (English language)
 */
 eventsfileurl="holidays.us.xml";
 

@@ -30,7 +30,7 @@ Bug Fixes
 * A local alias can now override a search name.  This was causing a script error
   when the menu was invoked.
 * Search forms can now have input elements named "target" without causing a script error
-
+* Labor day in holidays.nl.*.xml files now happens every year (thanks MLL and Johan Geertsma)
 
 -- What's new for 3.0.0.22 (beta)
 
