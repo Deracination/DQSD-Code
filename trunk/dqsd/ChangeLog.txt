@@ -1,4 +1,4 @@
--- What's new for x.x.x (date xxxxxxxx)
+-- What's new for 3.1.6.0 (20-Apr-2003)
 
 Enhancements
 
@@ -15,37 +15,38 @@ Enhancements
 
 New Searches
 
-* dseek - downseek.com software search
-* cs - ConsumerSearch.com search meta-reviews of other reviews (from Gregory Krohne)
-* hb - Hotbot.com search (from Gregory Krohne)
-* otn - Oracle Technology Network search (from Gregory Krohne)
-* rw - Search the Ripe Whois Database for IP addresses
-* ccase - new function to convert case of a string - lower, upper, caps. (from Sarah Sweeney)
-* mb - MapBlast.com LineDrive search (from Gregory Krohne)
-* fs - FindSounds.com sound file search (from Gregory Krohne)
-* dqsd - Search the DQSD mail archive (Gregory Krohne)
-* phpb - Search PHPBuilder (from Sarah Sweeney)
-* tr - Search ThomasRegister (from Brent Beardsley)
-* ct - Search Content Type List (from Brent Beardsley)
-* tldp - Search The Linux Documentation Project (from Brent Beardsley)
-* blb - Search the bible at BlueLetterBible.org (from Brent Beardsley)
-* thelist - Search evlot.org's thelist archives (from Sarah S.)
-* evolt - Search evolt.org (from Sarah S.)
-* htmlh - Search htmlhelp.com (from JB)
-* wf - Search Watchman Fellowship for info on cults (from JB)
-* bta - Search Betanews for new beta software (from Paul Hounshell)
-* bio - Search the Biography.com database (from viking mel)
-* mag - Search newspaper and magazine articles (from viking mel)
-* nyse - enter a company name and get the lookup symbol and a short description of that company (from viking mel)
-* tucows - search tucows (from Sarah S.)
-* ubs - search for used books at http://www.used-books.org.uk/cgi/books.cgi
-* encyfr - Search the encyclopédie Voila with Hachette Multimédia
-* wa - Search WebAttack for shareware and freeware
 * abt - Search About.com
 * alistapart - Search the A List Apart site (from Sarah S.)
-* mg - Search MajorGeeks site for shareware and freeware
-* winf - Brian's Buzz WinFind
+* bio - Search the Biography.com database (from viking mel)
+* blb - Search the bible at BlueLetterBible.org (from Brent Beardsley)
+* bta - Search Betanews for new beta software (from Paul Hounshell)
+* ccase - new function to convert case of a string - lower, upper, caps. (from Sarah Sweeney)
+* cs - ConsumerSearch.com search meta-reviews of other reviews (from Gregory Krohne)
+* ct - Search Content Type List (from Brent Beardsley)
+* dqsd - Search the DQSD mail archive (Gregory Krohne)
+* dseek - downseek.com software search
 * dyndns - search dyndns
+* encyfr - Search the encyclopédie Voila with Hachette Multimédia
+* evolt - Search evolt.org (from Sarah S.)
+* fs - FindSounds.com sound file search (from Gregory Krohne)
+* hb - Hotbot.com search (from Gregory Krohne)
+* htmlh - Search htmlhelp.com (from JB)
+* mag - Search newspaper and magazine articles (from viking mel)
+* mb - MapBlast.com LineDrive search (from Gregory Krohne)
+* mg - Search MajorGeeks site for shareware and freeware
+* nyse - enter a company name and get the lookup symbol and a short description of that company (from viking mel)
+* otn - Oracle Technology Network search (from Gregory Krohne)
+* phpb - Search PHPBuilder (from Sarah Sweeney)
+* rss - Searches syndicated RSS content feeds from sites and blogs (from Aaron Vance).
+* rw - Search the Ripe Whois Database for IP addresses
+* thelist - Search evlot.org's thelist archives (from Sarah S.)
+* tldp - Search The Linux Documentation Project (from Brent Beardsley)
+* tr - Search ThomasRegister (from Brent Beardsley)
+* tucows - search tucows (from Sarah S.)
+* ubs - search for used books at http://www.used-books.org.uk/cgi/books.cgi
+* wa - Search WebAttack for shareware and freeware
+* wf - Search Watchman Fellowship for info on cults (from JB)
+* winf - Brian's Buzz WinFind
 
 Bug Fixes
 
@@ -54,18 +55,18 @@ Bug Fixes
 
 Modified Searches
 
-* fe - now allows you to specify an extension name instead of only the first letter (from Matthew McDougal)
-* configure - localized it and added Reload menu option, fixed bug when addons directory did not exist (from Brent Beardsley)
+* aj - updated Ask Jeeves search (from Sam Mulube)
 * amaz - added /referral switch for building referral links for Amazon
-* ebay - added about, all, feedback, items, my, and user switches (from Darrick ? and Brent Beardsley)
-* sf - added status switch (from Brent Beardsley)
-* chap - updated to work again (from Sarah Sweeney)
 * babel - updated to work again (from Brent Beardsley)
-* aj updated Ask Jeeves search (from Sam Mulube)
+* chap - updated to work again (from Sarah Sweeney)
+* configure - localized it and added Reload menu option, fixed bug when addons directory did not exist (from Brent Beardsley)
+* ebay - added about, all, feedback, items, my, and user switches (from Darrick ? and Brent Beardsley)
+* fe - now allows you to specify an extension name instead of only the first letter (from Matthew McDougal)
 * freetrans - updated to work again (from Brent Beardsley)
-* yg - added mygroups switch to go to mygroups page (from Brent Beardsley)
 * php - added ability to search through the Smarty manual and for PEAR packages
+* sf - added status switch (from Brent Beardsley)
 * telfr - updated accordingly to the web site
+* yg - added mygroups switch to go to mygroups page (from Brent Beardsley)
 
 Miscellaneous
 
