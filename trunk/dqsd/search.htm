@@ -686,8 +686,8 @@ function direct(t)
   }
 
   // detect strings that look like DNS names
-  dns = new RegExp("^www\.([\\-a-z0-9]+\\.)+[\\-a-z0-9]+$" +
-                   "|^([\\-a-z0-9]+\\.)+(com|net|org|edu|gov|mil|[a-z]{2})$", "i");
+  dns = new RegExp("^www\.([\\-a-z0-9]+\\.)+[\\-a-z0-9]+(/\\S*)?$" +
+                   "|^([\\-a-z0-9]+\\.)+(com|net|org|edu|gov|mil|[a-z]{2})(/\\S*)?$", "i");
   if (dns.exec(t))
   {
     openSearchWindow("http://" + t);
@@ -909,21 +909,33 @@ function okp()
   // ctrl-enter just like IE's address bar - Joel's suggestion
   if (window.event.keyCode == 10)
   {
-    var t = document.deff.q.value;
+    var origt = document.deff.q.value;
+    var t = origt;
 
     // trim leading and trailing whitespace and punctuation
     t = t.replace(/^[\s~`!@#$%\^&\*()\-=\+{}\[\];:'<>,\.\/\?]*/, '')
          .replace(/[\s~`!@#$%\^&\*()\-=\+{}\[\];:'<>,\.\/\?]*$/, '');
 
-    // prepend www. and append .com
-    t = "www." + t + ".com";
+    // append .com if it looks like it needs it
+    dns = new RegExp("^([\\-a-z0-9]+\\.)+(com|net|org|edu|gov|mil|[a-z]{2})(/\S*)?$", "i");
+    if (!dns.exec(t))
+    {
+      var slashpos = t.indexOf('/');
+      if (slashpos < 0) slashpos = t.length;
+      t = t.substr(0, slashpos) + ".com" + t.substr(slashpos);
+    }
+
+    // prepend www. if there are fewer than three parts in the dns name
+    if (!t.match(/^[\w\-]+\.[\w\-]+\.[\w\-]+/))
+      t = "www." + t;
 
     // if it all looks good as a dns name, then history it
-    if (direct(t))
+    if (direct(t) || direct(t = origt))
     {
        document.deff.q.value = t;
        addhist(t);
     }
+
     return false;
   }
   if (window.event.keyCode == 3)
@@ -2930,7 +2942,7 @@ var QUICK_SEARCH =
 {
   en: "Quick Search",
   es: "Búsqueda Rápida",
-  fr: "Recherche rapide",
+  fr: "Recherche Rapide",
   no: "Hurtigsøk",
   nl: "Snelzoek",
   dk: "Hurtig Søgning",
