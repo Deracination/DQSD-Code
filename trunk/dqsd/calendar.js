@@ -11,6 +11,9 @@
  * modified by Monty Scroggins  31/03/2002
  *  - added support for a local events file with referenced by
  *    a the var 'localeventsfileurl'
+ * modified by Neel Doshi 31/03/2002
+ *  - configured the calendar to use the stylesheet
+ *  - fixed the bug where "today" was not being highlighted if today is Sunday
  * $Revision$ 
  * $Date$
  *
@@ -19,7 +22,9 @@
  *  - add ability to input events directly from search box
  */
 
+
 var ents = null;
+var lents = null;
 
 function loadeventslist()
 {
@@ -96,9 +101,6 @@ function evcal(dat)
   openNamedSearchWindow("http://www.evite.com/welcome?date=" + (dobj.getMonth() + 1) + "%2F" + dobj.getDate() + "%2F" + yy, "dqsdcal");
 }
 
-
-
-
 //vars used by the calendar script
 var DAYS_OF_WEEK = 7;    // "constant" for number of days in a week
 var DAYS_OF_MONTH = 31;    // "constant" for number of days in a month
@@ -117,15 +119,12 @@ function showcal()
   {
     popcal = window.createPopup();
     popcal.document.body.innerHTML = buildcal();
-    popcal.document.body.style.border="outset 2px";
-    popcal.document.body.style.background=calbackground;
-    popcal.document.body.style.color=caltextcolor;
+    popcal.document.body.className="cal";
   }
   else if (Today.getDate() != (new Date()).getDate())
   {
     popcal.document.body.innerHTML = buildcal();
   }
-
   popcal.show(document.body.clientWidth - calwidth, -calheight, calwidth, calheight, document.body);
   return false;
 }
@@ -156,11 +155,15 @@ function opencal(d)
   }
 }
 
-function buildcalheader()
+function buildcalhtmlhead()
 {
-  return '<CENTER>' + getMonthName(Calendar.getMonth()+1)  + ' ' + Calendar.getFullYear() + '</CENTER>';
+	return '<table class=cal width=100% height=100% cellpadding=0 cellspacing=0 border=0><tr><td><style>' + convertStylesToInline() + '</style>';
 }
 
+function buildcalheader()
+{
+  return getMonthName(Calendar.getMonth()+1)  + ' ' + Calendar.getFullYear();
+}
 
 function buildcal()
 {
@@ -177,134 +180,87 @@ function buildcal()
 
   Calendar.setDate(1);    // Start the calendar day at '1'
 
+  var TR_start = '<tr>';
+  var TR_end = '</tr>';
+  var day_start = '<td width=14.2857% class=caldow>';
+  var day_end = '</td>';
 
-  var TR_start = '<TR style=font:menu>';
-  var TR_end = '</TR>';
-  var day_start = '<TD width=14.2857% style="' + caldowstyle + '"><CENTER>';
-  var day_end = '</CENTER></TD>';
   function eventday_start(d, ttl)
   {
-    return '<TD style="cursor:default;background-color:' + caleventdaybackground + ';' + caleventdaystyle + '" ' +
-           (defaultcal ? ' onmouseover=this.style.background="' + calhighbackground +
-               '";this.style.color="' + calhightext +
-               '"; onmouseout=this.style.background="' + caleventdaybackground +
-               '";this.style.color="' + caleventdaytext +
-               '" onmouseup=parent.opencal(' + d + ');' +
-               'this.style.background="' + caleventdaybackground +
-               '";this.style.color="' + caleventdaytext + '"' : '') +
-               ' title="' + ttl + '"' +
-           '><CENTER>';
+    return '<td class=caleventday' +
+			(defaultcal ? ' onmouseover=this.className="caleventdayhigh" onmouseout=this.className="caleventday" onmouseup=this.className="caleventday";parent.opencal(' + d + ');' : ' ') +
+			' title="' + ttl + '">';
   }
-  var eventday_end   = '</CENTER></TD>';
+  var eventday_end   = '</td>';
+
   function todayevent_start(d, ttl)
   {
-    return '<TD style="cursor:default;background-color:' + caltodayeventbackground + ';' + caltodayeventstyle + '" ' +
-           (defaultcal ? ' onmouseover=this.style.background="' + calhighbackground +
-               '";this.style.color="' + calhightext +
-               '"; onmouseout=this.style.background="' + caltodayeventbackground +
-               '";this.style.color="' + caltodayeventtext +
-               '" onmouseup=parent.opencal(' + d + ');' +
-               'this.style.background="' + caltodayeventbackground +
-               '";this.style.color="' + caltodayeventtext + '"' : '') +
-               ' title="' + ttl + '"' +
-           '><CENTER>';
+    return '<td class=caltodayevent' +
+			(defaultcal ? ' onmouseover=this.className="caltodayeventhigh" onmouseout=this.className="caltodayevent" onmouseup=this.className="caltodayevent";parent.opencal(' + d + ');' : ' ') +
+			' title="' + ttl + '"' + '>';
   }
-  var todayevent_end   = '</CENTER></TD>';
+  var todayevent_end   = '</td>';
+
   function today_start(d)
   {
-    return '<TD style="cursor:default;background-color:' + caltodaybackground + ';' + caltodaystyle + '" ' +
-           (defaultcal ? ' onmouseover=this.style.background="' + calhighbackground +
-               '";this.style.color="' + calhightext +
-               '"; onmouseout=this.style.background="' + caltodaybackground +
-               '";this.style.color="' + caltodaytext +
-               '" onmouseup=parent.opencal(' + d + ');' +
-               'this.style.background="' + caltodaybackground +
-               '";this.style.color="' + caltodaytext + '"' : '') +
-           '><CENTER>';
+    return '<td class=caltoday' +
+    		(defaultcal ? ' onmouseover=this.className="caltodayhigh" onmouseout=this.className="caltoday" onmouseup=this.className="caltoday";parent.opencal(' + d + ');' : ' ') + '>';
   }
-  var today_end   = '</CENTER></TD>';
+  var today_end   = '</td>';
+
   function gray_start(d)
   {
-     return '<TD style="cursor:default;background-color:' + calgraybackground + ';' + 'color:' + calgraytext + ';' + caldaystyle + '" ' +
-           (defaultcal ? ' onmouseover=this.style.background="' + calhighbackground +
-               '";this.style.color="' + calhightext +
-               '"; onmouseout=this.style.background="' + calgraybackground +
-               '";this.style.color="' + calgraytext +
-               '" onmouseup=parent.opencal(' + d + ');'  +
-               'this.style.background="' + calbackground +
-               '";this.style.color="' + calgraytext + '"' : '') +
-           '><CENTER>';
+     return '<td class=calgray' +
+     		(defaultcal ? ' onmouseover=this.className="calgrayhigh" onmouseout=this.className="calgray" onmouseup=this.className="calgray";parent.opencal(' + d + ');' : ' ') + '>';
   }
-  var gray_end   = '</CENTER></TD>';
+  var gray_end   = '</td>';
+
   function TD_start(d)
   {
-    return '<TD style="cursor:default;' + caldaystyle + '" ' +
-           (defaultcal ? ' onmouseover=this.style.background="' + calhighbackground +
-               '";this.style.color="' + calhightext +
-               '"; onmouseout=this.style.background="' + calbackground +
-               '";this.style.color="' + caltextcolor +
-               '" onmouseup=parent.opencal(' + d + ');' +
-               'this.style.background="' + calbackground +
-               '";this.style.color="' + caltextcolor + '"' : '') +
-           '><CENTER>';
+    return '<td class=calday' +
+    		(defaultcal ? ' onmouseover=this.className="caldayhigh" onmouseout=this.className="calday" onmouseup=this.className="calday";parent.opencal(' + d + ');' : ' ') + '>';
   }
-  var TD_end = '</CENTER></TD>';
+  var TD_end = '</td>';
 
-  cal = '<TABLE WIDTH=100% HEIGHT=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR style=font:menu>';
-  cal += '<TD COLSPAN=7><TABLE WIDTH=100% HEIGHT=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR style=font:menu>';
-  cal += '<TD><TABLE ALIGN=LEFT HEIGHT=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR style=font:menu>';
-  cal += '<TD WIDTH=0 title="' + local(PREV_YEAR) +
-         '" style="cursor:hand;' + calnavstyle +
-         '" onmouseup="parent.movecal(-12);return false;" ' +
-         'onmouseover=this.style.background="' + calhighbackground +
-         '";this.style.color="' + calhightext +
-         '" onmouseout=this.style.background="' + calbackground +
-         '";this.style.color="' + caltextcolor +
-         '"><CENTER>&nbsp;&lt;&nbsp;</CENTER></TD>';
-  cal += '<TD WIDTH=0 title="' + local(PREV_MONTH) +
-         '" style="cursor:hand;' + calnavstyle +
-         '" onmouseup="parent.movecal(-1);" ' +
-         'onmouseover=this.style.background="' + calhighbackground +
-         '";this.style.color="' + calhightext +
-         '" onmouseout=this.style.background="' + calbackground +
-         '";this.style.color="' + caltextcolor +
-         '"><CENTER>&nbsp;&lt;&nbsp;</CENTER></TD></TR></TABLE></TD>';
-  if (weekday <0)
+  cal = buildcalhtmlhead();
+
+  cal += '<table width=100% height=100% border=0 cellspacing=0 cellpadding=0><tr>';
+  cal += '<td colspan=7><table width=100% height=100% border=0 cellspacing=0 cellpadding=0><tr>';
+  cal += '<td><table align=left height=100% border=0 cellspacing=0 cellpadding=0><tr>';
+  cal += '<td class=calnavyear width=0 title="' + local(PREV_YEAR) + '" ' +
+         ' onmouseup="parent.movecal(-12);return false;" ' +
+         ' onmouseover=this.className="calnavyearhigh" ' +
+         ' onmouseout=this.className="calnavyear" >&nbsp;&laquo;&nbsp;</td>';
+  cal += '<td class=calnavmonth width=0 title="' + local(PREV_MONTH) + '" ' +
+         ' onmouseup="parent.movecal(-1);return false;" ' +
+         ' onmouseover=this.className="calnavmonthhigh" ' +
+         ' onmouseout=this.className="calnavmonth" >&nbsp;&laquo;&nbsp;</td></tr></table></td>';
+
+  if (weekday < 0)
   {
-    cal += '<TD ID=calhead title="' + local(GO_TO_TODAY) +
-           '" style="cursor:hand;' + calmonthstyle +
-           '" onmouseup="parent.Calendar=new Date();parent.movecal(0);" ' +
-           'onmouseover=this.style.background="' + calhighbackground +
-           '";this.style.color="' + calhightext +
-           '" onmouseout=this.style.background="' + calbackground +
-           '";this.style.color="' + caltextcolor +
-           '"><CENTER>';
+    cal += '<td id=calhead class=calmonth title="' + local(GO_TO_TODAY) + '" ' +
+			' onmouseup="parent.Calendar=new Date();parent.movecal(0);" ' +
+			' onmouseover=this.className="calmonthhigh" ' +
+			' onmouseout=this.className="calmonth" >';
   }
   else
   {
-    cal += '<TD ID=calhead COLSPAN="' + (DAYS_OF_WEEK - 2) +
-           '" style="' + calmonthstyle + '">';
+    cal += '<td id=calhead class=calmonth colspan=' + (DAYS_OF_WEEK - 2) + '>';
   }
+
   cal += buildcalheader();
-  cal += '</TD>';
-  cal += '<TD><TABLE ALIGN=RIGHT HEIGHT=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR style=font:menu>';
-  cal += '<TD WIDTH=0 title="' + local(NEXT_MONTH) +
-         '" style="cursor:hand;' + calnavstyle +
-         '" onmouseup="parent.movecal(+1);" ' +
-         'onmouseover=this.style.background="' + calhighbackground +
-         '";this.style.color="' + calhightext +
-         '" onmouseout=this.style.background="' + calbackground +
-         '";this.style.color="' + caltextcolor +
-         '"><CENTER>&nbsp;&gt;&nbsp;</CENTER></TD>';
-  cal += '<TD WIDTH=0 title="' + local(NEXT_YEAR) +
-         '" style="cursor:hand;' + calnavstyle +
-         '" onmouseup="parent.movecal(+12);" ' +
-         'onmouseover=this.style.background="' + calhighbackground +
-         '";this.style.color="' + calhightext +
-         '" onmouseout=this.style.background="' + calbackground +
-         '";this.style.color="' + caltextcolor +
-         '"><CENTER>&nbsp;&gt;&nbsp;</CENTER></TD></TR></TABLE>';
-  cal += '</TD></TR></TABLE>';
+
+  cal += '</td>';
+  cal += '<td><table align=RIGHT height=100% border=0 cellspacing=0 cellpadding=0><tr>';
+  cal += '<td class=calnavmonth width=0 title="' + local(NEXT_MONTH) + '" ' +
+         ' onmouseup="parent.movecal(+1);return false;" ' +
+         ' onmouseover=this.className="calnavmonthhigh" ' +
+         ' onmouseout=this.className="calnavmonth" >&nbsp;&raquo;&nbsp;</td>';
+  cal += '<td class=calnavyear width=0 title="' + local(NEXT_YEAR) + '" ' +
+         ' onmouseup="parent.movecal(+12);return false;" ' +
+         ' onmouseover=this.className="calnavyearhigh" ' +
+         ' onmouseout=this.className="calnavyear" >&nbsp;&raquo;&nbsp;</td></tr></table></td>';
+  cal += '</td></tr></table>';
   cal += TR_end + TR_start;
 
   //printing day labels
@@ -341,9 +297,10 @@ function buildcal()
       ent = ents.selectSingleNode(querystr);
     if (lents)
       lent = lents.selectSingleNode(querystr);
-      
+
+
     var highlight = false;
-    if( weekday>0 && Today.getDate()==month_day)
+    if( weekday>=0 && Today.getDate()==month_day)
       highlight = true;
 
     // highlight appropriately
@@ -372,7 +329,7 @@ function buildcal()
       else
         if (highlight)
           cal += today_end;
-        else 
+        else
           if (ent)
             cal += eventday_end;
           else
@@ -388,8 +345,8 @@ function buildcal()
 
   //reset back the calendar's month
   Calendar.setMonth(Calendar.getMonth()-1);
-
-  cal += '</TABLE>';
+  cal += '</table>'
+  cal += '</td></tr></table>';
 
   //return the html string
   return cal;

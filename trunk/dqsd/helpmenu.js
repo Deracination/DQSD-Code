@@ -6,35 +6,36 @@ function mi(name, func, sym)
   qsym = sym;
   if (sym == "\\")
     qsym = "\\\\";
-
-  return "<tr " +
-    "onmouseover=\"this.style.background='highlight'; this.style.color='highlighttext';\"" +
-    "onmouseout=\"this.style.background='menu'; this.style.color='menutext';\"" +
-    "onmouseup=\"this.style.background='menu'; this.style.color='menutext';parent.mnu('" + func + "', &quot;" + qsym + "&quot;);\"" +
-    "style=\"" + actualmenustyle + "\">" +
-    "<td nowrap style=padding-left:20px;>" +
+  return "<tr class=menuRow " +
+    " onmouseover=\"this.className='menuRowHigh';\"" +
+    " onmouseout=\"this.className='menuRow';\"" +
+    " onmouseup=\"this.className='menuRow';parent.mnu('" + func + "', &quot;" + qsym + "&quot;);\"" +
+     " style=\"" + actualmenustyle + "\">" +
+    "<td nowrap class=menuCommands>" +
     name +
-    "</td><td nowrap style=padding-left:10px;padding-right:10px;>" + sym + "</td></tr>";
+    "</td><td nowrap class=menuAlias>" + sym + "</td></tr>";
 }
 
 function dv()
 {
   if (shrink) return "";
-  popheight += 10;
-  return "<tr><td colspan=2 style='height:10px;padding-left:2px;padding-right:2px'><hr style='position:absolute;top=" + (popheight-10) + "px;'></td></tr>";
+  popheight += 16;
+  return "<tr><td colspan=2 class=menuSeparator><hr class=menuHR></td></tr>";
 }
 
 function buildpop()
 {
   pophelp = window.createPopup();
-  popheight = 4;
+  popheight = 5;
   popwidth = 240;
   shrink = (window.screen.height <= 700);
-  var menucode = "<table cellpadding=0 cellspacing=0 width=100%><tr><td valign=top>" +
+  var menucode = "<table cellpadding=0 cellspacing=0 width=100%><tr><td valign=top><style>" + convertStylesToInline() + "</style>" +
       "<table cellpadding=0 cellspacing=0 width=100%>" +
       mi("About This Toolbar", "about", "");
   var i;
   var div = false;
+
+  //for (i = 0; i < menuarray.length; i++)
   for (i = menuarray.length - 1; i >= 0; i--)
   {
     var entry = menuarray[i];
@@ -94,17 +95,9 @@ function showpop()
   }
   else
   {
-    var rows = pophelp.document.all.tags("TR");
-    var i;
-    for (i = 0; i < rows.length; i++)
-    {
-       rows[i].style.background="menu";
-       rows[i].style.color="menutext";
-    }
-    
     pophelp.show((buttonalign == "left" ? 0 : document.body.clientWidth - popwidth),
                  -popheight, popwidth, popheight, document.body);
-                 
+
     window.setTimeout("queuefocus();", 0);
     watchpopup("pophelp");
     return false;

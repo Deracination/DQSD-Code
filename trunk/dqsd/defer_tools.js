@@ -46,22 +46,34 @@ function submitForm(form)
     // 1=same window always; 2=new window for each search type
     form.target = (reuseBrowserWindowMode == 1 ? DQSD_BROWSER_WINDOW_NAME : (DQSD_BROWSER_WINDOW_NAME + '_' + form.name));
   }
-    
+
   if (useExternalBrowser && DQSDLauncher)
     DQSDLauncher.SubmitForm(form);
   else
     form.submit();
 }
 
+// Used by the calendar and the menu (or anything that uses IE window.createPopup method), which cannot call
+// the stylesheet directly.
+function convertStylesToInline()
+{
+	var stylestring = new String();
+	for (var i = 0; i < document.styleSheets[0].rules.length; i++)
+	{
+		stylestring += document.styleSheets[0].rules[i].selectorText + ' {' + document.styleSheets[0].rules[i].style.cssText + '}'
+	}
+	return(stylestring);
+}
+
 function protocolHandled(url)
 {
   if (!ensureLauncher())
     return true; // what else can we do except assume the protocol is handled?
-  
+
   var results = url.match(/(\w+):/);
   if (!results)
     return false; // not a valid url
-    
+
   try
   {
     var handler = DQSDLauncher.GetProtocolHandler(results[1]);
@@ -74,41 +86,91 @@ function protocolHandled(url)
   return true;
 }
 
-// Returns an object with two properties:
-//   q:        string with switches removed
-//   switches: array of objects with these two properties:
-//     name:   name of switch, expanded if it matches the prefix
-//             of a switch in the list of expectedSwitches arg
-//     value:  value of switch.  I.e., /switch:value
-function parseArgs(
-  q, /* string to be parsed */
-  expectedSwitches /* list of expected switches, used to expand abbreviated switches */)
+// isURL
+//
+// Takes a string as a parameter and determines if it is a http URL (using either http or https protocol)
+// If the string is not a URL, then it attempts to detect obvious dns names, and if so, it prepends http://
+// to the string.  In either of the above to cases, the final string is returned, otherwise, 'false' is
+// returned.
+function isURL(t)
 {
-  var switches = [];
-  var tmpq = q;
-  
-  // Grab each token that looks like a switch (/\w+)
-  var reSwitch = /\/((\w+)(?::?(\w*)))\s*/;
-  var res = null;
-  expectedSwitches = ',' + expectedSwitches + ',';
-  while (res = tmpq.match(reSwitch))
-  {
-    // Expand switch if it's in the list of expected switches...
-    var fullswitch = expectedSwitches.match(new RegExp(',\\s*('+res[2]+'\\w*)\\s*,', 'i'));
-  	if (fullswitch && fullswitch[1])
-  	  switches.push( {name:fullswitch[1].toLowerCase(), value:res[3]} );
-    else
-    {
-      var o = {name:res[2].toLowerCase(), value:res[3]};
-      switches.push( o ); // ...otherwise just return the switch that was found
-    }
-      
-    // Drop switch we just found
-    tmpq = tmpq.replace(reSwitch, '');
-  }
-  
-  // Trim the remaining string which now contains the string without switches
-  q = tmpq.replace(/^\s*/, '').replace(/\s*$/, '');
+	// detect strings that look like URLs or filenames
+	prot = new RegExp("^(http://|https://|ftp://)([\\-a-z0-9]+\\.)*[\\-a-z0-9]+" +
+					"|^[a-z]:($|\\\\)" +
+					"|^\\\\\\\\[a-z0-9]+($|\\\\($|[a-z0-9]+($|\\\\)))", "i");
+	if (prot.exec(t))
+		return t;
 
-  return { q:q, switches:switches };
+	// detect strings that look like DNS names
+	dns = new RegExp("^www\.([\\-a-z0-9]+\\.)+[\\-a-z0-9]+(/\\S*)?$" +
+					"|^([\\-a-z0-9]+\\.)+(com|net|org|edu|gov|mil|[a-z]{2})(/\\S*)?$", "i");
+	if (dns.exec(t))
+	{
+		t = "http://" + t;
+		return t;
+	}
+	return false;
+}
+
+// parseArgs
+//
+// Used to parse standard switches (/foo or /foo:bar).  Takes the following parameters:
+//		q - string from the search function
+//		expectedSwitches - list or array of the expected switch values
+//		expandSwitches - optional parameter used to determine if the switch shortcuts should be expanded (i.e. /f becomes /foo)
+// Function returns an object with three properties
+//		q - the input string with the switches removed
+//		switches - array of objects with these two properties:
+//			     name:   expanded name of the matched switch (i.e. foo as in /foo:bar)
+//     			 value:  value of switch (i.e. bar as in /foo:bar)
+//		switch_val - associative array with the switch name as the key with the switch value as the value. (i.e. switch_val["foo"] = "bar" as in /foo:bar)
+//
+function parseArgs(q, expectedSwitches, expandSwitches)
+{
+	// In case the caller does not pass in a value
+	if (expandSwitches == undefined)
+		expandSwitches = 1;
+
+	// In case the caller uses a comma-space delimited string
+	if (expectedSwitches[0] == undefined)
+		expectedSwitches = expectedSwitches.split(', ');
+
+	var switches = [];
+	var switch_val = [];
+
+	// Split the query to allow for easy looping.
+	var args_array = q.split(' ');
+
+	// Regular expression that defines switches
+	var re_switch = /\/((\w+)(?::?(\w*)))\s*/;
+	var re_res_args;
+	var re_res_switch;
+
+	// Loop through the q array and see if any of the q's look like switches
+	for (var i = 0; i < args_array.length; i++)
+	{
+		// If a q looks like a switch, loop through the switch array and see if any of the switches match.
+		re_res_args = args_array[i].match(re_switch);
+		if (re_res_args)
+		{
+			for (var j = 0; j < expectedSwitches.length && !re_res_switch; j++)
+			{
+				if (expandSwitches)
+					re_res_switch = expectedSwitches[j].match(new RegExp('^(' + re_res_args[2] + ')', 'i'));
+				else
+					re_res_switch = expectedSwitches[j].match(new RegExp('^(' + re_res_args[2] + ')$', 'i'));
+				//  If there is a match, adjust the args_array, and save the values.
+				if (re_res_switch)
+				{
+					switch_val[expectedSwitches[j]] = re_res_args[3];
+					switches.push( {name:expectedSwitches[j].toLowerCase(), value:re_res_args[3]} );
+					args_array.splice(i, 1);
+					i--;
+				}
+			}
+			re_res_switch = "";
+		}
+	}
+	q = args_array.join(' ');
+	return { q:q, switches:switches, switch_val:switch_val };
 }
