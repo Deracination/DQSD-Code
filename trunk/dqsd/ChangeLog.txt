@@ -15,6 +15,7 @@ New Searches
 Modified Searches
 
 * setiq - yet another cosmetic change (use of <div> rather than <a>)
+* yg - Added /number switch for jumping directly to a message number in the archive
 
 Enhancements
 
