@@ -1,0 +1,41 @@
+// DQSDTools.idl : IDL source for DQSDTools.dll
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (DQSDTools.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+	[
+		object,
+		uuid(1A93D4C6-A0B1-41EC-8153-FD7F5500CEA0),
+		dual,
+		helpstring("DQSD Launcher Interface"),
+		pointer_default(unique)
+	]
+	interface ILauncher : IDispatch
+	{
+		[id(1), helpstring("Submits form using default browser. Pass a FORM object.")] HRESULT SubmitForm([in] VARIANT idForm);
+		[id(2), helpstring("Opens document in associated application. Pass a document URI.")] HRESULT OpenDocument([in] BSTR strDoc);
+		[propget, id(3), helpstring("Path of default browser executable")] HRESULT pathDefaultBrowser([out, retval] BSTR *pVal);
+	};
+
+[
+	uuid(4323AAF6-488C-4921-A605-6E22E13332E4),
+	version(1.0),
+	helpstring("Dave's Quick Search Deskbar Tools 1.0 Library")
+]
+library DQSDTOOLSLib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+	[
+		uuid(FA8211C1-F85B-4CCD-8C51-1587A37E566A),
+		helpstring("DQSD Launcher Object")
+	]
+	coclass Launcher
+	{
+		[default] interface ILauncher;
+	};
+};
