@@ -13,8 +13,53 @@
     </faq>
     <faq>
       <question>Where can I get the latest version of DQSD?</question>
-      <answer>You can the latest released version at <a href="http://www.dqsd.net">http://www.dqsd.net</a>
-      and the latest beta version at <a href="http://sourceforge.net/projects/dqsd">http://sourceforge.net/projects/dqsd</a>.</answer>
+      <answer>You can the latest released version at <link href="http://www.dqsd.net">http://www.dqsd.net</link>
+      and the latest beta version at <link href="http://sourceforge.net/projects/dqsd">http://sourceforge.net/projects/dqsd</link>.</answer>
+    </faq>
+    <faq>
+      <question>I've made some preference or style setting changes. How do I apply them?</question>
+      <answer>You can reload the DQSD toolbar by typing ! in the search window and pressing the ENTER key.</answer>
+    </faq>
+    <faq>
+      <question>I use Windows XP. When I open DQSD I only see the word "Search" on my taskbar. Why?</question>
+      <answer>XP has a "lock taskbar" feature set by default. Right click on your taskbar and uncheck Lock taskbar. Then you can drag DQSD all you need and you can disable showing the name (search), etc... When you get it like you want it, you can lock the taskbar again.</answer>
+    </faq>
+    <faq>
+      <question>What are the key bindings used by DQSD?</question>
+      <answer>
+        <ul>
+          <li>
+          Ctrl-Enter - Adds www. prefix and/or .com suffix to string if necessary and
+          launches URL. Like IE key-binding (only better since the prefix/suffix are only
+          add if needed).
+          </li>
+          <li>
+          Shift-Enter - Always opens a new window for the search regardless of the
+          reuseWindowMode setting. This works only when IE is the default browser.
+          </li>
+          <li>
+          Ctrl-B / F8 - Search the search history for the current text. (user
+          configurable in localprefs.js)
+          </li>
+          <li>
+          Shift-Ctrl-B / Shift-F8 - Search forward through the history for the current text.
+          (user configurable in localprefs.js)
+          </li>
+          <li>
+          Win-S - Make the search bar active (i.e., make it have the current focus).
+          (user configurable in localprefs.js)
+          </li>
+          <li>
+          F1 - Display menu.
+          </li>
+          <li>
+          Ctrl-P / Up - Display previous search in history.
+          </li>
+          <li>
+            Ctrl-N / Down - Display next search in history.
+          </li>
+        </ul>
+      </answer>
     </faq>
   </category>
 

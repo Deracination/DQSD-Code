@@ -3,6 +3,14 @@ BODY, P, TD, DIV {
 	 font-size: x-small;
 }
 
+A, A:Visited {
+	color: #0000ff;
+}
+
+A:Visited:hover {
+	background: #EEEEEE;
+}
+
 .category {
 	font-weight: bold;
 	font-size: 110%;
@@ -11,18 +19,19 @@ BODY, P, TD, DIV {
 }
 
 .question {
-	font-weight: bold;
 	margin-left: 2em;
 	margin-top: 0.2em;
+	cursor: hand;
 }
 
 .answer {
 	font-weight: normal;
-/*	text-indent : 5em; */
-	margin-left: 3em;
+	margin-left: 5em;
+	margin-bottom: 1em;
+	color: #cc3300;
 }
 
-.toggle {
+A:Visited.toggle {
 	width: 1em;
 	text-align: center;
 	text-decoration: none;
