@@ -38,8 +38,8 @@ import "ocidl.idl";
 	interface IMenuBuilder : IDispatch
 	{
 		[id(1), helpstring("method Display")] HRESULT Display( [out,retval] VARIANT* pvarSelection );
-		[id(2), helpstring("method AppendMenuItem")] HRESULT AppendMenuItem([in] BSTR bstrItem, [in] BSTR bstrKey, [in] long hmenu);
-		[id(3), helpstring("method AppendSubMenu")] HRESULT AppendSubMenu([in] BSTR bstrName, [out,retval] long* phmenu);
+		[id(2), helpstring("method AppendMenuItem")] HRESULT AppendMenuItem([in] BSTR bstrItem, [in] BSTR bstrKey, [in,optional] VARIANT* hmenu);
+		[id(3), helpstring("method AppendSubMenu")] HRESULT AppendSubMenu([in] BSTR bstrName, [in,optional] VARIANT* hParentMenu, [out,retval] long* phmenu);
 		[id(4), helpstring("method AppendSeparator")] HRESULT AppendSeparator([in] long hmenu);
 		[propget, id(5), helpstring("property HorizontalAlignment")] HRESULT HorizontalAlignment([out, retval] short *pVal);
 		[propput, id(5), helpstring("property HorizontalAlignment")] HRESULT HorizontalAlignment([in] short newVal);
