@@ -243,6 +243,7 @@ function getDefaultLanguage()
 
 function initGlobals()
 {
+  init = false;
   DQSDLauncher = null;
   triedToCreateLauncher = false;
 
@@ -258,9 +259,18 @@ function initGlobals()
   {
     if (ensureLauncher())
     {
-      var browserPath = DQSDLauncher.pathDefaultBrowser
-      if (launchmode != 0 && browserPath.toLowerCase().indexOf("iexplore.exe") > 0)
-        useExternalBrowser = false;
+      var browserPath;
+      try
+      {
+        browserPath = DQSDLauncher.pathDefaultBrowser;
+        if (launchmode != 0 && browserPath.toLowerCase().indexOf("iexplore.exe") > 0)
+          useExternalBrowser = false;
+      }
+      catch(e)
+      {
+		// Just ignore errors here, which seem to be caused by bad external browser setup
+		// (Happens on some 0.9x builds of FireFox)
+      }
     }
     else // Gracefully ignore problems creating the control.
     {
