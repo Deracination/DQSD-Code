@@ -294,10 +294,10 @@ function def()
     if (direct(t)) return false;
 
     // detect strings that look like phone numbers
-    if (phoneno(t)) return false;
+    if ((typeof autodetect_phone) == 'function' && autodetect_phone(t)) return false;
 
     // detect strings that look like currency conversions
-    if (currency(t)) return false;
+    if ((typeof autodetect_currency) == 'function' && autodetect_currency(t)) return false;
 
     // detect math expressions
     if (mathexp(t)) return false;
@@ -374,9 +374,9 @@ function shortcut(t)
   // no match, no dice
   if (!search)
     return false;
-    
+
   // execute search
-  performsearch(search, term);  
+  performsearch(search, term);
   return true;
 }
 
@@ -386,7 +386,7 @@ function performsearch( fname, term )
   if( !fname ) fname = defaultsearch;                         // if the specified search does not exist (ie. no default search), set to defaultsearch
   term = term.replace(/^\s*/, '').replace(/\s*$/, '');        // strip out leading and trailing spaces
 
-  if (searches[fname])  
+  if (searches[fname])
     searches[fname].fun(term);
   else
     eval(fname + "()");
@@ -477,7 +477,7 @@ function okp()
     def();
     return false;
   }
-  
+
   // ctrl-enter just like IE's address bar - Joel's suggestion
   if (window.event.keyCode == 10)
   {
@@ -540,7 +540,7 @@ function okp()
     prevnext(-1);
   else
     prevnext(1);
-    
+
   return false;
 }
 
@@ -654,7 +654,7 @@ function dodragover()
 function dodrop()
 {
   if (selfdrag) return true;
-  
+
   if (init)
     init = false;
   stopbanner();
