@@ -6,6 +6,7 @@ New Searches
 * cp - search for CodeProject, a code sharing site (from Andreas Saurwein)
 * vir - search http://www.virusbtn.com/ for virus information (from John Bairen)
 * infosec - search http://www.infosecuritymag.com/ for security information (from John Bairen)
+* pg - Project Gutenberg/Public Domain book (pg) search (from Thad Kerosky)
 
 Modified Searches
 
