@@ -1,14 +1,4 @@
 <search function="gendex">
-  <COMMENT>
-
-    This search file was initially created by Dave's Quick Search Deskbar
-    Search Wizard version 0.5 (beta) on 08/23/02 at 20:57:35
-
-    Even though this XML search will probably load and is a healthy start
-    toward a completed search, please be aware that this search will probably
-    not work as is and will require some human inspection and modification.
-
-  </COMMENT>
   <name>Gendex Search</name>
   <category>Genealogy</category>
   <contributor>Brent Beardsley</contributor>
@@ -21,9 +11,6 @@
         method="get"
         action="http://www.gendex.com:8080/display">
     <input type="hidden" name="page" value="surnames" />
-
-    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
-
     <input type="hidden" name="prefix" value="" />
   </form>
   <script src="addons/genealogy/genealogy_lib.js"></script>
@@ -33,20 +20,7 @@
       if( nullArgs("gendex", q) )
         return;
 
-      if( q == "" )
-      {
-        openSearchWindow("http://www.gendex.com:");
-        return;
-      }
-
-      // FORM variables for gendexf
-      //document.gendexf.page.value = "";
-
-      // The wizard assigned the search string to this form field value because
-      // this field was the active element when the search file was generated.
-      // Change this to args.q if the search string is parsed with parseArgs.
       document.gendexf.prefix.value = genealogy_parse_surname(q);
-
       submitForm(gendexf);
     }
   ]]></script>
