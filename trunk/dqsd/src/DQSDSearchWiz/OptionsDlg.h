@@ -42,6 +42,8 @@ END_MSG_MAP()
 
 		CWindow( GetDlgItem( IDC_EditXML ) ).SendMessage( BM_SETCHECK, m_options.EditResults() ? BST_CHECKED : BST_UNCHECKED );
 		CWindow( GetDlgItem( IDC_Editor ) ).SetWindowText( m_options.Editor().c_str() );
+		CWindow( GetDlgItem( IDC_CSSbackgroundColor ) ).SetWindowText( m_options.FormBackgroundColor().c_str() );
+		CWindow( GetDlgItem( IDC_CSSborder ) ).SetWindowText( m_options.FormBorder().c_str() );
 
 		OnClickedEditXML(0, 0, 0, bHandled );
 
@@ -56,10 +58,19 @@ END_MSG_MAP()
 		USES_CONVERSION;
 
 		m_options.EditResults( CWindow( GetDlgItem( IDC_EditXML ) ).SendMessage( BM_GETCHECK, 0, 0 ) == BST_CHECKED );
-		BSTR bstrEditor = NULL;
-		CWindow( GetDlgItem( IDC_Editor ) ).GetWindowText( &bstrEditor );
-		m_options.Editor( W2T( bstrEditor ) );
-		::SysFreeString( bstrEditor );
+		
+		BSTR bstrValue = NULL;
+		CWindow( GetDlgItem( IDC_Editor ) ).GetWindowText( &bstrValue );
+		m_options.Editor( W2T( bstrValue ) );
+		::SysFreeString( bstrValue );
+
+		CWindow( GetDlgItem( IDC_CSSbackgroundColor ) ).GetWindowText( &bstrValue );
+		m_options.FormBackgroundColor( W2T( bstrValue ) );
+		::SysFreeString( bstrValue );
+		
+		CWindow( GetDlgItem( IDC_CSSborder ) ).GetWindowText( &bstrValue );
+		m_options.FormBorder( W2T( bstrValue ) );
+		::SysFreeString( bstrValue );
 
 		m_options.IncludeComments( CWindow( GetDlgItem( IDC_IncludeComments ) ).SendMessage( BM_GETCHECK, 0, 0 ) == BST_CHECKED );
 		m_options.WarnNotActive( CWindow( GetDlgItem( IDC_WarnNotActive ) ).SendMessage( BM_GETCHECK, 0, 0 ) == BST_CHECKED );

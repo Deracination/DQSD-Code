@@ -250,19 +250,38 @@ LRESULT CDQSDWizardDlg::OnFormListItemChanged(int idCtrl, LPNMHDR pNMHDR, BOOL& 
 
 		CWindow ctlFormList = GetDlgItem( IDC_FormList2 );
 
-		if ( pNMListView->uNewState == 0 )
-		{
-			LVITEM lvi;
-			memset( &lvi, 0, sizeof lvi );
-			lvi.mask = LVIF_PARAM;
-			lvi.iItem = pNMListView->iItem;
-			ctlFormList.SendMessage( LVM_GETITEM, pNMListView->iItem, (LPARAM)&lvi );
-			CComPtr< IHTMLElement >* pspForm = reinterpret_cast<CComPtr< IHTMLElement >*>(lvi.lParam);
+		LVITEM lvi;
+		memset( &lvi, 0, sizeof lvi );
+		lvi.mask = LVIF_PARAM;
+		lvi.iItem = pNMListView->iItem;
+		ctlFormList.SendMessage( LVM_GETITEM, pNMListView->iItem, (LPARAM)&lvi );
+		CComPtr< IHTMLElement >* pspForm = reinterpret_cast<CComPtr< IHTMLElement >*>(lvi.lParam);
 
+		if ( pNMListView->uNewState == 3 )
+		{
+			m_spSelectedStyle = NULL;
+			(*pspForm)->get_style( &m_spSelectedStyle );
+
+			CComBSTR bstrStyleText;
+			m_spSelectedStyle->get_cssText( &bstrStyleText );
+			m_mapUnselectedStyle[ pNMListView->iItem ] = bstrStyleText;
+
+			COptions options;
+			options.Load();
+
+			m_spSelectedStyle->put_backgroundColor( _variant_t( _bstr_t( options.FormBackgroundColor().c_str() ) ) );
+			m_spSelectedStyle->put_border( _bstr_t( options.FormBorder().c_str() ) );
+		}
+		else if ( pNMListView->uNewState == 0 )
+		{
 			CComPtr< IHTMLStyle > spStyle;
 			(*pspForm)->get_style( &spStyle );
 
 			spStyle->put_cssText( m_mapUnselectedStyle[ pNMListView->iItem ] );
+			return 1;
+		}
+		else
+		{
 			return 1;
 		}
 
@@ -292,15 +311,6 @@ LRESULT CDQSDWizardDlg::OnFormListItemChanged(int idCtrl, LPNMHDR pNMHDR, BOOL& 
 						::SysFreeString( bstr );
 					}
 
-					CComPtr< IHTMLStyle > spStyle;
-					(*pspForm)->get_style( &spStyle );
-
-					CComBSTR bstrStyleText;
-					spStyle->get_cssText( &bstrStyleText );
-					m_mapUnselectedStyle[ i ] = bstrStyleText;
-
-					spStyle->put_backgroundColor( _variant_t( _bstr_t( _T("Yellow") ) ) );
-					spStyle->put_border( _bstr_t( _T("5px dotted red") ) );
 					return 1;
 				}
 			}
@@ -859,7 +869,8 @@ string CDQSDWizardDlg::GetSwitches()
 		if ( CComBSTR( bstr ).Length() > 0 )
 		{
 			_tcscpy( szSwitches, W2T( bstr ) );
-			LPTSTR pszSwitch = _tcstok( szSwitches, _T("\r\n,;") );
+			const LPCTSTR szDELIMITERS =  _T("\r\n,; ");
+			LPTSTR pszSwitch = _tcstok( szSwitches, szDELIMITERS );
 			strSwitches = _T("\r\n"
 							 "\r\n      // Parse switches with parseArgs:");
 			
@@ -886,20 +897,31 @@ string CDQSDWizardDlg::GetSwitches()
 			TCHAR pszDelim[ 16 ];
 			_tcscpy( pszDelim, _T("") );
 
-			string 
-			strCase  = _T("\r\n      //if ( args.switches.length > 0 )");
-			strCase += _T("\r\n      //{");
-			strCase += _T("\r\n      //  switch( args.switches[0].name )");
-			strCase += _T("\r\n      //  {");
+			string strCase = _T("");
+			BOOL bMutuallyExclusiveSwitches = CWindow( GetDlgItem( IDC_MutuallyExclusiveSwitches ) ).SendMessage( BM_GETCHECK, 0, 0 ) == BST_CHECKED;
+			if ( bMutuallyExclusiveSwitches )
+			{
+				strCase += _T("\r\n      //if ( args.switches.length > 0 )"
+							  "\r\n      //{"
+							  "\r\n      //  switch( args.switches[0].name )"
+							  "\r\n      //  {");
+			}
+			else
+			{
+				strCase += _T("\r\n      //for (var iSwitch = 0; iSwitch < args.switches.length; iSwitch++)"
+							  "\r\n      //{"
+							  "\r\n      //  switch( args.switches[iSwitch].name )"
+							  "\r\n      //  {");
+			}
 
 			while ( pszSwitch )
 			{
 				strSwitches += string( pszDelim ) + string( pszSwitch );
 				strCase += _T("\r\n      //    case \"") + string( pszSwitch ) + _T("\":"
-							  "\r\n      //         break;");
+							  "\r\n      //      break;");
 
 				_tcscpy( pszDelim, _T(", ") );
-				pszSwitch = _tcstok( NULL, _T("\r\n") );
+				pszSwitch = _tcstok( NULL, szDELIMITERS );
 			}
 			strSwitches += _T("\");");
 
@@ -957,6 +979,8 @@ void CDQSDWizardDlg::SaveFields()
 		rk.SetValue( W2T( bstr ), _T("Email") );
 		::SysFreeString( bstr );
 
+		rk.SetValue( CWindow( GetDlgItem( IDC_MutuallyExclusiveSwitches ) ).SendMessage( BM_GETCHECK, 0, 0 ) == BST_CHECKED, _T("MutuallyExclusiveSwitches") );
+
 		rk.Close();
 	}
 	catch ( ... )
@@ -988,6 +1012,10 @@ void CDQSDWizardDlg::RestoreFields()
 			{
 				CWindow( GetDlgItem( IDC_Email ) ).SetWindowText( szValue );
 			}
+
+			DWORD dwValue = 1;
+			rk.QueryValue( dwValue, _T("IncludeComments") );
+			CWindow( GetDlgItem( IDC_MutuallyExclusiveSwitches ) ).SendMessage( BM_SETCHECK, dwValue ? BST_CHECKED : BST_UNCHECKED );
 		}
 		else
 		{
@@ -1042,4 +1070,12 @@ string CDQSDWizardDlg::GetScriptFieldName( const string& rstrFieldName )
 		MessageBox( _T("An enternal error was encountered:  CDQSDWizardDlg::GetScriptFieldName"), _T("DQSD Search Wizard Exception"), MB_OK|MB_ICONERROR );
 	}
 	return _T("");
+}
+
+LRESULT CDQSDWizardDlg::OnDestroy(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
+{
+	m_spSelectedStyle->put_cssText( m_bstrUnselectedStyle );
+	m_spSelectedStyle = NULL;
+
+	return 0;
 }

@@ -1,4 +1,10 @@
-Version 0.61 (beta) - 5-Sep-2002
+Version 0.7 (beta) 7-Sep-2002
+
+* Fixed indentation of 'break' in gen'd code
+* Added option for mutually exclusive switches which changes gen'd code for parsing switches
+* Added feature to highlight selected FORM with user-configurable color/border
+
+Version 0.6.1 (beta) - 5-Sep-2002
 
 * Fixed bug introduced in 0.6 - was dropping ':' from the action's "http://"
 * Fixed wording in <created_by>
