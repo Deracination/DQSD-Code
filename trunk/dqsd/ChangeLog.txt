@@ -30,6 +30,7 @@ New Searches
 * evolt - Search evolt.org (from Sarah S.)
 * htmlh - Search htmlhelp.com (from JB)
 * wf - Search Watchman Fellowship for info on cults (from JB)
+* bta - Search Betanews for new beta software (from Paul Hounshell)
 
 Bug Fixes
 

@@ -1,0 +1,56 @@
+<search function="bta">
+  <name>BetaNews</name>
+  <description>
+    Find out about public releases of beta software.  Numeric parameters list most recent betas while string parameters search for betas containing that string.<br/>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>beta 200</td></tr>
+    </table>
+    <table class="helpboxDescTable">
+      <tr><td>beta mp3</td></tr>
+    </table>
+  </description>
+  <category>Computers<category>Software</category></category>
+  <link>http://www.betanews.com/</link>
+  <contributor>Paul Hounshell</contributor>
+  
+  <form name="betarecent"
+        action="http://www.betanews.com/releases.php3"
+        method="get">
+    <input type="hidden" name="num"/>
+  </form>
+  
+  <form name="betasearch"
+        action="http://fileforum.betanews.com/search.php3"
+        method="get">
+    <input type="hidden" name="search"/>
+    <input type="hidden" name="what" value="recent"/>
+  </form>
+  
+  <script><![CDATA[
+    function bta(q)
+    {
+      if( nullArgs("bta", q) )
+        return false;
+      else
+      {
+        if (isNaN(q))
+        {
+          document.betasearch.search.value = q
+          submitForm(betasearch);
+        }
+        else
+        {
+          document.betarecent.num.value = q
+          submitForm(betarecent);
+        }
+      }
+    }
+  ]]></script>
+
+  <copyright>
+	Copyright (c) 2002 David Bau
+	Distributed under the terms of the
+	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>
