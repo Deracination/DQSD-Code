@@ -4,19 +4,18 @@
    URL for official listings of public holidays is http://www.cst.gov.uk/er/bankhol.htm
    Useful holiday listing at http://www.holidayfestival.com/UK.html
    Note that the following are included although they are NOT public holidays:
-    Burns Night
-    Valentines Day
+    Burns Night (25 Jan)
+    Valentines Day (14 Feb)
     Commonwealth Day (2nd Monday in March)
-    Shrove Tuesday (Pancake Day) (2005 not included)
-    St. David's Day (Patron Saint of Wales)
-    Mothering Sunday (2005 not included)
-    St. George's Day (Patron Saint of England)
+    Shrove Tuesday (Pancake Day)
+    St. David's Day (Patron Saint of Wales) (1 Mar)
+    Mothering Sunday
+    St. George's Day (Patron Saint of England) (23 Apr)
     Fathers' Day (3rd Sunday in June)
-    Halloween 
-    Guy Fawkes' Day 
-    Remembrance Day (2 minutes silence at 11am)
+    Halloween (31 Oct)
+    Guy Fawkes' Night (5 Nov)
+    Remembrance Day (2 minutes silence at 11am) (11 Nov)
     Remembrance Sunday (2nd Sunday in November)
-   April Fool's Day (1 April) not included since it clashes with Good Friday in 2002
    - James Robertson (03 Jan 2004)
 -->
 
@@ -45,6 +44,7 @@
      <date day="12" month="2" year="2002"/>
      <date day="4" month="3" year="2003"/>
      <date day="24" month="2" year="2004"/>
+     <date day="8" month="2" year="2005"/>
      <date day="28" month="2" year="2006"/>
      <date day="20" month="2" year="2007"/>
      <date day="5" month="2" year="2008"/>
@@ -60,6 +60,7 @@
      <date day="10" month="3" year="2002"/>
      <date day="30" month="3" year="2003"/>
      <date day="21" month="3" year="2004"/>
+     <date day="6" month="3" year="2005"/>
      <date day="26" month="3" year="2006"/>
      <date day="18" month="3" year="2007"/>
      <date day="9" month="3" year="2008"/>
@@ -115,7 +116,7 @@
   <event name="Halloween" type="public_holiday">
      <date day="31" month="10"/>
   </event>
-  <event name="Guy Fawkes' Day" type="public_holiday">
+  <event name="Guy Fawkes' Night" type="public_holiday">
      <date day="5" month="11"/>
   </event> 
   <event name="Remembrance Day" type="public_holiday">
