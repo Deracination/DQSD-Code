@@ -78,6 +78,11 @@
       en: "Installed Addons"
     };
 
+	function editSearchFile(strFilename)
+	{
+		return editConfigFile(strFilename);
+	}
+
     function editCSSFile(strFilename)
 	{
 		var myEditor = (typeof cssEditorExe != "undefined") ? cssEditorExe : "notepad";
@@ -88,7 +93,7 @@
 		}
 		var cmd = "\""+myEditor+"\" \""+install_dir+"\\"+strFilename + "\"";
 		openDocument(cmd);
-
+		return "";
 	}
 
 	function editConfigFile(strFilename)
@@ -101,6 +106,7 @@
 		}
 		var cmd = "\""+myEditor+"\" \""+install_dir+"\\"+strFilename + "\"";
 		openDocument(cmd);
+		return "";
 	}
 
         function buildConfigureMenu(mb, hmenu)
