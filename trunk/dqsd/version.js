@@ -19,14 +19,15 @@ function versionCheck()
   {
     try
     {
-      if(!testObject.VersionIsCorrect(2,5,8,10))
+      if(!testObject.VersionIsCorrect(2,5,8,11))
       {
-        throw "DQSDTools out of date";
+		alert("The DQSD helper DLL is out of date");
+		bSuccess = false;
       }
     }
     catch(e)
     {
-      alert("The DQSD helper DLL is out of date (error '" + e.description + "')");
+      alert("The DQSD helper DLL version couldn't be checked (error '" + e.description + "')");
       bSuccess = false;
     }
   }
