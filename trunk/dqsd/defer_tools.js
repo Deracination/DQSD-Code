@@ -149,7 +149,7 @@ function parseArgs(q, expectedSwitches, expandSwitches)
   var args_array = q.split(' ');
 
   // Regular expression that defines switches
-  var re_switch = /\/((\w+)(?::?(\S*)))\s*/;
+  var re_switch = /\/(([-.\w]+)(?::?(\S*)))\s*/;
   var re_res_args;
   var re_res_switch;
 
@@ -162,10 +162,12 @@ function parseArgs(q, expectedSwitches, expandSwitches)
     {
       for (var j = 0; j < expectedSwitches.length && !re_res_switch; j++)
       {
-        if (expandSwitches)
-          re_res_switch = expectedSwitches[j].match(new RegExp('^(' + re_res_args[2] + ')', 'i'));
-        else
-          re_res_switch = expectedSwitches[j].match(new RegExp('^(' + re_res_args[2] + ')$', 'i'));
+        var expect_regex = new RegExp(
+            '^(' + re_res_args[2].replace('.', '\\.') +
+             ')' + (expandSwitches ? '' : '$'), 'i');
+
+        re_res_switch = expectedSwitches[j].match(expect_regex);
+
         //  If there is a match, adjust the args_array, and save the values.
         if (re_res_switch)
         {
