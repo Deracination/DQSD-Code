@@ -29,11 +29,15 @@ clocklongwidth=139;
 
 
 /* Reuse browser window mode
+* note - reuse browser mode is only valid when IE is the default browser.
+* If any other browser is the default and the launchmode=1, a new browser
+* window will be spawned for each search regardless of category.
+*
 *  0=new window always [default]
 *  1=single window for all
 *  2=single window for each search type
 */
-//reuseBrowserWindowMode = 2;
+reuseBrowserWindowMode = 2;
 
 
 /* Browser launch mode
