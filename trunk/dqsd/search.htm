@@ -396,14 +396,15 @@ function performsearch( fname, term )
   term = term.replace(/^\s*/, '').replace(/\s*$/, '');            // strip out leading and trailing spaces
   while( (arg = term.match(/\/(\w+)\s*$/)) != null )              // search for possible switches in term
   {
+    var arg1 = arg[1].toLowerCase();
     for( var j=0; j < searches[fname].switches.length; j++ )      // check if the switch found matches any registered values
-      if( arg[1] == searches[fname].switches[j].substring(0,arg[1].length) ) 
+      if( arg1 == searches[fname].switches[j].substring(0,arg[1].length) ) 
       {                                                           // we have a possible partial or full match
         var dup = false;
         
-        if( arg[1] != searches[fname].switches[j] )               // check to see this is a unique partial match
+        if( arg1 != searches[fname].switches[j] )               // check to see this is a unique partial match
           for( var k=0; k < searches[fname].switches.length; k++ )
-            if( arg[1] == searches[fname].switches[k].substring(0,arg[1].length)
+            if( arg1 == searches[fname].switches[k].substring(0,arg[1].length)
                 && searches[fname].switches[k] != searches[fname].switches[j] )
               dup = true;       
         
@@ -418,9 +419,9 @@ function performsearch( fname, term )
         }
       }
     
-    appterm = (switches[i] ? appterm : term.substring( term.length - arg[1].length - 1, 
+    appterm = (switches[i] ? appterm : term.substring( term.length - arg1.length - 1, 
                                        term.length ) + (appterm ? " " + appterm : ""));
-    term = term.substring( 0, term.length - arg[1].length - 1 ).replace(/\s*$/, '');
+    term = term.substring( 0, term.length - arg1.length - 1 ).replace(/\s*$/, '');
     if( switches[i] ) i++;
   }
   

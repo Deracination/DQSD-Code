@@ -9,11 +9,11 @@ function addsearch(fname, name, desc, link, cat, switches)
     if( switches )
     {
       if( switches.match( /[`~!@#$%^*()-+\=\[\]{}\|\\:;'".\/\?]+/ ) )
-        throw { description:"<switches> tag contains invalid characters." };
+        throw { description:"<switches></switches> tag contains invalid characters." };
       for( var i=0; switches.length > 0 ; i++ )
       {
         var tmp = switches.match( /^\s*(\w+)(\s*,?\s+|$)/ );
-        result[i] = tmp[1];
+        result[i] = tmp[1].toLowerCase();
         switches = switches.substring( tmp[1].length + tmp[2].length , switches.length );
       }
     }
