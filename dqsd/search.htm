@@ -35,8 +35,10 @@ For the latest version and installation instructions, visit
 
 * Use ctrl-P and ctrl-N for a history of your previous searches.
 
+* A clock shows after a few seconds. Right-click to see a calendar.
+
 * Edit <a href="view-source:preferences.js">preferences.js</a>
-  to customize your clock.
+  to customize your clock, default search, or other things.
 
 * Here are some more query codes you can use:
 
@@ -152,7 +154,7 @@ clockupdate=1000;              // clock will update every 1 sec
 clocklongwidth=139;            // pixels for the long form
 clocklongform=" EEE d MMM yyyy h:mm A "; // long clock format string
 clockshortform=" h:mm A ";     // short clock format string
-clocktooltipform=" EEEE, MMMM d, yyyy h:mm A "; // tooltip clock format string
+clocktooltipform="  EEEE, MMMM d, yyyy h:mm A "; // tooltip clock format string
 clockstyle="text-align:right"; // css style overrides for the clock
 
 txtfldstyle="";                // css style overrides for the text field
@@ -3062,12 +3064,10 @@ function paintclock()
 {
   // Display date and time
   document.deff.q.className = "clock";
+  if (clocktooltipform && clocktooltipform.length() > 0)
+    document.deff.q.title = formatdate(now, clocktooltipform);
   var now = new Date();
   document.deff.q.value = formatdate(now, clockformat);
-  
-  // Change tooltip to display clock if a format is defined for it
-  if ( clocktooltipform && clocktooltipform.length() > 0 )
-    document.deff.q.title = formatdate(now, clocktooltipform);
 }
 
 function startclock(delay)
@@ -3182,8 +3182,9 @@ function showcal()
   popcal.document.body.innerHTML = buildcal();
   popcal.document.body.style.border="outset 2px";
   popcal.document.body.style.background='menu';
+  popcal.document.body.style.color='menutext';
 
-  popcal.show(document.body.clientWidth - 175, -150, 175, 150, document.body);
+  popcal.show(document.body.clientWidth - 179, -148, 179, 148, document.body);
 
   return false;
 }
@@ -3192,6 +3193,13 @@ function movecal(nMths)
 {
   Calendar.setMonth(Calendar.getMonth()+nMths);
   popcal.document.body.innerHTML = buildcal();
+}
+
+function opencal(d)
+{
+  // For now, let's use the yahoo calendar...
+  d = Math.floor(d / 60 / 60 / 24 / 1000) * 60 * 60 * 24;
+  openSearchWindow("http://calendar.yahoo.com/srt:0/?v=0&t=" + d);
 }
 
 function buildcal()
@@ -3212,19 +3220,26 @@ function buildcal()
 
   var TR_start = '<TR style=\"font:menu;\">';
   var TR_end = '</TR>';
-  var highlight_start = '<TD style=background-color:window><B><CENTER>';
+  var day_start = '<TD width=14.2857%><CENTER>';
+  var day_end = '</CENTER></TD>';
+  function highlight_start(d) { return '<TD style=cursor:default;background-color:window onmouseover=this.style.background="highlight";this.style.color="highlighttext"; onmouseout=this.style.background="window";this.style.color="menutext" onmouseup=parent.opencal(' + d + ');><B><CENTER>'; }
   var highlight_end   = '</CENTER></B></TD>';
-  var gray_start = '<TD style=color:gray><CENTER>';
+  function gray_start(d) { return '<TD style=cursor:default;color:graytext onmouseover=this.style.background="highlight";this.style.color="highlighttext"; onmouseout=this.style.background="menu";this.style.color="graytext" onmouseup=parent.opencal(' + d + ');><CENTER>'; }
   var gray_end   = '</CENTER></TD>';
-  var TD_start = '<TD width=14.2857%><CENTER>';
+  function TD_start(d) { return '<TD style=cursor:default onmouseover=this.style.background="highlight";this.style.color="highlighttext"; onmouseout=this.style.background="menu";this.style.color="menutext" onmouseup=parent.opencal(' + d + ');><CENTER>'; }
   var TD_end = '</CENTER></TD>';
 
-  cal = '<TABLE WIDTH=100% HEIGHT=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR style=\"font:menu;\">';
-  cal += '<TD><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD title="show previous year" style="cursor:hand" onmouseup="parent.movecal(-12);" >&nbsp;&lt;</TD><TD title="show previous month" style="cursor:hand" onmouseup="parent.movecal(-1);" >&nbsp;&lt;</TD></TR></TABLE></TD>';
-  cal += '<TD COLSPAN="' + (DAYS_OF_WEEK - 2) + '"><CENTER>';
+  cal = '<TABLE WIDTH=100% HEIGHT=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR style=font:menu>';
+  cal += '<TD><TABLE WIDTH=100% HEIGHT=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR style=font:menu>';
+  cal += '<TD title="show previous year" style="cursor:hand" onmouseup="parent.movecal(-12);" onmouseover=this.style.background="highlight";this.style.color="highlighttext"; onmouseout=this.style.background="menu";this.style.color="menutext">&nbsp;&lt;</TD>';
+  cal += '<TD title="show previous month" style="cursor:hand" onmouseup="parent.movecal(-1);"  onmouseover=this.style.background="highlight";this.style.color="highlighttext"; onmouseout=this.style.background="menu";this.style.color="menutext">&nbsp;&lt;</TD></TR></TABLE></TD>';
   if (weekday <0)
   {
-    cal += '<a title="show this month" style="cursor:hand" onmouseup="parent.Calendar=new Date();parent.movecal(0);">';
+    cal += '<TD COLSPAN="' + (DAYS_OF_WEEK - 2) + '" title="go to today" style="cursor:hand" onmouseup="parent.Calendar=new Date();parent.movecal(0);" onmouseover=this.style.background="highlight";this.style.color="highlighttext"; onmouseout=this.style.background="menu";this.style.color="menutext"><CENTER>';
+  }
+  else
+  {
+    cal += '<TD COLSPAN="' + (DAYS_OF_WEEK - 2) + '"><CENTER>';
   }
   cal += '<B>' + getMonthName(month+1)  + '   ' + year + '</B>';
   if (weekday <0)
@@ -3232,17 +3247,19 @@ function buildcal()
     cal += '</a>'; 
   }
   cal += TD_end;
-  cal += '<TD><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD title="show next month" style="cursor:hand" onmouseup="parent.movecal(+1);" >&gt;&nbsp;</TD><TD title="show next year" style="cursor:hand" onmouseup="parent.movecal(+12);" >&gt;&nbsp;</TD></TR></TABLE></TD>';
+  cal += '<TD><TABLE WIDTH=100% HEIGHT=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR style=font:menu>';
+  cal += '<TD title="show next month" style="cursor:hand" onmouseup="parent.movecal(+1);" onmouseover=this.style.background="highlight";this.style.color="highlighttext"; onmouseout=this.style.background="menu";this.style.color="menutext">&gt;&nbsp;</TD>';
+  cal += '<TD title="show next year" style="cursor:hand" onmouseup="parent.movecal(+12);" onmouseover=this.style.background="highlight";this.style.color="highlighttext"; onmouseout=this.style.background="menu";this.style.color="menutext">&gt;&nbsp;</TD></TR></TABLE></TD>';
   cal += TR_end + TR_start;
 
   //printing day labels
   for(index=0; index < DAYS_OF_WEEK; index++)
   {
-    cal += TD_start;
+    cal += day_start;
     if (weekday == index) cal += '<B>';
-    cal += getDayName(index+8);
+    cal += getDayName(index+7+1);
     if (weekday == index) cal += '</B>';
-    cal += TD_end;
+    cal += day_end;
   }
 
   cal += TD_end;
@@ -3265,11 +3282,11 @@ function buildcal()
 
     // highlight appropriately
     if (whichmonth != 0)
-      cal += gray_start + Calendar.getDate() + gray_end;
+      cal += gray_start(Calendar.getTime()) + Calendar.getDate() + gray_end;
     else if (weekday>0 && today.getDate()==Calendar.getDate())
-      cal += highlight_start + Calendar.getDate() + highlight_end;
+      cal += highlight_start(Calendar.getTime()) + Calendar.getDate() + highlight_end;
     else
-      cal += TD_start + Calendar.getDate() + TD_end;
+      cal += TD_start(Calendar.getTime()) + Calendar.getDate() + TD_end;
 
     //advance the date for next iteration
     Calendar.setDate(Calendar.getDate()+1);
