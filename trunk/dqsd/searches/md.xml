@@ -1,20 +1,28 @@
 <search function="md">
   <name>WebMD</name>
-  <description>Search the WebMD medical news site: "md cold"</description>
-  <link>http://www.webmd.com/</link>
+  <description>
+    Search the WebMD medical news site.<br/>
+    <a class="helpboxDescLabels">Example:</a><br/>
+    <table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">md cold</td></tr>
+  	</table>
+  </description>
   <category>Other</category>
+  <link>http://www.webmd.com/</link>
   <contributor>John W. Bairen, Jr.</contributor>
+  
   <form name="mdf" 
         action="http://my.webmd.com/search_results" 
         method="post">        
     <input type="hidden" name="query"/>
     <input type="hidden" name="filter" value="library_filter"/>
-  </form>	
+  </form>
+  
   <script><![CDATA[
     function md(q)
     {
-      if( q == "" )
-        openSearchWindow("http://www.webmd.com/");
+      if( nullArgs("md",q) )
+        return false;
       else
       {
         document.mdf.query.value = q;

@@ -1,20 +1,27 @@
 <search function="mwt">
   <name>Merriam-Webster Thesaurus</name>
-  <description>Search for synonyms: "mwt boggle"</description>
+  <description>
+    Search for synonyms.<br/>
+    <a class="helpboxDescLabels">Example:</a><br/>
+    <table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">mwt boggle</td></tr>
+  	</table>
+  </description>
   <category>Reference</category>
   <link>http://www.m-w.com/</link>
-  <contributor></contributor>
+  
   <form name="mwtf"
         action="http://www.m-w.com/cgi-bin/thesaurus"
         method="post">
     <input type="hidden" name="book" value="Thesaurus"/>
     <input type="hidden" name="va" value=""/>
   </form>
+  
   <script><![CDATA[
     function mwt(q)
     {
-      if( q == "" )
-        openSearchWindow("http://www.m-w.com/");
+      if( nullArgs("mwt",q) )
+        return false;
       else
       {
         document.mwtf.va.value = q;
