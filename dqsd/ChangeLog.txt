@@ -43,6 +43,7 @@ New Searches
 * mnr - Check Mailinator.com email account
 * guidgen - Generate a GUID (Globally Unique Identifier)
 * jsx - new name for jsexec so that it fits the naming scheme of vbsx
+* ggl - Search Google Glossary (still in beta, but sooo useful already!).
 
 Modified Searches
 
