@@ -165,9 +165,9 @@ function parseArgs(q, expectedSwitches, expandSwitches)
   if (typeof expandSwitches == 'undefined')
     expandSwitches = 1;
 
-  // In case the caller uses a comma-space delimited string
+  // In case the caller uses a delimited (;,<space>) string
   if (typeof expectedSwitches[0] == 'undefined')
-    expectedSwitches = expectedSwitches.split(', ');
+    expectedSwitches = expectedSwitches.split( /[,;/\s]/ );
 
   var switches = [];
   var switch_val = [];
