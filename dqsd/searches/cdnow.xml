@@ -1,31 +1,42 @@
-  <search function="cdnow">
-    <name>CDNow Music Search</name>
-    <description>Search CDNOW by artist /a, song /s, title /t, or label /l: <nobr>"cdnow Lobster /s"</nobr></description>
-    <category>Entertainment</category>
-    <link>http://www.cdnow.com/</link>
-    <form name="cdnf"
-          target="_blank"
-          action="http://www.cdnow.com/cgi-bin/mserver/pagename=/RP/CDN/FIND/popsearch.html"
-          method="post">
-      <input type="hidden" name="string"/>
-      <input type="hidden" name="index"/>
-    </form>
-    <script><![CDATA[
-      // cdnow
-      function cdnow(q)
+<search function="cdnow">
+  <name>CDNOW</name>
+  <description>Search CDNOW by artist. Options include searchign by /album, /song, /label, /video, /actor, or /director.<nobr>Example: "cdnow Lobster /song"</nobr></description>
+  <category>Entertainment</category>
+  <link>http://www.cdnow.com/</link>
+  <switches>album, song, label, video, actor, director</switches>
+  <contributor>Peter Risser, Ryan Edwards</contributor>
+  <form name="cdnf"
+        target="_blank"
+        action="http://www.cdnow.com/cgi-bin/mserver/pagename=/RP/CDN/FIND/popsearch.html"
+        method="post">
+    <input type="hidden" name="string"/>
+    <input type="hidden" name="index"/>
+  </form>
+  <script><![CDATA[
+    function cdnow(q, switches)
+    {
+      if( q == "" )
+        openSearchWindow("http://www.cdnow.com/");
+      else if( switches.length == 1 )
       {
-        var res = q.match(/([^\/]+)(\/[AaSsTtLl])?/);
-
-        if (!res)
+        switch( switches[0] )
         {
-           openSearchWindow("http://www.cdnow.com/");
+          case "album": document.cdnf.index.value = "t"; break;
+          case "song": document.cdnf.index.value = "s"; break;
+          case "label": document.cdnf.index.value = "l"; break;
+          case "video": document.cdnf.index.value = "m"; break;
+          case "actor":
+          case "director": document.cdnf.index.value = "r"; break;
         }
-        else
-        {
-          document.cdnf.string.value=(res[1] ? res[1] : "");
-          document.cdnf.index.value=(res[2] ? res[2].toLowerCase().substring(1,2) : "a");
-          submitForm(cdnf);
-        }
+        document.cdnf.string.value = q;
+        submitForm(cdnf);
       }
-    ]]></script>
-  </search>
+      else
+      {
+        document.cdnf.index.value = "a";
+        document.cdnf.string.value = q;
+        submitForm(cdnf);
+      }
+    }
+  ]]></script>
+</search>

@@ -1,46 +1,39 @@
-  <search function="cpan">
-    <name>CPAN search</name>
-    <description>
-      Search the Comprehensive Perl Archive Network (CPAN): 
-      "cpan wrap /option"  Options include /author,
-      /module, /distribution and /documentation.  
-      Note - the options can be abbreviated.
-    </description>
-    <category>Computers</category>
-    <link>http://search.cpan.org/</link>
-    <contributor>Monty Scroggins</contributor>
-    <form name="cpanform"
-          method="get"
-          action="http://search.cpan.org/search"
-          target="_blank">
-      <input type="hidden" name="query" value=""/>
-      <input type="hidden" name="mode" value="module"/>
-    </form>
-    <script><![CDATA[
-      function cpan(q) {
-        var mode="module";
-        if (q == "")
-          openSearchWindow("http://search.cpan.org/");
-        else {
-           // Check for / suffix, 
-	   if (result = q.match(/^(.*)\s*\/(\w+)/)) {
-              q = result[1];
-              // must remove trailing spaces
-              q=q.replace(/\s$/,'');
-              suffix = result[2];
-                if ( suffix.toLowerCase() == "module".substr(0,suffix.length) ) 
-                    mode = "module";
-                else if ( suffix.toLowerCase() == "author".substr(0,suffix.length) ) 
-                    mode = "author";
-                else if ( suffix.toLowerCase() == "distribution".substr(0,suffix.length) )
-                    mode = "dist";
-                else if ( suffix.toLowerCase() == "documentation".substr(0,suffix.length) ) 
-                    mode = "doc";
-            }         
-          document.cpanform.mode.value=mode;
-          document.cpanform.query.value=q;
-          submitForm(cpanform);
+<search function="cpan">
+  <name>Comprehensive Perl Archive Network (CPAN)</name>
+  <description>Searches for modules by default. Options include searching by /author, /distribution and /documentation. <nobr>Example: "cpan wrap /author"</nobr></description>
+  <category>Computers</category>
+  <link>http://search.cpan.org/</link>
+  <switches>author, distribution, documentation</switches>
+  <contributor>Monty Scroggins, Ryan Edwards</contributor>
+  <form name="cpanform"
+        target="_blank"
+        action="http://search.cpan.org/search"
+        method="get">
+    <input type="hidden" name="query"/>
+    <input type="hidden" name="mode" value="module"/>
+  </form>
+  <script><![CDATA[
+    function cpan(q, switches)
+    {
+      if( q == "" )
+        openSearchWindow("http://search.cpan.org/");
+      else if( switches.length == 1 )
+      {
+        switch( switches[0] )
+        {
+          case "author": document.cpanform.mode.value = "author"; break;
+          case "distribution": document.cpanform.mode.value = "dist"; break;
+          case "documentation": document.cpanform.mode.value = "doc"; break;
         }
+        document.cpanform.query.value = q;
+        submitForm(cpanform);
       }
-    ]]></script>
-  </search>
+      else
+      {
+        document.cpanform.mode.value = "module"
+        document.cpanform.query.value = q;
+        submitForm(cpanform);
+      }
+    }
+  ]]></script>
+</search>
