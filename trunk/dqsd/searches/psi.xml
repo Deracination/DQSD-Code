@@ -1,38 +1,120 @@
 <search function="psi">
-  <name>PriceSCAN Price Guide</name>
-  <description>
-    Search PriceSCAN for an ISBN.<br/>
-    <div class="helpboxDescLabels">Example:</div>
-    <table class="helpboxDescTable">
-  		<tr><td>psi 0898713617</td></tr>
-  	</table>
-  </description>
+  <name>PriceSCAN Price Comparison</name>
   <category>Shopping</category>
-  <link>http://www.pricescan.com/home_books.asp</link>
-  
+  <contributor>Gregory Krohne</contributor>
+  <link>http://www.pricescan.com/</link>
+  <email>zeakz1d02@sneakemail.com</email>
+  <description>
+  Compare prices with shipping on just about anything. 
+	Search by ISBN, model number, brand, or other keywords. 
+	Results include pricing data from web sites, magazine ads, 
+	catalogs, and vendor-provided data.
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/computers</td>    <td> - </td><td>Hardware, software, &amp; supplies</td></tr>
+      <tr><td>/books</td>        <td> - </td><td>Books</td></tr>
+      <tr><td>/digital_photo</td><td> - </td><td>Cameras &amp; printers</td></tr>
+      <tr><td>/electronics</td>  <td> - </td><td>Consumer electronics</td></tr>
+      <tr><td>/health|beauty</td><td> - </td><td>Cosmetics, monitors, drugs, vitamins</td></tr>
+      <tr><td>/home|garden</td>  <td> - </td><td>Kitchen, housewares, mowers, grills</td></tr>
+      <tr><td>/movies</td>       <td> - </td><td>DVD, VHS</td></tr>
+      <tr><td>/music</td>        <td> - </td><td>CDs</td></tr>
+      <tr><td>/office</td>       <td> - </td><td>Calculators, copiers, faxes</td></tr>
+      <tr><td>/sports</td>       <td> - </td><td>Exercise &amp; sports equipment</td></tr>
+      <tr><td>/toys</td>         <td> - </td><td>TToyes</td></tr>
+      <tr><td>/videogames</td>   <td> - </td><td>Video games</td></tr>
+      <tr><td>/watches</td>      <td> - </td><td>Watches by brand</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>psi 0898713617</td></tr>
+      <tr><td>psi ipod</td></tr>
+      <tr><td>psi robomower /garden</td></tr>
+      <tr><td>psi rolex /watches</td></tr>
+    </table>
+  </description>
   <form name="psif"
-        action="http://www.pricescan.com/books/SearchResults.asp"
-        method="get">
-    <input type="hidden" name="type" id="type" value="isbn"/>
-    <input type="hidden" name="isbn" id="isbn"/>
+        method="get"
+        action="http://www.pricescan.com/xp_SearchResultsDispatch.ASP">
+    <input type="hidden" name="Category" value="all" />
+    <input type="hidden" name="SearchString" value="" />
+    <input type="hidden" name="SearchType" value="all" />
   </form>
-  
   <script><![CDATA[
     function psi(q)
     {
-      if( nullArgs("psi",q) )
-        return false;
-      else
+      if( nullArgs("psi", q) )
+        return;
+
+      // FORM variables for psif
+      document.psif.Category.value = "all";
+
+      // Parse switches with parseArgs:
+      var args = parseArgs(q, "computers, books, digital_photo, electronics, health, beauty, home, garden, movies, music, office, sports, toys, videogames, watches");
+      if ( args.switches.length > 0 )
       {
-        document.psif.isbn.value = q;
-        submitForm(psif);
+        switch( args.switches[0].name )
+        {
+          case "computers":
+						document.psif.Category.value = "computers";
+            break;
+          case "books":
+						document.psif.Category.value = "books";
+            break;
+          case "digital_photo":
+						document.psif.Category.value = "digiphoto";
+            break;
+          case "electronics":
+						document.psif.Category.value = "electronics";
+            break;
+          case "health":
+          case "beauty":
+						document.psif.Category.value = "health";
+            break;
+          case "home":
+          case "garden":
+						document.psif.Category.value = "home";
+            break;
+          case "movies":
+						document.psif.Category.value = "movies";
+            break;
+          case "music":
+						document.psif.Category.value = "music";
+            break;
+          case "office":
+						document.psif.Category.value = "office";
+            break;
+          case "sports":
+						document.psif.Category.value = "sports";
+            break;
+          case "toys":
+						document.psif.Category.value = "toys";
+            break;
+          case "videogames":
+						document.psif.Category.value = "videogames";
+            break;
+          case "watches":
+						document.psif.Category.value = "watches";
+            break;
+          default:
+						document.psif.Category.value = "all";
+            break;
+        }
       }
+
+      document.psif.SearchString.value = args.q;
+      document.psif.SearchType.value = "all";
+
+      submitForm(psif);
     }
   ]]></script>
-
   <copyright>
-	Copyright (c) 2002 David Bau
-	Distributed under the terms of the
-	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
   </copyright>
+  <created_by>
+    This search file was initially created on 01/18/05 at 09:47:13
+    by Dave's Quick Search Deskbar Search Wizard version 1.3,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
 </search>
