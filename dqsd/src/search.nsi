@@ -311,11 +311,13 @@ Section "Quick Search Deskbar (required)"
 
   ; Write the installation path into the registry
   WriteRegStr HKCR "CLSID\${DQSD_CLSID}" "InstallDir" "$INSTDIR"
-
+  IfErrors registry_error
+  
   ; ??? Keep this for a while for backward compatibility
   WriteRegStr HKCR "CLSID\${DQSD_CLSID}" "SecureFile" "$INSTDIR\search.htm"
   WriteRegDWORD HKCR "CLSID\${DQSD_CLSID}\SecureFiles" "$INSTDIR\search.htm" 0
   WriteRegDWORD HKCR "CLSID\${DQSD_CLSID}\SecureFiles" "$INSTDIR\settings.htm" 0
+  IfErrors registry_error
 
   ; Registry settings needed to function
   WriteRegStr HKCR "CLSID\${DQSD_CLSID}" "" "Quick Search"
@@ -326,15 +328,25 @@ Section "Quick Search Deskbar (required)"
   WriteRegStr HKCR "CLSID\${DQSD_CLSID}\InprocServer32" "ThreadingModel" "Apartment"
   WriteRegStr HKCR "CLSID\${DQSD_CLSID}\Instance" "CLSID" "{7BA4C742-9E81-11CF-99D3-00AA004AE837}"
   WriteRegStr HKCR "CLSID\${DQSD_CLSID}\Instance\InitPropertyBag" "Url" "$INSTDIR\search.htm"
-
+  IfErrors registry_error
+  
   ; Add dqsd clsid to approved shell extensions - irrelevant on non-NT based OS - but doesn't hurt anything per
   ; http://msdn.microsoft.com/library/en-us/shellcc/platform/Shell/programmersguide/shell_int/shell_int_extending/extensionhandlers/shell_ext.asp
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Shell Extensions\Approved" "${DQSD_CLSID}" "${DQSD_TITLE}"
-
+  IfErrors registry_error
+  
   ; Uninstallation keys
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${DQSD_CLSID}" "DisplayName" "${DQSD_TITLE} (remove only)"
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${DQSD_CLSID}" "UninstallString" '"$INSTDIR\uninstall.exe"'
+  IfErrors registry_error
+  
+  goto registry_success
 
+registry_error:
+  MessageBox MB_OK|MB_ICONEXCLAMATION "Failed to write information to your registry.$\nWhile installing, you must be logged in as a user with permissions to write to the registry, preferrably an Administrator.$\nThe installation will now abort."
+  Abort
+
+registry_success:
   ; xp theme css installer
   Call GetWindowsXPTheme
   Pop $0
@@ -423,11 +435,12 @@ Section "Uninstall"
   Delete /REBOOTOK $INSTDIR\xptoolbar2_olive.bmp
   Delete /REBOOTOK $INSTDIR\xptoolbar1_blue.bmp
   Delete /REBOOTOK $INSTDIR\xptoolbar2_blue.bmp
-  Delete /REBOOTOK $INSTDIR\localsearch_default.css
-  Delete /REBOOTOK $INSTDIR\localsearch_silver.css
-  Delete /REBOOTOK $INSTDIR\localsearch_olive.css
-  Delete /REBOOTOK $INSTDIR\localsearch_blue.css
   Delete /REBOOTOK $INSTDIR\preferences.js
+  Delete /REBOOTOK $INSTDIR\theme.css
+  Delete /REBOOTOK $INSTDIR\theme_blue.css
+  Delete /REBOOTOK $INSTDIR\theme_default.css
+  Delete /REBOOTOK $INSTDIR\theme_silver.css
+  Delete /REBOOTOK $INSTDIR\theme_olive.css
   Delete /REBOOTOK $INSTDIR\uninstall.exe
 
 ; Ask to delete local files
