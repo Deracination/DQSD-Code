@@ -1,45 +1,27 @@
 <search function="cp">
-	<name>CodeProject (CP)</name>
-	<description>
+  <name>CodeProject (CP)</name>
+  <description>
     Search CodeProject for source code, samples and tutorials<br />
     <div class="helpboxDescLabels">Switches:</div>
-  	<table class="helpboxDescTable">
-			<tr>
-				<td>/a</td>
-				<td> - </td>
-				<td>Search for authors.</td>
-			</tr>
-			<tr>
-				<td>/t</td>
-				<td> - </td>
-				<td>Search in titles.</td>
-			</tr>
-			<tr>
-				<td>/d</td>
-				<td> - </td>
-				<td>Search in descriptions.</td>
-			</tr>
-			<tr>
-				<td>/k</td>
-				<td> - </td>
-				<td>Search for keywords.</td>
-			</tr>
-		</table>
+    <table class="helpboxDescTable">
+      <tr><td>/a</td><td> - </td><td>Search for authors.</td></tr>
+      <tr><td>/t</td><td> - </td><td>Search in titles.</td></tr>
+      <tr><td>/d</td><td> - </td><td>Search in descriptions.</td></tr>
+      <tr><td>/k</td><td> - </td><td>Search for keywords.</td></tr>
+    </table>
     <div class="helpboxDescLabels">Example:</div>
     <table class="helpboxDescTable">
-			<tr>
-				<td>cp Saurwein /a</td>
-			</tr>
-		</table>
+      <tr><td>cp Saurwein /a</td></tr>
+    </table>
   </description>
-	<category>Computers</category>
-	<link>http://www.codeproject.com/</link>
-	<contributor>Andreas Saurwein</contributor>
-	<form name="cpf" action="http://www.codeproject.com/info/search.asp" method="get">
-		<input type="hidden" name="TARGET" value="" />
-		<input type="hidden" name="st" value="kw" />
-	</form>
-	<script><![CDATA[
+  <category>Computers</category>
+  <link>http://www.codeproject.com/</link>
+  <contributor>Andreas Saurwein</contributor>
+  <form name="cpf" action="http://www.codeproject.com/info/search.asp" method="get">
+    <input type="hidden" name="TARGET" value="" />
+    <input type="hidden" name="st" value="kw" />
+  </form>
+  <script><![CDATA[
     function cp(q)
     {
       var args = parseArgs(q, "a, t, d, k");
@@ -70,8 +52,8 @@
   ]]></script>
 
   <copyright>
-	Copyright (c) 2002 David Bau
-	Distributed under the terms of the
-	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  Copyright (c) 2002 David Bau
+  Distributed under the terms of the
+  GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
   </copyright>
 </search>

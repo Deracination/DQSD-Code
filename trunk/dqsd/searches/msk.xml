@@ -2,6 +2,10 @@
   <name>Microsoft Knowledge Base</name>
   <description>
     Search the Microsoft Knowledge Base using either a regular search expression or a 6-digit "Q" code.<br/>
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/google</td><td> - </td><td>Use Google to search support.microsoft.com</td></tr>
+    </table>
     <div class="helpboxDescLabels">Examples:</div>
     <table class="helpboxDescTable">
       <tr><td>msk Windows Bugs</td></tr>
