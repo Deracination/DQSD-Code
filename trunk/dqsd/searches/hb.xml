@@ -1,0 +1,62 @@
+<search function="hb">
+  <name>HotBot</name>
+  <description>
+    Search FAST, Google, Inktomi, or Teoma on HotBot.<br/>
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/fst</td><td> - </td><td>FAST - AllTheWeb's search engine.</td></tr>
+      <tr><td>/gg</td><td> - </td><td>Google search engine.</td></tr>
+      <tr><td>/ink</td><td> - </td><td>Inktomi search engine (HotBot default).</td></tr>
+      <tr><td>/tm</td><td> - </td><td>Teoma search using Subject Specific Popularity.</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>hb jeep</td></tr>
+  	</table>
+  </description>
+  <category>Search the Web</category>
+  <link>http://www.hotbot.com/</link>
+  
+  <form name="hbf"
+        action="http://www.hotbot.com/default.asp"
+        method="get">
+    <input type="radio" name="prov"/>
+    <input type="hidden" name="ps" value=""/>
+    <input type="hidden" name="loc" value="searchbox"/>
+    <input type="hidden" name="tab" value="web"/>
+    <input type="hidden" name="query"/>
+  </form>
+  
+  <script><![CDATA[
+    function hb(q)
+	//by GAK
+    {
+      var args = parseArgs(q, "fst, gg, ink, tm");
+	  var mode = "";
+
+      if( nullArgs("hb", args.q) )
+        return false;
+      else if( args.switches.length == 1 )
+      {
+			switch (args.switches[0].name)
+			{
+				case "fst": mode = "FAST"; break;
+				case "gg": mode = "Google"; break;
+				case "ink": mode = "Inktomi"; break;
+				case "tm": mode = "Teoma"; break;
+				default: mode = "";
+			}
+		document.hbf.prov.value = mode;
+		document.hbf.prov.checked = "checked";
+	  }	
+	document.hbf.query.value = args.q;
+	submitForm(hbf);
+    }
+  ]]></script>
+
+  <copyright>
+	Copyright (c) 2002 Gregory Krohne
+	Distributed under the terms of the
+	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>

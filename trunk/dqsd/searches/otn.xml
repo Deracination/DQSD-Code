@@ -1,0 +1,51 @@
+<search function="otn">
+  <name>Oracle Technology Network</name>
+  <category>Computers<category>Reference</category></category>
+  <contributor>Gregory Krohne</contributor>
+  <link>http://otn.oracle.com/</link>
+  <email>Gregory.Krohne@afrc.af.mil</email>
+  <description>
+  Search for articles and documentation on Oracle corporation's tech site.
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>otn jdbc</td></tr>
+      <tr><td>otn xml</td></tr>
+    </table>
+
+  </description>
+  <form name="otnf"
+        method="get"
+        action="http://otn.oracle.com/ultrasearch/wwws_otn/searchotn.jsp">
+    <input type="hidden" name="p_Action" value="Search" />
+    <input type="hidden" name="p_Query" value="" />
+    <input type="hidden" name="p_Group" value="4" />
+    <COMMENT>
+      The input element above, "p_Group", was a checkbox that was checked.
+    </COMMENT>
+
+    <input type="hidden" name="p_Group" value="5" />
+    <COMMENT>
+      The input element above, "p_Group", was a checkbox that was checked.
+    </COMMENT>
+
+  </form>
+  <script><![CDATA[
+    function otn(q)
+    {
+      if( nullArgs("otn", q) )
+        return;
+
+      document.otnf.p_Query.value = q;
+      submitForm(otnf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 12/17/02 at 10:31:48
+    by Dave's Quick Search Deskbar Search Wizard version 1.0.1 ,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>

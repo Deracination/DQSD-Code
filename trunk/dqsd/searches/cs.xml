@@ -1,0 +1,144 @@
+<search function="cs">
+  <name>Consumer Search</name>
+  <category>Shopping</category>
+  <contributor>Gregory Krohne</contributor>
+  <link>http://www.consumersearch.com</link>
+  <email>Gregory.Krohne@afrc.af.mil</email>
+  <description>
+  Search Consumer Search's meta-reviews of other reviews.
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/match:all</td><td> - </td><td>Search pages based on type of match. Use
+        <div style="padding: 0 0 0 20px">
+          /match:all - all search terms<br/>   
+          /match:any - any search terms<br/>   
+          /match:boolean - boolean match of terms
+        </div> 
+      </td></tr>
+      <tr><td>/format</td><td> - </td><td>Search format to return. Use
+        <div style="padding: 0 0 0 20px">
+          /format:long - long form<br/>   
+          /format:short - short form
+        </div> 
+      </td></tr>
+      <tr><td>/sort</td><td> - </td><td>Order of pages returned. Use
+        <div style="padding: 0 0 0 20px">
+          /sort:relevancy - most relevant results first<br/>   
+          /sort:date - newest results first<br/>   
+          /sort:title - closest title matches first
+        </div> 
+      </td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>cs /sort:date mutual funds</td></tr>
+      <tr><td>cs washing machines /match:all /form:short</td></tr>
+      <tr><td>cs TV and (DVD or VCR) /match:boolean</td></tr>
+    </table>
+  </description>
+  <form name="csf"
+        method="get"
+        action="http://www.consumersearch.com/perl/htwrap.cgi">
+    <input type="hidden" name="config" value="htdig-www" />
+    <input type="hidden" name="restrict" value="" />
+    <input type="hidden" name="exclude" value="" />
+    <input type="hidden" name="words" value="" />
+    <input type="hidden" name="method" value="and" />
+    <COMMENT>
+      The input element above, "method", was a SELECT element with the following options...
+      <select name="method">
+        <option value="and">All</option>
+        <option value="or">Any</option>
+        <option value="boolean">Boolean</option>
+      </select>
+    </COMMENT>
+
+    <input type="hidden" name="format" value="builtin-long" />
+    <COMMENT>
+      The input element above, "format", was a SELECT element with the following options...
+      <select name="format">
+        <option value="builtin-long">Long</option>
+        <option value="builtin-short">Short</option>
+      </select>
+    </COMMENT>
+
+    <input type="hidden" name="sort" value="score" />
+    <COMMENT>
+      The input element above, "sort", was a SELECT element with the following options...
+      <select name="sort">
+        <option value="score">Relevancy</option>
+        <option value="time">Date</option>
+        <option value="title">Title</option>
+      </select>
+    </COMMENT>
+
+  </form>
+  <script><![CDATA[
+    function cs(q)
+    {
+      var args = parseArgs(q, "match, format, sort");
+      if( nullArgs("cs", q) )
+        return;
+
+      for (var iSwitch = 0; iSwitch < args.switches.length; iSwitch++)
+      {
+        switch( args.switches[iSwitch].name )
+        {
+          case "match":
+		  	switch( args.switches[iSwitch].value )
+			{
+				case "all":
+					document.csf.method.value = "and";
+					break;
+				case "any":
+					document.csf.method.value = "or";
+					break;
+				case "boolean":
+					document.csf.method.value = "boolean";
+					break;
+			}
+            break;
+          case "format":
+		  	switch( args.switches[iSwitch].value )
+			{
+				case "long":
+					document.csf.format.value = "builtin-long";
+					break;
+				case "short":
+					document.csf.format.value = "builtin-short";
+					break;
+			}
+            break;
+          case "sort":
+		  	switch( args.switches[iSwitch].value )
+			{
+				case "relevancy":
+					document.csf.sort.value = "score";
+					break;
+				case "date":
+					document.csf.sort.value = "time";
+					break;
+				case "title":
+					document.csf.sort.value = "title";
+					break;
+			}
+            break;
+          default:
+            break;
+        }
+      }
+
+      document.csf.words.value = args.q;
+      submitForm(csf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 12/17/02 at 14:25:18
+    by Dave's Quick Search Deskbar Search Wizard version 1.0.1 ,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>
