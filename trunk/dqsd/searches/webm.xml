@@ -1,0 +1,39 @@
+<search function="webm">
+  <name>Webmonkey</name>
+  <category>Computers</category>
+  <contributor>Sarah Sweeney</contributor>
+  <link>http://hotwired.lycos.com/webmonkey/</link>
+  <email>poohbear@designshift.com</email>
+  <description>
+  Webmonkey search.
+  <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+      <tr><td>webm ethernet</td></tr>
+    </table>
+  </description>
+  <form name="webmf"
+        method="get"
+        action="http://search.hotwired.com/webmonkey/default.asp?query=">
+    <input type="hidden" name="query" value="" />
+  </form>
+  <script><![CDATA[
+    function webm(q)
+    {
+      if( nullArgs("webm", q) )
+        return;
+
+      document.webmf.query.value = q;
+
+      submitForm(webmf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 09/11/02 at 14:50:50
+    by Dave's Quick Search Deskbar Search Wizard version 0.7 (beta),
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>
