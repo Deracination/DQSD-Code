@@ -4,20 +4,24 @@
     Search or go to open source projects on SourceForge.net.<br/>
     <div class="helpboxDescLabels">Switches:</div>
     <table class="helpboxDescTable">
-      <tr><td>/software [default]</td><td> - </td><td>Software</td></tr>
+      <tr><td>/cvs</td><td> - </td><td>Browse project's CVS repository</td></tr>
+      <tr><td>/exact</td><td> - </td><td>Require all words in when searching</td></tr>
+      <tr><td>/foundry</td><td> - </td><td>Goto a Sourceforge foundry</td></tr>
+      <tr><td>/freshmeat</td><td> - </td><td>Freshmeat.net</td></tr>
+      <tr><td>/list[:admin]</td><td> - </td><td>Display list info or admin page</td></tr>
       <tr><td>/new</td><td> - </td><td>New Releases</td></tr>
       <tr><td>/people</td><td> - </td><td>People</td></tr>
-      <tr><td>/freshmeat</td><td> - </td><td>Freshmeat.net</td></tr>
       <tr><td>/project</td><td> - </td><td>Project's summary page</td></tr>
-      <tr><td>/cvs</td><td> - </td><td>Browse project's CVS repository</td></tr>
-      <tr><td>/list[:admin]</td><td> - </td><td>Display list info or admin page</td></tr>
+      <tr><td>/software [default]</td><td> - </td><td>Software</td></tr>
     </table>
     <div class="helpboxDescLabels">Examples:</div>
     <table class="helpboxDescTable">
       <tr><td>sf itext</td></tr>
+      <tr><td>sf itext java /exact</td></tr>
       <tr><td>sf /proj dqsd</td></tr>
       <tr><td>sf /cvs dqsd</td></tr>
       <tr><td>sf /list dqsd-users</td></tr>
+      <tr><td>sf /fo java</td></tr>
     </table>
   </description>
   <category>Computers<category>Programming</category></category>
@@ -29,6 +33,7 @@
         method="post">
     <input type="hidden" name="words"/>
     <input type="hidden" name="type_of_search"/>
+    <input type="hidden" name="exact" value="0"/>
   </form>
   
   <script><![CDATA[
@@ -37,13 +42,16 @@
       if( nullArgs("sf", q) )
         return false;
 
-      var args = parseArgs(q, "new, software, people, freshmeat, project, cvs, list");
-      if( q == "" )
-        openSearchWindow("http://www.sourceforge.net/");
-      else if( args.switches.length == 1 )
+      var exact = false;
+      var args = parseArgs(q, "exact, new, software, people, freshmeat, project, cvs, list, foundry");
+      if( args.switches.length == 1 )
       {
         switch( args.switches[0].name )
         {
+	  case "exact":
+	    exact = true; break;
+	  case "foundry":
+	    openSearchWindow("http://"+args.q.toLowerCase()+".foundries.sourceforge.net/"); return false;
           case "new":
             openSearchWindow("http://www.sourceforge.net/new/"); return false;
           case "software":
@@ -63,6 +71,7 @@
           default:
             document.sfsearch.section.value = args.switches[0].name; break;
         }
+	document.sfsearch.exact.value = (exact) ? "1" : "0";
         document.sfsearch.words.value = args.q;
         submitForm(sfsearch);
       }
@@ -71,6 +80,7 @@
       else
       {
         document.sfsearch.type_of_search.value = "soft";
+	document.sfsearch.exact.value = (exact) ? "1" : "0";
         document.sfsearch.words.value = args.q;
         submitForm(sfsearch);
       }
