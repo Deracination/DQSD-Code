@@ -23,6 +23,15 @@ TABLE.keybindings TH {
 	font-style: italic;
 }
 
+TABLE.toc TD {
+	font-weight: normal;
+	font-size: 12pt;
+	text-align: center;        
+	color: #000080;
+	font-weight: bold;
+	padding: 5;
+}
+
 A, A:Visited {
 	color: #000080;
 }
@@ -45,7 +54,6 @@ A:Visited:hover {
 DIV.question {
 	margin-left: 2em;
 	/*margin-top: 0.2em;*/
-	cursor: hand;
 }
 
 DIV.answer, DIV.answer TABLE {
@@ -53,7 +61,7 @@ DIV.answer, DIV.answer TABLE {
 }
 DIV.answer {
 	font-weight: normal;
-	margin-left: 5em;
+	margin-left: 6em;
 	/*margin-bottom: 1em;*/
 	/*border: inset 2px;*/
 	background: #eeeeee;
