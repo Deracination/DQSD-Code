@@ -25,6 +25,10 @@ Modified Searches
 * msda - Added a required form value (S2) in msda.xml. Searches failed without it - seems like a ListServ upgrade (Kim Gräsman)
 * msda - Added /dcom switch for searching the DCOM list as well (Kim Gräsman)
 
+Removed Searches
+
+* webpoll - discontinued (Dean Wilson)
+
 Miscellaneous
 
 *
