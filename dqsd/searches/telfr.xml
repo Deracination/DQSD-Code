@@ -11,14 +11,12 @@
   <link>http://www.infobel.com/france/default.asp?qSearchType=RWP</link>
   <contributor>MLL</contributor>
   <todo>allow several criterias (last name, city,...)</todo>
-  <version>1.1 (updated URIs)</version>
+
   <script><![CDATA[
     function telfr(q)
     {
-      if (q == "")
-        openSearchWindow("http://www.infobel.com/france/default.asp?qSearchType=RWP");
-      else
-        openSearchWindow("http://www.infobel.com/france/wp/search/result.asp?qSearchType=RWP&qCountryCode=fr&QLANGUAGE=1&qphone=" + q);
+      if( nullArgs( "telfr", q ) ) return false;
+      openSearchWindow( "http://www.infobel.com/france/wp/search/result.asp?qSearchType=RWP&qCountryCode=fr&QLANGUAGE=1&qphone=" + q );
     }
   ]]></script>
 </search>

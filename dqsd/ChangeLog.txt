@@ -9,12 +9,13 @@ New Searches
 
 Modified Searches
 
-* acine - added /video switch
+* acine - added /video switch and better use of nullargs
 * amaz - now tags to dqsd associate account, and added switches for catalog areas and restaurants
 * thw - updated the search (the form changed on the site) and added /category switch
 * ups - now allows spaces in tracking number(s)
 * setiq - new switches : connect and display
 * conv - missing "/" in the usage section
+* dicfr, gg, googletrans, telfr - better use of nullargs
 
 Enhancements
 
