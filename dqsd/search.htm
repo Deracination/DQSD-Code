@@ -512,7 +512,7 @@ function prevnext(direction)
 // show the text "Quick Search"
 function showQuickSearch()
 {
-  if ( typeof displayHelp != 'undefined' && displayHelp )
+  if ( typeof displayHelp == 'undefined' || displayHelp )
   {
     document.selection.empty();
     document.deff.q.value = local(QUICK_SEARCH);
@@ -553,7 +553,7 @@ function startbanner(delay)
 // banner() called to display help message for 8.5 seconds
 function banner()
 {
-  if ( typeof displayHelp != 'undefined' && displayHelp )
+  if ( typeof displayHelp == 'undefined' || displayHelp )
   {
     document.deff.q.value = local(HELP_TEXT);
     bant=window.setTimeout("unbanner();", helptime);
