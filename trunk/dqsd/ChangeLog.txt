@@ -14,6 +14,7 @@ New Searches
 * ly - Lycos search (Lincoln Jackson)
 * olk - onelook.com search (Steven Ourada)
 * whsc - search whois.sc
+* mmoz - Search for music info at MusicMoz.org
 
 Modified Searches
 
