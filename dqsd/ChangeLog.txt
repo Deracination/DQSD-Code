@@ -11,11 +11,12 @@ New Searches
 * otn - Oracle Technology Network search (from Gregory Krohne)
 
 Bug Fixes
+* Installation script now sets approved shell extension registry key for WinNT and it's descendants (from Brent Beardsley)
 
 Modified Searches
 
 * fe - now allows you to specify an extension name instead of only the first letter (from Matthew McDougal)
-* configure - localized it and added Reload menu option (from Brent Beardsley)
+* configure - localized it and added Reload menu option, fixed bug when addons directory did not exist (from Brent Beardsley)
 
 -- What's new for 3.1.5 (December 15, 2002)
 
