@@ -233,7 +233,7 @@
                   <html:li>cd ~/dqsd</html:li>
                   <html:li>src/build.cmd</html:li>
                </html:ul>
-               <html:li>In the end, you should get a dqsd/dqsd.exe.</html:li>
+               <html:li>In the end, you should get a dqsd/DQSDTools.dll.</html:li>
                <html:li>To go back to pristine sources, run src/clean.cmd</html:li>
             </html:ol>
             The above is for read-only access to the sources. For writable access, you'll need a Source Forge account, and Dave or Glenn will have to grant proper permissions to your account. 
