@@ -392,3 +392,8 @@ helpMenuToolTipsDisplayTime = 3;
 * and 'Display ? for help' strings to not be displayed at all.
 */
 displayHelp = true;
+
+
+/* Check web for an updated version each time the toolbar is started
+*/
+checkForUpdate = true;

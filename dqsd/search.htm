@@ -874,6 +874,8 @@ function postStartup()
       alert("There was a problem initializing the enhanced keyboard support - some key combinations and hotkeys may not work (Error '" + e.description + "')");
       keyboardHook = null;
   }
+
+  checkWebForUpdate();
 }
 
 
