@@ -1,6 +1,8 @@
 	gg
 !	ifl
 ?	yh
+yho	yh
+af	acr
 -	fst
 ^	av
 {	dog
