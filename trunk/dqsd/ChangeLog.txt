@@ -3,6 +3,7 @@
 Enhancements
 
 Bug Fixes
+* Clock tooltip no longer off by 3 days - thanks to Ed Stegman for the exquisit bug report
 
 New Searches
 
