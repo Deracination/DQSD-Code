@@ -634,6 +634,8 @@ function getDisplayDate(passedDate) {
 		<li>
 		Install Microsoft Visual C++ 6.0.
 		<li>
+		Install the <a href="http://www.microsoft.com/msdownload/platformsdk/sdkupdate/">Microsoft Internet Development SDK</a>.  Move the SDK path for include files and libraries before the standard Visual C++ header files.
+		<li>
 			Install NSIS - <A href="http://http://www.nullsoft.com/free/nsis/">http://www.nullsoft.com/free/nsis/</A>.
 		<li>
 		Make sure that MSVC and NSIS are on your path (you can try using Control
@@ -646,9 +648,7 @@ function getDisplayDate(passedDate) {
 				<li>
 				cvs -d:pserver:anonymous@c...:/cvsroot/dqsd login
 				<li>
-				cvs -d:pserver:anonymous@c...:/cvsroot/dqsd co
-				<li>
-					dqsd</li>
+				cvs -d:pserver:anonymous@c...:/cvsroot/dqsd co dqsd</li>
 			</ul>
 		<li>
 			And whenever you want to get the latest:
