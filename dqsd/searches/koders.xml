@@ -1,0 +1,118 @@
+<search function="koders">
+  <name>Koders.com</name>
+  <category>Computers<category>Programming</category></category>
+  <contributor>Shawn K. Hall</contributor>
+  <link>http://www.koders.com/</link>
+  <email>Shawn[@]ReliableAnswers.com</email>
+  <description>
+    Search the extensive source code database on Koders.com<br />
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+	<tr><td> [search] </td><td> Search for this line/term </td></tr>
+	<tr><td> /asp </td><td> ASP language</td></tr>
+	<tr><td> /c </td><td> C language</td></tr>
+	<tr><td> /c# </td><td> C# language</td></tr>
+	<tr><td> /cpp </td><td> CPP language</td></tr>
+	<tr><td> /delphi </td><td> DELPHI language</td></tr>
+	<tr><td> /fortran </td><td> FORTRAN language</td></tr>
+	<tr><td> /java </td><td> JAVA language</td></tr>
+	<tr><td> /javascript </td><td> JAVASCRIPT language</td></tr>
+	<tr><td> /perl </td><td> PERL language</td></tr>
+	<tr><td> /php </td><td> PHP language</td></tr>
+	<tr><td> /python </td><td> PYTHON language</td></tr>
+	<tr><td> /ruby </td><td> RUBY language</td></tr>
+	<tr><td> /sql </td><td> SQL language</td></tr>
+	<tr><td> /tcl </td><td> TCL language</td></tr>
+	<tr><td> /vb </td><td> VB language</td></tr>
+	<tr><td> /vb.net </td><td> VB.NET language</td></tr>
+	<tr><td> /afl </td><td> License: AFL</td></tr>
+	<tr><td> /apsl </td><td> License: APSL</td></tr>
+	<tr><td> /asl </td><td> License: ASL</td></tr>
+	<tr><td> /cpl </td><td> License: CPL</td></tr>
+	<tr><td> /gpl </td><td> License: GPL</td></tr>
+	<tr><td> /ibmpl </td><td> License: IBMPL</td></tr>
+	<tr><td> /iosl </td><td> License: IOSL</td></tr>
+	<tr><td> /lgpl </td><td> License: LGPL</td></tr>
+	<tr><td> /mpl10 </td><td> License: MPL10</td></tr>
+	<tr><td> /mpl11 </td><td> License: MPL11</td></tr>
+	<tr><td> /osl </td><td> License: OSL</td></tr>
+	<tr><td> /psfl </td><td> License: PSFL</td></tr>
+	<tr><td> /spl </td><td> License: SPL</td></tr>
+	<tr><td> /w3c </td><td> License: W3C</td></tr>
+	<tr><td> /zll </td><td> License: ZLL</td></tr>
+	<tr><td> /zpl </td><td> License: ZPL</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+	<tr><td> koders filesystemobject /asp /gpl </td></tr>
+	<tr><td> koders fopen </td></tr>
+	<tr><td> koders network /vb.net </td></tr>
+    </table>
+  </description>
+  <comment>
+    This is pretty spiffy, eh?
+  </comment>
+
+  <form name="kodersf" method="get" action="http://www.koders.com/">
+    <input type="hidden" name="s" value="" />
+    <input type="hidden" name="_:btn" value="Search" />
+    <input type="hidden" name="_:la" value="*" />
+    <input type="hidden" name="_:li" value="*" />
+  </form>
+  <script><![CDATA[
+    function koders(q){
+      if( nullArgs("koders", q) ){return false;}
+	document.kodersf['_:la'].value = "*";
+	document.kodersf['_:li'].value = "*";
+	var args = parseArgs(q, "asp, c, c#, cpp, delphi, fortran, java, javascript, perl, php, python, ruby, sql, tcl, vb, vb.net, afl, apsl, asl, cpl, gpl, ibmpl, iosl, lgpl, mpl10, mpl11, osl, psfl, spl, w3c, zll, zpl");
+	if( q == "" )
+	  openSearchWindow("http://www.koders.com/");
+      else if( args.switches.length >= 1 ){
+	for (var i = 0; i < args.switches.length; i++){
+	  sw = args.switches[i];
+	  switch(sw.name){
+	    case "asp":		document.kodersf['_:la'].value = "ASP"; break;
+	    case "c":		document.kodersf['_:la'].value = "C"; break;
+	    case "c#":		document.kodersf['_:la'].value = "C#"; break;
+	    case "cpp":		document.kodersf['_:la'].value = "Cpp"; break;
+	    case "delphi":	document.kodersf['_:la'].value = "Delphi"; break;
+	    case "fortran":	document.kodersf['_:la'].value = "Fortran"; break;
+	    case "java":	document.kodersf['_:la'].value = "Java"; break;
+	    case "javascript":	document.kodersf['_:la'].value = "JavaScript"; break;
+	    case "perl":	document.kodersf['_:la'].value = "Perl"; break;
+	    case "php":		document.kodersf['_:la'].value = "PHP"; break;
+	    case "python":	document.kodersf['_:la'].value = "Python"; break;
+	    case "ruby":	document.kodersf['_:la'].value = "Ruby"; break;
+	    case "sql":		document.kodersf['_:la'].value = "SQL"; break;
+	    case "tcl":		document.kodersf['_:la'].value = "Tcl"; break;
+	    case "vb":		document.kodersf['_:la'].value = "VB"; break;
+	    case "vb.net":	document.kodersf['_:la'].value = "VB.NET"; break;
+	    case "afl":		document.kodersf['_:li'].value = "AFL"; break;
+	    case "apsl":	document.kodersf['_:li'].value = "APSL"; break;
+	    case "asl":		document.kodersf['_:li'].value = "ASL"; break;
+	    case "cpl":		document.kodersf['_:li'].value = "CPL"; break;
+	    case "gpl":		document.kodersf['_:li'].value = "GPL"; break;
+	    case "ibmpl":	document.kodersf['_:li'].value = "IBMPL"; break;
+	    case "iosl":	document.kodersf['_:li'].value = "IOSL"; break;
+	    case "lgpl":	document.kodersf['_:li'].value = "LGPL"; break;
+	    case "mpl10":	document.kodersf['_:li'].value = "MPL10"; break;
+	    case "mpl11":	document.kodersf['_:li'].value = "MPL11"; break;
+	    case "osl":		document.kodersf['_:li'].value = "OSL"; break;
+	    case "psfl":	document.kodersf['_:li'].value = "PSFL"; break;
+	    case "spl":		document.kodersf['_:li'].value = "SPL"; break;
+	    case "w3c":		document.kodersf['_:li'].value = "W3C"; break;
+	    case "zll":		document.kodersf['_:li'].value = "ZLL"; break;
+	    case "zpl":		document.kodersf['_:li'].value = "ZPL"; break;
+	    default:
+	  }
+	}
+      }
+      document.kodersf.s.value = args.q;
+      submitForm(kodersf);
+    }
+  ]]></script>
+  <created_by>
+    This search file was created on 2004/11/12 by Shawn K. Hall
+    Copyright © 2004 Shawn K. Hall; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>
