@@ -2,7 +2,7 @@
   <name>Bible Search</name>
   <description>
     Search The Bible Gateway for a scripture reference.<br/>
-    <div class="helpboxDescLabels">Switches:</div>
+    <div class="helpboxDescLabels">Bible Versions:</div>
     <table class="helpboxDescTable">
       <tr><td>/NIV</td><td> - </td><td>Search the New International Version (default).</td></tr>
       <tr><td>/AMP</td><td> - </td><td>Search the Amplified Bible.</td></tr>
@@ -16,15 +16,33 @@
       <tr><td>/WE</td><td> - </td><td>Search the Worldwide English Version.</td></tr>
       <tr><td>/YLT</td><td> - </td><td>Search Young's Literal Translation.</td></tr>
     </table>
+    <div class="helpboxDescLabels">Search Types:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/all</td><td> - </td><td>Search for verses containing ALL of the words</td></tr>
+      <tr><td>/any</td><td> - </td><td>Search for verses containing ANY of the words</td></tr>
+      <tr><td>/approx</td><td> - </td><td>Search for verses containing an APPROXIMATE phrase</td></tr>
+      <tr><td>/count</td><td> - </td><td>Count the verses containing these words</td></tr>
+      <tr><td>/exact</td><td> - </td><td>Search for verses containing an EXACT phrase</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Misc Search Options:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/word</td><td> - </td><td>Search whole words only</td></tr>
+      <tr><td>/link</td><td> - </td><td>Show only links to verses not the text of the verses themselves</td></tr>
+    </table>
     <div class="helpboxDescLabels">Examples:</div>
     <table class="helpboxDescTable">
       <tr><td>bg 1 cor 13:4-7</td></tr>
       <tr><td>bg rom 6:23 /KJV</td></tr>
+      <tr><td>bg matt 24</td></tr>
+      <tr><td>bg /exact /kjv Remember the Sabbath</td></tr>
+      <tr><td>bg /approx only begotten son</td></tr>
+      <tr><td>bg /any alpha omega /kjv /word</td></tr>
+      <tr><td>bg /all famine earthquake /link</td></tr>
     </table>
   </description>
   <category>Reference</category>
   <link>http://www.biblegateway.com/</link>
-  <contributor>Glenn Carr, David Thompson</contributor>
+  <contributor>Glenn Carr, David Thompson, Brent Beardsley</contributor>
 
   <form name="bgf"
         action="http://www.biblegateway.com/cgi-bin/bible"
@@ -36,19 +54,94 @@
     <input type="hidden" name="language" value="english"/>
   </form>
 
+  <form name="bgwordsearchf"
+        method="get"
+        action="http://www.biblegateway.com/cgi-bin/bible">
+    <input type="hidden" name="search" value="" />
+    <input type="hidden" name="SearchType" value="AND" />
+    <COMMENT>
+      The input element above, "SearchType", was a SELECT element with the following options...
+      <select name="SearchType">
+        <option value="AND">Matches ALL words</option>
+        <option value="OR">Matches ANY word</option>
+        <option value="EXACT">Exact phrase</option>
+        <option value="FULL_TEXT">Approximate phrase</option>
+        <option value="COUNT">Count Verses with these words</option>
+      </select>
+    </COMMENT>
+    <input type="hidden" name="restrict" value="" />
+    <input type="hidden" name="StartRestrict" value="" />
+    <input type="hidden" name="EndRestrict" value="" />
+    <input type="hidden" name="SearchWholeWords" value="yes" />
+    <input type="hidden" name="SearchAsLink" value="yes" />
+    <input type="hidden" name="rpp" value="25" />
+    <input type="hidden" name="language" value="english" />
+    <input type="hidden" name="searchpage" value="0" />
+    <input type="hidden" name="version" value="NIV" />
+  </form>
+
   <script><![CDATA[
     function bg(q)
     {
       if( nullArgs("bg", q) )
         return;
 
-      var args = parseArgs(q, "NIV, NASB, AMP, NLT, KJV, ESV, NKJV, KJ21, ASV, WE, YLT, DARBY");
+      var searchType = "";
+      var bibleVersion = "NIV";
+      var wholeWords = false;
+      var resultsAsReferences = false;
+
+      var bibleVersions = "NIV, NASB, AMP, NLT, KJV, ESV, NKJV, KJ21, ASV, WE, YLT, DARBY";
+      var bibleVersionsList = bibleVersions.split(/[,;\s]/);
+      var args = parseArgs(q, bibleVersions+", EXACT, ALL, ANY, APPROXIMATE, COUNT, WORD, LINK");
       if ( args.switches.length > 0 )
       {
-        document.bgf.version.value = args.switches[0].name.toUpperCase();
+        for (var i=0; i < args.switches.length; i++)
+	{
+	  var switchName = args.switches[i].name.toUpperCase();
+
+	  // check switch against bible versions first
+	  var isBibleVersion = false;
+	  for (var j = 0; j < bibleVersionsList.length; j++)
+	  {
+            if (switchName == bibleVersionsList[j])
+            {
+              isBibleVersion = true;
+	      bibleVersion = switchName;
+	      break;
+            }
+          }
+	  if (!isBibleVersion)
+	  {
+            switch (switchName)
+	    {
+            case "EXACT":       searchType = "EXACT";       break;
+	    case "ALL":         searchType = "AND";         break;
+	    case "ANY":         searchType = "OR";          break;
+	    case "APPROXIMATE": searchType = "FULL_TEXT";   break;
+	    case "COUNT":       searchType = "COUNT";       break;
+	    case "WORD":        wholeWords = true;          break;
+	    case "LINK":        resultsAsReferences = true; break;
+	    }
+	  }
+	}
       }
-      document.bgf.passage.value = args.q;
-      submitForm(bgf);
+
+      if (searchType == "")
+      {
+        document.bgf.version.value = bibleVersion;
+	document.bgf.passage.value = args.q;
+        submitForm(bgf);
+      }
+      else
+      {
+        document.bgwordsearchf.version.value = bibleVersion;
+	document.bgwordsearchf.SearchType.value = searchType;
+	document.bgwordsearchf.search.value = args.q;
+	document.bgwordsearchf.SearchWholeWords.value = (wholeWords) ? "yes"  : "";
+	document.bgwordsearchf.SearchAsLink.value = (resultsAsReferences) ? "yes" : "";
+	submitForm(bgwordsearchf);
+      }
     }
   ]]></script>
 
