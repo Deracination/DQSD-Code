@@ -19,6 +19,7 @@
 #define IDS_ERR_HOTKEY_WINDOW_FAILED    704
 #define IDS_ERR_HOTKEY_REG_FAILED       705
 #define IDS_ERR_VERSION_RESOURCE        706
+#define IDS_EXCEPTION_IN_VERSION_CHECK  707
 
 // Next default values for new objects
 // 

@@ -141,6 +141,7 @@ BEGIN
                             "The hotkey notification window couldn't be created"
     IDS_ERR_HOTKEY_REG_FAILED "Hotkey registration failed"
     IDS_ERR_VERSION_RESOURCE "Problem reading DLL version"
+    IDS_EXCEPTION_IN_VERSION_CHECK "Exception occurred in version check"
 END
 
 #endif    // English (U.S.) resources
