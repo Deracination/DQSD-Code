@@ -1,0 +1,118 @@
+<search function="shack">
+  <name>Shacknews.com Comments</name>
+  <description>
+    Search the shacknews.com comments database
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/user:username</td><td> - </td><td>Narrow search to username. If the username. Replace blanks in username with + (fex: Steve Gibson becomes Steve+Gibson)</td></tr>
+      <tr><td>/db:database</td><td> - </td><td>Database to use. Default is current, possible values: current, archive1</td></tr>
+      <tr><td>/type:type</td><td> - </td><td>Narrow search to post type. Default is all, possible values: all, i (informative), n (NWS)</td></tr>
+      <tr><td>/sortby:key</td><td> - </td><td>Sort results by key. Default is date, possible values: date, relevance</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>shack 1942 /type:i </td></tr>
+      <tr><td>shack Doom3 /type:all</td></tr>
+      <tr><td>shack poop /user:Steve+Gibson</td></tr>
+    </table>
+
+  </description>
+  <category>Other</category>
+  <link>http://www.shacknews.com/</link>
+  <contributor>Wolfgang Deutsch</contributor>
+  <email>wolfgang.deutsch@chello.at</email>
+   
+  <script><![CDATA[
+
+    // Default switches. Change as desired
+
+    var defaultQuery="";
+    var defaultUser="";
+    var defaultDb="current";
+    var defaultType="all";
+    var defaultSort="date";
+
+    // Possible values for switches
+    var switchValues = [];
+
+    switchValues["db"] = "current archive1";
+    switchValues["type"] = "all i n";
+    switchValues["sortby"] = "relevance date";
+
+    function shack(q)
+    {
+      if (nullArgs("shack", q))
+        return false;
+
+      var params = [];
+
+      params["query"] =  new Array("query=", defaultQuery);
+      params["user"] =   new Array("&user=", defaultUser);
+      params["db"] =     new Array("&db=", defaultDb);
+      params["type"] =   new Array("&type=", defaultType);
+      params["sortby"] = new Array("&sortby=", defaultSort);
+
+      var args = parseArgs(q, "user, db, type, sortby");
+
+      var url = "http://www.shacknews.com/jazz/search.x?";
+
+      for (var i = 0; i < args.switches.length; i++)
+      {
+
+        var sw = args.switches[i];
+        switch (sw.name)
+        {
+          case "user":
+            if( sw.value == "" )
+            {
+              nullArgs("shack","?");
+              return false;
+            }
+            else
+            { 
+              params["user"][1] = sw.value;
+            }
+            break;
+
+          default:
+            if (sw.value=="" || switchValues[sw.name].indexOf(sw.value)==-1)
+            {
+              nullArgs("shack","?");
+              return false;
+            }
+            else
+            { 
+              params[sw.name][1] = sw.value;
+            }
+            break;
+        }
+      }
+
+      if (args.switches.length == 0)
+      {
+        params["query"][1] = q;
+      }
+      else
+      {
+        params["query"][1] += args.q;
+      }
+
+      url += params["query"].join('');
+      url += params["user"].join('');
+      url += params["db"].join('');
+      url += params["type"].join('');
+      url += params["sortby"].join('');
+
+      openSearchWindow(url);
+
+
+    }
+  ]]></script>
+
+  <copyright>
+  Copyright (c) 2002 David Bau
+  Distributed under the terms of the
+  GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>
+
