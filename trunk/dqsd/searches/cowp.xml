@@ -1,0 +1,36 @@
+<search function="cowp">
+  <name>Country and Western Pickers of the Internet</name>
+  <description>
+    Search for lyrics and chords for country songs.<br/>
+    <div class="helpboxDescLabels">Switches:</div>
+  	<table class="helpboxDescTable">
+  	</table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>cowpie God Must Be A Cowboy</td></tr>
+  	</table>
+  </description>
+  <category>Reference</category>
+  <link>http://www.roughstock.com/cowpie/songs/</link>
+  <contributor>Brent Beardsley</contributor>
+  
+  <form name="cowpie_search"
+        action="http://www.roughstock.com/cgi-bin/AT-cowpiesearch.cgi"
+        method="post">
+    <input type="hidden" name="search"/>
+    <input type="hidden" name="searchButton"/>
+    <input type="hidden" name="sp" value="sp"/>
+  </form>
+
+  
+  <script><![CDATA[
+    function cowp(q)
+    {
+      if( nullArgs("cowp", q) )
+        return false;
+
+      document.cowpie_search.search.value = q;
+      submitForm(cowpie_search);
+    }
+  ]]></script>
+</search>
