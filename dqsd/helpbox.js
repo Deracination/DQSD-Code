@@ -9,14 +9,14 @@ function closeabout()
   try
   {
     unopened = (!aboutWindow || aboutWindow.closed);
+
+    if (!unopened)
+    {
+      aboutWindow.close();
+      unopened = true;
+    }
   }
   catch (exception) {}
-
-  if (!unopened)
-  {
-    aboutWindow.close();
-    unopened = true;
-  }
 }
 
 function searchCompare( s1, s2 )
