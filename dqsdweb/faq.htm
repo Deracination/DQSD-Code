@@ -411,11 +411,11 @@ function getDisplayDate(passedDate) {
 				is an alias?</a>
 		</div>
 		<div class="answer">
-			Aliases are simply other names for existing searches.&nbsp;&nbsp;Aliases are 
+			Aliases are simply other names for existing searches.&nbsp; Aliases are 
 			defined in aliases.txt and/or localaliases.txt, but localaliases.txt is meant 
 			to be the user-defined file, and it won't be overwritten on an install.&nbsp; 
 			Aliases also provide substitution of '%s' (no quotes) with the actual search 
-			string.&nbsp;&nbsp;This allows some custom searches to be added very quickly 
+			string.&nbsp; This allows some custom searches to be added very quickly 
 			just by adding the URL with '%s' in the query string.&nbsp; Aliases are also 
 			referred to as Shortcuts.
 		</div>
@@ -425,9 +425,10 @@ function getDisplayDate(passedDate) {
 				some of my aliases.&nbsp; Why?</a>
 		</div>
 		<div class="answer">
-			There is currently no way to undefine an alias in aliases.txt without removing 
-			it from aliases.txt.&nbsp;&nbsp;(I'm sure this will be fixed in an upcoming 
-			release.)
+			There is currently no way to undefine an alias in aliases.txt without
+			removing it or commenting it out in aliases.txt (though this will surely be fixed in an upcoming release).&nbsp; Be aware that this change
+			will be overwritten by later installations.<br>
+			Please also note that a local alias overrides an alias if they have the same name.
 		</div>
 		<br>
 		<div>
