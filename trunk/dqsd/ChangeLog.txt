@@ -51,6 +51,7 @@ New Searches
 * randomsearch - Searches a given engine for the definition of a random word (Neel Doshi)
 * rxlib - Search the Regular Expression library at RegExLib.com (Shawn K. Hall)
 * crit - Metacritic compiles reviews from respected critics and publications for film, video/dvd, music and games (Tom C.)
+* guardster - Guardster web encryption service (Gregory Krohne)
 
 Modified Searches
 
