@@ -16,6 +16,7 @@ New Searches
 * gmane - gmane.org mail to news service and search engine (Kim Gräsman)
 
 Modified Searches
+* jdk - updated urls for j2ee and 1.4, added 1.5, 1.2, 1.1 and api switches (Brent Beardsley)
 * httpinst - added additional parameter /filename to specify the local filename (Brent Beardsley)
 * bb - updated to work with new Best Buy website (Shawn Hall)
 * stk - updated to work with new Bloomberg site as reported by Casco Valle (Kim Gräsman)
