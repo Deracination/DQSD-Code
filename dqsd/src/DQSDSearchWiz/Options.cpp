@@ -58,7 +58,7 @@ void COptions::Load()
 	}
 	catch ( ... )
 	{
-		MessageBox( ::GetForegroundWindow(), _T("An enternal error was encountered:  COptions::Load"), _T("DQSD Search Wizard Exception"), MB_OK|MB_ICONERROR );
+		MessageBox( ::GetForegroundWindow(), _T("An internal error was encountered:  COptions::Load"), _T("DQSD Search Wizard Exception"), MB_OK|MB_ICONERROR );
 	}
 }
 
@@ -79,6 +79,6 @@ void COptions::Save()
 	}
 	catch ( ... )
 	{
-		MessageBox( ::GetForegroundWindow(), _T("An enternal error was encountered:  COptions::Save"), _T("DQSD Search Wizard Exception"), MB_OK|MB_ICONERROR );
+		MessageBox( ::GetForegroundWindow(), _T("An internal error was encountered:  COptions::Save"), _T("DQSD Search Wizard Exception"), MB_OK|MB_ICONERROR );
 	}
 }
