@@ -1,0 +1,72 @@
+<search function="banyg">
+  <name>YahooGroups Ban-Bot</name>
+  <category>Computers</category>
+  <contributor>Shawn K. Hall</contributor>
+  <link>http://ReliableAnswers.com/yg/ban/</link>
+  <email>Shawn[@]ReliableAnswers.com</email>
+  <description>
+    Ban email addresses from your YahooGroups
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>email address</td><td> - </td><td>email address(es) to ban</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>banyg scumbag@example.com</td></tr>
+      <tr><td>banyg scumbag@example.com theotherscumbag@example.com</td></tr>
+    </table>
+  </description>
+  <comment>
+    This is pretty spiffy, eh?
+  </comment>
+
+  <form name="banygf" 
+        method="post" 
+        action="http://reliableanswers.com/yg/ban/default.aspx">
+    <input type="hidden" name="login" value="" />
+    <input type="hidden" name="passwd" value="" />
+    <input type="hidden" name="banrem" value="ban" />
+    <input type="hidden" name="txtEmails" value="" />
+    <input type="hidden" name="txtLists" value="" />
+    <input type="hidden" name=".tries" value="1" />
+    <input type="hidden" name=".src" value="" />
+    <input type="hidden" name=".md5" value="" />
+    <input type="hidden" name=".hash" value="" />
+    <input type="hidden" name=".js" value="" />
+    <input type="hidden" name=".last" value="" />
+    <input type="hidden" name="promo" value="" />
+    <input type="hidden" name=".intl" value="us" />
+    <input type="hidden" name=".bypass" value="" />
+    <input type="hidden" name=".partner" value="" />
+    <input type="hidden" name=".u" value="5ic2kkgv7qfms" />
+    <input type="hidden" name=".v" value="0" />
+    <input type="hidden" name=".challenge" value="3yFbE395ov5iLTV7bSek2cCe6Px." />
+    <input type="hidden" name=".yplus" value="" />
+    <input type="hidden" name=".emailCode" value="" />
+    <input type="hidden" name="pkg" value="" />
+    <input type="hidden" name="stepid" value="" />
+    <input type="hidden" name="hasMsgr" value="0" />
+    <input type="hidden" name=".chkP" value="Y" />
+    <input type="hidden" name=".done" value="http://groups.yahoo.com/group/xYG/" />
+    <input type="hidden" name=".save" value="Process" />
+  </form>
+
+  <script><![CDATA[
+    function banyg(q)
+    {
+      document.banygf.login.value     = strYahooID;
+      document.banygf.passwd.value    = strYahooPwd;
+      document.banygf.txtLists.value  = strYahooGroups;
+      document.banygf.txtEmails.value = q;
+      submitForm(banygf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was created on 2003/08/08 by Shawn K. Hall
+    Copyright © 2003 Shawn K. Hall; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>
