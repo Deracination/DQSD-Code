@@ -37,6 +37,7 @@ Modified Searches
 * sf - added status switch (from Brent Beardsley)
 * chap - updated to work again (from Sarah Sweeney)
 * babel - updated to work again (from Brent Beardsley)
+* aj updated Ask Jeeves search (from Sam Mulube)
 
 Miscellaneous
 
