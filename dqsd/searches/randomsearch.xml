@@ -1,0 +1,47 @@
+<search function="randomsearch">
+  <name>Random Search</name>
+  <description>
+    Choses a random line item from the given file (second argument) and uses the given search function (first argument) to look it up.  Ideal for a word of the day lookup tool.<br/>
+    <div class="helpboxDescLabels">Usage:</div>
+    <table class="helpboxDescTable">
+      <tr><td>randomsearch &lt;<i>function</i>&gt; &lt;<i>filename</i>&gt;</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+      <tr><td>randomsearch dic /searches/randomsearch.txt</td><td> - </td><td>Uses the "dic" function to look up a random word from the list.</td></tr>
+    </table>
+  </description>
+  <category>Search the Web</category>
+  <contributor>Neel Doshi</contributor>
+  
+  <script><![CDATA[
+
+    function randomsearch(q)
+    {
+      if ( nullArgs("randomsearch", q) )
+        return false; 
+       
+      var args_array = q.split(' ');
+      var args_function = args_array.shift();
+      var args_file = args_array.shift();   
+
+      var itemtable = readTabDelimitedFile(args_file);
+      if (itemtable == "")
+      {
+      	alert("No words in " + args_file);
+      	return false;
+      }
+      var irand = Math.round(Math.random() * (itemtable.length-1));
+      var stritemsearch = new String(itemtable[irand]);
+      performsearch(args_function, stritemsearch);
+      
+      return true;          
+    }
+  ]]></script>
+
+  <copyright>
+	Copyright (c) 2002 David Bau
+	Distributed under the terms of the
+	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>

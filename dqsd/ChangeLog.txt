@@ -45,6 +45,8 @@ New Searches
 * jsx - new name for jsexec so that it fits the naming scheme of vbsx
 * ggl - Search Google Glossary (still in beta, but sooo useful already!).
 * loc - Search the Library of Congress 'Thomas' system (Shawn K. Hall)
+* seq - Shows argument URLs in sequence in a browser window (Neel Doshi)
+* randomsearch - Searches a given engine for the definition of a random word (Neel Doshi)
 
 Modified Searches
 
