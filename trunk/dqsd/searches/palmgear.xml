@@ -32,7 +32,7 @@
 
       var args = parseArgs(q, "new, updated");
 	  if (args.switches.length > 0) {
-	    switch (args.switches[i].name) {
+	    switch (args.switches[0].name) {
 			case 'updated': openSearchWindow('http://www.palmgear.com/index.cfm?fuseaction=software.updatedproducts1day&SID=&PartnerREF='); return;
 			case 'new': openSearchWindow('http://www.palmgear.com/index.cfm?fuseaction=software.newproducts1day&SID=&PartnerREF='); return;
 			default: break;
