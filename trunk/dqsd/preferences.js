@@ -239,3 +239,14 @@ alertmode=0;
 /* Length of menu Most Recently Used list
 */
 menuMRUlength = 5;
+
+/* The character we use with the 'Windows key' as a hotkey to jump to the searchbar
+ This should be a single UPPER CASE letter
+*/
+hotkeyCharacter = "S";
+/* An alternative if you want to do something more elaborate - set the hotkeyCharacter to "" and use this as a direct vkCode number
+ Looking up VK codes is left as an task for the reader....
+*/
+hotkeyVkCode = 0;
+
+
