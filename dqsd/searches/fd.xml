@@ -1,0 +1,25 @@
+<search function="fd">
+  <name>Foldoc</name>
+  <description>Free On-Line dictionary of computing: "fd xhtml"</description>
+  <category>Computers</category>
+  <link>http://foldoc.doc.ic.ac.uk/foldoc/index.html</link>
+  <contributor>tomjcorcoran</contributor>
+  <form name="foldocf"
+        target="_blank"
+        action="http://foldoc.doc.ic.ac.uk/foldoc/foldoc.cgi"
+        method="get">
+    <input type="hidden" name="query" value=""/>
+  </form>
+  <script><![CDATA[
+    function fd(q)
+    {
+      if( q == "" )
+        openSearchWindow("http://foldoc.doc.ic.ac.uk/foldoc/index.html");
+      else
+      {
+        document.foldocf.query.value = q;
+        submitForm(foldocf);
+      }
+    }
+  ]]></script>
+</search>
