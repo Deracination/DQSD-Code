@@ -1,4 +1,4 @@
--- What's new for 3.1.x (date ...)
+-- What's new for 3.1.9 (date 2004-12-01)
 
 Enhancements
 * Support for Czech month- and day names (Jiri Sedlacek)
@@ -21,6 +21,8 @@ Bug Fixes
 * Fixed the alias parsing to allow spaces around the delimiters (Monty Scroggins)
 * Check to see if startupCommands is defined before trying to use it (Brent Beardsley)
 * Removed creation of temporary .html file by DQSDTools.dll on startup to determine default browser. (Glenn Carr)
+* Fixed memory ownership bug in get_AppDataDirectory, which would cause explorer crashes (Kim Gräsman)
+* Fixed bug in WriteFile, so CreateFile failure actually returns an error right away (Kim Gräsman)
 
 New Searches
 * riaar - riaaradar.org RIAA label and artist membership search. (Thad Kerosky)

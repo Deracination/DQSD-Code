@@ -21,7 +21,7 @@ function versionCheck()
     {
       // The DLL version has to be great than or equal to
       // this number
-      if(!testObject.VersionIsCorrect(3,1,8,0))
+      if(!testObject.VersionIsCorrect(3,1,9,0))
       {
          alert("The DQSD helper DLL is out of date.\nPlease reboot and run the setup program again.");
          bSuccess = false;
