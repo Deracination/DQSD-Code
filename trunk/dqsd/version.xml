@@ -1,13 +1,13 @@
 <dqsd_version_info>
-    <type>final</type>
+    <type>beta</type>
     <version>
         <majorhi>3</majorhi>
         <majorlo>1</majorlo>
-        <minorhi>6</minorhi>
+        <minorhi>8</minorhi>
         <minorlo>0</minorlo>
     </version>
     <date>
-        April 30, 2003
+        December 2, 2003
     </date>
     <html_description>
         You are currently running version %lv %lt <nobr>(%ld)</nobr> of <a href="http://www.dqsd.net" onclick="window.close();">Dave's Quick Search Deskbar</a>.<br/><br/>
