@@ -11,9 +11,9 @@ function addsearch(fname, name, desc, link, cat)
 
     addhelp(newobj);
   }
-  catch (ex)
+  catch (except)
   {
-    alert("Error adding search - " + ex.description +
+    alert("Error adding search - " + except.description +
            "\n\nfunction: \"" + fname + "\"\nname: \"" + name + "\"\ndescription: \"" + desc + "\"");
   }
 }
@@ -75,7 +75,7 @@ try
   for (var iPrivate = 0; iPrivate < localSearches.length; iPrivate++)
     searchRoot.appendChild(localSearches[iPrivate]);
 }
-catch (ex) {}
+catch (except) {}
 
 
 
