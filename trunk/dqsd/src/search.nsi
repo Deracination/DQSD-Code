@@ -174,6 +174,7 @@ Section "Quick Search Deskbar (required)"
   File "DQSDTools\StdAfx.cpp"
   File "DQSDTools\StdAfx.h"
   File "DQSDTools\Utilities.h"
+  File "DQSDTools\Utilities.cpp"
   File "DQSDTools\resource.h"
 
   ; Create files with user preferences if they doesn't exist
