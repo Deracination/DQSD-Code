@@ -150,14 +150,26 @@ function showpop()
   mb.AppendSeparator( 0 );
   for (i = 0; i < categoryarray.length; i++)
   {
-    var hsubmenu = mb.AppendSubMenu( categoryarray[i] );
-    var helparray = categories[categoryarray[i]];
+    var categoryName = categoryarray[i];
+    var helparray = categories[categoryName];
+    
+    // Are there any enabled searches in this category?
+    for (var k = 0; k < helparray.length && !helparray[k].enabled; k++)
+    {
+    }
+
+    // If all the searches are disabled in the category, don't add a submenu
+    if ( k == helparray.length )
+      continue;
+
+    var hsubmenu = mb.AppendSubMenu( categoryName );
     helparray.sort( searchCompare );
     for (var k = 0; k < helparray.length; k++)
     {
       var search = helparray[k];
       var alias = getSearchAliases( search );
-      mb.AppendMenuItem( search.name + '\t' + alias, search.aliases[0], hsubmenu );
+      if ( search.enabled )
+        mb.AppendMenuItem( search.name + '\t' + alias, search.aliases[0], hsubmenu );
     }
   }
   
@@ -168,7 +180,7 @@ function showpop()
   {
     var alias = null;
     if ( isInternalSearch( fn ) )
-      alias = searches[fn].aliases[1]
+      alias = searches[fn].aliases[1];
     mnu( fn, alias );
     if ( fn != 'about' )
       saveMenuHistory( alias ? alias : fn );
