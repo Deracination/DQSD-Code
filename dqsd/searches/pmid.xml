@@ -8,14 +8,14 @@
   Search the PubMed journals database
     <div class="helpboxDescLabels">Examples:</div>
     <table class="helpboxDescTable">
-      <tr><td>pmid 12429004 for a specific publication</td></tr>
+      <tr><td>pmid 12429004 for a PMID reference</td></tr>
       <tr><td>pmid Reeves Ginifer for a name search</td></tr>
       <tr><td>pmid transdermal intravenous fentanyl for a keyword search</td></tr>
     </table>
   </description>
   <form name="pmidf"
         method="post"
-        action="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?SUBMIT=y">
+		action="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?SUBMIT=y">
     <input type="hidden" name="WebEnv" value="" />
     <input type="hidden" name="CMD" value="" />
     <input type="hidden" name="db" value="PubMed" />
@@ -53,8 +53,6 @@
     Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
   </copyright>
   <created_by>
-    This search file was initially created on 01/28/04 at 16:00:24
-    by Dave's Quick Search Deskbar Search Wizard version 1.2,
-    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+    This search file was initially created on 01/28/04 at 16:00:24 by Dave's Quick Search Deskbar Search Wizard version 1.2, Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
   </created_by>
 </search>
