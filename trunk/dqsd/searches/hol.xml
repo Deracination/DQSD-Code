@@ -1,0 +1,166 @@
+<search function="hol">
+  <name>Add Local Holiday</name>
+  <description>
+    Adds the ability to create local holidays from the Quick Search textfield<br/>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>hol My Birthday|personal_holidays|13|2></td></tr>
+  		<tr><td>- This example adds a holiday that repeats yearly.</td></tr>
+  		<tr><td>...................................................</td></tr>
+  		<tr><td>hol Jessica's Going Away Party!|personal_appointment|10|4|2004</td></tr>
+  		<tr><td>- This example adds a holiday that does not repeat. It will only show for the year specified (2004)</td></tr>
+  		<tr><td>...................................................</td></tr>
+  		<tr><td>Created by Erik Telford, Mango Multimedia (http://www.mangom2.com) customers@mangom2.com</td></tr>
+  	</table>
+  </description>
+  <category>Functions</category>
+  <script><![CDATA[
+    function hol(q)
+    {
+      if( nullArgs("hol", q) )
+        return false;
+      
+      // initialize all variables
+      var loaded, historyFileContent, newStuff, replace, et;
+      var isLeapYear, eventName, eventType, eventDay, eventMonth, eventYear;	
+      
+      isLeapYear = 1;
+      
+      // take the new event and create an array with a "|" delimeter
+      loaded = q.split("|");
+      
+      // there can only be 4 or 5 args for the holiday
+      if(loaded.length < 4) {
+      	alert("You must at enter at least an Event Name, Event Type, Event Day, and Event Month.");
+      	return false;
+      }
+      
+      if(loaded.length > 5) {
+    		alert("You may only enter at Event Name, Event Type, Event Day, and Event Month.");
+    		return false;
+      }
+      
+      // create vars from each part of the loaded array
+      eventName = loaded[0];
+      eventType = loaded[1];
+      eventDay = loaded[2];
+      eventMonth = loaded[3];
+
+      // if the eventYear arg exists, make sure it is 4 digits
+      if (loaded[4] > 0) {
+      	if (loaded[4].length < 4) {
+          alert("You entered an invalid year");
+          return false;
+		    }
+		    else
+		    {
+          eventYear = loaded[4];
+		    }
+	    }
+
+      // the day, month and year (if supplied) have to be numeric
+      if (isNaN(eventDay) == true) {
+      	alert("The day for this event must be a number.");
+      	return false;
+      }
+	
+      if (isNaN(eventMonth) == true) {
+      	alert("The month for this event must be a number.");
+      	return false;
+      }
+	
+      if(loaded.length == 5) {
+      
+      	if (isNaN(eventYear) == true) {
+      		alert("The year for this event must be a number.");
+      		return false;
+      	}
+      }
+	
+      // make sure the day is greater than 0
+      if(eventDay < 1) {
+      	alert("You supplied an invalid day");
+      	return false;
+      }
+	
+      // check if the year is a leap year
+      if(eventYear > 0) {
+      
+      	if(((eventYear % 4 == 0) && (eventYear % 100 != 0)) || (eventYear % 400 == 0)) {
+      		isLeapYear = 1;
+      	} else {
+      		isLeapYear = 0;
+      	}
+      }
+	
+      // if isLeapYear is true and eventMonth is 2 (February), make sure the eventDay is not > 29
+      // otherwise, make sure the day in february is not > 28
+      if(isLeapYear == 1 && eventDay > 29 && eventMonth == 2) {
+    		alert("You supplied an invalid day");
+    		return false;
+      }
+      if(isLeapYear == 0 && eventDay > 28 && eventMonth == 2) {
+  			alert("You supplied an invalid day");
+  			return false;
+      }
+
+      // no months have more than 31 days
+      if(eventDay > 31) {
+      	alert("You supplied an invalid day");
+      	return false;
+      }
+	
+      // if the eventDay is > 30, make sure the month supports 31 days
+      if(eventDay > 30) {
+      
+      	switch(eventMonth) {
+      
+      	case 4:	alert("You supplied an invalid day"); return false;
+      	case 6: alert("You supplied an invalid day"); return false;
+      	case 9:	alert("You supplied an invalid day"); return false;
+      	case 11: alert("You supplied an invalid day"); return false;
+      	}
+      
+      }
+	
+      // the eventMonth must be between 1 & 12 (if you don't want to use the Gregorian calendar, look elsewhere)
+      if(eventMonth < 1 || eventMonth > 12) {
+      	alert("You supplied an invalid month");
+      	return false;
+      }
+	
+      // write the new XML
+      if(loaded.length == 4) {	
+      	newStuff = '<event name="' + eventName + '" type="' + eventType + '">\n' + '   <date day="' + eventDay + '" month="' + eventMonth + '"/>\n</event>\n';
+      } else {
+      	newStuff = '<event name="' + eventName + '" type="' + eventType + '">\n' + '   <date day="' + eventDay + '" month="' + eventMonth + '" year="' + eventYear + '"/>\n</event>\n';
+      }
+	
+      // read the current 'localeventsfileurl' file
+      try {
+      	historyFileContent = readFile(localeventsfileurl);
+      
+      	// replace the top and bottom lines in the current file
+      	replace = new RegExp('<events>\n', 'gi');
+      	historyFileContent = historyFileContent.replace(replace, '');
+      	replace = new RegExp('\n</events>', 'gi');
+      	historyFileContent = historyFileContent.replace(replace, '');
+      } catch(et) {
+      	historyFileContent = "";
+      }	
+      
+      // replace any &'s in the new holiday with &amp;
+      replace = new RegExp('&', 'gi');
+      newStuff = newStuff.replace(replace, '\&amp;');
+      
+      // write the final file back (current file + new content)
+      historyFileContent += newStuff;
+      writeFile(localeventsfileurl, "<events>\n" + historyFileContent + "</events>\n");
+    }
+]]></script>
+  <copyright>
+	Copyright (c) 2004 Erik Telford, Mango Multimedia (www.mangom2.com)
+	Distributed under the terms of the
+	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>
