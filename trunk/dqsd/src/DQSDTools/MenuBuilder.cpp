@@ -67,6 +67,8 @@ STDMETHODIMP CMenuBuilder::SetSite(IUnknown* pUnkSite)
 		filelen = sizeof(filebuf);
 	}
 
+	RegCloseKey(hDqsdKey);
+
     if (success == FALSE)
 	{
 		Error(IDS_ERR_UNAUTHCALLER, IID_ILauncher);
