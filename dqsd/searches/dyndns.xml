@@ -1,8 +1,8 @@
 <search function="dyndns">
-  <name>Dyndns beta</name>
+  <name>DynDns.org</name>
   <category>Computers</category>
   <contributor>MLL</contributor>
-  <link>http://beta.dyndns.org/</link>
+  <link>http://www.dyndns.org/</link>
   <email></email>
   <description>
     <div class="helpboxDescLabels">Switches:</div>
@@ -11,16 +11,18 @@
     </table>
     <div class="helpboxDescLabels">Examples:</div>
     <table class="helpboxDescTable">
-      <tr><td></td></tr>
-      <tr><td></td></tr>
+      <tr><td>dyndns /pass:mypass myuser</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Variables:</div>
+    <table class="helpboxDescTable">
+      <tr><td>dyndnsUsername</td><td> - </td><td>define this variable in your localprefs.js and you don't need to specify the username every time. </td></tr>
     </table>
   </description>
   <form name="dyndnsf"
         method="post"
-        action="https://beta.dyndns.org/index.html">
+        action="https://www.dyndns.org/index.html">
     <input type="hidden" name="__login" value="1" />
-    <input type="hidden" name="username" value="mll02" />
-
+    <input type="hidden" name="username" value="" />
     <input type="hidden" name="password" value="" />
   </form>
   <script><![CDATA[
@@ -29,42 +31,13 @@
       if( nullArgs("dyndns", q) )
         return;
 
-      // Parse switches with parseArgs:
-
-      // parseArgs usage:
-      // Arguments:
-      //    q                - string from the search function
-      //    expectedSwitches - list or array of the expected switch values
-      //    expandSwitches   - optional parameter [default = true] used to determine 
-      //                       if the switch shortcuts should be expanded (i.e. /f becomes /foo)
-      // Returns an object with these properties:
-      //    q        - the input string with the switches removed
-      //    switches - array of objects with these two properties:
-      //                  name:   expanded name of the matched switch (i.e. foo as in /foo:bar)
-      //                  value:  value of switch (i.e. bar as in /foo:bar)
-      //    switch_val - associative array with the switch name as the key with the switch value 
-      //                 as the value. (i.e. switch_val["foo"] = "bar" as in /foo:bar)
-
       var args = parseArgs(q, "password");
-      //for (var iSwitch = 0; iSwitch < args.switches.length; iSwitch++)
-      //{
-      //  switch( args.switches[iSwitch].name )
-      //  {
-      //    case "username":
-      //      break;
-      //    case "password":
-      //      break;
-      //    default:
-      //      break;
-      //  }
-      //}
-
-      // FORM variables for dyndnsf
-      //document.dyndnsf.__login.value = "";
-      document.dyndnsf.username.value = args.q;
-
+	  var username = (typeof dyndnsUsername != 'undefined') ? dyndnsUsername : "";
+	  if (args.q != "") {
+		username = args.q;
+	  }
+      document.dyndnsf.username.value = username;
       document.dyndnsf.password.value = args.switch_val["password"];
-
       submitForm(dyndnsf);
     }
   ]]></script>
