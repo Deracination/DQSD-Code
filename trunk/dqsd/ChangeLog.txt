@@ -123,8 +123,10 @@ New / Modified Searches
 * dicfr - Search French words definition
 * af - Acronym Finder now accepts switches: /reverse, /begins_with, /wildcard
 * rz - RhymeZone search (an online tool that aspires to be the best and fastest way for writers to find words.)
+* mm - Changed to use generic multimap server and client rather than uk2.multimap.   Helps when their system is busy.
 
 
 Miscellaneous
 
 * Added default key-binding descriptions to help
+* Modified installation to prompt user for reboot if needed to replace old DLL
