@@ -1,6 +1,11 @@
 BODY, TD, P 
 { 
-    font-size: x-small; font-family: Verdana; 
+    font-family: Verdana; 
+    font-size: x-small; 
+}
+PRE
+{
+    font-size: x-small;
 }
 HR 
 { 
@@ -30,4 +35,8 @@ A.toplink
 { 
     font-size:.80em; 
     vertical-align: bottom; 
+}
+DIV.lastupdate
+{
+    font-style: italic;
 }

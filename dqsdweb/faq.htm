@@ -3,13 +3,38 @@
 <title>DQSD Frequently Asked Questions</title>
 <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
 <link rel="stylesheet" type="text/css" href="dqsd.css">
+<script language="Javascript1.2">
+function getDisplayMonth(iMonth) {
+    var monthArray = new Array("January","Febuary","March","April","May","June","July","August","September","October","November","December");
+    return monthArray[iMonth];
+}
+
+function getDisplayDate(passedDate) {
+    theDate = new Date(passedDate);
+    sDisplayDate = getDisplayMonth(theDate.getMonth()) + " " + theDate.getDate() + ", " + theDate.getFullYear();
+    return sDisplayDate;
+}
+
+</script>
 </head>
 <body>
-<h3>
-	<a id="top" name="top">DQSD Frequently Asked Questions</a>
-</h3>
-<i>Last updated: 10-July-2002</i>
+
+<center>
+<h2><a id="top" name="top">DQSD Frequently Asked Questions</a></h2>
+
+<div class="lastupdate">
+	<nobr>Last updated:
+	<script>document.write( getDisplayDate( document.lastModified ) );</script>
+	</nobr>
+</div>
+<div>
+<br/>
+[ <a href="doc.htm">DQSD home page</a> ]
+</div>
+</center>
+
 <hr>
+
 <div>
 	<a class="category" href="#general">1. General</a>
 </div>
@@ -127,8 +152,7 @@
 		add-on?</a>
 </div>
 <hr>
-<br>
-<table cellspacing="5" id="Table1">
+<table cellspacing="5">
 	<tr>
 		<td>
 			<div>
@@ -218,7 +242,7 @@
 	</ul>
 </div>
 <br>
-<table cellspacing="5" id="Table2">
+<table cellspacing="5">
 	<tr>
 		<td>
 			<div>
@@ -251,7 +275,7 @@
 	upgrade.
 </div>
 <br>
-<table cellspacing="5" id="Table3">
+<table cellspacing="5">
 	<tr>
 		<td>
 			<div>
@@ -366,7 +390,7 @@
 		http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/dqsd/dqsd/searches/</a>
 </div>
 <br>
-<table cellspacing="5" id="Table4">
+<table cellspacing="5">
 	<tr>
 		<td>
 			<div>
@@ -430,7 +454,7 @@
 		hasn't been defined yet.</p>
 </div>
 <br>
-<table cellspacing="5" id="Table5">
+<table cellspacing="5">
 	<tr>
 		<td>
 			<div>
@@ -480,7 +504,7 @@
 	to 'false'.
 </div>
 <br>
-<table cellspacing="5" id="Table6">
+<table cellspacing="5">
 	<tr>
 		<td>
 			<div>
@@ -519,7 +543,7 @@
 	release.
 </div>
 <br>
-<table cellspacing="5" id="Table7">
+<table cellspacing="5">
 	<tr>
 		<td>
 			<div>
@@ -663,7 +687,7 @@
 	</ul>
 </div>
 <br>
-<table cellspacing="5" id="Table8">
+<table cellspacing="5">
 	<tr>
 		<td>
 			<div>
@@ -706,5 +730,11 @@
 	examples (googlespell, etc), and use them as a template for your own.
 </div>
 <br>
+
+<div align="center">
+<br/>
+[ <a href="doc.htm">DQSD home page</a> ]
+</div>
+
 </body>
 </html>
