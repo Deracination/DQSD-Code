@@ -26,6 +26,7 @@ New Searches
 * nic - IEEE MAC address to company translator (Steve Poirier)
 * a9 - The Amazon.com Search (Gregory Krohne)
 * jd - Search javadocs.org (Brent Beardsley)
+* pp - Paypal Search (Shawn Hall)
 
 Modified Searches
 * jdk - updated urls for j2ee and 1.4, added 1.5, 1.2, 1.1 and api switches (Brent Beardsley)
