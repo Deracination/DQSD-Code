@@ -19,6 +19,7 @@ Modified Searches
 
 * setiq - yet another cosmetic change (use of <div> rather than <a>)
 * yg - Added /number switch for jumping directly to a message number in the archive
+* &, gg /cache - Moved from 'Other' category to 'Search the Web'
 
 Enhancements
 

@@ -26,7 +26,7 @@ $$|dlt
 $$$|pw
 %|ebay
 ^|av
-&|gg %s /cache|Google Cache|Given a URL, loads Google's cached copy of the web page.|Other
+&|gg %s /cache|Google Cache|Given a URL, loads Google's cached copy of the web page.|Search the Web
 &&|ia
 *|aw
 -|fst
