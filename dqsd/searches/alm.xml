@@ -4,7 +4,7 @@
   <category>Entertainment</category>
   <link>http://www.allmusic.com/</link>
   <switches>artist, album, style, label</switches>
-  <contributor>Ryan Edwards</contributor>
+  <contributor>Peter Risser, Ryan Edwards</contributor>
   <form name="almf"
         target="_blank"
         action="http://www.allmusic.com/cg/amg.dll"
