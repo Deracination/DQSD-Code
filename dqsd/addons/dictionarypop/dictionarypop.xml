@@ -115,7 +115,8 @@
     {
       if(event.result.error) 
       {
-        displayPopupMessage("Error executing web service. " + event.result.errorDetail.code + ", " + event.result.errorDetail.string + " " + event.result.errorDetail.raw);
+       displayPopupMessage("Error contacting web service. Check that your firewall is allowing Windows Explorer to access this web service. (www.mybubble.com:8080) (" +
+        event.result.errorDetail.code + ", " + event.result.errorDetail.string + " " + event.result.errorDetail.raw + ")");
       } 
       else 
       {
