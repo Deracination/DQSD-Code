@@ -180,12 +180,12 @@
       }
       switch(args.switches[0].name)
       {
-      case "author":   fhlc_author(args.q);  break;
-      case "callno":   fhlc_callno(args.q);  break;
-      case "film":     fhlc_film(args.q);    break;
-      case "place":    fhlc_place(args.q);   break;
-      case "subject":  fhlc_subject(args.q); break;
-      case "surname":  fhlc_surname(args.q); break;
+      case "author":   var author =  args.switch_val["author"];  if (author == "") author = args.q;   fhlc_author(author);   break;
+      case "callno":   var callno =  args.switch_val["callno"];  if (callno == "") callno = args.q;   fhlc_callno(callno);   break;
+      case "film":     var film =    args.switch_val["film"];    if (film == "") film = args.q;       fhlc_film(film);       break;
+      case "place":    var place =   args.switch_val["place"];   if (place == "") place = args.q;     fhlc_place(place);     break;
+      case "subject":  var subject = args.switch_val["subject"]; if (subject == "") subject = args.q; fhlc_subject(subject); break;
+      case "surname":  var surname = args.switch_val["surname"]; if (surname == "") surname = args.q; fhlc_surname(surname); break;
       }
     }
   ]]></script>
