@@ -27,6 +27,15 @@ InstallDirRegKey HKCR "CLSID\${DQSD_UUID}" "InstallDir"
 
 ; The stuff to install
 Section "DQSDSearchWizard"
+  ; Confirm that the user really does want to install  
+  MessageBox MB_YESNO|MB_ICONINFORMATION|MB_DEFBUTTON2 "This will install Dave's Quick Search Deskbar Search Wizard.  Would you like to continue?" IDYES userconfirmedinstall
+  Quit
+  userconfirmedinstall:
+
+  MessageBox MB_OKCANCEL|MB_ICONINFORMATION|MB_DEFBUTTON2 "Please close all Internet Explorer windows before proceeding.  If any IE windows are open during the install, you will probably have to reboot.  Press OK to continue after you have closed all IE windows." IDOK userconfirmedcloseie
+  Quit
+  userconfirmedcloseie:
+
   IfFileExists $INSTDIR\search.htm Installed
     SetAutoClose true
     MessageBox MB_OK|MB_ICONEXCLAMATION "Unable to find installation of Dave's Quick Search Deskbar.$\n$\nPlease install the latest version of Dave's Quick Search Deskbar."
@@ -52,6 +61,11 @@ Installed:
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\$R3" "DisplayName" "${APPNAME} (remove only)"
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\$R3" "UninstallString" '"$R2"'
   
+  IfRebootFlag rebootmsg norebootmsg
+    rebootmsg:
+    MessageBox MB_OK "${APPNAME} has been installed.$\n$\nYou should reboot your computer now to$\ncomplete the installation.$\n$\nDave's Quick Search Deskbar Search Wizard$\nCopyright (c) 2002 Glenn Carr$\nDistributed under the terms of the$\nGNU General Public License, Version 2"
+  norebootmsg:
+
 SectionEnd
 
 ; Uninstall stuff
