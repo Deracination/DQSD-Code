@@ -20,7 +20,8 @@ var MONTH_NAMES =
   nl: Array('Januari','Februari','Maart','April','Mei','Juni','Juli','Augustus','September','Oktober','November','December','Jan','Feb','Mrt','Apr','Mei','Jun','Jul','Aug','Sep','Okt','Nov','Dec'),
   dk: Array('Januar','Februar','Marts','April','Maj','Juni','Juli','August','September','Oktober','November','December','Jan','Feb','Mar','Apr','Maj','Jun','Jul','Aug','Sep','Okt','Nov','Dec'),
   pt: Array('Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro','Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'),
-  it: Array('Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre', 'Gen', 'Feb', 'Mar', 'Apr', 'Mag', 'Giu', 'Lug', 'Ago', 'Set', 'Ott', 'Nov', 'Dic')
+  it: Array('Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre', 'Gen', 'Feb', 'Mar', 'Apr', 'Mag', 'Giu', 'Lug', 'Ago', 'Set', 'Ott', 'Nov', 'Dic'),
+  is: Array('Janúar','Febrúar','Mars','Apríl','Maí','Júní','Júlí','Ágúst','September','Október','Nóvember','Desember','jan.','feb.','mar.','apr.','maí','jún.','júl.','ág.','sep.','okt.','nóv.','des.')
 };
 
 var DAY_NAMES =
@@ -33,10 +34,9 @@ var DAY_NAMES =
   nl: Array('Zondag','Maandag','Dinsdag','Woensdag','Donderdag','Vrijdag','Zaterdag','Zon','Maa','Din','Woe','Don','Vrij','Zat'),
   dk: Array('Søndag', 'Mandag', 'Tirsdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lørdag', 'Søn', 'Man', 'Tir', 'Ons', 'Tor', 'Fre', 'Lør'),
   pt: Array('Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Dom','Seg','Ter','Qua','Qui','Sex','Sab'),
-  it: Array('Domenica', 'Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato', 'Dom', 'Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab')
+  it: Array('Domenica', 'Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato', 'Dom', 'Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab'),
+  is: Array('sunnudagur','mánudagur','þriðjudagur','miðvikudagur','fimmtudagur','föstudagur','laugardagur','sun','mán','þri','mið','fim','fös','lau')
 };
-
-
 
 
 var QUICK_SEARCH =
@@ -48,7 +48,8 @@ var QUICK_SEARCH =
   no: "Hurtigsøk",
   nl: "Snelzoek",
   dk: "Hurtig Søgning",
-  pt: "Pesquisa Rápida"
+  pt: "Pesquisa Rápida",
+  is: "Hraðleit"
 };
 
 var HELP_TEXT =
@@ -60,7 +61,8 @@ var HELP_TEXT =
   no: "Skriv ? for hjelp",
   nl: "Typ ? voor hulp",
   dk: "Skriv ? for hjælp",
-  pt: "Digite ? para ajuda"
+  pt: "Digite ? para ajuda",
+  is: "? gefur hjálp"
 };
 
 var SEARCH_TITLE =
@@ -71,7 +73,8 @@ var SEARCH_TITLE =
   de: "Suchen",
   nl: "Zoek",
   no: "Søk",
-  dk: "Søg"
+  dk: "Søg",
+  is: "Leit"
 };
 
 var NEXT_MONTH =
@@ -81,7 +84,8 @@ var NEXT_MONTH =
   de: "Nächster Monat",
   nl: "Volgende maand",
   no: "Neste måned",
-  dk: "Næste måned"
+  dk: "Næste måned",
+  is: "Næsti mánuður"
 };
 
 var PREV_MONTH =
@@ -91,7 +95,8 @@ var PREV_MONTH =
   de: "Voriger Monat",
   nl: "Vorige maand",
   no: "Forrige måned",
-  dk: "Forrige måned"
+  dk: "Forrige måned",
+  is: "Fyrri mánuður"
 };
 
 var NEXT_YEAR =
@@ -101,7 +106,8 @@ var NEXT_YEAR =
   de: "Nächstes Jahr",
   nl: "Volgend jaar",
   no: "Neste år",
-  dk: "Næste år"
+  dk: "Næste år",
+  is: "Næsta ár"
 };
 
 var PREV_YEAR =
@@ -111,7 +117,8 @@ var PREV_YEAR =
   de: "Voriges Jahr",
   nl: "Vorig jaar",
   no: "Forrige år",
-  dk: "Forrige år"
+  dk: "Forrige år",
+  is: "Fyrra ár"
 };
 
 var GO_TO_TODAY =
@@ -121,7 +128,8 @@ var GO_TO_TODAY =
   de: "Wechselt auf aktuelles Datum",
   nl: "Ga naar vandaag",
   no: "Gå til i dag",
-  dk: "Gå til i dag"
+  dk: "Gå til i dag",
+  is: "Fara á daginn í dag"
 };
 
 
@@ -145,6 +153,3 @@ function local(stringmap)
   if (!qs) return stringmap["en"];
   return qs;
 }
-
-
-
