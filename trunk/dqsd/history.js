@@ -15,7 +15,19 @@ function saveHistory()
 // restore at most historylength entries from the saved history
 function restoreHistory()
 {
-  var loaded = readFile("history.txt").replace(/\r\n/g, '\n').split('\n');
+  var historyFileContent = null;
+  try
+  {
+    historyFileContent = readFile("history.txt");
+  }
+  catch (e) {}
+  
+  var loaded = null;
+  if (historyFileContent)
+    loaded = historyFileContent.replace(/\r\n/g, '\n').split('\n');
+  else // history.txt probably doesn't exist
+    loaded = new Array(0);
+
   for (var i = loaded.length - 1; i >= 0; i--)
   {
     if (loaded[i] && loaded[i] != "")
