@@ -584,7 +584,7 @@ document.write(
   + 'ondrop=dodrop() '
   + 'onblur=rst() '
   + 'onhelp=showpop() '
-  + 'oncontextmenu="return showcal();" '
+  + (calStart ? 'ondblclick' : 'oncontextmenu') + '="return showcal();" '
   + 'onkeydown="return okd();" '
   + 'onkeypress="return okp();" '
   + 'value="" '

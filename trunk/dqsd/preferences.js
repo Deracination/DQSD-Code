@@ -158,6 +158,14 @@ calwidth=179;
 calheight=156;
 
 
+/* Calendar start method.
+*  0 = right click
+*  1 = double click
+*  default is 0
+*/
+calStart=0;
+
+
 /* Default calendar. clicking on a calendar day will spawn the defined online calendar.
 *  Valid calendars include:
 *  yhocal - Yahoo Calendar [default]
