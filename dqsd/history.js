@@ -175,7 +175,7 @@ function histsearch( t, shift )
 
 function recent()
 {
-  var t = document.deff.q.value;
+  var t = document.deff.q.value.replace( /\\/g, '\\\\' );
 
   if (!t.match(/^!\S/)) return true;
 
