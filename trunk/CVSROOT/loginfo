@@ -23,6 +23,5 @@
 # For example:
 #DEFAULT (echo ""; id; echo %s; date; cat) >> $CVSROOT/CVSROOT/commitlog
 # or
-#ALL $CVSROOT/CVSROOT/syncmail %{sVv} glenncarr@users.sourceforge.net
+#ALL (echo ""; id; echo %{sVv}; date; cat) >> $CVSROOT/CVSROOT/commitlog
 ALL $CVSROOT/CVSROOT/syncmail %{sVv} dqsd-cvs@lists.sourceforge.net
-ALL (echo ""; id; echo %{sVv}; date; cat) >> $CVSROOT/CVSROOT/commitlog
