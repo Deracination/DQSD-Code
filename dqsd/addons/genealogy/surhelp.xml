@@ -9,9 +9,6 @@
   <form name="surhelpf"
         method="post"
         action="http://surhelp-bin.rootsweb.com/sursrch.pl">
-
-    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
-
     <input type="hidden" name="surname" value="" />
     <input type="hidden" name="site_typ" value="" />
     <COMMENT>
@@ -421,24 +418,7 @@
       if( nullArgs("surhelp", q) )
         return;
 
-      if( q == "" )
-      {
-        openSearchWindow("http://surhelp.rootsweb.com/");
-        return;
-      }
-
-      // FORM variables for surhelpf
-
-      // The wizard assigned the search string to this form field value because
-      // this field was the active element when the search file was generated.
-      // Change this to args.q if the search string is parsed with parseArgs.
-      document.surhelpf.surname.value = q;
-      //document.surhelpf.site_typ.value = "";
-      //document.surhelpf.post_typ.value = "";
-      //document.surhelpf.post_dt.value = "";
-      //document.surhelpf.locale.value = "";
-      //document.surhelpf.search.value = "";
-
+      document.surhelpf.surname.value = genealogy_parse_surname(q);
       submitForm(surhelpf);
     }
   ]]></script>
