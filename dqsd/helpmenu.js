@@ -44,7 +44,8 @@ function buildpop()
     else
     {
        var search = searches[aliases[entry]];
-       menucode += mi(search.name, search.fname, entry);
+       if (search)
+         menucode += mi(search.name, search.fname, entry);
     }
   }
   menucode += "</table></td><tr></table>";
