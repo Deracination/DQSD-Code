@@ -4,6 +4,7 @@ Version 0.4 (beta) - 09-Aug-2002
 * Escape characters < > & in user text and HTML text
 * Restrict search name to lowercase and valid filename characters
 * Minor UI changes - about box, icon, etc.
+* Fix XML and script generated for radio buttons
 
 Version 0.3 (beta) - 08-Aug-2002
 
