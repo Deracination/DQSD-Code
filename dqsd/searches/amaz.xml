@@ -13,6 +13,9 @@
   <script><![CDATA[
     function amaz(q)
     {
+      if( nullArgs("amaz", q) )
+        return false;
+
       var args = parseArgs(q, "books, music, classical, dvd, vhs, movies, toys, baby, computers, software, games, electronics, photography, tools, magazines, garden, kitchen, travel, cellular, outlet, auctions, zshops");
       if( q == "" )
         openSearchWindow("http://www.amazon.com/");
