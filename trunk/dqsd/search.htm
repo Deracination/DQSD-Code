@@ -328,7 +328,7 @@ function okp()
   if (window.event.keyCode != 14 && window.event.keyCode != 16
       && window.event.keyCode != 3 && window.event.keyCode != 22
       && window.event.keyCode != 24 && window.event.keyCode != 10
-      && window.event.keyCode != 13)
+      && window.event.keyCode != 13 && window.event.keyCode != 1)
     return true;
 
   if (window.event.keyCode == 13)
@@ -394,6 +394,23 @@ function okp()
     return false;
   }
 
+  if (window.event.keyCode == 1)
+  {
+    // DEL key forwarded as CTRL-A from KeyboardHook
+    range = document.selection.createRange();
+    if (range.parentElement().name != "q") return true;
+
+    if(range.text == "")
+    {
+      range.expand("character");
+      range.execCommand("Delete");
+    }
+    else
+    {
+      range.execCommand("Delete");
+    }
+    return false;
+  }
 
   // handle ctrl-p and ctrl-n for history
   if (window.event.keyCode == 16)
@@ -721,11 +738,16 @@ function rsz()
      paintclock();
 }
 
+var keyboardHook;
+
 function postStartup()
 {
   document.all.delaymsg.style.display = 'none';
   rsz();
   document.body.onresize=rsz;
+
+  keyboardHook = new ActiveXObject("DQSDTools.Launcher");
+  keyboardHook.InstallKeyboardHook();
 }
 
 </script>

@@ -2,6 +2,7 @@
 #include "stdafx.h"
 #include "DQSDTools.h"
 #include "Launcher.h"
+#include "KeyboardHook.h"
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -373,4 +374,20 @@ STDMETHODIMP CLauncher::GetFiles(BSTR bstrFileSpec, BSTR *pbstrFiles)
 	*pbstrFiles = bstrFiles.Detach();
 
 	return S_OK;
+}
+
+//
+// This is nothing to do with the launcher - I've just piggybacked it on to save
+// creating another class/interface
+//
+STDMETHODIMP CLauncher::InstallKeyboardHook()
+{
+	if(KeyboardHookInstall() != NULL)
+	{
+		return S_OK;
+	}
+	else
+	{
+		return Error(IDS_ERR_CANT_INSTALL_KEYBOARD_HOOK, IID_ILauncher);
+	}
 }

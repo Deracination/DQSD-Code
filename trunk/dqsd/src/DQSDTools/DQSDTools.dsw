@@ -7,10 +7,6 @@ Project: "DQSDTools"=.\DQSDTools.dsp - Package Owner=<4>
 
 Package=<5>
 {{{
-    begin source code control
-    "$/DQSDTools", ECAAAAAA
-    .
-    end source code control
 }}}
 
 Package=<4>

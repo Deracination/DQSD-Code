@@ -110,13 +110,6 @@ SOURCE="$(InputPath)"
 # PROP Default_Filter "cpp;c;cxx;rc;def;r;odl;idl;hpj;bat"
 # Begin Source File
 
-SOURCE=.\dlldatax.c
-# PROP Exclude_From_Scan -1
-# PROP BASE Exclude_From_Build 1
-# PROP Exclude_From_Build 1
-# End Source File
-# Begin Source File
-
 SOURCE=.\DQSDTools.cpp
 # End Source File
 # Begin Source File
@@ -131,6 +124,10 @@ SOURCE=.\DQSDTools.idl
 # Begin Source File
 
 SOURCE=.\DQSDTools.rc
+# End Source File
+# Begin Source File
+
+SOURCE=.\KeyboardHook.cpp
 # End Source File
 # Begin Source File
 
@@ -151,10 +148,7 @@ SOURCE=.\StdAfx.cpp
 # PROP Default_Filter "h;hpp;hxx;hm;inl"
 # Begin Source File
 
-SOURCE=.\dlldatax.h
-# PROP Exclude_From_Scan -1
-# PROP BASE Exclude_From_Build 1
-# PROP Exclude_From_Build 1
+SOURCE=.\KeyboardHook.h
 # End Source File
 # Begin Source File
 
