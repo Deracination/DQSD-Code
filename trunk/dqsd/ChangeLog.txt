@@ -6,6 +6,7 @@ Bug Fixes
 
 * Fixed a copy paste error in defer_tools.js (Kim Grasman)
 * Fixed translate.js to work with the latest babel and freetranslation search urls (Brent Beardsley)
+* language overrides in preferences/localprefs are now honored (Kim Gräsman)
 
 New Searches
 
