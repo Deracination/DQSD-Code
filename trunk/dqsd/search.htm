@@ -621,6 +621,7 @@ function clr()
 // dodragover() called when dragging over the textbox
 function dodragover()
 {
+  clr();
   window.event.dataTransfer.dropEffect='copy';
   window.event.returnValue = false;
 }
@@ -645,7 +646,8 @@ function dodrop()
        .replace(/[\s~`!@#$%\^&\*()\-=\+{}\[\];:'<>,\.\/\?]*$/, '');
   document.deff.q.value = q;
 
-  mnu("goo", "");
+  rst();
+  mnu("gg", "");
 }
 
 // rst() called when the texbox loses focus
