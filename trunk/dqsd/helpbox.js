@@ -67,13 +67,11 @@ function about()
     txt = txt.replace(/\r\n/g, '\n');
     txt = txt.replace(/\n\*/g, '<li>');
     txt = txt.replace(/\nVer/, '</b><br>Ver');
-    txt = txt.replace(/\nCopy/, '<p>Copy');
-    txt = txt.replace(/\nDist/, '<br>Dist');
+    txt = txt.replace(/\nCop/, '<p>Cop');
+    txt = txt.replace(/\nDis/, '<br>Dis');
     txt = txt.replace(/(David Bau)/, '<a href=mailto:davidbau@hotmail.com>$1</a>');
     txt = txt.replace(/(GNU.*2)\s\((.*txt)\)/, '<br><a href=$2 target=GNU>$1</a>');
     txt = txt.replace(/\n#[^\n]*/g, '');
-    txt = txt.replace(/-?\t([^\s]+)\t([^\(\[]+)\s[\(\[][^\)\]]+[\)\]]/g,
-    '<tr><td valign=top class=lb> $1 </td><td valign=top class=lg> $2 </td></tr>');
     txt = txt.replace(/<\/table>/, helptable + "</table>");
     txt = txt.replace(/\n\n/g, '<p>');
     txt = txt.replace(/\n/g, ' ');
@@ -81,14 +79,15 @@ function about()
     var basedir = window.location.href;
     basedir = basedir.substring(0, basedir.lastIndexOf('/') + 1);
     txt = txt.replace(/(view-source:)/g, '$1' + basedir);
-    mesg = "<title>About Dave's Quick Search Deskbar</title>";
-    mesg = mesg + "<style>body{margin:20px;border:0;padding:0;background-color:threedface;font-family:Tahoma,Arial;scrollbar-track-color:threedface}" +
+    var mesg = "<title>About Dave's Quick Search Deskbar</title>";
+    mesg += "<style>body{margin:20px;border:0;padding:0;background-color:threedface;font-family:Tahoma,Arial;scrollbar-track-color:threedface}" +
            "td{font-size:8pt;border-collapse:collapse} .lg{background:lightgreen;} .lb{background:skyblue;}</style>";
-    mesg = mesg + "<body scroll=yes><table height=100% width=100%><tr><td><center style=font-size:9pt><b>";
-    mesg = mesg + txt + "</td></tr></table>";
+    mesg += "<body scroll=yes><table height=100% width=100%><tr><td><center style=font-size:9pt><b>";
+    mesg += txt + "</td></tr></table>";
     opts = "height=480, width=420, menubar=no, scrollbars=yes, resizable=yes, toolbar=no, status=no";
     aboutWindow = window.open("about:blank", "_blank", opts);
     aboutWindow.document.write(mesg);
+    aboutWindow.document.close();
   }
   aboutWindow.focus();
 }

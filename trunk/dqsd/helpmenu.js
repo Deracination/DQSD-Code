@@ -47,9 +47,7 @@ function buildpop()
        menucode += mi(search.name, search.fname, entry);
     }
   }
-  menucode += mi("Google Search", "goo", "") +
-           "</table>" +
-           "</td><tr></table>";
+  menucode += "</table></td><tr></table>";
 
   pophelp.document.body.innerHTML = menucode;
   pophelp.document.body.style.border="outset 2px";

@@ -83,6 +83,7 @@ Section "Quick Search Deskbar (required)"
   File "..\search.htm"
   File "..\search.xml"
   File "..\aliases.txt"
+  File "..\menu.txt"
   File "..\calculate.js"
   File "..\calendar.js"
   File "..\clock.js"
@@ -182,6 +183,7 @@ Section "Uninstall"
   Delete /REBOOTOK $INSTDIR\search.htm
   Delete /REBOOTOK $INSTDIR\search.xml
   Delete /REBOOTOK $INSTDIR\aliases.txt
+  Delete /REBOOTOK $INSTDIR\menu.txt
   Delete /REBOOTOK $INSTDIR\calculate.js
   Delete /REBOOTOK $INSTDIR\calendar.js
   Delete /REBOOTOK $INSTDIR\clock.js
