@@ -1,0 +1,48 @@
+<search function="ggd">
+  <name>Google Desktop Search</name>
+  <category>Search the Web</category>
+  <contributor>Shawn K. Hall</contributor>
+  <email>Shawn[@]ReliableAnswers.com</email>
+  <link>http://desktop.google.com/</link>
+  <description>
+    Search Google Desktop Search from DQSD
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td> [term] </td><td> Search Google Desktop </td></tr>
+      <tr><td> /about </td><td> About Google Desktop </td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td> ggd dqsd search	</td></tr>
+      <tr><td> ggd asp design	</td></tr>
+      <tr><td> ggd /about	</td></tr>
+    </table>
+  </description>
+  <comment>
+    This is pretty spiffy, eh?
+  </comment>
+  <form name="ggdf" method="GET"
+        action="http://127.0.0.1:4664/search&amp;s=286122300">
+    <input type="hidden" name="q" value="" />
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="hidden" value="Search Desktop" name="btnG" />
+  </form>
+  <script><![CDATA[
+    function ggd(q){
+      if( nullArgs( "ggd", q ) ){
+        return false;
+      }
+      var args = parseArgs(q, "about");
+      for (var i = 0; i < args.switches.length; i++){
+        sw = args.switches[i];
+        switch(sw.name){
+          case "about":
+            openSearchWindow("http://desktop.google.com/");
+            return;
+        }
+      }
+      document.ggdf.q.value = args.q;
+      submitForm(ggdf);
+    }
+  ]]></script>
+</search>
