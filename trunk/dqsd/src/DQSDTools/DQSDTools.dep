@@ -1,20 +1,33 @@
 # Microsoft Developer Studio Generated Dependency File, included by DQSDTools.mak
 
 .\DQSDTools.cpp : \
-	".\dlldatax.h"\
 	".\DQSDTools.h"\
 	".\DQSDTools_i.c"\
 	".\Launcher.h"\
 	
 
 .\DQSDTools.rc : \
+	".\DQSDTools.tlb"\
 	".\Launcher.rgs"\
+	".\MenuBuilder.rgs"\
+	
+
+.\KeyboardHook.cpp : \
+	".\DQSDTools.h"\
+	".\KeyboardHook.h"\
+	".\StdAfx.h"\
 	
 
 .\Launcher.cpp : \
 	".\DQSDTools.h"\
 	".\Launcher.h"\
 	".\Utilities.h"\
+	
+
+.\MenuBuilder.cpp : \
+	".\DQSDTools.h"\
+	".\MenuBuilder.h"\
+	".\StdAfx.h"\
 	
 
 .\StdAfx.cpp : \
