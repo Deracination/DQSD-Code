@@ -25,7 +25,7 @@ defaultcal="yhocal"; // click on a calendar day uses yahoo calendar
 
 clocklongform=" EEE d MMM yyyy h:mm A ";
 clockshortform=" h:mm A ";
-clocktooltipform=" EEEE, MMMM d, yyyy h:mm A "; // Set to null or empty string ("") to turn off tooltip
+clocktooltipform=null; // tooltip turned off by default
 
 
 /* show the menu popup button?
