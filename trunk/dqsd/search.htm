@@ -152,6 +152,7 @@ clockupdate=1000;              // clock will update every 1 sec
 clocklongwidth=139;            // pixels for the long form
 clocklongform=" EEE d MMM yyyy h:mm A "; // long clock format string
 clockshortform=" h:mm A ";     // short clock format string
+clocktooltipform=" EEEE, MMMM d, yyyy h:mm A "; // tooltip clock format string
 clockstyle="text-align:right"; // css style overrides for the clock
 
 txtfldstyle="";                // css style overrides for the text field
@@ -3063,6 +3064,10 @@ function paintclock()
   document.deff.q.className = "clock";
   var now = new Date();
   document.deff.q.value = formatdate(now, clockformat);
+  
+  // Change tooltip to display clock if a format is defined for it
+  if ( clocktooltipform && clocktooltipform.length() > 0 )
+    document.deff.q.title = formatdate(now, clocktooltipform);
 }
 
 function startclock(delay)
