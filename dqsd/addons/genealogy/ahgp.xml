@@ -1,49 +1,33 @@
-<search function="usgw">
-  <name>US GenWeb</name>
+<search function="ahgp">
+  <name>American History and Genealogy Project</name>
   <description>
-    Goto US GenWeb State web pages.<br/>
+    Goto American History and Genealogy Project State web pages.<br/>
     <div class="helpboxDescLabels">Examples:</div>
     <table class="helpboxDescTable">
-      <tr><td>usgw berrien, mi</td></tr>
-      <tr><td>usgw district of columbia</td></tr>
+      <tr><td>ahgp berrien, mi</td></tr>
+      <tr><td>ahgp district of columbia</td></tr> 
     </table>
   </description>
-  <link>http://www.usgenweb.org</link>
+  <link>http://www.ahgp.org/</link>
   <category>Genealogy<category>Reference</category></category>
   <contributor>Brent Beardsley</contributor>
 
   <script src="addons/genealogy/genealogy_lib.js"></script>
   <script><![CDATA[
 
-    function usgw(q)
+    function ahgp(q)
     {
-      if( nullArgs("usgw", q) )
+      if( nullArgs("ahgp", q) )
         return false;
 
       if (!genealogy_check_lib_version("1.4")) {
-	return false;
+		return false;
       }
 
-      var state_search_url = 'http://www.usgenweb.org/statelinks-table.html';
-      var args = genealogy_parseArgs(q, "map, table, list");
-      if (args.switches.length > 0) {
-	switch (args.switches[0].name) {
-	case 'map':
-	  state_search_url = 'http://www.usgenweb.org/statelinks.html';
-	  break;
-	case 'list':
-	  state_search_url = 'http://www.usgenweb.org/statelinkstext.html';
-	  break;
-	case 'table':
-	default:
-	  state_search_url = 'http://www.usgenweb.org/statelinks-table.html';
-	  break;
-	}
-      }
-
-      var search_url = "http://www.usgenweb.org/statelinks-table.html";
-      var state = genealogy_parse_place_state(args.q);
-      var county = genealogy_parse_place_county(args.q);
+      var state_search_url = 'http://www.ahgp.org/states.html';
+      var search_url = "http://www.ahgp.org/states.html";
+      var state = genealogy_parse_place_state(q);
+      var county = genealogy_parse_place_county(q);
       var links = genealogy_get_known_page_links(search_url);
       var search_place_num = genealogy_lookup_place(state);
       var page_src = null;
@@ -133,12 +117,12 @@
       } else {
         search_url = state_search_url;
       }
-      genealogy_openSearchWindow(search_url, "usgw", q);
+      genealogy_openSearchWindow(search_url, "ahgp", q);
     }
     ]]>
   </script>
   <copyright>
-	Copyright (c) 2002 Brent Beardsley
+	Copyright (c) 2003 Brent Beardsley
 	Distributed under the terms of the
 	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
   </copyright>
