@@ -8,7 +8,6 @@
 #include <shlguid.h>
 #include <shlobj.h>
 
-
 #pragma comment(lib, "Version.lib")
 
 /////////////////////////////////////////////////////////////////////////////
@@ -16,7 +15,6 @@
 
 LPCTSTR CLauncher::DQSD_REG_KEY = _T("CLSID\\{226b64e8-dc75-4eea-a6c8-abcb4d1d37ff}");
 LPCTSTR CLauncher::DQSD_SEC_KEY = _T("CLSID\\{226b64e8-dc75-4eea-a6c8-abcb4d1d37ff}\\SecureFiles");
-
 
 STDMETHODIMP CLauncher::SetSite(IUnknown* pUnkSite)
 {
@@ -67,6 +65,8 @@ STDMETHODIMP CLauncher::SetSite(IUnknown* pUnkSite)
 		filelen = sizeof(filebuf);
 	}
 
+	RegCloseKey(hDqsdKey);
+
     if (success == FALSE)
 	{
 		Error(IDS_ERR_UNAUTHCALLER, IID_ILauncher);
@@ -76,14 +76,11 @@ STDMETHODIMP CLauncher::SetSite(IUnknown* pUnkSite)
 #endif
 
   return S_OK;
-};
-
-
+}
 
 STDMETHODIMP CLauncher::SubmitForm(VARIANT idForm)
 {
 	HRESULT hr;
-
 
 	// Check for correct VARIANT type
 	if (idForm.vt != VT_DISPATCH)
@@ -118,7 +115,7 @@ STDMETHODIMP CLauncher::SubmitForm(VARIANT idForm)
 
 
 	// Retrieve FORM from DOM, manipulate target window, and get HTML text
-	CComBSTR bstrTarget(_T("_self"));
+	CComBSTR bstrTarget(L"_self");
 	spFormElement->put_target(bstrTarget);
 	CComBSTR bstrHTML;
 	spHTMLElement->get_outerHTML(&bstrHTML);
@@ -126,12 +123,12 @@ STDMETHODIMP CLauncher::SubmitForm(VARIANT idForm)
 
 	// Dump HTML text in temp file
 	{
-		DWORD cbPath = _MAX_PATH;
+		DWORD cchPath = _MAX_PATH;
 		DWORD dwBytesWritten;
 		TCHAR szPath[_MAX_PATH];
-		::GetTempPath(cbPath, szPath);
+		::GetTempPath(cchPath, szPath);
 
-		StrNCat(szPath, _T("DQSDLaunch.html"), sizeof(szPath)/sizeof(TCHAR)-_tcslen(szPath)-1);
+		StrNCat(szPath, _T("DQSDLaunch.html"), lengthof(szPath) - _tcslen(szPath) - 1);
 		HANDLE hFile = ::CreateFile(szPath, GENERIC_WRITE, FILE_SHARE_READ, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 		if (hFile == INVALID_HANDLE_VALUE)
 			return HRESULT_FROM_WIN32(::GetLastError());
@@ -140,18 +137,17 @@ STDMETHODIMP CLauncher::SubmitForm(VARIANT idForm)
 
 		CComBSTR bstrOutput, bstrBanner;
 		bstrBanner.LoadString(IDS_BANNER);
-		bstrOutput.Append(_T("<html><body onload=\"document."));
+		bstrOutput.Append(L"<html><body onload=\"document.");
 		bstrOutput.Append(bstrFormName);
-		bstrOutput.Append(_T(".submit();\">\n"));
+		bstrOutput.Append(L".submit();\">\n");
 		bstrOutput.Append(bstrBanner);
-		bstrOutput.Append(_T("\n"));
+		bstrOutput.Append(L"\n");
 		bstrOutput.Append(bstrHTML);
-		bstrOutput.Append(_T("\n</body></html>\n"));
+		bstrOutput.Append(L"\n</body></html>\n");
 		::WriteFile(hFile, OLE2T(bstrOutput), bstrOutput.Length(), &dwBytesWritten, NULL);
 		::FlushFileBuffers(hFile);
 
 		::CloseHandle(hFile);
-
 
 		// Open html associated application, passing DQSDLaunch.html
 		HINSTANCE hInstance = ::ShellExecute(NULL, NULL, szPath, NULL, NULL, SW_SHOWNORMAL);
@@ -161,7 +157,6 @@ STDMETHODIMP CLauncher::SubmitForm(VARIANT idForm)
 
 	return S_OK;
 }
-
 
 STDMETHODIMP CLauncher::OpenDocument(BSTR strDoc, VARIANT* pvParameters)
 {
@@ -184,8 +179,6 @@ STDMETHODIMP CLauncher::OpenDocument(BSTR strDoc, VARIANT* pvParameters)
 	return S_OK;
 }
 
-
-
 STDMETHODIMP CLauncher::get_pathDefaultBrowser(BSTR *pVal)
 {
 	USES_CONVERSION;
@@ -196,7 +189,7 @@ STDMETHODIMP CLauncher::get_pathDefaultBrowser(BSTR *pVal)
 
 	// Create temp file with desired .html extension
 	::GetTempPath(cbDocPath, szDocPath);
-	StrNCat(szDocPath, _T("DQSDLaunch.html"), sizeof(szDocPath)/sizeof(TCHAR)-_tcslen(szDocPath)-1);
+	StrNCat(szDocPath, _T("DQSDLaunch.html"), lengthof(szDocPath) - _tcslen(szDocPath) - 1);
 	HANDLE hFile = ::CreateFile(szDocPath, GENERIC_WRITE, FILE_SHARE_READ, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 	if (hFile == INVALID_HANDLE_VALUE)
 		return HRESULT_FROM_WIN32(::GetLastError());
@@ -208,7 +201,7 @@ STDMETHODIMP CLauncher::get_pathDefaultBrowser(BSTR *pVal)
 		return E_FAIL;
 	
 	// Prepare string for shipping, and ship
-	*pVal = ::SysAllocString(T2OLE(szExePath));
+	*pVal = T2BSTR(szExePath);
 
 	return S_OK;
 }
@@ -231,7 +224,6 @@ STDMETHODIMP CLauncher::put_Debug(VARIANT_BOOL bDebug)
 
 	return S_OK;
 }
-
 
 STDMETHODIMP CLauncher::ReadFile(BSTR bstrFilename, BSTR *pbstrResult)
 {
@@ -282,42 +274,15 @@ STDMETHODIMP CLauncher::WriteFile(BSTR bstrFilename, BSTR bstrValue)
 	if ( INVALID_HANDLE_VALUE == hFile )
 		HRESULT_FROM_WIN32(::GetLastError());
 
+	// TODO: Avoid using conversion macros here -- it's dangerous, 
+	// since there's no telling how large bstrValue is
 	DWORD dwBytesWritten = 0;
-	BOOL bResult = ::WriteFile( hFile, W2CT( bstrValue ), lstrlenW( bstrValue ), &dwBytesWritten, NULL );
+	BOOL bResult = ::WriteFile( hFile, W2CT( bstrValue ), SysStringLen(bstrValue), &dwBytesWritten, NULL );
 	::FlushFileBuffers( hFile );
 	::CloseHandle( hFile );
 	
 	if ( 0 == bResult )
-		HRESULT_FROM_WIN32(::GetLastError());
-
-	return S_OK;
-}
-
-// Private methods
-
-HRESULT CLauncher::GetFilename( LPCTSTR szName, LPTSTR szResult, LPCTSTR pszDefaultExt /*= _T(".txt")*/ )
-{
-	USES_CONVERSION;
-
-	// Get the installation directory from the registry
-	CRegKey rk;
-	if ( ERROR_SUCCESS != rk.Open( HKEY_CLASSES_ROOT, DQSD_REG_KEY, KEY_READ ) )
-	{
-		Error(IDS_ERR_REGKEYNOTFOUND, IID_ILauncher);
-		return E_UNEXPECTED;
-	}
-
-	TCHAR szInstallDir[ _MAX_PATH ];
-	DWORD dwCount = sizeof( szInstallDir );
-	if ( ERROR_SUCCESS != rk.QueryValue( szInstallDir, _T("InstallDir"), &dwCount ) )
-	{
-		Error(IDS_ERR_REGKEYNOTFOUND, IID_ILauncher);
-		return E_UNEXPECTED;
-	}
-
-	// Add the install directory and an extension if not supplied
-	::PathCombine( szResult, szInstallDir, szName );
-	::PathAddExtension( szResult, pszDefaultExt );
+		return HRESULT_FROM_WIN32(::GetLastError());
 
 	return S_OK;
 }
@@ -327,8 +292,8 @@ STDMETHODIMP CLauncher::GetProtocolHandler(BSTR bstrProtocol, BSTR *pbstrHandler
 	USES_CONVERSION;
 
 	TCHAR szProtocolHandlerKey[ 128 ];
-	StrCpyN( szProtocolHandlerKey, W2T( bstrProtocol ), sizeof(szProtocolHandlerKey)/sizeof(TCHAR));
-	StrNCat( szProtocolHandlerKey, _T("\\shell\\open\\command"), sizeof(szProtocolHandlerKey)/sizeof(TCHAR)-lstrlenW(bstrProtocol)-1);
+	StrCpyN( szProtocolHandlerKey, W2CT( bstrProtocol ), lengthof(szProtocolHandlerKey));
+	StrNCat( szProtocolHandlerKey, _T("\\shell\\open\\command"), lengthof(szProtocolHandlerKey) - SysStringLen(bstrProtocol) - 1);
 
 	TCHAR szProtocolHandler[ _MAX_PATH ];
 	DWORD dwCount = sizeof( szProtocolHandler );
@@ -342,7 +307,7 @@ STDMETHODIMP CLauncher::GetProtocolHandler(BSTR bstrProtocol, BSTR *pbstrHandler
 		return E_UNEXPECTED;
 	}
 
-	*pbstrHandler = ::SysAllocString( T2W( szProtocolHandler ) );
+	*pbstrHandler = T2BSTR(szProtocolHandler);
 
 	return S_OK;
 }
@@ -377,7 +342,7 @@ STDMETHODIMP CLauncher::GetFiles(BSTR bstrFileSpec, BSTR *pbstrFiles)
 		if (fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)
 			continue;
 
-		bstrFiles.Append( _T("\n") );
+		bstrFiles.Append( L"\n" );
 		bstrFiles.Append( fd.cFileName );
 	}
 
@@ -413,7 +378,6 @@ STDMETHODIMP CLauncher::MapKeyCode(long lVKCode, long lCharCode)
 	g_mapKeyCodeToCharCode[ lVKCode ] = lCharCode;
 	return S_OK;
 }
-
 
 STDMETHODIMP CLauncher::get_VersionIsCorrect(int v1, int v2, int v3, int v4, VARIANT_BOOL *pVal)
 {
@@ -518,7 +482,6 @@ STDMETHODIMP CLauncher::get_VersionIsCorrect(int v1, int v2, int v3, int v4, VAR
 	}
 }
 
-
 __declspec(dllexport) void CALLBACK RestartExplorer(HWND hParent, HINSTANCE hInst, LPTSTR lpCmdLine, int nShow)
 {
 	UNREFERENCED_PARAMETER(hParent);
@@ -526,9 +489,9 @@ __declspec(dllexport) void CALLBACK RestartExplorer(HWND hParent, HINSTANCE hIns
 	UNREFERENCED_PARAMETER(lpCmdLine);
 	UNREFERENCED_PARAMETER(nShow);
 
-	HWND hwndShell = FindWindow("Progman", NULL);
+	HWND hwndShell = FindWindow(_T("Progman"), NULL);
 	::PostMessage(hwndShell, WM_QUIT, 0, 0L);
-	::WinExec("Explorer.exe",SW_SHOW);
+	::WinExec("Explorer.exe", SW_SHOW);
 }
 
 DWORD WINAPI ShutdownThread(void* pParam)
@@ -551,7 +514,6 @@ DWORD WINAPI ShutdownThread(void* pParam)
 	}
 	return 0;
 }
-
 
 STDMETHODIMP CLauncher::ShutdownBar(LPDISPATCH pDispDocument)
 {
@@ -633,9 +595,7 @@ STDMETHODIMP CLauncher::get_InstallationDirectory(BSTR* pbstrDirectory)
 		return hr;
 	}
 
-	CComBSTR bstrInstallDir;
-	bstrInstallDir.Append(szInstallDir);
-	*pbstrDirectory = bstrInstallDir.Detach();
+	*pbstrDirectory = T2BSTR(szInstallDir);
 	return S_OK;
 }
 
@@ -646,15 +606,15 @@ typedef struct SPECIAL_FOLDER_MAP_S {
 
 static SPECIAL_FOLDER_MAP_T SpecialFolders[] =
 {
-	{"AppData",             CSIDL_APPDATA},
-	{"Desktop",             CSIDL_DESKTOP},
-	{"Favorites",           CSIDL_FAVORITES},
-	{"History",             CSIDL_HISTORY},
-	{"MyDocuments",         CSIDL_PERSONAL},
-	{"Recent",              CSIDL_RECENT},
-	{"StartMenu",           CSIDL_STARTMENU}
+	{_T("AppData"),             CSIDL_APPDATA},
+	{_T("Desktop"),             CSIDL_DESKTOP},
+	{_T("Favorites"),           CSIDL_FAVORITES},
+	{_T("History"),             CSIDL_HISTORY},
+	{_T("MyDocuments"),         CSIDL_PERSONAL},
+	{_T("Recent"),              CSIDL_RECENT},
+	{_T("StartMenu"),           CSIDL_STARTMENU}
 };
-#define SpecialFoldersCount  (sizeof(SpecialFolders) / sizeof(SPECIAL_FOLDER_MAP_T))
+#define SpecialFoldersCount  (lengthof(SpecialFolders))
 
 STDMETHODIMP CLauncher::GetSpecialFolderLocation(BSTR bstrSpecialFolder, BSTR* pbstrLocation)
 {
@@ -688,9 +648,8 @@ STDMETHODIMP CLauncher::GetSpecialFolderLocation(BSTR bstrSpecialFolder, BSTR* p
 		return E_FAIL;
 	}
 
-	CComBSTR bstrLocation;
-	bstrLocation.Append(szPath);
-	*pbstrLocation = bstrLocation.Detach();
+	*pbstrLocation = T2BSTR(szPath);
+
 	return S_OK;
 }
 
@@ -724,7 +683,7 @@ STDMETHODIMP CLauncher::GetFolders(BSTR bstrBaseFolder, BSTR* pbstrFolders)
 		if (!(fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY))
 			continue;
 
-		bstrFolders.Append( _T("\n") );
+		bstrFolders.Append( L"\n" );
 		bstrFolders.Append( fd.cFileName );
 	}
 
@@ -836,6 +795,7 @@ STDMETHODIMP CLauncher::RenameFile(BSTR bstrFromFilename, BSTR bstrToFilename)
 	return S_OK;
 }
 
+// Private methods
 HRESULT CLauncher::GetInstallationDirectory( LPTSTR szResult, DWORD dwResultSize)
 {
 	// Get the installation directory from the registry to use for making sure the filenames are in the install path
@@ -874,4 +834,31 @@ BOOL CLauncher::VerifyFileInDirectoryTree( LPCTSTR szFilename, LPCTSTR szDir)
 	// Make sure to filename is in the directory
 	int nCommonPathLen = ::PathCommonPrefix(szCanonDir, szCanonFilename, NULL);
 	return (nCommonPathLen == (int)_tcslen(szCanonDir)) ? TRUE : FALSE;
+}
+
+HRESULT CLauncher::GetFilename( LPCTSTR szName, LPTSTR szResult, LPCTSTR pszDefaultExt /*= _T(".txt")*/ )
+{
+	USES_CONVERSION;
+
+	// Get the installation directory from the registry
+	CRegKey rk;
+	if ( ERROR_SUCCESS != rk.Open( HKEY_CLASSES_ROOT, DQSD_REG_KEY, KEY_READ ) )
+	{
+		Error(IDS_ERR_REGKEYNOTFOUND, IID_ILauncher);
+		return E_UNEXPECTED;
+	}
+
+	TCHAR szInstallDir[ _MAX_PATH ];
+	DWORD dwCount = sizeof( szInstallDir );
+	if ( ERROR_SUCCESS != rk.QueryValue( szInstallDir, _T("InstallDir"), &dwCount ) )
+	{
+		Error(IDS_ERR_REGKEYNOTFOUND, IID_ILauncher);
+		return E_UNEXPECTED;
+	}
+
+	// Add the install directory and an extension if not supplied
+	::PathCombine( szResult, szInstallDir, szName );
+	::PathAddExtension( szResult, pszDefaultExt );
+
+	return S_OK;
 }
