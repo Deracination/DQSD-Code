@@ -54,7 +54,7 @@ function showpop()
     }
   }
 
-  var fn = mb.Display();
+  var fn = mb.Display(document);
   if ( fn )
   {
     var alias = null;

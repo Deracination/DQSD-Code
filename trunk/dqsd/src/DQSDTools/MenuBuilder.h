@@ -65,7 +65,7 @@ public:
 	STDMETHOD(AppendSubMenu)(/*[in]*/ BSTR bstrName, VARIANT* pvParentMenu, /*[out,retval]*/ long* phmenu);
 	STDMETHOD(AppendMenuItem)(/*[in]*/ BSTR bstrItem, /*[in]*/ BSTR bstrKey, /*[in]*/ BSTR bstrToolTip, /*[in,optional]*/ VARIANT* pvhMenu);
 	STDMETHOD(AppendSeparator)(/*[in]*/ long hmenu);
-	STDMETHOD(Display)(VARIANT* pbstrSelection);
+	STDMETHOD(Display)(LPDISPATCH pDispDocument, VARIANT* pbstrSelection);
 
 // Implementation
 protected:

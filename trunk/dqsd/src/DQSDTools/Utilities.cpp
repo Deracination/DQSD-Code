@@ -2,7 +2,12 @@
 
 
 #include "StdAfx.h"
+#include <comdef.h>
+
 #include "Utilities.h"
+
+HWND g_hDQSDWindow;
+
 
 
 INTERNET_SCHEME GetScheme(LPCTSTR szURL)
@@ -101,6 +106,37 @@ WindowWalker()
 {
 	EnumWindows(TopLevelEnumCallback, NULL);
 }
+
+//
+// Find the DQSD window (usually, but not always, on the taskbar)
+//
+// Return:
+//		The window handle, or null if we fail
+HWND
+UtilitiesFindDQSDWindow(LPDISPATCH pDispDocument)
+{
+	IOleWindowPtr pOleWindow;
+
+	HRESULT hResult = pDispDocument->QueryInterface(IID_IOleWindow, (LPVOID*)&pOleWindow);
+	if(SUCCEEDED(hResult))
+	{
+		HWND hWnd;
+
+		hResult = pOleWindow->GetWindow(&hWnd);
+		ATLTRACE("UtilitiesFindDQSDWindow: hResult 0x%x, hWnd 0x%x\n", hResult, hWnd);
+		if(SUCCEEDED(hResult))
+		{
+			g_hDQSDWindow = hWnd;
+			return hWnd;
+		}
+	}
+	else
+	{
+		ATLTRACE("UtilitiesFindDQSDWindow: GetSiteFailed hResult 0x%x\n", hResult);
+	}
+	return NULL;
+}
+
 
 
 

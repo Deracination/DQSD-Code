@@ -19,7 +19,7 @@ function versionCheck()
   {
     try
     {
-      if(!testObject.VersionIsCorrect(3,0,0,15))
+      if(!testObject.VersionIsCorrect(3,0,0,18))
       {
          alert("The DQSD helper DLL is out of date");
          bSuccess = false;
