@@ -1,3 +1,11 @@
+-- What's new for ???
+
+Modified Searches
+
+* gg - MLL added /news and more language switches (type "gg ?")
+* setiq - MLL added warning to description about password retention
+
+
 -- What's new for 3.0.0.18 (beta)
 
 New Searches
