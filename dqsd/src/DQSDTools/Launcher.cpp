@@ -30,9 +30,26 @@ STDMETHODIMP CLauncher::SetSite(IUnknown* pUnkSite)
 
 	CComBSTR bstrURL;
 	if (FAILED(hr = spWebBrowser->get_LocationURL(&bstrURL)))
-    return hr;
+		return hr;
 
-	if (GetScheme(OLE2T(bstrURL)) != INTERNET_SCHEME_FILE)
+	HKEY hDqsdKey;
+	if (ERROR_SUCCESS != RegOpenKey(HKEY_CLASSES_ROOT, "CLSID\\{226b64e8-dc75-4eea-a6c8-abcb4d1d37ff}", &hDqsdKey))
+	{
+		Error(IDS_ERR_UNAUTHCALLER, IID_ILauncher);
+		return E_FAIL;
+	}
+	
+	DWORD dt;
+	TCHAR filebuf[1024];
+	DWORD filelen = sizeof(filebuf);
+
+	if (ERROR_SUCCESS != RegQueryValueEx(hDqsdKey, "SecureFile",  0, &dt, (LPBYTE)filebuf, &filelen))
+	{
+		Error(IDS_ERR_UNAUTHCALLER, IID_ILauncher);
+		return E_FAIL;
+	}
+
+	if (!URLMatchesFilename(OLE2T(bstrURL), filebuf))
 	{
 		Error(IDS_ERR_UNAUTHCALLER, IID_ILauncher);
 		return E_FAIL;
