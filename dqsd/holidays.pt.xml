@@ -1,8 +1,8 @@
 ﻿<!--
-
-   This file contains a listing of public holidays in Portugal for the year 2005.
+   This file contains a listing of public holidays in Portugal
+   for the years 2005-2009.
    (Paulo Ferrão | mesh@netcabo.pt)
-   
+
 -->
 
 <events>
@@ -10,10 +10,18 @@
      <date day="1" month="1"/>
   </event>
   <event name="Carnaval" type="public_holiday">
-     <date day="8" month="2"/>
+     <date day="8" month="2" year="2005"/>
+     <date day="7" month="2" year="2006"/>
+     <date day="6" month="2" year="2007"/>
+     <date day="5" month="2" year="2008"/>
+     <date day="4" month="2" year="2009"/>
   </event>
-  <event name="P&aacute;scoa" type="public_holiday">
-     <date day="25" month="3"/>
+  <event name="Sexta-Feira Santa" type="public_holiday">
+     <date day="25" month="3" year="2005"/>
+     <date day="24" month="3" year="2006"/>
+     <date day="23" month="3" year="2007"/>
+     <date day="22" month="3" year="2008"/>
+     <date day="21" month="3" year="2009"/>
   </event>
   <event name="Dia da Liberdade" type="public_holiday">
      <date day="25" month="4"/>
@@ -21,8 +29,12 @@
   <event name="Dia do Trabalhador" type="public_holiday">
      <date day="1" month="5"/>
   </event>
-  <event name="Corpo de Deus" type="public_holiday">
-     <date day="19" month="6"/>
+    <event name="Corpo de Deus" type="public_holiday">
+     <date day="26" month="5" year="2005"/>
+     <date day="25" month="5" year="2006"/>
+     <date day="24" month="5" year="2007"/>
+     <date day="23" month="5" year="2008"/>
+     <date day="22" month="5" year="2009"/>
   </event>
   <event name="Dia de Portugal" type="public_holiday">
      <date day="10" month="7"/>
