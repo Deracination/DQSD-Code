@@ -4,37 +4,52 @@
     Lookup the meaning of Windows/DOS file extensions.<br/>
     <div class="helpboxDescLabels">Usage:</div>
   	<table class="helpboxDescTable">
-  		<tr><td>fe {[a..z] | num | sym }</td></tr>
+      <tr><td colspan="3">fe {[a..z] | num | sym | extension}</td></tr>
+      <tr><td>[a..z]</td><td> - </td><td>list all extensions starting with this letter</td></tr>
+      <tr><td>num</td><td> - </td><td>list all extensions starting with numbers</td></tr>
+      <tr><td>sym</td><td> - </td><td>list all extensions starting with symbols</td></tr>
+      <tr><td>extension</td><td> - </td><td>show this particular extension</td></tr>
   	</table>
     <div class="helpboxDescLabels">Example:</div>
     <table class="helpboxDescTable">
-  		<tr><td>fe D</td></tr>
-  		<tr><td>fe doc</td></tr>
+      <tr><td>fe D</td></tr>
+      <tr><td>fe 8</td></tr>
       <tr><td>fe sym</td></tr>
-  		<tr><td>fe num</td></tr>
+      <tr><td>fe num</td></tr>
+  		<tr><td>fe doc</td></tr>
   	</table>
   </description>
   <category>Computers<category>Reference</category></category>
-  <link>http://www.filext.com/</link>
+  <link>http://filext.com/</link>
+  <form name="fef"
+        method="get"
+        action="http://filext.com/detaillist.php">
+    <input type="hidden" name="extdetail" value="" />
+  </form>
   
   <script><![CDATA[
     function fe(q)
     {
-      if( nullArgs("fe",q) )
-        return false;
+      if( nullArgs("fe", q) )
+        return;
 
       q = q.toLowerCase();
-      if (q == 'sym' || q == 'num') {
-        openSearchWindow("http://www.filext.com/" + q + ".htm");
-      } else if (/^[a-z]/i.test(q)) {
-        openSearchWindow("http://www.filext.com/" + q.charAt(0) + ".htm");
-      } else if (/^[0-9]/i.test(q)) {
-        openSearchWindow("http://www.filext.com/num.htm");
+
+      if (q == 'sym') {
+        openSearchWindow("http://filext.com/alphalist.php?extstart=^[^A-Z0-9]");
+      } else if (q == 'num') {
+        openSearchWindow("http://filext.com/alphalist.php?extstart=^[0-9]");
+      } else if (/^[a-z]/i.test(q) && q.length == 1) {
+        openSearchWindow("http://filext.com/alphalist.php?extstart=^"+q);
       } else if (/^[\W_]/i.test(q)) {
         openSearchWindow("http://www.filext.com/sym.htm");
       } else {
-          nullArgs("fe","?");
+        document.fef.extdetail.value = q;
+        submitForm(fef);
       }
+
+
+
     }
   ]]></script>
 
