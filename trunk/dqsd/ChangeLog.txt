@@ -1,3 +1,22 @@
+-- What's new for ???????
+
+New Searches
+
+* newsau - Search for news topics at news.com.au, from Steve Lin
+
+Modified Searches
+
+* 
+
+Enhancements
+
+* 
+
+Bug Fixes
+
+* 
+
+
 -- What's new for 3.0.0.19 (beta)
 
 New Searches
