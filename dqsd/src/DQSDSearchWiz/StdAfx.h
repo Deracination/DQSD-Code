@@ -32,6 +32,8 @@ extern CComModule _Module;
 #include <atlhost.h>
 #include <atlapp.h>
 #include <atlctrls.h>
+#include <atlctrlx.h>
+#include <atlmisc.h>
 
 #include <string>
 #include <vector>
