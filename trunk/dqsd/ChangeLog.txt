@@ -1,3 +1,16 @@
+-- What's new for 3.?.?
+
+New Searches
+
+* yp - Yellow pages search from Tim Danner
+* setiq - Login as an admin to your setiqueue web admin interface - from MLL
+
+Bug Fixes
+
+* Changed regex in parseArgs to allow any non-whitespace character in switch values.  
+  Previously it only allowed identifier characters which excluded periods, etc.
+
+
 -- What's new for 3.0 (June 28, 2002)
 
 Search bar
