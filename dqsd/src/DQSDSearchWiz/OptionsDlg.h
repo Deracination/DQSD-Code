@@ -1,4 +1,5 @@
 // OptionsDlg.h : Declaration of the COptionsDlg
+// Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
 
 #ifndef __OPTIONSDLG_H_
 #define __OPTIONSDLG_H_

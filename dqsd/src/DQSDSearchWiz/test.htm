@@ -5,7 +5,53 @@
 
 <body>
 test.htm
-<form name="form1" method="GET" action="">
+<form name="form1" method="GET" action="relative/path/test.htm">
+
+<p><input type="text" name="textfield"></p>
+<p><input type="checkbox" name="checkbox1" value="ON" checked></p>
+<p><input type="checkbox" name="checkbox2" value="ON"></p>
+<p><select name="select1">
+<option value="op1">Option 1</option>
+<option value="op2" selected>Option 2</option>
+</select></p>
+<p>
+<input type="radio" name="radio1" value="option1" checked>
+<input type="radio" name="radio1" value="option2">
+<input type="radio" name="radio1" value="option3"></p>
+
+<textarea name="textarea1">
+this is the value of the textarea
+</textarea>
+
+<input type="submit">
+
+</form>
+
+
+<form name="form2" method="GET" action="/absolute/path/test.htm">
+
+<p><input type="text" name="textfield"></p>
+<p><input type="checkbox" name="checkbox1" value="ON" checked></p>
+<p><input type="checkbox" name="checkbox2" value="ON"></p>
+<p><select name="select1">
+<option value="op1">Option 1</option>
+<option value="op2" selected>Option 2</option>
+</select></p>
+<p>
+<input type="radio" name="radio1" value="option1" checked>
+<input type="radio" name="radio1" value="option2">
+<input type="radio" name="radio1" value="option3"></p>
+
+<textarea name="textarea1">
+this is the value of the textarea
+</textarea>
+
+<input type="submit">
+
+</form>
+
+
+<form name="form3" method="GET" action="">
 
 <p><input type="text" name="textfield"></p>
 <p><input type="checkbox" name="checkbox1" value="ON" checked></p>

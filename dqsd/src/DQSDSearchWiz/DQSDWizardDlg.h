@@ -1,4 +1,5 @@
 // DQSDWizardDlg.h : Declaration of the CDQSDWizardDlg
+// Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
 
 #ifndef __DQSDWIZARDDLG_H_
 #define __DQSDWIZARDDLG_H_
@@ -68,6 +69,7 @@ private:
 	string m_strInstallDir;
 	string m_strBaseURL;
 	string m_strVersion;
+	string m_strCopyright;
 	CSearchNameEdit m_editSearchName;
 	COptions m_options;
 

@@ -1,4 +1,5 @@
 // SearchWizard.h : Declaration of the CSearchWizard
+// Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
 
 #ifndef __SEARCHWIZARD_H_
 #define __SEARCHWIZARD_H_

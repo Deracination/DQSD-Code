@@ -1,4 +1,6 @@
 // OptionsDlg.cpp : Implementation of COptionsDlg
+// Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+
 #include "stdafx.h"
 #include "OptionsDlg.h"
 
