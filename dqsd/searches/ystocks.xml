@@ -1,10 +1,10 @@
 <search function="ystocks">
   <name>Yahoo Finance</name>
   <description>Use Yahoo Finance to find information about specific stocks.<br />
-	<b>Info Mode</b> (default): use to lookup stock symbols: "ystocks C /chart".  Optional switches:<br />
+	<a class="helpboxDescLabels">Info Mode:</a> (default): use to lookup stock symbols: "ystocks C /chart".  Optional switches:<br />
 	basic (default),  daywatch,  performance,  realtime,  detailed,  chart,  research,  options,  orderbook<br />
 
-	<b>Lookup Mode</b> (/lookup): Use to find symbols. "ystocks /lookup Citigroup".  Optional switches:<br />
+	<a class="helpboxDescLabels">Lookup Mode:</a> (/lookup): Use to find symbols. "ystocks /lookup Citigroup".  Optional switches:<br />
 	Market:  world or us (default)<br />
 	Instrument Type: any (default),  stocks,  options,  funds,  index<br />
   </description>

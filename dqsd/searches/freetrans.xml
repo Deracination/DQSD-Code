@@ -2,17 +2,20 @@
   <name>FreeTranslation.com Language Translation</name>
   <description>Use FreeTranslation.com to translate text from one language to another:<br />
 	"freetrans /from:en /to:es hello how are you" or "freetrans /from:en /to:es http://www.whitehouse.gov"<br />
-	/from:en /to:fr - English to French<br />
-	/from:en /to:de - English to German<br />
-	/from:en /to:it - English to Italian<br />
-	/from:en /to:pt - English to Portuguese<br />
-	/from:en /to:es - English to Spanish<br />
-	/from:en /to:no - English to Norwegian<br />
-	/from:fr /to:en - French to English<br />
-	/from:de /to:en - German to English<br />
-	/from:it /to:en - Italian to English<br />
-	/from:pt /to:en - Portuguese to English<br />
-	/from:es /to:en - Spanish to English<br />
+	<a class="helpboxDescLabels">Switches:</a><br />
+	<table cellpadding="0" cellspacing="0" border="0">
+		<tr><td class="helpboxDescColumns">/from:en</td><td class="helpboxDescColumns">/to:fr</td><td  class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">English to French</td></tr>
+		<tr><td class="helpboxDescColumns">/from:en</td><td class="helpboxDescColumns">/to:de</td><td  class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">English to German</td></tr>
+		<tr><td class="helpboxDescColumns">/from:en</td><td class="helpboxDescColumns">/to:it</td><td  class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">English to Italian</td></tr>
+		<tr><td class="helpboxDescColumns">/from:en</td><td class="helpboxDescColumns">/to:pt</td><td  class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">English to Portuguese</td></tr>
+		<tr><td class="helpboxDescColumns">/from:en</td><td class="helpboxDescColumns">/to:es</td><td  class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">English to Spanish</td></tr>
+		<tr><td class="helpboxDescColumns">/from:en</td><td class="helpboxDescColumns">/to:no</td><td  class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">English to Norwegian</td></tr>
+		<tr><td class="helpboxDescColumns">/from:fr</td><td class="helpboxDescColumns">/to:en</td><td  class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">French to English</td></tr>
+		<tr><td class="helpboxDescColumns">/from:de</td><td class="helpboxDescColumns">/to:en</td><td  class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">German to English</td></tr>
+		<tr><td class="helpboxDescColumns">/from:it</td><td class="helpboxDescColumns">/to:en</td><td  class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Italian to English</td></tr>
+		<tr><td class="helpboxDescColumns">/from:pt</td><td class="helpboxDescColumns">/to:en</td><td  class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Portuguese to English</td></tr>
+		<tr><td class="helpboxDescColumns">/from:es</td><td class="helpboxDescColumns">/to:en</td><td  class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Spanish to English</td></tr>
+	</table>
   </description>
   <contributor>Neel Doshi, Greg Mitchell</contributor>
   <category>Reference</category>

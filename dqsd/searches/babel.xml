@@ -2,25 +2,28 @@
   <name>Babelfish Language Translation</name>
   <description>Use the BabelFish to translate text from one language to another:<br />
 	"babel /from:en /to:es hello how are you" or "babel /from:en /to:es http://www.whitehouse.gov"<br />
-	/from:en /to:zh - English to Chinese<br />
-	/from:en /to:fr - English to French<br />
-	/from:en /to:de - English to German<br />
-	/from:en /to:it - English to Italian<br />
-	/from:en /to:ja - English to Japanese<br />
-	/from:en /to:ko - English to Korean<br />
-	/from:en /to:pt - English to Portuguese<br />
-	/from:en /to:es - English to Spanish<br />
-	/from:zh /to:en - Chinese to English<br />
-	/from:fr /to:en - French to English<br />
-	/from:fr /to:de - French to German<br />
-	/from:de /to:en - German to English<br />
-	/from:de /to:fr - German to French<br />
-	/from:it /to:en - Italian to English<br />
-	/from:ja /to:en - Japanese to English<br />
-	/from:ko /to:en - Korean to English<br />
-	/from:pt /to:en - Portuguese to English<br />
-	/from:ru /to:en - Russian to English<br />
-	/from:es /to:en - Spanish to English<br />
+	<a class="helpboxDescLabels">Switches:</a><br />
+	<table cellpadding="0" cellspacing="0" border="0">
+		<tr><td class="helpboxDescColumns">/from:en</td><td class="helpboxDescColumns">/to:zh</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">English to Chinese</td></tr>
+		<tr><td class="helpboxDescColumns">/from:en</td><td class="helpboxDescColumns">/to:fr</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">English to French</td></tr>
+		<tr><td class="helpboxDescColumns">/from:en</td><td class="helpboxDescColumns">/to:de</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">English to German</td></tr>
+		<tr><td class="helpboxDescColumns">/from:en</td><td class="helpboxDescColumns">/to:it</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">English to Italian</td></tr>
+		<tr><td class="helpboxDescColumns">/from:en</td><td class="helpboxDescColumns">/to:ja</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">English to Japanese</td></tr>
+		<tr><td class="helpboxDescColumns">/from:en</td><td class="helpboxDescColumns">/to:ko</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">English to Korean</td></tr>
+		<tr><td class="helpboxDescColumns">/from:en</td><td class="helpboxDescColumns">/to:pt</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">English to Portuguese</td></tr>
+		<tr><td class="helpboxDescColumns">/from:en</td><td class="helpboxDescColumns">/to:es</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">English to Spanish</td></tr>
+		<tr><td class="helpboxDescColumns">/from:zh</td><td class="helpboxDescColumns">/to:en</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Chinese to English</td></tr>
+		<tr><td class="helpboxDescColumns">/from:fr</td><td class="helpboxDescColumns">/to:en</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">French to English</td></tr>
+		<tr><td class="helpboxDescColumns">/from:fr</td><td class="helpboxDescColumns">/to:de</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">French to German</td></tr>
+		<tr><td class="helpboxDescColumns">/from:de</td><td class="helpboxDescColumns">/to:en</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">German to English</td></tr>
+		<tr><td class="helpboxDescColumns">/from:de</td><td class="helpboxDescColumns">/to:fr</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">German to French</td></tr>
+		<tr><td class="helpboxDescColumns">/from:it</td><td class="helpboxDescColumns">/to:en</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Italian to English</td></tr>
+		<tr><td class="helpboxDescColumns">/from:ja</td><td class="helpboxDescColumns">/to:en</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Japanese to English</td></tr>
+		<tr><td class="helpboxDescColumns">/from:ko</td><td class="helpboxDescColumns">/to:en</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Korean to English</td></tr>
+		<tr><td class="helpboxDescColumns">/from:pt</td><td class="helpboxDescColumns">/to:en</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Portuguese to English</td></tr>
+		<tr><td class="helpboxDescColumns">/from:ru</td><td class="helpboxDescColumns">/to:en</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Russian to English</td></tr>
+		<tr><td class="helpboxDescColumns">/from:es</td><td class="helpboxDescColumns">/to:en</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Spanish to English</td></tr>
+	</table>
   </description>
   <contributor>Neel Doshi, Greg Mitchell</contributor>
   <category>Reference</category>

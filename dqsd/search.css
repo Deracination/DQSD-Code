@@ -245,6 +245,17 @@ Styles for the help box
   background-color:highlight;
   color:white;
 }
+.helpboxDescLabels
+{
+  font-weight:bold;
+  color:activeCaption;
+}
+.helpboxDescColumns
+{
+  color:activeCaption;
+  padding-right:4px;
+  padding-left:4px;
+}
 A.helpboxLink:ACTIVE, A.helpboxLink:LINK, A.helpboxLink:VISITED, A.helpboxLink:HOVER, .helpboxSearchName
 {
   color:blue;
