@@ -1,3 +1,22 @@
+-- What's new for ??????
+
+New Searches
+
+* 
+
+Modified Searches
+
+* acine - added /video switch
+
+Enhancements
+
+* 
+
+Bug Fixes
+
+* 
+
+
 -- What's new for 3.0.0.20 (beta)
 
 New Searches
