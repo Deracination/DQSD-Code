@@ -1,0 +1,38 @@
+<search function="hv">
+  <name>Rex Swain's HTTP Viewer</name>
+  <description>
+    See exactly what an HTTP request returns to your browser.<br/>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>hv www.dqsd.net</td></tr>
+  	</table>
+  </description>
+  <category>Computers</category>
+  <link>http://www.rexswain.com/httpview.html</link>
+  <contributor>Glenn Carr</contributor>
+  
+  <form name="hvf"
+        method="post" 
+        action="http://www.rexswain.com/cgi-bin/httpview.cgi">
+    <input type="hidden" name="url" value=""/>
+    <input type="hidden" name="req" value="Get"/>
+    <input type="hidden" name="fmt" value="Auto"/>
+    <input type="hidden" name="fwd" value="on"/>
+  </form>
+  
+  <script><![CDATA[
+    function hv(q)
+    {
+      if( nullArgs("hv", q) )
+        return false;
+      else
+      {
+        var res = q.match(/^(http|https):/);
+        if ( !res )
+          q = "http://" + q;
+        document.hvf.url.value = q;
+        submitForm(hvf);
+      }
+    }
+  ]]></script>
+</search>
