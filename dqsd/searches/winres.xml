@@ -1,0 +1,36 @@
+<search function="winres">
+  <name>WinRes</name>
+  <description>WinRes will open a browser window of a specified 
+  size "winres 800 600" will open a broswer window that is 800 
+  pixels wide and 600 pixels tall.
+  </description>
+  <contributor>Neel Doshi</contributor>
+  <category>Functions</category>
+  <script><![CDATA[
+function winres(q) {
+     // First parse the arguments
+     var args_array = q.split(' ');
+     var args_width = args_array.shift();
+     var args_height = args_array.shift();
+
+   // Next determine if the next argument is a valid integer
+   if (args_width == undefined || args_width.match(/^(\d)+$/) == null || args_width == 0)
+   {
+     alert("The first argument must be an integer representing the window width in pixels");
+     return false;
+   }
+
+   // Next determine if the next argument is a valid integer
+   if (args_height == undefined || args_height.match(/^(\d)+$/) == null || args_height == 0)
+   {
+     alert("The second argument must be an integer representing the window height in pixels");
+     return false;
+   }
+
+      var WinAttrib;
+      WinAttrib = 'width=' + args_width + ',height=' + args_height +
+      ',scrollbars=yes,toolbar=yes,menubar=yes,location=yes,resizable=yes,status=yes,directories=yes';
+      window.open('','New1',WinAttrib);
+}
+    ]]></script>
+</search>
