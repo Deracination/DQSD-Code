@@ -1,0 +1,25 @@
+<search function="ana">
+  <name>Anagrams search</name>
+  <description>Search for anagrams in text "ana Clint Eastwood"</description>
+  <contributor>Monty Scroggins</contributor>
+  <category>Fun</category>
+  <link>http://www.wordsmith.org/anagram/</link>
+  <form name="anaf"
+	  method="get"
+	  action="http://www.wordsmith.org/anagram/anagram.cgi"
+	  target="_blank">
+	  <input type="hidden" name="anagram" value=""/>
+  </form>
+  <script><![CDATA[
+	 function ana(q)
+	 {
+	   if (q == "")
+		  openSearchWindow("http://www.wordsmith.org/anagram/");
+	   else
+	   {
+		  document.anaf.anagram.value=q;
+		  submitForm(anaf)
+	   }
+	 }
+ ]]></script>
+</search>
