@@ -3,11 +3,11 @@
     <version>
         <majorhi>3</majorhi>
         <majorlo>1</majorlo>
-        <minorhi>2</minorhi>
+        <minorhi>3</minorhi>
         <minorlo>0</minorlo>
     </version>
     <date>
-        September 8, 2002
+        September 9, 2002
     </date>
     <html_description>
         You are currently running version %lv %lt <nobr>(%ld)</nobr> of <a href="http://www.dqsd.net" onclick="window.close();">Dave's Quick Search Deskbar</a>.<br/><br/>
