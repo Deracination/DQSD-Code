@@ -3,8 +3,14 @@
 ; Installs Add-on for Dave's Quick Search Deskbar
 ;
 
+!Define APPNAME       "GoogleSpell Add-on for Dave's Quick Search Deskbar"
+!Define ADDON_SUBDIR  "$INSTDIR\addons\googlespell"
+!Define INSTALL_PKG   "..\googlespell.exe"
+
+!Define DQSD_UUID     "{226b64e8-dc75-4eea-a6c8-abcb4d1d37ff}"
+
 ; The name of the installer
-Name "GoogleSpell Add-on for Dave's Quick Search Deskbar"
+Name "${APPNAME}"
 
 ; Silent install
 DirShow show
@@ -14,11 +20,9 @@ SilentInstall normal
 ShowInstDetails show
 
 ; The installation package to create
-OutFile "..\googlespell.exe"
+OutFile "${INSTALL_PKG}"
 
-; Registry key to check for directory (so if you install again, it will
-; overwrite the old one automatically)
-InstallDirRegKey HKCR "CLSID\{226b64e8-dc75-4eea-a6c8-abcb4d1d37ff}" "InstallDir"
+InstallDirRegKey HKCR "CLSID\${DQSD_UUID}" "InstallDir"
 
 ; The stuff to install
 Section "GoogleSpell"
@@ -28,8 +32,8 @@ Section "GoogleSpell"
     Quit
 
 Installed:
-  StrCpy $R1 "$INSTDIR\addons\googlespell"
-  StrCpy $R3 "{226b64e8-dc75-4eea-a6c8-abcb4d1d37ff}"
+  StrCpy $R1 "${ADDON_SUBDIR}"
+  StrCpy $R3 "${DQSD_UUID}"
 
   ; Set output path to the add-on installation directory.
   SetOutPath $R1
@@ -44,7 +48,7 @@ Installed:
   File "GoogleSearch.wsdl"
 
   ; Uninstallation keys
-  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\$R3" "DisplayName" "Dave's Quick Search Deskbar - GoogleSpell Add-on (remove only)"
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\$R3" "DisplayName" "${APPNAME} (remove only)"
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\$R3" "UninstallString" '"$R2"'
   
   DetailPrint ""
@@ -56,7 +60,7 @@ SectionEnd
 
 ; Uninstall stuff
 
-UninstallText "Click next to uninstall the GoogleSpell Add-on for Dave's Quick Search Deskbar."
+UninstallText "Click next to uninstall ${APPNAME}."
 Section "Uninstall"
   SetDetailsView show
   
@@ -65,7 +69,7 @@ Section "Uninstall"
 
   IfRebootFlag rebootmsg norebootmsg
     rebootmsg:
-    MessageBox MB_OK "The Add-on has been uninstalled.$\n$\nYou should reboot your computer now to$\ncomplete the removal.$\n$\nDave's Quick Search Deskbar$\nCopyright (c) 2002 David Bau$\nDistributed under the terms of the$\nGNU General Public License, Version 2"
+    MessageBox MB_OK "The ${APPNAME} has been uninstalled.$\n$\nYou should reboot your computer now to$\ncomplete the removal.$\n$\nDave's Quick Search Deskbar$\nCopyright (c) 2002 David Bau$\nDistributed under the terms of the$\nGNU General Public License, Version 2"
   norebootmsg:
 
 SectionEnd
