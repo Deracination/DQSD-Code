@@ -12,6 +12,8 @@ New Searches
 * arin - Search the Arin Whois database at www.arin.net/whois (from Tim Aiello)
 * ubl - the Ultimate Band List by ArtistDirect (from Darren Greenberg)
 * viam - Find a map to any place in Europe with viamichelin.com
+* cowp - Search for lyrics and chords for country songs (from Brent Beardsley)
+* egw - Search Ellen G. White's writings (from Brent Beardsley)
 
 Modified Searches
 
