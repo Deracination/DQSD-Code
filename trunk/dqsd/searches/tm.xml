@@ -19,22 +19,19 @@
   <script><![CDATA[
     function tm(q)
     {
-      if (q == "")
-      {
-        openSearchWindow("http://www.teoma.com/");
-      }
-      else
-      {
-        document.tmf.t.value=q;
-        document.tmf.qcat.value=1;
-        submitForm(tmf);
+      if( nullArgs("tm", q) )
+        return;
+
+      document.tmf.t.value=q;
+      document.tmf.qcat.value=1;
+      submitForm(tmf);
       }
     }
   ]]></script>
 
   <copyright>
-	Copyright (c) 2002 David Bau
-	Distributed under the terms of the
-	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  Copyright (c) 2002 David Bau
+  Distributed under the terms of the
+  GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
   </copyright>
 </search>
