@@ -82,10 +82,10 @@ td
  border-color:window;
 }
 
+
 /*
 Styles for the calendar
 */
-
 .cal
 {
   border:2px;
@@ -153,8 +153,9 @@ Styles for the calendar
   cursor:default;
 }
 
+
 /*
-Styles for the menu
+Styles for the pop-up menu
 */
 .menuCommands
 {
@@ -191,10 +192,10 @@ Styles for the menu
   height:2px;
 }
 
+
 /*
 Styles for the help box
 */
-
 .helpboxCategoryExpander, .helpboxCategoryExpanderSign
 {
   behavior: url(categoryExpander.htc);
@@ -234,10 +235,6 @@ Styles for the help box
 .helpbox
 {
   font:menu;
-  border : 0px;
-  border-collapse: collapse;
-  border-spacing: 0;          
-
 }
 .helpboxDescriptions,
 {
@@ -256,11 +253,18 @@ Styles for the help box
   font-weight:bold;
   color:activeCaption;
 }
+.helpboxDescTable
+{
+  border:0px;
+  border-collapse:collapse;
+  border-spacing:0;
+}
 .helpboxDescColumns
 {
   color:activeCaption;
-  padding-right:4px;
-  padding-left:4px;
+  padding:0px;
+  padding-left:6px;
+  padding-right:6px;
 }
 A.helpboxLink:ACTIVE, A.helpboxLink:LINK, A.helpboxLink:VISITED, A.helpboxLink:HOVER, .helpboxSearchName
 {
@@ -282,6 +286,7 @@ A.helpboxLinkTop:HOVER, A.helpboxLink:HOVER, A.helpboxLinkJump:HOVER, A.helpboxC
 {
   color:red
 }
+
 
 /* STYLES FOR ORIGINAL HELP BOX :: Uncomment these styles to make the help box look like the original help box */
 /*
