@@ -69,6 +69,12 @@
       var args = parseArgs(q, "ifl, advanced, groups, directory, images, cache, related, link, local, uk, canada");
       var mode, local, local_meta = "", local_tld = "com";
       
+      if( q == "?" )
+      {
+        nullArgs( "gg", "?" );
+        return false;
+      }
+      
       // Establish the locale and mode the search will run in.
       if( args.switches.length > 0 )
         for( var j=0; j<args.switches.length; j++ )
@@ -113,10 +119,6 @@
           case "groups": openSearchWindow("http://www.google." + local_tld + "/grphp"); return;
           default: openSearchWindow("http://www.google." + local_tld); return;
         }
-        
-      // Show the help pop-up
-      else if( args.q == "?" )
-        nullArgs("gg","?");
       
       else if( mode )
       {
