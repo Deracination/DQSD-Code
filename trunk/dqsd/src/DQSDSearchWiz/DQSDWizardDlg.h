@@ -61,6 +61,8 @@ private:
 	string GetForms( string& rstrSearchName, string& rstrFormScript );
 	string GetSwitches();
 	string EscapeXML( string& xml );
+	void SaveFields();
+	void RestoreFields();
 };
 
 #endif //__DQSDWIZARDDLG_H_

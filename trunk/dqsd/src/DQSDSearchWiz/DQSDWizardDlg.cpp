@@ -96,6 +96,9 @@ LRESULT CDQSDWizardDlg::OnInitDialog(UINT uMsg, WPARAM wParam, LPARAM lParam, BO
 		ctlCategories.SendMessage( CB_ADDSTRING, 0, reinterpret_cast<LPARAM>( rgszCategories[ i ] ) );
 	}
 
+	// Restore some saved fields
+
+	RestoreFields();
 
 	// Get the forms
 
@@ -159,6 +162,8 @@ LRESULT CDQSDWizardDlg::OnFormListItemChanged(int idCtrl, LPNMHDR pNMHDR, BOOL& 
 		return 1;
 
 	// Get the current FORM selection and display it's innerHTML
+	// just to help the user know which form to use
+
 	CWindow ctlFormList = GetDlgItem( IDC_FormList2 );
 	const int cSelected = ctlFormList.SendMessage( LVM_GETSELECTEDCOUNT, 0, 0 );
 	if ( cSelected > 0 )
@@ -231,7 +236,12 @@ LRESULT CDQSDWizardDlg::OnOK(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHa
 		return 0;
 	}
 
+	// Save values for next time
+
+	SaveFields();
+
 	// Build the search file (??? probably should be done with the XMLDOM, but this is so much easier)
+
 	BSTR bstr = NULL;
 	string strSearchFile = _T("");
 	string strSearchName = W2T( bstrSearchName.m_str );
@@ -525,4 +535,58 @@ string CDQSDWizardDlg::EscapeXML( string& xml )
 	replace( strEscapedXML.begin(), strEscapedXML.end(), _T('&'), _T('~') );
 
 	return strEscapedXML;
+}
+
+void CDQSDWizardDlg::SaveFields()
+{
+	USES_CONVERSION;
+
+	CRegKey rk;
+	rk.Create( HKEY_CURRENT_USER, _T("SOFTWARE\\Dave's Quick Search Deskbar\\DQSDSearchWizard\\Settings") );
+
+	BSTR bstr = NULL;
+	CWindow( GetDlgItem( IDC_Contributor ) ).GetWindowText( &bstr );
+	rk.SetValue( W2T( bstr ), _T("Contributor") );
+	::SysFreeString( bstr );
+
+	CWindow( GetDlgItem( IDC_Email ) ).GetWindowText( &bstr );
+	rk.SetValue( W2T( bstr ), _T("Email") );
+	::SysFreeString( bstr );
+
+	rk.Close();
+}
+
+void CDQSDWizardDlg::RestoreFields()
+{
+	USES_CONVERSION;
+
+	DWORD dwSize = 0;
+	TCHAR szValue[ 1024 ];
+
+	CRegKey rk;
+	if ( ERROR_SUCCESS == rk.Open( HKEY_CURRENT_USER, _T("SOFTWARE\\Dave's Quick Search Deskbar\\DQSDSearchWizard\\Settings") ) )
+	{
+		dwSize = LENGTHOF( szValue );
+		if ( ERROR_SUCCESS == rk.QueryValue( szValue, _T("Contributor"), &dwSize ) )
+		{
+			CWindow( GetDlgItem( IDC_Contributor ) ).SetWindowText( szValue );
+		}
+
+		dwSize = LENGTHOF( szValue );
+		if ( ERROR_SUCCESS == rk.QueryValue( szValue, _T("Email"), &dwSize ) )
+		{
+			CWindow( GetDlgItem( IDC_Email ) ).SetWindowText( szValue );
+		}
+	}
+	else
+	{
+		rk.Open( HKEY_CURRENT_USER, _T("Software\\Microsoft\\MS Setup (ACME)\\User Info"), KEY_READ );
+
+		dwSize = LENGTHOF( szValue );
+		if ( ERROR_SUCCESS == rk.QueryValue( szValue, _T("DefName"), &dwSize ) )
+		{
+			CWindow( GetDlgItem( IDC_Contributor ) ).SetWindowText( szValue );
+		}
+	}
+	
 }
