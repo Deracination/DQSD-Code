@@ -97,12 +97,10 @@ Section "Quick Search Deskbar (required)"
   File "..\calculate.js"
   File "..\calendar.js"
   File "..\clock.js"
-  File "..\currency.js"
   File "..\helpbox.js"
   File "..\helpmenu.js"
   File "..\history.js"
   File "..\loader.js"
-  File "..\phoneno.js"
   File "..\strings.js"
   File "..\tools.js"
   File "..\defer_tools.js"
@@ -316,12 +314,10 @@ Section "Uninstall"
   Delete /REBOOTOK $INSTDIR\calculate.js
   Delete /REBOOTOK $INSTDIR\calendar.js
   Delete /REBOOTOK $INSTDIR\clock.js
-  Delete /REBOOTOK $INSTDIR\currency.js
   Delete /REBOOTOK $INSTDIR\helpbox.js
   Delete /REBOOTOK $INSTDIR\helpmenu.js
   Delete /REBOOTOK $INSTDIR\history.js
   Delete /REBOOTOK $INSTDIR\loader.js
-  Delete /REBOOTOK $INSTDIR\phoneno.js
   Delete /REBOOTOK $INSTDIR\strings.js
   Delete /REBOOTOK $INSTDIR\tools.js
   Delete /REBOOTOK $INSTDIR\defer_tools.js
