@@ -15,6 +15,7 @@ Bug Fixes
 
 * Changed regex in parseArgs to allow any non-whitespace character in switch values.  
   Previously it only allowed identifier characters which excluded periods, etc.
+* Can now set category for searches in localaliases.txt
 
 
 -- What's new for 3.0 (June 28, 2002)
