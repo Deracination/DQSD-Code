@@ -1,0 +1,49 @@
+HKCR
+{
+	DQSDSearchWiz.SearchWizard.1 = s 'SearchWizard Class'
+	{
+		CLSID = s '{0FE334BE-C7DC-4160-90FD-6C3DAAFD6236}'
+	}
+	DQSDSearchWiz.SearchWizard = s 'SearchWizard Class'
+	{
+		CLSID = s '{0FE334BE-C7DC-4160-90FD-6C3DAAFD6236}'
+		CurVer = s 'DQSDSearchWiz.SearchWizard.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {0FE334BE-C7DC-4160-90FD-6C3DAAFD6236} = s 'SearchWizard Class'
+		{
+			ProgID = s 'DQSDSearchWiz.SearchWizard.1'
+			VersionIndependentProgID = s 'DQSDSearchWiz.SearchWizard'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+		}
+	}
+}
+HKLM
+{
+	NoRemove Software
+	{
+		NoRemove Microsoft
+		{
+			NoRemove 'Internet Explorer'
+			{
+				NoRemove Extensions
+				{
+					ForceRemove '{F3E2D167-7415-4997-8575-C479E0583D6D}'
+					{
+						val ButtonText = s 'DQSD Search Wizard'
+						val Icon = s '%MODULE%,201'
+						val HotIcon = s '%MODULE%,202'
+						val CLSID = s '{1FBA04EE-3024-11d2-8F1F-0000F87ABD16}'
+						val ClsidExtension = s '{0FE334BE-C7DC-4160-90FD-6C3DAAFD6236}'
+						val 'Default Visible' = s 'yes'
+					}
+				}
+			}
+		}
+	}
+}

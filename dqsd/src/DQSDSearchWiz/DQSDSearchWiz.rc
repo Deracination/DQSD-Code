@@ -1,0 +1,229 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "winres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""winres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "1 TYPELIB ""DQSDSearchWiz.tlb""\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904B0"
+        BEGIN
+            VALUE "CompanyName", "\0"
+            VALUE "FileDescription", "DQSDSearchWiz Module\0"
+            VALUE "FileVersion", "1, 0, 0, 1\0"
+            VALUE "InternalName", "DQSDSearchWiz\0"
+            VALUE "LegalCopyright", "Copyright 2002\0"
+            VALUE "OriginalFilename", "DQSDSearchWiz.DLL\0"
+            VALUE "ProductName", "DQSDSearchWiz Module\0"
+            VALUE "ProductVersion", "1, 0, 0, 1\0"
+            VALUE "OLESelfRegister", "\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// REGISTRY
+//
+
+IDR_SEARCHWIZARD        REGISTRY DISCARDABLE    "SearchWizard.rgs"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_NORMAL              ICON    DISCARDABLE     "normal.ico"
+IDI_HOT                 ICON    DISCARDABLE     "hot.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_DQSDWIZARDDLG DIALOG DISCARDABLE  0, 0, 368, 223
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "DQSD Search Wizard"
+FONT 8, "MS Sans Serif"
+BEGIN
+    RTEXT           "Search &name:",IDC_STATIC,6,8,45,8
+    EDITTEXT        IDC_SearchName,53,6,102,14,ES_AUTOHSCROLL
+    RTEXT           "&Link:",IDC_STATIC,6,24,45,8
+    EDITTEXT        IDC_Link,53,22,102,14,ES_AUTOHSCROLL
+    RTEXT           "&Category:",IDC_STATIC,6,40,45,8
+    COMBOBOX        IDC_Category,53,38,102,127,CBS_DROPDOWN | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    RTEXT           "&Contributor:",IDC_STATIC,6,56,45,8
+    EDITTEXT        IDC_Contributor,53,53,102,14,ES_AUTOHSCROLL
+    RTEXT           "&Email:",IDC_STATIC,6,72,45,8
+    EDITTEXT        IDC_Email,53,69,102,14,ES_AUTOHSCROLL
+    RTEXT           "&Description:",IDC_STATIC,158,8,45,8
+    EDITTEXT        IDC_Description,205,6,102,39,ES_MULTILINE | 
+                    ES_WANTRETURN | WS_VSCROLL
+    LTEXT           "&Switches:",IDC_STATIC,171,49,32,8
+    EDITTEXT        IDC_Switches,205,47,102,39,ES_MULTILINE | ES_WANTRETURN | 
+                    WS_VSCROLL
+    LTEXT           "FORM elements in the current page:",IDC_STATIC,6,95,115,
+                    8
+    CONTROL         "List2",IDC_FormList2,"SysListView32",LVS_REPORT | 
+                    LVS_SINGLESEL | LVS_NOSORTHEADER | WS_BORDER | 
+                    WS_TABSTOP,6,104,356,43
+    GROUPBOX        "FORM fields:",IDC_STATIC,6,151,356,66
+    EDITTEXT        IDC_FormFields,12,161,344,49,ES_MULTILINE | 
+                    ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_READONLY | NOT 
+                    WS_TABSTOP
+    DEFPUSHBUTTON   "OK",1,312,6,50,14
+    PUSHBUTTON      "Cancel",2,312,23,50,14
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_DQSDWIZARDDLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 6
+        RIGHTMARGIN, 362
+        TOPMARGIN, 6
+        BOTTOMMARGIN, 217
+        HORZGUIDE, 134
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_DQSDWIZARDDLG DLGINIT
+BEGIN
+    IDC_Category, 0x403, 10, 0
+0x6f43, 0x706d, 0x7475, 0x7265, 0x0073, 
+    IDC_Category, 0x403, 14, 0
+0x6e45, 0x6574, 0x7472, 0x6961, 0x6d6e, 0x6e65, 0x0074, 
+    IDC_Category, 0x403, 8, 0
+0x6946, 0x616e, 0x636e, 0x0065, 
+    IDC_Category, 0x403, 4, 0
+0x7546, 0x006e, 
+    IDC_Category, 0x403, 10, 0
+0x7546, 0x636e, 0x6974, 0x6e6f, 0x0073, 
+    IDC_Category, 0x403, 5, 0
+0x654e, 0x7377, "\000" 
+    IDC_Category, 0x403, 18, 0
+0x6550, 0x706f, 0x656c, 0x6120, 0x646e, 0x5020, 0x616c, 0x6563, 0x0073, 
+
+    IDC_Category, 0x403, 10, 0
+0x6552, 0x6566, 0x6572, 0x636e, 0x0065, 
+    IDC_Category, 0x403, 15, 0
+0x6553, 0x7261, 0x6863, 0x7420, 0x6568, 0x5720, 0x6265, "\000" 
+    IDC_Category, 0x403, 9, 0
+0x6853, 0x7069, 0x6970, 0x676e, "\000" 
+    IDC_Category, 0x403, 9, 0
+0x6853, 0x706f, 0x6970, 0x676e, "\000" 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_PROJNAME            "DQSDSearchWiz"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+1 TYPELIB "DQSDSearchWiz.tlb"
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
