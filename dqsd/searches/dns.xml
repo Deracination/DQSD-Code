@@ -3,26 +3,29 @@
   <description>
     Perform a wide variety of DNS lookups.<br/>
     <div class="helpboxDescLabels">Switches:</div>
-  	<table class="helpboxDescTable">
-  		<tr><td>/rep</td><td> - </td><td>DNS Report - Finds lots of common DNS problems. (Enter domain name)</td></tr>
-  		<tr><td>/timing</td><td> - </td><td>DNS Timing - See how long your DNS servers take to respond (Enter domain/host name)</td></tr>
-  		<tr><td>/whois</td><td> - </td><td>WhoIS - Lists contact info for a domain/IP. (Enter domain name or IP) </td></tr>
-  		<tr><td>/spam</td><td> - </td><td>SPAM DB - See if a mail server is listed in ORBZ, ORDB, etc.. (Enter host name or IP)</td></tr>
-  		<tr><td>/rev</td><td> - </td><td>Reverse DNS - See if your IP has a reverse DNS entry. (Enter host name or IP)</td></tr>
-      <tr><td>/ipwhois</td><td> - </td><td>IP Whois. - Lists contact info for an IP (or domain). (Enter host name or IP)</td></tr>
-      <tr><td>/netgeo</td><td> - </td><td>NetGEO - Shows geographical location of an IP (or domain).  (Enter host name or IP)</td></tr>
-      <tr><td>/dns</td><td> - </td><td>DNS (default) - Look up a DNS record  (Enter domain/host name)</td></tr>
-      <tr><td>/tracert</td><td> - </td><td>TraceRt - Traces the route packets take to this host. (Enter host name or IP)</td></tr>
-      <tr><td>/ping</td><td> - </td><td>Ping - Shows how long it takes for packets to reach a host (Enter host name or IP)</td></tr>
-    </table>
+     <table class="helpboxDescTable">
+	<tr><td>/rep</td><td> - </td><td>DNS Report - Finds lots of common DNS problems. (Enter domain name)</td></tr>
+	<tr><td>/timing</td><td> - </td><td>DNS Timing - See how long your DNS servers take to respond (Enter domain/host name)</td></tr>
+	<tr><td>/whois</td><td> - </td><td>WhoIS - Lists contact info for a domain/IP. (Enter domain name or IP) </td></tr>
+	<tr><td>/spam</td><td> - </td><td>SPAM DB - See if a mail server is listed in ORBZ, ORDB, etc.. (Enter host name or IP)</td></tr>
+	<tr><td>/rev</td><td> - </td><td>Reverse DNS - See if your IP has a reverse DNS entry. (Enter host name or IP)</td></tr>
+	<tr><td>/ipwhois</td><td> - </td><td>IP Whois. - Lists contact info for an IP (or domain). (Enter host name or IP)</td></tr>
+	<tr><td>/netgeo</td><td> - </td><td>NetGEO - Shows geographical location of an IP (or domain).  (Enter host name or IP)</td></tr>
+	<tr><td>/dns</td><td> - </td><td>DNS (default) - Look up a DNS record  (Enter domain/host name)</td></tr>
+	<tr><td>/tracert</td><td> - </td><td>TraceRt - Traces the route packets take to this host. (Enter host name or IP)</td></tr>
+	<tr><td>/ping</td><td> - </td><td>Ping - Shows how long it takes for packets to reach a host (Enter host name or IP)</td></tr>
+	<tr><td>/cidr</td><td> - </td><td>CIDR - Shows the CIDR profile for an IP or CIDR block (Enter IP or IP/CIDR)</td></tr>
+     </table>
     <div class="helpboxDescLabels">Examples:</div>
-    <table class="helpboxDescTable">
-  		<tr><td>dns 192.168.1.1 /rep</td></tr>
-  		<tr><td>dns microsoft.com /timing</td></tr>
-  		<tr><td>dns adclick.net /whois</td></tr>
-  		<tr><td>dns adclick.net /spam</td></tr>
-  		<tr><td>dns 192.168.1.1 /rev</td></tr>
-  	</table>
+     <table class="helpboxDescTable">
+	<tr><td>dns 192.168.1.1 /rep</td></tr>
+	<tr><td>dns microsoft.com /timing</td></tr>
+	<tr><td>dns adclick.net /whois</td></tr>
+	<tr><td>dns adclick.net /spam</td></tr>
+	<tr><td>dns 192.168.1.1 /rev</td></tr>
+	<tr><td>dns 192.168.1.0/24 /cidr</td></tr>
+	<tr><td>dns 192.168.1.0 /cidr /tracert /spam /ipwhois</td></tr>
+     </table>
   </description>
   <category>Computers<category>Networking</category></category>
   <link>http://www.dnsstuff.com/</link>
@@ -30,99 +33,103 @@
   
   // the basic re-usable single element form for most of the lookups
   <form name="dnsf"
-        action="http://www.dnsstuff.com"
-	     method="get">
-     <input type="hidden" name="ip" value=""/>
-   </form>
+	action="http://www.dnsstuff.com"
+	method="get">
+	<input type="hidden" name="ip" value=""/>
+  </form>
    
   // the two element re-usable form for the rest of the lookups
   <form name="dnslongf"
-        method="get">
-    <input type="hidden" name="name" value=""/>
-    <input type="hidden" name="type" value="A"/>
+	method="get">
+	<input type="hidden" name="name" value=""/>
+	<input type="hidden" name="type" value="A"/>
   </form>
   
   //special form the the report page
   <form name="dnsrepf"       
-        method="get">
-    <input type="hidden" name="domain" value=""/>
+	method="get">
+	<input type="hidden" name="domain" value=""/>
   </form>  
   
   <script><![CDATA[
     function dns(q)
     {
-      var args = parseArgs(q, "report, timing, whois, spam, rev, ipwhois, netgeo, dns, tracert, ping");
-      if( q == "" )
-        openSearchWindow("http://www.dnsstuff.com/");
-      else if( args.switches.length == 1 )
-      {              
-		    switch( args.switches[0].name )
-          {
-          case "report":
-            document.dnsrepf.domain.value = args.q;
-            document.dnsrepf.action="http://www.dnsreport.com/tools/dnsreport.ch"
-            submitForm(dnsrepf);
-            break;
-          case "dns":
-            document.dnslongf.name.value = args.q;
-            document.dnslongf.action="http://www.dnsstuff.com/tools/lookup.ch"
-            submitForm(dnslongf);
-            break;
-          case "timing":
-            document.dnslongf.name.value = args.q;
-            document.dnslongf.action="http://www.dnsstuff.com/tools/dnstime.ch"
-            submitForm(dnslongf);
-            break;
-          case "whois":
-            document.dnsf.ip.value = args.q;
-            document.dnsf.action="http://www.dnsstuff.com/tools/whois.ch";
-            submitForm(dnsf);
-            break;
-          case "spam":
-            document.dnsf.ip.value = args.q;
-            document.dnsf.action="http://www.dnsstuff.com/tools/ip4r.ch";
-            submitForm(dnsf);
-            break;
-          case "rev":
-            document.dnsf.ip.value = args.q;
-            document.dnsf.action="http://www.dnsstuff.com/tools/ptr.ch";
-            submitForm(dnsf);
-            break;
-          case "ipwhois":
-            document.dnsf.ip.value = args.q;
-            document.dnsf.action="http://www.dnsstuff.com/tools/whois.ch";
-            submitForm(dnsf);
-            break;
-          case "netgeo":
-            document.dnsf.ip.value = args.q;
-            document.dnsf.action="http://www.dnsstuff.com/tools/netgeo.ch";
-            submitForm(dnsf);
-            break;
-         case "tracert":
-            document.dnsf.ip.value = args.q;
-            document.dnsf.action="http://www.dnsstuff.com/tools/tracert.ch";
-            submitForm(dnsf);
-            break;
-         case "ping":
-            document.dnsf.ip.value = args.q;
-            document.dnsf.action="http://www.dnsstuff.com/tools/ping.ch";
-            submitForm(dnsf);
-            break;
-         }         
-      }
-      else if( args.q == "?" )
-        nullArgs("dns","?");
-		else
-		{
-			//defaults to a standard dns lookup
-			document.dnslongf.name.value = args.q;
-			document.dnslongf.action="http://www.dnsstuff.com/tools/lookup.ch"
-			submitForm(dnslongf);
+      var args = parseArgs(q, "report, timing, whois, spam, rev, ipwhois, netgeo, dns, tracert, ping, cidr");
+      if( q == "" ){
+	openSearchWindow("http://www.dnsstuff.com/");
+      }else if( args.switches.length >= 1 ){
+	for (var i = 0; i < args.switches.length; i++){
+	  switch( args.switches[i].name ){
+	    case "report":
+		document.dnsrepf.domain.value = args.q;
+		document.dnsrepf.action="http://www.dnsreport.com/tools/dnsreport.ch"
+		submitForm(dnsrepf);
+		break;
+	    case "dns":
+		document.dnslongf.name.value = args.q;
+		document.dnslongf.action="http://www.dnsstuff.com/tools/lookup.ch"
+		submitForm(dnslongf);
+		break;
+	    case "timing":
+		document.dnslongf.name.value = args.q;
+		document.dnslongf.action="http://www.dnsstuff.com/tools/dnstime.ch"
+		submitForm(dnslongf);
+		break;
+	    case "whois":
+		document.dnsf.ip.value = args.q;
+		document.dnsf.action="http://www.dnsstuff.com/tools/whois.ch";
+		submitForm(dnsf);
+		break;
+	    case "spam":
+		document.dnsf.ip.value = args.q;
+		document.dnsf.action="http://www.dnsstuff.com/tools/ip4r.ch";
+		submitForm(dnsf);
+		break;
+	    case "rev":
+		document.dnsf.ip.value = args.q;
+		document.dnsf.action="http://www.dnsstuff.com/tools/ptr.ch";
+		submitForm(dnsf);
+		break;
+	    case "ipwhois":
+		document.dnsf.ip.value = args.q;
+		document.dnsf.action="http://www.dnsstuff.com/tools/whois.ch";
+		submitForm(dnsf);
+		break;
+	    case "netgeo":
+		document.dnsf.ip.value = args.q;
+		document.dnsf.action="http://www.dnsstuff.com/tools/netgeo.ch";
+		submitForm(dnsf);
+		break;
+	    case "tracert":
+		document.dnsf.ip.value = args.q;
+		document.dnsf.action="http://www.dnsstuff.com/tools/tracert.ch";
+		submitForm(dnsf);
+		break;
+	    case "ping":
+		document.dnsf.ip.value = args.q;
+		document.dnsf.action="http://www.dnsstuff.com/tools/ping.ch";
+		submitForm(dnsf);
+		break;
+	    case "cidr":
+		document.dnsf.ip.value = args.q;
+		document.dnsf.action="http://www.dnsstuff.com/tools/cidr.ch";
+		submitForm(dnsf);
+		break;
+	  }
+	}
+      }else if( args.q == "?" ){
+	nullArgs("dns","?");
+      }else{
+	//defaults to a standard dns lookup
+	document.dnslongf.name.value = args.q;
+	document.dnslongf.action="http://www.dnsstuff.com/tools/lookup.ch"
+	submitForm(dnslongf);
       }
     }
   ]]></script>
 
   <copyright>
+	This search file was last modified on 2005/01/06 by Shawn K. Hall
 	Copyright (c) 2002 David Bau
 	Distributed under the terms of the
 	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)

@@ -28,6 +28,7 @@ Modified Searches
 * winres - changed parsing to correct 'undefined' error and added ability to use preference variables (Shawn K. Hall)
 * enc - changed according to site changes (MLL)
 * wik - now supports international versions (MLL)
+* dns - added CIDR searching and enabled multiple queries in a single request (Shawn K. Hall)
 
 Removed Searches
 * encyfr - site discontinued (MLL)
