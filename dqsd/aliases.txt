@@ -1,11 +1,10 @@
+// aliases.txt
+// ----------------------------------------------------------------------------
 // This is where the default aliases are defined.
 //
-// The format requires a single <tab> or pipe "|" separator between the alias
-// and the function to be called.
-// 
-// Note:
-// User aliases should be placed in the localaliases.txt file which
-// will not be overwritten when a new version of the toolbar is installed.
+// You should *NOT* add your own aliases here. User aliases can be placed in the
+// localaliases.txt file which will not be overwritten when a new version of the
+// toolbar is installed.
 //
 !|gg %s /ifl|I'm Feeling Lucky!|Automatically takes you to the first web page returned for your query|Search the Web
 ,|gg %s /groups|Google Groups|Search Usenet discussion forums|Search the Web
