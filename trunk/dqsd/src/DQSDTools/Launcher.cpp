@@ -182,19 +182,18 @@ STDMETHODIMP CLauncher::OpenDocument(BSTR strDoc, VARIANT* pvParameters)
 STDMETHODIMP CLauncher::get_pathDefaultBrowser(BSTR *pVal)
 {
 	USES_CONVERSION;
+	HRESULT hr = S_OK;
 
 	DWORD cbDocPath = _MAX_PATH;
 	TCHAR szDocPath[_MAX_PATH];
 	TCHAR szExePath[_MAX_PATH];
 
-	// Create temp file with desired .html extension
-	::GetTempPath(cbDocPath, szDocPath);
-	StrNCat(szDocPath, _T("DQSDLaunch.html"), lengthof(szDocPath) - _tcslen(szDocPath) - 1);
-	HANDLE hFile = ::CreateFile(szDocPath, GENERIC_WRITE, FILE_SHARE_READ, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-	if (hFile == INVALID_HANDLE_VALUE)
-		return HRESULT_FROM_WIN32(::GetLastError());
-	::CloseHandle(hFile);
-	
+	// First try to open a file that should always be there, search.htm
+	hr = GetInstallationDirectory( szDocPath, cbDocPath );
+	if ( FAILED( hr ) )
+		return hr;
+	_tcscat( szDocPath, _T("\\search.htm") );
+
 	// Find associated app for .html files
 	HINSTANCE hInstance = ::FindExecutable(szDocPath, _T(""), szExePath);
 	if (reinterpret_cast<INT>(hInstance) <= 32)
@@ -203,7 +202,7 @@ STDMETHODIMP CLauncher::get_pathDefaultBrowser(BSTR *pVal)
 	// Prepare string for shipping, and ship
 	*pVal = T2BSTR(szExePath);
 
-	return S_OK;
+	return hr;
 }
 
 STDMETHODIMP CLauncher::get_Debug(VARIANT_BOOL* pbDebug)
@@ -637,6 +636,22 @@ STDMETHODIMP CLauncher::get_InstallationDirectory(BSTR* pbstrDirectory)
 	return S_OK;
 }
 
+STDMETHODIMP CLauncher::get_AppDataDirectory(BSTR* pbstrDirectory)
+{
+	USES_CONVERSION;
+
+	CComBSTR bstrAppData;
+	HRESULT hr = GetSpecialFolderLocation( T2W( _T("AppData") ), &bstrAppData );
+	if ( SUCCEEDED( hr ) )
+	{
+		bstrAppData.Append( _T("\\DQSD" ) );
+		::CreateDirectory( W2CT( bstrAppData ), NULL );
+
+		*pbstrDirectory = bstrAppData;
+	}
+	return hr;
+}
+
 typedef struct SPECIAL_FOLDER_MAP_S {
 	LPCTSTR strName;
 	int csidl_value;
@@ -859,7 +874,7 @@ STDMETHODIMP CLauncher::RenameFile(BSTR bstrFromFilename, BSTR bstrToFilename)
 }
 
 // Private methods
-HRESULT CLauncher::GetInstallationDirectory( LPTSTR szResult, DWORD dwResultSize)
+HRESULT CLauncher::GetInstallationDirectory( LPTSTR szResult, DWORD dwResultSize )
 {
 	// Get the installation directory from the registry to use for making sure the filenames are in the install path
 	CRegKey rk;

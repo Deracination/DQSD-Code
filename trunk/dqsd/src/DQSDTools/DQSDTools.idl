@@ -31,11 +31,12 @@ import "ocidl.idl";
 		[propget, id(12), helpstring("Check if the DLL is of at least the specified version")] HRESULT VersionIsCorrect(int v1, int v2, int v3, int v4, [out, retval] VARIANT_BOOL *pVal);
 		[id(14), helpstring("method ShutdownBar")] HRESULT ShutdownBar([in] LPDISPATCH pDispDocument);
 		[id(15), helpstring("Attempt to refresh taskbar tray icons")] HRESULT RefreshTrayIcons();
-		[propget, id(16), helpstring("property InstallationDirectory")] HRESULT InstallationDirectory([out,retval] BSTR *pbstrDirectory);
+		[propget, id(16), helpstring("InstallationDirectory")] HRESULT InstallationDirectory([out,retval] BSTR *pbstrDirectory);
 		[id(17), helpstring("method GetSpecialFolderLocation")] HRESULT GetSpecialFolderLocation([in] BSTR bstrSpecialFolder, [out,retval] BSTR* pbstrLocation);
 		[id(18), helpstring("method GetFolders")] HRESULT GetFolders([in] BSTR bstrBaseFolder, [out,retval] BSTR* pbstrFolders);
 		[id(19), helpstring("method FileExists")] HRESULT FileExists([in] BSTR bstrBaseFolder, [out,retval] VARIANT_BOOL *pbExists);
 		[id(20), helpstring("method RenameFile")] HRESULT RenameFile([in] BSTR bstrFromFile, [in] BSTR bstrToFile);
+		[propget, id(21), helpstring("AppDataDirectory")] HRESULT AppDataDirectory([out,retval] BSTR *pbstrDirectory);
 	};
 	[
 		object, 

@@ -80,17 +80,14 @@ public:
 	STDMETHOD(GetFolders)(/*[in]*/ BSTR bstrBaseFolder, /*[out,retval]*/ BSTR* pbstrFolders);
 	STDMETHOD(FileExists)(/*[in]*/ BSTR bstrFilename, /*[out,retval]*/ VARIANT_BOOL* pbExists);
 	STDMETHOD(RenameFile)(/*[in]*/ BSTR bstrFromFilename, /*[in]*/ BSTR bstrToFilename);
-
-public:
 	STDMETHOD(RegisterHotKey)(long hotkeyVkCode, BSTR bstrModifierName, LPDISPATCH pDispDocument);
 	STDMETHOD(InstallKeyboardHook)(LPDISPATCH pDispDocument);
 	STDMETHOD(MapKeyCode)(long lVKCode, long lCharCode);
-
-public:
 	STDMETHOD(RefreshTrayIcons)();
 	STDMETHOD(ShutdownBar)(LPDISPATCH pDispDocument );
 	STDMETHOD(get_VersionIsCorrect)(int v1, int v2, int v3, int v4, /*[out, retval]*/ VARIANT_BOOL *pVal);
 	STDMETHOD(SetSite)(IUnknown* pUnkSite);
+	STDMETHOD(get_AppDataDirectory)(/*[out,retval]*/ BSTR* pbstrDirectory);
 
 // Implementation
 private:
