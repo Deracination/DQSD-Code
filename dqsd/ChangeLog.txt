@@ -15,11 +15,12 @@ New Searches
 
 Modified Searches
 
-* 
+* ascii - added link to www asciitable com so an ascii table will pop up if no parameters are specified
+* multi - added ability to have multiple searches with different arguments and allow commas in arguments
 
 Enhancements
 
-* 
+* Sub categories and searches are now sorted properly in the help menu
 
 Bug Fixes
 
