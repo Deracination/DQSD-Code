@@ -407,7 +407,7 @@
 
                 
                 The default browser option does not seem to be working.  Is this a known problem?</div>
-<div class="answer">The problem is that your default browser isn't set everywhere.  Somewhere deep in your registry, IE still thinks it is the default browser.  These setps prove helpful:
+<div class="answer">The problem is that your default browser isn't set everywhere.  Somewhere deep in your registry, IE still thinks it is the default browser.  These steps prove helpful:
             <ol>
 <li>Use tools or preferences of your browser set itself as the default browser.</li>
 <li>Set the option in your browser to check if it is the default browser when it launches.</li>
@@ -437,8 +437,21 @@ href="http://texturizer.net/firefox/tips.html#beh_reuse" target=new>http://textu
 </ol>
            </div>
 </div>
+
 <div class="faq">
-	<div class="question">8.4 Why is my DQSD clock off by an hour?</div>
+	<div class="question">8.4 Speaking of Firefox, is there a fix for the nasty script errors I get whenever I fire off a search?</div>
+	<div class="answer">This is due to <a href="http://bugzilla.mozilla.org/show_bug.cgi?id=246078" target="new">a known bug</a> in Mozilla Firefox 0.9.<br><br> 
+	There's a registry modification script posted <a href="http://johnhaller.com/jh/mozilla/firefox_bug_246078.asp" target="new">here</a>, which 
+	fixes most of this issue, but if that still doesn't help, try downloading <a href="defer_tools.js">this tailor-made version of defer_tools.js</a>, 
+	which effectively hides the problem. Click the link and save the JavaScript file to your DQSD install dir, but please save a 
+	backup of your existing defer_tools.js, in case this modification breaks something for you.<br><br>
+	Please note that any updates of DQSD will overwrite this modified file, so if you install a release of DQSD before the Firefox team gets their 
+	act together, you have to overwrite defer_tools.js again from here.
+	</div>
+</div>
+
+<div class="faq">
+	<div class="question">8.5 Why is my DQSD clock off by an hour?</div>
 	<div class="answer">
 		The DQSD clock is driven by the Internet Explorer JavaScript engine clock. For some reason, this clock is dependent on an environment variable called TZ, denoting which timezone you're currently in. So, if this environment variable is out of sync with the Windows timezone setting, you could see this behavior.<br><br>
 		For the most part, removing the TZ variable should work fine, but remember to backup the value before doing so, in case some other application is dependent upon the value. A safer alternative is to set the TZ variable to the correct value, of course, but this can be difficult if you don't know which timezone you're actually in.<br><br>
