@@ -1,0 +1,509 @@
+<search function="mp">
+  <COMMENT>
+
+	When Microsoft purchased Vicinity, they folded MapBlast.com and it's
+	LineDrive(SM) technology into MSN MapPoint web site. This search replaces
+	the MapBlast (mb.xml) search, using the equivalent MapPoint options.
+
+  </COMMENT>
+  <name>MSN MapPoint</name>
+  <category>People and Places</category>
+  <contributor>Gregory Krohne, with help from Peter Heath's MapQuest search</contributor>
+  <link>http://mappoint.msn.com/DirectionsFind.aspx</link>
+  <email>Gregory.Krohne@afrc.af.mil</email>
+  <description>
+  Get driving directions and maps for the USA and many other countries. Uses the USA, by default. 
+  Linedrive/standard directions, quickest/shortest route, and miles/kilometers units will default to whatever you used the last time.
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+	  <tr><td>mp [street,] city[, state/province [, zip/postal code]] [/begin:region]</td></tr>
+	  <tr><td><i><b>to</b></i> [street,] city[, state/province, [,zip/postal code]] [/end:region]</td></tr>
+	  <tr>The <i>to</i> keyword and second address are important. This search is not yet designed to search for maps of a single location.</tr>
+      <tr><td>/linedrive</td><td> - </td><td>LineDrive(SM) geometric directions</td></tr>
+      <tr><td>/standard</td><td> - </td><td>Standard geographic directions</td></tr>
+      <tr><td>/quickest</td><td> - </td><td>to get you to the church on time</td></tr>
+      <tr><td>/shortest</td><td> - </td><td>good for nearby trips</td></tr>
+      <tr><td>/miles</td><td> - </td><td>USA standard unit</td></tr>
+      <tr><td>/kilometers</td><td> - </td><td>what the rest of the world uses</td></tr>
+      <tr><td>/begin:region</td><td> - </td><td>continent/nation, default USA</td></tr>
+	  <tr><td>/end:region</td><td> - </td><td>continent/nation, default USA</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+		<tr><td>mp </td><td>Port Orford, OR to Lubec, ME</td></tr>
+		<tr><td>mp </td><td>1327 Duval Street, Key West, FL to Rockefeller Plaza, New York, NY</td></tr>
+		<tr><td>mp </td><td>Rome /begin:Italy to Paris /end:France /standard /kilometers</td></tr>
+		<tr><td>mp </td><td>Miami, FL to Fairbanks, AK /standard</td></tr>
+		<tr><td>mp </td><td>New York, NY /begin:USA to Toronto, OT /end:Canada /linedrive /quickest</td></tr>
+		<tr><td>mp </td><td>1600 Pennsylvania Ave NW, Washington, DC 20500 to 1 1st St NW, Washington, DC 20001 /standard /shortest /miles</td></tr>
+		<tr><td>Regions: </td><td>Austria, Belgium, Canada, Denmark, France, Germany,
+		Italy, Luxembourg, Netherlands, Spain, Switzerland, UK, USA,
+		Europe, North_America</td></tr>
+    </table>
+  </description>
+  <form name="mpf"
+        method="post"
+        action="http://mappoint.msn.com/(abcdefghijklmnopqrstuvwx)/DirectionsFind.aspx"
+		 id="FindForm">
+    <input type="hidden" name="__VIEWSTATE" value="dDwtMTgzNTIxNTA4Mjt0PDtsPGk8MD47aTwxPjtpPDI+Oz47bDx0PHA8bDxzcmM7PjtsPGh0dHA6Ly9jLm1zbi5jb20vYy5naWY/TkM9MTI3MSZOQT0xMTUxJlBJPTM4MzI5JlRQPWh0dHA6Ly9tYXBwb2ludC5tc24uY29tL2RpcmVjdGlvbnNmaW5kLmFzcHgmREk9MzU0JlBTPTM5ODQ5JlJGPWh0dHA6Ly9tYXBwb2ludC5tc24uY29tLyhhYmNkZWZnaGlqa2xtbm9wcXJzdHV2d3gpL2RpcmVjdGlvbnMuYXNweDs+Pjs7Pjt0PHA8cDxsPE5hdmlnYXRlVXJsOz47bDxcZTs+Pjs+Ozs+O3Q8O2w8aTwxPjtpPDU+Oz47bDx0PDtsPGk8MD47aTwxPjtpPDI+O2k8Mz47aTw0PjtpPDU+Oz47bDx0PHA8bDxWaXNpYmxlOz47bDxvPGY+Oz4+Ozs+O3Q8cDxsPFZpc2libGU7PjtsPG88Zj47Pj47Oz47dDw7bDxpPDQ+O2k8NT47aTw2PjtpPDc+Oz47bDx0PHA8bDxzdHlsZTs+O2w8cGFkZGluZy10b3A6NVw7dmlzaWJpbGl0eTp2aXNpYmxlXDs7Pj47bDxpPDE+Oz47bDx0PHA8bDxpbm5lcmh0bWw7PjtsPFN0cmVldCBBZGRyZXNzOz4+Ozs+Oz4+O3Q8cDxsPHN0eWxlOz47bDx2aXNpYmlsaXR5OnZpc2libGVcOzs+PjtsPGk8MT47PjtsPHQ8cDxsPGlubmVyaHRtbDs+O2w8Q2l0eTs+Pjs7Pjs+Pjt0PHA8bDxzdHlsZTs+O2w8dmlzaWJpbGl0eTp2aXNpYmxlXDs7Pj47bDxpPDE+Oz47bDx0PHA8bDxpbm5lcmh0bWw7PjtsPFN0YXRlOz4+Ozs+Oz4+O3Q8cDxsPHN0eWxlOz47bDx2aXNpYmlsaXR5OnZpc2libGVcOzs+PjtsPGk8MT47PjtsPHQ8cDxsPGlubmVyaHRtbDs+O2w8WklQIENvZGU7Pj47Oz47Pj47Pj47dDxwPGw8VmlzaWJsZTs+O2w8bzxmPjs+Pjs7Pjt0PHA8bDxWaXNpYmxlOz47bDxvPGY+Oz4+Ozs+O3Q8O2w8aTw0PjtpPDU+O2k8Nj47aTw3Pjs+O2w8dDxwPGw8c3R5bGU7PjtsPHBhZGRpbmctdG9wOjVcO3Zpc2liaWxpdHk6dmlzaWJsZVw7Oz4+O2w8aTwxPjs+O2w8dDxwPGw8aW5uZXJodG1sOz47bDxTdHJlZXQgQWRkcmVzczs+Pjs7Pjs+Pjt0PHA8bDxzdHlsZTs+O2w8dmlzaWJpbGl0eTp2aXNpYmxlXDs7Pj47bDxpPDE+Oz47bDx0PHA8bDxpbm5lcmh0bWw7PjtsPENpdHk7Pj47Oz47Pj47dDxwPGw8c3R5bGU7PjtsPHZpc2liaWxpdHk6dmlzaWJsZVw7Oz4+O2w8aTwxPjs+O2w8dDxwPGw8aW5uZXJodG1sOz47bDxTdGF0ZTs+Pjs7Pjs+Pjt0PHA8bDxzdHlsZTs+O2w8dmlzaWJpbGl0eTp2aXNpYmxlXDs7Pj47bDxpPDE+Oz47bDx0PHA8bDxpbm5lcmh0bWw7PjtsPFpJUCBDb2RlOz4+Ozs+Oz4+Oz4+Oz4+O3Q8O2w8aTwzPjtpPDQ+O2k8NT47PjtsPHQ8cDxsPFZpc2libGU7PjtsPG88Zj47Pj47Oz47dDxwPGw8VmlzaWJsZTs+O2w8bzxmPjs+Pjs7Pjt0PDtsPGk8MD47aTwyPjs+O2w8dDxwPGw8Y2hlY2tlZDs+O2w8Y2hlY2tlZDs+Pjs7Pjt0PHA8bDxjaGVja2VkOz47bDw7Pj47Oz47Pj47Pj47Pj47Pj47bDxSb3V0ZUNvbnRyb2w6U3RhcnRBZGRyZXNzUmFkaW87Um91dGVDb250cm9sOlN0YXJ0UGxhY2VSYWRpbztSb3V0ZUNvbnRyb2w6RW5kQWRkcmVzc1JhZGlvO1JvdXRlQ29udHJvbDpFbmRQbGFjZVJhZGlvO1VuaXRzTWk7VW5pdHNLbTtSb3V0ZVR5cGVRdWljaztSb3V0ZVR5cGVTaG9ydDtNYXBTdHlsZU5vcm1hbDtNYXBTdHlsZUxpbmVEcml2ZTs+Pg==" />
+    <input type="hidden" name="RouteControl:StartARegionSelect" value="12" />
+    <COMMENT>
+      The input element above, "RouteControl:StartARegionSelect", was a SELECT element with the following options...
+      <select name="RouteControl:StartARegionSelect">
+        <option value="0">Austria</option>
+        <option value="1">Belgium</option>
+        <option value="2">Canada</option>
+        <option value="3">Denmark</option>
+        <option value="4">France</option>
+        <option value="5">Germany</option>
+        <option value="6">Italy</option>
+        <option value="7">Luxembourg</option>
+        <option value="8">Netherlands</option>
+        <option value="9">Spain</option>
+        <option value="10">Switzerland</option>
+        <option value="11">United Kingdom</option>
+        <option value="12">United States</option>
+      </select>
+    </COMMENT>
+
+    <input type="hidden" name="RouteControl:StartPRegionSelect" value="14" />
+    <COMMENT>
+      The input element above, "RouteControl:StartPRegionSelect", was a SELECT element with the following options...
+      <select name="RouteControl:StartPRegionSelect">
+        <option value="13">Europe</option>
+        <option value="14">North America</option>
+      </select>
+    </COMMENT>
+
+    <input type="hidden" name="RouteControl:StartStreetText" value="" />
+    <input type="hidden" name="RouteControl:StartCityText" value="" />
+    <input type="hidden" name="RouteControl:StartStateText" value="" />
+    <input type="hidden" name="RouteControl:StartZipText" value="" />
+    <input type="hidden" name="RouteControl:EndARegionSelect" value="12" />
+    <COMMENT>
+      The input element above, "RouteControl:EndARegionSelect", was a SELECT element with the following options...
+      <select name="RouteControl:EndARegionSelect">
+        <option value="0">Austria</option>
+        <option value="1">Belgium</option>
+        <option value="2">Canada</option>
+        <option value="3">Denmark</option>
+        <option value="4">France</option>
+        <option value="5">Germany</option>
+        <option value="6">Italy</option>
+        <option value="7">Luxembourg</option>
+        <option value="8">Netherlands</option>
+        <option value="9">Spain</option>
+        <option value="10">Switzerland</option>
+        <option value="11">United Kingdom</option>
+        <option value="12">United States</option>
+      </select>
+    </COMMENT>
+
+    <input type="hidden" name="RouteControl:EndPRegionSelect" value="14" />
+    <COMMENT>
+      The input element above, "RouteControl:EndPRegionSelect", was a SELECT element with the following options...
+      <select name="RouteControl:EndPRegionSelect">
+        <option value="13">Europe</option>
+        <option value="14">North America</option>
+      </select>
+    </COMMENT>
+
+    <input type="hidden" name="RouteControl:EndStreetText" value="" />
+    <input type="hidden" name="RouteControl:EndCityText" value="" />
+    <input type="hidden" name="RouteControl:EndStateText" value="" />
+    <input type="hidden" name="RouteControl:EndZipText" value="" />
+    <input type="hidden" name="RouteControl:AmbiguousButton" value="Get Directions" />
+    <input type="hidden" name="RouteControl:HiddenText" value="" />
+    <input type="hidden" name="RouteControl:StartHiddenText" value="" />
+    <input type="hidden" name="RouteControl:EndHiddenText" value="" />
+    <input type="hidden" name="RouteControl:isRegionChange" value="0" />
+    <input type="hidden" name="RouteControl:startResultOffSet" value="0" />
+    <input type="hidden" name="RouteControl:endResultOffSet" value="0" />
+    <input type="hidden" name="RouteControl:StartHiddenStreet" value="" />
+    <input type="hidden" name="RouteControl:StartHiddenCity" value="" />
+    <input type="hidden" name="RouteControl:StartHiddenState" value="" />
+    <input type="hidden" name="RouteControl:StartHiddenZip" value="" />
+    <input type="hidden" name="RouteControl:EndHiddenStreet" value="" />
+    <input type="hidden" name="RouteControl:EndHiddenCity" value="" />
+    <input type="hidden" name="RouteControl:EndHiddenState" value="" />
+    <input type="hidden" name="RouteControl:EndHiddenZip" value="" />
+    <input type="hidden" name="RouteControl:StartHiddenSearchType" value="" />
+    <input type="hidden" name="RouteControl:EndHiddenSearchType" value="" />
+    <input type="hidden" name="RouteControl:StartBkARegion" value="" />
+    <input type="hidden" name="RouteControl:StartBkPRegion" value="" />
+    <input type="hidden" name="RouteControl:EndBkARegion" value="" />
+    <input type="hidden" name="RouteControl:EndBkPRegion" value="" />
+    <input type="hidden" name="MapStyle" value="l" />
+    <COMMENT>
+      The input element above, "MapStyle" was a set of radio buttons with the following options...
+      "s", "l"
+    </COMMENT>
+
+    <input type="hidden" name="RouteControl:EndSearchType" value="Address" />
+    <COMMENT>
+      The input element above, "RouteControl:EndSearchType" was a set of radio buttons with the following options...
+      "Address", "Place"
+    </COMMENT>
+
+    <input type="hidden" name="RouteControl:StartSearchType" value="Address" />
+    <COMMENT>
+      The input element above, "RouteControl:StartSearchType" was a set of radio buttons with the following options...
+      "Address", "Place"
+    </COMMENT>
+
+    <input type="hidden" name="RouteType" value="quickest" />
+    <COMMENT>
+      The input element above, "RouteType" was a set of radio buttons with the following options...
+      "quickest", "shortest"
+    </COMMENT>
+
+    <input type="hidden" name="Units" value="miles" />
+    <COMMENT>
+      The input element above, "Units" was a set of radio buttons with the following options...
+      "miles", "km"
+    </COMMENT>
+
+  </form>
+  <script><![CDATA[
+    function mp(q)
+    {
+      if( nullArgs("mp", q) ) {
+	  	openSearchWindow("http://mappoint.msn.com/DirectionsFind.aspx");
+        return;
+	}
+		
+
+      // Parse switches with parseArgs:
+
+      // parseArgs usage:
+      // Arguments:
+      //    q                - string from the search function
+      //    expectedSwitches - list or array of the expected switch values
+      //    expandSwitches   - optional parameter [default = true] used to determine 
+      //                       if the switch shortcuts should be expanded (i.e. /f becomes /foo)
+      // Returns an object with these properties:
+      //    q        - the input string with the switches removed
+      //    switches - array of objects with these two properties:
+      //                  name:   expanded name of the matched switch (i.e. foo as in /foo:bar)
+      //                  value:  value of switch (i.e. bar as in /foo:bar)
+      //    switch_val - associative array with the switch name as the key with the switch value 
+      //                 as the value. (i.e. switch_val["foo"] = "bar" as in /foo:bar)
+
+      // FORM variables for mpf
+      // document.mpf.__VIEWSTATE.value = "";
+	  
+	  // There's no reason the default regions have to be hard-coded.
+	  // This would be a good place for someone to read the user's local region from localprefs.js
+	  
+      document.mpf["RouteControl:StartARegionSelect"].value = "12";	// default to USA
+      document.mpf["RouteControl:StartPRegionSelect"].value = "14";	// default to North America
+	  
+	  // This would be a good place for some clever person to default 
+	  // these values to the address values in localprefs.js
+	  
+      // document.mpf["RouteControl:StartStreetText"].value = "";
+      // document.mpf["RouteControl:StartCityText"].value = "";
+      // document.mpf["RouteControl:StartStateText"].value = "";
+      // document.mpf["RouteControl:StartZipText"].value = "";
+      document.mpf["RouteControl:EndARegionSelect"].value = "12"; // default to USA
+      document.mpf["RouteControl:EndPRegionSelect"].value = "14"; // default to North America
+      // document.mpf["RouteControl:EndStreetText"].value = "";
+      // document.mpf["RouteControl:EndCityText"].value = "";
+      // document.mpf["RouteControl:EndStateText"].value = "";
+      // document.mpf["RouteControl:EndZipText"].value = "";
+      // document.mpf["RouteControl:AmbiguousButton"].value = "";
+      // document.mpf["RouteControl:HiddenText"].value = "";
+      // document.mpf["RouteControl:StartHiddenText"].value = "";
+      // document.mpf["RouteControl:EndHiddenText"].value = "";
+      // document.mpf["RouteControl:isRegionChange"].value = "";
+      // document.mpf["RouteControl:startResultOffSet"].value = "";
+      // document.mpf["RouteControl:endResultOffSet"].value = "";
+      // document.mpf["RouteControl:StartHiddenStreet"].value = "";
+      // document.mpf["RouteControl:StartHiddenCity"].value = "";
+      // document.mpf["RouteControl:StartHiddenState"].value = "";
+      // document.mpf["RouteControl:StartHiddenZip"].value = "";
+      // document.mpf["RouteControl:EndHiddenStreet"].value = "";
+      // document.mpf["RouteControl:EndHiddenCity"].value = "";
+      // document.mpf["RouteControl:EndHiddenState"].value = "";
+      // document.mpf["RouteControl:EndHiddenZip"].value = "";
+      // document.mpf["RouteControl:StartHiddenSearchType"].value = "";
+      // document.mpf["RouteControl:EndHiddenSearchType"].value = "";
+      document.mpf["RouteControl:StartBkARegion"].value = "12"; // default to USA
+      document.mpf["RouteControl:StartBkPRegion"].value = "14"; // default to North America
+      document.mpf["RouteControl:EndBkARegion"].value = "12"; // default to USA
+      document.mpf["RouteControl:EndBkPRegion"].value = "14"; // default to North America
+      // document.mpf.MapStyle.value = "l"; // default to LineDrive
+      // document.mpf["RouteControl:EndSearchType"].value = "";
+      // document.mpf["RouteControl:StartSearchType"].value = "";
+      // document.mpf.RouteType.value = "quickest";
+      // document.mpf.Units.value = "miles";
+
+      var args = parseArgs(q, "linedrive, standard, quickest, shortest, miles, kilometers, begin, end");
+
+	  var regionParts;
+      for (var iSwitch = 0; iSwitch < args.switches.length; iSwitch++)
+      {
+        switch( args.switches[iSwitch].name )
+        {
+		  // Map style
+          case "linedrive":	// LineDrive directions
+		  	document.mpf.MapStyle.value = "l";
+            break;
+          case "standard":	// standard directions
+		  	document.mpf.MapStyle.value = "s";
+            break;
+			
+		  // Route type
+          case "quickest":
+		  	document.mpf.RouteType.value = "quickest";	
+            break;
+          case "shortest":
+		  	document.mpf.RouteType.value = "shortest";
+            break;
+			
+		  // Units
+          case "miles":
+		    document.mpf.Units.value = "miles";
+            break;
+          case "kilometers":
+		    document.mpf.Units.value = "km";
+            break;
+			
+		  // Start region/nation
+		  case "begin":
+		  	regionParts = parseRegion(args.switch_val["begin"]);
+			document.mpf["RouteControl:StartARegionSelect"].value = regionParts[0];
+			document.mpf["RouteControl:StartPRegionSelect"].value = regionParts[1];
+			document.mpf["RouteControl:StartBkARegion"].value = regionParts[0];
+			document.mpf["RouteControl:StartBkPRegion"].value = regionParts[1];
+			
+			// Assume begin and end region are the same (and that "begin" was first on command line)
+			document.mpf["RouteControl:EndARegionSelect"].value = regionParts[0];
+			document.mpf["RouteControl:EndPRegionSelect"].value = regionParts[1];
+			document.mpf["RouteControl:EndBkARegion"].value = regionParts[0];
+			document.mpf["RouteControl:EndBkPRegion"].value = regionParts[1];
+			
+			break;
+		  
+		  // End region/nation
+		  case "end":
+		  	regionParts = parseRegion(args.switch_val["end"]);
+			document.mpf["RouteControl:EndARegionSelect"].value = regionParts[0];
+			document.mpf["RouteControl:EndPRegionSelect"].value = regionParts[1];
+			document.mpf["RouteControl:EndBkARegion"].value = regionParts[0];
+			document.mpf["RouteControl:EndBkPRegion"].value = regionParts[1];
+			break;
+			
+          default:
+            break;
+        }
+		
+      }
+		// Parse the query string for begin/end addresses
+		
+		route = args.q.split(" to ");
+		var startAddress= parseAddress(route[0]);
+		
+		// If there is only one address, then make the start and end address the same.
+		// This would be a good place for someone to redirect the form to the single-address-map form.
+		var endAddress;
+		if (route.length < 2)
+		{
+			endAddress = startAddress;
+		}
+		else
+		{
+			endAddress = parseAddress(route[1]);
+		}
+		
+	    document.mpf["RouteControl:StartStreetText"].value = startAddress[0];
+	  	document.mpf["RouteControl:StartCityText"].value = startAddress[1];
+		document.mpf["RouteControl:StartStateText"].value = startAddress[2];
+	  	document.mpf["RouteControl:StartZipText"].value = startAddress[3];
+		
+	    document.mpf["RouteControl:StartHiddenStreet"].value = startAddress[0];
+	  	document.mpf["RouteControl:StartHiddenCity"].value = startAddress[1];
+		document.mpf["RouteControl:StartHiddenState"].value = startAddress[2];
+	  	document.mpf["RouteControl:StartHiddenZip"].value = startAddress[3];
+		
+		if (startAddress[2] != "") {
+		}
+
+		document.mpf["RouteControl:EndStreetText"].value = endAddress[0];
+		document.mpf["RouteControl:EndCityText"].value = endAddress[1];
+		document.mpf["RouteControl:EndStateText"].value = endAddress[2];
+		document.mpf["RouteControl:EndZipText"].value = endAddress[3];
+
+		document.mpf["RouteControl:EndHiddenStreet"].value = endAddress[0];
+		document.mpf["RouteControl:EndHiddenCity"].value = endAddress[1];
+		document.mpf["RouteControl:EndHiddenState"].value = endAddress[2];
+		document.mpf["RouteControl:EndHiddenZip"].value = endAddress[3];
+		
+		document.mpf["RouteControl:isRegionChange"].value = "";
+		
+      submitForm(mpf);
+    }
+	
+	function parseAddress (inAddress) {
+	
+        var address = "";
+        var city = "";
+        var state = "";
+        var zipcode = "";
+		
+		var location = inAddress;
+
+        // trim trailing zip
+        var res = location.match(/(\d{5}(-\d{4})?)[\s\.,;]*$/);
+        if (res && res[1])
+        {
+          zipcode = res[1];
+          location = location.substring(0, res.index);
+        }
+
+        // trim trailing state code.
+		// US state and Canadian province abbreviations only
+		// No other national states/provinces recognized by MapPoint
+        res = location.match(/\b(AL|AK|AS|AZ|AR|CA|CO|CT|DE|DC|FM|FL|GA|GU|HI|ID|IL|IN|IA|KS|KY|LA|ME|MH|MD|MA|MI|MN|MS|MO|MT|NE|NV|NH|NJ|NM|NY|NC|ND|MP|OH|OK|OR|PW|PA|PR|RI|SC|SD|TN|TX|UT|VT|VI|VA|WA|WV|WI|WY|AB|BC|MB|NB|NF|NS|NT|ON|PE|QC|SK|YT)[\s\.,;]*$/i);
+        if (res && res[1])
+        {
+          state = res[1];
+          location = location.substring(0, res.index);
+        }
+
+        // detect leading ### w w w st
+        res = location.match(/^\s*(\d+(\s+\w+)+\s+(st|ave|rd|ln|dr|blvd|cir|ct|pkwy|pl|way|aly|pk|sq|ter|plz))[\s\.,;]*(.*)$/i);
+        if (res && res[1])
+        {
+          address = res[1];
+          city = res[4];
+        }
+
+        // detect trailing comma or semicolon; prefer this way of finding city
+        res = location.match(/[\.,;]\s*([^\d][^,;]+)[\s\.,;]*$/i);
+        if (res && res[1])
+        {
+          city = res[1];
+          address = location.substring(0, res.index);
+        }
+
+        // last resorts: we really want a city
+        if (city == "")
+        {
+          // drop requirement for street number and precise abbreviation and look for street
+          res = location.match(/^\s*((\w+\s+)+(st|ave|rd|ln|dr|blvd|cir|ct|pkwy|pl|way|aly|pk|sq|ter|plz|street|avenue|road|lane|drive|boulevard|circle|court|parkway|place|loop|alley|park|square|terrace|plaza|mall))[\s\.,;]*(.*)$/i);
+          if (res && res[1])
+          {
+            address = res[1];
+            city = res[4];
+          }
+          // has a number: city is last word
+          else if (location.match(/^\s*\d/))
+          {
+            res = location.match(/(\w+)[\s\.,;]*$/);
+            city = res[1];
+            address = location.substring(0, res.index);
+          }
+          // otherwise, looks like it doesn't have a street; city is whole thing
+          else
+          {
+            city = location;
+            address = "";
+          }
+        }
+		var addressParts = new Array(address, city, state, zipcode);
+		return addressParts;
+	}
+	
+	function parseRegion(inRegion) {
+		var region = inRegion.toLowerCase();
+		var aRegion = "12";	// default to United States
+		var pRegion = "14"; // default to North America
+		
+		switch (region) {
+			case "austria":
+				aRegion = "0";
+				pRegion = "13";
+				break;
+			case "belgium":
+				aRegion = "1";
+				pRegion = "13";
+				break;
+			case "canada":
+				aRegion = "2";
+				pRegion = "14";
+				break;
+			case "denmark":
+				aRegion = "3";
+				pRegion = "13";
+				break;
+			case "france":
+				aRegion = "4";
+				pRegion = "13";
+				break;
+			case "germany":
+				aRegion = "5";
+				pRegion = "13";
+				break;
+			case "italy":
+				aRegion = "6";
+				pRegion = "13";
+				break;
+			case "luxembourg":
+				aRegion = "7";
+				pRegion = "13";
+				break;
+			case "netherlands":
+				aRegion = "8";
+				pRegion = "13";
+				break;
+			case "spain":
+				aRegion = "9";
+				pRegion = "13";
+				break;
+			case "switzerland":
+				aRegion = "10";
+				pRegion = "13";
+				break;
+			case "united_kingdom":
+			case "uk":
+				aRegion = "11";
+				pRegion = "13";
+				break;
+			case "united_states":
+			case "us":
+			case "usa":
+			case "america":
+				aRegion = "12";
+				pRegion = "14";
+				break;
+			case "europe":
+				aRegion = "";
+				pRegion = "13";
+				break;
+			case "north_america":
+			case "north":
+				aRegion = "";
+				pRegion = "14";
+				break;
+			default:
+				aRegion = "12";	// United States
+				pRegion = "14";	// North America
+				break;
+		}
+		
+		var regionParts = new Array(aRegion, pRegion);
+		return regionParts;
+	}
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 04/23/03 at 10:22:38
+    by Dave's Quick Search Deskbar Search Wizard version 1.0.1 ,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+	It was further edited by Gregory Krohne
+  </created_by>
+</search>
