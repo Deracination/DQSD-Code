@@ -77,10 +77,21 @@ END_MSG_MAP()
 		// create a tool tip
 		m_tip.Create(m_hWnd);
 		ATLASSERT(m_tip.IsWindow());
-		m_tip.Activate(TRUE);
 
-		m_tip.AddTool( GetDlgItem( IDOK ), _T("this is the OK button") );
-		m_tip.AddTool( GetDlgItem( IDC_ChangeHistory ), _T("this is the change history") );
+		RECT rcDlg;
+		GetWindowRect( &rcDlg );
+
+		RECT rcDlgItem;
+		CWindow( GetDlgItem( IDC_ChangeHistory ) ).GetWindowRect( &rcDlgItem );
+
+		rcDlgItem.top -= rcDlg.top;
+		rcDlgItem.left -= rcDlg.left;
+		rcDlgItem.bottom -= rcDlg.top;
+		rcDlgItem.right -= rcDlg.left;
+
+		m_tip.AddTool( m_hWnd, _T("change history"), &rcDlgItem, IDC_ChangeHistory );
+
+		m_tip.Activate(TRUE);
 
 		return 1;  // Let the system set the focus
 	}
