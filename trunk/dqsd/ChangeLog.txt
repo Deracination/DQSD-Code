@@ -20,6 +20,7 @@ Modified Searches
 * httpinst - added additional parameter /filename to specify the local filename (Brent Beardsley)
 * bb - updated to work with new Best Buy website (Shawn Hall)
 * stk - updated to work with new Bloomberg site as reported by Casco Valle (Kim Gräsman)
+* ths - updated it so that the popup help works (Brent Beardsley)
 
 Removed Searches
 * nwtsr and httpd replaced by whats (Kim Gräsman)
