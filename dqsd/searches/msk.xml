@@ -1,7 +1,11 @@
 <search function="msk">
   <name>Microsoft Knowledge Base</name>
   <description>Search the Microsoft Knowledge Base using either a regular search expression or a 6-digit "Q" code.<br/>
-  "msk Windows Bugs" or "msk q252795"
+  <a class="helpboxDescLabels">Examples:</a><br/>
+  <table cellpadding="0" cellspacing="0" border="0">
+		<tr><td class="helpboxDescColumns">msk Windows Bugs</td></tr>
+		<tr><td class="helpboxDescColumns">msk q252795</td></tr>
+	</table>
   </description>
   <link>http://support.microsoft.com/default.aspx?scid=fh;en-us;kbinfo</link>
   <category>Computers</category>
