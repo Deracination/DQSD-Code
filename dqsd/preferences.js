@@ -48,7 +48,7 @@ user_zip     = "20509"
 *  Increasing this might help if your tray icons don't all show up when you startup windows.
 *  [milliseconds (1000 milliseconds = 1 second)]
 */
-startupdelay=10000; 
+startupdelay=0;
 
 /* Display the clock?
 *  true = display
