@@ -233,14 +233,14 @@ function parseArgs(
   var switches = [];
   var tmpq = q;
   
-  // Grab each token that looks like a switch (/\S+)
-  var reSwitch = /\/((\S+)(?::?(\S*)))\s*/;
+  // Grab each token that looks like a switch (/\w+)
+  var reSwitch = /\/((\w+)(?::?(\w*)))\s*/;
   var res = null;
   expectedSwitches = ',' + expectedSwitches + ',';
   while (res = tmpq.match(reSwitch))
   {
     // Expand switch if it's in the list of expected switches...
-    var fullswitch = expectedSwitches.match(new RegExp(',\\s*('+res[2]+'\\S*)\\s*,', 'i'));
+    var fullswitch = expectedSwitches.match(new RegExp(',\\s*('+res[2]+'\\w*)\\s*,', 'i'));
   	if (fullswitch && fullswitch[1])
   	  switches.push( {name:fullswitch[1].toLowerCase(), value:res[3]} );
     else
