@@ -34,6 +34,7 @@ New Searches
 * racetv - Show US and Canada TV listings of auto racing events.
 * wordiq - Search wordiq.com for anything (Gregory Krohne)
 * rnd - random.org (Gregory Krohne)
+* ukdial - UK area code lookup (David Golding)
 
 Modified Searches
 * jdk - updated urls for j2ee and 1.4, added 1.5, 1.2, 1.1 and api switches (Brent Beardsley)
@@ -55,6 +56,8 @@ Modified Searches
 * fv - Fixed so it works with new FlightView form (Kim Gräsman)
 * comx - Added /userfriendly and /joyoftech (Monty Scroggins and Gregory Krohne)
 * racetv - Added timezone shifts in the schedule times (Monty Scroggins).
+* rxlib - Fixed to work with new ASP.NET-based site (Shawn K. Hall)
+* ch.xml - Base URL changed (James Robertson)
 
 Removed Searches
 * nwtsr and httpd replaced by whats (Kim Gräsman)
