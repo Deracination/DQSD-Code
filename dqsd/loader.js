@@ -1,6 +1,6 @@
 // Load the contents of search.xml, aliases, and menu files
 
-function addsearch(fname, name, desc, link, cat, local, subcats)
+function addsearch(fname, name, desc, link, cat, local, subcats, nomenu)
 {
   try
   {
@@ -14,7 +14,8 @@ function addsearch(fname, name, desc, link, cat, local, subcats)
                        aliases:[], 
                        enabled:!disabledsearches[fname], 
                        aliasmenudisplay:true, 
-                       local:(typeof local != 'undefined' ? local : false)};
+                       local:(typeof local != 'undefined' ? local : false),
+                       nomenu:(typeof nomenu != 'undefined' ? nomenu : false)};
     if( !aliases[fname] )
       addalias( fname, fname );
     addhelp( searches[fname] );
@@ -271,6 +272,11 @@ if (searchRoot)
       var descriptionNode = searchNode.selectSingleNode("description");
       var linkNode = searchNode.selectSingleNode("link");
       var categoryNode = searchNode.selectSingleNode("category");
+      var nomenu = false;
+      if ( categoryNode )
+      {
+        nomenu = categoryNode.attributes.getNamedItem("nomenu");
+      }
       var searchCategories = new Array();
       getCategories( categoryNode, searchCategories );
       var descriptonXml = null;
@@ -287,7 +293,8 @@ if (searchRoot)
                 (linkNode ? linkNode.text : null),
                 searchCategories.length ? searchCategories[0] : null,
                 localsearch,
-                searchCategories.slice( 1 ) );
+                searchCategories.slice( 1 ),
+                nomenu ? true : false);
     }
   }
 }
