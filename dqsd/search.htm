@@ -508,8 +508,11 @@ function prevnext(direction)
 // show the text "Quick Search"
 function showQuickSearch()
 {
-  document.selection.empty();
-  document.deff.q.value = local(QUICK_SEARCH);
+  if ( typeof displayHelp != 'undefined' && displayHelp )
+  {
+    document.selection.empty();
+    document.deff.q.value = local(QUICK_SEARCH);
+  }
 }
 
 // strt() called on page load; show help message after 4 seconds
@@ -546,8 +549,11 @@ function startbanner(delay)
 // banner() called to display help message for 8.5 seconds
 function banner()
 {
-  document.deff.q.value = local(HELP_TEXT);
-  bant=window.setTimeout("unbanner();", helptime);
+  if ( typeof displayHelp != 'undefined' && displayHelp )
+  {
+    document.deff.q.value = local(HELP_TEXT);
+    bant=window.setTimeout("unbanner();", helptime);
+  }
 }
 
 // called when the banner naturally goes away
