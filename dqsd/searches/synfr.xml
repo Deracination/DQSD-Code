@@ -1,0 +1,35 @@
+<search function="synfr">
+  <name>French synonyms</name>
+  <category>Reference</category>
+  <contributor>MLL</contributor>
+  <link>http://elsap1.unicaen.fr/cherches.html</link>
+  <description>
+  Get synonyms for a french word, with a very handy visual chart.<br/>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+      <tr><td>synfr maison</td></tr>
+    </table>
+  </description>
+
+  <form name="synfrf"
+        method="get"
+        action="http://elsap1.unicaen.fr/cgi-bin/trouveter">
+    <input type="hidden" name="requete" value="" />
+    <input type="hidden" name="refer" value="#" />
+  </form>
+
+  <script><![CDATA[
+    function synfr(q)
+    {
+      if( nullArgs("synfr", q) )
+        return;
+      document.synfrf.requete.value = q;
+      submitForm(synfrf);
+    }
+  ]]></script>
+
+  <copyright>
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+
+</search>
