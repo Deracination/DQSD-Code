@@ -133,6 +133,7 @@ overwritten when installing updates.
 <script type='text/jscript' src="helpmenu.js"></script>
 <script type='text/jscript' src="strings.js"></script>
 <script type='text/jscript' src="version.js"></script>
+<script type='text/jscript' src="httpinst.js"></script>
 
 <script type='text/jscript'>
 // show localized title string
@@ -195,13 +196,8 @@ function def()
 
   if(t == "refreshicons")   { refreshIcons(); return false; }
 
-  // Handle quick-installation
-  if(t.search("httpinst ") == 0)
-  {
-  	var searchUrl = t.substr(9, t.length);
-  	httpInstall(searchUrl);
-  	return false;
-  }
+  // HTTP-installation
+  if (httpinst(t)) return false;
 
   // anything below adds something to the history
   addhist(t);
@@ -925,57 +921,6 @@ function refreshIcons()
       alert("Refresh failed with error: " + e.description);
    }
 }
-
-function httpInstall(searchUrl)
-{
-  try
-  {
-  	// Request search xml from provided URL
-	  var xmlHttp = new ActiveXObject("Microsoft.XmlHttp")
-	  xmlHttp.open("GET", searchUrl, false);
-	  xmlHttp.send();
-
-		// Verify wellformed-ness of response
-		var xmlDom = xmlHttp.responseXml;
-	  if(xmlDom.parseError.errorCode != 0)
-	  {
-	    alert("Search retrieved from " + searchUrl + " is not well-formed.\nParse error: " + xmlDom.parseError.reason);
-	    return false;
-	  }
-		
-		// Parse out search filename
-		var searchName = "";
-		for(var p = searchUrl.length - 1; p > 0; --p)
-		{
-			if(searchUrl.charAt(p) == '/')
-			{
-				searchName = searchUrl.substr(p + 1, searchUrl.length - p);
-				break;
-			}
-		}
-		
-		if(searchName == "")
-		{
-			alert("Failed to find search filename in URL " + searchUrl);
-			return false;
-		}
-
-		// Save xml file to localsearches directory
-		writeFile("localsearches/" + searchName, xmlHttp.responseText);
-
-		// Tell the user all went well
-		if(confirm("Successfully installed search " + searchName + ".\nWould you like to reload the toolbar?"))
-		{
-			// Reload
-			reload();		
-		}
-  }
-  catch(e)
-  {
-		alert("Unable to install search from " + searchUrl + ".\nError message: " + e.message);
-  }
-}
-
 </script>
 </body>
 </html>
