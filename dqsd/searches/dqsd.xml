@@ -1,0 +1,58 @@
+<search function="dqsd">
+  <name>DQSD Mail Archive</name>
+  <category>Computers</category>
+  <contributor>Gregory Krohne</contributor>
+  <link>http://www.mail-archive.com/dqsd-users@lists.sourceforge.net/</link>
+  <email>Gregory.Krohne@afrc.af.mil</email>
+  <description>
+  Search the Mail Archive for Dave's QuickSearch Deskbar (DQSD)
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>dqsd Gregory Krohne</td></tr>
+      <tr><td>dqsd froogle</td></tr>
+    </table>
+  </description>
+  <form name="dqsdf"
+        method="get"
+        action="http://www.mail-archive.com/cgi-bin/htsearch">
+    <input type="hidden" name="method" value="and" />
+    <input type="hidden" name="format" value="short" />
+    <input type="hidden" name="config" value="dqsd-users_lists_sourceforge_net" />
+    <input type="hidden" name="restrict" value="" />
+    <input type="hidden" name="exclude" value="" />
+
+    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
+
+    <input type="hidden" name="words" value="forum" />
+  </form>
+  <script><![CDATA[
+    function dqsd(q)
+    {
+      if( nullArgs("dqsd", q) )
+        return;
+
+      // FORM variables for dqsdf
+      //document.dqsdf.method.value = "";
+      //document.dqsdf.format.value = "";
+      //document.dqsdf.config.value = "";
+      //document.dqsdf.restrict.value = "";
+      //document.dqsdf.exclude.value = "";
+
+      // The wizard assigned the search string to this form field value because
+      // this field was the active element when the search file was generated.
+      // Change this to args.q if the search string is parsed with parseArgs.
+      document.dqsdf.words.value = q;
+
+      submitForm(dqsdf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 12/17/02 at 16:20:15
+    by Dave's Quick Search Deskbar Search Wizard version 1.0.1 ,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>
