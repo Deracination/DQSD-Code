@@ -1,15 +1,15 @@
 <search function="temp">
   <name>Temperature Converter</name>
   <description>
-    Convert temperatures from Celsius to Fahrenheit and vice-versa. A switch is <b>required</b> to indicate the units the given value is in.<br/>
-    <div class="helpboxDescLabels">Switches:</div>
-  	<table class="helpboxDescTable">
-  		<tr><td>/celsius</td><td> - </td><td>Convert the given Celsius value to Fahrenheit.</td></tr>
-  		<tr><td>/fahrenheit</td><td> - </td><td>Convert the given Fahrenheit value to Celsius.</td></tr>
+    Convert temperatures from Celsius to Fahrenheit and vice-versa. A switch is required to indicate which units the given value is in.<br/>
+    <a class="helpboxDescLabels">Switches:</a><br/>
+  	<table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">/celsius</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Convert the given Celsius value to Fahrenheit.</td></tr>
+  		<tr><td class="helpboxDescColumns">/fahrenheit</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Convert the given Fahrenheit value to Celsius.</td></tr>
   	</table>
-    <div class="helpboxDescLabels">Example:</div>
-    <table class="helpboxDescTable">
-  		<tr><td>temp 22 /celsius</td></tr>
+    <a class="helpboxDescLabels">Example:</a><br/>
+    <table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">temp 22 /celsius</td></tr>
   	</table>
   </description>
   <category>Functions</category>
@@ -27,12 +27,12 @@
         switch( args.switches[0].name )
         {
           case "celsius":     // convert a celsius value to fahrenheit
-            document.deff.q.value = args.q + "\u00b0C = " + (9/5*args.q)+32 + "\u00b0F";
+            document.deff.q.value = args.q + "\u00b0C = " + parseInt(eval((1.8 * args.q) + 32),10) + "\u00b0F";
             document.deff.q.createTextRange().select();
             break;
             
           case "fahrenheit":  // convert a fahrenheit value to celsius
-            document.deff.q.value = args.q + "\u00b0F = " + (5/9)*(args.q-32) + "\u00b0C";
+            document.deff.q.value = args.q + "\u00b0F = " + parseInt(eval((args.q - 32) / 1.8),10) + "\u00b0C";
             document.deff.q.createTextRange().select();
             break;
         }
