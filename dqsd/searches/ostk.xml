@@ -1,0 +1,119 @@
+<search function="ostk">
+  <name>Overstock.com</name>
+  <category>Shopping</category>
+  <contributor>Brent Beardsley</contributor>
+  <link>http://www.overstock.com</link>
+  <email></email>
+  <description>
+  Search Overstock.com
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/all [default]</td><td> - </td><td>Search all categories</td></tr>
+      <tr><td>/apparel</td><td> - </td><td>Search for Apparel items</td></tr>
+      <tr><td>/books</td><td> - </td><td>Search for Books</td></tr>
+      <tr><td>/computers</td><td> - </td><td>Search for Computer items</td></tr>
+      <tr><td>/electronics</td><td> - </td><td>Search for Electronics</td></tr>
+      <tr><td>/garden</td><td> - </td><td>Search for Garden items</td></tr>
+      <tr><td>/home</td><td> - </td><td>Search for Home items</td></tr>
+      <tr><td>/jewelry</td><td> - </td><td>Search for Jewelry</td></tr>
+      <tr><td>/movies</td><td> - </td><td>Search for Movies</td></tr>
+      <tr><td>/music</td><td> - </td><td>Search for Music items</td></tr>
+      <tr><td>/new</td><td> - </td><td>Check for new items - can be used with the rest of the parameters to limit new items to a specific category</td></tr>
+      <tr><td>/sports</td><td> - </td><td>Search for Sports items</td></tr>
+      <tr><td>/travel</td><td> - </td><td>Search for Travel items</td></tr>
+      <tr><td>/toys</td><td> - </td><td>Search for Toys</td></tr>
+      <tr><td>/worldstock</td><td> - </td><td>Search for Worldstock items</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>ostk /c clie</td><td> - </td><td>Search the Computer section for clie</td></tr>
+      <tr><td>ostk /c /n</td><td> - </td><td>Show the new items in the Computer section</td></tr>
+    </table>
+  </description>
+  <form name="ostkf"
+        method="post"
+        action="http://www.overstock.com/cgi-bin/d2.cgi">
+    <input type="hidden" name="PAGE" value="SEARCH" />
+    <input type="hidden" name="SITEAREA" value="0" />
+    <COMMENT>
+      The input element above, "SITEAREA", was a SELECT element with the following options...
+      <select name="SITEAREA">
+        <option value="0">All Stores</option>
+        <option value="1">Home &amp; Garden</option>
+        <option value="2">Electronics &amp; Computers</option>
+        <option value="3">Books, Movies &amp; Music</option>
+        <option value="4">Jewelry &amp; Apparel</option>
+        <option value="5">Sports, Travel &amp; Toys</option>
+        <option value="6">Worldstock</option>
+      </select>
+    </COMMENT>
+    <input type="hidden" name="KEYWORD" value="" />
+  </form>
+  <script><![CDATA[
+    function ostk(q)
+    {
+      if( nullArgs("ostk", q) )
+        return;
+
+      var newitems = false;
+      var sitearea = 0;
+      var args = parseArgs(q, "all, apparel, books, computers, electronics, garden, home, jewelry, movies, music, new, sports, travel, toys, worldstock");
+      if ( args.switches.length > 0 )
+      {
+        for (var i=0; i < args.switches.length; i++) {
+          switch( args.switches[i].name )
+          {
+	    case "all":
+	      sitearea = 0;
+	      break;
+            case "home":
+            case "garden":
+	      sitearea = 1;
+              break;
+            case "electronics":
+            case "computers":
+  	      sitearea = 2;
+              break;
+            case "books":
+            case "movies":
+            case "music":
+	      sitearea = 3;
+              break;
+            case "jewelry":
+            case "apparel":
+	      sitearea = 4;
+              break;
+            case "sports":
+            case "travel":
+            case "toys":
+	      sitearea = 5;
+              break;
+	    case "worldstock":
+	      sitearea = 6;
+	      break;
+	    case "new":
+	      newitems = true;
+	      break;
+            default:
+              break;
+          }
+        }
+      }
+      if (newitems) {
+        var search_url = "http://www.overstock.com/cgi-bin/d2.cgi?PAGE=HEYWHATSNEW";
+        if (sitearea != 0) {
+	  search_url += "&STO_ID="+sitearea;
+	}
+	openSearchWindow(search_url);
+      } else {
+        document.ostkf.SITEAREA.value = sitearea;
+	document.ostkf.KEYWORD.value = args.q;
+        submitForm(ostkf);
+      }
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>

@@ -1,0 +1,33 @@
+<search function="tinyurl">
+  <name>TinyURL</name>
+  <category>Functions</category>
+  <contributor>Brent Beardsley</contributor>
+  <link>http://tinyurl.com/</link>
+  <email></email>
+  <description>
+  TinyURL makes a short URL for your long URL so you can paste it in email messages.
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>tinyurl http://wwww.reallyreallyreallylongurltoannoyyou.com</td></tr>
+    </table>
+  </description>
+  <form name="tinyurlf"
+        method="post"
+        action="http://tinyurl.com/create.php">
+    <input type="hidden" name="url" value="" />
+  </form>
+  <script><![CDATA[
+    function tinyurl(q)
+    {
+      if( nullArgs("tinyurl", q) )
+        return;
+
+      document.tinyurlf.url.value = q;
+      submitForm(tinyurlf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>
