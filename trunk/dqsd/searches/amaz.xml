@@ -77,6 +77,8 @@
         document.amazf["field-keywords"].value = args.q;
         submitForm(amazf);
       }
+      else if( args.switches.length > 1 )
+        nullArgs("amaz","?");
       else
       {
         document.amazf.index.value = "blended";
