@@ -3,6 +3,7 @@
   <description>Parallel search via the popular Dogpile metasearch: "dp travel"</description>
   <category>Search the Web</category>
   <link>http://www.dogpile.com/</link>
+  <contributor>David Bau, Brian Ross</contributor>
   <form name="dogf"
         target="_blank"
         action="http://search.dogpile.com/texis/search"
