@@ -1,0 +1,69 @@
+<search function="wini">
+  <name>Wisconsin Name Index</name>
+  <category>Genealogy</category>
+  <contributor>Brent Beardsley</contributor>
+  <link>http://www.wisconsinhistory.org/wni/</link>
+  <email></email>
+  <description>
+  Search the Wisconsin Name Index for your ancestors
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/place</td><td> - </td><td></td></tr>
+      <tr><td>/soundex</td><td> - </td><td></td></tr>
+    </table>
+  </description>
+  <form name="winif"
+        method="post"
+        action="http://www.wisconsinhistory.org/wni/searchResults.asp">
+    <input type="hidden" name="searchType" value="Basic" />
+    <input type="hidden" name="ln" value="" />
+    <input type="hidden" name="ln_match" value="exact" />
+    <COMMENT>
+      The input element above, "ln_match", was a SELECT element with the following options...
+      <select name="ln_match">
+        <option value="soundex">Sounds Like</option>
+        <option value="exact">Exactly</option>
+      </select>
+    </COMMENT>
+
+    <input type="hidden" name="fn" value="" />
+    <input type="hidden" name="ci" value="" />
+  </form>
+  <script src="addons/genealogy/genealogy_lib.js"></script>
+  <script><![CDATA[
+    function wini(q)
+    {
+      if( nullArgs("wini", q) )
+        return;
+
+      var place = "";
+	  var soundex = false;
+	  var i = 0;
+      var args = genealogy_parseArgs(q, "place, soundex");
+	  for (i = 0; i < args.switches.length; i++) {
+		switch( args.switches[i].name )
+        {
+          case "place":
+		    place = args.switch_val["place"];
+            break;
+          case "soundex":
+            break;
+          default:
+            break;
+        }
+      }
+
+      document.winif.ln.value = genealogy_parse_surname(args.q);
+      document.winif.fn.value = genealogy_parse_givenname(args.q);
+      document.winif.ln_match.value = soundex ? "soundex" : "exact";
+      document.winif.ci.value = place;
+
+      genealogy_submitForm(winif);
+    }
+  ]]></script>
+  <copyright>
+	Copyright (c) 2003 Brent Beardsley
+	Distributed under the terms of the
+	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>
