@@ -33,6 +33,7 @@ New Searches
 * pp - Paypal Search (Shawn Hall)
 * racetv - Show US and Canada TV listings of auto racing events.
 * wordiq - Search wordiq.com for anything (Gregory Krohne)
+* rnd - random.org (Gregory Krohne)
 
 Modified Searches
 * jdk - updated urls for j2ee and 1.4, added 1.5, 1.2, 1.1 and api switches (Brent Beardsley)
@@ -52,6 +53,7 @@ Modified Searches
 * palmgear - updated search to work again, added /new and /updated switches
 * gg - removed /keys, which no longer works. Encodes all queries as UTF-8, per Google's new default (Kim Gräsman)
 * fv - Fixed so it works with new FlightView form (Kim Gräsman)
+* comx - Added /userfriendly and /joyoftech (Monty Scroggins and Gregory Krohne)
 
 Removed Searches
 * nwtsr and httpd replaced by whats (Kim Gräsman)

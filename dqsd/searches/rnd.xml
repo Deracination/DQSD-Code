@@ -1,0 +1,141 @@
+<search function="rnd">
+  <name>Random Number/Sequence Generator</name>
+  <category>Functions</category>
+  <contributor>Gregory Krohne</contributor>
+  <link>http://www.random.org/</link>
+  <email>zeakz1d02@sneakemail.com</email>
+  <description>
+  Random.org offers true random numbers to anyone on the internet. It can generate random integers  (with duplicates, like dice rolls), randomized sequences (without duplicates, like lottery tickets) or raw random bytes. You can also flip virtual coins and generate random bitmaps.
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/duplicates:[100]</td><td> - </td><td>a set of integers, duplicates allowed 
+        <div style="padding: 0 0 0 20px">
+					/min:[1] - bottom of range<br/>
+					/max:[100] - top of range<br/>
+					/columns:[5] - number of columns
+        </div> 
+      </td></tr>
+      <tr><td>/sequence</td><td> - </td><td>A range of integers in random order 
+        <div style="padding: 0 0 0 20px">
+					/min:[1] - bottom of range<br/>
+					/max:[100] - top of range
+        </div> 
+      </td></tr>
+      <tr><td>/raw|bytes:[256]</td><td> - </td><td>random bytes in hex, decimal, octal or binary 
+        <div style="padding: 0 0 0 20px">
+					/format:([hex]|dec|oct|bin) - format of output
+        </div>
+      </td></tr>
+      <tr><td>/coin</td><td> - </td><td>Heads or tails, using the coin of your choice 
+        <div style="padding: 0 0 0 20px">
+					/currency:[antique.eucratides]) - currency/coin to use
+        </div>
+      </td></tr>
+      <tr><td>/bitmap:[64]</td><td> - </td><td>A randomized bitmap 
+        <div style="padding: 0 0 0 20px">
+					/width:[64]<br/>
+					/height:[64]
+        </div> 
+      </td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>rnd /dup:10</td></tr>
+      <tr><td>rnd /seq /min:1 /max:52</td></tr>
+      <tr><td>rnd /raw:1024 /f:hex</td></tr>
+      <tr><td>rnd /coin</td></tr>
+      <tr><td>rnd /bit /w:512 /h:512</td></tr>
+    </table>
+  </description>
+  <form name="rndf"
+        method="get"
+        action="http://www.random.org/cgi-bin/randseq">
+    <input type="hidden" name="num" value="100" />
+    <input type="hidden" name="col" value="100" />
+    <input type="hidden" name="min" value="1" />
+    <input type="hidden" name="max" value="100" />
+		
+    <input type="hidden" name="width" value="64" />
+    <input type="hidden" name="height" value="64" />
+		
+    <input type="hidden" name="nbytes" value="256" />
+    <input type="hidden" name="format" value="hex" />
+
+    <input type="hidden" name="cur" value="antique.eucratides" />
+  </form>
+  <script><![CDATA[
+    function rnd(q)
+    {
+      if( nullArgs("rnd", q) )
+        return;
+
+      // Parse switches with parseArgs:
+      var args = parseArgs(q, "duplicates, sequence, raw, bytes, coin, bitmap, min, max, format, width, height, currency");
+      if ( args.switches.length > 0 )
+      {
+        for( var j=0; j<args.switches.length; j++ )
+        {
+					switch( args.switches[j].name )
+					{
+						case "duplicates":
+							if (args.switches[j].value)
+								document.rndf.num.value = args.switches[j].value; 
+							document.rndf.action = "http://www.random.org/cgi-bin/randnum";
+							break;
+						case "sequence":
+							document.rndf.action = "http://www.random.org/cgi-bin/randseq";
+							break;
+						case "raw":
+						case "bytes":
+							if (args.switches[j].value)
+								document.rndf.nbytes.value = args.switches[j].value; 
+							document.rndf.action = "http://www.random.org/cgi-bin/randbyte";
+							break;
+						case "coin":
+							document.rndf.action = "http://www.random.org/cgi-bin/randflip";
+							break;
+						case "bitmap":
+							if (args.switches[j].value) {
+								document.rndf.width.value = args.switches[j].value;
+								document.rndf.height.value = args.switches[j].value;
+							}
+							document.rndf.action = "http://www.random.org/cgi-bin/randxbm";
+							break;
+						case "min":
+							document.rndf.min.value = args.switches[j].value;
+							break;
+						case "max":
+							document.rndf.max.value = args.switches[j].value;
+							break;
+						case "format":
+							document.rndf.format.value = args.switches[j].value;
+							break;
+						case "width":
+							document.rndf.width.value = args.switches[j].value;
+							break;
+						case "height":
+							document.rndf.height.value = args.switches[j].value;
+							break;
+						case "currency":
+							document.rndf.cur.value = args.switches[j].value;
+							break;
+						default:
+							document.rndf.action = "http://www.random.org/cgi-bin/randseq";
+							break;
+					}
+				}
+      }
+      
+      submitForm(rndf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 07/19/04 at 11:52:22
+    by Dave's Quick Search Deskbar Search Wizard version 1.2,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>
