@@ -1,3 +1,14 @@
+-- What's new for 3.1.0.? (beta)
+
+New Searches
+
+* walmart - Search WalMart online.
+
+Modified Searches
+
+* bible - David Thompson added switches for multiple translations
+
+
 -- What's new for 3.1 (August 27, 2002)
 
 New Searches
