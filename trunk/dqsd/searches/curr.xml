@@ -1,0 +1,39 @@
+<search function="curr">
+  <name>Currency Conversion</name>
+  <description>Convert one currency to another: ex - to convert 100 US dollars 
+  to United Kingdom pounds: "curr 100 usd to gbp" or "curr 100 usd>gbp"..  
+  90 currencies are supported..
+  </description>
+  <category>Functions</category>
+  <link>http://www.xe.com/ucc/</link>
+  <contributor></contributor>
+  <form name="currf"
+    action="http://www.xe.com/ucc/convert.cgi"
+    method="post">
+    <input type="hidden" name="Amount" value=""/>
+    <input type="hidden" name="From" value=""/>
+    <input type="hidden" name="To" value=""/>
+  </form>
+  <script><![CDATA[
+function curr(q){
+  if (q == "")
+    {  
+      openSearchWindow("http://www.xe.com/ucc/");
+    }else{
+      // detect strings that look like ABC<CBA or ABC>CBA upper or lower case
+      var res = q.match(/([0-9]*.?[0-9]*)(\s*)([A-Za-z]{3})\s*([<>]|to)\s*([A-Za-z]{3})/i);
+      if (res) {
+        if (res[4] == '<') {
+          document.currf.From.value=res[5].toUpperCase();
+          document.currf.To.value=res[3].toUpperCase();
+        }else{
+          document.currf.From.value=res[3].toUpperCase();
+          document.currf.To.value=res[5].toUpperCase();
+        }
+      document.currf.Amount.value=res[1];
+      submitForm(currf);
+      }
+   }
+}
+  ]]></script>
+</search>
