@@ -60,7 +60,7 @@
                       ((grn < 16) ? "0" : "") + grn.toString(16).toUpperCase() + 
                       ((blu < 16) ? "0" : "") + blu.toString(16).toUpperCase();
       var hslString = "HSL: "+ hsl[0] + " "+hsl[1]+" "+hsl[2];
-      document.deff.q.value =rgbString+"  "+hexString+"  "+hslString;
+      setSearchWindowText(rgbString+"  "+hexString+"  "+hslString);
     }
 
      // hsl functions adapted from http://support.microsoft.com/default.aspx?scid=KB;en-us;q29240

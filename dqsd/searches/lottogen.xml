@@ -54,7 +54,7 @@
         for (var k = 1; k <= numbercount; k++) {
           output += " "+r[k];
         }
-        document.deff.q.value = output;
+        setSearchWindowText(output);
       }     
       else lottogen(numbercount + " " + maxnumbers);
         

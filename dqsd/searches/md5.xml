@@ -274,8 +274,7 @@ function calcMD5(str) { return md5_binl2hex(md5_coreMD5( md5_str2binl(str))) }
       if( nullArgs("md5", q) )
         return;
 
-      document.deff.q.value = hexMD5(q);
-      document.deff.q.createTextRange().select();
+      setSearchWindowText(hexMD5(q), true);
     }
     ]]>
   </script>

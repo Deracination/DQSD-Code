@@ -38,7 +38,7 @@
                character = coding.charAt(position + 13);
            text += character;
         }
-        document.deff.q.value = "rot13 " + text;
+        setSearchWindowText("rot13 " + text);
         
         // Gettin' fancy here... select the converted text for easy copy/paste
         var range = document.deff.q.createTextRange();
