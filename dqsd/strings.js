@@ -65,6 +65,11 @@ var HELP_TEXT =
   is: "? gefur hjálp"
 };
 
+var ABOUT_TEXT = 
+{
+  en: "Help / About..."
+};
+
 var SEARCH_TITLE =
 {
   en: "Search",
