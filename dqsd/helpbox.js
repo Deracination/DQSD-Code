@@ -122,7 +122,11 @@ function about()
     txt = txt.replace(/(view-source:)/g, '$1' + basedir);
     var mesg = "<title>About Dave's Quick Search Deskbar</title>";
 
-    mesg += "<head><link rel=stylesheet type=text/css href=search.css></head>"
+    mesg += "<head><link rel=stylesheet type=text/css href=search.css>"
+	// Add a call to the overwriting stylesheet if necessary
+	if (typeof localstylesurl != "undefined" && localstylesurl != "")
+		mesg += "<link rel='stylesheet' type='text/css' href='" + localstylesurl + "'>";
+	mesg += "</head>"
     mesg += "<body scroll=yes><a name='#top'><table height=100% width=100% cellpadding=20><tr><td class=helpbox><center><b>";
     mesg += txt + "</td></tr></table>";
     opts = "height=480, width=441, menubar=no, scrollbars=yes, resizable=yes, toolbar=no, status=no";
