@@ -1,7 +1,7 @@
 <html>
 <!--
 Dave's Quick Search Deskbar
-Version 2.5.3 - January 6, 2002
+Version 2.5.4 - January 14, 2002
 
 Copyright (c) 2002 David Bau
 
@@ -12,8 +12,8 @@ GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
 
 This deskbar lets you launch searches from the Windows Explorer Taskbar.
 For the latest version and installation instructions, visit
-<a href=http://notesbydave.com/toolbar/searchdoc.htm
-  target=DavesDoc onclick=window.close()>Dave's site</a>.<ul>
+<nobr><a href=http://notesbydave.com/toolbar/searchdoc.htm
+  target=DavesDoc onclick=window.close()>Dave's site</a></nobr>.<ul>
 
 * Type in your search terms and hit Enter to do a Google
   Search.
@@ -97,7 +97,7 @@ localsearchurl="localsearch.xml"; // local search file
 helptime=8500;                 // help message shows for 8.5 secs
 launchmode=2;                  // 0 = use ie; 1 = default browser; 2 = auto
 reuseBrowserWindowMode=0;      // 0=new window always; 1=single window for all; 2=single window for each search type
-multiLine=true;				   // Use a mult-line search field instead of a single line
+multiline=true;                // Use a mult-line search field instead of a single line
 
 language=navigator.userLanguage.substr(0,2);
 
@@ -698,33 +698,30 @@ function reload()
      <td>
      <nobr>
      <script>
-     document.write(multiLine ? '<textarea ' : '<input ');
-     </script>
-      name=q
-            type=text
-            class=txtfld
-            onfocus=clr()
-            ondragstart="selfdrag=true;"
-            ondragend="selfdrag=false;"
-            ondragover=dodragover()
-            ondrop=dodrop()
-            onblur=rst()
-            onhelp=showpop()
-            oncontextmenu="return showcal();"
-            onkeydown="return okd();"
-            onkeypress="return okp();"
-            value=""
-            cols=20
-            rows=1
-            maxlength=256
-            tabindex=0
-            style=top:-100
-            autocomplete=off>
-      <script>
-      document.write(multiLine ? '</textarea>' : '');
-      </script>
+document.write(
+  (multiline ? '<textarea ' : '<input ')
+  + 'name=q '
+  + 'type=text '
+  + 'class=txtfld '
+  + 'onfocus=clr() '
+  + 'ondragstart="selfdrag=true;" '
+  + 'ondragend="selfdrag=false;" '
+  + 'ondragover=dodragover() '
+  + 'ondrop=dodrop() '
+  + 'onblur=rst() '
+  + 'onhelp=showpop() '
+  + 'oncontextmenu="return showcal();" '
+  + 'onkeydown="return okd();" '
+  + 'onkeypress="return okp();" '
+  + 'value="" '
+  + 'cols=20 '
+  + 'rows=1 '
+  + 'maxlength=256 '
+  + 'tabindex=0 '
+  + 'style=top:-100 '
+  + 'autocomplete=off>'
+  + (multiline ? '</textarea>' : ''));
 
-      <script>
 dopopup = (ie_version >= 5.5);
 
 if (dopopup)
