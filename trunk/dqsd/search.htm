@@ -311,7 +311,7 @@ function performsearch(fname, term)
 	{
       if (fname.match(/\(.*\)/)) {
         // function with parameters specified
-        eval(fname); 
+        eval(fname);
       } else {
         // just function no parameters
         eval(fname + "()");
@@ -329,8 +329,8 @@ function performsearch(fname, term)
 function mnu(text, alias)
 {
   var fn = (alias ? alias : text);
-  var search = (fn + ' ' + document.deff.q.value).replace( /^\s*(\S+)\s*$/, "$1" ); // trim leading/trailing whitespace
-  if (searches[fn]) 
+  var search = (fn + ' ' + document.deff.q.value).trimWhitespace( /^\s*(\S+)\s*$/, "$1" ); // trim leading/trailing whitespace
+  if (searches[fn])
     addhist( search );
   performsearch( text, document.deff.q.value );
 }
