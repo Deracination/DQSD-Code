@@ -1,0 +1,30 @@
+<search function="ac">
+    <name>Area Code Info</name>
+    <link>http://www.getzips.com</link>
+    <description>Search for information on a particular areacode: "ac 741".</description>
+    <category>People and Places</category>
+    <contributor>Stephen Montgomery</contributor>
+    <email>stephenmontgomery_at_ameritech_dot_net</email>
+    <form name="areacode" 
+          method="get" 
+          action="http://www.getzips.com/CGI-BIN/ziplook.exe" 
+          target="_blank">
+      <input type="hidden" name="What" value="4" />
+      <input type="hidden" name="Area" />
+    </form>
+    <script><![CDATA[
+      function ac(q, switches)
+      {
+        if (q == "")
+          window.open("http://www.getzips.com");
+        else
+        {
+          if (result = q.match(/^(\d{3})\s*(.*)/))
+          {
+            document.areacode.Area.value=result[1];
+          }
+          document.areacode.submit();
+        }
+      }
+    ]]></script>
+  </search>
