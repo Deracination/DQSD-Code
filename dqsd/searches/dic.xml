@@ -11,9 +11,9 @@
   <link>http://www.dictionary.com/</link>
   
   <form name="dicf"
-        action="http://www.dictionary.com/cgi-bin/dict.pl"
+        action="http://www.dictionary.com/search"
         method="get">
-    <input type="hidden" name="term"/>
+    <input type="hidden" name="q"/>
     <input type="hidden" name="db" value="*"/>
   </form>
   
@@ -24,7 +24,7 @@
         return false;
       else
       {
-        document.dicf.term.value = q;
+        document.dicf.q.value = q;
         submitForm(dicf);
       }
     }
