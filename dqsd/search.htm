@@ -13,8 +13,9 @@ GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
 ----
 
 This deskbar lets you launch searches from the Windows Explorer Taskbar.
-For the latest version and installation instructions, visit <nobr><a href=http://notesbydave.com/toolbar/doc.htm target=DavesDoc onclick=window.close()>Dave's site</a></nobr> <nobr>or check the <a href="http://sourceforge.net/docman/display_doc.php?docid=10846&group_id=42081" target="_blank" onclick=window.close()>FAQ</a>.</nobr><ul>
+For the latest version and installation instructions, visit <nobr><a href='http://notesbydave.com/toolbar/doc.htm' target='DavesDoc' onclick='window.close()'>Dave's site</a></nobr> <nobr>or check the <a href="http://sourceforge.net/docman/display_doc.php?docid=10846&amp;group_id=42081" target="_blank" onclick='window.close()'>FAQ</a>.</nobr>
 
+<ul>
 #* Type in your search terms and hit Enter to do a Google search.
 
 * If you're feeling lucky, go directly to Google's first hit using an exclamation point: "Crest toothpaste!"
@@ -27,7 +28,7 @@ For the latest version and installation instructions, visit <nobr><a href=http:/
 
 * Convert between currencies: "100 usd>gbp"
 
-* Mathematical expressions: <nobr>"4*(pi-3)", <wbr>"pow(1.06,30)"</nobr>
+* Mathematical expressions: <nobr>"4*(pi-3)", <wbr />"pow(1.06,30)"</nobr>
 
 * Navigate previous searches with ctrl-P and ctrl-N or the Up/Down arrows.. Type <nobr>"!<em>prefix</em>"</nobr> to see only matching entries.
 
@@ -273,7 +274,7 @@ function performsearch( fname, term )
     }
     catch(e)
     {
-        alert('An error occurred while trying to run the search "'+fname+'()'+'"');
+        alert('An error (' + e + '/' + e.description + ') occurred while trying to run the search "'+fname+'()'+'"');
     }
   }
 }
@@ -813,8 +814,6 @@ function postStartup()
       keyboardHook.RegisterHotKey(hotkeyCharacter.charCodeAt(0), hotkeyModifiers);
     else if(hotkeyVkCode != 0)
       keyboardHook.RegisterHotKey(hotkeyVkCode, hotkeyModifiers);
-
-//  keyboardHook.InitialiseBaseTooltip();
   }
   catch(e)
   {
