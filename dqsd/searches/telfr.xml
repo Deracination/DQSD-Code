@@ -19,4 +19,10 @@
       openSearchWindow( "http://www.infobel.com/france/wp/search/result.asp?qSearchType=RWP&qCountryCode=fr&QLANGUAGE=1&qphone=" + q );
     }
   ]]></script>
+
+  <copyright>
+	Copyright (c) 2002 David Bau
+	Distributed under the terms of the
+	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
 </search>

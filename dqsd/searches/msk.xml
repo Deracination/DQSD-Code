@@ -24,4 +24,10 @@
 openSearchWindow('http://search.support.microsoft.com/search/default.aspx?Catalog=LCID%3D1033%26CDID%3DEN-US-KB%26PRODLISTSRC%3DON&Product=msall&Query=' + q.replace( /\s+/g,'%2520' ) + '&Queryc=' + q.replace( /\s+/g,'+' ) + '&withinResults=false&srchstep=0&KeywordType=ALL&Titles=false&numDays=&maxResults=25');
     }
   ]]></script>
+
+  <copyright>
+	Copyright (c) 2002 David Bau
+	Distributed under the terms of the
+	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
 </search>
