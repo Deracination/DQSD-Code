@@ -1,21 +1,32 @@
 // Load the contents of search.xml, aliases, and menu files
 
-function addsearch(fname, name, desc, link, cat)
+function addsearch(fname, name, desc, link, cat, switches)
 {
   try
   {
-    if (name == null) name = fname;
-    var newobj = {fname:fname, name:name, desc:desc, link:link, cat:cat, fun:eval(fname), aliases:[]};
-    searches[fname] = newobj;
-    if (!aliases[fname])
-      addalias(fname, fname);
-
-    addhelp(newobj);
+    // Parse the switches string into individual words and store in the switches array
+    var result = [];
+    if( switches )
+    {
+      if( switches.match( /[`~!@#$%^*()-+\=\[\]{}\|\\:;'".\/\?]+/ ) )
+        throw { description:"<switches> tag contains invalid characters." };
+      for( var i=0; switches.length > 0 ; i++ )
+      {
+        var tmp = switches.match( /^\s*(\w+)(\s*,?\s+|$)/ );
+        result[i] = tmp[1];
+        switches = switches.substring( tmp[1].length + tmp[2].length , switches.length );
+      }
+    }
+    
+    searches[fname] = {fname:fname, name:name, desc:desc, link:link, cat:cat, fun:eval(fname), aliases:[], switches:result};
+    if( !aliases[fname] )
+      addalias( fname, fname );
+    addhelp( searches[fname] );
   }
-  catch (except)
+  catch( except )
   {
-    qualifiedalert("Error adding search - " + except.description +
-                   "\n\nfunction: \"" + fname + "\"\nname: \"" + name + "\"\ndescription: \"" + desc + "\"");
+    alert("Error adding search: " + except.description + 
+          "\n\nfunction: \"" + fname + "\"\nname: \"" + name + "\"\ndescription: \"" + desc + "\"");
   }
 }
 
@@ -43,7 +54,7 @@ function addalias(alias, fname)
                            "  direct(url.replace( /%s/g, t ));"
                           );
       eval( fname + " = f;" );
-      addsearch( fname, url, "", url.search(/%s/) < 0 ? url : "", "Shortcuts" );
+      addsearch( fname, url, "", url.search(/%s/) < 0 ? url : "", "Shortcuts", null );
     }
     else if ((res = fname.match(/^(\w+) +(.+)/)) && searches[res[1]]) // starts with a valid search function
     {
@@ -54,11 +65,11 @@ function addalias(alias, fname)
                            res[1] + "(cmd.replace( /%s/g, t ));"
                           );
       eval( fname + " = f;" );
-      addsearch( fname, cmd, "", "", "Shortcuts" );
+      addsearch( fname, cmd, "", "", "Shortcuts", null );
     }
     else
     {
-      qualifiedalert("Cannot add alias " + alias + " -> " + fname + ":\nThere is no search " + fname + ".");
+      alert("Cannot add alias " + alias + " -> " + fname + ":\nThere is no search " + fname + ".");
       return;
     }
   }
@@ -72,8 +83,7 @@ function addalias(alias, fname)
 
 function addhelp(search)
 {
-  var cat = search.cat;
-  if (!cat) cat = "Other";
+  var cat = (search.cat ? search.cat : "Other");
   if (!categories[cat])
   {
     categories[cat] = [];
@@ -137,7 +147,7 @@ try
       var funcname = searchNode.attributes.getNamedItem("function").text;
       if (searchRoot.selectSingleNode("/searches/search[@function='" + funcname + "']"))
       {
-        qualifiedalert('Search "' + funcname + '" found in ' + "searches\\" + searches[i] + ' already exists.');
+        alert('Search "' + funcname + '" found in ' + "searches\\" + searches[i] + ' already exists.');
         continue;
       }
       else
@@ -180,15 +190,16 @@ if (searchRoot)
       var descriptionNode = searchNode.selectSingleNode("description");
       var linkNode = searchNode.selectSingleNode("link");
       var categoryNode = searchNode.selectSingleNode("category");
+      var switchesNode = searchNode.selectSingleNode("switches");
       addsearch(fn.text,
                 (nameNode ? nameNode.text : fn.text),
                 (descriptionNode ? descriptionNode.xml : null),
                 (linkNode ? linkNode.text : null),
-                (categoryNode ? categoryNode.text : null));
+                (categoryNode ? categoryNode.text : null),
+                (switchesNode ? switchesNode.text : null));
     }
   }
 }
-
 
 
 // 4. load and execute the alias file
@@ -227,9 +238,8 @@ var menuTable = readTabDelimitedFile("menu");
 for (var iPrivate = 0; iPrivate < menuTable.length; iPrivate++)
 {
   var fields = menuTable[iPrivate];
-  if (fields.length > 0 &&
-      (fields[0].length > 0 || fields.length > 1))
-  {
+  if (fields.length > 0 && (fields[0].length > 0 || fields.length > 1))
     menuarray.push(fields[0]);
-  }
 }
+
+
