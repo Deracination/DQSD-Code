@@ -88,14 +88,21 @@
 		mb.AppendMenuItem( local(CONFIGURE_LOCAL_PREFERENCES_NAME), "editConfigFile(\"localprefs.js\")", local(CONFIGURE_LOCAL_PREFERENCES_DESCRIPTION), hmenu);
 		mb.AppendSeparator(hmenu);
 		mb.AppendMenuItem( local(CONFIGURE_SYSTEM_ALIASES_NAME), "editConfigFile(\"aliases.txt\")", local(CONFIGURE_SYSTEM_ALIASES_DESCRIPTION), hmenu);
-		mb.AppendMenuItem( local(CONFIGURE_SYSTEM_PREFERENCES_NAME), "editConfigFile(\"preferences.js\")", local(CONFIGURE_SYSTEM_PREFERENCES_DESCRIPTION), hmenu);
-        mb.AppendSeparator(hmenu);
-        mb.AppendMenuItem( local(CONFIGURE_RELOAD_DQSD_NAME), "if (confirm('"+local(CONFIGURE_RELOAD_DQSD_PROMPT)+"')) reload();", local(CONFIGURE_RELOAD_DQSD_DESCRIPTION), hmenu);
+		mb.AppendMenuItem( local(CONFIGURE_SYSTEM_PREFERENCES_NAME), "editConfigFile(\"preferences.js\")", local(CONFIGURE_SYSTEM_PREFERENCES_DESCRIPTION), hmenu);	
+		mb.AppendSeparator(hmenu);
+		mb.AppendMenuItem( local(CONFIGURE_RELOAD_DQSD_NAME), "if (confirm('"+local(CONFIGURE_RELOAD_DQSD_PROMPT)+"')) reload();", local(CONFIGURE_RELOAD_DQSD_DESCRIPTION), hmenu);
 
 		ensureLauncher();
-		var installedAddons = getFolders(DQSDLauncher.InstallationDirectory+"\\addons\\").split('\n');
-		if (installedAddons.length > 0 && installedAddons[0] == ".")
-		   installedAddons = installedAddons.slice(1);
+		var addonFolders = getFolders(DQSDLauncher.InstallationDirectory+"\\addons\\");
+		var installedAddons = null;
+		if (addonFolders != "") {
+			installedAddons = addonFolders.split('\n');
+			if (installedAddons.length > 0 && installedAddons[0] == ".") {
+				installedAddons = installedAddons.slice(1);
+			}
+		} else {
+			installedAddons = new Array();
+		}
 
 		if (installedAddons.length > 0) {
 		        mb.AppendSeparator(hmenu);
