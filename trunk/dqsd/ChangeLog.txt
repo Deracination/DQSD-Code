@@ -8,6 +8,18 @@ Enhancements
 * Added ability to change specify the first day of the week (from Harry-Anton Talvik)
 * Added Estonian calendar - holidays.et.xml (from Harry-Anton Talvik)
 
+New Searches
+
+* 
+
+Modified Searches
+
+* amaz - added domain switch to search either amaz. com de uk jp ca or fr (from Wolfgang)
+
+Bug Fixes
+
+* 
+
 -- What's new for 3.1.4.4 beta (October 24, 2002)
 
 New Searches

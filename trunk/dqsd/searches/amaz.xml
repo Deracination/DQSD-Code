@@ -1,10 +1,11 @@
 <search function="amaz">
-  <name>Amazon.com</name>
+  <name>amazon.com</name>
   <description>
-    Search specific stores on Amazon.com. Searches all stores by default.<br/>
+    Search specific stores on amazon.com. Searches all stores by default.<br/>
     <div class="helpboxDescLabels">Switches:</div>
   	<table class="helpboxDescTable">
-  		<tr><td>/books</td><td> - </td><td>Books</td></tr>
+        <tr><td>/domain:extension</td><td> - </td><td>Search in specific country by domain-extension. Possible values: com de uk jp ca fr (com is the default)</td></tr>
+		<tr><td>/books</td><td> - </td><td>Books</td></tr>
   		<tr><td>/music</td><td> - </td><td>Popular Music</td></tr>
   		<tr><td>/mp3</td><td> - </td><td>Music Downloads</td></tr>
   		<tr><td>/classical</td><td> - </td><td>Classical Music</td></tr>
@@ -54,68 +55,95 @@
     <input type="hidden" name="keyword"/>
     <input type="hidden" name="tag" value="dqsd-20"/>
   </form>
+
+	
   
   <script><![CDATA[
+
+    // Contains known amazon domains that are searchable
+    // If you add, make sure to keep the extra first and last blank in the string
+    var domains= " com de uk jp ca fr ";
+
     function amaz(q)
     {
+
+      var defaultDomain="com";
+
       if( nullArgs("amaz", q) )
         return false;
 
-      var args = parseArgs(q, "books, music, classical-music, music-dd, mp3, dvd, video, vhs, movies, theatrical, restaurants, toys, baby, computers, pc-hardware, software, games, electronics, photography, tools, magazines, garden, kitchen, travel, cellular, wireless-phones, outlet, auctions, zshops, scientific, medical, industrial, cars, home, lifestyle, pets, arts");
+      document.amazf.action = "http://www.amazon."+defaultDomain+"/exec/obidos/external-search";
+      document.amazf.mode.value = "blended";
+
+      var args = parseArgs(q, "domain, books, music, classical-music, music-dd, mp3, dvd, video, vhs, movies, theatrical, restaurants, toys, baby, computers, pc-hardware, software, games, electronics, photography, tools, magazines, garden, kitchen, travel, cellular, wireless-phones, outlet, auctions, zshops, scientific, medical, industrial, cars, home, lifestyle, pets, arts");
       if( q == "" )
-        openSearchWindow("http://www.amazon.com/");
-      else if( args.switches.length == 1 )
+        openSearchWindow("http://www.amazon."+defaultDomain);
+      else if( args.switches.length >= 1 && args.switches.length <= 2)
       {
-        switch( args.switches[0].name )
+        for (var i = 0; i < args.switches.length; i++)
         {
-          case "movies":
-            document.amazf.mode.value = "theatrical"; break;
-          case "video":
-            document.amazf.mode.value = "vhs"; break;
-          case "mp3":
-            document.amazf.mode.value = "music-dd"; break;
-          case "computers":
-            document.amazf.mode.value = "pc-hardware"; break;
-          case "games":
-            document.amazf.mode.value = "videogames"; break;
-          case "photography":
-            document.amazf.mode.value = "photo"; break;
-          case "cellular":
-            document.amazf.mode.value = "wireless-phones"; break;
-          case "auctions":
-            document.amazf.mode.value = "auction-redirect"; break;
-          case "zshops":
-            document.amazf.mode.value = "fixed-price-redirect"; break;
-          case "scientific":
-            document.amazf.mode.value = "moc-scientific-supplies"; break;
-          case "medical":
-            document.amazf.mode.value = "moc-medical-supplies"; break;
-          case "industrial":
-            document.amazf.mode.value = "moc-industrial-supplies"; break;
-          case "cars":
-            document.amazf.mode.value = "moc-cars"; break;
-          case "home":
-            document.amazf.mode.value = "moc-home-furnishings"; break;
-          case "lifestyle":
-            document.amazf.mode.value = "moc-lifestyle"; break;
-          case "pets":
-            document.amazf.mode.value = "moc-pet-toys"; break;
-          case "arts":
-            document.amazf.mode.value = "moc-arts-hobby"; break;
-          default:
-            document.amazf.mode.value = args.switches[0].name;
-        }
-        document.amazf.keyword.value = args.q;
-        submitForm(amazf);
+			sw = args.switches[i];
+			switch(sw.name)
+			{
+			  case "domain":
+				if (sw.value=="" || domains.match(" "+sw.value+" ") != " "+sw.value+" ")
+				{
+				  nullArgs("amaz","?");
+				  return false;
+				}
+			        domain = sw.value;
+				if (domain == "uk" || domain == "jp")
+					domain = "co." + domain;
+				document.amazf.action = "http://www.amazon."+domain+"/exec/obidos/external-search"; 
+				break;
+			  case "movies":
+				document.amazf.mode.value = "theatrical"; break;
+			  case "video":
+				document.amazf.mode.value = "vhs"; break;
+			  case "mp3":
+				document.amazf.mode.value = "music-dd"; break;
+			  case "computers":
+				document.amazf.mode.value = "pc-hardware"; break;
+			  case "games":
+				document.amazf.mode.value = "videogames"; break;
+			  case "photography":
+				document.amazf.mode.value = "photo"; break;
+			  case "cellular":
+				document.amazf.mode.value = "wireless-phones"; break;
+			  case "auctions":
+				document.amazf.mode.value = "auction-redirect"; break;
+			  case "zshops":
+				document.amazf.mode.value = "fixed-price-redirect"; break;
+			  case "scientific":
+				document.amazf.mode.value = "moc-scientific-supplies"; break;
+			  case "medical":
+				document.amazf.mode.value = "moc-medical-supplies"; break;
+			  case "industrial":
+				document.amazf.mode.value = "moc-industrial-supplies"; break;
+			  case "cars":
+				document.amazf.mode.value = "moc-cars"; break;
+			  case "home":
+				document.amazf.mode.value = "moc-home-furnishings"; break;
+			  case "lifestyle":
+				document.amazf.mode.value = "moc-lifestyle"; break;
+			  case "pets":
+				document.amazf.mode.value = "moc-pet-toys"; break;
+			  case "arts":
+				document.amazf.mode.value = "moc-arts-hobby"; break;
+			  default:
+				document.amazf.mode.value = args.switches[i].name;
+			}
+		 }
       }
-      else if( args.switches.length > 1 )
-        nullArgs("amaz","?");
-      else
+      else if (args.switches.length > 2)
       {
-        document.amazf.mode.value = "blended";
-        document.amazf.keyword.value = args.q;
-        submitForm(amazf);
+          nullArgs("amaz","?");
+	  return false;
       }
+
+      document.amazf.keyword.value = args.q;
+      submitForm(amazf);
+
     }
   ]]></script>
 
@@ -125,3 +153,4 @@
 	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
   </copyright>
 </search>
+
