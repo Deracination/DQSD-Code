@@ -1,0 +1,36 @@
+<search function="pinp">
+  <COMMENT>
+
+    This search file was initially created by Dave's Quick Search Deskbar
+    Search Wizard version 0.5 (beta) on 08/25/02 at 00:39:15
+
+    Even though this XML search will probably load and is a healthy start
+    toward a completed search, please be aware that this search will probably
+    not work as is and will require some human inspection and modification.
+
+  </COMMENT>
+  <name>GeoPinpoint</name>
+  <category>Reference</category>
+  <contributor>Thad Kerosky</contributor>
+  <link>http://www.serviceobjects.com</link>
+  <description>
+  Get a Physical Location to an IP address.
+  </description>
+  <form name="pinpf"
+        method="get"
+        action="http://www.serviceobjects.com/products/GeoNet_demo.asp">
+
+    <input type="hidden" name="Action" value="Send"/>
+    <input type="hidden" name="IPAddress" value=""/>
+  </form>
+  <script><![CDATA[
+    function pinp(q)
+    {
+      if( nullArgs("pinp", q) )
+        return;
+
+      document.pinpf.IPAddress.value = q;
+      submitForm(pinpf);
+    }
+  ]]></script>
+</search>
