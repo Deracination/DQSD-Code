@@ -604,8 +604,16 @@ function dodrop()
   var q = event.dataTransfer.getData("Text");
 
   // trim leading and trailing whitespace and punctuation
-  q = q.replace(/^[\s~`!@#$%\^&\*()\-=\+{}\[\];:'<>,\.\/\?]*/, '')
-       .replace(/[\s~`!@#$%\^&\*()\-=\+{}\[\];:'<>,\.\/\?]*$/, '');
+  if ( q && q.length > 0 )
+  {
+    q = q.replace(/(^[\s~`!@#$%\^&\*()\-=\+{}\[\];:'<>,\.\/\?]*)|([\s~`!@#$%\^&\*()\-=\+{}\[\];:'<>,\.\/\?]*$)/g, '');
+  }
+  if ( !q || q.length == 0 )
+  {
+    rst();
+    return;
+  }
+
   document.deff.q.value = q;
 
   rst();
