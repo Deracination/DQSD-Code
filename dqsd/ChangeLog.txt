@@ -7,6 +7,8 @@ New Searches
 * vir - search http://www.virusbtn.com/ for virus information (from John Bairen)
 * infosec - search http://www.infosecuritymag.com/ for security information (from John Bairen)
 * pg - Project Gutenberg/Public Domain book (pg) search (from Thad Kerosky)
+* slash - Search Slashdot (from Paul Bowers)
+* short - Abbreviate long and convoluted URLs (from Reginald Braithwaite-Lee)
 
 Modified Searches
 
