@@ -72,18 +72,32 @@ function about()
 
     for (i = 0; i < categoryarray.length; i++)
     {
+      var helparray = categories[categoryarray[i]];
+      helparray.sort( searchCompare );
+    
+      // Are there any enabled searches in this category?
+      for (var k = 0; k < helparray.length && (!helparray[k].enabled || helparray[k].nomenu); k++)
+      {
+      }
+
+      // If all the searches are disabled in the category, don't display this category
+      if ( k == helparray.length )
+        continue;
+
       var categoryText = '';
       categoryText += "<tr><td class=helpboxCategoryExpanderRow colspan=3>\n<table width='100%' border=0 cellpadding=0 cellspacing=0>\n<tr><td class=helpboxCategory><span id='categoryExpander' category='" + categoryarray[i] + "' class='helpboxCategoryExpanderSign'></span>\n"
       categoryText += "&nbsp;" + categoryarray[i] + "&nbsp;";
       categoryText += "<span id='categoryCount' class=helpboxCategoryCount /><a name=\""+categoryarray[i]+"\"></a></td><td align=right class=helpboxCategoryTop>[ <a class=helpboxLinkTop href='#top'>top</a> ]</td></tr></table></td></tr>";
-      var helparray = categories[categoryarray[i]];
-      helparray.sort( searchCompare );
       for (var k = 0; k < helparray.length; k++)
       {
         var search = helparray[k];
         var rowclassname = '';
         var sortText = '';
         
+        if (search.nomenu) {
+          continue;
+        }
+
         if (search.local)
         {
           rowclassname = 'class="localSearch"';
