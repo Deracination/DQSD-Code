@@ -1,17 +1,31 @@
+var dirty = false;
+
 function saveSearchSettings()
 {
-//  alert('in saveSearchSettings.js: saveSearchSettings');
+  if ( !dirty )
+    return;
+  
+  alert( 'You must reload the search bar for your changes to take effect.' );
+  
+  var toggles = document.all('search_enabled');
+  var disabled = new Array();
+  for ( var i = 0; i < toggles.length; i++ )
+  {
+    if ( !toggles[i].checked )
+      disabled.push( toggles[i].name );
+//    searches[toggles[i].name].enabled = toggles[i].checked;
+  }
+  DQSDLauncher = new ActiveXObject("DQSDTools.Launcher");
+  DQSDLauncher.WriteFile( "disabledsearches.txt", disabled.join("\n") );
+  DQSDLauncher = null;
 }
 
 function toggleEnabledSearch()
 {
-  //alert( event.srcElement.tagName );
+  dirty = true;
   var el = event.srcElement;
   while ( el.tagName != 'TR' )
     el = el.parentElement;
     
-  if ( event.srcElement.checked )
-    el.className = '';
-  else
-    el.className = 'disabledSearch';
+  el.className = event.srcElement.checked ? '' : 'disabledSearch';
 }
