@@ -1,0 +1,43 @@
+<search function="cyndi">
+  <name>Cyndi's List</name>
+  <category>Genealogy</category>
+  <contributor>Brent Beardsley</contributor>
+  <link>http://www.cyndislist.com/</link>
+  <email></email>
+  <description>
+  Search Cyndi's List
+  </description>
+  <form name="cyndif"
+        method="get"
+        action="http://search.freefind.com/find.html">
+    <input type="hidden" name="id" value="2077098" />
+    <input type="hidden" name="pageid" value="r" />
+    <input type="hidden" name="mode" value="all" />
+    <input type="hidden" name="query" value="" />
+  </form>
+  <script><![CDATA[
+    function cyndi(q)
+    {
+      if( nullArgs("cyndi", q) )
+        return;
+
+      if( q == "" )
+      {
+        openSearchWindow("http://www.cyndislist.com/");
+        return;
+      }
+
+      // FORM variables for cyndif
+      //document.cyndif.id.value = "";
+      //document.cyndif.pageid.value = "";
+      //document.cyndif.mode.value = "";
+
+      // The wizard assigned the search string to this form field value because
+      // this field was the active element when the search file was generated.
+      // Change this to args.q if the search string is parsed with parseArgs.
+      document.cyndif.query.value = q;
+
+      submitForm(cyndif);
+    }
+  ]]></script>
+</search>

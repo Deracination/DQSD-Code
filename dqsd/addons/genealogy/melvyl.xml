@@ -1,0 +1,152 @@
+<search function="melvyl">
+  <COMMENT>
+
+    This search file was initially created by Dave's Quick Search Deskbar
+    Search Wizard version 0.4 (beta) on 08/19/02 at 10:59:08
+
+    Even though this XML search will probably load and is a healthy start
+    toward a completed search, please be aware that this search will probably
+    not work as is and will require some human inspection and modification.
+
+  </COMMENT>
+  <name>MELVYL - University of California Digital Library</name>
+  <category>Genealogy</category>
+  <contributor>Brent Beardsley</contributor>
+  <link>http://www.dbs.cdlib.org/?CSdb=cat</link>
+  <email></email>
+  <description>
+  Search the MELVYL catalog
+  </description>
+  <form name="melvylf"
+        method="post"
+        action="http://128.48.120.7/mw/mwcgi.mb#LB">
+    <input type="hidden" name="sesid" value="1337914099" />
+    <input type="hidden" name="cmdid" value="1" />
+    <input type="hidden" name="CRX" value="find(C,history/home)" />
+    <input type="hidden" name="SDBDdb" value="cat" />
+    <input type="hidden" name="SSTSst" value="topical" />
+    <input type="hidden" name="S00Icon1" value="SU" />
+
+    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
+
+    <input type="hidden" name="S00Wcon1" value="" />
+    <input type="hidden" name="S00BLlanguage" value="and" />
+    <input type="hidden" name="S00ILlanguage" value="LANG" />
+    <input type="hidden" name="S00WLlanguage" value="English" />
+    <COMMENT>
+      The input element above, "S00WLlanguage", was a checkbox that was unchecked.
+    </COMMENT>
+
+    <input type="hidden" name="S00BLclib" value="and" />
+    <COMMENT>
+      The input element above, "S00BLclib", was a SELECT element with the following options...
+      <select name="S00BLclib">
+        <option value="and">and</option>
+        <option value="and-not">not</option>
+      </select>
+    </COMMENT>
+
+    <input type="hidden" name="S00ILclib" value="AT" />
+    <input type="hidden" name="S0rWLclib" value="" />
+    <COMMENT>
+      The input element above, "S0rWLclib", was a SELECT element with the following options...
+      <select name="S0rWLclib">
+        <option value="">ALL libraries</option>
+        <option value="UCB">UC Berkeley (all libraries)</option>
+        <option value="Moffitt">UCB Moffitt</option>
+        <option value="UCD">UC Davis</option>
+        <option value="UCI">UC Irvine</option>
+        <option value="UCLA">UC Los Angeles (all libraries)</option>
+        <option value="UCLA Undergraduate">UCLA College</option>
+        <option value="UCR">UC Riverside</option>
+        <option value="UCSD">UC San Diego (all libraries)</option>
+        <option value="UCSF">UC San Francisco</option>
+        <option value="UCSB">UC Santa Barbara</option>
+        <option value="UCSC">UC Santa Cruz</option>
+        <option value="Hastings">Hastings Law</option>
+        <option value="LBL">LBL</option>
+        <option value="NRLF">NRLF</option>
+        <option value="SRLF">SRLF</option>
+        <option value="UC LAW">UC Law Libraries</option>
+        <option value="UC MED">UC Medical Libraries</option>
+        <option value="North">UC Northern Libraries</option>
+        <option value="South">UC Southern Libraries</option>
+        <option value="CDL">CDL</option>
+        <option value="UC">All UC</option>
+        <option value="CSL">Calif. State Library</option>
+        <option value="CAS">Calif. Academy of Sciences</option>
+        <option value="CHS">Calif. Historical Society</option>
+        <option value="CRL">Center for Research Libs</option>
+        <option value="GTU">GTU</option>
+        <option value="NonUC">All Non-UC</option>
+      </select>
+    </COMMENT>
+
+  </form>
+  <script><![CDATA[
+    function melvyl(q)
+    {
+      if( nullArgs("melvyl", q) )
+        return;
+
+      if( q == "" )
+      {
+        openSearchWindow("http://128.48.120.7/");
+        return;
+      }
+
+      // Parse switches with parseArgs:
+
+      // parseArgs usage:
+      // Arguments:
+      //    q                - string from the search function
+      //    expectedSwitches - list or array of the expected switch values
+      //    expandSwitches   - optional parameter [default = true] used to determine 
+      //                       if the switch shortcuts should be expanded (i.e. /f becomes /foo)
+      // Returns an object with these properties:
+      //    q        - the input string with the switches removed
+      //    switches - array of objects with these two properties:
+      //                  name:   expanded name of the matched switch (i.e. foo as in /foo:bar)
+      //                  value:  value of switch (i.e. bar as in /foo:bar)
+      //    switch_val - associative array with the switch name as the key with the switch value 
+      //                 as the value. (i.e. switch_val["foo"] = "bar" as in /foo:bar)
+
+      //var args = parseArgs(q, "author, subject, title");
+      //if ( args.switches.length > 0 )
+      //{
+      //  switch( args.switches[0].name )
+      //  {
+      //    case "author":
+      //         break;
+      //    case "subject":
+      //         break;
+      //    case "title":
+      //         break;
+      //    default:
+      //         break;
+      //  } //end-switch
+      //}
+
+      // FORM variables for melvylf
+      //document.melvylf.sesid.value = "";
+      //document.melvylf.cmdid.value = "";
+      //document.melvylf.CRX.value = "";
+      //document.melvylf.SDBDdb.value = "";
+      //document.melvylf.SSTSst.value = "";
+      //document.melvylf.S00Icon1.value = "";
+
+      // The wizard assigned the search string to this form field value because
+      // this field was the active element when the search file was generated.
+      // Change this to args.q if the search string is parsed with parseArgs.
+      document.melvylf.S00Wcon1.value = q;
+      //document.melvylf.S00BLlanguage.value = "";
+      //document.melvylf.S00ILlanguage.value = "";
+      //document.melvylf.S00WLlanguage.value = "";
+      //document.melvylf.S00BLclib.value = "";
+      //document.melvylf.S00ILclib.value = "";
+      //document.melvylf.S0rWLclib.value = "";
+
+      submitForm(melvylf);
+    }
+  ]]></script>
+</search>

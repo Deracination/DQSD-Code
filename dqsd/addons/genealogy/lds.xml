@@ -1,0 +1,60 @@
+<search function="lds">
+  <name>LDS Family Search</name>
+  <category>Genealogy</category>
+  <contributor>Brent Beardsley</contributor>
+  <link>http://www.familysearch.org/</link>
+  <email></email>
+  <description>
+  Search LDS Family Search
+  </description>
+  <form name="ldsf"
+        method="post"
+        action="http://www.familysearch.org/Eng/Search/ancestorsearchresults.asp">
+  <input type="hidden" name="juris1orig2" value=""/>
+  <input type="hidden" name="juris1orig3" value=""/>
+  <input type="hidden" name="juris1orig4" value=""/>
+  <input type="hidden" name="LDS" value="99"/>
+  <input type="hidden" name="date_range_index" value=""/>
+  <input type="hidden" name="fathers_first_name" value=""/>
+  <input type="hidden" name="fathers_last_name" value=""/>
+  <input type="hidden" name="mothers_first_name" value=""/>
+  <input type="hidden" name="mothers_last_name" value=""/>
+  <input type="hidden" name="first_name" value=""/>
+  <input type="hidden" name="last_name" value=""/>
+  <input type="hidden" name="standardize" value="N"/>
+  </form>
+  <script><![CDATA[
+    function lds(q)
+    {
+      if( nullArgs("lds", q) )
+        return;
+
+      var args = parseArgs(q, "all, af, igi, ssdi");
+      if (args != null && args.switches.length > 0) {
+	if (args.switches.length > 1) {
+	  nullArgs("lds", "?");
+	  return;
+	}
+	switch (args.switches[0].name)
+	{
+		case 'af':
+			openSearchWindow("http://www.familysearch.org/Eng/Search/frameset_search.asp?PAGE=af/search_AF.asp&clear_form=true");
+			return;
+		case 'ssdi':
+			openSearchWindow("http://www.familysearch.org/Eng/Search/frameset_search.asp?PAGE=ssdi/search_ssdi.asp&clear_form=true");
+			return;
+		case 'igi':
+			openSearchWindow("http://www.familysearch.org/Eng/Search/frameset_search.asp?PAGE=igi/search_IGI.asp&clear_form=true");
+			return;
+		default:
+			openSearchWindow("http://www.familysearch.org/Eng/Search/frameset_search.asp?PAGE=search_all1.asp&clear_form=true");
+			return;
+        }
+      }
+
+      document.ldsf.last_name.value = genealogy_parse_surname(args.q);
+      document.ldsf.first_name.value = genealogy_parse_givenname(args.q);
+      submitForm(ldsf);
+    }
+  ]]></script>
+</search>

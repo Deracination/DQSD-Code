@@ -1,0 +1,127 @@
+<search function="ancestry">
+  <name>Ancestry.com</name>
+  <category>Genealogy</category>
+  <contributor>Brent Beardsley</contributor>
+  <link>http://www.ancestry.com/</link>
+  <email></email>
+  <description>
+	Search Ancestry.com
+  </description>
+  <form name="ancestryf"
+        method="get"
+        action="http://www.ancestry.com/rx/gs.asp">
+    <input type="hidden" name="gsfn" value="" />
+    <input type="hidden" name="gsln" value="" />
+    <input type="hidden" name="sx" value="" />
+    <COMMENT>
+      The input element above, "sx", was a SELECT element with the following options...
+      <select name="sx">
+        <option value="">Exact</option>
+        <option value="y">Soundex</option>
+      </select>
+    </COMMENT>
+
+    <input type="hidden" name="prox" value="1" />
+    <COMMENT>
+      The input element above, "prox", was a SELECT element with the following options...
+      <select name="prox">
+        <option value="0">Adjacent</option>
+        <option value="1">within 1 word</option>
+        <option value="2">within 2 words</option>
+        <option value="5">within 5 words</option>
+        <option value="10">within 10 words</option>
+        <option value="20">within 20 words</option>
+        <option value="-1">no proximity</option>
+      </select>
+    </COMMENT>
+
+    <input type="hidden" name="gsco" value="1" />
+    <COMMENT>
+      The input element above, "gsco", was a SELECT element with the following options...
+      <select name="gsco">
+        <option value="1">All Countries</option>
+        <option value="2,United States">United States</option>
+        <option value="3243,Canada">Canada</option>
+        <option value="5251,Channel Islands">Channel Islands</option>
+        <option value="3251,England">England</option>
+        <option value="3250,Ireland">Ireland</option>
+        <option value="5252,Isle of Man">Isle of Man</option>
+        <option value="3252,Scotland">Scotland</option>
+        <option value="5250,Wales">Wales</option>
+      </select>
+    </COMMENT>
+
+    <input type="hidden" name="gspl" value="1" />
+    <COMMENT>
+      The input element above, "gspl", was a SELECT element with the following options...
+      <select name="gspl">
+        <option value="1">Not Available</option>
+        <option value="1"> </option>
+        <option value="1">No county</option>
+        <option value="1">information</option>
+        <option value="1">available.</option>
+        <option value="1"> </option>
+        <option value="1"> </option>
+      </select>
+    </COMMENT>
+
+    <input type="hidden" name="year" value="" />
+    <input type="hidden" name="yearend" value="" />
+    <input type="hidden" name="gskw" value="" />
+    <input type="hidden" name="gst" value="" />
+    <COMMENT>
+      The input element above, "gst", was a SELECT element with the following options...
+      <select name="gst">
+        <option value="">All Record Types</option>
+        <option value="35">Census</option>
+        <option value="34">Birth, Marriage, Death</option>
+        <option value="42">Trees &amp; Community</option>
+        <option value="39">Military</option>
+        <option value="40">Immigration</option>
+        <option value="38">Newspapers</option>
+        <option value="33">Biography &amp; History</option>
+        <option value="36">Court, Land &amp; Probate</option>
+        <option value="41">Reference</option>
+        <option value="37">Directories</option>
+      </select>
+    </COMMENT>
+
+    <input type="hidden" name="gl" value="allgs" />
+    <input type="hidden" name="ti" value="0" />
+    <input type="hidden" name="gss" value="ansmp" />
+  </form>
+  <script><![CDATA[
+    function ancestry(q)
+    {
+      if( nullArgs("ancestry", q) )
+        return;
+
+      if( q == "" )
+      {
+        openSearchWindow("http://www.ancestry.com/");
+        return;
+      }
+
+      // FORM variables for ancestryf
+
+      // The wizard assigned the search string to this form field value because
+      // this field was the active element when the search file was generated.
+      // Change this to args.q if the search string is parsed with parseArgs.
+      document.ancestryf.gsfn.value = genealogy_parse_givenname(q);
+      document.ancestryf.gsln.value = genealogy_parse_surname(q);
+      //document.ancestryf.sx.value = "";
+      //document.ancestryf.prox.value = "";
+      //document.ancestryf.gsco.value = "";
+      //document.ancestryf.gspl.value = "";
+      //document.ancestryf.year.value = "";
+      //document.ancestryf.yearend.value = "";
+      //document.ancestryf.gskw.value = "";
+      //document.ancestryf.gst.value = "";
+      //document.ancestryf.gl.value = "";
+      //document.ancestryf.ti.value = "";
+      //document.ancestryf.gss.value = "";
+
+      submitForm(ancestryf);
+    }
+  ]]></script>
+</search>

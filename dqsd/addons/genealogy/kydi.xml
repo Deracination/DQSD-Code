@@ -1,0 +1,196 @@
+<search function="kydi">
+  <COMMENT>
+
+    This search file was initially created by Dave's Quick Search Deskbar
+    Search Wizard version 0.4 (beta) on 08/18/02 at 21:22:24
+
+    Even though this XML search will probably load and is a healthy start
+    toward a completed search, please be aware that this search will probably
+    not work as is and will require some human inspection and modification.
+
+  </COMMENT>
+  <name>Kentucky Death Index 1911-2000</name>
+  <category>Genealogy</category>
+  <contributor>Brent Beardsley</contributor>
+  <link>http://vitals.rootsweb.com/ky/death/search.cgi</link>
+  <email></email>
+  <description>
+  Search Kentucky Death Index 1911-2000
+  </description>
+  <form name="kydif"
+        method="post"
+        action="http://vitals.rootsweb.com/ky/death/search.cgi">
+
+    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
+
+    <input type="hidden" name="last" value="" />
+    <input type="hidden" name="stype" value="" />
+    <COMMENT>
+      The input element above, "stype", was a SELECT element with the following options...
+      <select name="stype">
+        <option>Exact</option>
+        <option>Soundex</option>
+        <option>Metaphone</option>
+      </select>
+    </COMMENT>
+
+    <input type="hidden" name="first" value="" />
+    <input type="hidden" name="county" value="" />
+    <COMMENT>
+      The input element above, "county", was a SELECT element with the following options...
+      <select name="county">
+        <option value="">Any</option>
+        <option value="ADAIR">ADAIR</option>
+        <option value="ALLEN">ALLEN</option>
+        <option value="ANDSN">ANDERSON</option>
+        <option value="BALLD">BALLARD</option>
+        <option value="BARRN">BARREN</option>
+        <option value="BATH">BATH</option>
+        <option value="BELL">BELL</option>
+        <option value="BOONE">BOONE</option>
+        <option value="BURBN">BOURBON</option>
+        <option value="BOYD">BOYD</option>
+        <option value="BOYLE">BOYLE</option>
+        <option value="BRCKN">BRACKEN</option>
+        <option value="BRTHT">BREATHITT</option>
+        <option value="BRECK">BRECKINRIDGE</option>
+        <option value="BULLT">BULLITT</option>
+        <option value="BUTLR">BUTLER</option>
+        <option value="CLDWL">CALDWELL</option>
+        <option value="CALWY">CALLOWAY</option>
+        <option value="CMPBL">CAMPBELL</option>
+        <option value="CRLIL">CARLISLE</option>
+        <option value="CARRL">CARROLL</option>
+        <option value="CARTR">CARTER</option>
+        <option value="CASEY">CASEY</option>
+        <option value="CRSTN">CHRISTIAN</option>
+        <option value="CLARK">CLARK</option>
+        <option value="CLAY">CLAY</option>
+        <option value="CLNTN">CLINTON</option>
+        <option value="CRTDN">CRITTENDEN</option>
+        <option value="CMBLD">CUMBERLAND</option>
+        <option value="DAVES">DAVIESS</option>
+        <option value="EDMSN">EDMONSON</option>
+        <option value="ELIOT">ELLIOTT</option>
+        <option value="ESTIL">ESTILL</option>
+        <option value="FYETE">FAYETTE</option>
+        <option value="FLMNG">FLEMING</option>
+        <option value="FLOYD">FLOYD</option>
+        <option value="FRNKL">FRANKLIN</option>
+        <option value="FULTN">FULTON</option>
+        <option value="GLLTN">GALLATIN</option>
+        <option value="GARRD">GARRARD</option>
+        <option value="GRANT">GRANT</option>
+        <option value="GRVES">GRAVES</option>
+        <option value="GRYSN">GRAYSON</option>
+        <option value="GREEN">GREEN</option>
+        <option value="GRNUP">GREENUP</option>
+        <option value="HANCK">HANCOCK</option>
+        <option value="HARDN">HARDIN</option>
+        <option value="HARLN">HARLAN</option>
+        <option value="HARSN">HARRISON</option>
+        <option value="HART">HART</option>
+        <option value="HNDSN">HENDERSON</option>
+        <option value="HENRY">HENRY</option>
+        <option value="HCKMN">HICKMAN</option>
+        <option value="HPKNS">HOPKINS</option>
+        <option value="JCKSN">JACKSON</option>
+        <option value="JEFFN">JEFFERSON</option>
+        <option value="JESMN">JESSAMINE</option>
+        <option value="JHNSN">JOHNSON</option>
+        <option value="KENTN">KENTON</option>
+        <option value="KNOTT">KNOTT</option>
+        <option value="KNOX">KNOX</option>
+        <option value="LARUE">LARUE</option>
+        <option value="LAURL">LAUREL</option>
+        <option value="LRNCE">LAWRENCE</option>
+        <option value="LEE">LEE</option>
+        <option value="LESLI">LESLIE</option>
+        <option value="LTCHR">LETCHER</option>
+        <option value="LEWIS">LEWIS</option>
+        <option value="LNCLN">LINCOLN</option>
+        <option value="LVGST">LIVINGSTON</option>
+        <option value="LOGAN">LOGAN</option>
+        <option value="LYON">LYON</option>
+        <option value="MADSN">MADISON</option>
+        <option value="MAGFN">MAGOFFIN</option>
+        <option value="MARON">MARION</option>
+        <option value="MRSHL">MARSHALL</option>
+        <option value="MARTN">MARTIN</option>
+        <option value="MASON">MASON</option>
+        <option value="MCCRK">MCCRACKEN</option>
+        <option value="MCCRY">MCCREARY</option>
+        <option value="MCLEN">MCLEAN</option>
+        <option value="MEADE">MEADE</option>
+        <option value="MENFE">MENIFEE</option>
+        <option value="MERCR">MERCER</option>
+        <option value="MTCLF">METCALFE</option>
+        <option value="MONRO">MONROE</option>
+        <option value="MNTGY">MONTGOMERY</option>
+        <option value="MORGN">MORGAN</option>
+        <option value="MLNBG">MUHLENBURG</option>
+        <option value="NELSN">NELSON</option>
+        <option value="NCHLS">NICHOLAS</option>
+        <option value="OHIO">OHIO</option>
+        <option value="OLDHM">OLDHAM</option>
+        <option value="OWEN">OWEN</option>
+        <option value="OWSLY">OWSLEY</option>
+        <option value="PNLTN">PENDLETON</option>
+        <option value="PERRY">PERRY</option>
+        <option value="PIKE">PIKE</option>
+        <option value="POWEL">POWELL</option>
+        <option value="PLSKI">PULASKI</option>
+        <option value="RBTSN">ROBERTSON</option>
+        <option value="RCKSL">ROCKCASTLE</option>
+        <option value="ROWAN">ROWAN</option>
+        <option value="RUSEL">RUSSELL</option>
+        <option value="SCOTT">SCOTT</option>
+        <option value="SHLBY">SHELBY</option>
+        <option value="SMPSN">SIMPSON</option>
+        <option value="SPNCR">SPENCER</option>
+        <option value="TAYLR">TAYLOR</option>
+        <option value="TODD">TODD</option>
+        <option value="TRIGG">TRIGG</option>
+        <option value="TRMBL">TRIMBLE</option>
+        <option value="UNION">UNION</option>
+        <option value="WARRN">WARREN</option>
+        <option value="WSHGN">WASHINGTON</option>
+        <option value="WAYNE">WAYNE</option>
+        <option value="WBSTR">WEBSTER</option>
+        <option value="WHTLY">WHITLEY</option>
+        <option value="WOLFE">WOLFE</option>
+        <option value="WDFRD">WOODFORD</option>
+      </select>
+    </COMMENT>
+
+    <input type="hidden" name="residence" value="" />
+    <input type="hidden" name="year" value="" />
+  </form>
+  <script><![CDATA[
+    function kydi(q)
+    {
+      if( nullArgs("kydi", q) )
+        return;
+
+      if( q == "" )
+      {
+        openSearchWindow("http://vitals.rootsweb.com/ky/death/search.cgi");
+        return;
+      }
+
+      // FORM variables for kydif
+
+      // The wizard assigned the search string to this form field value because
+      // this field was the active element when the search file was generated.
+      // Change this to args.q if the search string is parsed with parseArgs.
+      document.kydif.last.value = genealogy_parse_surname(q);
+      //document.kydif.stype.value = "";
+      document.kydif.first.value = genealogy_parse_givenname(q);
+      //document.kydif.county.value = "";
+      //document.kydif.residence.value = "";
+      //document.kydif.year.value = "";
+
+      submitForm(kydif);
+    }
+  ]]></script>
+</search>

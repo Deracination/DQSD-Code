@@ -1,0 +1,169 @@
+<search function="illp">
+  <COMMENT>
+
+    This search file was initially created by Dave's Quick Search Deskbar
+    Search Wizard version 0.4 (beta) on 08/15/02 at 22:58:10
+
+    Even though this XML search will probably load and is a healthy start
+    toward a completed search, please be aware that this search will probably
+    not work as is and will require some human inspection and modification.
+
+  </COMMENT>
+  <name>Illinois Land Sales Database</name>
+  <category>Genealogy</category>
+  <contributor>Brent Beardsley</contributor>
+  <link>http://www.cyberdriveillinois.com/departments/archives/genealogy/landsrch.html</link>
+  <email></email>
+  <description>
+  Search the Illinois Public Domain Land Tract Sales Database
+  </description>
+  <form name="illpf"
+        method="post"
+        action="http://cyberdriveillinois.com/cgi-bin/archives/land.s">
+
+    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
+
+    <input type="hidden" name="name" value="" />
+    <input type="hidden" name="county" value="" />
+    <COMMENT>
+      The input element above, "county", was a SELECT element with the following options...
+      <select name="county">
+        <option>STATE WIDE</option>
+        <option>ADAMS</option>
+        <option>ALEXANDER</option>
+        <option>BOND</option>
+        <option>BOONE</option>
+        <option>BROWN</option>
+        <option>BUREAU</option>
+        <option>CALHOUN</option>
+        <option>CARROLL</option>
+        <option>CASS</option>
+        <option>CHAMPAIGN</option>
+        <option>CHRISTIAN</option>
+        <option>CLARK</option>
+        <option>CLAY</option>
+        <option>CLINTON</option>
+        <option>COLES</option>
+        <option>COOK</option>
+        <option>CRAWFORD</option>
+        <option>CUMBERLAND</option>
+        <option>DEKALB</option>
+        <option>DEWITT</option>
+        <option>DOUGLAS</option>
+        <option>DUPAGE</option>
+        <option>EDGAR</option>
+        <option>EDWARDS</option>
+        <option>EFFINGHAM</option>
+        <option>FAYETTE</option>
+        <option>FORD</option>
+        <option>FRANKLIN</option>
+        <option>FULTON</option>
+        <option>GALLATIN</option>
+        <option>GREENE</option>
+        <option>GRUNDY</option>
+        <option>HAMILTON</option>
+        <option>HANCOCK</option>
+        <option>HARDIN</option>
+        <option>HENDERSON</option>
+        <option>HENRY</option>
+        <option>IROQUOIS</option>
+        <option>JACKSON</option>
+        <option>JASPER</option>
+        <option>JEFFERSON</option>
+        <option>JERSEY</option>
+        <option>JODAVIESS</option>
+        <option>JOHNSON</option>
+        <option>KANE</option>
+        <option>KANKAKEE</option>
+        <option>KENDALL</option>
+        <option>KNOX</option>
+        <option>LAKE</option>
+        <option>LASALLE</option>
+        <option>LAWRENCE</option>
+        <option>LEE</option>
+        <option>LIVINGSTON</option>
+        <option>LOGAN</option>
+        <option>MCDONOUGH</option>
+        <option>MCHENRY</option>
+        <option>MCLEAN</option>
+        <option>MACON</option>
+        <option>MACOUPIN</option>
+        <option>MADISON</option>
+        <option>MARION</option>
+        <option>MARSHALL</option>
+        <option>MASON</option>
+        <option>MASSAC</option>
+        <option>MENARD</option>
+        <option>MERCER</option>
+        <option>MONROE</option>
+        <option>MONTGOMERY</option>
+        <option>MORGAN</option>
+        <option>MOULTRIE</option>
+        <option>OGLE</option>
+        <option>PEORIA</option>
+        <option>PERRY</option>
+        <option>PIATT</option>
+        <option>PIKE</option>
+        <option>POPE</option>
+        <option>PULASKI</option>
+        <option>PUTNAM</option>
+        <option>RANDOLPH</option>
+        <option>RICHLAND</option>
+        <option>ROCK ISLAND</option>
+        <option>ST. CLAIR</option>
+        <option>SALINE</option>
+        <option>SANGAMON</option>
+        <option>SCHUYLER</option>
+        <option>SCOTT</option>
+        <option>SHELBY</option>
+        <option>STARK</option>
+        <option>STEPHENSON</option>
+        <option>TAZEWELL</option>
+        <option>UNION</option>
+        <option>VERMILION</option>
+        <option>WABASH</option>
+        <option>WARREN</option>
+        <option>WASHINGTON</option>
+        <option>WAYNE</option>
+        <option>WHITE</option>
+        <option>WHITESIDE</option>
+        <option>WILL</option>
+        <option>WILLIAMSON</option>
+        <option>WINNEBAGO</option>
+        <option>WOODFORD</option>
+      </select>
+    </COMMENT>
+
+  </form>
+  <script><![CDATA[
+    function illp(q)
+    {
+      if( nullArgs("illp", q) )
+        return;
+
+      if( q == "" )
+      {
+        openSearchWindow("http://www.cyberdriveillinois.com/departments/archives/genealogy/landsrch.html");
+        return;
+      }
+
+      var args = parseArgs(q, "county");
+      if (args == null) {
+	nullArgs("illp", "?");
+	return;
+      }
+	document.illpf.county.value = "";
+	document.illpf.name.value = "";
+	if (args.switches.length > 0) {
+		for (var i=0; i < args.switches.length; i++) {
+		  switch (args.switches[i].name)
+		  {
+			case "county": document.illpf.county.value = args.switch_val["county"].toUpperCase(); break;
+		  }
+		}
+	}
+	document.illpf.name.value = args.q;
+	submitForm(illpf);
+    }
+  ]]></script>
+</search>

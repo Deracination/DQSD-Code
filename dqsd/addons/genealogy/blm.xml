@@ -1,0 +1,249 @@
+<search function="blm">
+  <COMMENT>
+
+    This search file was initially created by Dave's Quick Search Deskbar
+    Search Wizard version 0.4 (beta) on 08/18/02 at 21:53:25
+
+    Even though this XML search will probably load and is a healthy start
+    toward a completed search, please be aware that this search will probably
+    not work as is and will require some human inspection and modification.
+
+  </COMMENT>
+  <name>BLM GLO Land Patents</name>
+  <category>Genealogy</category>
+  <contributor>Brent Beardsley</contributor>
+  <link>http://www.glorecords.blm.gov/PatentSearch/Default.asp?Tab1=2</link>
+  <email></email>
+  <description>
+  Search the BLM GLO Records
+  </description>
+  <form name="blmf"
+        method="post"
+        action="http://www.glorecords.blm.gov/PatentSearch/Wait.asp">
+    <input type="hidden" name="SelectedTab" value="2" />
+    <input type="hidden" name="f1" value="Any" />
+    <COMMENT>
+      The input element above, "f1", was a SELECT element with the following options...
+      <select name="f1">
+        <option value="AL">ALABAMA</option>
+        <option value="AK">ALASKA</option>
+        <option value="AZ">ARIZONA</option>
+        <option value="AR">ARKANSAS</option>
+        <option value="CA">CALIFORNIA</option>
+        <option value="CO">COLORADO</option>
+        <option value="FL">FLORIDA</option>
+        <option value="ID">IDAHO</option>
+        <option value="IL">ILLINOIS</option>
+        <option value="IN">INDIANA</option>
+        <option value="IA">IOWA</option>
+        <option value="KS">KANSAS</option>
+        <option value="LA">LOUISIANA</option>
+        <option value="MI">MICHIGAN</option>
+        <option value="MN">MINNESOTA</option>
+        <option value="MS">MISSISSIPPI</option>
+        <option value="MO">MISSOURI</option>
+        <option value="MT">MONTANA</option>
+        <option value="NE">NEBRASKA</option>
+        <option value="NV">NEVADA</option>
+        <option value="NJ">NEW JERSEY</option>
+        <option value="NM">NEW MEXICO</option>
+        <option value="ND">NORTH DAKOTA</option>
+        <option value="OH">OHIO</option>
+        <option value="OK">OKLAHOMA</option>
+        <option value="OR">OREGON</option>
+        <option value="SD">SOUTH DAKOTA</option>
+        <option value="TX">TEXAS</option>
+        <option value="UT">UTAH</option>
+        <option value="WA">WASHINGTON</option>
+        <option value="DC">WASHINGTON, DC</option>
+        <option value="WI">WISCONSIN</option>
+        <option value="WY">WYOMING</option>
+        <option value="Any">-------------- ALL STATES --------------</option>
+      </select>
+    </COMMENT>
+
+
+    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
+
+    <input type="hidden" name="f6" value="" />
+    <input type="hidden" name="f9" value="" />
+    <input type="hidden" name="f4" value="" />
+    <input type="hidden" name="f7" value="" />
+    <input type="hidden" name="f5" value="" />
+    <input type="hidden" name="f8" value="" />
+    <input type="hidden" name="f10" value="" />
+    <COMMENT>
+      The input element above, "f10", was a SELECT element with the following options...
+      <select name="f10">
+        <option value="">------ All Counties ------</option>
+      </select>
+    </COMMENT>
+
+    <input type="hidden" name="f15" value="" />
+    <input type="hidden" name="f16" value="" />
+    <COMMENT>
+      The input element above, "f16", was a SELECT element with the following options...
+      <select name="f16">
+        <option value="">Any Dir</option>
+        <option value="N">N</option>
+        <option value="S">S</option>
+      </select>
+    </COMMENT>
+
+    <input type="hidden" name="f13" value="" />
+    <input type="hidden" name="f17" value="" />
+    <input type="hidden" name="f18" value="" />
+    <COMMENT>
+      The input element above, "f18", was a SELECT element with the following options...
+      <select name="f18">
+        <option value="">Any Dir</option>
+        <option value="E">E</option>
+        <option value="W">W</option>
+      </select>
+    </COMMENT>
+
+    <input type="hidden" name="f14" value="" />
+    <input type="hidden" name="f19" value="" />
+    <COMMENT>
+      The input element above, "f19", was a SELECT element with the following options...
+      <select name="f19">
+        <option value="">---- All Meridians ----</option>
+      </select>
+    </COMMENT>
+
+    <input type="hidden" name="f21" value="" />
+    <COMMENT>
+      The input element above, "f21", was a SELECT element with the following options...
+      <select name="f21">
+        <option value="">Any</option>
+        <option value="1">Jan</option>
+        <option value="2">Feb</option>
+        <option value="3">Mar</option>
+        <option value="4">Apr</option>
+        <option value="5">May</option>
+        <option value="6">Jun</option>
+        <option value="7">Jul</option>
+        <option value="8">Aug</option>
+        <option value="9">Sep</option>
+        <option value="10">Oct</option>
+        <option value="11">Nov</option>
+        <option value="12">Dec</option>
+      </select>
+    </COMMENT>
+
+    <input type="hidden" name="f20" value="" />
+    <input type="hidden" name="f22" value="" />
+    <input type="hidden" name="f11" value="" />
+    <COMMENT>
+      The input element above, "f11", was a SELECT element with the following options...
+      <select name="f11">
+        <option value="">---- All Land Offices ----</option>
+      </select>
+    </COMMENT>
+
+    <input type="hidden" name="f23" value="" />
+    <input type="hidden" name="f33" value="" />
+    <input type="hidden" name="f12" value="" />
+    <COMMENT>
+      The input element above, "f12", was a SELECT element with the following options...
+      <select name="f12">
+        <option value="">---- All Authorities ----</option>
+      </select>
+    </COMMENT>
+
+    <input type="hidden" name="f25" value="PATENTEE_NAME" />
+    <COMMENT>
+      The input element above, "f25", was a SELECT element with the following options...
+      <select name="f25">
+        <option value="PATENTEE_NAME">Patentee Name</option>
+        <option value="STATE">State</option>
+        <option value="COUNTY">County</option>
+        <option value="ISSUE_DATE">Issue Date</option>
+        <option value="LAND_OFFICE">Land Office</option>
+        <option value="DOCUMENT_NUMBER">Document Number</option>
+        <option value="ACCESSION_SERIAL_NUMBER">Accession/Serial Number</option>
+      </select>
+    </COMMENT>
+
+    <input type="hidden" name="f26" value="ACCESSION_SERIAL_NUMBER" />
+    <COMMENT>
+      The input element above, "f26", was a SELECT element with the following options...
+      <select name="f26">
+        <option value="ACCESSION_SERIAL_NUMBER">Accession/Serial Number</option>
+        <option value="LOCATION">Location</option>
+      </select>
+    </COMMENT>
+
+    <input type="hidden" name="f24" value="GENEALOGY" />
+    <COMMENT>
+      The input element above, "f24" was a set of radio buttons with the following options...
+      "GENEALOGY", "TITLE"
+    </COMMENT>
+
+  </form>
+  <script><![CDATA[
+    function blm(q)
+    {
+      if( nullArgs("blm", q) )
+        return;
+
+      if( q == "" )
+      {
+        openSearchWindow("http://www.glorecords.blm.gov/PatentSearch/Default.asp?Tab1=2");
+        return;
+      }
+
+      // FORM variables for blmf
+      //document.blmf.SelectedTab.value = "";
+      document.blmf.f1.value = "";
+
+      var args = parseArgs(q, "state");
+      if (args != null && args.switches.length > 0) {
+	if (args.switches.length > 1) {
+	  nullArgs("blm", "?");
+	  return;
+	}
+	for (var i=0; i < args.switches.length; i++) {
+		switch (args.switches[i].name)
+		{
+		case "state":
+			document.blmf.f1.value = args.switch_val["state"];
+			break;
+		default:
+			break;
+		}
+	}
+      }
+
+      // The wizard assigned the search string to this form field value because
+      // this field was the active element when the search file was generated.
+      // Change this to args.q if the search string is parsed with parseArgs.
+      document.blmf.f6.value = genealogy_parse_surname(args.q);
+      //document.blmf.f9.value = "";
+      document.blmf.f4.value = genealogy_parse_givenname(args.q);
+      //document.blmf.f7.value = "";
+      //document.blmf.f5.value = "";
+      //document.blmf.f8.value = "";
+      //document.blmf.f10.value = "";
+      //document.blmf.f15.value = "";
+      //document.blmf.f16.value = "";
+      //document.blmf.f13.value = "";
+      //document.blmf.f17.value = "";
+      //document.blmf.f18.value = "";
+      //document.blmf.f14.value = "";
+      //document.blmf.f19.value = "";
+      //document.blmf.f21.value = "";
+      //document.blmf.f20.value = "";
+      //document.blmf.f22.value = "";
+      //document.blmf.f11.value = "";
+      //document.blmf.f23.value = "";
+      //document.blmf.f33.value = "";
+      //document.blmf.f12.value = "";
+      //document.blmf.f25.value = "";
+      //document.blmf.f26.value = "";
+      //document.blmf.f24.value = "";
+
+      submitForm(blmf);
+    }
+  ]]></script>
+</search>

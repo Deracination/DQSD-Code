@@ -1,0 +1,50 @@
+<search function="sndx">
+  <COMMENT>
+
+    This search file was initially created by Dave's Quick Search Deskbar
+    Search Wizard version 0.4 (beta) on 08/18/02 at 16:42:42
+
+    Even though this XML search will probably load and is a healthy start
+    toward a completed search, please be aware that this search will probably
+    not work as is and will require some human inspection and modification.
+
+  </COMMENT>
+  <name>Rootsweb Soundex Converter</name>
+  <category>Genealogy</category>
+  <contributor>Brent Beardsley</contributor>
+  <link>http://resources.rootsweb.com/cgi-bin/soundexconverter</link>
+  <email></email>
+  <description>
+  Calculate soundex for surnames from Rootsweb.com
+  </description>
+  <form name="sndxf"
+        method="post"
+        action="http://resources.rootsweb.com/cgi-bin/soundexconverter">
+
+    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
+
+    <input type="hidden" name="surname" value="" />
+  </form>
+  <script><![CDATA[
+    function sndx(q)
+    {
+      if( nullArgs("sndx", q) )
+        return;
+
+      if( q == "" )
+      {
+        openSearchWindow("http://resources.rootsweb.com/cgi-bin/soundexconverter");
+        return;
+      }
+
+      // FORM variables for sndxf
+
+      // The wizard assigned the search string to this form field value because
+      // this field was the active element when the search file was generated.
+      // Change this to args.q if the search string is parsed with parseArgs.
+      document.sndxf.surname.value = genealogy_parse_surname(q);
+
+      submitForm(sndxf);
+    }
+  ]]></script>
+</search>
