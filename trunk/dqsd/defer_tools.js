@@ -79,9 +79,9 @@ function submitForm(form, dontChangeTarget)
     {
       var w = null;
       if (typeof windowOpenFeatures != "undefined") {
-        w = window.open(url, name, windowOpenFeatures);
+        w = window.open(pagetemplate, newtarget, windowOpenFeatures);
       } else {
-        w = window.open(url, name);
+        w = window.open(pagetemplate, newtarget);
       }
       w.history.back(1);
     }
