@@ -3,27 +3,28 @@
   <description>
     Search for code snippets in a multitude of programming languages. Searches all languages by default.<br/>
     <div class="helpboxDescLabels">Switches:</div>
-  	<table class="helpboxDescTable">
-  		<tr><td>/asp</td><td> - </td><td>ASP</td></tr>
-  		<tr><td>/c</td><td> - </td><td>C and C++</td></tr>
-      <tr><td>/java</td><td> - </td><td>Java</td></tr>
-      <tr><td>/javascript</td><td> - </td><td>JavaScript</td></tr>
-      <tr><td>/php</td><td> - </td><td>PHP</td></tr>
-      <tr><td>/perl</td><td> - </td><td>Perl</td></tr>
-      <tr><td>/python</td><td> - </td><td>Python</td></tr>
-      <tr><td>/remotehosts</td><td> - </td><td>Remote Hosts</td></tr>
-      <tr><td>/tools</td><td> - </td><td>Tools and Utilities</td></tr>
-      <tr><td>/xml</td><td> - </td><td>XML</td></tr>
-  	</table>
+      <table class="helpboxDescTable">
+        <tr><td>/new</td><td> - </td><td>New listings</td></tr>
+        <tr><td>/asp</td><td> - </td><td>ASP</td></tr>
+        <tr><td>/c</td><td> - </td><td>C and C++</td></tr>
+        <tr><td>/java</td><td> - </td><td>Java</td></tr>
+        <tr><td>/javascript</td><td> - </td><td>JavaScript</td></tr>
+        <tr><td>/php</td><td> - </td><td>PHP</td></tr>
+        <tr><td>/perl</td><td> - </td><td>Perl</td></tr>
+        <tr><td>/python</td><td> - </td><td>Python</td></tr>
+        <tr><td>/remotehosts</td><td> - </td><td>Remote Hosts</td></tr>
+        <tr><td>/tools</td><td> - </td><td>Tools and Utilities</td></tr>
+        <tr><td>/xml</td><td> - </td><td>XML</td></tr>
+      </table>
     <div class="helpboxDescLabels">Example:</div>
     <table class="helpboxDescTable">
-  		<tr><td>hs parse /javascript</td></tr>
-  	</table>
+          <tr><td>hs parse /javascript</td></tr>
+      </table>
   </description>
   <category>Computers</category>
   <link>http://www.hotscripts.com/</link>
-  <contributor>Monty Scroggins, Ryan Edwards</contributor>
-  
+  <contributor>Monty Scroggins, Ryan Edwards, Brent Beardsley</contributor>
+
   <form name="hsf"
         action="http://www.hotscripts.com/search/"
         method="get">
@@ -31,18 +32,19 @@
     <input type="hidden" name="category" value=""/>
     <input type="hidden" name="bool" value="AND"/>
   </form>
-  
+
   <script><![CDATA[
     function hs(q)
     {
-      var args = parseArgs(q, "asp, c, java, javascript, php, perl, python, remotehosts, tools, xml");
-      
+      var args = parseArgs(q, "new, asp, c, java, javascript, php, perl, python, remotehosts, tools, xml");
+
       if( nullArgs("hs",q) )
         return false;
       else if( args.switches.length == 1 )
       {
         switch( args.switches[0].name )
         {
+          case "new": openSearchWindow("http://www.hotscripts.com/New/"); return false;
           case "asp": document.hsf.category.value = "ASP"; break;
           case "c": document.hsf.category.value = "C"; break;
           case "java": document.hsf.category.value = "Java"; break;
@@ -69,3 +71,4 @@
     }
   ]]></script>
 </search>
+
