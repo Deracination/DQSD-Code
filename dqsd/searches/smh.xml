@@ -1,0 +1,44 @@
+<search function="smh">
+  <name>SMH News</name>
+  <description>
+    Search for news topics at smh.com.au<br/>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>smh Saddam Hussein</td></tr>
+  	</table>
+  </description>
+  <category>News</category>
+  <link>http://www.smh.com.au/</link>
+ 
+ <form name="smhf"
+        action="http://newsstore.com.au/rlprod/rlsearcher"
+        method="get">
+    		<INPUT type="hidden" name="ac" Value="search"/>
+ 		<INPUT type="hidden" name="rs" Value="1"/>
+ 		<INPUT type="hidden" name="st" Value="dc"/>
+ 		<INPUT type="hidden" name="ss" Value="SMH"/>
+ 		<INPUT type="hidden" name="sy" Value="smh"/>
+ 		<INPUT type="hidden" name="sf" Value="all"/>
+ 		<INPUT type="hidden" name="dt" Value="selectRange"/>
+ 		<INPUT type="hidden" name="dr" Value="1year"/>
+ 		<INPUT type="hidden" name="so" Value="relevance"/>
+ 		<INPUT type="hidden" name="sp" Value="0"/>
+ 		<INPUT type="hidden" name="rc" value="10"/>
+ 		<INPUT type="hidden" name="pb" value="all_ffx"/>
+		<input type="hidden" name="kw" value=""/>
+  
+</form>
+  <script><![CDATA[
+    function smh(q)
+    {
+      if( nullArgs("smh",q) )
+        return false;
+      else
+      {
+        document.smhf.kw.value = q;
+        submitForm(smhf);
+
+      }
+    }
+  ]]></script>
+</search>
