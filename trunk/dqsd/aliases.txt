@@ -3,7 +3,6 @@
 -	fst
 ^	av
 {	dp
-??	gwd
 ???	ask
 +	map
 #	sb
@@ -20,7 +19,6 @@ $	stk
 ;;	mwt
 [	enc
 ]	xref
-&	ggc
 &&	ia
 >	gga
 $$	dlt
