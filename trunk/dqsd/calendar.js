@@ -297,7 +297,7 @@ function buildcal()
 
     var ent = null;
     var lent = null;
-    querystr = 'event[date[(@year="'+year+'" || not(@year)) && (@month="'+(month+1)+'" || not(@month)) && @day="'+month_day+'"]]';
+    querystr = 'event[date[(number(@year)="'+year+'" || not(@year)) && (number(@month)="'+(month+1)+'" || not(@month)) && number(@day)="'+month_day+'"]]';
     if (ents)
       ent = ents.selectSingleNode(querystr);
     if (lents)
