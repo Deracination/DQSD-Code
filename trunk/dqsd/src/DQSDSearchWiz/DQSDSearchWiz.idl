@@ -1,0 +1,38 @@
+// DQSDSearchWiz.idl : IDL source for DQSDSearchWiz.dll
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (DQSDSearchWiz.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+	[
+		object,
+		uuid(54A5C49B-040A-4CAC-8699-B3D058D8390F),
+		dual,
+		helpstring("ISearchWizard Interface"),
+		pointer_default(unique)
+	]
+	interface ISearchWizard : IDispatch
+	{
+	};
+
+[
+	uuid(511E1737-7384-4BD7-BB1B-466FD7D80232),
+	version(1.0),
+	helpstring("DQSDSearchWiz 1.0 Type Library")
+]
+library DQSDSEARCHWIZLib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+	[
+		uuid(0FE334BE-C7DC-4160-90FD-6C3DAAFD6236),
+		helpstring("SearchWizard Class")
+	]
+	coclass SearchWizard
+	{
+		[default] interface ISearchWizard;
+	};
+};
