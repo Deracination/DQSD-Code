@@ -302,9 +302,9 @@ function qualifiedalert(s)
 // Function used to allow startup options for DQSD.
 function startup()
 {
-	if (startupCommands != "")
-	{
-		eval(startupCommands);
-	}
+	if (typeof startupCommands == "undefined" || startupCommands == "")
+		return true;
+
+	eval(startupCommands);
 	return true;
 }
