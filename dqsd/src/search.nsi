@@ -11,6 +11,8 @@ Name "Dave's Quick Search Deskbar"
 !Define IE_MINOR_REQUIRED  5
 !Define HOW_TO_TURN_ON_TOOLBAR "Right-click in your taskbar and select$\n$\n    Toolbar > Add Quick Search...$\n$\nto add the Quick Search Deskbar to your taskbar."
 !Define TITLE_AND_COPYRIGHT "Dave's Quick Search Deskbar$\nCopyright (c) 2002 David Bau$\nDistributed under the terms of the$\nGNU General Public License, Version 2"
+!Define DQSD_CLSID "{226b64e8-dc75-4eea-a6c8-abcb4d1d37ff}"
+!Define DQSD_TITLE "Dave's Quick Search Deskbar"
 
 ; Silent install
 DirShow hide
@@ -28,7 +30,7 @@ InstallDir "$PROGRAMFILES\Quick Search Deskbar"
 
 ; Registry key to check for directory (so if you install again, it will
 ; overwrite the old one automatically)
-InstallDirRegKey HKCR "CLSID\{226b64e8-dc75-4eea-a6c8-abcb4d1d37ff}" "InstallDir"
+InstallDirRegKey HKCR "CLSID\${DQSD_CLSID}" "InstallDir"
 
 ; The text to prompt the user to enter a directory
 DirText "Choose a directory to install in to:"
@@ -40,7 +42,7 @@ Section "Quick Search Deskbar (required)"
   SetOutPath $INSTDIR
 
   ; Confirm that the user really does want to install  
-  MessageBox MB_YESNO|MB_ICONINFORMATION|MB_DEFBUTTON2 "This will install Dave's Quick Search Deskbar.  Would you like to continue?" IDYES userconfirmedinstall
+  MessageBox MB_YESNO|MB_ICONINFORMATION|MB_DEFBUTTON2 "This will install ${DQSD_TITLE}.  Would you like to continue?" IDYES userconfirmedinstall
   Abort
   userconfirmedinstall:
 
@@ -58,7 +60,7 @@ Section "Quick Search Deskbar (required)"
   IntCmp ${IE_MINOR_REQUIRED} $3 ieVersionOK ieVersionOK ieVersionNotOK
 
   ieVersionNotOK:
-    MessageBox MB_YESNO|MB_ICONEXCLAMATION|MB_DEFBUTTON2 "This version of Dave's Quick Search Deskbar requires IE version ${IE_MAJOR_REQUIRED}.${IE_MINOR_REQUIRED} or higher.  You are currently running version $2.$3.$\n$\nWould you like to continue with the installation anyway?" IDYES ieVersionOK
+    MessageBox MB_YESNO|MB_ICONEXCLAMATION|MB_DEFBUTTON2 "This version of ${DQSD_TITLE} requires IE version ${IE_MAJOR_REQUIRED}.${IE_MINOR_REQUIRED} or higher.  You are currently running version $2.$3.$\n$\nWould you like to continue with the installation anyway?" IDYES ieVersionOK
     Abort
     
   ieVersionOK:
@@ -243,30 +245,31 @@ Section "Quick Search Deskbar (required)"
   Delete $INSTDIR\searches\tel.xml
   Delete $INSTDIR\searches\tvgc.xml
 
-  ; The unique uuid for our taskbar
-  StrCpy $9 "{226b64e8-dc75-4eea-a6c8-abcb4d1d37ff}"
-
   ; Write the installation path into the registry
-  WriteRegStr HKCR "CLSID\$9" "InstallDir" "$INSTDIR"
+  WriteRegStr HKCR "CLSID\${DQSD_CLSID}" "InstallDir" "$INSTDIR"
 
   ; ??? Keep this for a while for backward compatibility
-  WriteRegStr HKCR "CLSID\$9" "SecureFile" "$INSTDIR\search.htm"
-  WriteRegDWORD HKCR "CLSID\$9\SecureFiles" "$INSTDIR\search.htm" 0
-  WriteRegDWORD HKCR "CLSID\$9\SecureFiles" "$INSTDIR\settings.htm" 0
+  WriteRegStr HKCR "CLSID\${DQSD_CLSID}" "SecureFile" "$INSTDIR\search.htm"
+  WriteRegDWORD HKCR "CLSID\${DQSD_CLSID}\SecureFiles" "$INSTDIR\search.htm" 0
+  WriteRegDWORD HKCR "CLSID\${DQSD_CLSID}\SecureFiles" "$INSTDIR\settings.htm" 0
 
   ; Registry settings needed to function
-  WriteRegStr HKCR "CLSID\$9" "" "Quick Search"
-  WriteRegStr HKCR "CLSID\$9" "MenuText" "Add Quick Search..."
-  WriteRegStr HKCR "CLSID\$9" "HelpText" "Dave's Quick Search Deskbar"
-  WriteRegStr HKCR "CLSID\$9\Implemented Categories\{00021492-0000-0000-C000-000000000046}" "" ""
-  WriteRegStr HKCR "CLSID\$9\InprocServer32" "" "$SYSDIR\shdocvw.dll"
-  WriteRegStr HKCR "CLSID\$9\InprocServer32" "ThreadingModel" "Apartment"
-  WriteRegStr HKCR "CLSID\$9\Instance" "CLSID" "{7BA4C742-9E81-11CF-99D3-00AA004AE837}"
-  WriteRegStr HKCR "CLSID\$9\Instance\InitPropertyBag" "Url" "$INSTDIR\search.htm"
+  WriteRegStr HKCR "CLSID\${DQSD_CLSID}" "" "Quick Search"
+  WriteRegStr HKCR "CLSID\${DQSD_CLSID}" "MenuText" "Add Quick Search..."
+  WriteRegStr HKCR "CLSID\${DQSD_CLSID}" "HelpText" "${DQSD_TITLE}"
+  WriteRegStr HKCR "CLSID\${DQSD_CLSID}\Implemented Categories\{00021492-0000-0000-C000-000000000046}" "" ""
+  WriteRegStr HKCR "CLSID\${DQSD_CLSID}\InprocServer32" "" "$SYSDIR\shdocvw.dll"
+  WriteRegStr HKCR "CLSID\${DQSD_CLSID}\InprocServer32" "ThreadingModel" "Apartment"
+  WriteRegStr HKCR "CLSID\${DQSD_CLSID}\Instance" "CLSID" "{7BA4C742-9E81-11CF-99D3-00AA004AE837}"
+  WriteRegStr HKCR "CLSID\${DQSD_CLSID}\Instance\InitPropertyBag" "Url" "$INSTDIR\search.htm"
+
+  ; Add dqsd clsid to approved shell extensions - irrelevant on non-NT based OS - but doesn't hurt anything per
+  ; http://msdn.microsoft.com/library/en-us/shellcc/platform/Shell/programmersguide/shell_int/shell_int_extending/extensionhandlers/shell_ext.asp
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Shell Extensions\Approved" "${DQSD_CLSID}" "${DQSD_TITLE}"
 
   ; Uninstallation keys
-  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\$9" "DisplayName" "Dave's Quick Search Deskbar (remove only)"
-  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\$9" "UninstallString" '"$INSTDIR\uninstall.exe"'
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${DQSD_CLSID}" "DisplayName" "${DQSD_TITLE} (remove only)"
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${DQSD_CLSID}" "UninstallString" '"$INSTDIR\uninstall.exe"'
 
   ; Message box
   IfRebootFlag rebootmsg norebootmsg
@@ -287,20 +290,20 @@ SectionEnd
 
 ; uninstall stuff
 
-UninstallText "Click next to uninstall Dave's Quick Search Deskbar."
+UninstallText "Click next to uninstall ${DQSD_TITLE}."
 
 ; special uninstall section.
 Section "Uninstall"
 
-  ; The unique uuid for our taskbar
-  StrCpy $9 "{226b64e8-dc75-4eea-a6c8-abcb4d1d37ff}"
-
   ; Unregister DQSDTools
   UnRegDLL $INSTDIR\DQSDTools.dll
 
+  ; remove approved shell extension regkey
+  DeleteRegValue HKLM "Software\Microsoft\Windows\CurrentVersion\Shell Extensions\Approved" "${DQSD_CLSID}"
+
   ; remove registry keys
-  DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\$9"
-  DeleteRegKey HKCR "CLSID\$9"
+  DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${DQSD_CLSID}"
+  DeleteRegKey HKCR "CLSID\${DQSD_CLSID}"
 
   ; remove files
   Delete /REBOOTOK $INSTDIR\DQSDTools.dll
