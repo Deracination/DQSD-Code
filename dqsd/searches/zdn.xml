@@ -2,7 +2,7 @@
   <name>ZDNet Downloads</name>
   <description>Search Ziff-Davis Net for software. Searches for Windows software by default.<br/>
   <div class="helpboxDescLabels">Switches:</div>
-	<table cellpadding="0" cellspacing="0" border="0">
+	<table class="helpboxDescTable">
 		<tr><td>/all</td><td> - </td><td>All Platform Downloads</td></tr>
 		<tr><td>/mac</td><td> - </td><td>MacOS Downloads</td></tr>
     <tr><td>/linux</td><td> - </td><td>Linux Downloads</td></tr>
@@ -11,7 +11,7 @@
     <tr><td>/psion</td><td> - </td><td>Psion/EPOC Downloads</td></tr>
 	</table>
   <div class="helpboxDescLabels">Example:</div>
-  <table cellpadding="0" cellspacing="0" border="0">
+  <table class="helpboxDescTable">
 		<tr><td>zdn quicktime /mac</td></tr>
 	</table>
   </description>
