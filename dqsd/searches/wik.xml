@@ -18,11 +18,7 @@
   </description>
   <form name="wikf"
         method="get"
-        action="http://www.wikipedia.org/w/wiki.phtml?">
-    <input type="hidden" name="PHPSESSID" value="b78cf22c7c0cfa0c8a5d7eec065d39f4" />
-
-    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
-
+        action="http://www.wikipedia.org/w/wiki.phtml">
     <input type="hidden" name="search" value="" />
   </form>
   <script><![CDATA[
@@ -31,20 +27,7 @@
       if( nullArgs("wik", q) )
         return;
 
-      if( q == "" )
-      {
-        openSearchWindow("http://www.wikipedia.org/");
-        return;
-      }
-
-      // FORM variables for wikf
-      //document.wikf.PHPSESSID.value = "";
-
-      // The wizard assigned the search string to this form field value because
-      // this field was the active element when the search file was generated.
-      // Change this to args.q if the search string is parsed with parseArgs.
       document.wikf.search.value = q;
-
       submitForm(wikf);
     }
   ]]></script>

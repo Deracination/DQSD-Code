@@ -7,6 +7,8 @@ New Searches
 * wgn - Search Windows Guide Network (from John Bairen).
 * howfar - Find out how far it is from city to city (from John Bairen).
 * dir - Get driving directions from one place to another (from Pete H).
+* wik - Wikipedia search (from Thad Kerosky)
+* nup - Nupedia (from Thad Kerosky)
 
 Modified Searches
 
