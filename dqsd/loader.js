@@ -26,11 +26,12 @@ function addalias(alias, fname)
 {
   if (!searches[fname]) // no matching searches
   {
+    var res;
     if (aliases[fname])
     {
       fname=aliases[fname];
     }
-    else if (fname.indexOf(':') > 0)
+    else if (fname.search(/^\w+:/) >= 0) // resembles URL
     {
       var url = fname;
       fname = INTERNAL_FUNC_PREFIX + (++internalShortcutIndex);
@@ -39,7 +40,19 @@ function addalias(alias, fname)
                            "direct(url.replace( /%s/g, t ));"
                           );
       eval( fname + " = f;" );
-      addsearch( fname, url, "", url, "Shortcuts" );
+      addsearch( fname, url, "", url.search(/%s/) < 0 ? url : "", "Shortcuts" );
+    }
+    else if ((res = fname.match(/^(\w+) +(.+)/)) && searches[res[1]]) // starts with a valid search function
+    {
+      var cmd = fname;
+      fname = INTERNAL_FUNC_PREFIX + (++internalShortcutIndex);
+      var f = new Function("t", 
+                           "var cmd = '" + res[2] + "';" +
+                           "alert(cmd.replace( /%s/g, t ));" +
+                           res[1] + "(cmd.replace( /%s/g, t ));"
+                          );
+      eval( fname + " = f;" );
+      addsearch( fname, cmd, "", "", "Shortcuts" );
     }
     else
     {
@@ -54,7 +67,6 @@ function addalias(alias, fname)
   if (fname == "ia" || fname == "ggc")
     specialaliasarray.push(alias);
 }
-
 
 function addhelp(search)
 {
