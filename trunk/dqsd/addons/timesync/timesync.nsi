@@ -56,6 +56,8 @@ Section "TimeSync"
 
   SetOutPath $WINDIR\system32
 
+  SetOverwrite ifnewer
+  
   File "CTimeSynch.ocx"
   Exec "regsvr32 /s CTimeSynch.ocx"
 
