@@ -1,0 +1,186 @@
+<search function="abe">
+
+  <name>abe</name>
+  <category>Shopping</category>
+  <contributor>David Golding</contributor>
+  <link>http://dogbert.abebooks.com/abe/IList</link>
+  <email>rot13 qnirt@fzvyvr.pbz</email>
+  <description>
+    
+    Search for used books at abebooks.com<br/>
+    
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/author</td>  <td> - </td> <td>Search for author's name</td></tr>
+      <tr><td>/title</td>   <td> - </td> <td>Search for book's title</td></tr>
+      <tr><td>/keywords</td><td> - </td> <td>Search by keywords (most general search)</td></tr>
+      <tr><td>/location</td><td> - </td> <td>Restrict results to a geographical location (three-letter ISO country code, or 2-letter US-state code)</td></tr>
+      <tr><td>/uk</td>      <td> - </td> <td>Restrict results to books in the United Kingdom (shortcut for "/location gbr")</td></tr>
+      <tr><td>/tweak</td>   <td> - </td> <td>Don't go to results - go to the Advanced Search page to tweak the search options</td></tr>
+    </table>
+
+    <div class="helpboxDescLabels">Important!</div>
+    <table class="helpboxDescTable">
+      <tr><td>Use spaces to separate switches from their their values. Do NOT use a colon. It works like this so you can specify multi-word names and titles. For example:</td></tr>
+    </table>
+    <table class="helpboxDescTable">
+      <tr><td>&#160;</td> <td>&#160;</td> <td>use</td> <td>abe /a adams /t guide galaxy</td></tr>
+      <tr><td>&#160;</td> <td>&#160;</td> <td>NOT</td> <td>abe /a:adams /t:guide galaxy</td></tr>
+    </table>
+
+    <div class="helpboxDescLabels">Note</div>
+    <table class="helpboxDescTable">
+      <tr><td>The default ("reading copy") search options are as follows (if you want a different search type, use /tweak):</td></tr>
+    <tr><td>Sort by lowest price, any location, any binding, any edition, don't care about it being signed, don't care about dustjacket,
+              no minimum price, no maximum price, 50 results per page, Boolean searching off</td></tr>
+    </table>
+    
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>abe /author heidegger /title "being and time"</td></tr>
+      <tr><td>abe /a adams /t guide galaxy /uk</td></tr>                       
+      <tr><td>abe /k blacksmithing /a andrews /l or</td></tr>
+      <tr><td>abe /a levinas /l fra /tw</td></tr>
+    </table>
+
+  </description>
+  
+  <form name="abef"
+        method="post"
+        action="http://dogbert.abebooks.com/abe/BookSearch">
+    
+    <!-- <comment>
+      Including a <comment> tag without the HTML comment string will
+      make the tag's value text appear in the blank form that is 
+      displayed before the website returns content
+    </comment> -->
+        
+    <comment>Searching abebooks.com...</comment>
+    
+    
+    <!-- <comment>
+      Defaults for these fields are set in abe() below to make sure we don't 
+      inherit previous search values 
+    </comment> -->
+    
+    <input type="hidden" name="ph" value="" />      <!-- <comment>Page handler? 2=go to results, ?other=go to advanced search page with fields filled as per POST data</comment> -->
+    <input type="hidden" name="an" value="" />      <!-- <comment>Author</comment> -->
+    <input type="hidden" name="tn" value="" />      <!-- <comment>Title</comment> -->
+    <input type="hidden" name="pn" value="" />      <!-- <comment>Publisher</comment> -->
+    <input type="hidden" name="kn" value="" />      <!-- <comment>Keywords</comment> -->
+    <input type="hidden" name="isbn" value="" />    <!-- <comment>ISBN</comment> -->
+    <input type="hidden" name="cty" value="" />     <!-- <comment>Three-letter ISO country code, or two-letter US-state code</comment> -->
+    <input type="hidden" name="bi" value="" />      <!-- <comment>Type of binding. ""=any, "H"=hardcover, "S"=softcover)</comment> -->
+    <input type="hidden" name="fe" value="" />      <!-- <comment>First edition</comment> -->
+    <input type="hidden" name="sgnd" value="" />    <!-- <comment>Signed</comment> -->
+    <input type="hidden" name="dj" value="" />      <!-- <comment>Dustjacket</comment> -->
+    <input type="hidden" name="prl" value="" />     <!-- <comment>Minimum price</comment> -->
+    <input type="hidden" name="prh" value="" />     <!-- <comment>Maximum price</comment> -->
+    <input type="hidden" name="ds" value="" />      <!-- <comment>Results per page. 10, 30 or 50</comment> -->
+    <input type="hidden" name="bx" value="" />      <!-- <comment>Boolean searching</comment> -->
+    <input type="hidden" name="sortby" value="" />  <!-- <comment>Sort criteria:  0=newest, 1=highest price, 2=lowest price, 4=author z-a, 5=author a-z, 6=title z-a, 7=title a-z  </comment> -->
+  
+  </form>
+  
+  <script><![CDATA[
+    
+    function abe(q)
+    {
+      if( nullArgs("abe", q) )
+        return;
+
+      // default search options
+      document.abef.ph.value       = "2";      // take me directly to search results
+      document.abef.bi.value       = "off";    // any binding
+      document.abef.fe.value       = "off";    // don't care about first edition
+      document.abef.sgnd.value     = "off";    // don't care about signed
+      document.abef.dj.value       = "off";    // don't care about dust-jacked
+      document.abef.prl.value      = "";       // no minimum price        
+      document.abef.prh.value      = "";       // no maximum price
+      document.abef.ds.value       = "50";     // fifty results per page
+      document.abef.bx.value       = "off";    // boolean searching off
+      document.abef.sortby.value   = "2";      // sort by lowest price
+
+      // clear search terms from last time
+      document.abef.an.value       = "";       // author
+      document.abef.tn.value       = "";       // title
+      document.abef.pn.value       = "";       // publisher
+      document.abef.kn.value       = "";       // keywords
+      document.abef.isbn.value     = "";       // isbn
+      document.abef.cty.value      = "";       // location
+
+      var args      = parseArgsEx(q, "author, title, keywords, location, uk, tweak", true);
+      var cSwitches = args.switches.length;
+
+      if ( cSwitches > 0 )
+      {
+        for ( var i=0; i<cSwitches; i++ )
+        {
+          var val = args.switches[i].value;
+          
+          switch( args.switches[i].name )
+          {
+            case "author":
+              document.abef.an.value = val;  
+              break;
+            
+            case "title":
+              document.abef.tn.value = val;
+              break;
+            
+            case "keywords":
+              document.abef.kn.value = val;
+              break;
+              
+            case "location":
+              // user needs to specify three-letter ISO country code (GBR, USA, FRA, DEU, etc.)
+              // or two-letter US-state code (FL, WA, NY, etc.)
+              document.abef.cty.value = val;    
+              break;
+              
+            case "uk":
+              // shortcut because i live in the UK
+              // this is the funcionality i've wanted for years :) 
+              // i will also be aliasing (e.g) "abeu" to "abe %s /location gbr", but having it
+              // switchable like this means i don't have to go back to the start of the search 
+              // text if i forget and write "abe" at the beginning - i can just slap a "/uk" on the end
+              document.abef.cty.value = "GBR";
+              break;
+              
+            case "tweak":
+              // user wants to go to the "advanced search" page to tweak the search further, 
+              // rather than go directly to the results
+              document.abef.ph.value = 1;
+              break;
+              
+            default:
+              // switch unrecognised, so default to appending to keyword query.
+              // this should only trigger if you add a new switch's case handler here 
+              // but forget to add it to parseArgEx's expectedSwitches parameter above
+              document.abef.kn.value += val + " ";
+              break;
+          }
+        }
+      }
+      else
+      {
+        // no switches, so default to keyword query
+        document.abef.kn.value = q;
+      }
+
+      submitForm(abef);
+      
+    }
+  ]]></script>
+  
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 04/16/04 at 00:05:40
+    by Dave's Quick Search Deskbar Search Wizard version 1.0.1 ,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+
+</search>
