@@ -5,6 +5,7 @@
 <style>
 li { padding-bottom: 1em }
 img { margin: 5px }
+.code { font-size: 80%; color: maroon; background: #eeeeee; border: black 1px solid; padding: 3px 3px }
 </style>
 </head>
 <body>
@@ -30,20 +31,29 @@ I call it <b>Dave's Quick Search Deskbar Search Wizard</b>.
 
 <hr size="1">
 
-<h3>What does it do?</h3>
+<h3>What does it do and why would I want to use it?</h3>
 
 <p>
-In a nutshell, it creates a DQSD search from the page currently displayed in your browser.
+In a nutshell, it generates a DQSD search from the page currently displayed in your browser.
 </p>
 
 <p>
-One of the first things you typically do when creating a new search is to view the source for the page containing the FORM INPUT elements.&nbsp;&nbsp;It's tedious.&nbsp;&nbsp;It's hard to find the right FORM when there are multiple FORMs in the page.&nbsp;&nbsp;It's error-prone because I have to convert the HTML to well-formed XML (and I always forget to close the INPUT elements with "/>").
+If you have no desire to ever write a search for DQSD, then don't read any further.&nbsp;&nbsp;If you do write searches from time to time, or at least want to, then you may find the DQSD Search Wizard useful.&nbsp;&nbsp;At least I do.&nbsp;&nbsp;
 </p>
 
-<h3>How do I use it?</h3>
+<p>
+One of the first things I typically do when creating a new search is to view the source for the page containing the FORM INPUT elements.&nbsp;&nbsp;It's tedious.&nbsp;&nbsp;It's hard to find the right FORM when there are multiple FORMs in the page.&nbsp;&nbsp;It's error-prone because I have to convert the HTML to well-formed XML (and I always forget to close the INPUT elements with "/>").
+</p>
+
+<p>
+There had to be an easier way.
+</p>
+
+<h3>OK, so how do I use it?</h3>
 
 <p>
 <ol>
+<li><a href="http://sourceforge.net/project/showfiles.php?group_id=42081&release_id=104770">Install</a> the Search Wizard.</li>
 <li>Go to the web page with the search.</li>
 <li>Click in the field you want to be receive the search string.</li>
 <li>Start up the wizard by clicking on its Internet Explorer toolbar button:<br/>
@@ -52,21 +62,183 @@ One of the first things you typically do when creating a new search is to view t
 </center>
 </li>
 <li>
-You should see a dialog that looks something like the following.&nbsp;&nbsp;Enter a name and a title.&nbsp;&nbsp;(The name is the string that will invoke the search and will be used name the file, so keep it short and simple.)<br/>
+You should see a dialog that looks something like the following.&nbsp;&nbsp;Some of the fields will be automatically filled in.&nbsp;&nbsp;Enter a name and a title for the new search.&nbsp;&nbsp;The name is the string that will invoke the search and will be used name the file, so keep it short and simple.<br/>
 <center><img src="dqsdsearchwiz.jpg" align="top"></center>
 </li>
 <li>Hit OK and you'll be prompted to save the search file to your DQSD 'searches' directory.</li>
+<li>After saving the file, it will come up in Notepad by default.&nbsp;&nbsp;(Click 'Options...' to change the editor to something other than Notepad.)
 </ol>
 </p>
 
 <h3>Example</h3>
 
 <p>
-In the screenshot above, I went to <a href="http://www.msnbc.com">http://www.msnbc.com</a>, clicked in the search field to make it 'active'...<br/>
+In the screen shot above, I went to <a href="http://www.msnbc.com">http://www.msnbc.com</a>, clicked in the search field...<br/>
 <center><img src="msnbc.jpg"></center>
-Then I invoked the wizard, entered 'msnbc' for the name, and 'MSNBC News' for the title (the title is what appears in the menu and help).&nbsp;&nbsp;All the FORM elements in the page are listed, with the one checked that contains the 'active' element.
+Then I clicked the 'DQSD Search Wizard' button.&nbsp;&nbsp;All the FORM elements in the page are listed, with the one checked that contains the 'active' element.&nbsp;&nbsp;I entered 'msnbc' for the name, enter 'msnbc' for the search name and 'MSNBC News' for the title (the title is what appears in the menu and help).&nbsp;&nbsp;Finally, I hit OK and I was prompted to save 'msnbc.xml' to the 'searches' subdirectory in the DQSD installation.
 </p>
 
+<p>
+The resulting XML file search file will look something like <a href="#searchxml">the following</a>.&nbsp;&nbsp;And, in spite of the comment at the top of the file, this search works as is!&nbsp;&nbsp;Woo hoo!&nbsp;&nbsp;(Well, I find it fairly exciting.)&nbsp;&nbsp;Granted, complicated searches won't 'just work', but the wizard will at least do a bunch of the boring work.
+</p>
+
+<a name="searchxml" />
+<div class="code">
+<xmp>
+<search function="msnbc">
+  <COMMENT>
+
+    This search file was initially created by Dave's Quick Search Deskbar
+    Search Wizard version 0.4 (beta) on 08/12/02 at 23:09:04
+
+    Even though this XML search will probably load and is a healthy start
+    toward a completed search, please be aware that this search will probably
+    not work as is and will require some human inspection and modification.
+
+  </COMMENT>
+  <name>MSNBC</name>
+  <category>News</category>
+  <contributor>Glenn Carr</contributor>
+  <link>http://www.msnbc.com/</link>
+  <email>glenn@glenncarr.com</email>
+  <description>
+  MSNBC Search
+  </description>
+  <form name="msnbcf"
+        method="post"
+        action="http://www.msnbc.com/modules/bom/findlog.asp">
+
+    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
+
+    <input type="hidden" name="qt" value="" />
+  </form>
+  <script><![CDATA[
+    function msnbc(q)
+    {
+      if( nullArgs("msnbc", q) )
+        return;
+
+      if( q == "" )
+      {
+        openSearchWindow("http://www.msnbc.com/");
+        return;
+      }
+
+      // FORM variables for msnbcf
+
+      // The wizard assigned the search string to this form field value because
+      // this field was the active element when the search file was generated.
+      // Change this to args.q if the search string is parsed with parseArgs.
+      document.msnbcf.qt.value = q;
+
+      submitForm(msnbcf);
+    }
+  ]]></script>
+</search>
+</xmp>
+</div>
+
+<h3>Switches</h3>
+
+<p>
+The 'parseArgs' utility method has become the convention for parsing switches for searches.&nbsp;&nbsp;If you enter some switches in the 'Switches:' field of the search wizard...<br/>
+<center><img src="switches.jpg"></center><br/>
+...the generated search will now include basic code for parsing the switches:
+</p>
+
+<div class="code">
+<xmp>
+<search function="msnbc">
+  <COMMENT>
+
+    This search file was initially created by Dave's Quick Search Deskbar
+    Search Wizard version 0.4 (beta) on 08/12/02 at 23:38:36
+
+    Even though this XML search will probably load and is a healthy start
+    toward a completed search, please be aware that this search will probably
+    not work as is and will require some human inspection and modification.
+
+  </COMMENT>
+  <name>MSNBC</name>
+  <category>News</category>
+  <contributor>Glenn Carr</contributor>
+  <link>http://www.msnbc.com/</link>
+  <email>glenn@glenncarr.com</email>
+  <description>
+  MSNBC Search
+  </description>
+  <form name="msnbcf"
+        method="post"
+        action="http://www.msnbc.com/modules/bom/findlog.asp">
+
+    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
+
+    <input type="hidden" name="qt" value="" />
+  </form>
+  <script><![CDATA[
+    function msnbc(q)
+    {
+      if( nullArgs("msnbc", q) )
+        return;
+
+      if( q == "" )
+      {
+        openSearchWindow("http://www.msnbc.com/");
+        return;
+      }
+</xmp><xmp style="color: red">
+      // Parse switches with parseArgs:
+
+      // parseArgs usage:
+      // Arguments:
+      //    q                - string from the search function
+      //    expectedSwitches - list or array of the expected switch values
+      //    expandSwitches   - optional parameter [default = true] used to determine 
+      //                       if the switch shortcuts should be expanded (i.e. /f becomes /foo)
+      // Returns an object with these properties:
+      //    q        - the input string with the switches removed
+      //    switches - array of objects with these two properties:
+      //                  name:   expanded name of the matched switch (i.e. foo as in /foo:bar)
+      //                  value:  value of switch (i.e. bar as in /foo:bar)
+      //    switch_val - associative array with the switch name as the key with the switch value 
+      //                 as the value. (i.e. switch_val["foo"] = "bar" as in /foo:bar)
+
+      //var args = parseArgs(q, "news, sports, business");
+      //if ( args.switches.length > 0 )
+      //{
+      //  switch( args.switches[0].name )
+      //  {
+      //    case "news":
+      //         break;
+      //    case "sports":
+      //         break;
+      //    case "business":
+      //         break;
+      //    default:
+      //         break;
+      //  } //end-switch
+      //}
+</xmp><xmp>
+      // FORM variables for msnbcf
+
+      // The wizard assigned the search string to this form field value because
+      // this field was the active element when the search file was generated.
+      // Change this to args.q if the search string is parsed with parseArgs.
+      document.msnbcf.qt.value = q;
+
+      submitForm(msnbcf);
+    }
+  ]]></script>
+</search>
+</xmp>
+</div>
+
+<p>
+Anyway, that's the gist of it.&nbsp;&nbsp;It needs a lot of testing, and there is plenty of room for improvement.&nbsp;&nbsp;It's also open source, so feel free to hack away.
+<p>
+
+Glenn Carr<br/>
+August 13, 2002
 
 </body>
 </html>
