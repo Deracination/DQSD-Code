@@ -62,7 +62,7 @@ DIV.answer, DIV.answer TABLE {
 DIV.answer {
 	font-weight: normal;
 	margin-left: 6em;
-	/*margin-bottom: 1em;*/
+	margin-bottom: 1em;
 	/*border: inset 2px;*/
 	background: #eeeeee;
 	padding: 3px 3px;
