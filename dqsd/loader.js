@@ -351,25 +351,18 @@ function loadAddons()
     
       if ( addonDirs[i] == "." )
         continue;
-	
-	  // load addon js library file
-      var addonLibraryFileName = "addons\\"+addonDirs[i]+"\\"+addonDirs[i]+"_lib.js";
-      var addonLibrary = getFiles(addonLibraryFileName).split('\n');
-	  if (addonLibrary != null && addonLibrary.length == 1) {
-		document.write("<script type=\"text/Jscript\" src=\""+addonLibraryFileName+"\"></script>");
-	  }
-
+  
       // load all addon xml search files
-	  var addonSearches = getFiles("addons\\"+addonDirs[i]+"\\*.xml").split('\n');
-	  for (var j = 0; j < addonSearches.length; j++)
-	  {
-	    // getFiles doesn't always work as expected; a problem with FindFirstFile/FindNextFile
-	    // especially with files named *.xml_sav or something similar.
-		if ( !/\.xml$/.test( addonSearches[j] ) )
-			continue;
+      var addonSearches = getFiles("addons\\"+addonDirs[i]+"\\*.xml").split('\n');
+      for (var j = 0; j < addonSearches.length; j++)
+      {
+        // getFiles doesn't always work as expected; a problem with FindFirstFile/FindNextFile
+        // especially with files named *.xml_sav or something similar.
+        if ( !/\.xml$/.test( addonSearches[j] ) )
+          continue;
 
-	      loadSearchFile( "addons\\" + addonDirs[i] + "\\" + addonSearches[j] );
-	  }
+        loadSearchFile( "addons\\" + addonDirs[i] + "\\" + addonSearches[j] );
+      }
 
     }
 
