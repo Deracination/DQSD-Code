@@ -30,6 +30,7 @@ extern CComModule _Module;
 #include <mshtml.h>
 #include <shlguid.h>				// SID_SWebBrowserApp, 
 #include <shellapi.h>				// ShellExecute, 
+#include <commctrl.h>
 
 #include <map>
 #include <string>

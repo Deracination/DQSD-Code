@@ -17,8 +17,8 @@ class ATL_NO_VTABLE CMenuBuilder :
 {
 public:
 	CMenuBuilder() 
-	: m_hwndBrowser( NULL )
-	, m_nMenuItem( 0 )
+	: //m_hwndBrowser( NULL ),
+	 m_nMenuItem( 0 )
 	, m_nHorizontalAlignment( 2 )
 	{
 		m_hMain = ::CreatePopupMenu();
@@ -63,7 +63,8 @@ public:
 protected:
 	static LPCTSTR	DQSD_REG_KEY;
 	static LPCTSTR	DQSD_SEC_KEY;
-	HWND			m_hwndBrowser;
+// WGD - I've removed this because it's not actually referenced, other than as a way of nulling hwndDQSD during failed window searches
+//	HWND			m_hwndBrowser;
 	HMENU			m_hMain;
 	int				m_nMenuItem;
 	std::map< int, std::string > m_mapKeys;

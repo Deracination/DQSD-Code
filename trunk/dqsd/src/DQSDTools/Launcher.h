@@ -34,6 +34,7 @@ public:
 	: m_bDebug(false)
 	{
 		ATLTRACE("CLauncher - created\n");
+		m_hBaseTooltipWnd = NULL;
 	}
 
 	virtual ~CLauncher()
@@ -67,19 +68,22 @@ public:
 	STDMETHOD(GetFiles)(/*[in]*/ BSTR bstrFileSpec, /*[out,retval]*/ BSTR* pbstrFiles);
 
 public:
-	STDMETHOD(RegisterHotKey)(long hotkeyVkCode);
+	STDMETHOD(RegisterHotKey)(long hotkeyVkCode, BSTR bstrModifierName);
 	STDMETHOD(InstallKeyboardHook)();
 	STDMETHOD(MapKeyCode)(long lVKCode, long lCharCode);
 
 public:
 	STDMETHOD(get_VersionIsCorrect)(int v1, int v2, int v3, int v4, /*[out, retval]*/ VARIANT_BOOL *pVal);
 	STDMETHOD(SetSite)(IUnknown* pUnkSite);
+	STDMETHOD(InitialiseBaseTooltip)(void);
 
 // Implementation
 private:
 	static LPCTSTR DQSD_REG_KEY;
 	static LPCTSTR DQSD_SEC_KEY;
 	bool	m_bDebug;
+
+	HWND	m_hBaseTooltipWnd;
 
 private:
 	HRESULT GetFilename( LPCTSTR szName, LPTSTR szResult, LPCTSTR pszDefaultExt = _T(".txt") );
