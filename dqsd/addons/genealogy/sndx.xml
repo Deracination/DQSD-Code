@@ -1,6 +1,8 @@
 <search function="sndx">
   <name>Soundex Calculator</name>
-  <category>Genealogy</category>
+  <category>Genealogy
+	<category>Calculators</category>
+  </category>
   <contributor>Brent Beardsley</contributor>
   <link></link>
   <email></email>

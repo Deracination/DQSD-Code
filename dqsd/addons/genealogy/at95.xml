@@ -9,7 +9,9 @@
     </table>
   </description>
   <link>http://www.livgenmi.com/1895</link>
-  <category>Genealogy</category>
+  <category>Genealogy
+	<category>Maps</category>
+  </category>
   <contributor>Brent Beardsley</contributor>
 
   <script src="addons/genealogy/genealogy_lib.js"></script>
