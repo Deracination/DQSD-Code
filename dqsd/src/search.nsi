@@ -9,6 +9,8 @@ Name "Dave's Quick Search Deskbar"
 ; What is the minimum required version of IE?
 !Define IE_MAJOR_REQUIRED  5
 !Define IE_MINOR_REQUIRED  5
+!Define HOW_TO_TURN_ON_TOOLBAR "Right-click in your taskbar and select$\n$\n    Toolbar > Add Quick Search...$\n$\nto add the Quick Search Deskbar to your taskbar."
+!Define TITLE_AND_COPYRIGHT "Dave's Quick Search Deskbar$\nCopyright (c) 2002 David Bau$\nDistributed under the terms of the$\nGNU General Public License, Version 2"
 
 ; Silent install
 DirShow hide
@@ -62,8 +64,8 @@ Section "Quick Search Deskbar (required)"
   ieVersionOK:
 
   ; Old versions to delete
-  UnRegDLL $INSTDIR\DQSDTools.dll
-  Delete /REBOOTOK $INSTDIR\DQSDTools.dll
+;  UnRegDLL $INSTDIR\DQSDTools.dll
+;  Delete /REBOOTOK $INSTDIR\DQSDTools.dll
   UnRegDLL $INSTDIR\dqsdt253.dll
   Delete /REBOOTOK $INSTDIR\dqsdt253.dll
   UnRegDLL $INSTDIR\dqsdt254.dll
@@ -76,48 +78,43 @@ Section "Quick Search Deskbar (required)"
   ; install new DLL
   SetOverwrite try
   ClearErrors
-  File "..\dqsdt258.dll"
+  File "..\DQSDTools.dll"
   IfErrors seeifsame register
 
   ; If was unable to upgrade, see if files are the same anyway
   seeifsame:
   ClearErrors
-  GetDLLVersionLocal "..\dqsdt258.dll" $1 $2
-  GetDLLVersion $INSTDIR\dqsdt258.dll $3 $4
+  GetDLLVersionLocal "..\DQSDTools.dll" $1 $2
+  GetDLLVersion $INSTDIR\DQSDTools.dll $3 $4
   IfErrors isdifferent
   IntCmpU $1 $3 test1 isdifferent isdifferent
   test1:
   IntCmpU $2 $4 test2 isdifferent isdifferent
   test2:
   ClearErrors
-  GetFileTimeLocal "..\dqsdt258.dll" $1 $2
-  GetFileTime $INSTDIR\dqsdt258.dll $3 $4
+  GetFileTimeLocal "..\DQSDTools.dll" $1 $2
+  GetFileTime $INSTDIR\DQSDTools.dll $3 $4
   IfErrors isdifferent
   IntCmpU $1 $3 test3 isdifferent isdifferent
   test3:
   IntCmpU $2 $4 register isdifferent isdifferent
 
-  ; If different, stop the install and tell the user
+  SetOverwrite on
+
+  ; If different, install as another name and rename to correct file on reboot
   isdifferent:
-  MessageBox MB_OK "Did not finish installing the deskbar because DQSDTools.dll is in use.$\n$\nTo finish installation, please logout and login again (or just reboot)$\nand then run this installer again."
-  Abort
+  File /oname=DQSDTools.dll.ins "..\DQSDTools.dll"
+  Rename /REBOOTOK "$INSTDIR\DQSDTools.dll.ins" "$INSTDIR\DQSDTools.dll"
 
   ; We can register the dll and continue
   register:
-  RegDLL $INSTDIR\dqsdt258.dll
-
-  SetOverwrite on
+  RegDLL $INSTDIR\DQSDTools.dll
 
   ; Determine if this is an upgrade
-  StrCpy $8 "The Deskbar has been upgraded.$\n$\nRight-click in your taskbar and select$\n$\n    Toolbar > Add Quick Search...$\n$\nto add the Quick Search Deskbar to your taskbar.$\n$\nIf the search bar is already present on your$\ntaskbar, right-click on the handle to the left of$\nthe search bar and select 'Refresh' to reload it.$\n$\nDave's Quick Search Deskbar$\nCopyright (c) 2002 David Bau$\nDistributed under the terms of the$\nGNU General Public License, Version 2"
+  StrCpy $8 "The Deskbar has been upgraded.$\n$\n${HOW_TO_TURN_ON_TOOLBAR}$\n$\nIf the search bar is already present on your$\ntaskbar, right-click on the handle to the left of$\nthe search bar and select 'Refresh' to reload it.$\n$\n${TITLE_AND_COPYRIGHT}"
   IfFileExists "$INSTDIR\search.htm" upgradebar
-  StrCpy $8 "The Deskbar has been installed.$\n$\nRight-click in your taskbar and select$\n$\n    Toolbar > Add Quick Search...$\n$\nto add the Quick Search Deskbar to your taskbar.$\n$\nDave's Quick Search Deskbar$\nCopyright (c) 2001 David Bau$\nDistributed under the terms of the$\nGNU General Public License, Version 2"
+  StrCpy $8 "The Deskbar has been installed.$\n$\n${HOW_TO_TURN_ON_TOOLBAR}$\n$\n${TITLE_AND_COPYRIGHT}"
   upgradebar:
-  IfRebootFlag rebootmsg norebootmsg
-  rebootmsg:
-  StrCpy $8 "The Deskbar has been upgraded.$\n$\nYou should reboot your computer now to$\ncomplete the installation.$\n$\nDave's Quick Search Deskbar$\nCopyright (c) 2002 David Bau$\nDistributed under the terms of the$\nGNU General Public License, Version 2"
-  norebootmsg:
-
 
 
   WriteUninstaller "$INSTDIR\uninstall.exe"
@@ -231,8 +228,20 @@ Section "Quick Search Deskbar (required)"
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\$9" "UninstallString" '"$INSTDIR\uninstall.exe"'
 
   ; Message box
-  MessageBox MB_OK|MB_ICONINFORMATION "$8"
+  IfRebootFlag rebootmsg norebootmsg
+    rebootmsg:
+      MessageBox MB_YESNO|MB_ICONINFORMATION|MB_DEFBUTTON1 "The Deskbar has been upgraded.  You must reboot before using the new version.$\nAfter rebooting, ${HOW_TO_TURN_ON_TOOLBAR}$\n$\nWould you like to reboot now (recommended)?." IDYES doreboot
+      MessageBox MB_OK|MB_ICONINFORMATION "Please remember to reboot before using the search bar.$\n$\n${TITLE_AND_COPYRIGHT}"
+      Goto endinstall
+    
+    norebootmsg:
+      MessageBox MB_OK|MB_ICONINFORMATION "$8"
+      Goto endinstall
 
+    doreboot:
+      Reboot
+
+   endinstall:
 SectionEnd
 
 ; uninstall stuff
@@ -245,15 +254,16 @@ Section "Uninstall"
   ; The unique uuid for our taskbar
   StrCpy $9 "{226b64e8-dc75-4eea-a6c8-abcb4d1d37ff}"
 
-  ; Unegister DQSDTools
-  UnRegDLL $INSTDIR\dqsdt258.dll
+  ; Unregister DQSDTools
+  UnRegDLL $INSTDIR\DQSDTools.dll
 
   ; remove registry keys
   DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\$9"
   DeleteRegKey HKCR "CLSID\$9"
 
   ; remove files
-  Delete /REBOOTOK $INSTDIR\dqsdt258.dll
+  Delete /REBOOTOK $INSTDIR\DQSDTools.dll
+  Delete /REBOOTOK $INSTDIR\ChangeLog.txt
   Delete /REBOOTOK $INSTDIR\aliases.txt
   Delete /REBOOTOK $INSTDIR\calculate.js
   Delete /REBOOTOK $INSTDIR\calendar.js
