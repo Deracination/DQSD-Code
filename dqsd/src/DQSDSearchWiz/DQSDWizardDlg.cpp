@@ -52,12 +52,19 @@ LRESULT CDQSDWizardDlg::OnInitDialog(UINT uMsg, WPARAM wParam, LPARAM lParam, BO
 	TCHAR szScheme[ 128 ];
 	if ( InternetCrackUrl( W2T( bstrURL ), 0, 0, &uc ) )
 	{
-		DWORD dwLength = uc.dwSchemeLength + 3 + uc.dwHostNameLength + 1;
-		_tcsncpy( szBaseURL, uc.lpszScheme, dwLength );
-		szBaseURL[ dwLength ] = _T('\0');
+		if ( uc.dwHostNameLength )
+		{
+			DWORD dwLength = uc.dwSchemeLength + 3 + uc.dwHostNameLength + 1;
+			_tcsncpy( szBaseURL, uc.lpszScheme, dwLength );
+			szBaseURL[ dwLength ] = _T('\0');
 
-		memset( szScheme, 0, sizeof szScheme );
-		_tcsncpy( szScheme, uc.lpszScheme, uc.dwSchemeLength + 3 );
+			memset( szScheme, 0, sizeof szScheme );
+			_tcsncpy( szScheme, uc.lpszScheme, uc.dwSchemeLength + 3 );
+		}
+		else
+		{
+			_tcscpy( szBaseURL, W2T( bstrURL ) );
+		}
 
 		CWindow ctl = GetDlgItem( IDC_Link );
 		ctl.SetWindowText( szBaseURL );
@@ -266,7 +273,7 @@ LRESULT CDQSDWizardDlg::OnOK(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHa
 		if ( ListView_GetCheckState( GetDlgItem( IDC_FormList2 ), i ) )
 			bChecked = TRUE;
 	}
-	if ( !bChecked )
+	if ( !bChecked && cItems > 0 )
 	{
 		MessageBox( _T("Select one or more of the FORMs"), _T("DQSD Search Wizard"), MB_OK|MB_ICONWARNING );
 		ctlFormList.SetFocus();
@@ -427,8 +434,8 @@ string CDQSDWizardDlg::GetForms( string& rstrSearchName, string& rstrFormScript 
 
 	CWindow ctlFormList = GetDlgItem( IDC_FormList2 );
 	int iSelectedForms = 0;
-	const int cItems = ctlFormList.SendMessage( LVM_GETITEMCOUNT, 0, 0 );
-	for ( int iForm = 0; iForm < cItems; iForm++ )
+	const int cForms = ctlFormList.SendMessage( LVM_GETITEMCOUNT, 0, 0 );
+	for ( int iForm = 0; iForm < cForms; iForm++ )
 	{
 		if ( ListView_GetCheckState( ctlFormList.m_hWnd, iForm ) )
 		{
@@ -591,6 +598,16 @@ string CDQSDWizardDlg::GetForms( string& rstrSearchName, string& rstrFormScript 
 
 			++iSelectedForms;
 		}
+	}
+
+	if ( 0 == cForms )
+	{
+		strFormXML += _T("\r\n  <form name=\"") + rstrSearchName + _T("f\""
+						 "\r\n        method=\"get\""
+						 "\r\n        action=\"\">"
+						 "\r\n    <input type=\"hidden\" name=\"field1\" value=\"\"/>"
+						 "\r\n    <input type=\"hidden\" name=\"field2\" value=\"\"/>"
+						 "\r\n  </form>");
 	}
 
 	return strFormXML;
