@@ -1,7 +1,12 @@
 <search function="txp">
   <name>tweakxp.com</name>
-  <description>Search the tweak database on tweakxp.com</description>
-  <category>Computers</category>
+  <description>Search the tweak database on tweakxp.com
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>txp desktop</td></tr>
+  	</table>
+  </description>
+  <category>Computers<category>Reference</category></category>
   <link>http://www.tweakxp.com/</link>
   <contributor>Wolfgang Deutsch</contributor>
   <script><![CDATA[
