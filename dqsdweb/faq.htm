@@ -3,19 +3,18 @@
 		<title>DQSD Frequently Asked Questions</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
 		<link rel="stylesheet" type="text/css" href="dqsd.css">
-			<script language="Javascript1.2">
-function getDisplayMonth(iMonth) {
-    var monthArray = new Array("January","Febuary","March","April","May","June","July","August","September","October","November","December");
-    return monthArray[iMonth];
-}
+		<script language="Javascript1.2">
+			function getDisplayMonth(iMonth) {
+				var monthArray = new Array("January","Febuary","March","April","May","June","July","August","September","October","November","December");
+				return monthArray[iMonth];
+			}
 
-function getDisplayDate(passedDate) {
-    theDate = new Date(passedDate);
-    sDisplayDate = getDisplayMonth(theDate.getMonth()) + " " + theDate.getDate() + ", " + theDate.getFullYear();
-    return sDisplayDate;
-}
-
-			</script>
+			function getDisplayDate(passedDate) {
+				theDate = new Date(passedDate);
+				sDisplayDate = getDisplayMonth(theDate.getMonth()) + " " + theDate.getDate() + ", " + theDate.getFullYear();
+				return sDisplayDate;
+			}
+		</script>
 	</head>
 	<body>
 		<center>
@@ -230,7 +229,7 @@ function getDisplayDate(passedDate) {
 				Ctrl-B / F8 - Search the search history for the current text. (user 
 				configurable in localprefs.js)
 				<li>
-				Shift-Ctrl-B / Shift-F8 - Search the history for the current text as a prefix. 
+				Shift-Ctrl-B / Shift-F8 - Search forward through the history for the current text. 
 				(user configurable in localprefs.js)
 				<li>
 				Win-S - Make the search bar active (i.e., make it have the current focus). 
