@@ -8,6 +8,68 @@
   <contributor>Brent Beardsley</contributor>
 
   <script><![CDATA[
+    var CONFIGURE_LOCAL_ALIASES_NAME = 
+    {
+      en: "Local Aliases..."
+    };
+
+    var CONFIGURE_LOCAL_ALIASES_DESCRIPTION = 
+    {
+      en: "Edit local aliases"
+    };
+    
+    var CONFIGURE_LOCAL_PREFERENCES_NAME = 
+    {
+      en: "Local Preferences..."
+    };
+
+    var CONFIGURE_LOCAL_PREFERENCES_DESCRIPTION = 
+    {
+      en: "Edit local preferences"
+    }
+
+    var CONFIGURE_SYSTEM_ALIASES_NAME = 
+    {
+      en: "System Aliases..."
+    };
+
+    var CONFIGURE_SYSTEM_ALIASES_DESCRIPTION = 
+    {
+      en: "Edit system aliases"
+    };
+    
+    var CONFIGURE_SYSTEM_PREFERENCES_NAME = 
+    {
+      en: "System Preferences..."
+    };
+
+    var CONFIGURE_SYSTEM_PREFERENCES_DESCRIPTION = 
+    {
+      en: "Edit system preferences"
+    }
+
+    var CONFIGURE_RELOAD_DQSD_NAME = 
+    {
+      en: "Reload..."
+    };
+
+    var CONFIGURE_RELOAD_DQSD_DESCRIPTION =
+    {
+      en: "Reload Quick Search Deskbar"
+    };
+
+    var CONFIGURE_RELOAD_DQSD_PROMPT =
+    {
+      en: "Are you sure you want to reload the Quick Search Deskbar?"
+    };
+
+    var CONFIGURE_INSTALLED_ADDONS_NAME = 
+    {
+      en: "Installed Addons"
+    };
+
+
+
 	function editConfigFile(strFilename)
 	{
 		var myEditor = (typeof configureEditorExe != "undefined") ? configureEditorExe : "notepad";
@@ -22,11 +84,13 @@
 
         function buildConfigureMenu(mb, hmenu)
 	{
-		mb.AppendMenuItem( "Local Aliases", "editConfigFile(\"localaliases.txt\")", "Edit local aliases", hmenu);
-		mb.AppendMenuItem( "Local Preferences", "editConfigFile(\"localprefs.js\")", "Edit local preferences", hmenu);
+		mb.AppendMenuItem( local(CONFIGURE_LOCAL_ALIASES_NAME), "editConfigFile(\"localaliases.txt\")", local(CONFIGURE_LOCAL_ALIASES_DESCRIPTION), hmenu);
+		mb.AppendMenuItem( local(CONFIGURE_LOCAL_PREFERENCES_NAME), "editConfigFile(\"localprefs.js\")", local(CONFIGURE_LOCAL_PREFERENCES_DESCRIPTION), hmenu);
 		mb.AppendSeparator(hmenu);
-		mb.AppendMenuItem( "System Aliases", "editConfigFile(\"aliases.txt\")", "Edit system aliases", hmenu);
-		mb.AppendMenuItem( "System Preferences", "editConfigFile(\"preferences.js\")", "Edit system preferences", hmenu);
+		mb.AppendMenuItem( local(CONFIGURE_SYSTEM_ALIASES_NAME), "editConfigFile(\"aliases.txt\")", local(CONFIGURE_SYSTEM_ALIASES_DESCRIPTION), hmenu);
+		mb.AppendMenuItem( local(CONFIGURE_SYSTEM_PREFERENCES_NAME), "editConfigFile(\"preferences.js\")", local(CONFIGURE_SYSTEM_PREFERENCES_DESCRIPTION), hmenu);
+        mb.AppendSeparator(hmenu);
+        mb.AppendMenuItem( local(CONFIGURE_RELOAD_DQSD_NAME), "if (confirm('"+local(CONFIGURE_RELOAD_DQSD_PROMPT)+"')) reload();", local(CONFIGURE_RELOAD_DQSD_DESCRIPTION), hmenu);
 
 		ensureLauncher();
 		var installedAddons = getFolders(DQSDLauncher.InstallationDirectory+"\\addons\\").split('\n');
@@ -35,7 +99,7 @@
 
 		if (installedAddons.length > 0) {
 		        mb.AppendSeparator(hmenu);
-			var haddons = mb.AppendSubMenu("Installed Addons ("+installedAddons.length+")", hmenu);
+			var haddons = mb.AppendSubMenu(local(CONFIGURE_INSTALLED_ADDONS_NAME)+" ("+installedAddons.length+")", hmenu);
 			for (var i=0; i < installedAddons.length; i++) {
 				mb.AppendMenuItem(installedAddons[i], "", installedAddons[i], haddons);
 				mb.DisableMenuItem(i, haddons);
