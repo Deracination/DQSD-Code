@@ -1,0 +1,35 @@
+<search function="tcc">
+  <name>Telephone Country Code Info</name>
+  <link>http://www.primeris.com</link>
+  <description>Search for information on a particular country code: "tcc 227" or "tcc Haiti".</description>
+  <category>People and Places</category>
+  <contributor>Stephen Montgomery</contributor>
+  <email>stephenmontgomery_at_ameritech_dot_net</email>
+  <form name="tccf" 
+        method="get" 
+        action="http://www.primeris.com/fonefind/findint.php" 
+        target="_blank">
+    <input type="hidden" name="intlnum" />
+    <input type="hidden" name="intlname" />
+    <input type="hidden" name="intlquery" />
+  </form>
+  <script><![CDATA[
+    function tcc(q, switches)
+    {
+      if (q == "")
+        window.open("http://www.primeris.com/fonefind");
+      else
+      {
+        if (result = q.match(/^(\d+)\s*(.*)/))
+        {
+          document.tccf.intlnum.value=result[1];
+          document.tccf.intlquery.value="Search by Number";
+        } else {
+          document.tccf.intlname.value=q;
+          document.tccf.intlquery.value="Search by Country";
+        }
+        submitForm(tccf);
+      }
+    }
+  ]]></script>
+</search>
