@@ -78,8 +78,7 @@
         if ( sSuggestedSpelling != '' )
         {
           //displayPopupMessage( "<b>Google suggests:</b>&nbsp; "+ sSuggestedSpelling );
-          document.deff.q.value = sSuggestedSpelling;
-          document.deff.q.createTextRange().select();
+          setSearchWindowText(sSuggestedSpelling, true)
 
           return true;
         }
