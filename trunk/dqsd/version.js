@@ -71,7 +71,11 @@ function checkWebForUpdate()
   {
     var rversion = getVersionFromVersionFile( "http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/*checkout*/dqsd/dqsd/version.xml?content-type=text/xml" );
     var lversion = getVersionFromVersionFile( "version.xml" );
-    if ( versioncmp( rversion, lversion ) > 0 )
+
+    // If there's a later version and the user wants to be notified of it, or
+    // there's a later version and there was an explicit update query, then show them
+    // what's available
+    if ( ( versioncmp( rversion, lversion ) > 0 ) && ( notifyUser( rversion ) || !quiet ) )
     {
       window.showModalDialog("versiondialog.htm", { lversion:lversion, rversion:rversion }, "dialogHeight: 150px; dialogWidth: 300px; dialogTop: " + (screen.height / 2 - 75) + "px; dialogLeft: " + (screen.width / 2 - 150) + "px; edge: Raised; center: Yes; help: No; resizable: Yes; status: No; scroll: No;");
     }
@@ -86,6 +90,11 @@ function checkWebForUpdate()
     if ( !quiet )
       alert("Unable to check for update.  Check your internet connection.");
   }
+}
+
+function notifyUser( rversion )
+{
+  return ( checkForUpdateTypes.search( new RegExp("\\b" + rversion.type + "\\b", "i" ) ) >= 0 );
 }
 
 function getVersionFromVersionFile( versionXML )
