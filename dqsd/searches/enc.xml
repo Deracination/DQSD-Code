@@ -11,9 +11,9 @@
   <link>http://www.encyclopedia.com/</link>
   
   <form name="encf"
-        action="http://www.encyclopedia.com/cgi-bin/search.cgi"
-        method="post">
-    <input type="hidden" name="search" value=""/>
+        action="http://www.encyclopedia.com/search.asp"
+        method="get">
+    <input type="hidden" name="target" value="" />
   </form>
   
   <script><![CDATA[
@@ -23,7 +23,7 @@
         return false;
       else
       {
-        document.encf.search.value = q;
+        document.encf.target.value = q;
         submitForm(encf);
       }
     }
