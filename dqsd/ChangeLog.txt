@@ -11,6 +11,7 @@ Enhancements
 * Modified the US holidays file for 2003
 * created an empty localsearches folder
 * added swedish strings to strings.js
+* Ctrl-Del to clear the history
 
 New Searches
 

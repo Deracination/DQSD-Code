@@ -6,6 +6,16 @@ histcurr = 0;
 
 restoreHistory();
 
+
+//clear the history
+function clearHistory()
+{
+  histarray = [];
+  saveHistory();
+  histcurr = 0;
+}
+
+
 // save the history array
 function saveHistory()
 {
