@@ -131,6 +131,33 @@ LRESULT CDQSDWizardDlg::OnInitDialog(UINT uMsg, WPARAM wParam, LPARAM lParam, BO
 			CComPtr< IHTMLElement >* pspForm = new CComPtr< IHTMLElement >( spForm ); // these are deleted in the dialog's dtor
 			m_vecFormHTMLs.push_back( pspForm );
 
+			// See if any of the fields in the form has focus
+/*			
+			BOOL bFormHasFocus = FALSE;
+
+			CComQIPtr< IHTMLFormElement > spFormElement( *pspForm );
+			long cFormElements = 0;
+			if ( SUCCEEDED( spFormElement->get_length( &cFormElements ) ) )
+			{
+				for ( int iFormElem = 0; iFormElem < cFormElements; iFormElem++ )
+				{
+					_variant_t varItem( static_cast<long>(iFormElem), VT_I4 );
+					CComPtr< IDispatch > spIDisp;
+					spFormElement->item( varItem, varItem, &spIDisp );
+
+					CComQIPtr< IHTMLInputElement > spInputElement( spIDisp );
+					if ( spInputElement )
+					{
+						VARIANT_BOOL bFormControlSelected = FALSE;
+						if ( SUCCEEDED( spInputElement->get_status( &bFormControlSelected ) ) )
+						{
+							bFormHasFocus = TRUE;
+						}
+					}
+				}
+			}
+*/
+
 			// Add the form information to the list
 			LVITEM lvi;
 			memset( &lvi, 0, sizeof lvi );
@@ -140,6 +167,8 @@ LRESULT CDQSDWizardDlg::OnInitDialog(UINT uMsg, WPARAM wParam, LPARAM lParam, BO
 			lvi.pszText = const_cast<LPTSTR>(strName.c_str());
 			lvi.lParam = reinterpret_cast<LPARAM>(pspForm);
 			int iPos = ctlFormList2.SendMessage( LVM_INSERTITEM, 0, (LPARAM)&lvi );
+
+//			ListView_SetCheckState( ctlFormList2.m_hWnd, iPos, bFormHasFocus );
 
 			lvi.mask = LVIF_TEXT;
 			lvi.iItem = iPos;
