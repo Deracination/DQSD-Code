@@ -2166,6 +2166,9 @@ function showpop()
   if (ie_version < 5.5)
     return false;
 
+  if (window.event.button == 2)
+    return false;
+
   window.event.cancelBubble = true;
   if (popclose)
   {
