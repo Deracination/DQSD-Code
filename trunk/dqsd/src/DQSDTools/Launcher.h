@@ -1,4 +1,3 @@
-
 //
 // DQSDTools ActiveX server for Dave's Quick Search Deskbar
 //  Copyright (c) 2001 Koen Mannaerts
@@ -33,11 +32,11 @@ class ATL_NO_VTABLE CLauncher :
 	public IDispatchImpl<ILauncher, &IID_ILauncher, &LIBID_DQSDTOOLSLib>,
 	public IObjectWithSiteImpl<CLauncher>,
 	public IObjectSafetyImpl<CLauncher, INTERFACESAFE_FOR_UNTRUSTED_CALLER>,
-  public ISupportErrorInfoImpl< &IID_ILauncher >
-
+	public ISupportErrorInfoImpl< &IID_ILauncher >
 {
 public:
 	CLauncher()
+	: m_bDebug(false)
 	{
 	}
 
@@ -58,8 +57,21 @@ public:
 	STDMETHOD(get_pathDefaultBrowser)(/*[out, retval]*/ BSTR *pVal);
 	STDMETHOD(OpenDocument)(/*[in]*/ BSTR strDoc);
 	STDMETHOD(SubmitForm)(/*[in]*/ VARIANT idForm);
+	STDMETHOD(get_Debug)(/*[out,retval]*/ VARIANT_BOOL* pbDebug );
+	STDMETHOD(put_Debug)(/*[in]*/ VARIANT_BOOL bDebug );
+	STDMETHOD(ReadFile)(/*[in]*/ BSTR bstrFilename, /*[out,retval]*/ BSTR* pbstrResult);
+	STDMETHOD(WriteFile)(/*[in]*/ BSTR bstrFilename, /*[in]*/ BSTR bstrValue);
+
+public:
 	STDMETHOD(SetSite)(IUnknown* pUnkSite);
 
+// Implementation
+private:
+	static LPCTSTR DQSD_REG_KEY;
+	bool	m_bDebug;
+
+private:
+	HRESULT GetFilename( LPCTSTR szName, LPTSTR szResult );
 
 };
 

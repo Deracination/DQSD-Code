@@ -18,6 +18,10 @@ import "ocidl.idl";
 		[id(1), helpstring("Submits form using default browser. Pass a FORM object.")] HRESULT SubmitForm([in] VARIANT idForm);
 		[id(2), helpstring("Opens document in associated application. Pass a document URI.")] HRESULT OpenDocument([in] BSTR strDoc);
 		[propget, id(3), helpstring("Path of default browser executable")] HRESULT pathDefaultBrowser([out, retval] BSTR *pVal);
+		[propput, id(4), helpstring("Debug setting")] HRESULT Debug( [in] VARIANT_BOOL bDebug );
+		[propget, id(4), helpstring("Debug setting")] HRESULT Debug( [out,retval] VARIANT_BOOL *pbDebug );
+		[id(5)] HRESULT ReadFile([in] BSTR bstrFilename, [out,retval] BSTR* pbstrResult);
+		[id(6)] HRESULT WriteFile([in] BSTR bstrFilename, [in] BSTR bstrValue);
 	};
 
 [

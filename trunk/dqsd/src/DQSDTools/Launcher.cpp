@@ -10,7 +10,7 @@
 /////////////////////////////////////////////////////////////////////////////
 // CLauncher
 
-
+LPCTSTR CLauncher::DQSD_REG_KEY = _T("CLSID\\{226b64e8-dc75-4eea-a6c8-abcb4d1d37ff}");
 
 STDMETHODIMP CLauncher::SetSite(IUnknown* pUnkSite)
 {
@@ -33,7 +33,7 @@ STDMETHODIMP CLauncher::SetSite(IUnknown* pUnkSite)
 		return hr;
 
 	HKEY hDqsdKey;
-	if (ERROR_SUCCESS != RegOpenKey(HKEY_CLASSES_ROOT, "CLSID\\{226b64e8-dc75-4eea-a6c8-abcb4d1d37ff}", &hDqsdKey))
+	if (ERROR_SUCCESS != RegOpenKey(HKEY_CLASSES_ROOT, DQSD_REG_KEY, &hDqsdKey))
 	{
 		Error(IDS_ERR_UNAUTHCALLER, IID_ILauncher);
 		return E_FAIL;
@@ -180,6 +180,112 @@ STDMETHODIMP CLauncher::get_pathDefaultBrowser(BSTR *pVal)
 	
 	// Prepare string for shipping, and ship
 	*pVal = ::SysAllocString(T2OLE(szExePath));
+
+	return S_OK;
+}
+
+STDMETHODIMP CLauncher::get_Debug(VARIANT_BOOL* pbDebug)
+{
+	if (NULL == pbDebug)
+		return E_INVALIDARG;
+
+	*pbDebug = (m_bDebug ? VARIANT_TRUE : VARIANT_FALSE);
+
+	return S_OK;
+}
+
+STDMETHODIMP CLauncher::put_Debug(VARIANT_BOOL bDebug)
+{
+	m_bDebug = bDebug != VARIANT_FALSE;
+
+	return S_OK;
+}
+
+
+STDMETHODIMP CLauncher::ReadFile(BSTR bstrFilename, BSTR *pbstrResult)
+{
+	USES_CONVERSION;
+
+	// Get the full pathname after applying some defaults
+	TCHAR szFilename[ _MAX_PATH ];
+	HRESULT hr = GetFilename( W2CT( bstrFilename ), szFilename );
+	if ( FAILED( hr ) )
+		return hr;
+	
+	// Try to open the file
+	HANDLE hFile = ::CreateFile( szFilename, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, 0, NULL);
+	if ( INVALID_HANDLE_VALUE == hFile )
+		HRESULT_FROM_WIN32(::GetLastError());
+
+	// Read in the string data
+	TCHAR szData[ 1024 ];
+	DWORD dwBytesRead = 0;
+	CComBSTR bstrResult;
+	do
+	{
+		memset( szData, 0, sizeof szData );
+		BOOL bResult = ::ReadFile( hFile, &szData, sizeof szData - 1, &dwBytesRead, NULL );
+		bstrResult.Append( szData );
+	}
+	while ( dwBytesRead > 0 );
+	::CloseHandle( hFile );
+
+	// Return the file data in a big string
+	*pbstrResult = bstrResult.Detach();
+
+	return S_OK;
+}
+
+STDMETHODIMP CLauncher::WriteFile(BSTR bstrFilename, BSTR bstrValue)
+{
+	USES_CONVERSION;
+
+	// Get the full pathname after applying some defaults
+	TCHAR szFilename[ _MAX_PATH ];
+	HRESULT hr = GetFilename( W2CT( bstrFilename ), szFilename );
+	if ( FAILED( hr ) )
+		return hr;
+	
+	HANDLE hFile = ::CreateFile( szFilename, GENERIC_WRITE, FILE_SHARE_READ, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+	if ( INVALID_HANDLE_VALUE == hFile )
+		HRESULT_FROM_WIN32(::GetLastError());
+
+	DWORD dwBytesWritten = 0;
+	BOOL bResult = ::WriteFile( hFile, W2CT( bstrValue ), wcslen( bstrValue ), &dwBytesWritten, NULL );
+	::FlushFileBuffers( hFile );
+	::CloseHandle( hFile );
+	
+	if ( 0 == bResult )
+		HRESULT_FROM_WIN32(::GetLastError());
+
+	return S_OK;
+}
+
+// Private methods
+
+HRESULT CLauncher::GetFilename( LPCTSTR szName, LPTSTR szResult )
+{
+	USES_CONVERSION;
+
+	// Get the installation directory from the registry
+	CRegKey rk;
+	if ( ERROR_SUCCESS != rk.Open( HKEY_CLASSES_ROOT, DQSD_REG_KEY, KEY_READ ) )
+	{
+		Error(IDS_ERR_REGKEYNOTFOUND, IID_ILauncher);
+		return E_UNEXPECTED;
+	}
+
+	TCHAR szInstallDir[ _MAX_PATH ];
+	DWORD dwCount = sizeof( szInstallDir );
+	if ( ERROR_SUCCESS != rk.QueryValue( szInstallDir, _T("InstallDir"), &dwCount ) )
+	{
+		Error(IDS_ERR_REGKEYNOTFOUND, IID_ILauncher);
+		return E_UNEXPECTED;
+	}
+
+	// Add the install directory and an extension if not supplied
+	::PathCombine( szResult, szInstallDir, szName );
+	::PathAddExtension( szResult, _T(".txt") );
 
 	return S_OK;
 }
