@@ -56,6 +56,7 @@ Section "Genealogy"
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\$R3" "UninstallString" '"$R2"'
   
   DetailPrint ""
+  DetailPrint "Author: Brent Beardsley"
   DetailPrint "Usage: See the Genealogy section of the menu for usage details."
   DetailPrint ""
   DetailPrint "Enter ! in the search bar to load this add-on."

@@ -57,6 +57,7 @@ Section "GoogleSpell"
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\$R3" "UninstallString" '"$R2"'
   
   DetailPrint ""
+  DetailPrint "Author: Glenn Carr"
   DetailPrint "Usage: 'googlespell <word or phrase to check>'"
   DetailPrint ""
   DetailPrint "Enter ! in the search bar to load this add-on."
