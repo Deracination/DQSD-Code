@@ -37,7 +37,7 @@ function showpop()
   {
     try
     {
-      if(typeof helpMenuToolTipsDisplayTime == undefined)
+      if(typeof helpMenuToolTipsDisplayTime == 'undefined')
       {
          helpMenuToolTipsDisplayTime = 3;
       }
