@@ -142,12 +142,32 @@ LRESULT CALLBACK NotificationWndProc(
 	LPARAM lParam   // second message parameter
 	)
 {
+	static int nAttempts;
+
 	if(uMsg == WM_HOTKEY || (uMsg == WM_TIMER && wParam == 0x5744))
 	{
 //		_RPT0(_CRT_WARN, "HotKey\n");
 //		OutputDebugString("HotKey\n");
 
+		if(uMsg == WM_HOTKEY)
+		{
+			nAttempts = 0;
+		}
+		else
+		{
+			nAttempts++;
+			if(nAttempts > 20)
+			{
+				// We've failed in some way - kill the timer
+				KillTimer(hwnd, 0x5744);
+			}
+		}
+
 		HWND hBarWnd = UtilitiesFindDQSDWindow();
+		if(hBarWnd == NULL)
+		{
+			return 0;
+		}
 
 		// Save the mouse position before these games...
 		POINT mousePoint;
@@ -161,7 +181,10 @@ LRESULT CALLBACK NotificationWndProc(
 		// SetForegroundWindow is crippled nowadays, and because the DQSD edit control
 		// doesn't actually seem to get a proper caret if you SFW to it anyway.
 		ATLTRACE("TaskBarRect: %d,%d,%d,%d\n", taskBarRect.left, taskBarRect.top, taskBarRect.right, taskBarRect.bottom);
-		if(taskBarRect.top >= GetSystemMetrics(SM_CYSCREEN) || taskBarRect.bottom < 0)
+		if(taskBarRect.top >= GetSystemMetrics(SM_CYSCREEN) 
+			|| taskBarRect.bottom < 0 
+			|| taskBarRect.left >= GetSystemMetrics(SM_CXSCREEN)
+			|| taskBarRect.right < 0)
 		{
 			// The taskbar is auto-hidden - we need to send more than one click - one to unhide the tool bar, 
 			// and one to set the focus
