@@ -1,0 +1,115 @@
+<search function="evolt">
+  <COMMENT>
+
+    Even though this XML search will probably load and is a good start
+    toward a completed search, please be aware that this search will probably
+    not work as is and will probably require some changes.
+
+  </COMMENT>
+  <name>Evolt Articles</name>
+  <category>Computers<category>Programming</category></category>
+  <contributor>Sarah Sweeney</contributor>
+  <link>http://www.evolt.org/search/index.html?keywords=javascript&amp;option=all&amp;tid=0&amp;maxrows=50&amp;synopsis=1</link>
+  <email>poohbear@designshift.com</email>
+  <description>
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/all</td><td> - </td><td>Search All Categories</td></tr>
+      <tr><td>/backend</td><td> - </td><td>Backend</td></tr>
+      <tr><td>/code</td><td> - </td><td>Code</td></tr>
+      <tr><td>/society</td><td> - </td><td>Commentary &amp; Society</td></tr>
+      <tr><td>/commnews</td><td> - </td><td>Community News</td></tr>
+      <tr><td>/usability</td><td> - </td><td>IA/Usability</td></tr>
+      <tr><td>/jobs</td><td> - </td><td>Jobs</td></tr>
+      <tr><td>/news</td><td> - </td><td>News</td></tr>
+      <tr><td>/reviews</td><td> - </td><td>Reviews &amp; Links</td></tr>
+      <tr><td>/sitedev</td><td> - </td><td>Site Development</td></tr>
+      <tr><td>/software</td><td> - </td><td>Software</td></tr>
+      <tr><td>/suggest</td><td> - </td><td>Suggestions</td></tr>
+      <tr><td>/design</td><td> - </td><td>Visual Design</td></tr>
+      <tr><td>/faq</td><td> - </td><td>evolt.org FAQ</td></tr>
+    </table>
+  </description>
+  <form name="evoltf"
+        method="get"
+        action="http://www.evolt.org/search/index.html">
+    <input type="hidden" name="keywords" />
+    <input type="hidden" name="option" value="all" />
+    <input type="hidden" name="tid" value="0" />
+    <input type="hidden" name="maxrows" value="50" />
+    <input type="hidden" name="synopsis" value="1" />
+  </form>
+  <script><![CDATA[
+    function evolt(q)
+    {
+      if( nullArgs("evolt", q) )
+        return;
+
+      var args = parseArgs(q, "all, backend, code, society, commnews, usability, jobs, news, reviews, sitedev, software, suggest, design, faq");
+      if ( args.switches.length > 0 )
+      {
+        switch( args.switches[0].name )
+        {
+          case "all":
+  					document.evoltf.tid.value = "0";
+            break;
+          case "backend":
+  					document.evoltf.tid.value = "18";
+            break;
+          case "code":
+  					document.evoltf.tid.value = "17";
+            break;
+          case "society":
+  					document.evoltf.tid.value = "25";
+            break;
+          case "commnews":
+  					document.evoltf.tid.value = "27";
+            break;
+          case "usability":
+  					document.evoltf.tid.value = "4090";
+            break;
+          case "jobs":
+  					document.evoltf.tid.value = "23";
+            break;
+          case "news":
+  					document.evoltf.tid.value = "1";
+            break;
+          case "reviews":
+  					document.evoltf.tid.value = "12";
+            break;
+          case "sitedev":
+  					document.evoltf.tid.value = "20";
+            break;
+          case "software":
+  					document.evoltf.tid.value = "21";
+            break;
+          case "suggest":
+  					document.evoltf.tid.value = "26";
+            break;
+          case "design":
+  					document.evoltf.tid.value = "22";
+            break;
+          case "faq":
+  					document.evoltf.tid.value = "9741";
+            break;
+          default:
+  					document.evoltf.tid.value = "0";
+            break;
+        }
+      }
+
+      document.evoltf.keywords.value = args.q;
+
+      submitForm(evoltf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 02/09/03 at 18:17:29
+    by Dave's Quick Search Deskbar Search Wizard version 1.0.1 ,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>
