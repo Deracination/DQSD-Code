@@ -31,6 +31,9 @@ New Searches
 * htmlh - Search htmlhelp.com (from JB)
 * wf - Search Watchman Fellowship for info on cults (from JB)
 * bta - Search Betanews for new beta software (from Paul Hounshell)
+* bio - Search the Biography.com database (from viking mel)
+* mag - Search newspaper and magazine articles (from viking mel)
+* nyse - enter a company name and get the lookup symbol and a short description of that company (from viking mel)
 
 Bug Fixes
 

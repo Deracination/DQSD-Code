@@ -1,0 +1,64 @@
+<search function="nyse">
+  <COMMENT>
+
+    Even though this XML search will probably load and is a good start
+    toward a completed search, please be aware that this search will probably
+    not work as is and will probably require some changes.
+
+  </COMMENT>
+  <name>NYSE Listed Companies </name>
+  <category>Finance</category>
+  <contributor>Glenn Carr</contributor>
+  <link>http://www.nyse.com/listed/listed.html</link>
+  <email></email>
+  <description>
+  Input a company name  and get the stock symbol and a small description of the company
+  </description>
+  <form name="nysef"
+        method="get"
+        action="http://198.140.38.206/search">
+    <input type="hidden" name="site" value="nyse" />
+    <input type="hidden" name="output" value="xml_no_dtd" />
+    <input type="hidden" name="client" value="nyse" />
+    <input type="hidden" name="access" value="p" />
+    <input type="hidden" name="proxystylesheet" value="nyse" />
+    <input type="hidden" name="getfields" value="SUMMARY" />
+    <input type="hidden" name="filter" value="0" />
+
+    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
+
+    <input type="hidden" name="q" value="" />
+  </form>
+  <script><![CDATA[
+    function nyse(q)
+    {
+      if( nullArgs("nyse", q) )
+        return;
+
+      // FORM variables for nysef
+      //document.nysef.site.value = "";
+      //document.nysef.output.value = "";
+      //document.nysef.client.value = "";
+      //document.nysef.access.value = "";
+      //document.nysef.proxystylesheet.value = "";
+      //document.nysef.getfields.value = "";
+      //document.nysef.filter.value = "";
+
+      // The wizard assigned the search string to this form field value because
+      // this field was the active element when the search file was generated.
+      // Change this to args.q if the search string is parsed with parseArgs.
+      document.nysef.q.value = q;
+
+      submitForm(nysef);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 01/25/03 at 09:25:38
+    by Dave's Quick Search Deskbar Search Wizard version 1.0.1 $,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>
