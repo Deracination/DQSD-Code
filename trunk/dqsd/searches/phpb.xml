@@ -1,0 +1,65 @@
+<search function="phpb">
+  <name>PHPBuilder</name>
+  <category>Computers</category>
+  <contributor>Sarah Sweeney</contributor>
+  <link>http://www.phpbuilder.com/search/</link>
+  <email>poohbear@designshift.com</email>
+  <description>
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/manual</td><td> - </td><td>PHP Manual</td></tr>
+      <tr><td>/mail</td><td> - </td><td>Mailing Lists</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>phpb isset</td></tr>
+      <tr><td>phpb mail /mail</td></tr>
+    </table>
+  </description>
+  <form name="phpbf"
+        method="get"
+        action="http://www.phpbuilder.com/search/">
+    <input type="hidden" name="sort" value="Score" />
+    <input type="hidden" name="method" value="and" />
+    <input type="hidden" name="config" value="manual" />
+    <input type="hidden" name="restrict" value="" />
+    <input type="hidden" name="exclude" value="" />
+    <input type="hidden" name="words" />
+  </form>
+  <script><![CDATA[
+    function phpb(q)
+    {
+      if( nullArgs("phpb", q) )
+        return;
+
+      var args = parseArgs(q, "manual, mail");
+      if ( args.switches.length > 0 )
+      {
+        switch( args.switches[0].name )
+        {
+          case "manual":
+            document.phpbf.config.value = "manual";
+            break;
+          case "mail":
+            document.phpbf.config.value = "mail";
+            break;
+          default:
+            document.phpbf.config.value = "manual";
+            break;
+        }
+      }
+      document.phpbf.words.value = args.q;
+
+      submitForm(phpbf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 01/20/03 at 13:07:39
+    by Dave's Quick Search Deskbar Search Wizard version 1.0.1 ,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>
