@@ -61,8 +61,6 @@
         }
       }
 
-      if (SearchFound)
-      {
         //  Define the popup's final width
         var windowW = 350;
         var QSFPopup = window.createPopup();
@@ -71,6 +69,8 @@
         var QFSBodyCode = "<table id=qstable border=0 cellspacing=1 cellpadding=2 width=100% height=100%>";
         QFSBodyCode += "<tr><td valign=top><style>" + convertStylesToInline() + "</style>";
 
+      if (SearchFound)
+      {
         //  Loop through the results to build the table in the popup
         for (var i in SearchResults)
         {
@@ -132,31 +132,32 @@
           }
           QFSBodyCode += "</td></tr>";
         }
-        QFSBodyCode += "</table>";
-        QSFPopupBody.innerHTML = QFSBodyCode;
-
-        QSFPopup.document.body.style.border="outset 2px";
-        QSFPopup.document.body.style.background='menu';
-        QSFPopup.document.body.style.overflowY='auto';
-
-        // Temporatily show the popup to determine the proper final
-        // height for the popup.
-        QSFPopup.show(0, 0, windowW, 0);
-        var windowH = QSFPopupBody.scrollHeight + 6;
-        QSFPopup.hide();
-
-        // Put a cap on the popup height
-        windowH = windowH > window.screen.height-30 ? window.screen.height-30 : windowH;
-
-        //QSFPopup.show(20, -20-windowH, windowW, windowH, document.body);
-        QSFPopup.show((buttonalign == "left" ? 0 : document.body.clientWidth - windowW), -windowH, windowW, windowH, document.body);
-      
-        return true;
       }
       else
-        alert("No searches match your search criteria - " + q);
-        
-      return false;
+      {
+        QFSBodyCode += "<tr><td valign=top style='text-align: center' class=helpboxDescriptions>No searches match your search criteria - <b>" + q + "</b>";
+      }
+
+      QFSBodyCode += "</table>";
+      QSFPopupBody.innerHTML = QFSBodyCode;
+
+      QSFPopup.document.body.style.border="outset 2px";
+      QSFPopup.document.body.style.background='menu';
+      QSFPopup.document.body.style.overflowY='auto';
+
+      // Temporatily show the popup to determine the proper final
+      // height for the popup.
+      QSFPopup.show(0, 0, windowW, 0);
+      var windowH = QSFPopupBody.scrollHeight + 6;
+      QSFPopup.hide();
+
+      // Put a cap on the popup height
+      windowH = windowH > window.screen.height-100 ? window.screen.height-100 : windowH;
+
+      //QSFPopup.show(20, -20-windowH, windowW, windowH, document.body);
+      QSFPopup.show((buttonalign == "left" ? 0 : document.body.clientWidth - windowW), -windowH, windowW, windowH, document.body);
+
+      return true;
     }
   ]]></script>
 </search>
