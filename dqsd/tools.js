@@ -138,8 +138,17 @@ function readTabDelimitedFile(filename)
   for (var i = 0; i < fileLines.length; i++)
   {
     if (!fileLines[i].match(/^\s*($|\/\/)/))  // ignore comments (//) and blank lines
+    {
+      //must prepend a space or the split will complain on the gg search
+      if (fileLines[i].match(/^[\|\t]/))
+      {
+        fileLines[i]=" "+fileLines[i];
+      }
       //split on the pipe symbol or the tab character 
       fileTable.push(fileLines[i].split(/[\|\t]/));
+      //alert("test "+test);
+  	   //fileTable.push(fileLines[i].match(/^\s*[\|\t]\s*(.+$)/));
+  	   }
   }
   return fileTable;
 }
