@@ -43,6 +43,14 @@ function addalias(alias, fname)
 
 function addhelp(search)
 {
+  var cat = search.cat;
+  if (!cat) cat = "Other";
+  if (!categories[cat])
+  {
+    categories[cat] = [];
+    categoryarray.push(cat);
+  }
+  var helparray = categories[cat];
   helparray.push(search);
 }
 
@@ -53,7 +61,8 @@ var searches = {};
 var aliases = {};
 var specialaliasarray = [];
 var menuarray = [];
-var helparray = [];
+var categories = {};
+var categoryarray = [];
 
 
 // 1. load search.xml and merge localsearch.xml

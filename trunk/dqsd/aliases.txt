@@ -1,8 +1,8 @@
 	gg
 !	ifl
-?	yho
+?	yh
 -	fst
-^	alt
+^	av
 {	dog
 ??	gwd
 ???	ask
@@ -32,3 +32,4 @@ $$$	pw
 >>	dl
 #*	phsp
 ~	uns
+:-)	aim

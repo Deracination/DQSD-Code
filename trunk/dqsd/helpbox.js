@@ -42,26 +42,36 @@ function about()
       txt = "Cannot find documentation.";
     }
 
-    for (i = 0; i < helparray.length; i++)
+    for (i = 0; i < categoryarray.length; i++)
     {
-      var search = helparray[i];
-      helptable += "<tr><td valign=top class=lb>";
-      for (var j = 0; j < search.aliases.length; j++)
+      helptable += "<tr><td valign=top class=lb colspan=2><b>"
+      helptable += categoryarray[i];
+      helptable += "</b></td></tr>";
+      var helparray = categories[categoryarray[i]];
+      for (var k = 0; k < helparray.length; k++)
       {
-        helptable += search.aliases[j].replace(/&/g, "&amp;").replace(/</g, "&lt;");
-        if (j < search.aliases.length)
-          helptable += "<br>"
+        var search = helparray[k];
+        helptable += "<tr><td valign=top class=lb>";
+        for (var j = 0; j < search.aliases.length; j++)
+        {
+          var alias = search.aliases[j].replace(/&/g, "&amp;").replace(/</g, "&lt;");
+          if (alias == "")
+            alias = "<font face='Wingdings 3'>&#56;</font>";
+          helptable += alias;
+          if (j < search.aliases.length)
+            helptable += "<br>"
+        }
+        helptable += "</td><td valign=top class=lg>";
+        if (search.link)
+          helptable += "<a target=info href=\"" + search.link + "\">" + search.name + "</a>";
+        else
+          helptable += search.name;
+        if (search.desc)
+        {
+          helptable += " - " + search.desc;
+        }
+        helptable += "</td></tr>";
       }
-      helptable += "</td><td valign=top class=lg>";
-      if (search.link)
-        helptable += "<a target=info href=\"" + search.link + "\">" + search.name + "</a>";
-      else
-        helptable += search.name;
-      if (search.desc)
-      {
-        helptable += " - " + search.desc;
-      }
-      helptable += "</td></tr>";
     }
 
     txt = txt.replace(/\r\n/g, '\n');
