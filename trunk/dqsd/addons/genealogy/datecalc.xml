@@ -1,0 +1,78 @@
+<search function="datecalc">
+  <name>Date Calculator</name>
+  <category>Genealogy</category>
+  <contributor>Brent Beardsley</contributor>
+  <link></link>
+  <email></email>
+  <description>
+  Calculate a date based on a specified start date and 
+  the number of years, months, and days to add or subtract from it
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td colspan="3">datecalc startDate [+/-][years,months,days]</td></tr>
+      <tr><td colspan="3"><br/></td></tr>
+      <tr><td>datecalc 1 Feb 1954 +3,0,1</td><td> - </td><td>Calculate 1 Feb 1954 plus 3 years and 1 day</td></tr>
+      <tr><td>datecalc 1 Feb 1954</td><td> - </td><td>Calculate the complete date information including day of week</td></tr>
+    </table>
+  </description>
+  <script src="addons/genealogy/genealogy_lib.js"></script>
+  <script><![CDATA[
+    function datecalc(q)
+    {
+      if( nullArgs("datecalc", q) )
+        return;
+
+      if (!genealogy_check_lib_version("1.6")) {
+	return false;
+      }
+
+      var startDate = null;
+      var endDate = null;
+      var doSubtract = true;
+      var result = "Invalid date(s) specified.";
+      var parametersRegExp = new RegExp("^\\s*"+genealogy_date_format_all+"\\s+(\\+|\\-)\\s*([0-9]*\\s*,\\s*[0-9]*\\s*,\\s*[0-9]*)\\s*$");
+      var justDateRegExp = new RegExp("^\\s*"+genealogy_date_format_all+"\\s*$");
+      if (q.match(parametersRegExp)) {
+            var r = parametersRegExp.exec(q);
+            if (r != null) {
+		startDate = genealogy_parse_date(r[1]);
+		endDate = new Date();
+		doSubtract = (r[14] != "+");
+		var amtParts = r[15].split(",");
+		var amtYears = parseInt(amtParts[0]);
+		if (isNaN(amtYears)) {
+		  amtYears = 0;
+		}
+		var amtMonths = parseInt(amtParts[1]);
+		if (isNaN(amtMonths)) {
+		  amtMonths = 0;
+		}
+		var amtDays = parseInt(amtParts[2]);
+		if (isNaN(amtDays)) {
+		  amtDays = 0;
+		}
+		if (doSubtract) {
+			endDate.setFullYear(startDate.getFullYear()-amtYears);
+			endDate.setMonth(startDate.getMonth()-amtMonths);
+			endDate.setDate(startDate.getDate()-amtDays);
+		} else {
+			endDate.setFullYear(startDate.getFullYear()+amtYears);
+			endDate.setMonth(startDate.getMonth()+amtMonths);
+			endDate.setDate(startDate.getDate()+amtDays);
+		}
+		result = endDate;
+            }
+      } else if (q.match(justDateRegExp)) {
+        var r = justDateRegExp.exec(q);
+	if (r != null) {
+	  endDate = genealogy_parse_date(r[1]);
+	}
+      }
+      if (endDate != null) {
+        // should format the date
+        result = endDate;
+      }
+      document.deff.q.value = result;
+    }
+  ]]></script>
+</search>

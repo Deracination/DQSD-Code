@@ -36,14 +36,14 @@
       if (q.match(twoDatesRegEx))	{
             var r = twoDatesRegEx.exec(q);
             if (r != null) {
-                  startDate = genealogy_parse_date(r[6]);
+                  startDate = genealogy_parse_date(r[1]);
                   endDate = genealogy_parse_date(r[10]);
                   result = genealogy_age_calc(startDate, endDate);
             }
       } else if (q.match(oneDateRegEx)) {
             var r = oneDateRegEx.exec(q);
             if (r != null) {
-                  startDate = genealogy_parse_date(r[6]);
+                  startDate = genealogy_parse_date(r[1]);
                   result = genealogy_age_calc(startDate);
             }
       }
