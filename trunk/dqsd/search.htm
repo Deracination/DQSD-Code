@@ -760,12 +760,12 @@ function dodrop()
 
     rst();
 
-    // Don't invoke the default search if they are holding down the shift key
-    // when they drop the selection
-    if ( !window.event.shiftKey && dragdropautosearch)^M
-        mnu( "", "");
-    else if(window.event.shiftKey && !dragdropautosearch)^M
-        mnu( "", "");  
+    // dragdropautosearch determines whether we want
+    // shift pressed or not, to launch a search
+    if( window.event.shiftKey != dragdropautosearch )
+    {
+      mnu("", "");
+    }
   }
   catch (e)
   {
