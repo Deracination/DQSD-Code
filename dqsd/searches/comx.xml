@@ -386,7 +386,7 @@
                  //<IMG ALT="Latest Strip" height="219" WIDTH="576" BORDER=0 SRC="http://www.userfriendly.org/cartoons/archives/04may/xuf006703.gif">
                  var pattern = /http\:\S+userfriendly\.org\/cartoons\/\S+\.gif/ig;
                  var result = sBody.match(pattern);
-                 var imgurl = result;
+                 var imgurl = result[0];
                  break;
                  
               case "ucomics":
