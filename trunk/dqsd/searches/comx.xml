@@ -1,0 +1,253 @@
+<search function="comx">
+  <name>Comic Strip</name>
+  <description>Displays a daily comic strip in a popup window.
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+    <tr><td>9 Chickweed Lane</td><td>comx /chick</td></tr>
+    <tr><td>Agnes</td><td>comx /agnes</td></tr>
+    <tr><td>Alley Oop</td><td>comx /alley</td></tr>
+    <tr><td>Andy Capp</td><td>comx /capp</td></tr>
+    <tr><td>Arlo and Janis</td><td>comx /arlo</td></tr>
+    <tr><td>B.C.</td><td>comx /bc</td></tr>
+    <tr><td>Ballard Street</td><td>comx /ballard</td></tr>
+    <tr><td>Ben</td><td>comx /ben</td></tr>
+    <tr><td>Betty</td><td>comx /betty</td></tr>
+    <tr><td>Big Nate</td><td>comx /bignate</td></tr>
+    <tr><td>Bo Nanas</td><td>comx /bonanas</td></tr>
+    <tr><td>The Born Loser</td><td>comx /loser</td></tr>
+    <tr><td>The Buckets</td><td>comx /buckets</td></tr>
+    <tr><td>Bulls N Bears</td><td>comx /bulls</td></tr>
+    <tr><td>Candorville</td><td>comx /candor</td></tr>
+    <tr><td>A Case in Point</td><td>comx /case</td></tr>
+    <tr><td>CEO Dad</td><td>comx /ceo</td></tr>
+    <tr><td>Cheap Thrills</td><td>comx /cheap</td></tr>
+    <tr><td>Committed</td><td>comx /committed</td></tr>
+    <tr><td>Dilbert</td><td>comx /dilbert</td></tr>
+    <tr><td>Drabble</td><td>comx /drabble</td></tr>
+    <tr><td>Fat Cats</td><td>comx /fatcats</td></tr>
+    <tr><td>Ferdnand</td><td>comx /ferd</td></tr>
+    <tr><td>Flight Deck</td><td>comx /fdeck</td></tr>
+    <tr><td>Flo and Friends</td><td>comx /flo</td></tr>
+    <tr><td>For Better or For Worse</td><td>comx /forbetter</td></tr>
+    <tr><td>Frank and Ernest</td><td>comx /frank</td></tr>
+    <tr><td>Frazz</td><td>comx /frazz</td></tr>
+    <tr><td>Geech</td><td>comx /geech</td></tr>
+    <tr><td>Get Fuzzy</td><td>comx /fuzzy</td></tr>
+    <tr><td>Ginger Meggs</td><td>comx /ginger</td></tr>
+    <tr><td>Go Fish</td><td>comx /gofish</td></tr>
+    <tr><td>Graffiti</td><td>comx /graffiti</td></tr>
+    <tr><td>Grand Avenue</td><td>comx /grand</td></tr>
+    <tr><td>The Grizzwells</td><td>comx /grizz</td></tr>
+    <tr><td>Heathcliff</td><td>comx /heath</td></tr>
+    <tr><td>Herb and Jamaal</td><td>comx /herb</td></tr>
+    <tr><td>Herman</td><td>comx /herman</td></tr>
+    <tr><td>Janes World</td><td>comx /jane</td></tr>
+    <tr><td>Jump Start</td><td>comx /jump</td></tr>
+    <tr><td>Kit N Carlyle</td><td>comx /kit</td></tr>
+    <tr><td>Liberty Meadows</td><td>comx /liberty</td></tr>
+    <tr><td>Lil Abner</td><td>comx /abner</td></tr>
+    <tr><td>Luann</td><td>comx /luann</td></tr>
+    <tr><td>Lupo Alberto</td><td>comx /lupo</td></tr>
+    <tr><td>Marmaduke</td><td>comx /marm</td></tr>
+    <tr><td>Meatloaf Night</td><td>comx /meat</td></tr>
+    <tr><td>Meg!</td><td>comx /meg</td></tr>
+    <tr><td>Moderately Confused</td><td>comx /confused</td></tr>
+    <tr><td>Momma</td><td>comx /momma</td></tr>
+    <tr><td>Monty</td><td>comx /monty</td></tr>
+    <tr><td>Motley</td><td>comx /motley</td></tr>
+    <tr><td>Nancy</td><td>comx /nancy</td></tr>
+    <tr><td>Natural Selection</td><td>comx /natural</td></tr>
+    <tr><td>Off The Mark</td><td>comx /off</td></tr>
+    <tr><td>One Big Happy Classics</td><td>comx /happy</td></tr>
+    <tr><td>The Other Coast</td><td>comx /coast</td></tr>
+    <tr><td>Out of the Gene Pool</td><td>comx /genepool</td></tr>
+    <tr><td>Over the Hedge</td><td>comx /hedge</td></tr>
+    <tr><td>PC and Pixel</td><td>comx /pc</td></tr>
+    <tr><td>Peanuts</td><td>comx /peanuts</td></tr>
+    <tr><td>Pearls Before Swine</td><td>comx /pearls</td></tr>
+    <tr><td>Pibgorn</td><td>comx /pibgorn</td></tr>
+    <tr><td>Pickles</td><td>comx /pickles</td></tr>
+    <tr><td>Potluck Parish</td><td>comx /potluck</td></tr>
+    <tr><td>Raising Duncan</td><td>comx /duncan</td></tr>
+    <tr><td>Reality Check</td><td>comx /reality</td></tr>
+    <tr><td>Red and Rover</td><td>comx /red</td></tr>
+    <tr><td>Ripleys Believe It or Not</td><td>comx /ripleys</td></tr>
+    <tr><td>Rose Is Rose</td><td>comx /rose</td></tr>
+    <tr><td>Rubes</td><td>comx /rubes</td></tr>
+    <tr><td>Rudy Park</td><td>comx /rudy</td></tr>
+    <tr><td>Sheldon</td><td>comx /sheldon</td></tr>
+    <tr><td>Shirley And Son</td><td>comx /shirley</td></tr>
+    <tr><td>Soup To Nutz</td><td>comx /soup</td></tr>
+    <tr><td>Speed Bump</td><td>comx /bump</td></tr>
+    <tr><td>Spot The Frog</td><td>comx /spot</td></tr>
+    <tr><td>Strange Brew</td><td>comx /brew</td></tr>
+    <tr><td>The Sunshine Club</td><td>comx /sun</td></tr>
+    <tr><td>Tarzan</td><td>comx /tarzan</td></tr>
+    <tr><td>Thats Life</td><td>comx /life</td></tr>
+    <tr><td>Top of the World!</td><td>comx /top</td></tr>
+    <tr><td>Wizard of Id</td><td>comx /id</td></tr>
+    <tr><td>Working Daze</td><td>comx /daze</td></tr>
+    <tr><td>Working It Out</td><td>comx /working</td></tr>
+    </table>
+  </description>
+  <link>http://comics.com</link>
+  <category>Fun</category>
+  <script><![CDATA[
+  function comx(q){
+	if( q == "?" ){
+	  qsfind("comx /function");
+	  return false;
+	}
+	if( q == "" ){
+	  qsfind("comx /function");
+	  return false;
+	}
+
+    //default window sizes for the comic strip windows
+    windowW = 600; windowH = 215;
+    //default window sizes for the comic strip window on Sundays
+    sunwindowW = 725; sunwindowH = 546;
+
+    //default regex for finding the image in the page source..  
+    var rx = /.+(\/archive\/images\/\w+\.\w+)"\s+ALT="Today's\s+Comic"/;
+    
+    var urlstart="http://www.comics.com/";
+        
+    if (q == "/agnes"){ var endurl= "creators/agnes/index.html";sunwindowH = 272;}
+    if (q == "/alley"){ var endurl= "comics/alleyoop/index.html";}
+    if (q == "/capp"){ var endurl= "creators/andycapp/index.html";sunwindowH = 385;}
+    if (q == "/arlo"){ var endurl= "comics/arlonjanis/index.html";}
+    if (q == "/bc"){ var endurl= "creators/bc/index.html";sunwindowW = 725; sunwindowH = 521;}
+    if (q == "/ballard"){ var endurl= "creators/ballardst/index.html";windowW = 300; windowH = 329;sunwindowH = 268;}
+    if (q == "/ben"){ var endurl= "comics/ben/index.html";sunwindowW = 600; sunwindowH = 200;}
+    if (q == "/betty"){ var endurl= "comics/betty/index.html";sunwindowH = 378;}
+    if (q == "/bignate"){ var endurl= "comics/bignate/index.html";sunwindowH = 537;}
+    if (q == "/bonanas"){ var endurl= "wash/bonanas/index.html";sunwindowH = 357;}
+    if (q == "/loser"){ var endurl= "comics/bornloser/index.html";sunwindowH = 542;}
+    if (q == "/buckets"){ var endurl= "comics/buckets/index.html";sunwindowH = 385;}
+    if (q == "/bulls"){ var endurl= "comics/bullsnbears/index.html";sunwindowW = 600; sunwindowH = 200;}
+    if (q == "/candor"){ var endurl= "wash/candorville/index.html";sunwindowH = 513;}
+    if (q == "/case"){ var endurl= "comics/acaseinpoint/index.html";windowW = 348; windowH = 460;sunwindowW = 348; sunwindowH = 460;}
+    if (q == "/ceo"){ var endurl= "creators/ceodad/index.html";sunwindowW = 600; sunwindowH = 200;}
+    if (q == "/cheap"){ var endurl= "wash/cheapthrills/index.html";windowW = 725; windowH = 273;sunwindowH = 273;}
+    if (q == "/chick"){ var endurl= "comics/chickweed/index.html";sunwindowH = 533;}
+    if (q == "/committed"){ var endurl= "comics/committed/index.html";windowW = 321; windowH = 394;sunwindowH = 377;}
+    if (q == "/drabble"){ var endurl= "comics/drabble/index.html";sunwindowH = 525;}
+    if (q == "/fatcats"){ var endurl= "comics/fatcats/index.html";sunwindowW = 600; sunwindowH = 209;}
+    if (q == "/ferd"){ var endurl= "comics/ferdnand/index.html";windowW = 600; windowH = 177;}
+    if (q == "/fdeck"){ var endurl= "creators/flightdeck/index.html";windowW = 300; windowH = 332;sunwindowH = 272;}
+    if (q == "/flo"){ var endurl= "creators/floandfriends/index.html";sunwindowH = 272;}
+    if (q == "/forbetter"){ var endurl= "comics/forbetter/index.html";sunwindowW = 750; sunwindowH = 575;}
+    if (q == "/frank"){ var endurl= "comics/franknernest/index.html";}
+    if (q == "/frazz"){ var endurl= "comics/frazz/index.html";sunwindowH = 385;}
+    if (q == "/geech"){ var endurl= "comics/geech/index.html";}
+    if (q == "/fuzzy"){ var endurl= "comics/getfuzzy/index.html";sunwindowH = 371;}
+    if (q == "/ginger"){ var endurl= "comics/gingermeggs/index.html";sunwindowW = 600; sunwindowH = 370;}
+    if (q == "/gofish"){ var endurl= "comics/gofish/index.html";windowW = 321; windowH = 352;sunwindowW = 600; sunwindowH = 314;}
+    if (q == "/graffiti"){ var endurl= "comics/graffiti/index.html";windowW = 321; windowH = 541;sunwindowW = 321; sunwindowH = 550;}
+    if (q == "/grand"){ var endurl= "comics/grandave/index.html";sunwindowH = 370;}
+    if (q == "/grizz"){ var endurl= "comics/grizzwells/index.html";sunwindowW = 600; sunwindowH = 202;}
+    if (q == "/heath"){ var endurl= "creators/heathcliff/index.html";windowW = 300; windowH = 331;}
+    if (q == "/herb"){ var endurl= "creators/herbnjamaal/index.html";}
+    if (q == "/herman"){ var endurl= "comics/herman/index.html";windowW = 300; windowH = 381;}
+    if (q == "/jane"){ var endurl= "comics/janesworld/index.html";sunwindowW = 600; sunwindowH = 211;}
+    if (q == "/jump"){ var endurl= "comics/jumpstart/index.html";}
+    if (q == "/kit"){ var endurl= "comics/kitncarlyle/index.html";windowW = 321; windowH = 349;sunwindowW = 321; sunwindowH = 349;}
+    if (q == "/liberty"){ var endurl= "creators/liberty/index.html";sunwindowH = 271;}
+    if (q == "/abner"){ var endurl= "comics/lilabner/index.html";windowW = 800; windowH = 226;sunwindowW = 800; sunwindowH = 228;}
+    if (q == "/luann"){ var endurl= "comics/luann/index.html";sunwindowH = 376;}
+    if (q == "/lupo"){ var endurl= "comics/lupo/index.html";sunwindowW = 600; sunwindowH = 205;}
+    if (q == "/marm"){ var endurl= "comics/marmaduke/index.html";windowW = 321; windowH = 347;}
+    if (q == "/meat"){ var endurl= "comics/meatloaf/index.html";sunwindowW = 600; sunwindowH = 197;}
+    if (q == "/meg"){ var endurl= "comics/meg/index.html";sunwindowW = 600; sunwindowH = 200;}
+    if (q == "/confused"){ var endurl= "comics/moderatelyconfused/index.html";windowW = 321; windowH = 399;sunwindowW = 321; sunwindowH = 399;}
+    if (q == "/momma"){ var endurl= "creators/momma/index.html";sunwindowH = 366;}
+    if (q == "/monty"){ var endurl= "comics/monty/index.html";}
+    if (q == "/motley"){ var endurl= "comics/motley/index.html";windowW = 504; windowH = 142;sunwindowW = 504; sunwindowH = 142;}
+    if (q == "/nancy"){ var endurl= "comics/nancy/index.html";}
+    if (q == "/natural"){ var endurl= "creators/naturalselection/index.html";windowW = 300; windowH = 356;sunwindowW = 300; sunwindowH = 356;}
+    if (q == "/off"){ var endurl= "comics/offthemark/index.html";windowW = 321; windowH = 359;sunwindowH = 251;}
+    if (q == "/happy"){ var endurl= "creators/onebighappy/index.html";sunwindowW = 650; sunwindowH = 300;}
+    if (q == "/coast"){ var endurl= "creators/othercoast/index.html";sunwindowH = 358;}
+    if (q == "/gene"){ var endurl= "wash/genepool/index.html";sunwindowH = 356;}
+    if (q == "/hedge"){ var endurl= "comics/hedge/index.html";}
+    if (q == "/pc"){ var endurl= "wash/pcnpixel/index.html";sunwindowH = 502;}
+    if (q == "/pearls"){ var endurl= "comics/pearls/index.html";sunwindowH = 382;}
+    if (q == "/pib"){ var endurl= "comics/pibgorn/index.html";windowW = 600; windowH = 420;}
+    if (q == "/pickles"){ var endurl= "wash/pickles/index.html";sunwindowH = 502;}
+    if (q == "/potluck"){ var endurl= "comics/potluck/index.html";}
+    if (q == "/duncan"){ var endurl= "comics/raisingduncan/index.html";sunwindowH = 371;}
+    if (q == "/reality"){ var endurl= "comics/reality/index.html";windowW = 321; windowH = 340;sunwindowH = 510;}
+    if (q == "/red"){ var endurl= "wash/redandrover/index.html";sunwindowH = 357;}
+    if (q == "/ripleys"){ var endurl= "comics/ripleys/index.html";windowW = 315; windowH = 410;sunwindowH = 500;}
+    if (q == "/rose"){ var endurl= "comics/roseisrose/index.html";}
+    if (q == "/rubes"){ var endurl= "creators/rubes/index.html";windowW = 300; windowH = 349;sunwindowH = 385;}
+    if (q == "/rudy"){ var endurl= "comics/rudypark/index.html";sunwindowH = 382;}
+    if (q == "/sheldon"){ var endurl= "comics/sheldon/index.html";}
+    if (q == "/shirley"){ var endurl= "comics/shirleynson/index.html";}
+    if (q == "/soup"){ var endurl= "comics/soup2nutz/index.html";sunwindowH = 377;}
+    if (q == "/bump"){ var endurl= "creators/speedbump/index.html";windowW = 300; windowH = 313;sunwindowH = 257;}
+    if (q == "/spot"){ var endurl= "comics/spotthefrog/index.html";sunwindowH = 377;}
+    if (q == "/brew"){ var endurl= "creators/strangebrew/index.html";windowW = 300; windowH = 327;sunwindowH = 272;}
+    if (q == "/sun"){ var endurl= "comics/sunshineclub/index.html";}
+    if (q == "/tarzan"){ var endurl= "comics/tarzan/index.html";}
+    if (q == "/life"){ var endurl= "wash/thatslife/index.html";windowW = 300; windowH = 349;sunwindowH = 354;}
+    if (q == "/top"){ var endurl= "comics/topofworld/index.html";sunwindowW = 600; sunwindowH = 206;}
+    if (q == "/id"){ var endurl= "creators/wizardofid/index.html";}
+    if (q == "/daze"){ var endurl= "comics/workingdaze/index.html";windowW = 335; windowH = 408;sunwindowW = 335; sunwindowH = 408;}
+    if (q == "/working"){ var endurl= "creators/workingitout/index.html";windowW = 300; windowH = 332;sunwindowW = 300; sunwindowH = 332;}
+    // the two oddball ones.. have to have their own rx pattern
+    if (q == "/peanuts"){ var endurl= "comics/peanuts/index.html";windowW = 600; windowH = 139;var rx = /.+(\/archive\/images\/\w+\.\w+)"\s+ALT="Today's Strip"/;}
+    if (q == "/dilbert"){ var endurl= "comics/dilbert/index.html";var rx = /.+(\/archive\/images\/\w+\.\w+)"\s+BORDER=0\s+ALT="Today's Dilbert Comic"/;}
+
+    //if the day is sunday, use the sunday window parameters
+    var dat = new Date();
+    today=dat.getDay();
+    if (today == 0) {
+        windowW=sunwindowW;
+        windowH=sunwindowH;
+    }
+
+    //return false;
+    var sUrl=urlstart+endurl;
+    urlmatch = endurl.match(/^(\w+)(\/\w+)/);
+    var urlcat=urlmatch[1];
+    var urldir=urlmatch[2];
+    
+	var xmlHttp = new ActiveXObject("Microsoft.XmlHttp");
+	xmlHttp.open("GET", sUrl, false);
+	xmlHttp.send();
+
+	//get the response content from the remote site
+	var sBody = xmlHttp.responseText;
+	
+	//run the regex to parse out the image url 
+	var r = rx.exec(sBody);
+	//alert(urlstart+urlcat+urldir+r[1]);
+	//process the html
+    if (r != ""){
+       comxSearchPopup = window.createPopup();
+       var comxSearchPopupBody = comxSearchPopup.document.body;
+       var comxSearchPopupBodyCode = "<html><head></head><body>";
+       comxSearchPopupBodyCode += "<table id=rstable border=0 cellspacing=1 cellpadding=2 width=100% height=100%>";
+       comxSearchPopupBodyCode += "<tr><td valign=top><style>" + convertStylesToInline() + "</style>";
+       comxSearchPopupBodyCode += "<tr><td valign=top style='text-align: center' class=helpboxDescriptions><img src=" + urlstart+urlcat+urldir+r[1] +" width="+windowW+"height="+windowH+">";
+       comxSearchPopupBodyCode += "</tr></td></table></body></html>";
+       comxSearchPopupBody.innerHTML = comxSearchPopupBodyCode;
+       comxSearchPopup.document.body.style.border="outset 2px";
+       comxSearchPopup.document.body.style.background='menu';
+       //comxSearchPopup.document.body.style.overflowY='auto';
+       //comxSearchPopup.document.body.style.overflowX='auto';
+
+       //pad the window width and height for a better display
+       windowW +=16;
+       windowH +=20;
+
+       comxSearchPopup.show((buttonalign == "left" ? 0 : document.body.clientWidth - windowW), -windowH, windowW, windowH, document.body);
+
+       // <IMG SRC="/creators/andycapp/archive/images/andycapp2004026099921.gif" ALT="Today's Comic" BORDER="0"></TD>
+       // <IMG SRC="/comics/dilbert/archive/images/dilbert2004026099921.gif" BORDER=0 ALT="Today's Dilbert Comic"></A><BR></TD>
+     }//if
+} //function
+  ]]></script>
+</search>
