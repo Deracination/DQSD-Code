@@ -4,7 +4,7 @@
     Adds the ability to create local holidays from the Quick Search textfield<br/>
     <div class="helpboxDescLabels">Example:</div>
     <table class="helpboxDescTable">
-  		<tr><td>hol My Birthday|personal_holidays|13|2></td></tr>
+  		<tr><td>hol My Birthday|personal_holidays|13|2</td></tr>
   		<tr><td>- This example adds a holiday that repeats yearly.</td></tr>
   		<tr><td>...................................................</td></tr>
   		<tr><td>hol Jessica's Going Away Party!|personal_appointment|10|4|2004</td></tr>
@@ -156,6 +156,7 @@
       // write the final file back (current file + new content)
       historyFileContent += newStuff;
       writeFile(localeventsfileurl, "<events>\n" + historyFileContent + "</events>\n");
+	  setSearchWindowText("Successfully added event.", true);
     }
 ]]></script>
   <copyright>
