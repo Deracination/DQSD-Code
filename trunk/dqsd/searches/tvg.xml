@@ -1,6 +1,6 @@
 <search function="tvg">
-  <name>TVGuide Search</name>
-  <description>Look up tv programming by keyword: "tvg simpsons"</description>
+  <name>TV Guide Online</name>
+  <description>Look up TV programming by keyword: "tvg simpsons". Or list all programming in a particular genre: "tvg /comedy". <nobr>Categories include <wbr/>/action, <wbr/>/comedy, <wbr/>/adult, <wbr/>/movie, <wbr/>/drama, <wbr/>/horror, <wbr/>/mystery, <wbr/>/scifi, <wbr/>/western, <wbr/>/sports, <wbr/>/news, <wbr/>/health, <wbr/>/science, <wbr/>/educational, <wbr/>/family, <wbr/>/childrens, <wbr/>/talk, <wbr/>/soaps, <wbr/>/shopping and <wbr/>/music.</nobr></description>
   <category>Entertainment</category>
   <link>http://www.tvguide.com/</link>
   <form name="tvgf"
@@ -8,15 +8,46 @@
         action="http://www.tvguide.com/listings/search/SearchResults.asp"
         method="get">
     <input type="hidden" name="FormText" value=""/>
+    <input type="hidden" name="FormCategories" value=""/>
   </form>
   <script><![CDATA[
-    function tvg(q) 
+    function tvg(q, switches) 
     {
       if (q=="")
         openSearchWindow("http://www.tvguide.com/listings/search/Search.asp");
+      else if( switches.length == 1 )
+      {
+        switch( switches[0] )
+        {
+          case "action": genre = "action & adventure"; break;
+          case "comedy": genre = "comedy"; break;
+          case "adult": genre = "adult"; break;
+          case "movie": genre = "Movie"; break;
+          case "drama": genre = "drama"; break;
+          case "horror": genre = "horror"; break;
+          case "mystery": genre = "mystery & suspense"; break;
+          case "scifi": genre = "sci-fi & paranormal"; break;
+          case "western": genre = "western"; break;
+          case "sports": genre = "Sports"; break;
+          case "news": genre = "Newscasts & newsmagazines"; break;
+          case "health": genre = "health & fitness"; break;
+          case "science": genre = "science & technology"; break;
+          case "educational": genre = "educational"; break;
+          case "family": genre = "kids & teens"; break;
+          case "childrens": genre = "Children\'s"; break;
+          case "talk": genre = "talk & discussion"; break;
+          case "soaps": genre = "soap opera"; break;
+          case "shopping": genre = "shopping & classifieds"; break;
+          case "music": genre = "music"; break;
+        }
+        document.tvgf.FormText.value = ""
+        document.tvgf.FormCategories.value = genre;
+        submitForm(tvgf);
+      }
       else
       {
-        document.tvgf.FormText.value=q;
+        document.tvgf.FormText.value = q;
+        document.tvgf.FormCategories.value = "";
         submitForm(tvgf)
       }
     }
