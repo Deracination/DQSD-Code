@@ -2168,7 +2168,9 @@ function showpop()
 
   window.event.cancelBubble = true;
   if (popclose)
+  {
     pophelp.hide();
+  }
   else
   {
     var rows = pophelp.document.all.tags("TR");
@@ -2213,6 +2215,7 @@ function queuefocus()
             ondrop=dodrop()
             onblur=rst()
             onhelp=showpop()
+            oncontextmenu="return showcal();"
             onkeydown="return okd();"
             onkeypress="return okp();"
             value=""
@@ -2265,6 +2268,7 @@ if (dopopup)
   + "       value=&#xBB;"
   + "       onmousedown=this.className='mdgobutton';showpop();"
   + "       ondblclick=showpop();"
+  + "       oncontextmenu=\"return showcal();\""
   + "       onmouseup=this.className='mogobutton'"
   + "       onmouseover=this.className='mogobutton'"
   + "       onmouseout=this.className='gobutton'"
@@ -3146,4 +3150,133 @@ rsz();
 document.body.onresize=rsz;
 
 </script>
+
+
+<SCRIPT>
+/**
+ * script to display a popup calendar
+ * added by Sidney Chong (sidney@allomail.com) 12/12/2001
+ **/
+
+//vars used by the calendar script
+var DAYS_OF_WEEK = 7;    // "constant" for number of days in a week
+var DAYS_OF_MONTH = 31;    // "constant" for number of days in a month
+
+var Calendar = new Date(); //stores the date the user is looking at
+
+function showcal()
+{
+  if (ie_version < 5.5)
+    return true;
+
+  popcal = window.createPopup();
+
+  popcal.document.body.innerHTML = buildcal();
+  popcal.document.body.style.border="outset 2px";
+  popcal.document.body.style.background='menu';
+
+  popcal.show(document.body.clientWidth - 175, -150, 175, 150, document.body);
+
+  return false;
+}
+
+function movecal(nMths)
+{
+  Calendar.setMonth(Calendar.getMonth()+nMths);
+  popcal.document.body.innerHTML = buildcal();
+}
+
+function buildcal()
+{
+  var year = Calendar.getFullYear();	    // Returns year in 4 digits
+  var month = Calendar.getMonth();    // Returns month (0-11)
+
+  var today = new Date();
+  var weekday = -1;
+
+  if (today.getMonth() == Calendar.getMonth() && today.getYear() == Calendar.getYear())
+    weekday = today.getDay(); 
+
+  var cal;    // Used for printing
+
+  Calendar.setDate(1);    // Start the calendar day at '1'
+
+
+  var TR_start = '<TR style=\"font:menu;\">';
+  var TR_end = '</TR>';
+  var highlight_start = '<TD style=background-color:window><B><CENTER>';
+  var highlight_end   = '</CENTER></B></TD>';
+  var gray_start = '<TD style=color:gray><CENTER>';
+  var gray_end   = '</CENTER></TD>';
+  var TD_start = '<TD width=14.2857%><CENTER>';
+  var TD_end = '</CENTER></TD>';
+
+  cal = '<TABLE WIDTH=100% HEIGHT=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR style=\"font:menu;\">';
+  cal += '<TD><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD title="show previous year" style="cursor:hand" onmousedown="parent.movecal(-12);">&nbsp;&lt;</TD><TD title="show previous month" style="cursor:hand" onmousedown="parent.movecal(-1);">&nbsp;&lt;</TD></TR></TABLE></TD>';
+  cal += '<TD COLSPAN="' + (DAYS_OF_WEEK - 2) + '"><CENTER>';
+  if (weekday <0)
+  {
+    cal += '<a title="show this month" style="cursor:hand" onmouseover="this.style.cursor=\'hand\'" onmousedown="parent.Calendar=new Date();parent.movecal(0);">';
+  }
+  cal += '<B>' + getMonthName(month+1)  + '   ' + year + '</B>';
+  if (weekday <0)
+  {
+    cal += '</a>'; 
+  }
+  cal += TD_end;
+  cal += '<TD><TABLE BORDER=0 CELLSPACING=0 CELLPADDING=0><TR><TD title="show next month" style="cursor:hand" onmousedown="parent.movecal(+1);">&gt;&nbsp;</TD><TD title="show next year" style="cursor:hand" onmousedown="parent.movecal(+12);">&gt;&nbsp;</TD></TR></TABLE></TD>';
+  cal += TR_end + TR_start;
+
+  //printing day labels
+  for(index=0; index < DAYS_OF_WEEK; index++)
+  {
+    cal += TD_start;
+    if (weekday == index) cal += '<B>';
+    cal += getDayName(index+8);
+    if (weekday == index) cal += '</B>';
+    cal += TD_end;
+  }
+
+  cal += TD_end;
+
+  //fill spaces until first day in the month
+  var whichmonth = -1;
+  var filldays = Calendar.getDay();
+
+  Calendar.setDate(Calendar.getDate() - filldays);
+
+  //draw six weeks loop for each day in the month
+  for (index=0; index < DAYS_OF_WEEK * 6; index++)
+  {
+    if (Calendar.getDate() == 1) whichmonth += 1;
+
+    week_day = Calendar.getDay();
+
+    // start new row if we hit a new week
+    if (week_day == 0) cal += TR_end + TR_start;
+
+    // highlight appropriately
+    if (whichmonth != 0)
+      cal += gray_start + Calendar.getDate() + gray_end;
+    else if (weekday>0 && today.getDate()==Calendar.getDate())
+      cal += highlight_start + Calendar.getDate() + highlight_end;
+    else
+      cal += TD_start + Calendar.getDate() + TD_end;
+
+    //advance the date for next iteration
+    Calendar.setDate(Calendar.getDate()+1);
+
+  }// end for loop
+
+  cal += TR_end;
+
+  //reset back the calendar's month
+  Calendar.setMonth(Calendar.getMonth()-1);
+
+  cal += '</TABLE>';
+
+  //return the html string
+  return cal;
+}
+</SCRIPT>
 
