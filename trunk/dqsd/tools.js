@@ -176,7 +176,7 @@ function readTabDelimitedFile(filename)
         fileLines[i]=" "+fileLines[i];
       }
       //split on the pipe symbol or the tab character 
-      fileTable.push(fileLines[i].split(/[\|\t]/));
+      fileTable.push(fileLines[i].split(/\s*[\|\t]\s*/));
     }
   }
   return fileTable;
