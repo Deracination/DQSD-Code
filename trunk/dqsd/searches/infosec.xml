@@ -1,0 +1,33 @@
+<search function="infosec">
+  <name>Information Security</name>
+  <description>The authority in security news, insight and analysis.<br/>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>infosec XP vulnerabilities</td></tr>
+  	</table>
+  </description>
+<contributor>John W. Bairen, Jr.</contributor>
+  <email>john_at_bairen_dot_net</email>
+  <category>Computers</category>
+  <link>http://www.infosecuritymag.com/</link>
+  
+<form name="infosecf" method="get" action="http://search.atomz.com/search/">
+<input type="hidden" name="sp-q"/>
+<input type="hidden" name="sp-a" value="sp1000c0bf"/>
+</form>
+  
+  <script><![CDATA[
+    function infosec(q)
+    {
+      if( nullArgs("infosec",q) )
+        return false;
+      else
+      {
+        document.infosecf["sp-q"].value = q;
+        submitForm(infosecf);
+      }
+    }
+  ]]></script>
+</search>
+
+
