@@ -31,6 +31,7 @@ Bug Fixes
   when the menu was invoked.
 * Search forms can now have input elements named "target" without causing a script error
 * Labor day in holidays.nl.*.xml files now happens every year (thanks MLL and Johan Geertsma)
+* Ctrl-A now correctly does "Select All" rather than DEL.
 
 -- What's new for 3.0.0.22 (beta)
 
