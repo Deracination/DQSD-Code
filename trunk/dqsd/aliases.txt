@@ -30,7 +30,7 @@ $$$|pw
 &&|ia
 *|aw
 -|fst
-+|map
++|mq
 =|clc
 [|enc
 ]|xref
@@ -46,4 +46,4 @@ $$$|pw
 >>|dl
 ?|qsfind
 ??|gg %s /directory|Google Directory|Search Google's copy of the DMOZ open directory.|Search the Web
-???|ask
+???|aj
