@@ -12,10 +12,10 @@
   <idea>David Brake david.brake@ukonline.co.uk</idea>
   
   <form name="cdof"
-        action="http://dictionary.cambridge.org/cmd_search.asp"
+        action="http://dictionary.cambridge.org/results.asp"
         method="post">
-    <input type="hidden" name="searchword"/>
-    <input type="hidden" name="dict" value="B"/>
+    <input type="hidden" name="searchword" value="" />
+    <input type="hidden" name="phonetics" value="checked" />
   </form>
   
   <script><![CDATA[
