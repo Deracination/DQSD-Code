@@ -1,54 +1,170 @@
 <search function="rgb">
   <name>RGB to Hexadecimal Conversion</name>
   <description>
-    Convert RGB integer values to hexadecimal equivalents.<br/>
-    <div class="helpboxDescLabels">Example:</div>
+    Convert RGB integer values to hexadecimal equivalents and vice versa.<br/>
+    <div class="helpboxDescLabels">Examples:</div>
     <table class="helpboxDescTable">
-  		<tr><td>rgb 255110053</td></tr>
+  		<tr><td>rgb 255110053</td><td> - </td><td>Convert decimal rgb number to hex</td></tr>
+  		<tr><td>rgb 255 110 53</td><td> - </td><td>Convert decimal rgb number to hex</td></tr>
+  		<tr><td>rgb 255,110,53</td><td> - </td><td>Convert decimal rgb number to hex</td></tr>
+  		<tr><td>rgb 255.110.53</td><td> - </td><td>Convert decimal rgb number to hex</td></tr>
+  		<tr><td>rgb 336666</td><td> - </td><td>Convert hex rgb number to decimal</td></tr>
+  		<tr><td>rgb #336666</td><td> - </td><td>Convert hex rgb number to decimal</td></tr>
+  		<tr><td>rgb 0x336666</td><td> - </td><td>Convert hex rgb number to decimal</td></tr>
   	</table>
   </description>
   <category>Functions</category>
-  <contributor>Monty Scroggins</contributor>
+  <contributor>Monty Scroggins, Brent Beardsley</contributor>
   
   <script><![CDATA[
-    function remleadzeros(str) 
+    function rgb(q) 
     {
-      while (str.charAt(0) == "0" && str.length > 1) // if has leading zero (but not just "0")
-        str= str.substring(1, str.length); // remove any leading zeros (otherwise assumes octal)
-      return(parseInt(str));
-    }
-
-    function rgb(c) 
-    {
-	    if( nullArgs("rgb",c) )
+	  if (nullArgs("rgb",q))
         return false;
-      
-      if (c.length<9 || c.match(/\D/))
-	    {
+
+      var red = -1;
+      var grn = -1;
+      var blu = -1;
+
+      if ( (r = q.match(/^\s*(\d{3})(\d{3})(\d{3})\s*$/)) != null) {
+        // specified in decimal
+        red = parseInt(r[1], 10);
+        grn = parseInt(r[2], 10);
+        blu = parseInt(r[3], 10);
+      } else if ( (r = q.match(/^\s*(\#|0x)?([\dA-Fa-f]{2})([\dA-Fa-f]{2})([\dA-Fa-f]{2})\s*$/)) != null) {
+        // specified in hex
+        // r[1] is the hex prefix
+        red = parseInt(r[2], 16);
+        grn = parseInt(r[3], 16);
+        blu = parseInt(r[4], 16);
+      } else if ( (r = q.match(/^\s*(\d+)\W+(\d+)\W+(\d+)\s*$/)) != null) {
+        // specified in decimal separated by non-digits
+        red = parseInt(r[1], 10);
+        grn = parseInt(r[2], 10);
+        blu = parseInt(r[3], 10);
+      } else {
+        // unknown format - show help
+        nullArgs("rgb", "?");
+        return false;
+      }
+      if (red < 0 || red > 255 || grn < 0 || grn > 255 || blu < 0 || blu > 255) {
+        // invalid rgb values
         alert("Red Green and Blue values must be between 0 and 255\nwith leading zeros if needed.\nex - 255034101 = r255 g034 b101");
         return false;
       }
-   
-      //var red=parseInt(c.substr(0,3));
-      var red=c.substr(0,3);
-      var grn=c.substr(3,3);
-      var blu=c.substr(6,3);
-      red=remleadzeros(red);
-      grn=remleadzeros(grn);
-      blu=remleadzeros(blu);
-      red=red.toString(16);
-      grn=grn.toString(16);
-      blu=blu.toString(16);
-      
-      if (red.length <2)
-        red = "0" + red;
-      if (grn.length <2)
-        grn = "0" + grn;
-      if (blu.length <2)
-        blu = "0" + blu;
-   
-      //document.deff.q.value ="red "+red+" green "+grn+" blue "+blu;
-      document.deff.q.value ="RGB: "+c+" Hex: "+red+grn+blu;
+
+      var hsl = rgb_to_hsl(red, grn, blu);
+      var rgbString = "RGB: "+red + " " + grn + " " + blu;
+      var hexString = "Hex: "+
+                      ((red < 16) ? "0" : "") + red.toString(16).toUpperCase() + 
+                      ((grn < 16) ? "0" : "") + grn.toString(16).toUpperCase() + 
+                      ((blu < 16) ? "0" : "") + blu.toString(16).toUpperCase();
+      var hslString = "HSL: "+ hsl[0] + " "+hsl[1]+" "+hsl[2];
+      document.deff.q.value =rgbString+"  "+hexString+"  "+hslString;
+    }
+
+     // hsl functions adapted from http://support.microsoft.com/default.aspx?scid=KB;en-us;q29240
+     // Brent Beardsley 4 Dec 2002
+    function rgb_to_hsl(r, g, b)
+    {
+      var HSLMAX = 255;
+      var RGBMAX = 255;
+
+       var h = -1.0;
+      var s = -1.0;
+      var l = -1.0;
+
+      var max = Math.max(Math.max(r,g), b);
+      var min = Math.min(Math.min(r,g), b);
+      var delta = max-min;
+
+      l = Math.round( (max+min)*HSLMAX / (2*RGBMAX) );
+      if (max == min) {
+        s = 0.0;
+        h = NaN;
+      } else {
+        if (l <= Math.floor(HSLMAX/2)) {
+          s = Math.round((delta*HSLMAX) / (max+min));
+        } else {
+          s = Math.round((delta*HSLMAX) / (2*RGBMAX-max-min));
+        }
+        var rdelta = Math.round((max-r)*Math.floor(HSLMAX/6) / delta);
+        var gdelta = Math.round((max-g)*Math.floor(HSLMAX/6) / delta);
+        var bdelta = Math.round((max-b)*Math.floor(HSLMAX/6) / delta);
+
+        if (r == max) {
+          h = bdelta - gdelta;
+        } else if (g == max) {
+          h = Math.floor(HSLMAX/3) + rdelta - bdelta;
+        } else {
+          h = Math.floor((2*HSLMAX)/3) + gdelta - rdelta;
+        }
+        if (h < 0) {
+          h += HSLMAX;
+        } else if (h > HSLMAX) {
+          h -= HSLMAX;
+        }
+      }
+//      alert("h: "+h+", s: "+s+", l: "+l);
+      return new Array(Math.round(h), Math.round(s), Math.round(l));
+    }
+
+    function hue_to_rgb(n1, n2, hue)
+    {
+      var HSLMAX = 255;
+      var RGBMAX = 255;
+
+      if (hue < 0) 
+        hue += HSLMAX;
+
+      if (hue > HSLMAX)
+        hue -= HSLMAX;
+
+      if (hue < Math.floor(HSLMAX/6)) {
+//        alert("hue_to_rgb: 1");
+        return ( n1 + Math.round( (n2-n1)*hue/Math.floor(HSLMAX/6)));
+      } else if (hue < Math.floor(HSLMAX/2)) {
+//        alert("hue_to_rgb: 2");
+        return n2;
+      } else if (hue < Math.floor((HSLMAX*2)/3)) {
+//        alert("hue_to_rgb: 3");
+        return ( n1 + Math.round((n2-n1)*(((HSLMAX*2)/3)-hue)/Math.floor(HSLMAX/6)) );
+      } else {
+//        alert("hue_to_rgb: 4");
+        return n1;
+      }
+    }
+
+    function hsl_to_rgb(h, s, l)
+    { 
+      var HSLMAX = 255;
+      var RGBMAX = 255;
+    
+      var r = NaN;
+      var g = NaN;
+      var b = NaN;
+      var magic1 = NaN;
+      var magic2 = NaN;
+
+      if (s == 0) {
+        r = (l*RGBMAX)/HSLMAX;
+        g = (l*RGBMAX)/HSLMAX;
+        b = (l*RGBMAX)/HSLMAX;
+      } else {
+        if (l <= Math.floor(HSLMAX/2)) {
+          magic2 = Math.round(l*(HSLMAX + s) / HSLMAX);
+        } else {
+          magic2 = l+s - Math.round((l*s)/HSLMAX);
+        }
+        magic1 = 2*l-magic2;
+
+        r = Math.round(hue_to_rgb(magic1, magic2, h+Math.floor(HSLMAX/3))*RGBMAX/HSLMAX);
+        g = Math.round(hue_to_rgb(magic1, magic2, h)*RGBMAX/HSLMAX);
+        b = Math.round(hue_to_rgb(magic1, magic2, h-Math.floor(HSLMAX/3))*RGBMAX/HSLMAX);
+
+      }
+//      alert("r: "+r+", g: "+g+", b: "+b);
+      return new Array(r,g,b);
     }
   ]]></script>
 
