@@ -24,7 +24,8 @@ Modified Searches
 
 Enhancements
 
-*
+* Added InstallationDirectory property to Launcher
+* Added FindSubMenu, FindMenuItem, GetMenuItemCount, InsertMenuItem, InsertSeparator, InsertSubMenu functions to MenuBuilder
 
 Bug Fixes
 
@@ -32,8 +33,6 @@ Bug Fixes
 * Remove HTML tags from menu item search names
 * Stop indicating as '[local]' aliases defined in aliases.txt
 * Sub categories and searches are now sorted properly in the help menu
-* Added InstallationDirectory property to Launcher
-* Added FindSubMenu, FindMenuItem, GetMenuItemCount, InsertMenuItem, InsertSeparator, InsertSubMenu functions to MenuBuilder
 
 
 -- What's new for 3.1.4 (October 3, 2002)
