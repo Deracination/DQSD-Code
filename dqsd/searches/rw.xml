@@ -1,0 +1,35 @@
+<search function="rw">
+  <name>Ripe Whois Database</name>
+  <category>Computers<category>Networking</category></category>
+  <contributor>MLL</contributor>
+  <link>http://www.ripe.net/ripencc/pub-services/db/whois/whois.html</link>
+  <description>Search the Ripe Whois Database for IP addresses
+  </description>
+  <form name="rwf"
+        method="get"
+        action="http://www.ripe.net/perl/whois">
+    <input type="hidden" name="form_type" value="simple" />
+    <input type="hidden" name="full_query_string" value="" />
+    <input type="hidden" name="searchtext" value="" />
+  </form>
+  <script><![CDATA[
+    function rw(q)
+    {
+      if( nullArgs("rw", q) )
+        return;
+
+      document.rwf.searchtext.value = q;
+
+      submitForm(rwf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 01/13/03 at 20:20:02
+    by Dave's Quick Search Deskbar Search Wizard version 1.0.1 ,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>

@@ -13,6 +13,7 @@ New Searches
 * cs - ConsumerSearch.com search meta-reviews of other reviews (from Gregory Krohne)
 * hb - Hotbot.com search (from Gregory Krohne)
 * otn - Oracle Technology Network search (from Gregory Krohne)
+* rw - Search the Ripe Whois Database for IP addresses
 
 Bug Fixes
 
