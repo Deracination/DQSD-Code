@@ -4,7 +4,7 @@
     European specialist job search site. The /market switch is required to select the area to search.<br/>
     <div class="helpboxDescLabels">Usage:</div>
   	<table class="helpboxDescTable">
-  		<tr><td>js &lt;<i>job</i>&gt; /market:&lt;<i>market</i>&gt; [{/permanent | /contract}] [/latest]</td></tr>
+  		<tr><td>js &lt;<i>job</i>&gt; /market:&lt;<i>market</i>&gt; [{/permanent | /contract}] [/latest] [/1 | /2 | /3 | /4 | /5]</td></tr>
   	</table>
     <div class="helpboxDescLabels">Switches:</div>
   	<table class="helpboxDescTable">
@@ -24,11 +24,17 @@
       <tr><td>/permanent</td><td> - </td><td>Search for permanent positions only.</td></tr>
       <tr><td>/contract</td><td> - </td><td>Search for temporary/contract positions only.</td></tr>
       <tr><td>/latest</td><td> - </td><td>Search for the latest additions instead of the best overall matches.</td></tr>
+      <tr><td>/1</td><td> - </td><td>Within 1 working day.</td></tr>
+      <tr><td>/2</td><td> - </td><td>Within 2 working days.</td></tr>
+      <tr><td>/3</td><td> - </td><td>Within 3 working days.</td></tr>
+      <tr><td>/4</td><td> - </td><td>Within 4 working days.</td></tr>
+      <tr><td>/5</td><td> - </td><td>Within 5 working days.</td></tr>
   	</table>
     <div class="helpboxDescLabels">Examples:</div>
     <table class="helpboxDescTable">
   		<tr><td>js programmer /market:it</td></tr>
-      <tr><td>js legal secretary /market:leg /permanent /latest</td></tr>
+  		<tr><td>js delphi /market:it /latest /1</td></tr>
+		<tr><td>js legal secretary /market:leg /permanent /latest</td></tr>
   	</table>
   </description>
   <category>Other</category>
@@ -55,7 +61,7 @@
         return false;
       else
       {
-        var args = parseArgs(q, "market, contract, permanent, latest");
+        var args = parseArgs(q, "market, contract, permanent, latest, 1, 2, 3, 4, 5");
         
         if( args.switches.length > 0 )
           for( var j=0; j<args.switches.length; j++ )
@@ -74,6 +80,11 @@
               case "contract": document.jsf.jobType.value = "C"; break;
               case "permanent": document.jsf.jobType.value = "P"; break;
               case "latest": document.jsf.order.value = "DateTime"; break;
+              case "1": document.jsf.d.value = "1"; break;
+              case "2": document.jsf.d.value = "2"; break;
+              case "3": document.jsf.d.value = "3"; break;
+              case "4": document.jsf.d.value = "4"; break;
+              case "5": document.jsf.d.value = "5"; break;
             }
         
         switch( jobMarket )
