@@ -3,7 +3,7 @@
   <description>Search Sun's JDK Javadoc. Uses Google.
     <div class="helpboxDescLabels">Example:</div>
     <table class="helpboxDescTable">
-  		<tr><td>php fopen</td></tr>
+  		<tr><td>jdk fopen</td></tr>
   	</table>
   </description>
   <link>http://java.sun.com/j2se/1.4/docs/api/</link>
