@@ -2,9 +2,17 @@
   <name>AcronymFinder</name>
   <description>
     Find an acronym on AcronymFinder.<br/>
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/exact</td><td> - </td><td>Exact Match (default)</td></tr>
+      <tr><td>/reverse</td><td> - </td><td>Reverse Lookup (boolean AND keyword searches in acronym meanings)</td></tr>
+      <tr><td>/begins_with</td><td> - </td><td>The search uses a wildcard character at the end of the acronym you type, so entering "AFR" would return all acronyms beginning with AFR -- AFR, AFRA, AFRC, AFREP, etc.</td></tr>
+      <tr><td>/wildcard</td><td> - </td><td>To find meanings for any acronym containing the search string.  A search for AFR using this option would return meanings for AFR, AFRT, MAFR, etc.</td></tr>
+    </table>
     <div class="helpboxDescLabels">Example:</div>
     <table class="helpboxDescTable">
   		<tr><td>af SCUBA</td></tr>
+      <tr><td>af laugh loud /rev</td></tr>
   	</table>
   </description>
   <category>Reference</category>
@@ -24,11 +32,33 @@
     {
       if( nullArgs("af", q) )
         return false;
-      else
+        
+      document.aff.String.value = "exact";
+
+      var args = parseArgs(q, "exact, begins_with, wildcard, reverse" );
+      if ( args.q == "" )
       {
-        document.aff.Acronym.value = q;
-        submitForm(aff);
+        nullArgs( "af", "?" );
+        return false;
       }
+      else if ( args.switches.length >= 1 )
+      {
+        q = args.q;
+        switch( args.switches[0].name )
+        {
+          case "begins_with":
+            document.aff.String.value = "off"; break;
+          case "wildcard":
+            document.aff.String.value = "wildcard"; break;
+          case "reverse":
+            document.aff.String.value = "on"; break;
+          case "exact":
+          default:
+        }
+      }
+        
+      document.aff.Acronym.value = q;
+      submitForm(aff);
     }
   ]]></script>
 </search>
