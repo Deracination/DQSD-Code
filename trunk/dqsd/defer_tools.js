@@ -131,11 +131,11 @@ function isURL(t)
 function parseArgs(q, expectedSwitches, expandSwitches)
 {
   // In case the caller does not pass in a value
-  if (expandSwitches == undefined)
+  if (typeof expandSwitches == 'undefined')
     expandSwitches = 1;
 
   // In case the caller uses a comma-space delimited string
-  if (expectedSwitches[0] == undefined)
+  if (typeof expectedSwitches[0] == 'undefined')
     expectedSwitches = expectedSwitches.split(', ');
 
   var switches = [];
