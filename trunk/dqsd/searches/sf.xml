@@ -13,6 +13,7 @@
       <tr><td>/people</td><td> - </td><td>People</td></tr>
       <tr><td>/project</td><td> - </td><td>Project's summary page</td></tr>
       <tr><td>/software [default]</td><td> - </td><td>Software</td></tr>
+      <tr><td>/status</td><td> - </td><td>Site Status</td></tr>
     </table>
     <div class="helpboxDescLabels">Examples:</div>
     <table class="helpboxDescTable">
@@ -22,6 +23,7 @@
       <tr><td>sf /cvs dqsd</td></tr>
       <tr><td>sf /list dqsd-users</td></tr>
       <tr><td>sf /fo java</td></tr>
+      <tr><td>sf /status cvs</td></tr>
     </table>
   </description>
   <category>Computers<category>Programming</category></category>
@@ -43,7 +45,7 @@
         return false;
 
       var exact = false;
-      var args = parseArgs(q, "exact, new, software, people, freshmeat, project, cvs, list, foundry");
+      var args = parseArgs(q, "exact, new, software, people, freshmeat, project, cvs, list, foundry, status");
       if( args.switches.length == 1 )
       {
         switch( args.switches[0].name )
@@ -67,6 +69,13 @@
           case "list":
             var listtype = args.switch_val["list"].toLowerCase();
             openSearchWindow("https://lists.sourceforge.net/lists/" + ( listtype.length && ( listtype == "admin".substr(0, listtype.length) ) ? "admin/" : "listinfo/" ) + args.q); return false;
+            break;
+          case "status":
+            statusUrl =	"http://sourceforge.net/docman/display_doc.php?docid=2352&group_id=1";
+            if (args.q != "")
+              statusUrl += "#" + args.q.toLowerCase();
+            openSearchWindow(statusUrl);
+            return false;
             break;
           default:
             document.sfsearch.section.value = args.switches[0].name; break;
