@@ -419,7 +419,7 @@
         return;
 
       document.surhelpf.surname.value = genealogy_parse_surname(q);
-      submitForm(surhelpf);
+      genealogy_submitForm(surhelpf, "surhelp", q);
     }
   ]]></script>
   <copyright>

@@ -30,7 +30,7 @@
         return;
 
       document.cyndif.query.value = q;
-      submitForm(cyndif);
+      genealogy_submitForm(cyndif, "cyndi", q);
     }
   ]]></script>
   <copyright>

@@ -89,7 +89,7 @@
         return;
 
       if (!genealogy_check_lib_version("1.3")) 
-	return;
+	    return;
 
       var state = genealogy_parse_place_state(q);
       var county = genealogy_parse_place_county(q);
@@ -98,7 +98,7 @@
 
       document.cens1930f.lstStates.value = stateAbbrev+stateFullname;
 
-      submitForm(cens1930f);
+      genealogy_submitForm(cens1930f, "cens1930", q);
     }
   ]]></script>
   <copyright>

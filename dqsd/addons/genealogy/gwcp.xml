@@ -29,7 +29,7 @@
       if (search_place_num >= 0) {
         search_url = links[search_place_num];
       }
-     openSearchWindow(search_url);
+      genealogy_openSearchWindow(search_url, "gwcp", q);
     }
     ]]>
   </script>

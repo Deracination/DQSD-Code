@@ -66,13 +66,13 @@
       
       if (args.q.match(/^[0-9\-]{9,11}$/)) {
         document.ssdif.ssn.value = args.q.replace(/[^0-9]/g, "");
-	document.ssdif.lastname.value = "";
-	document.ssdif.firstname.value = "";
+	    document.ssdif.lastname.value = "";
+	    document.ssdif.firstname.value = "";
       } else {
         document.ssdif.lastname.value = genealogy_parse_surname(args.q);
         document.ssdif.firstname.value = genealogy_parse_givenname(args.q);
       }
-      submitForm(ssdif);
+      genealogy_submitForm(ssdif, "ssdi", q);
     }
   ]]></script>
   <copyright>

@@ -26,7 +26,7 @@
         return false;
 
       document.libwebf.search.value = q;
-      submitForm(libwebf);
+      genealogy_submitForm(libwebf, "libweb", q);
     }
     ]]>
   </script>

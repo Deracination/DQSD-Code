@@ -20,7 +20,7 @@
         return false;
 
       if (!genealogy_check_lib_version("1.3")) {
-	return false;
+	    return false;
       }
 
       var state = genealogy_parse_place_state(q);
@@ -31,14 +31,14 @@
       var search_place_num = genealogy_lookup_place(state);
       if (search_place_num >= 0) {
         search_url = links[search_place_num];
-	if (county.length > 0) {
-	  var linkToOpen = genealogy_get_page_link_named(search_url, county);
-	  if (linkToOpen.length > 0) {
+	    if (county.length > 0) {
+	      var linkToOpen = genealogy_get_page_link_named(search_url, county);
+	      if (linkToOpen.length > 0) {
             search_url = linkToOpen;
-	  }
-	}
+	      }
+	    }
       }
-      openSearchWindow(search_url);
+      genealogy_openSearchWindow(search_url, "interment", q);
     }
     ]]>
   </script>

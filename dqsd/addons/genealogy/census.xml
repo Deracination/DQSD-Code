@@ -34,15 +34,15 @@
       var search_place_num = genealogy_lookup_place(state);
       if (search_place_num >= 0) {
         search_url = census_links[search_place_num];
-	if (county.length > 0) {
-	  var webpage = genealogy_get_webpage(search_url);
-	  var links = genealogy_get_page_links(webpage, county);
-	  if (links != null && links.length > 0) {
-		search_url = genealogy_build_url(search_url, genealogy_link_get_href(links[0]));
-	  }
-	}
+	    if (county.length > 0) {
+	      var webpage = genealogy_get_webpage(search_url);
+	      var links = genealogy_get_page_links(webpage, county);
+	      if (links != null && links.length > 0) {
+		    search_url = genealogy_build_url(search_url, genealogy_link_get_href(links[0]));
+	      }
+	    }
       }
-      openSearchWindow(search_url);
+      genealogy_openSearchWindow(search_url, "census", q);
     }
     ]]>
   </script>

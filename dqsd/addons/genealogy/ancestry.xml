@@ -99,7 +99,7 @@
 
       document.ancestryf.gsfn.value = genealogy_parse_givenname(q);
       document.ancestryf.gsln.value = genealogy_parse_surname(q);
-      submitForm(ancestryf);
+      genealogy_submitForm(ancestryf, "ancestry", q);
     }
   ]]></script>
   <copyright>

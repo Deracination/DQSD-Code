@@ -54,12 +54,12 @@
       if (bride_name != "") {
         document.wsmarrbf.b_firstname.value = genealogy_parse_givenname(bride_name);
         document.wsmarrbf.b_lastname.value = genealogy_parse_surname(bride_name);
-        submitForm(wsmarrbf);
+        genealogy_submitForm(wsmarrbf, "wsmarr", q);
       }
       if (groom_name != "") {
         document.wsmarrgf.g_firstname.value = genealogy_parse_givenname(groom_name);
         document.wsmarrgf.g_lastname.value = genealogy_parse_surname(groom_name);
-        submitForm(wsmarrgf);
+        genealogy_submitForm(wsmarrgf, "wsmarr", q);
       }
       if (groom_name == "" && bride_name == "") {
         nullArgs("wsmarr", "?");

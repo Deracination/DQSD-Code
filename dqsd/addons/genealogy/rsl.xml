@@ -38,13 +38,13 @@
         document.rslf.location.value = "";
       }
       if (genealogy_hasArg(args, "period")) {
-	document.rslf.period.value = args.switch_val["period"];
+	    document.rslf.period.value = args.switch_val["period"];
       } else {
         document.rslf.period.value = "All";
       }
       document.rslf.type.value = "Surname";
       document.rslf.surname.value = genealogy_parse_surname(args.q);
-      submitForm(rslf);
+      genealogy_submitForm(rslf, "rsl", q);
     }
   ]]></script>
   <copyright>

@@ -70,45 +70,45 @@
         if (query == "") {
           query = args.q;
         } 
-	document.genforumf.find.value = query;
-	submitForm(genforumf);
+    	document.genforumf.find.value = query;
+	    genealogy_submitForm(genforumf, "gfm", q);
       } else {
         var query = "";
-	if (genealogy_hasArg(args, "query")) {
+    	if (genealogy_hasArg(args, "query")) {
            query = args.switch_val["query"];
-	}
-	if (query == "") {
+	    }
+	    if (query == "") {
           query = args.q;
-	}
+	    }
         var forum_name = "";
         if (genealogy_hasArg(args, "place")) {
           var place_value = args.switch_val["place"].toLowerCase();
-	  var state_abbrev = genealogy_lookup_place_abbrev(genealogy_parse_place_state(place_value)).toLowerCase();
-	  if (state_abbrev != "") {
-		forum_name = state_abbrev;
-		var county = genealogy_parse_place_county(place_value).replace(/\s/g, "").toLowerCase();
-		if (county != "") {
-		  forum_name += "/" + county;
-		}
-	  }
+	      var state_abbrev = genealogy_lookup_place_abbrev(genealogy_parse_place_state(place_value)).toLowerCase();
+	      if (state_abbrev != "") {
+		    forum_name = state_abbrev;
+		    var county = genealogy_parse_place_county(place_value).replace(/\s/g, "").toLowerCase();
+		    if (county != "") {
+		      forum_name += "/" + county;
+		    }
+	      }
         } else if (genealogy_hasArg(args, "surname")) {
           forum_name = args.switch_val["surname"].replace(/\s/g, "").toLowerCase();
-	}
-	if (query == "") {
-	   // goto forum
-	   var search_url = "http://genforum.genealogy.com/";
-	   if (forum_name != "") {
-	     search_url += forum_name+"/";
-	   }
-	   openSearchWindow(search_url);
-	} else {
-	   // search forum
-  	   document.genforumsearchf.forum.value = forum_name;
-   	   document.genforumsearchf.url.value = "/" + forum_name + "/";
-	   document.genforumsearchf.path.value = "/" + forum_name + "/";
-	   document.genforumsearchf.terms.value = query;
-	   submitForm(genforumsearchf);
-	}
+	    }
+	    if (query == "") {
+	      // goto forum
+	      var search_url = "http://genforum.genealogy.com/";
+	      if (forum_name != "") {
+	        search_url += forum_name+"/";
+	      }
+	      genealogy_openSearchWindow(search_url, "gfm", q);
+    	} else {
+	      // search forum
+  	      document.genforumsearchf.forum.value = forum_name;
+   	      document.genforumsearchf.url.value = "/" + forum_name + "/";
+	      document.genforumsearchf.path.value = "/" + forum_name + "/";
+	      document.genforumsearchf.terms.value = query;
+	      genealogy_submitForm(genforumsearchf, "gfm", q);
+	    }
       }
     }
   ]]></script>

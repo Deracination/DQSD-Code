@@ -153,7 +153,7 @@
         search_name += ", " + first_name;
       }
       document.illpf.name.value = search_name;
-      submitForm(illpf);
+      genealogy_submitForm(illpf, "illp", q);
     }
   ]]></script>
   <copyright>

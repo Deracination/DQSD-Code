@@ -36,7 +36,7 @@
         return;
 
       document.feefhsf.keywords.value = q;
-      submitForm(feefhsf);
+      genealogy_submitForm(feefhsf, "feefhs", q);
     }
   ]]></script>
   <copyright>

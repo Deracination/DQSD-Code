@@ -31,9 +31,9 @@
       if (parts.length > 1) {
         document.townf.state.value = genealogy_lookup_place_abbrev(genealogy_trim(parts[1]));
       } else {
-	document.townf.state.value = "";
+	    document.townf.state.value = "";
       }
-      submitForm(townf);
+      genealogy_submitForm(townf, "town", q);
     }
   ]]></script>
   <copyright>

@@ -32,18 +32,18 @@
   <script><![CDATA[
     function mi1870(q)
     {
-	if( nullArgs("mi1870", q) )
+  	  if( nullArgs("mi1870", q) )
 		return false;
 
-	var county = "";
-	var args = genealogy_parseArgs(q, "county");
-	if (genealogy_hasArg(args, "county")) {
+	  var county = "";
+	  var args = genealogy_parseArgs(q, "county");
+	  if (genealogy_hasArg(args, "county")) {
 		county = args.switch_val["county"];
-	}
-        document.mi1870f.County.value = county;
-	document.mi1870f.Last_Name.value = genealogy_parse_surname(args.q);
-	document.mi1870f.First_Name.value = genealogy_parse_givenname(args.q);
-	submitForm(mi1870f);
+	  } 
+      document.mi1870f.County.value = county;
+	  document.mi1870f.Last_Name.value = genealogy_parse_surname(args.q);
+	  document.mi1870f.First_Name.value = genealogy_parse_givenname(args.q);
+	  genealogy_submitForm(mi1870f, "mi1870", q);
     }
   ]]></script>
   <copyright>

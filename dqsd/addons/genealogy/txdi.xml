@@ -1,14 +1,4 @@
 <search function="txdi">
-  <COMMENT>
-
-    This search file was initially created by Dave's Quick Search Deskbar
-    Search Wizard version 0.4 (beta) on 08/18/02 at 21:18:42
-
-    Even though this XML search will probably load and is a healthy start
-    toward a completed search, please be aware that this search will probably
-    not work as is and will require some human inspection and modification.
-
-  </COMMENT>
   <name>Texas Death Index 1964-1998</name>
   <category>Genealogy</category>
   <contributor>Brent Beardsley</contributor>
@@ -94,12 +84,6 @@
       if( nullArgs("txdi", q) )
         return;
 
-      if( q == "" )
-      {
-        openSearchWindow("http://vitals.rootsweb.com/tx/death/search.cgi");
-        return;
-      }
-
       // FORM variables for txdif
       document.txdif.surname.value = q;
       //document.txdif.stype.value = "";
@@ -108,7 +92,7 @@
       //document.txdif.year.value = "";
       //document.txdif.sex.value = "";
 
-      submitForm(txdif);
+      genealogy_submitForm(txdif, "txdi", q);
     }
   ]]></script>
   <copyright>

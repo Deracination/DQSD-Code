@@ -22,7 +22,7 @@
         return false;
 
       if (!genealogy_check_lib_version("1.3")) {
-	return false;
+	    return false;
       }
 
       var search_url = "http://resources.rootsweb.com/USA/";
@@ -30,21 +30,21 @@
       var county = genealogy_parse_place_county(q);
       if (county.length < 1) {
         var links = genealogy_get_known_page_links(search_url);
-	var search_place_num = genealogy_lookup_place(state);
-	if (search_place_num >= 0) {
-	  search_url = links[search_place_num];
+	    var search_place_num = genealogy_lookup_place(state);
+	    if (search_place_num >= 0) {
+	      search_url = links[search_place_num];
         }
       } else {
-	var state_abbrev = genealogy_lookup_place_abbrev(state);
-	if (state_abbrev.length > 0) {
-	  search_url += (state_abbrev+".html");
-	  var linkToOpen = genealogy_get_page_link_named(search_url, county.replace(new RegExp("\\s","gim"), ""));
-	  if (linkToOpen.length > 0) {
+	    var state_abbrev = genealogy_lookup_place_abbrev(state);
+	    if (state_abbrev.length > 0) {
+	      search_url += (state_abbrev+".html");
+	      var linkToOpen = genealogy_get_page_link_named(search_url, county.replace(new RegExp("\\s","gim"), ""));
+	      if (linkToOpen.length > 0) {
             search_url = linkToOpen;
-	  }
-	}
+	      }
+	    }
       }
-      openSearchWindow(search_url);
+      genealogy_openSearchWindow(search_url, "rwres", q);
     }
     ]]>
   </script>

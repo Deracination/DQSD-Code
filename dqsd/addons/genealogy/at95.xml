@@ -43,7 +43,7 @@
 	  search_url = state_url;
 	}
       }
-      openSearchWindow(search_url);
+      genealogy_openSearchWindow(search_url, "at95", q);
     }
     ]]>
   </script>

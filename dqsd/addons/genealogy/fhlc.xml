@@ -84,7 +84,7 @@
     {
       document.fhlc_filmf.filmno.value = q.replace(/[^0-9]/g, "");
       document.fhlc_filmf.filmno.value = fhlc_Clean(document.fhlc_filmf.filmno.value);
-      submitForm(fhlc_filmf);
+      genealogy_submitForm(fhlc_filmf);
     }
 
     function fhlc_callno(q)
@@ -92,7 +92,7 @@
       document.fhlc_callnof.callno.value = q;
       document.fhlc_callnof.callno.value = fhlc_repPCWithStar(document.fhlc_callnof.callno.value);
       document.fhlc_callnof.callno.value = fhlc_repSpWithU(document.fhlc_callnof.callno.value);
-      submitForm(fhlc_callnof);
+      genealogy_submitForm(fhlc_callnof);
     }
 
     function fhlc_subject(q)
@@ -102,7 +102,7 @@
       document.fhlc_subjectf.presubject.value = fhlc_repSpWithU(document.fhlc_subjectf.presubject.value);
       document.fhlc_subjectf.subject.value = fhlc_Normalise(document.fhlc_subjectf.presubject.value);
       document.fhlc_subjectf.presubject.value = fhlc_ReplaceLigatures(document.fhlc_subjectf.presubject.value);
-      submitForm(fhlc_subjectf);
+      genealogy_submitForm(fhlc_subjectf);
     }
 
     function fhlc_author(q)
@@ -120,7 +120,7 @@
       document.fhlc_authorf.forename.value = fhlc_Normalise(document.fhlc_authorf.preforename.value);
       document.fhlc_authorf.presurname.value = fhlc_ReplaceLigatures(document.fhlc_authorf.presurname.value);
       document.fhlc_authorf.preforename.value = fhlc_ReplaceLigatures(document.fhlc_authorf.preforename.value);
-      submitForm(fhlc_authorf);
+      genealogy_submitForm(fhlc_authorf, "fhlc /author", q);
     }
 
     function fhlc_surname(q)
@@ -132,7 +132,7 @@
       document.fhlc_surnamef.presurname.value = fhlc_repSpWithU(document.fhlc_surnamef.presurname.value);
       document.fhlc_surnamef.surname.value = fhlc_Normalise(document.fhlc_surnamef.presurname.value);
       document.fhlc_surnamef.presurname.value = fhlc_ReplaceLigatures(document.fhlc_surnamef.presurname.value);
-      submitForm(fhlc_surnamef);
+      genealogy_submitForm(fhlc_surnamef, "fhlc /surname", q);
     }
 
     function fhlc_place(q)
@@ -146,14 +146,14 @@
 
       if (county == "")
       {
-	document.fhlc_placef.PLACE.value = state;
+    	document.fhlc_placef.PLACE.value = state;
         document.fhlc_placef.PARTOF.value = "";
-	document.fhlc_placef.prePLACE.value = state;
+	    document.fhlc_placef.prePLACE.value = state;
         document.fhlc_placef.prePARTOF.value = "";
       } else {
-	document.fhlc_placef.PLACE.value = county;
+	    document.fhlc_placef.PLACE.value = county;
         document.fhlc_placef.PARTOF.value = state;
-	document.fhlc_placef.prePLACE.value = county;
+	    document.fhlc_placef.prePLACE.value = county;
         document.fhlc_placef.prePARTOF.value = state;
       }
 
@@ -165,7 +165,7 @@
       document.fhlc_placef.PARTOF.value = fhlc_Normalise(document.fhlc_placef.prePARTOF.value);
       document.fhlc_placef.prePLACE.value = fhlc_ReplaceLigatures(document.fhlc_placef.prePLACE.value);
       document.fhlc_placef.prePARTOF.value = fhlc_ReplaceLigatures(document.fhlc_placef.prePARTOF.value);
-      submitForm(fhlc_placef);
+      genealogy_submitForm(fhlc_placef, "fhlc /place", q);
     }
 
     function fhlc(q)
@@ -175,8 +175,8 @@
       
       var args = genealogy_parseArgs(q, "author, callno, film, place, subject, surname");
       if( args.switches.length != 1 ) {
-	nullArgs("fhlc", "?");
-	return;
+    	nullArgs("fhlc", "?");
+	    return;
       }
       switch(args.switches[0].name)
       {

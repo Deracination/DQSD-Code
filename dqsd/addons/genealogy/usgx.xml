@@ -21,7 +21,7 @@
         return false;
       
       if (!genealogy_check_lib_version("1.3")) {
-	return false;
+	    return false;
       }
 
       var search_url = "http://www.genexchange.org/";
@@ -30,14 +30,14 @@
       var state_abbrev = genealogy_lookup_place_abbrev(state).toLowerCase();
       if (state_abbrev.length > 0) {
         if (county.length > 0) {
-	  search_url += "county.cfm?state="+state_abbrev+"&amp;County="+county;
-	} else {
-	  search_url += "state.cfm?state="+state_abbrev;
-	}
+	      search_url += "county.cfm?state="+state_abbrev+"&amp;County="+county;
+	    } else {
+	      search_url += "state.cfm?state="+state_abbrev;
+	    }
       } else {
         search_url += "us.cfm";
       }
-      openSearchWindow(search_url);
+      genealogy_openSearchWindow(search_url, "usgx", q);
     }
     ]]>
   </script>

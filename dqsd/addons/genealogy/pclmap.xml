@@ -26,7 +26,7 @@
         state_name = "united_states";
       }
       var search_url = "http://www.lib.utexas.edu/maps/"+state_name+".html";
-      openSearchWindow(search_url);
+      genealogy_openSearchWindow(search_url, "pclmap", q);
     }
     ]]>
   </script>

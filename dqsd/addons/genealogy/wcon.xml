@@ -28,7 +28,7 @@
 
       document.wconf.surname.value = genealogy_parse_surname(q);
       document.wconf.given.value = genealogy_parse_givenname(q);
-      submitForm(wconf);
+      genealogy_submitForm(wconf, "wcon", q);
     }
   ]]></script>
   <copyright>

@@ -27,7 +27,7 @@
       if (search_place_num >= 0) {
         webpage = links[search_place_num];
       }
-      openSearchWindow(webpage);
+      genealogy_openSearchWindow(webpage, "fiftys", q);
     }
     ]]>
   </script>

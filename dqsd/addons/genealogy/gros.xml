@@ -33,18 +33,18 @@
 
       var args = genealogy_parseArgs(q, "from, to");
       if (genealogy_hasArg(args, "from")) {
-	document.grosf.var_year_from.value = args.switch_val["from"];
+    	document.grosf.var_year_from.value = args.switch_val["from"];
       } else {
-	document.grosf.var_year_from.value = "1553";
+	    document.grosf.var_year_from.value = "1553";
       }
 
       if (genealogy_hasArg(args, "to")) {
-	document.grosf.var_year_to.value = args.switch_val["to"];
+	    document.grosf.var_year_to.value = args.switch_val["to"];
       } else {
-	document.grosf.var_year_to.value = "1951";
+	    document.grosf.var_year_to.value = "1951";
       }
       document.grosf.var_surname.value = genealogy_parse_surname(args.q);
-      submitForm(grosf);
+      genealogy_submitForm(grosf, "gros", q);
     }
   ]]></script>
   <copyright>

@@ -193,7 +193,7 @@
       }
       document.blmf.f6.value = genealogy_parse_surname(args.q);
       document.blmf.f4.value = genealogy_parse_givenname(args.q);
-      submitForm(blmf);
+      genealogy_submitForm(blmf, "blm", q);
     }
   ]]></script>
   <copyright>
