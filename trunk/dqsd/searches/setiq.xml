@@ -6,7 +6,7 @@
     <table class="helpboxDescTable">
       <tr><td>setiq &lt;<i>password</i>&gt; [/server:&lt;<i>serveraddress</i>&gt; [/port:&lt;<i>portnumber</i>&gt;]] [/connect[:&lt;<i>duration</i>&gt;]] [/display:&lt;<i>page</i>&gt;]</td></tr>
     </table>
-    <a class="helpboxDescLabels">Switches:</a><br />
+    <div class="helpboxDescLabels">Switches:</div>
     <table class="helpboxDescTable">
       <tr><td>/server:serveraddress</td><td> - </td><td>specify server IP address or name (127.0.0.1 by default)</td></tr>
       <tr><td>/port:portnumber</td><td> - </td><td>specify port number (5517 by default)</td></tr>
