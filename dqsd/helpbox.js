@@ -75,12 +75,12 @@ function about()
       var helparray = categories[categoryarray[i]];
       helparray.sort( searchCompare );
     
-      // Are there any enabled searches in this category?
-      for (var k = 0; k < helparray.length && (!helparray[k].enabled || helparray[k].nomenu); k++)
+      // Are there any searches without nomenu specified in this category?
+      for (var k = 0; k < helparray.length && helparray[k].nomenu; k++)
       {
       }
 
-      // If all the searches are disabled in the category, don't display this category
+      // If all the searches have nomenu specified in the category, don't display this category
       if ( k == helparray.length )
         continue;
 
