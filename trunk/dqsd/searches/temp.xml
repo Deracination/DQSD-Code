@@ -1,0 +1,46 @@
+<search function="temp">
+  <name>Temperature Converter</name>
+  <description>
+    Convert temperatures from Celsius to Fahrenheit and vice-versa. One switch is <b>required</b> to indicate the units the given value is in.<br/>
+    <a class="helpboxDescLabels">Switches:</a><br/>
+  	<table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">/celsius</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Convert the given Celsius value to Fahrenheit.</td></tr>
+  		<tr><td class="helpboxDescColumns">/fahrenheit</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Convert the given Fahrenheit value to Celsius.</td></tr>
+  	</table>
+    <a class="helpboxDescLabels">Example:</a><br/>
+    <table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">temp 22 /celsius</td></tr>
+  	</table>
+  </description>
+  <category>Functions</category>
+  <contributor>Ryan Edwards, Volker Wick</contributor>
+  
+  <script><![CDATA[
+    function temp(q) 
+    {
+      var args = parseArgs(q, "celsius, fahrenheit");
+      
+      if( nullArgs("temp",q) )
+        return false;
+      else if( args.switches.length == 1 )
+      {
+        switch( args.switches[0].name )
+        {
+          case "celsius":     // convert a celsius value to fahrenheit
+            document.deff.q.value = args.q + "\u00b0C = " + (9/5*args.q)+32 + "\u00b0F";
+            document.deff.q.createTextRange().select();
+            break;
+            
+          case "fahrenheit":  // convert a fahrenheit value to celsius
+            document.deff.q.value = args.q + "\u00b0F = " + (5/9)*(args.q-32) + "\u00b0C";
+            document.deff.q.createTextRange().select();
+            break;
+        }
+      }
+      else
+      {
+        qsfind("temp");
+      }
+    }
+  ]]></script>
+</search>
