@@ -109,6 +109,8 @@ function histeditmove(t, i)
   var filter = histedit[histarray.length];
   if (filter != null && filter.match(/^!\S/) && filter != "!!")
     filter = "\\b" + filter.substring(1);
+  else if (filter != null && filter.match(/\S!$/) && filter != "!!")
+    filter = "\\b" + filter.substring(0,filter.length - 1);
   else filter = "";
 
   while (scan < histarray.length && !histarray[scan].match(filter))
@@ -118,6 +120,26 @@ function histeditmove(t, i)
   }
 
   histcurr = scan;
+}
+
+function histsearch( t, shift )
+{
+  if ( histcurr == histarray.length )
+    searchPrefix = t;
+
+  var re = new RegExp( (shift ? "" : "^") + searchPrefix );
+  for ( var i = histcurr - 1; i != histcurr; i-- )
+  {
+    if ( i < 0 )
+      i = histarray.length - 1;
+
+    if ( histarray[i].match( re ) )
+    {
+      histcurr = i;
+      document.deff.q.value = currhistedit();
+      return;
+    }
+  }
 }
 
 
