@@ -18,6 +18,10 @@ Modified Searches
 * setiq - cosmetic change
 * wfb - standardized layout
 
+Enhancements
+
+* When dragging text to the search bar, if the shift key is held down when dropping the text the default search won't be automatically invoked.
+
 
 -- What's new for 3.1 (August 27, 2002)
 
