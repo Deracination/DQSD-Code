@@ -432,6 +432,8 @@ refreshIconsAtStartup = true;
 
 
 /* Include a banner/logo on the search bar?
+*  bannerasgo    Use 'go button' behavior for banner/logo button (click 
+*                performs search)?
 *  bannerurl     Identifies the resource to use, either a url or file 
 *                reference from the DQSD install directory.
 *  bannerwidth   Specify the width of the banner image, or "0" to autodetect
@@ -439,11 +441,14 @@ refreshIconsAtStartup = true;
 *  bannerlink    Specify a destination url/action when clicking banner/logo 
 *                without a search in the box
 */
+bannerasgo   = false;
 bannerurl    = "dqsd.gif"; // "http://reliableanswers.com/x/dqsd/dqsd.gif"
 bannerwidth  =  18;        // 0 := autodetect banner size
 bannerheight =  18;        // 0 := autodetect banner size
 bannerlink   = "http://www.dqsd.net/";  // examples:
+                                        //   (action)="floax";
                                         //   (action)="gg";
+                                        //   (action)="vbsx gg ClipboardGetText";
                                         //   (url)="http://www.dqsd.net/";
 
 /* Startup functions

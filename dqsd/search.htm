@@ -552,24 +552,74 @@ function okd()
 // clickgo: handle clicking the logo image
 function clickgo()
 {
-  var t = document.deff.q.value;
+  var t = document.deff.q;
   // remove local-default values
-  if (t == local(QUICK_SEARCH)  ||
-      t == local(HELP_TEXT)     || 
-      document.deff.q.className == "clock")
-    document.deff.q.value = "";
+  if (t.value == local(QUICK_SEARCH) ||
+      t.value == local(HELP_TEXT)    ||
+      t.className == "clock")
+    t.value = "";
+  //disable 'go button' functionality if requested
+  if (typeof bannerasgo == "undefined") { bannerasgo = true;}
+  if (bannerasgo == false)
+    t.value = "";
   //set default action/url
   if (typeof bannerlink == "undefined") { bannerlink = "";}
-  if (document.deff.q.value == "" && bannerlink != "") {
+  if (t.value == "" && bannerlink != "") {
     // detect URLs, filenames, etc to open directly
     if (direct(bannerlink)) return false;
     //not a url and not empty, must be a script
-    document.deff.q.value = bannerlink;
+    t.value = bannerlink;
   }
   //search now
-  def();
+  if (t.value != "" )
+    def();
 
   return false;
+}
+
+
+// toggleView: allows direct access to the toggled viewport object when open
+var toggleView;
+
+// toggleDisplayIsToggled: returns a boolean indicating if the display is in
+//                         the default state (false) or toggled state (true)
+function toggleDisplayIsToggled() {
+  var t = document.getElementById("defft");
+  if ( t.style.display == '' ){
+    return true;
+  } else {
+    return false;
+  }
+}
+
+// toggleDisplay: toggles the viewport between 'normal' view and the viewport
+//       this function takes one argument, which if passed, will be used to 
+//       set the contents of the viewport. If not passed or empty it will 
+//       reset the view to 'normal'.
+function toggleDisplay( contents ){
+  //set a reference to the toggleView-port
+  //this is necessary for direct search access, assuming you'd want to
+  toggleView = document.getElementById("defft");
+  var obj;
+  if (typeof contents == "undefined") {contents = ''}
+  if (contents == '' ) {
+  //show default
+    toggleView.style.display ='none';
+    obj = document.deff.q;
+    obj.style.display        ='';
+    obj = document.deff.gobutton;
+    obj.style.display        ='';
+
+  } else {
+  //show toggleView
+    toggleView.style.display ='';
+    toggleView.innerHTML     =contents;
+    obj = document.deff.q;
+    obj.style.display        ='none';
+    obj = document.deff.gobutton;
+    obj.style.display        ='none';
+
+  }
 }
 
 function prevnext(direction)
@@ -774,6 +824,12 @@ function reload()
         }
         -->
       </script>
+      <span id="defft" style="display: none;"
+        onmouseup="toggleDisplay('');"
+        onkeydown="toggleDisplay('');"
+        onkeypress="toggleDisplay('');">
+      </span>
+      <nobr>
       <script type='text/jscript'>
         <!--
         document.write(

@@ -8,6 +8,7 @@ Enhancements
 * Added explicit statement to store query in the windows autocomplete cache (MSKB:Q329156) (Shawn K. Hall)
 * Added startup commands (Neel Doshi)
 * Added ability (as DEFAULT) to display graphic icon/logo in search bar, which functions as a 'GO' button. (Shawn K. Hall)
+* Added a SPAN element to provide DQSD-based changes internal to the search, providing an alternate viewport. (Shawn K. Hall)
 * version.js now checks DQSD version asynchronously so as to not lock up explorer.exe (Kim Gräsman)
 
 Bug Fixes
@@ -49,6 +50,7 @@ New Searches
 * loc - Search the Library of Congress 'Thomas' system (Shawn K. Hall)
 * seq - Shows argument URLs in sequence in a browser window (Neel Doshi)
 * randomsearch - Searches a given engine for the definition of a random word (Neel Doshi)
+* rxlib - Search the Regular Expression library at RegExLib.com (Shawn K. Hall)
 
 Modified Searches
 
@@ -67,6 +69,7 @@ Modified Searches
 * tvg - Default url broken, modified search accordingly (Shawn K. Hall)
 * viam - Changed to fit site changes
 * sd - changed for a correct example
+* smlnk - Updated to take advantage of new server features (Shawn K. Hall)
 
 Removed Searches
 
