@@ -11,7 +11,7 @@
 	<tr><td> [search] </td><td> Search for this line/term </td></tr>
 	<tr><td> /asp </td><td> ASP language</td></tr>
 	<tr><td> /c </td><td> C language</td></tr>
-	<tr><td> /c# </td><td> C# language</td></tr>
+	<tr><td> /cs </td><td> C# language</td></tr>
 	<tr><td> /cpp </td><td> CPP language</td></tr>
 	<tr><td> /delphi </td><td> DELPHI language</td></tr>
 	<tr><td> /fortran </td><td> FORTRAN language</td></tr>
@@ -64,7 +64,7 @@
       if( nullArgs("koders", q) ){return false;}
 	document.kodersf['_:la'].value = "*";
 	document.kodersf['_:li'].value = "*";
-	var args = parseArgs(q, "asp, c, c#, cpp, delphi, fortran, java, javascript, perl, php, python, ruby, sql, tcl, vb, vb.net, afl, apsl, asl, cpl, gpl, ibmpl, iosl, lgpl, mpl10, mpl11, osl, psfl, spl, w3c, zll, zpl");
+	var args = parseArgs(q, "asp, c, cs, cpp, delphi, fortran, java, javascript, perl, php, python, ruby, sql, tcl, vb, vb.net, afl, apsl, asl, cpl, gpl, ibmpl, iosl, lgpl, mpl10, mpl11, osl, psfl, spl, w3c, zll, zpl");
 	if( q == "" )
 	  openSearchWindow("http://www.koders.com/");
       else if( args.switches.length >= 1 ){
@@ -73,7 +73,7 @@
 	  switch(sw.name){
 	    case "asp":		document.kodersf['_:la'].value = "ASP"; break;
 	    case "c":		document.kodersf['_:la'].value = "C"; break;
-	    case "c#":		document.kodersf['_:la'].value = "C#"; break;
+	    case "cs":		document.kodersf['_:la'].value = "C#"; break;
 	    case "cpp":		document.kodersf['_:la'].value = "Cpp"; break;
 	    case "delphi":	document.kodersf['_:la'].value = "Delphi"; break;
 	    case "fortran":	document.kodersf['_:la'].value = "Fortran"; break;
