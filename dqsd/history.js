@@ -86,7 +86,6 @@ function histeditmove(t, i)
     histedit[histcurr] = "";
     if (histcurr > 0) histcurr--;
   }
-
     
   // no movement
   if (i == 0) return;
@@ -96,7 +95,7 @@ function histeditmove(t, i)
   if (scan > histarray.length || scan < 0) return;
 
   var filter = histedit[histarray.length];
-  if (filter != null && filter.length > 1 && filter.match(/^!\w/))
+  if (filter != null && filter.match(/^!\S/) && filter != "!!")
     filter = "\\b" + filter.substring(1);
   else filter = "";
 
@@ -110,3 +109,33 @@ function histeditmove(t, i)
 }
 
 
+// recent changes a !foo textbox into whatever it means
+// it returns false if there is no match
+
+function recent()
+{
+  var t = document.deff.q.value;
+
+  if (!t.match(/^!\S/)) return true;
+
+  if (t == "!!")
+  {
+    histcurr = histarray.length;
+    histeditmove(t, -1);
+    if (histcurr == histarray.length) return false;
+  }
+  else
+  {
+    // this bit of code searches backwards for !foo
+ 
+    // set the filter then behave like a ctrl-p
+    histcurr = histarray.length;
+    histeditmove(t, -1);
+
+    // return true if no match
+    if (histcurr == histarray.length) return false;
+  }
+
+  document.deff.q.value = currhistedit();
+  return true;
+}

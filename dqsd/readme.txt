@@ -27,18 +27,30 @@ typing "?" and Enter in the deskbar.
 SOURCE CODE
 -----------
 
-The source code consists of:
+The sources are included with the distribution. If you want a
+very recent copy of the sources, the most current sources can be
+found on the dqsd project at sourceforge.net in CVS.
 
-readme.txt - this file
+A guide to a few of the source files:
+
 search.htm - the HTML code for the toolbar itself
-search.nsi - the NSIS install script for the toolbar
-search.ico - the icon for the install program
 search.xml - an XML file defining more types of searches
 preferences.js - an example preferences file
-dqsd.xml - a PAD file containing version information
+aliases.txt - a file containing shortcuts
+menu.txt - a file defining the menu contents
+*.js - functionality for the calulator, clock, translator, etc.
+src/search.nsi - the NSIS installation script for building dqsd.exe
+src/DQSDTools - the C++ source code for DQSDTools.dll
+src/build.cmd - a build script that does a full build.
 
-The NSI script may be compiled using the open source
-NSIS install script compiler, available at
+In order to build things, you need
+
+(1) Microsoft Visual C++ (version 6.0 is what I use). You don't need
+this is if you're not rebuilding DQSDTools.dll.
+
+(2) NSIS rebuilds dqsd.exe; to run the src/search.nsi script, you
+need to install the open source NSIS installation compiler,
+available at
 
 http://www.nullsoft.com/free/nsis/
 
