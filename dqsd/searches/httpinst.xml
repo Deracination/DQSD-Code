@@ -1,0 +1,150 @@
+<search function="httpinst">
+  <name>DQSD Remote Search Installer</name>
+  <description>
+    Install DQSD search from a given URL.<br/>
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/o</td><td> - </td><td>Overwrite existing search unconditionally.</td></tr>
+      <tr><td>/local</td><td> - </td><td>Put search in localsearches folder.</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>httpinst http://www.example.com/dqsd/coolsearch.xml</td></tr>
+  		<tr><td>httpinst /local http://www.example.com/dqsd/localsearch.xml</td></tr>
+  		<tr><td>httpinst /o http://www.example.com/dqsd/whois.xml</td></tr>
+  	</table>
+  </description>
+  <category>Functions</category>
+  <contributor>Kim Gr&#228;sman</contributor>
+  <email>kim@mvps.org</email>
+  <script><![CDATA[
+    function httpinst(q)
+    {
+      if (nullArgs("httpinst", q))
+        return false;
+
+    	// Parse arguments
+    	var destinationFolder = 'searches';
+    	var forceOverwrite = false;
+
+    	var args = parseArgs(q, "local, o");
+    	for(var n = 0; n < args.switches.length; ++n)
+    	{
+    		switch(args.switches[n].name)
+    		{
+    		case "local":
+    			destinationFolder = "localsearches";
+    			break;
+    		case "o":
+    			forceOverwrite = true;
+    			break;
+    		}
+    	}
+
+    	// Validate URL arg
+    	var searchUrl = isURL(args.q);
+    	if(!searchUrl)
+    	{
+    		alert(args.q + " does not appear to be a valid URL");
+    	}
+    	else
+    	{		
+    		// Call worker	
+    		installFromUrl(searchUrl, destinationFolder, forceOverwrite);
+    	}
+
+    	return true;
+    }
+
+    // Reads XML file from searchUrl and writes it to destFolder, silently overwriting existing files if forceOverwrite is true
+    function installFromUrl(searchUrl, destFolder, forceOverwrite)
+    {
+      try
+      { 
+    		// Parse out search filename
+    		var searchName = searchFilenameFromUrl(searchUrl);
+      	var outputFilePath = destFolder + "/" + searchName;
+
+      	// Request search xml from provided URL
+    	  var xmlHttp = new ActiveXObject("Microsoft.XmlHttp")
+    	  xmlHttp.open("GET", searchUrl, false);
+    	  xmlHttp.send();
+
+    		// Verify that response is well-formed
+    		var xmlDom = xmlHttp.responseXml;
+    	  if(xmlDom.parseError.errorCode != 0)
+    	  {
+    	    throw new Error(0, "Search is not well-formed.\nParse error: " + xmlDom.parseError.reason + " line: " + xmlDom.parseError.line.toString() + ", col: " + xmlDom.parseError.linepos.toString() + "\n" + xmlDom.parseError.srcText);
+    	  }
+
+        var cancelInstall = false;
+    		if(!forceOverwrite)
+    		{
+    			// Check if file already exists
+    			if(fileExists(outputFilePath))
+    			{
+    				cancelInstall = !confirm("There's already a search called " + searchName + " in your " + destFolder + " folder. Do you wish to overwrite it?");
+    			}
+    		}
+
+    		if(!cancelInstall)
+    		{
+    			// Save xml file to destination directory
+    			writeFile(outputFilePath, xmlHttp.responseText);
+
+    			// Tell the user all went well, and reload if asked to
+    			if(confirm("Successfully installed search " + searchName + ".\n\nWould you like to reload the toolbar?"))
+    			{
+    				reload();		
+    			}
+    		}
+      }
+      catch(e)
+      {
+    		alert("Unable to install search from " + searchUrl + ".\nError message: " + e.message);
+      }
+    }
+
+    // Gets the search filename from an URL (everything after the last slash, must end with .xml)
+    function searchFilenameFromUrl(searchUrl)
+    {
+    	var searchName = "";
+
+    	try
+    	{
+    		// Parse out search filename
+    		for(var p = searchUrl.length - 1; p > 0; --p)
+    		{
+    			if(searchUrl.charAt(p) == '/')
+    			{
+    				searchName = searchUrl.substr(p + 1, searchUrl.length - p);
+    				break;
+    			}
+    		}
+
+    		// May not be empty
+    		if(searchName == "")
+    		{
+    			throw new Error(0, "Failed to find search filename in URL: " + searchUrl);
+    		}
+
+    		// Must end with ".xml"
+    		if(!/\.xml$/.test(searchName))
+    		{
+    			throw new Error(0, "Not a valid search filename: " + searchName);
+    		}		
+    	}
+    	catch(e)
+    	{
+    		throw e;
+    	}
+
+    	return searchName;
+    }
+  ]]></script>
+
+  <copyright>
+	Copyright (c) 2003 Kim Gr&#228;sman
+	Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>
