@@ -1,7 +1,7 @@
 <html>
 <!--
 Dave's Quick Search Deskbar
-Version 2.5.1 dev version - December 23, 2001
+Version 2.5.0 - December 22, 2001
 
 Copyright (c) 2001 David Bau
 
@@ -171,8 +171,8 @@ calbackground="menu";
 caltextcolor="menutext";
 calhighbackground="highlight";
 calhightext="highlighttext";
-caltodaybackground="window";
-caltodaytext="windowtext";
+caltodaybackground="infobackground";
+caltodaytext="infotext";
 calgraybackground="window";
 calgraytext="graytext";
 calmonthstyle="font-family:Tahoma;font-size:8pt;font-weight:bold";
@@ -2176,14 +2176,14 @@ function buildpop()
   pophelp.document.body.style.background='menu';
 }
 
-popclose=false;
+pophelpisopen=false;
 
-function checkpop()
+function watchpopup(popvarname)
 {
-  popclose = pophelp.isOpen;
-  if (popclose)
+  var isopen = eval(popvarname + "isopen = " + popvarname + ".isOpen");
+  if (isopen)
   {
-    window.setTimeout("checkpop();", 100);
+    window.setTimeout("watchpopup('" + popvarname + "');", 100);
   }
 }
 
@@ -2196,9 +2196,10 @@ function showpop()
     return false;
 
   window.event.cancelBubble = true;
-  if (popclose)
+  if (pophelpisopen)
   {
     pophelp.hide();
+    return false;
   }
   else
   {
@@ -2211,9 +2212,9 @@ function showpop()
     }
     pophelp.show(document.body.clientWidth - popwidth, -popheight, popwidth, popheight, document.body);
     window.setTimeout("queuefocus();", 0);
+    watchpopup("pophelp");
+    return false;
   }
-  checkpop();
-  return false;
 }
 
 function queuefocus()
@@ -3225,27 +3226,48 @@ var DAYS_OF_WEEK = 7;    // "constant" for number of days in a week
 var DAYS_OF_MONTH = 31;    // "constant" for number of days in a month
 
 var Calendar = new Date(); //stores the date the user is looking at
+var popcal = null;
+var popcalisopen = false;
 
 function showcal()
 {
   if (ie_version < 5.5)
     return true;
 
-  popcal = window.createPopup();
-
-  popcal.document.body.innerHTML = buildcal();
-  popcal.document.body.style.border="outset 2px";
-  popcal.document.body.style.background=calbackground;
-  popcal.document.body.style.color=caltextcolor;
-
+  if (popcal != null)
+  {
+    if (popcalisopen)
+    {
+      popcal.hide();
+      return false;
+    }
+  }
+  else
+  {
+    popcal = window.createPopup();
+    popcal.document.body.innerHTML = buildcal();
+    popcal.document.body.style.border="outset 2px";
+    popcal.document.body.style.background=calbackground;
+    popcal.document.body.style.color=caltextcolor;
+  }
   popcal.show(document.body.clientWidth - 179, -148, 179, 148, document.body);
-
+  watchpopup("popcal");
   return false;
 }
+
+calupdatetimer = null;
 
 function movecal(nMths)
 {
   Calendar.setMonth(Calendar.getMonth()+nMths);
+  popcal.document.all["calhead"].innerHTML = buildcalheader();
+  if (calupdatetimer == null)
+    calupdatetimer = setTimeout("updatecal()", 0);
+}
+
+function updatecal()
+{
+  calupdatetimer = null;
   popcal.document.body.innerHTML = buildcal();
 }
 
@@ -3253,13 +3275,18 @@ function opencal(d)
 {
   if (defaultcal)
   {
+    if (popcal)
+      popcal.hide();
     eval(defaultcal + '(' + d + ')');
   }
 }
 
 function yhocal(dat)
 {
-  // For now, let's use the yahoo calendar...
+  // adjust for the local time zone
+  dat = dat - (new Date()).getTimezoneOffset() * 1000 * 60;
+
+  // round down to closest day (in minutes)
   dat = Math.floor(dat / 60 / 60 / 24 / 1000) * 60 * 60 * 24;
   openNamedSearchWindow("http://calendar.yahoo.com/srt:0/?v=0&t=" + dat, "dqsdcal");
 }
@@ -3309,6 +3336,12 @@ function evcal(dat)
 
 
 
+function buildcalheader()
+{
+  return '<CENTER>' + getMonthName(Calendar.getMonth()+1)  + ' ' + Calendar.getFullYear() + '</CENTER>';
+}
+
+
 function buildcal()
 {
   var year = Calendar.getFullYear();	    // Returns year in 4 digits
@@ -3336,7 +3369,9 @@ function buildcal()
                '";this.style.color="' + calhightext +
                '"; onmouseout=this.style.background="' + caltodaybackground +
                '";this.style.color="' + caltodaytext +
-               '" onmouseup=parent.opencal(' + d + ');' : '') +
+               '" onmouseup=parent.opencal(' + d + ');' +
+               'this.style.background="' + caltodaybackground +
+               '";this.style.color="' + caltodaytext + '"' : '') +
            '><CENTER>';
   }
   var today_end   = '</CENTER></TD>';
@@ -3347,7 +3382,9 @@ function buildcal()
                '";this.style.color="' + calhightext +
                '"; onmouseout=this.style.background="' + calbackground +
                '";this.style.color="' + calgraytext +
-               '" onmouseup=parent.opencal(' + d + ');' : '') +
+               '" onmouseup=parent.opencal(' + d + ');'  +
+               'this.style.background="' + calbackground +
+               '";this.style.color="' + calgraytext + '"' : '') +
            '><CENTER>';
   }
   var gray_end   = '</CENTER></TD>';
@@ -3358,7 +3395,9 @@ function buildcal()
                '";this.style.color="' + calhightext +
                '"; onmouseout=this.style.background="' + calbackground +
                '";this.style.color="' + caltextcolor +
-               '" onmouseup=parent.opencal(' + d + ');' : '') +
+               '" onmouseup=parent.opencal(' + d + ');' +
+               'this.style.background="' + calbackground +
+               '";this.style.color="' + caltextcolor + '"' : '') +
            '><CENTER>';
   }
   var TD_end = '</CENTER></TD>';
@@ -3368,7 +3407,7 @@ function buildcal()
   cal += '<TD><TABLE ALIGN=LEFT HEIGHT=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR style=font:menu>';
   cal += '<TD WIDTH=0 title="' + local(PREV_YEAR) +
          '" style="cursor:hand;' + calnavstyle +
-         '" onmouseup="parent.movecal(-12);" ' +
+         '" onmouseup="parent.movecal(-12);return false;" ' +
          'onmouseover=this.style.background="' + calhighbackground +
          '";this.style.color="' + calhightext +
          '" onmouseout=this.style.background="' + calbackground +
@@ -3384,7 +3423,7 @@ function buildcal()
          '"><CENTER>&nbsp;&lt;&nbsp;</CENTER></TD></TR></TABLE></TD>';
   if (weekday <0)
   {
-    cal += '<TD title="' + local(GO_TO_TODAY) +
+    cal += '<TD ID=calhead title="' + local(GO_TO_TODAY) +
            '" style="cursor:hand;' + calmonthstyle +
            '" onmouseup="parent.Calendar=new Date();parent.movecal(0);" ' +
            'onmouseover=this.style.background="' + calhighbackground +
@@ -3395,11 +3434,11 @@ function buildcal()
   }
   else
   {
-    cal += '<TD COLSPAN="' + (DAYS_OF_WEEK - 2) +
-           '" style="' + calmonthstyle + '"><CENTER>';
+    cal += '<TD ID=calhead COLSPAN="' + (DAYS_OF_WEEK - 2) +
+           '" style="' + calmonthstyle + '">';
   }
-  cal += getMonthName(month+1)  + ' ' + year;
-  cal += '</CENTER></TD>';
+  cal += buildcalheader();
+  cal += '</TD>';
   cal += '<TD><TABLE ALIGN=RIGHT HEIGHT=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR style=font:menu>';
   cal += '<TD WIDTH=0 title="' + local(NEXT_MONTH) +
          '" style="cursor:hand;' + calnavstyle +
@@ -3449,7 +3488,7 @@ function buildcal()
     // highlight appropriately
     if (whichmonth != 0)
       cal += gray_start(Calendar.getTime()) + Calendar.getDate() + gray_end;
-    else if (today.getDate()==Calendar.getDate())
+    else if (weekday >= 0 && today.getDate()==Calendar.getDate())
       cal += today_start(Calendar.getTime()) + Calendar.getDate() + today_end;
     else
       cal += TD_start(Calendar.getTime()) + Calendar.getDate() + TD_end;
