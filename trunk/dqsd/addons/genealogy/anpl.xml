@@ -1,0 +1,35 @@
+<search function="anpl">
+  <name>Andersonville Prisoner Lookup</name>
+  <category>Genealogy</category>
+  <contributor>Brent Beardsley</contributor>
+  <link>http://www.montezuma-ga.org/chamber/plookup.htm</link>
+  <email></email>
+  <description>
+  Search for prisoners who were held captive at Andersonville.  The database contains the names of over 32,000 prisoners.
+  </description>
+  <form name="anplf"
+        method="post"
+        action="http://www.montezuma-ga.org/chamber/namelookup.asp">
+    <input type="hidden" name="NAME" value="" />
+    <input type="hidden" name="FNAME" value="" />
+    <input type="hidden" name="B2" value="Reset" />
+  </form>
+  <script src="addons/genealogy/genealogy_lib.js"></script>
+  <script><![CDATA[
+    function anpl(q)
+    {
+      if( nullArgs("anpl", q) )
+        return;
+
+      document.anplf.NAME.value = genealogy_parse_surname(q);
+      document.anplf.FNAME.value = genealogy_parse_givenname(q);
+
+      genealogy_submitForm(anplf);
+    }
+  ]]></script>
+  <copyright>
+	Copyright (c) 2002 Brent Beardsley
+	Distributed under the terms of the
+	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>
