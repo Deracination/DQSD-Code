@@ -1,20 +1,15 @@
-  <search function="php">
-    <name>PHP Reference</name>
-    <description>Lookup on php.net: "php fopen"</description>
-    <category>Computers</category>
-    <link>http://www.php.net/</link>
-    <script><![CDATA[
-      // PHP reference
-      function php(q)
-      {
-        if (q == "")
-        {
-          openSearchWindow("http://www.php.net/");
-        }
-        else
-        {
-          openSearchWindow("http://www.php.net/" + q);
-        }
-      }
-    ]]></script>
-  </search>
+<search function="php">
+  <name>PHP Reference</name>
+  <description>Lookup on php.net: "php fopen"</description>
+  <category>Computers</category>
+  <link>http://www.php.net/</link>
+  <script><![CDATA[
+    function php(q)
+    {
+      if (q == "")
+        openSearchWindow("http://www.php.net/");
+      else
+        openSearchWindow("http://www.php.net/" + q);
+    }
+  ]]></script>
+</search>
