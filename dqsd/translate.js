@@ -31,12 +31,12 @@ var FREE_TRANSLATIONS =
   fr_en: "French/English",
   de_en: "German/English",
   it_en: "Italian/English",
-  pt_en: "Portugese/English",
+  pt_en: "Portuguese/English",
   en_es: "English/Spanish",
   en_fr: "English/French",
   en_it: "English/Italian",
   en_no: "English/Norwegian",
-  en_pt: "English/Portungese"
+  en_pt: "English/Portuguese"
 };
 
 function choosetranslate(l,q)
