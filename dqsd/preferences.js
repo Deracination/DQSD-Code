@@ -4,14 +4,13 @@
 clock=true;          // false disables the clock
 clockdelay=5000;     // clock shows after 5 secs
 clockupdate=1000;    // clock updates every 1 sec
-clockright=true;     // clock is right-justified
-clockgray=false;     // true draws clock on gray background
 clocklongwidth=139;  // long form is used if this pixel width is exceeded
 
 launchmode=2;        // 0=use ie; 1=use default browser; 2=auto
 // language="en";    // uncomment to override default language
 defaultsearch="goo"; // use google search
-defaultcal="yhocal"; // use yahoo calendar
+cal=true;            // right-click shows popup calendar
+defaultcal="yhocal"; // click on a calendar day uses yahoo calendar
 
 // Note: valid calendars include
 // yhocal - Yahoo Calendar
