@@ -1,0 +1,87 @@
+<search function="googletrans">
+	<name>Google.com Language Translation</name>
+	<description>
+		Translate text or webpages from one language to another.<br/>
+		<a class="helpboxDescLabels">Switches:</a><br />
+		<table class="helpboxDescTable">
+			<tr><td>/from:en</td><td>/to:de</td><td> - </td><td>English to German</td></tr>
+			<tr><td>/from:en</td><td>/to:es</td><td> - </td><td>English to Spanish</td></tr>
+			<tr><td>/from:en</td><td>/to:fr</td><td> - </td><td>English to French</td></tr>
+			<tr><td>/from:en</td><td>/to:it</td><td> - </td><td>English to Italian</td></tr>
+			<tr><td>/from:en</td><td>/to:pt</td><td> - </td><td>English to Portuguese</td></tr>
+			<tr><td>/from:de</td><td>/to:en</td><td> - </td><td>German to English</td></tr>
+			<tr><td>/from:de</td><td>/to:fr</td><td> - </td><td>German to French</td></tr>
+			<tr><td>/from:es</td><td>/to:en</td><td> - </td><td>Spanish to English</td></tr>
+			<tr><td>/from:es</td><td>/to:fr</td><td> - </td><td>Spanish to French</td></tr>
+			<tr><td>/from:fr</td><td>/to:en</td><td> - </td><td>French to English</td></tr>
+			<tr><td>/from:fr</td><td>/to:de</td><td> - </td><td>French to German</td></tr>
+			<tr><td>/from:fr</td><td>/to:es</td><td> - </td><td>French to Spanish</td></tr>
+			<tr><td>/from:it</td><td>/to:en</td><td> - </td><td>Italian to English</td></tr>
+			<tr><td>/from:pt</td><td>/to:en</td><td> - </td><td>Portuguese to English</td></tr>
+		</table>
+		<div class="helpboxDescLabels">Examples:</div>
+		<table class="helpboxDescTable">
+			<tr><td>googletrans /from:en /to:es hello how are you</td></tr>
+			<tr><td>googletrans /from:en /to:es http://www.whitehouse.gov</td></tr>
+		</table>
+	</description>
+	<category>Reference</category>
+	<link>http://www.google.com/language_tools</link>
+	<contributor>MLL, inspired by Neel Doshi &amp; Greg Mitchell's freetrans.xml</contributor>
+	
+	<form name="googletransfTEXT"
+		action="http://translate.google.com/translate_t"
+		method="post">
+		<input type="hidden" name="text" />
+		<input type="hidden" name="langpair" />
+	</form>
+
+
+	<form name="googletransfURL"
+		action="http://translate.google.com/translate">
+		<input type="hidden" name="u" />
+		<input type="hidden" name="langpair" />
+	</form>
+
+	
+	<script><![CDATA[
+		function googletrans(q)
+		{
+			if(nullArgs("googletrans", q))
+				return false;
+			else
+			{
+				var func_name = "googletrans";
+				var switch_list = new Array("from", "to");
+				var args = parseArgs(q, switch_list);
+		
+				// check if the required switches are set
+				for (var j = 0; j < switch_list.length; j++)
+				{
+					if ( typeof args.switch_val[ switch_list[j] ] == "undefined" || args.switch_val[ switch_list[j] ] == "" )
+					{
+						alert(func_name + ":  /" + switch_list[j] + " switch must be entered.  Type '" + func_name + " ?' to see instructions");
+						return false;
+					}
+				}
+		
+
+				// Determine if the string is a url or not
+				var strURL = isURL(args.q);
+				if (strURL)
+				{
+					googletransfURL.u.value = strURL;
+					googletransfURL.langpair.value = args.switch_val["from"] + "|" + args.switch_val["to"];
+					submitForm(googletransfURL);
+				}
+				else
+				{
+					googletransfTEXT.text.value = args.q;
+					googletransfTEXT.langpair.value = args.switch_val["from"] + "|" + args.switch_val["to"];
+					submitForm(googletransfTEXT);
+				}
+				return true;
+			}
+		}
+	]]></script>
+</search>
