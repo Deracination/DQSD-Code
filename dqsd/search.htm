@@ -62,24 +62,23 @@ The deskbar is customizable and completely open-source.
 </ul>
 
 -->
-<script>
-  // default language setting
-  language=navigator.userLanguage.substr(0,2);
-</script>
-<script src=preferences.js></script>
-<script>
-  // include local preferences file
-  if (typeof localprefs != "undefined" != undefined && localprefs != "")
-    document.write("</" + "script" + "><script src=" + localprefs + "></" + "script" + ">");
-</script>
-
 <head>
   <title>Search</title>
+  <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1">
   <link rel="stylesheet" type="text/css" href="search.css">
   <script>
-  // include the overwriting stylesheet if necessary
-  if (typeof localstylesurl != "undefined" && localstylesurl != "")
-    document.write("<link rel='stylesheet' type='text/css' href='" + localstylesurl + "'>");
+    // default language setting
+    language=navigator.userLanguage.substr(0,2);
+  </script>
+  <script src=preferences.js></script>
+  <script>
+    // include local preferences file
+    if (typeof localprefs != "undefined" != undefined && localprefs != "")
+      document.write("</" + "script" + "><script src=" + localprefs + "></" + "script" + ">");
+
+    // include the overwriting stylesheet if necessary
+    if (typeof localstylesurl != "undefined" && localstylesurl != "")
+      document.write("<link rel='stylesheet' type='text/css' href='" + localstylesurl + "'>");
   </script>
 </head>
 
