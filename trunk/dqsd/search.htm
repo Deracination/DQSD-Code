@@ -58,7 +58,7 @@ The deskbar is customizable and completely open-source.
 
 * Shortcuts are defined in <a href="view-source:localaliases.txt">localaliases.txt</a>.
 
-* You can add new searches by adding new XML files to the <a target="_blank" href="file:searches">searches</a> subdirectory.
+* You can add new searches by adding new XML files to the <a target="_blank" href="file:localsearches">localsearches</a> subdirectory.
 
 * After editing the code, type "!" in the search bar to reload it.
 
@@ -75,7 +75,7 @@ Finally, the following are default key bindings.  Some of these can be customize
 
 <tr><td class='keyname'>Ctrl-Enter</td><td class='desc'>Adds www. prefix and/or .com suffix to string if necessary and launches URL.  Similar to the IE key-binding.</td></tr>
 
-<tr><td class='keyname'>Shift-Enter</td><td class='desc'>Always opens a new window for the search regardless of the reuseWindowMode setting.  This works only when IE is the default browser.</td></tr>
+<tr><td class='keyname'>Shift-Enter</td><td class='desc'>Always opens a new window for the search regardless of the reuseBrowserWindowMode setting.  This works only when IE is the default browser.</td></tr>
 
 <tr><td class='keyname'>Ctrl-B, F8</td><td class='desc'>Search back through the search history for the current text</td></tr>
 
@@ -153,6 +153,15 @@ document.title=local(SEARCH_TITLE);
 <div style='display:none' id='delaymsg'></div>
 
 <script type='text/jscript'>
+
+// register key press hooks so addons, etc can handle keypresses
+function registerKeypressHook( keypressHook )
+{
+  if ( typeof keypressHooks == 'undefined' )
+    keypressHooks = new Array();
+
+  keypressHooks.push( keypressHook );
+}
 
 // def() called when the user hits "enter" in the textbox
 function def()
@@ -414,6 +423,7 @@ function okp()
   }
   searchPrefix = ''; // reset the search command history search
 
+  var retval = false;
   switch(window.event.keyCode)
   {
     // Return
@@ -501,13 +511,22 @@ function okp()
       prevnext(1);
       break;
 
-
     default:
-      return true;
+      retval = true;
   }
 
-  // If we get here, we've come through a 'break' in the switch - so the key's been handled
-  return false;
+  if (retval == true && typeof keypressHooks != 'undefined') {
+    // process keypress hooks
+    for ( var i = 0; i < keypressHooks.length; i++ ) {
+      if (keypressHooks[i]( window.event ) == true) {
+        // keypress hook returns true if it handled the keypress
+        retval = false;
+        break;
+      }
+    }
+  }
+
+  return retval;
 }
 
 // onkeydown: handle the up and down arrow keys for history
