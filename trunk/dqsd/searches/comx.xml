@@ -419,7 +419,7 @@
         comxSearchPopup = window.createPopup();
         var comxSearchPopupBody = comxSearchPopup.document.body;
         var comxSearchPopupBodyCode = "<html><head></head><body><style>" + convertStylesToInline() + "</style>";
-        comxSearchPopupBodyCode += "<img src=" +imgurl +" width="+windowW+" height="+windowH+" alt='"+imgtitle+"' onclick='window.blur()';>";
+        comxSearchPopupBodyCode += "<img src=" +imgurl +" width="+windowW+" height="+windowH+" alt='"+imgtitle+"' onclick='window.blur()'; galleryimg='no' />";
         comxSearchPopupBodyCode += "</body></html>";
         comxSearchPopupBody.innerHTML = comxSearchPopupBodyCode;
         comxSearchPopup.document.body.style.border="outset 1px";
