@@ -14,12 +14,21 @@
     </table>
   </description>
   <link>http://my.yahoo.com/</link>
-  <category>Bookmarks</category>
+  <category nomenu="true">Bookmarks</category>
   <contributor>Brent Beardsley</contributor>
 
   <script src="addons/bookmarks/bookmarks_lib.js"></script>
   <script><![CDATA[
     var yahoo_bookmarks_array = null;
+ 
+    function bmya_get_bookmarks_array()
+    {
+	if (yahoo_bookmarks_array == null) {
+	        var bmk_location = (typeof bookmarks_yahoo_location != "undefined" && bookmarks_yahoo_location != "") ? bookmarks_yahoo_location : "http://e.my.yahoo.com/config/export_bookmark?.commit=1";
+		yahoo_bookmarks_array = bookmarks_get_bookmarks_array_from_netscape(bmk_location);
+	}
+	return yahoo_bookmarks_array;
+    }
 
     function bmya(q)
     {
@@ -37,12 +46,23 @@
 		return;
 	}
 
-	if (yahoo_bookmarks_array == null) {
-	        var bmk_location = (typeof bookmarks_yahoo_location != "undefined" && bookmarks_yahoo_location != "") ? bookmarks_yahoo_location : "http://e.my.yahoo.com/config/export_bookmark?.commit=1";
-		yahoo_bookmarks_array = bookmarks_get_bookmarks_array_from_netscape(bmk_location);
-	}
-	bookmarks_show_menu(yahoo_bookmarks_array);
+	bookmarks_show_menu(bmya_get_bookmarks_array());
     }
+
+    function bmyaMenuHook(mb)
+    {
+	if (typeof bookmarks_type == "undefined" || bookmarks_type != "bmya")
+		return;
+
+	var hBookmarksMenu = bookmarksGetMenu(mb);
+	if (hBookmarksMenu > 0) {
+	  bookmarks_get_menu(bmya_get_bookmarks_array(), mb, hBookmarksMenu);
+	}
+
+    }
+
+    registerMenuHook(bmyaMenuHook);
+
     ]]>
   </script>
 </search>

@@ -29,6 +29,17 @@ If you don't like the search names you can add a mapping in localaliases.txt.
 You can customize the defaults by placing the following variables in 
 your localprefs.js file.
 
+Requirements
+------------
+* DQSD version 3.1.4.3 or greater
+
+General Variables
+-----------------
+* bookmarks_type
+	- specify which bookmarks will show up in the popup menu from the >> button press
+	- default: bmie
+	- values can be: bmie, bmns4, bmmz, bmya
+
 Internet Explorer Specific Variables
 ------------------------------------
 * bookmarks_ie_location

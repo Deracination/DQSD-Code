@@ -14,12 +14,27 @@
     </table>
   </description>
   <link></link>
-  <category>Bookmarks</category>
+  <category nomenu="true">Bookmarks</category>
   <contributor>Brent Beardsley</contributor>
 
   <script src="addons/bookmarks/bookmarks_lib.js"></script>
   <script><![CDATA[
     var ie_bookmarks_array = null;
+
+    function bmie_get_bookmarks_array()
+    {
+	if (ie_bookmarks_array == null) {
+		var user_specified_dir = (typeof bookmarks_ie_location != "undefined" && bookmarks_ie_location != "");
+		var fav_location = "";
+		if (user_specified_dir) {
+			fav_location = bookmarks_ie_location;
+		} else {
+			fav_location = DQSDLauncher.GetSpecialFolderLocation("Favorites");
+		}
+		ie_bookmarks_array = bookmarks_get_bookmarks_array_from_ie(fav_location);
+	}
+	return ie_bookmarks_array;
+    }
 
     function bmie(q)
     {
@@ -37,20 +52,23 @@
 		return;
 	}
 
-	if (ie_bookmarks_array == null) {
-		var user_specified_dir = (typeof bookmarks_ie_location != "undefined" && bookmarks_ie_location != "");
-		var fav_location = "";
-		if (user_specified_dir) {
-			fav_location = bookmarks_ie_location;
-		} else {
-			var shell_obj = new ActiveXObject("WScript.Shell");
-			fav_location = shell_obj.SpecialFolders ("Favorites");
-			shell_obj = null;
-		}
-		ie_bookmarks_array = bookmarks_get_bookmarks_array_from_ie(fav_location);
-	}
-	bookmarks_show_menu(ie_bookmarks_array);
+	bookmarks_show_menu(bmie_get_bookmarks_array());
     }
+
+    function bmieMenuHook(mb)
+    {
+	if (typeof bookmarks_type != "undefined" && bookmarks_type != "bmie")
+		return;
+
+	var hBookmarksMenu = bookmarksGetMenu(mb);
+	if (hBookmarksMenu > 0) {
+	  bookmarks_get_menu(bmie_get_bookmarks_array(), mb, hBookmarksMenu);
+	}
+
+    }
+
+    registerMenuHook(bmieMenuHook);
+
     ]]>
   </script>
 </search>

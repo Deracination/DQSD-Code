@@ -14,12 +14,36 @@
     </table>
   </description>
   <link></link>
-  <category>Bookmarks</category>
+  <category nomenu="true">Bookmarks</category>
   <contributor>Brent Beardsley</contributor>
 
   <script src="addons/bookmarks/bookmarks_lib.js"></script>
   <script><![CDATA[
     var netscape4_bookmarks_array = null;
+
+    function bmns4_get_bookmarks_array()
+    {
+	if (netscape4_bookmarks_array == null) {
+		var bmk_location = (typeof bookmarks_netscape4_location != "undefined" && bookmarks_netscape4_location != "") ? bookmarks_netscape4_location : "C:\\Program Files\\Netscape";
+		bmk_location += "\\Users\\";
+		var bmk_profile = (typeof bookmarks_netscape4_profile != "undefined" && bookmarks_netscape4_profile != "") ? bookmarks_netscape4_profile : "";
+		var bmk_file = (typeof bookmarks_netscape4_file != "undefined" && bookmarks_netscape4_file != "") ? bookmarks_netscape4_file : "bookmark.htm";
+		if (bmk_profile == "") {
+			// if no profile specified grab the first one you find in bmk_location
+			var folders = getFolders(bmk_location).split('\n');
+			for (var i=0; i < folders.length; i++) {
+				if (folders[i] == ".")
+					continue;
+				bmk_profile = folders[i];
+				break;
+			}
+		}
+		var bookmarks_full_path = bmk_location+bmk_profile+"\\"+bmk_file;
+		netscape4_bookmarks_array = bookmarks_get_bookmarks_array_from_netscape(bookmarks_full_path);
+	}
+	return netscape4_bookmarks_array;
+    }
+
 
     function bmns4(q)
     {
@@ -37,26 +61,23 @@
 		return;
 	}
 
-	if (netscape4_bookmarks_array == null) {
-		var bmk_location = (typeof bookmarks_netscape4_location != "undefined" && bookmarks_netscape4_location != "") ? bookmarks_netscape4_location : "C:\\Program Files\\Netscape";
-		bmk_location += "\\Users";
-		var bmk_profile = (typeof bookmarks_netscape4_profile != "undefined" && bookmarks_netscape4_profile != "") ? bookmarks_netscape4_profile : "";
-		var bmk_file = (typeof bookmarks_netscape4_file != "undefined" && bookmarks_netscape4_file != "") ? bookmarks_netscape4_file : "bookmark.htm";
-		if (bmk_profile == "") {
-			// if no profile specified grab the first one you find in bmk_location
-			var fso = new ActiveXObject("Scripting.FileSystemObject");
-			var fc = new Enumerator(fso.GetFolder(bmk_location).SubFolders);
-			if (!fc.atEnd()) {
-			  bmk_profile = fso.GetFileName(fc.item());
-			}
-			fso = null;
-		}
-
-		var bookmarks_full_path = bmk_location+"\\"+bmk_profile+"\\"+bmk_file;
-		netscape4_bookmarks_array = bookmarks_get_bookmarks_array_from_netscape(bookmarks_full_path);
-	}
-	bookmarks_show_menu(netscape4_bookmarks_array);
+	bookmarks_show_menu(bmns4_get_bookmarks_array());
     }
+
+    function bmns4MenuHook(mb)
+    {
+	if (typeof bookmarks_type == "undefined" || bookmarks_type != "bmns4")
+		return;
+
+	var hBookmarksMenu = bookmarksGetMenu(mb);
+	if (hBookmarksMenu > 0) {
+	  bookmarks_get_menu(bmns4_get_bookmarks_array(), mb, hBookmarksMenu);
+	}
+
+    }
+
+    registerMenuHook(bmns4MenuHook);
+
     ]]>
   </script>
 </search>
