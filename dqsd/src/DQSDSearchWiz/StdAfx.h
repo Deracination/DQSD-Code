@@ -24,6 +24,7 @@ extern CComModule _Module;
 #include <comdef.h>
 #include <commctrl.h>
 #include <wininet.h>
+#include <msxml.h>
 
 #include <string>
 #include <vector>
@@ -32,7 +33,7 @@ using namespace std;
 // Many thanks to Tim Tabor for the following (www.cheztabor.com)
 #define HR(_ex) { HRESULT _hr = _ex; if (FAILED(_hr)) return _hr; }
 
-#define LENGTHOF(a) (sizeof(a) == sizeof(&*a)) ? 0 : (sizeof(a) / sizeof(*a))
+#define LENGTHOF(a) (sizeof(a) / sizeof(a[0]))
 
 //{{AFX_INSERT_LOCATION}}
 // Microsoft Visual C++ will insert additional declarations immediately before the previous line.

@@ -18,7 +18,7 @@ public:
 
 	~CDQSDWizardDlg()
 	{
-		vector< CComBSTR* >::iterator it = m_vecFormHTMLs.begin();
+		vector< CComPtr< IHTMLElement >* >::iterator it = m_vecFormHTMLs.begin();
 		for ( ; it != m_vecFormHTMLs.end(); it++ )
 			delete *it;
 	}
@@ -30,6 +30,7 @@ BEGIN_MSG_MAP(CDQSDWizardDlg)
 	COMMAND_ID_HANDLER(IDOK, OnOK)
 	COMMAND_ID_HANDLER(IDCANCEL, OnCancel)
 	NOTIFY_HANDLER(IDC_FormList2, LVN_ITEMCHANGED, OnFormListItemChanged)
+	COMMAND_HANDLER(IDC_SearchName, EN_CHANGE, OnChangeSearchName)
 END_MSG_MAP()
 // Handler prototypes:
 //  LRESULT MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
@@ -38,11 +39,7 @@ END_MSG_MAP()
 
 	LRESULT OnInitDialog(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
 
-	LRESULT OnOK(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHandled)
-	{
-		EndDialog(wID);
-		return 0;
-	}
+	LRESULT OnOK(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHandled);
 
 	LRESULT OnCancel(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHandled)
 	{
@@ -51,13 +48,17 @@ END_MSG_MAP()
 	}
 
 	LRESULT OnFormListItemChanged(int idCtrl, LPNMHDR pNMHDR, BOOL& bHandled);
+	LRESULT OnChangeSearchName(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHandled);
 
 public:
 	CComPtr<IHTMLDocument2> m_spDoc2;
 
 private:
-	vector< CComBSTR* > m_vecFormHTMLs;
+	vector< CComPtr< IHTMLElement >* > m_vecFormHTMLs;
+	string m_strInstallDir;
 
+private:
+	void SetOKSensitivity();
 };
 
 #endif //__DQSDWIZARDDLG_H_
