@@ -7,7 +7,7 @@
       <tr><td>arin 192.23.43.21</td></tr>
     </table>
   </description>
-  <category>Computers</category>
+  <category>Computers<category>Networking</category></category>
   <link>http://www.arin.net/whois</link>
   <contributor>Tim Aiello</contributor>
   <email>tsaiello@kosmoNOSPAM.com</email>

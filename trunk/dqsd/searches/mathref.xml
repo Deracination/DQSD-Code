@@ -8,7 +8,7 @@
     </tr>
   </table>
   </description>
-  <category>Reference</category>
+  <category>Reference<category>General</category></category>
   <link>http://www.mathworld.com/</link>
   <contributor>Matthew Slight</contributor>
   <form name="mathreff" action="http://mathworld.wolfram.com/search/" method="get">
