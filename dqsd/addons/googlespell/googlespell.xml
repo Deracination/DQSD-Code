@@ -1,0 +1,77 @@
+<search function="googlespell">
+  <name>Google Spellcheck</name>
+  <description>Invoke Google webservice for spelling suggestion</description>
+  <link>http://www.google.com/apis/</link>
+  <contributor>Glenn Carr</contributor>
+  <form name="googlespellf">
+    <input type="hidden" name="stringToCheck" />
+    <div id="googleWebService" name="googleWebService" style="behavior:url(extensions\\googlespell\\webservice.htc)" onresult="onWebServiceResult()" />
+  </form>
+  <script><![CDATA[
+    function googlespell(q)
+    {
+      if( nullArgs("googlespell", q) )
+        return false;
+
+      if ( typeof googleLicenseKey == 'undefined' )
+      {
+        alert( 'This requires a Google APIs license key.  You can obtain one for free at http://www.google.com/apis/.\n' +
+               'Once you obtain a key, assign it to \'googleLicenseKey\' in your localprefs.js.');
+        return;
+      }
+      callWebService(q)
+    }
+
+    function initWebService()
+    {
+      try 
+      {
+        document.all.googleWebService.useService("http://api.google.com/GoogleSearch.wsdl", "GoogleSearchService");
+        return true;
+      } 
+      catch (ex) 
+      {
+        alert("Web service failed to initialize. " + ex.description);
+        return false;
+      }
+    }
+
+    function callWebService(sSearch)
+    {
+      if (initWebService()) {
+
+        var objCall = new Object();
+        objCall.funcName = "doSpellingSuggestion";
+        objCall.async = true;
+
+        try 
+        {
+          iCallID = document.all.googleWebService.GoogleSearchService.callService(objCall, googleLicenseKey, sSearch, 0, 10, true, "", false, "lang_en", "latin1", "latin1");
+        } 
+        catch (ex) 
+        {
+          alert("Failed: " + ex.description);
+        }
+      }
+
+      return false;
+    }
+
+    function onWebServiceResult()
+    {
+      if(event.result.error) 
+      {
+        alert("Error executing web service. " + event.result.errorDetail.code + ", " + event.result.errorDetail.string + " " + event.result.errorDetail.raw);
+      } 
+      else 
+      {
+        var oDoc = event.result.raw;
+        resultXml = oDoc.xml;
+
+        var sSuggestedSpelling = oDoc.selectSingleNode("SOAP-ENV:Body/ns1:doSpellingSuggestionResponse/return").text;
+        document.deff.q.value = sSuggestedSpelling;
+        document.deff.q.createTextRange().select();
+      }
+    }
+  ]]></script>
+</search>
