@@ -1,7 +1,7 @@
 <search function="temp">
   <name>Temperature Converter</name>
   <description>
-    Convert temperatures from Celsius to Fahrenheit and vice-versa. One switch is <b>required</b> to indicate the units the given value is in.<br/>
+    Convert temperatures from Celsius to Fahrenheit and vice-versa. A switch is <b>required</b> to indicate the units the given value is in.<br/>
     <a class="helpboxDescLabels">Switches:</a><br/>
   	<table class="helpBoxDescTable">
   		<tr><td class="helpboxDescColumns">/celsius</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Convert the given Celsius value to Fahrenheit.</td></tr>
