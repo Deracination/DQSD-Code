@@ -1,0 +1,70 @@
+<search function="gmane">
+  <name>gmane.org</name>
+  <category>Search the Web</category>
+  <contributor>Kim Gräsman</contributor>
+  <link>http://search.gmane.org/</link>
+  <email>kim@mvps.org</email>
+  <description>
+  Search gmane.org's archive of mailing lists and newsgroups
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>[/email]</td><td> - </td><td>Author e-mail</td></tr>
+      <tr><td>[/group]</td><td> - </td><td>Group name</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>gmane /group:wtl Internet Explorer</td></tr>
+    </table>
+  </description>
+  <form name="gmanef"
+        method="get"
+        action="http://search.gmane.org/search.php">
+    <input type="hidden" name="query" value="" />
+    <input type="hidden" name="email" value="" />
+    <input type="hidden" name="group" value="" />
+    <input type="hidden" name="sort" value="relevance" />
+    <input type="hidden" name="sort" value="date" />
+  </form>
+  <script><![CDATA[
+    function gmane(q)
+    {
+      if(nullArgs("gmane", q))
+        return;
+
+      // Re-initialize the form        
+      document.gmanef.query.value = "";
+      document.gmanef.email.value = "";
+      document.gmanef.group.value = "";
+
+      // Parse switches with parseArgs:
+      var args = parseArgs(q, "email, group");
+      for(var i = 0; i < args.switches.length; ++i)
+      {
+        switch( args.switches[i].name )
+        {
+          case "email":
+            document.gmanef.email.value = args.switches[i].value;
+            break;
+          case "group":
+            document.gmanef.group.value = args.switches[i].value;
+            break;
+          default:
+            break;
+        }
+      }
+
+      // Fire off query
+      document.gmanef.query.value = args.q;
+      submitForm(gmanef);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 01/24/04 at 12:13:50
+    by Dave's Quick Search Deskbar Search Wizard version 1.2,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>

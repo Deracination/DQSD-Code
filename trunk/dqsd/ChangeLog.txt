@@ -12,6 +12,7 @@ Bug Fixes
 New Searches
 * riaar - riaaradar.org RIAA label and artist membership search. (Thad Kerosky)
 * pmid - a search for the PubMed database at www.ncbi.nlm.nih.gov. (James Robertson)
+* gmane - gmane.org mail to news service and search engine (Kim Gräsman)
 
 Modified Searches
 * httpinst - added additional parameter /filename to specify the local filename (Brent Beardsley)
