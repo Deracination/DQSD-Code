@@ -137,6 +137,7 @@ STDMETHODIMP CSearchWizard::Exec(const GUID*, DWORD nCmdID, DWORD, VARIANTARG*, 
 	CDQSDWizardDlg dlg;
 	dlg.m_spDoc2 = spActiveFrameDoc;
 	dlg.m_spMainDoc = spDoc2;
+	dlg.m_spWB2 = spWB2;
 	dlg.DoModal( hwndBrowser, cForms );
 
 	return S_OK;
