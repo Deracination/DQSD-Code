@@ -1,0 +1,80 @@
+<search function="dyndns">
+  <name>Dyndns beta</name>
+  <category>Computers</category>
+  <contributor>MLL</contributor>
+  <link>http://beta.dyndns.org/</link>
+  <email></email>
+  <description>
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/password</td><td> - </td><td></td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td></td></tr>
+      <tr><td></td></tr>
+    </table>
+  </description>
+  <form name="dyndnsf"
+        method="post"
+        action="https://beta.dyndns.org/index.html">
+    <input type="hidden" name="__login" value="1" />
+    <input type="hidden" name="username" value="mll02" />
+
+    <input type="hidden" name="password" value="" />
+  </form>
+  <script><![CDATA[
+    function dyndns(q)
+    {
+      if( nullArgs("dyndns", q) )
+        return;
+
+      // Parse switches with parseArgs:
+
+      // parseArgs usage:
+      // Arguments:
+      //    q                - string from the search function
+      //    expectedSwitches - list or array of the expected switch values
+      //    expandSwitches   - optional parameter [default = true] used to determine 
+      //                       if the switch shortcuts should be expanded (i.e. /f becomes /foo)
+      // Returns an object with these properties:
+      //    q        - the input string with the switches removed
+      //    switches - array of objects with these two properties:
+      //                  name:   expanded name of the matched switch (i.e. foo as in /foo:bar)
+      //                  value:  value of switch (i.e. bar as in /foo:bar)
+      //    switch_val - associative array with the switch name as the key with the switch value 
+      //                 as the value. (i.e. switch_val["foo"] = "bar" as in /foo:bar)
+
+      var args = parseArgs(q, "password");
+      //for (var iSwitch = 0; iSwitch < args.switches.length; iSwitch++)
+      //{
+      //  switch( args.switches[iSwitch].name )
+      //  {
+      //    case "username":
+      //      break;
+      //    case "password":
+      //      break;
+      //    default:
+      //      break;
+      //  }
+      //}
+
+      // FORM variables for dyndnsf
+      //document.dyndnsf.__login.value = "";
+      document.dyndnsf.username.value = args.q;
+
+      document.dyndnsf.password.value = args.switch_val["password"];
+
+      submitForm(dyndnsf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 02/18/03 at 15:15:13
+    by Dave's Quick Search Deskbar Search Wizard version 1.0.1 ,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>
