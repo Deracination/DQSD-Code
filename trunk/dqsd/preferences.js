@@ -362,6 +362,12 @@ hotkeyVkCode = 0;
 */
 hotkeyModifiers="WIN";
 
+/* History search default key assignment.
+   <historySearchVkCode> searches for the typed string in any part of a previous command
+   Shift-<historySearchVkCode> searches for only commands beginning with the string
+*/
+historySearchVkCode = 119 // F8 (kinda' like DOSKEY)
+
 /* How to sort the searches in the help window and the popup menu
 *  'name'  = sort by search name
 *  'alias' = sort by first alias

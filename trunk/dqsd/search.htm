@@ -3,7 +3,7 @@
 <html>
 <!--
 Dave's Quick Search Deskbar
-Version 2.5.8-Beta 11 - June 17, 2002
+Version 2.5.8-Beta 12 - June 19, 2002
 
 Copyright (c) 2002 David Bau
 
@@ -360,7 +360,8 @@ function okp()
   // Reset override each time
   reuseBrowserWindowModeOverride = reuseBrowserWindowMode;
 
-// Not sure how this is supposed to work - histsearch loops for ever when I try it...
+  // Search the command history.  Hold down shift with the key to search
+  // for just a prefix, otherwise it matches any part of the string.
   if (window.event.keyCode == 2)
   {
     histsearch( document.deff.q.value, window.event.shiftKey );
@@ -815,8 +816,9 @@ function postStartup()
     else if(hotkeyVkCode != 0)
       keyboardHook.RegisterHotKey(hotkeyVkCode, hotkeyModifiers);
 
+    keyboardHook.MapKeyCode( historySearchVkCode, 2 ); // Map key to the history search
 
-//	 keyboardHook.ShutdownBar();
+//   keyboardHook.ShutdownBar();
   }
   catch(e)
   {
