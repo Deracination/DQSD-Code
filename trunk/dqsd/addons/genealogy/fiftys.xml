@@ -1,0 +1,36 @@
+<search function="fiftys">
+  <name>Fifty States</name>
+  <description>
+    Goto 50states.com web pages.<br/>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>fiftys mi</td></tr>
+      <tr><td>fiftys district of columbia</td></tr>
+    </table>
+  </description>
+  <link>http://www.50states.com/</link>
+  <category>Genealogy</category>
+  <contributor>Brent Beardsley</contributor>
+  <form name="fiftysf">
+
+  </form>
+  <script src="addons/genealogy/genealogy_lib.js"></script>
+  <script><![CDATA[
+
+    function fiftys(q)
+    {
+      if( nullArgs("fiftys", q) )
+        return false;
+
+      var webpage = "http://www.50states.com/";
+      var links = genealogy_get_known_page_links(webpage);
+      var search_place_num = genealogy_lookup_place(q);
+      if (search_place_num >= 0) {
+        openSearchWindow(links[search_place_num]);
+      } else {
+	openSearchWindow(webpage);
+      }
+    }
+    ]]>
+  </script>
+</search>
