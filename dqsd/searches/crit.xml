@@ -1,0 +1,53 @@
+<search function="crit">
+  <name>metacritic</name>
+  <category>Entertainment</category>
+  <contributor>Tom Corcoran</contributor>
+  <link>http://www.metacritic.com/</link>
+  <email></email>
+  <description>Metacritic compiles reviews from respected critics and publications for film, video/dvd, music and games.<br/>
+    <div class="helpboxDescLabels">Usage:</div>
+   <table class="helpboxDescTable">
+    <tr><td>crit &lt;<i>title</i>&gt; [{/movie | /music | /games | /all}]</td></tr>
+   </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+    <tr><td>crit bright orange bright yellow /music</td></tr>
+    <tr><td>crit bringing down the house /movie</td></tr>
+   </table>
+ 
+  </description>
+ 
+  <form name="critf"
+        method="post"
+        action="http://search.metacritic.com/search/process">
+    <input type="hidden" name="sort" value="relevance" />
+    <input type="hidden" name="termType" value="all" />
+    <input type="hidden" name="term" value="" />
+    <input type="hidden" name="mode" value="all" />
+  </form>
+ 
+  <script><![CDATA[
+    function crit(q)
+    {
+      if( nullArgs("crit", q) )
+        return false;
+      else
+        {
+          var args = parseArgs(q, "movie,music,games,all");
+ 
+          if( args.switches.length > 0 )
+            for( var j=0; j<args.switches.length; j++ )
+              switch( args.switches[j].name )
+              {
+                case "movie": document.critf.mode.value = "movie"; break;
+                case "music": document.critf.mode.value = "music"; break;
+                case "games": document.critf.mode.value = "games"; break;
+                case "all": document.critf.mode.value = "all"; break;
+              }
+        }  
+      document.critf.term.value = args.q;
+ 
+      submitForm(critf);
+    }
+  ]]></script>
+</search>
