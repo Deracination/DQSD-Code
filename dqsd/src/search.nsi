@@ -19,7 +19,7 @@ OutFile "..\dqsd.exe"
 ; The default installation directory
 InstallDir "$PROGRAMFILES\Quick Search Deskbar"
 
-; Registry key to check for directory (so if you install again, it will 
+; Registry key to check for directory (so if you install again, it will
 ; overwrite the old one automatically)
 InstallDirRegKey HKCR "CLSID\{226b64e8-dc75-4eea-a6c8-abcb4d1d37ff}" "InstallDir"
 
@@ -87,30 +87,31 @@ Section "Quick Search Deskbar (required)"
   StrCpy $8 "The Deskbar has been upgraded.$\n$\nYou should reboot your computer now to$\ncomplete the installation.$\n$\nDave's Quick Search Deskbar$\nCopyright (c) 2002 David Bau$\nDistributed under the terms of the$\nGNU General Public License, Version 2"
   norebootmsg:
 
-  
+
 
   WriteUninstaller "$INSTDIR\uninstall.exe"
 
   ; Put files there
-  File "..\readme.txt"
-  File "..\search.htm"
+  File "..\aliases.txt"
   File "..\calculate.js"
   File "..\calendar.js"
+  File "..\categoryExpander.htc"
   File "..\clock.js"
+  File "..\defer_tools.js"
   File "..\helpbox.js"
   File "..\helpmenu.js"
   File "..\history.js"
-  File "..\loader.js"
-  File "..\strings.js"
-  File "..\tools.js"
-  File "..\defer_tools.js"
-  File "..\translate.js"
-  File "..\aliases.txt"
-  File "..\menu.txt"
-  File "..\categoryExpander.htc"
+  File "..\holidays.ca.xml"
   File "..\holidays.sg.xml"
   File "..\holidays.us.xml"
-  File "..\holidays.ca.xml"
+  File "..\loader.js"
+  File "..\menu.txt"
+  File "..\readme.txt"
+  File "..\search.css"
+  File "..\search.htm"
+  File "..\strings.js"
+  File "..\tools.js"
+  File "..\translate.js"
   SetOutPath "$INSTDIR\searches"
   File "..\searches\*.xml"
   SetOutPath "$INSTDIR\src"
@@ -140,13 +141,25 @@ Section "Quick Search Deskbar (required)"
   File "DQSDTools\dlldatax.h"
   File "DQSDTools\resource.h"
 
-
   ; Create files with user preferences if they doesn't exist
   SetOverwrite off
   SetOutPath "$INSTDIR"
-  File "..\preferences.js"
   File "..\localaliases.txt"
   SetOverwrite on
+
+  ; Check to see if localprefs exists.  If it doesn't, the user's preferences
+  ; file should be turned into localprefs to avoid losing the user's settings.
+  IfFileExists "$INSTDIR\localprefs.js" overwriteprefs renameprefs
+
+  renameprefs:
+  SetOutPath "$INSTDIR"
+  Rename "$INSTDIR\preferences.js" "$INSTDIR\localprefs.js"
+  goto overwriteprefs
+
+  overwriteprefs:
+  SetOverwrite on
+  SetOutPath "$INSTDIR"
+  File "..\preferences.js"
 
   ; old source files used to live here
   Delete $INSTDIR\license.txt
@@ -160,7 +173,7 @@ Section "Quick Search Deskbar (required)"
 
   ; Write the installation path into the registry
   WriteRegStr HKCR "CLSID\$9" "InstallDir" "$INSTDIR"
-  
+
   ; ??? Keep this for a while for backward compatibility
   WriteRegStr HKCR "CLSID\$9" "SecureFile" "$INSTDIR\search.htm"
   WriteRegDWORD HKCR "CLSID\$9\SecureFiles" "$INSTDIR\search.htm" 0
@@ -204,25 +217,26 @@ Section "Uninstall"
 
   ; remove files
   Delete /REBOOTOK $INSTDIR\dqsdt257.dll
-  Delete /REBOOTOK $INSTDIR\readme.txt
-  Delete /REBOOTOK $INSTDIR\search.htm
-  Delete /REBOOTOK $INSTDIR\search.xml
   Delete /REBOOTOK $INSTDIR\aliases.txt
-  Delete /REBOOTOK $INSTDIR\menu.txt
   Delete /REBOOTOK $INSTDIR\calculate.js
   Delete /REBOOTOK $INSTDIR\calendar.js
+  Delete /REBOOTOK $INSTDIR\categoryExpander.htc
   Delete /REBOOTOK $INSTDIR\clock.js
+  Delete /REBOOTOK $INSTDIR\defer_tools.js
   Delete /REBOOTOK $INSTDIR\helpbox.js
   Delete /REBOOTOK $INSTDIR\helpmenu.js
   Delete /REBOOTOK $INSTDIR\history.js
-  Delete /REBOOTOK $INSTDIR\loader.js
-  Delete /REBOOTOK $INSTDIR\strings.js
-  Delete /REBOOTOK $INSTDIR\tools.js
-  Delete /REBOOTOK $INSTDIR\defer_tools.js
-  Delete /REBOOTOK $INSTDIR\translate.js
-  Delete /REBOOTOK $INSTDIR\categoryExpander.htc
   Delete /REBOOTOK $INSTDIR\holidays.sg.xml
   Delete /REBOOTOK $INSTDIR\holidays.us.xml
+  Delete /REBOOTOK $INSTDIR\loader.js
+  Delete /REBOOTOK $INSTDIR\menu.txt
+  Delete /REBOOTOK $INSTDIR\readme.txt
+  Delete /REBOOTOK $INSTDIR\search.css  
+  Delete /REBOOTOK $INSTDIR\search.htm
+  Delete /REBOOTOK $INSTDIR\search.xml
+  Delete /REBOOTOK $INSTDIR\strings.js
+  Delete /REBOOTOK $INSTDIR\tools.js
+  Delete /REBOOTOK $INSTDIR\translate.js
   RmDir /r $INSTDIR\src
   RmDir /r $INSTDIR\searches
 
