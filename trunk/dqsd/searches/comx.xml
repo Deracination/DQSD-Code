@@ -1,4 +1,4 @@
-<search xmlns="http://tempuri.org/comx2.xsd" function="comx">
+<search function="comx">
     <name>Comic Strip</name>
     <description>Displays a daily comic strip in a popup window.
     <table class="helpboxDescTable"><tr><td colspan="2"><div class="helpboxDescLabels">Note:</div> All the switches can be abbreviated
