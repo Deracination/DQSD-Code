@@ -6,37 +6,44 @@
       <table class="helpboxDescTable">
         <tr><td>/new</td><td> - </td><td>New listings</td></tr>
         <tr><td>/asp</td><td> - </td><td>ASP</td></tr>
-        <tr><td>/c</td><td> - </td><td>C and C++</td></tr>
+        <tr><td>/.net /net</td><td> - </td><td>ASP.net</td></tr>
+        <tr><td>/c /c++</td><td> - </td><td>C and C++</td></tr>
+        <tr><td>/cfml /cf</td><td> - </td><td>Cold Fusion</td></tr>
+        <tr><td>/flash /fla</td><td> - </td><td>Flash</td></tr>
         <tr><td>/java</td><td> - </td><td>Java</td></tr>
-        <tr><td>/javascript</td><td> - </td><td>JavaScript</td></tr>
+        <tr><td>/javascript /js</td><td> - </td><td>JavaScript</td></tr>
         <tr><td>/php</td><td> - </td><td>PHP</td></tr>
-        <tr><td>/perl</td><td> - </td><td>Perl</td></tr>
-        <tr><td>/python</td><td> - </td><td>Python</td></tr>
-        <tr><td>/remotehosts</td><td> - </td><td>Remote Hosts</td></tr>
-        <tr><td>/tools</td><td> - </td><td>Tools and Utilities</td></tr>
+        <tr><td>/perl /pl</td><td> - </td><td>Perl</td></tr>
+        <tr><td>/python /py</td><td> - </td><td>Python</td></tr>
+        <tr><td>/remotehosts /remote /rem</td><td> - </td><td>Remote Hosts</td></tr>
+        <tr><td>/tools /utils</td><td> - </td><td>Tools and Utilities</td></tr>
         <tr><td>/xml</td><td> - </td><td>XML</td></tr>
       </table>
     <div class="helpboxDescLabels">Example:</div>
     <table class="helpboxDescTable">
-          <tr><td>hs parse /javascript</td></tr>
-      </table>
+	<tr><td>hs parse /javascript</td></tr>
+	<tr><td>hs window /js</td></tr>
+	<tr><td>hs cart /net</td></tr>
+	<tr><td>hs /new</td></tr>
+    </table>
   </description>
   <category>Computers<category>Programming</category></category>
   <link>http://www.hotscripts.com/</link>
-  <contributor>Monty Scroggins, Ryan Edwards, Brent Beardsley</contributor>
+  <contributor>Monty Scroggins, Ryan Edwards, Brent Beardsley, Shawn K. Hall</contributor>
 
   <form name="hsf"
-        action="http://www.hotscripts.com/search/"
+        action="http://www.hotscripts.com/cgi-bin/search.cgi?"
         method="get">
-    <input type="hidden" name="query"/>
-    <input type="hidden" name="category" value=""/>
-    <input type="hidden" name="bool" value="AND"/>
+    <input type="hidden" name="query" />
+    <input type="hidden" name="category" value="" />
+    <input type="hidden" name="catid" value="" />
+    <input type="hidden" name="bool" value="AND" />
   </form>
 
   <script><![CDATA[
     function hs(q)
     {
-      var args = parseArgs(q, "new, asp, c, java, javascript, php, perl, python, remotehosts, tools, xml");
+      var args = parseArgs(q, "new, all, asp, .net, net, c++, c, cfml, cf, flash, fla, java, javascript, js, php, perl, pl, python, py, remotehosts, remote, rem, tools, utils, xml");
 
       if( nullArgs("hs",q) )
         return false;
@@ -44,18 +51,31 @@
       {
         switch( args.switches[0].name )
         {
-          case "new": openSearchWindow("http://www.hotscripts.com/New/"); return false;
-          case "asp": document.hsf.category.value = "ASP"; break;
-          case "c": document.hsf.category.value = "C"; break;
-          case "java": document.hsf.category.value = "Java"; break;
-          case "javascript": document.hsf.category.value = "JavaScript"; break;
-          case "php": document.hsf.category.value = "PHP"; break;
-          case "perl": document.hsf.category.value = "Perl"; break;
-          case "python": document.hsf.category.value = "Python"; break;
-          case "remotehosts": document.hsf.category.value = "Remote_Hosts"; break;
-          case "tools":
-          case "utils": document.hsf.category.value = "Tools"; break;
-          case "xml": document.hsf.category.value = "XML"; break;
+          case "new":	openSearchWindow("http://www.hotscripts.com/New/"); return false;
+          case "all":	document.hsf.catid.value = "all"; break;  // All Categories
+          case "asp":	document.hsf.catid.value = "35"; break;   // ASP
+          case ".net":
+          case "net":	document.hsf.catid.value = "1204"; break; // ASP.NET
+          case "c++":
+          case "c":	document.hsf.catid.value = "28"; break;   // C/C++
+          case "cfml":
+          case "cf":	document.hsf.catid.value = "831"; break;  // CFML
+          case "flash":
+          case "fla":	document.hsf.catid.value = "782"; break;  // Flash
+          case "java":	document.hsf.catid.value = "56"; break;   // Java
+          case "javascript":
+          case "js":	document.hsf.catid.value = "26"; break;   // JavaScript
+          case "php":	document.hsf.catid.value = "2"; break;    // PHP
+          case "perl":
+          case "pl":	document.hsf.catid.value = "1"; break;    // Perl
+          case "python":
+          case "py":	document.hsf.catid.value = "597"; break;  // Python
+          case "remotehosts":
+          case "remote":
+          case "rem":	document.hsf.catid.value = "57"; break;   // Remote Hosts
+          case "utils":
+          case "tools":	document.hsf.catid.value = "27"; break;   // Tools & Utilities
+          case "xml":	document.hsf.catid.value = "605"; break;  // XML
         }
         document.hsf.query.value = args.q;
         submitForm(hsf);
@@ -77,4 +97,3 @@
 	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
   </copyright>
 </search>
-
