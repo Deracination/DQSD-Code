@@ -1,18 +1,3 @@
--- What's new for ???
-
-New Searches
-
-* ns - New Scientist (from Glenn Carr)
-
-Modified Searches
-
-
-Enhancements
-
-
-Bug Fixes
-
-
 -- What's new for 3.1.4.3 beta (October 23, 2002)
 
 New aliases
@@ -35,6 +20,7 @@ New Searches
 * ebuy - Search ebuyer.com (from Matthew Slight)
 * cpp - Search cppreference.com (from Matthew Slight)
 * mathref - Search Mathworld.com (from Matthew Slight)
+* ns - New Scientist (from Glenn Carr)
 
 Modified Searches
 
