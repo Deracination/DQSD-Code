@@ -1,0 +1,59 @@
+<search function="guardster">
+  <COMMENT>
+	A privacy proxy service. It can filter cookies, scripts, ads, images, and referrer,
+	but by default, it leaves them all on.
+  </COMMENT>
+  <name>Guardster VPN</name>
+  <category>Functions</category>
+  <contributor>Gregory Krohne</contributor>
+  <link>http://proxy.guardster.com/cgi-bin/nph-proxy.cgi/010100A/http/www.google.com</link>
+  <email>Gregory.Krohne@afrc.af.mil</email>
+  <description>
+  Guardster's free webproxy - visit websites anonymously.
+  </description>
+  <form name="guardsterf"
+        method="post"
+        action="http://proxy.guardster.com/cgi-bin/nph-proxy.cgi/010100A/782d70726f78792f7374617274">
+    <input type="hidden" name="rc" value="" />
+    <input type="hidden" name="rs" value="" />
+    <input type="hidden" name="fa" value="" />
+    <input type="hidden" name="br" value="" />
+    <input type="hidden" name="ff" value="" />
+
+    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
+
+    <input type="hidden" name="URL" value="http://www.google.com" />
+  </form>
+  <script><![CDATA[
+    function guardster(q)
+    {
+      if( nullArgs("guardster", q) )
+        return;
+
+      // FORM variables for guardsterf
+      // These are optional filters that guardster offers
+      // Set value = "on" to activate filter, and remove that element from the destination page
+      //document.guardsterf.rc.value = "";	// Cookies
+      //document.guardsterf.rs.value = "";	// Scripts
+      //document.guardsterf.fa.value = "";	// Ads
+      //document.guardsterf.br.value = "";	// Referrer
+      //document.guardsterf.ff.value = "";	// Images
+
+      // The wizard assigned the search string to this form field value because
+      // this field was the active element when the search file was generated.
+      // Change this to args.q if the search string is parsed with parseArgs.
+      document.guardsterf.URL.value = q;
+
+      submitForm(guardsterf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 11/17/03 at 08:50:27
+    by Dave's Quick Search Deskbar Search Wizard version 1.2,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>
