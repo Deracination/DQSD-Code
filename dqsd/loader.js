@@ -162,6 +162,13 @@ try
   
   for ( var i = 0; i < searches.length; i++ )
   {
+    // getFiles doesn't always work as expected; a problem with FindFirstFile/FindNextFile
+    // especially with files named *.xml_sav or something similar.
+    if ( !/\.xml$/.test( searches[i] ) )
+    {
+      continue;
+    }
+
     var xml = readFile("searches\\" + searches[i]);
     if (!xmldoc.loadXML(xml))
     {
