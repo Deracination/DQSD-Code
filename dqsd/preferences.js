@@ -369,7 +369,7 @@ hotkeyModifiers="WIN";
 
 /* History search default key assignment.
    <historySearchVkCode> searches for the typed string in any part of a previous command
-   Shift-<historySearchVkCode> searches for only commands beginning with the string
+   Shift-<historySearchVkCode> searches for the typed string in any part of the next command
 */
 historySearchVkCode = 119 // F8 (kinda' like DOSKEY)
 
