@@ -18,6 +18,7 @@ Modified Searches
 Enhancements
 
 * Dutch holidays to 2013 (in both Dutch and English language) from Johan Geertsma 
+* Modified 'shortcut' detection to allow shortcuts starting with numbers
 
 
 Bug Fixes
