@@ -1,0 +1,39 @@
+<search function="amo">
+  <name>Amo's Online Crossword Dictionary</name>
+  <description>
+    Ambiguously search a huge wordlist.<br/>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>amo *e*p*<br/>
+	(this returns 5-letter words with 'e' in pos. 2 and 'p' in pos. 4.)</td></tr>
+  	</table>
+  </description>
+  <category>Fun</category>
+  <contributor>Matthew McDougal</contributor>
+  <link>http://www.amo.qc.ca/cgi-bin/pub/ODico/dico.out</link>
+  
+  <form name="amof"
+        action="http://www.amo.qc.ca/cgi-bin/pub/ODico/dico.out"
+        method="get">
+    <input type="hidden" name="mot"/>
+  </form>
+  
+  <script><![CDATA[
+    function amo(q)
+    {
+      if( nullArgs("amo",q) )
+        return false;
+      else
+      {
+        document.amof.mot.value = q;
+        submitForm(amof);
+      }
+    }
+  ]]></script>
+
+  <copyright>
+	Copyright (c) 2002 David Bau
+	Distributed under the terms of the
+	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>
