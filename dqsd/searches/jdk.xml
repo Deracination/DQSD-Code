@@ -1,10 +1,15 @@
 <search function="jdk">
   <name>JDK Javadoc Search</name>
   <description>Search Sun's JDK Javadoc. Uses Google.
+    <div class="helpboxDescLabels">Switches:</div>
+      <table class="helpboxDescTable">
+        <tr><td>/1.4</td><td> - </td><td>Version 1.4 JDK (default)</td></tr>
+        <tr><td>/1.3</td><td> - </td><td>Version 1.3 JDK</td></tr>
+      </table>
     <div class="helpboxDescLabels">Example:</div>
     <table class="helpboxDescTable">
-  		<tr><td>jdk HashMap</td></tr>
-  	</table>
+      <tr><td>jdk HashMap /1.3</td></tr>
+    </table>
   </description>
   <link>http://java.sun.com/j2se/1.4/docs/api/</link>
   <category>Computers</category>
@@ -20,12 +25,32 @@
     // Uses Google I'm feeling lucky search
     function jdk(q)
     {
-      version = "v1.4.0";
+      // Note: Google does not index 1.2 for some reason.
+      var args = parseArgs(q, "1.4, 1.3");
       if (q == "")
         openSearchWindow("http://java.sun.com/j2se/1.4/docs/api/");
+      else if (args.switches.length > 1)
+        nullArgs("jdk","?");
       else
       {
-        document.jdkf.q.value='intitle:' + q + ' "v1.4.0" site:java.sun.com inurl:docs/api';
+        var version = "v1.4.0";
+        if (args.switches.length == 1)
+        {
+          switch (args.switches[0].name)
+          {
+            case "1.3":
+              version = "v1.3.1"; break;
+            case "1.4":
+            default:
+              version = "v1.4.0"; break;
+          }
+          if (args.q == "")
+          {
+            openSearchWindow("http://java.sun.com/j2se/" + args.switches[0].name + "/docs/api/");
+            return;
+          }
+        }
+        document.jdkf.q.value='intitle:' + args.q + ' "' + version + '" site:java.sun.com inurl:docs/api';
         submitForm(jdkf);
       }
     }
