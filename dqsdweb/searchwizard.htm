@@ -67,8 +67,29 @@ If you don't, simply right-click on the IE toolbar, and click 'Customize...'.&nb
 You should see a dialog that looks something like the following.&nbsp;&nbsp;Some of the fields will be automatically filled in.&nbsp;&nbsp;Enter an abbreviation and a title for the new search.&nbsp;&nbsp;The abbreviation is the string that will invoke the search and will be used for the file name, so keep it short and simple.<br/><br/>
 <center>
 
-<!-- <div style="font-size: xx-small">(Hold your cursor over the fields to seea description.)</div> -->
-<img border="0" src="dqsdsearchwiz.jpg" align="top">
+<div style="font-size: xx-small; color: red">(Hold your cursor over the different fields to see their description.)</div>
+<img border="0" src="dqsdsearchwiz.jpg" align="top" usemap="#searchwiz">
+
+<map name="searchwiz">
+
+<area alt="Enter the abbreviation for the search.  This is used to invoke the search and should be a short abbreviation which isn't a common word.  You also won't be able to enter uppercase or non-alphanumeric characters." coords="89,101,313,124" href="#" onclick="return false;">
+<area alt="Enter the title or name of the search.  This is what will be displayed in the menu." coords="122,126,313,147" href="#" onclick="return false;">
+<area alt="Enter the URL that this search should default to if no parameters are entered for the search.  The wizard will try to guess this based on the current URL, but it may not be the best default, so you should double-check it." coords="122,148,312,170" href="#" onclick="return false;">
+<area alt='Enter the category for this search.  You can select one from the list or enter a unique category.  If you don't enter a category the search will be grouped in the "Other" category in the menu and the help.' coords="335,98,542,123" href="#" onclick="return false;">
+<area alt='If you want to receive lavish quantities of praise for writing this search enter your name here.  Or, if you feel you are not deserving of such praise because the most excellent DQSD Search Wizard did most of the work for you, then enter "Glenn Carr".' coords="328,124,540,144" href="#" onclick="return false;">
+<area alt="If you want to be able to be contacted about this search enter your email address here.  Please note that if this search ends up being distributed with DQSD, your email will be out there for everyone to see, which isn't necessarily bad, but I like to enter my email in the form 'glenn at glenncarr dot com' just to keep bot email harvesters from finding it." coords="353,146,540,168" href="#" onclick="return false;">
+<area alt="Enter switches, if any, that you want to use with this search.  Script will be generated for parsing the switches if you do enter some." coords="327,175,537,246" href="#" onclick="return false;">
+<area alt="Do you want to include examples in the description?  If so, check this box and some placeholders with the standard formatting will be inserted in the description." coords="55,260,192,283" href="#" onclick="return false;">
+<area alt="Enter a helpful description for this search.  It can be as long or as short as you prefer." coords="51,172,309,260" href="#" onclick="return false;">
+<area alt='OK, so what this really means is... "Does it make sense for this search to get only one switch at a time (i.e., they are mutually exclusive), or does it use a combination of switches?"  The switch parsing code which is generated will be a little different depending on your choice here.' coords="329,246,451,264" href="#" onclick="return false;">
+<area alt="Do you want to include the switches in the description?  I don't really see why you wouldn't want to, but if so uncheck this box." coords="328,264,452,282" href="#" onclick="return false;">
+<area alt="This is a list of the form elements on the current web page.  Check the box next to the form(s) which are required for your search.  If you selected, or made active, an input field before you started up this wizard, its form should be checked below.  If you select or highlight a form, an attempt will be made to make it visually standout according to the CSS styles (check the options).  This can be helpful if you aren't quite sure which form to include in your search." coords="46,289,546,388" href="#" onclick="return false;">
+<area alt="This button will hide or display the HTML for the selected form.  This was simply provided as another aid in determining the correct form(s) to include in your search." coords="546,363,622,389" href="#" onclick="return false;">
+<area alt="Change various options." coords="547,153,622,176" href="#" onclick="return false;">
+<area alt="Check out who wrote this wizard and recent changes." coords="547,180,622,202" href="#" onclick="return false;">
+<area alt="Show help in the form of tool tips." coords="547,206,621,229" href="#" onclick="return false;">
+</map>
+
 
 </center>
 </li>
