@@ -1,0 +1,71 @@
+<search function="rwml">
+  <name>Rootsweb Mailing Lists</name>
+  <description>
+    Goto Rootsweb Mailing Lists web pages.<br/>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>rwml tmg</td></tr>
+      <tr><td>rwml beardsley</td></tr>
+    </table>
+  </description>
+  <link>http://lists.rootsweb.com/</link>
+  <category>Genealogy</category>
+  <contributor>Brent Beardsley</contributor>
+  <form name="rwmlbrowsef"
+        method="post"
+        action="http://archiver.rootsweb.com/th/index">
+    <input type="hidden" name="list" value="" />
+  </form>
+  <form name="rwmlsearchf"
+        method="post"
+        action="http://listsearches.rootsweb.com/cgi-bin/isearch2">
+    <input type="hidden" name="SEARCH_TYPE" value="ADVANCED" />
+    <input type="hidden" name="ISEARCH_TERM" value="" />
+    <input type="hidden" name="ELEMENT_SET" value="SUBJECT" />
+    <input type="hidden" name="MAXHITS" value="25" />
+    <input type="hidden" name="DBPATH" value="" />
+    <input type="hidden" name="DATABASE" value="" />
+    <COMMENT>
+      The input element above, "DATABASE" was a set of radio buttons with the following options...
+      "1999", "2000", "2001", "2002"
+    </COMMENT>
+  </form>
+
+  <script src="addons/genealogy/genealogy_lib.js"></script>
+  <script><![CDATA[
+    function rwml(q)
+    {
+      if( nullArgs("rwml", q) )
+        return false;
+
+      var args = genealogy_parseArgs(q, "board, year");
+      var board = "";
+      var query = "";
+      if (genealogy_hasArg(args, "board")) {
+        board = args.switch_val["board"].toUpperCase();
+	query = args.q;
+      } else {
+	board = args.q.toUpperCase();
+      }
+
+      if (query == "") {
+        // browse
+	document.rwmlbrowsef.list.value = board;
+	submitForm(rwmlbrowsef);
+      } else {
+        // search
+	var year = "";
+	if (genealogy_hasArg(args, "year")) {
+	  year = args.switch_val["year"];
+	} else {
+	  year = new Date().getYear();
+	}
+	document.rwmlsearchf.ISEARCH_TERM.value = query;
+	document.rwmlsearchf.DBPATH.value = "/u1/textindices/"+board.substring(0,1)+"/"+board;
+	document.rwmlsearchf.DATABASE.value = year;
+	submitForm(rwmlsearchf);
+      }
+    }
+    ]]>
+  </script>
+</search>
