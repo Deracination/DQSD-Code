@@ -92,9 +92,9 @@ function writeFile(filename, contents)
 // Here's a quick hack to append to an existing file, but
 // is very slow because it rewrites the whole file.  If
 // this is needed for anything but debugging, the component
-// should be modified to have something like an AppendToFile 
+// should be modified to have something like an AppendFile 
 // method.
-function appendToFile(filename, contents)
+function appendFile(filename, contents)
 {
   if (ensureLauncher())
   {
