@@ -222,9 +222,9 @@ function protocolHandled(url)
 // Returns an object with two properties:
 //   q:        string with switches removed
 //   switches: array of objects with these two properties:
-//      s:  name of switch, expanded if it matches the prefix
-//          of a switch in the list of expectedSwitches arg
-//      v:  value of switch.  I.e., /switch:value
+//     name:   name of switch, expanded if it matches the prefix
+//             of a switch in the list of expectedSwitches arg
+//     value:  value of switch.  I.e., /switch:value
 function parseArgs(
   q, /* string to be parsed */
   expectedSwitches /* list of expected switches, used to expand abbreviated switches */)
@@ -232,19 +232,19 @@ function parseArgs(
   var switches = [];
   var tmpq = q;
   
-  // Grab each token that looks like a switch (/\w+)
-  var reSwitch = /\/((\w+)(?::?(\w*)))\s*/;
+  // Grab each token that looks like a switch (/\S+)
+  var reSwitch = /\/((\S+)(?::?(\S*)))\s*/;
   var res = null;
   expectedSwitches = ',' + expectedSwitches + ',';
   while (res = tmpq.match(reSwitch))
   {
     // Expand switch if it's in the list of expected switches...
-    var fullswitch = expectedSwitches.match(new RegExp(',\\s*('+res[2]+'\\w*)\\s*,'));
+    var fullswitch = expectedSwitches.match(new RegExp(',\\s*('+res[2]+'\\S*)\\s*,', 'i'));
   	if (fullswitch && fullswitch[1])
-  	  switches.push( {s:fullswitch[1], v:res[3]} );
+  	  switches.push( {name:fullswitch[1].toLowerCase(), value:res[3]} );
     else
     {
-      var o = {s:res[2], v:res[3]};
+      var o = {name:res[2].toLowerCase(), value:res[3]};
       switches.push( o ); // ...otherwise just return the switch that was found
     }
       
