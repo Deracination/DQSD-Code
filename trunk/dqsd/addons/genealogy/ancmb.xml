@@ -88,7 +88,6 @@
 
       var args = genealogy_parseArgs(q, "author, days, find, place, query, surname, subject, type");
       if (genealogy_hasArg(args, "find")) {
-        alert("find");
 	// find board with name
 	var query = args.switch_val["find"];
 	if (query == "" && genealogy_hasArg(args, "query")) {
