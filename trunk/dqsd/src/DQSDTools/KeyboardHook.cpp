@@ -16,6 +16,7 @@ std::map< long, long > g_mapKeyCodeToCharCode;
 
 // The handle of our hook
 static HHOOK hHook;
+static HWND  hHookedWindow;
 
 
 static LRESULT CALLBACK KeyboardProc(
@@ -26,42 +27,50 @@ static LRESULT CALLBACK KeyboardProc(
 {
 	if(code == HC_ACTION)
 	{
+		HWND hFocusWnd = GetFocus();
+		if(hFocusWnd != hHookedWindow)
+		{
+			// This is not us - don't do anything
+			ATLTRACE("Hooked message arrived with wrong focus (DQSD 0x%x, focus 0x%x)\n", hHookedWindow, hFocusWnd);
+			return CallNextHookEx(hHook, code, wParam, lParam);
+		}
+
 		bool bKeyDown = !(lParam & 0x80000000);
 
 		if(wParam == VK_INSERT)
 		{
 			if(GetAsyncKeyState(VK_SHIFT) & 0x80000000)
 			{
-				_RPT1(_CRT_WARN, _T("Shift-INS: %c\n"), bKeyDown ? 'P' : 'R');
+				ATLTRACE(_T("Shift-INS: %c\n"), bKeyDown ? 'P' : 'R');
 				if(bKeyDown)
 				{
 					// Shift-INS is paste - send a CTRL-V
-					SendMessage(GetFocus(), WM_CHAR, 'V'-'@', 0);
+					SendMessage(hFocusWnd, WM_CHAR, 'V'-'@', 0);
 					return 0; 
 				}
 			}
 			else if(GetAsyncKeyState(VK_CONTROL) & 0x80000000)
 			{
-				_RPT1(_CRT_WARN, _T("Ctrl-INS: %c\n"), bKeyDown ? 'P' : 'R');
+				ATLTRACE(_T("Ctrl-INS: %c\n"), bKeyDown ? 'P' : 'R');
 				if(bKeyDown)
 				{
 					// Ctrl-INS is copy - send a CTRL-C
-					SendMessage(GetFocus(), WM_CHAR, 'C'-'@', 0);
+					SendMessage(hFocusWnd, WM_CHAR, 'C'-'@', 0);
 					return 0; 
 				}
 			}
 		}
 		else if(wParam == VK_DELETE)
 		{
-			_RPT1(_CRT_WARN, _T("DEL: %c\n"), bKeyDown ? 'P' : 'R');
+			ATLTRACE(_T("DEL: %c\n"), bKeyDown ? 'P' : 'R');
 
 			if(GetAsyncKeyState(VK_SHIFT) & 0x80000000)
 			{ 
-				_RPT1(_CRT_WARN, _T("Shift-DEL: %c\n"), bKeyDown ? 'P' : 'R');
+				ATLTRACE(_T("Shift-DEL: %c\n"), bKeyDown ? 'P' : 'R');
 				if(bKeyDown)
 				{
 					// Shift-DEL is cut - send a CTRL-X
-					SendMessage(GetFocus(), WM_CHAR, 'X'-'@', 0);
+					SendMessage(hFocusWnd, WM_CHAR, 'X'-'@', 0);
 					return 0; 
 				}
 			}
@@ -71,7 +80,7 @@ static LRESULT CALLBACK KeyboardProc(
 				if(bKeyDown)
 				{
 					// Send a CTRL-D - special handler for this in search.htm
-					SendMessage(GetFocus(), WM_CHAR, 'D'-'@', 0);
+					SendMessage(hFocusWnd, WM_CHAR, 'D'-'@', 0);
 					return 0; 
 				}
 			}
@@ -81,7 +90,7 @@ static LRESULT CALLBACK KeyboardProc(
 			if ( bKeyDown )
 			{
 				// Send a CTRL-P
-				SendMessage(GetFocus(), WM_CHAR, 'P'-'@', 0);
+				SendMessage(hFocusWnd, WM_CHAR, 'P'-'@', 0);
 				return 0;
 			}
 		}
@@ -90,7 +99,7 @@ static LRESULT CALLBACK KeyboardProc(
 			if ( bKeyDown )
 			{
 				// Send a CTRL-N
-				SendMessage(GetFocus(), WM_CHAR, 'N'-'@', 0);
+				SendMessage(hFocusWnd, WM_CHAR, 'N'-'@', 0);
 				return 0;
 			}
 		}
@@ -98,7 +107,7 @@ static LRESULT CALLBACK KeyboardProc(
 		{
 			if ( bKeyDown )
 			{
-				SendMessage(GetFocus(), WM_CHAR, g_mapKeyCodeToCharCode[ wParam ], 0);
+				SendMessage(hFocusWnd, WM_CHAR, g_mapKeyCodeToCharCode[ wParam ], 0);
 				return 0;
 			}
 		}
@@ -265,6 +274,7 @@ HRESULT KeyboardHookInstall(HWND hBarWnd, HHOOK& hInstalledHook)
 
 	hHook = SetWindowsHookEx(WH_KEYBOARD, KeyboardProc, _Module.GetModuleInstance(), threadId);
 	hInstalledHook = hHook;
+	hHookedWindow = hBarWnd;
 
 	ATLTRACE("hHook 0x%x\n", hHook);
 
