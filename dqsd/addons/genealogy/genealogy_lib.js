@@ -1,5 +1,10 @@
     var genealogy_debug = 0;
-    var genealogy_lib_version = "1.4";
+    var genealogy_lib_version = "1.5";
+
+	var genealogy_month_names = new Array("JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER");
+	var genealogy_date_format_1 = "([0-9]{1,2})\\s*/\\s*([0-9]{1,2})\\s*/\\s*([0-9]{4})";
+	var genealogy_date_format_2 = "([0-9]{1,2})\\s+([a-zA-Z]{3,})\\s+([0-9]{4})";
+	var genealogy_date_format_all = "(("+genealogy_date_format_1+")|("+genealogy_date_format_2+"))";
 
 	var genealogy_states = new Array(
 	"ALABAMA", "ALASKA", "ARIZONA", "ARKANSAS",
@@ -550,6 +555,109 @@ function genealogy_get_known_page_links(webpage_url, match_regex_str, search_nam
 		results[place_num] = place_url;
 	}
 	return results;
+}
+
+function genealogy_get_month_length(month, year)
+{
+	var len;
+	if(month==1 || month==3 || month==5 || month==7 || month==8 || month==10||month==12) {
+		len = 31;
+	} else {
+		if(month==2) {
+			len = 28;
+			if(!(year%4) && (year%100 || !(year%400)))
+				len++;
+		} else {
+			len = 30;
+		}
+   }
+   return len;    
+}
+
+
+function genealogy_age_calc(startDate, endDate)
+{
+	if (endDate == null || endDate == "" || typeof endDate == "undefined") {
+		endDate = new Date();
+	}
+
+	var startDay = startDate.getDate();
+	var startMonth = startDate.getMonth()+1;
+	var startYear = startDate.getFullYear();
+
+	var endDay = endDate.getDate();
+	var endMonth = endDate.getMonth()+1;
+	var endYear = endDate.getFullYear();
+
+
+	var ageDays = endDay - startDay;
+	if (ageDays < 0) {
+		endMonth--;
+		if (endMonth < 1) {
+			endYear--;
+			endMonth += 12;
+		}
+		var monthLength = genealogy_get_month_length(endMonth, endYear);
+		ageDays += monthLength;
+	}
+
+	var ageMonths = endMonth - startMonth;
+	if (ageMonths < 0) {
+		endYear--;
+		ageMonths += 12;
+	}
+
+	var ageYears = endYear - startYear;
+	var result = "";
+	if (ageYears > 0){
+		result += (ageYears  + " year"  + ((ageYears != 1)  ? "s" : "") + ", ");
+	}
+	if (ageMonths > 0 || result != "") {
+		result += (ageMonths + " month" + ((ageMonths != 1) ? "s" : "") + ", "); 
+	}
+	result += (ageDays   + " day"   + ((ageDays != 1)   ? "s" : ""));
+
+	return result;
+}
+
+function genealogy_parse_date(dateString)
+{
+	var year;
+	var month;
+	var day;
+	var r;
+	var valid_fmt = false;
+	var dateFmt1RegExp = new RegExp(genealogy_date_format_1);
+	var dateFmt2RegExp = new RegExp(genealogy_date_format_2);
+	if ( (r = dateFmt1RegExp.exec(dateString)) != null) {
+		month = r[1]-1;
+		day = r[2];
+		year = r[3];
+		valid_fmt = true;
+	} else if ( (r = dateFmt2RegExp.exec(dateString)) != null) {
+		day = r[1];
+		month = -1;
+		year = r[3];
+		var monthName = (r[2]).toUpperCase();
+		for (var i=0; i < genealogy_month_names.length; i++) {
+			if (monthName == genealogy_month_names[i] ||
+				monthName == genealogy_month_names[i].substring(0,3)) {
+				month = i;
+				valid_fmt = true;
+				break;
+			}
+		}
+	}
+	if (valid_fmt) {
+		if (month < 0 || month > 11) {
+			valid_fmt = false;
+		}
+	}
+	if (valid_fmt) {
+		return new Date(year, month, day);
+	} else {
+		return false;
+	}
 }
 
 genealogy_alert("genealogy_lib.js loaded");
