@@ -1,0 +1,38 @@
+<search function="dseek">
+  <name>Downseek</name>
+  <category>Computers<category>Software</category></category>
+  <contributor>Monty Scroggins</contributor>
+  <link>http://www.downseek.com/</link>
+  <email></email>
+  <description>
+  Search the DownSeek software search engine
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>dseek sygate</td></tr>
+    </table>
+  </description>
+  <form name="dseekf"
+        method="get"
+        action="http://www.downseek.com/search">
+    <input type="hidden" name="f" value="" />
+  </form>
+  <script><![CDATA[
+    function dseek(q)
+    {
+      if( nullArgs("dseek", q) )
+        return;
+      document.dseekf.f.value = q;
+
+      submitForm(dseekf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 12/17/02 at 11:49:34
+    by Dave's Quick Search Deskbar Search Wizard version 1.0.1 ,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>
