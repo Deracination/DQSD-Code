@@ -138,7 +138,7 @@ function showpop()
     if ( isInternalSearch( fn ) )
       alias = searches[fn].aliases[1];
     mnu( fn, alias );
-    if ( fn != 'about' && fn != 'checkWebForUpdateNotifyAll' )
+    if (searches[fn])
       saveMenuHistory( alias ? alias : fn );
   }
   return false;
