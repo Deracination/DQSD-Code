@@ -1,7 +1,7 @@
 <search xmlns="http://tempuri.org/comx2.xsd" function="comx">
     <name>Comic Strip</name>
     <description>Displays a daily comic strip in a popup window.
-    <table class="helpboxDescTable"><tr><td colspan="2"><div class="helpboxDescLabels">Note:</div> All the switches can be abbreviated 
+    <table class="helpboxDescTable"><tr><td colspan="2"><div class="helpboxDescLabels">Note:</div> All the switches can be abbreviated
     and multiple switches can be specified at one time.</td></tr><tr><td>--</td></tr><tr><td><div class="helpboxDescLabels">Switches:</div></td></tr>
     <tr><td>9 Chickweed Lane</td><td>/9chickweed</td></tr>
     <tr><td>A Case in Point</td><td>/caseinpoint</td></tr>
@@ -144,13 +144,13 @@
     <tr><td colspan="2"><div class="helpboxDescLabels">Examples:</div></td></tr><tr><td>comx /wiz   </td><td>(Wizard of Id)</td></tr><tr><td>comx /workingit  </td><td>(Working it Out)</td></tr><tr><td>comx /rip   </td><td>(Ripleys Believe it or Not)</td></tr><tr><td>comx /wiz /workingit /rip</td><td>(Opens all three)</td></tr></table></description>
     <category>Fun</category>
     <script><![CDATA[
-  
+
   function comx(q){
      if( q == "" || q == "?"){
         qsfind("comx /function");
         return false;
      }
-     
+
      var args = parseArgs(q, "9chickweedlane,agnes,alleyoop,andycapp,arloandjanis,bc,\
      ballardstreet,ben,betty,bignate,bonanas,bornloser,buckets,bullsnbears,candorville,\
      caseinpoint,ceodad,cheapthrills,committed,drabble,fatcats,ferdnand,\
@@ -169,11 +169,11 @@
      inthebleachers,joyoftech,kudzu,lacucaracha,lola,looseparts,lostsheep,luckycow,meehanstreak,\
      middletons,misterboffo,mixedmedia,mullets,nonsequitur,overboard,pluggers,poochcafe,popculture,\
      preteena,reallife,reynoldsunwrapped,shoe,stonesoup,tankmcnamara,userfriendly,willynethel,ziggy");
-     
-     if ( args.switches.length > 0 ){          
+
+     if ( args.switches.length > 0 ){
         //get the current day so the sizes can be adjusted for sunday comics
         var dat = new Date();
-        var today = dat.getDay();                              
+        var today = dat.getDay();
         for (i=0; i < args.switches.length; i++){
            //default window sizes for the comic strips window
            var windowW = 600; var windowH = 215;
@@ -181,7 +181,7 @@
            var sunwindowW = 725; var sunwindowH = 546;
            //default window sizes for the ucomic strips window on Sundays
            var ucsunwindowW = 600; var ucsunwindowH = 425;
-            
+
            var site=null;
            var endurl=null;
            var imgtitle=null;
@@ -190,7 +190,7 @@
            var endurl=null;
            var urlcat=null;
            var urldir=null;
-           
+
            //default regex for finding the image in the page source..
            var rx = /.+(\/archive\/images\/\w+\.\w+)"\s+ALT="Today's\s+Comic"/i;
            switch( args.switches[i].name ){
@@ -337,43 +337,54 @@
               case "calvinandhobbes": imgtitle="Calvin And Hobbes";site="ucomics";imgkey="ch";windowH=190;break;
               default:endurl=null;imgkey=null;break;
            }//switch
-        
+
            //default to www.comics.com
            switch(site){
-              case "altcomics": //not yet implemented   
+              case "altcomics": //not yet implemented
                  break;
               case "joyoftech":
                  var sUrl="http://www.geekculture.com/joyoftech/index.html";
-      
                  var xmlHttp = new ActiveXObject("Microsoft.XmlHttp");
                  xmlHttp.open("GET", sUrl, false);
                  xmlHttp.send();
 
                  //get the response content from the remote site
                  var sBody = xmlHttp.responseText;
-   
+
                  // what I'm looking for
                  //<img src="joyimages/555.png" height="431" width="485" border="0">
                  //<img src="joyimages/578.jpg" height="759" width="593" border="0">
                  var pattern = /joyimages\/\S+.[jpg|png|gif]/ig;
                  var result = sBody.match(pattern)[0];
-                                        
-                 //alert(result);
+
                  var imgurl = "http://www.geekculture.com/joyoftech/"+result;
+
+                 // This comic is not always the same dimensions, so find the correct dimmensions and save them
+                 pattern = /\<img.*src\=\"joyimages\/\S+.[jpg|png|gif]\".*\>/i;
+                 result = sBody.match(pattern);
+                 var tag = result[0];
+                 pattern = /width\s*=\s*\"(\S+)\"/i;
+                 result = tag.match(pattern);
+                 windowW = result[1];
+                 pattern = /height\s*=\s*\"(\S+)\"/i;
+                 result = tag.match(pattern);
+                 windowH = result[1];
+
                  break;
-                
+
               case "userfriendly":
                  var urlstart="http://ars.userfriendly.org/cartoons";
-         
+
                  // format the date param for today's comic
                  var mday = "0" + dat.getDate().toString();
                  var month = "0" + (dat.getMonth()+1);
                  var year = dat.getYear();
+                 
                  if (today == 0) {
                     windowW=ucsunwindowW;
                     windowH=ucsunwindowH;
                  }
-                 
+
                  var sUrl=urlstart;
                  var xmlHttp = new ActiveXObject("Microsoft.XmlHttp");
                  xmlHttp.open("GET", sUrl, false);
@@ -381,29 +392,39 @@
 
                  //get the response content from the remote site
                  var sBody = xmlHttp.responseText;
-    
+
                  // what I'm looking for
                  //<IMG ALT="Latest Strip" height="219" WIDTH="576" BORDER=0 SRC="http://www.userfriendly.org/cartoons/archives/04may/xuf006703.gif">
                  var pattern = /http\:\S+userfriendly\.org\/cartoons\/\S+\.gif/ig;
                  var result = sBody.match(pattern);
                  var imgurl = result[0];
+
+                 // This comic is not always the same dimensions, so find the correct dimmensions and save them
+                 pattern = /\<img.*src\=\"http\:\S+userfriendly\.org\/cartoons\/\S+\.gif\".*\>/i;
+                 result = sBody.match(pattern);
+                 var tag = result[0];
+                 pattern = /width\s*=\s*\"(\S+)\"/i;
+                 result = tag.match(pattern);
+                 windowW = result[1];
+                 pattern = /height\s*=\s*\"(\S+)\"/i;
+                 result = tag.match(pattern);
+                 windowH = result[1];
                  break;
-                 
+
               case "ucomics":
                  var urlstart="http://images.ucomics.com/comics/";
-                 //get the other date parameters for the ucomics image urls                      
+                 //get the other date parameters for the ucomics image urls
                  var mday = dat.getDate();
                  var month = dat.getMonth()+1;
                  var year = dat.getYear();
                  var subyear = year.toString();
                  subyear = subyear.substr(2,2);
-                 // I cant believe javascript doesn't have an sprintf function.
                  if (mday<10) mday= '0'+mday;
                  if (month<10) month= '0'+month;
-                         
+
                  //special handling for the calvinandhobbes comic.. It displays for year 1993
                  if (args.switches[i].name == "calvinandhobbes") {year=1993; subyear=93;}
-                    
+
                  //if the day is Sunday, use the larger Sunday comics sizes for ucomics..
                  if (today == 0) {
                     windowW=ucsunwindowW;
@@ -411,7 +432,7 @@
                  }
                  var imgurl = urlstart+imgkey+"/"+year+"/"+imgkey+subyear+month+mday+".gif";
                  break;
-                        
+
               default:
                  var urlstart="http://www.comics.com/";
                  //if the day is Sunday, use the larger Sunday comics sizes..
@@ -419,48 +440,55 @@
                     windowW=sunwindowW;
                     windowH=sunwindowH;
                  }
-      
+
                  var sUrl=urlstart+endurl;
                  urlmatch = endurl.match(/^(\w+)(\/\w+)/);
                  var urlcat=urlmatch[1];
                  var urldir=urlmatch[2];
-         
+
                  var xmlHttp = new ActiveXObject("Microsoft.XmlHttp");
                  xmlHttp.open("GET", sUrl, false);
                  xmlHttp.send();
-         
+
                  //get the response content from the remote site
                  var sBody = xmlHttp.responseText;
-         
+
                  //run the regex to parse out the image url
                  var imgurl = urlstart+urlcat+urldir+rx.exec(sBody)[1];
-      
+
                  if (imgtitle==null) {
                     //regex for finding the image title in the page source..
                     var tx = /<title>(.+)<\/title>/i;
                     var imgtitle = tx.exec(sBody)[1];
                  }
                  break;
-            }// switch on "site"
-       
-           
-        // make sure the popup height isnt larger than the display screen (like nonsequitur)
-        windowH = windowH > window.screen.availheight-38 ? window.screen.availheight-38 : windowH;
-        
-        //put up the window
-        if (imgurl != ""){
-           var comxSearchPopupBodyCode = "<html><head></head><body><style>" + convertStylesToInline() + "img {height:100%;width:100%;}</style>";
-           comxSearchPopupBodyCode += "<img src=" +imgurl +" width="+windowW+" height="+windowH+" alt=\""+imgtitle+"\" onclick='self.close()'; galleryimg='no' />";
-           comxSearchPopupBodyCode += "</body></html>";
-           var top=((screen.availheight-windowH)-38);
-           var left=((screen.width-windowW)-10);
-           //alert(screen.height+ ' -(' +screen.height+ '-' +windowH+ ') '+top);
-           popupImage = window.open('','_blank','width='+windowW+', height='+windowH+',toolbar=0,status=0,titlebar=0,location=0,directories=0,menuBar=0,scrollbars=auto,resizable=1,left='+left+',top='+top);
-           popupImage.document.open();
-           popupImage.document.write(comxSearchPopupBodyCode);
-           popupImage.document.close()
-           popupImage.document.title=imgtitle;
-        }//if imgurl        
+           }// switch on "site"
+
+           // make sure the popup height isnt larger than the display screen (like nonsequitur)
+           windowH = windowH > window.screen.availheight-38 ? window.screen.availheight-38 : windowH;
+   
+           //put up the window
+           if (imgurl != ""){
+              var comxSearchPopupBodyCode = "<html><head></head><body><style>" + convertStylesToInline() + "img {vertical-align:top;text-align:left;}</style>";
+              comxSearchPopupBodyCode += "<img src=" +imgurl +" width="+windowW+" height="+windowH+" border=0 alt=\""+imgtitle+"\" onclick='self.close()'; galleryimg='no' />";
+              comxSearchPopupBodyCode += "</body></html>";
+              var top=((screen.availheight-windowH)-38);
+              var left=((screen.width-windowW)-10);
+              popupImage = window.open('','_blank','toolbar=0,status=0,titlebar=0,location=0,directories=0,menuBar=0,scrollbars=auto,resizable=1,left='+left+',top='+top);
+              //popupImage = window.open('','_blank','width='+windowW+',height='+windowH+',toolbar=0,status=0,titlebar=0,location=0,directories=0,menuBar=0,scrollbars=auto,resizable=1,left='+left+',top='+top);
+              popupImage.document.open();
+              popupImage.document.write(comxSearchPopupBodyCode);
+              popupImage.document.close()
+              popupImage.document.title=imgtitle;
+              // The original numbers are correct for the interior window dimensions,
+              // but we have to expand the window a little to account for borders,
+              // title bar, and such.
+              // These numbers where chosen empirically, so they may not look correct
+              // on other desktops
+              windowW = Number(windowW) + 9;
+              windowH = Number(windowH) + 34;
+              popupImage.resizeTo(windowW, windowH);
+           }//if imgurl
         }// for i <...
      }else{
            setSearchWindowText("Bad Comic Name..  try 'comx ?' to see a list");
