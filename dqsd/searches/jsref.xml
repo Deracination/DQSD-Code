@@ -8,7 +8,7 @@
     <div class="helpboxDescLabels">Switches:</div>
       <table class="helpboxDescTable">
         <tr><td>/<i>version</i></td><td> - </td><td>
-          One of the following versions:<br/>
+          One of the following references:<br/>
           <table class="helpboxDescTable">
             <tr><td>/1.3</td><td> - </td><td>1.3 Netscape version</td></tr>
             <tr><td>/1.4</td><td> - </td><td>1.4 Netscape version</td></tr>
@@ -85,7 +85,6 @@
                 k++;
                 break;
               case "1.5":
-                //http://devedge.netscape.com/library/manuals/2000/javascript/1.5/reference/ could be used as an alternative
                 defpage = 'http://developer.netscape.com/docs/manuals/js/core/jsref15/contents.html';
                 query = args.q + ' inurl:jsref15 -inurl:ix site:developer.netscape.com';
                 k++;
