@@ -30,6 +30,8 @@ Modified Searches
 * ths - updated it so that the popup help works (Brent Beardsley)
 * hs - was broken & I updated it to include the new features (cf, flash and asp.net) and alternate (shorter) switches. (Shawn H)
 * abex - The destination URL had changed.. (Monty Scroggins)
+* yh - now able to search images, news, and products as well. (Brent Beardsley)
+* bg - now able to search the Message Bible as well as set version/etc preferences in localprefs.js - see the help for preference variables (Brent Beardsley)
 
 Removed Searches
 * nwtsr and httpd replaced by whats (Kim Gräsman)
