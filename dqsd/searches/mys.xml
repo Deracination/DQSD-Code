@@ -1,37 +1,39 @@
 <search function="mys">
   <name>MySQL Reference</name>
+  <category>Computers<category>Programming</category></category>
+  <contributor>Sarah Sweeney</contributor>
+  <link>http://dev.mysql.com/doc/mysql/en/index.html</link>
+  <email>mr.sanders@designshift.com</email>
   <description>
-    Lookup on mysql.com.<br/>
+  Search the MySQL documentation available at mysql.com.
     <div class="helpboxDescLabels">Example:</div>
     <table class="helpboxDescTable">
-  		<tr><td>mys create table</td></tr>
+  		<tr><td>mysql create table</td></tr>
   	</table>
   </description>
-  <category>Computers<category>Programming</category></category>
-  <link>http://dev.mysql.com/</link>
-  
   <form name="mysf"
-        action="http://dev.mysql.com/doc/mysql/search.php"
-        method="get">
-    <input type="hidden" name="q"/>
-	<input type="hidden" name="from" value="/doc/mysql/en/index.html" />
-	<input type="hidden" name="lang" value="en" />
+        method="get"
+        action="http://dev.mysql.com/doc/mysql/search.php">
+    <input type="hidden" name="q" value="" />
+    <input type="hidden" name="from" value="/doc/mysql/en/index.html" />
+    <input type="hidden" name="lang" value="en" />
   </form>
-  
   <script><![CDATA[
     function mys(q)
     {
-      if( nullArgs("mys",q) )
-        return false;
-
+      if( nullArgs("mys", q) )
+        return;
       document.mysf.q.value = q;
       submitForm(mysf);
     }
   ]]></script>
-
   <copyright>
-	Copyright (c) 2002 David Bau
-	Distributed under the terms of the
-	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
   </copyright>
-</search>
+  <created_by>
+    This search file was initially created on 07/14/04 at 11:43:12
+    by Dave's Quick Search Deskbar Search Wizard version 1.2,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search> 
