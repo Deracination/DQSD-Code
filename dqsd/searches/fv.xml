@@ -1,0 +1,64 @@
+<search function="fv">
+  <name>flightview.com</name>
+  <description>
+    Obtain real-time info on commercial flights.  Type the two letter airline code followed by the flight number.  Airline codes can be obtained from the drop down box on <a href="http://www.flightview.com">www.flightview.com</a>.
+    <br/><br/>
+    Even though flightview has airline codes for airlines throughout the world,
+	I believe they only track flights in U.S. and Canadian airspace.  Also, the
+	flight you enter must be "active" - usually this seems to mean from an hour
+	or two before takeoff until an hour or two after landing.
+	<br/><br/>
+	Airline codes can be entered in upper or lower case.  Some common US Airline
+	codes:
+	<br/><br/>
+	AA - American Airlines<br/>
+	CO - Continental Airlines<br/>
+	DL - Delta Airlines<br/>
+	B6 - Jet Blue<br/>
+	NW - Northwest Airlines<br/>
+	WN - Southwest Airlines<br/>
+	US - US Airways<br/>
+	UA - United Airlines<br/>
+	<br/>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>fv aa 2035</td></tr>
+  		<tr><td>fv us 5323</td></tr>
+    </table>
+  </description>
+  <category>Travel</category>
+  <link>http://www.flightview.com/</link>
+  <contributor>Allen B. MacKenzie</contributor>
+  
+  <form name="fvf"
+        action="http://www.flightview.com/fvFlightView/FlightViewCGI.exe"
+        method="get">
+    <input type="hidden" name="qtype" value="htm"/>
+    <input type="hidden" name="AL"/>
+    <input type="hidden" name="acid"/>
+    <input type="hidden" name="Find1" value="Find flight"/>
+  </form>
+  
+  <script><![CDATA[
+    function fv(q)
+    {
+      if( nullArgs("fv", q) )
+        return false;
+
+      if( q == "" )
+        openSearchWindow("http://www.flightview.com/");
+      else 
+      {
+        vars = q.split(" ")
+        if (vars.length = 2)
+        {
+          document.fvf.AL.value = vars[0].toUpperCase();
+          document.fvf.acid.value= vars[1];
+          submitForm(fvf);
+        }
+        else
+          nullArgs("fv","?");
+      }
+    }
+  ]]></script>
+</search>

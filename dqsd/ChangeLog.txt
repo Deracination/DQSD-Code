@@ -10,10 +10,12 @@ New Searches
 * slash - Search Slashdot (from Paul Bowers)
 * short - Abbreviate long and convoluted URLs (from Reginald Braithwaite-Lee)
 * palm - PalmGear.com search (from Herman Fuchs)
+* fv - FlightView search (from Allen B. MacKenzie)
 
 Modified Searches
 
-* 
+* yp - Tim Dierks added support for addresses
+* temp - Steven Ehrbar added Kelvin and Rankine conversions, /centigrade switch
 
 Enhancements
 

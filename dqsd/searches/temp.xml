@@ -1,24 +1,26 @@
 <search function="temp">
   <name>Temperature Converter</name>
   <description>
-    Convert temperatures from Celsius to Fahrenheit and vice-versa. A switch is required to indicate the units the given value is in.<br/>
+    Convert temperatures from any of Celsius, Fahrenheit, Kelvin, and Rankine to the other three. A switch is required to indicate the units the given value is in.<br/>
     <div class="helpboxDescLabels">Switches:</div>
     <table class="helpboxDescTable">
-      <tr><td>/celsius</td><td> - </td><td>Convert the given Celsius value to Fahrenheit.</td></tr>
-      <tr><td>/fahrenheit</td><td> - </td><td>Convert the given Fahrenheit value to Celsius.</td></tr>
+      <tr><td>/celsius, /centigrade</td><td> - </td><td>Convert the given Celsius value to Fahrenheit, Kelvin, and Rankine.</td></tr>
+      <tr><td>/fahrenheit</td><td> - </td><td>Convert the given Fahrenheit value to Celsius, Kelvin, and Rankine.</td></tr>
+      <tr><td>/kelvin</td><td> - </td><td>Convert the given Kelvin value to Celsius, Farenheit, and Rankine.</td></tr>
+      <tr><td>/rankine</td><td> - </td><td>Convert the given Rankine value to Celsius, Farenheit, and Kelvin.</td></tr>
     </table>
-    <div class="helpboxDescLabels">Example:</div>
+    <div class="helpboxDescLabels">Examples:</div>
     <table class="helpboxDescTable">
-      <tr><td>temp 22 /celsius</td></tr>
+      <tr><td>temp 22 /c</td></tr>
     </table>
   </description>
   <category>Functions</category>
-  <contributor>Ryan Edwards, Volker Wick</contributor>
+  <contributor>Ryan Edwards, Volker Wick, Steven Ehrbar</contributor>
   
   <script><![CDATA[
     function temp(q) 
     {
-      var args = parseArgs(q, "celsius, fahrenheit");
+      var args = parseArgs(q, "celsius, centigrade, fahrenheit, kelvin, rankine");
       
       if( nullArgs("temp",q) )
         return false;
@@ -26,13 +28,24 @@
       {
         switch( args.switches[0].name )
         {
-          case "celsius":     // convert a celsius value to fahrenheit
-            document.deff.q.value = args.q + "\u00b0C = " + parseInt(eval((1.8 * args.q) + 32),10) + "\u00b0F";
+          case "celsius": // convert a Celsius value.
+          case "centigrade":
+            document.deff.q.value = args.q + "\u00b0C = " + parseInt(eval(1.8 * args.q + 32 + 0.5),10) + "\u00b0F " + parseInt(eval(1 * args.q + 273.15 + 0.5),10) + "\u00b0K " + parseInt(eval((1.8 * args.q) + 32 + 459.67 + 0.5),10) + "\u00b0R";
             document.deff.q.createTextRange().select();
             break;
             
-          case "fahrenheit":  // convert a fahrenheit value to celsius
-            document.deff.q.value = args.q + "\u00b0F = " + parseInt(eval((args.q - 32) / 1.8),10) + "\u00b0C";
+          case "fahrenheit": // convert a Fahrenheit value
+            document.deff.q.value = args.q + "\u00b0F = " + parseInt(eval((args.q - 32) / 1.8 + 0.5),10) + "\u00b0C " + parseInt(eval((args.q - 32) / 1.8 + 273.15 + 0.5),10) + "\u00b0K " + parseInt(eval(1 * args.q + 459.67 + 0.5),10) + "\u00b0R";
+            document.deff.q.createTextRange().select();
+            break;
+            
+          case "kelvin": // convert a Kelvin value
+            document.deff.q.value = args.q + "\u00b0K = " + parseInt(eval(1 * args.q - 273.15 + 0.5),10) + "\u00b0C " + parseInt(eval((1.8 * args.q) - 459.67 + 0.5),10) + "\u00b0F " + parseInt(eval(1.8 * args.q + 0.5),10) + "\u00b0R";
+            document.deff.q.createTextRange().select();
+            break;
+            
+          case "rankine": // convert a Rankine value
+            document.deff.q.value = args.q + "\u00b0R = " + parseInt(eval((args.q) / 1.8 - 273.15 + 0.5),10) + "\u00b0C " + parseInt(eval((args.q) * 1 - 459.67 + 0.5),10) + "\u00b0F " + parseInt(eval((args.q) / 1.8 + 0.5),10) + "\u00b0K";
             document.deff.q.createTextRange().select();
             break;
         }
