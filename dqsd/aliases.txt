@@ -1,3 +1,12 @@
+// This is where the default aliases are defined.
+//
+// The format requires a single <tab> separator between the alias
+// and the function to be called.
+// 
+// Note:
+// User aliases should be placed in the localaliases.txt file which
+// will not be overwritten when a new version of the toolbar is installed.
+//
 	gg
 !	ifl
 ?	yh
