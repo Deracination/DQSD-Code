@@ -65,7 +65,7 @@
 
   <xsl:template match="html:*">
     <xsl:element name="{local-name()}">
-      <xsl:for-each select="@html:*">
+      <xsl:for-each select="@*">
         <xsl:attribute name="{local-name()}">
           <xsl:value-of select="." />
         </xsl:attribute>
