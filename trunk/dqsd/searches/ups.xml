@@ -1,6 +1,7 @@
 <search function="ups">
   <name>Track UPS Packages</name>
-  <description>Up to 20 at a time: "ups [tracking#1], [tracking#2]"</description>
+  <description>Track UPS packages by tracking number (up to 20):
+    <br/>ups [tracking#1], [tracking#2]</description>
   <category>Shipping</category>
   <link>http://www.ups.com/tracking/tracking.html</link>
   <contributor>Glenn Carr</contributor>

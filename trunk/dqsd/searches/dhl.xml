@@ -1,0 +1,39 @@
+<search function="dhl">
+  <name>Track DHL Packages</name>
+  <category>Shipping</category>
+  <contributor>David Bau</contributor>
+  <link>http://www.dhl-usa.com/tracking</link>
+  <email>davidbau@hotmail.com</email>
+  <description>
+  Track DHL packages by Airwaybill numbers (up to 10):
+  <br/>dhl [tracking #1] [tracking #2]
+  </description>
+  <form name="dhlf"
+        method="get"
+        action="http://www.dhl-usa.com/cgi-bin/tracking.pl">
+    <input type="hidden" name="AWB" value="" />
+    <input type="hidden" name="LAN" value="ENG" />
+    <input type="hidden" name="TID" value="US_ENG" />
+    <input type="hidden" name="FIRST_DB" value="US" />
+  </form>
+  <script><![CDATA[
+    function dhl(q)
+    {
+      if( nullArgs("dhl", q) )
+        return;
+
+      document.dhlf.AWB.value = q.replace(/\s+/g,"\r\n");
+
+      submitForm(dhlf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 09/19/02 at 07:02:40
+    by Dave's Quick Search Deskbar Search Wizard version 0.7 (beta),
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>

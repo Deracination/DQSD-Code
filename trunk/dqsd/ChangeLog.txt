@@ -7,6 +7,10 @@ New Searches
 * synfr - get synonyms for a french word
 * webpoll - displays a graph illustrating the timings of the objects on a web page (from Dean Wilson)
 * dg - GoDaddy DynaGen Domain Search; finds intelligent variations of domain names given a word (from Glenn Carr)
+* mysimon - MySimon price comparison engine
+* dhl - Track DHL packages
+* usps - Track USPS packages
+* abex - Track Airborne Express packages
 
 Modified Searches
 
