@@ -24,7 +24,8 @@ Enhancements
 
 Bug Fixes
 
-* 
+* changed progid for MSXML component from MSXML.DOMDocument to MSXML2.DOMDocument
+
 
 -- What's new for 3.0.0.23
 
