@@ -1,0 +1,103 @@
+<search function="npdr">
+  <name>Nurses' PDR</name>
+  <category>Reference</category>
+  <contributor>John W. Bairen, Jr.</contributor>
+  <link>http://www.nursespdr.com/members/database/index.html</link>
+  <email>john_at_bairen_dot_net</email>
+  <description>
+  Search www.nursespdr.com database for drug information.<br/>
+    <div class="helpboxDescLabels">Switches:</div>
+  	<table class="helpboxDescTable">
+  		<tr><td>/and</td><td> - </td><td>Match all terms</td></tr>
+  		<tr><td>/or</td><td> - </td><td>Match any terms</td></tr>
+  	</table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>npdr aluminum sulfate /and</td></tr>
+  		<tr><td>npdr aluminum sulfate /or</td></tr>
+  		<tr><td>npdr fentanyl</td></tr>
+  	</table>
+  </description>
+  <form name="npdrf"
+        method="post"
+        action="http://search.delmar.com/cgi-bin/htsearch">
+    <input type="hidden" name="method" value="and" />
+    <COMMENT>
+      The input element above, "method", was a SELECT element with the following options...
+      <select name="method">
+        <option value="and">All</option>
+        <option value="or">Any&gt;</option>
+      </select>
+    </COMMENT>
+
+    <input type="hidden" name="config" value="nursespdr" />
+    <input type="hidden" name="restrict" value="" />
+    <input type="hidden" name="exclude" value="" />
+
+    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
+
+    <input type="hidden" name="words" value="" />
+  </form>
+  <script><![CDATA[
+    function npdr(q)
+    {
+      if( nullArgs("npdr", q) )
+        return;
+
+      // Parse switches with parseArgs:
+
+      // parseArgs usage:
+      // Arguments:
+      //    q                - string from the search function
+      //    expectedSwitches - list or array of the expected switch values
+      //    expandSwitches   - optional parameter [default = true] used to determine 
+      //                       if the switch shortcuts should be expanded (i.e. /f becomes /foo)
+      // Returns an object with these properties:
+      //    q        - the input string with the switches removed
+      //    switches - array of objects with these two properties:
+      //                  name:   expanded name of the matched switch (i.e. foo as in /foo:bar)
+      //                  value:  value of switch (i.e. bar as in /foo:bar)
+      //    switch_val - associative array with the switch name as the key with the switch value 
+      //                 as the value. (i.e. switch_val["foo"] = "bar" as in /foo:bar)
+
+      var args = parseArgs(q, "and, or");
+      if ( args.switches.length > 0 )
+      {
+        switch( args.switches[0].name )
+        {
+          case "and":
+            document.npdrf.method.value = "and";
+            break;
+          case "or":
+            document.npdrf.method.value = "or";
+            break;
+          default:
+            document.npdrf.method.value = "and";
+            break;
+        }
+      }
+
+      // FORM variables for npdrf
+      //document.npdrf.method.value = "";
+      //document.npdrf.config.value = "";
+      //document.npdrf.restrict.value = "";
+      //document.npdrf.exclude.value = "";
+
+      // The wizard assigned the search string to this form field value because
+      // this field was the active element when the search file was generated.
+      // Change this to args.q if the search string is parsed with parseArgs.
+      document.npdrf.words.value = args.q;
+
+      submitForm(npdrf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 10/03/02 at 13:56:46
+    by Dave's Quick Search Deskbar Search Wizard version 0.7 (beta),
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>
