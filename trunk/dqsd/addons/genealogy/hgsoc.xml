@@ -1,27 +1,27 @@
-<search function="cemetery">
-  <name>Cemetery Junction</name>
+<search function="hgsoc">
+  <name>Historical &amp; Genealogical Societies</name>
   <description>
-    Goto Cemetery Junction web pages.<br/>
+    Goto Historical &amp; Genealogical Societies web pages.<br/>
     <div class="helpboxDescLabels">Examples:</div>
     <table class="helpboxDescTable">
-      <tr><td>cemetery mi</td></tr>
-      <tr><td>cemetery alaska</td></tr>
+      <tr><td>hgsoc mi</td></tr>
+      <tr><td>hgsoc alaska</td></tr>
     </table>
   </description>
-  <link>http://www.cemeteryjunction.com/</link>
+  <link>http://www.obitlinkspage.com/hs/</link>
   <category>Genealogy</category>
   <contributor>Brent Beardsley</contributor>
-  <form name="cemeteryf">
+  <form name="hgsocf">
 
   </form>
   <script src="addons/genealogy/genealogy_lib.js"></script>
   <script><![CDATA[
-    function cemetery(q)
+    function hgsoc(q)
     {
-      if( nullArgs("cemetery", q) )
+      if( nullArgs("hgsoc", q) )
         return false;
 
-      var search_url = "http://www.daddezio.com/cemetery/junction/index.html";
+      var search_url = "http://www.obitlinkspage.com/hs/";
       var links = genealogy_get_known_page_links(search_url);
       var search_place_num = genealogy_lookup_place(q);
       if (search_place_num >= 0) {

@@ -1,0 +1,42 @@
+<search function="sdaoi">
+  <COMMENT>
+
+    This search file was initially created by Dave's Quick Search Deskbar
+    Search Wizard version 0.5 (beta) on 08/23/02 at 21:05:32
+
+    Even though this XML search will probably load and is a healthy start
+    toward a completed search, please be aware that this search will probably
+    not work as is and will require some human inspection and modification.
+
+  </COMMENT>
+  <name>Seventh Day Adventist Obituary Index</name>
+  <category>Genealogy</category>
+  <contributor>Brent Beardsley</contributor>
+  <link>http://143.207.5.3:82/search/b</link>
+  <email></email>
+  <description>
+  Search the Seventh Day Adventist Obituary Index
+  </description>
+  <form name="sdaoif"
+        method="get"
+        action="http://143.207.5.3:82/search/b">
+    <input type="hidden" name="SEARCH" value=""/>
+  </form>
+  <script><![CDATA[
+    function sdaoi(q)
+    {
+      if( nullArgs("sdaoi", q) )
+        return;
+
+      if( q == "" )
+      {
+        openSearchWindow("http://143.207.5.3:82/search/b");
+	return;
+      } else {
+        //openSearchWindow("http://143.207.5.3:82/search/b/"+q);
+      }
+      document.sdaoif["SEARCH"].value = q;
+      submitForm(sdaoif); 
+    }
+  ]]></script>
+</search>

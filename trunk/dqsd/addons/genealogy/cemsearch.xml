@@ -1,27 +1,27 @@
-<search function="cemetery">
-  <name>Cemetery Junction</name>
+<search function="cemsearch">
+  <name>Cemetery Search - CemSearch</name>
   <description>
-    Goto Cemetery Junction web pages.<br/>
+    Goto CemSearch web pages.<br/>
     <div class="helpboxDescLabels">Examples:</div>
     <table class="helpboxDescTable">
-      <tr><td>cemetery mi</td></tr>
-      <tr><td>cemetery alaska</td></tr>
+      <tr><td>cemsearch mi</td></tr>
+      <tr><td>cemsearch alaska</td></tr>
     </table>
   </description>
-  <link>http://www.cemeteryjunction.com/</link>
+  <link>http://www.obitcentral.com/cemsearch/</link>
   <category>Genealogy</category>
   <contributor>Brent Beardsley</contributor>
-  <form name="cemeteryf">
+  <form name="cemsearchf">
 
   </form>
   <script src="addons/genealogy/genealogy_lib.js"></script>
   <script><![CDATA[
-    function cemetery(q)
+    function cemsearch(q)
     {
-      if( nullArgs("cemetery", q) )
+      if( nullArgs("cemsearch", q) )
         return false;
 
-      var search_url = "http://www.daddezio.com/cemetery/junction/index.html";
+      var search_url = "http://www.obitcentral.com/cemsearch/";
       var links = genealogy_get_known_page_links(search_url);
       var search_place_num = genealogy_lookup_place(q);
       if (search_place_num >= 0) {
