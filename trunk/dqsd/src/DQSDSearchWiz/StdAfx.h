@@ -16,9 +16,12 @@
 #define _ATL_APARTMENT_THREADED
 
 #include <atlbase.h>
+#include <atlapp.h>
+
 //You may derive a class from CComModule and use it if you want to override
 //something, but do not change the name of _Module
-extern CComModule _Module;
+extern CAppModule _Module;
+
 #include <ExDisp.h>
 #include <MsHtml.h>
 #include <atlcom.h>
@@ -30,7 +33,6 @@ extern CComModule _Module;
 #include <ctype.h>
 #include <time.h>
 #include <atlhost.h>
-#include <atlapp.h>
 #include <atlctrls.h>
 #include <atlctrlx.h>
 #include <atlmisc.h>

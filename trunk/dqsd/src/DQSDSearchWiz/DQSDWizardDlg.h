@@ -7,11 +7,12 @@
 #include "SearchNameEdit.h"
 #include "Options.h"
 #include "resource.h"       // main symbols
+#include "DialogToolTipCtrl.h"
 
 /////////////////////////////////////////////////////////////////////////////
 // CDQSDWizardDlg
 class CDQSDWizardDlg : 
-	public CAxDialogImpl<CDQSDWizardDlg>
+	public CDialogImpl<CDQSDWizardDlg>
 {
 public:
 	CDQSDWizardDlg()
@@ -39,6 +40,7 @@ BEGIN_MSG_MAP(CDQSDWizardDlg)
 	COMMAND_HANDLER(IDC_Options, BN_CLICKED, OnClickedOptions)
 	COMMAND_HANDLER(IDC_ShowHideHTML, BN_CLICKED, OnClickedShowHideHTML)
 	COMMAND_HANDLER(IDC_Switches, EN_CHANGE, OnChangeSwitches)
+	COMMAND_HANDLER(IDC_ShowTips, BN_CLICKED, OnClickedShowtips)
 END_MSG_MAP()
 // Handler prototypes:
 //  LRESULT MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
@@ -61,12 +63,16 @@ END_MSG_MAP()
 		EndDialog(wID);
 		return 0;
 	}
-
 	LRESULT OnFormListItemChanged(int idCtrl, LPNMHDR pNMHDR, BOOL& bHandled);
 	LRESULT OnClickedAbout(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHandled);
 	LRESULT OnClickedOptions(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHandled);
 	LRESULT OnClickedShowHideHTML(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHandled);
 	LRESULT OnChangeSwitches(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHandled);
+	LRESULT OnClickedShowtips(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHandled)
+	{
+		m_tip.Activate( ( CWindow( GetDlgItem( IDC_ShowTips ) ).SendMessage( BM_GETCHECK, 0, 0 ) == BST_CHECKED ) );
+		return 0;
+	}
 
 public:
 	CComPtr<IHTMLDocument2> m_spDoc2;
@@ -85,6 +91,7 @@ private:
 	map< int, CComBSTR > m_mapUnselectedStyle;
 	CComPtr< IHTMLStyle > m_spSelectedStyle;
 	int m_nTallDialogHeight;
+	CDialogToolTipCtrl m_tip;
 
 private:
 	string GetAbsoluteActionPath( _variant_t& varAction );

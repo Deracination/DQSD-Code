@@ -114,6 +114,10 @@ SOURCE=.\AboutDlg.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\DialogToolTipCtrl.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\DQSDSearchWiz.cpp
 # End Source File
 # Begin Source File
@@ -165,6 +169,10 @@ SOURCE=.\StdAfx.cpp
 # Begin Source File
 
 SOURCE=.\AboutDlg.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\DialogToolTipCtrl.h
 # End Source File
 # Begin Source File
 

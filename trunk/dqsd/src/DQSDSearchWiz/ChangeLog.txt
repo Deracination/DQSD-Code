@@ -1,11 +1,13 @@
-Version 0.9 (beta) ???
+Version 0.9 (beta) 20-Sep-2002
 
-* Added link to DQSD search wizard page on About dialog
+* Added links to DQSD search wizard web site on About dialog
+* Added help in the form of tooltips which can be turned on and off
+* Rearranged some of the controls and cleaned up some code
 
 Version 0.8 (beta) 16-Sep-2002
 
 * Added options for including switches and examples in description
-* Changed options for selected FORM CSS styles
+* Changed options for selected form CSS styles
 
 Version 0.7 (beta) 9-Sep-2002
 

@@ -14,7 +14,7 @@
 #include "SearchWizard.h"
 
 
-CComModule _Module;
+CAppModule _Module;
 
 BEGIN_OBJECT_MAP(ObjectMap)
 OBJECT_ENTRY(CLSID_SearchWizard, CSearchWizard)

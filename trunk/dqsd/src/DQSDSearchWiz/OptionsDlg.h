@@ -6,6 +6,7 @@
 
 #include "resource.h"       // main symbols
 #include "options.h"
+#include "DialogToolTipCtrl.h"
 
 /////////////////////////////////////////////////////////////////////////////
 // COptionsDlg
@@ -30,6 +31,7 @@ BEGIN_MSG_MAP(COptionsDlg)
 	COMMAND_ID_HANDLER(IDCANCEL, OnCancel)
 	COMMAND_HANDLER(IDC_EditXML, BN_CLICKED, OnClickedEditXML)
 	COMMAND_HANDLER(IDC_Browse, BN_CLICKED, OnClickedBrowse)
+	COMMAND_HANDLER(IDC_ShowTips, BN_CLICKED, OnClickedShowtips)
 END_MSG_MAP()
 // Handler prototypes:
 //  LRESULT MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
@@ -38,6 +40,32 @@ END_MSG_MAP()
 
 	LRESULT OnInitDialog(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 	{
+		// Create tooltip for controls
+
+		m_tip.Create( m_hWnd );
+
+		int rgCtrlIDs[] = { 
+			IDC_EditXML,
+			IDC_Editor,
+			IDC_Browse,
+			IDC_IncludeComments,
+			IDC_WarnNotActive,
+			IDC_CSS,
+			IDC_ShowTips,
+		};
+
+		for ( int iCtrl = 0; iCtrl < LENGTHOF( rgCtrlIDs ); iCtrl++ )
+		{
+			CString csTip;
+			if ( csTip.LoadString( rgCtrlIDs[ iCtrl ] ) )
+			{
+				m_tip.AddTool( rgCtrlIDs[ iCtrl ], csTip.LockBuffer() );
+				csTip.UnlockBuffer();
+			}
+		}
+		
+		m_tip.Activate( ( CWindow( GetDlgItem( IDC_ShowTips ) ).SendMessage( BM_GETCHECK, 0, 0 ) == BST_CHECKED ) );
+
 		CenterWindow( GetActiveWindow() );
 
 		CWindow( GetDlgItem( IDC_EditXML ) ).SendMessage( BM_SETCHECK, m_options.EditResults() ? BST_CHECKED : BST_UNCHECKED );
@@ -89,10 +117,19 @@ END_MSG_MAP()
 		return 0;
 	}
 
+	LRESULT OnClickedShowtips(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHandled)
+	{
+		m_tip.Activate( ( CWindow( GetDlgItem( IDC_ShowTips ) ).SendMessage( BM_GETCHECK, 0, 0 ) == BST_CHECKED ) );
+		return 0;
+	}
+
 	LRESULT OnClickedBrowse(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHandled);
 
 public:
 	COptions m_options;
+
+private:
+	CDialogToolTipCtrl m_tip;
 };
 
 #endif //__OPTIONSDLG_H_
