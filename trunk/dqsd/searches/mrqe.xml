@@ -1,0 +1,32 @@
+<search function="mrqe">
+  <name>Movie Review Query Engine</name>
+  <description>
+    Search for movie reviews across many different sources.<br/>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+      <tr><td>mrqe shrek</td></tr>
+   </table>
+  </description>
+  <category>Entertainment</category>
+  <link>http://www.mrqe.com/</link>
+  <contributor>Monty Scroggins</contributor>
+  
+  <form name="mrqef" 
+        method="get" 
+        action="http://www.mrqe.com/lookup">
+    <input type="hidden" name="isindex" value=""/>
+  </form>
+  
+  <script><![CDATA[
+    function mrqe(q)
+    {
+      if( nullArgs("mrqe", q) )
+        return false;
+      else
+      {
+          document.mrqef.isindex.value=q;
+          submitForm(mrqef);
+      }
+    }
+  ]]></script>
+</search>
