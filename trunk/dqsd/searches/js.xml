@@ -1,0 +1,152 @@
+<search function="js">
+  <name>Jobserve</name>
+  <description>European specialist job site: "js /s:java netherlands /d:3 /j:c"</description>
+  <category>Other</category>
+  <link>http://www.jobserve.com</link>
+  <contributor>Tom Corcoran</contributor>
+  <form name="jobservef"
+        target="_blank"
+        method="get">
+    <input type="hidden" name="page" value="1"/>
+    <input type="hidden" name="q" value=""/>
+    <input type="hidden" name="jobType" value=""/>
+    <input type="hidden" name="order" value=""/>
+    <input type="hidden" name="d" value=""/>
+  </form>
+  <script><![CDATA[
+   
+    function js(q)
+    {
+      // initialize to allow for repeated calls
+      var parsedVars;
+      var jobType = "";
+      var order = "Rank";
+      var numberDays = "0";
+      var searchText = "";
+
+      document.jobservef.action = "http://www.it.jobserve.com/jobserve/searchresults.asp";
+    
+      if ( q == "" )
+        openSearchWindow("http://www.jobserve.com");
+      else
+      {
+        if ( parsedVars = q.split( '/' ) )
+        {
+          // cycle through number of switches entered (max 4 switches + search text)
+          for ( var i = 0; i <= parsedVars.length-1 && i <= 4; i++ )
+          {
+            // if first split is "" then no text prior to first switch
+            if ( parsedVars[i] == "" )
+              continue;
+            
+            // used if no switches - eg. "js java"   
+            if ( parsedVars.length == 1 )
+            {
+              searchText = parsedVars[0]; 
+              continue;
+            }
+
+            // check if see which job market
+
+            if ( parsedVars[i].substr(0,3) == 'it:' ) 
+            {
+              document.jobservef.action = "http://www.it.jobserve.com/jobserve/searchresults.asp";
+              continue;
+            }
+
+            if ( parsedVars[i].substr(0,4) == 'acc:' ) 
+            {
+              document.jobservef.action = "http://www.accountancy.jobserve.com/jobserve/searchresults.asp";
+              continue;
+            }
+
+            if ( parsedVars[i].substr(0,4) == 'eng:' ) 
+            {
+              document.jobservef.action = "http://www.engineering.jobserve.com/jobserve/searchresults.asp";
+              continue;
+            }
+
+            if ( parsedVars[i].substr(0,4) == 'sal:' ) 
+            {
+              document.jobservef.action = "http://www.sales.jobserve.com/jobserve/searchresults.asp";
+              continue;
+            }
+
+            if ( parsedVars[i].substr(0,4) == 'fin:' ) 
+            {
+              document.jobservef.action = "http://www.financial.jobserve.com/jobserve/searchresults.asp";
+              continue;
+            }
+
+            if ( parsedVars[i].substr(0,4) == 'sec:' ) 
+            {
+              document.jobservef.action = "http://www.secretarial.jobserve.com/jobserve/searchresults.asp";
+              continue;
+            }
+
+            if ( parsedVars[i].substr(0,4) == 'leg:' ) 
+            {
+              document.jobservef.action = "http://www.legal.jobserve.com/jobserve/searchresults.asp";
+              continue;
+            }
+
+            if ( parsedVars[i].substr(0,4) == 'med:' ) 
+            {
+              document.jobservef.action = "http://www.medical.jobserve.com/jobserve/searchresults.asp";
+              continue;
+            }
+
+            // check for job type
+            if ( parsedVars[i].substr(0,2) == 'j:' ) 
+            {
+              // can be c (contract) or p (permanent)
+              if ( ( parsedVars[i].substr(2,1) == 'c' ) || ( parsedVars[i].substr(2,1) == 'p' ) ) 
+                jobType = parsedVars[i].substr(2,1).toUpperCase();
+              else
+                jobType = "*";
+              continue;
+            }
+
+            // check sort order
+            if ( parsedVars[i].substr(0,2) == 'o:' ) 
+            {
+              // can be l (lastest jobs) or b (best match)
+              if ( parsedVars[i].substr(2,1) == "l" )
+                order = "DateTime";
+              else { if ( parsedVars[i].substr(2,1) == "b" ) 
+                       order = "Rank";
+                   }
+              continue;
+            }
+
+            // check # Working Days
+            if ( parsedVars[i].substr(0,2) == 'd:' ) 
+            {
+              // can get jobs for 0 (today) up to & including last 5 days
+              if ( (parsedVars[i].substr(2,1) >= 0) && (parsedVars[i].substr(2,1) <= 5) ) 
+                numberDays = ( parsedVars[i].substr(2,1) );
+              continue;
+            }
+            
+            if ( parsedVars[i].substr(0,2) == 's:' ) 
+            {
+              searchText = parsedVars[i].substr(2,parsedVars[i].length-1); 
+              continue;
+            }
+            // if got here then search text entered without /s and other switches
+            searchText = parsedVars[i]; 
+
+          } // end for 
+        } // end if ( parsedVars = q.split( '/' ) )
+
+        document.jobservef.q.value = searchText;
+        document.jobservef.jobType.value = jobType;
+        document.jobservef.order.value = order;
+        document.jobservef.d.value = numberDays;
+
+        submitForm( jobservef );
+
+      } // end else
+    }
+  ]]></script>
+</search>
