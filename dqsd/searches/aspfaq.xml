@@ -1,0 +1,129 @@
+<search function="aspfaq">
+  <name>Active-Server-Pages FAQ</name>
+  <category>Computers<category>Programming</category></category>
+  <contributor>Shawn K. Hall</contributor>
+  <link>http://www.ASPFAQ.com/</link>
+  <email>Shawn[@]ReliableAnswers.com</email>
+  <description>
+    Search the Active Server Pages Frequently Asked Questions online database<br /><br />
+    If you know your Transact-SQL, you can use characters like % and _ to enhance 
+    your search. If you are searching for those literal characters, please enclose
+    them in [square brackets]. There is no special condition for +/- or quote 
+    characters - they will simply be a part of the search.<br /><br />
+    There are no "noise" words configured. Searches for 'a' or '%' will result in a
+    large resultset. Choose words that are likely to return a match.
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td> #      </td><td> - </td><td> Open this ASPFAQ article number directly </td></tr>
+      <tr><td> /any   </td><td> - </td><td> Match any word </td></tr>
+      <tr><td> /exact </td><td> - </td><td> Match exact phrase </td></tr>
+      <tr><td> /match </td><td> Default </td><td> Match all words </td></tr>
+      <tr><td> /day   </td><td> - </td><td> Articles updated in the last day </td></tr>
+      <tr><td> /week  </td><td> - </td><td> Articles updated in the last week </td></tr>
+      <tr><td> /month </td><td> - </td><td> Articles updated in the last month </td></tr>
+      <tr><td> /all   </td><td> Default </td><td> Search all categories </td></tr>
+      <tr><td> /db    </td><td> - </td><td> Search only the database category </td></tr>
+      <tr><td> /comps </td><td> - </td><td> Search only the components category </td></tr>
+      <tr><td> /forms </td><td> - </td><td> Search only the forms category </td></tr>
+      <tr><td> /files </td><td> - </td><td> Search only the filesystem category </td></tr>
+      <tr><td> /email </td><td> - </td><td> Search only the emailcategory </td></tr>
+      <tr><td> /dates </td><td> - </td><td> Search only the dates category </td></tr>
+      <tr><td> /gen   </td><td> - </td><td> Search only the general category </td></tr>
+      <tr><td> /x     </td><td> - </td><td> Use 'abstract' results </td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td> aspfaq /db 80004005 </td></tr>
+      <tr><td> aspfaq /email timeout </td></tr>
+      <tr><td> aspfaq /gen remote page </td></tr>
+      <tr><td> aspfaq 2195 </td></tr>
+      <tr><td> aspfaq dynamic include </td></tr>
+      <tr><td> aspfaq enterprise manager </td></tr>
+    </table>
+  </description>
+  <comment>
+    This is pretty spiffy, eh?
+  </comment>
+
+  <form name="aspfaqf" 
+        method="post" 
+        action="http://www.aspfaq.com/results.asp">
+    <input type="hidden" name="srch"     value="" />
+    <input type="hidden" name="type"     value="all" />
+    <input type="hidden" name="category" value="0" />
+    <input type="hidden" name="days"     value="0" />
+    <input type="hidden" name="abstract" value="" />
+  </form>
+
+  <script><![CDATA[
+    function aspfaq(q)
+    {
+      if( nullArgs("aspfaq", q) ) {
+        openSearchWindow("http://www.aspfaq.com/search.asp");
+        return false;
+      }
+
+      var args = parseArgs(q, "any, match, exact, day, week, month, all, db, comps, forms, files, email, dates, gen, x");
+      if( q == "" )
+        openSearchWindow("http://www.aspfaq.com/");
+      else if( args.switches.length >= 1 )
+      {
+        for (var i = 0; i < args.switches.length; i++)
+        {
+          sw = args.switches[i];
+          switch(sw.name)
+          {
+            case "any":
+              document.aspfaqf.type.value = "any";   break; //any words
+            case "match":
+              document.aspfaqf.type.value = "all";   break; //all words
+            case "exact":
+              document.aspfaqf.type.value = "xct";   break; //exact match
+
+            case "day":
+              document.aspfaqf.days.value = "1";     break; //last day
+            case "week":
+              document.aspfaqf.days.value = "7";     break; //last week
+            case "month":
+              document.aspfaqf.days.value = "30";    break; //last month
+
+            case "all":
+              document.aspfaqf.category.value = "0"; break; //any
+            case "db":
+              document.aspfaqf.category.value = "1"; break; //database
+            case "comps":
+              document.aspfaqf.category.value = "2"; break; //components
+            case "forms":
+              document.aspfaqf.category.value = "3"; break; //forms
+            case "files":
+              document.aspfaqf.category.value = "4"; break; //filesystem
+            case "email":
+              document.aspfaqf.category.value = "5"; break; //email
+            case "dates":
+              document.aspfaqf.category.value = "6"; break; //dates
+            case "gen":
+              document.aspfaqf.category.value = "7"; break; //general
+
+            case "x":
+              document.aspfaqf.abstract.value = "1"; break; //abstract response
+
+            default:
+          }
+        }
+      }
+
+      document.aspfaqf.srch.value = args.q;
+      submitForm(aspfaqf);
+
+
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was created on 2003/08/08 by Shawn K. Hall
+    Copyright © 2003 Shawn K. Hall; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>
