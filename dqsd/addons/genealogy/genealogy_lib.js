@@ -67,6 +67,43 @@ function genealogy_trim(str)
    }
 }
 
+function genealogy_strip_tags(str)
+{
+	var start = 0;
+	var end = str.length-1;
+	var retval = "";
+	var in_tag = 0;
+	var in_quotes = 0;
+	while (start <= end)
+	{
+		var ch = str.charAt(start);
+		if (in_tag) {
+			if (ch == '>') {
+				if (!in_quotes) {
+					in_tag = 0;
+				}
+			} else if (ch == '"') {
+				in_quotes = (in_quotes == 1) ? 0 : 1;
+			}
+		} else {
+			if (ch == '<') {
+				if (in_quotes) {
+					retval += ch;
+				} else {
+					in_tag = 1;
+				}
+			} else if (ch == '"') {
+				in_quotes = (in_quotes == 1) ? 0 : 1;
+				retval += ch; 
+			} else {
+				retval += ch;
+			}
+		}
+		start++;
+	}
+	return retval;
+}
+
 function genealogy_error(msg)
 {
 	alert(msg);
@@ -144,6 +181,7 @@ function genealogy_parse_givenname(name)
 
 function genealogy_build_url(cur_url, link_url)
 {
+	genealogy_alert("cur_url="+cur_url+", link_url="+link_url);
 	if (link_url.match("://")) {
 		// has a protocol, etc it's ok just return it
 		return link_url;
@@ -227,7 +265,6 @@ function genealogy_get_known_page_links(webpage_url, match_regex_str, search_nam
 	}
 	var webpage_source = genealogy_get_webpage(webpage_url, search_name, refresh_time);
 	var links_regex = new RegExp("<a href=\"(.*?)\".*?>(.*?)<\/a>", "i");
-    var remove_tags_regex = new RegExp("<(\/)?\\w+( )?[\\w\"\=\ ]*(\/)?>", "gi");
 	var replace_spaces_regex = new RegExp("_");
 	var replace_nothing_regex = new RegExp("\n\.");
 	var links = genealogy_get_page_links(webpage_source);
@@ -246,7 +283,8 @@ function genealogy_get_known_page_links(webpage_url, match_regex_str, search_nam
 		var link = links_regex.exec(links[i]);
 		if (link == null || link.length != 3)
 			continue;
-		var place = genealogy_trim(link[2].replace(replace_spaces_regex, " ").replace(replace_nothing_regex, "").replace(remove_tags_regex, ""));
+		genealogy_alert(link[2] + " "+link[1]);
+		var place = genealogy_trim(genealogy_strip_tags(link[2].replace(replace_spaces_regex, " ").replace(replace_nothing_regex, "")));
 		if (match_regex != null) {
 			if (!place.match(match_regex))
 				continue;
