@@ -1,0 +1,39 @@
+<search function="wc">
+  <name>World Clock</name>
+  <description>
+    Get the time around the world.<br/>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>wc Pittsburgh</td></tr>
+  		<tr><td>wc PA</td></tr>
+   		<tr><td>wc Pennsylvania</td></tr>
+   		<tr><td>wc Paris</td></tr>
+  	</table>
+  </description>
+  <contributor>John W. Bairen, Jr.</contributor>
+  <email>john_at_bairen_dot_net</email>
+  <category>Reference</category>
+  <link>http://www.timeanddate.com/worldclock/search.html</link>
+  
+ <form name="wcf" method="get" action="http://www.timeanddate.com/worldclock/results.html">
+<input type="hidden" name="query" value="" />
+</form>
+ 
+<script><![CDATA[
+  function wc(q)
+  {
+    if( nullArgs("wc",q) )
+      return false;
+    else
+    {
+      document.wcf.query.value = q;
+      submitForm(wcf);
+    }
+  }
+  ]]></script>
+    <copyright>
+	Copyright (c) 2002 David Bau
+	Distributed under the terms of the
+	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>
