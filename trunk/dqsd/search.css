@@ -229,6 +229,12 @@ Styles for the help box
   font-size: 10px;
   font-weight:normal;
 }
+.helpboxCategoryDisabledCount
+{
+  color: #cFc4e4;
+  font-size: 10px;
+  font-weight:normal;
+}
 .helpboxAlias
 {
   color:buttonhighlight;

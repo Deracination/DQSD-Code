@@ -62,9 +62,24 @@ function about()
 
     for (i = 0; i < categoryarray.length; i++)
     {
+    	var enabled=0;
+      var disabled=0;
+			var tarray = categories[categoryarray[i]];
+			for (var k = 0; k < tarray.length; k++){
+	         var tsearch = tarray[k];
+	         if ( !tsearch.enabled )
+	         {
+	           disabled++;
+	         }else{
+	            enabled++;           
+            }
+         }
+           
       helptable += "<tr><td class=helpboxCategoryExpanderRow colspan=3><table width='100%' border=0 cellpadding=0 cellspacing=0><tr><td class=helpboxCategory><span id='categoryExpander' category='" + categoryarray[i] + "' class='helpboxCategoryExpanderSign'></span>"
       helptable += "&nbsp;" + categoryarray[i] + "&nbsp;";
-      helptable += "<span id='categoryCount' class=helpboxCategoryCount></span><a name=\""+categoryarray[i]+"\"></td><td align=right class=helpboxCategoryTop>[ <a class=helpboxLinkTop href='#top'>top</a> ]</td></tr></table></td></tr>";
+      helptable += "<span class=helpboxCategoryCount>&nbsp("+enabled+")&nbsp</span>";
+      helptable += "<span class=helpboxCategoryDisabledCount>&nbsp("+disabled+")&nbsp</span>";
+      helptable += "<a name=\""+categoryarray[i]+"\"></td><td align=right class=helpboxCategoryTop>[ <a class=helpboxLinkTop href='#top'>top</a> ]</td></tr></table></td></tr>";
       var helparray = categories[categoryarray[i]];
       helparray.sort( searchCompare );
       for (var k = 0; k < helparray.length; k++)
@@ -75,7 +90,8 @@ function about()
         {
           checked =  '';
           rowclassname = 'class=disabledSearch';
-        }
+          }
+
         helptable += "<tr " + rowclassname + " id='" + categoryarray[i] + "'><td class=helpboxCommands>";
         for (var j = 0; j < search.aliases.length; j++)
         {
