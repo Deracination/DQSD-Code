@@ -1,0 +1,131 @@
+<search function="dictionarypop">
+  <name>Bubbles Dictionary Popup</name>
+  <description>Invoke a Dictionary/Thesaurus/Stock Information webservice for handy popup information<br/>
+      <div class="helpboxDescLabels">Usage:</div>
+        <table class="helpboxDescTable">
+           <tr><td>dictionarypop &lt;<i>query</i>&gt;[{/synonym | /news | /profile | /quote}]</td></tr>
+       </table>
+      <div class="helpboxDescLabels">Switches:</div>
+        <table class="helpboxDescTable">
+           <tr><td>(default)</td><td> - </td><td>Popup Definitions of a Word.</td></tr>
+           <tr><td>/synonym</td><td> - </td><td>Popup Synonyms of a Word.</td></tr>
+           <tr><td>/news</td><td> - </td><td>Popup News for a stock.</td></tr>
+           <tr><td>/profile</td><td> - </td><td>Popup Profile for a stock.</td></tr>
+           <tr><td>/quote</td><td> - </td><td>Popup quote information for a stock.</td></tr>
+         </table>
+      <div class="helpboxDescLabels">Examples:</div>
+      <table class="helpboxDescTable">
+          <tr><td>dictionarypop goat</td></tr>
+          <tr><td>dictionarypop /syn set</td></tr>
+          <tr><td>dictionarypop /quot YHOO</td></tr>
+        </table>
+  </description>
+  <link>http://www.mybubble.com</link>
+
+  <category>Reference</category>
+  <contributor>Thad Kerosky</contributor>5:38 AM 8/25/2002
+  <dqsd_version>
+      <majorhi>3</majorhi>
+      <majorlo>0</majorlo>
+      <minorhi>0</minorhi>
+      <minorlo>25</minorlo>
+  </dqsd_version>
+  <form name="dictionarypopf">
+    <div id="dictionaryWebService" name="dictionaryWebService" style="behavior:url(addons\\dictionarypop\\webservice.htc)" onresult="dictionarypop_onWebServiceResult()" />
+  </form>
+  <script><![CDATA[
+
+//See: http://www.xmethods.com/ve2/ViewListing.po?serviceid=7328
+//and demo: http://soapclient.com/soapclient?fn=soapform&template=/clientform.html&soaptemplate=/soapresult.html&soapwsdl=http://www.mybubble.com:8080/mybubbleEntServer/MBSoapServices.wsdl
+
+    function dictionarypop(q)
+    {
+      var s = "Meaning";
+    
+      if( nullArgs("dictionarypop", q) )
+        return false;
+      else
+      {
+        var args = parseArgs(q, "synonym, news, profile, quote");
+        
+        if( args.switches.length > 0 )
+        {
+          for( var j=0; j<args.switches.length; j++ )
+          {
+            switch( args.switches[j].name )
+            {
+              case "synonym":
+                s = "Synonym";
+                break;
+              case 'news':
+                s = "StockNews";
+                break;
+              case "profile":
+                s = "StockProfile";
+                break;
+              case "quote":
+                s = "StockQuote";
+                break;
+            }
+          }
+        }
+      }
+       
+      dictionarypop_callWebService(args.q, s);
+    }
+    function dictionarypop_initWebService()
+    {
+      try 
+      {
+        document.all.dictionaryWebService.useService("http://www.mybubble.com:8080/mybubbleEntServer/MBSoapServices.wsdl", "MyBubbleSoapService");
+
+        return true;
+      } 
+      catch (ex) 
+      {
+        displayPopupMessage("Web service failed to initialize. " + ex.description);
+        return false;
+      }
+    }
+
+    function dictionarypop_callWebService(sSearch, sServiceName)
+    {
+      if (dictionarypop_initWebService()) {
+
+        var objCall = new Object();
+        objCall.funcName = "getServiceResponsePublic";
+        objCall.async = true;
+
+        //sServiceName can be either Meaning, Synonym,  StockNews, StockProfile, or StockQuote
+        try 
+        {
+          iCallID = document.all.dictionaryWebService.MyBubbleSoapService.callService(objCall, sServiceName , sSearch);
+         
+        } 
+        catch (ex) 
+        {
+          displayPopupMessage("Failed: " + ex.description);
+        }
+      }
+
+      return false;
+    }
+
+    function dictionarypop_onWebServiceResult()
+    {
+      if(event.result.error) 
+      {
+        displayPopupMessage("Error executing web service. " + event.result.errorDetail.code + ", " + event.result.errorDetail.string + " " + event.result.errorDetail.raw);
+      } 
+      else 
+      {
+        var oDoc = event.result.raw;
+        var sReturnedHTML = oDoc.selectSingleNode("SOAP-ENV:Body/ns1:getServiceResponsePublicResponse/return").text;
+        if ( sReturnedHTML != '' )
+        {
+          displayPopupMessage( sReturnedHTML, "<base href=http://www.mybubble.com><link rel=\"stylesheet\" href=\"/mybubbleEntServer/css/layout.css\" />" );
+        }
+      }
+    }
+  ]]></script>
+</search>
