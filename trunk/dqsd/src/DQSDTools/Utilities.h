@@ -24,21 +24,21 @@ INTERNET_SCHEME GetScheme(LPCTSTR szURL)
 
 int URLMatchesFilename(LPCTSTR szURL, LPCTSTR szFile)
 {
-  TCHAR             schemebuf[32];
-  TCHAR             pathbuf[1024];
+  TCHAR             pathbuf[_MAX_PATH];
   URL_COMPONENTS    uc;
   ZeroMemory(&uc, sizeof uc);
 
   uc.dwStructSize = sizeof uc;
-  uc.lpszScheme = schemebuf;
-  uc.dwSchemeLength = sizeof schemebuf;
   uc.lpszUrlPath = pathbuf;
   uc.dwUrlPathLength = sizeof pathbuf;
   if (!InternetCrackUrl(szURL, _tcsclen(szURL), ICU_DECODE, &uc))
      return FALSE;
 
+  if (uc.nScheme != INTERNET_SCHEME_FILE)
+    return FALSE;
+
   if (StrCmpI(uc.lpszUrlPath, szFile))
-      return FALSE;
+    return FALSE;
 
   return TRUE;
 }

@@ -1,7 +1,7 @@
 <html>
 <!--
 Dave's Quick Search Deskbar
-Version 2.5.0 beta - December 18, 2001
+Version 2.5.0 - December 22, 2001
 
 Copyright (c) 2001 David Bau
 
@@ -163,10 +163,23 @@ buttonstyle="";                // css style overrides for the button
 menustyle="cursor:default";    // css style overrides for the menu
 localsearchurl="localsearch.xml"; // local search file
 helptime=8500;                 // help message shows for 8.5 secs
-useExternalBrowser=true;       // attempt to use default browser if possible, requires DQSDTools ActiveX control
+launchmode=2;                  // 0 = use ie; 1 = default browser; 2 = auto
 
-firsterror = null;
 language = navigator.userLanguage.substr(0,2);
+
+calbackground="menu";
+caltextcolor="menutext";
+calhighbackground="highlight";
+calhightext="highlighttext";
+caltodaybackground="window";
+caltodaytext="windowtext";
+calgraybackground="window";
+calgraytext="windowtext";
+calmonthstyle="font-family:Tahoma;font-size:8pt;font-weight:bold";
+calnavstyle="font-family:Tahoma;font-size:8pt;font-weight:bold";
+caldaystyle="font-family:Tahoma;font-size:8pt;";
+caldowstyle="font-family:Tahoma;font-size:8pt;";
+caltodaystyle="font-family:Tahoma;font-size:8pt;font-weight:bold";
 
 // catch errors
 function handleerror(msg, url, lineno)
@@ -297,9 +310,9 @@ ie_version=(m ? parseFloat(m[1]) : 0.0);
                         ".clock{" + clockstyle + "}</style>");
   actualmenustyle =
       "background:menu;height:18px;" +
-      "color:black;font-family:Tahoma;padding:1px;font-size:8pt;" +
+      "color:menutext;font-family:Tahoma;padding:1px;font-size:8pt;" +
       menustyle;
-
+  
 </script>
 
 <body onload=strt() scroll=no>
@@ -310,6 +323,8 @@ selfdrag = false;
 
 // Try to instantiate the launcher tool
 var DQSDLauncher = null;
+var useExternalBrowser = (launchmode > 0);
+
 try 
 {
   if (useExternalBrowser)
@@ -319,8 +334,7 @@ try
   if (DQSDLauncher)
   {
     var browserPath = DQSDLauncher.pathDefaultBrowser
-    // alert(browserPath);
-    if (browserPath.toLowerCase().indexOf("iexplore.exe") > 0)
+    if (launchmode == 2 && browserPath.toLowerCase().indexOf("iexplore.exe") > 0)
       useExternalBrowser = false;
   }
 }
@@ -328,6 +342,7 @@ catch (e)  // Gracefully ignore problems creating the control.
 {
   useExternalBrowser = false;
 }
+
 
 // Open a search window either with the default browser or with IE
 function openSearchWindow(url)
@@ -970,7 +985,7 @@ function strt()
   rsz();
 
   if (!clock || clockdelay > 0)
-    document.deff.q.value = localQuickSearch();
+    document.deff.q.value = local(QUICK_SEARCH);
 
   if (helptime > 0)
   {
@@ -993,7 +1008,7 @@ function startbanner(delay)
 // banner() called to display help message for 8.5 seconds
 function banner()
 {
-  document.deff.q.value = localHelpText();
+  document.deff.q.value = local(HELP_TEXT);
   bant=window.setTimeout("unbanner();", helptime);
 }
 
@@ -1002,7 +1017,7 @@ function unbanner()
 {
   stopbanner();
   if (!clock || clockdelay >0)
-    document.deff.q.value = localQuickSearch();
+    document.deff.q.value = local(QUICK_SEARCH);
   startclock(clockdelay);
 }
 
@@ -1069,7 +1084,7 @@ function rst()
   {
     init = true;
     if (!clock || clockdelay > 0)
-      document.deff.q.value = localQuickSearch();
+      document.deff.q.value = local(QUICK_SEARCH);
   }
   startclock(clockdelay);
 }
@@ -2932,6 +2947,37 @@ var HELP_TEXT =
   pt: "Digite ? para ajuda"
 };
 
+var SEARCH_TITLE =
+{
+  en: "Search",
+  fr: "Recherche"
+}
+
+var NEXT_MONTH =
+{
+  en: "Next month"
+}
+
+var PREV_MONTH =
+{
+  en: "Previous month"
+}
+
+var NEXT_YEAR =
+{
+  en: "Next year"
+}
+
+var PREV_YEAR =
+{
+  en: "Previous year"
+}
+
+var GO_TO_TODAY =
+{
+  en: "Go to today"
+}
+
 
 function getMonthName(m)
 {
@@ -2947,19 +2993,15 @@ function getDayName(d)
   return arr[d - 1];
 }
 
-function localQuickSearch()
+function local(stringmap)
 {
-  var qs = QUICK_SEARCH[language];
-  if (!qs) return QUICK_SEARCH["en"];
+  var qs = stringmap[language];
+  if (!qs) return stringmap["en"];
   return qs;
 }
 
-function localHelpText()
-{
-  var txt = HELP_TEXT[language];
-  if (!txt) return HELP_TEXT["en"];
-  return txt;
-}
+document.title=local(SEARCH_TITLE);
+
 
 function formatdate(date,format)
 {
@@ -3193,8 +3235,8 @@ function showcal()
 
   popcal.document.body.innerHTML = buildcal();
   popcal.document.body.style.border="outset 2px";
-  popcal.document.body.style.background='menu';
-  popcal.document.body.style.color='menutext';
+  popcal.document.body.style.background=calbackground;
+  popcal.document.body.style.color=caltextcolor;
 
   popcal.show(document.body.clientWidth - 179, -148, 179, 148, document.body);
 
@@ -3283,47 +3325,106 @@ function buildcal()
   Calendar.setDate(1);    // Start the calendar day at '1'
 
 
-  var TR_start = '<TR style=\"font:menu;\">';
+  var TR_start = '<TR style=font:menu>';
   var TR_end = '</TR>';
-  var day_start = '<TD width=14.2857%><CENTER>';
+  var day_start = '<TD width=14.2857% style="' + caldowstyle + '"><CENTER>';
   var day_end = '</CENTER></TD>';
-  function highlight_start(d) { return '<TD style=cursor:default;background-color:window' + (defaultcal ? ' onmouseover=this.style.background="highlight";this.style.color="highlighttext"; onmouseout=this.style.background="window";this.style.color="menutext" onmouseup=parent.opencal(' + d + ');' : '') + '><B><CENTER>'; }
-  var highlight_end   = '</CENTER></B></TD>';
-  function gray_start(d) { return '<TD style=cursor:default;color:graytext' + (defaultcal ? ' onmouseover=this.style.background="highlight";this.style.color="highlighttext"; onmouseout=this.style.background="menu";this.style.color="graytext" onmouseup=parent.opencal(' + d + ');' : '') + '><CENTER>'; }
+  function today_start(d)
+  {
+    return '<TD style="cursor:default;background-color:' + caltodaybackground + ';' + caltodaystyle + '" ' +
+           (defaultcal ? ' onmouseover=this.style.background="' + calhighbackground +
+               '";this.style.color="' + calhightext +
+               '"; onmouseout=this.style.background="' + caltodaybackground +
+               '";this.style.color="' + caltodaytext +
+               '" onmouseup=parent.opencal(' + d + ');' : '') +
+           '><CENTER>';
+  }
+  var today_end   = '</CENTER></TD>';
+  function gray_start(d)
+  {
+     return '<TD style="cursor:default;color:' + calgraytext + ';' + caldaystyle + '" ' +
+           (defaultcal ? ' onmouseover=this.style.background="' + calhighbackground +
+               '";this.style.color="' + calhightext +
+               '"; onmouseout=this.style.background="' + calbackground +
+               '";this.style.color="' + calgraytext +
+               '" onmouseup=parent.opencal(' + d + ');' : '') +
+           '><CENTER>';
+  }
   var gray_end   = '</CENTER></TD>';
-  function TD_start(d) { return '<TD style=cursor:default ' + (defaultcal ? ' onmouseover=this.style.background="highlight";this.style.color="highlighttext"; onmouseout=this.style.background="menu";this.style.color="menutext" onmouseup=parent.opencal(' + d + ');' : '') + '><CENTER>'; }
+  function TD_start(d)
+  {
+    return '<TD style="cursor:default;' + caldaystyle + '" ' +
+           (defaultcal ? ' onmouseover=this.style.background="' + calhighbackground +
+               '";this.style.color="' + calhightext +
+               '"; onmouseout=this.style.background="' + calbackground +
+               '";this.style.color="' + caltextcolor +
+               '" onmouseup=parent.opencal(' + d + ');' : '') +
+           '><CENTER>';
+  }
   var TD_end = '</CENTER></TD>';
 
   cal = '<TABLE WIDTH=100% HEIGHT=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR style=font:menu>';
-  cal += '<TD><TABLE WIDTH=100% HEIGHT=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR style=font:menu>';
-  cal += '<TD title="show previous year" style="cursor:hand" onmouseup="parent.movecal(-12);" onmouseover=this.style.background="highlight";this.style.color="highlighttext"; onmouseout=this.style.background="menu";this.style.color="menutext"><CENTER>&nbsp;&lt;</CENTER></TD>';
-  cal += '<TD title="show previous month" style="cursor:hand" onmouseup="parent.movecal(-1);"  onmouseover=this.style.background="highlight";this.style.color="highlighttext"; onmouseout=this.style.background="menu";this.style.color="menutext"><CENTER>&nbsp;&lt;</CENTER></TD></TR></TABLE></TD>';
+  cal += '<TD COLSPAN=7><TABLE WIDTH=100% HEIGHT=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR style=font:menu>';
+  cal += '<TD><TABLE ALIGN=LEFT HEIGHT=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR style=font:menu>';
+  cal += '<TD WIDTH=0 title="' + local(PREV_YEAR) +
+         '" style="cursor:hand;' + calnavstyle +
+         '" onmouseup="parent.movecal(-12);" ' +
+         'onmouseover=this.style.background="' + calhighbackground +
+         '";this.style.color="' + calhightext +
+         '" onmouseout=this.style.background="' + calbackground +
+         '";this.style.color="' + caltextcolor +
+         '"><CENTER>&nbsp;&lt;&nbsp;</CENTER></TD>';
+  cal += '<TD WIDTH=0 title="' + local(PREV_MONTH) +
+         '" style="cursor:hand;' + calnavstyle +
+         '" onmouseup="parent.movecal(-1);" ' +
+         'onmouseover=this.style.background="' + calhighbackground +
+         '";this.style.color="' + calhightext +
+         '" onmouseout=this.style.background="' + calbackground +
+         '";this.style.color="' + caltextcolor +
+         '"><CENTER>&nbsp;&lt;&nbsp;</CENTER></TD></TR></TABLE></TD>';
   if (weekday <0)
   {
-    cal += '<TD COLSPAN="' + (DAYS_OF_WEEK - 2) + '" title="go to today" style="cursor:hand" onmouseup="parent.Calendar=new Date();parent.movecal(0);" onmouseover=this.style.background="highlight";this.style.color="highlighttext"; onmouseout=this.style.background="menu";this.style.color="menutext"><CENTER>';
+    cal += '<TD title="' + local(GO_TO_TODAY) +
+           '" style="cursor:hand;' + calmonthstyle +
+           '" onmouseup="parent.Calendar=new Date();parent.movecal(0);" ' +
+           'onmouseover=this.style.background="' + calhighbackground +
+           '";this.style.color="' + calhightext +
+           '" onmouseout=this.style.background="' + calbackground +
+           '";this.style.color="' + caltextcolor +
+           '"><CENTER>';
   }
   else
   {
-    cal += '<TD COLSPAN="' + (DAYS_OF_WEEK - 2) + '"><CENTER>';
+    cal += '<TD COLSPAN="' + (DAYS_OF_WEEK - 2) +
+           '" style="' + calmonthstyle + '"><CENTER>';
   }
-  cal += '<B>' + getMonthName(month+1)  + '   ' + year + '</B>';
-  if (weekday <0)
-  {
-    cal += '</a>'; 
-  }
-  cal += TD_end;
-  cal += '<TD><TABLE WIDTH=100% HEIGHT=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR style=font:menu>';
-  cal += '<TD title="show next month" style="cursor:hand" onmouseup="parent.movecal(+1);" onmouseover=this.style.background="highlight";this.style.color="highlighttext"; onmouseout=this.style.background="menu";this.style.color="menutext"><CENTER>&gt;&nbsp;</CENTER></TD>';
-  cal += '<TD title="show next year" style="cursor:hand" onmouseup="parent.movecal(+12);" onmouseover=this.style.background="highlight";this.style.color="highlighttext"; onmouseout=this.style.background="menu";this.style.color="menutext"><CENTER>&gt;&nbsp;</CENTER></TD></TR></TABLE></TD>';
+  cal += getMonthName(month+1)  + ' ' + year;
+  cal += '</CENTER></TD>';
+  cal += '<TD><TABLE ALIGN=RIGHT HEIGHT=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR style=font:menu>';
+  cal += '<TD WIDTH=0 title="' + local(NEXT_MONTH) +
+         '" style="cursor:hand;' + calnavstyle +
+         '" onmouseup="parent.movecal(+1);" ' +
+         'onmouseover=this.style.background="' + calhighbackground +
+         '";this.style.color="' + calhightext +
+         '" onmouseout=this.style.background="' + calbackground +
+         '";this.style.color="' + caltextcolor +
+         '"><CENTER>&nbsp;&gt;&nbsp;</CENTER></TD>';
+  cal += '<TD WIDTH=0 title="' + local(NEXT_YEAR) +
+         '" style="cursor:hand;' + calnavstyle +
+         '" onmouseup="parent.movecal(+12);" ' +
+         'onmouseover=this.style.background="' + calhighbackground +
+         '";this.style.color="' + calhightext +
+         '" onmouseout=this.style.background="' + calbackground +
+         '";this.style.color="' + caltextcolor +
+         '"><CENTER>&nbsp;&gt;&nbsp;</CENTER></TD></TR></TABLE>';
+  cal += '</TD></TR></TABLE>';
   cal += TR_end + TR_start;
 
   //printing day labels
   for(index=0; index < DAYS_OF_WEEK; index++)
   {
     cal += day_start;
-    if (weekday == index) cal += '<B>';
     cal += getDayName(index+7+1);
-    if (weekday == index) cal += '</B>';
     cal += day_end;
   }
 
@@ -3349,7 +3450,7 @@ function buildcal()
     if (whichmonth != 0)
       cal += gray_start(Calendar.getTime()) + Calendar.getDate() + gray_end;
     else if (weekday>0 && today.getDate()==Calendar.getDate())
-      cal += highlight_start(Calendar.getTime()) + Calendar.getDate() + highlight_end;
+      cal += today_start(Calendar.getTime()) + Calendar.getDate() + today_end;
     else
       cal += TD_start(Calendar.getTime()) + Calendar.getDate() + TD_end;
 
