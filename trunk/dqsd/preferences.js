@@ -11,8 +11,8 @@ launchmode=2;        // 0=use ie; 1=use default browser; 2=auto
 //defaultsearch="gg"; // use google search
 cal=true;            // right-click shows popup calendar
 defaultcal="yhocal"; // click on a calendar day uses yahoo calendar
-
 //eventsfileurl="events.xml"; //default xml file for the popup calendar events
+//multiline=false;   // default=true; set this to false to prevent word wraps
 
 // Note: valid calendars include
 // yhocal - Yahoo Calendar
