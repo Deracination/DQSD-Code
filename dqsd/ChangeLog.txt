@@ -1,4 +1,4 @@
--- What's new for 3.1.8 (date 2003-12-02)
+-- What's new for 3.1.8 (date 2004-01-18)
 
 Enhancements
 
@@ -12,6 +12,8 @@ Enhancements
 * version.js now checks DQSD version asynchronously so as to not lock up explorer.exe (Kim Gräsman)
 * Added key-handlers for performing several google search-types in the style of the Google Deskbar (Shawn K. Hall)
 * Now builds installer with bz2-compression
+* Version checks are now done towards http://www.dqsd.net/version.xml (Kim Gräsman)
+* New XP styles for all color themes (blue, silver, olive and a separate DQSD color theme) - removed old XP theme stuff (Monty Scroggins)
 
 Bug Fixes
 

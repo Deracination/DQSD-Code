@@ -149,9 +149,6 @@ Section "Quick Search Deskbar (required)"
   File "..\version.js"
   File "..\version.xml"
   File "..\versiondialog.htm"
-  File "..\xplocalsearch.css"
-  File "..\xptoolbarbot.bmp"
-  File "..\xptoolbartop.bmp"
   SetOutPath "$INSTDIR\searches"
   File "..\searches\*.xml"
   SetOutPath "$INSTDIR\src"
@@ -203,7 +200,10 @@ Section "Quick Search Deskbar (required)"
   Delete $INSTDIR\search.nsi
   Delete $INSTDIR\dqsd.xml
   Delete $INSTDIR\search.xml
-  
+  Delete $INSTDIR\xplocalsearch.css
+  Delete $INSTDIR\xptoolbarbot.bmp
+  Delete $INSTDIR\xptoolbartop.bmp
+
   ; Remove stuff introduced by 3.1.8 beta-1
   Delete $INSTDIR\dqsd.gif
   Delete $INSTDIR\httpinst.js
@@ -336,9 +336,18 @@ Section "Uninstall"
   Delete /REBOOTOK $INSTDIR\version.js
   Delete /REBOOTOK $INSTDIR\version.xml
   Delete /REBOOTOK $INSTDIR\versiondialog.htm
-  Delete /REBOOTOK $INSTDIR\xplocalsearch.css
-  Delete /REBOOTOK $INSTDIR\xptoolbarbot.bmp
-  Delete /REBOOTOK $INSTDIR\xptoolbartop.bmp
+  Delete /REBOOTOK $INSTDIR\xptoolbar2_default.bmp
+  Delete /REBOOTOK $INSTDIR\xptoolbar1_default.bmp
+  Delete /REBOOTOK $INSTDIR\xptoolbar1_silver.bmp
+  Delete /REBOOTOK $INSTDIR\xptoolbar2_silver.bmp
+  Delete /REBOOTOK $INSTDIR\xptoolbar1_olive.bmp
+  Delete /REBOOTOK $INSTDIR\xptoolbar2_olive.bmp
+  Delete /REBOOTOK $INSTDIR\xptoolbar1_blue.bmp
+  Delete /REBOOTOK $INSTDIR\xptoolbar2_blue.bmp
+  Delete /REBOOTOK $INSTDIR\localsearch_default.css
+  Delete /REBOOTOK $INSTDIR\localsearch_silver.css
+  Delete /REBOOTOK $INSTDIR\localsearch_olive.css
+  Delete /REBOOTOK $INSTDIR\localsearch_blue.css
   RmDir /r $INSTDIR\src
   RmDir /r $INSTDIR\searches
   RmDir /r $INSTDIR\addons
