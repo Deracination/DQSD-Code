@@ -77,7 +77,7 @@ The deskbar is customizable and completely open-source.
   <script type='text/Jscript' src=preferences.js></script>
   <script type='text/Jscript'>
     // include local preferences file
-    if (typeof localprefs != "undefined" != undefined && localprefs != "")
+    if (typeof localprefs != "undefined" && localprefs != "")
       document.write("</" + "script" + "><script src=" + localprefs + "></" + "script" + ">");
 
     // include the overwriting stylesheet if necessary
@@ -154,6 +154,10 @@ function def()
 
   // exclamation mark only: refresh
   if (t == "!")         { reload(); return false; }
+
+  // Shutdown DQSD and kick the explorer to unload us
+// The world's not ready for this one yet...
+//  if(t == "quitdqsd")   { shutdown(); return false; }
 
   // anything below adds something to the history
   addhist(t);
@@ -847,6 +851,22 @@ function postStartup()
       keyboardHook = null;
   }
 }
+
+
+function shutdown()
+{
+   try
+   {
+      keyboardHook.ShutdownBar();
+   }
+   catch(e)
+   {
+      alert("Shutdown failed with error: " + e.description);
+   }
+}
+
+
+
 </script>
 
 </body>
