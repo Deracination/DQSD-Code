@@ -1,22 +1,30 @@
 <search function="e2">
   <name>everything2</name>
-  <description>Search across many different reference sources. "e2 whatever"</description>
+  <description>
+    Search across many different reference sources.<br/>
+    <a class="helpboxDescLabels">Example:</a><br/>
+    <table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">e2 whatever</td></tr>
+  	</table>
+  </description>
   <category>Reference</category>
   <link>http://www.everything2.com</link>
   <contributor>Bradley Dean</contributor>
+  
   <form name="e2f"
         action="http://www.everything2.com/"
         method="post">
     <input type="hidden" name="node" value=""/>
   </form>
+  
   <script><![CDATA[
     function e2(q)
     {
-      if (q == "")
-        openSearchWindow("http://www.everything2.com/");
+      if( nullArgs("e2",q) )
+        return false;
       else
       {
-        document.e2f.node.value=q;
+        document.e2f.node.value = q;
         submitForm(e2f);
       }
     }
