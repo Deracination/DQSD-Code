@@ -162,6 +162,7 @@ Section "Quick Search Deskbar (required)"
 
   ; Put files there
   File "..\ChangeLog.txt"
+  File "..\aliases.deprecated"  ; Temporary backup of old aliases.txt -- should be removed in the next version
   File "..\aliases.txt"
   File "..\calculate.js"
   File "..\calendar.js"
@@ -390,6 +391,7 @@ Section "Uninstall"
   ; remove files
   Delete /REBOOTOK $INSTDIR\DQSDTools.dll
   Delete /REBOOTOK $INSTDIR\ChangeLog.txt
+  Delete /REBOOTOK $INSTDIR\aliases.deprecated
   Delete /REBOOTOK $INSTDIR\aliases.txt
   Delete /REBOOTOK $INSTDIR\calculate.js
   Delete /REBOOTOK $INSTDIR\calendar.js
