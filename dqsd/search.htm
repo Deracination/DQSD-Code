@@ -441,7 +441,7 @@ function direct(t)
   // detect strings that look like URLs or filenames
   prot = new RegExp("^(http://|https://|ftp://)([\\-a-z0-9]+\\.)*[\\-a-z0-9]+" +
                     "|^[a-z]:($|\\\\)" +
-                    "|^\\\\\\\\[a-z0-9]+($|\\\\($|[a-z0-9]+($|\\\\)))", "i");
+                    "|^\\\\\\\\[\\w]+[\\w\$]*($|\\\\($|[\\w\$]+($|\\\\)))", "i");
   if (prot.exec(t))
   {
     openSearchWindow(t);
