@@ -29,6 +29,7 @@
     <input type="hidden" name="useicons" value="yes" />
     <input type="hidden" name="conffile" value="/etc/roxen/swish/w4ais.conf" />
   </form>
+  <script src="addons/genealogy/genealogy_lib.js"></script>
   <script><![CDATA[
     function feefhs(q)
     {
