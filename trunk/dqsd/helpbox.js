@@ -139,7 +139,8 @@ function about()
     
     var basedir = window.location.href;
     basedir = basedir.substring(0, basedir.lastIndexOf('/') + 1);
-    txt = txt.replace(/(view-source:)/g, '$1' + basedir);
+    txt = txt.replace(/(view-source:|file:)/g, '$1' + basedir);
+    txt = txt.replace(/file:file:/g, 'file:');
  
     // dollar signs are match variables for replace, so any literal dollar signs need to be
     // converted to HTML code so they will display properly
