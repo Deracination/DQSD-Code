@@ -1,0 +1,38 @@
+<!--
+   This file contains a listing of public holidays in Italy
+   for the year 2002.
+-->
+
+<events>
+  <event name="New Year's Day" type="public_holiday">
+     <date day="1" month="1"/>
+  </event>
+  <event name="Epiphany" type="public_holiday">
+     <date day="6" month="1"/>
+  </event> 
+  <event name="Easter" type="public_holiday">
+     <date day="31" month="3" year="2002"/>
+  </event>
+  <event name="Easter Monday" type="public_holiday">
+     <date day="1" month="4" year="2002"/>
+  </event>
+  <event name="Liberation Day" type="public_holiday">
+     <date day="25" month="4"/>
+  </event>
+  <event name="Labour Day" type="public_holiday">
+     <date day="1" month="5"/>
+  </event>
+  <event name="Mid Summer Day" type="public_holiday">
+     <date day="15" month="8" />
+  </event>
+  <event name="All Saints" type="public_holiday">
+     <date day="1" month="11"/>
+  </event>
+  <event name="Christmas" type="public_holiday">
+     <date day="25" month="12"/>
+  </event>
+  <event name="St. Stephan's Day" type="public_holiday">
+     <date day="26" month="12"/>
+  </event>
+</events>
+
