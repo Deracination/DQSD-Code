@@ -1,0 +1,44 @@
+<search function="msdn">
+  <name>MSDN Search</name>
+  <description>Searches all of MSDN by default, /lib limits searches to only
+the MSDN Library. Examples: MSDN ocx, MSDN iframes /lib</description>
+  <category>Computers</category>
+  <link>http://msdn.microsoft.com/</link>
+  <contributor>Ryan Edwards</contributor>
+<form name="msdnf" target="_blank"
+action="http://msdn.microsoft.com/library/shared/searchtab/searchHandoff.asp
+" method="get">
+  <input type="hidden" id="qu" name="qu" />
+  <input type="hidden" name="handoffurl"
+value="/isapi/gosearch.asp?TARGET=/us/dev/default.asp" />
+  <input type="hidden" name="stcfg" value="/library/searchtabconfig.xml" />
+  <input type="hidden" Name="scopeid" />
+  </form>
+<script>
+<![CDATA[
+      function msdn(q)
+      {
+        if (q == "")
+            openSearchWindow("http://msdn.microsoft.com/");
+        else
+        {
+          var result = q.match(/^(.*)\/(\w+)/);
+                              document.msdnf.scopeid.value = "1";
+          if( result )
+          {
+                                    var suffix = result[2].toLowerCase();
+                                    if( suffix == "l" || suffix == "lib" ||
+suffix == "library" )
+                  document.msdnf.scopeid.value = "2";
+                                    document.msdnf.qu.value = result[1];
+                              }
+                              else
+                                    document.msdnf.qu.value = q;
+                              submitForm( msdnf );
+        }
+      }
+
+
+  ]]>
+  </script>
+  </search>

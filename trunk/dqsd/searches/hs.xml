@@ -1,0 +1,87 @@
+  <search function="hs">
+    <name>HotScripts.com Search</name>
+    <description>Search for code in a multitude of programming languages and a few code categories: "hs search string" Options include All languages /all, ASP /asp, C or C++ /c, Java /java, Javascript /js or /jscript or /javascript, PHP /php, Perl /pl, Python /py or /python, Tools and Utilities /tools or /utils, Remote Hosts /rh or /remhosts.. (language defaults to /all)</description>
+    <category>Computers</category>
+    <link>http://www.hotscripts.com/</link>
+    <contributor>Monty Scroggins</contributor>
+    <form name="hsf"
+       method="get"
+       action="http://www.hotscripts.com/search"
+       target="_blank">
+       <input type="hidden" name="query" value=""/>
+       <input type="hidden" name="category" value=""/>
+       <input type="hidden" name="bool" value="AND"/>
+    </form>
+    <script><![CDATA[
+      function hs(q)
+      {
+        var suffix;
+        var result;
+        var category = "All Categories";  // Web Search
+        if (q == "")
+          openSearchWindow("http://www.hotscripts.com");
+        else
+        {
+          // Check for / suffix, 
+          if (result = q.match(/^(.*)\/(\w+)/))
+          {
+            suffix = result[2];
+            q = result[1];
+            switch ( suffix.toLowerCase() )
+            {
+            case "asp":
+              category = "ASP";
+              break;
+            case "c":
+            case "c++":
+              category = "C";
+              break;
+            case "java":
+              category = "Java";
+              break;
+            case "js":
+            case "javascript":
+            case "jscript":
+              category = "JavaScript";
+              break;
+            case "php":
+              category = "PHP";
+              break;
+            case "pl":
+            case "perl":
+              category = "Perl";
+              break;
+            case "py":
+            case "python":
+              category = "Python";
+              break;
+            case "rh":
+            case "remhosts":
+              category = "Remote_Hosts";
+              break;
+            case "tools":
+            case "utils":
+              category = "Tools";
+              break;
+            case "xml":
+              category = "XML";
+              break;
+            case "all":
+              category = "all";
+              break;
+            default:
+              category = "all";  // All categories Search by default
+              break;
+            }
+          }
+          else
+          {
+            category = "all";
+          }
+          document.hsf.query.value=q;
+          document.hsf.category.value=category;
+          submitForm(hsf);
+        }
+      }
+    ]]></script>
+  </search>

@@ -1,0 +1,23 @@
+  <search function="wfb">
+    <name>World Fact Book</name>
+    <description>Search the CIA's world fact book: "wfb somalia"</description>
+    <link>http://www.google.com/help/features.html#lucky</link>
+    <category>Reference</category>
+    <contributor>David Bau</contributor>
+    <script><![CDATA[
+      // world factbook, uses Google I'm feeling lucky search
+      function wfb(q)
+      {
+        if (q == "")
+        {
+          openSearchWindow("http://www.odci.gov/cia/publications/factbook/index.html");
+        }
+        else
+        {
+          document.iflf.q.value=q +
+            " site:www.odci.gov inurl:factbook";
+          submitForm(iflf);
+        }
+      }
+    ]]></script>
+  </search>

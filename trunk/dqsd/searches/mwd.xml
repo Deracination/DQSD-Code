@@ -1,0 +1,28 @@
+  <search function="mwd">
+    <name>Merriam-Webster Dictionary</name>
+    <description>Search for definitions: "mwd idempotent"</description>
+    <category>Reference</category>
+    <link>http://m-w.com/</link>
+    <contributor></contributor>
+    <form name="mwdf"
+        method="post"
+        action="http://www.m-w.com/cgi-bin/thesaurus"
+        target="_blank">
+      <input type="hidden" name="book" value="dictionary"/>
+      <input type="hidden" name="va" value=""/>
+    </form>
+    <script><![CDATA[
+      function mwd(q)
+      {
+         if (q == "")
+         {
+            openSearchWindow("http://www.m-w.com/");
+         }
+         else
+         {
+            document.mwdf.va.value=q;
+            submitForm(mwdf);
+         }
+      }
+    ]]></script>
+  </search>

@@ -1,0 +1,47 @@
+  <search function="unip">
+    <name>Uniplus DNS Search</name>
+    <description>Dig on a DNS address: "unip yahoo.com", or "unip email.com/MX"</description>
+    <category>Computers</category>
+    <link>http://www.uniplus.ch/cgi-bin/dig.cgi</link>
+    <contributor>Bjorn Jonson</contributor>
+    <email>bjornjonson2000@yahoo.com</email>
+    <form name="digdnsf"
+          action="http://www.uniplus.ch/cgi-bin/dig.cgi"
+          target="_blank">
+      <input name="action" type="hidden" value="process"/>
+      <input name="domain" type="hidden"/>
+      <input name="type" type="hidden" value="ANY"/>
+      <input name="atserver" type="hidden" value=""/>
+      <input name="x" type="hidden" value="0"/>
+      <input name="y" type="hidden" value="0"/>
+    </form>
+    <script><![CDATA[
+      function unip(q)
+      {
+        var suffix;
+        var result;
+
+        if (q == "")
+        {
+          openSearchWindow("http://www.uniplus.ch/cgi-bin/dig.cgi");
+        }
+        else
+        {
+          // Check for / suffix, such as unip yahoo.com /MX
+          if (result = q.match(/^(.*)\/(\w+)/))
+          {
+            suffix = result[2];
+            q = result[1];
+          }
+          else
+          {
+            suffix = "ANY";
+          }
+
+          document.digdnsf.domain.value=q;
+          document.digdnsf.type.value=suffix;
+          submitForm(digdnsf);
+        }
+      }
+    ]]></script>
+  </search>

@@ -1,0 +1,32 @@
+<search function="conv">
+   <name>Measurement Converter</name>
+   <description>Convert units from one unit to another 
+   from convertit.com  "conv 1/5 gallon" or use an optional 'to' 
+   unit "conv astronomical unit to football fields"</description>
+   <category>Calculations</category>
+   <contributor>Monty Scroggins</contributor>
+   <link>http://www.convertit.com/Go/Entisoft/Measurement/Converter.ASP</link>
+   <form name="convf"
+      method="post"
+      action="http://www.convertit.com/Go/Entisoft/Measurement/Converter.ASP"
+      target="_blank">
+      <input type="hidden" name="From" value=""/>
+      <input type="hidden" name="To" value=""/>
+   </form>
+   <script><![CDATA[
+   function conv(q) {
+      if (q == ""){
+         openSearchWindow("http://www.convertit.com/Go/Entisoft/Measurement/Converter.ASP");
+         }
+      else {
+         parsedunits = q.split(/ *to */);
+         document.convf.From.value=parsedunits[0];
+         if (parsedunits[1] != undefined) {
+            document.convf.To.value=parsedunits[1];
+            }
+         submitForm(convf);
+         }
+      }
+     ]]></script>
+   </search>
+ 

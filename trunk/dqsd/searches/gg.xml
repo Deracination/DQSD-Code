@@ -1,0 +1,7 @@
+  <search function="gg">
+    <name>Google Search</name>
+    <description>Google is reputed to be the fastest web search engine: "gg quick search"</description>
+    <link>http://www.google.com</link>
+    <category>Search the Web</category>
+    <contributor>David Bau</contributor>
+  </search>

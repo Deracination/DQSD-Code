@@ -1,0 +1,28 @@
+  <search function="mwt">
+    <name>Merriam-Webster Thesaurus</name>
+    <description>Search for synonyms: "mwt boggle"</description>
+    <category>Reference</category>
+    <link>http://m-w.com/</link>
+    <contributor></contributor>
+    <form name="mwtf"
+        method="post"
+        action="http://www.m-w.com/cgi-bin/thesaurus"
+        target="_blank">
+      <input type="hidden" name="book" value="Thesaurus"/>
+      <input type="hidden" name="va" value=""/>
+    </form>
+    <script><![CDATA[
+      function mwt(q)
+      {
+         if (q == "")
+         {
+            openSearchWindow("http://www.m-w.com/");
+         }
+         else
+         {
+            document.mwtf.va.value=q;
+            submitForm(mwtf);
+         }
+      }
+    ]]></script>
+  </search>

@@ -1,0 +1,29 @@
+  <search function="imdb">
+    <name>Internet Movie Database</name>
+    <description>Lookup movies on imdb: "imdb jaws"</description>
+    <category>Entertainment</category>
+    <link>http://imdb.com/</link>
+    <form name="mdbf"
+          target="_blank"
+          action="http://www.imdb.com/Find"
+          method="post">
+      <input type="hidden" name="select" value="All"/>
+      <input type="hidden" name="for"/>
+      <input type="hidden" name="Go" value="Go"/>
+    </form>
+    <script><![CDATA[
+      // IMDB
+      function imdb(q)
+      {
+        if (q == "")
+        {
+          openSearchWindow("http://www.imdb.com/");
+        }
+        else
+        {
+          document.mdbf["for"].value = q;
+          submitForm(mdbf);
+        }
+      }
+    ]]></script>
+  </search>

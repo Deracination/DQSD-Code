@@ -1,0 +1,29 @@
+  <search function="af">
+    <name>AcronymFinder Search</name>
+    <description>Search for an acronym: "af nasa"</description>
+    <category>Reference</category>
+    <link>http://www.acronymfinder.com/</link>
+    <contributor>Nikolai Devereaux</contributor>
+    <email>nikolai_at_bigaction_dot_org</email>
+    <form name="acrf"
+          action="http://www.acronymfinder.com/af-query.asp"
+          method="get"
+          target="_blank">
+      <input name="String" type="hidden" value="exact" />
+      <input name="Acronym" type="hidden" />
+    </form>
+    <script><![CDATA[
+      function af(q)
+      {
+        if (q == "")
+        {
+          openSearchWindow("http://www.acronymfinder.com/");
+        }
+        else
+        {
+          document.acrf.Acronym.value=q;
+          submitForm(acrf);
+        }
+      }
+    ]]></script>
+  </search>

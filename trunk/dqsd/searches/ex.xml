@@ -1,0 +1,31 @@
+  <search function="ex">
+    <name>Excite Search</name>
+    <description>Search using Excite: "ex cable modems"</description>
+    <category>Search the Web</category>
+    <link>http://www.excite.com/</link>
+    <form name="excf"
+          target="_blank"
+          action="http://search.excite.com/search.gw"
+          method="get">
+      <input name="c"
+             type="hidden"
+             value="web"/>
+      <input name="search"
+             type="hidden"/>
+    </form>
+    <script><![CDATA[
+      // excite search
+      function ex(q)
+      {
+        if (q == "")
+        {
+          openSearchWindow("http://www.excite.com/");
+        }
+        else
+        {
+          document.excf.search.value=q;
+          submitForm(excf);
+        }
+      }
+    ]]></script>
+  </search>

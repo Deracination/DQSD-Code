@@ -1,0 +1,34 @@
+  <search function="dlt">
+    <name>DealTime Price Comparison</name>
+    <description>Compare products, prices, and stores: "dlt Harry Potter"</description>
+    <category>Shopping</category>
+    <link>http://www.dealtime.com/</link>
+    <form name="dltf"
+        method="get"
+        action="http://www.dealtime.com/GS2/GS2StatReDirect"
+        target="_blank">
+      <input type="hidden" name="nFormID" VALUE=""/>
+      <input type="hidden" name="nParentFormID" VALUE="0"/>
+      <input type="hidden" name="NavigationGroupId" VALUE="1"/>
+      <input type="hidden" name="WeightGroupId" VALUE="1"/>
+      <input type="hidden" name="bParent" VALUE="on"/>
+      <input type="hidden" name="uid" VALUE=""/>
+      <input type="hidden" name="bid" VALUE="1"/>
+      <input type="hidden" name="Operator" value="2"/>
+      <input type="hidden" name="keyword" value=""/>
+    </form>
+    <script><![CDATA[
+      function dlt(q)
+      {
+        if (q == "")
+        {
+           openSearchWindow("http://www.dealtime.com/");
+        }
+        else
+        {
+           document.dltf.keyword.value=q;
+           submitForm(dltf);
+        }
+      }   
+    ]]></script>
+  </search>

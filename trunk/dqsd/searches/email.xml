@@ -1,0 +1,28 @@
+  <search function="email">
+    <description>Send an email with default handler - "email recepient(s); subject; body"</description>
+    <category>Other</category>
+    <contributor>Glenn Carr</contributor>
+    <suggestor>Nikolai Devereaux</suggestor>
+    <script><![CDATA[
+      function email(q)
+      {
+        var action = "mailto:";
+        var tokens = q.split( ';' );
+        if (tokens[0])
+        {
+          action += tokens[0].replace(/,/, ";");
+          if (tokens[1])
+          {
+            var subject = tokens[1].replace( /^\s/, '' ).replace( /\s$/, '' )
+            action += ("?subject=" + subject);
+            if (tokens[2])
+            {
+              var body = tokens[2].replace( /^\s/, '' ).replace( /\s$/, '' )
+              action += ("&body=" + body);
+            }
+          }
+        }
+        window.location.href = action;
+      }
+    ]]></script>
+  </search>

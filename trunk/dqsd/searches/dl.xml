@@ -1,0 +1,27 @@
+  <search function="dl">
+    <name>Search Download.com</name>
+    <description>Search CNET's shareware archive: "dl DQSD"</description>
+    <category>Computers</category>
+    <link>http://download.cnet.com/</link>
+    <form name="downloadsf"
+          method="get"
+          action="http://download.cnet.com/downloads/search/redirector/1,10207,0-0,00.html"
+          target="_blank">
+      <input type="hidden" name="tg" value="dl-10000"/>
+      <input type="hidden" name="cn" value=""/>
+      <input type="hidden" name="tt" value="srch"/>
+      <input type="hidden" name="qt" value=""/>
+    </form>
+    <script><![CDATA[
+      function dl(q)
+      {
+        if (q == "")
+          openSearchWindow("http://download.cnet.com/");
+        else
+        {
+          document.downloadsf.qt.value=q;
+          submitForm(downloadsf);
+        }
+      }
+    ]]></script>
+  </search>

@@ -1,0 +1,44 @@
+  <search function="acx">
+    <name>Cambridgesoft ChemACX Compound Search</name>
+    <description>Another chemical search</description>
+    <category>Other</category>
+    <contributor>Stewart Rubenstein</contributor>
+    <link>http://chemacx.cambridgesoft.com</link>
+    <form name="acxf"
+          target="_blank"
+          action="http://chemacx.cambridgesoft.com/chemacx/default.asp"
+          method="GET">
+        <input type="hidden" name="formgroup" value="basenp_form_group"/>
+        <input type="hidden" name="dbname" value="chemacx"/>
+        <input type="hidden" name="dataaction" value="query_string"/>
+        <input type="hidden" name="field_type" value="TEXT"/>
+        <input type="hidden" name="field_criteria" value="="/>
+        <input type="hidden" name="full_field_name" value=""/>
+        <input type="hidden" name="field_value" value=""/>
+        <input type="hidden" name="UseHeader" value="on"/>
+        <input type="hidden" name="DisplayMessage" value=""/>
+        <input type="hidden" name="ReturnURL"/>
+        <input type="hidden" name="ReturnType"/>
+    </form>
+    <script><![CDATA[
+      function acx(q)
+      {
+        if (q == "")
+        {
+          openSearchWindow("http://chemacx.cambridgesoft.com/");
+        }
+        else
+        {
+          // check to see if it's a cas registry number
+          cas = new RegExp("^([0-9]{1,9})\\s*-?\\s*([0-9]{1,2}\\s*-?\\s*[0-9])$", "");
+          res = cas.exec(q);
+          if (res)
+            document.acxf.full_field_name.value="Substance.CAS";
+          else
+            document.acxf.full_field_name.value="Synonym.Name";
+        }
+        document.acxf.field_value.value=q;
+        submitForm(acxf);
+      }
+    ]]></script>
+  </search>

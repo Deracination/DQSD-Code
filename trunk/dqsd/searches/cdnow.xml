@@ -1,0 +1,31 @@
+  <search function="cdnow">
+    <name>CDNow Music Search</name>
+    <description>Search CDNOW by artist /a, song /s, title /t, or label /l: <nobr>"cdnow Lobster /s"</nobr></description>
+    <category>Entertainment</category>
+    <link>http://www.cdnow.com/</link>
+    <form name="cdnf"
+          target="_blank"
+          action="http://www.cdnow.com/cgi-bin/mserver/pagename=/RP/CDN/FIND/popsearch.html"
+          method="post">
+      <input type="hidden" name="string"/>
+      <input type="hidden" name="index"/>
+    </form>
+    <script><![CDATA[
+      // cdnow
+      function cdnow(q)
+      {
+        var res = q.match(/([^\/]+)(\/[AaSsTtLl])?/);
+
+        if (!res)
+        {
+           openSearchWindow("http://www.cdnow.com/");
+        }
+        else
+        {
+          document.cdnf.string.value=(res[1] ? res[1] : "");
+          document.cdnf.index.value=(res[2] ? res[2].toLowerCase().substring(1,2) : "a");
+          submitForm(cdnf);
+        }
+      }
+    ]]></script>
+  </search>

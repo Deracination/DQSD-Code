@@ -1,0 +1,29 @@
+  <search function="fst">
+    <name>AllTheWeb Search</name>
+    <description>Use the frequently-rebuilt FAST index: "fst jeep"</description>
+    <category>Search the Web</category>
+    <link>http://fast.no/</link>
+    <contributor></contributor>
+    <form name="fstf"
+        method="get"
+        action="http://www.alltheweb.com/search"
+        target="_blank">
+      <input type="hidden" name="cat" value="web"/>
+      <input type="hidden" name="lang" value="any"/>
+      <input type="hidden" name="query" value=""/>
+    </form>
+    <script><![CDATA[
+      function fst(q)
+      {
+       if (q == "")
+       {
+         openSearchWindow("http://www.alltheweb.com/");
+       }
+       else
+       {
+         document.fstf.query.value=q;
+         submitForm(fstf);
+       }
+      }
+    ]]></script>
+  </search>

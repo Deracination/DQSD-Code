@@ -1,0 +1,29 @@
+  <search function="quot">
+    <name>Bartleby.com Quotations Search</name>
+    <description>Search several sources for familiar quotations: "quot penny"</description>
+    <category>Reference</category>
+    <contributor>Stephen Granade</contributor>
+    <email>sgranade@phy.duke.edu</email>
+    <form name="bartlebyf"
+    action="http://www.bartleby.com/cgi-bin/texis/webinator/sitesearch"
+    method="get"
+    target="_blank">
+      <input name="query" type="hidden" />
+      <input name="db" type="hidden" value="db" />
+      <input name="filter" type="hidden" value="colQuotations" />
+    </form>
+    <script><![CDATA[
+      function quot(q)
+      {
+        if (q == "")
+        {
+          openSearchWindow("http://www.bartleby.com/");
+        }
+        else
+        {
+          document.bartlebyf.query.value=q;
+          submitForm(bartlebyf);
+        }
+      }
+    ]]></script>
+  </search>

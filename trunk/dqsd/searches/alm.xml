@@ -1,0 +1,40 @@
+  <search function="alm">
+    <name>AMG All Music Search</name>
+    <description>Search by <nobr>artist ("alm Sting /a"),<wbr/> title ("alm Dream of /t"),<wbr/> style ("alm Rock /y"),<wbr/> or label ("alm A&amp;M /l")</nobr></description>
+    <category>Entertainment</category>
+    <link>http://www.allmusic.com/</link>
+    <form name="almf"
+          target="_blank"
+          action="http://www.allmusic.com/cg/amg.dll"
+          method="post">
+      <input type="hidden" name="P" value="amg"/>
+      <input type="hidden" name="uid" value="SEARCH"/>
+      <input type="hidden" name="opt1"/>
+      <input type="hidden" name="sql"/>
+    </form>
+    <script><![CDATA[
+      function alm(q)
+      {
+        var res = q.match(/([^\/]+)(\/[AaSsTtLlYy])?/);
+
+        if (!res)
+        {
+           openSearchWindow("http://www.allmusic.com/");
+        }
+        else
+        {
+          document.almf.sql.value=(res[1] ? res[1] : "");
+          document.almf.opt1.value="1";
+          switch (res[2].toLowerCase().substring(1,2))
+          {
+           case "a": case "A": document.almf.opt1.value="1"; break;
+           case "T": case "t": document.almf.opt1.value="2"; break;
+           case "s": case "S": document.almf.opt1.value="3"; break;
+           case "Y": case "y": document.almf.opt1.value="5"; break;
+           case "l": case "L": document.almf.opt1.value="4"; break;
+          }
+          submitForm(almf);
+        }
+      }
+    ]]></script>
+  </search>

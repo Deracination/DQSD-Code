@@ -1,0 +1,25 @@
+  <search function="wug">
+    <name>Weather Underground Search</name>
+    <description>Use a zip code: "wug 75287"</description>
+    <category>News</category>
+    <link>http://www.weatherunderground.com/</link>
+    <contributor>Monty Scroggins</contributor>
+    <form name="wundergf"
+          method="get"
+          action="http://www.weatherunderground.com/cgi-bin/findweather/getForecast"
+          target="_blank">
+      <input type="hidden" name="query" value=""/>
+    </form>
+    <script><![CDATA[
+      function wug(q)
+      {
+        if (q == "")
+          openSearchWindow("http://www.weatherunderground.com");
+        else
+        {
+          document.wundergf.query.value=q;
+          submitForm(wundergf);
+        }
+      }
+    ]]></script>
+  </search>

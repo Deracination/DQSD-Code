@@ -1,0 +1,34 @@
+  <search function="faq">
+    <name>Usenet FAQ Search</name>
+    <link>http://www.faqs.org/faqs/</link>
+    <description>Search the Usenet FAQ archives.</description>
+    <category>Other</category>
+    <form name="faqf"
+          target="_blank"
+          method="post"
+          action="http://www.faqs.org/cgi-bin/faqs/faqsearch">
+      <input name="archive" type="hidden" value="faqs"/>
+      <input name="case" type="hidden" value="off"/>
+      <input name="whole" type="hidden" value="on"/>
+      <input name="maxlines" type="hidden" value="30"/>
+      <input name="errors" type="hidden" value="1"/>
+      <input name="maxfiles" type="hidden" value="50"/>
+      <input name="meta" type="hidden" value="enabled"/>
+      <input name="query" type="hidden"/>
+    </form>
+    <script><![CDATA[
+      // Usenet FAQ search
+      function faq(q)
+      {
+        if (q == "")
+        {
+          openSearchWindow("http://www.faqs.org/faqs/");
+        }
+        else
+        {
+          document.faqf.query.value=q;
+          submitForm(faqf);
+        }
+      }
+    ]]></script>
+  </search>
