@@ -1,0 +1,36 @@
+<search function="ebuy">
+  <name>Ebuyer</name>
+  <description>Search ebuyer.com
+  <div class="helpboxDescLabels">Example:</div> 
+  <table class="helpboxDescTable">
+    <tr>
+      <td>ebuy keyboard</td>
+    </tr>
+  </table>
+  </description>
+  <category>Computers</category>
+  <link>http://www.ebuyer.com/</link>
+  <contributor>Matthew Slight</contributor>
+  <form name="ebuyerf" method="post" action="http://www.ebuyer.com/customer/products/index.html?action=">
+    <input type="hidden" name="qfind" />
+  </form>
+  <script><![CDATA[
+    function ebuy(input)
+    {
+      if( nullArgs( "ebuy", input) )
+        return;
+      else
+      {
+        document.ebuyerf.qfind.value=input;
+        submitForm(ebuyerf);
+      }
+    }
+  ]]></script>
+
+  <copyright>
+	Copyright (c) 2002 Matthew Slight
+	Distributed under the terms of the
+	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>
+

@@ -1,0 +1,36 @@
+<search function="cpp">
+  <name>C/C++ Reference</name>
+  <description>Search cppreference.com
+  <div class="helpboxDescLabels">Example:</div> 
+  <table class="helpboxDescTable">
+    <tr>
+      <td>cpp function()</td>
+    </tr>
+  </table>
+  </description>
+  <category>Computers</category>
+  <link>http://www.cppreference.com/</link>
+  <contributor>Matthew Slight</contributor>
+  <form name="cppf" method="post" action="http://www.cppreference.com/cgi-bin/search.cgi">
+    <input type="hidden" name="query" />
+  </form>
+  <script><![CDATA[
+    function cpp(input)
+    {
+      if( nullArgs( "cpp", input) )
+        return;
+      else
+      {
+        document.cppf.query.value=input;
+        submitForm(cppf);
+      }
+    }
+  ]]></script>
+
+  <copyright>
+	Copyright (c) 2002 Matthew Slight
+	Distributed under the terms of the
+	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>
+
