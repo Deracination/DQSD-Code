@@ -124,9 +124,8 @@ reuseBrowserWindowMode = 0;
 /* Browser launch mode
 *  0=use IE
 *  1=use default browser
-*  2=auto (launches in IE directly if IE is default browser) [default]
 */
-launchmode=2;
+launchmode=1;
 
 /* Page template to use to initialize search results window
 * Used only when launching in IE. Set pagetemplate to "maximized.htm" to maximize results.

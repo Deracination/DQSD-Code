@@ -7,6 +7,7 @@ Enhancements
 * Added (for real this time) Mouse Wheel history browsing. (Thad Kerosky)
 * Added AppDataProperty to DQSDTools.Launcher component for possible future use. (Glenn Carr)
 * Improved and simplified multi-monitor handling (Kim Gräsman)
+* Removed launchmode 2 (launch in IE directly if IE is default browser) and set 1 as default. 2 wasn't really necessary anyway. (Kim Gräsman)
 
 Bug Fixes
 * Removed 'Type "!<em>prefix</em>" to see only matching entries.' from help. This action launches lucky Google.
