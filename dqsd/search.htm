@@ -222,7 +222,7 @@ function shortcut(t)
   // look for matching commands first
   var search = null;
   var term = null;
-  var result = t.match(/^([a-zA-Z]+[a-zA-Z0-9]*)\b/)
+  var result = t.match(/^(\w+)\b/)
   if (result)
   {
     if (aliases[result[1]])
