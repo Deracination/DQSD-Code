@@ -1,0 +1,71 @@
+<search function="cp">
+	<name>CodeProject (CP)</name>
+	<description>
+    Search CodeProject for source code, samples and tutorials<br />
+    <div class="helpboxDescLabels">Switches:</div>
+  	<table class="helpboxDescTable">
+			<tr>
+				<td>/a</td>
+				<td> - </td>
+				<td>Search for authors.</td>
+			</tr>
+			<tr>
+				<td>/t</td>
+				<td> - </td>
+				<td>Search in titles.</td>
+			</tr>
+			<tr>
+				<td>/d</td>
+				<td> - </td>
+				<td>Search in descriptions.</td>
+			</tr>
+			<tr>
+				<td>/k</td>
+				<td> - </td>
+				<td>Search for keywords.</td>
+			</tr>
+		</table>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+			<tr>
+				<td>cp Saurwein /a</td>
+			</tr>
+		</table>
+  </description>
+	<category>Computers</category>
+	<link>http://www.codeproject.com/</link>
+	<contributor>Andreas Saurwein</contributor>
+	<form name="cpf" action="http://www.codeproject.com/info/search.asp" method="get">
+		<input type="hidden" name="TARGET" value="" />
+		<input type="hidden" name="st" value="kw" />
+	</form>
+	<script><![CDATA[
+    function cp(q)
+    {
+      var args = parseArgs(q, "a, t, d, k");
+      
+      if( nullArgs("cp", q) )
+        return false;
+      else if( args.switches.length == 1 )
+      {
+        switch( args.switches[0].name )
+        {
+          case "a": document.cpf.st.value = "au"; break;
+          case "t": document.cpf.st.value = "tt"; break;
+          case "d": document.cpf.st.value = "ds"; break;
+          case "k": document.cpf.st.value = "kw"; break;
+        }
+        document.cpf.TARGET.value = args.q;
+        submitForm(cpf);
+      }
+      else if( args.switches.length > 1 )
+        nullArgs("cp","?");
+      else
+      {
+        document.cpf.st.value = "kw"
+        document.cpf.TARGET.value = args.q;
+        submitForm(cpf);
+      }
+    }
+  ]]></script>
+</search>
