@@ -262,6 +262,7 @@ Styles for the help box
 .helpboxDescColumns
 {
   color:activeCaption;
+  vertical-align:top;
   padding:0px;
   padding-left:6px;
   padding-right:6px;
