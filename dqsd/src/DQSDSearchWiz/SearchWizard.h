@@ -4,8 +4,7 @@
 #define __SEARCHWIZARD_H_
 
 #include "resource.h"       // main symbols
-#include <ExDisp.h>
-#include <MsHtml.h>
+#include "DQSDSearchWiz.h"
 
 /////////////////////////////////////////////////////////////////////////////
 // CSearchWizard

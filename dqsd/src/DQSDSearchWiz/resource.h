@@ -32,6 +32,9 @@
 #define IDC_Message                     223
 #define IDC_IncludeComments             224
 #define IDC_ChangeHistory               228
+#define IDC_Browse                      231
+#define IDC_WarnNotActive               232
+#define IDC_EditLabel                   233
 
 // Next default values for new objects
 // 
@@ -39,7 +42,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        206
 #define _APS_NEXT_COMMAND_VALUE         32768
-#define _APS_NEXT_CONTROL_VALUE         229
+#define _APS_NEXT_CONTROL_VALUE         234
 #define _APS_NEXT_SYMED_VALUE           106
 #endif
 #endif

@@ -4,6 +4,7 @@
 #define __OPTIONSDLG_H_
 
 #include "resource.h"       // main symbols
+#include "options.h"
 
 /////////////////////////////////////////////////////////////////////////////
 // COptionsDlg
@@ -12,9 +13,8 @@ class COptionsDlg :
 {
 public:
 	COptionsDlg()
-		: m_bEditResult( TRUE )
-		, m_strEditor( _T("notepad.exe") )
 	{
+		m_options.Load();
 	}
 
 	~COptionsDlg()
@@ -28,6 +28,7 @@ BEGIN_MSG_MAP(COptionsDlg)
 	COMMAND_ID_HANDLER(IDOK, OnOK)
 	COMMAND_ID_HANDLER(IDCANCEL, OnCancel)
 	COMMAND_HANDLER(IDC_EditXML, BN_CLICKED, OnClickedEditXML)
+	COMMAND_HANDLER(IDC_Browse, BN_CLICKED, OnClickedBrowse)
 END_MSG_MAP()
 // Handler prototypes:
 //  LRESULT MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
@@ -37,12 +38,14 @@ END_MSG_MAP()
 	LRESULT OnInitDialog(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 	{
 		CenterWindow( GetActiveWindow() );
-		
-		CWindow( GetDlgItem( IDC_EditXML ) ).SendMessage( BM_SETCHECK, m_bEditResult ? BST_CHECKED : BST_UNCHECKED );
 
-		CWindow( GetDlgItem( IDC_Editor ) ).SetWindowText( m_strEditor.c_str() );
+		CWindow( GetDlgItem( IDC_EditXML ) ).SendMessage( BM_SETCHECK, m_options.EditResults() ? BST_CHECKED : BST_UNCHECKED );
+		CWindow( GetDlgItem( IDC_Editor ) ).SetWindowText( m_options.Editor().c_str() );
 
 		OnClickedEditXML(0, 0, 0, bHandled );
+
+		CWindow( GetDlgItem( IDC_WarnNotActive ) ).SendMessage( BM_SETCHECK, m_options.WarnNotActive() ? BST_CHECKED : BST_UNCHECKED );
+		CWindow( GetDlgItem( IDC_IncludeComments ) ).SendMessage( BM_SETCHECK, m_options.IncludeComments() ? BST_CHECKED : BST_UNCHECKED );
 
 		return 1;  // Let the system set the focus
 	}
@@ -51,13 +54,16 @@ END_MSG_MAP()
 	{
 		USES_CONVERSION;
 
-		m_bEditResult = CWindow( GetDlgItem( IDC_EditXML ) ).SendMessage( BM_GETCHECK, 0, 0 ) == BST_CHECKED ? TRUE : FALSE;
-
+		m_options.EditResults( CWindow( GetDlgItem( IDC_EditXML ) ).SendMessage( BM_GETCHECK, 0, 0 ) == BST_CHECKED );
 		BSTR bstrEditor = NULL;
 		CWindow( GetDlgItem( IDC_Editor ) ).GetWindowText( &bstrEditor );
-		m_strEditor = W2T( bstrEditor );
+		m_options.Editor( W2T( bstrEditor ) );
 		::SysFreeString( bstrEditor );
-		
+
+		m_options.IncludeComments( CWindow( GetDlgItem( IDC_IncludeComments ) ).SendMessage( BM_GETCHECK, 0, 0 ) == BST_CHECKED );
+		m_options.WarnNotActive( CWindow( GetDlgItem( IDC_WarnNotActive ) ).SendMessage( BM_GETCHECK, 0, 0 ) == BST_CHECKED );
+		m_options.Save();
+
 		EndDialog(wID);
 		return 0;
 	}
@@ -71,12 +77,15 @@ END_MSG_MAP()
 	LRESULT OnClickedEditXML(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHandled)
 	{
 		CWindow( GetDlgItem( IDC_Editor ) ).EnableWindow( CWindow( GetDlgItem( IDC_EditXML ) ).SendMessage( BM_GETCHECK, 0, 0 ) == BST_CHECKED );
+		CWindow( GetDlgItem( IDC_Browse ) ).EnableWindow( CWindow( GetDlgItem( IDC_EditXML ) ).SendMessage( BM_GETCHECK, 0, 0 ) == BST_CHECKED );
+		CWindow( GetDlgItem( IDC_EditLabel ) ).EnableWindow( CWindow( GetDlgItem( IDC_EditXML ) ).SendMessage( BM_GETCHECK, 0, 0 ) == BST_CHECKED );
 		return 0;
 	}
 
+	LRESULT OnClickedBrowse(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHandled);
+
 public:
-	BOOL m_bEditResult;
-	string m_strEditor;
+	COptions m_options;
 };
 
 #endif //__OPTIONSDLG_H_

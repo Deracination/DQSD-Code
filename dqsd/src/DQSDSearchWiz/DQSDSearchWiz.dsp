@@ -139,6 +139,10 @@ SOURCE=.\ModulVer.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\Options.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\OptionsDlg.cpp
 # End Source File
 # Begin Source File
@@ -169,6 +173,10 @@ SOURCE=.\DQSDWizardDlg.h
 # Begin Source File
 
 SOURCE=.\ModulVer.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\Options.h
 # End Source File
 # Begin Source File
 

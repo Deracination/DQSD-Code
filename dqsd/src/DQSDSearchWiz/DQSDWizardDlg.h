@@ -4,7 +4,7 @@
 #define __DQSDWIZARDDLG_H_
 
 #include "SearchNameEdit.h"
-
+#include "Options.h"
 #include "resource.h"       // main symbols
 
 /////////////////////////////////////////////////////////////////////////////
@@ -62,6 +62,7 @@ private:
 	string m_strBaseURL;
 	string m_strVersion;
 	CSearchNameEdit m_editSearchName;
+	COptions m_options;
 
 private:
 	string GetAbsoluteActionPath( _variant_t& varAction );
