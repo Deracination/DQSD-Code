@@ -1,0 +1,65 @@
+<search function="ep">
+  <name>Epinions.com Search</name>
+  <category>Shopping</category>
+  <contributor> Andrew N. Carpenter</contributor>
+  <link>http://www.epinions.com/</link>
+  <email>andy@andrewcarpenter.net</email>
+  <description>
+  Search Epinions
+  </description>
+  <form name="epf"
+        method="get"
+        action="http://www.epinions.com/search/">
+    <input type="hidden" name="search_string" value="" />
+    <input type="hidden" name="search_vertical" value="all" />
+    <COMMENT>
+      The input element above, "search_vertical", was a SELECT element with the following options...
+      <select name="search_vertical">
+        <option value="all">All Categories</option>
+        <option value="2522317">Autos &amp; Motorsports</option>
+        <option value="2522482">Beauty</option>
+        <option value="3321654">Books</option>
+        <option value="2531404">Business &amp; Technology</option>
+        <option value="2518365">Computer Hardware</option>
+        <option value="2522494">Education</option>
+        <option value="2521901">Electronics</option>
+        <option value="2531389">Games</option>
+        <option value="2531403">Gourmet</option>
+        <option value="2522488">Health</option>
+        <option value="2522498">Home &amp; Garden</option>
+        <option value="2522535">Hotels &amp; Travel</option>
+        <option value="2522499">Kids &amp; Family</option>
+        <option value="30971265">Magazines &amp; Newspapers</option>
+        <option value="2522131">Movies</option>
+        <option value="46335">Music</option>
+        <option value="2522545">Musical Equipment</option>
+        <option value="6205">Online Stores &amp; Services</option>
+        <option value="2923567">Outdoor Gear</option>
+        <option value="2522726">Personal Finance</option>
+        <option value="2522495">Pets</option>
+        <option value="14528">Restaurants &amp; Gourmet</option>
+        <option value="165915759489">Software</option>
+        <option value="2522265">Sporting Goods</option>
+        <option value="10026">TV Channels</option>
+        <option value="offers">New Deals</option>
+      </select>
+    </COMMENT>
+
+    <input type="hidden" name="mem_search" value="0" />
+  </form>
+  <script><![CDATA[
+    function ep(q)
+    {
+      if( nullArgs("ep", q) )
+        return;
+
+      document.epf.search_string.value = q;
+      submitForm(epf);
+    }
+  ]]></script>
+  <copyright>
+	Copyright (c) 2002 David Bau
+	Distributed under the terms of the
+	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>
