@@ -160,6 +160,9 @@ Section "Quick Search Deskbar (required)"
 
   ; Write the installation path into the registry
   WriteRegStr HKCR "CLSID\$9" "InstallDir" "$INSTDIR"
+  
+  ; ??? Keep this for a while for backward compatibility
+  WriteRegStr HKCR "CLSID\$9" "SecureFile" "$INSTDIR\search.htm"
   WriteRegDWORD HKCR "CLSID\$9\SecureFiles" "$INSTDIR\search.htm" 0
   WriteRegDWORD HKCR "CLSID\$9\SecureFiles" "$INSTDIR\settings.htm" 0
 
