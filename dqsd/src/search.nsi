@@ -94,6 +94,7 @@ Section "Quick Search Deskbar (required)"
   File "DQSDTools\DQSDTools.dsp"
   File "DQSDTools\DQSDTools.dsw"
   File "DQSDTools\DQSDTools.idl"
+  File "DQSDTools\DQSDTools.mak"
   File "DQSDTools\DQSDTools.rc"
   File "DQSDTools\Launcher.cpp"
   File "DQSDTools\Launcher.h"
@@ -177,6 +178,7 @@ Section "Uninstall"
   Delete /REBOOTOK $INSTDIR\src\DQSDTools\DQSDTools.dsp
   Delete /REBOOTOK $INSTDIR\src\DQSDTools\DQSDTools.dsw
   Delete /REBOOTOK $INSTDIR\src\DQSDTools\DQSDTools.idl
+  Delete /REBOOTOK $INSTDIR\src\DQSDTools\DQSDTools.mak
   Delete /REBOOTOK $INSTDIR\src\DQSDTools\DQSDTools.rc
   Delete /REBOOTOK $INSTDIR\src\DQSDTools\Launcher.cpp
   Delete /REBOOTOK $INSTDIR\src\DQSDTools\Launcher.h
