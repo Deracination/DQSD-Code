@@ -55,7 +55,7 @@ END_COM_MAP()
 // ILauncher
 public:
 	STDMETHOD(get_pathDefaultBrowser)(/*[out, retval]*/ BSTR *pVal);
-	STDMETHOD(OpenDocument)(/*[in]*/ BSTR strDoc);
+	STDMETHOD(OpenDocument)(/*[in]*/ BSTR strDoc, VARIANT* pvParameters);
 	STDMETHOD(SubmitForm)(/*[in]*/ VARIANT idForm);
 	STDMETHOD(get_Debug)(/*[out,retval]*/ VARIANT_BOOL* pbDebug );
 	STDMETHOD(put_Debug)(/*[in]*/ VARIANT_BOOL bDebug );

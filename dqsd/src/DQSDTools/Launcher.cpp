@@ -147,12 +147,21 @@ STDMETHODIMP CLauncher::SubmitForm(VARIANT idForm)
 }
 
 
-STDMETHODIMP CLauncher::OpenDocument(BSTR strDoc)
+STDMETHODIMP CLauncher::OpenDocument(BSTR strDoc, VARIANT* pvParameters)
 {
 	USES_CONVERSION;
 
-
-	HINSTANCE hInstance = ::ShellExecute(NULL, NULL, OLE2T(strDoc), NULL, NULL, SW_SHOWNORMAL);
+	// Check for optional string parameter.  Any non-existent parameter should be indicated
+	// by a VARIANT of type VT_ERROR with a value of DISP_E_PARAMNOTFOUND.
+	HINSTANCE hInstance = NULL;
+	if (pvParameters && (VT_BSTR == pvParameters->vt))
+	{
+		hInstance = ::ShellExecute(NULL, NULL, OLE2T(strDoc), OLE2T(pvParameters->bstrVal), NULL, SW_SHOWNORMAL);
+	}
+	else
+	{
+		hInstance = ::ShellExecute(NULL, NULL, OLE2T(strDoc), NULL, NULL, SW_SHOWNORMAL);
+	}
 	if (reinterpret_cast<INT>(hInstance) <= 32)
 		return E_FAIL;
 
