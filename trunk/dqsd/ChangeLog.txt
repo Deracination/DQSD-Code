@@ -63,6 +63,7 @@ Removed Searches
 Miscellaneous
 
 * added a couple 'button' style graphics (30x100) for promoting DQSD on websites (Shawn K. Hall)
+* added a logo-size graphic (dqsd.gif) for use with the new banner feature (Shawn K. Hall)
 * added several more bit-depth and size formats to the dqsd search.ico icon file (Shawn K. Hall)
 
 -- What's new for 3.1.6.0 (20-Apr-2003)
