@@ -10,13 +10,25 @@
           <xsl:comment>
           function toggleVisible()
           {
-            var answer = event.srcElement.parentElement.parentElement.all['answer'];
-            var toggle = event.srcElement.parentElement.all['toggle'];
+            if ( !document.all )
+              return false;
+
+            if ( event.srcElement.tagName == 'DIV' )
+            {
+              var answer = event.srcElement.parentElement.children['answer'];
+              var toggle = event.srcElement.children['toggle'];
+            }
+            else if ( event.srcElement.id == 'toggle' )
+            {
+              var answer = event.srcElement.parentElement.parentElement.all['answer'];
+              var toggle = event.srcElement;
+            }
             if ( answer )
             {
               answer.style.display = ( answer.style.display == "none" ? "block" : "none" );
               toggle.innerText = ( answer.style.display == "none" ? "+" : "-" );
             }
+            return false;
           }
           </xsl:comment>
         </SCRIPT>
@@ -30,13 +42,13 @@
         </div>
         <xsl:for-each select="faq">
           <div class="faq">
-            <div class="question">
-              <a href="#" class="toggle" id="toggle" onclick="toggleVisible();">+</a>
+            <div class="question" onclick="return toggleVisible();">
+              <a href="#" class="toggle" id="toggle">+</a>
               <xsl:number value="$category_num" format="1" />
               <xsl:number value="position()" format=".1" />&#160;<xsl:value-of select="question"/>
             </div>
             <div id="answer" class="answer" style="display: none">
-              <xsl:value-of select="answer"/>
+              <xsl:apply-templates select="answer"/>
             </div>
           </div>
         </xsl:for-each>
@@ -45,4 +57,7 @@
     </HTML>
   </xsl:template>
 
+  <xsl:template match="link">
+    <a href="{@href}"><xsl:value-of select="."/></a>
+  </xsl:template>
 </xsl:stylesheet>
