@@ -1,5 +1,9 @@
 -- What's new for ???
 
+Enhancements
+
+* Sean Farrell added Microsoft Outlook option for calendar
+
 New Searches
 
 * rot13 - Glenn add a rot13 converter function
