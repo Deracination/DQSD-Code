@@ -132,11 +132,7 @@ function histsearch( t, shift )
     searchPrefix = t;
 
   // Escape every letter in the searchPrefix, because it might contain chars with special meaning in a regexp
-  var escapedString = '';
-  for(var i = 0; i < searchPrefix.length; i++)
-  {
-    escapedString += "\\x" + searchPrefix.charCodeAt(i).toString(16);
-  }
+  var escapedString = escapeString( searchPrefix );
 
   var re;
   try
@@ -175,7 +171,7 @@ function histsearch( t, shift )
 
 function recent()
 {
-  var t = document.deff.q.value.replace( /\\/g, '\\\\' );
+  var t = escapeString( document.deff.q.value );
 
   if (!t.match(/^!\S/)) return true;
 
@@ -199,4 +195,16 @@ function recent()
 
   document.deff.q.value = currhistedit();
   return true;
+}
+
+function escapeString( s )
+{
+  if ( !s.length )
+    return s;
+  var es = '';
+  for (var i = 0; i < s.length; i++)
+  {
+    es += "\\x" + s.charCodeAt(i).toString(16);
+  }
+  return es;
 }
