@@ -42,7 +42,6 @@ function about()
     var i;
     var txt;
     var helptable = "";
-    var jumplist = "<center>";
 
     for (i = 0; i < 10; i++)
     {
@@ -91,10 +90,7 @@ function about()
         }
         helptable += "</td></tr>";
       }
-      jumplist += (i > 0 ? " | " : "") + "<a class=helpboxLinkJump href=\"\#"+categoryarray[i]+"\">"+ categoryarray[i]+"</a>";
     }
-    jumplist += "</center>";
-    jumplist += "<div align='center' style='margin: 5px 0px 5px 0px;'>[ <span class='helpboxCategoryExpander' type='expandall'>expand all</span> ]  [ <span class='helpboxCategoryExpander' type='collapseall'>collapse all</span> ]</div>";
 
     txt = txt.replace(/\r\n/g, '\n');
     txt = txt.replace(/\n\*/g, '<li>');
@@ -104,7 +100,7 @@ function about()
     txt = txt.replace(/(David Bau)/, '<a href=mailto:davidbau@hotmail.com>$1</a>');
     txt = txt.replace(/(GNU.*2)\s\((.*txt)\)/, '<br><a href=$2 target=GNU>$1</a>');
     txt = txt.replace(/\n#[^\n]*/g, '');
-    txt = txt.replace(/<table/, jumplist + "<table width='100%' border=0 cellspacing=1 cellpadding=2");
+    txt = txt.replace(/<table/, "<div align='center' style='margin: 0px 0px 5px 0px;'>[ <span class='helpboxCategoryExpander' type='expandall'>expand all</span> ]  [ <span class='helpboxCategoryExpander' type='collapseall'>collapse all</span> ]</div><table width='100%' border=0 cellspacing=1 cellpadding=2");
 
 	// dollar signs are match variables for replace, so any literal dollar signs need to be
 	// converted to HTML code so they will display properly
@@ -114,8 +110,6 @@ function about()
     txt = txt.replace(/\n\n/g, '<p>');
     txt = txt.replace(/\n/g, ' ');
     txt = txt.replace(/----/, '</center>');
-    txt +=jumplist;
-
 
     var basedir = window.location.href;
     basedir = basedir.substring(0, basedir.lastIndexOf('/') + 1);
