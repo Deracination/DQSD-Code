@@ -34,6 +34,7 @@ New Searches
 * vbsx - Execute VBScript Inline (Shawn K. Hall)
 * wrp - Wrap text (Shawn K. Hall)
 * xrl - Shorten urls with xrl.us (Dean W.)
+* b64 - base64 encoder/decoder (Glenn Carr)
 
 Modified Searches
 
@@ -48,6 +49,7 @@ Modified Searches
 * js - one can set the number of working days (Tom Corcoran)
 * tucows - more approriate category (Sarah Sweeney)
 * pw - fixed to work with current web page (can't remember who fixed it)
+* gtwhois - Post url changed, modified search accordingly (Dean Wilson)
 
 Removed Searches
 
