@@ -1,20 +1,28 @@
 <search function="cdo">
   <name>Cambridge Dictionaries Online</name>
-  <description>Search for British English definitions: "cdo lexical"</description>
+  <description>
+    Search for British English word definitions.<br/>
+    <a class="helpboxDescLabels">Example:</a><br/>
+    <table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">cdo lexical</td></tr>
+  	</table>
+  </description>
   <category>Reference</category>
   <link>http://dictionary.cambridge.org/</link>
   <idea>David Brake david.brake@ukonline.co.uk</idea>
+  
   <form name="cdof"
         action="http://dictionary.cambridge.org/cmd_search.asp"
         method="post">
     <input type="hidden" name="searchword"/>
     <input type="hidden" name="dict" value="B"/>
   </form>
+  
   <script><![CDATA[
     function cdo(q)
     {
-      if( q == "" )
-        openSearchWindow("http://dictionary.cambridge.org/");
+      if( nullArgs("cdo",q) )
+        return false;
       else
       {
         document.cdof.searchword.value = q;

@@ -1,21 +1,38 @@
 <search function="cdnow">
   <name>CDNOW</name>
-  <description>Search CDNOW by artist. Options include searchign by /album, /song, /label, /video, /actor, or /director. <nobr>Example: "cdnow Lobster /song"</nobr></description>
+  <description>
+    Search for music on CDNOW. Searches for artists by default.<br/>
+    <a class="helpboxDescLabels">Switches:</a><br/>
+  	<table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">/album</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Search for a specific album.</td></tr>
+  		<tr><td class="helpboxDescColumns">/song</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Search for a specific song.</td></tr>
+  		<tr><td class="helpboxDescColumns">/label</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Search for a record label.</td></tr>
+  		<tr><td class="helpboxDescColumns">/video</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Find a music video.</td></tr>
+  		<tr><td class="helpboxDescColumns">/actor</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Find an actor or director from a music video.</td></tr>
+   	</table>
+    <a class="helpboxDescLabels">Examples:</a><br/>
+    <table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">cdnow Mansun</td></tr>
+  		<tr><td class="helpboxDescColumns">cdnow Lobster /song</td></tr>
+  	</table>
+  </description>
   <category>Entertainment</category>
   <link>http://www.cdnow.com/</link>
   <contributor>Peter Risser, Ryan Edwards</contributor>
+  
   <form name="cdnowf"
         action="http://www.cdnow.com/cgi-bin/mserver/pagename=/RP/CDN/FIND/popsearch.html"
         method="post">
     <input type="hidden" name="string"/>
     <input type="hidden" name="index"/>
   </form>
+  
   <script><![CDATA[
     function cdnow(q)
     {
-      var args = parseArgs(q, "album, song, label, video, actor, director");
-      if( q == "" )
-        openSearchWindow("http://www.cdnow.com/");
+      var args = parseArgs(q, "album, song, label, video, actor");
+      if( nullArgs("cdnow",q) )
+        return false;
       else if( args.switches.length == 1 )
       {
         switch( args.switches[0].name )
@@ -24,8 +41,7 @@
           case "song": document.cdnowf.index.value = "s"; break;
           case "label": document.cdnowf.index.value = "l"; break;
           case "video": document.cdnowf.index.value = "m"; break;
-          case "actor":
-          case "director": document.cdnowf.index.value = "r"; break;
+          case "actor": document.cdnowf.index.value = "r"; break;
         }
         document.cdnowf.string.value = args.q;
         submitForm(cdnowf);

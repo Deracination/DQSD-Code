@@ -1,32 +1,36 @@
 <search function="cpan">
   <name>Comprehensive Perl Archive Network (CPAN)</name>
-  <description>Searches for modules by default.<br/>
-  <a class="helpboxDescLabels">Switches:</a><br/>
-	<table cellpadding="0" cellspacing="0" border="0">
-		<tr><td class="helpboxDescColumns">/author</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Search for authors.</td></tr>
-		<tr><td class="helpboxDescColumns">/distribution</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Search for distributions.</td></tr>
-    <tr><td class="helpboxDescColumns">/documentation</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Search for distribution documentation.</td></tr>
- 	</table>
-  <a class="helpboxDescLabels">Example:</a><br/>
-  <table cellpadding="0" cellspacing="0" border="0">
-		<tr><td class="helpboxDescColumns">cpan wrap /author</td></tr>
-	</table>
+  <description>
+    Search CPAN for Perl software. Searches for modules by default.<br/>
+    <a class="helpboxDescLabels">Switches:</a><br/>
+  	<table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">/author</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Search for authors.</td></tr>
+  		<tr><td class="helpboxDescColumns">/distribution</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Search for distributions.</td></tr>
+      <tr><td class="helpboxDescColumns">/documentation</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Search for distribution documentation.</td></tr>
+   	</table>
+    <a class="helpboxDescLabels">Example:</a><br/>
+    <table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">cpan wrap /author</td></tr>
+  	</table>
   </description>
   <category>Computers</category>
   <link>http://search.cpan.org/</link>
   <contributor>Monty Scroggins, Ryan Edwards</contributor>
+  
   <form name="cpanf"
         action="http://search.cpan.org/search"
         method="get">
     <input type="hidden" name="query"/>
     <input type="hidden" name="mode" value="module"/>
   </form>
+  
   <script><![CDATA[
     function cpan(q)
     {
       var args = parseArgs(q, "author, distribution, documentation");
-      if( q == "" )
-        openSearchWindow("http://search.cpan.org/");
+      
+      if( nullArgs("cpan", q) )
+        return false;
       else if( args.switches.length == 1 )
       {
         switch( args.switches[0].name )

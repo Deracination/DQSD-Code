@@ -1,9 +1,16 @@
 <search function="chem">
   <name>Cambridgesoft Chemfinder</name>
-  <description>Search for chemicals: "chem ammonium"</description>
+  <description>
+    Search for chemicals with the Cambridgesoft Chemfinder.<br/>
+    <a class="helpboxDescLabels">Example:</a><br/>
+    <table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">chem ammonium</td></tr>
+  	</table>
+  </description>
   <category>Other</category>
   <link>http://chemfinder.cambridgesoft.com/</link>
   <contributor>Stewart Rubenstein</contributor>
+  
   <form name="chemf"
         action="http://chemfinder.cambridgesoft.com/result.asp"
         method="get">
@@ -13,11 +20,12 @@
     <input type="hidden" name="userHeader" value="on"/>
     <input type="hidden" name="DisplayMessage" value=""/>
   </form>
+  
   <script><![CDATA[
     function chem(q)
     {
-      if( q == "" )
-        openSearchWindow("http://chemfinder.cambridgesoft.com/");
+      if( nullArgs("chem",q) )
+        return false;
       else
       {
         document.chemf.polyQuery.value = q;
