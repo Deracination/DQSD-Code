@@ -82,11 +82,25 @@ Section "Quick Search Deskbar (required)"
   File "..\readme.txt"
   File "..\search.htm"
   File "..\search.xml"
+  File "..\aliases.txt"
+  File "..\calculate.js"
+  File "..\calendar.js"
+  File "..\clock.js"
+  File "..\currency.js"
+  File "..\helpbox.js"
+  File "..\helpmenu.js"
+  File "..\history.js"
+  File "..\loader.js"
+  File "..\phoneno.js"
+  File "..\strings.js"
+  File "..\tools.js"
+  File "..\translate.js"
   SetOutPath "$INSTDIR\src"
   File "search.ico"
   File "search.nsi"
   File "build.cmd"
   File "clean.cmd"
+  File "scrub.cmd"
   File "dqsd.xml"
   SetOutPath "$INSTDIR\src\DQSDTools"
   File "DQSDTools\DQSDTools.cpp"
@@ -166,13 +180,28 @@ Section "Uninstall"
   ; remove files
   Delete /REBOOTOK $INSTDIR\readme.txt
   Delete /REBOOTOK $INSTDIR\search.htm
-  Delete /REBOOTOK $INSTDIR\search.nsi
-  Delete /REBOOTOK $INSTDIR\search.ico
   Delete /REBOOTOK $INSTDIR\search.xml
-  Delete /REBOOTOK $INSTDIR\dqsd.xml
+  Delete /REBOOTOK $INSTDIR\aliases.txt
+  Delete /REBOOTOK $INSTDIR\calculate.js
+  Delete /REBOOTOK $INSTDIR\calendar.js
+  Delete /REBOOTOK $INSTDIR\clock.js
+  Delete /REBOOTOK $INSTDIR\currency.js
+  Delete /REBOOTOK $INSTDIR\helpbox.js
+  Delete /REBOOTOK $INSTDIR\helpmenu.js
+  Delete /REBOOTOK $INSTDIR\history.js
+  Delete /REBOOTOK $INSTDIR\loader.js
+  Delete /REBOOTOK $INSTDIR\phoneno.js
+  Delete /REBOOTOK $INSTDIR\strings.js
+  Delete /REBOOTOK $INSTDIR\tools.js
+  Delete /REBOOTOK $INSTDIR\translate.js"
+  Delete /REBOOTOK $INSTDIR\src\dqsd.xml
   Delete /REBOOTOK $INSTDIR\DQSDTools.dll
   Delete /REBOOTOK $INSTDIR\src\build.cmd
   Delete /REBOOTOK $INSTDIR\src\clean.cmd
+  Delete /REBOOTOK $INSTDIR\src\scrub.cmd
+  Delete /REBOOTOK $INSTDIR\src\dqsd.xml
+  Delete /REBOOTOK $INSTDIR\src\search.nsi
+  Delete /REBOOTOK $INSTDIR\src\search.ico
   Delete /REBOOTOK $INSTDIR\src\DQSDTools\DQSDTools.cpp
   Delete /REBOOTOK $INSTDIR\src\DQSDTools\DQSDTools.def
   Delete /REBOOTOK $INSTDIR\src\DQSDTools\DQSDTools.dsp
