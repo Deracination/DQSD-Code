@@ -1,6 +1,6 @@
 <search function="clc">
   <name>Calculate</name>
-  <category>Calculations</category>
+  <category>Functions</category>
   <description>Evaluates numeric expressions: "clc (4+3)*(2+2)" or "clc pow(e, pi/2)"</description>
   <script><![CDATA[
     function clc(q)
