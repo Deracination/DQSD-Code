@@ -13,9 +13,7 @@ function saveSearchSettings()
       disabled.push( toggles[i].name );
     opener.searches[toggles[i].name].enabled = toggles[i].checked;
   }
-  DQSDLauncher = new ActiveXObject("DQSDTools.Launcher");
-  DQSDLauncher.WriteFile( "disabledsearches.txt", disabled.join("\n") );
-  DQSDLauncher = null;
+  opener.writeFile( "disabledsearches.txt", disabled.join("\n") );
 }
 
 function toggleEnabledSearch()
