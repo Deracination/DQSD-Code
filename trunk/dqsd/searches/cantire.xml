@@ -1,0 +1,82 @@
+<search function="cantire">
+  <name>Canadian Tire</name>
+  <category>Shopping</category>
+  <contributor>Sarah Sweeney</contributor>
+  <link>http://www.canadiantire.ca/intro/homepage.jsp</link>
+  <description>
+  Search the online Canadian Tire catalogue.
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>cantire tires</td></tr>
+    </table>
+  </description>
+  <form name="cantiref"
+        method="post"
+        action="http://www.canadiantire.ca/intro/homepage.jsp">
+    <input type="hidden" name="bmForm" value="shop_by_search" />
+    <input type="hidden" name="bmFormID" value="1089899083208" />
+    <input type="hidden" name="bmUID" value="1089899083208" />
+    <input type="hidden" name="bmIsForm" value="true" />
+    <input type="hidden" name="bmPrevTemplate" value="intro/homepage.jsp" />
+    <input type="hidden" name="bmText" value="VALIDATE_SEARCH&lt;&gt;keyword" />
+    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
+    <input type="hidden" name="VALIDATE_SEARCH&lt;&gt;keyword" value="" />
+    <input type="hidden" name="bmHidden" value="SEARCH_INPUT&lt;&gt;path" />
+    <input type="hidden" name="SEARCH_INPUT&lt;&gt;path" value="/Assortments/Primary/PrimaryAssortment/AroundtheHouse" />
+    <input type="hidden" name="bmHidden" value="SEARCH_INPUT&lt;&gt;path" />
+    <input type="hidden" name="SEARCH_INPUT&lt;&gt;path" value="/Assortments/Primary/PrimaryAssortment/Automotive" />
+    <input type="hidden" name="bmHidden" value="SEARCH_INPUT&lt;&gt;path" />
+    <input type="hidden" name="SEARCH_INPUT&lt;&gt;path" value="/Assortments/Primary/PrimaryAssortment/GardenPatio" />
+    <input type="hidden" name="bmHidden" value="SEARCH_INPUT&lt;&gt;path" />
+    <input type="hidden" name="SEARCH_INPUT&lt;&gt;path" value="/Assortments/Primary/PrimaryAssortment/SportsRecreation" />
+    <input type="hidden" name="bmHidden" value="SEARCH_INPUT&lt;&gt;path" />
+    <input type="hidden" name="SEARCH_INPUT&lt;&gt;path" value="/Assortments/Primary/PrimaryAssortment/Workshop" />
+    <input type="hidden" name="bmHidden" value="SEARCH_INPUT&lt;&gt;path" />
+    <input type="hidden" name="SEARCH_INPUT&lt;&gt;path" value="/Assortments/As_Seen_On_TV/As_Seen_On_TV" />
+    <input type="hidden" name="bmHidden" value="SEARCH_INPUT&lt;&gt;path" />
+    <input type="hidden" name="SEARCH_INPUT&lt;&gt;path" value="/Assortments/Gift/GiftIdeas" />
+    <input type="hidden" name="bmHidden" value="SEARCH_INPUT&lt;&gt;path" />
+    <input type="hidden" name="SEARCH_INPUT&lt;&gt;path" value="/Assortments/Gift_Certificates/Gift_Certificates" />
+    <input type="hidden" name="bmHidden" value="SEARCH_INPUT&lt;&gt;path" />
+    <input type="hidden" name="SEARCH_INPUT&lt;&gt;path" value="/Assortments/Winter/ShoppingforWinter" />
+    <input type="hidden" name="bmHidden" value="SEARCH_INPUT&lt;&gt;path" />
+    <input type="hidden" name="SEARCH_INPUT&lt;&gt;path" value="/Assortments/Online_Only/Online_Only" />
+    <input type="hidden" name="bmHidden" value="SEARCH_INPUT&lt;&gt;objectTypes" />
+    <input type="hidden" name="SEARCH_INPUT&lt;&gt;objectTypes" value="PRODUCT" />
+    <input type="hidden" name="bmHidden" value="SEARCH_INPUT&lt;&gt;maxRows_cd" />
+    <input type="hidden" name="SEARCH_INPUT&lt;&gt;maxRows_cd" value="10" />
+    <input type="hidden" name="bmHidden" value="SEARCH_INPUT&lt;&gt;searchTextOperator" />
+    <input type="hidden" name="SEARCH_INPUT&lt;&gt;searchTextOperator" value="and" />
+    <input type="hidden" name="bmHidden" value="SEARCH_INPUT&lt;&gt;currencyCode" />
+    <input type="hidden" name="SEARCH_INPUT&lt;&gt;currencyCode" value="CAD" />
+    <input type="hidden" name="bmImage" value="submit.x" />
+    <input type="hidden" name="bmImage" value="submit.y" />
+    <input type="hidden" name="bmImage" value="submit" />
+    <input type="hidden" name="bmHidden" value="PRODUCT&lt;&gt;prd_id" />
+    <input type="hidden" name="PRODUCT&lt;&gt;prd_id" value="845524442860831" />
+    <input type="hidden" name="bmHidden" value="FOLDER&lt;&gt;folder_id" />
+    <input type="hidden" name="FOLDER&lt;&gt;folder_id" value="2534374302376533" />
+    <input type="hidden" name="bmHidden" value="ASSORTMENT&lt;&gt;ast_id" />
+    <input type="hidden" name="ASSORTMENT&lt;&gt;ast_id" value="1408474395348027" />
+    <input type="hidden" name="bmFields" value="bmForm,bmFormID,bmUID,bmIsForm,bmPrevTemplate,bmText,bmHidden,bmImage" />
+    <input type="hidden" name="bmHash" value="8a95ed93f020e9b816993ed2794113598d0bc504" />
+  </form>
+  <script><![CDATA[
+    function cantire(q)
+    {
+      if( nullArgs("cantire", q) )
+        return;
+      document.cantiref["VALIDATE_SEARCH<>keyword"].value = q;
+      submitForm(cantiref);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 07/15/04 at 10:52:29
+    by Dave's Quick Search Deskbar Search Wizard version 1.2,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>
