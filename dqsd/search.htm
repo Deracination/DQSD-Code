@@ -92,58 +92,57 @@ Finally, the following are default key bindings.  Some of these can be customize
 
 -->
 <head>
-  <title>Search</title>
-  <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1">
-  <link rel="stylesheet" type="text/css" href="search.css">
-  <script type='text/Jscript'>
-    // default language setting
-    language=navigator.userLanguage.substr(0,2);
-  </script>
-  <script type='text/Jscript' src=preferences.js></script>
-  <script type='text/Jscript'>
-    // include local preferences file
-    if (typeof localprefs != "undefined" && localprefs != "")
-      document.write("</" + "script" + "><script src=" + localprefs + "></" + "script" + ">");
 
-    // include the overwriting stylesheet if necessary
-    if (typeof localstylesurl != "undefined" && localstylesurl != "")
-      document.write("<link rel='stylesheet' type='text/css' href='" + localstylesurl + "'>");
-  </script>
+<title>Search</title>
 
-<!--  <xml id='searchxml' src='search.xml'></xml>  -->
-<script type='text/Jscript'>
+<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1">
+
+<link rel="stylesheet" type="text/css" href="search.css">
+
+<!-- External Scripts -->
+
+<!--
+Include default values for all user customizable preferences.
+This file _should not_ be modified by the user because it will be overwritten
+during update installations.  Make changes to the default values in localprefs.js.
+-->
+<script type="text/jscript" src="preferences.js"></script>
+
+<!--
+Include overrides for user-customizable preferences.  This file will not be
+overwritten when installing updates.
+-->
+<script type="text/jscript" src="localprefs.js"></script>
+
+<script type='text/jscript'>
+  // include the overwriting stylesheet if necessary
+  if (typeof localstylesurl != "undefined" && localstylesurl != "")
+    document.write("<link rel='stylesheet' type='text/css' href='" + localstylesurl + "'>");
+</script>
+
+<script type="text/jscript" src="tools.js"></script>
+
+<script type="text/jscript">
+
+  getDefaultLanguage();
+
+  initGlobals();
+
+</script>
+
+<script type='text/jscript' src="helpmenu.js"></script>
+<script type='text/jscript' src="strings.js"></script>
+<script type='text/jscript' src="version.js"></script>
+
+<script type='text/jscript'>
+// show localized title string
+document.title=local(SEARCH_TITLE);
+</script>
+
+<script type='text/jscript'>
   // include the localsearch file if necessary
   if (typeof localsearchurl != "undefined" && localsearchurl != "")
     document.write("<xml id='localsearch' src='" + localsearchurl + "'></xml>");
-</script>
-
-<script type='text/Jscript' src="helpmenu.js"></script>
-<script type='text/Jscript'>
-
-// catch errors
-function handleerror(msg, url, lineno)
-{
-  if (!firsterror)
-  {
-     firsterror = msg;
-     alert("Error (line " + lineno + "):\n" + msg);
-  }
-  return true;
-}
-firsterror = null;
-// window.onerror=handleerror;
-
-function qualifiedalert(s)
-{
-  alertmode && alert(s);
-}
-</script>
-
-<script type='text/Jscript'>
-<!--
-uaMatch=navigator.userAgent.toLowerCase().match("msie\\s+(\\d+\\.\\d*)");
-ie_version=(uaMatch ? parseFloat(uaMatch[1]) : 0.0);
--->
 </script>
 
 </head>
@@ -153,9 +152,7 @@ ie_version=(uaMatch ? parseFloat(uaMatch[1]) : 0.0);
 
 <div style='display:none' id='delaymsg'></div>
 
-<script type='text/Jscript'>
-init = true;
-selfdrag = false;
+<script type='text/jscript'>
 
 // def() called when the user hits "enter" in the textbox
 function def()
@@ -392,9 +389,6 @@ function direct(t)
   return false;
 }
 
-reuseBrowserWindowModeOverride = reuseBrowserWindowMode;
-searchPrefix = '';
-
 // handle onkeypress: cut-copy-paste, ctrl-n, ctrl-p for next and previous
 // we need to do this because for some reason it's not done for us when
 // we're docked in the taskbar!
@@ -564,8 +558,6 @@ function strt()
     startclock(clockdelay);
 }
 
-bant = null;
-
 // starts the banner timer
 function startbanner(delay)
 {
@@ -684,100 +676,88 @@ function reload()
 </script>
 
 
-  <table align='left'
-        border=0
-        cellpadding=0
-        cellspacing=0>
-   <tr>
-     <td>
-       <form name='deff'
-         target='_blank'
-         action='http://www.google.com/search'
-         method='get'
-         onsubmit="return def();">
-       <nobr>
-       <script type='text/Jscript'>
-<!--
-document.write(
-  (multiline ? '<textarea ' : '<input ')
-  + 'name=q '
-  + 'type=text '
-  + 'style="top:-100; display: none;" '
-  + 'class=txtfld '
-  + 'onfocus=clr() '
-  + 'ondragstart="selfdrag=true;" '
-  + 'ondragend="selfdrag=false;" '
-  + 'ondragover=dodragover() '
-  + 'ondrop=dodrop() '
-  + 'onblur=rst() '
-  + 'onhelp=showpop() '
-  + (calStart ? 'ondblclick' : 'oncontextmenu') + '="return showcal();" '
-  + 'onkeydown="return okd();" '
-  + 'onkeypress="return okp();" '
-  + 'value="" '
-  + 'cols=20 '
-  + 'rows=1 '
-  + 'maxlength=256 '
-  + 'tabindex=0 '
-  + 'autocomplete=' + (autocomplete ? 'on' : 'off')
-  + (multiline ? "></textarea>" : ">"));
+<table align='left'
+      border=0
+      cellpadding=0
+      cellspacing=0>
+  <tr>
+    <td>
+    <form name='deff'
+       target='_blank'
+       action='http://www.google.com/search'
+       method='get'
+       onsubmit="return def();">
+      <nobr>
+      <script type='text/jscript'>
+        <!--
+        document.write(
+          (multiline ? '<textarea ' : '<input ')
+          + 'name=q '
+          + 'type=text '
+          + 'style="top:-100; display: none;" '
+          + 'class=txtfld '
+          + 'onfocus=clr() '
+          + 'ondragstart="selfdrag=true;" '
+          + 'ondragend="selfdrag=false;" '
+          + 'ondragover=dodragover() '
+          + 'ondrop=dodrop() '
+          + 'onblur=rst() '
+          + 'onhelp=showpop() '
+          + (calStart ? 'ondblclick' : 'oncontextmenu') + '="return showcal();" '
+          + 'onkeydown="return okd();" '
+          + 'onkeypress="return okp();" '
+          + 'value="" '
+          + 'cols=20 '
+          + 'rows=1 '
+          + 'maxlength=256 '
+          + 'tabindex=0 '
+          + 'autocomplete=' + (autocomplete ? 'on' : 'off')
+          + (multiline ? "></textarea>" : ">"));
 
-dopopup = (ie_version >= 5.5);
-
-if (dopopup)
-{
-  document.write(
-    "<input class=gobutton type=button"
-  + "       name=gobutton"
-  + "       value=&raquo;"
-  + "       onmousedown=this.className='mdgobutton';showpop();"
-  + "       ondblclick=showpop();"
-  + "       oncontextmenu=\"return showcal();\""
-  + "       onmouseup=this.className='mogobutton'"
-  + "       onmouseover=this.className='mogobutton'"
-  + "       onmouseout=this.className='gobutton'"
-  + "       style='top:-100'"
-  + "       tabindex=-1>");
-}
--->
-        </script>
+        if (dopopup)
+        {
+          document.write(
+            "<input class=gobutton type=button"
+          + "       name=gobutton"
+          + "       value=&raquo;"
+          + "       onmousedown=this.className='mdgobutton';showpop();"
+          + "       ondblclick=showpop();"
+          + "       oncontextmenu=\"return showcal();\""
+          + "       onmouseup=this.className='mogobutton'"
+          + "       onmouseover=this.className='mogobutton'"
+          + "       onmouseout=this.className='gobutton'"
+          + "       style='top:-100'"
+          + "       tabindex=-1>");
+        }
+        -->
+      </script>
       </nobr>
-     </form>
-   </td>
+    </form>
+    </td>
   </tr>
   <tr>
-   <td id='info' style='display:none'>
-    <img width=0 height=36><br>
-    <b><a style='text-decoration:none;color:black' href='http://www.dqsd.net/' target='_blank' tabindex='-1'>
-      Dave's Quick Search Deskbar</a></b>
-    <br>
-    Designed to be placed on the Windows taskbar.<br>
-    For documentation,
-    <a href="about:" onclick="about(); return false;" tabindex=-1>click here</a>.
-   </td>
+    <td id='info' style='display:none'>
+      <img width=0 height=36><br>
+        <b><a style='text-decoration:none;color:black' href='http://www.dqsd.net/' target='_blank' tabindex='-1'>
+        Dave's Quick Search Deskbar</a></b>
+      <br>
+        Designed to be placed on the Windows taskbar.<br>
+        For documentation,
+        <a href="about:" onclick="about(); return false;" tabindex=-1>click here</a>.
+    </td>
   </tr>
- </table>
+</table>
 
-<script type='text/Jscript' src="version.js"></script>
-<script type='text/Jscript' src="tools.js"></script>
-<script type='text/Jscript' src="strings.js"></script>
-<script type='text/Jscript' src="loader.js"></script>
-<script type='text/Jscript' src="history.js"></script>
-<script type='text/Jscript' src="calculate.js"></script>
-<script type='text/Jscript' src="translate.js"></script>
-<script type='text/Jscript' src="clock.js"></script>
-<script type='text/Jscript' src="calendar.js"></script>
-<script defer type='text/Jscript' src="defer_tools.js"></script>
-<script defer type='text/Jscript' src="helpbox.js"></script>
+<script type='text/jscript' src="loader.js"></script>
+<script type='text/jscript' src="history.js"></script>
+<script type='text/jscript' src="calculate.js"></script>
+<script type='text/jscript' src="translate.js"></script>
+<script type='text/jscript' src="clock.js"></script>
+<script type='text/jscript' src="calendar.js"></script>
+<script defer type='text/jscript' src="defer_tools.js"></script>
+<script defer type='text/jscript' src="helpbox.js"></script>
 
-<script type='text/Jscript'>
-// show localized title string
-document.title=local(SEARCH_TITLE);
-
-
-// eliminate Go button if window is narrow
-gowidth = -1;
-textheight = -1;
+<script type='text/jscript'>
 
 function handleResize()
 {
@@ -847,8 +827,6 @@ function handleResize()
   if (clockrunning)
      paintclock();
 }
-
-var keyboardHook;
 
 function postStartup()
 {
