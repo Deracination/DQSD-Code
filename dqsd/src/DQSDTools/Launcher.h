@@ -82,6 +82,7 @@ public:
 	STDMETHOD(MapKeyCode)(long lVKCode, long lCharCode);
 
 public:
+	STDMETHOD(RefreshTrayIcons)();
 	STDMETHOD(ShutdownBar)(LPDISPATCH pDispDocument );
 	STDMETHOD(get_VersionIsCorrect)(int v1, int v2, int v3, int v4, /*[out, retval]*/ VARIANT_BOOL *pVal);
 	STDMETHOD(SetSite)(IUnknown* pUnkSite);

@@ -30,6 +30,7 @@ import "ocidl.idl";
 		[id(11), helpstring("Map a virtual key code to a character code to be sent to the DQSD bar")] HRESULT MapKeyCode(long lVKCode, long lCharCode);
 		[propget, id(12), helpstring("Check if the DLL is of at least the specified version")] HRESULT VersionIsCorrect(int v1, int v2, int v3, int v4, [out, retval] VARIANT_BOOL *pVal);
 		[id(14), helpstring("method ShutdownBar")] HRESULT ShutdownBar([in] LPDISPATCH pDispDocument);
+		[id(15), helpstring("Attempt to refresh taskbar tray icons")] HRESULT RefreshTrayIcons();
 	};
 	[
 		object, 

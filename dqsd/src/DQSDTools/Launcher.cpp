@@ -597,3 +597,15 @@ STDMETHODIMP CLauncher::ShutdownBar(LPDISPATCH pDispDocument)
 
 	return Error(_T("Failed to shut DQSD bar"), IID_ILauncher, E_FAIL);
 }
+
+STDMETHODIMP CLauncher::RefreshTrayIcons()
+{
+	static DWORD result;
+	UINT msg = ::RegisterWindowMessage(_T("TaskbarCreated"));
+
+	ATLTRACE("DQSDTools: Refreshing tray icons (msg 0x%x)\n", msg);
+
+	::SendMessageTimeout(HWND_BROADCAST, msg, 0, 0, SMTO_ABORTIFHUNG, 1000, &result);
+
+	return S_OK;
+}

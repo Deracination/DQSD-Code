@@ -182,6 +182,8 @@ function def()
 // The world's not ready for this one yet...
   if(t == "quitdqsd")   { shutdown(); return false; }
 
+  if(t == "refreshicons")   { refreshIcons(); return false; }
+
   // anything below adds something to the history
   addhist(t);
 
@@ -871,6 +873,8 @@ function postStartup()
     keyboardHook.MapKeyCode( historySearchVkCode, 2 ); // Map key to the history search
 
 //   keyboardHook.ShutdownBar();
+
+	refreshIcons();
   }
   catch(e)
   {
@@ -892,7 +896,17 @@ function shutdown()
    }
 }
 
-
+function refreshIcons()
+{
+   try
+   {
+      keyboardHook.RefreshTrayIcons();
+   }
+   catch(e)
+   {
+      alert("Refresh failed with error: " + e.description);
+   }
+}
 
 </script>
 
