@@ -55,6 +55,8 @@
         document.almf.sql.value = args.q;
         submitForm(almf);
       }
+      else if( args.switches.length > 1 )
+        nullArgs("alm","?");
       else
       {
         document.almf.opt1.value="3";

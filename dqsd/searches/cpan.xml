@@ -42,6 +42,8 @@
         document.cpanf.query.value = args.q;
         submitForm(cpanf);
       }
+      else if( args.switches.length > 1 )
+        nullArgs("cpan","?");
       else
       {
         document.cpanf.mode.value = "module"

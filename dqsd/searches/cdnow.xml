@@ -46,6 +46,8 @@
         document.cdnowf.string.value = args.q;
         submitForm(cdnowf);
       }
+      else if( args.switches.length > 1 )
+        nullArgs("cdnow","?");
       else
       {
         document.cdnowf.index.value = "a";
