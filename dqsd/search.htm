@@ -147,6 +147,7 @@ The deskbar is customizable and completely open-source.
 // configuration settings
 
 defaultsearch="goo";           // google is the default search
+defaultcal="yhocal";           // yahoo is the default calendar
 
 clock=true;                    // set to false to remove clock
 clockdelay=5000;               // clock will appear after 5 secs
@@ -331,10 +332,16 @@ catch (e)  // Gracefully ignore problems creating the control.
 // Open a search window either with the default browser or with IE
 function openSearchWindow(url)
 {
+  openNamedSearchWindow(url, "_blank");
+}
+
+// Open a search window in an existing frame
+function openNamedSearchWindow(url, name)
+{
   if (useExternalBrowser && DQSDLauncher)
     DQSDLauncher.OpenDocument(url);
   else 
-    window.open(url);
+    window.open(url, name);
 }
 
 // Submit a form either with the default browser or with IE
@@ -3202,10 +3209,63 @@ function movecal(nMths)
 
 function opencal(d)
 {
-  // For now, let's use the yahoo calendar...
-  d = Math.floor(d / 60 / 60 / 24 / 1000) * 60 * 60 * 24;
-  openSearchWindow("http://calendar.yahoo.com/srt:0/?v=0&t=" + d);
+  if (defaultcal)
+  {
+    eval(defaultcal + '(' + d + ')');
+  }
 }
+
+function yhocal(dat)
+{
+  // For now, let's use the yahoo calendar...
+  dat = Math.floor(dat / 60 / 60 / 24 / 1000) * 60 * 60 * 24;
+  openNamedSearchWindow("http://calendar.yahoo.com/srt:0/?v=0&t=" + dat, "dqsdcal");
+}
+
+function msncal(dat)
+{
+  var dobj = new Date(dat);
+  var yy = dobj.getYear();
+  if (yy < 100) yy += 1900;
+  openNamedSearchWindow("http://calendar.msn.com/calendar/isapi.dll?calendarView=day&day=" + dobj.getDate() + "&month=" + (dobj.getMonth()+1) + "&year=" + yy, "dqsdcal");
+}
+
+function nsccal(dat)
+{
+  var dobj = new Date(dat);
+  var yy = dobj.getYear();
+  if (yy < 100) yy += 1900;
+  openNamedSearchWindow("http://calendar.netscape.com/cgi-bin/gx.cgi/AppLogic+DayGridView?_Date=" + (dobj.getMonth() + 1) + "/" + dobj.getDate() + "/" + yy, "dqsdcal");
+}
+
+function aolcal(dat)
+{
+  var dobj = new Date(dat);
+  var yy = dobj.getYear();
+  if (yy < 100) yy += 1900;
+  openNamedSearchWindow("http://calendar.aol.com/cgi-bin/gx.cgi/AppLogic+DayGridView?_Date=" + (dobj.getMonth() + 1) + "/" + dobj.getDate() + "/" + yy, "dqsdcal");
+}
+
+function mycal(dat)
+{
+  var dobj = new Date(dat);
+  var yy = dobj.getYear();
+  if (yy < 100) yy += 1900;
+  openNamedSearchWindow("http://www.mycalendar.com/?act=thisday&curdate=" + (dobj.getMonth() + 1) + "/" + dobj.getDate() + "/" + yy, "dqsdcal");
+}
+
+
+function evcal(dat)
+{
+  var dobj = new Date(dat);
+  var yy = dobj.getYear();
+  if (yy < 100) yy += 1900;
+  openNamedSearchWindow("http://www.evite.com/welcome?date=" + (dobj.getMonth() + 1) + "%2F" + dobj.getDate() + "%2F" + yy, "dqsdcal");
+}
+
+
+
+
 
 function buildcal()
 {
@@ -3227,17 +3287,17 @@ function buildcal()
   var TR_end = '</TR>';
   var day_start = '<TD width=14.2857%><CENTER>';
   var day_end = '</CENTER></TD>';
-  function highlight_start(d) { return '<TD style=cursor:default;background-color:window onmouseover=this.style.background="highlight";this.style.color="highlighttext"; onmouseout=this.style.background="window";this.style.color="menutext" onmouseup=parent.opencal(' + d + ');><B><CENTER>'; }
+  function highlight_start(d) { return '<TD style=cursor:default;background-color:window' + (defaultcal ? ' onmouseover=this.style.background="highlight";this.style.color="highlighttext"; onmouseout=this.style.background="window";this.style.color="menutext" onmouseup=parent.opencal(' + d + ');' : '') + '><B><CENTER>'; }
   var highlight_end   = '</CENTER></B></TD>';
-  function gray_start(d) { return '<TD style=cursor:default;color:graytext onmouseover=this.style.background="highlight";this.style.color="highlighttext"; onmouseout=this.style.background="menu";this.style.color="graytext" onmouseup=parent.opencal(' + d + ');><CENTER>'; }
+  function gray_start(d) { return '<TD style=cursor:default;color:graytext' + (defaultcal ? ' onmouseover=this.style.background="highlight";this.style.color="highlighttext"; onmouseout=this.style.background="menu";this.style.color="graytext" onmouseup=parent.opencal(' + d + ');' : '') + '><CENTER>'; }
   var gray_end   = '</CENTER></TD>';
-  function TD_start(d) { return '<TD style=cursor:default onmouseover=this.style.background="highlight";this.style.color="highlighttext"; onmouseout=this.style.background="menu";this.style.color="menutext" onmouseup=parent.opencal(' + d + ');><CENTER>'; }
+  function TD_start(d) { return '<TD style=cursor:default ' + (defaultcal ? ' onmouseover=this.style.background="highlight";this.style.color="highlighttext"; onmouseout=this.style.background="menu";this.style.color="menutext" onmouseup=parent.opencal(' + d + ');' : '') + '><CENTER>'; }
   var TD_end = '</CENTER></TD>';
 
   cal = '<TABLE WIDTH=100% HEIGHT=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR style=font:menu>';
   cal += '<TD><TABLE WIDTH=100% HEIGHT=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR style=font:menu>';
-  cal += '<TD title="show previous year" style="cursor:hand" onmouseup="parent.movecal(-12);" onmouseover=this.style.background="highlight";this.style.color="highlighttext"; onmouseout=this.style.background="menu";this.style.color="menutext">&nbsp;&lt;</TD>';
-  cal += '<TD title="show previous month" style="cursor:hand" onmouseup="parent.movecal(-1);"  onmouseover=this.style.background="highlight";this.style.color="highlighttext"; onmouseout=this.style.background="menu";this.style.color="menutext">&nbsp;&lt;</TD></TR></TABLE></TD>';
+  cal += '<TD title="show previous year" style="cursor:hand" onmouseup="parent.movecal(-12);" onmouseover=this.style.background="highlight";this.style.color="highlighttext"; onmouseout=this.style.background="menu";this.style.color="menutext"><CENTER>&nbsp;&lt;</CENTER></TD>';
+  cal += '<TD title="show previous month" style="cursor:hand" onmouseup="parent.movecal(-1);"  onmouseover=this.style.background="highlight";this.style.color="highlighttext"; onmouseout=this.style.background="menu";this.style.color="menutext"><CENTER>&nbsp;&lt;</CENTER></TD></TR></TABLE></TD>';
   if (weekday <0)
   {
     cal += '<TD COLSPAN="' + (DAYS_OF_WEEK - 2) + '" title="go to today" style="cursor:hand" onmouseup="parent.Calendar=new Date();parent.movecal(0);" onmouseover=this.style.background="highlight";this.style.color="highlighttext"; onmouseout=this.style.background="menu";this.style.color="menutext"><CENTER>';
@@ -3253,8 +3313,8 @@ function buildcal()
   }
   cal += TD_end;
   cal += '<TD><TABLE WIDTH=100% HEIGHT=100% BORDER=0 CELLSPACING=0 CELLPADDING=0><TR style=font:menu>';
-  cal += '<TD title="show next month" style="cursor:hand" onmouseup="parent.movecal(+1);" onmouseover=this.style.background="highlight";this.style.color="highlighttext"; onmouseout=this.style.background="menu";this.style.color="menutext">&gt;&nbsp;</TD>';
-  cal += '<TD title="show next year" style="cursor:hand" onmouseup="parent.movecal(+12);" onmouseover=this.style.background="highlight";this.style.color="highlighttext"; onmouseout=this.style.background="menu";this.style.color="menutext">&gt;&nbsp;</TD></TR></TABLE></TD>';
+  cal += '<TD title="show next month" style="cursor:hand" onmouseup="parent.movecal(+1);" onmouseover=this.style.background="highlight";this.style.color="highlighttext"; onmouseout=this.style.background="menu";this.style.color="menutext"><CENTER>&gt;&nbsp;</CENTER></TD>';
+  cal += '<TD title="show next year" style="cursor:hand" onmouseup="parent.movecal(+12);" onmouseover=this.style.background="highlight";this.style.color="highlighttext"; onmouseout=this.style.background="menu";this.style.color="menutext"><CENTER>&gt;&nbsp;</CENTER></TD></TR></TABLE></TD>';
   cal += TR_end + TR_start;
 
   //printing day labels

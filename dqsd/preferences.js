@@ -8,6 +8,17 @@ clockright=true;     // clock is right-justified
 clockgray=false;     // true draws clock on gray background
 clocklongwidth=139;  // long form is used if this pixel width is exceeded
 
+defaultcal="yhocal"; // use yahoo calendar
+
+// Note: valid calendars include
+// yhocal - Yahoo Calendar
+// msncal - MSN Calendar
+// aolcal - AOL Calendar
+// nsccal - Netscape Calendar
+// mycal  - MyCalendar.com
+// evcal  - Evite.com
+
+
 // The clock is formatted according to the following format strings:
 
 clocklongform=" EEE d MMM yyyy h:mm A ";
