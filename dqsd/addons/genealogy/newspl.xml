@@ -1,0 +1,35 @@
+<search function="newspl">
+  <name>NewspaperLinks</name>
+  <category>Genealogy<category>Newspapers</category></category>
+  <contributor>Brent Beardsley</contributor>
+  <link>http://www.newspaperlinks.com</link>
+  <email></email>
+  <description>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>newspl mi</td></tr>
+      <tr><td>newspl alaska</td></tr>
+    </table>
+  </description>
+  <form name="newsplf"
+        method="post"
+        action="http://www.newspaperlinks.com/newspaperlist.cfm">
+    <input type="hidden" name="goSearch" value="true" />
+    <input type="hidden" name="temp_mid" value="us0" />
+    <input type="hidden" name="mid" value="http://www.newspaperlinks.com/home.cfm?mid=us0" />
+    <input type="hidden" name="cid" value="" />
+    <input type="hidden" name="sid" value="" />
+    <input type="hidden" name="search" value="" />
+  </form>
+  <script src="addons/genealogy/genealogy_lib.js"></script>
+  <script><![CDATA[
+    function newspl(q)
+    {
+      if( nullArgs("newspl", q) )
+        return;
+
+      document.newsplf.sid.value = genealogy_lookup_place_abbrev(genealogy_parse_place_state(q)).toUpperCase();
+      submitForm(newsplf);
+    }
+  ]]></script>
+</search>
