@@ -379,7 +379,7 @@ function loadAddons()
   try
   {
     // Get searches in the 'addons' subdirectory
-    var addonDirs = getFiles( "addons\\*" ).split('\n');
+    var addonDirs = getFolders( "addons\\*" ).split('\n');
     
     for ( var i = 0; i < addonDirs.length; i++ )
     {

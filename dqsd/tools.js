@@ -110,6 +110,24 @@ function getFiles(directory)
     throw "Unable to get files from directory " + directory;
 }
 
+function getFolders(directory)
+{
+  if (ensureLauncher())
+  {
+    try
+    {
+      return DQSDLauncher.GetFolders(directory);
+    }
+    catch (e)
+    {
+      return getFiles(directory);
+    }
+  }
+  else
+    throw "Unable to get folders from directory " + directory;
+}
+
+
 // read tab-delimited, or pipe (|) delimited file
 function readTabDelimitedFile(filename)
 {
