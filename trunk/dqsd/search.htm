@@ -97,6 +97,7 @@ localsearchurl="localsearch.xml"; // local search file
 helptime=8500;                 // help message shows for 8.5 secs
 launchmode=2;                  // 0 = use ie; 1 = default browser; 2 = auto
 reuseBrowserWindowMode=0;      // 0=new window always; 1=single window for all; 2=single window for each search type
+multiLine=true;				   // Use a mult-line search field instead of a single line
 
 language=navigator.userLanguage.substr(0,2);
 
@@ -696,7 +697,10 @@ function reload()
          onsubmit="return def();">
      <td>
      <nobr>
-     <textarea name=q
+     <script>
+     document.write(multiLine ? '<textarea ' : '<input ');
+     </script>
+      name=q
             type=text
             class=txtfld
             onfocus=clr()
@@ -715,7 +719,12 @@ function reload()
             maxlength=256
             tabindex=0
             style=top:-100
-            autocomplete=off></textarea><script>
+            autocomplete=off>
+      <script>
+      document.write(multiLine ? '</textarea>' : '');
+      </script>
+
+      <script>
 dopopup = (ie_version >= 5.5);
 
 if (dopopup)
