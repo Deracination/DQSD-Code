@@ -54,6 +54,7 @@ Modified Searches
 * gg - removed /keys, which no longer works. Encodes all queries as UTF-8, per Google's new default (Kim Gräsman)
 * fv - Fixed so it works with new FlightView form (Kim Gräsman)
 * comx - Added /userfriendly and /joyoftech (Monty Scroggins and Gregory Krohne)
+* racetv - Added timezone shifts in the schedule times (Monty Scroggins).
 
 Removed Searches
 * nwtsr and httpd replaced by whats (Kim Gräsman)
