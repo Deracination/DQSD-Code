@@ -32,7 +32,7 @@
   <script><![CDATA[
     function hs(q)
     {
-      var args = parseArgs(q, "asp, c, java, javascript, php, perl, python, tools, utils, rh, remotehosts, xml");
+      var args = parseArgs(q, "asp, c, java, javascript, php, perl, python, remotehosts, tools, xml");
       if( q == "" )
         openSearchWindow("http://www.hotscripts.com/");
       else if( args.switches.length == 1 )
@@ -46,7 +46,6 @@
           case "php": document.hsf.category.value = "PHP"; break;
           case "perl": document.hsf.category.value = "Perl"; break;
           case "python": document.hsf.category.value = "Python"; break;
-          case "rh": 
           case "remotehosts": document.hsf.category.value = "Remote_Hosts"; break;
           case "tools":
           case "utils": document.hsf.category.value = "Tools"; break;

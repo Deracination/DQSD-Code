@@ -65,13 +65,13 @@
             document.zdnf.ca.value = "2020";
             break;
         }
-        document.zdnf.titlename.value = q;
+        document.zdnf.titlename.value = args.q;
         submitForm(zdnf);
       }
       else
       {
         document.zdnf.ca.value = "2001";
-        document.zdnf.titlename.value = q;
+        document.zdnf.titlename.value = args.q;
         submitForm(zdnf);
       }
    }
