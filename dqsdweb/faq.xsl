@@ -24,20 +24,9 @@
 
             <div class="lastupdate">
                <nobr>Last updated: 
-<script>
-              
-<xsl:comment>                document.write( getDisplayDate( document.lastModified ) );
-              </xsl:comment>
-
-
-
-
-
-
-
-
-            
-</script>
+				<script>
+				document.write( getDisplayDate( document.lastModified ) );
+				</script>
                </nobr>
             </div>
 
