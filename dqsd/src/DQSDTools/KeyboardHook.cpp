@@ -87,6 +87,14 @@ static LRESULT CALLBACK KeyboardProc(
 				return 0;
 			}
 		}
+		else if(wParam == VK_F8)
+		{
+			if ( bKeyDown )
+			{
+				SendMessage(GetFocus(), WM_CHAR, 'B'-'@', 0);
+				return 0;
+			}
+		}
 		else
 		{
 			_RPT1(_CRT_WARN, _T("Hook: %d\n"), wParam);
