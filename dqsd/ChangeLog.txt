@@ -2,7 +2,8 @@
 
 New Searches
 
-* 
+* que - Interface with Queue (http://www.irondust.com/queue) from Nick Tornow
+* wotsit - Programmers File Format Reference
 
 Modified Searches
 
@@ -22,6 +23,7 @@ Bug Fixes
 * If you have an old localprefs.js that sets defaultsearch to a nonexistent search, gg is used.
 * A local alias can now override a search name.  This was causing a script error
   when the menu was invoked.
+* Search forms can now have input elements named "target" without causing a script error
 
 -- What's new for 3.0.0.22 (beta)
 
