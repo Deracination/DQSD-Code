@@ -779,7 +779,7 @@ STDMETHODIMP CMenuBuilder::EnableMenuItem(UINT position, VARIANT* pvParentMenu)
 		hmenu = pvParentMenu->intVal ? (HMENU)pvParentMenu->intVal : (HMENU)m_hMain;
 	}
 
-	BOOL bResult = ::EnableMenuItem(hmenu, position, MF_BYPOSITION | MF_ENABLED);
+	::EnableMenuItem(hmenu, position, MF_BYPOSITION | MF_ENABLED);
 	return S_OK;
 }
 
@@ -793,6 +793,6 @@ STDMETHODIMP CMenuBuilder::DisableMenuItem(UINT position, VARIANT* pvParentMenu)
 	{
 		hmenu = pvParentMenu->intVal ? (HMENU)pvParentMenu->intVal : (HMENU)m_hMain;
 	}
-	BOOL bResult = ::EnableMenuItem(hmenu, position, MF_BYPOSITION | MF_GRAYED);
+	::EnableMenuItem(hmenu, position, MF_BYPOSITION | MF_GRAYED);
 	return S_OK;
 }

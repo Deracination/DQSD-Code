@@ -669,7 +669,7 @@ STDMETHODIMP CLauncher::GetSpecialFolderLocation(BSTR bstrSpecialFolder, BSTR* p
 	
 	// map from special folder name to id
 	BOOL bFound = FALSE;
-	int nFolder;
+	int nFolder = 0;
 	LPCTSTR ptstrSpecialFolder = W2CT(bstrSpecialFolder);
 	for (int i=0; i < SpecialFoldersCount; i++) {
 		PSPECIAL_FOLDER_MAP_T pMap = &SpecialFolders[i];
