@@ -15,6 +15,7 @@
       <tr><td>/theater</td><td> - </td><td>what's playing in a theater (theater or city name)</td></tr>
       <tr><td>/news</td><td> - </td><td>latest news about somebody, a movie, a company</td></tr>
       <tr><td>/bio</td><td> - </td><td>the biography of a celebrity</td></tr>
+      <tr><td>/video</td><td> - </td><td>video sources (trailers, extracts, making ofs...)</td></tr>
     </table>
     <div class="helpboxDescLabels">Examples:</div>
     <table class="helpboxDescTable">
@@ -24,8 +25,9 @@
       <tr><td>acine jean-pierre melville /bywith</td></tr>
       <tr><td>acine meilleurs copains /movie</td></tr>
       <tr><td>acine le grand rex /theater</td></tr>
-      <tr><td>acine reno /news</td></tr>
+      <tr><td>acine cruise /news</td></tr>
       <tr><td>acine adjani /bio</td></tr>
+      <tr><td>acine shrek /video</td></tr>
     </table>
   </description>
   <category>Entertainment</category>
@@ -60,7 +62,7 @@
   <script><![CDATA[
     function acine(q)
     {
-      var args = parseArgs(q, "place, bywith, movie, theater, news, bio, zip");
+      var args = parseArgs(q, "place, bywith, movie, theater, news, bio, video, zip");
       var mode, typerech="0";
       
       //eliminate no query, or more than 1 switch, or ? cases
@@ -94,6 +96,7 @@
         case "theater": typerech = "8"; break;
         case "news": typerech = "12"; break;
         case "bio": typerech = "10"; break;
+        case "video": typerech = "7"; break;
 
         case "zip": break;
             
