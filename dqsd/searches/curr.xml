@@ -3,13 +3,13 @@
   <description>
     Convert from one currency to another using the Universal Currency Converter.<br/>
     <div class="helpboxDescLabels">Usage:</div>
-  	<table class="helpboxDescTable">
-  		<tr><td>curr /from:&lt;<i>curr1</i>&gt; /to:&lt;<i>curr2</i>&gt; &lt;<i>amount</i>&gt;</td></tr>
-   	</table>
+  <table class="helpboxDescTable">
+  <tr><td>curr /from:&lt;<i>curr1</i>&gt; /to:&lt;<i>curr2</i>&gt; &lt;<i>amount</i>&gt;</td></tr>
+   </table>
     <div class="helpboxDescLabels">Example:</div>
     <table class="helpboxDescTable">
-  		<tr><td>curr /from:usd /to:gbp 100</td></tr>
-  	</table>
+  <tr><td>curr /from:usd /to:gbp 100</td></tr>
+  </table>
   </description>
   <category>Reference</category>
   <link>http://www.xe.com/ucc/</link>
@@ -24,74 +24,69 @@
   </form>
   
   <script><![CDATA[
-  	currency_regex = /(\d+)(\s*)([A-Za-z]{3})\s*([<>]|to)\s*([A-Za-z]{3})/i; 
-  	
-  	// the auto-detection routine used for special handling of strings entered into the
-  	// toolbar that look like currency conversions.
-  	function autodetect_currency(q)
-  	{
-  	  // detect strings that look like ABC<CBA or ABC>CBA upper or lower case
-  	  var res = q.match(currency_regex);
-  	  if (res) 
-      {
-  	    curr2(q);
-  	    return true;
-  	  }
-  	}
+  currency_regex = /^\s*(\.(\d+)|(\d+(\.\d*)?))(\s*)([A-Za-z]{3})\s*([<>]|to)\s*([A-Za-z]{3})\s*$/i; 
   
-  	function curr2(q)
+  // the auto-detection routine used for special handling of strings entered into the
+  // toolbar that look like currency conversions.
+  function autodetect_currency(q)
+  {
+    // detect strings that look like ABC<CBA or ABC>CBA upper or lower case
+    var res = q.match(currency_regex);
+    if (res) 
     {
-  	  if( nullArgs("curr", q) )
-  	  	return false;
+      curr2(q);
+      return true;
+    }
+  }
+  
+  function curr2(q)
+  {
+    if( nullArgs("curr", q) )
+      return false;
+
+    // detect strings that look like ABC<CBA or ABC>CBA upper or lower case
+    var res = q.match(currency_regex);
+    if (res) 
+    {
+      if (res[7] == '<') 
+      {
+        document.currf.From.value=res[8].toUpperCase();
+        document.currf.To.value=res[6].toUpperCase();
+      }
       else
-  	  {
-        // detect strings that look like ABC<CBA or ABC>CBA upper or lower case
-	      var res = q.match(currency_regex);
-	      if (res) 
-        {
-          if (res[4] == '<') 
-          {
-	          document.currf.From.value=res[5].toUpperCase();
-	          document.currf.To.value=res[3].toUpperCase();
-	        }
-          else
-          {
-	          document.currf.From.value=res[3].toUpperCase();
-	          document.currf.To.value=res[5].toUpperCase();
-	        }
-          document.currf.Amount.value=res[1];
-	        submitForm(currf);
-        }
+      {
+        document.currf.From.value=res[6].toUpperCase();
+        document.currf.To.value=res[8].toUpperCase();
+      }
+      document.currf.Amount.value=res[1];
+      submitForm(currf);
+    }
+  }
+  
+  function curr(q)
+  {
+    if ( nullArgs("curr", q) )
+      return false;
+  
+    var func_name = "curr";
+    var switch_list = new Array("from", "to");
+    var args = parseArgs(q, switch_list);
+  
+    // check if the required switches are set
+    for (var j = 0; j < switch_list.length; j++)
+    {
+      if (typeof args.switch_val[switch_list[j]] == "undefined" || args.switch_val[switch_list[j]] == "")
+      {
+        alert(func_name + ":  /" + switch_list[j] + " switch must be entered.  Type '" + func_name + " ?' to see instructions");
+        return false;
       }
     }
   
-  	function curr(q)
-  	{
-  		if ( nullArgs("curr", q) )
-  			return false;
-  
-  		else
-  		{
-  			var func_name = "curr";
-  			var switch_list = new Array("from", "to");
-  			var args = parseArgs(q, switch_list);
-  
-  			// check if the required switches are set
-  			for (var j = 0; j < switch_list.length; j++)
-  			{
-  				if ( typeof args.switch_val[ switch_list[j] ] == "undefined" || args.switch_val[ switch_list[j] ] == "" )
-  				{
-  					alert(func_name + ":  /" + switch_list[j] + " switch must be entered.  Type '" + func_name + " ?' to see instructions");
-  					return false;
-  				}
-  			}
-  
-  			currf.Amount.value = args.q;
-  			currf.From.value = args.switch_val["from"].toUpperCase();
-  			currf.To.value = args.switch_val["to"].toUpperCase();
-  			submitForm(currf);
-  			return true;
-  		}
-    }
+    currf.Amount.value = args.q;
+    currf.From.value = args.switch_val["from"].toUpperCase();
+    currf.To.value = args.switch_val["to"].toUpperCase();
+    submitForm(currf);
+    return true;
+  }
   ]]></script>
 </search>
