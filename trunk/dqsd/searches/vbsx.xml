@@ -35,7 +35,10 @@
   <category>Computers<category>Programming</category></category>
   <link>http://www.ReliableAnswers.com/x/dqsd/</link>
   <contributor>Shawn K. Hall</contributor>
-  
+  <requirements>
+    <scripting>vbscript</scripting>
+  </requirements>
+
   <form name="vbsxf"
     action="http://www.ReliableAnswers.com/x/dqsd/"
     method="post">

@@ -28,6 +28,9 @@
   <category>Functions</category>
   <link>http://www.ReliableAnswers.com/x/dqsd/</link>
   <contributor>Shawn K. Hall</contributor>
+  <requirements>
+    <scripting>vbscript</scripting>
+  </requirements>
   
   <form name="wrpf"
     action="http://www.ReliableAnswers.com/x/dqsd/"

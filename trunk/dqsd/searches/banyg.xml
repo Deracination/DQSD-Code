@@ -33,6 +33,7 @@
   <form name="banygf" 
         method="post" 
         action="http://reliableanswers.com/yg/ban/default.aspx">
+    <input type="hidden" name="__VIEWSTATE" value="dDwtMzQyOTg2NDAxOzs+IRMeR1g+CEykCOte3j9jolDSUXg=" />
     <input type="hidden" name="login" value="" />
     <input type="hidden" name="passwd" value="" />
     <input type="hidden" name="banrem" value="ban" />
@@ -59,17 +60,25 @@
     <input type="hidden" name=".chkP" value="Y" />
     <input type="hidden" name=".done" value="http://groups.yahoo.com/group/xYG/" />
     <input type="hidden" name=".save" value="Process" />
-    <input type="hidden" name="dqsd" value="banyg" />
   </form>
 
   <script><![CDATA[
   function banyg(q)
   {
     if( nullArgs( "banyg", q ) ) return false;
-    var banygYahooID     = strYahooID;
-    var banygYahooPwd    = strYahooPwd;
-    var banygYahooGroups = strYahooGroups;
-    var banygYahooBanRem = strYahooBanRem;
+    var banygYahooID  = "";
+    var banygYahooPwd = "";
+    var banygYahooGroups = "";
+    var banygYahooBanRem = "ban";
+    if (typeof strYahooID     != "undefined")
+      banygYahooID     = strYahooID;
+    if (typeof strYahooPwd    != "undefined")
+      banygYahooPwd    = strYahooPwd;
+    if (typeof strYahooGroups != "undefined")
+      banygYahooGroups = strYahooGroups;
+    if (typeof strYahooBanRem != "undefined")
+      banygYahooBanRem = strYahooBanRem;
+
     var banygYahooEmails = q;
     var args = parseArgs(q, "y, id, p, pw, pwd, g, grp, groups, l, lists, r, rem, remove, b, ban, e, eml, email, emails");
     for (var i = 0; i < args.switches.length; i++)
