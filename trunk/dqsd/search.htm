@@ -58,7 +58,7 @@ The deskbar is customizable and completely open-source.
 
 * Shortcuts are defined in <a href="view-source:localaliases.txt">localaliases.txt</a>.
 
-* You can add new searches by adding new XML files to the <a target="_blank" href="file:localsearches">localsearches</a> subdirectory.
+* You can add new searches by adding new XML files to the <a target="_blank" href="file:searches">searches</a> subdirectory.
 
 * After editing the code, type "!" in the search bar to reload it.
 
@@ -75,7 +75,7 @@ Finally, the following are default key bindings.  Some of these can be customize
 
 <tr><td class='keyname'>Ctrl-Enter</td><td class='desc'>Adds www. prefix and/or .com suffix to string if necessary and launches URL.  Similar to the IE key-binding.</td></tr>
 
-<tr><td class='keyname'>Shift-Enter</td><td class='desc'>Always opens a new window for the search regardless of the reuseBrowserWindowMode setting.  This works only when IE is the default browser.</td></tr>
+<tr><td class='keyname'>Shift-Enter</td><td class='desc'>Always opens a new window for the search regardless of the reuseWindowMode setting.  This works only when IE is the default browser.</td></tr>
 
 <tr><td class='keyname'>Ctrl-B, F8</td><td class='desc'>Search back through the search history for the current text</td></tr>
 
@@ -86,6 +86,8 @@ Finally, the following are default key bindings.  Some of these can be customize
 <tr><td class='keyname'>Ctrl-P, Up</td><td class='desc'>Display previous search</td></tr>
 
 <tr><td class='keyname'>Ctrl-N, Down</td><td class='desc'>Display next search</td></tr>
+
+<tr><td class='keyname'>Ctrl-Del</td><td class='desc'>Clear the search history</td></tr>
 
 <tr><td class='keyname'>Shift [drag-n-drop]</td><td class='desc'>When dragging text to the search bar, if the shift key is held down when dropping the text the default search won't be automatically invoked.</td></tr>
 </table>
@@ -152,15 +154,6 @@ document.title=local(SEARCH_TITLE);
 
 <script type='text/jscript'>
 
-// register key press hooks so addons, etc can handle keypresses
-function registerKeypressHook( keypressHook )
-{
-  if ( typeof keypressHooks == 'undefined' )
-    keypressHooks = new Array();
-
-  keypressHooks.push( keypressHook );
-}
-
 // def() called when the user hits "enter" in the textbox
 function def()
 {
@@ -184,6 +177,8 @@ function def()
 
   // exclamation mark only: refresh
   if (t == "!")         { reload(); return false; }
+
+  if (t == "clrhist")         { clearHistory(); return false; }
 
   // Shutdown DQSD and kick the explorer to unload us
 // The world's not ready for this one yet...
@@ -419,7 +414,6 @@ function okp()
   }
   searchPrefix = ''; // reset the search command history search
 
-  var retval = false;
   switch(window.event.keyCode)
   {
     // Return
@@ -488,7 +482,13 @@ function okp()
 
     // Special forwarded value of DEL from keyboard hook (it's actually a CTRL-D)
     case 4:
-      document.execCommand("Delete");
+      // CTRL+DEL to clear history
+      if (window.event.ctrlKey) {
+        clearHistory();
+      }
+      else {
+        document.execCommand("Delete");
+      }
       break;
 
     // CTRL-P or UP for previous history
@@ -501,22 +501,13 @@ function okp()
       prevnext(1);
       break;
 
+
     default:
-      retval = true;
+      return true;
   }
 
-  if (retval == true && typeof keypressHooks != 'undefined') {
-    // process keypress hooks
-    for ( var i = 0; i < keypressHooks.length; i++ ) {
-      if (keypressHooks[i]( window.event ) == true) {
-        // keypress hook returns true if it handled the keypress
-        retval = false;
-        break;
-      }
-    }
-  }
-
-  return retval;
+  // If we get here, we've come through a 'break' in the switch - so the key's been handled
+  return false;
 }
 
 // onkeydown: handle the up and down arrow keys for history
