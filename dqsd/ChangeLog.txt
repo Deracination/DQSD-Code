@@ -27,12 +27,14 @@ Modified Searches
 * mac - added help display if a question mark or no args are specified
 * rgb - added ability to accept hex numbers and decimal numbers separated with non-digits, display hsl in the output
 * md5 - select the generated md5 hash
+* gg - added /froogle, /glossary, and /keys
 
 Bug Fixes
 
 * Depending on the configured editor, spaces in the config file path would cause problems.  Fix by quoting filename.
 * Fix from Gregg Tavares for "[ 643945 ] Does not run in Japanese Windows":
   http://sourceforge.net/tracker/index.php?func=detail&aid=643945&group_id=42081&atid=432066
+* Fixed google search with 'mode' qualifers and no search string to go the home page for that mode (news, groups, etc.)
 
 
 -- What's new for 3.1.4.4 beta (October 24, 2002)

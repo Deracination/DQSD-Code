@@ -9,7 +9,10 @@
       <tr><td>/groups</td><td> - </td><td>Search Google's newsgroup archive.</td></tr>
       <tr><td>/directory</td><td> - </td><td>Search Google's copy of the DMOZ open directory.</td></tr>
       <tr><td>/images</td><td> - </td><td>Search for images.</td></tr>
-      <tr><td>/news</td><td> - </td><td>Search for news (<i>warning : google news still in beta, .com only, english only mode</i>).</td></tr>
+      <tr><td>/news</td><td> - </td><td>Search for news (<i>warning : still in beta, .com/english only</i>).</td></tr>
+      <tr><td>/froogle</td><td> - </td><td>Find products for sale online(<i>warning : still in beta, .com/english only</i>).</td></tr>
+      <tr><td>/glossary</td><td> - </td><td>Find definitions for words, phrases and acronyms(<i>warning : still in beta, .com/english only</i>).</td></tr>
+      <tr><td>/keys</td><td> - </td><td>Navigate search results without using your mouse (<i>warning : still in beta, .com/english only</i>).</td></tr>
       <tr><td>/since:days</td><td> - </td><td>Search pages based on when they were indexed.  Use either a number to specify when, or 
         <div style="padding: 0 0 0 20px">
           /since:t - indexed today<br/>   
@@ -44,6 +47,8 @@
     <table class="helpboxDescTable">
       <tr><td>gg dqsd /images</td></tr>
       <tr><td>gg tony blair /uk /directory</td></tr>
+      <tr><td>gg /froogle cd clock radio</td></tr>
+      <tr><td>gg /glossary wrt</td></tr>
     </table>
   </description>
   <category>Search the Web</category>
@@ -104,30 +109,33 @@
     <input type="hidden" name="datemod" value="0" />
   </form>
 
+  <form name="ggf_froogle"
+        method="get"
+        action="http://froogle.google.com/froogle">
+    <input type="hidden" name="q" value="" />
+  </form>
+
+  <form name="ggf_glossary"
+        method="get"
+        action="http://labs.google.com/glossary">
+    <input type="hidden" name="q" value="" />
+  </form>
+
+  <form name="ggf_keys"
+        method="get"
+        action="http://labs.google.com/cgi-bin/keys">
+    <input type="hidden" name="q" value="" />
+  </form>
 
   <script><![CDATA[
-
-
-    function julian(Y,M,D) {
-    //inspired from http://pacific.commerce.ubc.ca/xr/julian.html
-    //(did not check it toroughly, but seems to work)
-       with (Math) {
-         jd=367*Y-floor(7*(Y+floor((M+9)/12))/4)
-           -floor(3*(floor((Y+(M-9)/7)/100)+1)/4)
-           +floor(275*M/9)+D+1721028;
-       }
-       return jd;
-    }
-
-
     function gg(q)
     //by MLL: warning : news service is still in beta stage, so URLs below may change
     {
-      var args = parseArgs(q, "ifl, advanced, groups, directory, images, news, since, cache, related, link, local, canada, deutschland, france, italia, uk, language");
+      var args = parseArgs(q, "ifl, advanced, groups, directory, images, news, since, cache, related, link, froogle, glossary, keys, local, canada, deutschland, france, italia, uk, language");
       var mode, local, local_meta = "", local_tld = "com", msglang = "";
       
-      if( nullArgs( "gg", args.q ) ) return false;
-      
+      if( nullArgs( "gg", q ) ) return false;
+
       // Establish the locale and mode the search will run in.
       if( args.switches.length > 0 )
       {
@@ -147,7 +155,7 @@
             case "since": break;
             
             default:
-              if(mode) 
+              if(mode) // multiple 'modes' have been specified
               { 
                 nullArgs("gg","?"); 
                 return false; 
@@ -174,17 +182,24 @@
       
       // No parameters, so go to the appropriate web page.
       if( args.q == "" )
+      {
+        var googleURL = "http://www.google." + local_tld;
         switch( mode )
         {
-          case "ifl": openSearchWindow("http://www.google." + local_tld + "/help/features.html#lucky"); return;
-          case "advanced": openSearchWindow("http://www.google." + local_tld + "/advanced_search"); return;
-          case "images": openSearchWindow("http://images.google." + local_tld); return;
-          case "directory": openSearchWindow("http://images.google." + local_tld + "/dirhp"); return;
-          case "groups": openSearchWindow("http://www.google." + local_tld + "/grphp"); return;
-          case "news": openSearchWindow("http://www.google." + local_tld + "/news"); return;
-          default: openSearchWindow("http://www.google." + local_tld); return;
+          case "ifl":       googleURL = "http://www.google." + local_tld + "/help/features.html#lucky"; break;
+          case "advanced":  googleURL = "http://www.google." + local_tld + "/advanced_search"; break;
+          case "images":    googleURL = "http://images.google." + local_tld; break;
+          case "directory": googleURL = "http://images.google." + local_tld + "/dirhp"; break;
+          case "groups":    googleURL = "http://www.google." + local_tld + "/grphp"; break;
+          case "news":      googleURL = "http://www.google." + local_tld + "/news"; break;
+          case "froogle":   googleURL = "http://froogle.google.com/froogle"; break;
+          case "glossary":  googleURL = "http://labs.google.com/glossary"; break;
+          case "keys":      googleURL = "http://labs.google.com/keys"; break;
+          default: 
         }
-      
+        openSearchWindow( googleURL ); 
+        return;
+      }
       else
       {
         //apply the daterange specification
@@ -275,6 +290,18 @@
               document.ggf_news.hl.value = msglang;
               submitForm(ggf_news);
               break;
+            case "froogle":
+              document.ggf_froogle.q.value = args.q;
+              submitForm(ggf_froogle);
+              break;
+            case "glossary":
+              document.ggf_glossary.q.value = args.q;
+              submitForm(ggf_glossary);
+              break;
+            case "keys":
+              document.ggf_keys.q.value = args.q;
+              submitForm(ggf_keys);
+              break;
           }
         }
         else
@@ -286,12 +313,23 @@
         }
       }
     }
+
+    function julian(Y,M,D) {
+    //inspired from http://pacific.commerce.ubc.ca/xr/julian.html
+    //(did not check it toroughly, but seems to work)
+       with (Math) {
+         jd=367*Y-floor(7*(Y+floor((M+9)/12))/4)
+           -floor(3*(floor((Y+(M-9)/7)/100)+1)/4)
+           +floor(275*M/9)+D+1721028;
+       }
+       return jd;
+    }
   ]]></script>
 
   <copyright>
-	Copyright (c) 2002 David Bau
-	Distributed under the terms of the
-	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  Copyright (c) 2002 David Bau
+  Distributed under the terms of the
+  GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
   </copyright>
 </search>
 
