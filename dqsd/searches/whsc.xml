@@ -1,0 +1,23 @@
+<search function="whsc">
+  <name>whois.sc</name>
+  <description>Find a wealth of info on a domain name, IP address etc...
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>whsc dqsd.net</td></tr>
+      <tr><td>whsc 68.80.224.11</td></tr>
+      <tr><td>whsc microsoft</td></tr>
+    </table>
+  </description>
+  <category>Computers<category>Networking</category></category>
+  <link>http://www.whois.sc/</link>
+  <contributor>MLL</contributor>
+  <script><![CDATA[
+    function whsc(q)
+    {
+      if( nullArgs( "whsc", q ) ) return;
+
+      openSearchWindow("http://www.whois.sc/search/?q="+q);
+    }
+  ]]></script>
+</search>
+

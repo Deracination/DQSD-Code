@@ -13,6 +13,7 @@ New Searches
 * dmda - Searches DevelopMentor's list archives (Kim Gräsman)
 * ly - Lycos search (Lincoln Jackson)
 * olk - onelook.com search (Steven Ourada)
+* whsc - search whois.sc
 
 Modified Searches
 
