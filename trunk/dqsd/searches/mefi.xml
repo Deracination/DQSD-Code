@@ -1,0 +1,46 @@
+<search function="mefi">
+  <name>MetaFilter</name>
+  <description>
+    MetaFilter is a community blog that anyone can contribute links or comments to<br/>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>mefi pancakes</td></tr>
+  	</table>
+  </description>
+  <category>News</category>
+  <link>http://www.Metafilter.com/</link>
+  <contributor>Pete Matthews</contributor>
+  <email>Pete_at_monkeyspannered.com</email>
+  
+  <form name="search"
+      action="http://www.metafilter.com/searched.mefi">
+      <input type="hidden" name="option" value="2"/>
+      <input type="hidden" name="date" value="3"/>
+      <input type="hidden" name="search" value="" />
+  </form>
+  
+  <script><![CDATA[
+    function mefi(q)
+    {
+      if( nullArgs("sw",q) )
+        return false;
+      else
+      {
+        document.search.search.value = q;
+        submitForm(search);
+      }
+    }
+  ]]></script>
+
+  <copyright>
+	Copyright (c) 2002 David Bau
+	Distributed under the terms of the
+	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+
+  <copyright>
+	Copyright (c) 2002 David Bau
+	Distributed under the terms of the
+	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>
