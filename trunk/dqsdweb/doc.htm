@@ -1,4 +1,5 @@
 <html>
+<head>
 <title>Dave's Quick Search Taskbar Toolbar Deskbar</title>
 <style>
 body {
@@ -15,11 +16,16 @@ background: lightgreen;
 background: skyblue;
 }
 </style>
+</head>
 <body>
 <center><h2><nobr>Dave's Quick Search <wbr>Taskbar Toolbar Deskbar</nobr></h2></center>
 
 <center><a href="dqsd.exe"><b>Download Version 2.5.7 Now!</b></a>
 (<a href="#new">What's New</a>)</center>
+
+<p style="font-size: 8pt">
+(Stay tuned... The all new and improved version 3.0 will be released any day now!)
+</p>
 
 <p><a href="http://www.google.com/">Google</a>
 does it right: they
@@ -69,7 +75,7 @@ definitions with a "<b>colon:</b>", get Bloomberg stock quotes
 like this "<b>msft intc csco$</b>", and find Switchboard
 phone numbers by saying "<b>Lois Lane#</b>".
 You can search real "<b>news.</b>" search "<b>newsgroups,</b>"
-check "<b>weather*</b>", or "<b>comparison shop$$</b>". 
+check "<b>weather*</b>", or "<b>comparison shop$$</b>".
 There's a built in calculator when you need to know
 "<b>pow(1.0625, 30)</b>" is 6.1640785. And so on.
 
@@ -116,7 +122,7 @@ then right-click on the empty gray part of the taskbar, and select the menu
 Toolbars > Add Quick Search...
 
 <center><p><img src=addquicksearch.gif></p></center>
- 
+
 <p>If "<em>Add Quick Search</em>" doesn't appear, wait ten seconds and
 try again - Windows takes a few seconds to discover the existence of
 a newly installed deskbar.
@@ -133,7 +139,7 @@ want to get rid of the little caption that says "Search" by
 right-clicking it and unchecking "Show Title".  And since the search
 bar includes its own clock, you probably want to remove the
 system clock from the system tray by right-clicking in the empty space
-in the taskbar and selecting "Properties", then unchecking "Show Clock".  
+in the taskbar and selecting "Properties", then unchecking "Show Clock".
 
 <center><p><table><tr><td><img src=notitle.gif></td>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
@@ -176,7 +182,7 @@ URL, and if it's on your E: drive, there's yet another one.
 <h3>Support</h3>
 
 <p>There is a new discussion forum that Glenn Carr has set up
-for support, ideas, and enhancements. If you've got any, please 
+for support, ideas, and enhancements. If you've got any, please
 <a href="mailto:dqsd-users@lists.sourceforge.net">email</a> them
 to the dqsd-users@lists.sourceforge.net group. (An archive
 of the list is
@@ -580,10 +586,10 @@ contributions from the discussion group:
 new functionality and reorganizes the code significantly:
 
 <ol>
-<li>Thanks to help from Monty Scroggins, all the searches are moved 
-into search.xml now. Search.htm is much smaller. the format of 
-search.xml has changed. Shortcuts are no longer defined in this file; 
-instead, they are defined in aliases.txt, and the menu layout is in 
+<li>Thanks to help from Monty Scroggins, all the searches are moved
+into search.xml now. Search.htm is much smaller. the format of
+search.xml has changed. Shortcuts are no longer defined in this file;
+instead, they are defined in aliases.txt, and the menu layout is in
 menu.txt. Search.htm is exploded out to several different .js files.
 <li>Some of the default mnemonics for searches have been changed. Every
 search can now be done via a command like "gg" for google. The
@@ -603,11 +609,11 @@ all the matching searches. "!!" redoes the most recent search.
 be at the end.)
 <li>The input box is multiline instead of single-line (this feature
 was suggested by Mark Zeren).
-<li>There is an option (buttonalign="left") to move the button to the 
+<li>There is an option (buttonalign="left") to move the button to the
 left (as requested by Mitch G).
-<li>Erik Hartmann contributed an aol IM shortcut a long time ago that 
-I've finally gotten around to pasting in. I haven't tested it because 
-I haven't installed AIM yet - and this should be changed so that it 
+<li>Erik Hartmann contributed an aol IM shortcut a long time ago that
+I've finally gotten around to pasting in. I haven't tested it because
+I haven't installed AIM yet - and this should be changed so that it
 behaves better when aim isn't installed.
 <li>There are two new UK-oriented searches (suggested by David Brake):
 cdo searchs Cambridge Dictionary Online for a British view of the
@@ -615,7 +621,7 @@ English language, and mm searches multimap.com for addresses in the
 UK.
 <li>Reginald Braithwaite-Lee contributed a bomis.com search
 <li>Stephen Granade contributed a better bartleby.com quotations search
-<li>Volker Wick contributed Fahrenheit to Celsius (and vice versa) 
+<li>Volker Wick contributed Fahrenheit to Celsius (and vice versa)
 conversion
 <li>Monty Scroggins contributed a hotscripts search for searching
 for resources for various scripting languages simultaneously.
@@ -672,7 +678,7 @@ control, which was introduced to us by Monty Scroggins.
 And Glenn came up with a way to handle POSTed forms through
 temporary files, so that changes to search.xml are minimal.)
 <li>Sidney Chong added a terrific calendar (that I hacked
-up a bit). Get it by right-clicking in the deskbar. 
+up a bit). Get it by right-clicking in the deskbar.
 Preferences.js can be used to customize it to launch yahoo,
 msn, aol, netscape, mycalendar, or evite calendar services.
 <li>Volker Wick contributed a bugfix in the ctrl-enter code.
