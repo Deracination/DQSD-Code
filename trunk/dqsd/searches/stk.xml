@@ -1,7 +1,7 @@
 <search function="stk">
   <name>Bloomberg Stock Quotes</name>
   <description>Bloomberg quotes by symbol: "stk WMT S"</description>
-  <category>News</category>
+  <category>Finance</category>
   <link>href="http://www.bloomberg.com/</link>
   <form name="stkf"
         action="http://quote.bloomberg.com/analytics/bquote.cgi"
@@ -21,4 +21,4 @@
     }
   }
   ]]></script>
-</search>  
+</search>
