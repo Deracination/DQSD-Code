@@ -17,14 +17,13 @@ function calculate(expr)
             abs(round(answer * 1e+7) - answer * 1e+7) < 0.001)
           answer = round(answer * 1e+7)/1e+7;
       }
-      document.deff.q.value = answer;
+	  setSearchWindowText(answer, true);
     }
   }
   catch (exception)
   {
-    document.deff.q.value = expr + "=ERR=";
+    setSearchWindowText(expr + "=ERR=", true);
   }
-  document.deff.q.createTextRange().select();
 
   savevars();
 }

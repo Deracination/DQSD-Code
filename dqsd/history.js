@@ -152,7 +152,7 @@ function histsearch( t, shift )
       if ( histarray[i].match( re ) )
       {
         histcurr = i;
-        document.deff.q.value = currhistedit();
+        setSearchWindowText(currhistedit());
         return;
       }
     }
@@ -162,7 +162,7 @@ function histsearch( t, shift )
       if ( histarray[i].match( re ) )
       {
         histcurr = i;
-        document.deff.q.value = currhistedit();
+        setSearchWindowText(currhistedit());
         return;
       }
     }
@@ -174,7 +174,7 @@ function histsearch( t, shift )
       if ( histarray[i].match( re ) )
       {
         histcurr = i;
-        document.deff.q.value = currhistedit();
+        setSearchWindowText(currhistedit());
         return;
       }
     }
@@ -184,7 +184,7 @@ function histsearch( t, shift )
       if ( histarray[i].match( re ) )
       {
         histcurr = i;
-        document.deff.q.value = currhistedit();
+        setSearchWindowText(currhistedit());
         return;
       }
     }
@@ -219,7 +219,7 @@ function recent()
     if (histcurr == histarray.length) return false;
   }
 
-  document.deff.q.value = currhistedit();
+  setSearchWindowText(currhistedit());
   return true;
 }
 

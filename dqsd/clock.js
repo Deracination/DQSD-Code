@@ -131,7 +131,7 @@ function paintclock()
   document.selection.empty();
   document.deff.q.className = "clock";
   var now = new Date();
-  document.deff.q.value = formatdate(now, clockformat);
+  setSearchWindowText(formatdate(now, clockformat));
   if (typeof clocktooltipform != "undefined" && clocktooltipform != "")
   {
     document.deff.q.title = formatdate(now, clocktooltipform);
