@@ -72,6 +72,21 @@
     <h2><xsl:value-of select="."/></h2>
   </xsl:template>
   
+  <xsl:template match="key_bindings">
+  	  <table class="keybindings">
+			<tbody>
+				<tr>
+					<th class="keyname">Key</th><th>Description</th>
+				</tr>
+				<xsl:apply-templates select="key" />
+			</tbody>
+		</table>
+  </xsl:template>
+  
+  <xsl:template match="key">
+    <tr><td class="keyname"><xsl:value-of select="@name"/></td><td><xsl:value-of select="."/></td></tr>
+  </xsl:template>
+  
   <xsl:template match="html:*">
     <xsl:element name="{local-name()}">
       <xsl:for-each select="@*">
@@ -84,7 +99,6 @@
   </xsl:template>
 
   <xsl:template match="/faq_document/faqs">
-
       <xsl:for-each select="category">
         <div class="category">
           <xsl:variable name="category_num" select="position()"/>

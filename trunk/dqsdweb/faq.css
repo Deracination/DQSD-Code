@@ -8,15 +8,19 @@ H1, H2, H3 {
 	margin-bottom: 0px;
 }
 
-TABLE.keybindings TD {
+TABLE.keybindings TD, TABLE.keybindings TH {
 	vertical-align: top;
 	font-size: 70%;
 }
-TD.keyname {
+TH.keyname, TD.keyname {
 	white-space: nowrap;
 	font-weight: bold;
 	padding-right: 1em;
 	text-align: right;
+}
+TABLE.keybindings TH {
+	font-weight: normal;
+	font-style: italic;
 }
 
 A, A:Visited {
