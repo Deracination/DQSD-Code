@@ -32,19 +32,15 @@ public:
 	BOOL IncludeComments() { return m_bIncludeComments; }
 	void IncludeComments( BOOL bIncludeComments ) { m_bIncludeComments = bIncludeComments; }
 
-	string FormBackgroundColor() { return m_strFormBackgroundColor; }
-	void FormBackgroundColor( const string& rstrFormBackgroundColor ) { m_strFormBackgroundColor = rstrFormBackgroundColor; }
-
-	string FormBorder() { return m_strFormBorder; }
-	void FormBorder( const string& rstrFormBorder ) { m_strFormBorder = rstrFormBorder; }
+	string FormCSS() { return m_strFormCSS; }
+	void FormCSS( const string& rstrFormCSS ) { m_strFormCSS = rstrFormCSS; }
 
 private:
 	BOOL m_bEditResults;
 	string m_strEditor;
 	BOOL m_bWarnNotActive;
 	BOOL m_bIncludeComments;
-	string m_strFormBackgroundColor;
-	string m_strFormBorder;
+	string m_strFormCSS;
 };
 
 #endif // !defined(AFX_OPTIONS_H__C61B51EE_2914_446B_AF73_EA7F41FD447D__INCLUDED_)

@@ -132,7 +132,7 @@ LRESULT CDQSDWizardDlg::OnInitDialog(UINT uMsg, WPARAM wParam, LPARAM lParam, BO
 		ctlFormList2.SendMessage( LVM_INSERTCOLUMN, 0, (LPARAM)&lvc );
 		
 		lvc.pszText = _T("action");
-		lvc.cx = 430;
+		lvc.cx = 420;
 		lvc.iOrder = 1;
 		ctlFormList2.SendMessage( LVM_INSERTCOLUMN, 1, (LPARAM)&lvc );
 
@@ -285,8 +285,7 @@ LRESULT CDQSDWizardDlg::OnFormListItemChanged(int idCtrl, LPNMHDR pNMHDR, BOOL& 
 			COptions options;
 			options.Load();
 
-			m_spSelectedStyle->put_backgroundColor( _variant_t( _bstr_t( options.FormBackgroundColor().c_str() ) ) );
-			m_spSelectedStyle->put_border( _bstr_t( options.FormBorder().c_str() ) );
+			m_spSelectedStyle->put_cssText( _bstr_t( options.FormCSS().c_str() ) );
 		}
 		else if ( pNMListView->uNewState == 0 )
 		{
@@ -300,39 +299,6 @@ LRESULT CDQSDWizardDlg::OnFormListItemChanged(int idCtrl, LPNMHDR pNMHDR, BOOL& 
 		{
 			return 1;
 		}
-
-#if 0
-		// Get the current FORM selection and display it's HTML
-		// just to help the user know which form to use
-
-		const int cSelected = ctlFormList.SendMessage( LVM_GETSELECTEDCOUNT, 0, 0 );
-		if ( cSelected > 0 )
-		{
-			const int cItems = ctlFormList.SendMessage( LVM_GETITEMCOUNT, 0, 0 );
-			for ( int i = 0; i < cItems; i++ )
-			{
-				if ( ctlFormList.SendMessage( LVM_GETITEMSTATE, i, LVIS_SELECTED ) )
-				{
-					LVITEM lvi;
-					memset( &lvi, 0, sizeof lvi );
-					lvi.mask = LVIF_PARAM;
-					lvi.iItem = i;
-					ctlFormList.SendMessage( LVM_GETITEM, i, (LPARAM)&lvi );
-					CComPtr< IHTMLElement >* pspForm = reinterpret_cast<CComPtr< IHTMLElement >*>(lvi.lParam);
-
-					BSTR bstr = NULL;
-					if ( SUCCEEDED( (*pspForm)->get_outerHTML( &bstr ) ) )
-					{
-						CWindow ctlForm = GetDlgItem( IDC_FormFields );
-						ctlForm.SetWindowText( W2T( bstr ) );
-						::SysFreeString( bstr );
-					}
-
-					return 1;
-				}
-			}
-		}
-#endif
 
 	}
 	catch ( ... )
@@ -438,6 +404,12 @@ LRESULT CDQSDWizardDlg::OnOK(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHa
 		strSearchFile += _T("\r\n  <description>");
 		if ( _tcslen( W2T( bstr ) ) )
 			strSearchFile += _T("\r\n  ") + EscapeXML( string( W2T( bstr ) ) );
+
+		vector< string > vecSwitches;
+		string strSwitchesCode = GetSwitches( vecSwitches );
+
+		strSearchFile += GetExamples( vecSwitches );
+		
 		strSearchFile += _T("\r\n  </description>");
 		::SysFreeString( bstr );
 
@@ -450,7 +422,7 @@ LRESULT CDQSDWizardDlg::OnOK(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHa
 							"\r\n      if( nullArgs(\"") + strSearchName + _T("\", q) )"
 							"\r\n        return;");
 		
-		strSearchFile += GetSwitches();
+		strSearchFile += strSwitchesCode;
 
 		strSearchFile += strFormScript;
     
@@ -873,7 +845,7 @@ string CDQSDWizardDlg::GetAbsoluteActionPath( _variant_t& varAction )
 	return _T("");
 }
 
-string CDQSDWizardDlg::GetSwitches()
+string CDQSDWizardDlg::GetSwitches( vector< string >& rvecSwitches )
 {
 	USES_CONVERSION;
 
@@ -935,6 +907,8 @@ string CDQSDWizardDlg::GetSwitches()
 
 			while ( pszSwitch )
 			{
+				rvecSwitches.push_back( pszSwitch );
+
 				strSwitches += string( pszDelim ) + string( pszSwitch );
 				strCase += _T("\r\n      //    case \"") + string( pszSwitch ) + _T("\":"
 							  "\r\n      //      break;");
@@ -959,6 +933,38 @@ string CDQSDWizardDlg::GetSwitches()
 	}
 
 	return strSwitches;
+}
+
+string CDQSDWizardDlg::GetExamples( vector< string >& rvecSwitches )
+{
+	string strExamples = _T("");
+
+	BOOL bIncludeDescSwitches = CWindow( GetDlgItem( IDC_DescSwitches ) ).SendMessage( BM_GETCHECK, 0, 0 ) == BST_CHECKED;
+	BOOL bIncludeDescExamples = CWindow( GetDlgItem( IDC_DescExamples ) ).SendMessage( BM_GETCHECK, 0, 0 ) == BST_CHECKED;
+
+	if ( bIncludeDescSwitches && rvecSwitches.size() > 0 )
+	{
+		strExamples =  _T("\r\n    <div class=\"helpboxDescLabels\">Switches:</div>"
+						  "\r\n    <table class=\"helpboxDescTable\">");
+		
+		vector< string >::iterator it = rvecSwitches.begin();
+		for ( ; it != rvecSwitches.end(); it++ )
+		{
+			strExamples += 
+					   _T("\r\n      <tr><td>/") + *it + _T("</td><td> - </td><td></td></tr>");
+		}
+		strExamples += _T("\r\n    </table>");
+	}
+
+	if ( bIncludeDescExamples )
+	{
+		strExamples += _T("\r\n    <div class=\"helpboxDescLabels\">Examples:</div>"
+						  "\r\n    <table class=\"helpboxDescTable\">"
+						  "\r\n      <tr><td></td></tr>"
+						  "\r\n      <tr><td></td></tr>"
+						  "\r\n    </table>");
+	}
+	return strExamples;
 }
 
 string CDQSDWizardDlg::EscapeXML( string& xml )
@@ -1000,6 +1006,10 @@ void CDQSDWizardDlg::SaveFields()
 
 		rk.SetValue( CWindow( GetDlgItem( IDC_MutuallyExclusiveSwitches ) ).SendMessage( BM_GETCHECK, 0, 0 ) == BST_CHECKED, _T("MutuallyExclusiveSwitches") );
 
+		rk.SetValue( CWindow( GetDlgItem( IDC_DescSwitches ) ).SendMessage( BM_GETCHECK, 0, 0 ) == BST_CHECKED, _T("IncludeDescriptionSwitches") );
+
+		rk.SetValue( CWindow( GetDlgItem( IDC_DescExamples ) ).SendMessage( BM_GETCHECK, 0, 0 ) == BST_CHECKED, _T("IncludeDescriptionExamples") );
+
 		rk.Close();
 	}
 	catch ( ... )
@@ -1035,6 +1045,14 @@ void CDQSDWizardDlg::RestoreFields()
 			DWORD dwValue = 1;
 			rk.QueryValue( dwValue, _T("IncludeComments") );
 			CWindow( GetDlgItem( IDC_MutuallyExclusiveSwitches ) ).SendMessage( BM_SETCHECK, dwValue ? BST_CHECKED : BST_UNCHECKED );
+
+			dwValue = 1;
+			rk.QueryValue( dwValue, _T("IncludeDescriptionSwitches") );
+			CWindow( GetDlgItem( IDC_DescSwitches ) ).SendMessage( BM_SETCHECK, dwValue ? BST_CHECKED : BST_UNCHECKED );
+
+			dwValue = 1;
+			rk.QueryValue( dwValue, _T("IncludeDescriptionExamples") );
+			CWindow( GetDlgItem( IDC_DescExamples ) ).SendMessage( BM_SETCHECK, dwValue ? BST_CHECKED : BST_UNCHECKED );
 		}
 		else
 		{
@@ -1150,6 +1168,7 @@ LRESULT CDQSDWizardDlg::OnChangeSwitches(WORD wNotifyCode, WORD wID, HWND hWndCt
 	::GetWindowText( GetDlgItem( IDC_Switches ), szSwitches, LENGTHOF( szSwitches ) - 1 );
 
 	CWindow( GetDlgItem( IDC_MutuallyExclusiveSwitches ) ).EnableWindow( _tcslen( szSwitches ) > 0 );
+	CWindow( GetDlgItem( IDC_DescSwitches ) ).EnableWindow( _tcslen( szSwitches ) > 0 );
 
 	return 0;
 }
