@@ -24,6 +24,7 @@ import "ocidl.idl";
 		[id(5), helpstring("Return the contents of the specified file as a string")] HRESULT ReadFile([in] BSTR bstrFilename, [out,retval] BSTR* pbstrResult);
 		[id(6), helpstring("Write the string to the specified file")] HRESULT WriteFile([in] BSTR bstrFilename, [in] BSTR bstrValue);
 		[id(7), helpstring("Get protocol handler for specified protocol")] HRESULT GetProtocolHandler([in] BSTR bstrProtocol, [out,retval] BSTR* pbstrHandler);
+		[id(8), helpstring("Get list of files matching file spec")] HRESULT GetFiles([in] BSTR bstrFileSpec, [out,retval] BSTR* pbstrFiles);
 	};
 
 [
