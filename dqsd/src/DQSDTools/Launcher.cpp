@@ -361,14 +361,24 @@ STDMETHODIMP CLauncher::GetFiles(BSTR bstrFileSpec, BSTR *pbstrFiles)
 		return HRESULT_FROM_WIN32(::GetLastError());
 	}
 
-	CComBSTR bstrFiles( fd.cFileName );
+	CComBSTR bstrFiles;
+
+	// ??? Either I'm being stupid (likely) or FindFirstFile doesn't work as advertised (unlikely)
+	// but, it finds files like *.xml_sav as well as *.xml files.
+	LPCTSTR pszName = _tcsrchr( szFilename, _T('\\' ) ) ? _tcsrchr( szFilename, _T('\\' ) ) + 1 : szFilename;
+	if ( ::PathMatchSpec( fd.cFileName, pszName ) )
+		bstrFiles.Append( fd.cFileName );
 	while ( ::FindNextFile( handle, &fd ) )
 	{
 		if ( !_tcscmp( fd.cFileName, _T(".") ) || !_tcscmp( fd.cFileName, _T("..") ) )
 			continue;
 
-		bstrFiles.Append( _T("\n") );
-		bstrFiles.Append( fd.cFileName );
+		if ( ::PathMatchSpec( fd.cFileName, pszName ) )
+		{
+			if ( bstrFiles.Length() > 0 )
+				bstrFiles.Append( _T("\n") );
+			bstrFiles.Append( fd.cFileName );
+		}
 	}
 
 	*pbstrFiles = bstrFiles.Detach();
