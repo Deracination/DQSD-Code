@@ -4,7 +4,7 @@
     Goto GenWeb State web pages.<br/>
     <div class="helpboxDescLabels">Examples:</div>
     <table class="helpboxDescTable">
-      <tr><td>usgw mi</td></tr>
+      <tr><td>usgw berrien, mi</td></tr>
       <tr><td>usgw district of columbia</td></tr>
     </table>
   </description>
@@ -22,13 +22,106 @@
       if( nullArgs("usgw", q) )
         return false;
 
-      var links = genealogy_get_known_page_links("http://www.usgenweb.org/statelinkstext.html");
-      var search_place_num = genealogy_lookup_place(q);
-      if (search_place_num >= 0) {
-        openSearchWindow(links[search_place_num]);
-      } else {
-	openSearchWindow("http://www.usgenweb.org/statelinks-table.html");
+      if (!genealogy_check_lib_version("1.4")) {
+	return false;
       }
+
+      var state_search_url = 'http://www.usgenweb.org/statelinks-table.html';
+      var args = parseArgs(q, "map, table, list");
+      if (args.switches.length > 0) {
+	switch (args.switches[0].name) {
+	case 'map':
+	  state_search_url = 'http://www.usgenweb.org/statelinks.html';
+	  break;
+	case 'list':
+	  state_search_url = 'http://www.usgenweb.org/statelinkstext.html';
+	  break;
+	case 'table':
+	default:
+	  state_search_url = 'http://www.usgenweb.org/statelinks-table.html';
+	  break;
+	}
+      }
+
+      var search_url = "http://www.usgenweb.org/statelinks-table.html";
+      var state = genealogy_parse_place_state(args.q);
+      var county = genealogy_parse_place_county(args.q);
+      var links = genealogy_get_known_page_links(search_url);
+      var search_place_num = genealogy_lookup_place(state);
+      var page_src = null;
+      if (search_place_num >= 0) {
+        // got a valid state
+        search_url = links[search_place_num];
+	if (county.length > 0) {
+	  // has a county, too
+	  page_src = genealogy_webpage_get(search_url);
+	  links = genealogy_webpage_get_links(page_src);
+	  if (links.length == 1) {
+	    // if only one link assume it's a redirect
+	    genealogy_alert("only one link available assuming it's a redirect.");
+	    search_url = genealogy_build_url(search_url, genealogy_link_get_href(links[0]));
+	    page_src = genealogy_webpage_get(search_url);
+	    links = genealogy_webpage_get_links(page_src)
+	  }
+          var county_regex = new RegExp("^"+county+"( County)?", "i");
+	  genealogy_alert("looking for "+county);
+	  var matching_links = genealogy_links_get_matching_named_links(links, county_regex, null);
+	  if (matching_links.length > 0) {
+	    // found the county link
+	    search_url = genealogy_build_url(search_url, genealogy_link_get_href(matching_links[0]));		
+	  } else {
+	    // look for the county list page
+ 	    genealogy_alert("didn't find county so looking for county list page");
+	    var ignore_regex = new RegExp("\\bMap\\b", "i");
+	    var county_list_regex = new RegExp(
+		"("+
+		"Alphabetical List|"+
+		"County Alphabetical Index|"+
+		"County Sites|"+
+		"County List|"+
+		"County Links|"+
+		"County Table|"+
+		"County Listings|"+
+		"County Pages|"+
+		"County Selection|"+
+		"Counties Selection List|"+
+		"List of Counties|"+
+		"Ohio's 88 Counties|"+
+		"Parish Sites|"+
+		"Research by County|"+
+		"Select a (.*?)County|"+
+		"Table with (.*?)Links|"+
+		"Table Listing|"+
+		"Quick Links|"+
+		"^Counties( [A-Z]-[A-Z])?$|"+
+		"^List$|"+
+		"^Table version$"+
+		")",
+		"i"
+	    );
+	    matching_links = genealogy_links_get_matching_named_links(links, county_list_regex, ignore_regex);
+	    if (matching_links.length > 0) {
+	      // got the county list page now look for the county again
+	      search_url = genealogy_build_url(search_url, genealogy_link_get_href(matching_links[0]));		
+ 	      genealogy_alert("found county list page at "+search_url+" now looking for "+county);
+              page_src = genealogy_webpage_get(search_url);
+	      links = genealogy_webpage_get_links(page_src);
+	      matching_links = genealogy_links_get_matching_named_links(links, county_regex, null);
+	      if (matching_links.length > 0) {
+	        // got the county
+	        search_url = genealogy_build_url(search_url, genealogy_link_get_href(matching_links[0]));		
+	      } else {
+		genealogy_alert("couldn't find county - giving up.");
+	      }
+            } else {
+		genealogy_alert("couldn't find county list page - giving up.");
+	    }
+	  }
+	}
+      } else {
+        search_url = state_search_url;
+      }
+      openSearchWindow(search_url);
     }
     ]]>
   </script>

@@ -1,5 +1,5 @@
     var genealogy_debug = 0;
-    var genealogy_lib_version = "1.3";
+    var genealogy_lib_version = "1.4";
 
 	var genealogy_states = new Array(
 	"ALABAMA", "ALASKA", "ARIZONA", "ARKANSAS",
@@ -15,7 +15,7 @@
 	"NEBRASKA", "NEVADA", "NEW HAMPSHIRE", "NEW JERSEY", "NEW MEXICO", "NEW YORK", "NORTH CAROLINA", "NORTH DAKOTA",
 	"OHIO", "OKLAHOMA", "OREGON",
 	"PENNSYLVANIA",
-	"RHODE_ISLAND",
+	"RHODE ISLAND",
 	"SOUTH CAROLINA", "SOUTH DAKOTA",
 	"TENNESSEE", "TEXAS",
 	"UTAH", 
@@ -33,7 +33,7 @@
 	"ID", "IL", "IN", "IA",
 	"KS", "KY",
 	"LA",
-	"ME", "MD", "MA", "MI", "MN", "MI", "MS", "MT",
+	"ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT",
 	"NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND",
 	"OH", "OK", "OR", 
 	"PA",
@@ -58,13 +58,16 @@ function genealogy_trim(str)
    while (str.charAt(start) == ' ') {
 	   start++;
    }
+   if (start >= end)   {
+	   return "";
+   }
    while (str.charAt(end) == ' ') {
 	   end--;
    }
    if (start != 0 || end != str.length-1) {
 	   return str.substring(start, end+1);
    } else {
-		return str;
+       return str;
    }
 }
 
@@ -103,6 +106,13 @@ function genealogy_strip_tags(str)
 		start++;
 	}
 	return retval;
+}
+
+function genealogy_log(msg)
+{
+	if (genealogy_debug != null && genealogy_debug != 0) {
+  	  appendFile("genealogy.log", msg+"\r\n");
+	}
 }
 
 function genealogy_error(msg)
@@ -313,33 +323,109 @@ function genealogy_build_url(cur_url, link_url)
 				return link_url;
 			}
 		}
-	}
+	} else if (link_url.match("^#")) {
+		return cur_url + link_url;
+	} 
 
 	// it must be a relative link
 	var last_backslash = cur_url.lastIndexOf('/');
-	if (last_backslash > 5) {
-		// not the :// <-
+	var last_period = cur_url.lastIndexOf('.');
+	if (last_backslash > 6 && last_period > last_backslash) {
+		// not the :// and has a filename at the end of the url
 		return cur_url.substring(0, last_backslash+1)+link_url;
 	} else {
-		genealogy_error("Problem building url {cur_url: "+cur_url+", link_url: "+link_url);
-		return link_url;
+		if (last_backslash == cur_url.length-1) {
+			return cur_url+link_url;
+		} else {
+			return cur_url+"/"+link_url;
+		}
 	}
 
 }
-
-
 function genealogy_get_webpage(webpage_url, search_name, refresh_time)
 {
-	// if search_name not specified || refresh_time == 0 || search_name.cache does not exist || (current date - search_name.cache date) > refresh_time) Re-download from web
+	// TODO: caching - 
+	//   if search_name not specified || 
+	//      refresh_time == 0 || 
+	//      search_name.cache does not exist || 
+	//      (current date - search_name.cache date) > refresh_time)
+	//   then Re-download from web
+	return genealogy_webpage_get(webpage_url);
+}
+
+function genealogy_webpage_get(webpage_url)
+{
+	var xmlhttp = false;
+	try	{
+		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");		
+	} catch (e) {
+		xmlhttp = false;
+	}
+	if (!xmlhttp) {
+		return "";
+	}
+    xmlhttp.Open('GET',webpage_url,false);
+	try	{
+		xmlhttp.Send();
+	}
+	catch (e) {
+		xmlhttp = null;
+		return "";
+	}
+	var page_src = xmlhttp.responseText;
+	xmlhttp = null;
+	return page_src;
+}
+
+function genealogy_webpage_exists(webpage_url)
+{
 	var http_obj = new ActiveXObject("Microsoft.XMLHTTP");
-	http_obj.Open('GET',webpage_url,false);
-	http_obj.Send();
-	return http_obj.responseText;
+	http_obj.Open('HEAD',webpage_url,false);
+	try {
+		http_obj.Send();
+	}
+	catch (e) {
+		return false;
+	}
+	var status = http_obj.status;
+	http_obj = null;
+	return (status == 200) ? true : false;
+}
+
+function genealogy_webpage_get_links(webpage_src)
+{
+	var list = new Array();
+	var links_regex = new RegExp("<a (.*?)>.*?<\/a>", "gim");
+	var new_source = webpage_src.replace(/\r|\n/g, ' '); 
+	var link = null;
+	var i = 0;
+	while ( (link = links_regex.exec(new_source)) != null) {
+		list[i] = link[0];
+		i++;
+	}
+	return list;
+}
+
+function genealogy_links_get_matching_named_links(links, matching_regex, not_matching_regex)
+{
+	var list = new Array();
+	var j = 0;
+	for (var i=0; i < links.length; i++) {
+		var name = genealogy_link_get_name(links[i]);
+		var matching = (matching_regex == null || (matching_regex != null && matching_regex.test(name))) ? true : false;
+		var not_matching = (not_matching_regex == null || !not_matching_regex.test(name)) ? true : false;
+		genealogy_alert("name: "+name+", matching: "+matching+", not_matching: "+not_matching);
+		if (matching && not_matching) {
+			list[j] = links[i];
+			j++;
+		}
+	}
+	return list;
 }
 
 function genealogy_link_get_href(link)
 {
-	var links_regex = new RegExp("<a href=\"(.*?)\".*?>(.*?)<\/a>", "gim");
+	var links_regex = new RegExp("href=\"(.*?)\"", "gim");
 	var parts = links_regex.exec(link);
 	if (parts != null && parts.length > 1) {
 		return parts[1];
@@ -349,48 +435,33 @@ function genealogy_link_get_href(link)
 
 function genealogy_link_get_name(link)
 {
-	var links_regex = new RegExp("<a href=\"(.*?)\".*?>(.*?)<\/a>", "gim");
+	var links_regex = new RegExp("<a.*?>(.*?)<\/a>", "gim");
 	var parts = links_regex.exec(link);
-	if (parts != null && parts.length > 2) {
-		return parts[2];
+	if (parts != null && parts.length > 1) {
+		// replace <br> tags with space, strip rest of tags, replace &nbsp; with space, replace &amp; with &, replace multiple spaces with one space
+		var name = genealogy_trim(genealogy_strip_tags(parts[1].replace(/\<br\>/gim, " ")).replace(/&nbsp;/gim, " ").replace(/&amp;/gim, "&").replace(/\s{2,}/gim, " "));
+		return name;
 	}
 	return "";
 }
 
 function genealogy_get_page_links(webpage_source, matching_name)
 {
-	var matching_name_regex = null;
-	if (matching_name != null) {
-		matching_name_regex = new RegExp(matching_name, "i");
+	var links = genealogy_webpage_get_links(webpage_source);
+	if (matching_name != null && matching_name.length > 0){
+		return genealogy_links_get_matching_named_links(links, new RegExp(matching_name, "i"), null);
+	} else {
+		return links;
 	}
-	var links_regex = new RegExp("<a href=\"(.*?)\".*?>(.*?)<\/a>", "gim");
-	//var links_regex = new RegExp("<a.*?\/a>", "gim");
-	var link;
-	var arr = new Array();
-
-	// replace cr/lf with space for regex to work better
-	var new_source = webpage_source.replace(/\r|\n/g, ' '); 
-
-	// add links to array
-	var i = 0;
-	while ( (link = links_regex.exec(new_source)) != null) {
-		if (matching_name_regex != null) {
-			var link_name = link[2];
-			if (!link_name.match(matching_name_regex)) {
-				continue;
-			}
-		}
-		arr[i] = link[0];
-		i++;
-	}
-	return arr;
 }
 
 function genealogy_get_page_link_named(webpage_url, matching_name)
 {
 	var webpage = genealogy_get_webpage(webpage_url);
 	var links = genealogy_get_page_links(webpage, matching_name);
+	genealogy_log("done with genealogy_get_page_links for matching_name: "+matching_name);
 	if (links != null && links.length > 0) {
+		genealogy_log("calling genealogy_build_url for matching_name: "+matching_name);
 		return genealogy_build_url(webpage_url, genealogy_link_get_href(links[0]));
 	} else {
 		return "";
@@ -413,7 +484,7 @@ function genealogy_check_lib_version(required_version)
 			return true;
 		}
 	}
-	genealogy_error("This search requires version '"+required_version+" of genealogy_lib.js");
+	genealogy_error("This search requires version "+required_version+" of genealogy_lib.js");
 	return false;
 }
 
@@ -438,7 +509,8 @@ function genealogy_get_known_page_links(webpage_url, match_regex_str, search_nam
 		results[i] = webpage_url;
 	}
 	var webpage_source = genealogy_get_webpage(webpage_url, search_name, refresh_time);
-	var links_regex = new RegExp("<a href=\"(.*?)\".*?>(.*?)<\/a>", "i");
+	var links_regex = new RegExp("<a.*?href=\"(.*?)\".*?>(.*?)<\/a>", "i");
+	var replace_multiple_spaces = new RegExp("\\s{2,}", "gim");
 	var replace_spaces_regex = new RegExp("_");
 	var replace_nothing_regex = new RegExp("\n\.");
 	var links = genealogy_get_page_links(webpage_source);
@@ -457,8 +529,8 @@ function genealogy_get_known_page_links(webpage_url, match_regex_str, search_nam
 		var link = links_regex.exec(links[i]);
 		if (link == null || link.length != 3)
 			continue;
-		genealogy_alert(link[2] + " "+link[1]);
-		var place = genealogy_trim(genealogy_strip_tags(link[2].replace(replace_spaces_regex, " ").replace(replace_nothing_regex, "")));
+		genealogy_log(link[2] + " "+link[1]);
+		var place = genealogy_trim(genealogy_strip_tags(link[2].replace(replace_spaces_regex, " ").replace(replace_nothing_regex, "")).replace(replace_multiple_spaces, " "));
 		if (match_regex != null) {
 			if (!place.match(match_regex))
 				continue;
@@ -468,7 +540,7 @@ function genealogy_get_known_page_links(webpage_url, match_regex_str, search_nam
 				place = place_results[1];
 			}
 		}
-		genealogy_alert("\""+place+"\"");
+		genealogy_log("\""+place+"\"");
 		var place_num = genealogy_lookup_place(place);
 		if (place_num == -1)
 			continue;

@@ -1,0 +1,48 @@
+<search function="at95">
+  <name>1895 U.S. Atlas</name>
+  <description>
+    Goto 1895 U.S. Atlas state and county web pages.<br/>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>at95 berrien, mi</td></tr>
+      <tr><td>at95 virginia</td></tr>
+    </table>
+  </description>
+  <link>http://www.livgenmi.com/1895</link>
+  <category>Genealogy</category>
+  <contributor>Brent Beardsley</contributor>
+
+  <script src="addons/genealogy/genealogy_lib.js"></script>
+  <script><![CDATA[
+    function at95(q)
+    {
+      if( nullArgs("at95", q) )
+        return false;
+
+      if (!genealogy_check_lib_version("1.4")) {
+	return false;
+      }
+
+      var search_url = "http://www.livgenmi.com/1895";
+      var state = genealogy_parse_place_state(q);
+      var county = genealogy_parse_place_county(q);
+      var state_abbrev = genealogy_lookup_place_abbrev(state);
+      if (state_abbrev.length > 0) {
+        var state_url = "http://www.livgenmi.com/"+state_abbrev.toLowerCase()+"1895mp"; 
+	var county_url = "http://www.livgenmi.com/"+county.replace(new RegExp("\\s", "gim"), "").toLowerCase()+state_abbrev.toUpperCase()+".htm";
+	var county_list_url = "http://www.livgenmi.com/"+state_abbrev.toLowerCase()+"county.htm";
+        if (county.length > 0) {
+	  if (genealogy_webpage_exists(county_url)) {
+	    search_url = county_url;
+	  } else {
+            search_url = county_list_url;
+	  }
+	} else {
+	  search_url = state_url;
+	}
+      }
+      openSearchWindow(search_url);
+    }
+    ]]>
+  </script>
+</search>
