@@ -14,6 +14,7 @@ Enhancements
 * Modified update check to display a message box if there
   was an error (e.g., no internet) and there was an explicit
   check.
+* Italian holidays thru 2020 from Tom Creek
 
 Bug Fixes
 
