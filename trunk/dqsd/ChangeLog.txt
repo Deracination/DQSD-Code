@@ -5,6 +5,7 @@ Enhancements
 * Sean Farrell added Microsoft Outlook option for calendar
 * 2002 Italian holidays from Tom Creek
 * 2002-2020 French holidays
+* 2002-2005 Australia NSW holidays from Steve Lin
 
 New Searches
 
