@@ -34,13 +34,19 @@ public:
 	: m_bDebug(false)
 	{
 		ATLTRACE("CLauncher - created\n");
-		m_hBaseTooltipWnd = NULL;
+//		m_hBaseTooltipWnd = NULL;
+		m_hHotkeyNotificationWindow = NULL;
 	}
 
 	virtual ~CLauncher()
 	{
 		ATLTRACE("CLauncher - destroyed\n");
 		ATLTRACE("DQSDTools: Lock count %d\n", _Module.GetLockCount());
+
+		if(m_hHotkeyNotificationWindow != NULL)
+		{
+			DestroyWindow(m_hHotkeyNotificationWindow);
+		}
 	}
 
 DECLARE_REGISTRY_RESOURCEID(IDR_LAUNCHER)
@@ -73,6 +79,7 @@ public:
 	STDMETHOD(MapKeyCode)(long lVKCode, long lCharCode);
 
 public:
+	STDMETHOD(ShutdownBar)();
 	STDMETHOD(get_VersionIsCorrect)(int v1, int v2, int v3, int v4, /*[out, retval]*/ VARIANT_BOOL *pVal);
 	STDMETHOD(SetSite)(IUnknown* pUnkSite);
 	STDMETHOD(InitialiseBaseTooltip)(void);
@@ -83,7 +90,8 @@ private:
 	static LPCTSTR DQSD_SEC_KEY;
 	bool	m_bDebug;
 
-	HWND	m_hBaseTooltipWnd;
+//	HWND	m_hBaseTooltipWnd;
+	HWND	m_hHotkeyNotificationWindow;
 
 private:
 	HRESULT GetFilename( LPCTSTR szName, LPTSTR szResult, LPCTSTR pszDefaultExt = _T(".txt") );

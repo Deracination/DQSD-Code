@@ -371,6 +371,10 @@ helpSortKey = 'name';
 /* Enable tooltips on menu help menu items 
     The options are 'true' or 'false'
 */
-helpMenuToolTipsEnabled = false;
+helpMenuToolTipsEnabled = true;
 
+/* A multiplier of  the time for which the menu tooltips are displayed
+ 1 would be the system default, which is a bit fast for some of the long tips
+*/
+helpMenuToolTipsDisplayTime = 3;
 
