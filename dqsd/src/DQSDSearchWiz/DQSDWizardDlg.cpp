@@ -296,7 +296,7 @@ LRESULT CDQSDWizardDlg::OnOK(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHa
 	strSearchFile += _T("\r\n"
 						"\r\n    Even though this XML search will probably load and is a healthy start"
 						"\r\n    toward a completed search, please be aware that this search will probably"
-						"\r\n    not work as is and will require some human modification, especially the script."
+						"\r\n    not work as is and will require some human inspection and modification."
 						"\r\n"
 						"\r\n  </COMMENT>");
 
@@ -331,25 +331,26 @@ LRESULT CDQSDWizardDlg::OnOK(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHa
 	string strFormScript;
 	strSearchFile += GetForms( strSearchName, strFormScript );
 
-	strSearchFile += _T("\r\n  <script><![CDATA[");
-    strSearchFile += _T("\r\n    function ") + strSearchName + _T("(q)");
-    strSearchFile += _T("\r\n    {");
-    strSearchFile += _T("\r\n      if( nullArgs(\"") + strSearchName + _T("\", q) )");
-    strSearchFile += _T("\r\n        return false;");
-    strSearchFile += _T("\r\n");
-    strSearchFile += _T("\r\n      if( q == \"\" )");
-    strSearchFile += _T("\r\n      {");
-    strSearchFile += _T("\r\n        openSearchWindow(\"") + strLink + _T("\");");
-    strSearchFile += _T("\r\n        return true;");
-    strSearchFile += _T("\r\n      }");
+	strSearchFile += _T("\r\n  <script><![CDATA["
+                        "\r\n    function ") + strSearchName + _T("(q)"
+                        "\r\n    {"
+                        "\r\n      if( nullArgs(\"") + strSearchName + _T("\", q) )"
+                        "\r\n        return;"
+						"\r\n"
+						"\r\n      if( q == \"\" )"
+						"\r\n      {"
+						"\r\n        openSearchWindow(\"") + strLink + _T("\");"
+						"\r\n        return;"
+						"\r\n      }");
 	
 	strSearchFile += GetSwitches();
 
 	strSearchFile += strFormScript;
     
-	strSearchFile += _T("\r\n      submitForm(") + strSearchName + _T("f);");
-    strSearchFile += _T("\r\n    }");
-	strSearchFile += _T("\r\n  ]]></script>");
+	strSearchFile += _T("\r\n"
+						"\r\n      submitForm(") + strSearchName + _T("f);"
+						"\r\n    }"
+						"\r\n  ]]></script>");
 
 	strSearchFile += _T("\r\n</search>");
 
@@ -418,6 +419,11 @@ string CDQSDWizardDlg::GetForms( string& rstrSearchName, string& rstrFormScript 
 	USES_CONVERSION;
 
 	string strFormXML = _T("");
+
+	// Grab active element so we can assign 'q' to it in the gen'd script	
+	CComPtr< IHTMLElement > spActiveElement;
+	m_spDoc2->get_activeElement( &spActiveElement );
+	CComPtr< IUnknown > spActiveElementUnk = spActiveElement;
 
 	CWindow ctlFormList = GetDlgItem( IDC_FormList2 );
 	int iSelectedForms = 0;
@@ -497,9 +503,17 @@ string CDQSDWizardDlg::GetForms( string& rstrSearchName, string& rstrFormScript 
 						if ( ( SUCCEEDED( spElement->getAttribute( _bstr_t( _T("type") ), 0, &varInputType ) ) && varInputType.bstrVal ) && !wcsicmp( L"submit", varInputType.bstrVal ) )
 							continue;
 
-						strFormXML += _T("\r\n    <input type=\"hidden\"");
+						// Was this the active element?
 
-						strFormXML += _T(" name=\"") + string( W2T( varInputName.bstrVal ) ) + _T("\"");
+						CComPtr< IUnknown > spElementUnk = spElement;
+						BOOL bActiveElement = spElementUnk.IsEqualObject( spActiveElementUnk );
+
+						if ( bActiveElement )
+						{
+							strFormXML += _T("\r\n    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>");
+						}
+
+						strFormXML += _T("\r\n    <input type=\"hidden\" name=\"") + string( W2T( varInputName.bstrVal ) ) + _T("\"");
 
 						// Stick the value of the field in as well for two reasons... some hidden fields are required 
 						// and the user can enter a string in a visible field to see which field to use.
@@ -516,12 +530,23 @@ string CDQSDWizardDlg::GetForms( string& rstrSearchName, string& rstrFormScript 
 
 						strFormXML += _T("/>");
 
-						rstrFormScript += _T("\r\n      //document.") + strFormName + _T(".") + string( W2T( varInputName.bstrVal ) ) + _T(".value = \"\";");
+						if ( bActiveElement )
+						{
+							rstrFormScript += _T("\r\n"
+												 "\r\n      // The wizard assigned the search string to this form field value because"
+												 "\r\n      // this field was the active element when the search file was generated."
+												 "\r\n      // Change this to args.q if the search string is parsed with parseArgs."
+												 "\r\n      document.") + strFormName + _T(".") + string( W2T( varInputName.bstrVal ) ) + _T(".value = q;");
+						}
+						else
+						{
+							rstrFormScript += _T("\r\n      //document.") + strFormName + _T(".") + string( W2T( varInputName.bstrVal ) ) + _T(".value = \"\";");
+						}
 
 						if ( !_tcsicmp( W2T( bstrName ), _T("SELECT") ) )
 						{
-							strFormXML += _T("\r\n      <COMMENT>  The input element above was a SELECT element with the following options...");
-							strFormXML += _T("\r\n        <select name=\"" + string( W2T( varInputName.bstrVal ) ) + "\">");
+							strFormXML += _T("\r\n    <COMMENT>  The input element above was a SELECT element with the following options...");
+							strFormXML += _T("\r\n      <select name=\"" + string( W2T( varInputName.bstrVal ) ) + "\">");
 							
 							CComQIPtr< IHTMLSelectElement > spSelect( spElement );
 							if ( spSelect )
@@ -542,7 +567,7 @@ string CDQSDWizardDlg::GetForms( string& rstrSearchName, string& rstrFormScript 
 									BSTR bstrOptionText = NULL;
 									spOption->get_text( &bstrOptionText );
 									
-									strFormXML += _T("\r\n          <option");
+									strFormXML += _T("\r\n        <option");
 									if ( bstrOptionValue )
 										strFormXML += _T(" value=\"") + string( W2T( bstrOptionValue ) ) + _T("\"");
 									strFormXML += _T(">");
@@ -552,8 +577,8 @@ string CDQSDWizardDlg::GetForms( string& rstrSearchName, string& rstrFormScript 
 								}
 							}
 
-							strFormXML += _T("\r\n        </select>");
-							strFormXML += _T("\r\n      </COMMENT>\r\n");
+							strFormXML += _T("\r\n      </select>"
+											 "\r\n    </COMMENT>");
 						}
 					}
 
@@ -602,7 +627,24 @@ string CDQSDWizardDlg::GetSwitches()
 	{
 		_tcscpy( szSwitches, W2T( bstr ) );
 		LPTSTR pszSwitch = _tcstok( szSwitches, _T("\r\n") );
-		strSwitches =  _T("\r\n\r\n      // Parse switches\r\n      //var args = parseArgs(q, \"");
+		strSwitches = _T("\r\n"
+						 "\r\n      // Parse switches with parseArgs:"
+						 "\r\n"
+						 "\r\n      // parseArgs usage:"
+						 "\r\n      // Arguments:"
+						 "\r\n      //    q                - string from the search function"
+						 "\r\n      //    expectedSwitches - list or array of the expected switch values"
+						 "\r\n      //    expandSwitches   - optional parameter [default = true] used to determine "
+						 "\r\n      //                       if the switch shortcuts should be expanded (i.e. /f becomes /foo)"
+						 "\r\n      // Returns an object with these properties:"
+						 "\r\n      //    q        - the input string with the switches removed"
+						 "\r\n      //    switches - array of objects with these two properties:"
+						 "\r\n      //                  name:   expanded name of the matched switch (i.e. foo as in /foo:bar)"
+						 "\r\n      //                  value:  value of switch (i.e. bar as in /foo:bar)"
+						 "\r\n      //    switch_val - associative array with the switch name as the key with the switch value "
+						 "\r\n      //                 as the value. (i.e. switch_val[\"foo\"] = \"bar\" as in /foo:bar)"
+						 "\r\n"
+						 "\r\n      //var args = parseArgs(q, \"");
 		TCHAR pszDelim[ 16 ];
 		_tcscpy( pszDelim, _T("") );
 
@@ -615,18 +657,18 @@ string CDQSDWizardDlg::GetSwitches()
 		while ( pszSwitch )
 		{
 			strSwitches += string( pszDelim ) + string( pszSwitch );
-			strCase += _T("\r\n      //    case \"") + string( pszSwitch ) + _T("\":");
-			strCase += _T("\r\n      //         break;");
+			strCase += _T("\r\n      //    case \"") + string( pszSwitch ) + _T("\":"
+						  "\r\n      //         break;");
 
 			_tcscpy( pszDelim, _T(", ") );
 			pszSwitch = _tcstok( NULL, _T("\r\n") );
 		}
 		strSwitches += _T("\");");
 
-		strCase += _T("\r\n      //    default:");
-		strCase += _T("\r\n      //         break;");
-		strCase += _T("\r\n      //  } //end-switch");
-		strCase += _T("\r\n      //}");
+		strCase += _T("\r\n      //    default:"
+					  "\r\n      //         break;"
+					  "\r\n      //  } //end-switch"
+					  "\r\n      //}");
 
 		strSwitches += strCase;
 	}
