@@ -19,6 +19,17 @@ function closeabout()
   }
 }
 
+function searchCompare( s1, s2 )
+{
+
+  var alias1 = (s1.aliases[0].substr(0,INTERNAL_FUNC_PREFIX.length) == INTERNAL_FUNC_PREFIX) ? s1.aliases[1] : s1.aliases[0];
+  var alias2 = (s2.aliases[0].substr(0,INTERNAL_FUNC_PREFIX.length) == INTERNAL_FUNC_PREFIX) ? s2.aliases[1] : s2.aliases[0];
+  if ( alias1 < alias2 ) return -1;
+  if ( alias1 > alias2 ) return 1;
+
+  return 0;
+}
+
 
 function about()
 {
@@ -49,6 +60,7 @@ function about()
       helptable += "&nbsp;" + categoryarray[i] + "&nbsp;";
       helptable += "<span id='categoryCount' class=helpboxCategoryCount></span><a name=\""+categoryarray[i]+"\"></td><td align=right class=helpboxCategoryTop>[ <a class=helpboxLinkTop href='#top'>top</a> ]</td></tr></table></td></tr>";
       var helparray = categories[categoryarray[i]];
+      helparray.sort( searchCompare );
       for (var k = 0; k < helparray.length; k++)
       {
         var search = helparray[k];
@@ -61,10 +73,10 @@ function about()
           if (alias == "")
             alias = "<em>Enter</em>";
           if (j > 0)
-			helptable += "<a class=helpboxAlias>";
+            helptable += "<a class=helpboxAlias>";
           helptable += alias;
           if (j > 0)
-			helptable += "</a>";
+            helptable += "</a>";
           if (j < search.aliases.length)
             helptable += "<br>"
         }
