@@ -10,7 +10,7 @@
   <br/>
     <div class="helpboxDescLabels">Switches:</div>
   	<table class="helpboxDescTable">
-  		<tr><td>/all</td><td> - </td><td>Search All Sections</td></tr>
+  		<tr><td>/all</td><td> - </td><td>Search All Sections.</td></tr>
   		<tr><td>/articles</td><td> - </td><td>Search Article Library.</td></tr>
   		<tr><td>/dictionary</td><td> - </td><td>Search Dictionary.</td></tr>
   		<tr><td>/drivers</td><td> - </td><td>Search Driver Guide.</td></tr>
