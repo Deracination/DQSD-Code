@@ -61,16 +61,16 @@ private:
 	string m_strInstallDir;
 	string m_strBaseURL;
 	string m_strVersion;
+	CSearchNameEdit m_editSearchName;
 
 private:
 	string GetAbsoluteActionPath( _variant_t& varAction );
-	string GetForms( string& rstrSearchName, string& rstrFormScript );
+	string GetForms( const string& rstrSearchName, string& rstrFormScript );
 	string GetSwitches();
 	string EscapeXML( string& xml );
 	void SaveFields();
 	void RestoreFields();
-
-	CSearchNameEdit m_editSearchName;
+	string GetScriptFieldName( const string& rstrFieldName );
 };
 
 #endif //__DQSDWIZARDDLG_H_

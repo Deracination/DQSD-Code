@@ -51,6 +51,11 @@ LRESULT CDQSDWizardDlg::OnInitDialog(UINT uMsg, WPARAM wParam, LPARAM lParam, BO
 {
 	USES_CONVERSION;
 
+#ifdef _DEBUG
+	CWindow( GetDlgItem( IDC_SearchName ) ).SetWindowText( _T("xyzzy") );
+	CWindow( GetDlgItem( IDC_SearchTitle ) ).SetWindowText( _T("xyzzy Search") );
+#endif
+
 	CenterWindow( GetActiveWindow() ); // ??? should probably use the actual browser window
 
 	m_editSearchName.SubclassWindow( GetDlgItem( IDC_SearchName ) );
@@ -461,7 +466,7 @@ LRESULT CDQSDWizardDlg::OnOK(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHa
 	return 0;
 }
 
-string CDQSDWizardDlg::GetForms( string& rstrSearchName, string& rstrFormScript )
+string CDQSDWizardDlg::GetForms( const string& rstrSearchName, string& rstrFormScript )
 {
 	USES_CONVERSION;
 
@@ -578,18 +583,18 @@ string CDQSDWizardDlg::GetForms( string& rstrSearchName, string& rstrFormScript 
 							strInputValue = EscapeXML( string( W2T( varInputValue.bstrVal ) ) );
 						}
 
+						BOOL bChecked = FALSE;
+						_variant_t varChecked;
+						if ( SUCCEEDED( spElement->getAttribute( _bstr_t( _T("checked") ), 0, &varChecked ) ) )
+						{
+							bChecked = varChecked.boolVal;
+						}
+
 						// Stick the value of the field in as well for two reasons... some hidden fields are required 
 						// and the user can enter a string in a visible field to see which field to use.
 						
 						if ( !_tcsicmp( _T("radio"), strInputType.c_str() ) )
 						{
-							BOOL bChecked = FALSE;
-							_variant_t varChecked;
-							if ( SUCCEEDED( spElement->getAttribute( _bstr_t( _T("checked") ), 0, &varChecked ) ) )
-							{
-								bChecked = varChecked.boolVal;
-							}
-
 							RadioButtonMap_t::iterator itFound = mapRadioButtons.find( strInputName );
 							RadioButtonValues_t radioValues;
 							if ( itFound != mapRadioButtons.end() )
@@ -605,34 +610,37 @@ string CDQSDWizardDlg::GetForms( string& rstrSearchName, string& rstrFormScript 
 							continue;
 						}
 
-						// If there are any non-alpha characters in the INPUT field name, the use different notation in the script
-						
-						string strScriptInputName = _T(".") + strInputName + _T(".value");
-						if ( ( strInputName.find_first_not_of( _T("_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"), 0 ) != string::npos ) ||
-							 ( !_tcsicmp( strInputName.c_str(), _T("target") ) ) ||
-							 ( !_tcsicmp( strInputName.c_str(), _T("submit") ) ) )
+						if ( bActiveElement  )
 						{
-							strScriptInputName = _T("[\"") + strInputName + _T("\"].value");
-						}
-
-						if ( bActiveElement )
-						{
-							strFormXML += _T("\r\n    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>");
+							strFormXML += _T("\r\n\r\n    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>\r\n");
 						}
 
 						strFormXML += _T("\r\n    <input type=\"hidden\" name=\"") + strInputName + _T("\" value=\"") + strInputValue + _T("\" />");
 
-						if ( bActiveElement )
+						// Only set the search string to the form field if it was a text field
+
+						if ( bActiveElement && 
+							 _tcsicmp( _T("radio"), strInputType.c_str() ) && 
+							 _tcsicmp( _T("checkbox"), strInputType.c_str() ) &&
+							 _tcsicmp( W2T( bstrTagName ), _T("SELECT") ) )
 						{
 							rstrFormScript += _T("\r\n"
 												 "\r\n      // The wizard assigned the search string to this form field value because"
 												 "\r\n      // this field was the active element when the search file was generated."
 												 "\r\n      // Change this to args.q if the search string is parsed with parseArgs."
-												 "\r\n      document.") + strFormName + strScriptInputName + _T(" = q;");
+												 "\r\n      document.") + strFormName + GetScriptFieldName( strInputName ) + _T(" = q;");
 						}
 						else
 						{
-							rstrFormScript += _T("\r\n      //document.") + strFormName + strScriptInputName + _T(" = \"\";");
+							rstrFormScript += _T("\r\n      //document.") + strFormName + GetScriptFieldName( strInputName ) + _T(" = \"\";");
+						}
+
+						if ( !_tcsicmp( _T("checkbox"), strInputType.c_str() ) )
+						{
+							strFormXML += _T("\r\n    <COMMENT>"
+											 "\r\n      The input element above, \"") + strInputName + _T("\", was a checkbox that was ") + 
+											 string( bChecked ? _T("checked.") : _T("unchecked.") );
+							strFormXML += _T("\r\n    </COMMENT>\r\n");
 						}
 
 						if ( !_tcsicmp( W2T( bstrTagName ), _T("SELECT") ) )
@@ -671,7 +679,7 @@ string CDQSDWizardDlg::GetForms( string& rstrSearchName, string& rstrFormScript 
 							}
 
 							strFormXML += _T("\r\n      </select>"
-											 "\r\n    </COMMENT>");
+											 "\r\n    </COMMENT>\r\n");
 						
 						} // end-if SELECT
 					
@@ -705,18 +713,10 @@ string CDQSDWizardDlg::GetForms( string& rstrSearchName, string& rstrFormScript 
 							}
 						}
 						
-						string strScriptInputName = _T(".") + itElements->first + _T(".value");
-						if ( ( itElements->first.find_first_not_of( _T("_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"), 0 ) != string::npos ) ||
-							 ( !_tcsicmp( itElements->first.c_str(), _T("target") ) ) ||
-							 ( !_tcsicmp( itElements->first.c_str(), _T("submit") ) ) )
-						{
-							strScriptInputName = _T("[\"") + itElements->first + _T("\"].value");
-						}
-						rstrFormScript += _T("\r\n      //document.") + strFormName + strScriptInputName + _T(" = \"\";");
+						rstrFormScript += _T("\r\n      //document.") + strFormName + GetScriptFieldName( itElements->first ) + _T(" = \"\";");
 
 						strRadioElement += _T("\" />");
-
-						strRadioValues += _T("\r\n    <COMMENT>");
+						strRadioValues += _T("\r\n    </COMMENT>\r\n");
 
 						strFormXML += strRadioElement;
 						strFormXML += strRadioValues;
@@ -839,6 +839,7 @@ string CDQSDWizardDlg::EscapeXML( string& xml )
 	srch_repl( xml, _T(">"), _T("&gt;") );
 //	srch_repl( xml, _T("'"), _T("&apos;") );
 //	srch_repl( xml, _T("\""), _T("&quot;") );
+	srch_repl( xml, _T("\r\n"), _T("\\n") );
 
 	return xml;
 }
@@ -936,4 +937,20 @@ LRESULT CDQSDWizardDlg::OnClickedOptions(WORD wNotifyCode, WORD wID, HWND hWndCt
 
 	rk.Close();
 	return 0;
+}
+
+// Convert the fieldname to a valid script form of the name
+// If there are any non-alpha characters in the INPUT field name, 
+// then use different notation in the script
+
+string CDQSDWizardDlg::GetScriptFieldName( const string& rstrFieldName )
+{
+	string strScriptInputName = _T(".") + rstrFieldName + _T(".value");
+	if ( ( rstrFieldName.find_first_not_of( _T("_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"), 0 ) != string::npos ) ||
+		 ( !_tcsicmp( rstrFieldName.c_str(), _T("target") ) ) ||
+		 ( !_tcsicmp( rstrFieldName.c_str(), _T("submit") ) ) )
+	{
+		strScriptInputName = _T("[\"") + rstrFieldName + _T("\"].value");
+	}
+	return strScriptInputName;
 }
