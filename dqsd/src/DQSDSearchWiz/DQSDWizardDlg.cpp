@@ -232,6 +232,8 @@ LRESULT CDQSDWizardDlg::OnInitDialog(UINT uMsg, WPARAM wParam, LPARAM lParam, BO
 		MessageBox( _T("An enternal error was encountered:  CDQSDWizardDlg::OnInitDialog"), _T("DQSD Search Wizard Exception"), MB_OK|MB_ICONERROR );
 	}
 
+	m_spWB2->put_StatusText( _bstr_t( ( _T("DQSD Search Wizard - Version ") + m_strVersion + _T(", ") + m_strCopyright ).c_str() ) );
+
 	return 1;  // Let the system set the focus
 }
 
@@ -272,6 +274,11 @@ LRESULT CDQSDWizardDlg::OnFormListItemChanged(int idCtrl, LPNMHDR pNMHDR, BOOL& 
 						ctlForm.SetWindowText( W2T( bstr ) );
 						::SysFreeString( bstr );
 					}
+
+					CComPtr< IHTMLStyle > spStyle;
+					(*pspForm)->get_style( &spStyle );
+					spStyle->put_backgroundColor( _variant_t( _bstr_t( _T("Yellow") ) ) );
+					spStyle->put_border( _bstr_t( _T("5px dotted red") ) );
 					return 1;
 				}
 			}
@@ -830,7 +837,7 @@ string CDQSDWizardDlg::GetSwitches()
 		if ( CComBSTR( bstr ).Length() > 0 )
 		{
 			_tcscpy( szSwitches, W2T( bstr ) );
-			LPTSTR pszSwitch = _tcstok( szSwitches, _T("\r\n") );
+			LPTSTR pszSwitch = _tcstok( szSwitches, _T("\r\n,;") );
 			strSwitches = _T("\r\n"
 							 "\r\n      // Parse switches with parseArgs:");
 			
@@ -875,8 +882,8 @@ string CDQSDWizardDlg::GetSwitches()
 			strSwitches += _T("\");");
 
 			strCase += _T("\r\n      //    default:"
-						  "\r\n      //         break;"
-						  "\r\n      //  } //end-switch"
+						  "\r\n      //      break;"
+						  "\r\n      //  }"
 						  "\r\n      //}");
 
 			strSwitches += strCase;
