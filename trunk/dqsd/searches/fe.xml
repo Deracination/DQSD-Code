@@ -9,7 +9,9 @@
     <div class="helpboxDescLabels">Example:</div>
     <table class="helpboxDescTable">
   		<tr><td>fe D</td></tr>
+  		<tr><td>fe doc</td></tr>
       <tr><td>fe sym</td></tr>
+  		<tr><td>fe num</td></tr>
   	</table>
   </description>
   <category>Computers<category>Reference</category></category>
@@ -20,12 +22,17 @@
     {
       if( nullArgs("fe",q) )
         return false;
-      else
-      {
-        q = q.toLowerCase();
-        if ( /^[a-z]$/i.test(q) || ( q == 'sym' ) || ( q == 'num' ) )
-          openSearchWindow("http://www.filext.com/" + q + ".htm");
-        else
+
+      q = q.toLowerCase();
+      if (q == 'sym' || q == 'num') {
+        openSearchWindow("http://www.filext.com/" + q + ".htm");
+      } else if (/^[a-z]/i.test(q)) {
+        openSearchWindow("http://www.filext.com/" + q.charAt(0) + ".htm");
+      } else if (/^[0-9]/i.test(q)) {
+        openSearchWindow("http://www.filext.com/num.htm");
+      } else if (/^[\w_]/i.test(q)) {
+        openSearchWindow("http://www.filext.com/sym.htm");
+      } else {
           nullArgs("fe","?");
       }
     }
