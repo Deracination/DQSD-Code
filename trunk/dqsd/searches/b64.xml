@@ -1,0 +1,65 @@
+<search function="b64">
+  <COMMENT>
+
+    Even though this XML search will probably load and is a good start
+    toward a completed search, please be aware that this search will probably
+    not work as is and will probably require some changes.
+
+  </COMMENT>
+  <name>Base64 Encoder/Decoder</name>
+  <category>Computers<category>Programming</category></category>
+  <contributor>Glenn Carr</contributor>
+  <link>http://makcoder.sourceforge.net/demo/base64.php</link>
+  <email>glenn at glenncarr dot com</email>
+  <description>
+  Base64 encode/decode
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/encode (default)</td><td> - </td><td>Encode</td></tr>
+      <tr><td>/decode</td><td> - </td><td>Decode</td></tr>
+    </table>
+  </description>
+  <form name="b64f"
+        method="post"
+        action="http://makcoder.sourceforge.net/demo/base64.php">
+
+    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
+
+    <input type="hidden" name="plain" value="" />
+    <input type="hidden" name="process" value="Encode" />
+  </form>
+  <script><![CDATA[
+    function b64(q)
+    {
+      if( nullArgs("b64", q) )
+        return;
+
+      var args = parseArgs(q, "encode, decode");
+      if ( args.switches.length > 0 )
+      {
+        switch( args.switches[0].name )
+        {
+          case "decode":
+            document.b64f.process.value = "Decode";
+            break;
+          default:
+            document.b64f.process.value = "Encode";
+            break;
+        }
+      }
+
+      document.b64f.plain.value = q;
+
+      submitForm(b64f);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 09/10/03 at 16:57:16
+    by Dave's Quick Search Deskbar Search Wizard version 1.2,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>
