@@ -128,7 +128,7 @@ function getFiles(directory)
     throw "Unable to get files from directory " + directory;
 }
 
-// read tab-delimited file
+// read tab-delimited, or pipe (|) delimited file
 function readTabDelimitedFile(filename)
 {
   var fileText = "";
