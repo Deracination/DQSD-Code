@@ -140,7 +140,7 @@
                   <xsl:value-of select="@name" />
                </xsl:attribute>
 
-               <xsl:value-of select="@name" />
+               &#160;<xsl:value-of select="@name" />
             </xsl:element>
          </span>
 
@@ -161,7 +161,7 @@
                <xsl:number value="position()" format=".1" />
 
                 
-               <xsl:value-of select="question" />
+               &#160;<xsl:value-of select="question" />
                </div>
 
                <div id="answer" class="answer">
