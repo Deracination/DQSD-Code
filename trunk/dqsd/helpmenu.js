@@ -131,8 +131,10 @@ function makeToolTipString(search)
     var helpString = search.desc;
     helpString = helpString.replace(/<description>/, '');
     // Break the string at the first bit of HTML markup (usually a <BR />)
-    helpString = helpString.slice(0, helpString.indexOf('<', 1));
-    return helpString.replace(/\r\n/g, '');
+    var firstBracket = helpString.indexOf('<', 1);
+    if ( firstBracket != -1 )
+      helpString = helpString.slice(0, firstBracket);
+    return helpString.replace(/\r\n/g, '').replace( /^\s+/, '');
   }
   else
   {
