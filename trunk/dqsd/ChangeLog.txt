@@ -1,3 +1,22 @@
+-- What's new for 3.0.0.???
+
+New Searches
+
+* 
+
+Modified Searches
+
+* 
+
+Enhancements
+
+* install now bundled with xplocalsearch.css, to be used as localsearch.css to make
+  things match with XP default theme.
+
+Bug Fixes
+
+* 
+
 -- What's new for 3.0.0.23
 
 New Searches

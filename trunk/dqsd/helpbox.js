@@ -174,7 +174,7 @@ function about()
       mesg += "<link rel='stylesheet' type='text/css' href='" + localstylesurl + "'>\n";
     mesg += "<script type='text/Jscript' src='savesearchsettings.js'></script>\n";
     mesg += "</head>\n"
-    mesg += "<body scroll=yes onunload='saveSearchSettings()'>\n<a name='#top'></a>\n<table height='100%' width='100%' cellpadding=20>\n<tr><td class=helpbox><center><b>";
+    mesg += "<body scroll=yes onunload='saveSearchSettings()' class=helpboxBody>\n<a name='#top'></a>\n<table height='100%' width='100%' cellpadding=20>\n<tr><td class=helpbox><center><b>";
 
     try
     {
