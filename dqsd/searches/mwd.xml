@@ -5,9 +5,9 @@
   <link>http://www.m-w.com/</link>
   <form name="mwdf"
         target="_blank"
-        action="http://www.m-w.com/cgi-bin/thesaurus"
+        action="http://www.m-w.com/cgi-bin/dictionary"
         method="post">
-    <input type="hidden" name="book" value="dictionary"/>
+    <input type="hidden" name="book" value="Dictionary"/>
     <input type="hidden" name="va"/>
   </form>
   <script><![CDATA[

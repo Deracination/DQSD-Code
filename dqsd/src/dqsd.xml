@@ -50,9 +50,9 @@
         <Filename_Previous>dqsd.exe</Filename_Previous>
         <Filename_Generic>dqsd.exe</Filename_Generic>
         <Filename_Long>dqsd.exe</Filename_Long>
-        <File_Size_Bytes>143646</File_Size_Bytes>
-        <File_Size_K>140</File_Size_K>
-        <File_Size_MB>0.14</File_Size_MB>
+        <File_Size_Bytes>176425</File_Size_Bytes>
+        <File_Size_K>172</File_Size_K>
+        <File_Size_MB>0.17</File_Size_MB>
     </File_Info>
 <Expire_Info>
         <Has_Expire_Info>N</Has_Expire_Info>
@@ -63,7 +63,7 @@
         <Expire_Day />
         <Expire_Year />
     </Expire_Info>
-        <Program_Change_Info>Includes an improved history, several new searches.</Program_Change_Info>
+        <Program_Change_Info>Includes a directory of pluggable searchesx.</Program_Change_Info>
         <Program_Specific_Category>Utilities</Program_Specific_Category>
         <Program_Categories>Desktop Enhancements, Internet Search Tools</Program_Categories>
         <Program_System_Requirements>IE 5.0 (or newer), with Active Desktop</Program_System_Requirements>

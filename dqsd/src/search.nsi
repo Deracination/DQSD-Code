@@ -37,26 +37,28 @@ Section "Quick Search Deskbar (required)"
   Delete /REBOOTOK $INSTDIR\DQSDTools.dll
   UnRegDLL $INSTDIR\dqsdt253.dll
   Delete /REBOOTOK $INSTDIR\dqsdt253.dll
+  UnRegDLL $INSTDIR\dqsdt254.dll
+  Delete /REBOOTOK $INSTDIR\dqsdt254.dll
 
   ; install new DLL
   SetOverwrite try
   ClearErrors
-  File "..\dqsdt254.dll"
+  File "..\dqsdt255.dll"
   IfErrors seeifsame register
 
   ; If was unable to upgrade, see if files are the same anyway
   seeifsame:
   ClearErrors
-  GetDLLVersionLocal "..\dqsdt254.dll" $1 $2
-  GetDLLVersion $INSTDIR\dqsdt254.dll $3 $4
+  GetDLLVersionLocal "..\dqsdt255.dll" $1 $2
+  GetDLLVersion $INSTDIR\dqsdt255.dll $3 $4
   IfErrors isdifferent
   IntCmpU $1 $3 test1 isdifferent isdifferent
   test1:
   IntCmpU $2 $4 test2 isdifferent isdifferent
   test2:
   ClearErrors
-  GetFileTimeLocal "..\dqsdt254.dll" $1 $2
-  GetFileTime $INSTDIR\dqsdt254.dll $3 $4
+  GetFileTimeLocal "..\dqsdt255.dll" $1 $2
+  GetFileTime $INSTDIR\dqsdt255.dll $3 $4
   IfErrors isdifferent
   IntCmpU $1 $3 test3 isdifferent isdifferent
   test3:
@@ -69,7 +71,7 @@ Section "Quick Search Deskbar (required)"
 
   ; We can register the dll and continue
   register:
-  RegDLL $INSTDIR\dqsdt254.dll
+  RegDLL $INSTDIR\dqsdt255.dll
 
   SetOverwrite on
 
@@ -90,7 +92,6 @@ Section "Quick Search Deskbar (required)"
   ; Put files there
   File "..\readme.txt"
   File "..\search.htm"
-  File "..\search.xml"
   File "..\calculate.js"
   File "..\calendar.js"
   File "..\clock.js"
@@ -106,6 +107,98 @@ Section "Quick Search Deskbar (required)"
   File "..\aliases.txt"
   File "..\menu.txt"
   File "..\holidays.sg.xml"
+  File "..\holidays.us.xml"
+  SetOutPath "$INSTDIR\searches"
+  File "..\searches\ac.xml"
+  File "..\searches\acx.xml"
+  File "..\searches\af.xml"
+  File "..\searches\aim.xml"
+  File "..\searches\alarm.xml"
+  File "..\searches\alm.xml"
+  File "..\searches\amaz.xml"
+  File "..\searches\amed.xml"
+  File "..\searches\ana.xml"
+  File "..\searches\ask.xml"
+  File "..\searches\at.xml"
+  File "..\searches\atm.xml"
+  File "..\searches\av.xml"
+  File "..\searches\aw.xml"
+  File "..\searches\bfe.xml"
+  File "..\searches\bible.xml"
+  File "..\searches\bomis.xml"
+  File "..\searches\cddb.xml"
+  File "..\searches\cdnow.xml"
+  File "..\searches\cdo.xml"
+  File "..\searches\cf.xml"
+  File "..\searches\chem.xml"
+  File "..\searches\clc.xml"
+  File "..\searches\cnn.xml"
+  File "..\searches\conv.xml"
+  File "..\searches\cpan.xml"
+  File "..\searches\crax.xml"
+  File "..\searches\dic.xml"
+  File "..\searches\dl.xml"
+  File "..\searches\dlt.xml"
+  File "..\searches\dp.xml"
+  File "..\searches\ebay.xml"
+  File "..\searches\email.xml"
+  File "..\searches\enc.xml"
+  File "..\searches\ex.xml"
+  File "..\searches\faq.xml"
+  File "..\searches\fc.xml"
+  File "..\searches\fedex.xml"
+  File "..\searches\fst.xml"
+  File "..\searches\gg.xml"
+  File "..\searches\gga.xml"
+  File "..\searches\ggn.xml"
+  File "..\searches\half.xml"
+  File "..\searches\hs.xml"
+  File "..\searches\hsw.xml"
+  File "..\searches\ia.xml"
+  File "..\searches\ifl.xml"
+  File "..\searches\imdb.xml"
+  File "..\searches\map.xml"
+  File "..\searches\md.xml"
+  File "..\searches\mf.xml"
+  File "..\searches\mm.xml"
+  File "..\searches\msdn.xml"
+  File "..\searches\msk.xml"
+  File "..\searches\mwd.xml"
+  File "..\searches\mwt.xml"
+  File "..\searches\mys.xml"
+  File "..\searches\pcm.xml"
+  File "..\searches\php.xml"
+  File "..\searches\phsp.xml"
+  File "..\searches\psi.xml"
+  File "..\searches\pw.xml"
+  File "..\searches\quot.xml"
+  File "..\searches\run.xml"
+  File "..\searches\sams.xml"
+  File "..\searches\sb.xml"
+  File "..\searches\sbb.xml"
+  File "..\searches\sbc.xml"
+  File "..\searches\sbp.xml"
+  File "..\searches\screenit.xml"
+  File "..\searches\sqlt.xml"
+  File "..\searches\start.xml"
+  File "..\searches\stk.xml"
+  File "..\searches\ths.xml"
+  File "..\searches\thw.xml"
+  File "..\searches\timer.xml"
+  File "..\searches\tvg.xml"
+  File "..\searches\tvgc.xml"
+  File "..\searches\unip.xml"
+  File "..\searches\uns.xml"
+  File "..\searches\ups.xml"
+  File "..\searches\viv.xml"
+  File "..\searches\wfb.xml"
+  File "..\searches\wug.xml"
+  File "..\searches\xref.xml"
+  File "..\searches\yh.xml"
+  File "..\searches\yhe.xml"
+  File "..\searches\ym.xml"
+  File "..\searches\zc.xml"
+  File "..\searches\zdn.xml"
   SetOutPath "$INSTDIR\src"
   File "search.ico"
   File "search.nsi"
@@ -116,6 +209,7 @@ Section "Quick Search Deskbar (required)"
   SetOutPath "$INSTDIR\src\DQSDTools"
   File "DQSDTools\DQSDTools.cpp"
   File "DQSDTools\DQSDTools.def"
+  File "DQSDTools\DQSDTools.dep"
   File "DQSDTools\DQSDTools.dsp"
   File "DQSDTools\DQSDTools.dsw"
   File "DQSDTools\DQSDTools.idl"
@@ -144,6 +238,7 @@ Section "Quick Search Deskbar (required)"
   Delete $INSTDIR\search.ico
   Delete $INSTDIR\search.nsi
   Delete $INSTDIR\dqsd.xml
+  Delete $INSTDIR\search.xml
 
   ; The unique uuid for our taskbar
   StrCpy $9 "{226b64e8-dc75-4eea-a6c8-abcb4d1d37ff}"
@@ -182,14 +277,14 @@ Section "Uninstall"
   StrCpy $9 "{226b64e8-dc75-4eea-a6c8-abcb4d1d37ff}"
 
   ; Unegister DQSDTools
-  UnRegDLL $INSTDIR\dqsdt254.dll
+  UnRegDLL $INSTDIR\dqsdt255.dll
 
   ; remove registry keys
   DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\$9"
   DeleteRegKey HKCR "CLSID\$9"
 
   ; remove files
-  Delete /REBOOTOK $INSTDIR\dqsdt254.dll
+  Delete /REBOOTOK $INSTDIR\dqsdt255.dll
   Delete /REBOOTOK $INSTDIR\readme.txt
   Delete /REBOOTOK $INSTDIR\search.htm
   Delete /REBOOTOK $INSTDIR\search.xml
@@ -206,32 +301,11 @@ Section "Uninstall"
   Delete /REBOOTOK $INSTDIR\phoneno.js
   Delete /REBOOTOK $INSTDIR\strings.js
   Delete /REBOOTOK $INSTDIR\tools.js
-  Delete /REBOOTOK $INSTDIR\translate.js"
+  Delete /REBOOTOK $INSTDIR\translate.js
   Delete /REBOOTOK $INSTDIR\holidays.sg.xml
-  Delete /REBOOTOK $INSTDIR\src\dqsd.xml
-  Delete /REBOOTOK $INSTDIR\src\build.cmd
-  Delete /REBOOTOK $INSTDIR\src\clean.cmd
-  Delete /REBOOTOK $INSTDIR\src\scrub.cmd
-  Delete /REBOOTOK $INSTDIR\src\dqsd.xml
-  Delete /REBOOTOK $INSTDIR\src\search.nsi
-  Delete /REBOOTOK $INSTDIR\src\search.ico
-  Delete /REBOOTOK $INSTDIR\src\DQSDTools\DQSDTools.cpp
-  Delete /REBOOTOK $INSTDIR\src\DQSDTools\DQSDTools.def
-  Delete /REBOOTOK $INSTDIR\src\DQSDTools\DQSDTools.dsp
-  Delete /REBOOTOK $INSTDIR\src\DQSDTools\DQSDTools.dsw
-  Delete /REBOOTOK $INSTDIR\src\DQSDTools\DQSDTools.idl
-  Delete /REBOOTOK $INSTDIR\src\DQSDTools\DQSDTools.mak
-  Delete /REBOOTOK $INSTDIR\src\DQSDTools\DQSDTools.rc
-  Delete /REBOOTOK $INSTDIR\src\DQSDTools\Launcher.cpp
-  Delete /REBOOTOK $INSTDIR\src\DQSDTools\Launcher.h
-  Delete /REBOOTOK $INSTDIR\src\DQSDTools\Launcher.rgs
-  Delete /REBOOTOK $INSTDIR\src\DQSDTools\License.txt
-  Delete /REBOOTOK $INSTDIR\src\DQSDTools\StdAfx.cpp
-  Delete /REBOOTOK $INSTDIR\src\DQSDTools\StdAfx.h
-  Delete /REBOOTOK $INSTDIR\src\DQSDTools\Utilities.h
-  Delete /REBOOTOK $INSTDIR\src\DQSDTools\dlldatax.c
-  Delete /REBOOTOK $INSTDIR\src\DQSDTools\dlldatax.h
-  Delete /REBOOTOK $INSTDIR\src\DQSDTools\resource.h
+  Delete /REBOOTOK $INSTDIR\holidays.us.xml
+  RmDir /r $INSTDIR\src
+  RmDir /r $INSTDIR\searches
 
   ; Remove preferences too
   Delete /REBOOTOK $INSTDIR\preferences.js
