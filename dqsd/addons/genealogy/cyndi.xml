@@ -15,6 +15,7 @@
     <input type="hidden" name="mode" value="all" />
     <input type="hidden" name="query" value="" />
   </form>
+  <script src="addons/genealogy/genealogy_lib.js"></script>
   <script><![CDATA[
     function cyndi(q)
     {

@@ -43,6 +43,7 @@
     <input type="hidden" name="b_firstname" value="" />
     <input type="hidden" name="b_lastname" value="" />
   </form>
+  <script src="addons/genealogy/genealogy_lib.js"></script>
   <script><![CDATA[
     function wsmarr(q)
     {
