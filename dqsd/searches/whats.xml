@@ -1,0 +1,25 @@
+<search function="whats">
+  <name>What's That Site Running?</name>
+  <category>Computers<category>Networking</category></category>
+  <contributor>Thad Kerosky</contributor>
+  <link>http://www.netcraft.com/</link>
+  <email></email>
+  <description>
+  Check Netcraft's "Whats that site running?" HTTPD database for a specific web site to get information on a web server.
+  </description>
+  <form name="whatsf"
+        method="get"
+        action="http://uptime.netcraft.com/up/graph/">
+    <input type="hidden" name="site" value="" />
+  </form>
+  <script><![CDATA[
+    function whats(q)
+    {
+      if( nullArgs("whats", q ) )
+        return;
+
+      document.whatsf.site.value = q;
+      submitForm(whatsf);
+    }
+  ]]></script>
+</search>

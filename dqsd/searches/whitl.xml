@@ -5,6 +5,7 @@
   <link>http://whittlebit.com/index.php</link>
   <email></email>
   <description>
+    Search, and rate the results.
   </description>
   <form name="whittlef"
         method="post"
@@ -16,8 +17,8 @@
     {
       if( nullArgs("whitl", q) )
         return;
+
       document.whittlef.query.value = q;
- 
       submitForm(whittlef);
     }
   ]]></script>
