@@ -1,5 +1,5 @@
 Dave's Quick Search Taskbar Toolbar
-Copyright (c) 2001 David Bau
+Copyright (c) 2001-2002 David Bau
 Contact davidbau@hotmail.com
 
 Licensed under the GNU General Public License
@@ -34,16 +34,18 @@ found on the dqsd project at sourceforge.net in CVS.
 A guide to a few of the source files:
 
 search.htm - the HTML code for the toolbar itself
-search.xml - an XML file defining more types of searches
-preferences.js - an example preferences file
+preferences.js - the user preferences file
 aliases.txt - a file containing shortcuts
-menu.txt - a file defining the menu contents
+menu.txt - a file defining the contents of the pop-up menu
+searches/ - a directory containing all the search definitions in XML 
+		files. (As of 2.5.5, this replaces the search.xml file.)
+
 *.js - functionality for the calulator, clock, translator, etc.
 src/search.nsi - the NSIS installation script for building dqsd.exe
 src/DQSDTools - the C++ source code for DQSDTools.dll
 src/build.cmd - a build script that does a full build.
 
-In order to build things, you need
+In order to build things, you need:
 
 (1) Microsoft Visual C++ (version 6.0 is what I use). You don't need
 this is if you're not rebuilding DQSDTools.dll.
