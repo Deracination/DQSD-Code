@@ -2,21 +2,63 @@
   <name>PHP Reference</name>
   <description>
     Lookup on php.net.<br/>
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/pear</td><td> - </td><td>Search PEAR packages</td></tr>
+      <tr><td>/smarty</td><td> - </td><td>Search Smarty manual</td></tr>
+  	</table>
     <div class="helpboxDescLabels">Example:</div>
     <table class="helpboxDescTable">
   		<tr><td>php fopen</td></tr>
+  		<tr><td>php /s cycle</td></tr>
+  		<tr><td>php /p DB</td></tr>
   	</table>
   </description>
   <category>Computers<category>Programming</category></category>
   <link>http://www.php.net/</link>
-  
+
+  <form name="phpsmartyf" action="http://smarty.php.net/search.php" method="post">
+    <input type="hidden" name="show" value="manual" />
+    <input type="hidden" name="pattern" value="" />
+  </form>
+  <form name="phppearf" action="http://pear.php.net/search.php" method="post">
+    <input type="hidden" name="search_in" value="packages" />
+    <input type="hidden" name="search_string" value="" />
+  </form>
   <script><![CDATA[
     function php(q)
     {
       if( nullArgs("php",q) )
         return false;
+
+      var args = parseArgs(q, "pear, smarty");
+      if( args.switches.length >= 1 ) {
+        switch( args.switches[0].name )
+		{
+		case "pear":
+		  if (args.q != "") {
+			document.phppearf.search_string.value = args.q;
+			submitForm(phppearf);
+		  } else {
+		    openSearchWindow("http://pear.php.net/");
+		  }
+		  break;
+		case "smarty":
+		  if (args.q != "") {
+			document.phpsmartyf.pattern.value = args.q;
+			submitForm(phpsmartyf);
+		  } else {
+		    openSearchWindow("http://smarty.php.net/");
+		  }
+		  break;
+		default:
+  		  if (nullArgs("php", "?"))
+			  return false;
+		  break;
+		}
+	  }
       else
-        openSearchWindow("http://www.php.net/" + q.replace(/\s+/g, "+"));
+        openSearchWindow("http://www.php.net/" + args.q.replace(/\s+/g, "+"));
     }
   ]]></script>
 

@@ -6,6 +6,7 @@
     <table class="helpboxDescTable">
       <tr><td>/messages:string</td><td> - </td><td>Search group for messages</td></tr>
       <tr><td>/members:name</td><td> - </td><td>Search group for member names</td></tr>
+	  <tr><td>/mygroups</td><td> - </td><td>Goto My Groups page</td></tr>
       <tr><td>/number:message_number</td><td> - </td><td>Go directly to a message number</td></tr>
     </table>
     <div class="helpboxDescLabels">Examples:</div>
@@ -31,7 +32,7 @@
       if( nullArgs("yg", q) )
         return false;
 
-      var args = parseArgs(q, "messages, members, number");
+      var args = parseArgs(q, "messages, members, number, mygroups");
       if( args.switches.length >= 1 )
       {
         document.ygf.query.value = args.switches[0].value;
@@ -49,6 +50,9 @@
           case "number":
             openSearchWindow("http://groups.yahoo.com/group/" + args.q + "/message/" + args.switch_val["number"]);
             break;
+          case "mygroups":
+		    openSearchWindow("http://groups.yahoo.com/mygroups");
+			break;
           default:
             openSearchWindow("http://groups.yahoo.com/");
         }
