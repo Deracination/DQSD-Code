@@ -7,7 +7,8 @@ New Searches
 
 Modified Searches
 
-* gg - /fresh switch disappeared (/since is enough) - /since now allows a number of days in addition to t,y,w,m, and gets independant of goosearch
+* gg - /fresh switch disappeared (/since is enough) - /since now allows a 
+       number of days in addition to t,y,w,m, and gets independant of goosearch
 * hs - added /new from Brent Beardsley
 * jdk - added /1.4, /1.3, /tutorial, /all, /j2ee, /jls, /jvm options
 * multi - apostrophes (') in the query now don't generate errors
@@ -15,7 +16,10 @@ Modified Searches
 Enhancements
 
 * switches now can contain . and -. This is used here: jdk HashMap /1.3
-* changed defer_tools.js for special searches like setiq.xml that need several forms opened in one window
+* changed defer_tools.js for special searches like setiq.xml that need 
+  several forms opened in one window
+* added empty localprefs.js and localsearch.css to install, instead of 
+  requiring user to create them if they don't exist.
 
 Bug Fixes
 
@@ -24,6 +28,7 @@ Bug Fixes
 * A local alias can now override a search name.  This was causing a script error
   when the menu was invoked.
 * Search forms can now have input elements named "target" without causing a script error
+
 
 -- What's new for 3.0.0.22 (beta)
 
