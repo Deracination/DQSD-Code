@@ -429,7 +429,7 @@ string CDQSDWizardDlg::GetForms( string& rstrSearchName, string& rstrFormScript 
 								spOption->get_text( &bstrOptionText );
 								
 								strFormXML += _T("\r\n          <option value=\"") + string( W2T( bstrOptionValue ) ) + _T("\">");
-								strFormXML += string( W2T( bstrOptionText ) ) + _T("</option>");
+								strFormXML += EscapeXML( string( W2T( bstrOptionText ) ) ) + _T("</option>");
 
 								::SysFreeString( bstrOptionValue );
 							}
@@ -515,4 +515,14 @@ string CDQSDWizardDlg::GetSwitches()
 	::SysFreeString( bstr );
 
 	return strSwitches;
+}
+
+string CDQSDWizardDlg::EscapeXML( string& xml )
+{
+	string strEscapedXML = xml;
+
+	// ??? Very quick hack to get rid of ampersands until we figure out a better way
+	replace( strEscapedXML.begin(), strEscapedXML.end(), _T('&'), _T('~') );
+
+	return strEscapedXML;
 }

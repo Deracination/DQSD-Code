@@ -60,6 +60,7 @@ private:
 	string GetAbsoluteActionPath( _variant_t& varAction );
 	string GetForms( string& rstrSearchName, string& rstrFormScript );
 	string GetSwitches();
+	string EscapeXML( string& xml );
 };
 
 #endif //__DQSDWIZARDDLG_H_

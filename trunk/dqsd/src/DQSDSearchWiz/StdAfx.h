@@ -29,6 +29,7 @@ extern CComModule _Module;
 
 #include <string>
 #include <vector>
+#include <algorithm>
 using namespace std;
 
 // Many thanks to Tim Tabor for the following (www.cheztabor.com)
