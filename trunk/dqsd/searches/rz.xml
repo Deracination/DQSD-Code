@@ -1,0 +1,90 @@
+<search function="rz">
+  <name>RhymeZone</name>
+  <description>
+    RhymeZone is an online tool that aspires to be the best and fastest way for writers to find words.<br/>
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/rhymes</td><td> - Rhymes (default)</td></tr>
+      <tr><td>/antonyms</td><td> - Antonyms</td></tr>
+      <tr><td>/consonants</td><td> - Match consonants only</td></tr>
+      <tr><td>/definition</td><td> - Definition</td></tr>
+      <tr><td>/homophones</td><td> - Homophones</td></tr>
+      <tr><td>/phrases</td><td> - Phrases</td></tr>
+      <tr><td>/quotations</td><td> - Quotations</td></tr>
+      <tr><td>/related</td><td> - Related</td></tr>
+      <tr><td>/shakespeare</td><td> - Search in Shakespeare</td></tr>
+      <tr><td>/sound_similar</td><td> - Similar sounding words</td></tr>
+      <tr><td>/spelling_similar</td><td> - Similar spellings</td></tr>
+      <tr><td>/synonyms</td><td> - Synonyms</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+    </table>
+  </description>
+  <category>Reference</category>
+  <link>http://rhyme.lycos.com/</link>
+  <contributor>Glenn Carr</contributor>
+  
+  <form name="rzf"
+        action="http://rhyme.lycos.com//r/rhyme.cgi"
+        method="get">
+    <input type="hidden" name="Word" value="" />
+    <input type="hidden" name="typeofrhyme" value="perfect" />
+    <input type="hidden" name="org1" value="syl" />
+    <input type="hidden" name="org2" value="l" />
+  </form>
+  <script><![CDATA[
+    function rz(q)
+    {
+      if( nullArgs("rz", q) )
+        return false;
+
+      var args = parseArgs(q, "rhymes, synonyms, antonyms, definition, related, sound_similar, homophones, consonants, phrases, spelling_similar, shakespeare, quotations");
+
+      document.rzf.typeofrhyme.value = "perfect";
+      document.rzf.Word.value = q;
+
+      if( q == "" )
+      {
+        openSearchWindow("http://rhyme.lycos.com/");
+      }
+      else if( args.switches.length >= 1 )
+      {
+        for ( var i = 0; i < args.switches.length; i++ )
+        {
+          switch( args.switches[0].name )
+          {
+            case "synonyms":
+              document.rzf.typeofrhyme.value = "syn"; break;
+            case "antonyms":
+              document.rzf.typeofrhyme.value = "ant"; break;
+            case "definition":
+              document.rzf.typeofrhyme.value = "def"; break;
+            case "related":
+              document.rzf.typeofrhyme.value = "rel"; break;
+            case "sound_similar":
+              document.rzf.typeofrhyme.value = "sim"; break;
+            case "homophones":
+              document.rzf.typeofrhyme.value = "hom"; break;
+            case "consonants":
+              document.rzf.typeofrhyme.value = "cons"; break;
+            case "phrases":
+              document.rzf.typeofrhyme.value = "sub"; break;
+            case "spelling_similar":
+              document.rzf.typeofrhyme.value = "spell"; break;
+            case "shakespeare":
+              document.rzf.typeofrhyme.value = "shake"; break;
+            case "quotations":
+              document.rzf.typeofrhyme.value = "quotes"; break;
+            case "rhymes":
+            default:
+          }
+        }
+        document.rzf.Word.value = args.q;
+      }
+
+      submitForm( rzf );
+    }
+  ]]>
+  </script>
+</search>
