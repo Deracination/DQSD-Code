@@ -1,0 +1,68 @@
+<search function="videoeta">
+  <name>Video ETA</name>
+  <category>Entertainment</category>
+  <contributor>Monty Scroggins</contributor>
+  <link>http://www.videoeta.com/search.html</link>
+  <email></email>
+  <description>
+    Video ETA is a site which specializes in detailing when movies
+    are available on video.  Searches can be done by movie title (default)
+    or by actors name.
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>videoeta Christmas Vacation</td></tr>
+      <tr><td>videoeta Blues Brothers /movie</td></tr>
+      <tr><td>videoeta Woody Allen /person</td></tr>
+    </table>
+  </description>
+  <form name="videoetaf"
+        method="get"
+        action="http://www.videoeta.com/search.html">
+    <input type="hidden" name="search_query" value="" />
+  </form>
+  <form name="videoetaf2"
+        method="get"
+        action="http://www.videoeta.com/person.html">
+    <input type="hidden" name="search" value="" />
+  </form>
+  <script><![CDATA[
+    function videoeta(q)
+    {
+      if( nullArgs("videoeta", q) )
+        return;
+
+      var args = parseArgs(q, "movie, person");
+      if ( args.switches.length > 0 )
+      { 
+        alert("args.switches >0 "+ args.switches.length);
+        switch( args.switches[0].name )
+        {
+          case "movie":
+            document.videoetaf.search_query.value = args.q;
+            submitForm(videoetaf);
+            break;
+          case "person":
+            document.videoetaf2.search.value = args.q;
+            submitForm(videoetaf2);
+            break;
+          default:
+            break;
+        }
+      }
+      else
+      {
+        document.videoetaf.search_query.value = args.q;
+        submitForm(videoetaf);
+      }
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 10/01/02 at 08:06:09
+    by Dave's Quick Search Deskbar Search Wizard version 0.9.1 (beta),
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>
