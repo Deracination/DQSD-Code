@@ -42,7 +42,9 @@
       {
         document.mftheatreform.csz.value = args.q;
         submitForm(mftheatreform);
-      }       
+      }
+      else if( args.switches.length > 1 )
+        nullArgs("mf","?");      
       else
       {
         document.mff.query.value = args.q;
