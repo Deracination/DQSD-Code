@@ -1,0 +1,84 @@
+<search function="riaar">
+  <name>RIAA Radar</name>
+  <category>Entertainment</category>
+  <contributor>Thad Kerosky</contributor>
+  <link>http://www.riaaradar.org</link>
+  <email>nospam@thadk.net</email>
+  <description>
+  The RIAA Radar is a tool that music consumers can use to easily and instantly distinguish whether an album was released by a member of the Recording Industry Of America (RIAA)
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/upc</td><td> - </td><td>Search by UPC code.</td></tr>
+      <tr><td>/artist</td><td> - </td><td>Search by Artist.</td></tr>
+      <tr><td>/label</td><td> - </td><td>Search by Record Label.</td></tr>
+    </table>
+  </description>
+  <form name="riaaf"
+        method="post"
+        action="http://www.magnetbox.com/riaa/search.asp">
+    <input type="hidden" name="searchtype" value="KeywordSearch" />
+    <input type="hidden" name="keyword" value="" />
+  </form>
+  <script><![CDATA[
+    function riaar(q)
+    {
+      if( nullArgs("riaar", q) )
+        return;
+
+      // Parse switches with parseArgs:
+
+      // parseArgs usage:
+      // Arguments:
+      //    q                - string from the search function
+      //    expectedSwitches - list or array of the expected switch values
+      //    expandSwitches   - optional parameter [default = true] used to determine 
+      //                       if the switch shortcuts should be expanded (i.e. /f becomes /foo)
+      // Returns an object with these properties:
+      //    q        - the input string with the switches removed
+      //    switches - array of objects with these two properties:
+      //                  name:   expanded name of the matched switch (i.e. foo as in /foo:bar)
+      //                  value:  value of switch (i.e. bar as in /foo:bar)
+      //    switch_val - associative array with the switch name as the key with the switch value 
+      //                 as the value. (i.e. switch_val["foo"] = "bar" as in /foo:bar)
+
+      var args = parseArgs(q, "/upc, /artist, /label");
+      if ( args.switches.length > 0 )
+      {
+        switch( args.switches[0].name )
+        {
+          case "upc":
+            document.riaaf.searchtype.value = "UpcSearch";
+            break;
+          case "artist":
+            document.riaaf.searchtype.value = "ArtistSearch";
+            break;
+          case "label":
+            document.riaaf.searchtype.value = "ManufacturerSearch";
+            break;
+          default:
+            document.riaaf.searchtype.value = "KeywordSearch";
+            break;
+        }
+      }
+
+      // FORM variables for riaaf
+      //document.riaaf.searchtype.value = "";
+
+      // The wizard assigned the search string to this form field value because
+      // this field was the active element when the search file was generated.
+      // Change this to args.q if the search string is parsed with parseArgs.
+      document.riaaf.keyword.value = args.q;
+
+      submitForm(riaaf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 12/29/03 at 02:39:32
+    by Dave's Quick Search Deskbar Search Wizard version 1.2,
+    Copyright (c) 2004 Thad Kerosky; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>
