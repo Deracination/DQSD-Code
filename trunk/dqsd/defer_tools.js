@@ -115,7 +115,7 @@ function isURL(t)
   return false;
 }
 
-// parseArgs
+// parseArgs (Neel Doshi - 03/31/2002)
 //
 // Used to parse standard switches (/foo or /foo:bar).  Takes the following parameters:
 //    q - string from the search function
@@ -176,4 +176,52 @@ function parseArgs(q, expectedSwitches, expandSwitches)
   }
   q = args_array.join(' ');
   return { q:q, switches:switches, switch_val:switch_val };
+}
+
+
+// nullArgs (Neel Doshi - 04/09/2002)
+//
+// Many functions will open the <link> url when the query is null or the description if the query is "?".  This function automates this process.
+//    func - string name of the function
+//    q - string from the search function
+// The function returns false if the query was not null or "?" and true otherwise
+//
+function nullArgs(func, q)
+{
+	if (q == "")
+	{
+		if (searches[func].link)
+		{
+			openSearchWindow(searches[func].link);
+			return true;
+		}
+	}
+	if (q == "?" || q == "")
+	{
+		if (searches[func].desc)
+		{
+			var search_desc = searches[func].desc;
+
+			// convery <br> tags to newlines
+			var re = new RegExp("(<br)( )?(\/>)", "g");
+			search_desc = search_desc.replace(re, "\n");
+
+			// Replace tabs and multiple spaces in the description with one space
+			var re = new RegExp("((\\t)|( ))+", "g");
+			search_desc = search_desc.replace(re, " ");
+
+			// Replace newline space with nothing
+			var re = new RegExp("\n( )", "g");
+			search_desc = search_desc.replace(re, "");
+
+			// Remove any more HTML tags
+			var re = new RegExp("<(\/)?\\w+( )?(\/)?>", "g");
+			var search_desc = search_desc.replace(re, "");
+
+			alert(search_desc);
+			return true;
+		}
+	}
+	else
+		return false;
 }
