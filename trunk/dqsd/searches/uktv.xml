@@ -1,0 +1,41 @@
+<search function="uktv">
+  <name>UK TV Guide</name>
+  <description>UK Television guide - for today's channel 4 listing : "uktv 4"<br />
+    Sample channels :
+      <table style="margin-left: 20px" cellpadding="0" cellspacing="0" border="0">
+      <tr><td width="100px">bbc 1</td><td>            uktv 1</td></tr>
+      <tr><td>bbc 2</td><td>            uktv 2</td></tr>
+      <tr><td>itv1</td><td>             uktv 3</td></tr>
+      <tr><td>channel 4</td><td>        uktv 4</td></tr>
+      <tr><td>channel 5</td><td>        uktv 5</td></tr>
+      <tr><td>bbc radio 1</td><td>      uktv 502</td></tr>
+      <tr><td>bbc radio 2</td><td>      uktv 503</td></tr>
+      <tr><td>bbc radio 3</td><td>      uktv 504</td></tr>
+      <tr><td>bbc radio 4</td><td>      uktv 505</td></tr>
+      <tr><td>bbc radio 5</td><td> live uktv 506</td></tr>
+      </table>
+  </description>
+  <category>Entertainment</category>
+  <contributor>tomjcorcoran</contributor>
+  <link>http://www.uktvguide.com/</link>
+  <form name="uktvf"
+        target="_blank"
+        action="http://www.mydigiguide.com/dgx/wbl.dll?h=13"
+        method="post">
+    <input type="hidden" name="ch" value=""/>
+  </form>
+  <script><![CDATA[
+    function uktv(q)
+    {
+      if (q == "")
+      {
+        openSearchWindow("http://www.uktvguide.com/");
+      }
+      else
+      {
+        document.uktvf.ch.value = q;
+        submitForm(uktvf);
+      }
+    }
+  ]]></script>
+</search>
