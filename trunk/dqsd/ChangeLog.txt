@@ -78,6 +78,7 @@ Modified Searches
 * rxlib - Fixed to work with new ASP.NET-based site (Shawn K. Hall)
 * ch.xml - Base URL changed (James Robertson)
 * mq.xml - Now handles latitude/longitude searches (Gregory Krohne)
+* comx - Changed to use a single browser window to aid in winXP SP2 compatibility (Monty Scroggins) 
 
 Removed Searches
 * nwtsr and httpd replaced by whats (Kim Gräsman)
