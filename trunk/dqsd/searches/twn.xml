@@ -1,5 +1,7 @@
 <search function="twn">
   <name>The Weather Network Forecast</name>
+  <category>News</category>
+  <link>http://www.theweathernetwork.com/</link>
   <description>
     Search for Canadian weather forecasts by city.<br/>
     <div class="helpboxDescLabels">Example:</div>
@@ -7,33 +9,36 @@
       <tr><td>twn Halifax</td></tr>
     </table>
   </description>
-  <category>News</category>
-  <link>http://www.theweathernetwork.com/</link>
   <contributor>Sarah Sweeney</contributor>
-  <email>sarah@designshift.com</email>
-  <form name="weathernetworkform"
-        action="http://www.theweathernetwork.com/services/search/search.asp"
-        method="post">
-    <input type="hidden" name="recherche"/>
+  <email>poohbear@designshift.com</email>
+  <form name="twnf"
+        method="post"
+        action="http://www.theweathernetwork.com/common/scripts/search.htm">
+    <input type="hidden" name="recherche" value="" />
   </form>
   <script><![CDATA[
     function twn(q)
     {
-      if( nullArgs("twn",q) )
-        return false;
-      if( q == "" )
-        openSearchWindow("http://www.theweathernetwork.com/");
-      else
-      {
-        document.weathernetworkform.recherche.value = q;
-        submitForm(weathernetworkform);
-      }
+      if( nullArgs("twn", q) )
+        return;
+
+      // FORM variables for twnf
+
+      // The wizard assigned the search string to this form field value because
+      // this field was the active element when the search file was generated.
+      // Change this to args.q if the search string is parsed with parseArgs.
+      document.twnf.recherche.value = q;
+
+      submitForm(twnf);
     }
   ]]></script>
-
   <copyright>
-	Copyright (c) 2002 David Bau
-	Distributed under the terms of the
-	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
   </copyright>
-</search>  
+  <created_by>
+    This search file was initially created on 10/15/03 at 09:51:11
+    by Dave's Quick Search Deskbar Search Wizard version 1.0.1 ,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>
