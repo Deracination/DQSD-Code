@@ -1,0 +1,32 @@
+<search function="encarta">
+  <name>Encarta Online Deluxe Search</name>
+  <category>Reference</category>
+  <contributor> Andrew N. Carpenter</contributor>
+  <link>http://encarta.msn.com/</link>
+  <email>andy@andrewcarpenter.net</email>
+  <description>
+  Search Microsoft Encarta Encyclopedia
+  </description>
+  <form name="encartaf"
+        method="get"
+        action="http://encarta.msn.com/encarta/search.asp">
+
+    <input type="hidden" name="search" value="" />
+  </form>
+  <script><![CDATA[
+    function encarta(q)
+    {
+      if( nullArgs("encarta", q) )
+        return;
+
+      document.encartaf.search.value = q;
+
+      submitForm(encartaf);
+    }
+  ]]></script>
+  <copyright>
+	Copyright (c) 2002 David Bau
+	Distributed under the terms of the
+	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>
