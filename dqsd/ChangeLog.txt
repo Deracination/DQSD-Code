@@ -1,7 +1,7 @@
 -- What's new for ???? (date ????)
 
 Enhancements
-* 
+configure.xml - modified to include dynamically loadable color schemes. CSS files renamed (Monty Scroggins)
 
 Bug Fixes
 * 
