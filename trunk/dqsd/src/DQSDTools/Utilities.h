@@ -10,4 +10,4 @@ int URLMatchesFilename(LPCTSTR szURL, LPCTSTR szFile);
 // Return:
 //		The window handle, or null if we fail
 HWND
-UtilitiesFindDQSDWindow();
+UtilitiesFindDQSDWindow(bool bCheckForNonTaskbar = true);

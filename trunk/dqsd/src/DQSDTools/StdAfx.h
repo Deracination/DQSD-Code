@@ -34,9 +34,15 @@ extern CComModule _Module;
 #include <shlguid.h>				// SID_SWebBrowserApp, 
 #include <shellapi.h>				// ShellExecute, 
 #include <commctrl.h>
+#include <process.h> 
+
+
+#pragma warning(push, 3)
 
 #include <map>
 #include <string>
+
+#pragma warning(pop)
 
 //{{AFX_INSERT_LOCATION}}
 // Microsoft Visual C++ will insert additional declarations immediately before the previous line.

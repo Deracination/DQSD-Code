@@ -250,7 +250,7 @@ STDMETHODIMP CLauncher::ReadFile(BSTR bstrFilename, BSTR *pbstrResult)
 	do
 	{
 		memset( szData, 0, sizeof szData );
-		BOOL bResult = ::ReadFile( hFile, &szData, sizeof szData - 1, &dwBytesRead, NULL );
+		::ReadFile( hFile, &szData, sizeof szData - 1, &dwBytesRead, NULL );
 		bstrResult.Append( szData );
 	}
 	while ( dwBytesRead > 0 );
@@ -505,107 +505,50 @@ STDMETHODIMP CLauncher::get_VersionIsCorrect(int v1, int v2, int v3, int v4, VAR
 	}
 }
 
-STDMETHODIMP CLauncher::InitialiseBaseTooltip(void)
+
+__declspec(dllexport) void CALLBACK RestartExplorer(HWND hParent, HINSTANCE hInst, LPTSTR lpCmdLine, int nShow)
 {
-	return Error(_T("Tooltip functions not implemented yet..."), IID_ILauncher, E_NOTIMPL);
+	UNREFERENCED_PARAMETER(hParent);
+	UNREFERENCED_PARAMETER(hInst);
+	UNREFERENCED_PARAMETER(lpCmdLine);
+	UNREFERENCED_PARAMETER(nShow);
 
-/*
-	ATLTRACE("InitialiseBaseTooltip: Starting\n");
-
-
-	if(m_hBaseTooltipWnd != NULL)
-	{
-		DestroyWindow(m_hBaseTooltipWnd);
-	}
-
-	HWND hDQSDWindow = UtilitiesFindDQSDWindow();
-	if(hDQSDWindow == NULL)
-	{
-		return Error(_T("InitialiseBaseTooltip: Can't find DQSD window"), IID_ILauncher, E_FAIL);
-	}
-	
-	m_hBaseTooltipWnd = CreateWindowEx(WS_EX_TOPMOST,
-		TOOLTIPS_CLASS,
-		NULL,
-		WS_POPUP | TTS_NOPREFIX | TTS_ALWAYSTIP,		 
-		CW_USEDEFAULT,
-		CW_USEDEFAULT,
-		CW_USEDEFAULT,
-		CW_USEDEFAULT,
-		NULL, // hDQSDWindow,
-		NULL,
-		_Module.GetModuleInstance(),
-		NULL
-		);
-	if(m_hBaseTooltipWnd == NULL)
-	{
-		return Error(_T("Failed to create tooltip window"), IID_ILauncher, E_FAIL);
-	}
-
-	::SetWindowPos(m_hBaseTooltipWnd,
-		HWND_TOPMOST,
-		0,
-		0,
-		0,
-		0,
-		SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
-
-	TOOLINFO ti;
-	unsigned int uid = 0;       // for ti initialization
-	char strTT[30] = "This is your ToolTip string.";
-	LPTSTR lptstr = strTT;
-	RECT rect;                  // for client area coordinates
-
-	GetClientRect(hDQSDWindow, &rect);
-
-	// INITIALIZE MEMBERS OF THE TOOLINFO STRUCTURE 
-	ti.cbSize = sizeof(TOOLINFO);
-	ti.uFlags = TTF_SUBCLASS;
-	ti.hwnd = hDQSDWindow;
-	ti.hinst = _Module.GetModuleInstance();
-	ti.uId = 0;
-	ti.lpszText = lptstr;
-	// ToolTip control will cover the whole window
-	ti.rect.left = rect.left;    
-	ti.rect.top = rect.top;
-	ti.rect.right = rect.right;
-	ti.rect.bottom = rect.bottom;
-
-	// SEND AN ADDTOOL MESSAGE TO THE TOOLTIP CONTROL WINDOW 
-	::SendMessage(m_hBaseTooltipWnd, TTM_ADDTOOL, 0, (LPARAM)&ti);	
-
-	return S_OK;
-*/
+	HWND hwndShell = FindWindow("Progman", NULL);
+	::PostMessage(hwndShell, WM_QUIT, 0, 0L);
+	::WinExec("Explorer.exe",SW_SHOW);
 }
 
-
-// Will Dean - this was just an experiment to do with termination
-// it doesn't work, but I'm still thinking about it...
-
-#include <process.h> 
-
-void KillerThread(void*)
+void ShutdownThread(void*)
 {
-//	HANDLE hEvent = CreateEvent(NULL, TRUE, FALSE, "DQSDStopperEvent");
+	ATLTRACE("ShutdownThread: Starting\n");
+	// Wait for DQSD to be gone
+	LONG startTime = GetTickCount();
+	while(((LONG)GetTickCount() - startTime) < 10000)
+	{
+		if(!IsWindow(UtilitiesFindDQSDWindow(false)))
+		{
+			// We're gone
+			ATLTRACE("ShutdownThread: DQSD Gone\n");
 
-//	ResetEvent(hEvent);
-	//	WaitForSingleObject(hEvent, INFINITE);
-
-	Sleep(3000);
-
-	CoFreeUnusedLibraries();
-	CoFreeUnusedLibraries();
-	CoFreeUnusedLibraries();
+			// Restart Explorer
+			RestartExplorer(NULL,NULL,NULL,0);
+			return;
+		}
+		Sleep(100);
+	}
 }
-
 
 
 STDMETHODIMP CLauncher::ShutdownBar()
 {
-	return Error(_T("Shutdown bar not implemented yet..."), IID_ILauncher, E_NOTIMPL);
+//	return Error(_T("Shutdown bar not implemented yet..."), IID_ILauncher, E_NOTIMPL);
 
-/*
-	HWND hDQSDWnd = UtilitiesFindDQSDWindow();
+
+	HWND hDQSDWnd = UtilitiesFindDQSDWindow(false);
+	if(hDQSDWnd == NULL)
+	{
+		return Error(_T("DQSD was not found on the taskbar"), IID_ILauncher, E_FAIL);
+	}
 
 	// The window hierachy goes 
 //		 _T("Shell_TrayWnd"), 
@@ -636,16 +579,18 @@ STDMETHODIMP CLauncher::ShutdownBar()
 			if(info.hwndChild == hRebarBand)
 			{
 				// We've found our band - shut it down
-				DestroyWindow(hRebarBand);
+				::SendMessage(hRebar, RB_SHOWBAND, nBand, FALSE);
 				::SendMessage(hRebar, RB_DELETEBAND, nBand, 0);
 
-				_beginthread(KillerThread, 0, NULL);
+				ATLTRACE("Destroying band window: 0x%x\n", hRebarBand);
+				DestroyWindow(hRebarBand);
 
+				_beginthread(ShutdownThread, 0, NULL);
 
+				return S_OK;
 			}
 		}
 	}
 
-*/
-	return S_OK;
+	return Error(_T("Failed to shut DQSD bar"), IID_ILauncher, E_FAIL);
 }

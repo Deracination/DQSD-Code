@@ -29,7 +29,6 @@ import "ocidl.idl";
 		[id(10), helpstring("Register a key to be used with the Windows key to jump to the DQSD bar")] HRESULT RegisterHotKey(long hotkeyVkCode, BSTR bstrModifierName);
 		[id(11), helpstring("Map a virtual key code to a character code to be sent to the DQSD bar")] HRESULT MapKeyCode(long lVKCode, long lCharCode);
 		[propget, id(12), helpstring("Check if the DLL is of at least the specified version")] HRESULT VersionIsCorrect(int v1, int v2, int v3, int v4, [out, retval] VARIANT_BOOL *pVal);
-		[id(13), helpstring("method InitialiseBaseTooltip")] HRESULT InitialiseBaseTooltip();
 		[id(14), helpstring("method ShutdownBar")] HRESULT ShutdownBar();
 	};
 	[
