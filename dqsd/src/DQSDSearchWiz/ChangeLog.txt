@@ -1,4 +1,4 @@
-Version 0.4 (beta) - 09-Aug-2002
+Version 0.4 (beta) - 10-Aug-2002
 
 * Form element names with weird characters ([^_a-zA-Z]) are now referenced correctly.
 * Escape characters < > & in user text and HTML text
