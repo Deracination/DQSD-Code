@@ -18,6 +18,7 @@ New Searches
 * rw - Search the Ripe Whois Database for IP addresses
 * ccase - new function to convert case of a string - lower, upper, caps. (from Sarah Sweeney)
 * mb - MapBlast.com LineDrive search (from Gregory Krohne)
+* fs - FindSounds.com sound file search (from Gregory Krohne)
 
 Bug Fixes
 
