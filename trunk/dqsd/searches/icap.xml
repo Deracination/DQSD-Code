@@ -1,0 +1,79 @@
+<search function="icap">
+  <name>RIAA Radar Search</name>
+  <category>Shopping</category>
+  <contributor>Shawn K. Hall</contributor>
+  <link>http://www.danvine.com/icapture/</link>
+  <email>Shawn[@]ReliableAnswers.com</email>
+  <description>
+    View a URL as it looks in Safari 1.1 on Macintosh
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td> /home </td><td> - </td><td> Just go to iCapture's website </td></tr>
+      <tr><td> url </td><td> - </td><td> URL to preview </td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>icap /home </td></tr>
+      <tr><td>icap http://ReliableAnswers.com/ </td></tr>
+      <tr><td>icap www.dqsd.net </td></tr>
+    </table>
+  </description>
+
+  <form name="icapf" 
+        method="post" 
+        action="http://www.danvine.com/icapture/_capture.html">
+	<input type="hidden" name="url"	value="" />
+	<input type="hidden" name="browser" value="safari12" />
+	<input type="hidden" name="v"	value="" />
+	<input type="hidden" name="u"	value="" />
+  </form>
+
+  <script><![CDATA[
+    function icap(q){
+	if( nullArgs( "icap", q ) ) return false;
+
+	var args = parseArgs(q, "home");
+	for (var i = 0; i < args.switches.length; i++){
+	  sw = args.switches[i];
+	  switch(sw.name){
+	    case "h":
+	    case "home":
+		openSearchWindow( "http://www.danvine.com/icapture/" );
+		return false;
+	    default:
+	  }
+	}
+	//get url
+	  var sUrl = args.q;
+	  if (sUrl.indexOf(":") == -1)	{sUrl = "http://" + sUrl;}
+	  if (sUrl.indexOf(":") > 6)	{sUrl = "http://" + sUrl;}
+	  if (!isURL(sUrl))		{sUrl = "http://" + sUrl;}
+	  document.icapf.url.value = sUrl;
+
+	//obtain field 'seeds'
+	  var xmlHttp = new ActiveXObject("Microsoft.XmlHttp");
+	  xmlHttp.open("GET", "http://www.danvine.com/icapture/", false);
+	  xmlHttp.send(null);
+	  var sBody = xmlHttp.responseText;
+
+	//set 'v'
+	  var rx = /<input[^>]*name="v"[^>]*value="([^"]*)"[^>]*>/gim;
+	  var r;
+	  while ((r = rx.exec(sBody)) != null){var sVVV = r[1];}
+	  document.icapf.v.value = sVVV;
+
+	//set 'u'
+	  var rx = /<input[^>]*name="u"[^>]*value="([^"]*)"[^>]*>/gim;
+	  var r;
+	  while ((r = rx.exec(sBody)) != null){var sUUU = r[1];}
+	  document.icapf.u.value = sUUU;
+
+	//submit it
+          submitForm(icapf);
+    }
+  ]]></script>
+  <copyright>
+    This search file was created by Shawn K. Hall
+    Copyright (c) 2004 Shawn K. Hall; Distributed under the terms of the GNU General Public License, Version 2
+  </copyright>
+</search>
