@@ -6,14 +6,15 @@ clockdelay=5000;     // clock shows after 5 secs
 clockupdate=1000;    // clock updates every 1 sec
 clocklongwidth=139;  // long form is used if this pixel width is exceeded
 
+//reuseBrowserWindowMode = 2; // 0=new window always [default]; 1=single window for all; 2=single window for each search type
 launchmode=2;        // 0=use ie; 1=use default browser; 2=auto
 // language="en";    // uncomment to override default language
 //defaultsearch="gg"; // use google search
 cal=true;            // right-click shows popup calendar
-defaultcal="yhocal"; // click on a calendar day uses yahoo calendar
 //eventsfileurl="events.xml"; //default xml file for the popup calendar events
 //multiline=false;   // default=true; set this to false to prevent word wraps
 
+defaultcal="yhocal"; // click on a calendar day uses yahoo calendar
 // Note: valid calendars include
 // yhocal - Yahoo Calendar
 // msncal - MSN Calendar
