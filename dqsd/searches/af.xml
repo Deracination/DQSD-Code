@@ -56,6 +56,11 @@
           default:
         }
       }
+     else 
+       {
+          openSearchWindow("http://www.acronymfinder.com/af-query.asp?String=exact&Acronym=" + q);
+          return false;
+        }
         
       document.aff.Acronym.value = q;
       submitForm(aff);
