@@ -7,8 +7,8 @@
 Name "Dave's Quick Search Deskbar"
 
 ; What is the minimum required version of IE?
-!Define IE_MAJOR_REQUIRED  6
-!Define IE_MINOR_REQUIRED  0
+!Define IE_MAJOR_REQUIRED  5
+!Define IE_MINOR_REQUIRED  5
 
 ; Silent install
 DirShow hide
@@ -45,21 +45,18 @@ Section "Quick Search Deskbar (required)"
   ; Verify that they've got the correct version of IE installed.
   GetDLLVersion "shdocvw.dll" $1 $4
   IntOp $2 $1 & 0xffff0000
-  IntOp $2 $2 /    0x10000
+  IntOp $2 $2 / 0x00010000
   IntOp $3 $1 & 0x0000ffff
   IntOp $5 $4 & 0xffff0000
-  IntOp $5 $5 /    0x10000
+  IntOp $5 $5 / 0x00010000
   IntOp $6 $4 & 0x0000ffff
   DetailPrint 'IE Version: $2.$3.$5.$6: OK'
-  IntCmpU $2 ${IE_MAJOR_REQUIRED} ieMajorVersionOK ieVersionNotOK ieMajorVersionOK
+  IntCmp ${IE_MAJOR_REQUIRED} $2 ieMajorVersionOK ieVersionOK ieVersionNotOK
   ieMajorVersionOK:
-  IntCmpU $3 ${IE_MINOR_REQUIRED} ieMinorVersionOK ieVersionNotOK ieMinorVersionOK
-  ieMinorVersionOK:
-  Goto ieVersionOK
+  IntCmp ${IE_MINOR_REQUIRED} $3 ieVersionOK ieVersionOK ieVersionNotOK
 
   ieVersionNotOK:
-    MessageBox MB_YESNO|MB_ICONEXCLAMATION|MB_DEFBUTTON2 "This version of Dave's Quick Search Deskbar requires IE version ${IE_MAJOR_REQUIRED}.${IE_MINOR_REQUIRED} or higher.  You are currently running version $2.$3.$5.$6.$\n$\nWould you like to visit Microsoft's IE download web site now?" IDNO dontvisitms
-    ExecShell "" "http://www.microsoft.com/windows/ie"
+    MessageBox MB_YESNO|MB_ICONEXCLAMATION|MB_DEFBUTTON2 "This version of Dave's Quick Search Deskbar requires IE version ${IE_MAJOR_REQUIRED}.${IE_MINOR_REQUIRED} or higher.  You are currently running version $2.$3.$5.$6.$\n$\nWould you like to continue with the installation anyway?" IDNO dontvisitms
     dontvisitms:
     Abort
     
