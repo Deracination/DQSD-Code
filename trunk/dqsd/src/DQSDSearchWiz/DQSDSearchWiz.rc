@@ -58,9 +58,9 @@ VS_VERSION_INFO VERSIONINFO
  PRODUCTVERSION 0,0,1,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
- FILEFLAGS 0x1L
+ FILEFLAGS 0x21L
 #else
- FILEFLAGS 0x0L
+ FILEFLAGS 0x20L
 #endif
  FILEOS 0x4L
  FILETYPE 0x2L
@@ -73,7 +73,7 @@ BEGIN
             VALUE "Comments", "\0"
             VALUE "CompanyName", "\0"
             VALUE "FileDescription", "Dave's Quick Search Deskbar Search Wizard\0"
-            VALUE "FileVersion", "0, 0, 1, 0\0"
+            VALUE "FileVersion", "0.1\0"
             VALUE "InternalName", "DQSDSearchWiz\0"
             VALUE "LegalCopyright", "Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2\0"
             VALUE "LegalTrademarks", "\0"
@@ -81,8 +81,8 @@ BEGIN
             VALUE "OriginalFilename", "DQSDSearchWiz.DLL\0"
             VALUE "PrivateBuild", "\0"
             VALUE "ProductName", "Dave's Quick Search Deskbar Search Wizard\0"
-            VALUE "ProductVersion", "0, 0, 1, 0\0"
-            VALUE "SpecialBuild", "\0"
+            VALUE "ProductVersion", "0.1\0"
+            VALUE "SpecialBuild", "(alpha)\0"
         END
     END
     BLOCK "VarFileInfo"
@@ -120,7 +120,7 @@ IDD_DQSDWIZARDDLG DIALOGEX 0, 0, 368, 274
 STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 EXSTYLE WS_EX_CONTEXTHELP
 CAPTION "DQSD Search Wizard"
-FONT 8, "MS Sans Serif"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
 BEGIN
     RTEXT           "* &Name:",IDC_STATIC,6,9,45,8
     EDITTEXT        IDC_SearchName,53,6,102,14,ES_AUTOHSCROLL

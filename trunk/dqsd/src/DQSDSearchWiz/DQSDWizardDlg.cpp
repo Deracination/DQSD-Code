@@ -112,6 +112,11 @@ LRESULT CDQSDWizardDlg::OnInitDialog(UINT uMsg, WPARAM wParam, LPARAM lParam, BO
 
 	int cDisplayedForms = 0;
 
+	// See if any of the fields in the form has focus
+
+	CComPtr< IHTMLElement > spActiveElement;
+	m_spDoc2->get_activeElement( &spActiveElement );
+
 	for ( int iForm = 0; iForm < cForms; iForm++ )
 	{
 		CComPtr< IDispatch > spFormDisp;
@@ -137,34 +142,14 @@ LRESULT CDQSDWizardDlg::OnInitDialog(UINT uMsg, WPARAM wParam, LPARAM lParam, BO
 			CComPtr< IHTMLElement >* pspForm = new CComPtr< IHTMLElement >( spForm ); // these are deleted in the dialog's dtor
 			m_vecFormHTMLs.push_back( pspForm );
 
-			// See if any of the fields in the form has focus
-/*			
-			BOOL bFormHasFocus = FALSE;
+			// If the current form contains the active element, then will select
+			// it by default
 
-			CComQIPtr< IHTMLFormElement > spFormElement( *pspForm );
-			long cFormElements = 0;
-			if ( SUCCEEDED( spFormElement->get_length( &cFormElements ) ) )
-			{
-				for ( int iFormElem = 0; iFormElem < cFormElements; iFormElem++ )
-				{
-					_variant_t varItem( static_cast<long>(iFormElem), VT_I4 );
-					CComPtr< IDispatch > spIDisp;
-					spFormElement->item( varItem, varItem, &spIDisp );
-
-					CComQIPtr< IHTMLInputElement > spInputElement( spIDisp );
-					if ( spInputElement )
-					{
-						VARIANT_BOOL bFormControlSelected = FALSE;
-						if ( SUCCEEDED( spInputElement->get_status( &bFormControlSelected ) ) )
-						{
-							bFormHasFocus = TRUE;
-						}
-					}
-				}
-			}
-*/
+			VARIANT_BOOL bContainsActiveElement = VARIANT_FALSE;
+			spForm->contains( spActiveElement, &bContainsActiveElement );
 
 			// Add the form information to the list
+			
 			LVITEM lvi;
 			memset( &lvi, 0, sizeof lvi );
 
@@ -174,7 +159,7 @@ LRESULT CDQSDWizardDlg::OnInitDialog(UINT uMsg, WPARAM wParam, LPARAM lParam, BO
 			lvi.lParam = reinterpret_cast<LPARAM>(pspForm);
 			int iPos = ctlFormList2.SendMessage( LVM_INSERTITEM, 0, (LPARAM)&lvi );
 
-//			ListView_SetCheckState( ctlFormList2.m_hWnd, iPos, bFormHasFocus );
+			ListView_SetCheckState( ctlFormList2.m_hWnd, iPos, bContainsActiveElement );
 
 			lvi.mask = LVIF_TEXT;
 			lvi.iItem = iPos;
@@ -358,10 +343,37 @@ LRESULT CDQSDWizardDlg::OnOK(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHa
 		HANDLE hFile = ::CreateFile(ofn.lpstrFile, GENERIC_WRITE, FILE_SHARE_READ, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 		if ( hFile != INVALID_HANDLE_VALUE )
 		{
+			// Save the file
+
 			DWORD dwBytesWritten = 0;
 			::WriteFile( hFile, strSearchFile.c_str(), strSearchFile.length(), &dwBytesWritten, NULL );
 			::FlushFileBuffers( hFile );
 			::CloseHandle( hFile );
+
+			// Throw the file up in an editor if they so choose
+
+			CRegKey rk;
+			BOOL bEditResult = TRUE;
+			string strEditor = _T("notepad.exe");
+			if ( ERROR_SUCCESS == rk.Open( HKEY_CURRENT_USER, _T("SOFTWARE\\Dave's Quick Search Deskbar\\DQSDSearchWizard\\Settings") ) )
+			{
+				DWORD dwValue = 0;
+				if ( ERROR_SUCCESS == rk.QueryValue( dwValue, _T("EditResult") ) )
+					bEditResult = dwValue;
+
+				TCHAR szValue[ MAX_PATH + 1 ];
+				DWORD dwSize = LENGTHOF( szValue );
+				if ( ERROR_SUCCESS == rk.QueryValue( szValue, _T("ResultEditor"), &dwSize ) )
+					strEditor = string( szValue );
+			}
+			rk.Close();
+
+			if ( bEditResult )
+			{
+				TCHAR szCommandLine[ 1024 ];
+				_tcscpy( szCommandLine, ( _T("\"") + strEditor + _T("\" \"") + string( ofn.lpstrFile ) + _T("\"") ).c_str() );
+				::WinExec( szCommandLine, SW_SHOW );
+			}
 		}
 
 		EndDialog(wID);
