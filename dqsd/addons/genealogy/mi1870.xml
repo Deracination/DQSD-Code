@@ -6,14 +6,11 @@
   	<table class="helpboxDescTable">
   		<tr><td>/county</td><td> - </td><td>Specify county name</td></tr>
   	</table>
-    <div class="helpboxDescLabels">Usage:</div>
-  	<table class="helpboxDescTable">
-  		<tr><td>mi1870 /county:&lt;<i>county name</i>&gt; &lt;<i>last name</i>&gt;</td></tr>
-   	</table>
-    <div class="helpboxDescLabels">Example:</div>
+    <div class="helpboxDescLabels">Examples:</div>
     <table class="helpboxDescTable">
-  		<tr><td>mi1870 McCoy</td></tr>
-  	</table>
+	<tr><td>mi1870 McCoy</td></tr>
+	<tr><td>mi1870 jones, eliza /county berrien</td></tr>
+    </table>
   </description>
   <category>Genealogy
 	<category>Census</category>
@@ -38,20 +35,15 @@
 	if( nullArgs("mi1870", q) )
 		return false;
 
-        document.mi1870f.County.value = "";
-	var args = parseArgs(q, "county");
-	if (args != null) {
-		if (args.switches.length == 1) {
-			if (args.switches[0].name == "county") {
-				document.mi1870f.County.value =  args.switch_val["county"];
-			}
-		}
-		document.mi1870f.Last_Name.value = genealogy_parse_surname(q);
-		document.mi1870f.First_Name.value = genealogy_parse_givenname(q);
-		submitForm(mi1870f);
-		return;
+	var county = "";
+	var args = genealogy_parseArgs(q, "county");
+	if (genealogy_hasArg(args, "county")) {
+		county = args.switch_val["county"];
 	}
-	nullArgs("mi1870", "?");
+        document.mi1870f.County.value = county;
+	document.mi1870f.Last_Name.value = genealogy_parse_surname(args.q);
+	document.mi1870f.First_Name.value = genealogy_parse_givenname(args.q);
+	submitForm(mi1870f);
     }
   ]]></script>
 </search>

@@ -1,27 +1,28 @@
 <search function="cadi">
-  <COMMENT>
-
-    This search file was initially created by Dave's Quick Search Deskbar
-    Search Wizard version 0.4 (beta) on 08/18/02 at 21:07:59
-
-    Even though this XML search will probably load and is a healthy start
-    toward a completed search, please be aware that this search will probably
-    not work as is and will require some human inspection and modification.
-
-  </COMMENT>
   <name>California Death Index 1940-1997</name>
   <category>Genealogy</category>
   <contributor>Brent Beardsley</contributor>
   <link>http://userdb.rootsweb.com/ca/death/search.cgi</link>
   <email></email>
   <description>
+    Search the California Death Index from 1940-1997<br/>
+    <div class="helpboxDescLabels">Switches:</div>
+  	<table class="helpboxDescTable">
+  		<tr><td>/birthplace</td><td> - </td><td>Specify birth place state</td></tr>
+  		<tr><td>/father</td><td> - </td><td>Specify father's last name</td></tr>
+  		<tr><td>/mother</td><td> - </td><td>Specify mother's maiden name</td></tr>
+  		<tr><td>/sex</td><td> - </td><td>Specify sex: Male or Female</td></tr>
+  	</table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+	<tr><td>cadi McGlashan</td></tr>
+	<tr><td>cadi mcglashan /m beaver</td></tr>
+	<tr><td>cadi mcglashan /s f</td></tr>
+    </table>
   </description>
   <form name="cadif"
         method="post"
         action="http://vitals.rootsweb.com/ca/death/search.cgi">
-
-    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
-
     <input type="hidden" name="surname" value="" />
     <input type="hidden" name="stype" value="" />
     <COMMENT>
@@ -37,15 +38,6 @@
     <input type="hidden" name="mlast" value="" />
     <input type="hidden" name="flast" value="" />
     <input type="hidden" name="sex" value="" />
-    <COMMENT>
-      The input element above, "sex", was a SELECT element with the following options...
-      <select name="sex">
-        <option value="">Any</option>
-        <option value="1">Male</option>
-        <option value="2">Female</option>
-      </select>
-    </COMMENT>
-
     <input type="hidden" name="year" value="" />
     <input type="hidden" name="bplace" value="" />
     <COMMENT>
@@ -254,25 +246,44 @@
       if( nullArgs("cadi", q) )
         return;
 
-      if( q == "" )
-      {
-        openSearchWindow("http://userdb.rootsweb.com/ca/death/search.cgi");
-        return;
+      var args = genealogy_parseArgs(q, "birthplace, sex, type, mother, father"); 
+      var sex = "";
+      if (genealogy_hasArg(args, "sex")) {
+	sex = args.switch_val["sex"];
+        var sexList =   new Array("Any", "Male", "Female");
+	var sexValue =  new Array("",    "1",     "2");
+	for (var i=0; i < sexList.length; i++) {
+	   if (sexList[i].match(new RegExp("^"+sex, "i"))) {
+	     sex = sexValue[i];
+	     break;
+	   }
+	}
+	if (i == sexList.length) {
+	  sex = "";
+	}
+      }
+      var birthplace = "";
+      if (genealogy_hasArg(args, "birthplace")) {
+	birthplace = genealogy_lookup_place_abbrev(args.switch_val["birthplace"]).toUpperCase();
       }
 
-      // FORM variables for cadif
+      var fatherlast = "";
+      if (genealogy_hasArg(args, "father")) {
+	fatherlast = genealogy_parse_surname(args.switch_val["father"]);
+      }
+      var motherlast = "";
+      if (genealogy_hasArg(args, "mother")) {
+	motherlast = genealogy_parse_surname(args.switch_val["mother"]);
+      }
 
-      // The wizard assigned the search string to this form field value because
-      // this field was the active element when the search file was generated.
-      // Change this to args.q if the search string is parsed with parseArgs.
-      document.cadif.surname.value = genealogy_parse_surname(q);
+      document.cadif.surname.value = genealogy_parse_surname(args.q);
+      document.cadif.given.value = genealogy_parse_givenname(args.q);
       document.cadif.stype.value = "";
-      document.cadif.given.value = genealogy_parse_givenname(q);
-      document.cadif.mlast.value = "";
-      document.cadif.flast.value = "";
-      document.cadif.sex.value = "";
+      document.cadif.mlast.value = motherlast;
+      document.cadif.flast.value = fatherlast;
+      document.cadif.sex.value = sex;
       document.cadif.year.value = "";
-      document.cadif.bplace.value = "";
+      document.cadif.bplace.value = birthplace;
       document.cadif.dyear.value = "";
       document.cadif.dplace.value = "";
 
