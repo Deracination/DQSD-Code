@@ -17,17 +17,31 @@
 	    if (nullArgs("qsfind", q))
 	    	return false;
 
+	    var switch_list = new Array("function");
+		var args = parseArgs(q, switch_list);
+
 	    // Create an array to store the search results.
 	    var SearchResults = new Array();
 	    var SearchFound = false;
-		for (var i in searches)
-		{
-			if (isNaN(i))
+	    if ( typeof args.switch_val["function"] != "undefined")
+	    {
+	    	if ( typeof searches[args.q] != "undefined" )
+	    	{
+	    		SearchResults[args.q] = searches[args.q];
+				SearchFound = true;
+			}
+	    }
+	    else
+	    {
+			for (var i in searches)
 			{
-				if( searches[i].desc.toLowerCase().match(q) || searches[i].name.toLowerCase().match(q) || (searches[i].link ? searches[i].link.toLowerCase().match(q) : 0) )
+				if (isNaN(i))
 				{
-					SearchResults[i] = searches[i];
-					SearchFound = true;
+					if( searches[i].desc.toLowerCase().match(args.q) || searches[i].name.toLowerCase().match(args.q) || (searches[i].link ? searches[i].link.toLowerCase().match(args.q) : 0) )
+					{
+						SearchResults[i] = searches[i];
+						SearchFound = true;
+					}
 				}
 			}
 		}
