@@ -31,6 +31,8 @@ function openDocument(path)
   }
 }
 
+var submitcount = 0;
+
 // Submit a form either with the default browser or with IE
 function submitForm(form, dontChangeTarget)
 {
