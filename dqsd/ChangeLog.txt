@@ -18,6 +18,7 @@ New Searches
 * pgrab - Price searches, product info, vendor ratings & reviews. (from Andrew D. Myers)
 * httpd - Netcraft's "Whats that site running" database/web server information
 * archi - Archive.org's Way Back Machine.
+* videoeta - Search the videoeta.com site for video release information
 
 Modified Searches
 
