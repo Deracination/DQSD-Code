@@ -163,7 +163,7 @@ calheight=156;
 *  1 = double click
 *  default is 0
 */
-calStart=1;
+calStart=0;
 
 
 /* Default calendar. clicking on a calendar day will spawn the defined online calendar.
