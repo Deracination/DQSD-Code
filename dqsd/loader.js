@@ -151,52 +151,11 @@ try
 }
 catch (except) {}
 
-try
-{
-  // Get searches in the 'searches' subdirectory
-  var searches = getFiles( "searches\\*.xml" );
-  searches = searches.split('\n');
-  
-  //sort the list of searches
-  searches.sort(); 
-  
-  for ( var i = 0; i < searches.length; i++ )
-  {
-    // getFiles doesn't always work as expected; a problem with FindFirstFile/FindNextFile
-    // especially with files named *.xml_sav or something similar.
-    if ( !/\.xml$/.test( searches[i] ) )
-    {
-      continue;
-    }
+// Load searches from search directory
+loadSearches();
 
-    var xml = readFile("searches\\" + searches[i]);
-    if (!xmldoc.loadXML(xml))
-    {
-      alert('Unable to load search from ' + searches[i] + ':  ' + xmldoc.parseError.reason );
-      continue;
-    }
-    else
-    {
-      var searchNode = xmldoc.selectSingleNode("/search");
-      var funcname = searchNode.attributes.getNamedItem("function").text;
-      if (alertmode && searchRoot.selectSingleNode("/searches/search[@function='" + funcname + "']"))
-      {
-        qualifiedalert('Search "' + funcname + '" found in ' + "searches\\" + searches[i] + ' already exists.');
-        continue;
-      }
-      else if (alertmode && searchNode.selectSingleNode("/search/FORM"))
-      {
-        alert('Search "' + funcname + '" has a <FORM> element which probably needs to be lowercased (<form>)');
-      }
-      else
-      {
-        searchRoot.appendChild(searchNode);
-      }
-    }
-  }
-}
-catch (except) {}
-
+// Load optional add-ons from addons directory
+loadAddons();
 
 // 2. eval all the scripts and doc.write all the forms
 
@@ -269,3 +228,76 @@ function addAliasesFromFile( aliasFile, category )
       }
     }
   }
+
+
+function loadSearches()
+{
+
+  try
+  {
+    // Get searches in the 'searches' subdirectory
+    var fileSearches = getFiles( "searches\\*.xml" ).split('\n');
+    
+    for ( var i = 0; i < fileSearches.length; i++ )
+    {
+      // getFiles doesn't always work as expected; a problem with FindFirstFile/FindNextFile
+      // especially with files named *.xml_sav or something similar.
+      if ( !/\.xml$/.test( fileSearches[i] ) )
+        continue;
+      
+      loadSearchFile( "searches\\" + fileSearches[i] );
+
+    }
+  }
+  catch (except) {}
+}
+
+function loadAddons()
+{
+  try
+  {
+    // Get searches in the 'searches' subdirectory
+    var fileSearches = getFiles( "addons\\*" ).split('\n');
+    
+    for ( var i = 0; i < fileSearches.length; i++ )
+    {
+    
+      if ( fileSearches[i] == "." )
+        continue;
+
+      loadSearchFile( "addons\\" + fileSearches[i] + "\\" + fileSearches[i] + ".xml" );
+
+    }
+
+  }
+  catch (except) {}
+}
+
+function loadSearchFile( path )
+{
+  var xml = readFile(path);
+  if (!xmldoc.loadXML(xml))
+  {
+    alert('Unable to load search from ' + path + ':  ' + xmldoc.parseError.reason );
+    return;
+  }
+  else
+  {
+    var searchNode = xmldoc.selectSingleNode("/search");
+    var funcname = searchNode.attributes.getNamedItem("function").text;
+    if (alertmode && searchRoot.selectSingleNode("/searches/search[@function='" + funcname + "']"))
+    {
+      qualifiedalert('Search "' + funcname + '" found in ' + path + ' already exists.');
+      return;
+    }
+    else if (alertmode && searchNode.selectSingleNode("/search" + "/FORM"))
+    {
+      alert('Search "' + funcname + '" has a <FORM> element which probably needs to be lowercased (<form>)');
+    }
+    else
+    {
+      searchRoot.appendChild(searchNode);
+    }
+  }
+}
+
