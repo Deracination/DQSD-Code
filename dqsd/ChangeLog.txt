@@ -22,6 +22,7 @@ New Searches
 * olk - onelook.com search (Steven Ourada)
 * whsc - search whois.sc
 * mmoz - Search for music info at MusicMoz.org
+* j2 - Searches JavaScript-2.com, an index of 8,000+ free JavaScript codes offered by the top JavaScript code libraries (M. Wong)
 
 Modified Searches
 

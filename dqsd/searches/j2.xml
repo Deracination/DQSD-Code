@@ -1,0 +1,42 @@
+<search function="j2">
+  <name>JavaScript-2.com</name>
+  <description>
+    Searches 8,000+ free JavaScript codes offered by the top JavaScript code libraries.<br/>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>j2 menu</td></tr>
+		<tr><td>j2 form validation</td></tr>
+		<tr><td>j2 popup window</td></tr>
+  	</table>
+  </description>
+  <category>Computers<category>Programming</category></category>
+  <link>http://www.javascript-2.com/</link>
+  
+  <form name="j2f"
+        action="http://www.javascript-2.com/cgi-bin/js/search.pl"
+        method="get">
+        <input type="hidden" name="Match" value="1" />
+    <input type="hidden" name="Realm" value="All" />
+    <input type="hidden" name="p:pm" value="1" />
+    <input type="hidden" name="q" value="" />
+  </form>
+  
+  <script><![CDATA[
+    function j2(q)
+    {
+      if( nullArgs("j2",q) )
+        return false;
+      else
+      {
+        document.j2f.q.value = q;
+        submitForm(j2f);
+      }
+    }
+  ]]></script>
+
+  <copyright>
+	Copyright (c) 2002 David Bau
+	Distributed under the terms of the
+	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>
