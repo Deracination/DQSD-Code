@@ -131,7 +131,7 @@ function appendMRUMenuSelections( mb )
             // Create 'mneumonic' using the last digit of the number
             var mnemonic = (menus.length - i).toString();
             mnemonic = mnemonic.substr( 0, mnemonic.length - 1 ) + "&" + mnemonic.substr( mnemonic.length - 1 );
-            mb.AppendMenuItem( mnemonic + "  " + search.name + '\t' + alias, search.aliases[0], 0 );
+            mb.AppendMenuItem( mnemonic + "  " + search.name + '\t' + alias, search.aliases[0] );
             break;
           }
         }
@@ -146,7 +146,7 @@ function showpop()
   document.deff.q.focus();
   document.deff.q.createTextRange().select();
   var mb = new ActiveXObject("DQSDTools.MenuBuilder");
-  mb.AppendMenuItem( "About DQSD...", "about", 0 );
+  mb.AppendMenuItem( "About DQSD...", "about" );
   mb.AppendSeparator( 0 );
   for (i = 0; i < categoryarray.length; i++)
   {
