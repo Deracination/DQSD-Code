@@ -89,7 +89,12 @@ function about()
     txt = txt.replace(/(GNU.*2)\s\((.*txt)\)/, '<br><a href=$2 target=GNU>$1</a>');
     txt = txt.replace(/\n#[^\n]*/g, '');
     txt = txt.replace(/<table/, jumplist + "<table width='100%'");
+
+	// dollar signs are match variables for replace, so any literal dollar signs need to be
+	// converted to HTML code so they will display properly
+    helptable = helptable.replace(/\$/g, "&#036;");
     txt = txt.replace(/<\/table>/, helptable + "</table>");
+
     txt = txt.replace(/\n\n/g, '<p>');
     txt = txt.replace(/\n/g, ' ');
     txt = txt.replace(/----/, '</center>');
