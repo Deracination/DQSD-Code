@@ -390,13 +390,7 @@ LRESULT CDQSDWizardDlg::OnOK(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHa
                         "\r\n    function ") + strSearchName + _T("(q)"
                         "\r\n    {"
                         "\r\n      if( nullArgs(\"") + strSearchName + _T("\", q) )"
-                        "\r\n        return;"
-						"\r\n"
-						"\r\n      if( q == \"\" )"
-						"\r\n      {"
-						"\r\n        openSearchWindow(\"") + strLink + _T("\");"
-						"\r\n        return;"
-						"\r\n      }");
+                        "\r\n        return;");
 	
 	strSearchFile += GetSwitches();
 
