@@ -40,6 +40,7 @@ New Searches
 * whitl - Searches WhittleBit, a user-rateable search engine (Tom Corcoran)
 * nwtsr - Displays operating system and web server for host (David Resnick)
 * aspfaq - Search the Active Server Pages FAQ (Shawn K. Hall)
+* mnr - Check Mailinator.com email account
 
 Modified Searches
 
