@@ -8,6 +8,7 @@ Enhancements
 
 Bug Fixes
 * Removed 'Type "!<em>prefix</em>" to see only matching entries.' from help. This action launches lucky Google.
+* Fixed clock bug found by John Bairen, where the clock would fail to display if displayHelp was false (Kim Gräsman)
 
 New Searches
 * riaar - riaaradar.org RIAA label and artist membership search. (Thad Kerosky)
