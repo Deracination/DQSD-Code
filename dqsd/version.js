@@ -21,7 +21,7 @@ function versionCheck()
     {
       // The DLL version has to be great than or equal to
       // this number
-      if(!testObject.VersionIsCorrect(3,1,5,0))
+      if(!testObject.VersionIsCorrect(3,1,6,0))
       {
          alert("The DQSD helper DLL is out of date.\nPlease reboot and run the setup program again.");
          bSuccess = false;
@@ -69,41 +69,66 @@ function checkWebForUpdateNotifyAll()
   checkWebForUpdate(false)
 }
 
+// These are required to be global for the MSXML DOM
+// asynchronous load to work properly.
+var checkUpdateOnlineVersionDOM = null;
+var checkUpdateQuiet = true;
+var DQSD_CHECKUPDATE_URL = "http://cvs.sourceforge.net/viewcvs.py/*checkout*/dqsd/dqsd/version.xml?rev=HEAD&content-type=text/xml";
+
 function checkWebForUpdate()
 {
-  var quiet = true;
+  checkUpdateQuiet = true;
   if ( arguments.length )
   {
-    var quiet = arguments[0];
+    checkUpdateQuiet = arguments[0];
   }
 
-  if ( quiet && ( typeof checkForUpdate == 'undefined' || !checkForUpdate ) )
+  if ( checkUpdateQuiet && ( typeof checkForUpdate == 'undefined' || !checkForUpdate ) )
     return;
     
-  checkForUpdate = false;  // only display once per session
-
   try
   {
-    var rversion = getVersionFromVersionFile( "http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/*checkout*/dqsd/dqsd/version.xml?content-type=text/xml" );
-    var lversion = getVersionFromVersionFile( "version.xml" );
-
-    // If there's a later version and the user wants to be notified of it, or
-    // there's a later version and there was an explicit update query, then show them
-    // what's available
-    if ( ( versioncmp( rversion, lversion ) > 0 ) && ( notifyUser( rversion ) || !quiet ) )
-    {
-      window.showModalDialog("versiondialog.htm", { lversion:lversion, rversion:rversion }, "dialogHeight: 150px; dialogWidth: 300px; dialogTop: " + (screen.height / 2 - 75) + "px; dialogLeft: " + (screen.width / 2 - 150) + "px; edge: Raised; center: Yes; help: No; resizable: Yes; status: No; scroll: No;");
-    }
-    else if ( !quiet )
-    {
-      rversion.htmlDescription = "You are using the latest version.<br/>For more details visit <a tabindex=-1 href='http://www.dqsd.net' onclick='window.close();'>www.dqsd.net</a>."
-      window.showModalDialog("versiondialog.htm", { lversion:lversion, rversion:rversion }, "dialogHeight: 100px; dialogWidth: 300px; dialogTop: " + (screen.height / 2 - 50) + "px; dialogLeft: " + (screen.width / 2 - 150) + "px; edge: Raised; center: Yes; help: No; resizable: Yes; status: No; scroll: No;");
-    }
+    // Load asynchronously to make sure explorer.exe doesn't lock up if this takes a while
+    // (has been known to happen)
+    checkUpdateOnlineVersionDOM = getMSXMLDOMDocumentInstance();
+    checkUpdateOnlineVersionDOM.onreadystatechange = onVersionLoadReadyStateChange;
+    checkUpdateOnlineVersionDOM.load( DQSD_CHECKUPDATE_URL );
   }
   catch(e)
   {
-    if ( !quiet )
+    if ( !checkUpdateQuiet )
       alert("Unable to check for update.  Check your internet connection.");
+  }
+  
+  checkForUpdate = false;  // only display once per session  
+}
+
+function onVersionLoadReadyStateChange()
+{
+  if( typeof checkUpdateOnlineVersionDOM != 'undefined' && checkUpdateOnlineVersionDOM.readyState == 4 ) // finished loading
+  {
+    if( checkUpdateOnlineVersionDOM.parseError.errorCode == 0 )
+    {
+      var rversion = getVersion( checkUpdateOnlineVersionDOM.documentElement );
+      var lversion = getVersionFromVersionFile( "version.xml" );
+  
+      // If there's a later version and the user wants to be notified of it, or
+      // there's a later version and there was an explicit update query, then show them
+      // what's available
+      if ( ( versioncmp( rversion, lversion ) > 0 ) && ( notifyUser( rversion ) || !checkUpdateQuiet ) )
+      {
+        window.showModalDialog("versiondialog.htm", { lversion:lversion, rversion:rversion }, "dialogHeight: 150px; dialogWidth: 300px; dialogTop: " + (screen.height / 2 - 75) + "px; dialogLeft: " + (screen.width / 2 - 150) + "px; edge: Raised; center: Yes; help: No; resizable: Yes; status: No; scroll: No;");
+      }
+      else if ( !checkUpdateQuiet )
+      {
+        rversion.htmlDescription = "You are using the latest version.<br/>For more details visit <a tabindex=-1 href='http://www.dqsd.net' onclick='window.close();'>www.dqsd.net</a>."
+        window.showModalDialog("versiondialog.htm", { lversion:lversion, rversion:rversion }, "dialogHeight: 100px; dialogWidth: 300px; dialogTop: " + (screen.height / 2 - 50) + "px; dialogLeft: " + (screen.width / 2 - 150) + "px; edge: Raised; center: Yes; help: No; resizable: Yes; status: No; scroll: No;");
+      }
+    }
+    else
+    {
+      alert( "Failed to parse on-line version information. Error message: " + checkUpdateOnlineVersionDOM.parseError.reason );
+    }
   }
 }
 
