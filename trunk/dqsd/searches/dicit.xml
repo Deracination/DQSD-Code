@@ -1,6 +1,11 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
-The previous statement allows using accentuated characters.
+
+Do not switch encoding - MSXML in many IE 5.5 installations cannot handle it - xml version="1.0" encoding="ISO-8859-1"
+
+Instead, use &#232;, &#224;, etc.
+-->
+
+<!--
 - SGP 20020716
 
 The /en and /it switches require a free user registration on the site.
@@ -25,7 +30,7 @@ send out cookies to save login parameters.
 			<tr><td>dicit /it boss</td></tr>
 		</table>
 		<div class="helpboxDescLabels">Per registrarsi:</div>
-		Ci si registra gratis sul sito (dicit). Per tutte le ricerche è meglio riutilizzare la stessa finestra del browser, altrimenti la login verrà richiesta per ogni nuova ricerca che la comporti.
+		Ci si registra gratis sul sito (dicit). Per tutte le ricerche &#232; meglio riutilizzare la stessa finestra del browser, altrimenti la login verr&#224; richiesta per ogni nuova ricerca che la comporti.
 	</description>
 	<category>Reference</category>
 	<link>http://www.garzantilinguistica.it/</link>

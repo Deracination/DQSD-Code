@@ -192,5 +192,5 @@ function getFirstAlias( search )
 // one place, if it needs to be changed in the future.
 function getMSXMLDOMDocumentInstance()
 {
-  return new ActiveXObject("Msxml2.DOMDocument");
+  return new ActiveXObject("Msxml.DOMDocument");
 }

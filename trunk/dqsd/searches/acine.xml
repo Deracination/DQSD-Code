@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?> <!-- allows the use of accentuated characters -->
+<!-- Do not switch encoding - MSXML in many IE 5.5 installations cannot handle it - xml version="1.0" encoding="ISO-8859-1" -->
 
 <search function="acine">
   <name>Allocine.com</name>
