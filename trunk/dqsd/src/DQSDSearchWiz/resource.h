@@ -9,7 +9,7 @@
 #define IDC_FormList                    201
 #define IDI_HOT                         202
 #define IDC_FormList2                   202
-#define IDC_SearchName                  203
+#define IDC_SearchTitle                 203
 #define IDC_Switches                    204
 #define IDC_Contributor                 205
 #define IDC_Description                 206
@@ -17,6 +17,7 @@
 #define IDC_Link                        208
 #define IDC_Email                       209
 #define IDC_FormFields                  210
+#define IDC_SearchName                  211
 
 // Next default values for new objects
 // 
