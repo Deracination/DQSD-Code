@@ -168,6 +168,7 @@ launchmode=2;                  // 0 = use ie; 1 = default browser; 2 = auto
 language = navigator.userLanguage.substr(0,2);
 showbutton = 2;
 
+cal=true;
 calwidth=179;
 calheight=148;
 calbackground="menu";
@@ -3247,7 +3248,7 @@ var popcal = null;
 function showcal()
 {
 
-  if (ie_version < 5.5)
+  if (ie_version < 5.5 || !cal)
     return true;
 
   if (popcal == null)
