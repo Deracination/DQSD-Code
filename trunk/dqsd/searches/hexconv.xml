@@ -42,8 +42,8 @@
 
     function hexconv(c)
     {
-      if (c == "")
-        return;
+      if( nullArgs("hexconv",c) )
+        return false;
     
       var dec = decfromhex(c);
       var int = parseInt(dec);
