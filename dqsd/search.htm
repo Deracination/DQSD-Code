@@ -549,6 +549,29 @@ function okd()
   return false;
 }
 
+// clickgo: handle clicking the logo image
+function clickgo()
+{
+  var t = document.deff.q.value;
+  // remove local-default values
+  if (t == local(QUICK_SEARCH)  ||
+      t == local(HELP_TEXT)     || 
+      document.deff.q.className == "clock")
+    document.deff.q.value = "";
+  //set default action/url
+  if (typeof bannerlink == "undefined") { bannerlink = "";}
+  if (document.deff.q.value == "" && bannerlink != "") {
+    // detect URLs, filenames, etc to open directly
+    if (direct(bannerlink)) return false;
+    //not a url and not empty, must be a script
+    document.deff.q.value = bannerlink;
+  }
+  //search now
+  def();
+
+  return false;
+}
+
 function prevnext(direction)
 {
   // save the value in the history edit buffer
@@ -742,10 +765,10 @@ function reload()
           if (typeof bannerheight == "undefined") { bannerheight = "-1"; }
           if (typeof bannerwidth  == "undefined") { bannerwidth  = "-1"; }
           document.write(
-            '<img src=\"'
-            + bannerurl + '\" '
+            '<img src=\"' + bannerurl + '\" '
             + (bannerheight != "-1" ? 'height=\"' + bannerheight + '\"' : '')
             + (bannerwidth  != "-1" ? 'width=\"'  + bannerwidth  + '\"' : '')
+            + 'onclick=\"clickgo()\" '
             + 'id=\"banner\" />'
             + '<nobr>');
         }
@@ -877,8 +900,8 @@ function handleResize()
       {
         if (bannerwidth != -1)
         {
-          document.deff.q.style.left         = gowidth + bannerwidth + 2;
-          document.deff.gobutton.style.left  = 0 + bannerwidth + 2;
+          document.deff.q.style.left         = gowidth + bannerwidth + 1;
+          document.deff.gobutton.style.left  = 0 + bannerwidth + 1;
         }
         else
         {
@@ -890,8 +913,8 @@ function handleResize()
       {
         if (bannerwidth != -1)
         {
-          document.deff.q.style.left         = 0 + bannerwidth + 2;
-          document.deff.gobutton.style.left  = targetwidth + bannerwidth + 2;
+          document.deff.q.style.left         = 0 + bannerwidth + 1;
+          document.deff.gobutton.style.left  = targetwidth + bannerwidth + 1;
         }
         else
         {
@@ -907,8 +930,8 @@ function handleResize()
       if (bannerwidth != -1)
       {
         document.deff.gobutton.style.display = "none";
-        document.deff.q.style.left           = 0 + bannerwidth + 2;
-        targetwidth                          = document.body.clientWidth - bannerwidth + 2;
+        document.deff.q.style.left           = 0 + bannerwidth + 1;
+        targetwidth                          = document.body.clientWidth - bannerwidth + 1;
       }
       else
       {
