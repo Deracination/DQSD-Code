@@ -16,6 +16,9 @@
  *  - fixed the bug where "today" was not being highlighted if today is Sunday
  * modified by Harry-Anton Talvik 03/11/2002
  *  - configured the calender to use week start day
+ * modified by Will Dean 2003-1-9
+ *  - Speed improvements to very large strcat operation in build
+ *  - Caching of inlinestyle conversion
  *
  * TODO:
  *  - add ability to distingush b/w different kind of events
@@ -122,6 +125,8 @@ var WEEK_START_DAY = weekStartDay;    // "constant" to indicate a day which star
 var Calendar = new Date(); //stores the date the user is looking at
 var Today = new Date(); // stores the date marked as today
 var popcal = null;
+var bNeverBuilt = true;
+var inlineStyles = new String();
 
 function showcal()
 {
@@ -157,6 +162,8 @@ function updatecal()
 {
   calupdatetimer = null;
   popcal.document.body.innerHTML = buildcal();
+  
+  var gCompleteTime = new Date();
 }
 
 function opencal(d)
@@ -171,7 +178,12 @@ function opencal(d)
 
 function buildcalhtmlhead()
 {
-  return '<table class=cal width=100% height=100% cellpadding=0 cellspacing=0 border=0><tr><td><style>' + convertStylesToInline() + '</style>';
+  if(bNeverBuilt)
+  {
+    inlineStyles = convertStylesToInline();
+    bNeverBuilt = false;
+  } 
+  return '<table class=cal width=100% height=100% cellpadding=0 cellspacing=0 border=0><tr><td><style>' + inlineStyles + '</style>';
 }
 
 function buildcalheader()
@@ -236,56 +248,60 @@ function buildcal()
   }
   var TD_end = '</td>';
 
-  cal = buildcalhtmlhead();
-
-  cal += '<table width=100% height=100% border=0 cellspacing=0 cellpadding=0><tr>';
-  cal += '<td colspan=7><table width=100% height=100% border=0 cellspacing=0 cellpadding=0><tr>';
-  cal += '<td><table align=left height=100% border=0 cellspacing=0 cellpadding=0><tr>';
-  cal += '<td class=calnavyear width=0 title="' + local(PREV_YEAR) + '" ' +
+  var cal = buildcalhtmlhead();
+  
+  var tableStart = '<table width=100% height=100% border=0 cellspacing=0 cellpadding=0><tr>';
+  tableStart += '<td colspan=7><table width=100% height=100% border=0 cellspacing=0 cellpadding=0><tr>';
+  tableStart += '<td><table align=left height=100% border=0 cellspacing=0 cellpadding=0><tr>';
+  tableStart += '<td class=calnavyear width=0 title="' + local(PREV_YEAR) + '" ' +
          ' onmouseup="parent.movecal(-12);return false;" ' +
          ' onmouseover=this.className="calnavyearhigh" ' +
          ' onmouseout=this.className="calnavyear" >&nbsp;&laquo;&nbsp;</td>';
-  cal += '<td class=calnavmonth width=0 title="' + local(PREV_MONTH) + '" ' +
+  tableStart += '<td class=calnavmonth width=0 title="' + local(PREV_MONTH) + '" ' +
          ' onmouseup="parent.movecal(-1);return false;" ' +
          ' onmouseover=this.className="calnavmonthhigh" ' +
          ' onmouseout=this.className="calnavmonth" >&nbsp;&lsaquo;&nbsp;</td></tr></table></td>';
 
   if (weekday < 0)
   {
-    cal += '<td id=calhead class=calmonth title="' + local(GO_TO_TODAY) + '" ' +
+    tableStart += '<td id=calhead class=calmonth title="' + local(GO_TO_TODAY) + '" ' +
       ' onmouseup="parent.Calendar=new Date();parent.movecal(0);" ' +
       ' onmouseover=this.className="calmonthhigh" ' +
       ' onmouseout=this.className="calmonth" >';
   }
   else
   {
-    cal += '<td id=calhead class=calmonth colspan=' + (DAYS_OF_WEEK - 2) + '>';
+    tableStart += '<td id=calhead class=calmonth colspan=' + (DAYS_OF_WEEK - 2) + '>';
   }
 
-  cal += buildcalheader();
+  tableStart += buildcalheader();
 
-  cal += '</td>';
-  cal += '<td><table align=RIGHT height=100% border=0 cellspacing=0 cellpadding=0><tr>';
-  cal += '<td class=calnavmonth width=0 title="' + local(NEXT_MONTH) + '" ' +
+  tableStart += '</td>';
+  tableStart += '<td><table align=RIGHT height=100% border=0 cellspacing=0 cellpadding=0><tr>';
+  tableStart += '<td class=calnavmonth width=0 title="' + local(NEXT_MONTH) + '" ' +
          ' onmouseup="parent.movecal(+1);return false;" ' +
          ' onmouseover=this.className="calnavmonthhigh" ' +
          ' onmouseout=this.className="calnavmonth" >&nbsp;&rsaquo;&nbsp;</td>';
-  cal += '<td class=calnavyear width=0 title="' + local(NEXT_YEAR) + '" ' +
+  tableStart += '<td class=calnavyear width=0 title="' + local(NEXT_YEAR) + '" ' +
          ' onmouseup="parent.movecal(+12);return false;" ' +
          ' onmouseover=this.className="calnavyearhigh" ' +
          ' onmouseout=this.className="calnavyear" >&nbsp;&raquo;&nbsp;</td></tr></table></td>';
-  cal += '</td></tr></table>';
-  cal += TR_end + TR_start;
+  tableStart += '</td></tr></table>';
+  tableStart += TR_end + TR_start;
+
+  cal += tableStart;
 
   //printing day labels
+  var tempString = new String();
   for(index=0; index < DAYS_OF_WEEK; index++)
   {
-    cal += day_start;
-    cal += getDayName(DAYS_OF_WEEK + ((index + WEEK_START_DAY - 1) % DAYS_OF_WEEK) + 1);
-    cal += day_end;
+    tempString += day_start;
+    tempString += getDayName(DAYS_OF_WEEK + ((index + WEEK_START_DAY - 1) % DAYS_OF_WEEK) + 1);
+    tempString += day_end;
   }
-
-  cal += TD_end;
+  tempString += TD_end;
+  
+  cal += tempString;
 
   //fill spaces until first day in the month
   var whichmonth = -1;
@@ -294,16 +310,20 @@ function buildcal()
 
   Calendar.setDate(Calendar.getDate() - filldays);
 
+  var tableString = new String();
+
   //draw six weeks loop for each day in the month
   for (index=0; index < DAYS_OF_WEEK * 6; index++)
   {
     var month_day = Calendar.getDate();
     if (month_day == CAL_DAY_START) whichmonth += 1;
+    var dayString = new String();
+    var nowTime = Calendar.getTime();
 
     week_day = Calendar.getDay();
 
     // start new row if we hit a new week
-    if (week_day == WEEK_START_DAY - 1) cal += TR_end + TR_start;
+    if (week_day == WEEK_START_DAY - 1) dayString += TR_end + TR_start;
     var ent = null;
     var lent = null;
     querystr = 'event[date[(number(@year)="'+year+'" || not(@year)) && (number(@month)="'+(month+1)+'" || not(@month)) && number(@day)="'+month_day+'"]]';
@@ -319,48 +339,53 @@ function buildcal()
 
     // highlight appropriately
     if (whichmonth != 0)
-      cal += gray_start(Calendar.getTime()) + month_day + gray_end;
+      dayString += gray_start(nowTime) + month_day + gray_end;
     else
     {
       if (highlight && ent)
-        cal += todayevent_start(Calendar.getTime(), ent.getAttribute("name"));
+        dayString += todayevent_start(nowTime, ent.getAttribute("name"));
       else
         if (highlight)
-          cal += today_start(Calendar.getTime());
+          dayString += today_start(nowTime);
         else
           if (ent)
-            cal += eventday_start(Calendar.getTime(), ent.getAttribute("name"));
+            dayString += eventday_start(nowTime, ent.getAttribute("name"));
           else
             if (lent)
-              cal += eventday_start(Calendar.getTime(), lent.getAttribute("name"));
+              dayString += eventday_start(nowTime, lent.getAttribute("name"));
             else
-              cal += TD_start(Calendar.getTime());
+              dayString += TD_start(nowTime);
 
-      cal += month_day;
+      dayString += month_day;
 
       if (highlight && ent)
-        cal += todayevent_end;
+        dayString += todayevent_end;
       else
         if (highlight)
-          cal += today_end;
+          dayString += today_end;
         else
           if (ent)
-            cal += eventday_end;
+            dayString += eventday_end;
           else
-            cal += TD_end;
+            dayString += TD_end;
+            
     }
 
     //advance the date for next iteration
     Calendar.setDate(Calendar.getDate()+1);
 
+    tableString += dayString;
+
   }// end for loop
 
-  cal += TR_end;
-
+  cal += tableString + TR_end + '</table></td></tr></table>'
+  
   //reset back the calendar's month
   Calendar.setMonth(Calendar.getMonth()-1);
-  cal += '</table>'
-  cal += '</td></tr></table>';
+  
+//  var endTime = new Date();
+//  var timeDiff = endTime - startTime;
+//  alert(timeDiff);
 
   //return the html string
   return cal;

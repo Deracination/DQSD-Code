@@ -91,13 +91,20 @@ function convertStylesToInline()
   var stylestring = new String();
   for (var j = 0; j < document.styleSheets.length; j++)
   {
-    for (var i = 0; i < document.styleSheets[j].rules.length; i++)
+	var intermediateString = '';
+	var rules = document.styleSheets[j].rules;
+	var rulesLength = rules.length;
+	
+    for (var i = 0; i < rulesLength; i++)
     {
-      stylestring += document.styleSheets[j].rules[i].selectorText + ' {' + document.styleSheets[j].rules[i].style.cssText + '}'
+      intermediateString += rules[i].selectorText + ' {' + rules[i].style.cssText + '}'
     }
+    
+    stylestring += intermediateString;
   }
   return(stylestring);
 }
+
 
 function protocolHandled(url)
 {
