@@ -1,0 +1,33 @@
+<search function="rwobit">
+  <name>Rootsweb Obituary Lookup Volunteers</name>
+  <description>
+    Goto Rootsweb Obituary Lookup Volunteers web pages.<br/>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>rwobit mi</td></tr>
+      <tr><td>rwobit alaska</td></tr>
+    </table>
+  </description>
+  <link>http://freepages.genealogy.rootsweb.com/~obitl/ovlist.html</link>
+  <category>Genealogy<category>Lookups</category></category>
+  <contributor>Brent Beardsley</contributor>
+
+  <script src="addons/genealogy/genealogy_lib.js"></script>
+  <script><![CDATA[
+    function rwobit(q)
+    {
+      if( nullArgs("rwobit", q) )
+        return false;
+
+      var state = genealogy_parse_place_state(q);
+      var search_url = "http://freepages.genealogy.rootsweb.com/~obitl/ovlist.html";
+      var links = genealogy_get_known_page_links(search_url);
+      var search_place_num = genealogy_lookup_place(state);
+      if (search_place_num >= 0) {
+        search_url = links[search_place_num];
+      }
+      openSearchWindow(search_url);
+    }
+    ]]>
+  </script>
+</search>
