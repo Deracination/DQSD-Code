@@ -25,10 +25,14 @@ Enhancements
 * Andrew Francis added basic character escaping to the date/time format string.  
   Allows use of literal characters like 'd' that would normally be interpreted 
   as date/time formats.
+* Modified automatic update notification to default to only final releases.  This
+  can customized to notify for final or beta and final releases.
 
 Bug Fixes
 
 * URLs, filenames, etc. are now detected with leading whitespace
+* Will Dean added a possible fix for missing tray icons at startup.  Also,
+  refreshing icons can be done explicitly by typing 'refreshicons'.
 
 
 -- What's new for 3.0.0.20 (beta)

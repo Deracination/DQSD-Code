@@ -398,3 +398,14 @@ displayHelp = true;
 */
 checkForUpdate = true;
 checkForUpdateDelay = 10000; // millisecond delay after first search
+
+/* Notify for only final ('final') or both beta and final ('beta,final').
+*  This is ignored if 'checkForUpdateTypes' is false
+*/
+checkForUpdateTypes = 'final';
+
+
+/* Broadcast a message to refresh the tray icons.  This may solve the problems
+*  for some with disappearing tray icons at startup.
+*/
+refreshIconsAtStartup = true;

@@ -873,8 +873,9 @@ function postStartup()
     keyboardHook.MapKeyCode( historySearchVkCode, 2 ); // Map key to the history search
 
 //   keyboardHook.ShutdownBar();
-
-	refreshIcons();
+    
+    if ( refreshIconsAtStartup )
+      refreshIcons();
   }
   catch(e)
   {
