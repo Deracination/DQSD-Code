@@ -121,6 +121,7 @@ New / Modified Searches
 * telfr - French telephone lookup (telfr)
 * googletrans - Google.com Language Translation
 * dicfr - Search French words definition
+* af - Acronym Finder now accepts switches: /reverse, /begins_with, /wildcard
 
 
 Miscellaneous
