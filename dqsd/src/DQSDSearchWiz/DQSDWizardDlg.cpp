@@ -4,6 +4,7 @@
 #include "DQSDWizardDlg.h"
 #include "AboutDlg.h"
 #include "OptionsDlg.h"
+#include "ModulVer.h"
 
 /////////////////////////////////////////////////////////////////////////////
 // CDQSDWizardDlg
@@ -13,6 +14,16 @@ LRESULT CDQSDWizardDlg::OnInitDialog(UINT uMsg, WPARAM wParam, LPARAM lParam, BO
 	USES_CONVERSION;
 
 	CenterWindow( GetActiveWindow() ); // ??? should probably use the actual browser window
+
+	TCHAR szModule[ MAX_PATH + 1 ];
+	if ( GetModuleFileName( _Module.GetResourceInstance(), szModule, LENGTHOF(szModule) ) )
+	{
+		CModuleVersion moduleVersion;
+		if ( moduleVersion.GetFileVersionInfo( szModule ) )
+		{
+			SetWindowText( ( _T("DQSD Search Wizard - Version ") + moduleVersion.GetValue( _T("ProductVersion") ) + _T(" ") + moduleVersion.GetValue( _T("SpecialBuild") ) ).c_str() );
+		}
+	}
 
 	// Get DQSD install dir
 

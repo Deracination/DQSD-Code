@@ -54,8 +54,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 0,0,1,0
- PRODUCTVERSION 0,0,1,0
+ FILEVERSION 0,0,2,0
+ PRODUCTVERSION 0,0,2,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x21L
@@ -73,7 +73,7 @@ BEGIN
             VALUE "Comments", "\0"
             VALUE "CompanyName", "\0"
             VALUE "FileDescription", "Dave's Quick Search Deskbar Search Wizard\0"
-            VALUE "FileVersion", "0.1\0"
+            VALUE "FileVersion", "0.2\0"
             VALUE "InternalName", "DQSDSearchWiz\0"
             VALUE "LegalCopyright", "Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2\0"
             VALUE "LegalTrademarks", "\0"
@@ -81,8 +81,8 @@ BEGIN
             VALUE "OriginalFilename", "DQSDSearchWiz.DLL\0"
             VALUE "PrivateBuild", "\0"
             VALUE "ProductName", "Dave's Quick Search Deskbar Search Wizard\0"
-            VALUE "ProductVersion", "0.1\0"
-            VALUE "SpecialBuild", "(alpha)\0"
+            VALUE "ProductVersion", "0.2\0"
+            VALUE "SpecialBuild", "(beta)\0"
         END
     END
     BLOCK "VarFileInfo"
