@@ -94,14 +94,15 @@ Modified Searches
 * acine - fit site changes (MLL)
 * cjfr - fit site changes (MLL)
 * jsref - attempts at fitting site changes (MLL)
-* encyfr - moved to right category (MLL)
 * winres - changed parsing to correct 'undefined' error and added ability to use preference variables (Shawn K. Hall)
+* enc - changed according to site changes (MLL)
 
 Removed Searches
 * nwtsr and httpd replaced by whats (Kim Gräsman)
 * dicfr - site discontinued (MLL)
 * pcm - site modified, search no longer works (John Bairen)
 * wiq - duplicate of wordiq (John Bairen)
+* encyfr - site discontinued (MLL)
 
 Miscellaneous
 * Installer now lives by the following rules: (Kim Gräsman)
