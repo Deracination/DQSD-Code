@@ -50,6 +50,7 @@ Section "Genealogy"
 
   File "*.xml"
   File "genealogy_lib.js"
+  File "fhlc_func.js"
 
   ; Uninstallation keys
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\$R3" "DisplayName" "${APPNAME} (remove only)"
