@@ -4,7 +4,7 @@
       Directly login as an admin to your setiqueue web admin interface without having the hassle to go through the login page.<br/>
     <div class="helpboxDescLabels">Usage:</div>
     <table class="helpboxDescTable">
-      <tr><td>setiq &lt;<i>password</i>&gt; [/server:&lt;<i>serveraddress</i>&gt; [/port:&lt;<i>portnumber</i>&gt;]] [/connect[:&lt;<i>duration</i>&gt;]] [/display::&lt;<i>page</i>&gt;]</td></tr>
+      <tr><td>setiq &lt;<i>password</i>&gt; [/server:&lt;<i>serveraddress</i>&gt; [/port:&lt;<i>portnumber</i>&gt;]] [/connect[:&lt;<i>duration</i>&gt;]] [/display:&lt;<i>page</i>&gt;]</td></tr>
     </table>
     <a class="helpboxDescLabels">Switches:</a><br />
     <table class="helpboxDescTable">
