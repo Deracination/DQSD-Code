@@ -19,6 +19,7 @@ New Searches
 * adtunes - search adtunes.com (Sarah Sweeney)
 * revdic - reverse dictionary lookup(Sarah Sweeney)
 * ch.xml - UK Companies House (James R.)
+* comx.xml - search comics.com and display any of 85 daily comics in popup window (Monty Scroggins) 
 
 Modified Searches
 * jdk - updated urls for j2ee and 1.4, added 1.5, 1.2, 1.1 and api switches (Brent Beardsley)
