@@ -1,0 +1,24 @@
+<search function="e2">
+  <name>e2</name>
+  <description>search for anything "e2 whatever"</description>
+  <category>Reference</category>
+  <link>http://www.everything2.com</link>
+  <contributor>Bradley Dean</contributor>
+  <form name="e2f"
+        action="http://www.everything2.com/"
+        method="post">
+    <input type="hidden" name="node_id" value=""/>
+  </form>
+  <script><![CDATA[
+    function e2(q)
+    {
+      if (q == "")
+        openSearchWindow("http://www.everything2.com/");
+      else
+      {
+        document.e2f.node_id.value=q;
+        submitForm(e2f);
+      }
+    }
+  ]]></script>
+</search>
