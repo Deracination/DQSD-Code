@@ -1,0 +1,79 @@
+<search function="lipsum">
+  <name>Lorem Ipsum Generator</name>
+  <category>Reference</category>
+  <contributor>Glenn Carr</contributor>
+  <link>http://www.lipsum.com/</link>
+  <email>glenn at glenncarr dot com</email>
+  <description>
+  Generate Loren Ipsum text
+    <div class="helpboxDescLabels">Parameters:</div>
+    <table class="helpboxDescTable">
+      <tr><td>[count]</td><td> - </td><td>Number of paragraphs or lists to generate - default is 1.</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/paragraphs</td><td> - </td><td>[default] Generate paragraphs</td></tr>
+      <tr><td>/lists</td><td> - </td><td>Generate list groups</td></tr>
+      <tr><td>/random</td><td> - </td><td>Don't start with the standard &quot;Lorem ipsum dolor sit amet...&quot;</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>lipsum /lists</td></tr>
+      <tr><td>lipsum 10 /ran</td></tr>
+      <tr><td>lipsum 3 /lists</td></tr>
+    </table>
+  </description>
+  <form name="lipsumf"
+        method="post"
+        action="http://www.lipsum.com/cgi-bin/lipsum.pl">
+    <input type="hidden" name="amount" value="1" />
+    <input type="hidden" name="start" value="yes" />
+    <input type="hidden" name="what" value="paras" />
+    <COMMENT>
+      The input element above, "what" was a set of radio buttons with the following options...
+      "paras", "words", "bytes", "lists"
+    </COMMENT>
+  </form>
+  <script><![CDATA[
+    function lipsum(q)
+    {
+      var defaultItemCount = "1";
+      
+      if ( q == "" )
+        q = defaultItemCount;
+    
+      if( nullArgs("lipsum", q) )
+        return;
+        
+      document.lipsumf.what.value = "paras";
+      document.lipsumf.start.value = "yes";
+
+      var args = parseArgs(q, "paragraphs, lists, random");
+      for (var iSwitch = 0; iSwitch < args.switches.length; iSwitch++)
+      {
+        switch( args.switches[iSwitch].name )
+        {
+          case "lists":
+            document.lipsumf.what.value = "lists";
+            break;
+          case "random":
+            document.lipsumf.start.value = "";
+            break;
+        }
+      }
+
+      document.lipsumf.amount.value = args.q.length > 0 ? args.q : defaultItemCount;
+
+      submitForm(lipsumf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 11/19/02 at 16:22:08
+    by Dave's Quick Search Deskbar Search Wizard version 1.0.0 ,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>
