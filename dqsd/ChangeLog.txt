@@ -15,6 +15,7 @@ New Searches
 Modified Searches
 
 * amaz - added domain switch to search either amaz. com de uk jp ca or fr (from Wolfgang Deutsch)
+* sf - added exact and foundry switches for requiring all words and going to a foundry page (from Brent Beardsley)
 
 Bug Fixes
 
