@@ -1,3 +1,7 @@
+Version 1.x
+
+* Recognizes TEXTAREA as a valid selected field (Kim Gräsman)
+
 Version 1.2 (final) 14-May-2003
 
 * Stopped excluding INPUT elements of type="submit" since some searches need them.

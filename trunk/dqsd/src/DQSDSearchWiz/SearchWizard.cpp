@@ -118,8 +118,24 @@ STDMETHODIMP CSearchWizard::Exec(const GUID*, DWORD nCmdID, DWORD, VARIANTARG*, 
 			// Give the user a chance to select a FORM field
 			CComPtr< IHTMLElement > spActiveElement;
 			spActiveFrameDoc->get_activeElement( &spActiveElement );
-			CComPtr< IHTMLInputElement > spActiveInputElement;
-			if ( !spActiveElement || FAILED( spActiveElement.QueryInterface( &spActiveInputElement ) ) )
+
+			bool bWarn = (spActiveElement == NULL);
+			if(!bWarn)
+			{
+				// See if an INPUT element is selected
+				CComPtr< IHTMLInputElement > spActiveInputElement;
+				if(FAILED(spActiveElement.QueryInterface(&spActiveInputElement)))
+				{
+					// See if a TEXTAREA element is selected
+					CComPtr< IHTMLTextAreaElement > spActiveTextAreaElement;
+					if(FAILED(spActiveElement.QueryInterface(&spActiveTextAreaElement)))
+					{
+						bWarn = true;
+					}
+				}
+			}
+
+			if(bWarn)
 			{
 				if ( IDNO == ::MessageBox( hwndBrowser, 
 								   _T("No fields have been selected.  Selecting or clicking in the field which contains the search "
