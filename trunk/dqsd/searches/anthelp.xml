@@ -1,0 +1,48 @@
+<search function="anthelp">
+  <name>Ant Task help pages</name>
+  <description>
+    Display Ant Task help pages.<br/>
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td><nobr>/core [default]</nobr></td><td> - </td><td>Lookup help page for a core task</td></tr>
+      <tr><td><nobr>/optional</nobr></td><td> - </td><td>Lookup help page for an optional task</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>anthelp copyfile</td></tr>
+      <tr><td>anthelp /opt ftp</td></tr>
+    </table>
+  </description>
+  <link>http://jakarta.apache.org/ant/manual/</link>
+  <category>Computers</category>
+  <contributor>Brent Beardsley</contributor>
+
+  <script><![CDATA[
+    function anthelp(q)
+    {
+      if( nullArgs("anthelp", q) )
+        return false;
+
+      var args = parseArgs(q,"core, optional");
+      var cmd = args.q.toLowerCase();
+      var cmdDir = "CoreTasks";
+      var cmdList = "coretasklist";
+      if (args.switches.length > 1) {
+	nullArgs("anthelp", "?");
+	return false;
+      }
+      if( args.switches.length == 1 && args.switches[0].name == "optional") {
+        cmdDir = "OptionalTasks";
+	cmdList = "optionaltasklist";
+      }
+
+      if (cmd.length > 0) {
+        openSearchWindow("http://jakarta.apache.org/ant/manual/"+cmdDir+"/"+cmd+".html");
+      } else {
+        openSearchWindow("http://jakarta.apache.org/ant/manual/"+cmdList+".html");
+      }
+    }
+    ]]>
+  </script>
+</search>
+	
