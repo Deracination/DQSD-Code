@@ -20,7 +20,7 @@ Enhancements
 
 Bug Fixes
 
-* 
+* updated the link to the FAQ in the about box.
 
 
 -- What's new for 3.0.0.19 (beta)
