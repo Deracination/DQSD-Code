@@ -1,0 +1,4 @@
+Version 0.3 (beta) - 08-Aug-2002
+
+* Allow creation of empty search
+* Detect active field and use it as default search field
