@@ -1,32 +1,26 @@
 <search function="mrqe">
-  <name>Movie Review Query Engine</name>
-  <description>
-    Search for movie reviews across many different sources.<br/>
-    <div class="helpboxDescLabels">Example:</div>
-    <table class="helpboxDescTable">
-      <tr><td>mrqe shrek</td></tr>
-   </table>
-  </description>
+  <name>MRQE Search</name>
+  <description>Search the Movie Review Query Engine for movie reviews: "mrqe jaws"</description>
   <category>Entertainment</category>
   <link>http://www.mrqe.com/</link>
-  <contributor>Monty Scroggins</contributor>
-  
-  <form name="mrqef" 
-        method="get" 
-        action="http://www.mrqe.com/lookup">
+  <contributor>Steven J. Heil</contributor>
+  <email>sjheil_at_hotmail_dot_com</email>
+  <form name="mrqef"
+        action="http://www.mrqe.com/lookup"
+        method="get">
     <input type="hidden" name="isindex" value=""/>
   </form>
-  
   <script><![CDATA[
     function mrqe(q)
     {
-      if( nullArgs("mrqe", q) )
-        return false;
+      if( q == "" )
+        openSearchWindow("http://www.mrqe.com/");
       else
       {
-          document.mrqef.isindex.value=q;
-          submitForm(mrqef);
+        document.mrqef.isindex.value = q;
+        submitForm(mrqef);
       }
     }
   ]]></script>
 </search>
+
