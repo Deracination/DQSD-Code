@@ -1,0 +1,46 @@
+<search function="yg">
+  <name>Yahoo Groups</name>
+  <description>Search yahoo groups for messages or members.  Usage: "yg &lt;groupname&gt; [/messages:string] [/members:name]".  E.g., "yg dqsdd /mes:localpreferences" or "yg dqsdd /mem:carr"</description>
+  <category>Search the Web</category>
+  <link>http://groups.yahoo.com/</link>
+  <contributor>Glenn Carr</contributor>
+    <form name="ygf" action="http://groups.yahoo.com/rsearch" method="get">
+      <input type="hidden" name="type" value="query" />
+      <input type="hidden" name="where" value="" />
+      <input type="hidden" name="group" value="" />
+      <input type="hidden" name="query" value="" />
+      <input type="hidden" name="expand" value="1" />
+    </form>
+  <script><![CDATA[
+    function yg(q)
+    {
+      var args = parseArgs(q, "messages, members");
+      if( args.q == "" || args.switches.length == 0)
+      {
+        openSearchWindow("http://groups.yahoo.com/");
+      }
+      else if( args.switches.length >= 1 )
+      {
+        document.ygf.query.value = args.switches[0].value;
+        switch( args.switches[0].name )
+        {
+          case "messages":
+            document.ygf.where.value = "/group/" + args.q + "/messagesearch";
+            submitForm(ygf);
+            break;
+          case "members":
+            document.ygf.where.value = "/group/" + args.q + "/members";
+            document.ygf.group.value = "sub";
+            submitForm(ygf);
+            break;
+          default:
+            openSearchWindow("http://groups.yahoo.com/");
+        }
+      }
+      else
+      {
+        openSearchWindow("http://groups.yahoo.com/group/" + args.q );
+      }
+    }
+  ]]></script>
+</search>
