@@ -25,7 +25,7 @@
       }
 
       var state_search_url = 'http://www.usgenweb.org/statelinks-table.html';
-      var args = parseArgs(q, "map, table, list");
+      var args = genealogy_parseArgs(q, "map, table, list");
       if (args.switches.length > 0) {
 	switch (args.switches[0].name) {
 	case 'map':

@@ -1,14 +1,4 @@
 <search function="ssdi">
-  <COMMENT>
-
-    This search file was initially created by Dave's Quick Search Deskbar
-    Search Wizard version 0.4 (beta) on 08/18/02 at 23:43:17
-
-    Even though this XML search will probably load and is a healthy start
-    toward a completed search, please be aware that this search will probably
-    not work as is and will require some human inspection and modification.
-
-  </COMMENT>
   <name>Rootsweb Social Security Death Index</name>
   <category>Genealogy</category>
   <contributor>Brent Beardsley</contributor>
@@ -16,11 +6,16 @@
   <email></email>
   <description>
   Search the Social Security Death Index at Rootsweb
+  <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>ssdi 123-45-6789</td></tr>
+      <tr><td>ssdi jones, john</td></tr>
+    </table>
   </description>
   <form name="ssdif"
         method="post"
         action="http://ssdi.genealogy.rootsweb.com/cgi-bin/ssdi.cgi">
-    <input type="hidden" name="stat" value="" />
+    <input type="hidden" name="stat" value="a" />
     <input type="hidden" name="lastname" value="" />
     <input type="hidden" name="nt" value="exact" />
     <COMMENT>
@@ -31,11 +26,25 @@
         <option value="metaphone">Metaphone</option>
       </select>
     </COMMENT>
-
     <input type="hidden" name="firstname" value="" />
     <input type="hidden" name="middlename" value="" />
     <input type="hidden" name="ssn" value="" />
+    <input type="hidden" name="zip" value="" />
+    <input type="hidden" name="lump" value="" />
+    <input type="hidden" name="ls" value="" />
+    <input type="hidden" name="lus" value="" />
+    <input type="hidden" name="lc" value="" />
+    <input type="hidden" name="luc" value="" />
+    <input type="hidden" name="lct" value="" />
+    <input type="hidden" name="luct" value="" />
+    <input type="hidden" name="birth" value="" />
+    <input type="hidden" name="bmo" value="00" />
+    <input type="hidden" name="bda" value="00" />
+    <input type="hidden" name="death" value="" />
+    <input type="hidden" name="dmo" value="00" />
+    <input type="hidden" name="issue" value="" />
   </form>
+
   <script src="addons/genealogy/genealogy_lib.js"></script>
   <script><![CDATA[
     function ssdi(q)
@@ -43,52 +52,26 @@
       if( nullArgs("ssdi", q) )
         return;
 
-      if( q == "" )
-      {
-        openSearchWindow("http://ssdi.genealogy.rootsweb.com/cgi-bin/ssdi.cgi");
-        return;
+      var args = genealogy_parseArgs(q, "ssn, residence, benefit, issue");
+      if (genealogy_hasArg(args, "ssn")) {
+        document.ssdif.ssn.value = args.switch_val["ssn"].replace(/[^0-9]/g, "");
+      } else {
+        document.ssdif.ssn.value = "";
       }
-
-      // Parse switches with parseArgs:
-
-      // parseArgs usage:
-      // Arguments:
-      //    q                - string from the search function
-      //    expectedSwitches - list or array of the expected switch values
-      //    expandSwitches   - optional parameter [default = true] used to determine 
-      //                       if the switch shortcuts should be expanded (i.e. /f becomes /foo)
-      // Returns an object with these properties:
-      //    q        - the input string with the switches removed
-      //    switches - array of objects with these two properties:
-      //                  name:   expanded name of the matched switch (i.e. foo as in /foo:bar)
-      //                  value:  value of switch (i.e. bar as in /foo:bar)
-      //    switch_val - associative array with the switch name as the key with the switch value 
-      //                 as the value. (i.e. switch_val["foo"] = "bar" as in /foo:bar)
-
-      document.ssdif.ssn.value = "";
-      var args = parseArgs(q, "type, ssn");
-      if ( args.switches.length > 0 )
-      {
-        switch( args.switches[0].name )
-        {
-          case "type":
-               break;
-          case "ssn":
-	       document.ssdif.ssn.value = args.switch_val["ssn"];
-               break;
-          default:
-               break;
-        } //end-switch
+      if (genealogy_hasArg(args, "issue")) {
+        document.ssdif.issue.value = args.switch_val["issue"];	
+      } else {
+        document.ssdif.issue.value = "";
       }
-
-      // FORM variables for ssdif
-      //document.ssdif.stat.value = "";
-      document.ssdif.lastname.value = genealogy_parse_surname(args.q);
-      //document.ssdif.nt.value = "";
-      document.ssdif.firstname.value = genealogy_parse_givenname(args.q);
-      //document.ssdif.middlename.value = "";
-      //document.ssdif.ssn.value = "";
-
+      
+      if (args.q.match(/^[0-9\-]{9,11}$/)) {
+        document.ssdif.ssn.value = args.q.replace(/[^0-9]/g, "");
+	document.ssdif.lastname.value = "";
+	document.ssdif.firstname.value = "";
+      } else {
+        document.ssdif.lastname.value = genealogy_parse_surname(args.q);
+        document.ssdif.firstname.value = genealogy_parse_givenname(args.q);
+      }
       submitForm(ssdif);
     }
   ]]></script>

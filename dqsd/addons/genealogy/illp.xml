@@ -16,7 +16,7 @@
     <table class="helpboxDescTable">
       <tr><td>illp jones</td></tr>
       <tr><td>illp jones, fred</td></tr>
-      <tr><td>illp /county:ogle jones</td></tr>
+      <tr><td>illp jones /county ogle</td></tr>
     </table>
   </description>
   <form name="illpf"
@@ -141,17 +141,11 @@
       if( nullArgs("illp", q) )
         return;
 
-      document.illpf.county.value = "";
-      document.illpf.name.value = "";
-
-      var args = parseArgs(q, "county");
-      if (args.switches.length > 0) {
-        for (var i=0; i < args.switches.length; i++) {
-          switch (args.switches[i].name)
-	  {
-          case "county": document.illpf.county.value = args.switch_val["county"].toUpperCase(); break;
-          }
-        }
+      var args = genealogy_parseArgs(q, "county");
+      if (genealogy_hasArg(args, "county")) {
+        document.illpf.county.value = args.switch_val["county"].toUpperCase();
+      } else {
+        document.illpf.county.value = "";
       }
       var search_name = genealogy_parse_surname(args.q);
       var first_name = genealogy_parse_givenname(args.q);

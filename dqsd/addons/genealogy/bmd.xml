@@ -11,12 +11,12 @@
   		<tr><td>/birth</td><td> - </td><td>Search birth records</td></tr>
   		<tr><td>/marriage</td><td> - </td><td>Search marriage records</td></tr>
   		<tr><td>/death</td><td> - </td><td>Search death records</td></tr>
-		<tr><td>/county:[county name]</td><td> - </td><td>Specify county to search in</td></tr>
-  		<tr><td>/state:[state name] (required)</td><td> - </td><td>Specify state to search in</td></tr>
+		<tr><td>/county</td><td> - </td><td>Specify county to search in</td></tr>
+  		<tr><td>/state (required)</td><td> - </td><td>Specify state to search in</td></tr>
   	</table>
     <div class="helpboxDescLabels">Examples:</div>
     <table class="helpboxDescTable">
-  		<tr><td>bmd /d /s:ny jones</td></tr>
+  		<tr><td>bmd jones /d /s ny</td></tr>
   	</table>
   </description>
   <form name="bmdf"
@@ -53,7 +53,7 @@
       //document.bmdf.t.value = "";
       //document.bmdf[".cgifields"].value = "";
 
-      var args = parseArgs(q, "county, state, birth, marriage, death");
+      var args = genealogy_parseArgs(q, "county, state, birth, marriage, death");
       var recordType = "";
       var stateAbbrev = "";
       var lastName = "";

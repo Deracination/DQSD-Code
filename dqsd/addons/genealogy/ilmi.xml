@@ -1,14 +1,4 @@
 <search function="ilmi">
-  <COMMENT>
-
-    This search file was initially created by Dave's Quick Search Deskbar
-    Search Wizard version 0.4 (beta) on 08/15/02 at 22:47:04
-
-    Even though this XML search will probably load and is a healthy start
-    toward a completed search, please be aware that this search will probably
-    not work as is and will require some human inspection and modification.
-
-  </COMMENT>
   <name>Illinois Marriage Index 1763-1900</name>
   <category>Genealogy</category>
   <contributor>Brent Beardsley</contributor>
@@ -16,13 +6,22 @@
   <email></email>
   <description>
   Search the Illinois Marriage Index 1763-1900
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/bride</td><td> - </td><td>Specify the bride's name</td></tr>
+      <tr><td>/county</td><td> - </td><td>Specify the county</td></tr>
+      <tr><td>/groom</td><td> - </td><td>Specify the groom's name</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>ilmi /g jones</td></tr>
+      <tr><td>ilmi /g jones, francis</td></tr>
+      <tr><td>ilmi /g jones /c ogle</td></tr>
+    </table>
   </description>
   <form name="ilmif"
         method="post"
         action="http://cyberdriveillinois.com/cgi-bin/archives/marriage.s">
-
-    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
-
     <input type="hidden" name="groom" value="" />
     <input type="hidden" name="bride" value="" />
     <input type="hidden" name="county" value="" />
@@ -143,31 +142,25 @@
       if( nullArgs("ilmi", q) )
         return;
 
-      if( q == "" )
-      {
-        openSearchWindow("http://www.cyberdriveillinois.com/departments/archives/marriage.html");
-        return;
+      var args = genealogy_parseArgs(q, "county, bride, groom");
+      if (genealogy_hasArg(args, "county")) {
+        document.ilmif.county.value = args.switch_val["county"].toUpperCase();
+      } else {
+	document.ilmif.county.value = "STATEWIDE";
       }
-
-      var args = parseArgs(q, "county, bride, groom");
-      if (args != null) {
-	document.ilmif.groom.value = "";
+      if (genealogy_hasArg(args, "bride")) {
+        document.ilmif.bride.value = args.switch_val["bride"];
+      } else {
 	document.ilmif.bride.value = "";
-	document.ilmif.county.value = "";
-	if (args.switches.length > 0) {
-	        for (var i=0; i < args.switches.length; i++) {
-		  switch (args.switches[i].name)
-		  {
-			case "groom": document.ilmif.groom.value = args.switch_val["groom"]; break;
-			case "bride": document.ilmif.bride.value = args.switch_val["bride"]; break;
-			case "county": document.ilmif.county.value = args.switch_val["county"].toUpperCase(); break;
-  		  }
-		}
-	}
-	if (document.ilmif.groom.value == "" && document.ilmif.bride.value == "") {
-		nullArgs("ilmi", "?");
-		return;
-	}
+      }
+      if (genealogy_hasArg(args, "groom")) {
+        document.ilmif.groom.value = args.switch_val["groom"]; 
+      } else {
+	document.ilmif.groom.value = "";
+      }
+      if (document.ilmif.groom.value == "" && document.ilmif.bride.value == "") {
+        nullArgs("ilmi", "?");
+      } else {
         submitForm(ilmif);
       }
     }

@@ -97,31 +97,8 @@
       if( nullArgs("ancestry", q) )
         return;
 
-      if( q == "" )
-      {
-        openSearchWindow("http://www.ancestry.com/");
-        return;
-      }
-
-      // FORM variables for ancestryf
-
-      // The wizard assigned the search string to this form field value because
-      // this field was the active element when the search file was generated.
-      // Change this to args.q if the search string is parsed with parseArgs.
       document.ancestryf.gsfn.value = genealogy_parse_givenname(q);
       document.ancestryf.gsln.value = genealogy_parse_surname(q);
-      //document.ancestryf.sx.value = "";
-      //document.ancestryf.prox.value = "";
-      //document.ancestryf.gsco.value = "";
-      //document.ancestryf.gspl.value = "";
-      //document.ancestryf.year.value = "";
-      //document.ancestryf.yearend.value = "";
-      //document.ancestryf.gskw.value = "";
-      //document.ancestryf.gst.value = "";
-      //document.ancestryf.gl.value = "";
-      //document.ancestryf.ti.value = "";
-      //document.ancestryf.gss.value = "";
-
       submitForm(ancestryf);
     }
   ]]></script>

@@ -1,14 +1,4 @@
 <search function="midi">
-  <COMMENT>
-
-    This search file was initially created by Dave's Quick Search Deskbar
-    Search Wizard version 0.5 (beta) on 08/21/02 at 18:37:39
-
-    Even though this XML search will probably load and is a healthy start
-    toward a completed search, please be aware that this search will probably
-    not work as is and will require some human inspection and modification.
-
-  </COMMENT>
   <name>Michigan Death Index 1867-1897</name>
   <category>Genealogy</category>
   <contributor>Brent Beardsley</contributor>
@@ -16,13 +6,20 @@
   <email></email>
   <description>
   Search the Michigan Death Index 1867-1897
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/county</td><td> - </td><td>Limit the search to a specified county</td></tr>
+      <tr><td>/father</td><td> - </td><td>Specify father's last name</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>midi jones /c berrien</td></tr>
+      <tr><td>midi /c berrien /f jones</td></tr>
+    </table>
   </description>
   <form name="midif"
         method="post"
         action="http://www.mdch.state.mi.us/gendisx/scripts/search.idc">
-
-    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
-
     <input type="hidden" name="LastName" value="" />
     <input type="hidden" name="FirstName" value="" />
     <input type="hidden" name="FatherLastName" value="" />
@@ -214,26 +211,19 @@
       if( nullArgs("midi", q) )
         return;
 
-      if( q == "" )
-      {
-        openSearchWindow("http://www.mdch.state.mi.us/");
-        return;
+      var args = genealogy_parseArgs(q, "county, father");
+      if (genealogy_hasArg(args, "county")) {
+        document.midif.CountyName.value = args.switch_val["county"];
+      } else {
+        document.midif.CountyName.value = "%%";
       }
-
-      // FORM variables for midif
-
-      // The wizard assigned the search string to this form field value because
-      // this field was the active element when the search file was generated.
-      // Change this to args.q if the search string is parsed with parseArgs.
-      document.midif.LastName.value = genealogy_parse_surname(q);
-      document.midif.FirstName.value = genealogy_parse_givenname(q);
-      //document.midif.FatherLastName.value = "";
-      //document.midif.CountyName.value = "";
-      //document.midif.DxLowerYear.value = "";
-      //document.midif.DxUpperYear.value = "";
-      //document.midif.SortClause.value = "";
-      //document.midif.RESET.value = "";
-
+      if (genealogy_hasArg(args, "father")) {
+	 document.midif.FatherLastName.value = genealogy_parse_surname(args.switch_val["father"]);
+      } else {
+	 document.midif.FatherLastName.value = "";
+      }	 
+      document.midif.LastName.value = genealogy_parse_surname(args.q);
+      document.midif.FirstName.value = genealogy_parse_givenname(args.q);
       submitForm(midif);
     }
   ]]></script>

@@ -14,7 +14,7 @@
 	<table class="helpboxDescTable">
 		<tr><td>iddi jones, john w</td></tr>
 		<tr><td>iddi jones</td></tr>
-		<tr><td>iddi /county:gem jones, james</td></tr>
+		<tr><td>iddi jones, james /county gem</td></tr>
 	</table>
   </description>
   <form name="iddif"
@@ -79,19 +79,14 @@
       if( nullArgs("iddi", q) )
         return;
 
-      var args = parseArgs(q, "county");
-      if (args != null) {
+      var args = genealogy_parseArgs(q, "county");
+      if (genealogy_hasArg(args, "county")) {
+        document.iddif["county"].value =  args.switch_val["county"];
+      } else {
         document.iddif["county"].value = "";
-        if (args.switches.length == 1) {
-          if (args.switches[0].name == "county") {
-            document.iddif["county"].value =  args.switch_val["county"];
-          }
-        }
-        document.iddif.name.value = args.q;
-        submitForm(iddif);
-        return;
       }
-      nullArgs("iddi", "?");
+      document.iddif.name.value = args.q;
+      submitForm(iddif);
     }
   ]]></script>
 </search>
