@@ -20,14 +20,51 @@
 		openDocument(cmd);
 	}
 
+        function buildConfigureMenu(mb, hmenu)
+	{
+		mb.AppendMenuItem( "Local Aliases", "editConfigFile(\"localaliases.txt\")", "Edit local aliases", hmenu);
+		mb.AppendMenuItem( "Local Preferences", "editConfigFile(\"localprefs.js\")", "Edit local preferences", hmenu);
+		mb.AppendSeparator(hmenu);
+		mb.AppendMenuItem( "System Aliases", "editConfigFile(\"aliases.txt\")", "Edit system aliases", hmenu);
+		mb.AppendMenuItem( "System Preferences", "editConfigFile(\"preferences.js\")", "Edit system preferences", hmenu);
+
+		ensureLauncher();
+		var installedAddons = getFolders(DQSDLauncher.InstallationDirectory+"\\addons\\").split('\n');
+		if (installedAddons.length > 0 && installedAddons[0] == ".")
+		   installedAddons = installedAddons.slice(1);
+
+		if (installedAddons.length > 0) {
+		        mb.AppendSeparator(hmenu);
+			var haddons = mb.AppendSubMenu("Installed Addons ("+installedAddons.length+")", hmenu);
+			for (var i=0; i < installedAddons.length; i++) {
+				mb.AppendMenuItem(installedAddons[i], "", installedAddons[i], haddons);
+				mb.DisableMenuItem(i, haddons);
+			}
+		}
+
+	}
+	function configureDQSD(q)
+	{
+          // build the menu
+          var mb = new ActiveXObject("DQSDTools.MenuBuilder");
+          if (mb != null) {
+            // Align the menu with the button
+            mb.HorizontalAlignment = ( buttonalign == 'left' ? 1 : 2 ); // 1 = left, 2 = right (default)
+
+	    var hmenu = 0;
+            buildConfigureMenu(mb, hmenu);
+            var fn = mb.Display(document);
+            if (fn) {
+              eval(fn);
+            }
+            mb = null;
+          }
+	}
+
 	function configureMenuHook(mb)
 	{
 		var confhmenu = mb.InsertSubMenu("Configure", 2);
-		mb.AppendMenuItem( "Local Aliases", "editConfigFile(\"localaliases.txt\")", "Edit local aliases", confhmenu);
-		mb.AppendMenuItem( "Local Preferences", "editConfigFile(\"localprefs.js\")", "Edit local preferences", confhmenu);
-		mb.AppendSeparator(confhmenu);
-		mb.AppendMenuItem( "System Aliases", "editConfigFile(\"aliases.txt\")", "Edit system aliases", confhmenu);
-		mb.AppendMenuItem( "System Preferences", "editConfigFile(\"preferences.js\")", "Edit system preferences", confhmenu);
+		buildConfigureMenu(mb, confhmenu);
 	}
 	
 	registerMenuHook(configureMenuHook);
