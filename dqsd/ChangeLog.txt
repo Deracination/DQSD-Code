@@ -17,6 +17,7 @@ Modified Searches
 
 * fe - now allows you to specify an extension name instead of only the first letter (from Matthew McDougal)
 * configure - localized it and added Reload menu option, fixed bug when addons directory did not exist (from Brent Beardsley)
+* amaz - added /referral switch for building referral links for Amazon
 
 -- What's new for 3.1.5 (December 15, 2002)
 
