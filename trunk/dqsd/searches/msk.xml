@@ -4,24 +4,43 @@
     Search the Microsoft Knowledge Base using either a regular search expression or a 6-digit "Q" code.<br/>
     <div class="helpboxDescLabels">Examples:</div>
     <table class="helpboxDescTable">
-  		<tr><td>msk Windows Bugs</td></tr>
-  		<tr><td>msk q252795</td></tr>
-  	</table>
+      <tr><td>msk Windows Bugs</td></tr>
+      <tr><td>msk q252795</td></tr>
+      <tr><td>msk Windows Bugs /google</td></tr>
+      <tr><td>msk q252795 /google</td></tr>
+    </table>
   </description>
   <category>Computers</category>
   <link>http://support.microsoft.com/default.aspx?scid=fh;en-us;kbinfo</link>
-  <contributor>Ryan Edwards</contributor>
-  
+  <contributor>Ryan Edwards, MLL</contributor>
+
+  <form name="mskggf"
+        action="http://www.google.com/search"
+        method="get">
+    <input type="hidden" name="q"/>
+  </form>
+
   <script><![CDATA[
     function msk(q)
     {
+      var args = parseArgs(q, "google");
       var res;
-      if( nullArgs("msk",q) )
+      if( nullArgs("msk",args.q) )
         return false;
+      else if( args.switches.length > 1 )
+      {
+        nullArgs("msk","?");
+        return false;
+      }
+      else if( args.switches.length == 1 && args.switches[0].name == "google" )
+      {
+        document.mskggf.q.value = args.q + " site:support.microsoft.com";
+        submitForm(mskggf);
+      }
       else if( (res = q.match(/^\s*[qQ]?(\d{6})\s*$/ )) != null )
-			  openSearchWindow('http://support.microsoft.com/default.aspx?scid=kb;en-us;'+ "Q" + res[1]);
-		  else
-openSearchWindow('http://search.support.microsoft.com/search/default.aspx?Catalog=LCID%3D1033%26CDID%3DEN-US-KB%26PRODLISTSRC%3DON&Product=msall&Query=' + q.replace( /\s+/g,'%2520' ) + '&Queryc=' + q.replace( /\s+/g,'+' ) + '&withinResults=false&srchstep=0&KeywordType=ALL&Titles=false&numDays=&maxResults=25');
+        openSearchWindow('http://support.microsoft.com/default.aspx?scid=kb;en-us;'+ "Q" + res[1]);
+      else
+        openSearchWindow('http://search.support.microsoft.com/search/default.aspx?Catalog=LCID%3D1033%26CDID%3DEN-US-KB%26PRODLISTSRC%3DON&Product=msall&Query=' + q.replace( /\s+/g,'%2520' ) + '&Queryc=' + q.replace( /\s+/g,'+' ) + '&withinResults=false&srchstep=0&KeywordType=ALL&Titles=false&numDays=&maxResults=25');
     }
   ]]></script>
 

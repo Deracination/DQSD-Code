@@ -12,6 +12,7 @@ New Searches
 Modified Searches
 
 * bible - David Thompson added switches for multiple translations
+* msk - added /google switch
 
 
 -- What's new for 3.1 (August 27, 2002)
