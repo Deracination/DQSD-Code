@@ -22,20 +22,9 @@
         method="post"
         action="http://search.delmar.com/cgi-bin/htsearch">
     <input type="hidden" name="method" value="and" />
-    <COMMENT>
-      The input element above, "method", was a SELECT element with the following options...
-      <select name="method">
-        <option value="and">All</option>
-        <option value="or">Any&gt;</option>
-      </select>
-    </COMMENT>
-
     <input type="hidden" name="config" value="nursespdr" />
     <input type="hidden" name="restrict" value="" />
     <input type="hidden" name="exclude" value="" />
-
-    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
-
     <input type="hidden" name="words" value="" />
   </form>
   <script><![CDATA[
@@ -43,22 +32,6 @@
     {
       if( nullArgs("npdr", q) )
         return;
-
-      // Parse switches with parseArgs:
-
-      // parseArgs usage:
-      // Arguments:
-      //    q                - string from the search function
-      //    expectedSwitches - list or array of the expected switch values
-      //    expandSwitches   - optional parameter [default = true] used to determine 
-      //                       if the switch shortcuts should be expanded (i.e. /f becomes /foo)
-      // Returns an object with these properties:
-      //    q        - the input string with the switches removed
-      //    switches - array of objects with these two properties:
-      //                  name:   expanded name of the matched switch (i.e. foo as in /foo:bar)
-      //                  value:  value of switch (i.e. bar as in /foo:bar)
-      //    switch_val - associative array with the switch name as the key with the switch value 
-      //                 as the value. (i.e. switch_val["foo"] = "bar" as in /foo:bar)
 
       var args = parseArgs(q, "and, or");
       if ( args.switches.length > 0 )
@@ -82,10 +55,6 @@
       //document.npdrf.config.value = "";
       //document.npdrf.restrict.value = "";
       //document.npdrf.exclude.value = "";
-
-      // The wizard assigned the search string to this form field value because
-      // this field was the active element when the search file was generated.
-      // Change this to args.q if the search string is parsed with parseArgs.
       document.npdrf.words.value = args.q;
 
       submitForm(npdrf);
