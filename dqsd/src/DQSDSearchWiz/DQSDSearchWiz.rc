@@ -54,8 +54,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 0,1,0,1
- PRODUCTVERSION 0,1,0,1
+ FILEVERSION 0,1,1,0
+ PRODUCTVERSION 0,1,1,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -73,14 +73,14 @@ BEGIN
             VALUE "Comments", "\0"
             VALUE "CompanyName", "http://www.glenncarr.com/\0"
             VALUE "FileDescription", "Dave's Quick Search Deskbar Search Wizard\0"
-            VALUE "FileVersion", "1.0.1\0"
+            VALUE "FileVersion", "1.1\0"
             VALUE "InternalName", "DQSDSearchWiz\0"
             VALUE "LegalCopyright", "Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2\0"
             VALUE "LegalTrademarks", "\0"
             VALUE "OriginalFilename", "DQSDSearchWiz.DLL\0"
             VALUE "PrivateBuild", "\0"
             VALUE "ProductName", "Dave's Quick Search Deskbar Search Wizard\0"
-            VALUE "ProductVersion", "1.0.1\0"
+            VALUE "ProductVersion", "1.1\0"
             VALUE "SpecialBuild", "\0"
         END
     END
@@ -118,7 +118,7 @@ IDI_WIZARD              ICON    DISCARDABLE     "wizard.ico"
 
 IDD_DQSDWIZARDDLG DIALOGEX 0, 0, 394, 271
 STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
-FONT 8, "MS Sans Serif", 0, 0, 0x1
+FONT 8, "MS Sans Serif"
 BEGIN
     RTEXT           "* &Abbreviation:",IDC_STATIC,29,9,49,8
     EDITTEXT        IDC_SearchName,80,6,102,14,ES_LOWERCASE | ES_AUTOHSCROLL
@@ -159,7 +159,7 @@ BEGIN
     PUSHBUTTON      "&HTML >>",IDC_ShowHideHTML,338,168,50,14
     EDITTEXT        IDC_FormFields,6,192,382,75,ES_MULTILINE | 
                     ES_AUTOVSCROLL | ES_READONLY | WS_VSCROLL
-    ICON            IDI_WIZARD,IDC_STATIC,6,5,21,20
+    ICON            IDI_WIZARD,IDC_STATIC,6,5,20,20
     LTEXT           "* = Required",IDC_STATIC,6,183,40,8
 END
 
@@ -272,7 +272,7 @@ BEGIN
     1001                    "Enter the abbreviation for the search.  This is used to invoke the search and should be a short abbreviation which isn't a common word.  You also won't be able to enter uppercase or non-alphanumeric characters."
     1002                    "Enter the title or name of the search.  This is what will be displayed in the menu."
     1003                    "Enter the URL that this search should default to if no parameters are entered for the search.  The wizard will try to guess this based on the current URL, but it may not be the best default, so you should double-check it."
-    1004                    "Enter the category for this search.  You can select one from the list or enter a unique category.  If you don't enter a category the search will be grouped in the ""Other"" category in the menu and the help."
+    1004                    "Enter the category for this search.  You can select one from the list or enter a unique category.  If you don't enter a category the search will be grouped in the ""Other"" category in the menu and the help.  Use forward slashes (/) to specify subcategories.  I.e., ""Computers/Programming""."
     1005                    "If you want to receive lavish quantities of praise for writing this search enter your name here.  Or, if you feel you are not deserving of such praise because the most excellent DQSD Search Wizard did most of the work for you, then enter my name, Glenn Carr <just kidding>."
     1006                    "If you want to be able to be contacted about this search enter your email address here.  Please note that if this search ends up being distributed with DQSD, your email will be out there for everyone to see, which isn't necessarily bad, but I like to enter my email in the form 'glenn at glenncarr dot com' just to keep bot email harvesters from finding it."
     1007                    "Enter a helpful description for this search.  It can be as long or as short as you prefer."

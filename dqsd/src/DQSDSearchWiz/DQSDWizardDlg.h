@@ -104,6 +104,7 @@ private:
 	string GetScriptFieldName( const string& rstrFieldName );
 	void ShrinkDialog();
 	void GrowDialog();
+	string ParseCategory( LPCTSTR sz );
 };
 
 #endif //__DQSDWIZARDDLG_H_
