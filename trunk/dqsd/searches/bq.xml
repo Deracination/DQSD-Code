@@ -1,0 +1,44 @@
+<search function="bq">
+  <name>Bartlett's Familiar Quotations</name>
+  <category></category>
+  <contributor>Glenn Carr</contributor>
+  <link>http://www.online-literature.com/quotes/quotations.php</link>
+  <email>glenn at glenncarr dot com</email>
+  <description>
+  Search Bartlett's Familiar Quotations at <a target="_blank" href="http://www.online-literature.com/">The Literature Network</a>.
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td><nobr>/author:&lt;author&gt;</nobr></td><td> - </td><td>Limit to works by the specified author</td></tr>
+      <tr><td>/work:&lt;work&gt;</td><td> - </td><td>Limit to works with the specified title</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>bq truths to be self-evident</td></tr>
+      <tr><td>bq /author:twain</td></tr>
+      <tr><td>bq /work:declaration</td></tr>
+    </table>
+  </description>
+  <form name="bqf"
+        method="post"
+        action="http://www.online-literature.com/quotes/quotation_search.php">
+    <input type="hidden" name="author" value="" />
+    <input type="hidden" name="from" value="" />
+    <input type="hidden" name="quote" value="" />
+  </form>
+  <script><![CDATA[
+    function bq(q)
+    {
+      if ( nullArgs("bq", q) )
+        return;
+
+      var args = parseArgs(q, "quote, author, work");
+      if ( typeof args.switch_val["author"] != 'undefined' )
+        document.bqf.author.value = args.switch_val["author"];
+      if ( typeof args.switch_val["work"] != 'undefined' )
+        document.bqf.from.value = args.switch_val["work"];
+      document.bqf.quote.value = args.q;
+
+      submitForm(bqf);
+    }
+  ]]></script>
+</search>

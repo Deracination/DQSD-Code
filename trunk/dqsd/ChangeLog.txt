@@ -12,6 +12,7 @@ New Searches
 * exp - Expedia (from Allen B. MacKenzie)
 * spcs - Send Sprint PCS One-Way web messages (from Rick Olson)
 * pinp - ServiceObjects' DOTS GeoPinpoint IP address Location converter (from Thad Kerosky)
+* bq - Search Bartlett's Familiar Quotations at http://www.online-literature.com
 
 Modified Searches
 
