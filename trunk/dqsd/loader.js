@@ -241,18 +241,18 @@ function addAliasesFromFile( aliasFile )
   for (var iPrivate = 0; iPrivate < aliasTable.length; iPrivate++)
   {
     var fields = aliasTable[iPrivate];
-    if (fields.length != 2)
+    if (!fields.join('').match(/^\s*($|\/\/)/)) // not a comment (//)
     {
-      if (fields.length > 2 || !fields[0].match(/^\s*($|\/\/)/))
+      if (fields.length != 2)
       {
         alert("Error on line " + (iPrivate + 1) + " of aliases.txt:\n\n" + aliasTable[iPrivate] + 
               "\n\n(Make sure there is a tab between the alias and command.)");
         break;
       }
-    }
-    else
-    {
-      addalias(fields[0], fields[1]);
+      else
+      {
+        addalias(fields[0], fields[1]);
+      }
     }
   }
 }
