@@ -3,8 +3,7 @@
   <description>The File Extension Source fe {[a..z] | num | sym }: "fe d"</description>
   <category>Computers</category>
   <link>http://www.filext.com/</link>
-  <form name="filextf"
-        target="_blank"
+  <form name="fef"
         method="get">
   </form>
   <script><![CDATA[
@@ -18,10 +17,10 @@
       {
         q = q.toLowerCase();
         if ( /^[a-z]$/i.test(q) || ( q == 'sym' ) || ( q == 'num' ) )
-          document.filextf.action = "http://www.filext.com/" + q + ".htm";
+          document.fef.action = "http://www.filext.com/" + q + ".htm";
         else
-          document.filextf.action = "http://www.filext.com/";
-          submitForm(filextf);
+          document.fef.action = "http://www.filext.com/";
+          submitForm(fef);
       }
     }
   ]]></script>

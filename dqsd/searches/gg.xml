@@ -6,14 +6,12 @@
   <switches>images, directory, related, similar, cache, link</switches>
   <contributor>David Bau, Ryan Edwards</contributor>
   <form name="ggf"
-        target="_blank"
         action="http://www.google.com/search"
         method="get">
     <input type="hidden" name="cat" value=""/>
     <input type="hidden" name="q"/>
   </form>
   <form name="imagef"
-        target="_blank"
         action="http://images.google.com/images"
         method="get">
     <input type="hidden" name="q"/>

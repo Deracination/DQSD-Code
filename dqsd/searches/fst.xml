@@ -4,7 +4,6 @@
   <category>Search the Web</category>
   <link>http://www.alltheweb.com/</link>
   <form name="fstf"
-        target="_blank"
         action="http://www.alltheweb.com/search"
         method="get">
     <input type="hidden" name="cat" value="web"/>

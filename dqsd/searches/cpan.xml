@@ -5,8 +5,7 @@
   <link>http://search.cpan.org/</link>
   <switches>author, distribution, documentation</switches>
   <contributor>Monty Scroggins, Ryan Edwards</contributor>
-  <form name="cpanform"
-        target="_blank"
+  <form name="cpanf"
         action="http://search.cpan.org/search"
         method="get">
     <input type="hidden" name="query"/>
@@ -21,18 +20,18 @@
       {
         switch( switches[0] )
         {
-          case "author": document.cpanform.mode.value = "author"; break;
-          case "distribution": document.cpanform.mode.value = "dist"; break;
-          case "documentation": document.cpanform.mode.value = "doc"; break;
+          case "author": document.cpanf.mode.value = "author"; break;
+          case "distribution": document.cpanf.mode.value = "dist"; break;
+          case "documentation": document.cpanf.mode.value = "doc"; break;
         }
-        document.cpanform.query.value = q;
-        submitForm(cpanform);
+        document.cpanf.query.value = q;
+        submitForm(cpanf);
       }
       else
       {
-        document.cpanform.mode.value = "module"
-        document.cpanform.query.value = q;
-        submitForm(cpanform);
+        document.cpanf.mode.value = "module"
+        document.cpanf.query.value = q;
+        submitForm(cpanf);
       }
     }
   ]]></script>

@@ -1,10 +1,9 @@
 <search function="uns">
   <name>Word Unscrambler</name>
-  <description>To calculate scrabble scores: for example, "uns inourdnas"</description>
+  <description>To calculate scrabble scores: "uns inourdnas"</description>
   <category>Fun</category>
   <link>http://www.concordance.com/unscrambler.htm</link>
-  <form name="srbf"
-        target="_blank"
+  <form name="unsf"
         action="http://www.concordance.com/cgi-bin/unscrambler.pl"
         method="post">
     <input type="hidden" name="letters" value=""/>
@@ -16,8 +15,8 @@
         openSearchWindow("http://www.concordance.com/unscrambler.htm");
       else
       {
-        document.srbf.letters.value=q;
-        submitForm(srbf);
+        document.unsf.letters.value=q;
+        submitForm(unsf);
       }
     }
   ]]></script>

@@ -5,7 +5,6 @@
   <contributor>Monty Scroggins</contributor>
   <link>http://www.convertit.com/Go/Entisoft/Measurement/Converter.ASP</link>
   <form name="convf"
-        target="_blank"
         action="http://www.convertit.com/Go/Entisoft/Measurement/Converter.ASP"
         method="post">
     <input type="hidden" name="From"/>

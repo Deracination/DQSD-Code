@@ -7,8 +7,7 @@
   <contributor>Glenn Carr, Ryan Edwards</contributor>
   <email>glenn_at_glenncarr_dot_com</email>
   <idea>Nik Devereaux</idea>
-  <form name="mfform"
-        target="_blank"
+  <form name="mff"
         action="http://www.moviefone.com/showtimes/moviesearch.adp"
         method="get">
     <input type="hidden" name="action" value="title"/>
@@ -33,8 +32,8 @@
       }       
       else
       {
-        document.mfform.query.value = q;
-        submitForm(mfform);
+        document.mff.query.value = q;
+        submitForm(mff);
       }
     }
   ]]></script>

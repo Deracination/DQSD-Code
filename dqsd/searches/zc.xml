@@ -1,12 +1,11 @@
 <search function="zc">
   <name>Zip Code Info</name>
-  <description>Search for information on a particular zipcode: "zc 74133" or "zc Glen Ellyn"</description>
+  <description>Search for information on a particular zcf: "zc 74133" or "zc Glen Ellyn"</description>
   <link>http://www.zipinfo.com/</link>
   <category>People and Places</category>
   <contributor>Stephen Montgomery</contributor>
   <email>stephenmontgomery_at_ameritech_dot_net</email>
-  <form name="zipcode"
-        target="_blank"
+  <form name="zcf"
         action="http://www.zipinfo.com/cgi-local/zipsrch.exe" 
         method="get">
     <input type="hidden" name="zip"/>
@@ -24,11 +23,11 @@
       else
       {
         if (result = q.match(/^(\d{5})\s*(.*)/))
-          document.zipcode.zip.value = result[1];
+          document.zcf.zip.value = result[1];
         else if (result = q.match(/^(.*)/))
-          document.zipcode.zip.value = result[1];
+          document.zcf.zip.value = result[1];
         
-        submitForm(zipcode);
+        submitForm(zcf);
       }
     }
   ]]></script>

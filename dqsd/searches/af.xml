@@ -5,8 +5,7 @@
   <link>http://www.acronymfinder.com/</link>
   <contributor>Nikolai Devereaux</contributor>
   <email>nikolai_at_bigaction_dot_org</email>
-  <form name="acrf"
-        target="_blank"
+  <form name="aff"
         action="http://www.acronymfinder.com/af-query.asp"
         method="get">
     <input type="hidden" name="String" value="exact"/>
@@ -19,8 +18,8 @@
         openSearchWindow("http://www.acronymfinder.com/");
       else
       {
-        document.acrf.Acronym.value = q;
-        submitForm(acrf);
+        document.aff.Acronym.value = q;
+        submitForm(aff);
       }
     }
   ]]></script>

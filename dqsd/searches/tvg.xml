@@ -4,7 +4,6 @@
   <category>Entertainment</category>
   <link>http://www.tvguide.com/</link>
   <form name="tvgf"
-        target="_blank"
         action="http://www.tvguide.com/listings/search/SearchResults.asp"
         method="get">
     <input type="hidden" name="FormText" value=""/>

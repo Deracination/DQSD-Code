@@ -4,8 +4,7 @@
   <category>Fun</category>
   <link>http://www.phonespell.org/</link>
   <contributor>Chris Sells</contributor>
-  <form name="phspellf"
-        target="_blank"
+  <form name="phspf"
         action="http://www.phonespell.org/combo.cgi"
         method="get">
     <input type="hidden" name="n" value=""/>
@@ -17,8 +16,8 @@
         openSearchWindow("http://www.phonespell.org/");
       else
       {
-        document.phspellf.n.value = q;
-        submitForm(phspellf);
+        document.phspf.n.value = q;
+        submitForm(phspf);
       }
     }
   ]]></script>

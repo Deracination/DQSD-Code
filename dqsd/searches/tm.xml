@@ -3,9 +3,7 @@
   <description>Teoma search using Subject Specific Popularity : "tm denali"</description>
   <category>Search the Web</category>
   <link>http://www.teoma.com/</link>
-  <contributor>tomjcorcoran</contributor>
-  <form name="teomaf"
-        target="_blank"
+  <form name="tmf"
         action="http://www.teoma.com/search.asp"
         method="get">
     <input type="hidden" name="t" value=""/>
@@ -20,9 +18,9 @@
       }
       else
       {
-        document.teomaf.t.value=q;
-        document.teomaf.qcat.value=1;
-        submitForm(teomaf);
+        document.tmf.t.value=q;
+        document.tmf.qcat.value=1;
+        submitForm(tmf);
       }
     }
   ]]></script>

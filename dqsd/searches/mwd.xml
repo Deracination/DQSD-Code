@@ -4,7 +4,6 @@
   <category>Reference</category>
   <link>http://www.m-w.com/</link>
   <form name="mwdf"
-        target="_blank"
         action="http://www.m-w.com/cgi-bin/dictionary"
         method="post">
     <input type="hidden" name="book" value="Dictionary"/>

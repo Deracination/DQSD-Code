@@ -4,8 +4,7 @@
   <category>Other</category>
   <link>http://chemfinder.cambridgesoft.com/</link>
   <contributor>Stewart Rubenstein</contributor>
-  <form name="chmfrm"
-        target="_blank"
+  <form name="chemf"
         action="http://chemfinder.cambridgesoft.com/result.asp"
         method="get">
     <input type="hidden" name="polyQuery"/>
@@ -21,8 +20,8 @@
         openSearchWindow("http://chemfinder.cambridgesoft.com/");
       else
       {
-        document.chmfrm.polyQuery.value = q;
-        submitForm(chmfrm);
+        document.chemf.polyQuery.value = q;
+        submitForm(chemf);
       }
     }
   ]]></script>

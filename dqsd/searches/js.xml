@@ -4,8 +4,7 @@
   <category>Other</category>
   <link>http://www.jobserve.com</link>
   <contributor>Tom Corcoran</contributor>
-  <form name="jobservef"
-        target="_blank"
+  <form name="jsf"
         method="get">
     <input type="hidden" name="page" value="1"/>
     <input type="hidden" name="q" value=""/>
@@ -24,7 +23,7 @@
       var numberDays = "0";
       var searchText = "";
 
-      document.jobservef.action = "http://www.it.jobserve.com/jobserve/searchresults.asp";
+      document.jsf.action = "http://www.it.jobserve.com/jobserve/searchresults.asp";
     
       if ( q == "" )
         openSearchWindow("http://www.jobserve.com");
@@ -50,49 +49,49 @@
 
             if ( parsedVars[i].substr(0,3) == 'it:' ) 
             {
-              document.jobservef.action = "http://www.it.jobserve.com/jobserve/searchresults.asp";
+              document.jsf.action = "http://www.it.jobserve.com/jobserve/searchresults.asp";
               continue;
             }
 
             if ( parsedVars[i].substr(0,4) == 'acc:' ) 
             {
-              document.jobservef.action = "http://www.accountancy.jobserve.com/jobserve/searchresults.asp";
+              document.jsf.action = "http://www.accountancy.jobserve.com/jobserve/searchresults.asp";
               continue;
             }
 
             if ( parsedVars[i].substr(0,4) == 'eng:' ) 
             {
-              document.jobservef.action = "http://www.engineering.jobserve.com/jobserve/searchresults.asp";
+              document.jsf.action = "http://www.engineering.jobserve.com/jobserve/searchresults.asp";
               continue;
             }
 
             if ( parsedVars[i].substr(0,4) == 'sal:' ) 
             {
-              document.jobservef.action = "http://www.sales.jobserve.com/jobserve/searchresults.asp";
+              document.jsf.action = "http://www.sales.jobserve.com/jobserve/searchresults.asp";
               continue;
             }
 
             if ( parsedVars[i].substr(0,4) == 'fin:' ) 
             {
-              document.jobservef.action = "http://www.financial.jobserve.com/jobserve/searchresults.asp";
+              document.jsf.action = "http://www.financial.jobserve.com/jobserve/searchresults.asp";
               continue;
             }
 
             if ( parsedVars[i].substr(0,4) == 'sec:' ) 
             {
-              document.jobservef.action = "http://www.secretarial.jobserve.com/jobserve/searchresults.asp";
+              document.jsf.action = "http://www.secretarial.jobserve.com/jobserve/searchresults.asp";
               continue;
             }
 
             if ( parsedVars[i].substr(0,4) == 'leg:' ) 
             {
-              document.jobservef.action = "http://www.legal.jobserve.com/jobserve/searchresults.asp";
+              document.jsf.action = "http://www.legal.jobserve.com/jobserve/searchresults.asp";
               continue;
             }
 
             if ( parsedVars[i].substr(0,4) == 'med:' ) 
             {
-              document.jobservef.action = "http://www.medical.jobserve.com/jobserve/searchresults.asp";
+              document.jsf.action = "http://www.medical.jobserve.com/jobserve/searchresults.asp";
               continue;
             }
 
@@ -139,12 +138,12 @@
           } // end for 
         } // end if ( parsedVars = q.split( '/' ) )
 
-        document.jobservef.q.value = searchText;
-        document.jobservef.jobType.value = jobType;
-        document.jobservef.order.value = order;
-        document.jobservef.d.value = numberDays;
+        document.jsf.q.value = searchText;
+        document.jsf.jobType.value = jobType;
+        document.jsf.order.value = order;
+        document.jsf.d.value = numberDays;
 
-        submitForm( jobservef );
+        submitForm( jsf );
 
       } // end else
     }

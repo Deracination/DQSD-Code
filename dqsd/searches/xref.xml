@@ -1,10 +1,9 @@
 <search function="xref">
-  <name>Xrefer Reference Lookup</name>
+  <name>Xrefer Reference</name>
   <description>Searches dozens of reference titles: "xref venice"</description>
   <category>Reference</category>
   <link>http://www.xrefer.com/</link>
-  <form name="xreferf"
-        target="_blank"
+  <form name="xreff"
         action="http://www.xrefer.com/results.jsp"
         method="get">
     <input type="hidden" name="shelf"/>
@@ -17,9 +16,9 @@
       openSearchWindow("http://www.xrefer.com");
     else
     {
-      document.xreferf.term.value = q;
-      document.xreferf.shelf.value = "search all"
-      submitForm(xreferf);
+      document.xreff.term.value = q;
+      document.xreff.shelf.value = "search all"
+      submitForm(xreff);
     }
   }
   ]]></script>

@@ -5,8 +5,7 @@
   <link>http://www.cddb.com/</link>
   <switches>artist, album, song</switches>
   <contributor>Peter Risser, Ryan Edwards</contributor>
-  <form name="cdbf"
-        target="_blank"
+  <form name="cddbf"
         action="http://www.cddb.com/php/search2.php3">
     <input type="hidden" name="f"/>
     <input type="hidden" name="q"/>
@@ -29,15 +28,15 @@
           }
           args += (args ? " " : "");
         }
-        document.cdbf.q.value = q;
-        document.cdbf.f.value = args;
-        submitForm(cdbf);
+        document.cddbf.q.value = q;
+        document.cddbf.f.value = args;
+        submitForm(cddbf);
       }
       else
       {
-        document.cdbf.q.value = q;
-        document.cdbf.f.value = "artist";
-        submitForm(cdbf);
+        document.cddbf.q.value = q;
+        document.cddbf.f.value = "artist";
+        submitForm(cddbf);
       }
     }
   ]]></script>

@@ -5,8 +5,7 @@
   <link>http://www.amazon.com/</link>
   <switches>books, music, classical, dvd, vhs, movies, toys, baby, computers, software, games, electronics, photography, tools, magazines, garden, kitchen, travel, cellular, outlet, auctions, zshops</switches>
   <contributor>Dan Sanderson, Ryan Edwards</contributor>
-  <form name="amzf"
-        target="_blank"
+  <form name="amazf"
         action="http://www.amazon.com/exec/obidos/search-handle-form"
         method="post">
     <input type="hidden" name="index"/>
@@ -22,30 +21,30 @@
         switch( switches[0] )
         {
           case "movies":
-            document.amzf.index.value = "theatrical"; break;
+            document.amazf.index.value = "theatrical"; break;
           case "computers":
-            document.amzf.index.value = "pc-hardware"; break;
+            document.amazf.index.value = "pc-hardware"; break;
           case "games":
-            document.amzf.index.value = "videogames"; break;
+            document.amazf.index.value = "videogames"; break;
           case "photography":
-            document.amzf.index.value = "photo"; break;
+            document.amazf.index.value = "photo"; break;
           case "cellular":
-            document.amzf.index.value = "wireless-phones"; break;
+            document.amazf.index.value = "wireless-phones"; break;
           case "auctions":
-            document.amzf.index.value = "auction-redirect"; break;
+            document.amazf.index.value = "auction-redirect"; break;
           case "zshops":
-            document.amzf.index.value = "fixed-price-redirect"; break;
+            document.amazf.index.value = "fixed-price-redirect"; break;
           default:
-            document.amzf.index.value = switches[0];
+            document.amazf.index.value = switches[0];
         }
-        document.amzf["field-keywords"].value = q;
-        submitForm(amzf);
+        document.amazf["field-keywords"].value = q;
+        submitForm(amazf);
       }
       else
       {
-        document.amzf.index.value = "blended";
-        document.amzf["field-keywords"].value = q;
-        submitForm(amzf);
+        document.amazf.index.value = "blended";
+        document.amazf["field-keywords"].value = q;
+        submitForm(amazf);
       }
     }
   ]]></script>

@@ -3,8 +3,7 @@
   <description>Search for weather forecasts by zip code: "aw 98052"</description>
   <category>News</category>
   <link>http://www.accuweather.com/</link>
-  <form name="acwf"
-        target="_blank"
+  <form name="awf"
         action="http://www.accuweather.com/adcbin/local_index"
         method="get">
     <input type="hidden" name="nav" value="home"/>
@@ -17,8 +16,8 @@
         openSearchWindow("http://www.accuweather.com/adcbin/local_index");
       else
       {
-        document.acwf.thisZip.value = q;
-        submitForm(acwf);
+        document.awf.thisZip.value = q;
+        submitForm(awf);
       }
     }
   ]]></script>

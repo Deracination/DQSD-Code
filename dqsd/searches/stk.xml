@@ -4,7 +4,6 @@
   <category>News</category>
   <link>href="http://www.bloomberg.com/</link>
   <form name="stkf"
-        target="_blank"
         action="http://quote.bloomberg.com/analytics/bquote.cgi"
         method="get">
     <input type="hidden" name="version" value="markets99.cfg"/>

@@ -4,7 +4,6 @@
   <category>Other</category>
   <link>http://www.faqs.org/faqs/</link>
   <form name="faqf"
-        target="_blank"
         action="http://www.faqs.org/cgi-bin/faqs/faqsearch"
         method="post">
     <input type="hidden" name="archive" value="faqs"/>

@@ -3,8 +3,7 @@
   <description>Search the Yahoo directory: "yh horses"</description>
   <category>Search the Web</category>
   <link>http://www.yahoo.com/</link>
-  <form name="yhof"
-        target="_blank"
+  <form name="yhf"
         action="http://search.yahoo.com/bin/search"
         method="get">
     <input type="hidden" name="p" value=""/>
@@ -16,8 +15,8 @@
         openSearchWindow("http://www.yahoo.com/");
       else
       {
-        document.yhof.p.value=q;
-        submitForm(yhof);
+        document.yhf.p.value=q;
+        submitForm(yhf);
       }
     }
   ]]></script>

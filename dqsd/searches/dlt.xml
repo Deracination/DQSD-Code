@@ -4,7 +4,6 @@
   <category>Shopping</category>
   <link>http://www.dealtime.com/</link>
   <form name="dltf"
-        target="_blank"
         action="http://www.dealtime.com/GS2/GS2StatReDirect"
         method="get">
     <input type="hidden" name="nFormID" value=""/>

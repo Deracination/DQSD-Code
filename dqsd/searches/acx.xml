@@ -34,9 +34,9 @@
           document.acxf.full_field_name.value = "Substance.CAS";
         else
           document.acxf.full_field_name.value = "Synonym.Name";
-      }
       document.acxf.field_value.value = q;
       submitForm(acxf);
+      }
     }
   ]]></script>
 </search>

@@ -5,8 +5,7 @@
   <link>http://www.cdnow.com/</link>
   <switches>album, song, label, video, actor, director</switches>
   <contributor>Peter Risser, Ryan Edwards</contributor>
-  <form name="cdnf"
-        target="_blank"
+  <form name="cdnowf"
         action="http://www.cdnow.com/cgi-bin/mserver/pagename=/RP/CDN/FIND/popsearch.html"
         method="post">
     <input type="hidden" name="string"/>
@@ -21,21 +20,21 @@
       {
         switch( switches[0] )
         {
-          case "album": document.cdnf.index.value = "t"; break;
-          case "song": document.cdnf.index.value = "s"; break;
-          case "label": document.cdnf.index.value = "l"; break;
-          case "video": document.cdnf.index.value = "m"; break;
+          case "album": document.cdnowf.index.value = "t"; break;
+          case "song": document.cdnowf.index.value = "s"; break;
+          case "label": document.cdnowf.index.value = "l"; break;
+          case "video": document.cdnowf.index.value = "m"; break;
           case "actor":
-          case "director": document.cdnf.index.value = "r"; break;
+          case "director": document.cdnowf.index.value = "r"; break;
         }
-        document.cdnf.string.value = q;
-        submitForm(cdnf);
+        document.cdnowf.string.value = q;
+        submitForm(cdnowf);
       }
       else
       {
-        document.cdnf.index.value = "a";
-        document.cdnf.string.value = q;
-        submitForm(cdnf);
+        document.cdnowf.index.value = "a";
+        document.cdnowf.string.value = q;
+        submitForm(cdnowf);
       }
     }
   ]]></script>

@@ -3,8 +3,7 @@
   <description>Search with AltaVista: "av digital"</description>
   <category>Search the Web</category>
   <link>http://www.altavista.com/</link>
-  <form name="altf"
-        target="_blank"
+  <form name="avf"
         action="http://www.altavista.com/sites/search/web"
         method="get">
     <input type="hidden" name="q"/>
@@ -18,8 +17,8 @@
         openSearchWindow("http://www.altavista.com/");
       else
       {
-        document.altf.q.value = q;
-        submitForm(altf);
+        document.avf.q.value = q;
+        submitForm(avf);
       }
     }
   ]]></script>

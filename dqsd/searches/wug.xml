@@ -4,8 +4,7 @@
   <category>News</category>
   <link>http://www.weatherunderground.com/</link>
   <contributor>Monty Scroggins</contributor>
-  <form name="wundergf"
-        target="_blank"
+  <form name="wugf"
         action="http://www.weatherunderground.com/cgi-bin/findweather/getForecast"
         method="get">
     <input type="hidden" name="query" value=""/>
@@ -17,8 +16,8 @@
         openSearchWindow("http://www.weatherunderground.com/");
       else
       {
-        document.wundergf.query.value=q;
-        submitForm(wundergf);
+        document.wugf.query.value=q;
+        submitForm(wugf);
       }
     }
   ]]></script>

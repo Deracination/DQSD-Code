@@ -6,7 +6,6 @@
   <switches>artist, album, style, label</switches>
   <contributor>Peter Risser, Ryan Edwards</contributor>
   <form name="almf"
-        target="_blank"
         action="http://www.allmusic.com/cg/amg.dll"
         method="post">
     <input type="hidden" name="P" value="amg"/>

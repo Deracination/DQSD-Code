@@ -5,8 +5,7 @@
   <link>http://movies.yahoo.com/</link>
   <contributor>Glenn Carr</contributor>
   <email>glenn_at_glenncarr_dot_com</email>
-  <form name="yahoomoviesf"
-        target="_blank"
+  <form name="ymf"
         action="http://movies.yahoo.com/showtimes/showtimes.html" 
         method="get">
     <input type="hidden" name="z" /> <comment>(e.g., 94089 or Sunnyvale, CA - required)</comment>
@@ -26,12 +25,12 @@
       {
         if (result = q.match(/^(\d{5})\s*(.*)/))
         {
-          document.yahoomoviesf.z.value=result[1];
-          document.yahoomoviesf.m.value=result[2];
+          document.ymf.z.value=result[1];
+          document.ymf.m.value=result[2];
         }
         else
-          document.yahoomoviesf.m.value=q;
-        submitForm(yahoomoviesf);
+          document.ymf.m.value=q;
+        submitForm(ymf);
       }
     }
   ]]></script>

@@ -4,7 +4,6 @@
   <category>News</category>
   <link>http://www.cnn.com/</link>
   <form name="cnnf"
-        target="_blank"
         action="http://cnn.looksmart.com/r_search"
         method="get">
     <input type="hidden" name="sites" value="CNN"/>

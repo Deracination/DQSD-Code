@@ -5,7 +5,6 @@
   <category>Fun</category>
   <link>http://www.wordsmith.org/anagram/</link>
   <form name="anaf"
-        target="_blank"
         action="http://www.wordsmith.org/anagram/anagram.cgi"
         method="get">
     <input type="hidden" name="anagram" value=""/>

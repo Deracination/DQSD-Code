@@ -6,8 +6,7 @@
   <switches>mx</switches>
   <contributor>Bjorn Jonson</contributor>
   <email>bjornjonson2000_at_yahoo_dot_com</email>
-  <form name="digdnsf"
-        target="_blank"
+  <form name="unipf"
         action="http://www.uniplus.ch/cgi-bin/dig.cgi">
     <input type="hidden" name="action" value="process"/>
     <input type="hidden" name="domain"/>
@@ -17,7 +16,7 @@
     <input type="hidden" name="y" value="0"/>
   </form>
   <script><![CDATA[
-    function unip(q)
+    function unip(q,switches)
     {
       var suffix;
       var result;
@@ -28,16 +27,16 @@
       {
         if( switches[0] == "mx" )
         {
-          document.digdnsf.domain.value = q;
-          document.digdnsf.type.value = "MX";
-          submitForm(digdnsf);
+          document.unipf.domain.value = q;
+          document.unipf.type.value = "MX";
+          submitForm(unipf);
         }
       }
       else
       {
-        document.digdnsf.domain.value = q;
-        document.digdnsf.type.value = "ANY";
-        submitForm(digdnsf);
+        document.unipf.domain.value = q;
+        document.unipf.type.value = "ANY";
+        submitForm(unipf);
       }
     }
   ]]></script>

@@ -5,8 +5,7 @@
   <link>http://www.vivisimo.com/</link>
   <switches>tn, topnews, tb, topbus, tt, toptech, ts, topsports, yaa, yahooauctions, ebay, yas, yahooshop, pubmed, usgov, patent, delphion, gorp, buscom, business, britannica, yahoo, msn, fast, netscape, od, excite, dh, directhit, ls, looksmart, aj, askjeeves, lycos, aol, hb, hotbot, cnn, nytimes, yn, yahoonews, wn, worldnews, bbc, sfgate, cnnfn, ybn, yahoobiznews, wired, ytn, yahootechnews, ysn, yahoosportnews</switches>
   <contributor>Sam Gera</contributor>
-  <form name="vivisimof"
-        target="_blank"
+  <form name="vivf"
         action="http://vivisimo.com/search"
         method="get">
     <input type="hidden" name="query"/>
@@ -114,15 +113,15 @@
           case "ysn": 
           case "yahoosportnews": se = "YahooSportNews"; break;
         }
-        document.vivisimof.query.value = q;
-        document.vivisimof.se.value = se;
-        submitForm(vivisimof);
+        document.vivf.query.value = q;
+        document.vivf.se.value = se;
+        submitForm(vivf);
       }
       else
       {
-        document.vivisimof.query.value = q;
-        document.vivisimof.se.value = "Yahoo,MSN,Fast,Netscape,OD,Excite,Looksmart,AskJeeves";
-        submitForm(vivisimof);
+        document.vivf.query.value = q;
+        document.vivf.se.value = "Yahoo,MSN,Fast,Netscape,OD,Excite,Looksmart,AskJeeves";
+        submitForm(vivf);
       }
     }
   ]]></script>

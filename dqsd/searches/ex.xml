@@ -3,8 +3,7 @@
   <description>Search using Excite: "ex cable modems"</description>
   <category>Search the Web</category>
   <link>http://www.excite.com/</link>
-  <form name="excf"
-        target="_blank"
+  <form name="exf"
         action="http://search.excite.com/search.gw"
         method="get">
     <input type="hidden" name="c" value="web"/>
@@ -17,8 +16,8 @@
         openSearchWindow("http://www.excite.com/");
       else
       {
-        document.excf.search.value = q;
-        submitForm(excf);
+        document.exf.search.value = q;
+        submitForm(exf);
       }
     }
   ]]></script>

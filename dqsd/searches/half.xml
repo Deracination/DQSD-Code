@@ -4,7 +4,6 @@
   <category>Shopping</category>
   <link>http://www.half.com/</link>
   <form name="halff"
-        target="_blank"
         action="http://www.half.com/search/search.jsp"
         method="get">
     <input type="hidden" name="product" value="all"/>
