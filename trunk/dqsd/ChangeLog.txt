@@ -41,6 +41,7 @@ New Searches
 * nwtsr - Displays operating system and web server for host (David Resnick)
 * aspfaq - Search the Active Server Pages FAQ (Shawn K. Hall)
 * mnr - Check Mailinator.com email account
+* guidgen - Generate a GUID (Globally Unique Identifier)
 
 Modified Searches
 
