@@ -28,8 +28,16 @@
       elTable = elTable.parentElement;
 
     var elCount = el.parentElement.all('categoryCount');
-    var nCount = elTable.children[ category ].length;
-    elCount.innerText = '(' + (nCount ? nCount : 1) + ')';
+    var rows = elTable.children[ category ];
+    var nCount = rows.length;
+    var nEnabled = 0;
+    for ( var iSearch = 0; iSearch < nCount; iSearch++ )
+    {
+      var toggle = rows[ iSearch ].cells(1).all('search_enabled');
+      if ( toggle.checked )
+        nEnabled += 1;
+    }
+    elCount.innerText = '(' + nEnabled + '/' + (nCount ? nCount : 1) + ')';
   }
 
   function doClick()
