@@ -1,5 +1,5 @@
 <search function="aj">
-  <name>Ask Jeeves</name>
+  <name>Ask Jeeves - Ask.com</name>
   <description>
     Jeeves answers questions written in the common question format.<br/>
     <div class="helpboxDescLabels">Example:</div>
@@ -8,9 +8,9 @@
   	</table>
   </description>
   <category>Search the Web</category>
-  <link>http://www.askjeeves.com/</link>
+  <link>http://www.ask.com/</link>
   <form name="ajf"
-        action="http://www.askjeeves.com/main/askjeeves.asp"
+        action="http://www.ask.com/main/askjeeves.asp"
         method="post">
     <input type="hidden" name="ask"/>
   </form>
@@ -19,11 +19,9 @@
     {
       if( nullArgs("aj", q) )
         return false;
-      else
-      {
-        document.ajf.ask.value = q;
-        submitForm(ajf);
-      }
+
+	  document.ajf.ask.value = q;
+      submitForm(ajf);
     }
   ]]></script>
 
