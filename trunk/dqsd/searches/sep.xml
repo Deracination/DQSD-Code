@@ -1,0 +1,82 @@
+<search function="sep">
+  <COMMENT>
+
+    This search file was initially created by Dave's Quick Search Deskbar
+    Search Wizard version 0.5 (beta) on 08/29/02 at 11:23:03
+
+    Even though this XML search will probably load and is a healthy start
+    toward a completed search, please be aware that this search will probably
+    not work as is and will require some human inspection and modification.
+
+  </COMMENT>
+  <name>Stanford Encyclopedia of Philosophy</name>
+  <category>Reference</category>
+  <contributor>Andrew N. Carpenter</contributor>
+  <link>http://plato.stanford.edu/entries/search.html</link>
+  <email>andy@andrewcarpenter.net</email>
+  <description>
+  Search Stanford Encyclopedia of Philosophy
+  </description>
+  <form name="sepf"
+        method="get"
+        action="http://plato.stanford.edu/cgi-bin/webglimpse/usr/local/etc/httpd/htdocs/entries">
+
+    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
+
+    <input type="hidden" name="query" value="" />
+    <input type="hidden" name="case" value="" />
+    <input type="hidden" name="whole" value="" />
+    <input type="hidden" name="lines" value="" />
+    <input type="hidden" name="errors" value="" />
+    <COMMENT>
+      The input element above, "errors", was a SELECT element with the following options...
+      <select name="errors">
+        <option>0</option>
+        <option>1</option>
+        <option>2</option>
+      </select>
+    </COMMENT>
+
+    <input type="hidden" name="maxfiles" value="" />
+    <COMMENT>
+      The input element above, "maxfiles", was a SELECT element with the following options...
+      <select name="maxfiles">
+        <option>10</option>
+        <option>50</option>
+        <option>100</option>
+        <option>1000</option>
+      </select>
+    </COMMENT>
+
+    <input type="hidden" name="maxlines" value="" />
+    <COMMENT>
+      The input element above, "maxlines", was a SELECT element with the following options...
+      <select name="maxlines">
+        <option>10</option>
+        <option>30</option>
+        <option>50</option>
+        <option>500</option>
+      </select>
+    </COMMENT>
+
+    <input type="hidden" name="maxchars" value="10000" />
+  </form>
+  <script><![CDATA[
+    function sep(q)
+    {
+      if( nullArgs("sep", q) )
+        return;
+
+      document.sepf.query.value = q;
+      //document.sepf.case.value = "";
+      //document.sepf.whole.value = "";
+      //document.sepf.lines.value = "";
+      //document.sepf.errors.value = "";
+      //document.sepf.maxfiles.value = "";
+      //document.sepf.maxlines.value = "";
+      //document.sepf.maxchars.value = "";
+
+      submitForm(sepf);
+    }
+  ]]></script>
+</search>

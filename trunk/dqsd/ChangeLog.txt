@@ -3,6 +3,8 @@
 New Searches
 
 * walmart - Search WalMart online.
+* iep - Internet Encyclopedia of Philosophy (from Andrew Carpenter)
+* sep - Stanford Encyclopedia of Philosophy (from Andrew Carpenter)
 
 Modified Searches
 
