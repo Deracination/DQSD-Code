@@ -31,12 +31,12 @@ class ATL_NO_VTABLE CLauncher :
 {
 public:
 	CLauncher()
-	: m_bDebug(false)
+		: m_bDebug(false)
 	{
 		ATLTRACE("CLauncher - created\n");
-//		m_hBaseTooltipWnd = NULL;
 		m_hHotkeyNotificationWindow = NULL;
 		m_hKeyboardHook = NULL;
+		memset(m_szInstallDir, 0, sizeof(m_szInstallDir));
 	}
 
 	virtual ~CLauncher()
@@ -96,10 +96,8 @@ private:
 	static LPCTSTR DQSD_SEC_KEY;
 	bool	m_bDebug;
 	HHOOK	m_hKeyboardHook;
-
-//	HWND	m_hBaseTooltipWnd;
 	HWND	m_hHotkeyNotificationWindow;
-
+	TCHAR	m_szInstallDir[MAX_PATH];
 
 private:
 	HRESULT GetFilename( LPCTSTR szName, LPTSTR szResult, LPCTSTR pszDefaultExt = _T(".txt") );
@@ -107,7 +105,6 @@ private:
 	BOOL VerifyFileInDirectoryTree( LPCTSTR szFilename, LPCTSTR szDir);
 	BOOL IsValidFileDirectory(LPCTSTR szFilename);
 	BOOL IsFileExtension( LPCTSTR szFilename, LPCTSTR szExts);
-
 };
 
 #endif // __LAUNCHER_H_A43187EC_B518_40a5_9615_C628D10567E4__
