@@ -10,6 +10,7 @@
     <table class="helpboxDescTable">
       <tr><td>howfar /Pittsburgh, PA /Paris France </td></tr>
       <tr><td>howfar /Pittsburgh, PA /Chicago, IL</td></tr>
+      <tr><td>howfar /Pittsburgh, PA</td></tr>
     </table>
     </description>
   <form name="howfarf"
@@ -26,13 +27,20 @@
         return false;
       else
       {
-        var howfararray = q.split("/")
-        document.howfarf.place1.value = howfararray[1];
-        document.howfarf.place2.value = howfararray[2];
+        var howfararray = new Array();
+        howfararray = q.split("/")
+        if (howfararray[1])
+          document.howfarf.place1.value = howfararray[1];
+        else
+          document.howfarf.place1.value = "";
+        if (howfararray[2])
+          document.howfarf.place2.value = howfararray[2];
+        else
+          document.howfarf.place2.value = "";
       }
     
         submitForm(howfarf);
-        return true;
+	return true;
           
     }
 
