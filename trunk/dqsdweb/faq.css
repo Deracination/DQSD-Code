@@ -1,0 +1,29 @@
+BODY, P, TD, DIV {
+	 font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	 font-size: x-small;
+}
+
+.category {
+	font-weight: bold;
+	font-size: 110%;
+	margin-top: 1em;
+	color: #000080;
+}
+
+.question {
+	font-weight: bold;
+	margin-left: 2em;
+	margin-top: 0.2em;
+}
+
+.answer {
+	font-weight: normal;
+/*	text-indent : 5em; */
+	margin-left: 3em;
+}
+
+.toggle {
+	width: 1em;
+	text-align: center;
+	text-decoration: none;
+}
