@@ -626,21 +626,13 @@ STDMETHODIMP CLauncher::get_InstallationDirectory(BSTR* pbstrDirectory)
 {
 	USES_CONVERSION;
 
-	// Get the installation directory from the registry
-	CRegKey rk;
-	if ( ERROR_SUCCESS != rk.Open( HKEY_CLASSES_ROOT, DQSD_REG_KEY, KEY_READ ) )
+	TCHAR szInstallDir[ _MAX_PATH ];
+	HRESULT hr = GetInstallationDirectory(szInstallDir, sizeof(szInstallDir));
+	if (FAILED (hr) )
 	{
-		Error(IDS_ERR_REGKEYNOTFOUND, IID_ILauncher);
-		return E_UNEXPECTED;
+		return hr;
 	}
 
-	TCHAR szInstallDir[ _MAX_PATH ];
-	DWORD dwCount = sizeof( szInstallDir );
-	if ( ERROR_SUCCESS != rk.QueryValue( szInstallDir, _T("InstallDir"), &dwCount ) )
-	{
-		Error(IDS_ERR_REGKEYNOTFOUND, IID_ILauncher);
-		return E_UNEXPECTED;
-	}
 	CComBSTR bstrInstallDir;
 	bstrInstallDir.Append(szInstallDir);
 	*pbstrDirectory = bstrInstallDir.Detach();
@@ -764,12 +756,27 @@ STDMETHODIMP CLauncher::RenameFile(BSTR bstrFromFilename, BSTR bstrToFilename)
 {
 	USES_CONVERSION;
 
-	// Get the full from pathname after applying some defaults and terminate with double \0's
+	HRESULT hr;
+
+	// Get the full from pathname after applying some defaults
 	TCHAR szFromFilename[ _MAX_PATH ];
-	HRESULT hr = GetFilename( W2CT( bstrFromFilename ), szFromFilename );
+	hr = GetFilename( W2CT( bstrFromFilename ), szFromFilename );
 	if ( FAILED( hr ) )
 		return hr;
 
+	// Get the installation directory from the registry to use for making sure the filenames are in the install path
+	TCHAR szInstallDir[ _MAX_PATH ];
+	hr = GetInstallationDirectory(szInstallDir, sizeof(szInstallDir));
+	if (FAILED ( hr) )
+		return hr;
+
+	// Make sure from filename is in the installation directory tree
+	if (!VerifyFileInDirectoryTree(szFromFilename, szInstallDir))
+	{
+		return Error(_T("Source filename is not in the installation directory tree."), IID_ILauncher, E_FAIL);
+	}
+
+	// add extra \0 for SHFileOperation call
 	szFromFilename[lstrlen(szFromFilename)+1] = '\0';
 
 	// Make sure that from filename already exists
@@ -785,12 +792,19 @@ STDMETHODIMP CLauncher::RenameFile(BSTR bstrFromFilename, BSTR bstrToFilename)
 	}
 #pragma warning(default: 4310) // cast truncates constant value
 
-	// Get the full to pathname after applying some defaults and terminate with double \0's
+	// Get the full to pathname after applying some defaults
 	TCHAR szToFilename[ _MAX_PATH ];
 	hr = GetFilename( W2CT( bstrToFilename ), szToFilename );
 	if ( FAILED( hr ) )
 		return hr;
 
+	// Make sure to filename is in the installation directory tree
+	if (!VerifyFileInDirectoryTree(szToFilename, szInstallDir))
+	{
+		return Error(_T("Destination filename is not in the installation directory tree."), IID_ILauncher, E_FAIL);
+	}
+
+	// add extra \0 for SHFileOperation call
 	szToFilename[lstrlen(szToFilename)+1] = '\0';
 
 	// Make sure to filename doesn't already exist
@@ -820,4 +834,44 @@ STDMETHODIMP CLauncher::RenameFile(BSTR bstrFromFilename, BSTR bstrToFilename)
 		return hr;
 
 	return S_OK;
+}
+
+HRESULT CLauncher::GetInstallationDirectory( LPTSTR szResult, DWORD dwResultSize)
+{
+	// Get the installation directory from the registry to use for making sure the filenames are in the install path
+	CRegKey rk;
+	if ( ERROR_SUCCESS != rk.Open( HKEY_CLASSES_ROOT, DQSD_REG_KEY, KEY_READ ) )
+	{
+		Error(IDS_ERR_REGKEYNOTFOUND, IID_ILauncher);
+		return E_UNEXPECTED;
+	}
+
+	DWORD dwCount = dwResultSize;
+	if ( ERROR_SUCCESS != rk.QueryValue( szResult, _T("InstallDir"), &dwCount ) )
+	{
+		Error(IDS_ERR_REGKEYNOTFOUND, IID_ILauncher);
+		return E_UNEXPECTED;
+	}
+	return S_OK;
+}
+
+BOOL CLauncher::VerifyFileInDirectoryTree( LPCTSTR szFilename, LPCTSTR szDir)
+{
+	TCHAR szCanonFilename[_MAX_PATH];
+	TCHAR szCanonDir[_MAX_PATH];
+
+	// canonicalize the dir and filename first to remove . and ..
+	if (!::PathCanonicalize(szCanonFilename, szFilename))
+	{
+		return FALSE;
+	}
+
+	if (!::PathCanonicalize(szCanonDir, szDir))
+	{
+		return FALSE;
+	}
+
+	// Make sure to filename is in the directory
+	int nCommonPathLen = ::PathCommonPrefix(szCanonDir, szCanonFilename, NULL);
+	return (nCommonPathLen == (int)_tcslen(szCanonDir)) ? TRUE : FALSE;
 }
