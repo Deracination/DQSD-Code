@@ -7,9 +7,9 @@
 // User aliases should be placed in the localaliases.txt file which
 // will not be overwritten when a new version of the toolbar is installed.
 //
-!|gg %s /ifl
-,|gg %s /groups
->|gg %s /advanced
+!|gg %s /ifl|I'm Feeling Lucky!|Automatically takes you to the first web page returned for your query|Search the Web
+,|gg %s /groups|Google Groups|Search Usenet discussion forums|Search the Web
+>|gg %s /advanced|Google Advanced|Google Advanced Search|Search the Web
 ?|yh
 -|fst
 ^|av
@@ -17,7 +17,7 @@
 ???|ask
 +|map
 #|sb
-##|sb %s /business
+##|sb %s /business|Switchboard Business|Search Switchboard Yellow Pages|People and Places
 @|yhe
 @@|bfe
 =|clc

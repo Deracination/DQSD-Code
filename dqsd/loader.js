@@ -19,7 +19,7 @@ function addsearch(fname, name, desc, link, cat)
 internalShortcutIndex = 0;
 INTERNAL_FUNC_PREFIX = "_dqsd_internal_fn_";
 
-function addalias(alias, fname, name, desc)
+function addalias(alias, fname, name, desc, cat)
 {
   if (!searches[fname]) // no matching searches
   {
@@ -40,7 +40,7 @@ function addalias(alias, fname, name, desc)
                            "  direct(url.replace( /%s/g, t ));"
                           );
       eval( fname + " = f;" );
-      addsearch( fname, name ? name : url, desc ? desc : "", url.search(/%s/) < 0 ? url : "", "Shortcuts");
+      addsearch( fname, name ? name : url, desc ? desc : "", url.search(/%s/) < 0 ? url : "", cat);
     }
     else if ((res = fname.match(/^(\w+) +(.+)/)) && searches[res[1]]) // starts with a valid search function
     {
@@ -51,7 +51,7 @@ function addalias(alias, fname, name, desc)
                            res[1] + "(cmd.replace( /%s/g, t ));"
                           );
       eval( fname + " = f;" );
-      addsearch( fname, name ? name : cmd, desc ? desc : "", "", "Shortcuts");
+      addsearch( fname, name ? name : cmd, desc ? desc : "", "", cat);
     }
     else
     {
@@ -224,9 +224,9 @@ if (searchRoot)
 // 4. load and execute the alias file
 
 addAliasesFromFile( "aliases" );
-addAliasesFromFile( localaliases );
+addAliasesFromFile( localaliases, "Shortcuts" );
 
-function addAliasesFromFile( aliasFile )
+function addAliasesFromFile( aliasFile, category )
 {
   var aliasTable = readTabDelimitedFile(aliasFile);
   //sort the list of aliases
@@ -244,8 +244,9 @@ function addAliasesFromFile( aliasFile )
       {
         addalias(fields[0],
                  fields[1],
-                 fields.length >= 3 ? fields[2] : null,   // name
-                 fields.length >= 4 ? fields[3] : null);  // description
+                 (fields.length >= 3 && fields[2] != '') ? fields[2] : null,   // name
+                 (fields.length >= 4 && fields[3] != '') ? fields[3] : null,   // description
+                 arguments.length >= 2 ? category : ((fields.length >= 5 && fields[4] != "") ? fields[4] : null) );
       }
     }
   }
