@@ -3,6 +3,7 @@
 New Searches
 
 * rot13 - Glenn add a rot13 converter function
+* gfaq - GameFAQs.com from Casper Kvan Clausen
 
 Modified Searches
 
