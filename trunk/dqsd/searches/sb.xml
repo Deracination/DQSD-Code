@@ -66,14 +66,14 @@
   <script><![CDATA[
     function sb(q)
     {
-      var searchGroup, parsed;
-      
-      if( nullArgs("sb",q) )
-        return false
+      var searchGroup = 0;
+      var args = parseArgs(q, "person, business, category");
+      if( nullArgs("sb",args.q) )
+      {
+        return false;
+      }
       else
       {
-        var args = parseArgs(q, "person, business, category");
-        
         if( args.switches.length == 1 )
         {
           for( var j=0; j<args.switches.length; j++ )
@@ -91,7 +91,7 @@
         }
         
         // The search was for a phone number, so do a reverse lookup.
-        parsed = args.q.match( /(\d{3})-*\.*(\d{3})-*\.*(\d{4})/ );
+        var parsed = args.q.match( /(\d{3})-*\.*(\d{3})-*\.*(\d{4})/ );
         if( parsed )
         {
           switch( searchGroup )
