@@ -18,7 +18,7 @@
   <link>http://www.php.net/</link>
 
   <form name="phpsmartyf" action="http://smarty.php.net/search.php" method="post">
-    <input type="hidden" name="show" value="manual" />
+    <input type="hidden" name="show" value="manual-en" />
     <input type="hidden" name="pattern" value="" />
   </form>
   <form name="phppearf" action="http://pear.php.net/search.php" method="post">
