@@ -7,6 +7,7 @@ Enhancements
 * Performance improvement to calendar (Will Dean)
 * Performance improvement to inline style generation (used by calendar and message boxes) (Will Dean)
 * added edit local stylesheet menu option and a new variable to set for the css editor called cssEditorExe so you can use TopStyle, Dreamweaver, etc (from Brent Beardsley)
+* added Belgian National Holidays (from Joris Verhuyck)
 
 New Searches
 
@@ -16,6 +17,7 @@ New Searches
 * otn - Oracle Technology Network search (from Gregory Krohne)
 * rw - Search the Ripe Whois Database for IP addresses
 * ccase - new function to convert case of a string - lower, upper, caps. (from Sarah Sweeney)
+* mb - MapBlast.com LineDrive search (from Gregory Krohne)
 
 Bug Fixes
 
