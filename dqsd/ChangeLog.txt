@@ -78,6 +78,7 @@ Modified Searches
 * jdk - fixed to suit site changes (bug #827803), and made the ? suffix display the help popup
 * gg - added /define (thanks to Tom Corcoran for the hint)
 * whatis - Made sure it accepts ? to show help (Kim Gräsman)
+* php - fixed smarty search (Brent Beardsley)
 
 Removed Searches
 
