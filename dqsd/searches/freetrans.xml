@@ -37,11 +37,11 @@
   </form>
   
   <form name="freetransfURL"
-        action="http://fets3.freetranslation.com/"
+        action="http://www.freetranslation.com/web.asp"
         method="post">
-    <input type="hidden" name="Sequence" value="core"/>
-    <input type="hidden" name="Language"/>
-    <input type="hidden" name="Url"/>
+    <input type="hidden" name="sequence" value="core"/>
+    <input type="hidden" name="language"/>
+    <input type="hidden" name="url"/>
   </form>
   
   <script><![CDATA[
@@ -102,8 +102,8 @@
     		var strURL = isURL(args.q);
     		if (strURL)
     		{
-    			freetransfURL.Url.value = strURL;
-    			freetransfURL.Language.value =  args.switch_val["from"] + "/" +  args.switch_val["to"];
+    			freetransfURL.url.value = strURL;
+    			freetransfURL.language.value =  args.switch_val["from"] + "/" +  args.switch_val["to"];
     			submitForm(freetransfURL);
     		}
     		else
