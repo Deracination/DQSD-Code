@@ -134,7 +134,7 @@ STDMETHODIMP CLauncher::SubmitForm(VARIANT idForm)
 
 
 		// Open html associated application, passing DQSDLaunch.html
-		HINSTANCE hInstance = ::ShellExecute(NULL, _T("open"), szPath, NULL, NULL, SW_SHOWNORMAL);
+		HINSTANCE hInstance = ::ShellExecute(NULL, NULL, szPath, NULL, NULL, SW_SHOWNORMAL);
 		if (reinterpret_cast<INT>(hInstance) <= 32)
 			return E_FAIL;
 	}		
@@ -148,7 +148,7 @@ STDMETHODIMP CLauncher::OpenDocument(BSTR strDoc)
 	USES_CONVERSION;
 
 
-	HINSTANCE hInstance = ::ShellExecute(NULL, _T("open"), OLE2T(strDoc), NULL, NULL, SW_SHOWNORMAL);
+	HINSTANCE hInstance = ::ShellExecute(NULL, NULL, OLE2T(strDoc), NULL, NULL, SW_SHOWNORMAL);
 	if (reinterpret_cast<INT>(hInstance) <= 32)
 		return E_FAIL;
 
