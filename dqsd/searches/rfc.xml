@@ -1,0 +1,106 @@
+<search function="rfc">
+  <name>RFC/STD/FYI/BCP Archives</name>
+  <description>
+    Internet RFC/STD/FYI/BCP Archives <br/>
+    <div class="helpboxDescLabels">Usage:</div>
+  	<table class="helpboxDescTable">
+  		<tr><td>rfc search term /switch</td></tr>
+  	</table>
+    <div class="helpboxDescLabels">Switches:</div>
+  	<table class="helpboxDescTable">
+      <tr><td>/ref</td><td> - </td><td>Find references to search term. (default)</td></tr>
+	  <tr><td>/rank</td><td> - </td><td>Find number of references to search term per document.</td></tr>
+      <tr><td>/rfc</td><td> - </td><td>Find RFCs with the search term.</td></tr>
+      <tr><td>/fyi</td><td> - </td><td>Find FYIs with the search term.</td></tr>
+      <tr><td>/bcp</td><td> - </td><td>Find BCPs with the search term.</td></tr>
+      <tr><td>/std</td><td> - </td><td>Find STDs with the search term.</td></tr>
+      <tr><td>/num</td><td> - </td><td>Go to the RFC with this number.</td></tr>
+  	</table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>rfc 2022 /num</td></tr>
+  		<tr><td>rfc POP3</td></tr>
+  		<tr><td>rfc mom /fyi</td></tr>
+  	</table>
+  </description>
+  <category>Computers</category>
+  <link>http://www.faqs.org/rfcs/index.html</link>
+  <contributor>Joey Lesh</contributor>
+  
+  <form name="rfcf" 
+		METHOD="POST" 
+		ACTION="http://www.faqs.org/cgi-bin/rfcsearch">
+	<INPUT TYPE="hidden" NAME="query" />
+	<INPUT TYPE="hidden" NAME="archive" />
+  </form>
+
+	<form 
+		name="rfcnumf" 
+		METHOD="POST" 
+		ACTION="http://www.faqs.org/cgi-bin/rfcdisplay">
+	  <INPUT TYPE="hidden" NAME="display" />
+	</form>
+  
+  <script><![CDATA[
+    function rfc(q)
+    {
+      if( nullArgs("rfc",q) )
+		return false;
+      else
+      {
+        var args = parseArgs(q, "ref, rfc, fyi, bcp, std, rank, num");
+
+        if( args.switches.length > 0 )
+            switch( args.switches[0].name )
+            { 
+			  case "ref": 
+				document.rfcf.archive.value = "rfcs"; 
+				document.rfcf.query.value = args.q;
+ 	  			submitForm( rfcf );
+				break;
+			  case "num": 		
+	  			document.rfcnumf.display.value = args.q; 
+				submitForm( rfcnumf );
+				break;
+              case "rfc": 
+				document.rfcf.archive.value = "rfcindex";
+				document.rfcf.query.value = args.q;
+ 	  			submitForm( rfcf );
+				break;
+			  case "fyi": 
+				document.rfcf.archive.value = "fyiindex"; 
+				document.rfcf.query.value = args.q;
+ 	  			submitForm( rfcf );
+				break;
+			  case "bcp": 
+				document.rfcf.archive.value = "bcpindex";
+				document.rfcf.query.value = args.q;
+ 	  			submitForm( rfcf );
+				break;
+			  case "std": 
+				document.rfcf.archive.value = "stdindex"; 
+				document.rfcf.query.value = args.q;
+ 	  			submitForm( rfcf );
+				break;
+			  case "rank": 
+				document.rfcf.archive.value = "rank"; 
+				document.rfcf.query.value = args.q;
+ 	  			submitForm( rfcf );
+				break;
+			  default: 
+				document.rfcf.archive.value = "rfcs"; 
+				document.rfcf.query.value = args.q;
+ 	  			submitForm( rfcf );
+				break;
+			}
+		else
+		{
+			document.rfcf.archive.value = "rfcs";
+			document.rfcf.query.value = args.q;
+ 	  		submitForm( rfcf );
+		}
+      }
+    }
+  ]]></script>
+</search>
+
