@@ -1,0 +1,33 @@
+<search function="libweb">
+  <name>Libraries on the Web</name>
+  <description>
+    Goto Library web pages.<br/>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>libweb mi</td></tr>
+      <tr><td>libweb alaska</td></tr>
+      <tr><td>libweb berkeley</td></tr>
+    </table>
+  </description>
+  <link>http://sunsite.berkeley.edu/Libweb/</link>
+  <category>Genealogy<category>Reference</category></category>
+  <contributor>Brent Beardsley</contributor>
+  <form name="libwebf"
+        method="get"
+        action="http://www.ohiolink.edu/cgi-bin/libweb-search.pl">
+    <input type="hidden" name="search" value="" />
+  </form>
+  <script src="addons/genealogy/genealogy_lib.js"></script>
+  <script><![CDATA[
+
+    function libweb(q)
+    {
+      if( nullArgs("libweb", q) )
+        return false;
+
+      document.libwebf.search.value = q;
+      submitForm(libwebf);
+    }
+    ]]>
+  </script>
+</search>
