@@ -1,3 +1,26 @@
+-- What's new for 
+
+Enhancements
+
+* 
+
+Bug Fixes
+
+* 
+
+New Searches
+
+* 
+
+Modified Searches
+
+* mb removed (has yet to become mp thanks to Gregory Krohne)
+
+Miscellaneous
+
+* 
+
+
 -- What's new for 3.1.6.0 (20-Apr-2003)
 
 Enhancements
@@ -73,6 +96,7 @@ Miscellaneous
 * Corrected documentation in help for adding a local, user search.
 * New holiday database - holidays.cs.xml for the Czech Republic (from Jiri Sedlacek)
 * New holiday database - holidays.gb.xml for England and Wales (James Robertson)
+
 
 -- What's new for 3.1.5 (December 15, 2002)
 
