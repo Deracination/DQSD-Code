@@ -126,12 +126,21 @@ function about()
       helptable += categoryText;
     }
 
-    var oVersion = getVersionFromVersionFile( "version.xml" );
-	sVersion = new Array( oVersion.majorHi, oVersion.majorLo, oVersion.minorHi, oVersion.minorLo ).join('.');
+    sVersion = '';
+    sVersionDate = '';
+    // Try to read the version information several times, in case there's a problem
+    for ( var iGetVersion = 0; (iGetVersion < 5) && (typeof sVersion == 'undefined' || sVersion == null || sVersion == ''); iGetVersion++ )
+    {
+      try {
+        var oVersion = getVersionFromVersionFile( "version.xml" );
+        sVersion = new Array( oVersion.majorHi, oVersion.majorLo, oVersion.minorHi, oVersion.minorLo ).join('.');
+        sVersionDate = oVersion.date;
+      } catch(e) {}
+    }
 
     txt = txt.replace(/\r\n/g, '\n');
     txt = txt.replace(/%lv/g, sVersion );
-    txt = txt.replace(/%ld/g, oVersion.date );
+    txt = txt.replace(/%ld/g, sVersionDate );
     txt = txt.replace(/\n\*/g, '<li />');
     txt = txt.replace(/\nVer/, '</b><br />Ver');
     txt = txt.replace(/\nCop/, '<p />Cop');
