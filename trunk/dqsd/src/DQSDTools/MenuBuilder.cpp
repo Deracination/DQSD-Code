@@ -173,9 +173,17 @@ STDMETHODIMP CMenuBuilder::AppendSubMenu(BSTR bstrName, VARIANT* pvParentMenu, l
 	return S_OK;
 }
 
-STDMETHODIMP CMenuBuilder::AppendSeparator(long hmenu)
+STDMETHODIMP CMenuBuilder::AppendSeparator(VARIANT* pvParentMenu)
 {
-	::AppendMenu( (hmenu ? (HMENU)hmenu : m_hMain), MF_SEPARATOR, NULL, NULL );
+	USES_CONVERSION;
+
+	HMENU hmenu = (HMENU)m_hMain;
+	if (pvParentMenu && ((VT_I4 == pvParentMenu->vt) || (VT_I2 == pvParentMenu->vt)) )
+	{
+		hmenu = pvParentMenu->intVal ? (HMENU)pvParentMenu->intVal : (HMENU)m_hMain;
+	}
+
+	::AppendMenu( hmenu, MF_SEPARATOR, NULL, NULL );
 
 	return S_OK;
 }
@@ -586,9 +594,15 @@ STDMETHODIMP CMenuBuilder::InsertMenuItem(BSTR bstrItem, BSTR bstrKey, BSTR bstr
 	return S_OK;
 }
 
-STDMETHODIMP CMenuBuilder::InsertSeparator(UINT position, long hmenu)
+STDMETHODIMP CMenuBuilder::InsertSeparator(UINT position, VARIANT* pvParentMenu)
 {
 	USES_CONVERSION;
+
+	HMENU hmenu = (HMENU)m_hMain;
+	if (pvParentMenu && ((VT_I4 == pvParentMenu->vt) || (VT_I2 == pvParentMenu->vt)) )
+	{
+		hmenu = pvParentMenu->intVal ? (HMENU)pvParentMenu->intVal : (HMENU)m_hMain;
+	}
 
 	MENUITEMINFO menuItem;
 	memset(&menuItem, 0, sizeof(MENUITEMINFO));
