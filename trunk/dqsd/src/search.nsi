@@ -127,6 +127,7 @@ Section "Quick Search Deskbar (required)"
   File "..\ChangeLog.txt"
   File "..\aliases.txt"
   File "..\calculate.js"
+  File "..\httpinst.js"
   File "..\calendar.js"
   File "..\categoryExpander.htc"
   File "..\clock.js"
@@ -305,6 +306,7 @@ Section "Uninstall"
   Delete /REBOOTOK $INSTDIR\ChangeLog.txt
   Delete /REBOOTOK $INSTDIR\aliases.txt
   Delete /REBOOTOK $INSTDIR\calculate.js
+  Delete /REBOOTOK $INSTDIR\httpinst.js
   Delete /REBOOTOK $INSTDIR\calendar.js
   Delete /REBOOTOK $INSTDIR\categoryExpander.htc
   Delete /REBOOTOK $INSTDIR\clock.js
