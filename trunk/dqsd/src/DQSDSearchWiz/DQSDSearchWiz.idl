@@ -1,5 +1,5 @@
 // DQSDSearchWiz.idl : IDL source for DQSDSearchWiz.dll
-//
+// Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
 
 // This file will be processed by the MIDL tool to
 // produce the type library (DQSDSearchWiz.tlb) and marshalling code.

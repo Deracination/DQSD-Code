@@ -1,4 +1,5 @@
 // Options.cpp: implementation of the COptions class.
+// Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
 //
 //////////////////////////////////////////////////////////////////////
 

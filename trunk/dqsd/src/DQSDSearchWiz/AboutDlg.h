@@ -1,4 +1,5 @@
 // AboutDlg.h : Declaration of the CAboutDlg
+// Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
 
 #ifndef __ABOUTDLG_H_
 #define __ABOUTDLG_H_
