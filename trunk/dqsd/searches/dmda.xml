@@ -1,0 +1,152 @@
+<search function="dmda">
+  <name>DevelopMentor List Archives</name>
+  <category>Computers</category>
+  <contributor>Kim Gräsman</contributor>
+  <link>http://discuss.develop.com/archives/</link>
+  <email>kim@mvps.org</email>
+  <description>
+  	Search the discuss.develop.com archives. Adapted from Glenn Carr's msda.xml.<br/>
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td colspan="3"><i>One of the following is required:</i></td></tr>
+      <tr><td>/atl</td><td> - </td><td>Search the ATL list (migrated from Microsoft in October 2002)</td></tr>
+      <tr><td>/dotnet</td><td> - </td><td>Search the DOTNET list</td></tr>
+      <tr><td>/dotnet-clr</td><td> - </td><td>Search the DOTNET-CLR list</td></tr>
+      <tr><td>/oledb</td><td> - </td><td>Search the OLEDB_DEV list</td></tr>
+      <tr><td>/soap</td><td> - </td><td>Search the SOAP list</td></tr>
+      <tr><td colspan="3"><hr size="1"/></td></tr>
+      <tr><td colspan="3"><i>Optional:</i></td></tr>
+      <tr><td>/author</td><td> - </td><td>Restrict your search to messages posted by a particular person</td></tr>
+      <tr><td>/since</td><td> - </td><td>Search for messages only since the specified date</td></tr>
+      <tr><td>/until</td><td> - </td><td>Search for messages only before the specified date</td></tr>      
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+	  <tr><td></td></tr>
+      <tr><td>dmda /soap bath /since:2000</td><td> - </td><td>Search the SOAP list for the word 'bath' since 1-Jan-2000</td></tr>
+    </table>
+  </description>
+  <form name="dmdaf"
+        method="post"
+        action="http://discuss.develop.com/archives/wa.exe">
+    <input type="hidden" name="S2" value="dqsd" />	<COMMENT>May not be blank - feeding it with DQSD seems fair</COMMENT>
+    <input type="hidden" name="L" value="" />		<COMMENT>List to search</COMMENT>
+    <COMMENT>
+      The input element above, "L", was a SELECT element with the following options...
+      Use it as a guide when adding more lists to the search.
+      <select name="L">
+        <option value="ADVANCED-DOTNET">ADVANCED-DOTNET Moderated discussion of advanced .NET topics.</option>
+        <option value="ADVANCED-JAVA">ADVANCED-JAVA Moderated discussion of advanced Java topics.</option>
+        <option value="ATL">ATL Discussion related to the Active Template Library and COM development</option>
+        <option value="DIME">DIME Discussion of Direct Internet Message Encapsulation (DIME)</option>
+        <option value="DOTNET">DOTNET The DOTNET list is retired as of 7/1/02</option>
+        <option value="DOTNET-ADVOCACY">DOTNET-ADVOCACY DOTNET-ADVOCACY</option>
+        <option value="DOTNET-CF">DOTNET-CF Discussion related to the .NET Compact Framework and smart device development</option>
+        <option value="DOTNET-CLR">DOTNET-CLR Discussion of development on the .NET platform using any managed language</option>
+        <option value="DOTNET-CX">DOTNET-CX Discussion relating to the specifics of the C# and Managed C++ languages</option>
+        <option value="DOTNET-JOBS">DOTNET-JOBS Unmoderated DOTNET job forum</option>
+        <option value="DOTNET-PRODUCTS">DOTNET-PRODUCTS dotnet-products</option>
+        <option value="DOTNET-ROTOR">DOTNET-ROTOR Discussion of the Rotor Shared Source CLI implementation</option>
+        <option value="DOTNET-WEB">DOTNET-WEB Discussion of building .NET applications targeted for the Web</option>
+        <option value="DOTNET-WINFORMS">DOTNET-WINFORMS Discussion forum for developers using Windows Forms to build apps and controls</option>
+        <option value="GENX">GENX Discussion of GenX software</option>
+        <option value="JAVA">JAVA Java Discussion</option>
+        <option value="JAVA-SECURITY">JAVA-SECURITY Java-Security</option>
+        <option value="JAWIN">JAWIN Discussion of Java/Win32/COM integration with Jawin</option>
+        <option value="OLEDB_DEV">OLEDB_DEV OLEDB_DEV</option>
+        <option value="SOAP">SOAP Discussion of implementing SOAP applications today</option>
+        <option value="SOAP-BOFS">SOAP-BOFS The SOAP-BOFS list is retired as of 7/1/02</option>
+        <option value="SOAP-RP">SOAP-RP The SOAP-RP list is retired as of 7/1/02</option>
+        <option value="VBCOM">VBCOM Technical discussion of VBCOM</option>
+        <option value="VBDOTNET">VBDOTNET Discussion of writing applications and components using Visual Basic .NET</option>
+        <option value="WS-APPLICATIONS">WS-APPLICATIONS Discussion of publicly available Web Services applications</option>
+        <option value="WS-FUTURES">WS-FUTURES Discussion of evolving platform-neutral Web Service-related specifications</option>
+        <option value="WSDL">WSDL The WSDL list is retired as of 7/1/02</option>
+        <option value="XLANG">XLANG The XLANG list is retired as of 7/1/02</option>
+      </select>
+    </COMMENT>
+    <input type="hidden" name="q" value="" />	<COMMENT>Query</COMMENT>
+    <input type="hidden" name="s" value="" />	<COMMENT>Subject</COMMENT>
+    <input type="hidden" name="f" value="" />	<COMMENT>Author</COMMENT>
+    <input type="hidden" name="a" value="" />	<COMMENT>Since</COMMENT>
+    <input type="hidden" name="b" value="" />	<COMMENT>Until</COMMENT>
+    <input type="hidden" name="I" value="-3" />	<COMMENT>Sort order</COMMENT>
+    <COMMENT>
+      The input element above, "I", was a SELECT element with the following options...
+      <select name="I">
+        <option value="0">Nothing</option>
+        <option value="1">Item No.</option>
+        <option value="-1">Item No., desc.</option>
+        <option value="3">Date/Time</option>
+        <option value="-3">Date/Time, desc.</option>
+        <option value="4">Lines</option>
+        <option value="-4">Lines, desc.</option>
+        <option value="6">Subject</option>
+        <option value="-6">Subject, desc.</option>
+        <option value="7">List name</option>
+        <option value="-7">List name, desc.</option>
+      </select>
+    </COMMENT>
+  </form>
+  <script><![CDATA[
+    function dmda(q)
+    {
+      if(nullArgs("dmda", q))
+        return;
+
+      var args = parseArgs(q, "atl, dotnet, dotnet-clr, oledb, soap, author, since, until");
+      for (var i = 0; i < args.switches.length; ++i)
+      {
+        switch(args.switches[i].name)
+        {
+        // Lists
+          case "atl":
+          	document.dmdaf.L.value = "ATL";
+            break;
+          case "dotnet":
+          	document.dmdaf.L.value = "dotnet";
+            break;
+          case "dotnet-clr":
+          	document.dmdaf.L.value = "dotnet-clr";
+            break;
+          case "oledb":
+          	document.dmdaf.L.value = "oledb_dev";
+            break;
+          case "soap":
+          	document.dmdaf.L.value = "soap";
+            break;
+        // Generic switches
+          case "author":
+            document.dmdaf.f.value = args.switches[i].value;
+            break;
+          case "since":
+            document.dmdaf.a.value = args.switches[i].value;
+            break;
+          case "until":
+            document.dmdaf.b.value = args.switches[i].value;
+            break;
+		  default:
+			break;
+		}
+	  }
+		
+      if (document.dmdaf.L.value == "")
+      {
+        nullArgs("dmda", "?");
+        return;
+      }
+
+      document.dmdaf.q.value = args.q;
+      submitForm(dmdaf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 04/28/03 at 17:04:20
+    by Dave's Quick Search Deskbar Search Wizard version 1.0.1 ,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>
