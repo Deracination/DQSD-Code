@@ -18,8 +18,8 @@
   <script><![CDATA[
     function whatis(q)
     {
-      if (q == "")
-        openSearchWindow("http://whatis.techtarget.com/");
+      if( nullArgs("whatis", q) )
+        return false;
       else
       {
         document.whatisf["query"].value = q;
