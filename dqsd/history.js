@@ -15,13 +15,16 @@ function saveHistory()
 // restore at most historylength entries from the saved history
 function restoreHistory()
 {
-  var loaded = readFile("history.txt").split('\r\n');
-  for (var i = (loaded.length < historylength ? 0 : historylength - loaded.length);
-           i < loaded.length; i++)
+  var loaded = readFile("history.txt").replace(/\r\n/g, '\n').split('\n');
+  for (var i = loaded.length - 1; i >= 0; i--)
   {
     if (loaded[i] && loaded[i] != "")
       histarray.push(loaded[i]);
+    if (histarray.length >= historylength)
+      break;
   }
+  histarray.reverse();
+  histcurr = histarray.length;
 }
 
 // add an item to the history
@@ -54,7 +57,7 @@ function addhist(t)
 // get the current history entry
 function currhistedit()
 {
-  if (histedit[histcurr])
+  if (histedit[histcurr] != null)
     return histedit[histcurr];
   if (histcurr >= histarray.length)
     return (histcurr > 0 ? histarray[histarray.length - 1] : "");
@@ -75,12 +78,34 @@ function histeditmove(t, i)
 {
   if (t != currhistedit())
     histedit[histcurr] = t;
-    
-  if (i == 0) return;
-  if (i > 0 && histcurr >= histarray.length) return;
-  if (i < 0 && histcurr <= 0) return;
 
-  histcurr = histcurr + i;
+  // special case: first ctrl-p and no edits were done
+  if (i == -1 && histcurr == histarray.length && histedit[histcurr] == null)
+  {
+    histedit[histcurr] = "";
+    if (histcurr > 0) histcurr--;
+  }
+
+    
+  // no movement
+  if (i == 0) return;
+
+  // filter when somebody has typed !prefix then ctrl-p
+  var scan = histcurr + i;
+  if (scan > histarray.length || scan < 0) return;
+
+  var filter = histedit[histarray.length];
+  if (filter != null && filter.length > 1 && filter.match(/^!\w/))
+    filter = "\\b" + filter.substring(1);
+  else filter = "";
+
+  while (scan < histarray.length && !histarray[scan].match(filter))
+  {
+    scan += i;
+    if (scan < 0) return;
+  }
+
+  histcurr = scan;
 }
 
 
