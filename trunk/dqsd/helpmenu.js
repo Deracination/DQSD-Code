@@ -167,33 +167,6 @@ function showpop()
       saveMenuHistory( alias );
   }
   return false;
-  
-//  mb = null;
-//  return false;
-//  if (!dopopup)
-//    return false;
-//
-//  if (window.event.button == 2)
-//    return false;
-//
-//  if (!pophelp)
-//    buildpop();
-//
-//  window.event.cancelBubble = true;
-//  if (pophelpisopen)
-//  {
-//    pophelp.hide();
-//    return false;
-//  }
-//  else
-//  {
-//    pophelp.show((buttonalign == "left" ? 0 : document.body.clientWidth - popwidth),
-//                 -popheight, popwidth, popheight, document.body);
-//
-//    window.setTimeout("queuefocus();", 0);
-//    watchpopup("pophelp");
-//    return false;
-//  }
 }
 
 function queuefocus()
