@@ -156,7 +156,7 @@
         qsfind("comx /function");
         return false;
      }
-     var comxoutfile = DQSDLauncher.InstallationDirectory+'\\comx.html';     
+     var comxoutfile = DQSDLauncher.AppDataDirectory + '\\comx.html';     
      var pagebody="<html><head></head><body>";
      
      var args = parseArgs(q, "9chickweedlane,agnes,alleyoop,andycapp,arloandjanis,bc,\
@@ -435,8 +435,9 @@
            return;
      }//else
      pagebody += '<br></body></html>';
+     
      writeFile(comxoutfile, pagebody);
-     openSearchWindow("file:///"+comxoutfile);
+     openSearchWindow("file://" + comxoutfile);
   } //function
 
   ]]></script>

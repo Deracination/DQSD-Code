@@ -284,7 +284,7 @@ STDMETHODIMP CLauncher::WriteFile(BSTR bstrFilename, BSTR bstrValue)
 		return Error(_T("Filename is not in the installation or app data directory trees."), IID_ILauncher, E_FAIL);
 	}
 
-	// Make sure it's extension is not one of the bad extensions
+	// Make sure its extension is not one of the bad extensions
 	TCHAR *szBadExtensions = _T(".exe;.dll");
 	if (IsFileExtension(szFilename, szBadExtensions))
 	{
@@ -293,7 +293,12 @@ STDMETHODIMP CLauncher::WriteFile(BSTR bstrFilename, BSTR bstrValue)
 	
 	HANDLE hFile = ::CreateFile( szFilename, GENERIC_WRITE, FILE_SHARE_READ, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 	if ( INVALID_HANDLE_VALUE == hFile )
-		HRESULT_FROM_WIN32(::GetLastError());
+		return HRESULT_FROM_WIN32(::GetLastError());
+
+//	int cchBuffer = WideCharToMultiByte(CP_THREAD_ACP, 0, bstrValue, SysStringLen(bstrValue), NULL, -1, 0, 0);
+//	if (cchBuffer == 0)
+//	{
+//	}
 
 	// TODO: Avoid using conversion macros here -- it's dangerous, 
 	// since there's no telling how large bstrValue is
@@ -625,13 +630,13 @@ STDMETHODIMP CLauncher::get_AppDataDirectory(BSTR* pbstrDirectory)
 	USES_CONVERSION;
 
 	CComBSTR bstrAppData;
-	HRESULT hr = GetSpecialFolderLocation( T2W( _T("AppData") ), &bstrAppData );
+	HRESULT hr = GetSpecialFolderLocation( CComBSTR(L"AppData"), &bstrAppData );
 	if ( SUCCEEDED( hr ) )
 	{
-		bstrAppData.Append( _T("\\DQSD" ) );
+		bstrAppData.Append(L"\\DQSD");
 		::CreateDirectory( W2CT( bstrAppData ), NULL );
 
-		*pbstrDirectory = bstrAppData;
+		*pbstrDirectory = bstrAppData.Detach();
 	}
 	return hr;
 }
