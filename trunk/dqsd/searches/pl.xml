@@ -1,0 +1,79 @@
+<search function="pl">
+  <name>Port Lookup</name>
+  <category>Computers<category>Reference</category></category>
+  <contributor>Kim Grauml;sman</contributor>
+  <link>http://www.securitystats.com/tools/portsearch.php</link>
+  <email>kim@mvps.org</email>
+  <description>
+    SecurityStats TCP/UDP Port Search Utility - used to resolve port number info.
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/desc</td><td> - </td><td>Search for description</td></tr>
+      <tr><td>/kw</td><td> - </td><td>Search for keyword</td></tr>
+      <tr><td>/port</td><td> - </td><td>Search for port number</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td colspan="2">pl /port 445 or</td></tr>
+      <tr><td>pl 445</td><td> - </td><td>Lookup port 445</td></tr>
+      <tr><td colspan="2">pl /desc Microsoft or</td></tr>
+      <tr><td>pl Microsoft</td><td> - </td><td>Search for 'Microsoft' among descriptions</td></tr><tr></tr>
+      <tr><td>pl /kw POP3</td><td> - </td><td>Search for 'POP3' among service keywords</td></tr>
+    </table>
+  </description>
+  <form name="plf" method="post" action="http://www.securitystats.com/tools/portsearch.php">
+    <input type="hidden" name="input" value="" />
+    <input type="hidden" name="type" value="" />
+    <input type="hidden" name="select" value="any" />
+    <input type="hidden" name="Submit" value="Submit" />
+  </form>
+  <script><![CDATA[
+    function pl(q)
+    {
+      if (nullArgs("pl", q))
+        return;
+
+      var args = parseArgs(q, "desc, kw, port");
+      if (args.switches.length > 0)
+      {
+        switch( args.switches[0].name )
+        {
+          case "desc":
+            document.plf.type.value = "description";
+            break;
+          case "kw":
+            document.plf.type.value = "keyword";
+            break;
+          case "port":
+            document.plf.type.value = "port";
+            break;
+        }
+      }
+      else
+      {
+        if (args.q.match(/^\d+$/))
+        {
+          // If numeric, it's a port number
+          document.plf.type.value = "port";
+        }
+        else
+        {
+          // It's considered to be a description
+          document.plf.type.value = "description";
+        }
+      }
+
+      document.plf.input.value = args.q;
+      submitForm(plf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 09/26/04 at 19:02:18
+    by Dave's Quick Search Deskbar Search Wizard version 1.3,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>
