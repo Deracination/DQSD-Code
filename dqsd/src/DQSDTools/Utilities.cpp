@@ -146,31 +146,41 @@ UtilitiesFindDQSDWindow(bool bCheckForNonTaskbar)
 
 	};
 
-	int maxAttempts = bCheckForNonTaskbar ? 3 : 2;
+	int maxTrees = bCheckForNonTaskbar ? 3 : 2;
 
 	//We now traverse the array of window classes. 
 	// The first window class is OCHost
 	HWND hwndDQSD = NULL;
-	for(int nAttempt = 0; hwndDQSD == NULL && nAttempt < maxAttempts; nAttempt++)
+
+	// Make up to three passes with a delay here
+	for(int nAttempt = 0; hwndDQSD == NULL && nAttempt < 3; nAttempt++)
 	{
-		for ( int i = 0; i < sizeof(rgszClassNames[0])/sizeof(rgszClassNames[0][0]); i++ ) 
+		for(int nTree = 0; hwndDQSD == NULL && nTree < maxTrees; nTree++)
 		{
-			LPCTSTR pClassName = rgszClassNames[nAttempt][i];
-
-			if(pClassName == NULL)
+			for ( int i = 0; i < sizeof(rgszClassNames[0])/sizeof(rgszClassNames[0][0]); i++ ) 
 			{
-				// We've reached the end of a list - we must have found the window
-				break;
-			}
+				LPCTSTR pClassName = rgszClassNames[nTree][i];
+ 
+				if(pClassName == NULL)
+				{
+					// We've reached the end of a list - we must have found the window
+					break;
+				}
 
-			hwndDQSD = ::FindWindowEx( hwndDQSD, NULL, pClassName, NULL );
+				hwndDQSD = ::FindWindowEx( hwndDQSD, NULL, pClassName, NULL );
 
-			if ( NULL == hwndDQSD )
-			{
-				// We've failed to find the window using this attempt - break out of the 
-				// inner traversal loop and attempt another class name list
-				break;
+				if ( NULL == hwndDQSD )
+				{
+					// We've failed to find the window using this attempt - break out of the 
+					// inner traversal loop and attempt another class name list
+					break;
+				}
 			}
+		} 
+
+		if(hwndDQSD == NULL)
+		{
+			Sleep(300);
 		}
 	}
 
