@@ -74,6 +74,8 @@ Section "Quick Search Deskbar (required)"
   Delete /REBOOTOK $INSTDIR\dqsdt255.dll
   UnRegDLL $INSTDIR\dqsdt257.dll
   Delete /REBOOTOK $INSTDIR\dqsdt257.dll
+  UnRegDLL $INSTDIR\dqsdt258.dll
+  Delete /REBOOTOK $INSTDIR\dqsdt258.dll
 
   ; install new DLL
   SetOverwrite try
