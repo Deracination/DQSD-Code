@@ -27,7 +27,7 @@ For the latest version and installation instructions, visit <nobr><a href=http:/
 
 * Mathematical expressions: <nobr>"4*(pi-3)", <wbr>"pow(1.06,30)"</nobr>
 
-* Navigate previous searches with ctrl-P and ctrl-N. Type <nobr>"!<em>prefix</em>"</nobr> to see only matching entries.
+* Navigate previous searches with ctrl-P and ctrl-N or the Up/Down arrows.. Type <nobr>"!<em>prefix</em>"</nobr> to see only matching entries.
 
 * A clock appears after when idle. Right-click for a calendar.
 
@@ -50,9 +50,9 @@ The deskbar is customizable and completely open-source.
 * Edit <a href="view-source:localsearch.css">localsearch.css</a> to customize fonts, colors, sizes, etc.  Look in <a href="view-source:search.css">search.css</a>
   to see all of the available style settings.
 
-* Shortcuts and the default search are defined in <a href="view-source:localaliases.txt">localaliases.txt</a>.
+* Shortcuts are defined in <a href="view-source:localaliases.txt">localaliases.txt</a>.
 
-* You can add new searches by adding new XML files to the searches directory.
+* You can add new searches by adding new XML files to the searches subdirectory.
 
 * After editing the code, type "!" in the search bar to reload it.
 
@@ -245,7 +245,7 @@ function performsearch( fname, term )
 {
   if( !fname ) fname = defaultsearch;                         // if the specified search does not exist (ie. no default search), set to defaultsearch
   term = term.replace(/^\s+/g, '').replace(/\s+$/g, '')       // strip out leading and trailing spaces
-      
+
   if (searches[fname])
     searches[fname].fun(term);
   else
