@@ -5,7 +5,7 @@
   "navigator.userLanugage=" in the deskbar.)
 
   Please mail or post any additional translations to the support
-  group at dqsdd@groups.yahoo.com so other people can enjoy them too.
+  group at dqsdd@yahoogroups.com so other people can enjoy them too.
   
   Thanks!
 */
