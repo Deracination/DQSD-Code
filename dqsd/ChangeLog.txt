@@ -6,7 +6,7 @@ New Searches
 
 Modified Searches
 
-* gg - /fresh switch disappeared (/since is enough) - /since now requires a number of days instead of d, w or m, and gets independant of goosearch
+* gg - /fresh switch disappeared (/since is enough) - /since now allows a number of days in addition to t,y,w,m, and gets independant of goosearch
 * hs - added /new from Brent Beardsley
 * jdk - added /1.4, /1.3, /tutorial, /all, /j2ee, /jls, /jvm options
 * multi - apostrophes (') in the query now don't generate errors
