@@ -1,9 +1,17 @@
 <search function="sw">
-  <name>SurfWax Search</name>
-  <description>Search the SurfWax: "sw horses"</description>
+  <name>SurfWax</name>
+  <description>
+    Delivers results from a broad range of sources including the visible and invisible Web, newsfeeds, and intranets.<br/>
+    <a class="helpboxDescLabels">Example:</a><br/>
+    <table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">sw horses</td></tr>
+  	</table>
+  </description>
   <category>Search the Web</category>
   <link>http://www.surfwax.com/</link>
-  <contributor>robbyh [robbyh at yahoo dot com]</contributor>
+  <contributor>robbyh</contributor>
+  <email>robbyh_at_yahoo_dot_com</email>
+  
   <form name="swf"
       action="http://www.surfwax.com/servlet/com.surfwax.FrontEnd.home">
       <input type="hidden" name="cmd" value="frames"/>
@@ -12,16 +20,15 @@
       <input type="hidden" name="sort" value="alpha"/>
       <input type="hidden" name="summaries" value="checked"/>
   </form>
+  
   <script><![CDATA[
-    function sw(search)
+    function sw(q)
     {
-      if (search == "")
-      {
-        openSearchWindow("http://www.surfwax.com/");
-      }
+      if( nullArgs("sw",q) )
+        return false;
       else
       {
-        document.swf.search.value=search;
+        document.swf.search.value = q;
         submitForm(swf);
       }
     }

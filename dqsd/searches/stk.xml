@@ -1,24 +1,32 @@
 <search function="stk">
   <name>Bloomberg Stock Quotes</name>
-  <description>Bloomberg quotes by symbol: "stk WMT S"</description>
+  <description>
+    Get stock quotes by symbol.<br/>
+    <a class="helpboxDescLabels">Example:</a><br/>
+    <table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">stk WMT S</td></tr>
+  	</table>
+  </description>
   <category>Finance</category>
-  <link>href="http://www.bloomberg.com/</link>
+  <link>http://www.bloomberg.com/</link>
+  
   <form name="stkf"
         action="http://quote.bloomberg.com/analytics/bquote.cgi"
         method="get">
     <input type="hidden" name="version" value="markets99.cfg"/>
     <input type="hidden" name="ticker" value=""/>
   </form>
+  
   <script><![CDATA[
-  function stk(q)
-  {
-    if (q == "")
-      openSearchWindow("http://www.bloomberg.com/");
-    else
+    function stk(q)
     {
-      document.stkf.ticker.value = q;
-      submitForm(stkf);
+      if( nullArgs("stk",q) )
+        return false;
+      else
+      {
+        document.stkf.ticker.value = q;
+        submitForm(stkf);
+      }
     }
-  }
   ]]></script>
 </search>
