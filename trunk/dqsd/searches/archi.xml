@@ -1,0 +1,50 @@
+<search function="archi">
+  <COMMENT>
+
+    This search file was initially created by Dave's Quick Search Deskbar
+    Search Wizard version 0.5 (beta) on 09/25/02 at 20:38:19
+
+    Even though this XML search will probably load and is a healthy start
+    toward a completed search, please be aware that this search will probably
+    not work as is and will require some human inspection and modification.
+
+  </COMMENT>
+  <name>Way Back Machine</name>
+  <category>Search the Web</category>
+  <contributor>Thad Kerosky</contributor>
+  <link>http://archive.org/</link>
+  <email></email>
+  <description>
+  Look into the extensive incremental archives of the internet. Some date back to 1998.
+  </description>
+  <form name="wbmf"
+        method="get"
+        action="http://web.archive.org/archive_request_ng">
+    <input type="hidden" name="collection" value="web" />
+
+    <input type="hidden" name="url" value="" />
+  </form>
+  <script><![CDATA[
+    function archi(q)
+    {
+      if( nullArgs("archi", q) )
+        return;
+
+      if( q == "" )
+      {
+        openSearchWindow("http://archive.org/");
+        return;
+      }
+
+      // FORM variables for wbmf
+      //document.wbmf.collection.value = "";
+
+      // The wizard assigned the search string to this form field value because
+      // this field was the active element when the search file was generated.
+      // Change this to args.q if the search string is parsed with parseArgs.
+      document.wbmf.url.value = q;
+
+      submitForm(wbmf);
+    }
+  ]]></script>
+</search>
