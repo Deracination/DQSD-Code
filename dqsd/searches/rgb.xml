@@ -1,7 +1,7 @@
 <search function="rgb">
-  <name>RGB to Hexidecimal Conversion</name>
+  <name>RGB to Hexadecimal Conversion</name>
   <description>
-    Convert RGB integer values to hexidecimal equivalents.<br/>
+    Convert RGB integer values to hexadecimal equivalents.<br/>
     <div class="helpboxDescLabels">Example:</div>
     <table class="helpboxDescTable">
   		<tr><td>rgb 255110053</td></tr>
