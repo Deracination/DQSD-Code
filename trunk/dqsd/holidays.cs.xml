@@ -1,0 +1,166 @@
+<!--
+   This file contains a listing of public holidays in the Czech Republic for the years 2003-2020.
+
+   Please put these lines in your localprefs.js:
+      clocklongform=" EEEE d. MMM H:mm ";
+      clockshortform=" EEE d. MMM H:mm ";
+      weekStartDay = 2;
+      eventsfileurl="holidays.cs.xml";
+
+   Please change charset to iso-8859-2 in the meta tag in search.htm:
+      <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-2">
+
+   - Jiri Sedlacek [Jiri.Sedlacek@quick.cz] (20.12.2002)
+-->
+
+<events>
+  <event name="Nov&#x00fd; rok / St&#x00e1;tn&#x00ed; sv&#x00e1;tek - Den obnovy samostatn&#x00e9;ho &#x010d;esk&#x00e9;ho st&#x00e1;tu" type="public_holiday">
+     <date day="1" month="1"/>
+  </event>
+  <event name="US - Valentine's Day" type="public_holiday">
+     <date day="14" month="2"/>
+  </event>
+  <event name="V&#x00fd;znamn&#x00fd; den - Vstup &#x010c;R do NATO" type="public_holiday">
+     <date day="12" month="3"/>
+  </event>
+  <event name="Den bl&#x00e1;zn&#x016f;" type="public_holiday">
+     <date day="1" month="4"/>
+  </event>
+  <event name="Velk&#x00fd; p&#x00e1;tek" type="public_holiday">
+     <date day="18" month="4" year="2003"/>
+     <date day="9"  month="4" year="2004"/>
+     <date day="26" month="3" year="2005"/>
+     <date day="14" month="4" year="2006"/>
+     <date day="6"  month="4" year="2007"/>
+     <date day="21" month="3" year="2008"/>
+     <date day="10" month="4" year="2009"/>
+     <date day="2"  month="4" year="2010"/>
+     <date day="22" month="4" year="2011"/>
+     <date day="6"  month="4" year="2012"/>
+     <date day="29" month="3" year="2013"/>
+     <date day="18" month="4" year="2014"/>
+     <date day="3"  month="4" year="2015"/>
+     <date day="25" month="3" year="2016"/>
+     <date day="14" month="4" year="2017"/>
+     <date day="30" month="3" year="2018"/>
+     <date day="19" month="4" year="2019"/>
+     <date day="10" month="4" year="2020"/>
+  </event>
+  <event name="Velikono&#x010d;n&#x00ed; ned&#x011b;le" type="public_holiday">
+     <date day="20" month="4" year="2003"/>
+     <date day="11" month="4" year="2004"/>
+     <date day="27" month="3" year="2005"/>
+     <date day="16" month="4" year="2006"/>
+     <date day="8"  month="4" year="2007"/>
+     <date day="23" month="3" year="2008"/>
+     <date day="12" month="4" year="2009"/>
+     <date day="4"  month="4" year="2010"/>
+     <date day="24" month="4" year="2011"/>
+     <date day="8"  month="4" year="2012"/>
+     <date day="31" month="3" year="2013"/>
+     <date day="20" month="4" year="2014"/>
+     <date day="5"  month="4" year="2015"/>
+     <date day="27" month="3" year="2016"/>
+     <date day="16" month="4" year="2017"/>
+     <date day="1"  month="4" year="2018"/>
+     <date day="21" month="4" year="2019"/>
+     <date day="12" month="4" year="2020"/>
+  </event>
+  <event name="Velikono&#x010d;n&#x00ed; pond&#x011b;l&#x00ed;" type="public_holiday">
+     <date day="21" month="4" year="2003"/>
+     <date day="12" month="4" year="2004"/>
+     <date day="28" month="3" year="2005"/>
+     <date day="17" month="4" year="2006"/>
+     <date day="9"  month="4" year="2007"/>
+     <date day="24" month="3" year="2008"/>
+     <date day="13" month="4" year="2009"/>
+     <date day="5"  month="4" year="2010"/>
+     <date day="25" month="4" year="2011"/>
+     <date day="9"  month="4" year="2012"/>
+     <date day="1"  month="4" year="2013"/>
+     <date day="21" month="4" year="2014"/>
+     <date day="6"  month="4" year="2015"/>
+     <date day="28" month="3" year="2016"/>
+     <date day="17" month="4" year="2017"/>
+     <date day="2"  month="4" year="2018"/>
+     <date day="22" month="4" year="2019"/>
+     <date day="13" month="4" year="2020"/>
+  </event>
+  <event name="Sv&#x00e1;tek pr&#x00e1;ce" type="public_holiday">
+     <date day="1" month="5"/>
+  </event>
+  <event name="V&#x00fd;znamn&#x00fd; den - Kv&#x011b;tnov&#x00e9; povst&#x00e1;n&#x00ed; &#x010d;esk&#x00e9;ho lidu" type="public_holiday">
+     <date day="5" month="5"/>
+  </event>
+  <event name="St&#x00e1;tn&#x00ed; sv&#x00e1;tek - Den osvobozen&#x00ed;" type="public_holiday">
+     <date day="8" month="5"/>
+  </event>
+  <event name="Den matek" type="public_holiday">
+     <date day="11" month="5" year="2003"/>
+     <date day="9"  month="5" year="2004"/>
+     <date day="8"  month="5" year="2005"/>
+     <date day="14" month="5" year="2006"/>
+     <date day="13" month="5" year="2007"/>
+     <date day="11" month="5" year="2008"/>
+     <date day="10" month="5" year="2009"/>
+     <date day="9"  month="5" year="2010"/>
+     <date day="8"  month="5" year="2011"/>
+     <date day="13" month="5" year="2012"/>
+     <date day="12" month="5" year="2013"/>
+     <date day="11" month="5" year="2014"/>
+     <date day="10" month="5" year="2015"/>
+     <date day="8"  month="5" year="2016"/>
+     <date day="14" month="5" year="2017"/>
+     <date day="13" month="5" year="2018"/>
+     <date day="12" month="5" year="2019"/>
+     <date day="10" month="5" year="2020"/>
+  </event>
+  <event name="US - Father's Day" type="public_holiday">
+     <date day="15" month="6" year="2003"/>
+     <date day="20" month="6" year="2004"/>
+     <date day="19" month="6" year="2005"/>
+     <date day="18" month="6" year="2006"/>
+     <date day="17" month="6" year="2007"/>
+     <date day="15" month="6" year="2008"/>
+     <date day="21" month="6" year="2009"/>
+     <date day="20" month="6" year="2010"/>
+     <date day="19" month="6" year="2011"/>
+     <date day="17" month="6" year="2012"/>
+     <date day="16" month="6" year="2013"/>
+     <date day="15" month="6" year="2014"/>
+     <date day="21" month="6" year="2015"/>
+     <date day="19" month="6" year="2016"/>
+     <date day="18" month="6" year="2017"/>
+     <date day="17" month="6" year="2018"/>
+     <date day="16" month="6" year="2019"/>
+     <date day="21" month="6" year="2020"/>
+  </event>
+  <event name="St&#x00e1;tn&#x00ed; sv&#x00e1;tek - Den slovansk&#x00fd;ch v&#x011b;rozv&#x011b;st&#x016f; Cyrila a Metod&#x011b;je" type="public_holiday">
+     <date day="5" month="7"/>
+  </event>
+  <event name="St&#x00e1;tn&#x00ed; sv&#x00e1;tek - Den up&#x00e1;len&#x00ed; mistra Jana Husa" type="public_holiday">
+     <date day="6" month="7"/>
+  </event>
+  <event name="St&#x00e1;tn&#x00ed; sv&#x00e1;tek - Den &#x010d;esk&#x00e9; st&#x00e1;tnosti" type="public_holiday">
+     <date day="28" month="9"/>
+  </event>
+  <event name="St&#x00e1;tn&#x00ed; sv&#x00e1;tek - Den vzniku samostatn&#x00e9;ho &#x010d;eskoslovensk&#x00e9;ho st&#x00e1;tu" type="public_holiday">
+     <date day="28" month="10"/>
+  </event>
+  <event name="US - Halloween" type="public_holiday">
+     <date day="31" month="10"/>
+  </event>
+  <event name="St&#x00e1;tn&#x00ed; sv&#x00e1;tek - Den boje za svobodu a demokracii" type="public_holiday">
+     <date day="17" month="11"/>
+  </event>
+  <event name="&#x0160;t&#x011b;dr&#x00fd; den" type="public_holiday">
+     <date day="24" month="12"/>
+  </event>
+  <event name="1. sv&#x00e1;tek v&#x00e1;no&#x010d;n&#x00ed;" type="public_holiday">
+     <date day="25" month="12"/>
+  </event>
+  <event name="2. sv&#x00e1;tek v&#x00e1;no&#x010d;n&#x00ed;" type="public_holiday">
+     <date day="26" month="12"/>
+  </event>
+</events>
+
