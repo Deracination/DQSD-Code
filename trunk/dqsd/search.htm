@@ -595,29 +595,36 @@ function dodrop()
 {
   if (selfdrag) return true;
 
-  if (init)
-    init = false;
-  stopbanner();
-
-  window.event.returnValue=false;
-  window.event.dataTransfer.dropEffect='copy';
-  var q = event.dataTransfer.getData("Text");
-
-  // trim leading and trailing whitespace and punctuation
-  if ( q && q.length > 0 )
+  try
   {
-    q = q.replace(/(^[\s~`!@#$%\^&\*()\-=\+{}\[\];:'<>,\.\/\?]*)|([\s~`!@#$%\^&\*()\-=\+{}\[\];:'<>,\.\/\?]*$)/g, '');
-  }
-  if ( !q || q.length == 0 )
-  {
+    if (init)
+      init = false;
+    stopbanner();
+
+    window.event.returnValue=false;
+    window.event.dataTransfer.dropEffect='copy';
+    var q = event.dataTransfer.getData("Text");
+
+    // trim leading and trailing whitespace and punctuation
+    if ( q && q.length > 0 )
+    {
+      q = q.replace(/(^[\s~`!@#$%\^&\*()\-=\+{}\[\];:'<>,\.\/\?]*)|([\s~`!@#$%\^&\*()\-=\+{}\[\];:'<>,\.\/\?]*$)/g, '');
+    }
+    if ( !q || q.length == 0 )
+    {
+      rst();
+      return false;
+    }
+
+    document.deff.q.value = q;
+
     rst();
-    return;
+    mnu( "", "");
   }
-
-  document.deff.q.value = q;
-
-  rst();
-  mnu( "", "");
+  catch (e)
+  {
+    return false; // ??? hack, but it avoids weird intermittent errors
+  }
 }
 
 // rst() called when the texbox loses focus
