@@ -1,0 +1,63 @@
+<search function="fm">
+  <name>Freshmeat.net</name>
+  <description>
+    Search open source projects on Freshmeat.net.<br/>
+    <div class="helpboxDescLabels">Switches:</div>
+  	<table class="helpboxDescTable">
+  		<tr><td>/projects</td><td> - </td><td>Projects</td></tr>
+  		<tr><td>/articles</td><td> - </td><td>Articles</td></tr>
+  		<tr><td>/comments</td><td> - </td><td>Comments</td></tr>
+  	</table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>fm php graph</td></tr>
+  	</table>
+  </description>
+  <category>Computers</category>
+  <link>http://www.freshmeat.net/</link>
+  <contributor>Brent Beardsley</contributor>
+  
+  <form name="fmsearch"
+        action="http://www.freshmeat.net/search/"
+        method="get">
+    <input type="hidden" name="q"/>
+    <input type="hidden" name="section"/>
+  </form>
+  
+  <script><![CDATA[
+    function fm(q)
+    {
+      if( nullArgs("fm", q) )
+        return false;
+
+      var args = parseArgs(q, "projects, articles, comments");
+      if( q == "" )
+        openSearchWindow("http://www.freshmeat.net/");
+      else if( args.switches.length == 1 )
+      {
+        switch( args.switches[0].name )
+        {
+          case "projects":
+            document.fmsearch.section.value = "projects"; break;
+          case "comments":
+            document.fmsearch.section.value = "comments"; break;
+          case "articles":
+            document.fmsearch.section.value = "articles"; break;
+          default:
+            document.fmsearch.section.value = args.switches[0].name; break;
+        }
+        document.fmsearch.q.value = args.q;
+        submitForm(fmsearch);
+      }
+      else if( args.switches.length > 1 )
+        nullArgs("fm","?");
+      else
+      {
+        document.fmsearch.section.value = "projects";
+        document.fmsearch["q"].value = args.q;
+        submitForm(fmsearch);
+      }
+    }
+  ]]></script>
+</search>
+

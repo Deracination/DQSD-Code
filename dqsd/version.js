@@ -73,12 +73,12 @@ function checkWebForUpdate()
     var lversion = getVersionFromVersionFile( "version.xml" );
     if ( versioncmp( rversion, lversion ) > 0 )
     {
-      window.showModalDialog("versiondialog.htm", { lversion:lversion, rversion:rversion }, "dialogHeight: 150px; dialogWidth: 300px; dialogTop: px; dialogLeft: px; edge: Raised; center: Yes; help: No; resizable: Yes; status: No; scroll: No;");
+      window.showModalDialog("versiondialog.htm", { lversion:lversion, rversion:rversion }, "dialogHeight: 150px; dialogWidth: 300px; dialogTop: " + (screen.height / 2 - 75) + "px; dialogLeft: " + (screen.width / 2 - 150) + "px; edge: Raised; center: Yes; help: No; resizable: Yes; status: No; scroll: No;");
     }
     else if ( !quiet )
     {
       rversion.htmlDescription = "You are using the latest version.<br/>For more details visit <a tabindex=-1 href='http://www.dqsd.net' onclick='window.close();'>www.dqsd.net</a>."
-      window.showModalDialog("versiondialog.htm", { lversion:lversion, rversion:rversion }, "dialogHeight: 100px; dialogWidth: 300px; dialogTop: px; dialogLeft: px; edge: Raised; center: Yes; help: No; resizable: Yes; status: No; scroll: No;");
+      window.showModalDialog("versiondialog.htm", { lversion:lversion, rversion:rversion }, "dialogHeight: 100px; dialogWidth: 300px; dialogTop: " + (screen.height / 2 - 50) + "px; dialogLeft: " + (screen.width / 2 - 150) + "px; edge: Raised; center: Yes; help: No; resizable: Yes; status: No; scroll: No;");
     }
   }
   catch(e)

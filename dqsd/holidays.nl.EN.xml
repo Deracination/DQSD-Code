@@ -1,0 +1,112 @@
+<!--
+   This file contains a listing of public holidays in
+   the Netherlands for the years 2002-2013. (English language version)
+   - Johan Geertsma [jgeertsma@yahoo.com] (19/7/2002)
+-->
+
+<events>
+ <event name="New Year's Day" type="public_holiday">
+  <date day="1" month="1"></date>
+ </event>
+ <event name="Good Friday" type="public_holiday">
+  <date day="18" month="4" year="2003"></date>
+  <date day="9" month="4" year="2004"></date>
+  <date day="25" month="3" year="2005"></date>
+  <date day="14" month="4" year="2006"></date>
+  <date day="6" month="4" year="2007"></date>
+  <date day="21" month="3" year="2008"></date>
+  <date day="10" month="4" year="2009"></date>
+  <date day="2" month="4" year="2010"></date>
+  <date day="22" month="4" year="2011"></date>
+  <date day="6" month="4" year="2012"></date>
+  <date day="29" month="3" year="2013"></date>
+ </event>
+ <event name="Easter Day" type="public_holiday">
+  <date day="20" month="4" year="2003"></date>
+  <date day="11" month="4" year="2004"></date>
+  <date day="27" month="3" year="2005"></date>
+  <date day="16" month="4" year="2006"></date>
+  <date day="8" month="4" year="2007"></date>
+  <date day="23" month="3" year="2008"></date>
+  <date day="12" month="4" year="2009"></date>
+  <date day="4" month="4" year="2010"></date>
+  <date day="24" month="4" year="2011"></date>
+  <date day="8" month="4" year="2012"></date>
+  <date day="31" month="3" year="2013"></date>
+ </event>
+ <event name="Easter Monday" type="public_holiday">
+  <date day="21" month="4" year="2003"></date>
+  <date day="12" month="4" year="2004"></date>
+  <date day="28" month="3" year="2005"></date>
+  <date day="17" month="4" year="2006"></date>
+  <date day="9" month="4" year="2007"></date>
+  <date day="24" month="3" year="2008"></date>
+  <date day="13" month="4" year="2009"></date>
+  <date day="5" month="4" year="2010"></date>
+  <date day="25" month="4" year="2011"></date>
+  <date day="9" month="4" year="2012"></date>
+  <date day="1" month="4" year="2013"></date>
+ </event>
+  <event name="Heavensday" type="public_holiday">
+  <date day="29" month="5" year="2003"></date>
+  <date day="20" month="5" year="2004"></date>
+  <date day="5" month="5" year="2005"></date>
+  <date day="25" month="5" year="2006"></date>
+  <date day="17" month="5" year="2007"></date>
+  <date day="1" month="5" year="2008"></date>
+  <date day="21" month="5" year="2009"></date>
+  <date day="13" month="5" year="2010"></date>
+  <date day="2" month="5" year="2011"></date>
+  <date day="17" month="5" year="2012"></date>
+  <date day="9" month="5" year="2013"></date>
+ </event>
+ <event name="Queen's Birthday" type="public_holiday">
+  <date day="30" month="4"></date>
+  </event>
+ <event name="Labor Day" type="public_holiday">
+  <date day="1" month="5" year="2003"></date>
+ </event>
+ <event name="Memorial Day" type="public_holiday">
+  <date day="4" month="5"></date>
+ </event>
+ <event name="Liberation Day" type="public_holiday">
+  <date day="5" month="5"></date>
+ </event>
+ <event name="Whitsunday" type="public_holiday">
+  <date day="8" month="6" year="2003"></date>
+  <date day="30" month="5" year="2004"></date>
+  <date day="15" month="5" year="2005"></date>
+  <date day="4" month="6" year="2006"></date>
+  <date day="27" month="5" year="2007"></date>
+  <date day="11" month="5" year="2008"></date>
+  <date day="31" month="5" year="2009"></date>
+  <date day="23" month="5" year="2010"></date>
+  <date day="12" month="5" year="2011"></date>
+  <date day="27" month="5" year="2012"></date>
+  <date day="19" month="5" year="2013"></date>
+ </event>
+ <event name="Whitmonday" type="public_holiday">
+  <date day="9" month="6" year="2003"></date>
+  <date day="31" month="5" year="2004"></date>
+  <date day="16" month="5" year="2005"></date>
+  <date day="5" month="6" year="2006"></date>
+  <date day="28" month="5" year="2007"></date>
+  <date day="12" month="5" year="2008"></date>
+  <date day="1" month="6" year="2009"></date>
+  <date day="24" month="5" year="2010"></date>
+  <date day="13" month="5" year="2011"></date>
+  <date day="28" month="5" year="2012"></date>
+  <date day="20" month="5" year="2013"></date>
+ </event>
+ <event name="Christmas Day" type="public_holiday">
+  <date day="25" month="12"></date>
+ </event>
+ <event name="Boxing Day - St, Stephen's Day" type="public_holiday">
+  <date day="26" month="12"></date>
+ </event>
+ <event name="New Years's Eve" type="public_holiday">
+  <date day="31" month="12"></date>
+ </event>
+</events>
+
+

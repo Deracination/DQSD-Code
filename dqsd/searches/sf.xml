@@ -1,0 +1,66 @@
+<search function="sf">
+  <name>Sourceforge.net</name>
+  <description>
+    Search open source projects on SourceForge.net.<br/>
+    <div class="helpboxDescLabels">Switches:</div>
+  	<table class="helpboxDescTable">
+  		<tr><td>/new</td><td> - </td><td>New Releases</td></tr>
+  		<tr><td>/software</td><td> - </td><td>Software</td></tr>
+  		<tr><td>/people</td><td> - </td><td>People</td></tr>
+  		<tr><td>/freshmeat</td><td> - </td><td>Freshmeat.net</td></tr>
+  	</table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>sf itext</td></tr>
+  	</table>
+  </description>
+  <category>Computers</category>
+  <link>http://www.sourceforge.net/</link>
+  <contributor>Brent Beardsley</contributor>
+  
+  <form name="sfsearch"
+        action="http://sourceforge.net/search/"
+        method="post">
+    <input type="hidden" name="words"/>
+    <input type="hidden" name="type_of_search"/>
+  </form>
+  
+  <script><![CDATA[
+    function sf(q)
+    {
+      if( nullArgs("sf", q) )
+        return false;
+
+      var args = parseArgs(q, "new, software, people, freshmeat");
+      if( q == "" )
+        openSearchWindow("http://www.sourceforge.net/");
+      else if( args.switches.length == 1 )
+      {
+        switch( args.switches[0].name )
+        {
+	  case "new":
+	    openSearchWindow("http://www.sourceforge.net/new/"); return false;
+          case "software":
+            document.sfsearch.type_of_search.value = "soft"; break;
+          case "people":
+            document.sfsearch.type_of_search.value = "people"; break;
+          case "freshmeat":
+            document.sfsearch.type_of_search.value = "freshmeat"; break;
+          default:
+            document.sfsearch.section.value = args.switches[0].name; break;
+        }
+        document.sfsearch.words.value = args.q;
+        submitForm(sfsearch);
+      }
+      else if( args.switches.length > 1 )
+        nullArgs("sf","?");
+      else
+      {
+        document.sfsearch.type_of_search.value = "soft";
+        document.sfsearch.words.value = args.q;
+        submitForm(sfsearch);
+      }
+    }
+  ]]></script>
+</search>
+
