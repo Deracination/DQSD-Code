@@ -179,9 +179,8 @@
      preteena,reallife,reynoldsunwrapped,shoe,stonesoup,tankmcnamara,userfriendly,willynethel,ziggy");
 
      if ( args.switches.length > 0 ){
-        //get the current day so the sizes can be adjusted for sunday comics
+        //get the current date
         var dat = new Date();
-        var today = dat.getDay();
         for (i=0; i < args.switches.length; i++){
 
            var site=null;
@@ -355,7 +354,6 @@
 
                  // what I'm looking for
                  //<img src="joyimages/555.png" height="431" width="485" border="0">
-                 //<img src="joyimages/578.jpg" height="759" width="593" border="0">
                  var pattern = /joyimages\/\S+.[jpg|png|gif]/ig;
                  var result = sBody.match(pattern)[0];
                  var imgurl = "http://www.geekculture.com/joyoftech/"+result;
