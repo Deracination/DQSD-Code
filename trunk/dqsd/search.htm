@@ -77,6 +77,7 @@ The deskbar is customizable and completely open-source.
 <script>
 // configuration settings
 
+defaultsearch="gg";
 defaultcal="yhocal";           // yahoo is the default calendar
 eventsfileurl="";               // default no events
 
@@ -97,10 +98,9 @@ menustyle="";                  // css style overrides for the menu
 localsearchurl="localsearch.xml"; // local search file
 localaliases="localaliases.txt";  // local aliases file
 helptime=8500;                 // help message shows for 8.5 secs
-launchmode=2;                  // 0=use ie; 1=default browser; 2=auto
+launchmode=2;                  // 0 = use ie; 1 = default browser; 2 = auto
 reuseBrowserWindowMode=0;      // 0=new window always; 1=single window for all; 2=single window for each search type
 multiline=true;                // Use a mult-line search field instead of a single line
-alertmode=0;                   // 0=no qualified alerts; 1=all qualified alerts
 
 language=navigator.userLanguage.substr(0,2);
 
@@ -144,11 +144,6 @@ function handleerror(msg, url, lineno)
 firsterror = null;
 // window.onerror=handleerror;
 
-
-function qualifiedalert(s)
-{
-  alertmode && alert(s);
-}
 </script>
 
 <style>
@@ -314,7 +309,7 @@ function def()
   if (shortcut(t)) return false;
 
   // if all else fails, do a google search
-  gg(t);
+  performsearch( defaultsearch, t );
   return false;
 }
 
@@ -383,10 +378,59 @@ function shortcut(t)
     return false;
     
   // strip spaces and execute search
-  term = term.replace(/^\s*/, '').replace(/\s*$/, '');
-  searches[search].fun(term);
+  performsearch( search, term );  
   return true;
 }
+
+
+function performsearch( fname, term )
+{
+  var switches = [], i = 0, arg = null, appterm = "";
+  
+  term = term.replace(/^\s*/, '').replace(/\s*$/, '');            // strip out leading and trailing spaces
+  while( (arg = term.match(/\/(\w+)\s*$/)) != null )              // search for possible switches in term
+  {
+    for( var j=0; j < searches[fname].switches.length; j++ )      // check if the switch found matches any registered values
+      if( arg[1] == searches[fname].switches[j].substring(0,arg[1].length) ) 
+      {                                                           // we have a possible partial or full match
+        var dup = false;
+        
+        if( arg[1] != searches[fname].switches[j] )               // check to see this is a unique partial match
+          for( var k=0; k < searches[fname].switches.length; k++ )
+            if( arg[1] == searches[fname].switches[k].substring(0,arg[1].length)
+                && searches[fname].switches[k] != searches[fname].switches[j] )
+              dup = true;       
+        
+        for( var k=0; k < switches.length; k++ )                  // make sure we haven't added this switch to the list already
+          if( switches[k] == searches[fname].switches[j] )
+            dup = true;
+        
+        if( dup == false )
+        {
+          switches[i] = searches[fname].switches[j];              // everything looks good, so add the switch
+          break;
+        }
+      }
+    
+    appterm = (switches[i] ? appterm : term.substring( term.length - arg[1].length - 1, 
+                                       term.length ) + (appterm ? " " + appterm : ""));
+    term = term.substring( 0, term.length - arg[1].length - 1 ).replace(/\s*$/, '');
+    if( switches[i] ) i++;
+  }
+  
+  // because we parse the string backwards, we need to switch the data around so
+  // that it reflects the order in which it was typed and not confuse the search programmer
+  if( switches )
+  {
+    var tmp = [];
+    for( var i=0; i < switches.length; i++ )
+      tmp[i] = switches[switches.length-i-1];
+    switches = tmp;
+  }
+  
+  searches[fname].fun(term + (appterm ? " " + appterm : ""), switches );
+}
+
 
 function containsalias(s, t)
 {
@@ -415,7 +459,7 @@ function containsalias(s, t)
 function mnu(text, sym)
 {
   addhist(document.deff.q.value + sym);
-  eval(text + "(document.deff.q.value);");
+  performsearch( text, document.deff.q.value );
 }
 
 
@@ -586,13 +630,9 @@ function strt()
     showQuickSearch();
 
   if (helptime > 0)
-  {
     startbanner(clockdelay);
-  }
   else
-  {
     startclock(clockdelay);
-  }
 }
 
 bant = null;
@@ -654,11 +694,9 @@ function dodragover()
 function dodrop()
 {
   if (selfdrag) return true;
-
+  
   if (init)
-  {
     init = false;
-  }
   stopbanner();
 
   window.event.returnValue=false;
@@ -671,7 +709,7 @@ function dodrop()
   document.deff.q.value = q;
 
   rst();
-  mnu("gg", "");
+  mnu( defaultsearch, "");
 }
 
 // rst() called when the texbox loses focus
@@ -687,20 +725,6 @@ function rst()
   startclock(clockdelay);
 }
 
-
-// an ordinary google search
-function gg(q)
-{
-  if (q == "")
-  {
-    openSearchWindow("http://www.google.com/");
-  }
-  else
-  {
-    document.ggf.q.value=q;
-    submitForm(ggf);
-  }
-}
 
 function reload()
 {
@@ -779,15 +803,6 @@ if (dopopup)
    </td>
   </tr>
  </table>
-
-<!-- regular google search -->
-<form name=ggf
-      target=_blank
-      action=http://www.google.com/search
-      method=get>
- <input name=q
-        type=hidden>
-</form>
 
 <script src="tools.js"></script>
 <script src="strings.js"></script>
