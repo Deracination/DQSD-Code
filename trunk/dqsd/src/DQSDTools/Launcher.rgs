@@ -1,0 +1,26 @@
+HKCR
+{
+	DQSDTools.Launcher.1 = s 'DQSD Launcher Class'
+	{
+		CLSID = s '{FA8211C1-F85B-4CCD-8C51-1587A37E566A}'
+	}
+	DQSDTools.Launcher = s 'DQSD Launcher Class'
+	{
+		CLSID = s '{FA8211C1-F85B-4CCD-8C51-1587A37E566A}'
+		CurVer = s 'DQSDTools.Launcher.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {FA8211C1-F85B-4CCD-8C51-1587A37E566A} = s 'Launcher Class'
+		{
+			ProgID = s 'DQSDTools.Launcher.1'
+			VersionIndependentProgID = s 'DQSDTools.Launcher'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			'TypeLib' = s '{4323AAF6-488C-4921-A605-6E22E13332E4}'
+		}
+	}
+}
