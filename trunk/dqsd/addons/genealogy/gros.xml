@@ -14,12 +14,12 @@
     <div class="helpboxDescLabels">Examples:</div>
     <table class="helpboxDescTable">
         <tr><td>gros stewart</td></tr>
-        <tr><td>gros /from:1800 /to:1843 mcglashan</td></tr>
+        <tr><td>gros mcglashan /f 1800 /t 1843</td></tr>
   </table>
   </description>
-  <form name="grosf"
+    <form name="grosf"
         method="post"
-        action="http://public.scotlandspeople.gov.uk/index.php?YXJlYT1mcmVlc2VhcmNoJmlkPS05OQ==">
+        action="http://public.scotlandspeople.gov.uk/index.php?area=freesearch&amp;id=-99">
     <input type="hidden" name="var_surname" value="" />
     <input type="hidden" name="var_year_from" value="1553" />
     <input type="hidden" name="var_year_to" value="1951" />
@@ -31,18 +31,17 @@
       if( nullArgs("gros", q) )
         return;
 
-      var switch_list = new Array("from", "to");
-      var args = parseArgs(q, switch_list);
-      if (typeof args.switch_val[switch_list[0]] == "undefined" || args.switch_val[switch_list[0]] == "") {
-	document.grosf.var_year_from.value = "1553";
+      var args = genealogy_parseArgs(q, "from, to");
+      if (genealogy_hasArg(args, "from")) {
+	document.grosf.var_year_from.value = args.switch_val["from"];
       } else {
-	document.grosf.var_year_from.value = args.switch_val[switch_list[0]];
+	document.grosf.var_year_from.value = "1553";
       }
 
-      if (typeof args.switch_val[switch_list[1]] == "undefined" || args.switch_val[switch_list[1]] == "") {
-	document.grosf.var_year_to.value = "1951";
+      if (genealogy_hasArg(args, "to")) {
+	document.grosf.var_year_to.value = args.switch_val["to"];
       } else {
-	document.grosf.var_year_to.value = args.switch_val[switch_list[1]];
+	document.grosf.var_year_to.value = "1951";
       }
       document.grosf.var_surname.value = genealogy_parse_surname(args.q);
       submitForm(grosf);

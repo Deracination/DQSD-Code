@@ -173,7 +173,7 @@
       if( nullArgs("fhlc", q) )
         return;
       
-      var args = parseArgs(q, "author, callno, film, place, subject, surname");
+      var args = genealogy_parseArgs(q, "author, callno, film, place, subject, surname");
       if( args.switches.length != 1 ) {
 	nullArgs("fhlc", "?");
 	return;

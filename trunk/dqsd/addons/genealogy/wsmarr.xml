@@ -38,44 +38,32 @@
       if( nullArgs("wsmarr", q) )
         return;
 
-      var args = parseArgs(q, "all, bride, groom");
-      if (args != null) {
-	var do_groom = true;
-	var do_bride = true;
-	if (args.switches.length > 0) {
-		do_groom = false;
-		do_bride = false;
-	        for (var i=0; i < args.switches.length; i++) {
-		  switch (args.switches[i].name)
-		  {
-			case "groom": do_groom = true; break;
-			case "bride": do_bride = true; break;
-			case "all":
-			default:
-			  do_groom = true; do_bride = true; break;
-  		  }
-		}
-	}   
-	if (args.q == "") {
-		do_groom = false;
-		do_bride = false;
-	}   
-	if (!do_groom && !do_bride) {
-		nullArgs("wsmarr", "?");
-		return;
-	}
-	if (do_bride) {
-		document.wsmarrbf.b_firstname.value = genealogy_parse_givenname(args.q);
-		document.wsmarrbf.b_lastname.value = genealogy_parse_surname(args.q);
-		submitForm(wsmarrbf);
-	}
-	if (do_groom) {
-		document.wsmarrgf.g_firstname.value = genealogy_parse_givenname(args.q);
-		document.wsmarrgf.g_lastname.value = genealogy_parse_surname(args.q);
-		submitForm(wsmarrgf);
-	}
+      var args = genealogy_parseArgs(q, "all, bride, groom");
+      var groom_name = "";
+      if (genealogy_hasArg(args, "groom")) {
+        groom_name = args.switch_val["groom"];
+      } else if (genealogy_hasArg(args, "all")) {
+        groom_name = args.switch_val["all"];
       }
-
+      var bride_name = "";
+      if (genealogy_hasArg(args, "bride")) {
+        bride_name = args.switch_val["bride"];
+      } else if (genealogy_hasArg(args, "all")) {
+        bride_name = args.switch_val["all"];
+      }
+      if (bride_name != "") {
+        document.wsmarrbf.b_firstname.value = genealogy_parse_givenname(bride_name);
+        document.wsmarrbf.b_lastname.value = genealogy_parse_surname(bride_name);
+        submitForm(wsmarrbf);
+      }
+      if (groom_name != "") {
+        document.wsmarrgf.g_firstname.value = genealogy_parse_givenname(groom_name);
+        document.wsmarrgf.g_lastname.value = genealogy_parse_surname(groom_name);
+        submitForm(wsmarrgf);
+      }
+      if (groom_name == "" && bride_name == "") {
+        nullArgs("wsmarr", "?");
+      }
     }
   ]]></script>
 </search>

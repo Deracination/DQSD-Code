@@ -16,7 +16,7 @@
     <table class="helpboxDescTable">
       <tr><td>blm jones</td></tr>
       <tr><td>blm jones, francis</td></tr>
-      <tr><td>blm /state:il jones, francis</td></tr>
+      <tr><td>blm jones, francis /state il</td></tr>
     </table>
   </description>
   <form name="blmf"
@@ -187,25 +187,10 @@
         return;
 
       document.blmf.f1.value = "";
-
-      var args = parseArgs(q, "state");
-      if (args != null && args.switches.length > 0) {
-	if (args.switches.length > 1) {
-	  nullArgs("blm", "?");
-	  return;
-	}
-	for (var i=0; i < args.switches.length; i++) {
-		switch (args.switches[i].name)
-		{
-		case "state":
-			document.blmf.f1.value = genealogy_lookup_place_abbrev(genealogy_parse_place_state(args.switch_val["state"])).toUpperCase();
-			break;
-		default:
-			break;
-		}
-	}
+      var args = genealogy_parseArgs(q, "state");
+      if (genealogy_hasArg(args, "state")) {
+        document.blmf.f1.value = genealogy_lookup_place_abbrev(genealogy_parse_place_state(args.switch_val["state"])).toUpperCase();
       }
-
       document.blmf.f6.value = genealogy_parse_surname(args.q);
       document.blmf.f4.value = genealogy_parse_givenname(args.q);
       submitForm(blmf);
