@@ -384,3 +384,8 @@ helpMenuToolTipsEnabled = true;
 */
 helpMenuToolTipsDisplayTime = 3;
 
+
+/* Display help text setting. Setting this to false will cause the 'Quick Search'
+* and 'Display ? for help' strings to not be displayed at all.
+*/
+displayHelp = true;
