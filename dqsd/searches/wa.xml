@@ -1,0 +1,41 @@
+<search function="wa">
+  <name>WebAttack</name>
+  <category>Computers<category>Software</category></category>
+  <contributor>John W. Bairen, Jr.</contributor>
+  <link>http://www.webattack.com/</link>
+  <email>john_at_bairen_dot_net</email>
+  <description>
+  Search WebAttack for shareware and freeware.
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>wa Spam Weasel</td></tr>
+      <tr><td>wa get rid of spam</td></tr>
+    </table>
+  </description>
+  <form name="waf"
+        method="post"
+        action="http://www.webattack.com/downloadfind.php">
+
+    <input type="hidden" name="st" value="" />
+    <input type="hidden" name="action" value="s" />
+  </form>
+  <script><![CDATA[
+    function wa(q)
+    {
+      if( nullArgs("wa", q) )
+        return;
+
+      document.waf.st.value = q;
+      submitForm(waf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 03/06/03 at 20:55:16
+    by Dave's Quick Search Deskbar Search Wizard version 1.0.1 ,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>
