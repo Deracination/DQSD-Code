@@ -106,6 +106,13 @@ function outlook(dat)
   openDocument("outlook:calendar");
 }
 
+function mozillacal(dat)
+{
+  // TODO - find out how to open at a particular date
+  openDocument("mozilla.exe -calendar");
+  //openDocument("mozilla.exe chrome://calendar/content/calendar.xul");
+}
+
 //vars used by the calendar script
 var DAYS_OF_WEEK = 7;    // "constant" for number of days in a week
 var DAYS_OF_MONTH = 31;    // "constant" for number of days in a month
