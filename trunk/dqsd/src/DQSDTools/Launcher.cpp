@@ -682,6 +682,7 @@ STDMETHODIMP CLauncher::GetSpecialFolderLocation(BSTR bstrSpecialFolder, BSTR* p
 		if (pMap != NULL && _tcscmp(ptstrSpecialFolder, pMap->strName) == 0) {
 			bFound = TRUE;
 			nFolder = pMap->csidl_value;
+			break;
 		}
 	}
 
