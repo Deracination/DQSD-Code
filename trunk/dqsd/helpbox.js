@@ -22,8 +22,8 @@ function closeabout()
 function searchCompare( s1, s2 )
 {
   // by default, sort by first alias
-  var key1 = (isInternalSearch(s1.aliases[0]) ? s1.aliases[1] : s1.aliases[0]).toLowerCase();
-  var key2 = (isInternalSearch(s2.aliases[0]) ? s2.aliases[1] : s2.aliases[0]).toLowerCase();
+  var key1 = (isInternalSearch(s1.aliases[0]) && s1.aliases.length > 1 ? s1.aliases[1] : s1.aliases[0]).toLowerCase();
+  var key2 = (isInternalSearch(s2.aliases[0]) && s2.aliases.length > 1 ? s2.aliases[1] : s2.aliases[0]).toLowerCase();
   switch ( helpSortKey.toLowerCase() )
   {
   case 'name':
