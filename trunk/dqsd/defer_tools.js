@@ -383,3 +383,11 @@ function displayPopupMessage( msg, headHTML )
 
   dqsdMessagePopup.show((buttonalign == "left" ? 0 : document.body.clientWidth - windowW), -windowH, windowW, windowH, document.body);
 }
+
+function setSearchWindowText(text, autoselect)
+{
+  document.deff.q.value = text;
+  if (typeof autoselect != "undefined" && autoselect == true) {
+    document.deff.q.createTextRange().select();
+  }
+}
