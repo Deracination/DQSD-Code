@@ -59,7 +59,7 @@
         nullArgs("alm","?");
       else
       {
-        document.almf.opt1.value="3";
+        document.almf.opt1.value="1";
         document.almf.sql.value = args.q;
         submitForm(almf);
       }
