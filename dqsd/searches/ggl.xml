@@ -1,0 +1,70 @@
+<search function="ggl">
+  <name>Google Local Search</name>
+  <category>Search the Web</category>
+  <contributor>Brent Beardsley</contributor>
+  <link>http://local.google.com/</link>
+  <email></email>
+  <description>
+  Search Google Local - if /where is not specified it tries to use the following preferences in this order <i>user_zip</i>, then <i>user_city and user_state</i>
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/where</td><td> - </td><td>zipcode or city, state combination</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>ggl /w:90210 mcdonalds</td></tr>
+      <tr><td>ggl watch repair</td></tr>
+    </table>
+  </description>
+  <form name="gglf"
+        method="get"
+        action="http://local.google.com/local">
+    <input type="hidden" name="sc" value="1" />
+    <input type="hidden" name="hl" value="en" />
+    <input type="hidden" name="q" value="" />
+    <input type="hidden" name="near" value="" />
+    <input type="hidden" name="btnG" value="Google Search" />
+    <input type="hidden" name="rl" value="1" />
+  </form>
+  <script><![CDATA[
+    function ggl(q)
+    {
+      if( nullArgs("ggl", q) )
+        return;
+
+      var where = (typeof user_zip != "undefined") ? user_zip : "";
+	  if (where == "" && typeof user_city != "undefined" && typeof user_state != "undefined" && user_city != "" && user_state != "") {
+		where = user_city + ", " + user_state;
+	  }
+      var args = parseArgs(q, "where");
+      if ( args.switches.length > 0 )
+      {
+        for (var i=0; i < args.switches.length; i++) {
+          sw = args.switches[i];
+          switch(sw.name)
+          {
+            case "where":
+	  	      where = sw.value;
+			  document.gglf.rl.value = "0";
+              break;
+            default:
+              break;
+          }
+		}
+      }
+
+      document.gglf.q.value = args.q;
+      document.gglf.near.value = where;
+      submitForm(gglf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 03/07/05 at 15:37:39
+    by Dave's Quick Search Deskbar Search Wizard version 1.2,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>
