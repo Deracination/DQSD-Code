@@ -154,23 +154,29 @@ if (searchRoot)
 
 // 4. load and execute the alias file
 
-var aliasTable = readTabDelimitedFile("aliases");
+addAliasesFromFile( "aliases" );
+addAliasesFromFile( localaliases );
 
-for (var iPrivate = 0; iPrivate < aliasTable.length; iPrivate++)
+function addAliasesFromFile( aliasFile )
 {
-  var fields = aliasTable[iPrivate];
-  if (fields.length != 2)
+  var aliasTable = readTabDelimitedFile(aliasFile);
+  
+  for (var iPrivate = 0; iPrivate < aliasTable.length; iPrivate++)
   {
-    if (fields.length > 2 || !fields[0].match(/^\s*$/))
+    var fields = aliasTable[iPrivate];
+    if (fields.length != 2)
     {
-      alert("Error on line " + (iPrivate + 1) + " of aliases.txt:\n\n" + aliasTable[iPrivate] + 
-            "\n\n(Make sure there is a tab between the alias and command.)");
-      break;
+      if (fields.length > 2 || !fields[0].match(/^\s*$/))
+      {
+        alert("Error on line " + (iPrivate + 1) + " of aliases.txt:\n\n" + aliasTable[iPrivate] + 
+              "\n\n(Make sure there is a tab between the alias and command.)");
+        break;
+      }
     }
-  }
-  else
-  {
-    addalias(fields[0], fields[1]);
+    else
+    {
+      addalias(fields[0], fields[1]);
+    }
   }
 }
 
