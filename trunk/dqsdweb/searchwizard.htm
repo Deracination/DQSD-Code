@@ -2,17 +2,71 @@
 <head>
 <title>Dave's Quick Search Deskbar Search Wizard</title>
 <link rel="stylesheet" type="text/css" href="dqsd.css">
+<style>
+li { padding-bottom: 1em }
+img { margin: 5px }
+</style>
 </head>
 <body>
 <center>
 <h2><nobr>Dave's Quick Search Deskbar <wbr>Search Wizard</nobr></h2>
 [ <a href="doc.htm">Dave's Quick Search Deskbar</a> ]
+</center>
+
 <hr size="1">
-One of the biggest pains in writing a new DQSD search is finding and
+
+<p>
+I find one of the biggest pains in writing a new DQSD search is finding and
 massaging the correct HTML FORM into well-formed XML.  I finally got annoyed enough to
 write a little utility to do some of the work for me.
-<br/><br/>
-<img src="dqsdsearchwiz.jpg">
+</p>
+
+<p>
+I call it <b>Dave's Quick Search Deskbar Search Wizard</b>.
+<center>
+<img src="hatwand.jpg">
 </center>
+</p>
+
+<hr size="1">
+
+<h3>What does it do?</h3>
+
+<p>
+In a nutshell, it creates a DQSD search from the page currently displayed in your browser.
+</p>
+
+<p>
+One of the first things you typically do when creating a new search is to view the source for the page containing the FORM INPUT elements.&nbsp;&nbsp;It's tedious.&nbsp;&nbsp;It's hard to find the right FORM when there are multiple FORMs in the page.&nbsp;&nbsp;It's error-prone because I have to convert the HTML to well-formed XML (and I always forget to close the INPUT elements with "/>").
+</p>
+
+<h3>How do I use it?</h3>
+
+<p>
+<ol>
+<li>Go to the web page with the search.</li>
+<li>Click in the field you want to be receive the search string.</li>
+<li>Start up the wizard by clicking on its Internet Explorer toolbar button:<br/>
+<center>
+<img src="wizard_toolbar.jpg">
+</center>
+</li>
+<li>
+You should see a dialog that looks something like the following.&nbsp;&nbsp;Enter a name and a title.&nbsp;&nbsp;(The name is the string that will invoke the search and will be used name the file, so keep it short and simple.)<br/>
+<center><img src="dqsdsearchwiz.jpg" align="top"></center>
+</li>
+<li>Hit OK and you'll be prompted to save the search file to your DQSD 'searches' directory.</li>
+</ol>
+</p>
+
+<h3>Example</h3>
+
+<p>
+In the screenshot above, I went to <a href="http://www.msnbc.com">http://www.msnbc.com</a>, clicked in the search field to make it 'active'...<br/>
+<center><img src="msnbc.jpg"></center>
+Then I invoked the wizard, entered 'msnbc' for the name, and 'MSNBC News' for the title (the title is what appears in the menu and help).&nbsp;&nbsp;All the FORM elements in the page are listed, with the one checked that contains the 'active' element.
+</p>
+
+
 </body>
 </html>
