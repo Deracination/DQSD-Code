@@ -30,7 +30,7 @@
      <date day="1" month="4"/>
   </event>
     <event name="Daylight Savings Time Begins" type="public_holiday">
-       <date day="7" month="6" year="2003"/>
+       <date day="6" month="4" year="2003"/>
     </event>
   <event name="Mothers Day" type="public_holiday">
      <date day="11" month="5" year="2003"/>
