@@ -1,0 +1,34 @@
+<search function="tldp">
+  <name>The Linux Documentation Project</name>
+  <category>Computers<category>Reference</category></category>
+  <contributor>Brent Beardsley</contributor>
+  <link>http://www.tldp.org/</link>
+  <email></email>
+  <description>
+  Search The Linux Documentation Project
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>tldp ppp</td></tr>
+      <tr><td>tldp ldap</td></tr>
+    </table>
+  </description>
+  <form name="tldpf"
+        method="post"
+        action="http://tldp.org/cgi-bin/ldpsrch.cgi">
+    <input type="hidden" name="svr" value="" />
+    <input type="hidden" name="words" value="" />
+  </form>
+  <script><![CDATA[
+    function tldp(q)
+    {
+      if( nullArgs("tldp", q) )
+        return;
+
+      document.tldpf.words.value = q;
+      submitForm(tldpf);
+    }
+  ]]></script>
+  <copyright>
+    Copyright (c) 2003 Brent Beardsley; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>

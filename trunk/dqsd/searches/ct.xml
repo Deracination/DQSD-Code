@@ -1,0 +1,35 @@
+<search function="ct">
+  <name>Content Type Listings</name>
+  <category>Computers<category>Reference</category></category>
+  <contributor>Brent Beardsley</contributor>
+  <link>http://www.reliableanswers.com/ContentType/</link>
+  <email></email>
+  <description>
+  Search the Content-Type Listings from Reliable Answers.com
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>ct zip</td></tr>
+      <tr><td>ct mxp</td></tr>
+    </table>
+  </description>
+  <form name="ctf"
+        method="post"
+        action="http://www.reliableanswers.com/ContentType/CType.asp?ord=">
+    <input type="hidden" name="ct-FsClass" value="" />
+    <input type="hidden" name="ct-FsContentType" value="" />
+	<input type="hidden" name="filter" value="Filter" />
+  </form>
+  <script><![CDATA[
+    function ct(q)
+    {
+      if( nullArgs("ct", q) )
+        return;
+
+      document.ctf["ct-FsClass"].value = q;
+      submitForm(ctf);
+    }
+  ]]></script>
+  <copyright>
+    Copyright (c) 2003 Brent Beardsley; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>
