@@ -7,14 +7,16 @@ var clockformat = clocklongform;
 // Adapted from http://www.merlyn.demon.co.uk/weekinfo.htm
 function calcWeekNo(date)
 {
-	var day = date.getDay();
+  var dateClone = new Date(date);
+  
+	var day = dateClone.getDay();
 	if (day == 0) day = 7;
-	date.setDate(date.getDate() + (4 - day));
+	dateClone.setDate(dateClone.getDate() + (4 - day));
 	
 	// Jan 1; -6h allows for Summer Time
-	var januaryFirst = new Date(date.getFullYear(), 0, 1, -6);
+	var januaryFirst = new Date(dateClone.getFullYear(), 0, 1, -6);
 
-	var dayOfYear = Math.floor( (date.getTime() - januaryFirst) / 86400000);
+	var dayOfYear = Math.floor( (dateClone.getTime() - januaryFirst) / 86400000);
 	var weekNo = Math.floor(dayOfYear / 7) + 1;
 	return weekNo;
 }
