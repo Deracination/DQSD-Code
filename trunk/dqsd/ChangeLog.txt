@@ -1,4 +1,4 @@
--- What's new for ?????
+-- What's new for 3.0.0.23
 
 New Searches
 
@@ -8,7 +8,7 @@ New Searches
 Modified Searches
 
 * gg - /fresh switch disappeared (/since is enough) - /since now allows a 
-       number of days in addition to t,y,w,m, and gets independant of goosearch
+       number of days in addition to t,y,w,m, and gets independent of goosearch
 * hs - added /new from Brent Beardsley
 * jdk - added /1.4, /1.3, /tutorial, /all, /j2ee, /jls, /jvm options
 * multi - apostrophes (') in the query now don't generate errors
@@ -32,6 +32,7 @@ Bug Fixes
 * Search forms can now have input elements named "target" without causing a script error
 * Labor day in holidays.nl.*.xml files now happens every year (thanks MLL and Johan Geertsma)
 * Ctrl-A now correctly does "Select All" rather than DEL.
+
 
 -- What's new for 3.0.0.22 (beta)
 
