@@ -2,19 +2,25 @@
   <name>MultiSearch</name>
   <description>
     Perform multiple searches with a single command line expression.<br/>
+    <b><i>superMultiModeEnabled</i></b> can be set to true in localprefs.js to enable super multi mode which allows different sets of 
+         searches to be done (ie: multi search1 /firstParam; search2 search3 /secondParam)<br/>
+     <b><i>superMultiModeSepChar</i></b> can be set to a character in localprefs.js to determine the split character for the super multi mode
+         the default value is ;
     <div class="helpboxDescLabels">Usage:</div>
     <table class="helpboxDescTable">
       <tr><td>multi &lt;<i>search1</i>&gt; [&lt;<i>search2</i>&gt; [...]] &lt;<i>term</i>&gt;</td></tr>
     </table>
     <div class="helpboxDescLabels">Example:</div>
     <table class="helpboxDescTable">
-      <tr><td>multi av gg wood planes</td></tr>
+      <tr><td>multi av gg wood planes</td><td> - </td><td>Display the search results for wood planes on altavista and google.</td></tr>
+      <tr><td>multi fm;sf hs /new</td><td> - </td><td>Display the new projects and files on freshmeat, sourceforge, and hotscripts provided superMultiModeEnabled is set to true in localprefs.js.</td></tr>
     </table>
   </description>
   <category>Search the Web</category>
   <contributor>Neel Doshi</contributor>
   
   <script><![CDATA[
+
     // This function is almost identical to the shortcut function in search.html
     function multiIsCommand(t)
     {
@@ -89,8 +95,25 @@
       }
       if ( nullArgs("multi", q) )
         return false;
-      else
-        if (result = q.split( /[,\s]+/ ) )
+
+      var multiCmdSets = new Array();
+      var mySuperMultiModeEnabled =  (typeof superMultiModeEnabled != "undefined" && superMultiModeEnabled != "");
+      var mySuperSepChar = (typeof superMultiModeSepChar != "undefined" && superMultiModeSepChar != "") ? superMultiModeSepChar : ";";
+      if (mySuperMultiModeEnabled == true)
+      {
+	var myCmds = q.split(mySuperSepChar);
+        for (var i=0; i < myCmds.length; i++)
+	{
+	   var oneCmd = myCmds[i];
+	   multiCmdSets[i] = oneCmd;   
+        }
+      } else {
+        multiCmdSets.push(q);
+      }
+
+      for (var m=0; m < multiCmdSets.length; m++)
+      {
+        if (result = (multiCmdSets[m]).split( /[\s]+/ ) )
         {
 
           var arrCmds = new Array(0);
@@ -140,10 +163,10 @@
               else
                 performsearch(arrCmds[j - 1], arrParams.join(" "));
             }
-            return true;
           }
         }
       }
+    }
   ]]></script>
 
   <copyright>
