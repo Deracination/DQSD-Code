@@ -4,11 +4,9 @@
   <category>Computers</category>
   <link>http://download.cnet.com/</link>
   <form name="dlf"
-        action="http://download.cnet.com/downloads/search/redirector/1,10207,0-0,00.html"
+        action="http://download.com.com/3120-20-0.html"
         method="get">
-    <input type="hidden" name="tg" value="dl-10000"/>
-    <input type="hidden" name="cn" value=""/>
-    <input type="hidden" name="tt" value="srch"/>
+    <input type="hidden" name="tg" value="dl-20"/>
     <input type="hidden" name="qt"/>
   </form>
   <script><![CDATA[
