@@ -1,0 +1,37 @@
+<search function="rss">
+  <name>Feedster</name>
+  <category>Search the Web</category>
+  <contributor>Aaron Vance</contributor>
+  <link>http://www.feedster.com/</link>
+  <email>lafutura@multivance.com</email>
+  <description>
+  Searches syndicated RSS content feeds from sites and blogs.
+  <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+      <tr><td>rss userland</td></tr>
+    </table>
+  </description>
+  <form name="rssform"
+        method="get"
+        action="http://www.feedster.com/search.php?q=">
+    <input type="hidden" name="q" value="" />
+  </form>
+  <script><![CDATA[
+    function rss(q)
+    {
+      if( nullArgs("rss", q) )
+        return;
+
+      document.rssform.q.value = q;
+
+      submitForm(rssform);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search was created by Aaron Vance on Monday, April 14th, 2003.  It's Free.
+  </created_by>
+</search>
