@@ -69,7 +69,15 @@
         resultXml = oDoc.xml;
 
         var sSuggestedSpelling = oDoc.selectSingleNode("SOAP-ENV:Body/ns1:doSpellingSuggestionResponse/return").text;
-        document.deff.q.value = sSuggestedSpelling;
+        if ( sSuggestedSpelling != '' )
+        {
+          document.deff.q.value = sSuggestedSpelling;
+        }
+        else
+        {
+          //document.deff.q.value = '[No suggestions found]';
+          alert( 'Google found no suggestions.' );
+        }
         document.deff.q.createTextRange().select();
       }
     }
