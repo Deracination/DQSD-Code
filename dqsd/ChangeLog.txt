@@ -20,6 +20,8 @@ Bug Fixes
 
 * curr - fixed bug with decimal currency conversion (1.23 usd>cad)
 * If you have an old localprefs.js that sets defaultsearch to a nonexistent search, gg is used.
+* A local alias can now override a search name.  This was causing a script error
+  when the menu was invoked.
 
 -- What's new for 3.0.0.22 (beta)
 
