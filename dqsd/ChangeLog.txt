@@ -10,6 +10,7 @@ Enhancements
 Modified Searches
 
 * php - fix problem with spaces in URL (from Nikolai Devereaux)
+* sf - add "/list" for jumping to a SourceForge hosted list info/admin page (from Glenn Carr)
 
 Bug Fixes
 
