@@ -1,0 +1,37 @@
+<search function="thelist">
+  <name>Evolt thelist Archives</name>
+  <category>Computers<category>Programming</category></category>
+  <contributor>Sarah Sweeney</contributor>
+  <link>http://lists.evolt.org/</link>
+  <email>poohbear@designshift.com</email>
+  <description>
+  Search evolt.org's thelist archives.
+  </description>
+  <form name="thelistf"
+        method="get"
+        action="http://www.google.com/search">
+    <input type="hidden" name="as_q" value="" />
+    <input type="hidden" name="num" value="100" />
+    <input type="hidden" name="as_dt" value="i" />
+    <input type="hidden" name="as_sitesearch" value="lists.evolt.org" />
+    <input type="hidden" name="safe" value="off" />
+  </form>
+  <script><![CDATA[
+    function thelist(q)
+    {
+      if( nullArgs("thelist", q) )
+        return;
+        document.thelistf.as_q.value = q;
+        submitForm(thelistf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 02/09/03 at 18:08:35
+    by Dave's Quick Search Deskbar Search Wizard version 1.0.1 ,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>

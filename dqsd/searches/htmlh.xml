@@ -1,0 +1,55 @@
+<search function="htmlh">
+  <COMMENT>
+
+    Even though this XML search will probably load and is a good start
+    toward a completed search, please be aware that this search will probably
+    not work as is and will probably require some changes.
+
+  </COMMENT>
+  <name>HTML Help</name>
+  <category>Computers<category>Programming</category></category>
+  <contributor>John W. Bairen, Jr.</contributor>
+  <link>http://www.htmlhelp.com/</link>
+  <email>john_at_bairen_dot_net</email>
+  <description>
+  Search www.htmlhelp.com.
+
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>htmlh font</td></tr>
+     </table>
+  </description>
+  <form name="htmlhf"
+        method="get"
+        action="http://www.htmlhelp.com/cgi-bin/search.cgi">
+
+    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
+
+    <input type="hidden" name="q" value="" />
+  </form>
+  <script><![CDATA[
+    function htmlh(q)
+    {
+      if( nullArgs("htmlh", q) )
+        return;
+
+      // FORM variables for htmlhf
+
+      // The wizard assigned the search string to this form field value because
+      // this field was the active element when the search file was generated.
+      // Change this to args.q if the search string is parsed with parseArgs.
+      document.htmlhf.q.value = q;
+
+      submitForm(htmlhf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 02/09/03 at 17:45:03
+    by Dave's Quick Search Deskbar Search Wizard version 1.0.1 ,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>
