@@ -148,7 +148,7 @@ function protocolHandled(url)
 function isURL(t)
 {
   // detect strings that look like URLs or filenames
-  prot = new RegExp("^(http://|https://|ftp://)([\\-a-z0-9]+\\.)*[\\-a-z0-9]+" +
+  prot = new RegExp("^(http://|https://|ftp://|irc://)([\\-a-z0-9]+\\.)*[\\-a-z0-9]+" +
           "|^[a-z]:($|\\\\)" +
           "|^\\\\\\\\[a-z0-9]+($|\\\\($|[a-z0-9]+($|\\\\)))", "i");
   if (prot.exec(t))
