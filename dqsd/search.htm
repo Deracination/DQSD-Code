@@ -229,11 +229,44 @@ td
  padding-right:1px;
  padding-left:1px;
  border:2px;
- border-style:outset;
+ border-style:solid;
+ border-color:threedface;
  background-color:threedface;
  color:buttontext;
  margin-bottom:0px;
- margin-left:2px;
+ margin-left:0px;
+ position:absolute;
+}
+.mogobutton
+{
+ font:menu;
+ padding-bottom:1px;
+ padding-top:1px;
+ padding-right:1px;
+ padding-left:1px;
+ border:2px;
+ border-style:outset;
+ border-color:window;
+ background-color:threedface;
+ color:buttontext;
+ margin-bottom:0px;
+ margin-left:0px;
+ position:absolute;
+}
+.mdgobutton
+{
+ font:menu;
+ padding-bottom:1px;
+ padding-top:1px;
+ padding-right:1px;
+ padding-left:1px;
+ border:2px;
+ border-style:inset;
+ border-color:window;
+ background-color:threedface;
+ color:buttontext;
+ margin-bottom:0px;
+ margin-left:0px;
  position:absolute;
 }
 </style>
@@ -254,6 +287,8 @@ ie_version=(m ? parseFloat(m[1]) : 0.0);
 
   document.write("<style>.txtfld{" + txtfldstyle + "} " +
                         ".gobutton{" + buttonstyle + "} " +
+                        ".mogobutton{" + buttonstyle + "} " +
+                        ".mdgobutton{" + buttonstyle + "} " +
                         ".clock{" + clockstyle + "}</style>");
   actualmenustyle =
       "background:menu;height:18px;" +
@@ -2228,8 +2263,11 @@ if (dopopup)
     "<input class=gobutton type=button"
   + "       name=gobutton"
   + "       value=&#xBB;"
-  + "       onmousedown=showpop();"
+  + "       onmousedown=this.className='mdgobutton';showpop();"
   + "       ondblclick=showpop();"
+  + "       onmouseup=this.className='mogobutton'"
+  + "       onmouseover=this.className='mogobutton'"
+  + "       onmouseout=this.className='gobutton'"
   + "       tabindex=-1>");
 }
 </script></nobr>
@@ -2833,9 +2871,12 @@ var MONTH_NAMES =
   en: Array('January','February','March','April','May','June','July','August','September','October','November','December','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'),
   es: Array('Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre','Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'),
   fr: Array('Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre','Janv', 'Févr', 'Mars', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sept', 'Oct', 'Nov', 'Déc'),
+  de: Array('Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember', 'Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'),
   no: Array('Januar','Februar','Mars','April','Mai','Juni','Juli','August','September','Oktober','November','Desember','Jan','Feb','Mar','Apr','Mai','Jun','Jul','Aug','Sep','Okt','Nov','Des'),
   nl: Array('Januari','Februari','Maart','April','Mei','Juni','Juli','Augustus','September','Oktober','November','December','Jan','Feb','Mrt','Apr','Mei','Jun','Jul','Aug','Sep','Okt','Nov','Dec'),
-  pt: Array('Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro','Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez')
+  dk: Array('Januar','Februar','Marts','April','Maj','Juni','Juli','August','September','Oktober','November','December','Jan','Feb','Mar','Apr','Maj','Jun','Jul','Aug','Sep','Okt','Nov','Dec'),
+  pt: Array('Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro','Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'),
+  it: Array('Gennaio', 'Febbraio', 'Marzo', 'Aprile', 'Maggio', 'Giugno', 'Luglio', 'Agosto', 'Settembre', 'Ottobre', 'Novembre', 'Dicembre', 'Gen', 'Feb', 'Mar', 'Apr', 'Mag', 'Giu', 'Lug', 'Ago', 'Set', 'Ott', 'Nov', 'Dic')
 };
 
 var DAY_NAMES = 
@@ -2843,10 +2884,13 @@ var DAY_NAMES =
   en: Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'),
   es: Array('Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Dom','Lun','Mar','Mie','Jue','Vie','Sab'),
   fr: Array('Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dim','Lun','Mar','Mer','Jeu','Ven','Sam'),
+  de: Array('Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Son', 'Mon', 'Die', 'Mit', 'Don', 'Fre', 'Sam'),
   no: Array('Søndag','Mandag','Tirsdag','Onsdag','Torsdag','Fredag','Lørdag','Søn','Man','Tir','Ons','Tor','Fre','Lør'),
   nl: Array('Zondag','Maandag','Dinsdag','Woensdag','Donderdag','Vrijdag','Zaterdag','Zon','Maa','Din','Woe','Don','Vrij','Zat'),
-  pt: Array('Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Dom','Seg','Ter','Qua','Qui','Sex','Sab')
-};
+  dk: Array('Søndag', 'Mandag', 'Tirsdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lørdag', 'Søn', 'Man', 'Tir', 'Ons', 'Tor', 'Fre', 'Lør'),
+  pt: Array('Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Dom','Seg','Ter','Qua','Qui','Sex','Sab'),
+  it: Array('Domenica', 'Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato', 'Dom', 'Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab')
+ };
 
 var QUICK_SEARCH =
 {
@@ -2854,6 +2898,7 @@ var QUICK_SEARCH =
   es: "Búsqueda Rápida",
   no: "Hurtigsøk",
   nl: "Snelzoek",
+  dk: "Hurtig Søgning",
   pt: "Pesquisa Rápida"
 };
 
@@ -2864,6 +2909,7 @@ var HELP_TEXT =
   fr: "Type ? pour l'aide",
   no: "Skriv ? for hjelp",
   nl: "Typ ? voor hulp",
+  dk: "Skriv ? for hjælp",
   pt: "Digite ? para ajuda"
 };
 
@@ -3042,7 +3088,7 @@ function rsz()
   if (gowidth < 0)
   {
     if (dopopup)
-       gowidth = document.deff.gobutton.offsetWidth + 2;
+       gowidth = document.deff.gobutton.offsetWidth;
     else
        gowidth = 0.0;
 
