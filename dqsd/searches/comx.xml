@@ -156,9 +156,9 @@
         qsfind("comx /function");
         return false;
      }
-     var outfile = "comx.html";
+     var comxoutfile = DQSDLauncher.InstallationDirectory+'\\comx.html';     
      var pagebody="<html><head></head><body>";
-
+     
      var args = parseArgs(q, "9chickweedlane,agnes,alleyoop,andycapp,arloandjanis,bc,\
      ballardstreet,ben,betty,bignate,bonanas,bornloser,buckets,bullsnbears,candorville,\
      caseinpoint,ceodad,cheapthrills,committed,drabble,fatcats,ferdnand,\
@@ -437,8 +437,8 @@
            return;
      }//else
      pagebody += '<br></body></html>';
-     writeFile(outfile, pagebody);
-     openSearchWindow("file:///C:/Program%20Files/Quick%20Search%20Deskbar/"+outfile);
+     writeFile(comxoutfile, pagebody);
+     openSearchWindow("file:///"+comxoutfile);
   } //function
 
   ]]></script>
