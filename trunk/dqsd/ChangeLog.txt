@@ -17,8 +17,9 @@ Modified Searches
 
 * ups - Tim Dierks fixed to zero out old search values from the form and 
         edit out non-alphanumerics (since value was used in eval, single 
-        quotes could cause JS errors)
-* fv - Allen B. MacKenzie fixed a bug
+        quotes could cause JS errors).
+* fv - Allen B. MacKenzie fixed a bug.
+* pcm - Thad K. updated.
 
 Enhancements
 
