@@ -1,6 +1,13 @@
 <search function="whatis">
   <name>Whatis.com</name>
-  <description>Definitions for IT-related words: "whatis 42"</description>
+  <description>Definitions for IT-related words
+  <div class="helpboxDescLabels">Example:</div> 
+  <table class="helpboxDescTable">
+    <tr>
+      <td>whatis 42</td>
+    </tr>
+  </table>  
+  </description>
   <category>Computers</category>
   <link>http://whatis.techtarget.com/</link>
   <form name="whatisf"

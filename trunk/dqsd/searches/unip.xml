@@ -1,12 +1,22 @@
 <search function="unip">
   <name>Uniplus DNS</name>
-  <description>Dig on a DNS address: "unip yahoo.com", or "unip email.com /MX"</description>
+  <description>Dig on a DNS address
+  <div class="helpboxDescLabels">Examples:</div> 
+  <table class="helpboxDescTable">
+    <tr>
+      <td>unip yahoo.com</td>
+    </tr>
+    <tr>
+      <td>unip email.com /MX</td> 
+    </tr>
+  </table>
+  </description>
   <category>Computers</category>
   <link>http://www.uniplus.ch/cgi-bin/dig.cgi</link>
   <contributor>Bjorn Jonson</contributor>
   <email>bjornjonson2000_at_yahoo_dot_com</email>
   <form name="unipf"
-        action="http://www.uniplus.ch/cgi-bin/dig.cgi">
+    action="http://www.uniplus.ch/cgi-bin/dig.cgi">
     <input type="hidden" name="action" value="process"/>
     <input type="hidden" name="domain"/>
     <input type="hidden" name="type" value="ANY"/>

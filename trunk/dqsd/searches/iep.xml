@@ -1,14 +1,4 @@
 <search function="iep">
-  <COMMENT>
-
-    This search file was initially created by Dave's Quick Search Deskbar
-    Search Wizard version 0.5 (beta) on 08/29/02 at 11:19:37
-
-    Even though this XML search will probably load and is a healthy start
-    toward a completed search, please be aware that this search will probably
-    not work as is and will require some human inspection and modification.
-
-  </COMMENT>
   <name>Internet Encyclopedia of Philosophy</name>
   <category>Reference</category>
   <contributor> Andrew N. Carpenter</contributor>
@@ -16,6 +6,12 @@
   <email>andy@andrewcarpenter.net</email>
   <description>
   Internet Encyclopedia of Philosophy Search
+  <div class="helpboxDescLabels">Example:</div> 
+    <table class="helpboxDescTable">
+      <tr>
+        <td>iep socrates</td>
+      </tr>
+    </table>
   </description>
   <form name="iepf"
         method="post"

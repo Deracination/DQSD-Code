@@ -6,6 +6,12 @@
   <email>andy@andrewcarpenter.net</email>
   <description>
   Search Microsoft Encarta Encyclopedia
+  <div class="helpboxDescLabels">Example:</div> 
+    <table class="helpboxDescTable">
+      <tr>
+        <td>encarta tuscanny</td>
+      </tr>
+    </table>
   </description>
   <form name="encartaf"
         method="get"

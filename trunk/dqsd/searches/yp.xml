@@ -1,26 +1,41 @@
 <search function="yp">
-	<name>Yahoo! Yellow Pages</name>
-	<description>Search Yahoo Yellow Pages
-		Search for "yp business" (uses personalization variables or last location),
-		"yp cubby, 1060 W. Addison Street, Chicago, IL",
-		"yp cubby, 1060 W. Addison Street, Chicago IL",
-		"yp cubby, Chicago, IL",
-		"yp cubby, Chicago IL",
-		or "yp cubby, 60613".
-	</description>
-	<category>People and Places</category>
-	<link>http://yp.yahoo.com/</link>
-	<form name="ypf" method="get" action="http://yp.yahoo.com/py/yploc.py">
-		<input type="hidden" name="stp" value="a"/>
-		<input type="hidden" name="clr" value="ypResults"/>
-		<input type="hidden" name="stx" value=""/>
-		<input type="hidden" name="addr_in" value=""/>
-		<input type="hidden" name="csz_in" value=""/>
-		<input type="hidden" name="country_in" value="us"/>
-		<input type="hidden" name="newFL" value="NONE"/>
-		<input type="hidden" name="submit_field" value="1"/>
-	</form>
-	<script><![CDATA[
+  <name>Yahoo! Yellow Pages</name>
+  <description>Search Yahoo Yellow Pages
+  <div class="helpboxDescLabels">Examples:</div> 
+  <table class="helpboxDescTable">
+    <tr>
+      <td>yp business" (uses personalization variables or last location)</td>
+    </tr>
+    <tr>
+      <td>yp cubby, 1060 W. Addison Street, Chicago, IL</td>
+    </tr>
+    <tr>
+      <td>yp cubby, 1060 W. Addison Street, Chicago IL</td>
+    </tr>
+    <tr>
+      <td>yp cubby, Chicago, IL</td>
+    </tr>
+    <tr>
+      <td>yp cubby, Chicago IL</td>
+    </tr>
+    <tr>
+      <td>yp cubby, 60613</td>
+    </tr>
+  </table>
+  </description>
+  <category>People and Places</category>
+  <link>http://yp.yahoo.com/</link>
+  <form name="ypf" method="get" action="http://yp.yahoo.com/py/yploc.py">
+    <input type="hidden" name="stp" value="a"/>
+    <input type="hidden" name="clr" value="ypResults"/>
+    <input type="hidden" name="stx" value=""/>
+    <input type="hidden" name="addr_in" value=""/>
+    <input type="hidden" name="csz_in" value=""/>
+    <input type="hidden" name="country_in" value="us"/>
+    <input type="hidden" name="newFL" value="NONE"/>
+    <input type="hidden" name="submit_field" value="1"/>
+    </form>
+  <script><![CDATA[
 
 // TODO: Support Canada. Biggest annoyance is the user interface.
 //  Best option seems like it would be to recognize Canadian

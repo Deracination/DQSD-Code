@@ -1,6 +1,13 @@
 <search function="webopedia">
   <name>Webopedia</name>
-  <description>Seach the weboopedia for technical terms and links: "webopedia HTTP"</description>
+  <description>Seach the weboopedia for technical terms and links
+  <div class="helpboxDescLabels">Example:</div> 
+  <table class="helpboxDescTable">
+    <tr>
+      <td>webopedia HTTP</td>
+    </tr>
+  </table>      
+  </description>
   <contributor>Neel Doshi</contributor>
   <category>Computers</category>
   <link>http://www.webopedia.com/</link>

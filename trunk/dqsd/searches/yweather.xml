@@ -1,7 +1,15 @@
 <search function="yweather">
   <name>Yahoo Weather</name>
-  <description>Search Yahoo Weather (by the Weather channel) for weather forecasts by zip code or city name: "yweather 22204"
-    Uses personalization variables if no arguments are present:  "yweather"
+  <description>Search Yahoo Weather (by the Weather channel) for weather forecasts by zip code or city name
+  <div class="helpboxDescLabels">Examples:</div> 
+  <table class="helpboxDescTable">
+    <tr>
+      <td>yweather 22204</td>
+    </tr>
+    <tr>
+      <td>Uses personalization variables if no arguments are present: yweather</td>
+    </tr>
+  </table>
   </description>
   <category>News</category>
   <link>http://weather.yahoo.com/</link>

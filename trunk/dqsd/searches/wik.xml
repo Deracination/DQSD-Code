@@ -1,20 +1,16 @@
 <search function="wik">
-  <COMMENT>
-
-    This search file was initially created by Dave's Quick Search Deskbar
-    Search Wizard version 0.5 (beta) on 08/25/02 at 00:37:19
-
-    Even though this XML search will probably load and is a healthy start
-    toward a completed search, please be aware that this search will probably
-    not work as is and will require some human inspection and modification.
-
-  </COMMENT>
   <name>Wikipedia</name>
   <category>Reference</category>
   <contributor>Thad Kerosky</contributor>
   <link>http://www.wikipedia.org/</link>
   <description>
   An open encylopedia based upon visitor contributions.
+  <div class="helpboxDescLabels">Example:</div> 
+    <table class="helpboxDescTable">
+      <tr>
+        <td>wik tuscanny</td>
+      </tr>
+    </table>
   </description>
   <form name="wikf"
         method="get"

@@ -1,6 +1,13 @@
 <search function="mrqe">
   <name>MRQE Search</name>
-  <description>Search the Movie Review Query Engine for movie reviews: "mrqe jaws"</description>
+  <description>Search the Movie Review Query Engine for movie reviews 
+  <div class="helpboxDescLabels">Example:</div> 
+  <table class="helpboxDescTable">
+    <tr>
+      <td>mrqe jaws</td>
+    </tr>
+  </table>
+  </description>
   <category>Entertainment</category>
   <link>http://www.mrqe.com/</link>
   <contributor>Steven J. Heil</contributor>

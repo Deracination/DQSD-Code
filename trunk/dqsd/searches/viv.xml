@@ -1,6 +1,13 @@
 <search function="viv">
   <name>Vivisimo</name>
-  <description>Search Vivisimo. Options include Top News /tn, Business News /tb, Tech News /tt, Sports News /ts, <nobr><wbr/>/yaa, <wbr/>/ebay, <wbr/>/yas, <wbr/>/pubmed, <wbr/>/usgov, <wbr/>/patent, <wbr/>/gorp, <wbr/>/buscom, <wbr/>/brit, <wbr/>/yahoo, <wbr/>/msn, <wbr/>/fast, <wbr/>/netscape, <wbr/>/od, <wbr/>/excite, <wbr/>/dh, <wbr/>/ls, <wbr/>/aj, <wbr/>/lycos, <wbr/>/aol, <wbr/>/hb, <wbr/>/cnn, <wbr/>/nyt, <wbr/>/yn, <wbr/>/wn, <wbr/>/bbc, <wbr/>/sfg, <wbr/>/cnnfn, <wbr/>/ybn, <wbr/>/wired, <wbr/>/ytn, <wbr/>/ysn.</nobr> <nobr>Example: "viv president /cnn"</nobr></description>
+  <description>Search Vivisimo. Options include Top News /tn, Business News /tb, Tech News /tt, Sports News /ts, <wbr/>/yaa, <wbr/>/ebay, <wbr/>/yas, <wbr/>/pubmed, <wbr/>/usgov, <wbr/>/patent, <wbr/>/gorp, <wbr/>/buscom, <wbr/>/brit, <wbr/>/yahoo, <wbr/>/msn, <wbr/>/fast, <wbr/>/netscape, <wbr/>/od, <wbr/>/excite, <wbr/>/dh, <wbr/>/ls, <wbr/>/aj, <wbr/>/lycos, <wbr/>/aol, <wbr/>/hb, <wbr/>/cnn, <wbr/>/nyt, <wbr/>/yn, <wbr/>/wn, <wbr/>/bbc, <wbr/>/sfg, <wbr/>/cnnfn, <wbr/>/ybn, <wbr/>/wired, <wbr/>/ytn, <wbr/>/ysn.
+  <div class="helpboxDescLabels">Example:</div> 
+  <table class="helpboxDescTable">
+    <tr>
+      <td>viv president /cnn</td>
+    </tr>
+  </table>
+  </description>
   <category>Search the Web</category>
   <link>http://www.vivisimo.com/</link>
   <contributor>Sam Gera</contributor>

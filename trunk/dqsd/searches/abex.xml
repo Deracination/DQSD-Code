@@ -6,7 +6,12 @@
   <email>davidbau@hotmail.com</email>
   <description>
   Track Airborne Express packages by tracking number (up to 25):
-  <br/>abex [tracking #1] [tracking #2]
+  <div class="helpboxDescLabels">Example:</div> 
+  <table class="helpboxDescTable">
+    <tr>
+      <td>abex [tracking #1] [tracking #2]</td>
+    </tr>
+  </table>
   </description>
   <form name="abexf"
         method="post"

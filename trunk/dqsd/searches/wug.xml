@@ -1,6 +1,13 @@
 <search function="wug">
   <name>Weather Underground</name>
-  <description>Search for weather forecasts by zip code: "wug 75287"</description>
+  <description>Search for weather forecasts by zip code
+  <div class="helpboxDescLabels">Examples:</div> 
+  <table class="helpboxDescTable">
+    <tr>
+      <td>wug 75287</td>
+    </tr>
+  </table>
+  </description>
   <category>News</category>
   <link>http://www.weatherunderground.com/</link>
   <contributor>Monty Scroggins</contributor>

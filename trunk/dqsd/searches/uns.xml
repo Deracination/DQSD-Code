@@ -1,6 +1,13 @@
 <search function="uns">
   <name>Word Unscrambler</name>
-  <description>To calculate scrabble scores: "uns inourdnas"</description>
+  <description>To calculate scrabble scores
+  <div class="helpboxDescLabels">Example:</div> 
+  <table class="helpboxDescTable">
+    <tr>
+      <td>uns inourdnas</td>
+    </tr>
+  </table>
+  </description>
   <category>Fun</category>
   <link>http://www.concordance.com/unscrambler.htm</link>
   <form name="unsf"

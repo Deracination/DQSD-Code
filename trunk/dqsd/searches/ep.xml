@@ -6,6 +6,12 @@
   <email>andy@andrewcarpenter.net</email>
   <description>
   Search Epinions
+  <div class="helpboxDescLabels">Example:</div> 
+    <table class="helpboxDescTable">
+      <tr>
+        <td>ep gladiator</td>
+      </tr>
+    </table>
   </description>
   <form name="epf"
         method="get"

@@ -1,6 +1,13 @@
 <search function="ths">
   <name>Thesaurus.com</name>
-  <description>Search for synonyms: "ths frothy"</description>
+  <description>Search for synonyms
+  <div class="helpboxDescLabels">Example:</div> 
+  <table class="helpboxDescTable">
+    <tr>
+      <td>ths frothy</td>
+    </tr>
+  </table>
+  </description>
   <category>Reference</category>
   <link>http://www.thesaurus.com/</link>
   <form name="thsf"

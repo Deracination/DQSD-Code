@@ -1,6 +1,13 @@
 <search function="findlaw">
    <name>FindLaw Law Library</name>
-   <description>Search FindLaw's Law Library.  Options include Dictionary /dictionary, Author /author, Title /title, Abstract /abstract, and Full Text which is the default. <nobr>Example: "findlaw adoption"</nobr></description>
+   <description>Search FindLaw's Law Library.  Options include Dictionary /dictionary, Author /author, Title /title, Abstract /abstract, and Full Text which is the default.
+   <div class="helpboxDescLabels">Example:</div> 
+  <table class="helpboxDescTable">
+    <tr>
+      <td>findlaw adoption</td>
+    </tr>
+   </table>
+   </description>
    <category>Reference</category>
    <link>http://library.lp.findlaw.com/</link>
    <contributor>John W. Bairen, Jr. proxy for David Leighni</contributor>

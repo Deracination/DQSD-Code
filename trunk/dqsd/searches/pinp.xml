@@ -1,20 +1,16 @@
 <search function="pinp">
-  <COMMENT>
-
-    This search file was initially created by Dave's Quick Search Deskbar
-    Search Wizard version 0.5 (beta) on 08/25/02 at 00:39:15
-
-    Even though this XML search will probably load and is a healthy start
-    toward a completed search, please be aware that this search will probably
-    not work as is and will require some human inspection and modification.
-
-  </COMMENT>
   <name>GeoPinpoint</name>
   <category>Reference</category>
   <contributor>Thad Kerosky</contributor>
   <link>http://www.serviceobjects.com</link>
   <description>
   Get a Physical Location to an IP address.
+  <div class="helpboxDescLabels">Examples:</div> 
+    <table class="helpboxDescTable">
+      <tr>
+        <td>pinp 207.46.230.220</td>
+      </tr>
+    </table>
   </description>
   <form name="pinpf"
         method="get"

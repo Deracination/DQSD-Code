@@ -1,6 +1,13 @@
 <search function="yh">
   <name>Yahoo</name>
-  <description>Search the Yahoo directory: "yh horses"</description>
+  <description>Search the Yahoo directory
+  <div class="helpboxDescLabels">Example:</div> 
+  <table class="helpboxDescTable">
+    <tr>
+      <td>yh horses</td>
+    </tr>
+  </table>
+  </description>
   <category>Search the Web</category>
   <link>http://www.yahoo.com/</link>
   <form name="yhf"
