@@ -230,7 +230,7 @@ Styles for the help box
 }
 .helpboxAlias
 {
-  color:lightblue;
+  color:buttonhighlight;
 }
 .helpbox
 {
@@ -244,7 +244,7 @@ Styles for the help box
 }
 .helpboxCommands
 {
-  font:menu;
+  font-weight:bold;
   background-color:highlight;
   color:white;
 }
@@ -253,6 +253,12 @@ Styles for the help box
   font-weight:bold;
   color:activeCaption;
 }
+TR.disabledSearch TD, TR.disabledSearch TD TABLE.helpboxDescTable TD, TR.disabledSearch DIV.helpboxDescLabels, TR.disabledSearch A.helpboxLink, TR.disabledSearch A.helpboxLink:VISITED, TR.disabledSearch .helpboxSearchName, TR.disabledSearch A.helpboxAlias
+{
+  background: scrollbar;
+  color: graytext;
+}
+
 TABLE.helpboxDescTable
 {
   border:0px;
