@@ -613,3 +613,28 @@ STDMETHODIMP CLauncher::RefreshTrayIcons()
 
 	return S_OK;
 }
+
+STDMETHODIMP CLauncher::get_InstallationDirectory(BSTR* pbstrDirectory)
+{
+	USES_CONVERSION;
+
+	// Get the installation directory from the registry
+	CRegKey rk;
+	if ( ERROR_SUCCESS != rk.Open( HKEY_CLASSES_ROOT, DQSD_REG_KEY, KEY_READ ) )
+	{
+		Error(IDS_ERR_REGKEYNOTFOUND, IID_ILauncher);
+		return E_UNEXPECTED;
+	}
+
+	TCHAR szInstallDir[ _MAX_PATH ];
+	DWORD dwCount = sizeof( szInstallDir );
+	if ( ERROR_SUCCESS != rk.QueryValue( szInstallDir, _T("InstallDir"), &dwCount ) )
+	{
+		Error(IDS_ERR_REGKEYNOTFOUND, IID_ILauncher);
+		return E_UNEXPECTED;
+	}
+	CComBSTR bstrInstallDir;
+	bstrInstallDir.Append(szInstallDir);
+	*pbstrDirectory = bstrInstallDir.Detach();
+	return S_OK;
+}

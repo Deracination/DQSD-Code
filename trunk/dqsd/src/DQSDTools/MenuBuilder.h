@@ -66,6 +66,12 @@ public:
 	STDMETHOD(AppendMenuItem)(/*[in]*/ BSTR bstrItem, /*[in]*/ BSTR bstrKey, /*[in]*/ BSTR bstrToolTip, /*[in,optional]*/ VARIANT* pvhMenu);
 	STDMETHOD(AppendSeparator)(/*[in]*/ long hmenu);
 	STDMETHOD(Display)(LPDISPATCH pDispDocument, VARIANT* pbstrSelection);
+	STDMETHOD(InsertMenuItem)(/*[in]*/ BSTR bstrItem, /*[in]*/ BSTR bstrKey, /*[in]*/ BSTR bstrToolTip, /*[in]*/ UINT position, /*[in,optional]*/ VARIANT* pvhMenu );
+	STDMETHOD(InsertSeparator)(/*[in]*/ UINT position, /*[in]*/ long hmenu);
+	STDMETHOD(InsertSubMenu)(/*[in]*/ BSTR bstrName, /*[in]*/ UINT position, /*[in,optional]*/ VARIANT* pvParentMenu, /*[out,retval]*/ long *phmenu);
+	STDMETHOD(GetMenuItemCount)(/*[in]*/ long hmenu, /*[out,retval]*/ long *pCount);
+	STDMETHOD(FindSubMenu)(/*[in]*/ BSTR bstrName, /*[in,optional]*/ VARIANT* pvParentMenu, /*[out,retval]*/ long *phmenu);
+	STDMETHOD(FindMenuItem)(/*[in]*/ BSTR bstrName, /*[in,optional]*/ VARIANT* pvParentMenu, /*[out,retval]*/ long *pPosition);
 
 // Implementation
 protected:

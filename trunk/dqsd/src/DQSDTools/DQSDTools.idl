@@ -31,6 +31,7 @@ import "ocidl.idl";
 		[propget, id(12), helpstring("Check if the DLL is of at least the specified version")] HRESULT VersionIsCorrect(int v1, int v2, int v3, int v4, [out, retval] VARIANT_BOOL *pVal);
 		[id(14), helpstring("method ShutdownBar")] HRESULT ShutdownBar([in] LPDISPATCH pDispDocument);
 		[id(15), helpstring("Attempt to refresh taskbar tray icons")] HRESULT RefreshTrayIcons();
+		[propget, id(16), helpstring("property InstallationDirectory")] HRESULT InstallationDirectory([out,retval] BSTR *pbstrDirectory);
 	};
 	[
 		object, 
@@ -48,6 +49,12 @@ import "ocidl.idl";
 		[propget, id(5), helpstring("property HorizontalAlignment")] HRESULT HorizontalAlignment([out, retval] short *pVal);
 		[propput, id(5), helpstring("property HorizontalAlignment")] HRESULT HorizontalAlignment([in] short newVal);
 		[id(6), helpstring("method InitialiseTooltips")] HRESULT InitialiseTooltips([in] long displayTimeMultiplier);
+		[id(7), helpstring("method InsertMenuItem")] HRESULT InsertMenuItem([in] BSTR bstrItem, [in] BSTR bstrKey, [in] BSTR bstrToolTip, [in] UINT position, [in,optional] VARIANT* hmenu);
+		[id(8), helpstring("method InsertSeparator")] HRESULT InsertSeparator([in] UINT position, [in] long hmenu);
+		[id(9), helpstring("method InsertSubMenu")] HRESULT InsertSubMenu([in] BSTR bstrName, [in] UINT position, [in,optional] VARIANT* hParentMenu, [out,retval] long* phmenu);
+		[id(10), helpstring("method GetMenuItemCount")] HRESULT GetMenuItemCount([in] long hmenu, [out,retval] long* pCount);
+		[id(11), helpstring("method FindSubMenu")] HRESULT FindSubMenu([in] BSTR bstrName, [in,optional] VARIANT* hParentMenu, [out,retval] long* phmenu);
+		[id(12), helpstring("method FindMenuItem")] HRESULT FindMenuItem([in] BSTR bstrName, [in,optional] VARIANT* hParentMenu, [out,retval] long* pPosition);
 	};
 
 [
