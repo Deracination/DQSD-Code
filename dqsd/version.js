@@ -83,7 +83,8 @@ function checkWebForUpdate()
   }
   catch(e)
   {
-    // ignore any errors for now
+    if ( !quiet )
+      alert("Unable to check for update.  Check your internet connection.");
   }
 }
 
