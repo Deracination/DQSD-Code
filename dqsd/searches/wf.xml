@@ -1,0 +1,58 @@
+<search function="wf">
+  <COMMENT>
+
+    Even though this XML search will probably load and is a good start
+    toward a completed search, please be aware that this search will probably
+    not work as is and will probably require some changes.
+
+  </COMMENT>
+  <name>Watchman Fellowship</name>
+  <category>Reference</category>
+  <contributor>John W. Bairen, Jr.</contributor>
+  <link>http://www.watchman.org/watchman.htm</link>
+  <email>john_at_bairen_dot_net</email>
+  <description>
+  Watchman Fellowship is an independent Christian research and apologetics ministry focusing on new religious movements, cults, the occult and the New Age.
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>wf Swedenborgianism</td></tr>
+      <tr><td>wf New Church</td></tr>
+      <tr><td>wf New Jerusalem</td></tr>
+    </table>
+  </description>
+  <form name="wff"
+        method="post"
+        action="http://www.watchman.org/search/watchman_VSearchResult2.cfm">
+    <input type="hidden" name="StartRow" value="1" />
+
+    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
+
+    <input type="hidden" name="Criteria" value="" />
+  </form>
+  <script><![CDATA[
+    function wf(q)
+    {
+      if( nullArgs("wf", q) )
+        return;
+
+      // FORM variables for wff
+      //document.wff.StartRow.value = "";
+
+      // The wizard assigned the search string to this form field value because
+      // this field was the active element when the search file was generated.
+      // Change this to args.q if the search string is parsed with parseArgs.
+      document.wff.Criteria.value = q;
+
+      submitForm(wff);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 02/21/03 at 18:09:54
+    by Dave's Quick Search Deskbar Search Wizard version 1.0.1 ,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>
