@@ -1,11 +1,11 @@
 <search function="icap">
-  <name>RIAA Radar Search</name>
-  <category>Shopping</category>
+  <name>ICapture</name>
+  <category>Functions</category>
   <contributor>Shawn K. Hall</contributor>
   <link>http://www.danvine.com/icapture/</link>
   <email>Shawn[@]ReliableAnswers.com</email>
   <description>
-    View a URL as it looks in Safari 1.1 on Macintosh
+    View a URL as it looks in Safari 1.2 on Macintosh
     <div class="helpboxDescLabels">Switches:</div>
     <table class="helpboxDescTable">
       <tr><td> /home </td><td> - </td><td> Just go to iCapture's website </td></tr>
@@ -19,11 +19,11 @@
     </table>
   </description>
 
-  <form name="icapf" 
-        method="post" 
+  <form name="icapf"
+        method="post"
         action="http://www.danvine.com/icapture/_capture.html">
 	<input type="hidden" name="url"	value="" />
-	<input type="hidden" name="browser" value="safari12" />
+	<input type="hidden" name="browser" value="safari_1.2" />
 	<input type="hidden" name="v"	value="" />
 	<input type="hidden" name="u"	value="" />
   </form>
@@ -36,10 +36,7 @@
 	for (var i = 0; i < args.switches.length; i++){
 	  sw = args.switches[i];
 	  switch(sw.name){
-	    case "h":
-	    case "home":
-		openSearchWindow( "http://www.danvine.com/icapture/" );
-		return false;
+	    case "home": openSearchWindow( "http://www.danvine.com/icapture/" ); return false;
 	    default:
 	  }
 	}

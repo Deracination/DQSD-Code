@@ -1,0 +1,79 @@
+<search function="floax">
+  <name>The Floax Bar</name>
+  <category>Functions</category>
+  <link>http://ReliableAnswers.com/x/dqsd/</link>
+  <contributor>Shawn K. Hall</contributor>
+  <description>
+    Provides a floating button bar for quick 'mouser' search access.<br />
+    <div class="helpboxDescLabels">Usage:</div>
+    <table class="helpboxDescTable">
+      <tr><td>floax</td></tr>
+      <tr><td>click on the DQSD 'go' button</td></tr>
+    </table>
+    Floax is intended to be used from the banner/logo by setting the 
+    following variables in localprefs.js, this assumes, of course, that 
+    your settings are enabled for the banner/logo:
+    <table class="helpboxDescTable">
+    <tr><td>
+	bannerlink="floax"; <br />
+	bannerasgo=false;
+    </td></tr>
+    </table>
+    <div class="helpboxDescLabels">Variables:</div>
+    <table class="helpboxDescTable">
+      <tr><td>floaxButtons()</td><td> - </td><td> An array depicting the buttons, layout and function of the floax bar. </td></tr>
+      <tr><td style="color:red;" colspan="3">
+var floaxButtons =<br />
+  Array(<br />
+    Array('ra.png',      'Visit RA', 'http://ReliableAnswers.com/'),<br />
+    Array('yahoo!.png',  'Yahoo Profile [Clipboard]', 'vbsx yprof ClipboardGetText'),<br />
+    Array('yahoo!.png',  'YG Ban-Bot [Clipboard]', 'vbsx banyg ClipboardGetText'),<br />
+    Array('reg.png',     'Google [Clipboard]', 'vbsx gg ClipboardGetText'),<br />
+    Array('ftp.png',     'Look up [Clipboard] in Dictionary', 'vbsx dic ClipboardGetText'),<br />
+    Array('vbs.png',     'ClipBoard Length', 'vbsx !Len(ClipboardGetText)' )<br />
+  ); // Array( button, title, function)
+    </td></tr>
+    </table>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+      <tr><td>floax</td></tr>
+    </table>
+  </description>
+  
+  <form name="floaxf"
+    action="http://ReliableAnswers.com/x/dqsd/"
+    method="post">
+    <input type="hidden" name="qs" value="" />
+  </form>
+
+  <script><![CDATA[
+  function floax (q)
+  {
+    if (q.length == 1) {
+      if (q.charAt(0) == "?"){
+      //show help
+        if (nullArgs( "floax", "?" )) return true;
+      }
+    }
+    if ( toggleDisplayIsToggled() ) {
+      toggleDisplay('');
+      return false;
+
+    } else {
+    //format the view-port
+      var floaxs = "";
+      for (var i = 0; i < floaxButtons.length; i++) {
+        floaxs += "<img width=16 height=16";
+        floaxs += " src='" + floaxButtons[i][0] + "'";
+        floaxs += " title='"   + floaxButtons[i][1] + "'";
+        floaxs += " onclick=\"toggleDisplay();document.deff.q.value='";
+        floaxs += floaxButtons[i][2] + "';def();\"";
+        floaxs += " />\n ";
+      }
+      toggleDisplay( floaxs );
+
+      return false;
+    }
+  }
+  ]]></script>
+</search>

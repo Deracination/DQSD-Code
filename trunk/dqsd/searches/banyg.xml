@@ -9,11 +9,11 @@
     <div class="helpboxDescLabels">Switches:</div>
     <table class="helpboxDescTable">
       <tr><td>email address</td><td> [default] </td><td>email address(es) to ban </td></tr>
-      <tr><td> /b, /ban </td><td> [default] or <em>strYahooBanRem</em> </td><td> Ban the addresses requested </td></tr>
-      <tr><td> /r, /rem, remove </td><td> - </td><td> Remove the addresses requested </td></tr>
+      <tr><td> /ban </td><td> [default] or <em>strYahooBanRem</em> </td><td> Ban the addresses requested </td></tr>
+      <tr><td> /remove </td><td> - </td><td> Remove the addresses requested </td></tr>
       <tr><td> /y, /id </td><td> <em>strYahooID</em> </td><td> YahooID </td></tr>
-      <tr><td> /p, /pw, /pwd </td><td> <em>strYahooPwd</em> </td><td> Yahoo Password </td></tr>
-      <tr><td> /l, /lists, /g, /grp, /groups </td><td> <em>strYahooGroups</em> </td><td> YahooGroups to ban/remove addresses from </td></tr>
+      <tr><td> /pwd </td><td> <em>strYahooPwd</em> </td><td> Yahoo Password </td></tr>
+      <tr><td> /lists, /groups </td><td> <em>strYahooGroups</em> </td><td> YahooGroups to ban/remove addresses from </td></tr>
     </table>
     <div class="helpboxDescLabels">Examples:</div>
     <table class="helpboxDescTable">
@@ -33,98 +33,41 @@
   <form name="banygf" 
         method="post" 
         action="http://reliableanswers.com/yg/ban/default.aspx">
-    <input type="hidden" name="__VIEWSTATE" value="dDwtMzQyOTg2NDAxOzs+IRMeR1g+CEykCOte3j9jolDSUXg=" />
     <input type="hidden" name="login" value="" />
     <input type="hidden" name="passwd" value="" />
     <input type="hidden" name="banrem" value="ban" />
     <input type="hidden" name="txtEmails" value="" />
     <input type="hidden" name="txtLists" value="" />
-    <input type="hidden" name=".tries" value="1" />
-    <input type="hidden" name=".src" value="" />
-    <input type="hidden" name=".md5" value="" />
-    <input type="hidden" name=".hash" value="" />
-    <input type="hidden" name=".js" value="" />
-    <input type="hidden" name=".last" value="" />
-    <input type="hidden" name="promo" value="" />
-    <input type="hidden" name=".intl" value="us" />
-    <input type="hidden" name=".bypass" value="" />
-    <input type="hidden" name=".partner" value="" />
-    <input type="hidden" name=".u" value="5ic2kkgv7qfms" />
-    <input type="hidden" name=".v" value="0" />
-    <input type="hidden" name=".challenge" value="3yFbE395ov5iLTV7bSek2cCe6Px." />
-    <input type="hidden" name=".yplus" value="" />
-    <input type="hidden" name=".emailCode" value="" />
-    <input type="hidden" name="pkg" value="" />
-    <input type="hidden" name="stepid" value="" />
-    <input type="hidden" name="hasMsgr" value="0" />
-    <input type="hidden" name=".chkP" value="Y" />
-    <input type="hidden" name=".done" value="http://groups.yahoo.com/group/xYG/" />
-    <input type="hidden" name=".save" value="Process" />
   </form>
 
   <script><![CDATA[
-  function banyg(q)
-  {
-    if( nullArgs( "banyg", q ) ) return false;
-    var banygYahooID  = "";
-    var banygYahooPwd = "";
-    var banygYahooGroups = "";
-    var banygYahooBanRem = "ban";
-    if (typeof strYahooID     != "undefined")
-      banygYahooID     = strYahooID;
-    if (typeof strYahooPwd    != "undefined")
-      banygYahooPwd    = strYahooPwd;
-    if (typeof strYahooGroups != "undefined")
-      banygYahooGroups = strYahooGroups;
-    if (typeof strYahooBanRem != "undefined")
-      banygYahooBanRem = strYahooBanRem;
+  function banyg(q){
+	if( nullArgs( "banyg", q ) ) return false;
+	var banygYahooID = "";	 if (typeof strYahooID != "undefined")	banygYahooID = strYahooID;
+	var banygYahooPwd= "";	 if (typeof strYahooPwd != "undefined")	banygYahooPwd = strYahooPwd;
+	var banygYahooGroups= ""; if (typeof strYahooGroups != "undefined")	banygYahooGroups = strYahooGroups;
+	var banygYahooBanRem= "ban";if (typeof strYahooBanRem != "undefined")	banygYahooBanRem = strYahooBanRem;
 
-    var banygYahooEmails = q;
-    var args = parseArgs(q, "y, id, p, pw, pwd, g, grp, groups, l, lists, r, rem, remove, b, ban, e, eml, email, emails");
-    for (var i = 0; i < args.switches.length; i++)
-    {
-      sw = args.switches[i];
-      switch(sw.name)
-      {
-        case "y":
-        case "id":
-          banygYahooID = sw.value; break;
-
-        case "p":
-        case "pw":
-        case "pwd":
-          banygYahooPwd = sw.value; break;
-
-        case "g":
-        case "grp":
-        case "groups":
-        case "l":
-        case "lists":
-          banygYahooGroups += " " + sw.value; break;
-
-        case "r":
-        case "rem":
-        case "remove":
-          banygYahooBanRem = "rem"; break;
-
-        case "b":
-        case "ban":
-          banygYahooBanRem = "ban"; break;
-
-        case "e":
-        case "eml":
-        case "email":
-        case "emails":
-        default:
-          banygYahooEmails += " " + sw.value; break;
-      }
-    }
-    document.banygf.login.value     = banygYahooID;
-    document.banygf.passwd.value    = banygYahooPwd;
-    document.banygf.txtLists.value  = banygYahooGroups;
-    document.banygf.banrem.value    = banygYahooBanRem;
-    document.banygf.txtEmails.value = banygYahooEmails;
-    submitForm(banygf);
+	var banygYahooEmails = q;
+	var args = parseArgs(q, "y, id, pwd, groups, lists, remove, ban, emails");
+	for (var i = 0; i < args.switches.length; i++){
+	 sw = args.switches[i];
+	 switch(sw.name){
+	  case "y": case "id": banygYahooID = sw.value; break;
+	  case "pwd": banygYahooPwd = sw.value; break;
+	  case "groups": case "lists": banygYahooGroups += " " + sw.value; break;
+	  case "remove": banygYahooBanRem = "rem"; break;
+	  case "ban": banygYahooBanRem = "ban"; break;
+	  case "emails":
+	  default: banygYahooEmails += " " + sw.value; break;
+	 }
+	}
+	document.banygf.login.value     = banygYahooID;
+	document.banygf.passwd.value    = banygYahooPwd;
+	document.banygf.txtLists.value  = banygYahooGroups;
+	document.banygf.banrem.value    = banygYahooBanRem;
+	document.banygf.txtEmails.value = banygYahooEmails;
+	submitForm(banygf);
   }
   ]]></script>
   <copyright>
@@ -133,7 +76,7 @@
   </copyright>
   <created_by>
     This search file was created on 2003/08/08 by Shawn K. Hall
-    This search file was modified on 2003/10/13 by Shawn K. Hall
+    This search file was last modified on 2004/11/28 by Shawn K. Hall
     Copyright (c) 2003 Shawn K. Hall; Distributed under the terms of the GNU General Public License, Version 2
   </created_by>
 </search>
