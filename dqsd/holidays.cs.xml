@@ -10,17 +10,23 @@
    Please change charset to iso-8859-2 in the meta tag in search.htm:
       <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-2">
 
-   - Jiri Sedlacek [Jiri.Sedlacek@quick.cz] (20.12.2002)
+   - Jiri Sedlacek [J(dot)Sedlacek(at)quick(dot)cz] (20.12.2002, 28.11.2003)
 -->
 
 <events>
-  <event name="Nov&#x00fd; rok / St&#x00e1;tn&#x00ed; sv&#x00e1;tek - Den obnovy samostatn&#x00e9;ho &#x010d;esk&#x00e9;ho st&#x00e1;tu" type="public_holiday">
+  <event name="Nov&#x00fd; rok / St&#x00e1;tn&#x00ed; sv&#x00e1;tek - Den obnovy samostatn&#x00e9;ho &#x010d;esk&#x00e9;ho st&#x00e1;tu (1993); zaveden v roce 2000" type="public_holiday">
      <date day="1" month="1"/>
+  </event>
+  <event name="V&#x00fd;znamn&#x00fd; den - Den pam&#x00e1;tky ob&#x011b;t&#x00ed; holocaustu a p&#x0159;edch&#x00e1;zen&#x00ed; zlo&#x010d;in&#x016f;m proti lidskosti (p&#x0159;ipom&#x00ed;n&#x00e1; den osvobozen&#x00ed; koncentra&#x010d;n&#x00ed;ho t&#x00e1;bora Osv&#x011b;tim - symbolu holocaustu)" type="public_holiday">
+     <date day="27" month="1"/>
   </event>
   <event name="US - Valentine's Day" type="public_holiday">
      <date day="14" month="2"/>
   </event>
-  <event name="V&#x00fd;znamn&#x00fd; den - Vstup &#x010c;R do NATO" type="public_holiday">
+  <event name="V&#x00fd;znamn&#x00fd; den - Mezin&#x00e1;rodn&#x00ed; den &#x017e;en" type="public_holiday">
+     <date day="8" month="3"/>
+  </event>
+  <event name="V&#x00fd;znamn&#x00fd; den - Vstup &#x010c;esk&#x00e9; republiky do NATO v roce 1999; zaveden v roce 2000" type="public_holiday">
      <date day="12" month="3"/>
   </event>
   <event name="Den bl&#x00e1;zn&#x016f;" type="public_holiday">
@@ -89,10 +95,10 @@
   <event name="Sv&#x00e1;tek pr&#x00e1;ce" type="public_holiday">
      <date day="1" month="5"/>
   </event>
-  <event name="V&#x00fd;znamn&#x00fd; den - Kv&#x011b;tnov&#x00e9; povst&#x00e1;n&#x00ed; &#x010d;esk&#x00e9;ho lidu" type="public_holiday">
+  <event name="V&#x00fd;znamn&#x00fd; den - Kv&#x011b;tnov&#x00e9; povst&#x00e1;n&#x00ed; &#x010d;esk&#x00e9;ho lidu v roce 1945" type="public_holiday">
      <date day="5" month="5"/>
   </event>
-  <event name="St&#x00e1;tn&#x00ed; sv&#x00e1;tek - Den osvobozen&#x00ed;" type="public_holiday">
+  <event name="St&#x00e1;tn&#x00ed; sv&#x00e1;tek - Den v&#x00ed;t&#x011b;zstv&#x00ed; (p&#x0159;ipom&#x00ed;n&#x00e1; v&#x00ed;t&#x011b;zstv&#x00ed; nad fa&#x0161;ismem v roce 1945); zaveden v roce 1991" type="public_holiday">
      <date day="8" month="5"/>
   </event>
   <event name="Den matek" type="public_holiday">
@@ -135,32 +141,37 @@
      <date day="16" month="6" year="2019"/>
      <date day="21" month="6" year="2020"/>
   </event>
-  <event name="St&#x00e1;tn&#x00ed; sv&#x00e1;tek - Den slovansk&#x00fd;ch v&#x011b;rozv&#x011b;st&#x016f; Cyrila a Metod&#x011b;je" type="public_holiday">
+  <event name="V&#x00fd;znamn&#x00fd; den - Den pam&#x00e1;tky ob&#x011b;t&#x00ed; komunismu (v tento den byla v roce 1950 po vykonstruovan&#x00e9;m procesu popravena n&#x00e1;rodn&#x011b;socialistick&#x00e1; politi&#x010d;ka Milada Hor&#x00e1;kov&#x00e1;)" type="public_holiday">
+     <date day="27" month="6"/>
+  </event>
+  <event name="St&#x00e1;tn&#x00ed; sv&#x00e1;tek - Den slovansk&#x00fd;ch v&#x011b;rozv&#x011b;st&#x016f; Cyrila a Metod&#x011b;je (v&#x00fd;ro&#x010d;&#x00ed; jejich p&#x0159;&#x00ed;chodu na Moravu roku 863); slav&#x00ed; se od roku 1990" type="public_holiday">
      <date day="5" month="7"/>
   </event>
-  <event name="St&#x00e1;tn&#x00ed; sv&#x00e1;tek - Den up&#x00e1;len&#x00ed; mistra Jana Husa" type="public_holiday">
+  <event name="St&#x00e1;tn&#x00ed; sv&#x00e1;tek - Den up&#x00e1;len&#x00ed; mistra Jana Husa (p&#x0159;ipom&#x00ed;n&#x00e1; v&#x00fd;ro&#x010d;&#x00ed; jeho up&#x00e1;len&#x00ed; v roce 1415); slav&#x00ed; se od roku 1990" type="public_holiday">
      <date day="6" month="7"/>
   </event>
-  <event name="St&#x00e1;tn&#x00ed; sv&#x00e1;tek - Den &#x010d;esk&#x00e9; st&#x00e1;tnosti" type="public_holiday">
+  <event name="St&#x00e1;tn&#x00ed; sv&#x00e1;tek - Den &#x010d;esk&#x00e9; st&#x00e1;tnosti; zaveden v roce 2000" type="public_holiday">
      <date day="28" month="9"/>
   </event>
-  <event name="St&#x00e1;tn&#x00ed; sv&#x00e1;tek - Den vzniku samostatn&#x00e9;ho &#x010d;eskoslovensk&#x00e9;ho st&#x00e1;tu" type="public_holiday">
+  <event name="St&#x00e1;tn&#x00ed; sv&#x00e1;tek - Den vzniku samostatn&#x00e9;ho &#x010d;eskoslovensk&#x00e9;ho st&#x00e1;tu (1918)" type="public_holiday">
      <date day="28" month="10"/>
   </event>
   <event name="US - Halloween" type="public_holiday">
      <date day="31" month="10"/>
   </event>
-  <event name="St&#x00e1;tn&#x00ed; sv&#x00e1;tek - Den boje za svobodu a demokracii" type="public_holiday">
+  <event name="V&#x00fd;znamn&#x00fd; den - Den v&#x00e1;le&#x010d;n&#x00fd;ch veter&#x00e1;n&#x016f; (je v&#x011b;nov&#x00e1;n veter&#x00e1;n&#x016f;m v&#x0161;ech v&#x00e1;le&#x010d;n&#x00fd;ch konflikt&#x016f; a slav&#x00ed; se ve v&#x0161;ech demokratick&#x00fd;ch zem&#x00ed;ch Evropy, USA a Kanad&#x011b; jako v&#x00fd;znamn&#x00e1; p&#x0159;ipom&#x00ed;nka v&#x00ed;t&#x011b;zstv&#x00ed; demokracie ve sv&#x011b;t&#x011b; - 11. listopadu 1918 bylo uzav&#x0159;eno p&#x0159;&#x00ed;m&#x011b;&#x0159;&#x00ed; mezi st&#x00e1;ty Dohody a N&#x011b;meckem a skon&#x010d;ila prvn&#x00ed; sv&#x011b;tov&#x00e1; v&#x00e1;lka)" type="public_holiday">
+     <date day="12" month="11"/>
+  </event>
+  <event name="St&#x00e1;tn&#x00ed; sv&#x00e1;tek - Den boje za svobodu a demokracii (p&#x0159;ipom&#x00ed;n&#x00e1; demonstrace student&#x016f; za nacistick&#x00e9; okupace v roce 1939 a za komunistick&#x00e9;ho re&#x017e;imu v roce 1989); zaveden v roce 2000" type="public_holiday">
      <date day="17" month="11"/>
   </event>
   <event name="&#x0160;t&#x011b;dr&#x00fd; den" type="public_holiday">
      <date day="24" month="12"/>
   </event>
-  <event name="1. sv&#x00e1;tek v&#x00e1;no&#x010d;n&#x00ed;" type="public_holiday">
+  <event name="prvn&#x00ed; sv&#x00e1;tek v&#x00e1;no&#x010d;n&#x00ed;" type="public_holiday">
      <date day="25" month="12"/>
   </event>
-  <event name="2. sv&#x00e1;tek v&#x00e1;no&#x010d;n&#x00ed;" type="public_holiday">
+  <event name="druh&#x00fd; sv&#x00e1;tek v&#x00e1;no&#x010d;n&#x00ed;" type="public_holiday">
      <date day="26" month="12"/>
   </event>
 </events>
-

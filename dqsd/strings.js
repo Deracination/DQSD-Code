@@ -25,7 +25,8 @@ var MONTH_NAMES =
   is: Array('Janúar','Febrúar','Mars','Apríl','Maí','Júní','Júlí','Ágúst','September','Október','Nóvember','Desember','jan.','feb.','mar.','apr.','maí','jún.','júl.','ág.','sep.','okt.','nóv.','des.'),
   fi: Array('Tammikuu','Helmikuu','Maaliskuu','Huhtikuu','Toukokuu','Kesäkuu','Heinäkuu','Elokuu','Syyskuu','Lokakuu','Marraskuu','Joulu','Tammi','Helmi','Maalis','Huhti','Touko','Kesä','Heinä','Elo','Syys','Loka','Marras','Joulu'),
   et: Array('Jaanuar', 'Veebruar', 'Märts', 'Aprill', 'Mai', 'Juuni', 'Juuli', 'August', 'September', 'Oktoober', 'November', 'Detsember', 'Jaan', 'Veebr', 'Märts', 'Apr', 'Mai', 'Juuni', 'Juuli', 'Aug', 'Sept', 'Okt', 'Nov', 'Dets'),
-  sv: Array('Januari','Februari','Mars','April','Maj','Juni','Juli','Augusti','September','Oktober','November','December','Jan','Feb','Mar','Apr','Maj','Jun','Jul','Aug','Sep','Okt','Nov','Dec')
+  sv: Array('Januari','Februari','Mars','April','Maj','Juni','Juli','Augusti','September','Oktober','November','December','Jan','Feb','Mar','Apr','Maj','Jun','Jul','Aug','Sep','Okt','Nov','Dec'),
+  cs: Array('Leden','Únor','Bøezen','Duben','Kvìten','Èerven','Èervenec','Srpen','Záøí','Øíjen','Listopad','Prosinec','ledna','února','bøezna','dubna','kvìtna','èervna','èervence','srpna','záøí','øíjna','listopadu','prosince')
 };
 
 var DAY_NAMES =
@@ -42,7 +43,8 @@ var DAY_NAMES =
   is: Array('sunnudagur','mánudagur','þriðjudagur','miðvikudagur','fimmtudagur','föstudagur','laugardagur','sun','mán','þri','mið','fim','fös','lau'),
   fi: Array('Sunnuntai', 'Maanantai', 'Tiistai', 'Keskiviikko', 'Torstai', 'Perjantai', 'Lauantai', 'Su', 'Ma', 'Ti', 'Ke', 'To', 'Pe', 'La'),
   et: Array('Pühapäev', 'Esmaspäev', 'Teisipäev', 'Kolmapäev', 'Neljapäev', 'Reede', 'Laupäev', 'P', 'E', 'T', 'K', 'N', 'R', 'L'),
-  sv: Array('Söndag','Måndag','Tisdag','Onsdag','Torsdag','Fredag','Lördag','Sön','Mån','Tis','Ons','Tor','Fre','Lör')
+  sv: Array('Söndag','Måndag','Tisdag','Onsdag','Torsdag','Fredag','Lördag','Sön','Mån','Tis','Ons','Tor','Fre','Lör'),
+  cs: Array('Nedìle', 'Pondìlí', 'Úterý', 'Støeda', 'Ètvrtek', 'Pátek', 'Sobota', 'Ne', 'Po', 'Út', 'St', 'Èt', 'Pá', 'So')
   };
 
 

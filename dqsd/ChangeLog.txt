@@ -1,3 +1,24 @@
+-- What's new for 3.1.x (date ...)
+
+Enhancements
+* Support for Czech month- and day names (Jiri Sedlacek)
+* Holidays for Czech Republic up until 2020 (Jiri Sedlacek)
+
+Bug Fixes
+* 
+
+New Searches
+* 
+
+Modified Searches
+* 
+
+Removed Searches
+* 
+
+Miscellaneous
+* 
+
 -- What's new for 3.1.8 (date 2004-01-18)
 
 Enhancements
