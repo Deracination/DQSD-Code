@@ -89,7 +89,8 @@ private:
 private:
 	string GetAbsoluteActionPath( _variant_t& varAction );
 	string GetForms( const string& rstrSearchName, string& rstrFormScript );
-	string GetSwitches();
+	string GetSwitches( vector< string >& rvecSwitches );
+	string GetExamples( vector< string >& rvecSwitches );
 	string EscapeXML( string& xml );
 	void SaveFields();
 	void RestoreFields();

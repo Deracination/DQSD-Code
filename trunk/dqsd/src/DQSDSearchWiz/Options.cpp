@@ -15,8 +15,7 @@ COptions::COptions()
 	, m_strEditor( _T("notepad.exe") )
 	, m_bWarnNotActive( TRUE )
 	, m_bIncludeComments( TRUE )
-	, m_strFormBackgroundColor( _T("yellow") )
-	, m_strFormBorder( _T("1px dotted red") )
+	, m_strFormCSS( _T("background: yellow; border: 1px dotted red") )
 {
 	Load();
 }
@@ -53,12 +52,8 @@ void COptions::Load()
 			m_bIncludeComments = dwValue;
 
 		dwSize = LENGTHOF( szValue );
-		if ( ERROR_SUCCESS == rk.QueryValue( szValue, _T("FormBackgroundColor"), &dwSize ) )
-			m_strFormBackgroundColor = string( szValue );
-
-		dwSize = LENGTHOF( szValue );
-		if ( ERROR_SUCCESS == rk.QueryValue( szValue, _T("FormBorder"), &dwSize ) )
-			m_strFormBorder = string( szValue );
+		if ( ERROR_SUCCESS == rk.QueryValue( szValue, _T("FormCSS"), &dwSize ) )
+			m_strFormCSS = string( szValue );
 
 	}
 	catch ( ... )
@@ -80,8 +75,7 @@ void COptions::Save()
 		rk.SetValue( m_strEditor.c_str(), _T("ResultEditor") );
 		rk.SetValue( m_bIncludeComments, _T("IncludeComments") );
 		rk.SetValue( m_bWarnNotActive, _T("WarnNotActive") );
-		rk.SetValue( m_strFormBackgroundColor.c_str(), _T("FormBackgroundColor") );
-		rk.SetValue( m_strFormBorder.c_str(), _T("FormBorder") );
+		rk.SetValue( m_strFormCSS.c_str(), _T("FormCSS") );
 	}
 	catch ( ... )
 	{
