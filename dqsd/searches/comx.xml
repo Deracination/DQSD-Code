@@ -212,6 +212,7 @@
               case "ceodad": endurl="creators/ceodad/index.html";break;
               case "cheapthrills": endurl="wash/cheapthrills/index.html";break;
               case "committed": endurl="comics/committed/index.html";break;
+              case "dilbert": endurl="comics/dilbert/index.html"; imgtitle="Dilbert"; break;
               case "drabble": endurl="comics/drabble/index.html";break;
               case "fatcats": endurl="comics/fatcats/index.html";break;
               case "ferdnand": endurl="comics/ferdnand/index.html";break;
@@ -276,9 +277,8 @@
               case "wizardofid": endurl="creators/wizardofid/index.html";break;
               case "workingdaze": endurl="comics/workingdaze/index.html";break;
               case "workingitout": endurl="creators/workingitout/index.html";break;
-              // the two oddball ones.. have to have their own rx pattern
+              // the oddball one.. has to have its own rx pattern
               case "peanuts": endurl="comics/peanuts/index.html";rx=/.+(\/archive\/images\/\w+\.\w+)"\s+ALT="Today's Strip"/;imgtitle="Peanuts";break;
-              case "dilbert": endurl="comics/dilbert/index.html";rx=/.+(\/archive\/images\/\w+\.\w+)"\s+BORDER=0\s+ALT="Today's Dilbert Comic"/;imgtitle="Dilbert";break;
               // comics from ucomics.com
               case "animalcrackers": imgtitle="Animal Crackers";site="ucomics";imgkey="tmani";break;
               case "adamathome": imgtitle="Adam at Home";site="ucomics";imgkey="ad";break;
@@ -373,7 +373,14 @@
                  var sBody = xmlHttp.responseText;
 
                  //run the regex to parse out the image url
-                 var imgurl = urlstart+urlcat+urldir+rx.exec(sBody)[1];
+                 var relativeImgUrl = '';
+                 var imgmatch = rx.exec(sBody);
+                 if (imgmatch != null)
+                 {
+                    relativeImgUrl = imgmatch[1];
+                 }
+                 
+                 var imgurl = urlstart+urlcat+urldir+relativeImgUrl;
 
                  if (imgtitle==null) {
                     //regex for finding the image title in the page source..
