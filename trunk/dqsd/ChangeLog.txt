@@ -1,27 +1,4 @@
--- What's new for ???? (date ????)
-
-Enhancements
-configure.xml - modified to include dynamically loadable color schemes. CSS files renamed (Monty Scroggins)
-
-Bug Fixes
-* 
-
-New Searches
-* mb - Search the online user-contributed MusicBrainz music database
-
-Modified Searches
-* acine - fit site changes (MLL)
-* cjfr - fit site changes (MLL)
-* jsref - attempts at fitting site changes (MLL)
-* encyfr - moved to right category (MLL)
-
-Removed Searches
-* dicfr - site discontinued (MLL)
-
-Miscellaneous
-* 
-
--- What's new for 3.1.9 (date 2004-12-01)
+-- What's new for 3.1.9 (date xxxx-xx-xx)
 
 Enhancements
 * Support for Czech month- and day names (Jiri Sedlacek)
@@ -38,6 +15,7 @@ Enhancements
 * Added week number support for clock - formattable using the W symbol (Kim Gräsman)
 * Swedish holidays for 2005 (woo, early!) (Kim Gräsman)
 * Added ability to set number of results in google search as preference. (Shawn K. Hall)
+* configure.xml - modified to include dynamically loadable color schemes. CSS files renamed (Monty Scroggins)
 
 Bug Fixes
 * Removed 'Type "!<em>prefix</em>" to see only matching entries.' from help. This action launches lucky Google.
@@ -81,6 +59,7 @@ New Searches
 * copys - CopyScape Search (Shawn K. Hall)
 * note.xml - Nifty quick note search (Peter Heath)
 * floax - 'mouser' interaction in the alternate viewport (read the help) (Shawn K. Hall)
+* mb - Search the online user-contributed MusicBrainz music database
 
 Modified Searches
 * jdk - updated urls for j2ee and 1.4, added 1.5, 1.2, 1.1 and api switches (Brent Beardsley)
@@ -110,9 +89,16 @@ Modified Searches
 * tvg - Corrected to work with new (limited) TVGuide search engine (Shawn K. Hall)
 * icap - Corrected Safari 1.2 form parameter (Shawn K. Hall)
 * ts - Corrected default action to hit default Terminal Server (Shawn K. Hall)
+* acine - fit site changes (MLL)
+* cjfr - fit site changes (MLL)
+* jsref - attempts at fitting site changes (MLL)
+* encyfr - moved to right category (MLL)
 
 Removed Searches
 * nwtsr and httpd replaced by whats (Kim Gräsman)
+* dicfr - site discontinued (MLL)
+* pcm - site modified, search no longer works (John Bairen)
+* wiq - duplicate of wordiq (John Bairen)
 
 Miscellaneous
 * Installer now lives by the following rules: (Kim Gräsman)
