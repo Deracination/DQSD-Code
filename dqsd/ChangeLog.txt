@@ -38,6 +38,7 @@ Enhancements
 * Modified to display command as tooltip for shortcut on the menu if a name for the shortcut was supplied.  
   This is helpful to see what the actual command is from the shortcuts menu without having to open up localaliases.txt.
 * Added add-ons and searches to modify the popup menu using calls to registerMenuHook
+* Added ability for subcategories in the popup menu by nesting <category/>'s
 
 Bug Fixes
 

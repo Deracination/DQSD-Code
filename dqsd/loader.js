@@ -1,6 +1,6 @@
 // Load the contents of search.xml, aliases, and menu files
 
-function addsearch(fname, name, desc, link, cat, local)
+function addsearch(fname, name, desc, link, cat, local, subcats)
 {
   try
   {
@@ -9,6 +9,7 @@ function addsearch(fname, name, desc, link, cat, local)
                        desc:desc, 
                        link:link, 
                        cat:cat, 
+                       subcats:subcats,
                        fun:eval(fname), 
                        aliases:[], 
                        enabled:!disabledsearches[fname], 
@@ -28,7 +29,7 @@ function addsearch(fname, name, desc, link, cat, local)
 internalShortcutIndex = 0;
 INTERNAL_FUNC_PREFIX = "_dqsd_internal_fn_";
 
-function addalias(alias, fname, name, desc, cat)
+function addalias(alias, fname, name, desc, cat, subcats)
 {
   // If this alias is already defined, then remove it from the search it was previously defined for
   // so that the last alias definition wins (i.e., localaliases.txt overrides aliases.txt)
@@ -85,7 +86,7 @@ function addalias(alias, fname, name, desc, cat)
                            "  direct(url.replace( /%s/g, t ));"
                           );
       eval( fname + " = f;" );
-      addsearch( fname, name ? name : url, desc ? desc : url, url.search(/%s/) < 0 ? url : "", cat);
+      addsearch( fname, name ? name : url, desc ? desc : url, url.search(/%s/) < 0 ? url : "", cat, true, subcats);
     }
     else if ((res = fname.match(/^(\w+) +(.+)/)) && searches[res[1]]) // starts with a valid search function
     {
@@ -96,7 +97,7 @@ function addalias(alias, fname, name, desc, cat)
                            res[1] + "(cmd.replace( /%s/g, t ));"
                           );
       eval( fname + " = f;" );
-      addsearch( fname, name ? name : cmd, desc ? desc : cmd, "", cat);
+      addsearch( fname, name ? name : cmd, desc ? desc : cmd, "", cat, true, subcats);
     }
     else
     {
@@ -222,10 +223,7 @@ if (searchRoot)
     {
       var externalScriptName = externalScriptRef.text;
       if ( loadedScripts[ externalScriptName ] ) // External script is already loaded
-      {
-        //alert( externalScriptName + ' already loaded' );
         continue;
-      }
       
       xScriptVal = readFile( externalScriptName );
 
@@ -273,6 +271,8 @@ if (searchRoot)
       var descriptionNode = searchNode.selectSingleNode("description");
       var linkNode = searchNode.selectSingleNode("link");
       var categoryNode = searchNode.selectSingleNode("category");
+      var searchCategories = new Array();
+      getCategories( categoryNode, searchCategories );
       var descriptonXml = null;
       if(descriptionNode)
       {
@@ -285,12 +285,34 @@ if (searchRoot)
                 (nameNode ? nameNode.text : fn.text),
                 descriptionXml,
                 (linkNode ? linkNode.text : null),
-                (categoryNode ? categoryNode.text : null),
-                localsearch);
+                searchCategories.length ? searchCategories[0] : null,
+                localsearch,
+                searchCategories.slice( 1 ) );
     }
   }
 }
 
+function getCategories( categoryNode, categories )
+{
+  var nodes = categoryNode.childNodes;
+  if ( !nodes )
+    alert( categoryNode.text );
+  for ( var i = 0; i < nodes.length; i++ )
+  {
+    if ( nodes[i].nodeType == 3 ) // NODE_TEXT
+    {
+      var text = nodes[i].nodeValue
+                  .replace( /(^\s*)|(\s*$)/g, '' )    // leading/trailing whitespace
+                  .replace( /\r\n\s*\r\n/g, '\r\n' );  // blank lines
+
+      categories.push( text );
+    }
+    else if ( nodes[i].nodeType == 1 ) // NODE_ELEMENT
+    {
+      getCategories( nodes[i], categories );
+    }
+  }
+}
 
 // 4. load and execute the alias file
 
@@ -315,7 +337,8 @@ function addAliasesFromFile( aliasFile, category )
                  fields[1],
                  (fields.length >= 3 && fields[2] != '') ? fields[2] : null,   // name
                  (fields.length >= 4 && fields[3] != '') ? fields[3] : null,   // description
-                 (fields.length >= 5 && fields[4] != "") ? fields[4] : ((arguments.length >= 2) ? category : null) // category
+                 (fields.length >= 5 && fields[4] != "") ? fields[4] : ((arguments.length >= 2) ? category : null), // category
+                 (fields.length >= 6 && fields[5] != "") ? fields[5].split(',') : new Array() // subcategories
                  );
       }
     }
