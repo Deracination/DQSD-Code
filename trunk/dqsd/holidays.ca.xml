@@ -1,7 +1,9 @@
 <!--
-   This file contains a listing of public holidays in Canada (Ontario)
-   for the year(s) 2002.
+   This file contains a listing of public holidays in Canada
+   (Ontario and Quebec) for the year(s) 2002.
+
    - Bill Hewitt [bill.hewitt@mochamail.com] (02/04/2002)
+     amended to include Quebec, thanks to Jocelyn Legault (02/13/2002)
 -->
 
 <events>
@@ -40,6 +42,9 @@
   </event>
   <event name="Father's Day" type="public_holiday">
      <date day="16" month="6" year="2002"/>
+  </event>
+  <event name="St. Jean Baptiste Day" type="public_holiday">
+     <date day="24" month="6"/>
   </event>
   <event name="Canada Day" type="public_holiday">
      <date day="1" month="7"/>
