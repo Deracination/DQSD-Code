@@ -3,7 +3,7 @@
 Enhancements
 
 * Added "mozillacal" as an option for the defaultcal preference to bring up the Mozilla calendar (although it doesn't go to the selected date yet)
-
+* Moved the Computer and Reference searches into menu subcategories..  
 
 -- What's new for 3.1.4.4 beta (October 24, 2002)
 
