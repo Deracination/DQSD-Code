@@ -59,7 +59,7 @@ There had to be an easier way.
 
 <p>
 <ol>
-<li><a href="http://sourceforge.net/project/showfiles.php?group_id=42081&release_id=104770">Install</a> the Search Wizard.</li>&nbsp;&nbsp;You should see a new button on your toolbar.&nbsp;&nbsp;If you don't, simply right-click on the
+<li><a href="http://sourceforge.net/project/showfiles.php?group_id=42081&release_id=104770">Install</a> the Search Wizard.</li>&nbsp;&nbsp;You should see a new button on your toolbar.&nbsp;&nbsp;If you don't, simply right-click on the IE toolbar, and click customize.&nbsp;&nbsp;You should see the button labeled "DQSD Search Wizard" in the list of available toolbar buttons.
 <li>Go to the web page with the search.</li>
 <li>Click in the field you want to be receive the search string.</li>
 <li>Start up the wizard by clicking on its Internet Explorer toolbar button:<br/>
@@ -71,6 +71,9 @@ There had to be an easier way.
 You should see a dialog that looks something like the following.&nbsp;&nbsp;Some of the fields will be automatically filled in.&nbsp;&nbsp;Enter a name and a title for the new search.&nbsp;&nbsp;The name is the string that will invoke the search and will be used name the file, so keep it short and simple.<br/>
 <center><img src="dqsdsearchwiz.jpg" align="top"></center>
 </li>
+<li>
+Make sure at least one FORM is checked in the list of FORMs.&nbsp;&nbsp;If you clicked in a field before invoking the wizard, the FORM containing that field should be already be checked.&nbsp;&nbsp;Selecting a FORM in the list will show the HTML content of the FORM in the area below the list.&nbsp;&nbsp;This is really just to provide some help in determining which FORM(s) you need.&nbsp;&nbsp;You can check multiple FORMs which will all be included in the search file.
+</li>
 <li>Hit OK and you'll be prompted to save the search file to your DQSD 'searches' directory.</li>
 <li>After saving the file, it will come up in Notepad by default.&nbsp;&nbsp;(Click 'Options...' to change the editor to something other than Notepad.)
 </ol>
@@ -81,11 +84,11 @@ You should see a dialog that looks something like the following.&nbsp;&nbsp;Some
 <p>
 In the screen shot above, I went to <a href="http://www.msnbc.com">http://www.msnbc.com</a>, clicked in the search field...<br/>
 <center><img src="msnbc.jpg"></center>
-Then I clicked the 'DQSD Search Wizard' button.&nbsp;&nbsp;All the FORM elements in the page are listed, with the one checked that contains the 'active' element.&nbsp;&nbsp;I entered 'msnbc' for the name and 'MSNBC News' for the title (the title is what appears in the menu and help).&nbsp;&nbsp;Finally, I hit OK and I was prompted to save 'msnbc.xml' to the 'searches' subdirectory in the DQSD installation.
+Then I clicked the 'DQSD Search Wizard' button.&nbsp;&nbsp;All the FORM elements in the page are listed, with the one checked that contains the 'active' element.&nbsp;&nbsp;I entered 'msnbc' for the name and 'MSNBC News' for the title (the title is what appears in the menu and help).&nbsp;&nbsp;Finally, I hit OK and I was prompted to save 'msnbc.xml' to the 'searches' subdirectory of my DQSD installation.
 </p>
 
 <p>
-The resulting XML file search file will look something like <a href="#searchxml">the following</a>.&nbsp;&nbsp;And, in spite of the comment at the top of the file, this search works as is!&nbsp;&nbsp;Woo hoo!&nbsp;&nbsp;(Well, I find it fairly exciting.)&nbsp;&nbsp;Granted, complicated searches won't 'just work', but the wizard will at least do a bunch of the boring work.
+The resulting XML file search file will look something like <a href="#searchxml">the following</a>.&nbsp;&nbsp;And, in spite of the comment at the top of the file, this search works without modification.&nbsp;&nbsp;<i>Woo hoo!</i>&nbsp;&nbsp;(Well, I find it fairly exciting.)&nbsp;&nbsp;Granted, complicated searches won't 'just work', but the wizard will at least do a bunch of the tedious work for you.
 </p>
 
 <a name="searchxml" />
@@ -106,7 +109,7 @@ The resulting XML file search file will look something like <a href="#searchxml"
   <category>News</category>
   <contributor>Glenn Carr</contributor>
   <link>http://www.msnbc.com/</link>
-  <email>glenn@glenncarr.com</email>
+  <email>glenn at glenncarr dot com</email>
   <description>
   MSNBC Search
   </description>
@@ -169,7 +172,7 @@ The 'parseArgs' utility method has become the convention for parsing switches fo
   <category>News</category>
   <contributor>Glenn Carr</contributor>
   <link>http://www.msnbc.com/</link>
-  <email>glenn@glenncarr.com</email>
+  <email>glenn at glenncarr dot com</email>
   <description>
   MSNBC Search
   </description>
@@ -240,10 +243,13 @@ The 'parseArgs' utility method has become the convention for parsing switches fo
 </div>
 
 <p>
-Anyway, that's the gist of it.&nbsp;&nbsp;It still needs a lot of testing, and there is plenty of room for improvement.&nbsp;&nbsp;It's also open source like DQSD, so feel free to hack away.
+Anyway, that's the gist of it.&nbsp;&nbsp;It still needs a lot of testing, and there is plenty of room for improvement.&nbsp;&nbsp;It's also <a href="http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/dqsd/dqsd/src/DQSDSearchWiz/">open source</a> like DQSD, so feel free to hack away and send in bug fixes.
 <p>
 
-Glenn Carr<br/>
+<script>
+document.write( buildEmail( 'glenn', 'glenncarr', 'com', 'Glenn Carr' ) );
+</script>
+<br/>
 August 13, 2002
 
 </body>
