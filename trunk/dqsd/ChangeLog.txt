@@ -3,6 +3,7 @@
 New Searches
 
 * rfc - search the Internet RFC/STD/FYI/BCP Archives (from Joey Lesh)
+* cp - search for CodeProject, a code sharing site (from Andreas Saurwein)
 
 Modified Searches
 
