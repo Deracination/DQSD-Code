@@ -75,7 +75,7 @@ Finally, the following are default key bindings.  Some of these can be customize
 
 <tr><td class='keyname'>Ctrl-Enter</td><td class='desc'>Adds www. prefix and/or .com suffix to string if necessary and launches URL.  Similar to the IE key-binding.</td></tr>
 
-<tr><td class='keyname'>Shift-Enter</td><td class='desc'>Always opens a new window for the search regardless of the reuseWindowMode setting.  This works only when IE is the default browser.</td></tr>
+<tr><td class='keyname'>Shift-Enter</td><td class='desc'>Always opens a new window for the search regardless of the reuseBrowserWindowMode setting.  This works only when IE is the default browser.</td></tr>
 
 <tr><td class='keyname'>Ctrl-B, F8</td><td class='desc'>Search back through the search history for the current text</td></tr>
 
@@ -157,7 +157,7 @@ function registerKeypressHook( keypressHook )
 {
   if ( typeof keypressHooks == 'undefined' )
     keypressHooks = new Array();
-    
+
   keypressHooks.push( keypressHook );
 }
 
