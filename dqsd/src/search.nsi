@@ -127,15 +127,16 @@ Section "Quick Search Deskbar (required)"
   File "..\ChangeLog.txt"
   File "..\aliases.txt"
   File "..\calculate.js"
-  File "..\httpinst.js"
   File "..\calendar.js"
   File "..\categoryExpander.htc"
   File "..\clock.js"
   File "..\defer_tools.js"
+  File "..\dqsd.gif"  
   File "..\helpbox.js"
   File "..\helpmenu.js"
   File "..\history.js"
   File "..\holidays.*.xml"
+  File "..\httpinst.js"
   File "..\loader.js"
   File "..\maximized.htm"
   File "..\preferences.js"
@@ -307,19 +308,21 @@ Section "Uninstall"
   Delete /REBOOTOK $INSTDIR\ChangeLog.txt
   Delete /REBOOTOK $INSTDIR\aliases.txt
   Delete /REBOOTOK $INSTDIR\calculate.js
-  Delete /REBOOTOK $INSTDIR\httpinst.js
   Delete /REBOOTOK $INSTDIR\calendar.js
   Delete /REBOOTOK $INSTDIR\categoryExpander.htc
   Delete /REBOOTOK $INSTDIR\clock.js
   Delete /REBOOTOK $INSTDIR\defer_tools.js
+  Delete /REBOOTOK $INSTDIR\dqsd.gif
   Delete /REBOOTOK $INSTDIR\helpbox.js
   Delete /REBOOTOK $INSTDIR\helpmenu.js
   Delete /REBOOTOK $INSTDIR\history.js
   Delete /REBOOTOK $INSTDIR\holidays.*.xml
+  Delete /REBOOTOK $INSTDIR\httpinst.js
   Delete /REBOOTOK $INSTDIR\loader.js
   Delete /REBOOTOK $INSTDIR\maximized.htm
   Delete /REBOOTOK $INSTDIR\menu.txt
   Delete /REBOOTOK $INSTDIR\readme.txt
+  Delete /REBOOTOK $INSTDIR\savesearchsettings.js
   Delete /REBOOTOK $INSTDIR\search.css
   Delete /REBOOTOK $INSTDIR\search.htm
   Delete /REBOOTOK $INSTDIR\search.xml
