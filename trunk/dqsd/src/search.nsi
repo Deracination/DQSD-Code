@@ -245,6 +245,7 @@ Section "Quick Search Deskbar (required)"
   Delete $INSTDIR\searches\tvgc.xml
   Delete $INSTDIR\searches\webpoll.xml
   Delete $INSTDIR\searches\jsexec.xml
+  Delete $INSTDIR\searches\timer.xml
 
   ; Write the installation path into the registry
   WriteRegStr HKCR "CLSID\${DQSD_CLSID}" "InstallDir" "$INSTDIR"
