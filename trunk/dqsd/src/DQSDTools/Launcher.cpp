@@ -14,7 +14,9 @@ LPCTSTR CLauncher::DQSD_REG_KEY = _T("CLSID\\{226b64e8-dc75-4eea-a6c8-abcb4d1d37
 
 STDMETHODIMP CLauncher::SetSite(IUnknown* pUnkSite)
 {
-#ifndef DQSD_NOSECURITY
+#if defined(DQSD_NOSECURITY) && defined(_DEBUG)
+#pragma message(  __FILE__ " ** WARNING! ** Compilation without security restrictions...do not distribute the resulting binary! " )
+#else
 	USES_CONVERSION;
 
 	HRESULT hr;
