@@ -211,12 +211,30 @@ function buildcal()
   var day_start = '<td width=14.2857% class=caldow>';
   var day_end = '</td>';
 
-  function eventday_start(d, ttl)
+  function eventday_start(d, ttl, clr)
   {
-    return '<td class=caleventday' +
+    var colordef="";
+    if (typeof(clr) == "string") 
+    {
+       colordef=' style="color:' + clr + '"; '
+    }
+    return '<td class=caleventday'+ colordef +
       (defaultcal ? ' onmouseover=this.className="caleventdayhigh" onmouseout=this.className="caleventday" onmouseup=this.className="caleventday";parent.opencal(' + d + ');' : ' ') +
       ' title="' + ttl + '">';
   }
+  
+  function localeventday_start(d, ttl, clr)
+  {
+    var colordef="";
+    if (typeof(clr) == "string") 
+    {
+       colordef=' style="color:' + clr + '"; '
+    }
+    return '<td class=localcaleventday'+ colordef +
+      (defaultcal ? ' onmouseover=this.className="localcaleventdayhigh" onmouseout=this.className="localcaleventday" onmouseup=this.className="localcaleventday";parent.opencal(' + d + ');' : ' ') +
+      ' title="' + ttl + '">';
+  }
+
   var eventday_end   = '</td>';
 
   function todayevent_start(d, ttl)
@@ -349,10 +367,10 @@ function buildcal()
           dayString += today_start(nowTime);
         else
           if (ent)
-            dayString += eventday_start(nowTime, ent.getAttribute("name"));
+            dayString += eventday_start(nowTime, ent.getAttribute("name"), ent.getAttribute("color"));
           else
             if (lent)
-              dayString += eventday_start(nowTime, lent.getAttribute("name"));
+              dayString += localeventday_start(nowTime, lent.getAttribute("name"), lent.getAttribute("color"));
             else
               dayString += TD_start(nowTime);
 

@@ -107,9 +107,10 @@ Styles for the calendar
 {
   font-weight:bold;
 }
-.caleventday, .caleventdayhigh
+.caleventday, .caleventdayhigh, .localcaleventday, .localcaleventdayhigh
 {
   color:red;
+  font-weight:bold;
 }
 .caltodayevent, .caltodayeventhigh
 {
@@ -136,12 +137,12 @@ Styles for the calendar
 {
   text-align:center;
 }
-.calmonth, .calnavmonth, .calnavyear, .calday, .caleventday, .caltodayevent, .caltoday, .calgray
+.calmonth, .calnavmonth, .calnavyear, .calday, .caleventday, .caltodayevent, .caltoday, .calgray, .localcaleventday
 {
   text-align:center;
   cursor:hand;
 }
-.calmonthhigh, .calnavmonthhigh, .calnavyearhigh, .caldayhigh, .caleventdayhigh, .caltodayeventhigh, .caltodayhigh, .calgrayhigh
+.calmonthhigh, .calnavmonthhigh, .calnavyearhigh, .caldayhigh, .caleventdayhigh, .caltodayeventhigh, .caltodayhigh, .calgrayhigh, .localcaleventday, .localcaleventdayhigh
 {
   cursor:hand;
   background-color:highlight;
