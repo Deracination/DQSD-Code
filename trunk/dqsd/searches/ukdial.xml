@@ -1,0 +1,45 @@
+<search function="ukdial">
+  <name>UK Phone Code Locator</name>
+  <category>Reference</category>
+  <contributor>dg</contributor>
+  <link>http://www.ukphoneinfo.com/section/tci/locator.shtml</link>
+  <email></email>
+  <description>
+    
+    Find the geographical location of any UK phone number<br/>
+
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>ukdial 01423</td></tr>
+      <tr><td>ukdial 01423 507500</td></tr>
+    </table>
+
+  </description>
+  <form name="ukdialf"
+        method="get"
+        action="http://www.ukphoneinfo.com/cgi-bin-Phones/nng">
+    <input type="hidden" name="Reset" value="Clear" />
+    <input type="hidden" name="GNG" value="" />
+    <input type="hidden" name="Submit" value="Submit" />
+  </form>
+  <script><![CDATA[
+    function ukdial(q)
+    {
+      if( nullArgs("ukdial", q) )
+        return;
+
+      document.ukdialf.GNG.value = q;
+
+      submitForm(ukdialf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 08/13/04 at 12:57:43
+    by Dave's Quick Search Deskbar Search Wizard version 1.2,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>
