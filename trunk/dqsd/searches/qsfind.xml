@@ -75,7 +75,11 @@
         for (var i in SearchResults)
         {
           var search = SearchResults[i];
-          var rowclass = (search.enabled ? '' : 'class=disabledSearch');
+
+          var rowclass = (search.local ? 'class=localSearch' : '' );
+          if (!search.enabled)
+            rowclass = 'class=disabledSearch';
+
           QFSBodyCode += "<tr " + rowclass + "><td class=helpboxCommands>";
           for (var j = 0; search.menudisplay && (j < search.aliases.length); j++)
           {

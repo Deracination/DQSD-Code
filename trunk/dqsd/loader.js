@@ -1,10 +1,19 @@
 // Load the contents of search.xml, aliases, and menu files
 
-function addsearch(fname, name, desc, link, cat)
+function addsearch(fname, name, desc, link, cat, local)
 {
   try
   {
-    searches[fname] = {fname:fname, name:name, desc:desc, link:link, cat:cat, fun:eval(fname), aliases:[], enabled:!disabledsearches[fname], menudisplay:true};
+    searches[fname] = {fname:fname, 
+                       name:name, 
+                       desc:desc, 
+                       link:link, 
+                       cat:cat, 
+                       fun:eval(fname), 
+                       aliases:[], 
+                       enabled:!disabledsearches[fname], 
+                       menudisplay:true, 
+                       local:(typeof local != 'undefined' ? local : false)};
     if( !aliases[fname] )
       addalias( fname, fname );
     addhelp( searches[fname] );
@@ -139,16 +148,9 @@ for ( var i = 0; i < disabledfnames.length; i++ )
   delim = ' and ';
 }
 
-// 1. load search.xml (if present), merge localsearch.xml (if present), merge files in 'searches' subdirectory
-
 var searchRoot = null;
-try
-{
-  searchRoot = document.all("searchxml").selectSingleNode("searches");
-}
-catch (e) {}
 
-// If there's no searchxml XML, then create an empty search root
+// Create an empty search root
 if (!searchRoot)
 {
   var searchDOM = getMSXMLDOMDocumentInstance();
@@ -196,7 +198,7 @@ loadSearchesFromDir( "searches" );
 loadAddons();
 
 // Load local searches
-loadSearchesFromDir( "localsearches" );
+loadSearchesFromDir( "localsearches", true );
 
 // 2. eval all the scripts and doc.write all the forms
 
@@ -274,17 +276,17 @@ if (searchRoot)
       var descriptonXml = null;
       if(descriptionNode)
       {
-        // There may be a better way to do this - I'm
-    // trying to remove the <description> tags which end-up bracketing
-    // the description XML
-        descriptionXml = descriptionNode.xml.replace(/\<description\>/, '');
-        descriptionXml = descriptionXml.replace(/\<\/description\>/, '');
+        // There may be a better way to do this - I'm trying to remove 
+        // the <description> tags which bracket the description XML
+        descriptionXml = descriptionNode.xml.replace(/\<\/?description\>/g, '')
       }
+      var localsearch = searchNode.attributes.getNamedItem("localsearch") ? true : false;
       addsearch(fn.text,
                 (nameNode ? nameNode.text : fn.text),
                 descriptionXml,
                 (linkNode ? linkNode.text : null),
-                (categoryNode ? categoryNode.text : null));
+                (categoryNode ? categoryNode.text : null),
+                localsearch);
     }
   }
 }
@@ -320,7 +322,7 @@ function addAliasesFromFile( aliasFile, category )
   }
 
 
-function loadSearchesFromDir( directory )
+function loadSearchesFromDir( directory, local )
 {
 
   try
@@ -334,8 +336,8 @@ function loadSearchesFromDir( directory )
       // especially with files named *.xml_sav or something similar.
       if ( !/\.xml$/.test( fileSearches[i] ) )
         continue;
-      
-      loadSearchFile( directory + "\\" + fileSearches[i] );
+     
+      loadSearchFile( directory + "\\" + fileSearches[i], local );
 
     }
   }
@@ -373,7 +375,7 @@ function loadAddons()
   catch (except) {}
 }
 
-function loadSearchFile( path )
+function loadSearchFile( path, local )
 {
   var xml = readFile(path);
   if (!xmldoc.loadXML(xml))
@@ -385,19 +387,30 @@ function loadSearchFile( path )
   {
     var searchNode = xmldoc.selectSingleNode("/search");
     var funcname = searchNode.attributes.getNamedItem("function").text;
-    if (alertmode && searchRoot.selectSingleNode("/searches/search[@function='" + funcname + "']"))
+
+    // If the search already exists, override with this new one
+    var existingSearchNode = searchRoot.selectSingleNode("/search[@function='" + funcname + "']");
+    if ( existingSearchNode )
     {
-      qualifiedalert('Search "' + funcname + '" found in ' + path + ' already exists.');
-      return;
+      if ( alertmode )
+      {
+        alert('Search "' + funcname + '" found in ' + path + ' already exists.  It will override the existing search.');
+      }
+      searchRoot.removeChild( existingSearchNode );
     }
-    else if (alertmode && searchNode.selectSingleNode("/search" + "/FORM"))
+
+    // Check to see if the element is lowercase (which it needs to be)
+    if (alertmode && searchNode.selectSingleNode("/search[@function='" + funcname + "']/FORM"))
     {
-      alert('Search "' + funcname + '" has a <FORM> element which probably needs to be lowercased (<form>)');
+      alert('Search "' + funcname + '" found in ' + path + ' has a <FORM> element which needs to be lowercased (<form>)');
     }
-    else
+    
+    if ( typeof local != 'undefined' && local == true )
     {
-      searchRoot.appendChild(searchNode);
+      searchNode.attributes.setNamedItem( xmldoc.createAttribute("localsearch") );
     }
+    
+    searchRoot.appendChild(searchNode);
   }
 }
 

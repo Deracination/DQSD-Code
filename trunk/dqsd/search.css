@@ -280,6 +280,10 @@ TR.disabledSearch TD
   background: scrollbar;
   color: graytext;
 }
+TR.localSearch .helpboxCommands
+{
+  background-color:#008000;
+}
 
 TABLE.helpboxDescTable
 {
