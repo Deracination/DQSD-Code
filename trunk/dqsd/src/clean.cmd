@@ -3,6 +3,8 @@
 REM This script scrubs the sources clean
 REM Please don't check into cvs any files that are deleted by this script.
 
+pushd %~dp0
+
 pushd ..
 if exist dqsd.exe del dqsd.exe
 if exist DQSDTools.dll del DQSDTools.dll
@@ -20,4 +22,6 @@ if exist DQSDTools_p.c del /q DQSDTools_p.c
 if exist dlldata.c del /q dlldata.c
 if exist Debug rmdir /q /s Debug
 if exist ReleaseMinDependency rmdir /q /s ReleaseMinDependency
+popd
+
 popd
