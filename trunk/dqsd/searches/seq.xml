@@ -1,0 +1,179 @@
+<search function="seq">
+  <name>Sequence</name>
+  <description>
+    Sequence will load a number of sites in one browser window in sequence.  The arguments are all urls to web pages.<br/>
+    <div class="helpboxDescLabels">Usage:</div>
+  	<table class="helpboxDescTable">
+  		<tr><td>Set</td><td> - </td><td>seq &lt;<i>search1</i>&gt;<br/> [&lt;<i>search2</i>&gt; [...]]<br/> /frequency:&lt;<i>frequency</i>&gt;  /repeat:&lt;<i>number</i>&gt;</td></tr>
+        <tr><td>Cancel</td><td> - </td><td>seq cancel</td></tr>
+  	</table>
+    <div class="helpboxDescLabels">Switches:</div>
+  	<table class="helpboxDescTable">
+  		<tr><td>/frequency:&lt;<i>seconds or ask</i>&gt;</td><td> - </td><td>Number of seconds between switches.  Frequency of "0" will ask the user before switching.   (default = 0)</td></tr>
+  		<tr><td>/repeat:&lt;<i>number</i>&gt;</td><td> - </td><td>Number of times to repeat the sequence.  (default = 1, 0 = forever)</td></tr>
+  	</table>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>seq http://www.gymamerica.com http://www.whitehouse.gov</td></tr>
+  	</table>
+  </description>
+  <category>Functions</category>
+  <contributor>Neel Doshi</contributor>
+
+  <script><![CDATA[
+    // Array used to keep track of sequence commands that are pending completion
+    seqTracker = new Array();
+
+
+    function seqURLLoad(url_array, freq, repeat, seq_code, seq_target)
+    {
+    	// The repeat parameter is really the parameter the user entered multiplied by the number of
+    	// URLS in the array.  This is done by the calling function.
+
+		// When the function calls itself the url_array is passed as a string
+		// otherwise it is passed as an array.
+		if (typeof url_array == 'string')
+			url_array = url_array.split(',');
+
+		// Move the URL in the url_array from the top to the bottom.
+		var strURL = url_array.shift();
+		url_array.push(strURL);
+
+		// Open the URL in a browser window.
+		// Note:  I am using window.open because I do not know of another
+		// way to ensure opening the page in the same window everytime.
+		// For some reasons, certain sites seem to break this bit of functionality
+		// i.e. www.nytimes.com.
+		window.open(strURL, seq_target);
+
+
+		// See if the function should be called again.
+		if (--repeat == 0)
+		{
+			if (typeof seqTimeout != 'undefined')
+			{
+				clearInterval(seqTimeout);
+				delete seqTracker[seq_code];
+			}
+			return false;
+		}
+		else
+		{
+			// if the frequency is 0, ask the user if he wants to continue:
+			if (freq == 0)
+				if(confirm("Click OK when you want to load " + url_array[0] + "\nClick Cancel to cancel this sequence") == false)
+				{
+					if (typeof seqTimeout != 'undefined')
+					{
+						clearInterval(seqTimeout);
+
+					}
+					delete seqTracker[seq_code];
+					return true;
+				}
+
+			// otherwise use the frequency.
+			var strTimeout = "seqURLLoad('" + url_array + "', '" + freq + "', '" + repeat + "', '" + seq_code + "', '" + seq_target + "');";
+			seqTimeout = setTimeout(strTimeout, freq * 1000);
+			seqTracker[seq_code] = seqTimeout;
+		}
+		return true;
+	}
+
+	function seq(q)
+  	{
+  	  	var seq_base = 1;
+		if (nullArgs("seq", q))
+			return false;
+
+		// First parse the arguments
+		var args = parseArgs(q, "frequency, repeat");
+
+		var freq = 0;
+		var repeat = 1;
+		// set defaults if necessary
+		if (typeof args.switch_val["frequency"] != 'undefined')
+		{
+
+			freq = args.switch_val["frequency"];
+		}
+		if (typeof args.switch_val["repeat"] != 'undefined')
+		{
+			repeat = args.switch_val["repeat"];
+		}
+
+		// Create an array with the URLS in them.
+		// Make sure to add the http:// if necessary.
+
+		var url_array = args.q.split(' ');
+
+
+		// Check to see if the user wants to cancel a sequence.
+		if (url_array[0] == 'cancel')
+		{
+			// The member wants to cancel a particular sequence
+			var seq_code;
+			if (typeof url_array[1] == 'undefined')
+			{
+				url_array[1] = seq_base;
+				seq_code = "";
+			}
+			else
+				seq_code = url_array[1] + " ";
+
+			if (typeof seqTracker[url_array[1]] != 'undefined')
+			{
+				clearInterval(seqTracker[url_array[1]]);
+				delete seqTracker[url_array[1]];
+				document.deff.q.value = "Sequence " + seq_code + "canceled!";
+				setTimeout("document.deff.q.value='';",1000);
+				return true;
+			}
+			else
+			{
+				alert("Sequence code " + seq_code + " not found!");
+				return false;
+			}
+		}
+
+		for ( var j = 0; j < url_array.length; j++ )
+		{
+			url_array[j] = isURL(url_array[j]);
+			if (url_array[j] == false)
+			{
+				alert("Only properly formatted URLs are allowed.  Please try again.");
+				return false;
+			}
+		}
+
+	  // Generate a sequence code and target name
+  	  // The purpose of the sequencecode is to allow the user to cancel a
+  	  // sequence once it has begun.  The seqTracker array will keep track of
+  	  // all of the active sequences and associate a sequence code to a setTimeout handle
+  	  // so the user doesn't have to keep track of the changing setTimeout handles.
+      for (var seq_code = seq_base; typeof seqTracker[seq_code] != 'undefined'; ++seq_code);
+	  var seq_target = "target_" + seq_code;
+
+      // Start getting the URL
+      repeat = repeat*url_array.length;
+      seqURLLoad(url_array, freq, repeat, seq_code, seq_target);
+
+      // Display the cancel code in the search field
+      if (seq_code == seq_base)
+        seq_code = "";
+      else
+      	seq_code = " " + seq_code;
+
+      document.deff.q.value = "To cancel: 'seq cancel" + seq_code + "'";
+      setTimeout("document.deff.q.value='';",2000);
+
+      return true;
+    }
+  ]]></script>
+
+  <copyright>
+	Copyright (c) 2002 David Bau
+	Distributed under the terms of the
+	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>
