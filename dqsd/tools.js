@@ -78,7 +78,7 @@ function openNamedSearchWindow(url, name)
   if (useExternalBrowser && DQSDLauncher)
     DQSDLauncher.OpenDocument(url);
   else
-    window.open(url, name);
+    window.open(url, name).focus();
 }
 
 // direct shellexecute
@@ -103,8 +103,8 @@ function submitForm(form)
   // their own window.
   if ((reuseBrowserWindowMode > 0) && form.target && (form.target == '_blank'))
   {
-    // 1=new window always; 2=new window for each search type
-    form.target = (reuseBrowserWindowMode == 1 ? DQSD_BROWSER_WINDOW_NAME : ("DQSDWindow_" + form.name));
+    // 1=same window always; 2=new window for each search type
+    form.target = (reuseBrowserWindowMode == 1 ? DQSD_BROWSER_WINDOW_NAME : (DQSD_BROWSER_WINDOW_NAME + '_' + form.name));
   }
     
   if (useExternalBrowser && DQSDLauncher)
