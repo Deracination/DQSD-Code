@@ -12,8 +12,10 @@
 //
 // The <title> and <description> are used in the help window to describe the 
 // purpose of the alias.
-// The <category> can be used to define a category other than the default
-// Shortcuts for the alias to be listed under. 
+//
+// The <category> can be used to define a category for the search to be listed 
+// under in the help and the menus.  If no category is defined, it will be listed 
+// under the 'Shortcuts' category.
 //
 // NOTE: Only the <alias> and <action> fields are required, BUT currently all 
 // preceeding fields must be supplied.  I.e., this will work:
