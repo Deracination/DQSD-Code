@@ -2,15 +2,28 @@
    <name>Setiqueue</name>
    <description>
       Directly login as an admin to your setiqueue web admin interface without having the hassle to go through the login page.<br/>
+    <div class="helpboxDescLabels">Usage:</div>
+    <table class="helpboxDescTable">
+      <tr><td>setiq &lt;<i>password</i>&gt; [/server:&lt;<i>serveraddress</i>&gt; [/port:&lt;<i>portnumber</i>&gt;]] [/connect[:&lt;<i>duration</i>&gt;]] [/display::&lt;<i>page</i>&gt;]</td></tr>
+    </table>
     <a class="helpboxDescLabels">Switches:</a><br />
     <table class="helpboxDescTable">
-      <tr><td>/server:serveradress</td><td> - Specify server IP address or name (127.0.0.1 if not specified)</td></tr>
-      <tr><td>/port:portnumber</td><td> - Specify port number (5517 if not specified)</td></tr>
+      <tr><td>/server:serveraddress</td><td> - </td><td>specify server IP address or name (127.0.0.1 by default)</td></tr>
+      <tr><td>/port:portnumber</td><td> - </td><td>specify port number (5517 by default)</td></tr>
+      <tr><td>/connect:duration</td><td> - </td><td>tell SetiQueue to connect to the Internet. You can specify one of the following durations (30 minutes by default):
+        <table class="helpboxDescTable">
+          <tr><td><b>0.5</b> or <b>30</b></td><td> - </td><td>30 minutes</td></tr>
+          <tr><td><b>1</b> or <b>60</b></td><td> - </td><td>1 hour</td></tr>
+          <tr><td><b>2</b> or <b>120</b></td><td> - </td><td>2 hours</td></tr>
+          <tr><td><b>4</b> or <b>240</b></td><td> - </td><td>4 hours</td></tr>
+        </table>
+      </td></tr>
+      <tr><td>/dislay:page</td><td> - </td><td>display specified page (without htm extension)</td></tr>
     </table>
     <div class="helpboxDescLabels">Examples:</div>
     <table class="helpBoxDescTable">
       <tr><td>setiq mypassword</td></tr>
-      <tr><td>setiq mypassword /server:localhost /port:6000</td></tr>
+      <tr><td>setiq mypassword /server:localhost /port:6000 /connect:4 /display:logs</td></tr>
     </table>
     <div class="helpboxDescLabels" style="color: red">Security warning:<br/>
     <table class="helpBoxDescTable">
@@ -29,42 +42,100 @@
   <category>Functions</category>
   <link>http://www.setiqueue.org</link>
   <contributor>MLL</contributor>
-  <version>1.0</version>
 
-  <form method="POST" name='setiqf'>
-  <input type="hidden" name="User"/>
-  <input type="hidden" name="Pass"/>
+  <form name="setiqf"
+        method="post">
+    <input type="hidden" name="User"/>
+    <input type="hidden" name="Pass"/>
   </form>
 
-  
+  <form name="setiqcf"
+        method="post">
+    <input type="hidden" name="Connect"/>
+    <!-- for future other options ?
+      <input type="hidden" name="StopService" value='Stop SetiQueue Service'>
+      <input type="hidden" name="Exit" value='Terminate Program'>
+    -->
+  </form>
+
+  <form name="setiqlf"
+        method="post">
+  </form>
+
+
   <script><![CDATA[
-    function setiq(q)
+    function setiq( q )
     {
-      if(nullArgs("setiq", q))
+      if( nullArgs( "setiq", q ) )
         return false;
       else
       {
-        var switch_list = new Array("server", "port");
-        var args = parseArgs(q, switch_list);
+        var switch_list = new Array( "server", "port", "connect", "display" );
+        var args = parseArgs( q, switch_list );
         
         var serveraddress="127.0.0.1";
-        if (! ( typeof args.switch_val["server"] == "undefined" || args.switch_val["server"] == "" ) )
+        if( !( typeof args.switch_val["server"] == "undefined" || args.switch_val["server"] == "" ) )
         {
           serveraddress=args.switch_val["server"];
         }
 
         var portnumber="5517";
-        if (! ( typeof args.switch_val["port"] == "undefined" || args.switch_val["port"] == "" ) )
+        if( !( typeof args.switch_val["port"] == "undefined" || args.switch_val["port"] == "" ) )
         {
           portnumber=args.switch_val["port"];
         }
         
-        var formaction = "http://"+serveraddress+":"+portnumber+"/login.htm?";
 
-        setiqf.action = formaction;
-        setiqf.User.value="admin" ;
-        setiqf.Pass.value=args.q ;
-        submitForm(setiqf);
+        if( !( typeof args.switch_val["connect"] == "undefined" ) )
+        {
+          var duration=args.switch_val["connect"];
+          switch( duration * 1 )
+          {
+            case 0: duration = "30 min"; break;
+            case .5:  duration = "30 min"; break;
+            case 30:  duration = "30 min"; break;
+            case 1:   duration = "1 hour"; break;
+            case 60:  duration = "1 hour"; break;
+            case 2:   duration = "2 hours"; break;
+            case 120: duration = "2 hour3"; break;
+            case 4:   duration = "4 hours"; break;
+            case 240: duration = "4 hours"; break;
+            case "": duration = "30 min"; break;
+            default:
+            {
+              nullArgs( "setiq", "?" );
+              return false;
+            }
+          }
+        }
+
+        //hack to get all 3 forms to open in same window
+        var tempreuseBrowserWindowModeOverride = reuseBrowserWindowModeOverride;
+        reuseBrowserWindowModeOverride = 1;
+
+        document.setiqf.action = "http://"+serveraddress+":"+portnumber+"/login.htm?";
+        document.setiqf.User.value="admin";
+        document.setiqf.Pass.value=args.q;
+        submitForm(document.setiqf);
+
+        if( duration )
+        {
+          document.setiqcf.action = "http://"+serveraddress+":"+portnumber+"/connect.htm?";
+          document.setiqcf.Connect.value=duration;
+          document.setiqcf.target=document.setiqf.target;
+          submitForm(document.setiqcf);
+        }
+
+        //debugger;
+        if( !( typeof args.switch_val["display"] == "undefined" || args.switch_val["display"] == "" ) )
+        {
+          //mmh... I use a form, but I'm sure it's overkill. How to change the location URL of the opened window?
+          document.setiqlf.action = "http://"+serveraddress+":"+portnumber+"/" + args.switch_val["display"] + ".htm";
+          document.setiqlf.target=document.setiqcf.target;
+          submitForm(document.setiqlf);
+        }
+
+        reuseBrowserWindowModeOverride = tempreuseBrowserWindowModeOverride;
         return true;
       }
     }

@@ -12,6 +12,7 @@ Modified Searches
 * amaz - now tags to dqsd associate account, and added switches for catalog areas and restaurants
 * thw - updated the search (the form changed on the site) and added /category switch
 * ups - now allows spaces in tracking number(s)
+* setiq - new switches : connect and display
 
 Enhancements
 
