@@ -148,6 +148,7 @@ Section "Quick Search Deskbar (required)"
   SetOverwrite off
   SetOutPath "$INSTDIR"
   File "..\localaliases.txt"
+  File "..\mrumenu.txt"
   SetOverwrite on
 
   ; Check to see if localprefs exists.  If it doesn't, the user's preferences
