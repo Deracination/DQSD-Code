@@ -1,0 +1,192 @@
+<search function="fhlc">
+  <name>Family History Library Catalog</name>
+  <category>Genealogy</category>
+  <contributor>Brent Beardsley</contributor>
+  <link>http://www.familysearch.org/Eng/Library/FHLC/frameset_fhlc.asp</link>
+  <email></email>
+  <description>
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/author</td><td> - </td><td>Search for items by author</td></tr>
+      <tr><td>/callno</td><td> - </td><td>Search for items by call number</td></tr>
+      <tr><td>/film</td><td> - </td><td>Search for items by film or fiche number</td></tr>
+      <tr><td>/place</td><td> - </td><td>Search for items by place</td></tr>
+      <tr><td>/subject</td><td> - </td><td>Search for items by subject</td></tr>
+      <tr><td>/surname</td><td> - </td><td>Search for items by surname</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>fhlc /a beardsley</td><td> - </td><td>Search for items with author named with last name of Beardsley</td></tr>
+      <tr><td>fhlc /a beardsley, isaac</td><td> - </td><td>Search for items with author named Isaac Beardsley</td></tr>
+      <tr><td>fhlc /c [call number]</td><td> - </td><td>Search for item with specified call number</td></tr>
+      <tr><td>fhlc /f 1234987</td><td> - </td><td>Search for film or fiche with film number 1234987</td></tr>
+      <tr><td>fhlc /p perth</td><td> - </td><td>Search for places containing the name Perth</td></tr>
+      <tr><td>fhlc /p fulton, ny</td><td> - </td><td>Search for places containing Fulton as a part of New York</td></tr>
+      <tr><td>fhlc /sub immigration</td><td> - </td><td>Search for items with a subject of immigration</td></tr>
+      <tr><td>fhlc /sur Beardsley</td><td> - </td><td>Search for items containing references to the Beardsley surname</td></tr>
+    </table>
+  </description>
+  <form name="fhlc_surnamef"
+        method="get"
+        action="http://www.familysearch.org/Eng/Library/fhlcatalog/supermainframeset.asp">
+    <input type="hidden" name="display" value="titlehitlist" />
+    <input type="hidden" name="columns" value="*,0,0" />
+    <input type="hidden" name="surname" value="" />
+    <input type="hidden" name="presurname" value="" />
+  </form>
+  <form name="fhlc_placef"
+        method="get"
+        action="http://www.familysearch.org/Eng/Library/fhlcatalog/supermainframeset.asp">
+    <input type="hidden" name="display" value="localityhitlist" />
+    <input type="hidden" name="columns" value="*,0,0" />
+    <input type="hidden" name="PLACE" value="" />
+    <input type="hidden" name="PARTOF" value="" />
+    <input type="hidden" name="prePLACE" value="" />
+    <input type="hidden" name="prePARTOF" value="" />
+  </form>
+  <form name="fhlc_authorf"
+        method="get"
+        action="http://www.familysearch.org/Eng/Library/fhlcatalog/supermainframeset.asp">
+    <input type="hidden" name="display" value="authorhitlist" />
+    <input type="hidden" name="columns" value="*,0,0" />
+    <input type="hidden" name="surname" value="" />
+    <input type="hidden" name="forename" value="" />
+    <input type="hidden" name="presurname" value="" />
+    <input type="hidden" name="preforename" value="" />
+  </form>
+  <form name="fhlc_subjectf"
+        method="get"
+        action="http://www.familysearch.org/Eng/Library/fhlcatalog/supermainframeset.asp">
+    <input type="hidden" name="display" value="subjecthitlist" />
+    <input type="hidden" name="columns" value="*,0,0" />
+    <input type="hidden" name="subject" value="" />
+    <input type="hidden" name="presubject" value="" />
+  </form>
+  <form name="fhlc_callnof"
+        method="get"
+        action="http://www.familysearch.org/Eng/Library/fhlcatalog/supermainframeset.asp">
+    <input type="hidden" name="display" value="titlehitlist" />
+    <input type="hidden" name="columns" value="*,0,0" />
+    <input type="hidden" name="callno" value="" />
+  </form>
+  <form name="fhlc_filmf"
+        method="get"
+        action="http://www.familysearch.org/Eng/Library/fhlcatalog/supermainframeset.asp">
+    <input type="hidden" name="display" value="filmhitlist" />
+    <input type="hidden" name="columns" value="*,0,0" />
+    <input type="hidden" name="filmno" value="" />
+  </form>
+
+  <script src="addons/genealogy/genealogy_lib.js"></script>
+  <script src="addons/genealogy/fhlc_func.js"></script>
+  <script><![CDATA[
+    function fhlc_film(q)
+    {
+      document.fhlc_filmf.filmno.value = q.replace(/[^0-9]/g, "");
+      document.fhlc_filmf.filmno.value = fhlc_Clean(document.fhlc_filmf.filmno.value);
+      submitForm(fhlc_filmf);
+    }
+
+    function fhlc_callno(q)
+    {
+      document.fhlc_callnof.callno.value = q;
+      document.fhlc_callnof.callno.value = fhlc_repPCWithStar(document.fhlc_callnof.callno.value);
+      document.fhlc_callnof.callno.value = fhlc_repSpWithU(document.fhlc_callnof.callno.value);
+      submitForm(fhlc_callnof);
+    }
+
+    function fhlc_subject(q)
+    {
+      document.fhlc_subjectf.presubject.value = q;
+      document.fhlc_subjectf.presubject.value = fhlc_repPCWithStar(document.fhlc_subjectf.presubject.value);
+      document.fhlc_subjectf.presubject.value = fhlc_repSpWithU(document.fhlc_subjectf.presubject.value);
+      document.fhlc_subjectf.subject.value = fhlc_Normalise(document.fhlc_subjectf.presubject.value);
+      document.fhlc_subjectf.presubject.value = fhlc_ReplaceLigatures(document.fhlc_subjectf.presubject.value);
+      submitForm(fhlc_subjectf);
+    }
+
+    function fhlc_author(q)
+    {
+      var surname = genealogy_parse_surname(q);
+      var forename = genealogy_parse_givenname(q);
+
+      document.fhlc_authorf.preforename.value = forename;
+      document.fhlc_authorf.presurname.value = surname;
+      document.fhlc_authorf.presurname.value = fhlc_repPCWithStar(document.fhlc_authorf.presurname.value);
+      document.fhlc_authorf.preforename.value = fhlc_repPCWithStar(document.fhlc_authorf.preforename.value);
+      document.fhlc_authorf.presurname.value = fhlc_repSpWithU(document.fhlc_authorf.presurname.value);
+      document.fhlc_authorf.preforename.value = fhlc_repSpWithU(document.fhlc_authorf.preforename.value);
+      document.fhlc_authorf.surname.value = fhlc_Normalise(document.fhlc_authorf.presurname.value);
+      document.fhlc_authorf.forename.value = fhlc_Normalise(document.fhlc_authorf.preforename.value);
+      document.fhlc_authorf.presurname.value = fhlc_ReplaceLigatures(document.fhlc_authorf.presurname.value);
+      document.fhlc_authorf.preforename.value = fhlc_ReplaceLigatures(document.fhlc_authorf.preforename.value);
+      submitForm(fhlc_authorf);
+    }
+
+    function fhlc_surname(q)
+    {
+      var surname = genealogy_parse_surname(q);
+      document.fhlc_surnamef.surname.value = surname;
+      document.fhlc_surnamef.presurname.value = surname;
+      document.fhlc_surnamef.presurname.value = fhlc_repPCWithStar(document.fhlc_surnamef.presurname.value);
+      document.fhlc_surnamef.presurname.value = fhlc_repSpWithU(document.fhlc_surnamef.presurname.value);
+      document.fhlc_surnamef.surname.value = fhlc_Normalise(document.fhlc_surnamef.presurname.value);
+      document.fhlc_surnamef.presurname.value = fhlc_ReplaceLigatures(document.fhlc_surnamef.presurname.value);
+      submitForm(fhlc_surnamef);
+    }
+
+    function fhlc_place(q)
+    {
+      var state = genealogy_parse_place_state(q);
+      var fullname_state = genealogy_lookup_place_name(state);
+      if (fullname_state != "")
+        state = fullname_state.toLowerCase();
+
+      var county = genealogy_parse_place_county(q).toLowerCase();
+
+      if (county == "")
+      {
+	document.fhlc_placef.PLACE.value = state;
+        document.fhlc_placef.PARTOF.value = "";
+	document.fhlc_placef.prePLACE.value = state;
+        document.fhlc_placef.prePARTOF.value = "";
+      } else {
+	document.fhlc_placef.PLACE.value = county;
+        document.fhlc_placef.PARTOF.value = state;
+	document.fhlc_placef.prePLACE.value = county;
+        document.fhlc_placef.prePARTOF.value = state;
+      }
+
+      document.fhlc_placef.prePLACE.value = fhlc_repPCWithStar(document.fhlc_placef.prePLACE.value);
+      document.fhlc_placef.prePARTOF.value = fhlc_repPCWithStar(document.fhlc_placef.prePARTOF.value);
+      document.fhlc_placef.prePLACE.value = fhlc_repSpWithU(document.fhlc_placef.prePLACE.value);
+      document.fhlc_placef.prePARTOF.value = fhlc_repSpWithU(document.fhlc_placef.prePARTOF.value);
+      document.fhlc_placef.PLACE.value = fhlc_Normalise(document.fhlc_placef.prePLACE.value);
+      document.fhlc_placef.PARTOF.value = fhlc_Normalise(document.fhlc_placef.prePARTOF.value);
+      document.fhlc_placef.prePLACE.value = fhlc_ReplaceLigatures(document.fhlc_placef.prePLACE.value);
+      document.fhlc_placef.prePARTOF.value = fhlc_ReplaceLigatures(document.fhlc_placef.prePARTOF.value);
+      submitForm(fhlc_placef);
+    }
+
+    function fhlc(q)
+    {
+      if( nullArgs("fhlc", q) )
+        return;
+      
+      var args = parseArgs(q, "author, callno, film, place, subject, surname");
+      if( args.switches.length != 1 ) {
+	nullArgs("fhlc", "?");
+	return;
+      }
+      switch(args.switches[0].name)
+      {
+      case "author":   fhlc_author(args.q);  break;
+      case "callno":   fhlc_callno(args.q);  break;
+      case "film":     fhlc_film(args.q);    break;
+      case "place":    fhlc_place(args.q);   break;
+      case "subject":  fhlc_subject(args.q); break;
+      case "surname":  fhlc_surname(args.q); break;
+      }
+    }
+  ]]></script>
+</search>
