@@ -182,6 +182,8 @@ defaultcal="yhocal";
 *  holidays.us.xml - United States [default]
 *  holidays.ca.xml - Canada
 *  holidays.sg.xml - Singapore
+*  holidays.it.xml - Italy
+*  holidays.fr.xml - France
 */
 eventsfileurl="holidays.us.xml";
 
