@@ -128,15 +128,22 @@ function histeditmove(t, i)
 
 function histsearch( t, shift )
 {
-  if ( histcurr == histarray.length )
+  if ( searchPrefix == '' )
     searchPrefix = t;
 
-  var re = new RegExp( (shift ? "" : "^") + searchPrefix );
-  for ( var i = histcurr - 1; i != histcurr; i-- )
+  var re = new RegExp( (shift ? "^" : "") + searchPrefix, "i" );
+  for ( var i = histcurr - 1; i >= 0; i-- )
   {
-    if ( i < 0 )
-      i = histarray.length - 1;
+    if ( histarray[i].match( re ) )
+    {
+      histcurr = i;
+      document.deff.q.value = currhistedit();
+      return;
+    }
+  }
 
+  for ( var i = histarray.length - 1; i >= histcurr; i-- )
+  {
     if ( histarray[i].match( re ) )
     {
       histcurr = i;
