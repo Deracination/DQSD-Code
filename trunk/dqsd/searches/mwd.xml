@@ -10,7 +10,7 @@
     <input type="hidden" name="va"/>
   </form>
   <script><![CDATA[
-    function mwd(q, switches)
+    function mwd(q)
     {
       if( q == "" )
         openSearchWindow("http://www.m-w.com/");

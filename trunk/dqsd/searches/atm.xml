@@ -14,7 +14,7 @@
 		<input type="hidden" name="bRegistered" value="1"/>
 	</form>
 	<script><![CDATA[
-		function atm(q, switches)
+		function atm(q)
 		{
 			if (q == "")
 			  openSearchWindow("http://www.atomica.com/");

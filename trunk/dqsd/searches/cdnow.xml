@@ -3,7 +3,6 @@
   <description>Search CDNOW by artist. Options include searchign by /album, /song, /label, /video, /actor, or /director. <nobr>Example: "cdnow Lobster /song"</nobr></description>
   <category>Entertainment</category>
   <link>http://www.cdnow.com/</link>
-  <switches>album, song, label, video, actor, director</switches>
   <contributor>Peter Risser, Ryan Edwards</contributor>
   <form name="cdnowf"
         action="http://www.cdnow.com/cgi-bin/mserver/pagename=/RP/CDN/FIND/popsearch.html"
@@ -12,13 +11,14 @@
     <input type="hidden" name="index"/>
   </form>
   <script><![CDATA[
-    function cdnow(q, switches)
+    function cdnow(q)
     {
+      var args = parseArgs(q, "album, song, label, video, actor, director");
       if( q == "" )
         openSearchWindow("http://www.cdnow.com/");
-      else if( switches.length == 1 )
+      else if( args.switches.length == 1 )
       {
-        switch( switches[0] )
+        switch( args.switches[0].name )
         {
           case "album": document.cdnowf.index.value = "t"; break;
           case "song": document.cdnowf.index.value = "s"; break;
@@ -27,13 +27,13 @@
           case "actor":
           case "director": document.cdnowf.index.value = "r"; break;
         }
-        document.cdnowf.string.value = q;
+        document.cdnowf.string.value = args.q;
         submitForm(cdnowf);
       }
       else
       {
         document.cdnowf.index.value = "a";
-        document.cdnowf.string.value = q;
+        document.cdnowf.string.value = args.q;
         submitForm(cdnowf);
       }
     }

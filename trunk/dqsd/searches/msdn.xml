@@ -3,7 +3,6 @@
   <description>Searches all of MSDN by default, /library limits searches to only the MSDN Library. Examples: "msdn ocx", "msdn iframes /library"</description>
   <category>Computers</category>
   <link>http://msdn.microsoft.com/</link>
-  <switches>library</switches>
   <contributor>Ryan Edwards</contributor>
   <email>ryan_at_karynova_dot_com</email>
   <form name="msdnf"
@@ -15,20 +14,21 @@
     <input type="hidden" Name="scopeid"/>
   </form>
   <script><![CDATA[
-    function msdn(q, switches)
+    function msdn(q)
     {
+      var args = parseArgs(q, "library");
       if( q == "" )
         openSearchWindow("http://msdn.microsoft.com/");
-      else if( switches.length == 1 && switches[0] == "library" )
+      else if( args.switches.length == 1 && args.switches[0].name == "library" )
       {
         document.msdnf.scopeid.value = "2";
-        document.msdnf.qu.value = q;
+        document.msdnf.qu.value = args.q;
         submitForm( msdnf );
       }
       else
       {
         document.msdnf.scopeid.value = "1";
-        document.msdnf.qu.value = q;
+        document.msdnf.qu.value = args.q;
         submitForm( msdnf );
       }
     }

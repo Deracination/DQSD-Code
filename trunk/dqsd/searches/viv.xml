@@ -3,7 +3,6 @@
   <description>Search Vivisimo. Options include Top News /tn, Business News /tb, Tech News /tt, Sports News /ts, <nobr><wbr/>/yaa, <wbr/>/ebay, <wbr/>/yas, <wbr/>/pubmed, <wbr/>/usgov, <wbr/>/patent, <wbr/>/gorp, <wbr/>/buscom, <wbr/>/brit, <wbr/>/yahoo, <wbr/>/msn, <wbr/>/fast, <wbr/>/netscape, <wbr/>/od, <wbr/>/excite, <wbr/>/dh, <wbr/>/ls, <wbr/>/aj, <wbr/>/lycos, <wbr/>/aol, <wbr/>/hb, <wbr/>/cnn, <wbr/>/nyt, <wbr/>/yn, <wbr/>/wn, <wbr/>/bbc, <wbr/>/sfg, <wbr/>/cnnfn, <wbr/>/ybn, <wbr/>/wired, <wbr/>/ytn, <wbr/>/ysn.</nobr> <nobr>Example: "viv president /cnn"</nobr></description>
   <category>Search the Web</category>
   <link>http://www.vivisimo.com/</link>
-  <switches>tn, topnews, tb, topbus, tt, toptech, ts, topsports, yaa, yahooauctions, ebay, yas, yahooshop, pubmed, usgov, patent, delphion, gorp, buscom, business, britannica, yahoo, msn, fast, netscape, od, excite, dh, directhit, ls, looksmart, aj, askjeeves, lycos, aol, hb, hotbot, cnn, nytimes, yn, yahoonews, wn, worldnews, bbc, sfgate, cnnfn, ybn, yahoobiznews, wired, ytn, yahootechnews, ysn, yahoosportnews</switches>
   <contributor>Sam Gera</contributor>
   <form name="vivf"
         action="http://vivisimo.com/search"
@@ -12,17 +11,18 @@
     <input type="hidden" name="se" value=""/>
   </form>
   <script><![CDATA[
-    function viv(q, switches)
+    function viv(q)
     {
       var suffix;
       var result;
       var se = "Yahoo,MSN,Fast,Netscape,OD,Excite,Looksmart,AskJeeves";  // Web Search
 
+      var args = parseArgs(q, "tn, topnews, tb, topbus, tt, toptech, ts, topsports, yaa, yahooauctions, ebay, yas, yahooshop, pubmed, usgov, patent, delphion, gorp, buscom, business, britannica, yahoo, msn, fast, netscape, od, excite, dh, directhit, ls, looksmart, aj, askjeeves, lycos, aol, hb, hotbot, cnn, nytimes, yn, yahoonews, wn, worldnews, bbc, sfgate, cnnfn, ybn, yahoobiznews, wired, ytn, yahootechnews, ysn, yahoosportnews");
       if (q == "")
         openSearchWindow("http://www.vivisimo.com/");
-      else if( switches.length == 1 )
+      else if( args.switches.length == 1 )
       {
-        switch( switches[0] )
+        switch( args.switches[0].name )
         {
           case "tn":
           case "topnews": se = "CNN,NYTimes,YahooNews,WorldNews"; break;
@@ -113,13 +113,13 @@
           case "ysn": 
           case "yahoosportnews": se = "YahooSportNews"; break;
         }
-        document.vivf.query.value = q;
+        document.vivf.query.value = args.q;
         document.vivf.se.value = se;
         submitForm(vivf);
       }
       else
       {
-        document.vivf.query.value = q;
+        document.vivf.query.value = args.q;
         document.vivf.se.value = "Yahoo,MSN,Fast,Netscape,OD,Excite,Looksmart,AskJeeves";
         submitForm(vivf);
       }

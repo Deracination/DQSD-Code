@@ -3,7 +3,6 @@
   <description>Search local movie listings. /location searches for theaters near an American zip code or city. <nobr>Example: "mf monsters", "mf life as a house"</nobr></description>
   <category>Entertainment</category>
   <link>http://www.moviefone.com/</link>
-  <switches>location</switches>
   <contributor>Glenn Carr, Ryan Edwards</contributor>
   <email>glenn_at_glenncarr_dot_com</email>
   <idea>Nik Devereaux</idea>
@@ -14,25 +13,25 @@
     <input type="hidden" name="query"/>
   </form>
   <form name="mftheatreform"
-        target="_blank"
         action="http://www.moviefone.com/showtimes/closesttheaters.adp"
         method="get">
     <input type="hidden" name="_action" value="setLocation"/>
     <input type="hidden" name="csz"/>
   </form>
   <script><![CDATA[
-    function mf(q, switches)
+    function mf(q)
     {
+      var args = parseArgs(q, "location");
       if( q == "" )
         openSearchWindow("http://www.moviefone.com/");
-      else if( switches.length == 1 && switches[0] == "location" )
+      else if( args.switches.length == 1 && args.switches[0].name == "location" )
       {
-        document.mftheatreform.csz.value = q;
+        document.mftheatreform.csz.value = args.q;
         submitForm(mftheatreform);
       }       
       else
       {
-        document.mff.query.value = q;
+        document.mff.query.value = args.q;
         submitForm(mff);
       }
     }

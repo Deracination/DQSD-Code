@@ -14,7 +14,7 @@
     <input type="hidden" name="DisplayMessage" value=""/>
   </form>
   <script><![CDATA[
-    function chem(q, switches)
+    function chem(q)
     {
       if( q == "" )
         openSearchWindow("http://chemfinder.cambridgesoft.com/");

@@ -6,7 +6,7 @@
   <contributor>Ryan Edwards</contributor>
   <email>ryan_at_karynova_dot_com</email>
   <script><![CDATA[
-    function msk(q, switches)
+    function msk(q)
     {
       var res;
       if( q == "" )

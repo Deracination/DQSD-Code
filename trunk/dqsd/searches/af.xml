@@ -12,7 +12,7 @@
     <input type="hidden" name="Acronym"/>
   </form>
   <script><![CDATA[
-    function af(q, switches)
+    function af(q)
     {
       if( q == "" )
         openSearchWindow("http://www.acronymfinder.com/");

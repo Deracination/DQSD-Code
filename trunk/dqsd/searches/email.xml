@@ -5,7 +5,7 @@
   <contributor>Glenn Carr</contributor>
   <idea>Nikolai Devereaux</idea>
   <script><![CDATA[
-    function email(q, switches)
+    function email(q)
     {
       var action = "mailto:";
       var tokens = q.split( ';' );

@@ -25,7 +25,7 @@
     <input type="hidden" name="qt" value=""/>
   </form>
   <script><![CDATA[
-    function cnn(q, switches)
+    function cnn(q)
     {
       if( q == "" )
         openSearchWindow("http://www.cnn.com/");

@@ -9,7 +9,7 @@
     <input type="hidden" name="srch"/>
   </form>
   <script><![CDATA[
-    function crax(q, switches)
+    function crax(q)
     {
       if( q == "" )
         openSearchWindow("http://astalavista.box.sk/");

@@ -16,7 +16,7 @@
     var parsedLine;
     var parsedMsg;
      
-    function alarm(t, switches) 
+    function alarm(t) 
     {
       if( t.match(/^cancel *$/i) ) 
       {

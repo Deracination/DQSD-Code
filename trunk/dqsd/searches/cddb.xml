@@ -3,7 +3,6 @@
   <description>Search CDDB by /artist, /album, /song, or a combination of the three. <nobr>Example: "cddb Madonna /artist /title"</nobr></description>
   <category>Entertainment</category>
   <link>http://www.cddb.com/</link>
-  <switches>artist, album, song</switches>
   <contributor>Peter Risser, Ryan Edwards</contributor>
   <form name="cddbf"
         action="http://www.cddb.com/php/search2.php3">
@@ -11,16 +10,19 @@
     <input type="hidden" name="q"/>
   </form>
   <script><![CDATA[
-    function cddb(q, switches)
+    function cddb(q)
     {
+      var parsedargs = parseArgs(q, "artist, album, song");
       if( q == "" )
+      {
         openSearchWindow("http://www.cddb.com/");
-      else if( switches.length > 0 )
+      }
+      else if( parsedargs.switches.length > 0 )
       {
         var args = "";
-        for( var i = 0; i < switches.length; i++ )
+        for( var i = 0; i < parsedargs.switches.length; i++ )
         {
-          switch( switches[i] )
+          switch( parsedargs.switches[i].name )
           {
             case "artist": args += "artist"; break;
             case "album": args += "disc"; break;
@@ -28,13 +30,13 @@
           }
           args += (args ? " " : "");
         }
-        document.cddbf.q.value = q;
+        document.cddbf.q.value = parsedargs.q;
         document.cddbf.f.value = args;
         submitForm(cddbf);
       }
       else
       {
-        document.cddbf.q.value = q;
+        document.cddbf.q.value = parsedargs.q;
         document.cddbf.f.value = "artist";
         submitForm(cddbf);
       }

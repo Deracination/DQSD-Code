@@ -12,7 +12,7 @@
     <input type="hidden" name="qt"/>
   </form>
   <script><![CDATA[
-    function dl(q, switches)
+    function dl(q)
     {
       if( q == "" )
         openSearchWindow("http://download.cnet.com/");

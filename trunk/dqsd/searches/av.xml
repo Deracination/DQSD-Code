@@ -11,7 +11,7 @@
     <input type="hidden" name="kl" value="XX"/>
   </form>
   <script><![CDATA[
-    function av(q, switches)
+    function av(q)
     {
       if( q == "" )
         openSearchWindow("http://www.altavista.com/");

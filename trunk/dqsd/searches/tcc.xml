@@ -14,7 +14,7 @@
     <input type="hidden" name="intlquery" />
   </form>
   <script><![CDATA[
-    function tcc(q, switches)
+    function tcc(q)
     {
       if (q == "")
         window.open("http://www.primeris.com/fonefind");

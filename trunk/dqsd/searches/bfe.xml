@@ -16,7 +16,7 @@
     <input type="hidden" name="EmailSearch" value="1"/>
   </form>
   <script><![CDATA[
-    function bfe(q, switches)
+    function bfe(q)
     {
       res = q.match(/(((\w+\s+)?\w+)\s+)?(\w+)(\s*\((([^,]+),?\s+)?(\w\w)\))?/);
       if( !res )

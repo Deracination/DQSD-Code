@@ -3,7 +3,6 @@
   <description>Searches for modules by default. Options include searching by /author, /distribution and /documentation. <nobr>Example: "cpan wrap /author"</nobr></description>
   <category>Computers</category>
   <link>http://search.cpan.org/</link>
-  <switches>author, distribution, documentation</switches>
   <contributor>Monty Scroggins, Ryan Edwards</contributor>
   <form name="cpanf"
         action="http://search.cpan.org/search"
@@ -12,25 +11,26 @@
     <input type="hidden" name="mode" value="module"/>
   </form>
   <script><![CDATA[
-    function cpan(q, switches)
+    function cpan(q)
     {
+      var args = parseArgs(q, "author, distribution, documentation");
       if( q == "" )
         openSearchWindow("http://search.cpan.org/");
-      else if( switches.length == 1 )
+      else if( args.switches.length == 1 )
       {
-        switch( switches[0] )
+        switch( args.switches[0].name )
         {
           case "author": document.cpanf.mode.value = "author"; break;
           case "distribution": document.cpanf.mode.value = "dist"; break;
           case "documentation": document.cpanf.mode.value = "doc"; break;
         }
-        document.cpanf.query.value = q;
+        document.cpanf.query.value = args.q;
         submitForm(cpanf);
       }
       else
       {
         document.cpanf.mode.value = "module"
-        document.cpanf.query.value = q;
+        document.cpanf.query.value = args.q;
         submitForm(cpanf);
       }
     }
