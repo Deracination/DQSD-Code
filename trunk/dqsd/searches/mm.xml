@@ -1,11 +1,10 @@
 <search function="mm">
   <name>Multimap Maps</name>
-  <description>Search for UK maps: "mm 10 Downing Street, London"</description>
+  <description>Search for UK maps: "mm 10 Downing Street, London sw1"</description>
   <category>People and Places</category>
   <link>http://www.multimap.com/</link>
   <idea>David Brake david.brake@ukonline.co.uk</idea>
-  <form name="mmform"
-        target="_blank"
+  <form name="mmf"
         action="http://uk2.multimap.com/map/places.cgi"
         method="get">
     <input type="hidden" name="source" value="quicksearch"/>
@@ -19,8 +18,8 @@
         openSearchWindow("http://www.multimap.com/");
       else
       {
-        document.mmform.quicksearch.value = q;
-        submitForm(mmform);
+        document.mmf.quicksearch.value = q;
+        submitForm(mmf);
       }
     }
   ]]></script>

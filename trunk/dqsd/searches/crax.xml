@@ -4,7 +4,6 @@
   <category>Search the Web</category>
   <link>http://astalavista.box.sk/</link>
   <form name="craxf"
-        target="_blank"
         action="http://astalavista.box.sk/cgi-bin/robot"
         method="get">
     <input type="hidden" name="srch"/>

@@ -3,8 +3,7 @@
   <description>Search PriceScan for an ISBN: "psi 0898713617"</description>
   <category>Shopping</category>
   <link>http://www.pricescan.com/home_books.asp</link>
-  <form name="isbnf"
-        target="_blank"
+  <form name="psif"
         action="http://www.pricescan.com/books/SearchResults.asp"
         method="get">
     <input type="hidden" name="type" id="type" value="isbn"/>
@@ -17,8 +16,8 @@
         openSearchWindow("http://www.pricescan.com/home_books.asp");
       else
       {
-        document.isbnf.isbn.value = q;
-        submitForm(isbnf);
+        document.psif.isbn.value = q;
+        submitForm(psif);
       }
     }
   ]]></script>

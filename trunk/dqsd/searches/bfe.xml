@@ -4,7 +4,6 @@
   <category>People and Places</category>
   <link>http://search.bigfoot.com/</link>
   <form name="bfef"
-        target="_blank"
         action="http://search.bigfoot.com/SEARCH"
         method="post">
     <input type="hidden" name="FormName" value="Listing"/>

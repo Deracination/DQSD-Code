@@ -4,7 +4,6 @@
   <category>Computers</category>
   <link>http://whatis.techtarget.com/</link>
   <form name="whatisf"
-        target="_blank"
         action="http://whatis.techtarget.com/wsearchResults/1,290214,,00.html"
         method="get">
     <input type="hidden" name="query" value=""/>

@@ -6,7 +6,6 @@
   <contributor>Glenn Carr</contributor>
   <idea>stickyc's buddy</idea>
   <form name="upsf"
-        target="_blank" 
         action="http://wwwapps.ups.com/etracking/tracking.cgi"> 
     <input type="hidden" name="tracknums_displayed"/>
     <input type="hidden" name="TypeOfInquiryNumber" value="T"/>

@@ -4,8 +4,7 @@
 	<link>http://www.atomica.com/</link>
 	<category>Reference</category>
 	<contributor>Chris Farmer</contributor>
-	<form name="atomf"
-        target="_blank"
+	<form name="atmf"
 				action="http://lookup.atomica.com/atomica/frame.pl"
 				method="get">
 		<input type="hidden" name="s"/>
@@ -21,8 +20,8 @@
 			  openSearchWindow("http://www.atomica.com/");
 			else
 			{
-				document.atomf.s.value = q;
-				submitForm(atomf);
+				document.atmf.s.value = q;
+				submitForm(atmf);
 			}
 		}
 	]]></script>

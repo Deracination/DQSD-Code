@@ -3,8 +3,7 @@
   <description>Search eBay either by description or item number. Examples: "ebay guitars", "ebay 1503826268"</description>
   <category>Shopping</category>
   <link>http://www.ebay.com/</link>
-  <form name="ebyf"
-        target="_blank"
+  <form name="ebayf"
         action="http://search.ebay.com/search/search.dll"
         method="get">
     <input type="hidden" name="MfcISAPICommand" value="GetResult"/>
@@ -23,8 +22,8 @@
         openSearchWindow('http://cgi.ebay.com/aw-cgi/eBayISAPI.dll?MfcISAPICommand=ViewItem&item=' + res[1]);
       else
       {
-        document.ebyf.query.value = q;
-        submitForm(ebyf);
+        document.ebayf.query.value = q;
+        submitForm(ebayf);
       }
     }
   ]]></script>

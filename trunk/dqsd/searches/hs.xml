@@ -6,7 +6,6 @@
   <switches>asp, c, java, javascript, php, perl, python, tools, utils, rh, remotehosts, xml</switches>
   <contributor>Monty Scroggins, Ryan Edwards</contributor>
   <form name="hsf"
-        target="_blank"
         action="http://www.hotscripts.com/search/"
         method="get">
     <input type="hidden" name="query"/>

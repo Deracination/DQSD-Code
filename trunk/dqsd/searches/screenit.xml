@@ -1,10 +1,10 @@
 <search function="screenit">
   <name>ScreenIt</name>
-  <description>A family-friendly movie search index. Uses Google for searching.</description>
+  <description>A family-friendly movie search index. 
+  Uses Google for searching. "screenit jaws"</description>
   <category>Entertainment</category>
   <link>http://www.screenit.com/</link>
   <form name="screenitf"
-        target="_blank"
         action="http://www.google.com/custom"
         method="GET">
     <input type="hidden" name="q" value=""/>

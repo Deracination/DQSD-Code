@@ -4,8 +4,7 @@
   <category>Other</category>
   <link>http://www.howstuffworks.com/</link>
   <contributor>John W. Bairen, Jr.</contributor>
-  <form name="hswf" 
-        target="_blank"
+  <form name="hswf"
         action="http://www.howstuffworks.com/search.php" 
         method="post">
     <input type="hidden" name="search" value="SEARCH"/>

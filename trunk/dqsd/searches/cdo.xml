@@ -4,8 +4,7 @@
   <category>Reference</category>
   <link>http://dictionary.cambridge.org/</link>
   <idea>David Brake david.brake@ukonline.co.uk</idea>
-  <form name="cdoform"
-        target="_blank"
+  <form name="cdof"
         action="http://dictionary.cambridge.org/cmd_search.asp"
         method="post">
     <input type="hidden" name="searchword"/>
@@ -18,8 +17,8 @@
         openSearchWindow("http://dictionary.cambridge.org/");
       else
       {
-        document.cdoform.searchword.value = q;
-        submitForm(cdoform);
+        document.cdof.searchword.value = q;
+        submitForm(cdof);
       }
     }
   ]]></script>

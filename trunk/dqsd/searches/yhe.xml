@@ -4,7 +4,6 @@
   <category>People and Places</category>
   <link>http://email.people.yahoo.com/</link>
   <form name="yhef"
-        target="_blank"
         action="http://email.people.yahoo.com/py/psSearch.py"
         method="get">
     <input type="hidden" name="FirstName"/>

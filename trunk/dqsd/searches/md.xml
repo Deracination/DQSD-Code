@@ -5,7 +5,6 @@
   <category>Other</category>
   <contributor>John W. Bairen, Jr.</contributor>
   <form name="mdf" 
-        target="_blank"
         action="http://my.webmd.com/search_results" 
         method="post">        
     <input type="hidden" name="query"/>

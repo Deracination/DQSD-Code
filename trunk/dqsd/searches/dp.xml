@@ -4,8 +4,7 @@
   <category>Search the Web</category>
   <link>http://www.dogpile.com/</link>
   <contributor>David Bau, Brian Ross</contributor>
-  <form name="dogf"
-        target="_blank"
+  <form name="dpf"
         action="http://search.dogpile.com/texis/search"
         method="get">
     <input type="hidden" name="fs" value="web"/>
@@ -19,8 +18,8 @@
         openSearchWindow("http://www.dogpile.com/");
       else
       {
-        document.dogf.q.value = q;
-        submitForm(dogf);
+        document.dpf.q.value = q;
+        submitForm(dpf);
       }
     }
   ]]></script>

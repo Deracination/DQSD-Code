@@ -5,10 +5,9 @@
     <category>People and Places</category>
     <contributor>Stephen Montgomery</contributor>
     <email>stephenmontgomery_at_ameritech_dot_net</email>
-    <form name="areacode" 
+    <form name="acf" 
           method="get" 
-          action="http://www.getzips.com/CGI-BIN/ziplook.exe" 
-          target="_blank">
+          action="http://www.getzips.com/CGI-BIN/ziplook.exe">
       <input type="hidden" name="What" value="4" />
       <input type="hidden" name="Area" />
     </form>
@@ -21,9 +20,9 @@
         {
           if (result = q.match(/^(\d{3})\s*(.*)/))
           {
-            document.areacode.Area.value=result[1];
+            document.acf.Area.value=result[1];
           }
-          submitForm(areacode);
+          submitForm(acf);
         }
       }
     ]]></script>

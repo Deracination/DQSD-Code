@@ -3,8 +3,7 @@
   <description>Search CNET's shareware archive: "dl DQSD"</description>
   <category>Computers</category>
   <link>http://download.cnet.com/</link>
-  <form name="downloadsf"
-        target="_blank"
+  <form name="dlf"
         action="http://download.cnet.com/downloads/search/redirector/1,10207,0-0,00.html"
         method="get">
     <input type="hidden" name="tg" value="dl-10000"/>
@@ -19,8 +18,8 @@
         openSearchWindow("http://download.cnet.com/");
       else
       {
-        document.downloadsf.qt.value = q;
-        submitForm(downloadsf);
+        document.dlf.qt.value = q;
+        submitForm(dlf);
       }
     }
   ]]></script>

@@ -4,8 +4,7 @@
   <category>Other</category>
   <link>http://www.accessmedicine.com/</link>
   <contributor>Andrew Gilmartin</contributor>
-  <form name="accessmedicinef"
-        target="_blank"
+  <form name="amedf"
         action="http://www.accessmedicine.com/cgi-bin/search_simple.cgi"
         method="get">
     <input type="hidden" name="category" value="chapters_updates"/>
@@ -20,8 +19,8 @@
         openSearchWindow("http://www.accessmedicine.com/harrisons/public/su_search/advanced_search.html");
       else
       {
-        document.accessmedicinef.QueryText.value = q;
-        submitForm( accessmedicinef );
+        document.amedf.QueryText.value = q;
+        submitForm( amedf );
       }
     }
   ]]></script>

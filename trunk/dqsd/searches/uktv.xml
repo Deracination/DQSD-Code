@@ -19,7 +19,6 @@
   <contributor>tomjcorcoran</contributor>
   <link>http://www.uktvguide.com/</link>
   <form name="uktvf"
-        target="_blank"
         action="http://www.mydigiguide.com/dgx/wbl.dll?h=13"
         method="post">
     <input type="hidden" name="ch" value=""/>

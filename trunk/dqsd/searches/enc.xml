@@ -5,7 +5,6 @@
   <link>http://www.encyclopedia.com/</link>
   <contributor></contributor>
   <form name="encf"
-        target="_blank"
         action="http://www.encyclopedia.com/cgi-bin/search.cgi"
         method="post">
     <input type="hidden" name="search" value=""/>

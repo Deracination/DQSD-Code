@@ -4,7 +4,6 @@
   <category>Computers</category>
   <link>http://www.mysql.com/</link>
   <form name="mysf"
-        target="_blank"
         action="http://www.mysql.com/doc/manual.php"
         method="get">
     <input type="hidden" name="search_query"/>

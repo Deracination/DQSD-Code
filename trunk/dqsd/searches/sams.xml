@@ -3,8 +3,7 @@
   <description>Check internet addresses using SamSpade.org: "sams amazon.com"</description>
   <category>Computers</category>
   <link>http://www.samspade.org/</link>
-  <form name="samw"
-        target="_blank"
+  <form name="samsf"
         action="http://www.samspade.org/t/lookat"
         method="get">
     <input type="hidden" name="a"/>
@@ -16,8 +15,8 @@
         openSearchWindow("http://www.samspade.org/");
       else
       {
-        document.samw.a.value = q;
-        submitForm(samw);
+        document.samsf.a.value = q;
+        submitForm(samsf);
       }
     }
   ]]></script>

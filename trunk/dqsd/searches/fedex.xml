@@ -6,7 +6,6 @@
   <contributor>Glenn Carr</contributor>
   <idea>stickyc's buddy</idea>
   <form name="fedexf"
-        target="_blank"
         action="http://www.fedex.com/cgi-bin/tracking"
         method="get">
     <input type="hidden" name="tracknumbers"/>

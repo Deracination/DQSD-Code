@@ -3,8 +3,7 @@
   <description>Lookup movies, television shows, actors, dicectors and more on the IMDB: "imdb jaws"</description>
   <category>Entertainment</category>
   <link>http://www.imdb.com/</link>
-  <form name="mdbf"
-        target="_blank"
+  <form name="imdbf"
         action="http://www.imdb.com/Find"
         method="post">
     <input type="hidden" name="select" value="All"/>
@@ -18,8 +17,8 @@
         openSearchWindow("http://www.imdb.com/");
       else
       {
-        document.mdbf["for"].value = q;
-        submitForm(mdbf);
+        document.imdbf["for"].value = q;
+        submitForm(imdbf);
       }
     }
   ]]></script>

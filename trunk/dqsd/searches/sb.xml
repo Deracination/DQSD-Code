@@ -4,7 +4,6 @@
   <category>People and Places</category>
   <link>http://www.switchboard.com/</link>
   <form name="sbf"
-        target="_blank"
         action="http://www.switchboard.com/bin/cgiqa.dll"
         method="get">
     <input type="hidden" name="SR" value=""/>

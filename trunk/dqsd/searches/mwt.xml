@@ -5,7 +5,6 @@
   <link>http://www.m-w.com/</link>
   <contributor></contributor>
   <form name="mwtf"
-        target="_blank"
         action="http://www.m-w.com/cgi-bin/thesaurus"
         method="post">
     <input type="hidden" name="book" value="Thesaurus"/>

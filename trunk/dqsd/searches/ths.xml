@@ -4,7 +4,6 @@
   <category>Reference</category>
   <link>http://www.thesaurus.com/</link>
   <form name="thsf"
-        target="_blank"
         action="http://www.thesaurus.com/cgi-bin/search"
         method="get">
     <input type="hidden" name="config" value="roget"/>

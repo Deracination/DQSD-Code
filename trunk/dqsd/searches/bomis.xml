@@ -6,7 +6,6 @@
   <contributor>Reginald Braithwaite-Lee</contributor>
   <email>raganwald_at_yahoo_dot_com</email>
   <form name="bomisf"
-        target="_blank"
         action="http://www.bomis.com/searchring.fcgi"
         method="get">
     <input type="hidden" name="db" value="bomis"/>

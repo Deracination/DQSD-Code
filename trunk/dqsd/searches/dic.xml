@@ -4,7 +4,6 @@
   <category>Reference</category>
   <link>http://www.dictionary.com/</link>
   <form name="dicf"
-        target="_blank"
         action="http://www.dictionary.com/cgi-bin/dict.pl"
         method="get">
     <input type="hidden" name="term"/>
