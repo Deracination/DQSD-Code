@@ -1,0 +1,31 @@
+<search function="vir">
+  <name>Virus Bulletin</name>
+  <description>
+    Independent Anti-Virus Advice<br/>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>vir klez</td></tr>
+  	</table>
+  </description>
+  <category>Computers</category>
+  <link>http://www.virusbtn.com/</link>
+  
+<form name="virf" action="http://www.virusbtn.com/search.cgi" method="get">
+<input type="hidden" name="terms" value="" />
+</form>
+  
+  <script><![CDATA[
+    function vir(q)
+    {
+      if( nullArgs("vir",q) )
+        return false;
+      else
+      {
+        document.virf.terms.value = q;
+        submitForm(virf);
+      }
+    }
+  ]]></script>
+</search>
+
+
