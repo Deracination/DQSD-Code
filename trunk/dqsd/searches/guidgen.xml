@@ -5,21 +5,40 @@
   <link></link>
   <email>glenn at glenncarr dot com</email>
   <description>
-  Generate a GUID using the scriptlet.typelib ActiveX component.  No arguments need to be specified.
-  <!--
+  Generate a GUID using the scriptlet.typelib ActiveX component.
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/dotnet</td><td> - </td><td>Generate a .NET compatible guid string</td></tr>
+	</table>
     <div class="helpboxDescLabels">Examples:</div>
     <table class="helpboxDescTable">
-      <tr><td></td></tr>
-      <tr><td></td></tr>
+      <tr><td>guidgen</td></tr>
+      <tr><td>guidgen /d</td></tr>
     </table>
-  -->
   </description>
   <script><![CDATA[
     function guidgen(q)
     {
 			try
 			{
+				var dotNetMode = false;
+				var args = parseArgs(q, "dotnet");
+		        for (var i = 0; i < args.switches.length; i++) {
+		          sw = args.switches[i];
+				  switch(sw.name) {
+				  case "dotnet": dotNetMode = true; break;
+				  }
+				}
+
+				if (args.q != "") {
+					nullArgs("guidgen","?");
+					return false;
+				}
+
 				var guid = new ActiveXObject("scriptlet.typelib").guid.substr(0,38);
+				if (dotNetMode) {
+					guid = "[Guid(\"" + guid.replace(/[{}]/g, "") + "\")]";
+				}
 				setSearchWindowText(guid, true);
 			}
 			catch ( e )
