@@ -1,26 +1,32 @@
 <search function="fe">
-  <name>File Ext</name>
-  <description>The File Extension Source fe {[a..z] | num | sym }: "fe d"</description>
+  <name>The File Extension Source</name>
+  <description>
+    Lookup the meaning of Windows/DOS file extensions.<br/>
+    <a class="helpboxDescLabels">Usage:</a><br/>
+  	<table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">fe {[a..z] | num | sym }</td></tr>
+  	</table>
+    <a class="helpboxDescLabels">Example:</a><br/>
+    <table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">fe D</td></tr>
+      <tr><td class="helpboxDescColumns">fe sym</td></tr>
+  	</table>
+  </description>
   <category>Computers</category>
   <link>http://www.filext.com/</link>
-  <form name="fef"
-        method="get">
-  </form>
+  
   <script><![CDATA[
     function fe(q)
     {
-      if( q == "" )
-      {
-        openSearchWindow("http://www.filext.com/");
-      }
+      if( nullArgs("fe",q) )
+        return false;
       else
       {
         q = q.toLowerCase();
         if ( /^[a-z]$/i.test(q) || ( q == 'sym' ) || ( q == 'num' ) )
-          document.fef.action = "http://www.filext.com/" + q + ".htm";
+          openSearchWindow("http://www.filext.com/" + q + ".htm");
         else
-          document.fef.action = "http://www.filext.com/";
-          submitForm(fef);
+          nullArgs("fe","?");
       }
     }
   ]]></script>

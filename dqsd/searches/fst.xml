@@ -1,8 +1,15 @@
 <search function="fst">
   <name>FAST</name>
-  <description>Search the frequently-rebuilt FAST index: "fst jeep"</description>
+  <description>
+    Search the frequently-rebuilt AllTheWeb FAST index.<br/>
+    <a class="helpboxDescLabels">Example:</a><br/>
+    <table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">fst jeep</td></tr>
+  	</table>
+  </description>
   <category>Search the Web</category>
   <link>http://www.alltheweb.com/</link>
+  
   <form name="fstf"
         action="http://www.alltheweb.com/search"
         method="get">
@@ -10,11 +17,12 @@
     <input type="hidden" name="lang" value="any"/>
     <input type="hidden" name="query"/>
   </form>
+  
   <script><![CDATA[
     function fst(q)
     {
-      if( q == "" )
-        openSearchWindow("http://www.alltheweb.com/");
+      if( nullArgs("fst",q) )
+        return false;
       else
       {
         document.fstf.query.value = q;
