@@ -42,7 +42,7 @@ function showpop()
       var search = helparray[k];
       var alias = getSearchAliases( search );
 
-      if ( search.enabled )
+      if ( search.enabled && !search.nomenu )
       {
       
         // If there are subcategories, nest them
