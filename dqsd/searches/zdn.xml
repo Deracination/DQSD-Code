@@ -1,35 +1,48 @@
 <search function="zdn">
   <name>ZDNet</name>
-  <description>Searches for PC downloads by default. Options include /all of ZDNet, Mac Downloads /mac, CE Downloads /ce, Linux Downloads /linux, Palm Downloads /palm, The Web /web. <nobr>Example: "zdn quicktime /mac"</nobr></description>
+  <description>Searches for PC downloads by default. Options include All of ZDNet /all, Mac Downloads /mac, CE Downloads /ce, Linux Downloads /linux, Palm Downloads /palm, The Web /web. <nobr>Example: "zdn quicktime /mac"</nobr></description>
   <category>Computers</category>
   <link>http://www.zdnet.com/downloads/</link>
-  <switches>all, zd, mac, ce, linux, palm, web</switches>
+  <switches>all, mac, ce, linux, palm, web</switches>
   <contributor>John W. Bairen, Jr.</contributor>
-  <form name="downloadform"
-        target="_blank"
-        action="http://hotfiles.zdnet.com/cgi-bin/texis/swlib/hotfiles/search.html"
-        method="post">
-    <input type="hidden" name="Utext" value=""/>
-    <input type="hidden" name="Usrt" value="rel"/>
-    <input type="hidden" name="Usrchtype" value="simple"/>
-    <input type="hidden" name="b" value=""/>
-  </form>
-  <form name="zdform"
-        target="_blank"
-        action="http://xlink.zdnet.com/cgi-bin/texis/xlink/xlink/search.html"
-        method="post">
-    <input type="hidden" name="Uch" value=""/>
-    <input type="hidden" name="Utype" value="D"/>
-    <input type="hidden" name="Utext" value=""/>
-    <input type="hidden" name="db" value=""/>
-  </form>
-  <form name="mainform" 
-        target="_blank"
-        action="http://xlink.zdnet.com/cgi-bin/texis/xlink/websearch/search.html"
-        method="post">
-    <input type="hidden" name="cmd" value="zd_qry"/>
-    <input type="hidden" name="Utext" value=""/>
-  </form>
+  		<form name="zdn1f" method="post" action="http://xlink.zdnet.com/cgi-bin/texis/xlink/xlink/search.html" target="_blank">
+			<input type="hidden" name="Uch" value=""/>
+			<input type="hidden" name="Utype" value="D"/>
+			<input type="hidden" name="Utext"/>
+		</form>
+			
+		<form name="zdn2f" action="http://xlink.zdnet.com/cgi-bin/texis/xlink/websearch/search.html" target="_blank">
+			<input type="hidden" name="cmd" value="zd_qry"/>
+			<input type="hidden" name="Utext" Value="dvd"/>
+		</form>
+		<form method="post" name="zdn3f" action="http://hotfiles.zdnet.com/cgi-bin/texis/swlib/hotfiles/search.html" target="_blank">
+			<input type="hidden" name="Utext" value=""/>
+			<input type="hidden" name="Usrt" value="rel"/>
+			<input type="hidden" name="Usrchtype" value="simple"/>
+		</form>
+		<form method="post" name="zdn4f" action="http://hotfiles.zdnet.com/cgi-bin/texis/swlib/hotfiles/search.html?b=mac" target="_blank">
+			<input type="hidden" name="Utext" value=""/>
+			<input type="hidden" name="Usrt" value="rel"/>
+			<input type="hidden" name="Usrchtype" value="simple"/>
+		</form>
+		<form method="post" name="zdn5f" action="http://hotfiles.zdnet.com/cgi-bin/texis/swlib/hotfiles/search.html?b=zdpalm" target="_blank">
+			<input type="hidden" name="Utext" value=""/>
+			<input type="hidden" name="Usrt" value="rel"/>
+			<input type="hidden" name="Usrchtype" value="simple"/>
+		</form>
+		<form method="post" name="zdn6f" action="http://hotfiles.zdnet.com/cgi-bin/texis/swlib/hotfiles/search.html?b=zdce" target="_blank">
+			<input type="hidden" name="Utext" value=""/>
+			<input type="hidden" name="Usrt" value="rel"/>
+			<input type="hidden" name="Usrchtype" value="simple"/>
+		</form>
+		<form method="post" name="zdn7f" action="http://hotfiles.zdnet.com/cgi-bin/texis/swlib/hotfiles/search.html?b=zdlinux" target="_blank">
+			<input type="hidden" name="Utext" value=""/>
+			<input type="hidden" name="Usrt" value="rel"/>
+			<input type="hidden" name="Uos" value="Linux"/>
+			<input type="hidden" name="Uplat" value="ANY"/>
+			<input type="hidden" name="Usrchtype" value="simple"/>
+		</form>
+  
   <script><![CDATA[
     function zdn(q, switches)
     {
@@ -40,42 +53,40 @@
         switch( switches[0] )
         {
           case "mac":
-            document.downloadform.b.value="mac";
-            document.downloadform.Utext.value=q;
-            submitForm(downloadform);
+            document.zdn4f.Utext.value = q;
+			submitForm(zdn4f);
             break;
           case "linux":
-            document.downloadform.b.value="zdlinux";
-            document.downloadform.Utext.value=q;
-            submitForm(downloadform);
+            document.zdn7f.Utext.value = q;
+			submitForm(zdn7f);
             break;
           case "palm":
-            document.downloadform.b.value="zdpalm";
-            document.downloadform.Utext.value=q;
-            submitForm(downloadform);
+            document.zdn5f.Utext.value = q;
+			submitForm(zdn5f);
             break
           case "ce":
-            document.downloadform.b.value="zdce";
-            document.downloadform.Utext.value=q;
-            submitForm(downloadform);
+            document.zdn6f.Utext.value = q;
+			submitForm(zdn6f);
             break;
-          case "zd":
           case "all":
-            document.zdform.Utext.value=q;
-            submitForm(zdform);
+            document.zdn1f.Utext.value = q;
+            document.zdn1f.Uch.value = '';
+			submitForm(zdn1f);
             break;
           case "web":
-            document.mainform.Utext.value=q;
-            submitForm(mainform);
+            document.zdn2f.Utext.value = q; 
+	   		submitForm(zdn2f);
             break;
-        }
+          default:
+		    document.zdn3f.Utext.value = q;
+		    submitForm(zdn3f);
+		}
       }
       else
       {
-        document.downloadform.b.value="";
-        document.downloadform.Utext.value=q;
-        submitForm(downloadform);
+        document.zdn3f.Utext.value = q;
+		submitForm(zdn3f);
       }
-    }
+   }
   ]]></script>
 </search>
