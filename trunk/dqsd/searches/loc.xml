@@ -1,0 +1,96 @@
+<search function="loc">
+  <name>Library of Congress 'Thomas' bill lookup</name>
+  <description>
+    Search the Thomas LOC bill register.<br/>
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/session</td><td> [current] </td><td>Session to search</td></tr>
+      <tr><td>/senate</td><td> - </td><td>Search Senate bills</td></tr>
+      <tr><td>/house</td><td> default </td><td>Search House of Representatives bills</td></tr>
+      <tr><td>/bill</td><td> - </td><td>Bill number</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td> loc 2357 </td></tr>
+    </table>
+  </description>
+  <category>Reference<category>General</category></category>
+  <link>http://thomas.loc.gov/</link>
+  <contributor>Shawn K. Hall</contributor>
+  
+  <form name="locf"
+        action="http://thomas.loc.gov/cgi-bin/query"
+        method="post">
+    <input type="hidden" id="locdocidc" name="docidc108" value="" />
+    <input type="hidden" id="locqueryc" name="queryc108" value="" />
+    <input type="hidden" name="submit"  value="Search" />
+  </form>
+
+  
+  
+  <script><![CDATA[
+    function loc(q)
+    {
+      if( nullArgs("loc", q) ) return false;
+
+      var locbill    = "";
+      var locdate    = new Date();
+      var locsearch  = "";
+      var locsession = "";
+      var locwhere   = "";
+
+      var args = parseArgs(q, "session, sess, bill, senate, sen, sb, s, house, hr, h");
+      for (var i = 0; i < args.switches.length; i++)
+      {
+        sw = args.switches[i];
+        switch(sw.name){
+          case "session":
+            locsession = sw.value; break;
+          case "sess":
+            locsession = sw.value; break;
+          case "bill":
+            locbill    = sw.value; break;
+          case "senate":
+            locwhere   = "s.b."; break;
+          case "sen":
+            locwhere   = "s.b."; break;
+          case "sb":
+            locwhere   = "s.b."; break;
+          case "s":
+            locwhere   = "s.b."; break;
+          case "house":
+            locwhere   = "h\.b\."; break;
+          case "hr":
+            locwhere   = "h\.b\."; break;
+          case "h":
+            locwhere   = "h\.b\."; break;
+          default:
+            locsearch  = args.switches[i].name;
+        }
+      }
+      if ( locsession == "" )
+        locsession = ((locdate.getYear() - 1788)/2).toFixed();
+      if ( locwhere   == "" )        locwhere   = "h.r.";
+      if ( locbill    == "" )        locbill    = q;
+      if ( locsearch  == "" )        locsearch  = q;
+
+      if ( isNaN(parseInt(locsearch)) ){
+        if ( !isNaN(parseInt(locbill)) ){
+          document.locf.locdocidc.name  = "docidc" + locbill;
+          document.locf.locdocidc.value = locbill;
+        }
+        document.locf.locqueryc.name  = "queryc" + locsession;
+        document.locf.locqueryc.value = locsearch;
+        submitForm(locf);
+      } else {
+        openSearchWindow( "http://thomas.loc.gov/cgi-bin/bdquery/z\?d" + locsession + ":" + locwhere + locbill + ":");
+      }
+    }
+  ]]></script>
+
+  <copyright>
+    Copyright (c) 2002 David Bau
+    Distributed under the terms of the
+    GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>

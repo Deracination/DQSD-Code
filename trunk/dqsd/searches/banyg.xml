@@ -54,6 +54,7 @@
   <script><![CDATA[
     function banyg(q)
     {
+      if( nullArgs( "banyg", q ) ) return false;
       document.banygf.login.value     = strYahooID;
       document.banygf.passwd.value    = strYahooPwd;
       document.banygf.txtLists.value  = strYahooGroups;

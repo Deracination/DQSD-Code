@@ -26,11 +26,11 @@
     </table>
   </description>
   <category>Functions</category>
-  <link>http://www.ReliableAnswers.com/</link>
+  <link>http://www.ReliableAnswers.com/x/dqsd/</link>
   <contributor>Shawn K. Hall</contributor>
   
   <form name="wrpf"
-    action="http://reliableanswers.com/x/"
+    action="http://www.ReliableAnswers.com/x/dqsd/"
     method="post">
     <input type="hidden" name="q" value="" />
     <textarea name="vbscode" style="display: none;"><![CDATA[
@@ -120,10 +120,10 @@ Function Wrp(ByVal sString, sPrefix, sMax, bRemove)
   Wrp = sBuild
 End Function
 Function ClipBoardSetText( sText )
-  ClipBoardSetText = window.clipboardData.SetData( "Text", sText )
+  ClipBoardSetText = window.clipboardData.setData( "Text", sText )
 End Function
 Function ClipBoardGetText()
-  ClipBoardGetText = window.clipboardData.GetData( "Text" )
+  ClipBoardGetText = window.clipboardData.getData( "Text" )
 End Function
 
     ]]></textarea>
@@ -133,6 +133,13 @@ End Function
 
   function wrp (q)
   {
+    if (q.length == 1) {
+      if (q.charAt(0) == "?"){
+      //show help
+        if (nullArgs( "wrp", "?" )) return true;
+      }
+    }
+
     document.wrpf.q.value = q;
 
   //get the vbs code

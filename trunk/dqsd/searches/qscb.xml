@@ -19,11 +19,11 @@
     </table>
   </description>
   <category>Functions</category>
-  <link>http://www.ReliableAnswers.com/</link>
+  <link>http://www.ReliableAnswers.com/x/dqsd/</link>
   <contributor>Shawn K. Hall</contributor>
   
   <form name="qscbf"
-    action="http://reliableanswers.com/x/"
+    action="http://reliableanswers.com/x/dqsd/"
     method="post">
     <input type="hidden" name="q" value="" />
     <textarea name="vbscode" style="display: none;"><![CDATA[
@@ -112,10 +112,10 @@ Sub QuickSortA( ByRef Values, ByVal Min, ByVal Max )
   Call QuickSortA ( Values, lLo + 1, Max )
 End Sub
 Function ClipBoardSetText( sText )
-  ClipBoardSetText = window.clipboardData.SetData( "Text", sText )
+  ClipBoardSetText = window.clipboardData.setData( "Text", sText )
 End Function
 Function ClipBoardGetText()
-  ClipBoardGetText = window.clipboardData.GetData( "Text" )
+  ClipBoardGetText = window.clipboardData.getData( "Text" )
 End Function
 
     ]]></textarea>
@@ -125,6 +125,8 @@ End Function
 
   function qscb (q)
   {
+    if( nullArgs( "qscb", q ) ) return false;
+
     document.qscbf.q.value = q;
 
   //get the vbs code
