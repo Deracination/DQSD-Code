@@ -10,6 +10,7 @@ Enhancements
 * Removed launchmode 2 (launch in IE directly if IE is default browser) and set 1 as default. 2 wasn't really necessary anyway. (Kim Gräsman)
 * tools.js now tries the MSXML4 DOM first, because it's blazingly fast. Falls back on older versions if it's not installed (Kim Gräsman)
 * Explicitly specifies async loading in version.js (Kim Gräsman)
+* Aggressive code cleanup and optimization in loader.js. 25% performance increase with MSXML4 installed (Kim Gräsman)
 
 Bug Fixes
 * Removed 'Type "!<em>prefix</em>" to see only matching entries.' from help. This action launches lucky Google.

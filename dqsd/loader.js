@@ -1,5 +1,4 @@
 // Load the contents of search.xml, aliases, and menu files
-
 function addsearch(fname, name, desc, link, cat, local, subcats, nomenu)
 {
   try
@@ -133,32 +132,21 @@ function addhelp(search)
 var searches = {};
 var aliases = {};
 var specialaliasarray = [];
-var menuarray = [];
 var categories = {};
 var categoryarray = [];
 
 // 0. Get disabled searches
-
 var disabledfnames = readTabDelimitedFile("disabledsearches.txt");
 var disabledsearches = new Object();
-var xpathquery = '';
-var delim = ''
 for ( var i = 0; i < disabledfnames.length; i++ )
 {
   disabledsearches[disabledfnames[i]] = true;
-  xpathquery += delim + "@function!='" + disabledfnames[i] + "'";
-  delim = ' and ';
 }
-
-var searchRoot = null;
 
 // Create an empty search root
-if (!searchRoot)
-{
-  var searchDOM = getMSXMLDOMDocumentInstance();
-  searchDOM.async = false;
-  searchRoot = searchDOM.createElement("searches");
-}
+var searchDOM = getMSXMLDOMDocumentInstance();
+searchDOM.async = false;
+var searchRoot = searchDOM.createElement("searches");
 
 try
 {
@@ -203,100 +191,100 @@ loadAddons();
 loadSearchesFromDir( "localsearches", true );
 
 // 2. eval all the scripts and doc.write all the forms
+var loadedScripts = new Object();
 
-if (searchRoot)
+var xscripts = searchRoot.selectNodes("search/script");
+var xscript = null;
+while(xscript = xscripts.nextNode)
 {
+  // ??? This seems like a hack, but the only way I can determine to load and evaluate
+  // external scripts (referenced with the 'src' attribute), is by manually loading them.
+  var externalScriptRef = xscript.attributes.getNamedItem("src");
+  var xScriptVal = null;
 
-// ??? This XQuery will only allow the searches that are enabled to be evaluated.  This should
-// decrease load time, but it needs to be tested and determined if it makes sense first.
-//  var xscripts = searchRoot.selectNodes("search[" + xpathquery + "]/script");
-
-  var xscripts = searchRoot.selectNodes("search/script");
-  var loadedScripts = new Object();
-  for (var iPrivate = 0; iPrivate < xscripts.length; iPrivate++)
+  if ( externalScriptRef )
   {
-    // ??? This seems like a hack, but the only way I can determine to load and evaluate
-    // external scripts (referenced with the 'src' attribute), is by manually loading them.
-    var externalScriptRef = xscripts[iPrivate].attributes.getNamedItem("src");
-    var xScriptVal = null;
+    var externalScriptName = externalScriptRef.text;
+    if ( loadedScripts[ externalScriptName ] ) // External script is already loaded
+      continue;
+    
+    xScriptVal = readFile( externalScriptName );
 
-    if ( externalScriptRef )
-    {
-      var externalScriptName = externalScriptRef.text;
-      if ( loadedScripts[ externalScriptName ] ) // External script is already loaded
-        continue;
-      
-      xScriptVal = readFile( externalScriptName );
-
-      loadedScripts[ externalScriptName ] = true;
-    }
-    else
-    {
-      xScriptVal = xscripts[iPrivate].text;
-    }
-
-    try
-    {
-      eval(xScriptVal);
-    }
-    catch(e)
-    {
-      alert("Error '" + e.description + "', " + (e.number & 0xffff) + " occurred loading script '" + xScriptVal + "'");
-    }
+    loadedScripts[ externalScriptName ] = true;
+  }
+  else
+  {
+    xScriptVal = xscript.text;
   }
 
-// ??? This XQuery will only allow the searches that are enabled to be evaluated.  This should
-// decrease load time, but it needs to be tested and determined if it makes sense first.
-//  var xforms = searchRoot.selectNodes("search[" + xpathquery + "]/form");
-
-  var xforms = searchRoot.selectNodes("search/form");
-  for (var iPrivate = 0; iPrivate < xforms.length; iPrivate++)
+  try
   {
-    document.write(xforms[iPrivate].xml);
+    eval(xScriptVal);
+  }
+  catch(e)
+  {
+    alert("Error '" + e.description + "', " + (e.number & 0xffff) + " occurred loading script '" + xScriptVal + "'");
   }
 }
 
+// Caching document.write calls saves us 40% of the time in this loop
+var xformsCache = '';
+var xform = null;
+var xforms = searchRoot.selectNodes("search/form");
+while(xform = xforms.nextNode)
+{
+  // Appending to string is faster than writing repeatedly...
+  xformsCache += xform.xml;
+  if(xformsCache.length > 25000)
+  {
+    // ... but even string appending goes slow after a while
+    // so flush if it gets too big
+    document.write(xformsCache);
+    xformsCache = '';
+  }
+}
+
+// Flush any remaining data
+if(xformsCache.length > 0)
+{
+  document.write(xformsCache);
+  xformsCache = null;
+}
 
 // 3. define all the searches
-
-if (searchRoot)
+var searchNodes = searchRoot.selectNodes("search");
+for (var iSearch = 0; iSearch < searchNodes.length; iSearch++)
 {
-  var searchNodes = searchRoot.selectNodes("search");
-  for (var iSearch = 0; iSearch < searchNodes.length; iSearch++)
+  var searchNode = searchNodes[iSearch];
+
+  var fn = searchNode.attributes.getNamedItem("function");
+  var nameNode = searchNode.selectSingleNode("name");
+  var descriptionNode = searchNode.selectSingleNode("description");
+  var linkNode = searchNode.selectSingleNode("link");
+  var categoryNode = searchNode.selectSingleNode("category");
+  var nomenu = false;
+  if ( categoryNode )
   {
-    var searchNode = searchNodes[iSearch];
-    if (searchNode != null)
-    {
-      var fn = searchNode.attributes.getNamedItem("function");
-      var nameNode = searchNode.selectSingleNode("name");
-      var descriptionNode = searchNode.selectSingleNode("description");
-      var linkNode = searchNode.selectSingleNode("link");
-      var categoryNode = searchNode.selectSingleNode("category");
-      var nomenu = false;
-      if ( categoryNode )
-      {
-        nomenu = categoryNode.attributes.getNamedItem("nomenu");
-      }
-      var searchCategories = new Array();
-      getCategories( categoryNode, searchCategories );
-      var descriptonXml = null;
-      if(descriptionNode)
-      {
-        // There may be a better way to do this - I'm trying to remove 
-        // the <description> tags which bracket the description XML
-        descriptionXml = descriptionNode.xml.replace(/\<\/?description\>/g, '')
-      }
-      var localsearch = searchNode.attributes.getNamedItem("localsearch") ? true : false;
-      addsearch(fn.text,
-                (nameNode ? nameNode.text : fn.text),
-                descriptionXml,
-                (linkNode ? linkNode.text : null),
-                searchCategories.length ? searchCategories[0] : null,
-                localsearch,
-                searchCategories.slice( 1 ),
-                nomenu ? true : false);
-    }
+    nomenu = categoryNode.attributes.getNamedItem("nomenu") ? true : false;
   }
+  var searchCategories = new Array();
+  getCategories( categoryNode, searchCategories );
+  var descriptonXml = null;
+  if(descriptionNode)
+  {
+    // There may be a better way to do this - I'm trying to remove 
+    // the <description> tags which bracket the description XML
+    descriptionXml = descriptionNode.xml.replace(/\<\/?description\>/g, '')
+  }
+  var localsearch = searchNode.attributes.getNamedItem("localsearch") ? true : false;
+  addsearch(fn.text,
+            (nameNode ? nameNode.text : fn.text),
+            descriptionXml,
+            (linkNode ? linkNode.text : null),
+            searchCategories.length ? searchCategories[0] : null,
+            localsearch,
+            searchCategories.slice( 1 ),
+            nomenu);
 }
 
 function getCategories( categoryNode, categories )
@@ -322,7 +310,6 @@ function getCategories( categoryNode, categories )
 }
 
 // 4. load and execute the alias file
-
 addAliasesFromFile( "aliases", null, false );
 addAliasesFromFile( localaliases, "Shortcuts", true );
 
@@ -332,33 +319,32 @@ function addAliasesFromFile( aliasFile, category, local )
   for (var iPrivate = 0; iPrivate < aliasTable.length; iPrivate++)
   {
     var fields = aliasTable[iPrivate];
-      if (fields.length < 2)
-      {
-        alert("Error on line " + (iPrivate + 1) + " of aliases.txt:\n\n" + aliasTable[iPrivate] + 
-              "\n\n(Make sure there is a tab or \| symbol between the alias and command.)");
-        break;
-      }
-      else
-      {
-        addalias(fields[0],
-                 fields[1],
-                 (fields.length >= 3 && fields[2] != '') ? fields[2] : null,   // name
-                 (fields.length >= 4 && fields[3] != '') ? fields[3] : null,   // description
-                 (fields.length >= 5 && fields[4] != "") ? fields[4] : ((arguments.length >= 2 && arguments[1] != null) ? category : null), // category
-                 (fields.length >= 6 && fields[5] != "") ? fields[5].split(',') : new Array(), // subcategories
-                 local );
-      }
+    if (fields.length < 2)
+    {
+      alert("Error on line " + (iPrivate + 1) + " of aliases.txt:\n\n" + aliasTable[iPrivate] + 
+            "\n\n(Make sure there is a tab or \| symbol between the alias and command.)");
+      break;
+    }
+    else
+    {
+      addalias(fields[0],
+                fields[1],
+                (fields.length >= 3 && fields[2] != '') ? fields[2] : null,   // name
+                (fields.length >= 4 && fields[3] != '') ? fields[3] : null,   // description
+                (fields.length >= 5 && fields[4] != "") ? fields[4] : ((arguments.length >= 2 && arguments[1] != null) ? category : null), // category
+                (fields.length >= 6 && fields[5] != "") ? fields[5].split(',') : new Array(), // subcategories
+                local );
     }
   }
-
+}
 
 function loadSearchesFromDir( directory, local )
 {
-
   try
   {
     // Get searches in the 'searches' subdirectory
-    var fileSearches = getFiles( directory + "\\*.xml" ).split('\n');
+    directory += '\\';
+    var fileSearches = getFiles( directory + "*.xml" ).split('\n');
     
     for ( var i = 0; i < fileSearches.length; i++ )
     {
@@ -367,7 +353,7 @@ function loadSearchesFromDir( directory, local )
       if ( !/\.xml$/.test( fileSearches[i] ) )
         continue;
      
-      loadSearchFile( directory + "\\" + fileSearches[i], local );
+      loadSearchFile( directory + fileSearches[i], local );
 
     }
   }
@@ -383,7 +369,6 @@ function loadAddons()
     
     for ( var i = 0; i < addonDirs.length; i++ )
     {
-    
       if ( addonDirs[i] == "." )
         continue;
   
@@ -398,9 +383,7 @@ function loadAddons()
 
         loadSearchFile( "addons\\" + addonDirs[i] + "\\" + addonSearches[j] );
       }
-
     }
-
   }
   catch (except) {}
 }
@@ -411,7 +394,6 @@ function loadSearchFile( path, local )
   if (!xmldoc.loadXML(xml))
   {
     alert('Unable to load search from ' + path + ':  ' + xmldoc.parseError.reason );
-    return;
   }
   else
   {
@@ -440,7 +422,7 @@ function loadSearchFile( path, local )
       searchNode.attributes.setNamedItem( xmldoc.createAttribute("localsearch") );
     }
     
-    searchRoot.appendChild(searchNode);
+    // Must clone the node to move it into another doc (enforced as of MSXML4)
+    searchRoot.appendChild(searchNode.cloneNode(true));
   }
 }
-
