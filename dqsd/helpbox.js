@@ -126,7 +126,12 @@ function about()
       helptable += categoryText;
     }
 
+    var oVersion = getVersionFromVersionFile( "version.xml" );
+	sVersion = new Array( oVersion.majorHi, oVersion.majorLo, oVersion.minorHi, oVersion.minorLo ).join('.');
+
     txt = txt.replace(/\r\n/g, '\n');
+    txt = txt.replace(/%lv/g, sVersion );
+    txt = txt.replace(/%ld/g, oVersion.date );
     txt = txt.replace(/\n\*/g, '<li />');
     txt = txt.replace(/\nVer/, '</b><br />Ver');
     txt = txt.replace(/\nCop/, '<p />Cop');

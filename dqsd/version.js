@@ -19,8 +19,9 @@ function versionCheck()
   {
     try
     {
-      var version = getVersionFromVersionFile( "version.xml" );
-      if(!testObject.VersionIsCorrect( version.majorHi, version.majorLo, version.minorHi, version.minorLo))
+      // The DLL version has to be great than or equal to
+      // this number
+      if(!testObject.VersionIsCorrect(3,0,0,18))
       {
          alert("The DQSD helper DLL is out of date");
          bSuccess = false;
@@ -36,6 +37,37 @@ function versionCheck()
 
 
   return bSuccess;
+}
+
+// Check for the correct ActiveX DLL version
+if(!versionCheck())
+{
+  // This is not a nice thing to do, but does reinforce the fact that you
+  // can't use the bar like it is
+  // Unfortunately, you can't do a toolbar refresh to recover from this
+  // so it might not be a great idea
+  window.close();
+}
+
+
+function checkWebForUpdate()
+{
+  if ( typeof checkForUpdate == 'undefined' || !checkForUpdate )
+    return;
+
+  try
+  {
+    var rversion = getVersionFromVersionFile( "http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/*checkout*/dqsd/dqsd/version.xml?content-type=text/xml" );
+    var lversion = getVersionFromVersionFile( "version.xml" );
+    if ( versioncmp( rversion, lversion ) > 0 )
+    {
+      window.showModalDialog("versiondialog.htm", { lversion:lversion, rversion:rversion }, "dialogHeight: 150px; dialogWidth: 300px; dialogTop: px; dialogLeft: px; edge: Raised; center: Yes; help: No; resizable: Yes; status: No; scroll: No;");
+    }
+  }
+  catch(e)
+  {
+    // ignore any errors for now
+  }
 }
 
 function getVersionFromVersionFile( versionXML )
@@ -65,26 +97,6 @@ function getVersion( xmldom )
   return version;
 }
 
-function checkWebForUpdate()
-{
-  if ( typeof checkForUpdate == 'undefined' || !checkForUpdate )
-    return;
-
-  try
-  {
-    var rversion = getVersionFromVersionFile( "http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/*checkout*/dqsd/dqsd/version.xml?content-type=text/xml" );
-    var lversion = getVersionFromVersionFile( "version.xml" );
-    if ( versioncmp( rversion, lversion ) > 0 )
-    {
-      window.showModalDialog("versiondialog.htm", { lversion:lversion, rversion:rversion }, "dialogHeight: 150px; dialogWidth: 300px; dialogTop: px; dialogLeft: px; edge: Raised; center: Yes; help: No; resizable: Yes; status: No; scroll: No;");
-    }
-  }
-  catch(e)
-  {
-    // ignore any errors for now
-  }
-}
-
 // returns 1 if v1 > v2; -1 if v1 < v2; 0 if equal
 function versioncmp( v1, v2 )
 {
@@ -106,14 +118,4 @@ function versioncmp( v1, v2 )
     return -1;
   
   return 0; // equal
-}
-
-// Check for the correct ActiveX DLL version
-if(!versionCheck())
-{
-  // This is not a nice thing to do, but does reinforce the fact that you
-  // can't use the bar like it is
-  // Unfortunately, you can't do a toolbar refresh to recover from this
-  // so it might not be a great idea
-  window.close();
 }
