@@ -34,6 +34,8 @@ import "ocidl.idl";
 		[propget, id(16), helpstring("property InstallationDirectory")] HRESULT InstallationDirectory([out,retval] BSTR *pbstrDirectory);
 		[id(17), helpstring("method GetSpecialFolderLocation")] HRESULT GetSpecialFolderLocation([in] BSTR bstrSpecialFolder, [out,retval] BSTR* pbstrLocation);
 		[id(18), helpstring("method GetFolders")] HRESULT GetFolders([in] BSTR bstrBaseFolder, [out,retval] BSTR* pbstrFolders);
+		[id(19), helpstring("method FileExists")] HRESULT FileExists([in] BSTR bstrBaseFolder, [out,retval] VARIANT_BOOL *pbExists);
+		[id(20), helpstring("method RenameFile")] HRESULT RenameFile([in] BSTR bstrFromFile, [in] BSTR bstrToFile);
 	};
 	[
 		object, 
