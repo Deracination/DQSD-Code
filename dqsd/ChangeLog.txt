@@ -20,6 +20,8 @@ Modified Searches
 
 * amaz - added domain switch to search either amaz. com de uk jp ca or fr (from Wolfgang Deutsch)
 * sf - added exact and foundry switches for requiring all words and going to a foundry page (from Brent Beardsley)
+* tinyurl - changed example so it wouldn't wrap
+* mac - added help display if a question mark or no args are specified
 
 Bug Fixes
 
