@@ -163,7 +163,7 @@ calheight=156;
 *  1 = double click
 *  default is 0
 */
-calStart=0;
+calStart=1;
 
 
 /* Default calendar. clicking on a calendar day will spawn the defined online calendar.
@@ -235,3 +235,7 @@ historylength=50;
 *  1=all qualified alerts
 */
 alertmode=0;
+
+/* Length of menu Most Recently Used list
+*/
+menuMRUlength = 6;

@@ -76,32 +76,124 @@ function watchpopup(popvarname)
   }
 }
 
+function saveMenuHistory( alias )
+{
+  var menuContent = null;
+  try
+  {
+    menuContent = readFile( "mrumenu.txt" );
+  }
+  catch (e) {}
+  var menus = menuContent ? menuContent.replace(/\r\n/g, '\n').split('\n') : new Array(0);
+  
+  // TODO: This should be re-ordered if it already exists... 
+  
+  for ( var i = 0; i < menus.length; i++ )
+    if ( menus[i].toLowerCase() == alias )
+      return;
+  
+  menus.push( alias );
+  if ( menus.length > menuMRUlength )
+    menus.splice( 0, menus.length - menuMRUlength );
+  writeFile( "mrumenu.txt", menus.join('\r\n') );
+}
+
+function appendMRUMenuSelections( mb )
+{
+  var menuContent = null;
+  try
+  {
+    menuContent = readFile( "mrumenu.txt" );
+  }
+  catch (e) {}
+  if ( menuContent )
+  {
+    mb.AppendSeparator( 0 );
+    var menus = menuContent.replace(/\r\n/g, '\n').split('\n');
+    for ( var i = 0; i < menus.length; i++ )
+    {
+      for ( var iSearch in searches )
+      {
+        var search = searches[iSearch];
+        if ( search.aliases )
+        for ( var iAlias = 0; iAlias < search.aliases.length; iAlias++ )
+        {
+          if ( menus[i] == search.aliases[iAlias] )
+          {
+            var alias = getSearchAlias( search );
+            mb.AppendMenuItem( "&" + (menus.length - i) + "  " + search.name + '\t' + alias, search.aliases[0], 0 );
+            break;
+          }
+        }
+      }
+    }
+  }
+  
+}
+
+function getSearchAlias( search )
+{
+  return (search.aliases[0].substr(0,INTERNAL_FUNC_PREFIX.length) == INTERNAL_FUNC_PREFIX) ? search.aliases[1] : search.aliases.join(', ');
+}
+
 function showpop()
 {
-  if (!dopopup)
-    return false;
-
-  if (window.event.button == 2)
-    return false;
-
-  if (!pophelp)
-    buildpop();
-
-  window.event.cancelBubble = true;
-  if (pophelpisopen)
+  document.deff.q.focus();
+  document.deff.q.createTextRange().select();
+  var mb = new ActiveXObject("DQSDTools.MenuBuilder");
+  mb.AppendMenuItem( "About DQSD...", "about", 0 );
+  mb.AppendSeparator( 0 );
+  for (i = 0; i < categoryarray.length; i++)
   {
-    pophelp.hide();
-    return false;
+    var hsubmenu = mb.AppendSubMenu( categoryarray[i] );
+    var helparray = categories[categoryarray[i]];
+    helparray.sort( searchCompare );
+    for (var k = 0; k < helparray.length; k++)
+    {
+      var search = helparray[k];
+      var alias = getSearchAlias( search );
+      mb.AppendMenuItem( search.name + '\t' + alias, search.aliases[0], hsubmenu );
+    }
   }
-  else
-  {
-    pophelp.show((buttonalign == "left" ? 0 : document.body.clientWidth - popwidth),
-                 -popheight, popwidth, popheight, document.body);
+  
+  appendMRUMenuSelections( mb );
 
-    window.setTimeout("queuefocus();", 0);
-    watchpopup("pophelp");
-    return false;
+  var alias = mb.Display();
+  if ( alias )
+  {
+    alias = alias.split(', ')[0];
+    mnu( alias, "" );
+    if ( alias != 'about' )
+      saveMenuHistory( alias );
   }
+  return false;
+  
+//  mb = null;
+//  return false;
+//  if (!dopopup)
+//    return false;
+//
+//  if (window.event.button == 2)
+//    return false;
+//
+//  if (!pophelp)
+//    buildpop();
+//
+//  window.event.cancelBubble = true;
+//  if (pophelpisopen)
+//  {
+//    pophelp.hide();
+//    return false;
+//  }
+//  else
+//  {
+//    pophelp.show((buttonalign == "left" ? 0 : document.body.clientWidth - popwidth),
+//                 -popheight, popwidth, popheight, document.body);
+//
+//    window.setTimeout("queuefocus();", 0);
+//    watchpopup("pophelp");
+//    return false;
+//  }
 }
 
 function queuefocus()

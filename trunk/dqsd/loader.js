@@ -242,7 +242,10 @@ function addAliasesFromFile( aliasFile )
       }
       else
       {
-        addalias(fields[0], fields[1], fields.length >= 3 ? fields[2] : null);
+        addalias(fields[0],
+                 fields[1],
+                 fields.length >= 3 ? fields[2] : null,   // name
+                 fields.length >= 4 ? fields[3] : null);  // description
       }
     }
   }
