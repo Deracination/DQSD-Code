@@ -396,3 +396,10 @@ STDMETHODIMP CLauncher::RegisterHotKey(long hotkeyVkCode)
 {
 	return KeyboardInstallHotkey(hotkeyVkCode);
 }
+
+STDMETHODIMP CLauncher::MapKeyCode(long lVKCode, long lCharCode)
+{
+	g_mapKeyCodeToCharCode[ lVKCode ] = lCharCode;
+	return S_OK;
+}
+

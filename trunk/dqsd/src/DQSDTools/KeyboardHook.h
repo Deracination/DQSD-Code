@@ -17,5 +17,6 @@ HHOOK KeyboardHookInstall();
 HRESULT
 KeyboardInstallHotkey(int vkCode);
 
+extern std::map< long, long > g_mapKeyCodeToCharCode;
 
 #endif // KEYBOARDHOOK_H

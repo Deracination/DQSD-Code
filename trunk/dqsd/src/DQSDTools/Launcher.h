@@ -62,6 +62,9 @@ public:
 public:
 	STDMETHOD(RegisterHotKey)(long hotkeyVkCode);
 	STDMETHOD(InstallKeyboardHook)();
+	STDMETHOD(MapKeyCode)(long lVKCode, long lCharCode);
+
+public:
 	STDMETHOD(SetSite)(IUnknown* pUnkSite);
 
 // Implementation
