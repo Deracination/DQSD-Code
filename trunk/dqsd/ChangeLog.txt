@@ -7,13 +7,15 @@ New aliases
 New Searches
 
 * cheapcd - Buy Cheap CDs Online at Wholesale Cost, $5 under Retail (from Steven J. Heil)
-* md5 - calculate an md-5 digest for a string
+* md5 - calculate an md-5 digest for a string (from Brent Beardsley)
 * tgn - Search the Getty Thesaurus of Geographical Names (from Tim Aiello)
 * arin - Search the Arin Whois database at www.arin.net/whois (from Tim Aiello)
 * ubl - the Ultimate Band List by ArtistDirect (from Darren Greenberg)
 * viam - Find a map to any place in Europe with viamichelin.com
 * cowp - Search for lyrics and chords for country songs (from Brent Beardsley)
 * egw - Search Ellen G. White's writings (from Brent Beardsley)
+* ostk - Search Overstock.com for items (from Brent Beardsley)
+* tinyurl - tinyurl.com is a link-shortening redirector (from Brent Beardsley) 
 
 Modified Searches
 
@@ -22,13 +24,16 @@ Modified Searches
 
 Enhancements
 
-* Sub categories and searches are now sorted properly in the help menu
+*
 
 Bug Fixes
 
 * Fix for tooltips problem on scrolling menus (bug 617639)  (DQSDTools.DLL changes, version.js NOT changed to force upgrade)
 * Remove HTML tags from menu item search names
 * Stop indicating as '[local]' aliases defined in aliases.txt
+* Sub categories and searches are now sorted properly in the help menu
+* Added InstallationDirectory property to Launcher
+* Added FindSubMenu, FindMenuItem, GetMenuItemCount, InsertMenuItem, InsertSeparator, InsertSubMenu functions to MenuBuilder
 
 
 -- What's new for 3.1.4 (October 3, 2002)
