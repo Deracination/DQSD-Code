@@ -22,8 +22,7 @@ your localprefs.js file.
 ServerName="time.nist.gov";
 ***************************************************************************
 
-TimeSyncBookmarks Addon allows you to synchronize your PC time to an
-Internet SNTP server.
+TimeSync Addon allows you to synchronize your PC time to an Internet SNTP server.
 
 Windows Scripting Host is required and will popup security confirmation
 dialogs the first time you try to do synchronize the PC time - so
