@@ -1,0 +1,16 @@
+<search function="so">
+  <name>Societe.com</name>
+  <description>Retrieve info on french companies directory through societe.com. Use with SIREN number. <nobr>Example: "so 352568091"</nobr></description>
+  <category>Business</category>
+  <link>http://www.societe.com/</link>
+  <contributor>MLL</contributor>
+  <script><![CDATA[
+    function so(q)
+    {
+      if (q == "")
+        openSearchWindow("http://www.societe.com/");
+      else
+        openSearchWindow("http://societe.com/cgi-bin/recherche?rncs=" + q);
+    }
+  ]]></script>
+</search>
