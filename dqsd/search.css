@@ -327,12 +327,11 @@ TABLE#keybindings TD
 {
   vertical-align: top;
   border: 1px inset;
-  padding: 2px 2px 2px 5px;
+  padding: 2px 2px 2px 2px;
 }
 
 TABLE#keybindings TD.keyname
 {
-  font-weight: bold;
   white-space: nowrap;
 }
 

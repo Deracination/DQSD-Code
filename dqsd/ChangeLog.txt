@@ -20,6 +20,8 @@ Enhancements
   several forms opened in one window
 * added empty localprefs.js and localsearch.css to install, instead of 
   requiring user to create them if they don't exist.
+* Shift-F8 and Shift-Ctrl-B now search forward through the history
+  instead of searching for a prefix
 
 Bug Fixes
 
