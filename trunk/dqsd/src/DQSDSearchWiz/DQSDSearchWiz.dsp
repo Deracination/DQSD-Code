@@ -202,5 +202,5 @@ SOURCE=.\SearchWizard.rgs
 # End Target
 # End Project
 # Section DQSDSearchWiz : {00000000-0000-0000-0000-800000800000}
-# 	1:12:IDD_ABOUTDLG:104
+# 	1:16:IDD_DWMESSAGEBOX:105
 # End Section

@@ -7,6 +7,7 @@
 #define IDD_DQSDWIZARDDLG               102
 #define IDD_OPTIONSDLG                  103
 #define IDD_ABOUTDLG                    104
+#define IDD_DWMESSAGEBOX                105
 #define IDI_NORMAL                      201
 #define IDC_FormList                    201
 #define IDI_HOT                         202
@@ -25,6 +26,9 @@
 #define IDC_EditXML                     214
 #define IDC_Editor                      215
 #define IDC_Version                     217
+#define IDC_DontAskAgain                218
+#define IDC_Message                     223
+#define IDC_IncludeComments             224
 
 // Next default values for new objects
 // 
@@ -32,7 +36,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        204
 #define _APS_NEXT_COMMAND_VALUE         32768
-#define _APS_NEXT_CONTROL_VALUE         218
-#define _APS_NEXT_SYMED_VALUE           105
+#define _APS_NEXT_CONTROL_VALUE         227
+#define _APS_NEXT_SYMED_VALUE           106
 #endif
 #endif

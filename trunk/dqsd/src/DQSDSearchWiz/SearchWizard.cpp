@@ -53,22 +53,31 @@ STDMETHODIMP CSearchWizard::Exec(const GUID*, DWORD nCmdID, DWORD, VARIANTARG*, 
 	
 	if ( 0 == cForms )
 	{
-		::MessageBox( hwndBrowser, _T("Sorry, no FORMs were found in the current document.  At least one FORM is required to create a search."), _T("DQSD Search Wizard"), MB_OK|MB_ICONINFORMATION );
-		return S_OK;
-	}
-
-	// Give the user a chance to select a FORM field
-	CComPtr< IHTMLElement > spActiveElement;
-	spDoc2->get_activeElement( &spActiveElement );
-	CComPtr< IHTMLInputElement > spActiveInputElement;
-	if ( !spActiveElement || FAILED( spActiveElement.QueryInterface( &spActiveInputElement ) ) )
-	{
-		if ( IDYES == ::MessageBox( hwndBrowser, 
-						   _T("Selecting or clicking in the field which contains the search string will add some helpful information to the search and make it more complete.\r\n\r\n"
-							  "Would you like to select a form field and then run the wizard again?"), 
-						   _T("DQSD Search Wizard"), MB_YESNO|MB_ICONQUESTION ) )
+		if ( IDNO == ::MessageBox( hwndBrowser, 
+								   _T("Sorry, no FORMs were found in the current document.  "
+									  "Would you like to continue and create an empty search template?"), 
+								   _T("DQSD Search Wizard"), MB_YESNO|MB_ICONQUESTION|MB_DEFBUTTON2 ) )
 		{
 			return S_OK;
+		}
+	}
+	else
+	{
+		// Give the user a chance to select a FORM field
+		CComPtr< IHTMLElement > spActiveElement;
+		spDoc2->get_activeElement( &spActiveElement );
+		CComPtr< IHTMLInputElement > spActiveInputElement;
+		if ( !spActiveElement || FAILED( spActiveElement.QueryInterface( &spActiveInputElement ) ) )
+		{
+			if ( IDNO == ::MessageBox( hwndBrowser, 
+							   _T("No fields have been selected.  Selecting or clicking in the field which contains the search "
+								  "string will add some helpful information to the search and make "
+								  "it more complete.\r\n\r\n"
+								  "Would you like to continue anyway?"), 
+							   _T("DQSD Search Wizard"), MB_YESNO|MB_ICONQUESTION|MB_DEFBUTTON2 ) )
+			{
+				return S_OK;
+			}
 		}
 	}
 	
