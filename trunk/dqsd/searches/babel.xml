@@ -1,0 +1,87 @@
+<search function="babel">
+  <name>Babelfish Language Translation</name>
+  <description>Use the BabelFish to translate text from one language to another: "babel /from:en /to:es hello how are you" or "babel /from:en /to:es http://www.yahoo.com"</description>
+  <contributor>Neel Doshi, Greg Mitchell</contributor>
+  <category>Reference</category>
+  <link>http://babelfish.altavista.com</link>
+  <form name="babelf"
+        action="http://babelfish.altavista.com/tr"
+        method="post">
+    <input type="hidden" name="doit" value="done" />
+    <input type="hidden" name="lp" />
+    <input type="hidden" name="tt" />
+    <input type="hidden" name="urltext" />
+    <input type="hidden" name="url" />
+  </form>
+  <script><![CDATA[
+function babel(q)
+{
+	if( q == "" )
+	{
+		openSearchWindow("http://babelfish.altavista.com/");
+		return false;
+	}
+	else if ( q == "?" )
+	{
+		alert("Use the BabelFish to translate text from one language to another:\n \
+'babel /from:en /to:es hello how are you' or 'babel /from:en /to:es http://www.yahoo.com' \n \
+Options as of 3/29/2002 are:\n \
+/from:en /to:zh - English to Chinese\n \
+/from:en /to:fr - English to French\n \
+/from:en /to:de - English to German\n \
+/from:en /to:it - English to Italian\n \
+/from:en /to:ja - English to Japanese\n \
+/from:en /to:ko - English to Korean\n \
+/from:en /to:pt - English to Portuguese\n \
+/from:en /to:es - English to Spanish\n \
+/from:zh /to:en - Chinese to English\n \
+/from:fr /to:en - French to English\n \
+/from:fr /to:de - French to German\n \
+/from:de /to:en - German to English\n \
+/from:de /to:fr - German to French\n \
+/from:it /to:en - Italian to English\n \
+/from:ja /to:en - Japanese to English\n \
+/from:ko /to:en - Korean to English\n \
+/from:pt /to:en - Portuguese to English\n \
+/from:ru /to:en - Russian to English\n \
+/from:es /to:en - Spanish to English\n \
+	");
+		return false;
+	}
+	else
+	{
+		var func_name = "babel";
+		var switch_list = new Array("from", "to");
+		var switch_vals = new Array();
+		var args = parseArgs(q, switch_list);
+
+		// check if the required switches are set
+		for (var j = 0; j < switch_list.length; j++)
+		{
+			if ( typeof args.switch_val[ switch_list[j] ] == "undefined" || args.switch_val[ switch_list[j] ] == "" )
+			{
+				alert(func_name + ":  /" + switch_list[j] + " switch must be entered.  Type '" + func_name + " ?' to see instructions");
+				return false;
+			}
+		}
+
+		// Determine if the string is a url or not
+		var strURL = isURL(args.q);
+		if (strURL)
+		{
+			babelf.tt.value = "url";
+			babelf.url.value = strURL;
+		}
+		else
+		{
+			babelf.tt.value = "urltext";
+			babelf.urltext.value = args.q;
+		}
+
+		babelf.lp.value =  args.switch_val["from"] + "_" +  args.switch_val["to"];
+		submitForm(babelf);
+		return true;
+	}
+}
+  ]]></script>
+</search>
