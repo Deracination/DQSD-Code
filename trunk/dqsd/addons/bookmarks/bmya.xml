@@ -1,0 +1,54 @@
+<search function="bmya">
+  <name>Yahoo Bookmarks</name>
+  <description>
+    Goto Yahoo Bookmarks<br/>
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+	<tr><td>/reload</td><td> - </td><td>Force reload and update cache</td></tr>
+	<tr><td>/help</td><td> - </td><td>Show the help menu</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+	<tr><td>bmya</td><td> - </td><td>Show Yahoo bookmarks menu - cached if not the first time</td></tr>
+	<tr><td>bmya /r</td><td> - </td><td>Reload cache and show Yahoo bookmarks menu</td></tr>
+    </table>
+  </description>
+  <link>http://my.yahoo.com/</link>
+  <category>Bookmarks</category>
+  <contributor>Brent Beardsley</contributor>
+
+  <script src="addons/bookmarks/bookmarks_lib.js"></script>
+  <script><![CDATA[
+    var yahoo_bookmarks_array = null;
+
+    function bmya(q)
+    {
+        var args = parseArgs(q, "reload, help");
+	if (args != null && args.switches.length >= 1) {
+	  if (args.switches[0].name == "reload") {
+		yahoo_bookmarks_array = null;
+	  } else if (args.switches[0].name == "help") {
+		nullArgs("bmya", "?");
+		return;
+	  }
+	}
+	if (args.q == "?") {
+		nullArgs("bmya", "?");
+		return;
+	}
+
+	if (yahoo_bookmarks_array == null) {
+	        var bmk_location = (typeof bookmarks_yahoo_location != "undefined" && bookmarks_yahoo_location != "") ? bookmarks_yahoo_location : "http://e.my.yahoo.com/config/export_bookmark?.commit=1";
+		var bookmarks_page = "";
+		if (bmk_location.match(/\:\/\//)) {
+			bookmarks_page = bookmarks_get_webpage(bmk_location);
+		} else {
+			bookmarks_page = bookmarks_get_file(bmk_location);
+		}
+		yahoo_bookmarks_array = bookmarks_get_bookmarks_array_from_netscape(bookmarks_page);
+	}
+	bookmarks_show_menu(yahoo_bookmarks_array);
+    }
+    ]]>
+  </script>
+</search>

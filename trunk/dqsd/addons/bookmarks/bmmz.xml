@@ -1,0 +1,67 @@
+<search function="bmmz">
+  <name>Mozilla Bookmarks</name>
+  <description>
+    Goto Mozilla Bookmarks<br/>
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+	<tr><td>/reload</td><td> - </td><td>Force reload and update cache</td></tr>
+	<tr><td>/help</td><td> - </td><td>Show the help menu</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+	<tr><td>bmmz</td><td> - </td><td>Show Mozilla bookmarks menu - cached if not the first time</td></tr>
+	<tr><td>bmmz /r</td><td> - </td><td>Reload cache and show Mozilla bookmarks menu</td></tr>
+    </table>
+  </description>
+  <link></link>
+  <category>Bookmarks</category>
+  <contributor>Brent Beardsley</contributor>
+
+  <script src="addons/bookmarks/bookmarks_lib.js"></script>
+  <script><![CDATA[
+    var mozilla_bookmarks_array = null;
+
+    function bmmz(q)
+    {
+        var args = parseArgs(q, "reload, help");
+	if (args != null && args.switches.length >= 1) {
+	  if (args.switches[0].name == "reload") {
+		mozilla_bookmarks_array = null;
+	  } else if (args.switches[0].name == "help") {
+		nullArgs("bmmz", "?");
+		return;
+	  }
+	}
+	if (args.q == "?") {
+		nullArgs("bmmz", "?");
+		return;
+	}
+
+	if (mozilla_bookmarks_array == null) {
+		var bookmarks_full_path = "";
+		var user_specified_dir = (typeof bookmarks_mozilla_location != "undefined" && bookmarks_mozilla_location != "");
+		var user_profile = (typeof bookmarks_mozilla_profile != "undefined" && bookmarks_mozilla_profile != "") ? bookmarks_mozilla_profile : "default";
+		var user_file = (typeof bookmarks_mozilla_file != "undefined" && bookmarks_mozilla_file != "") ? bookmarks_mozilla_file : "bookmarks.html";
+		if (!user_specified_dir) {
+			var shell_obj = new ActiveXObject("WScript.Shell");
+			var bmk_folder = shell_obj.SpecialFolders("AppData") + "\\Mozilla\\Profiles\\"+user_profile;
+			// appears that there is a random directory below the profile directory so get it and if it's there add it to the path
+			var fso = new ActiveXObject("Scripting.FileSystemObject");
+			var fc = new Enumerator(fso.GetFolder(bmk_folder).SubFolders);
+			if (!fc.atEnd()) {
+			  bmk_folder += ("\\" + fso.GetFileName(fc.item()));
+			}
+			fso = null;
+			bookmarks_full_path = bmk_folder + "\\" + user_file;
+			shell_obj = null;
+		} else {
+		  bookmarks_full_path = bookmarks_mozilla_location + "\\" + user_file;
+		}
+		var bookmarks_page = bookmarks_get_file(bookmarks_full_path);
+		mozilla_bookmarks_array = bookmarks_get_bookmarks_array_from_netscape(bookmarks_page);
+	}
+	bookmarks_show_menu(mozilla_bookmarks_array);
+    }
+    ]]>
+  </script>
+</search>
