@@ -1,0 +1,136 @@
+<search function="bmd">
+  <name>Birth Marriage Death Project</name>
+  <category>Genealogy</category>
+  <contributor>Brent Beardsley</contributor>
+  <link>http://bmdproject.rootsweb.com/</link>
+  <email></email>
+  <description>
+  Search the Birth Marriage Death Project at Rootsweb.com
+    <div class="helpboxDescLabels">Switches:</div>
+  	<table class="helpboxDescTable">
+  		<tr><td>/birth</td><td> - </td><td>Search birth records</td></tr>
+  		<tr><td>/marriage</td><td> - </td><td>Search marriage records</td></tr>
+  		<tr><td>/death</td><td> - </td><td>Search death records</td></tr>
+		<tr><td>/county:[county name]</td><td> - </td><td>Specify county to search in</td></tr>
+  		<tr><td>/state:[state name] (required)</td><td> - </td><td>Specify state to search in</td></tr>
+  	</table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>bmd /d /s:ny jones</td></tr>
+  	</table>
+  </description>
+  <form name="bmdf"
+        method="post"
+        action="http://bmdproject.rootsweb.com/cgi-bin/search.cgi">
+    <input type="hidden" name="last" value="" />
+    <input type="hidden" name="first" value="" />
+    <input type="hidden" name="county" value="none" />
+    <input type="hidden" name="search_by" value="Surname" />
+    <input type="hidden" name="st" value="" />
+    <input type="hidden" name="t" value="M" />
+    <input type="hidden" name=".cgifields" value="type" />
+    <input type="hidden" name="type" value="Exact" />
+    <COMMENT>
+      The input element above, "type" was a set of radio buttons with the following options...
+      "Exact", "Starts with", "Soundex"
+    </COMMENT>
+  </form>
+  <script src="addons/genealogy/genealogy_lib.js"></script>
+  <script><![CDATA[
+    function bmd(q)
+    {
+      if( nullArgs("bmd", q) )
+        return;
+
+      var validBirthStates = new Array();
+      var validMarriageStates = new Array("FL", "GA", "KY", "MS", "NY", "NC", "OH", "OK", "TN", "VA", "WI");
+      var validDeathStates = new Array("FL", "GA", "KY", "NY", "NC", "OH", "OK", "TN", "WI");
+
+      document.bmdf.county.value = "none";
+      document.bmdf.st.value = "";
+      document.bmdf.type.value = "";
+      //document.bmdf.search_by.value = "";
+      //document.bmdf.t.value = "";
+      //document.bmdf[".cgifields"].value = "";
+
+      var args = parseArgs(q, "county, state, birth, marriage, death");
+      var recordType = "";
+      var stateAbbrev = "";
+      var lastName = "";
+      var firstName = "";
+      var countyName = "";
+      for (var iSwitch = 0; iSwitch < args.switches.length; iSwitch++)
+      {
+        switch( args.switches[iSwitch].name )
+        {
+          case "birth":
+            recordType = 'B';
+            break;
+          case "death":
+            recordType = 'D';
+            break;
+          case "marriage":
+            recordType = 'M';
+            break;
+          case "county":
+            countyName = args.switch_val["state"];
+            break;
+          case "state":
+	    stateAbbrev = genealogy_lookup_place_abbrev(args.switch_val["state"]);
+            break;
+          default:
+            break;
+        }
+      }
+
+      var errCount = 0;
+      var errMsg = "";
+
+      lastName = genealogy_parse_surname(args.q);
+      if (lastName.length == 0) {
+	errMsg = "No surname specified.";
+	errCount++;
+      }
+    
+      switch (recordType) {
+      case 'B':
+         if (!genealogy_in_array(stateAbbrev, validBirthStates)) {
+           errCount++;
+	   errMsg = "State has no birth records available.";
+	 }
+	 break;
+      case 'M':
+         if (!genealogy_in_array(stateAbbrev, validMarriageStates)) {
+           errCount++;
+	   errMsg = "State has no marriage records available.";
+	 }
+	 break;
+      case 'D':
+         if (!genealogy_in_array(stateAbbrev, validDeathStates)) {
+           errCount++;
+	   errMsg = "State has no death records available.";
+	 }
+	 break;
+      default:
+        errCount++;
+        errMsg = "Invalid record type specified.";
+	break;
+      }
+      if (stateAbbrev.length == 0) {
+	errMsg = "Invalid state specified.";
+	errCount++;
+      }
+
+      document.bmdf.t.value = recordType;
+      document.bmdf.st.value = stateAbbrev;
+      document.bmdf.last.value = lastName;
+      document.bmdf.first.value = genealogy_parse_givenname(args.q);
+    
+      if (errCount == 0) {
+        submitForm(bmdf);
+      } else {
+	displayPopupMessage(errMsg);
+      }
+    }
+  ]]></script>
+</search>

@@ -4,7 +4,7 @@
     Goto USGenExchange State web pages.<br/>
     <div class="helpboxDescLabels">Examples:</div>
     <table class="helpboxDescTable">
-      <tr><td>usgx mi</td></tr>
+      <tr><td>usgx berrien, mi</td></tr>
       <tr><td>usgx virginia</td></tr>
     </table>
   </description>
@@ -21,13 +21,25 @@
     {
       if( nullArgs("usgx", q) )
         return false;
-
-      var state_abbrev = genealogy_lookup_place_abbrev(q)
-      if (state_abbrev.length > 0) {
-        openSearchWindow("http://www.genexchange.org/state.cfm?state="+state_abbrev.toLowerCase());
-      } else {
-	openSearchWindow("http://www.genexchange.org/us.cfm");
+      
+      if (!genealogy_check_lib_version("1.3")) {
+	return false;
       }
+
+      var search_url = "http://www.genexchange.org/";
+      var state = genealogy_parse_place_state(q);
+      var county = genealogy_parse_place_county(q).toLowerCase().replace(new RegExp("\\s","gim"), "");
+      var state_abbrev = genealogy_lookup_place_abbrev(state).toLowerCase();
+      if (state_abbrev.length > 0) {
+        if (county.length > 0) {
+	  search_url += "county.cfm?state="+state_abbrev+"&amp;County="+county;
+	} else {
+	  search_url += "state.cfm?state="+state_abbrev;
+	}
+      } else {
+        search_url += "us.cfm";
+      }
+      openSearchWindow(search_url);
     }
     ]]>
   </script>

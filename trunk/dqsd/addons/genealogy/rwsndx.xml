@@ -1,0 +1,31 @@
+<search function="rwsndx">
+  <name>Rootsweb Soundex Calculator</name>
+  <category>Genealogy</category>
+  <contributor>Brent Beardsley</contributor>
+  <link>http://resources.rootsweb.com/cgi-bin/soundexconverter</link>
+  <email></email>
+  <description>
+  Calculate soundex for surnames from Rootsweb.com
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>sndx Beardsley</td></tr>
+      <tr><td>sndx MacBeth</td></tr>
+    </table>
+  </description>
+  <form name="rwsndxf"
+        method="post"
+        action="http://resources.rootsweb.com/cgi-bin/soundexconverter">
+    <input type="hidden" name="surname" value="" />
+  </form>
+  <script src="addons/genealogy/genealogy_lib.js"></script>
+  <script><![CDATA[
+    function rwsndx(q)
+    {
+      if( nullArgs("rwsndx", q) )
+        return;
+
+      document.rwsndxf.surname.value = genealogy_parse_surname(q);
+      submitForm(rwsndxf);
+    }
+  ]]></script>
+</search>

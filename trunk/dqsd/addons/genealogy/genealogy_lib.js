@@ -1,4 +1,5 @@
     var genealogy_debug = 0;
+    var genealogy_lib_version = "1.3";
 
 	var genealogy_states = new Array(
 	"ALABAMA", "ALASKA", "ARIZONA", "ARKANSAS",
@@ -179,6 +180,118 @@ function genealogy_parse_givenname(name)
 	return "";
 }
 
+function genealogy_soundex(name)
+{
+	var i = 0;
+	var j = 0;
+	var SCode = '0';
+	var PrevCode = '0';
+	var strResult = '';
+	var CharTemp = '0';
+	var tempName = genealogy_trim(name).toUpperCase();
+
+	for (i = 0; (i < tempName.length && j < 4); i++) {
+		CharTemp = tempName.charAt(i);
+		if (CharTemp == 'R') {
+			SCode = '6';
+        } else if (CharTemp == 'M' || CharTemp == 'N') {
+			SCode = '5';
+		} else if (CharTemp == 'L') {
+			SCode = '4';
+		} else if (CharTemp == 'D' || CharTemp == 'T') {
+			SCode = '3';
+		} else if (CharTemp == 'C' || CharTemp == 'G' ||
+                   CharTemp == 'J' || CharTemp == 'K' ||
+                   CharTemp == 'Q' || CharTemp == 'S' ||
+                   CharTemp == 'X' || CharTemp == 'Z') {
+			SCode = '2';
+		} else if (CharTemp == 'B' || CharTemp == 'F' ||
+                   CharTemp == 'P' || CharTemp == 'V') {
+			SCode = '1';
+		} else {
+			SCode = '0';
+		}
+
+		if (SCode > '0' || j == 0) {
+			if (j == 0 || SCode != PrevCode) {
+				strResult += SCode;
+				j++;
+            }
+        }
+
+		if (j == 0)	{
+			j++;
+		}
+
+		if (CharTemp == 'H' || CharTemp == 'W') {
+			SCode = PrevCode;
+		}
+		PrevCode = SCode;
+	}
+
+	for (i = j; i <= 4; i++) {
+		strResult += '0';
+	}
+	if (name.length > 0) {
+		return name.charAt(0).toUpperCase()+strResult.substring(1,4);
+	} else {
+		return "";
+	}
+}
+
+function genealogy_parse_place(name, fmt)
+{
+   var fmtparts = fmt.split(",");
+   if (fmtparts == null || fmtparts.length == 0) {
+	   return null;
+   }
+   for (var i=0; i < fmtparts.length; i++) {
+	   fmtparts[i] = genealogy_trim(fmtparts[i]).toLowerCase();
+   }
+   var placePieces = [];
+   var fmtitem = fmtparts.length-1;
+   var nameparts = name.split(",");
+   var namepart = '';
+   var fmtpart = '';
+
+   if (nameparts != null) {
+	   for (var j=nameparts.length-1; j >= 0; j--) {
+			namepart = genealogy_trim(nameparts[j]);
+			fmtpart = fmtparts[fmtitem];
+			placePieces[fmtpart] = namepart;
+			fmtitem--;
+			if (fmtitem < 0) {
+				break;
+			}
+       }
+   }
+   while (fmtitem >= 0) {
+		fmtpart = fmtparts[fmtitem];
+		placePieces[fmtpart] = "";
+		fmtitem--;
+   }
+   return placePieces;
+}
+
+function genealogy_parse_place_state(name, fmt)
+{
+	if (fmt == null || fmt.length == 0)	{
+		fmt = "county, state";
+	}
+	var placePieces = genealogy_parse_place(name, fmt);
+	return placePieces["state"];
+}
+
+function genealogy_parse_place_county(name, fmt)
+{
+	if (fmt == null || fmt.length == 0)	{
+		fmt = "county, state";
+	}
+	var placePieces = genealogy_parse_place(name, fmt);
+	return placePieces["county"];
+}
+
+
 function genealogy_build_url(cur_url, link_url)
 {
 	genealogy_alert("cur_url="+cur_url+", link_url="+link_url);
@@ -224,8 +337,32 @@ function genealogy_get_webpage(webpage_url, search_name, refresh_time)
 	return http_obj.responseText;
 }
 
-function genealogy_get_page_links(webpage_source)
+function genealogy_link_get_href(link)
 {
+	var links_regex = new RegExp("<a href=\"(.*?)\".*?>(.*?)<\/a>", "gim");
+	var parts = links_regex.exec(link);
+	if (parts != null && parts.length > 1) {
+		return parts[1];
+	}
+	return "";
+}
+
+function genealogy_link_get_name(link)
+{
+	var links_regex = new RegExp("<a href=\"(.*?)\".*?>(.*?)<\/a>", "gim");
+	var parts = links_regex.exec(link);
+	if (parts != null && parts.length > 2) {
+		return parts[2];
+	}
+	return "";
+}
+
+function genealogy_get_page_links(webpage_source, matching_name)
+{
+	var matching_name_regex = null;
+	if (matching_name != null) {
+		matching_name_regex = new RegExp(matching_name, "i");
+	}
 	var links_regex = new RegExp("<a href=\"(.*?)\".*?>(.*?)<\/a>", "gim");
 	//var links_regex = new RegExp("<a.*?\/a>", "gim");
 	var link;
@@ -237,10 +374,47 @@ function genealogy_get_page_links(webpage_source)
 	// add links to array
 	var i = 0;
 	while ( (link = links_regex.exec(new_source)) != null) {
+		if (matching_name_regex != null) {
+			var link_name = link[2];
+			if (!link_name.match(matching_name_regex)) {
+				continue;
+			}
+		}
 		arr[i] = link[0];
 		i++;
 	}
 	return arr;
+}
+
+function genealogy_get_page_link_named(webpage_url, matching_name)
+{
+	var webpage = genealogy_get_webpage(webpage_url);
+	var links = genealogy_get_page_links(webpage, matching_name);
+	if (links != null && links.length > 0) {
+		return genealogy_build_url(webpage_url, genealogy_link_get_href(links[0]));
+	} else {
+		return "";
+	}
+}
+
+function genealogy_check_lib_version(required_version)
+{
+	var cur_version_parts = genealogy_lib_version.split(".");
+	var required_version_parts = required_version.split(".");
+	
+	var major_cur_version = cur_version_parts[0];
+	var minor_cur_version = (cur_version_parts.length > 1) ? cur_version_parts[1] : 0;
+
+	var major_required_version = required_version_parts[0];
+	var minor_required_version = (required_version_parts.length > 1) ? required_version_parts[1] : 0;
+	
+	if (major_cur_version >= major_required_version) {
+		if (minor_cur_version >= minor_required_version) {
+			return true;
+		}
+	}
+	genealogy_error("This search requires version '"+required_version+" of genealogy_lib.js");
+	return false;
 }
 
 function genealogy_in_array(needle, haystack)

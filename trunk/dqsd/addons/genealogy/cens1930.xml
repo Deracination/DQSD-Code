@@ -1,0 +1,102 @@
+<search function="cens1930">
+  <name>Census - 1930 Microfilm Locator </name>
+  <category>Genealogy</category>
+  <contributor>Brent Beardsley</contributor>
+  <link>http://1930census.archives.gov/beginSearch.asp</link>
+  <email></email>
+  <description>
+  Find the microfilm for the 1930 census.
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td></td></tr>
+      <tr><td></td></tr>
+    </table>
+  </description>
+  <form name="cens1930f"
+        method="post"
+        action="http://1930census.archives.gov/stateSearch.asp">
+    <input type="hidden" name="lstStates" value="" />
+    <COMMENT>
+      The input element above, "lstStates", was a SELECT element with the following options...
+      <select name="lstStates">
+        <option value="ALAlabama">Alabama</option>
+        <option value="AKAlaska">Alaska</option>
+        <option value="ASAmerican Samoa">American Samoa</option>
+        <option value="AZArizona">Arizona</option>
+        <option value="ARArkansas">Arkansas</option>
+        <option value="CACalifornia">California</option>
+        <option value="COColorado">Colorado</option>
+        <option value="CTConnecticut">Connecticut</option>
+        <option value="DEDelaware">Delaware</option>
+        <option value="DCDistrict of Columbia">District of Columbia</option>
+        <option value="FLFlorida">Florida</option>
+        <option value="GAGeorgia">Georgia</option>
+        <option value="GUGuam">Guam</option>
+        <option value="HIHawaii">Hawaii</option>
+        <option value="IDIdaho">Idaho</option>
+        <option value="ILIllinois">Illinois</option>
+        <option value="INIndiana">Indiana</option>
+        <option value="IAIowa">Iowa</option>
+        <option value="KSKansas">Kansas</option>
+        <option value="KYKentucky">Kentucky</option>
+        <option value="LALouisiana">Louisiana</option>
+        <option value="MEMaine">Maine</option>
+        <option value="MDMaryland">Maryland</option>
+        <option value="MAMassachusetts">Massachusetts</option>
+        <option value="MIMichigan">Michigan</option>
+        <option value="MNMinnesota">Minnesota</option>
+        <option value="MSMississippi">Mississippi</option>
+        <option value="MOMissouri">Missouri</option>
+        <option value="MTMontana">Montana</option>
+        <option value="NENebraska">Nebraska</option>
+        <option value="NVNevada">Nevada</option>
+        <option value="NHNew Hampshire">New Hampshire</option>
+        <option value="NJNew Jersey">New Jersey</option>
+        <option value="NMNew Mexico">New Mexico</option>
+        <option value="NYNew York">New York</option>
+        <option value="NCNorth Carolina">North Carolina</option>
+        <option value="NDNorth Dakota">North Dakota</option>
+        <option value="OHOhio">Ohio</option>
+        <option value="OKOklahoma">Oklahoma</option>
+        <option value="OROregon">Oregon</option>
+        <option value="PCPanama Canal">Panama Canal</option>
+        <option value="PAPennsylvania">Pennsylvania</option>
+        <option value="PRPuerto Rico">Puerto Rico</option>
+        <option value="RIRhode Island">Rhode Island</option>
+        <option value="SCSouth Carolina">South Carolina</option>
+        <option value="SDSouth Dakota">South Dakota</option>
+        <option value="TNTennessee">Tennessee</option>
+        <option value="TXTexas">Texas</option>
+        <option value="UTUtah">Utah</option>
+        <option value="VTVermont">Vermont</option>
+        <option value="VIVirgin Islands">Virgin Islands</option>
+        <option value="VAVirginia">Virginia</option>
+        <option value="WAWashington">Washington</option>
+        <option value="WVWest Virginia">West Virginia</option>
+        <option value="WIWisconsin">Wisconsin</option>
+        <option value="WYWyoming">Wyoming</option>
+      </select>
+    </COMMENT>
+
+  </form>
+  <script src="addons/genealogy/genealogy_lib.js"></script>
+  <script><![CDATA[
+    function cens1930(q)
+    {
+      if( nullArgs("cens1930", q) )
+        return;
+
+      if (!genealogy_check_lib_version("1.3")) 
+	return;
+
+      var state = genealogy_parse_place_state(q);
+      var county = genealogy_parse_place_county(q);
+      var stateAbbrev = genealogy_lookup_place_abbrev(state);
+      var stateFullname = genealogy_lookup_place_name(state);
+
+      document.cens1930f.lstStates.value = stateAbbrev+stateFullname;
+
+      submitForm(cens1930f);
+    }
+  ]]></script>
+</search>

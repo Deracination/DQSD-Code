@@ -4,7 +4,7 @@
     Goto Interment.net web pages.<br/>
     <div class="helpboxDescLabels">Examples:</div>
     <table class="helpboxDescTable">
-      <tr><td>interment mi</td></tr>
+      <tr><td>interment branch, mi</td></tr>
       <tr><td>interment alaska</td></tr>
     </table>
   </description>
@@ -21,14 +21,26 @@
       if( nullArgs("interment", q) )
         return false;
 
+      if (!genealogy_check_lib_version("1.3")) {
+	return false;
+      }
+
+      var state = genealogy_parse_place_state(q);
+      var county = genealogy_parse_place_county(q);
+
       var search_url = "http://www.interment.net/us/";
       var links = genealogy_get_known_page_links(search_url);
-      var search_place_num = genealogy_lookup_place(q);
+      var search_place_num = genealogy_lookup_place(state);
       if (search_place_num >= 0) {
-        openSearchWindow(links[search_place_num]);
-      } else {
-	openSearchWindow(search_url);
+        search_url = links[search_place_num];
+	if (county.length > 0) {
+	  var linkToOpen = genealogy_get_page_link_named(search_url, county);
+	  if (linkToOpen.length > 0) {
+            search_url = linkToOpen;
+	  }
+	}
       }
+      openSearchWindow(search_url);
     }
     ]]>
   </script>

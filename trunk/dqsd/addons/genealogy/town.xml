@@ -1,14 +1,4 @@
 <search function="town">
-  <COMMENT>
-
-    This search file was initially created by Dave's Quick Search Deskbar
-    Search Wizard version 0.4 (beta) on 08/18/02 at 15:54:48
-
-    Even though this XML search will probably load and is a healthy start
-    toward a completed search, please be aware that this search will probably
-    not work as is and will require some human inspection and modification.
-
-  </COMMENT>
   <name>Rootsweb Town Search</name>
   <category>Genealogy</category>
   <contributor>Brent Beardsley</contributor>
@@ -16,13 +6,16 @@
   <email></email>
   <description>
   Search for a town on Rootsweb Town Search
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>town preston</td></tr>
+      <tr><td>town preston, ny</td></tr>
+      <tr><td>town preston, new york</td></tr>
+    </table>
   </description>
   <form name="townf"
         method="post"
         action="http://resources.rootsweb.com/cgi-bin/townco.cgi">
-
-    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
-
     <input type="hidden" name="city" value="" />
     <input type="hidden" name="state" value="" />
   </form>
@@ -33,45 +26,13 @@
       if( nullArgs("town", q) )
         return;
 
-      // Parse switches with parseArgs:
-
-      // parseArgs usage:
-      // Arguments:
-      //    q                - string from the search function
-      //    expectedSwitches - list or array of the expected switch values
-      //    expandSwitches   - optional parameter [default = true] used to determine 
-      //                       if the switch shortcuts should be expanded (i.e. /f becomes /foo)
-      // Returns an object with these properties:
-      //    q        - the input string with the switches removed
-      //    switches - array of objects with these two properties:
-      //                  name:   expanded name of the matched switch (i.e. foo as in /foo:bar)
-      //                  value:  value of switch (i.e. bar as in /foo:bar)
-      //    switch_val - associative array with the switch name as the key with the switch value 
-      //                 as the value. (i.e. switch_val["foo"] = "bar" as in /foo:bar)
-
-      document.townf.city.value = "";
-      document.townf.state.value = "";
-
-      var args = parseArgs(q, "state");
-      if ( args.switches.length > 0 )
-      {
-        switch( args.switches[0].name )
-        {
-          case "state":
-	       document.townf.state.value = genealogy_lookup_place_abbrev(args.switch_val["state"]);
-               break;
-          default:
-               break;
-        } //end-switch
+      var parts = q.split(",");
+      document.townf.city.value = genealogy_trim(parts[0]);
+      if (parts.length > 1) {
+        document.townf.state.value = genealogy_lookup_place_abbrev(genealogy_trim(parts[1]));
+      } else {
+	document.townf.state.value = "";
       }
-
-      // FORM variables for townf
-
-      // The wizard assigned the search string to this form field value because
-      // this field was the active element when the search file was generated.
-      // Change this to args.q if the search string is parsed with parseArgs.
-      document.townf.city.value = args.q;
-
       submitForm(townf);
     }
   ]]></script>
