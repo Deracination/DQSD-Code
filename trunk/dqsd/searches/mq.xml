@@ -1,10 +1,11 @@
 <search function="mq">
   <name>Mapquest Maps</name>
   <description>
-    Find maps of United States locations.<br/>
+    Find maps of United States locations by address or latitude/longitude.<br/>
     <div class="helpboxDescLabels">Example:</div>
     <table class="helpboxDescTable">
   		<tr><td>mq 1400 Constitution Ave NE, Washington DC</td></tr>
+  		<tr><td>mq 28.2492, -81.3651</td></tr>
   	</table>
   </description>
   <category>People and Places</category>
@@ -35,9 +36,18 @@
         var city = "";
         var state = "";
         var zipcode = "";
+				var res;
+				
+				// See if it's just latitude/longitude coordinates
+				res = q.match(/(-?\d+\.?\d*),?\s*(-?\d+\.?\d*)[\s\.,;]*$/);
+				if (res && res[1])
+				{
+					openSearchWindow(document.mqf.action + "?latlongtype=decimal&latitude=" + res[1] + "&longitude=" + res[2]);
+					return true;
+				}
 
         // trim trailing zip
-        var res = q.match(/(\d{5}(-\d{4})?)[\s\.,;]*$/);
+        res = q.match(/(\d{5}(-\d{4})?)[\s\.,;]*$/);
         if (res && res[1])
         {
           zipcode = res[1];
