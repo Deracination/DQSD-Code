@@ -1,0 +1,94 @@
+<search function="que">
+  <name>Queue</name>
+  <description>
+    Interface with Queue (requires Queue account and login w/cookies)<br/>
+    <div class="helpboxDescLabels">Switches:</div>
+      <table class="helpboxDescTable">
+        <tr><td>/search</td><td> - </td><td>Search your Queue Data Stores</td></tr>
+        <tr><td>/add</td><td> - </td><td>Add an Entry to a Queue Data Store</td></tr>
+        <tr><td>/push</td><td> - </td><td>Push a page to your personal Queue</td></tr>
+        <tr><td>/pop</td><td> - </td><td>Pop a page from your personal Queue</td></tr>
+        <tr><td>/task</td><td> - </td><td>Create a new task for your personal Queue</td></tr>
+      </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>que /search Taliban</td></tr>
+      <tr><td>que /add Beth 455-4564</td></tr>
+      <tr><td>que /push http://www.google.com/</td></tr>
+      <tr><td>que /pop</td></tr>
+      <tr><td>que /task Pick up clothes from dry cleaner</td></tr>
+    </table>
+  </description>
+  <category>Reference</category>
+  <link>http://www.irondust.com/queue/</link>
+  <contributor>Nick Tornow</contributor>
+  <email>irondust@hotmail.com</email>
+  
+  <form name="qSearchForm"
+        action="http://www.irondust.com/queue/db_searchStores.asp"
+        method="get">
+    <input type="hidden" name="searchterms"/>
+  </form>
+  <form name="qAddForm"
+        action="http://www.irondust.com/queue/db_addToStore.asp"
+        method="get">
+    <input type="hidden" name="entry"/>
+    <input type="hidden" name="treat_as_text" value="1"/>
+  </form>
+  <form name="qPushForm"
+        action="http://www.irondust.com/queue/db_pushPage.asp"
+        method="get">
+    <input type="hidden" name="PageToPush"/>
+    <input type="hidden" name="autoclose" value="no"/>
+    <input type="hidden" name="hideback" value="1"/>
+  </form>
+  <form name="qPopForm"
+        action="http://www.irondust.com/queue/db_popPage.asp"
+        method="get">
+  </form>
+  <form name="qTaskForm"
+        action="http://www.irondust.com/queue/db_newTask.asp"
+        method="get">
+    <input type="hidden" name="TaskText"/>
+    <input type="hidden" name="autoclose" value="no"/>
+    <input type="hidden" name="hideback" value="1"/>
+  </form>
+  <script><![CDATA[
+    function que(q)
+    {
+      if ( nullArgs("que", q) ) {
+        return false;
+      }
+      var posted = false;
+      var args = parseArgs(q, "search, add, push, pop, task");
+      if (args.switches.length > 0) {
+        switch (args.switches[0].name) {
+          case "add":
+            document.qAddForm.entry.value = args.q;
+            posted = true;
+            submitForm(qAddForm);
+            break;
+          case "push":
+            document.qPushForm.PageToPush.value = args.q;
+            submitForm(qPushForm);
+            posted = true;
+            break;
+          case "pop":
+            submitForm(qPopForm);
+            posted = true;
+            break;
+          case "task":
+            document.qTaskForm.TaskText.value = args.q;
+            submitForm(qTaskForm);
+            posted = true;
+            break;
+        }  //switch
+      }  //if
+      //default is searching Data Stores
+      if (!posted) {
+            document.qSearchForm.searchterms.value = args.q;
+            submitForm(qSearchForm);
+      }  //if
+    } //function
+  ]]></script>
+</search>

@@ -1,0 +1,40 @@
+<search function="wotsit">
+  <name>WotSit's Format - Programmers File Format Reference</name>
+  <description>
+    Search WotSit's Format - Programmers File Format Reference<br/>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>wotsit dbf</td></tr>
+  	</table>
+  </description>
+  <category>Computers</category>
+  <link>http://www.wotsit.org/</link>
+  <contributor></contributor>
+  
+  <form name="wotsitsearch"
+	action="http://www.wotsit.org/search.asp"
+	method="post">
+	<input type="hidden" name="target" />
+  </form>
+
+  <script><![CDATA[
+    function wotsit(q)
+    {
+      if( nullArgs("wotsit", q) )
+        return false;
+
+      var args = parseArgs(q, "all");
+      if( q == "" )
+        openSearchWindow("http://www.wotsit.org/");
+      else if( args.switches.length == 0 )
+      {
+        document.wotsitsearch.elements[0].value = args.q;
+        submitForm(wotsitsearch); 
+      }
+      else
+      {
+        nullArgs("wotsit","?");
+      }
+    }
+  ]]></script>
+</search>
