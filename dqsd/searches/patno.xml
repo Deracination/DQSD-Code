@@ -1,0 +1,58 @@
+<search function="patno">
+
+<COMMENT>Copied from sep.xml - I cannot figure out how to get DQSD to 
+recognize an entirely new search function, so I cannibalized one that 
+already existed and I didn't need.  Someday, figure out how to replace 
+"sep" with "patno" and get this to work.  If I rename the search function 
+"patno", it doesn't show up on the list, even after a refresh.  
+Interestingly, I was able to create a new category (Legal) by just 
+editing the category field here and DQSD picked it up.
+
+The category and the help stuff all show up upon refresh, but not if I 
+change the name of the function above.
+
+OK, now it works - just be persistent.
+</COMMENT>
+
+  <name>Patent Number</name>
+  <contributor>Philip Albert</contributor>
+  <description>Retrieve a patent from U.S. PTO by number.<br/>
+  <div class="helpboxDescLabels">Example:</div>
+  <table class="helpboxDescTable">
+    <tr><td>patno 6,123,456</td></tr>
+    <tr><td>      6,123,456#</td></tr>
+  </table>
+  </description>
+  <category>Legal</category>
+
+  <link>http://164.195.100.11/netahtml/srchnum.htm</link>
+  <form name="patnof" method="get" action="http://164.195.100.11/netacgi/nph-Parser">
+        <INPUT TYPE="HIDDEN" NAME="TERM1" VALUE="" />
+        <INPUT TYPE="HIDDEN" NAME="Sect1" VALUE="PTO1" />
+        <INPUT TYPE="HIDDEN" NAME="Sect2" VALUE="HITOFF" />
+        <INPUT TYPE="HIDDEN" NAME="d"     VALUE="PALL" />
+        <INPUT TYPE="HIDDEN" NAME="p"     VALUE="1" />
+        <INPUT TYPE="HIDDEN" NAME="u"     VALUE="/netahtml/srchnum.htm" />
+        <INPUT TYPE="HIDDEN" NAME="r"     VALUE="0" />
+        <INPUT TYPE="HIDDEN" NAME="f"     VALUE="S" />
+        <INPUT TYPE="HIDDEN" NAME="l"     VALUE="10" />
+  </form>
+  
+  <script><![CDATA[
+    function patno(q)
+    {
+      if( nullArgs("patno", q) )
+        return;
+
+      document.patnof.TERM1.value = q;
+      submitForm(patnof);
+    }
+  ]]></script>
+
+  <copyright>
+	Copyright (c) 2002 David Bau
+	Mods copyright Philip Albert 2002
+	Distributed under the terms of the
+	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>
