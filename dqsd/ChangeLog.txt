@@ -1,0 +1,121 @@
+-- What's new for 2.5.8 (June 30, 2002)
+
+Search bar
+
+* New cascading help menu
+* Most-recently-used list on help menu
+* Support for DEL key and CTRL-INS, etc. cut/copy/paste
+* Fix for problems on machines set for non-English character encoding
+* Ability to enable/disable searches in the help window
+* Shift-Enter on search forces new browser window (overrides reuseBrowserWindowMode)
+* Search history search (enter part of a previous search and press f8)
+* Improved installer and version checking
+* Calender - some bug fixes
+* Lots of minor bug fixes
+* Global hot key (WIN - S) to jump to DQSD from any application
+* "?" followed by a string displays all searches with that string in the search or
+  description
+
+
+New Preferences
+
+* helptime - Time for which help text is displayed at startup
+* startdelay - Setting this to a large number (milliseconds) may help with the 
+               missing tray icons
+* calStart - calendar can be started with double click rather than right-click
+* helpSortKey - Choose whether searches are sorted by name or alias
+* displayHelp - Set this to false to stop display of help strings 'Quick Search' 
+                and 'Display ? for help'
+??? - there are lots more than this
+
+
+Customisation
+
+* All visual styling of DQSD elements moved to search.css with localsearch.css override
+* localprefs.js added to allow local override of preferences
+* parseArgs 
+  A.  Rewrote parse args to solve the problem of switches that were
+  never defined to be switches from being removed from the query.  This
+  caused problems with functions that use switches and expect a url
+  parameter (http://www.yahoo.com would become http:/.yahoo.com due to
+  the parsing).
+  B.  Added an optional third parameter to the function that will
+  disable the switch expansion (/b becomes /books).  A complicated
+  search that expects the '/' character in the query can use this to
+  avoid any problems.
+  C.  Added another output property which returns the switches in an
+  associative array.  In other words /foo:bar will be returned as
+  switch_val["foo"] with the value "bar". The function should still 
+  be backwards compatible so existing searches do not have to be 
+  modified.
+
+* isURL -
+  Added the function isURL which determines if a given string is an
+  http or https url or not.  If it is it will return the string, and if
+  it is not, it will return false.  If the string looks like a dns
+  name, the function will prefix the string with "http://" before
+  returning it.  
+
+* convertStylesToInline - a new function called convertStylesToInline 
+  which is used to shoehorn the stylesheet into a window.createPopup 
+  spawned popup.  
+
+* Added function nullArgs.  I noticed that all of the functions that 
+  I've written open the search link () if the query is null and raise 
+  an alert with the  if the query is "?".  The nullArgs function 
+  encapsulates all of this.  With nullArgs, the user does not have 
+  to write a different version of the description for HTML and for the 
+  alert.  This may be a good way to standardize searches so that the 
+  user knows that he can find help about a function by calling it 
+  with a "?" as the only argument.
+
+* localaliases.txt - Added name and description fields
+
+* Support for 'addons' - see FAQ
+
+
+New / Modified Searches
+
+* yg - Yahoo groups search  
+* gg - Fixed bug when there were no parameter or switches defined.
+* gguk - goggle UK search
+* babel babel search - language translation  
+* QSFind - Improved appearance
+* babel - improved display of help text
+* freetrans - improved display of help text
+* ystocks - improved display of help text
+* yweather - search yahoo weather for a weather forecast.  Uses the 
+             personalization variables in lieu of an argument if the 
+             user has them set.
+* ystocks - search yahoo finance for stock information.
+* webopedia - search the webopedia for technical terms.
+* qsfind - The purpose of qsfind is to help the user find relevant 
+           searches.  qsfind will allow the user to search through the 
+           available functions and see a list of results.  For example, 
+           "qsfind yahoo" will create a popup that displays the list of 
+           searches that have something to do with yahoo.  Then if the 
+           user clicks on the function name, the text will pre-fill the 
+           search dialog box.
+* dns - searches dnsstuff.com
+* temp - bug fixes to temperature converter
+* so - Search societe
+* mac - mac address conversion
+* lottery - lottery number generation
+* roman - roman numberal builder
+* gtwhois - geektime whois service
+* winres - takes an optional url to open
+* phone - now detects phone number regardless of trailing whitespace
+* mrqe - Movie review query engine
+* sb - Changed switchboard search to make /person the default switch
+* Searches submitted Sarah Sweeney:
+    - All Recipes
+    - Chapters|Indigo
+    - InfoSpace.ca Individual Search
+    - InfoSpace.ca Business Search
+    - InfoSpace.ca Category Search
+    - CA Reverse Phone Lookup
+    - CA Reverse Business Phone Lookup
+    - Rotten Tomatoes
+    - The Weather Network Forecast
+    - Snopes.com Urban Legends
+* telfr - French telephone lookup (telfr)
