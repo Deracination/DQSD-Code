@@ -32,7 +32,7 @@ if (!Array.prototype.push)
 
 var DQSDLauncher = null;
 var triedToCreateLauncher = false;
-var useExternalBrowser = (launchmode > 0);
+useExternalBrowser = (launchmode > 0);
 
 function ensureLauncher()
 {
@@ -57,7 +57,7 @@ if (useExternalBrowser)
   if (ensureLauncher())
   {
     var browserPath = DQSDLauncher.pathDefaultBrowser
-    if (launchmode == 2 && browserPath.toLowerCase().indexOf("iexplore.exe") > 0)
+    if (launchmode != 0 && browserPath.toLowerCase().indexOf("iexplore.exe") > 0)
       useExternalBrowser = false;
   }
   else // Gracefully ignore problems creating the control.
