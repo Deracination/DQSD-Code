@@ -136,7 +136,6 @@ Section "Quick Search Deskbar (required)"
   File "..\helpmenu.js"
   File "..\history.js"
   File "..\holidays.*.xml"
-  File "..\httpinst.js"
   File "..\loader.js"
   File "..\maximized.htm"
   File "..\preferences.js"
@@ -318,7 +317,6 @@ Section "Uninstall"
   Delete /REBOOTOK $INSTDIR\helpmenu.js
   Delete /REBOOTOK $INSTDIR\history.js
   Delete /REBOOTOK $INSTDIR\holidays.*.xml
-  Delete /REBOOTOK $INSTDIR\httpinst.js
   Delete /REBOOTOK $INSTDIR\loader.js
   Delete /REBOOTOK $INSTDIR\maximized.htm
   Delete /REBOOTOK $INSTDIR\menu.txt

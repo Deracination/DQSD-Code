@@ -133,7 +133,6 @@ overwritten when installing updates.
 <script type='text/jscript' src="helpmenu.js"></script>
 <script type='text/jscript' src="strings.js"></script>
 <script type='text/jscript' src="version.js"></script>
-<script type='text/jscript' src="httpinst.js"></script>
 
 <script type='text/jscript'>
 // show localized title string
@@ -198,9 +197,6 @@ function def()
   if(t == "quitdqsd")   { shutdown(); return false; }
 
   if(t == "refreshicons")   { refreshIcons(); return false; }
-
-  // HTTP-installation
-  if (httpinst(t)) return false;
 
   // anything below adds something to the history
   addhist(t);
