@@ -1,0 +1,70 @@
+<search function="cheapcd">
+  <name>cheap-cds.com</name>
+  <description>Buy Cheap CDs Online at Wholesale Cost, $5 under Retail.<br/>
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/title</td><td> - </td><td>Title search (default)</td></tr>
+      <tr><td>/artist</td><td> - </td><td>Artist search</td></tr>
+      <tr><td>/song</td><td> - </td><td>Song title search</td></tr>
+      <tr><td>/catnum</td><td> - </td><td>Catalog number search</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>cheapcd rolling stones /artist</td></tr>
+      <tr><td>cheapcd out of control /song</td></tr>
+    </table>
+  </description>
+  <category>Shopping</category>
+  <link>http://www.cheap-cds.com/</link>
+  <contributor>Steven J. Heil</contributor>
+  <email>sjheil_at_hotmail_dot_com</email>
+  <form name="cheapcdf"
+        action="http://www.cheap-cds.com/surf/finds1"
+        method="post">
+    <input type="hidden" name="by" value="t"/>
+    <input type="hidden" name="artist" value=""/>
+  </form>
+  <script><![CDATA[
+    function cheapcd(q)
+    {
+      if( nullArgs("cheapcd", q) )
+        return false;
+
+      var args = parseArgs(q, "title, artist, song, catnum");
+
+      if( q == "" )
+        openSearchWindow("http://www.cheap-cds.com/");
+
+      else if( args.switches.length == 1 )
+      {
+        switch( args.switches[0].name )
+        {
+          case "artist":
+            document.cheapcdf.by.value = "a"; break;
+          case "song":
+            document.cheapcdf.by.value = "s"; break;
+          case "catnum":
+            document.cheapcdf.by.value = "c"; break;
+          case "title":
+          default:
+            document.cheapcdf.by.value = "t"; break;
+        }
+        document.cheapcdf.artist.value = args.q;
+        submitForm(cheapcdf);
+      }
+      else if( args.switches.length > 1 )
+        nullArgs("cheapcd","?");
+      else
+      {
+        document.cheapcdf.artist.value = q;
+        submitForm(cheapcdf);
+      }
+    }
+  ]]></script>
+  <copyright>
+	Copyright (c) 2002 David Bau
+	Distributed under the terms of the
+	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>
+
