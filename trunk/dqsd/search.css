@@ -260,7 +260,7 @@ Styles for the help box
   font-weight:bold;
   color:activeCaption;
 }
-TR.disabledSearch TD, TR.disabledSearch TD TABLE.helpboxDescTable TD, TR.disabledSearch .helpboxDescLabels, TR.disabledSearch A.helpboxLink, TR.disabledSearch A.helpboxLink:VISITED, TR.disabledSearch .helpboxSearchName, TR.disabledSearch A.helpboxAlias
+TR.disabledSearch TD, TR.disabledSearch TD TABLE.helpboxDescTable TD, TR.disabledSearch .helpboxDescLabels, TR.disabledSearch A.helpboxLink, TR.disabledSearch A.helpboxLink:VISITED, TR.disabledSearch .helpboxSearchName, TR.disabledSearch A.helpboxAlias, TR.disabledSearch A.helpboxCommandLink
 {
   background: scrollbar;
   color: graytext;

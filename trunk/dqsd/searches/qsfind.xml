@@ -66,7 +66,8 @@
         for (var i in SearchResults)
         {
           var search = SearchResults[i];
-          QFSBodyCode += "<tr><td valign=top class=helpboxCommands>";
+          var rowclass = (search.enabled ? '' : 'class=disabledSearch');
+          QFSBodyCode += "<tr " + rowclass + "><td class=helpboxCommands>";
           for (var j = 0; j < search.aliases.length; j++)
           {
             var alias = search.aliases[j].replace(/&/g, "&amp;").replace(/</g, "&lt;");
