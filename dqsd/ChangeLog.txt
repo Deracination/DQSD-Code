@@ -1,3 +1,26 @@
+-- What's new for ??? ()
+
+New aliases
+
+* dhr and w3r, from Glenn Carr and Will Dean
+
+New Searches
+
+* 
+
+Modified Searches
+
+* 
+
+Enhancements
+
+* 
+
+Bug Fixes
+
+* 
+
+
 -- What's new for 3.1.4 (October 3, 2002)
 
 New Searches
