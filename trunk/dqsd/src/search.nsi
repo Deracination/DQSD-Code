@@ -133,6 +133,7 @@ Section "Quick Search Deskbar (required)"
   File "..\helpmenu.js"
   File "..\history.js"
   File "..\holidays.ca.xml"
+  File "..\holidays.it.xml"
   File "..\holidays.sg.xml"
   File "..\holidays.us.xml"
   File "..\loader.js"
@@ -276,6 +277,8 @@ Section "Uninstall"
   Delete /REBOOTOK $INSTDIR\helpbox.js
   Delete /REBOOTOK $INSTDIR\helpmenu.js
   Delete /REBOOTOK $INSTDIR\history.js
+  Delete /REBOOTOK $INSTDIR\holidays.ca.xml
+  Delete /REBOOTOK $INSTDIR\holidays.it.xml
   Delete /REBOOTOK $INSTDIR\holidays.sg.xml
   Delete /REBOOTOK $INSTDIR\holidays.us.xml
   Delete /REBOOTOK $INSTDIR\loader.js
