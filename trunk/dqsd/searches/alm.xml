@@ -32,8 +32,9 @@
     function alm(q)
     {
       var args = parseArgs(q, "album, song, style, label");
-      if( q == "" )
-         openSearchWindow("http://www.allmusic.com/");
+      
+      if( nullArgs("alm", q) )
+         return false;
       else if( args.switches.length == 1 )
       {
         switch( args.switches[0].name )

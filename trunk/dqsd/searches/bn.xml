@@ -32,8 +32,8 @@
       document.bnf.Sort.value = "Rank";
       document.bnf.Display.value = "Article";
         
-      if( q == "" )
-        openSearchWindow("http://www.tamaracka.com/search.htm");
+      if( nullArgs("bn", q) )
+        return false;
       else if( args.switches.length > 0 )
       {
         for (var j = 0; j < args.switches.length; j++)

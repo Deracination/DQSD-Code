@@ -22,8 +22,8 @@
   <script><![CDATA[
     function ac(q)
     {
-      if (q == "")
-        window.open("http://www.getzips.com");
+      if( nullArgs("ac", q) )
+        return false;
       else
       {
         if (result = q.match(/^(\d{3})\s*(.*)/))

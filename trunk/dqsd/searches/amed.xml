@@ -23,8 +23,8 @@
   <script><![CDATA[
     function amed(q)
     {
-      if( q == "" )
-        openSearchWindow("http://www.accessmedicine.com/harrisons/public/su_search/advanced_search.html");
+      if( nullArgs("amed", q) )
+        return false;
       else
       {
         document.amedf.QueryText.value = q;

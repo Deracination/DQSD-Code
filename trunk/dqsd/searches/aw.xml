@@ -20,8 +20,8 @@
   <script><![CDATA[
     function aw(q)
     {
-      if( q == "" )
-        openSearchWindow("http://www.accuweather.com/adcbin/local_index");
+      if( nullArgs("aw", q) )
+        return false;
       else
       {
         document.awf.thisZip.value = q;

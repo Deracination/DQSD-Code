@@ -22,8 +22,8 @@
   <script><![CDATA[
     function af(q)
     {
-      if( q == "" )
-        openSearchWindow("http://www.acronymfinder.com/");
+      if( nullArgs("af", q) )
+        return false;
       else
       {
         document.aff.Acronym.value = q;
