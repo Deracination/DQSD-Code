@@ -25,7 +25,8 @@ import "ocidl.idl";
 		[id(6), helpstring("Write the string to the specified file")] HRESULT WriteFile([in] BSTR bstrFilename, [in] BSTR bstrValue);
 		[id(7), helpstring("Get protocol handler for specified protocol")] HRESULT GetProtocolHandler([in] BSTR bstrProtocol, [out,retval] BSTR* pbstrHandler);
 		[id(8), helpstring("Get list of files matching file spec")] HRESULT GetFiles([in] BSTR bstrFileSpec, [out,retval] BSTR* pbstrFiles);
-		[id(9), helpstring("method InstallKeyboardHook")] HRESULT InstallKeyboardHook();
+		[id(9), helpstring("Install the keyboard hook which provides full key support (DEL, arrows, etc)")] HRESULT InstallKeyboardHook();
+		[id(10), helpstring("Register a key to be used with the Windows key to jump to the DQSD bar")] HRESULT RegisterHotKey(long hotkeyVkCode);
 	};
 	[
 		object,

@@ -391,3 +391,8 @@ STDMETHODIMP CLauncher::InstallKeyboardHook()
 		return Error(IDS_ERR_CANT_INSTALL_KEYBOARD_HOOK, IID_ILauncher);
 	}
 }
+
+STDMETHODIMP CLauncher::RegisterHotKey(long hotkeyVkCode)
+{
+	return KeyboardInstallHotkey(hotkeyVkCode);
+}

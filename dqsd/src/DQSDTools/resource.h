@@ -15,6 +15,9 @@
 #define IDS_ERR_CANTFINDDQSD            700
 #define IDS_ERR_INVALIDHORIZALIGNMENT   701
 #define IDS_ERR_CANT_INSTALL_KEYBOARD_HOOK 702
+#define IDS_ERR_HOTKEY_NO_BAR_WINDOW    703
+#define IDS_ERR_HOTKEY_WINDOW_FAILED    704
+#define IDS_ERR_HOTKEY_REG_FAILED       705
 
 // Next default values for new objects
 // 
