@@ -261,6 +261,7 @@ Section "Quick Search Deskbar (required)"
   Delete $INSTDIR\searches\timer.xml
   Delete $INSTDIR\searches\nwtsr.xml
   Delete $INSTDIR\searches\httpd.xml
+  Delete $INSTDIR\searches\dicfr.xml
 
   ; Write the installation path into the registry
   WriteRegStr HKCR "CLSID\${DQSD_CLSID}" "InstallDir" "$INSTDIR"
