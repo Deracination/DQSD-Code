@@ -1,3 +1,21 @@
+-- What's new for 3.0.0.???
+
+New Searches
+
+
+Modified Searches
+
+* ups - Tim Dierks fixed to zero out old search values from the form and 
+        edit out non-alphanumerics (since value was used in eval, single 
+        quotes could cause JS errors)
+
+Enhancements
+
+
+Bug Fixes
+
+
+
 -- What's new for 3.0.0.24 (beta)
 
 New Searches
