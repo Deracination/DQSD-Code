@@ -86,11 +86,17 @@ function saveMenuHistory( alias )
   catch (e) {}
   var menus = menuContent ? menuContent.replace(/\r\n/g, '\n').split('\n') : new Array(0);
   
-  // TODO: This should be re-ordered if it already exists... 
-  
+  var exists = false;
+  var newmenus = new Array(0);
   for ( var i = 0; i < menus.length; i++ )
-    if ( menus[i].toLowerCase() == alias )
-      return;
+  {
+    if ( menus[i].toLowerCase() != alias )
+      newmenus.push( menus[i] );
+    else
+      exists = true;
+  }
+  if ( exists )
+    menus = (alias + '\n' + newmenus.join('\n')).split('\n');
   
   menus.push( alias );
   if ( menus.length > menuMRUlength )
