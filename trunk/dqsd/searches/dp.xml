@@ -1,9 +1,16 @@
 <search function="dp">
   <name>Dogpile</name>
-  <description>Parallel search via the popular Dogpile metasearch: "dp travel"</description>
+  <description>
+    Parallel search via the popular Dogpile metasearch.<br/>
+    <a class="helpboxDescLabels">Example:</a><br/>
+    <table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">dp travel</td></tr>
+  	</table>
+  </description>
   <category>Search the Web</category>
   <link>http://www.dogpile.com/</link>
   <contributor>David Bau, Brian Ross</contributor>
+  
   <form name="dpf"
         action="http://search.dogpile.com/texis/search"
         method="get">
@@ -11,11 +18,12 @@
     <input type="hidden" name="geo" value="no"/>
     <input type="hidden" name="q"/>
   </form>
+  
   <script><![CDATA[
     function dp(q)
     {
-      if( q == "" )
-        openSearchWindow("http://www.dogpile.com/");
+      if( nullArgs("dp",q) )
+        return false;
       else
       {
         document.dpf.q.value = q;

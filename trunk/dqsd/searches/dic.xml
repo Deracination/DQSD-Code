@@ -1,19 +1,27 @@
 <search function="dic">
   <name>Dictionary.com</name>
-  <description>Search for English word definitions: "dic lexical"</description>
+  <description>
+    Search for English word definitions.<br/>
+    <a class="helpboxDescLabels">Example:</a><br/>
+    <table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">dic lexical</td></tr>
+  	</table>
+  </description>
   <category>Reference</category>
   <link>http://www.dictionary.com/</link>
+  
   <form name="dicf"
         action="http://www.dictionary.com/cgi-bin/dict.pl"
         method="get">
     <input type="hidden" name="term"/>
     <input type="hidden" name="db" value="*"/>
   </form>
+  
   <script><![CDATA[
     function dic(q)
     {
-      if( q == "" )
-        openSearchWindow("http://www.dictionary.com/");
+      if( nullArgs("dic",q) )
+        return false;
       else
       {
         document.dicf.term.value = q;
