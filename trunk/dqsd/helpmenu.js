@@ -123,29 +123,19 @@ function appendMRUMenuSelections( mb )
   
 }
 
-var xmldoc = new ActiveXObject( "MSXML.DOMDocument" );
-xmldoc.async = false;
-
 function makeToolTipString(search)
 {
   var tip = '';
-  if(helpMenuToolTipsEnabled)
+  if(helpMenuToolTipsEnabled && search.desc != '')
   {
-    var helpString = search.desc;
-
-    xmldoc.loadXML( "<description>" + search.desc + "</description>" );
-    var xmlDesc = xmldoc.selectSingleNode("/description");
-    if ( xmlDesc )
-    {
-      tip = xmlDesc.xml
-                  .replace( /<[^>]+>/g, '' )          // any tags
-                  .replace( /(^\s*)|(\s*$)/g, '' )    // leading/trailing whitespace
-                  .replace( /\r\n\s*\r\n/g, '\r\n' )  // blank lines
-                  .replace( /&gt;/g, '>' )            // HTML gunk
-                  .replace( /&lt;/g, '<' )
-                  .replace( /&amp;/g, '&' )
-                  .replace( /\t/g, '    ' )           // reduce indentation
-    }
+    tip = search.desc
+                .replace( /<[^>]+>/g, '' )          // any tags
+                .replace( /(^\s*)|(\s*$)/g, '' )    // leading/trailing whitespace
+                .replace( /\r\n\s*\r\n/g, '\r\n' )  // blank lines
+                .replace( /&gt;/g, '>' )            // HTML gunk
+                .replace( /&lt;/g, '<' )
+                .replace( /&amp;/g, '&' )
+                .replace( /\t/g, '    ' )           // reduce indentation
   }
   return tip;
 }
