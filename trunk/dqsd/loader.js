@@ -25,7 +25,7 @@ function addsearch(fname, name, desc, link, cat, switches)
   }
   catch( except )
   {
-    alert("Error adding search: " + except.description + 
+    qualifiedalert("Error adding search: " + except.description + 
           "\n\nfunction: \"" + fname + "\"\nname: \"" + name + "\"\ndescription: \"" + desc + "\"");
   }
 }
@@ -69,7 +69,7 @@ function addalias(alias, fname)
     }
     else
     {
-      alert("Cannot add alias " + alias + " -> " + fname + ":\nThere is no search " + fname + ".");
+      qualifiedalert("Cannot add alias " + alias + " -> " + fname + ":\nThere is no search " + fname + ".");
       return;
     }
   }
@@ -147,7 +147,7 @@ try
       var funcname = searchNode.attributes.getNamedItem("function").text;
       if (searchRoot.selectSingleNode("/searches/search[@function='" + funcname + "']"))
       {
-        alert('Search "' + funcname + '" found in ' + "searches\\" + searches[i] + ' already exists.');
+        qualifiedalert('Search "' + funcname + '" found in ' + "searches\\" + searches[i] + ' already exists.');
         continue;
       }
       else
