@@ -30,7 +30,7 @@
       <tr><td>babel /from:en /to:es http://www.whitehouse.gov</td></tr>
   	</table>
   </description>
-  <category>Reference</category>
+  <category>Reference<category>Language</category></category>
   <link>http://babelfish.altavista.com</link>
   <contributor>Neel Doshi, Greg Mitchell</contributor>
   

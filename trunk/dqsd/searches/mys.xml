@@ -7,7 +7,7 @@
   		<tr><td>mysql create table</td></tr>
   	</table>
   </description>
-  <category>Computers</category>
+  <category>Computers<category>Programming</category></category>
   <link>http://www.mysql.com/</link>
   
   <form name="mysf"

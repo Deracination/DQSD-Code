@@ -7,7 +7,7 @@
   		<tr><td>whois karynova.com</td></tr>
   	</table>
   </description>
-  <category>Computers</category>
+  <category>Computers<category>Networking</category></category>
   <link>http://www.betterwhois.com/</link>
   <contributor>Ryan Edwards</contributor>
   

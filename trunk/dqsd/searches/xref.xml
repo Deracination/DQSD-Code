@@ -1,7 +1,7 @@
 <search function="xref">
   <name>Xrefer Reference</name>
   <description>Searches dozens of reference titles: "xref venice"</description>
-  <category>Reference</category>
+  <category>Reference<category>General</category></category>
   <link>http://www.xrefer.com/</link>
   <form name="xreff"
         action="http://www.xrefer.com/results.jsp"

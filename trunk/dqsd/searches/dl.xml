@@ -9,7 +9,7 @@
 		  <tr><td>dl Dave's Quick Search</td></tr>
 	  </table>
   </description>
-  <category>Computers</category>
+  <category>Computers<category>Software</category></category>
   <link>http://download.cnet.com/</link>
   
   <form name="dlf"

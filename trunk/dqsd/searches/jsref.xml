@@ -39,7 +39,7 @@
     </table>
   </description>
   <link>http://developer.netscape.com/docs/manuals/javascript.html</link>
-  <category>Computers</category>
+  <category>Computers<category>Programming</category></category>
   <contributor>MLL, from jdk.xml</contributor>
   
   <form name="jsreff_gg" action="http://www.google.com/search" method="get">

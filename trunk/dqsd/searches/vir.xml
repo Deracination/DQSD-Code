@@ -9,7 +9,7 @@
   </description>
 <contributor>John W. Bairen, Jr.</contributor>
   <email>john_at_bairen_dot_net</email>
-  <category>Computers</category>
+  <category>Computers<category>Reference</category></category>
   <link>http://www.virusbtn.com/</link>
   
 <form name="virf" action="http://www.virusbtn.com/search.cgi" method="get">

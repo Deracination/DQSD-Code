@@ -1,9 +1,4 @@
 <search function="pgrab">
-  <COMMENT>
-    This search was created with Glen Carr's DQSD Search Wizard v 0.9.1 (beta),
-    which kicks sufficient ass to enable a clueless schlub crank one of these 
-    suckers out in under a half hour.
-  </COMMENT>
   <name>PriceGrabber</name>
   <category>Shopping</category>
   <contributor>Andrew D. Myers</contributor>

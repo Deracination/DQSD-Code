@@ -21,7 +21,7 @@
           <tr><td>hs parse /javascript</td></tr>
       </table>
   </description>
-  <category>Computers</category>
+  <category>Computers<category>Programming</category></category>
   <link>http://www.hotscripts.com/</link>
   <contributor>Monty Scroggins, Ryan Edwards, Brent Beardsley</contributor>
 

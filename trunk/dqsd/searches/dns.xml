@@ -24,7 +24,7 @@
   		<tr><td>dns 192.168.1.1 /rev</td></tr>
   	</table>
   </description>
-  <category>Computers</category>
+  <category>Computers<category>Networking</category></category>
   <link>http://www.dnsstuff.com/</link>
   <contributor>Monty Scroggins</contributor>
   

@@ -4,7 +4,7 @@
     Search Linux man pages.
   </description>
   <link>http://www.oreillynet.com/linux/cmd/</link>
-  <category>Computers</category>
+  <category>Computers<category>Reference</category></category>
   <contributor>Brent Beardsley</contributor>
 
   <script><![CDATA[
