@@ -1,3 +1,23 @@
+-- What's new for ??? (???)
+
+New Searches
+
+* smlnk - smLNK is a link-shortening redirector where the URLs are as short as possible (from Jonathon Marshall)
+* smlnkey - Get the url that corresponds to the given key (see smlnk) (from Jonathon Marshall)
+
+Modified Searches
+
+* 
+
+Enhancements
+
+* 
+
+Bug Fixes
+
+* 
+
+
 -- What's new for 3.1.3 (September 9, 2002)
 
 Bug Fixes
