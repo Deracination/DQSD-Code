@@ -1,31 +1,25 @@
-  <search function="ths">
-    <name>Thesaurus.com</name>
-    <description>Search for synonyms: "ths frothy"</description>
-    <category>Reference</category>
-    <link>http://thesaurus.com/</link>
-    <form name="thsf"
-          target="_blank"
-          action="http://www.thesaurus.com/cgi-bin/search"
-          method="get">
-     <input name="config"
-            type="hidden"
-            value="roget"/>
-     <input name="words"
-            type="hidden"/>
-    </form>
-    <script><![CDATA[
-      // Thesaurus.com search
-      function ths(q)
+<search function="ths">
+  <name>Thesaurus.com</name>
+  <description>Search for synonyms: "ths frothy"</description>
+  <category>Reference</category>
+  <link>http://www.thesaurus.com/</link>
+  <form name="thsf"
+        target="_blank"
+        action="http://www.thesaurus.com/cgi-bin/search"
+        method="get">
+    <input type="hidden" name="config" value="roget"/>
+    <input type="hidden" name="words"/>
+  </form>
+  <script><![CDATA[
+    function ths(q)
+    {
+      if (q == "")
+        openSearchWindow("http://www.thesaurus.com/");
+      else
       {
-        if (q == "")
-        {
-          openSearchWindow("http://www.thesaurus.com/");
-        }
-        else
-        {
-          document.thsf.words.value=q;
-          submitForm(thsf);
-        }
+        document.thsf.words.value=q;
+        submitForm(thsf);
       }
-    ]]></script>
-  </search>
+    }
+  ]]></script>
+</search>

@@ -1,29 +1,27 @@
-  <search function="quot">
-    <name>Bartleby.com Quotations Search</name>
-    <description>Search several sources for familiar quotations: "quot penny"</description>
-    <category>Reference</category>
-    <contributor>Stephen Granade</contributor>
-    <email>sgranade@phy.duke.edu</email>
-    <form name="bartlebyf"
-    action="http://www.bartleby.com/cgi-bin/texis/webinator/sitesearch"
-    method="get"
-    target="_blank">
-      <input name="query" type="hidden" />
-      <input name="db" type="hidden" value="db" />
-      <input name="filter" type="hidden" value="colQuotations" />
-    </form>
-    <script><![CDATA[
-      function quot(q)
+<search function="quot">
+  <name>Bartleby.com Quotations</name>
+  <description>Search several sources for familiar quotations: "quot penny"</description>
+  <category>Reference</category>
+  <contributor>Stephen Granade</contributor>
+  <email>sgranade_at_phy_dot_duke_dot_edu</email>
+  <form name="bartlebyf"
+        target="_blank"
+        action="http://www.bartleby.com/cgi-bin/texis/webinator/sitesearch"
+        method="get">
+    <input type="hidden" name="query"/>
+    <input type="hidden" name="db" value="db"/>
+    <input type="hidden" name="filter" value="colQuotations"/>
+  </form>
+  <script><![CDATA[
+    function quot(q)
+    {
+      if (q == "")
+        openSearchWindow("http://www.bartleby.com/");
+      else
       {
-        if (q == "")
-        {
-          openSearchWindow("http://www.bartleby.com/");
-        }
-        else
-        {
-          document.bartlebyf.query.value=q;
-          submitForm(bartlebyf);
-        }
+        document.bartlebyf.query.value=q;
+        submitForm(bartlebyf);
       }
-    ]]></script>
-  </search>
+    }
+  ]]></script>
+</search>
