@@ -1,7 +1,7 @@
 -- What's new for x.x.x.x (date xxxx-xx-xx)
 
 Enhancements
-* Holidays for Portugal through 2005 (Paulo Ferrão)
+* Holidays for Portugal through 2009 (Paulo Ferrão)
 
 Bug Fixes
 * Clock tooltip no longer off by 3 days - thanks to Ed Stegman for the exquisit bug report
