@@ -36,6 +36,7 @@ New Searches
 * wrp - Wrap text (Shawn K. Hall)
 * xrl - Shorten urls with xrl.us (Dean W.)
 * b64 - base64 encoder/decoder (Glenn Carr)
+* whitl - Searches WhittleBit, a user-rateable search engine (Tom Corcoran)
 
 Modified Searches
 

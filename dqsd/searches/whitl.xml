@@ -1,0 +1,24 @@
+<search function="whitl">
+  <name>WhittleBit</name>
+  <category>Search the Web</category>
+  <contributor>Tom Corcoran</contributor>
+  <link>http://whittlebit.com/index.php</link>
+  <email></email>
+  <description>
+  </description>
+  <form name="whittlef"
+        method="post"
+        action="http://whittlebit.com/index.php">
+    <input type="hidden" name="query" value="" />
+  </form>
+  <script><![CDATA[
+    function whitl(q)
+    {
+      if( nullArgs("whitl", q) )
+        return;
+      document.whittlef.query.value = q;
+ 
+      submitForm(whittlef);
+    }
+  ]]></script>
+</search>
