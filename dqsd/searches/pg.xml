@@ -11,14 +11,15 @@
   		<tr><td>/author</td><td> - </td><td>Search for an Author instead of a Title</td></tr>
       		<tr><td>/reader</td><td> - </td><td>Search for Public Domain books on the more friendly but less complete <a href="http://www.pgreader.org">pgreader.org</a>.<br />
       			HTML formatted version of some books are also offered here.</td></tr>
-      		<tr><td>/dmoz</td><td> - </td><td>Search through the Project Gutenberg book titles and authors on the Open Directory Project. The author switch is ignored. It seems to be faster and more accurate than the official search sometimes.</td></tr>
+      		<tr><td>/dmoz</td><td> - </td><td>Search through the Project Gutenberg book titles and authors on the <a href="http://dmoz.org/">Open Directory Project</a>. The author switch is ignored. It seems to be faster and more accurate than the official search sometimes.</td></tr>
+      		<tr><td>/ebi</td><td> - </td><td>Search through Tecriture's eBook Initiative site. Fairly good automated HTML conversion is available here for any book in PG's archives. Due to a lot of hidden javascript you may need to go through the <a href="http://ns2.tecriture.com/">Tecriture Home</a> to browse properly.</td></tr>
   	</table>
     <div class="helpboxDescLabels">Examples:</div>
     <table class="helpboxDescTable">
   		<tr><td>pg Alice In Wonderland</td></tr>
       		<tr><td>pg Dostoevsky /author</td></tr>
       		<tr><td>pg Sun Tzu /author /reader</td></tr>
-      		<tr><td>pg Man in the Iron Mask /reader</td></tr>
+      		<tr><td>pg Beowulf /ebi</td></tr>
       		<tr><td>pg Time Machine /dmoz</td></tr>
   	</table>
   </description>
@@ -43,7 +44,16 @@
     <input type="hidden" name="search" value=""/>
     <input type="hidden" name="all" value="no"/> 
   </form>
- 
+  
+   <form name="ebisearch" method="post" action="http://ns2.tecriture.com/cgi-bin/ebi.cgi">
+     <input type="hidden" name="author"/>
+     <input type="hidden" name="title"/>
+     <input type="hidden" name="keyword"/>
+     <input type="hidden" name="dates"/>
+     <input type="hidden" name="language"/>
+     <input type="hidden" name="action" value="search"/>
+     <input type="hidden" name="line" value="1"/>
+  </form>
 
    <script><![CDATA[
    
@@ -57,7 +67,7 @@
         return false;
       else
       {
-        var args = parseArgs(q, "reader, dmoz, author");
+        var args = parseArgs(q, "reader, dmoz, ebi, author");
         
         if( args.switches.length > 0 )
           for( var j=0; j<args.switches.length; j++ )
@@ -70,6 +80,9 @@
                 document.dmozsearch.search.value = args.q;
                 searchID = 2;
                 break;
+              case "ebi":
+                searchID = 3;
+                break;
                 
               case "author":
                 AuthorQuery = true;
@@ -80,11 +93,13 @@
       if (!AuthorQuery) {
       	  document.pgsearch.title.value = args.q;
       	  document.readersearch.title_txt.value = args.q;
+      	  document.ebisearch.keyword.value = args.q;
       	}
         else 
         {
           document.pgsearch.author.value = args.q;
           document.readersearch.author_txt.value = args.q;
+          document.ebisearch.author.value = args.q;
         }
         
       	
@@ -95,6 +110,9 @@
       	  break;
       	case 2:
       	  submitForm(dmozsearch);
+      	  break;
+      	case 3:
+      	  submitForm(ebisearch);
       	  break;
       	default:
       	  submitForm(pgsearch);
