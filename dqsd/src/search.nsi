@@ -186,7 +186,7 @@ Section "Quick Search Deskbar (required)"
   File "DQSDTools\Utilities.cpp"
   File "DQSDTools\resource.h"
 
-  ; Create files with user preferences if they doesn't exist
+  ; Create files with user preferences if they don't exist
   SetOverwrite off
   SetOutPath "$INSTDIR"
   File "..\localaliases.txt"
@@ -289,6 +289,7 @@ SectionEnd
 ; uninstall stuff
 
 UninstallText "Click next to uninstall ${DQSD_TITLE}."
+UninstallIcon search.ico
 
 ; special uninstall section.
 Section "Uninstall"

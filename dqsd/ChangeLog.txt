@@ -22,6 +22,7 @@ Bug Fixes
 * Fixed Win-S loop problems, and tentatively fixed Win-S support on multiple monitor systems (Kim Gräsman)
 * Fixed DLL version check in version.js (now checks that DLL version is 3.1.6.0 instead of 3.1.5.0) (Kim Gräsman)
 * Portuguese-English (and reverse) translations now work correctly. Thanks to Michael Kairys for reporting (Kim Gräsman)
+* Fixed search.nsi to include an UninstallIcon entry, required to work with new search.ico (Kim Gräsman)
 
 New Searches
 
