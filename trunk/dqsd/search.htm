@@ -400,14 +400,13 @@ function okp()
   reuseBrowserWindowModeOverride = reuseBrowserWindowMode;
 
   // Search the command history.  Hold down shift with the key to search
-  // for just a prefix, otherwise it matches any part of the string.
+  // forward.
   if (window.event.keyCode == 2)
   {
     histsearch( document.deff.q.value, window.event.shiftKey );
     return false;
   }
-
-  searchPrefix = '';
+  searchPrefix = ''; // reset the search command history search
 
   switch(window.event.keyCode)
   {
