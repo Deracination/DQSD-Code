@@ -54,8 +54,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 0,0,7,0
- PRODUCTVERSION 0,0,7,0
+ FILEVERSION 0,0,8,0
+ PRODUCTVERSION 0,0,8,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x21L
@@ -73,14 +73,14 @@ BEGIN
             VALUE "Comments", "\0"
             VALUE "CompanyName", "http://www.glenncarr.com/\0"
             VALUE "FileDescription", "Dave's Quick Search Deskbar Search Wizard\0"
-            VALUE "FileVersion", "0.7\0"
+            VALUE "FileVersion", "0.8\0"
             VALUE "InternalName", "DQSDSearchWiz\0"
             VALUE "LegalCopyright", "Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2\0"
             VALUE "LegalTrademarks", "\0"
             VALUE "OriginalFilename", "DQSDSearchWiz.DLL\0"
             VALUE "PrivateBuild", "\0"
             VALUE "ProductName", "Dave's Quick Search Deskbar Search Wizard\0"
-            VALUE "ProductVersion", "0.7\0"
+            VALUE "ProductVersion", "0.8\0"
             VALUE "SpecialBuild", "(beta)\0"
         END
     END
@@ -137,15 +137,15 @@ BEGIN
     GROUPBOX        "&Description",IDC_STATIC,6,51,165,69
     EDITTEXT        IDC_Description,12,61,154,43,ES_MULTILINE | 
                     ES_WANTRETURN | WS_VSCROLL
-    CONTROL         "Include &examples",IDC_DescExamples,"Button",
+    CONTROL         "Include e&xamples",IDC_DescExamples,"Button",
                     BS_AUTOCHECKBOX | WS_TABSTOP,12,107,71,10
     GROUPBOX        "&Switches (comma-separated)",IDC_STATIC,172,51,149,69
-    EDITTEXT        IDC_Switches,177,61,138,43,ES_MULTILINE | ES_WANTRETURN | 
+    EDITTEXT        IDC_Switches,177,61,138,34,ES_MULTILINE | ES_WANTRETURN | 
                     WS_VSCROLL
     CONTROL         "&Mutually exclusive",IDC_MutuallyExclusiveSwitches,
-                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,177,107,73,10
-    CONTROL         "&Document",IDC_DescSwitches,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,252,107,66,10
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,177,96,73,10
+    CONTROL         "&Include in description",IDC_DescSwitches,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,177,107,104,10
     LTEXT           "* &FORMs on current page:",IDC_STATIC,6,123,84,8
     CONTROL         "List2",IDC_FormList2,"SysListView32",LVS_REPORT | 
                     LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_NOSORTHEADER | 
