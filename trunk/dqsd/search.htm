@@ -3064,10 +3064,12 @@ function paintclock()
 {
   // Display date and time
   document.deff.q.className = "clock";
-  if (clocktooltipform && clocktooltipform.length() > 0)
-    document.deff.q.title = formatdate(now, clocktooltipform);
   var now = new Date();
   document.deff.q.value = formatdate(now, clockformat);
+  if (clocktooltipform && clocktooltipform != "")
+  {
+    document.deff.q.title = formatdate(now, clocktooltipform);
+  }
 }
 
 function startclock(delay)
