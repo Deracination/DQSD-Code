@@ -36,7 +36,8 @@ Bug Fixes
 * Remove HTML tags from menu item search names
 * Stop indicating as '[local]' aliases defined in aliases.txt
 * Sub categories and searches are now sorted properly in the help menu
-
+* Fix for GetFiles and GetFolders in Launcher to close the FindFirstFile handle when finished so files and directories don't
+  stay locked
 
 -- What's new for 3.1.4 (October 3, 2002)
 
