@@ -878,14 +878,13 @@ function reload()
     </td>
   </tr>
   <tr>
-    <td id='info' style='display:none'>
-      <img width=0 height=36><br>
+    <td id='info' style='display:none; padding-left:20px;'>
+      <br>
         <b><a style='text-decoration:none;color:black' href='http://www.dqsd.net/' target='_blank' tabindex='-1'>
         Dave's Quick Search Deskbar</a></b>
       <br>
         Designed to be placed on the Windows taskbar.<br>
-        For documentation,
-        <a href="about:" onclick="about(); return false;" tabindex=-1>click here</a>.
+        For documentation, <a href='about:' onclick='about(); return false;' tabindex='-1'>click here</a>.
     </td>
   </tr>
 </table>
@@ -933,9 +932,9 @@ function handleResize()
   {
     // We seem to be off the toolbar
     document.all.info.style.display="block";
-    document.deff.q.style.display="block";
+    document.deff.q.style.display="none";
     document.deff.q.style.top=0;
-    document.deff.q.style.height = originaltextheight;
+    document.deff.q.style.height=0;
   }
   else
   {
@@ -949,7 +948,7 @@ function handleResize()
 
   if(dopopup)
   {
-    if((showbutton == 1) || ((showbutton == 2) && (targetwidth >= clocklongwidth)))
+    if((showbutton == 1) || ((showbutton == 2) && (targetwidth >= clocklongwidth)) && document.deff.q.style.display != "none")
     {
       document.deff.gobutton.style.display ="inline";
       if (buttonalign == "left")
