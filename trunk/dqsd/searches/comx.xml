@@ -195,7 +195,7 @@
           case "brew":var endurl= "creators/strangebrew/index.html";windowW = 300; windowH = 327;sunwindowH = 272;break;
           case "sun":var endurl= "comics/sunshineclub/index.html";break;
           case "tarzan":var endurl= "comics/tarzan/index.html";break;
-          case "life":var endurl= "wash/thatslife/index.html";windowW = 300; windowH = 349;sunwindowH = 354;break;
+          case "life":var endurl= "wash/thatslife/index.html";windowW = 300; windowH = 364;sunwindowH = 364;break;
           case "top":var endurl= "comics/topofworld/index.html";sunwindowW = 600; sunwindowH = 206;break;
           case "id":var endurl= "creators/wizardofid/index.html";break;
           case "daze":var endurl= "comics/workingdaze/index.html";windowW = 335; windowH = 408;sunwindowW = 335; sunwindowH = 408;break;
@@ -241,14 +241,14 @@
        comxSearchPopup = window.createPopup();
        var comxSearchPopupBody = comxSearchPopup.document.body;
        var comxSearchPopupBodyCode = "<html><head></head><body><style>" + convertStylesToInline() + "</style>";
-       comxSearchPopupBodyCode += "<img src=" + urlstart+urlcat+urldir+r +" width="+windowW+"height="+windowH+">";
-       comxSearchPopupBodyCode += "</body></html>";
+       comxSearchPopupBodyCode += "<center><img src=" + urlstart+urlcat+urldir+r +" width="+windowW+"height="+windowH+">";
+       comxSearchPopupBodyCode += "</center></body></html>";
        comxSearchPopupBody.innerHTML = comxSearchPopupBodyCode;
        comxSearchPopup.document.body.style.border="outset 1px";
        comxSearchPopup.document.body.style.background='window';
        //a little window padding
-       windowH+=4;
-       windowW+=2;
+       windowH+=10;
+       windowW+=8;
        
        comxSearchPopup.show((buttonalign == "left" ? 0 : document.body.clientWidth - windowW), -windowH, windowW, windowH, document.body);
        
