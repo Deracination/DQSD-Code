@@ -1,0 +1,239 @@
+<search function="blb">
+  <name>Blue Letter Bible</name>
+  <category>Reference<category>General</category></category>
+  <contributor>Brent Beardsley</contributor>
+  <link>http://www.blueletterbible.org/</link>
+  <email></email>
+  <description>
+  Search for bible verses, strongs number, etc
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/concordance</td><td> - </td><td>Search for words</td></tr>
+      <tr><td>/strongs</td><td> - </td><td>Show Strong's Numbers</td></tr>
+	</table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>blb John 3:16</td></tr>
+      <tr><td>blb John 3</td></tr>
+      <tr><td>blb John</td></tr>
+      <tr><td>blb /c trumpets</td></tr>
+      <tr><td>blb /c /s lov* 5368</td></tr>
+    </table>
+  </description>
+  <form name="blbf"
+        method="get"
+        action="http://www.blueletterbible.org/cgi-bin/index.pl">
+    <input type="hidden" name="Book" value="" />
+    <COMMENT>
+      The input element above, "Book", was a SELECT element with the following options...
+      <select name="Book">
+        <option value="2 ">Genesis</option>
+        <option value="3 ">Exodus</option>
+        <option value="4 ">Leviticus</option>
+        <option value="5 ">Numbers</option>
+        <option value="6 ">Deuteronomy</option>
+        <option value="7 ">Joshua</option>
+        <option value="8 ">Judges</option>
+        <option value="9 ">Ruth</option>
+        <option value="10 ">1 Samuel</option>
+        <option value="11 ">2 Samuel</option>
+        <option value="12 ">1 Kings</option>
+        <option value="13 ">2 Kings</option>
+        <option value="14 ">1 Chronicles</option>
+        <option value="15 ">2 Chronicles</option>
+        <option value="16 ">Ezra</option>
+        <option value="17 ">Nehemiah</option>
+        <option value="18 ">Esther</option>
+        <option value="19 ">Job</option>
+        <option value="20 ">Psalms</option>
+        <option value="21 ">Proverbs</option>
+        <option value="22 ">Ecclesiastes</option>
+        <option value="23 ">Song of Songs</option>
+        <option value="24 ">Isaiah</option>
+        <option value="25 ">Jeremiah</option>
+        <option value="26 ">Lamentations</option>
+        <option value="27 ">Ezekiel</option>
+        <option value="28 ">Daniel</option>
+        <option value="29 ">Hosea</option>
+        <option value="30 ">Joel</option>
+        <option value="31 ">Amos</option>
+        <option value="32 ">Obadiah</option>
+        <option value="33 ">Jonah</option>
+        <option value="34 ">Micah</option>
+        <option value="35 ">Nahum</option>
+        <option value="36 ">Habakkuk</option>
+        <option value="37 ">Zephaniah</option>
+        <option value="38 ">Haggai</option>
+        <option value="39 ">Zechariah</option>
+        <option value="40 ">Malachi</option>
+        <option value="41 ">Matthew</option>
+        <option value="42 ">Mark</option>
+        <option value="43 ">Luke</option>
+        <option value="44 ">John</option>
+        <option value="45 ">Acts</option>
+        <option value="46 ">Romans</option>
+        <option value="47 ">1 Corinthians</option>
+        <option value="48 ">2 Corinthians</option>
+        <option value="49 ">Galatians</option>
+        <option value="50 ">Ephesians</option>
+        <option value="51 ">Philippians</option>
+        <option value="52 ">Colossians</option>
+        <option value="53 ">1 Thessalonians</option>
+        <option value="54 ">2 Thessalonians</option>
+        <option value="55 ">1 Timothy</option>
+        <option value="56 ">2 Timothy</option>
+        <option value="57 ">Titus</option>
+        <option value="58 ">Philemon</option>
+        <option value="59 ">Hebrews</option>
+        <option value="60 ">James</option>
+        <option value="61 ">1 Peter</option>
+        <option value="62 ">2 Peter</option>
+        <option value="63 ">1 John</option>
+        <option value="64 ">2 John</option>
+        <option value="65 ">3 John</option>
+        <option value="66 ">Jude</option>
+        <option value="67 ">Revelation</option>
+      </select>
+    </COMMENT>
+
+    <input type="hidden" name="Chapter" value="" />
+    <input type="hidden" name="Verse" value="" />
+    <input type="hidden" name="handref" value="" />
+  </form>
+  <form name="blbf2"
+        method="get"
+        action="http://www.blueletterbible.org/cgi-bin/words.pl">
+    <input type="hidden" name="show_strongs" value="no" />
+    <input type="hidden" name="word" value="" />
+  </form>
+  <script><![CDATA[
+    function blb_isReference(q)
+	{
+	   var r = q.match(/^([0-9]?\s*[a-zA-z]+)\s*(([0-9]{0,3})(:([0-9]{0,3}))?)?$/);
+	   if (r == null)
+	     return false;
+		
+	   var book = r[1];
+	   var chap = r[3];
+	   var verse = r[5];
+	   
+	   var books_list = new Array(
+		"Genesis",       "Gen",
+		"Exodus",        "Exd",
+		"Leviticus",     "Lev",
+		"Numbers",       "Num",
+		"Dueteronomy",   "Deu",
+		"Joshua",        "Jos",
+		"Judges",        "Jdg",
+		"Ruth",		     "Rth",
+		"1 Samuel",	     "1Sa",
+		"2 Samuel",	     "2Sa",
+		"1 Kings",	     "1Ki",
+		"2 Kings",	     "2Ki",
+		"1 Chronicles",  "1Ch",
+		"2 Chronicles",  "2Ch",
+		"Ezra",		     "Ezr",
+		"Nehemiah",		 "Neh",
+		"Esther",		 "Est",
+		"Job",			 "Job",
+		"Psalms",		 "Psa",
+		"Proverbs",		 "Pro",
+		"Ecclesiastes",	 "Ecc",
+		"Song of Songs", "Sgs",
+		"Isaiah",		 "Isa",
+		"Jeremiah",		 "Jer",
+		"Lamentations",	 "Lam",
+		"Ezekiel",		 "Eze",
+		"Daniel",		 "Dan",
+		"Hosea",		 "Hsa",
+		"Joel",			 "Joe",
+		"Amos",			 "Amo",
+		"Obadiah",		 "Oba",
+		"Jonah",		 "Jon",
+		"Micah",		 "Mic",
+		"Nahum",		 "Nah",
+		"Habakkuk",		 "Hab",
+		"Zephaniah",	 "Zep",
+		"Haggai",		 "Hag",
+		"Zechariah",	 "Zec",
+		"Malachi",		 "Mal",
+		"Matthew",		 "Mat",
+		"Mark",			 "Mar",
+		"Luke",			 "Luk",
+		"John",			 "Jhn",
+		"Acts",			 "Act",
+		"Romans",		 "Rom",
+		"1 Corinthians", "1Cr",
+		"2 Corinthians", "2Cr",
+		"Galatians",	 "Gal",
+		"Ephesians",	 "Eph",
+		"Phillipians",	 "Phi",
+		"Colossians",	 "Col",
+		"1 Thessalonians", "1Th",
+		"2 Thessalonians", "2Th",
+		"1 Timothy",	   "1Ti",
+		"2 Timothy",	   "2Ti",
+		"Titus",		   "Tts",
+		"Philemon",		   "Phi",
+		"Hebrews",		   "Heb",
+		"James",		   "Jam",
+		"1 Peter",		   "1Pe",
+		"2 Peter",		   "2Pe",
+		"1 John",		   "1Jo",
+		"2 John",		   "2Jo",
+		"3 John",		   "3Jo",
+		"Jude",			   "Jud",
+		"Revelation",	   "Rev"
+	   );
+
+	   var bookUpper = book.toUpperCase();
+	   for (var i = 0; i < books_list.length; i++) {
+	     if (bookUpper == books_list[i].toUpperCase()) {
+		   var ref_array = new Array(book, chap, verse);
+		   return ref_array;
+		 }
+	   }
+	   return false;
+	}
+
+    function blb(q)
+    {
+      if( nullArgs("blb", q) )
+        return;
+
+	  var search = false;
+	  var strongs = false;
+      var args = parseArgs(q, "concordance, strongs");
+	  for (var i=0; i < args.switches.length; i++)
+      {
+        switch( args.switches[i].name )
+        {
+          case "concordance":
+		    search = true;
+            break;
+		  case "strongs":
+		    strongs = true;
+			break;
+          default:
+            break;
+        }
+      }
+
+	  var ref = false;
+	  if (search != true) {
+	    ref = blb_isReference(args.q);
+	  }
+	  if (search == true || ref == false) {
+	    document.blbf2.show_strongs.value = ((strongs == true) ? "yes" : "no");
+        document.blbf2.word.value = args.q;
+	    submitForm(blbf2);
+	  } else {
+	    document.blbf.handref.value = args.q;
+        submitForm(blbf);
+	  }
+    }
+  ]]></script>
+  <copyright>
+    Copyright (c) 2003 Brent Beardsley; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>

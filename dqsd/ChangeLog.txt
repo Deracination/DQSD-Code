@@ -24,6 +24,7 @@ New Searches
 * tr - Search ThomasRegister (from Brent Beardsley)
 * ct - Search Content Type List (from Brent Beardsley)
 * tldp - Search The Linux Documentation Project (from Brent Beardsley)
+* blb - Search the bible at BlueLetterBible.org (from Brent Beardsley)
 
 Bug Fixes
 
