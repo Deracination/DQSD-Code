@@ -1,5 +1,4 @@
-Version 1.3
-
+Version 1.3 (final) 21-July-2003
 * Recognizes TEXTAREA as a valid selected field, requested by Tom Corcoran (Kim Gräsman)
 
 Version 1.2 (final) 14-May-2003
