@@ -51,41 +51,71 @@ int URLMatchesFilename(LPCTSTR szURL, LPCTSTR szFile)
 // Return:
 //		The window handle, or null if we fail
 HWND
-UtilitiesFindDQSDWindow()
+UtilitiesFindDQSDWindow(bool bCheckForNonTaskbar)
 {
 	// The following window hierarchy was determined using Spy++ on Windows XP Pro Build 2600.
 	// Should be the same at least on Windows 2000 and other Win XP versions.
-	LPCTSTR rgszClassNames[] = { _T("Shell_TrayWnd"), 
-		_T("ReBarWindow32"), 
-		_T("OCHost"), 
-		_T("Shell Embedding"), 
-		_T("Shell DocObject View"), 
-		_T("Internet Explorer_Server") };
-
-	//We now traverse the array of window classes. Set hwnd NULL to start with the desktop.
-	HWND hwndDQSD = NULL;
-	for ( int i = 0; i < sizeof(rgszClassNames)/sizeof(rgszClassNames[0]); i++ ) 
+	static LPCTSTR rgszClassNames[][10] = 
 	{
-		if ( NULL == ( hwndDQSD = ::FindWindowEx( hwndDQSD, NULL, rgszClassNames[i], NULL ) ) )
+		{ 
+			// This is a normal taskbar window
+			_T("Shell_TrayWnd"), 
+			_T("ReBarWindow32"), 
+			_T("OCHost"), 
+			_T("Shell Embedding"), 
+			_T("Shell DocObject View"), 
+			_T("Internet Explorer_Server"),
+			NULL
+		},
+		// This is if you dock DQSD on it's own to a desktop edge
+		{ 
+			_T("BaseBar"), 
+			_T("ReBarWindow32"), 
+			_T("OCHost"), 
+			_T("Shell Embedding"), 
+			_T("Shell DocObject View"), 
+			_T("Internet Explorer_Server"),
+			NULL
+		},
+		{ 
+			// I think this finds more than just the DQSD window, so where that matters, it's disabled by the bCheckForNonTaskbar parameter
+			_T("IEFrame"), 
+			_T("Shell DocObject View"), 
+			_T("Internet Explorer_Server"),
+			NULL,
+		},
+
+	};
+
+	int maxAttempts = bCheckForNonTaskbar ? 3 : 2;
+
+	//We now traverse the array of window classes. 
+	// The first window class is OCHost
+	HWND hwndDQSD = NULL;
+	for(int nAttempt = 0; hwndDQSD == NULL && nAttempt < maxAttempts; nAttempt++)
+	{
+		for ( int i = 0; i < sizeof(rgszClassNames[0])/sizeof(rgszClassNames[0][0]); i++ ) 
 		{
-			// If unable to traverse the first list, then assume it's a separate browser window
-			LPCTSTR rgszClassNames[] = { _T("IEFrame"), 
-				_T("Shell DocObject View"), 
-				_T("Internet Explorer_Server") };
+			LPCTSTR pClassName = rgszClassNames[nAttempt][i];
 
-			hwndDQSD = NULL;
-
-			for ( int j = 0; j < sizeof(rgszClassNames)/sizeof(rgszClassNames[0]); j++ )
+			if(pClassName == NULL)
 			{
-				if ( NULL == ( hwndDQSD = ::FindWindowEx( hwndDQSD, NULL, rgszClassNames[j], NULL ) ) )
-				{
-					hwndDQSD = NULL;
-				}
+				// We've reached the end of a list - we must have found the window
+				break;
 			}
 
-			break;
+			hwndDQSD = ::FindWindowEx( hwndDQSD, NULL, pClassName, NULL );
+
+			if ( NULL == hwndDQSD )
+			{
+				// We've failed to find the window using this attempt - break out of the 
+				// inner traversal loop and attempt another class name list
+				break;
+			}
 		}
 	}
+
+	ATLTRACE("UtilitiesFindDQSDWindow: Returning 0x%x\n", hwndDQSD);
 
 	return hwndDQSD;
 }

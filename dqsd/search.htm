@@ -3,7 +3,7 @@
 <html>
 <!--
 Dave's Quick Search Deskbar
-Version 3.0 - June 29, 2002
+Version 3.0.1 beta 1  - July 2, 2002
 
 Copyright (c) 2002 David Bau
 
@@ -180,7 +180,7 @@ function def()
 
   // Shutdown DQSD and kick the explorer to unload us
 // The world's not ready for this one yet...
-//  if(t == "quitdqsd")   { shutdown(); return false; }
+  if(t == "quitdqsd")   { shutdown(); return false; }
 
   // anything below adds something to the history
   addhist(t);

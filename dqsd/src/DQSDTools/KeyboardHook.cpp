@@ -106,7 +106,7 @@ static LRESULT CALLBACK KeyboardProc(
 		}
 		else
 		{
-			_RPT1(_CRT_WARN, _T("Hook: %d\n"), wParam);
+			ATLTRACE(_T("Hook: %d (focus 0x%x)\n"), wParam, GetFocus());
 		}
 	}
 	return CallNextHookEx(hHook, code, wParam, lParam);
@@ -135,7 +135,7 @@ static BOOL CALLBACK EnumProc(
 }
 */
 
-HWND hBarWnd = NULL;
+//HWND hBarWnd = NULL;
 
 LRESULT CALLBACK NotificationWndProc(
 	HWND hwnd,      // handle to window
@@ -144,22 +144,38 @@ LRESULT CALLBACK NotificationWndProc(
 	LPARAM lParam   // second message parameter
 	)
 {
-	if(uMsg == WM_HOTKEY)
+	if(uMsg == WM_HOTKEY || (uMsg == WM_TIMER && wParam == 0x5744))
 	{
 //		_RPT0(_CRT_WARN, "HotKey\n");
 //		OutputDebugString("HotKey\n");
+
+		HWND hBarWnd = UtilitiesFindDQSDWindow();
+
+		// Save the mouse position before these games...
+		POINT mousePoint;
+		GetCursorPos(&mousePoint);
 
 		// Find our window
 		RECT taskBarRect;
 		GetWindowRect(hBarWnd, &taskBarRect);
 
+		SetForegroundWindow(hBarWnd);
+
 		// We do all this larking about with the mouse because
 		// SetForegroundWindow is crippled nowadays, and because the DQSD edit control
 		// doesn't actually seem to get a proper caret if you SFW to it anyway.
-
-		// Save the mouse position before these games...
-		POINT mousePoint;
-		GetCursorPos(&mousePoint);
+		ATLTRACE("TaskBarRect: %d,%d,%d,%d\n", taskBarRect.left, taskBarRect.top, taskBarRect.right, taskBarRect.bottom);
+		if(taskBarRect.top >= GetSystemMetrics(SM_CYSCREEN) || taskBarRect.bottom < 0)
+		{
+			// The taskbar is auto-hidden - we need to send more than one click - one to unhide the tool bar, 
+			// and one to set the focus
+			SetTimer(hwnd, 0x5744, 50, NULL);
+		}
+		else
+		{
+			// The taskbar is not autohidden - don't send any timer messages
+			KillTimer(hwnd, 0x5744);
+		}
 
 		// Calculate the position of a simultated mouse click
 		// The SendInput structure takes a position scaled 0-65536 across the primary monitor
@@ -179,7 +195,6 @@ LRESULT CALLBACK NotificationWndProc(
 
 		// Put the mouse back where we found it, because we're nice like that
 		SetCursorPos(mousePoint.x, mousePoint.y);
-
 	}
 	else if(uMsg == WM_DESTROY)
 	{
@@ -197,26 +212,14 @@ LRESULT CALLBACK NotificationWndProc(
 //
 HRESULT KeyboardHookInstall()
 {
-
-/*	// Find the parent of the search window
-	HWND hTrayWnd = FindWindow(_T("Shell_TrayWnd"), _T(""));
-	if(hTrayWnd == NULL)
-	{
-		MessageBox(NULL, _T("Can't find tray window"), NULL, MB_OK);
-		return FALSE;
-	}
-
-	// Look through its children to find the search window
-	EnumChildWindows(hTrayWnd, EnumProc, (LPARAM)&hBarWnd);
-*/
-
-	hBarWnd = UtilitiesFindDQSDWindow();
+	HWND hBarWnd = UtilitiesFindDQSDWindow();
 
 	// Did we find the window?
 	if(hBarWnd == NULL)
 	{
 		return CLauncher::Error(IDS_ERR_CANT_INSTALL_KEYBOARD_HOOK, IID_ILauncher);
 	}
+	
 
 	// Get a handle to the thread which owns the message queue for this window
 	DWORD threadId = GetWindowThreadProcessId(hBarWnd, NULL);
@@ -240,6 +243,7 @@ HRESULT KeyboardHookInstall()
 HRESULT
 KeyboardInstallHotkey(int vkCode, LPCTSTR pModifierNames, HWND* phwndNotification)
 {
+	HWND hBarWnd = UtilitiesFindDQSDWindow();
 	if(hBarWnd == NULL)
 	{
 		return CLauncher::Error(IDS_ERR_HOTKEY_NO_BAR_WINDOW, IID_ILauncher, E_FAIL);
