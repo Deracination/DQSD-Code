@@ -55,7 +55,6 @@
     <tr><td>Gasoline Alley</td><td>/gasolinealley</td></tr>
     <tr><td>Geech</td><td>/geech</td></tr>
     <tr><td>Get Fuzzy</td><td>/getfuzzy</td></tr>
-    <tr><td>Ginger Meggs</td><td>/gingermeggs</td></tr>
     <tr><td>Go Fish</td><td>/gofish</td></tr>
     <tr><td>Graffiti</td><td>/graffiti</td></tr>
     <tr><td>Grand Avenue</td><td>/grandavenue</td></tr>
@@ -106,7 +105,6 @@
     <tr><td>Pluggers</td><td>/pluggers</td></tr>
     <tr><td>Pooch Cafe</td><td>/poochcafe</td></tr>
     <tr><td>Pop Culture</td><td>/popculture</td></tr>
-    <tr><td>Potluck Parish</td><td>/potluckparish</td></tr>
     <tr><td>Preteena</td><td>/preteena</td></tr>
     <tr><td>Raising Duncan</td><td>/raisingduncan</td></tr>
     <tr><td>Real Life Adventures</td><td>/reallife</td></tr>
@@ -161,11 +159,11 @@
      ballardstreet,ben,betty,bignate,bonanas,bornloser,buckets,bullsnbears,candorville,\
      caseinpoint,ceodad,cheapthrills,committed,drabble,fatcats,ferdnand,\
      flightdeck,floandfriends,forbetterorforworse,frankandernest,frazz,geech,getfuzzy,\
-     gingermeggs,gofish,graffiti,grandavenue,grizzwells,heathcliff,herbandjamaal,herman,\
+     gofish,graffiti,grandavenue,grizzwells,heathcliff,herbandjamaal,herman,\
      janesworld,jumpstart,kitncarlyle,libertymeadows,lilabner,luann,lupoalberto,marmaduke,\
      meatloafnight,meg,moderatelyconfused,momma,monty,motley,nancy,naturalselection,\
      offthemark,onebighappyclassics,othercoast,outofthegenepool,overthehedge,pcandpixel,\
-     pearlsbeforeswine,pibgorn,pickles,potluckparish,raisingduncan,realitycheck,redandrover,\
+     pearlsbeforeswine,pibgorn,pickles,raisingduncan,realitycheck,redandrover,\
      ripleysbelieveitornot,roseisrose,rubes,rudypark,sheldon,shirleyandson,souptonutz,\
      speedbump,spotthefrog,strangebrew,sunshineclub,tarzan,thatslife,topoftheworld,\
      wizardofid,workingdaze,workingitout,peanuts,dilbert,animalcrackers,adamathome,annie,\
@@ -223,7 +221,6 @@
               case "frazz": endurl="comics/frazz/index.html";break;
               case "geech": endurl="comics/geech/index.html";break;
               case "getfuzzy": endurl="comics/getfuzzy/index.html";break;
-              case "gingermeggs": endurl="comics/gingermeggs/index.html";break;
               case "gofish": endurl="comics/gofish/index.html";break;
               case "graffiti": endurl="comics/graffiti/index.html";break;
               case "grandavenue": endurl="comics/grandave/index.html";break;
@@ -256,7 +253,6 @@
               case "pearlsbeforeswine": endurl="comics/pearls/index.html";break;
               case "pibgorn": endurl="comics/pibgorn/index.html";break;
               case "pickles": endurl="wash/pickles/index.html";break;
-              case "potluckparish": endurl="comics/potluck/index.html";break;
               case "raisingduncan": endurl="comics/raisingduncan/index.html";break;
               case "realitycheck": endurl="comics/reality/index.html";break;
               case "redandrover": endurl="wash/redandrover/index.html";break;
