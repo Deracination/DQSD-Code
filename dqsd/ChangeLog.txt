@@ -71,6 +71,7 @@ Modified Searches
 * sd - changed for a correct example
 * smlnk - Updated to take advantage of new server features (Shawn K. Hall)
 * twn - repaired to fit site changes (Sarah Sweeney)
+* jdk - fixed to suit site changes (bug #827803), and made the ? suffix display the help popup
 
 Removed Searches
 
