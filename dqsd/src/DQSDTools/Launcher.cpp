@@ -215,7 +215,9 @@ STDMETHODIMP CLauncher::get_Debug(VARIANT_BOOL* pbDebug)
 	if (NULL == pbDebug)
 		return E_INVALIDARG;
 
+#pragma warning(disable: 4310) // cast truncates constant value
 	*pbDebug = (m_bDebug ? VARIANT_TRUE : VARIANT_FALSE);
+#pragma warning(default: 4310) // cast truncates constant value
 
 	return S_OK;
 }
@@ -475,7 +477,9 @@ STDMETHODIMP CLauncher::get_VersionIsCorrect(int v1, int v2, int v3, int v4, VAR
 		ATLTRACE("CLauncher: DLL Version %d.%d.%d.%d\n", dllV1, dllV2, dllV3, dllV4);
 
 		// Assume we're going to pass
+#pragma warning(disable: 4310) // cast truncates constant value
 		*pVal = VARIANT_TRUE;
+#pragma warning(default: 4310) // cast truncates constant value
 
 		// Test the version in order from MS to LS
 		// This could have been done as one 64 bit comparison, but...
