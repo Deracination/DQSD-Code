@@ -244,27 +244,41 @@ LRESULT CALLBACK NotificationWndProc(
 // Install a keyboard hook on the search deskbars message handler thread
 //
 //
-HRESULT KeyboardHookInstall(HWND hBarWnd)
+HRESULT KeyboardHookInstall(HWND hBarWnd, HHOOK& hInstalledHook)
 {
-//	HWND hBarWnd = UtilitiesFindDQSDWindow();
-
 	// Did we find the window?
 	if(hBarWnd == NULL)
 	{
 		return CLauncher::Error(IDS_ERR_CANT_INSTALL_KEYBOARD_HOOK, IID_ILauncher);
 	}
 	
-
 	// Get a handle to the thread which owns the message queue for this window
 	DWORD threadId = GetWindowThreadProcessId(hBarWnd, NULL);
 
-	_RPT1(_CRT_WARN, "Thread ID 0x%x\n", threadId);
+	ATLTRACE("Thread ID 0x%x\n", threadId);
+
+	if(hHook != NULL)
+	{
+		ATLTRACE("DQSD: Keyboard Hook already installed\n");
+		return CLauncher::Error(IDS_ERR_CANT_INSTALL_KEYBOARD_HOOK, IID_ILauncher);
+	}
 
 	hHook = SetWindowsHookEx(WH_KEYBOARD, KeyboardProc, _Module.GetModuleInstance(), threadId);
+	hInstalledHook = hHook;
 
-	_RPT1(_CRT_WARN, "hHook 0x%x\n", hHook);
+	ATLTRACE("hHook 0x%x\n", hHook);
 
 	return S_OK;
+}
+
+void
+KeyboardHookRemove(HHOOK hInstalledHook)
+{
+	if(hInstalledHook != NULL)
+	{
+		UnhookWindowsHookEx(hInstalledHook);
+		hHook = NULL;
+	}
 }
 
 

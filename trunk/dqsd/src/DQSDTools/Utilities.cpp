@@ -117,22 +117,36 @@ UtilitiesFindDQSDWindow(LPDISPATCH pDispDocument)
 {
 	IOleWindowPtr pOleWindow;
 
-	HRESULT hResult = pDispDocument->QueryInterface(IID_IOleWindow, (LPVOID*)&pOleWindow);
-	if(SUCCEEDED(hResult))
+	try
 	{
-		HWND hWnd;
-
-		hResult = pOleWindow->GetWindow(&hWnd);
-		ATLTRACE("UtilitiesFindDQSDWindow: hResult 0x%x, hWnd 0x%x\n", hResult, hWnd);
+		HRESULT hResult = pDispDocument->QueryInterface(IID_IOleWindow, (LPVOID*)&pOleWindow);
 		if(SUCCEEDED(hResult))
 		{
-			g_hDQSDWindow = hWnd;
-			return hWnd;
+			HWND hWnd;
+
+			hResult = pOleWindow->GetWindow(&hWnd);
+			ATLTRACE("UtilitiesFindDQSDWindow: hResult 0x%x, hWnd 0x%x\n", hResult, hWnd);
+			if(SUCCEEDED(hResult))
+			{
+				g_hDQSDWindow = hWnd;
+				return hWnd;
+			}
 		}
+		else
+		{
+			ATLTRACE("UtilitiesFindDQSDWindow: GetSiteFailed hResult 0x%x\n", hResult);
+		}
+
 	}
-	else
+	catch(_com_error& e)
 	{
-		ATLTRACE("UtilitiesFindDQSDWindow: GetSiteFailed hResult 0x%x\n", hResult);
+		ATLTRACE("UtilitiesFindDQSDWindow: COM exception: Desc %s, Message %d\n", 
+			(LPCTSTR)e.Description(), 
+			(LPCTSTR)e.ErrorMessage());
+	}
+	catch(...)
+	{
+		ATLTRACE("UtilitiesFindDQSDWindow: Unknown Exception Caught\n");
 	}
 	return NULL;
 }

@@ -1,8 +1,8 @@
 // Launcher.cpp : Implementation of CLauncher
 #include "stdafx.h"
 #include "DQSDTools.h"
-#include "Launcher.h"
 #include "KeyboardHook.h"
+#include "Launcher.h"
 #include "Utilities.h"
 
 
@@ -384,7 +384,7 @@ STDMETHODIMP CLauncher::GetFiles(BSTR bstrFileSpec, BSTR *pbstrFiles)
 //
 STDMETHODIMP CLauncher::InstallKeyboardHook(LPDISPATCH pDispDocument)
 {
-	return KeyboardHookInstall(UtilitiesFindDQSDWindow(pDispDocument));
+	return KeyboardHookInstall(UtilitiesFindDQSDWindow(pDispDocument), m_hKeyboardHook);
 }
 
 STDMETHODIMP CLauncher::RegisterHotKey(long hotkeyVkCode, BSTR bstrModifierName, LPDISPATCH pDispDocument)
