@@ -4,8 +4,8 @@
     Get information on built-in Dave's Quick Search functions by searching through their descriptions. Click on the name of the search in the resuling popup to fill the search text box with the function name.<br/>
     <div class="helpboxDescLabels">Example:</div>
     <table class="helpboxDescTable">
-  		<tr><td>qsfind phone number</td></tr>
-  	</table>
+      <tr><td>qsfind phone number</td></tr>
+    </table>
   </description>
   <category>Functions</category>
   <contributor>Neel Doshi</contributor>
@@ -47,6 +47,15 @@
             {
               SearchResults[i] = searches[i];
               SearchFound = true;
+            }
+            for (var j = 0; j < searches[i].aliases.length; j++)
+            {
+              if ( searches[i].aliases[j].toLowerCase().match(args.q) )
+              {
+                SearchResults[i] = searches[i];
+                SearchFound = true;
+                break;
+              }
             }
           }
         }
