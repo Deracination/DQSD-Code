@@ -270,6 +270,9 @@ function def()
   // detect special commands
   if (!special(t))
   {
+    // detect URLs, filenames, etc to open directly
+    if (direct(t)) return false;
+    
     // detect strings that look like phone numbers
     if (phoneno(t)) return false;
 
@@ -281,9 +284,6 @@ function def()
 
     // detect translations
     if (translate(t)) return false;
-
-    // detect URLs, filenames, etc to open directly
-    if (direct(t)) return false;
   }
 
   // try to execute a shortcut
@@ -505,21 +505,13 @@ function okp()
     return false;
   }
 
+
   // handle ctrl-p and ctrl-n for history
   if (window.event.keyCode == 16)
-    advhist(-1);
+    prevnext(-1);
   else
-    advhist(1);
-
-  // work around a weird bug
-  if (document.deff.q.value == "")
-    document.deff.q.value = ".";
-
-  document.deff.q.value = currhist();
-  range = document.selection.createRange();
-  if (range.parentElement().name != "q") { alert ("foo"); return false; }
-  range.collapse(false);
-  range.scrollIntoView(false);
+    prevnext(1);
+    
   return false;
 }
 
@@ -529,20 +521,28 @@ function okd()
   if (window.event.keyCode != 38 && window.event.keyCode != 40)
     return true;
   if (window.event.keyCode == 38)
-    advhist(-1);
+    prevnext(-1);
   else
-    advhist(1);
+    prevnext(1);
+
+  return false;
+}
+
+function prevnext(direction)
+{
+  // save the value in the history edit buffer
+  histeditmove(document.deff.q.value, direction);
 
   // work around a weird bug
   if (document.deff.q.value == "")
     document.deff.q.value = ".";
 
-  document.deff.q.value = currhist();
-  range = document.selection.createRange();
-  if (range.parentElement().name != "q") { alert ("foo"); return false; }
+  document.deff.q.value = currhistedit();
+  var range = document.deff.q.createTextRange();
+  if (range.parentElement().name != "q") { return; }
   range.collapse(false);
   range.scrollIntoView(false);
-  return false;
+  range.select();
 }
 
 // strt() called on page load; show help message after 4 seconds
@@ -605,7 +605,7 @@ function clr()
   }
   stopbanner();
   document.deff.q.className = "txtfld";
-  document.deff.q.value=currhist();
+  document.deff.q.value=currhistedit();
   range = document.deff.q.createTextRange();
   range.select();
 }
@@ -643,7 +643,7 @@ function dodrop()
 // rst() called when the texbox loses focus
 function rst()
 {
-  advhist(0);
+  histeditmove(document.deff.q.value, 0);
   if (init == false && document.deff.q.value=="")
   {
     init = true;

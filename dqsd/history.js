@@ -1,82 +1,85 @@
 // fancy UI: history and cut and paste (via arrow and control keys)
 
-histarray = new Array(historylength + 1);
-histedit = new Array(histarray.length);
-histarray[0] = "";
-histcount = 1;
+histarray = [];
+histedit = new Array(historylength + 1);
 histcurr = 0;
-histend = 0;
 
 restoreHistory();
 
+// save the history array
 function saveHistory()
 {
-  writeFile("history.txt", histarray.join('\n'));
+  writeFile("history.txt", histarray.join('\r\n'));
 }
 
+// restore at most historylength entries from the saved history
 function restoreHistory()
 {
-  var loaded = readFile( "history.txt" ).split('\n');
-  for (var i = 1; i < histarray.length; i++)
+  var loaded = readFile("history.txt").split('\r\n');
+  for (var i = (loaded.length < historylength ? 0 : historylength - loaded.length);
+           i < loaded.length; i++)
   {
-    if (!loaded[i] || loaded[i] == "")
-      break;
-    histarray[i] = loaded[i];
+    if (loaded[i] && loaded[i] != "")
+      histarray.push(loaded[i]);
   }
-  histcount = histend = i;
-}
-
-function historyItemExists(t)
-{
-  for (var i = histend-1; i >= 0; i--)
-    if (t == histarray[i])
-      return true;
-  return false;
 }
 
 // add an item to the history
 function addhist(t)
 {
-  // Don't add if already exists
-  if (histend > 0 && historyItemExists(t))
-    return;
+  // See if it's already in the history so we can remove it
   var i;
-  for (i = 0; i < histcount; i++)
-    histedit[i] = null;
-  histarray[histend] = t;
-  histend = histend + 1;
-  if (histend >= histarray.length)
-      histend = 0;
-  histcurr = histend;
-  histarray[histend] = "";
-  if (histcount < histarray.length)
-    histcount = histcount + 1;
+  for (i = 0; i < histarray.length; i++)
+    if (histarray[i] == t) break;
+
+  // Not there, but history is maxed out: remove the 0th.
+  if (i == histarray.length && histarray.length == historylength)
+    i = 0;
     
+  // Shift down all the entries after the one to be removed
+  for (; i < histarray.length - 1; i++)
+    histarray[i] = histarray[i + 1];
+
+  // Store the new item in the history
+  histarray[i] = t;
+    
+  // Save it baby
   saveHistory();
+
+  // History edits get cleared whenever something new goes in
+  clearhistedits();
+  histcurr = i + 1;
+  histedit[histcurr] = t;
 }
 
 // get the current history entry
-function currhist()
+function currhistedit()
 {
   if (histedit[histcurr])
       return histedit[histcurr];
   return histarray[histcurr];
 }
 
-// advance the currently viewed history entry +1 or -1
-function advhist(i)
+// clear the history edits
+function clearhistedits()
 {
-  if (i > 0 && histcurr == histend) i = 0;
-  if (i < 0 && (histcurr == histend + 1 || histend == histcount - 1 && histcurr == 0)) i = 0;
+  for (var i = 0; i < histedit.length; i++)
+  {
+    histedit[i] = null;
+  }
+}
 
-  if (document.deff.q.value != currhist())
-    histedit[histcurr] = document.deff.q.value;
+// advance the currently viewed history entry +1 or -1
+function histeditmove(t, i)
+{
+  if (t != currhistedit())
+    histedit[histcurr] = t;
+    
+  if (i == 0) return;
+  if (i > 0 && histcurr >= histarray.length) return;
+  if (i < 0 && histcurr <= 0) return;
 
   histcurr = histcurr + i;
-  if (histcurr >= histcount)
-    histcurr = 0;
-  if (histcurr < 0)
-    histcurr = histcount - 1;
 }
 
 
