@@ -1,0 +1,79 @@
+<search function="ccase">
+  <name>Change case</name>
+  <description>
+    Change case of string to capitalized, lowercase, or uppercase.<br/>
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>/capitalize</td><td>Capitalize the first letter, lowercase the rest of each word.</td></tr>
+  		<tr><td>/lowercase</td><td>Lowercase all words</td></tr>
+  		<tr><td>/uppercase</td><td>Uppercase all words</td></tr>
+  	</table>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>Capitalize:</td><td>ccase Today is a Monday.</td></tr>
+  		<tr><td>Capitalize:</td><td>ccase /c Today is a Monday.</td></tr>
+  		<tr><td>Lowercase:</td><td>ccase /l Today is a Monday.</td></tr>
+  		<tr><td>Uppercase:</td><td>ccase /u Today is a Monday.</td></tr>
+  	</table>
+  </description>
+  <category>Functions</category>
+  <contributor>Sarah Sweeney</contributor>
+  <email>poohbear@designshift.com</email>
+  
+  <script><![CDATA[
+    function capitalizeCase(str)
+    { temp = "";
+      words = str.split(" ");
+      if (words.length > 0)
+      { for (i = 0; i < words.length; i++)
+        { if (temp != "") temp += " ";
+          word = words[i];
+          first = word.charAt(0);
+          first = first.toUpperCase();
+          rest = word.slice(1,word.length).toLowerCase();
+          temp = temp + first + rest;
+        }
+      }
+      return temp;
+    }
+    function lowerCase(str)
+    { return str.toLowerCase();
+    }
+    function upperCase(str)
+    { return str.toUpperCase();
+    }
+    function ccase(q, switches)
+	  { if (nullArgs("ccase", q)) return false;
+
+      var args = parseArgs(q, "capitalize, lowercase, uppercase");
+
+      str = "";
+
+	    if (args.switches.length > 0) {
+        switch (args.switches[0].name)
+        { case "lowercase":
+            str = lowerCase(args.q);
+            break;
+          case "uppercase":
+            str = upperCase(args.q);
+			      break;
+          case "capitalize":
+            str = capitalizeCase(args.q);
+			      break;
+          default:
+            str = capitalizeCase(args.q);
+            break;
+        }
+      }
+      else str = capitalizeCase(args.q);
+
+      setSearchWindowText(str, true);
+    }
+  ]]></script>
+
+  <copyright>
+	Copyright (c) 2002 David Bau
+	Distributed under the terms of the
+	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>
