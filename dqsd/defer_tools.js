@@ -249,16 +249,17 @@ function getReuseBrowserWindowMode()
   return reuseBrowserWindowModeOverride;
 }
 
-function displayPopupMessage( msg )
+function displayPopupMessage( msg, headHTML )
 {
   var dqsdMessagePopup = window.createPopup();
   var windowW = 350;
   var dqsdMessagePopup = window.createPopup();
   var dqsdMessagePopupBody = dqsdMessagePopup.document.body;
-  var dqsdMessageBodyCode = "<table id=qstable border=0 cellspacing=1 cellpadding=2 width=100% height=100%>";
+  var dqsdMessageBodyCode = "<html><head>" + (typeof headHTML == 'undefined' ? '' : headHTML ) + "</head><body>";
+  dqsdMessageBodyCode += "<table id=qstable border=0 cellspacing=1 cellpadding=2 width=100% height=100%>";
   dqsdMessageBodyCode += "<tr><td valign=top><style>" + convertStylesToInline() + "</style>";
   dqsdMessageBodyCode += "<tr><td valign=top style='text-align: center' class=helpboxDescriptions>" + msg;
-  dqsdMessageBodyCode += "</tr></td></table>";
+  dqsdMessageBodyCode += "</tr></td></table></body></html>";
   dqsdMessagePopupBody.innerHTML = dqsdMessageBodyCode;
   dqsdMessagePopup.document.body.style.border="outset 2px";
   dqsdMessagePopup.document.body.style.background='menu';
