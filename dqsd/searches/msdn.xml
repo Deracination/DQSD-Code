@@ -37,6 +37,8 @@
         document.msdnf.qu.value = args.q;
         submitForm( msdnf );
       }
+      else if( args.switches.length > 1 )
+        nullArgs("msdn","?");
       else
       {
         document.msdnf.scopeid.value = "1";
