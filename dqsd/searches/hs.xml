@@ -1,6 +1,24 @@
 <search function="hs">
   <name>HotScripts.com</name>
-  <description>Search for code snippets in a multitude of programming languages. Searches all languages by default. Options include: ASP (/asp), C or C++ (/c), Java (/java), Javascript (/javascript), PHP (/php), Perl (/perl), Python (/python), Tools and Utilities (/tools or /utils), Remote Hosts (/rh or /remotehosts), XML (/xml).</description>
+  <description>Search for code snippets in a multitude of programming languages. Searches all languages by default.<br/>
+  <a class="helpboxDescLabels">Switches:</a><br/>
+	<table cellpadding="0" cellspacing="0" border="0">
+		<tr><td class="helpboxDescColumns">/asp</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">ASP</td></tr>
+		<tr><td class="helpboxDescColumns">/c</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">C and C++</td></tr>
+    <tr><td class="helpboxDescColumns">/java</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Java</td></tr>
+    <tr><td class="helpboxDescColumns">/javascript</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">JavaScript</td></tr>
+    <tr><td class="helpboxDescColumns">/php</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">PHP</td></tr>
+    <tr><td class="helpboxDescColumns">/perl</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Perl</td></tr>
+    <tr><td class="helpboxDescColumns">/python</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Python</td></tr>
+    <tr><td class="helpboxDescColumns">/remotehosts</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Remote Hosts</td></tr>
+    <tr><td class="helpboxDescColumns">/tools</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Tools and Utilities</td></tr>
+    <tr><td class="helpboxDescColumns">/xml</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">XML</td></tr>
+	</table>
+  <a class="helpboxDescLabels">Example:</a><br/>
+  <table cellpadding="0" cellspacing="0" border="0">
+		<tr><td class="helpboxDescColumns">hs parse /javascript</td></tr>
+	</table>
+  </description>
   <category>Computers</category>
   <link>http://www.hotscripts.com/</link>
   <contributor>Monty Scroggins, Ryan Edwards</contributor>
