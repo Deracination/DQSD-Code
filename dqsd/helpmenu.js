@@ -52,7 +52,7 @@ function showpop()
     var helparray = categories[categoryName];
     
     // Are there any enabled searches in this category?
-    for (var k = 0; k < helparray.length && (!helparray[k].enabled || helparray[k]).nomenu; k++)
+    for (var k = 0; k < helparray.length && (!helparray[k].enabled || helparray[k].nomenu); k++)
     {
     }
 
