@@ -1,38 +1,44 @@
-  <search function="cddb">
-    <name>CDDB Music Search</name>
-    <description>Search Gracenote CDDB by artist /a, title /t, or song /s, or a combination: <nobr>"cddb Madonna /at"</nobr></description>
-    <category>Entertainment</category>
-    <link>http://www.cddb.com/</link>
-    <form name="cdbf"
-          target="_blank"
-          action="http://www.cddb.com/php/search1.php3">
-      <input type="hidden" name="f"/>
-      <input type="hidden" name="q"/>
-    </form>
-    <script><![CDATA[
-      // cddb
-      function cddb(q)
+<search function="cddb">
+  <name>Gracenote CDDB Search</name>
+  <description>Search CDDB by /artist, /album, /song, or a combination of the three. <nobr>Example: "cddb Madonna /artist /title"</nobr></description>
+  <category>Entertainment</category>
+  <link>http://www.cddb.com/</link>
+  <switches>artist, album, song</switches>
+  <contributor>Peter Risser, Ryan Edwards</contributor>
+  <form name="cdbf"
+        target="_blank"
+        action="http://www.cddb.com/php/search2.php3">
+    <input type="hidden" name="f"/>
+    <input type="hidden" name="q"/>
+  </form>
+  <script><![CDATA[
+    function cddb(q, switches)
+    {
+      if( q == "" )
+        openSearchWindow("http://www.cddb.com/");
+      else if( switches.length > 0 )
       {
-        var res = q.match(/([^\/]+)((\/)[ats]+)?/);
-
-        if (!res)
+        var args = "";
+        for( var i = 0; i < switches.length; i++ )
         {
-           openSearchWindow("http://www.cddb.com/");
+          switch( switches[i] )
+          {
+            case "artist": args += "artist"; break;
+            case "album": args += "disc"; break;
+            case "song": args += "track"; break;
+          }
+          args += (args ? " " : "");
         }
-        else
-        {
-          var dope = "";
-          if ((res[2].indexOf('a') > -1) || (res[2].indexOf('A') > -1))
-            dope += "artist ";
-          if ((res[2].indexOf('t') > -1) || (res[2].indexOf('T') > -1))
-            dope += "disc ";
-          if ((res[2].indexOf('s') > -1) || (res[2].indexOf('S') > -1))
-            dope += "track ";
-
-          document.cdbf.q.value=(res[1] ? res[1] : "");
-          document.cdbf.f.value=(res[2] ? dope : "artist");
-          submitForm(cdbf);
-        }
+        document.cdbf.q.value = q;
+        document.cdbf.f.value = args;
+        submitForm(cdbf);
       }
-    ]]></script>
-  </search>
+      else
+      {
+        document.cdbf.q.value = q;
+        document.cdbf.f.value = "artist";
+        submitForm(cdbf);
+      }
+    }
+  ]]></script>
+</search>
