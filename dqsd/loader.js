@@ -175,20 +175,20 @@ if (searchRoot)
     var xScriptVal;
     if ( externalScriptRef )
     {
-		xScriptVal = readFile( externalScriptRef.text );
-	}
-	else
-	{
-		xScriptVal = xscripts[iPrivate].text;
-	}
-	try
-	{
-		eval(xScriptVal);
-	}
-	catch(e)
-	{
-		alert("An error ("+e+") occurred loading script '"+xScriptVal+"'");
-	}
+      xScriptVal = readFile( externalScriptRef.text );
+    }
+    else
+    {
+      xScriptVal = xscripts[iPrivate].text;
+    }
+    try
+    {
+      eval(xScriptVal);
+    }
+    catch(e)
+    {
+      alert("An error ("+e+") occurred loading script '"+xScriptVal+"'");
+    }
   }
 
 // ??? This XQuery will only allow the searches that are enabled to be evaluated.  This should

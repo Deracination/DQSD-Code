@@ -9,11 +9,11 @@ restoreHistory();
 // save the history array
 function saveHistory()
 {
-	try
-	{
-	  writeFile("history.txt", histarray.join('\r\n'));
-	}
-  	catch(e) { }
+  try
+  {
+    writeFile("history.txt", histarray.join('\r\n'));
+  }
+  catch(e) { }
 }
 
 // restore at most historylength entries from the saved history
