@@ -10,7 +10,7 @@ pushd %~dp0
 pushd DQSDTools
 nmake -f "DQSDTools.mak" CFG="DQSDTools - Win32 Release MinDependency"
 
-copy /y ReleaseMinDependency\DQSDTools.dll ..\..\dqsdt255.dll
+copy /y ReleaseMinDependency\DQSDTools.dll ..\..\dqsdt256.dll
 popd
 
 makensis search.nsi
