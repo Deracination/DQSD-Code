@@ -286,7 +286,7 @@ function addAliasesFromFile( aliasFile, category )
                  fields[1],
                  (fields.length >= 3 && fields[2] != '') ? fields[2] : null,   // name
                  (fields.length >= 4 && fields[3] != '') ? fields[3] : null,   // description
-                 arguments.length >= 2 ? category : ((fields.length >= 5 && fields[4] != "") ? fields[4] : null) );
+                 (fields.length >= 5 && fields[4] != "") ? fields[4] : ((arguments.length >= 2) ? category : null) );
       }
     }
   }
