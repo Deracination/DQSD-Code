@@ -1,0 +1,29 @@
+<search function="sw">
+  <name>SurfWax Search</name>
+  <description>Search the SurfWax: "sw horses"</description>
+  <category>Search the Web</category>
+  <link>http://www.surfwax.com/</link>
+  <contributor>robbyh [robbyh at yahoo dot com]</contributor>
+  <form name="swf"
+      action="http://www.surfwax.com/servlet/com.surfwax.FrontEnd.home">
+      <input type="hidden" name="cmd" value="frames"/>
+      <input type="hidden" name="search" value=""/>
+      <input type="hidden" name="max" value="100"/>
+      <input type="hidden" name="sort" value="alpha"/>
+      <input type="hidden" name="summaries" value="checked"/>
+  </form>
+  <script><![CDATA[
+    function sw(search)
+    {
+      if (search == "")
+      {
+        openSearchWindow("http://www.surfwax.com/");
+      }
+      else
+      {
+        document.swf.search.value=search;
+        submitForm(swf);
+      }
+    }
+  ]]></script>
+</search>
