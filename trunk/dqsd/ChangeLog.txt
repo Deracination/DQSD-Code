@@ -17,6 +17,9 @@ New Searches
 * ostk - Search Overstock.com for items (from Brent Beardsley)
 * tinyurl - tinyurl.com is a link-shortening redirector (from Brent Beardsley)
 * sl - Search StudyLight.org for verses and Hebrew and Greek words
+* ebuy - Search ebuyer.com (from Matthew Slight)
+* cpp - Search cppreference.com (from Matthew Slight)
+* ebuy - Search Mathworld.com (from Matthew Slight)
 
 Modified Searches
 
