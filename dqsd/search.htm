@@ -1,7 +1,7 @@
 <html>
 <!--
 Dave's Quick Search Deskbar
-Version 2.5.8-Beta 8 - May ??, 2002
+Version 2.5.8-Beta 8 - May 15, 2002
 
 Copyright (c) 2002 David Bau
 
@@ -325,12 +325,16 @@ function direct(t)
   return false;
 }
 
+reuseBrowserWindowModeOverride = reuseBrowserWindowMode;
 
 // handle onkeypress: cut-copy-paste, ctrl-n, ctrl-p for next and previous
 // we need to do this because for some reason it's not done for us when
 // we're docked in the taskbar!
 function okp()
 {
+  // Reset override each time
+  reuseBrowserWindowModeOverride = reuseBrowserWindowMode;
+
   if (window.event.keyCode != 14 && window.event.keyCode != 16
       && window.event.keyCode != 3 && window.event.keyCode != 22
       && window.event.keyCode != 24 && window.event.keyCode != 10
@@ -339,6 +343,8 @@ function okp()
 
   if (window.event.keyCode == 13)
   {
+    if (window.event.shiftKey)
+        reuseBrowserWindowModeOverride = 0; // If they hold down the shift key, open a new window
     def();
     return false;
   }
