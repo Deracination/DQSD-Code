@@ -4,7 +4,7 @@
     Search the shacknews.com comments database
     <div class="helpboxDescLabels">Switches:</div>
     <table class="helpboxDescTable">
-      <tr><td>/user:username</td><td> - </td><td>Narrow search to username. If the username. Replace blanks in username with + (fex: Steve Gibson becomes Steve+Gibson)</td></tr>
+      <tr><td>/user:username</td><td> - </td><td>Narrow search to username. Replace blanks in username with + (fex: Steve Gibson becomes Steve+Gibson)</td></tr>
       <tr><td>/db:database</td><td> - </td><td>Database to use. Default is current, possible values: current, archive1</td></tr>
       <tr><td>/type:type</td><td> - </td><td>Narrow search to post type. Default is all, possible values: all, i (informative), n (NWS)</td></tr>
       <tr><td>/sortby:key</td><td> - </td><td>Sort results by key. Default is date, possible values: date, relevance</td></tr>
