@@ -19,13 +19,27 @@ function addsearch(fname, name, desc, link, cat)
   }
 }
 
+internalShortcutIndex = 0;
+INTERNAL_FUNC_PREFIX = "_dqsd_internal_fn_";
+
 function addalias(alias, fname)
 {
-  if (!searches[fname])
+  if (!searches[fname]) // no matching searches
   {
     if (aliases[fname])
     {
       fname=aliases[fname];
+    }
+    else if (fname.indexOf(':') > 0)
+    {
+      var url = fname;
+      fname = INTERNAL_FUNC_PREFIX + (++internalShortcutIndex);
+      var f = new Function("t", 
+                           "var url = '" + url + "';" +
+                           "direct(url.replace( /%s/g, t ));"
+                          );
+      eval( fname + " = f;" );
+      addsearch( fname, url, "", url, "Shortcuts" );
     }
     else
     {
