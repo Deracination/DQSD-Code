@@ -48,6 +48,7 @@ Modified Searches
 * mys - updated broken search form (Brent Beardsley)
 * configure - now return "" for the edit functions so they'll work better in aliases (Brent Beardsley)
 * palmgear - updated search to work again, added /new and /updated switches
+* gg - removed /keys, which no longer works. Encodes all queries as UTF-8, per Google's new default (Kim Gräsman)
 
 Removed Searches
 * nwtsr and httpd replaced by whats (Kim Gräsman)

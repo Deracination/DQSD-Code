@@ -13,7 +13,6 @@
       <tr><td>/froogle</td><td> - </td><td>Find products for sale online(<i>warning : still in beta, .com/english only</i>).</td></tr>
       <tr><td>/glossary</td><td> - </td><td>Find definitions for words, phrases and acronyms(<i>warning : still in beta, .com/english only</i>).</td></tr>
       <tr><td>/define</td><td> - </td><td>Find Google's own definitions for words, phrases and acronyms(<i>warning : english only</i>).</td></tr>
-      <tr><td>/keys</td><td> - </td><td>Navigate search results without using your mouse (<i>warning : still in beta, .com/english only</i>).</td></tr>
       <tr><td>/since:days</td><td> - </td><td>Search pages based on when they were indexed.  Use either a number to specify when, or 
         <div style="padding: 0 0 0 20px">
           /since:t - indexed today<br/>   
@@ -63,6 +62,7 @@
     <input type="hidden" name="hl" value=""/>
     <input type="hidden" name="cat" value=""/>
     <input type="hidden" name="meta" value=""/>
+    <input type="hidden" name="ie" value="utf-8"/>
     <input type="hidden" name="q"/>
   </form>
   
@@ -70,6 +70,7 @@
         action="http://www.google.com/advanced_search"
         method="get">
     <input type="hidden" name="hl" value=""/>
+    <input type="hidden" name="ie" value="utf-8"/>
     <input type="hidden" name="q"/>
   </form>
   
@@ -79,6 +80,7 @@
     <input type="hidden" name="hl" value=""/>
     <input type="hidden" name="q"/>
     <input type="hidden" name="meta" value=""/>
+    <input type="hidden" name="ie" value="utf-8"/>
     <input type="hidden" name="btnI" value="I'm Feeling Lucky"/>
   </form>
   
@@ -86,6 +88,7 @@
         action="http://images.google.com/images"
         method="get">
     <input type="hidden" name="hl" value=""/>
+    <input type="hidden" name="ie" value="utf-8"/>
     <input type="hidden" name="q"/>
   </form>
   
@@ -93,13 +96,14 @@
         action="http://groups.google.com/groups"
         method="get">
     <input type="hidden" name="hl" value=""/>
+    <input type="hidden" name="ie" value="utf-8"/>
     <input type="hidden" name="q"/>
   </form>
   
   <form name="ggf_news"
         action="http://news.google.com/news"
         method="get">
-    <!-- commented out for test <input type="hidden" name="hl" value="en"/> -->
+    <input type="hidden" name="ie" value="utf-8"/>
     <input type="hidden" name="hl" value=""/>
     <input type="hidden" name="q"/>
   </form>
@@ -107,7 +111,7 @@
   <form name="ggf_fresh"
         action="http://www.researchbuzz.com/cgi-bin/goofresh.cgi" 
         method="get">
-    <input type="hidden" Name="query" />
+    <input type="hidden" name="query" />
     <input type="hidden" name="datemod" value="0" />
   </form>
 
@@ -115,25 +119,21 @@
         method="get"
         action="http://froogle.google.com/froogle">
     <input type="hidden" name="q" value="" />
+    <input type="hidden" name="ie" value="utf-8"/>
   </form>
 
   <form name="ggf_glossary"
         method="get"
         action="http://labs.google.com/glossary">
     <input type="hidden" name="q" value="" />
-  </form>
-
-  <form name="ggf_keys"
-        method="get"
-        action="http://labs.google.com/cgi-bin/keys">
-    <input type="hidden" name="q" value="" />
+    <input type="hidden" name="ie" value="utf-8"/>
   </form>
 
   <script><![CDATA[
     function gg(q)
     //by MLL: warning : news service is still in beta stage, so URLs below may change
     {
-      var args = parseArgs(q, "ifl, advanced, groups, directory, images, news, since, cache, related, link, froogle, glossary, define, keys, local, canada, deutschland, france, italia, uk, language");
+      var args = parseArgs(q, "ifl, advanced, groups, directory, images, news, since, cache, related, link, froogle, glossary, define, local, canada, deutschland, france, italia, uk, language");
       var mode, local, local_meta = "", local_tld = "com", msglang = "";
       
       if( nullArgs( "gg", q ) ) return false;
@@ -197,7 +197,6 @@
           case "froogle":   googleURL = "http://froogle.google.com/froogle"; break;
           case "glossary":  googleURL = "http://labs.google.com/glossary"; break;
           case "define":    googleURL = "http://www.google." + local_tld + "/help/operators.html#define"; break;
-          case "keys":      googleURL = "http://labs.google.com/keys"; break;
           default: 
         }
         openSearchWindow( googleURL ); 
@@ -205,6 +204,9 @@
       }
       else
       {
+      	// Force UTF-8 encoding
+      	args.q = utf8(args.q);
+      	
         //apply the daterange specification
         if( args.switch_val["since"] == "" )
         {
@@ -307,10 +309,6 @@
               document.ggf.cat.value = "";
               submitForm(ggf);
               break;
-            case "keys":
-              document.ggf_keys.q.value = args.q;
-              submitForm(ggf_keys);
-              break;
           }
         }
         else
@@ -333,7 +331,7 @@
        }
        return jd;
     }
-
+    
     function gg_keypressHook(keypressEvent)
     {
       switch(keypressEvent.keyCode){
