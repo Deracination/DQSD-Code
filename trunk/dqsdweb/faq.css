@@ -3,6 +3,10 @@ BODY, P, TD, DIV {
 	 font-size: x-small;
 }
 
+TD.keyname {
+	white-space: nowrap;	
+}
+
 A, A:Visited {
 	color: #0000ff;
 }
