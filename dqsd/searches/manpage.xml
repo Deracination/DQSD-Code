@@ -1,10 +1,7 @@
 <search function="manpage">
   <name>Linux man pages</name>
   <description>
-    Search Linux man pages.<br/>
-    <div class="helpboxDescLabels">Examples:</div>
-    <table class="helpboxDescTable">
-    </table>
+    Search Linux man pages.
   </description>
   <link>http://www.oreillynet.com/linux/cmd/</link>
   <category>Computers</category>

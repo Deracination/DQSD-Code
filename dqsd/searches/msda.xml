@@ -8,19 +8,19 @@
   Search the discuss.microsoft.com archive
     <div class="helpboxDescLabels">Switches:</div>
     <table class="helpboxDescTable">
-      <tr><td colspan="3"><i>One of the following is required:</i></td></tr>
-      <tr><td>/atl</td><td> - </td><td>Search ATL list archives</td></tr>
-      <tr><td>/javacom</td><td> - </td><td>Search Java-COM list archives</td></tr>
-      <tr><td colspan="3"><hr size="1"/></td></tr>
-      <tr><td colspan="3"><i>Optional:</i></td></tr>
-      <tr><td>/substring</td><td> - </td><td>By default, searches will only match full words. But if you check the "substring search" box, your search will match any word containing the string you have entered.</td></tr>
-      <tr><td>/author</td><td> - </td><td>Restrict your search to messages posted by a particular person</td></tr>
-      <tr><td>/since</td><td> - </td><td>Search for messages only since the specified date.</td></tr>
-      <tr><td>/until</td><td> - </td><td>Search for messages only before the specified date</td></tr>
+      <tr><td colspan="4"><i>One of the following is required:</i></td></tr>
+      <tr><td> </td><td>/atl</td><td> - </td><td>Search ATL list archives</td></tr>
+      <tr><td> </td><td>/javacom</td><td> - </td><td>Search Java-COM list archives</td></tr>
+      <tr><td colspan="4"><hr size="1"/></td></tr>
+      <tr><td colspan="4"><i>Optional:</i></td></tr>
+      <tr><td> </td><td>/substring</td><td> - </td><td>By default, searches will only match full words. But if you check the "substring search" box, your search will match any word containing the string you have entered.</td></tr>
+      <tr><td> </td><td>/author</td><td> - </td><td>Restrict your search to messages posted by a particular person</td></tr>
+      <tr><td> </td><td>/since</td><td> - </td><td>Search for messages only since the specified date.</td></tr>
+      <tr><td> </td><td>/until</td><td> - </td><td>Search for messages only before the specified date</td></tr>
     </table>
     <div class="helpboxDescLabels">Examples:</div>
     <table class="helpboxDescTable">
-      <tr><td>msda /atl /s tooltip /since:2002</td><td>Search the ATL list for tooltip substrings since 1-Jan-2002</td></tr>
+      <tr><td>msda /atl /s tooltip /since:2002</td><td> - </td><td>Search the ATL list for tooltip substrings since 1-Jan-2002</td></tr>
       <tr><td></td></tr>
     </table>
   </description>
