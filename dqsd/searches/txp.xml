@@ -1,0 +1,16 @@
+<search function="txp">
+  <name>tweakxp.com</name>
+  <description>Search the tweak database on tweakxp.com</description>
+  <category>Computers</category>
+  <link>http://www.tweakxp.com/</link>
+  <contributor>Wolfgang Deutsch</contributor>
+  <script><![CDATA[
+    function txp(q)
+    {
+      if( nullArgs( "txp", q ) ) return;
+
+      openSearchWindow("http://www.tweakxp.com/tweakxp/search.asp?s="+q);
+    }
+  ]]></script>
+</search>
+

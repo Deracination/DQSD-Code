@@ -10,11 +10,11 @@ Enhancements
 
 New Searches
 
-* 
+* txp - Search the tweak database on tweakxp.com (from Wolfgang Deutsch)
 
 Modified Searches
 
-* amaz - added domain switch to search either amaz. com de uk jp ca or fr (from Wolfgang)
+* amaz - added domain switch to search either amaz. com de uk jp ca or fr (from Wolfgang Deutsch)
 
 Bug Fixes
 
