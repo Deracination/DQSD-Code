@@ -21,6 +21,7 @@ New Searches
 * fs - FindSounds.com sound file search (from Gregory Krohne)
 * dqsd - Search the DQSD mail archive (Gregory Krohne)
 * phpb - Search PHPBuilder (from Sarah Sweeney)
+* tr - Search ThomasRegister (from Brent Beardsley)
 
 Bug Fixes
 
