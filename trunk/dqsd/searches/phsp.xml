@@ -1,25 +1,25 @@
 <search function="phsp">
-    <name>Phone Number Speller</name>
-    <description>Spells out phone numbers: "phsp 227-4332" or "phsp bar-idea"</description>
-    <category>Fun</category>
-    <link>http://www.phonespell.org/</link>
-    <contributor>Chris Sells</contributor>
-    <form name="phspellf"
-          method="get"
-          action="http://www.phonespell.org/combo.cgi"
-          target="_blank">
-      <input type="hidden" name="n" value=""/>
-    </form>
-    <script><![CDATA[
-      function phsp(q)
+  <name>Phone Number Speller</name>
+  <description>Spells out phone numbers: "phsp 227-4332" or "phsp bar-idea"</description>
+  <category>Fun</category>
+  <link>http://www.phonespell.org/</link>
+  <contributor>Chris Sells</contributor>
+  <form name="phspellf"
+        target="_blank"
+        action="http://www.phonespell.org/combo.cgi"
+        method="get">
+    <input type="hidden" name="n" value=""/>
+  </form>
+  <script><![CDATA[
+    function phsp(q)
+    {
+      if (q == "")
+        openSearchWindow("http://www.phonespell.org/");
+      else
       {
-        if (q == "")
-          openSearchWindow("http://www.phonespell.org/");
-        else
-        {
-          document.phspellf.n.value = q;
-          submitForm(phspellf);
-        }
+        document.phspellf.n.value = q;
+        submitForm(phspellf);
       }
-    ]]></script>
-  </search>
+    }
+  ]]></script>
+</search>
