@@ -1,0 +1,62 @@
+<search function="adbn">
+  <COMMENT>
+
+    Even though this XML search will probably load and is a good start
+    toward a completed search, please be aware that this search will probably
+    not work as is and will probably require some changes.
+
+  </COMMENT>
+  <name>Audubon</name>
+  <category>Reference<category>General</category></category>
+  <contributor>John W. Bairen, Jr.</contributor>
+  <link>http://www.audubon.org/</link>
+  <email>john_at_bairen_dot_net</email>
+  <description>Search the Audubon Society for information about birds.
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>adbn woodpecker</td></tr>
+      <tr><td>adbn cardinal</td></tr>
+    </table>
+  </description>
+  <form name="adbnf"
+        method="get"
+        action="http://search.freefind.com/find.html">
+    <input type="hidden" name="id" value="53279" />
+    <input type="hidden" name="pageid" value="r" />
+    <input type="hidden" name="mode" value="ALL" />
+    <input type="hidden" name="n" value="0" />
+
+    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
+
+    <input type="hidden" name="query" value="" />
+  </form>
+  <script><![CDATA[
+    function adbn(q)
+    {
+      if( nullArgs("adbn", q) )
+        return;
+
+      // FORM variables for adbnf
+      //document.adbnf.id.value = "";
+      //document.adbnf.pageid.value = "";
+      //document.adbnf.mode.value = "";
+      //document.adbnf.n.value = "";
+
+      // The wizard assigned the search string to this form field value because
+      // this field was the active element when the search file was generated.
+      // Change this to args.q if the search string is parsed with parseArgs.
+      document.adbnf.query.value = q;
+
+      submitForm(adbnf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 02/06/04 at 21:45:47
+    by Dave's Quick Search Deskbar Search Wizard version 1.2,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>
