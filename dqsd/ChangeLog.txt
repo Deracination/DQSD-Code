@@ -13,7 +13,7 @@ New Searches
 * riaar - riaaradar.org RIAA label and artist membership search. (Thad Kerosky)
 
 Modified Searches
-* 
+* httpinst - added additional parameter /filename to specify the local filename (Brent Beardsley)
 
 Removed Searches
 * nwtsr and httpd replaced by whats (Kim Gräsman)
