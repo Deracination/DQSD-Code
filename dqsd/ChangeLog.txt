@@ -35,6 +35,7 @@ New Searches
 * wordiq - Search wordiq.com for anything (Gregory Krohne)
 * rnd - random.org (Gregory Krohne)
 * ukdial - UK area code lookup (David Golding)
+* hol - localEvents.xml management command (Erik Telford)
 
 Modified Searches
 * jdk - updated urls for j2ee and 1.4, added 1.5, 1.2, 1.1 and api switches (Brent Beardsley)
