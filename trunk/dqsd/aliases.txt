@@ -14,39 +14,5 @@
 //
 // ----------------------------------------------------------------------------
 //
-~|uns
 !|gg %s /ifl|I'm Feeling Lucky!|Go directly to Google's top-ranked result.|Search the Web
-@|yhe
-@@|bfe
-#|sb
-##|sb %s /business|Switchboard Business|Search the Switchboard Yellow Pages.|People and Places
-#*|phsp
-$|stk
-$$|dlt
-$$$|pw
-%|ebay
-^|av
-&|gg %s /cache|Google Cache|Given a URL, loads Google's cached copy of the web page.|Search the Web
-&&|ia
-*|aw
--|fst
-+|mq
-=|clc
-[|enc
-]|xref
-{|dp
-:|mwd
-::|dic
-;|ths
-;;|mwt
-,|gg %s /groups|Google Groups|Search Google's newsgroup archive.|Search the Web
-,,|faq
-.|cnn
->|gg %s /advanced|Google Advanced|Use the Google Advanced Search page.|Search the Web
->>|dl
 ?|qsfind
-??|gg %s /directory|Google Directory|Search Google's copy of the DMOZ open directory.|Search the Web
-???|aj
-dhr|gg /ifl %s site:msdn.microsoft.com inurl:dhtml|<a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/dhtmlrefs.asp">DHTML reference at Microsoft</a>|Lookup a DHTML item reference on the MS site|Computers|Programming
-w3r|gg /ifl %s element site:www.w3.org inurl:REC-html40|<a href="http://www.w3.org/TR/REC-html40/">DHTML reference at the World Wide Web Consortium</a>|Lookup a DHTML item reference on the W3.org site|Computers|Programming
-timer|alarm

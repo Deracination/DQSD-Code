@@ -19,6 +19,7 @@ Removed Searches
 
 Miscellaneous
 * Added IRC url autodetection (only really useful for people that have IRC software that handles the URL hook) (Shawn K. Hall)
+* Removed most of the default aliases, saved a backup in aliases.deprecated (Kim Gräsman)
 
 
 -- What's new for 3.1.9.1 (date 2005-01-06)
