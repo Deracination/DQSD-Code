@@ -92,10 +92,16 @@ var categoryarray = [];
 
 // 0. Get disabled searches
 
-var d = readTabDelimitedFile("disabledsearches.txt");
+var disabledfnames = readTabDelimitedFile("disabledsearches.txt");
 var disabledsearches = new Object();
-for ( var i = 0; i < d.length; i++ )
-  disabledsearches[d[i]] = true;
+var xpathquery = '';
+var delim = ''
+for ( var i = 0; i < disabledfnames.length; i++ )
+{
+  disabledsearches[disabledfnames[i]] = true;
+  xpathquery += delim + "@function!='" + disabledfnames[i] + "'";
+  delim = ' and ';
+}
 
 // 1. load search.xml (if present), merge localsearch.xml (if present), merge files in 'searches' subdirectory
 
@@ -189,11 +195,13 @@ catch (except) {}
 
 if (searchRoot)
 {
+//  var xscripts = searchRoot.selectNodes("search[" + xpathquery + "]/script");
   var xscripts = searchRoot.selectNodes("search/script");
   for (var iPrivate = 0; iPrivate < xscripts.length; iPrivate++)
   {
     eval(xscripts[iPrivate].text);
   }
+//  var xforms = searchRoot.selectNodes("search[" + xpathquery + "]/form");
   var xforms = searchRoot.selectNodes("search/form");
   for (var iPrivate = 0; iPrivate < xforms.length; iPrivate++)
   {
