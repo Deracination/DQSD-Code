@@ -4,7 +4,6 @@
 #define __DQSDWIZARDDLG_H_
 
 #include "resource.h"       // main symbols
-#include <atlhost.h>
 
 /////////////////////////////////////////////////////////////////////////////
 // CDQSDWizardDlg
