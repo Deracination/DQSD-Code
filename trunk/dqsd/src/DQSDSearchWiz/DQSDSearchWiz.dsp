@@ -110,6 +110,10 @@ SOURCE="$(InputPath)"
 # PROP Default_Filter "cpp;c;cxx;rc;def;r;odl;idl;hpj;bat"
 # Begin Source File
 
+SOURCE=.\AboutDlg.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\DQSDSearchWiz.cpp
 # End Source File
 # Begin Source File
@@ -131,6 +135,10 @@ SOURCE=.\DQSDWizardDlg.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=.\OptionsDlg.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=.\SearchWizard.cpp
 # End Source File
 # Begin Source File
@@ -144,7 +152,15 @@ SOURCE=.\StdAfx.cpp
 # PROP Default_Filter "h;hpp;hxx;hm;inl"
 # Begin Source File
 
+SOURCE=.\AboutDlg.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\DQSDWizardDlg.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\OptionsDlg.h
 # End Source File
 # Begin Source File
 
@@ -178,5 +194,5 @@ SOURCE=.\SearchWizard.rgs
 # End Target
 # End Project
 # Section DQSDSearchWiz : {00000000-0000-0000-0000-800000800000}
-# 	1:17:IDD_DQSDWIZARDDLG:102
+# 	1:12:IDD_ABOUTDLG:104
 # End Section

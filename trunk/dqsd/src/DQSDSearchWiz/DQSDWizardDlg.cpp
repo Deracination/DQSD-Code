@@ -2,6 +2,8 @@
 
 #include "stdafx.h"
 #include "DQSDWizardDlg.h"
+#include "AboutDlg.h"
+#include "OptionsDlg.h"
 
 /////////////////////////////////////////////////////////////////////////////
 // CDQSDWizardDlg
@@ -108,6 +110,8 @@ LRESULT CDQSDWizardDlg::OnInitDialog(UINT uMsg, WPARAM wParam, LPARAM lParam, BO
 	long cForms = 0;
 	HR(spFormCollection->get_length( &cForms ));
 
+	int cDisplayedForms = 0;
+
 	for ( int iForm = 0; iForm < cForms; iForm++ )
 	{
 		CComPtr< IDispatch > spFormDisp;
@@ -125,6 +129,8 @@ LRESULT CDQSDWizardDlg::OnInitDialog(UINT uMsg, WPARAM wParam, LPARAM lParam, BO
 			{
 				continue; // Ignore if there's no action
 			}
+
+			cDisplayedForms += 1;
 
 			strAction = GetAbsoluteActionPath( varAttributeValue );
 
@@ -177,6 +183,9 @@ LRESULT CDQSDWizardDlg::OnInitDialog(UINT uMsg, WPARAM wParam, LPARAM lParam, BO
 			ctlFormList2.SendMessage( LVM_SETITEM, iPos, (LPARAM)&lvi );
 		}
 	}
+
+	if ( cDisplayedForms == 1 )
+		ListView_SetCheckState( ctlFormList2.m_hWnd, 0, TRUE );
 
 	return 1;  // Let the system set the focus
 }
@@ -623,4 +632,45 @@ void CDQSDWizardDlg::RestoreFields()
 		}
 	}
 	
+}
+
+LRESULT CDQSDWizardDlg::OnClickedAbout(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHandled)
+{
+	CAboutDlg().DoModal();
+	return 0;
+}
+
+LRESULT CDQSDWizardDlg::OnClickedOptions(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHandled)
+{
+	USES_CONVERSION;
+
+	DWORD dwSize = 0;
+	TCHAR szValue[ 1024 ];
+	DWORD dwValue = 0;
+
+	COptionsDlg dlgOptions;
+
+	CRegKey rk;
+	if ( ERROR_SUCCESS == rk.Open( HKEY_CURRENT_USER, _T("SOFTWARE\\Dave's Quick Search Deskbar\\DQSDSearchWizard\\Settings") ) )
+	{
+		if ( ERROR_SUCCESS == rk.QueryValue( dwValue, _T("EditResult") ) )
+		{
+			dlgOptions.m_bEditResult = dwValue;
+		}
+
+		dwSize = LENGTHOF( szValue );
+		if ( ERROR_SUCCESS == rk.QueryValue( szValue, _T("ResultEditor"), &dwSize ) )
+		{
+			dlgOptions.m_strEditor = string( szValue );
+		}
+	}
+	
+	if ( dlgOptions.DoModal() == IDOK )
+	{
+		rk.SetValue( dlgOptions.m_bEditResult, _T("EditResult") );
+		rk.SetValue( dlgOptions.m_strEditor.c_str(), _T("ResultEditor") );
+	}
+
+	rk.Close();
+	return 0;
 }
