@@ -44,6 +44,12 @@ user_state   = "DC"
 user_zip     = "20509"
 */
 
+/* Startup delay
+*  Increasing this might help if your tray icons don't all show up when you startup windows.
+*  [milliseconds (1000 milliseconds = 1 second)]
+*/
+startupdelay=10000; 
+
 /* Display the clock?
 *  true = display
 *  false = do not display
