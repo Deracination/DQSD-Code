@@ -74,7 +74,7 @@
         // should format the date
         result = endDate;
       }
-      document.deff.q.value = result;
+      setSearchWindowText(result);
     }
   ]]></script>
   <copyright>

@@ -19,13 +19,12 @@
     function sndx(q)
     {
       if( nullArgs("sndx", q) )
-        return;
+        return false;
 
-      if (!genealogy_check_lib_version("1.3")) {
-	return false;
-      }
+      if (!genealogy_check_lib_version("1.3"))
+	    return false;
 
-      document.deff.q.value = genealogy_soundex(genealogy_parse_surname(q));
+      setSearchWindowText(genealogy_soundex(genealogy_parse_surname(q)), true);
     }
   ]]></script>
   <copyright>
