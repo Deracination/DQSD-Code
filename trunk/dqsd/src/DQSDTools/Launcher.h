@@ -64,6 +64,7 @@ public:
 	STDMETHOD(GetProtocolHandler)(/*[in]*/ BSTR bstrProtocol, /*[out,retval]*/ BSTR* pbstrHandler);
 
 public:
+	STDMETHOD(GetFiles)(/*[in]*/ BSTR bstrFileSpec, /*[out,retval]*/ BSTR* pbstrFiles);
 	STDMETHOD(SetSite)(IUnknown* pUnkSite);
 
 // Implementation
@@ -72,7 +73,7 @@ private:
 	bool	m_bDebug;
 
 private:
-	HRESULT GetFilename( LPCTSTR szName, LPTSTR szResult );
+	HRESULT GetFilename( LPCTSTR szName, LPTSTR szResult, LPCTSTR pszDefaultExt = _T(".txt") );
 
 };
 

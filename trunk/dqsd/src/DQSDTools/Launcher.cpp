@@ -219,7 +219,8 @@ STDMETHODIMP CLauncher::ReadFile(BSTR bstrFilename, BSTR *pbstrResult)
 	// Try to open the file
 	HANDLE hFile = ::CreateFile( szFilename, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, 0, NULL);
 	if ( INVALID_HANDLE_VALUE == hFile )
-		HRESULT_FROM_WIN32(::GetLastError());
+		return HRESULT_FROM_WIN32(::GetLastError());
+
 
 	// Read in the string data
 	TCHAR szData[ 1024 ];
@@ -267,7 +268,7 @@ STDMETHODIMP CLauncher::WriteFile(BSTR bstrFilename, BSTR bstrValue)
 
 // Private methods
 
-HRESULT CLauncher::GetFilename( LPCTSTR szName, LPTSTR szResult )
+HRESULT CLauncher::GetFilename( LPCTSTR szName, LPTSTR szResult, LPCTSTR pszDefaultExt /*= _T(".txt")*/ )
 {
 	USES_CONVERSION;
 
@@ -289,7 +290,7 @@ HRESULT CLauncher::GetFilename( LPCTSTR szName, LPTSTR szResult )
 
 	// Add the install directory and an extension if not supplied
 	::PathCombine( szResult, szInstallDir, szName );
-	::PathAddExtension( szResult, _T(".txt") );
+	::PathAddExtension( szResult, pszDefaultExt );
 
 	return S_OK;
 }
@@ -315,6 +316,44 @@ STDMETHODIMP CLauncher::GetProtocolHandler(BSTR bstrProtocol, BSTR *pbstrHandler
 	}
 
 	*pbstrHandler = ::SysAllocString( T2W( szProtocolHandler ) );
+
+	return S_OK;
+}
+
+STDMETHODIMP CLauncher::GetFiles(BSTR bstrFileSpec, BSTR *pbstrFiles)
+{
+	USES_CONVERSION;
+
+	TCHAR szFilename[ _MAX_PATH ];
+	HRESULT hr = GetFilename( W2CT( bstrFileSpec ), szFilename, _T("*.*") );
+	if ( FAILED( hr ) )
+	{
+		Error(IDS_ERR_FILENOTFOUND, IID_ILauncher, hr);
+		return hr;
+	}
+
+	WIN32_FIND_DATA fd;
+	memset( &fd, 0, sizeof(fd) );
+	HANDLE handle = ::FindFirstFile( szFilename, &fd );
+	if (INVALID_HANDLE_VALUE == handle)
+	{
+		Error(IDS_ERR_FILENOTFOUND, IID_ILauncher, HRESULT_FROM_WIN32(::GetLastError()));
+		return HRESULT_FROM_WIN32(::GetLastError());
+	}
+
+	CComBSTR bstrFiles( _T("") );
+	LPCTSTR pszDelim = _T("");
+	while ( ::FindNextFile( handle, &fd ) )
+	{
+		if ( !_tcscmp( fd.cFileName, _T(".") ) || !_tcscmp( fd.cFileName, _T("..") ) )
+			continue;
+
+		bstrFiles.Append( pszDelim );
+		bstrFiles.Append( fd.cFileName );
+		pszDelim = _T("\n");
+	}
+
+	*pbstrFiles = bstrFiles.Detach();
 
 	return S_OK;
 }
