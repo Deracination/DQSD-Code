@@ -1,0 +1,26 @@
+<search function="webopedia">
+  <name>Webopedia</name>
+  <description>Seach the weboopedia for technical terms and links: "we HTTP"</description>
+  <contributor>Neel Doshi</contributor>
+  <category>Computers</category>
+  <link>http://www.webopedia.com/</link>
+  <form name="wef"
+        action="http://www.webopedia.com/SHARED/search_action.asp"
+        method="post">
+    <input type="hidden" name="term"/>
+    <input type="hidden" name="Template_Name" value="www.webopedia.com"/>
+  </form>
+  <script><![CDATA[
+    function webopedia(q, switches)
+    {
+      if( nullArgs("webopedia", q) )
+        return false;
+      else
+      {
+        document.wef.term.value = q;
+        submitForm(wef);
+        return true;
+      }
+    }
+  ]]></script>
+</search>

@@ -1,0 +1,45 @@
+<search function="yweather">
+  <name>Yahoo Weather</name>
+  <description>Search Yahoo Weather (by the Weather channel) for weather forecasts by zip code or city name: "yweather 22204"
+    Uses personalization variables if no arguments are present:  "yweather"
+  </description>
+  <category>News</category>
+  <link>http://weather.yahoo.com/</link>
+  <contributor>Neel Doshi</contributor>
+  <form name="yweatherf"
+        action="http://search.weather.yahoo.com/search/weather2"
+        method="get">
+    <input type="hidden" name="p" value=""/>
+  </form>
+  <script><![CDATA[
+    function yweather(q)
+    {
+      if (q == "")
+      	if (typeof user_zip != "undefined" && user_zip != "")
+      	{
+      		document.yweatherf.p.value=user_zip;
+      		submitForm(yweatherf);
+      	}
+      	else if (typeof user_city != "undefined" && user_city != "")
+      	{
+      		document.yweatherf.p.value=user_city;
+      		submitForm(yweatherf);
+      	}
+      	else
+      	{
+      		openSearchWindow("http://weather.yahoo.com/");
+      		return false;
+      	}
+      else if (q == "?")
+      {
+		nullArgs("yweather", q);
+		return false;
+      }
+      else
+      {
+        document.yweatherf.p.value=q;
+        submitForm(yweatherf);
+      }
+    }
+  ]]></script>
+</search>
