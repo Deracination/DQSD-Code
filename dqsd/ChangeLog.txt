@@ -3,12 +3,14 @@
 Enhancements
 * Support for Czech month- and day names (Jiri Sedlacek)
 * Holidays for Czech Republic up until 2020 (Jiri Sedlacek)
+* Added dragdropautosearch configuration option to control automatic searching on drag&drop. (Thad Kerosky)
+* Added (for real this time) Mouse Wheel history browsing. (Thad Kerosky)
 
 Bug Fixes
-* 
+* Removed 'Type "!<em>prefix</em>" to see only matching entries.' from help. This action launches lucky Google.
 
 New Searches
-* 
+* riaar - riaaradar.org RIAA label and artist membership search. (Thad Kerosky)
 
 Modified Searches
 * 
