@@ -50,6 +50,12 @@ In order to build things, you need:
 (1) Microsoft Visual C++ (version 6.0 is what I use). You don't need
 this is if you're not rebuilding DQSDTools.dll.
 
+(2) The Microsoft Internet Development SDK:
+http://www.microsoft.com/msdownload/platformsdk/sdkupdate/
+
+Add the SDK include and library paths before the standard Visual
+C++ directories.
+
 (2) NSIS rebuilds dqsd.exe; to run the src/search.nsi script, you
 need to install the open source NSIS installation compiler,
 available at
