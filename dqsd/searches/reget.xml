@@ -1,0 +1,176 @@
+<search function="reget">
+  <name>ReGet</name>
+  <description>ReGet will auto-reload a URL at a given frequency:
+    "reget 10 20 http://www.gymamerica.com" will reload gymamerica every 20 seconds for 10 iterations.
+    "reget 0 20 http://www.yahoo.com /noforce" will reload yahoo every 20 seconds until cancelled without forcing the browser to reload from the server.
+  </description>
+  <switches>noforce</switches>
+  <contributor>Neel Doshi</contributor>
+  <category>Functions</category>
+  <script><![CDATA[
+
+    // Array used to keep track of reget commands that are pending completion
+    regetTracker = new Array();
+
+    // Used to error check the URL arguement.
+	function regetIsURL(t)
+	{
+	  // detect strings that look like URLs or filenames
+	  prot = new RegExp("^(http://|https://|ftp://)([\\-a-z0-9]+\\.)*[\\-a-z0-9]+" +
+	                    "|^[a-z]:($|\\\\)" +
+	                    "|^\\\\\\\\[a-z0-9]+($|\\\\($|[a-z0-9]+($|\\\\)))", "i");
+	  if (prot.exec(t))
+	    return t;
+
+	  // detect strings that look like DNS names
+	  dns = new RegExp("^www\.([\\-a-z0-9]+\\.)+[\\-a-z0-9]+(/\\S*)?$" +
+	                   "|^([\\-a-z0-9]+\\.)+(com|net|org|edu|gov|mil|[a-z]{2})(/\\S*)?$", "i");
+	  if (dns.exec(t))
+	  {
+	    t = "http://" + t;
+	    return t;
+	  }
+	  return false;
+	}
+
+	function regetURLLoad(freq, num, name, reget_code, force_reload, strURL)
+    {
+      if (force_reload == 1)
+      {
+        // Append something unique to each request to guarantee a true
+        // releod from the server instead of the browser cache.
+        var strURL1;
+        var str_concat_char;
+        if ( strURL.match(/[?]+/) )
+          str_concat_char = "&reget_foo=";
+        else
+          str_concat_char = "?";
+
+        strURL1 = strURL + str_concat_char + (new Date()).getTime();
+      }
+      else
+        strURL1 = strURL;
+
+      // Open the URL in the same browser window.
+      // Note:  I am using window.open because I do not know of another
+      // way to ensure opening the page in the same window everytime.
+      window.open(strURL1, name);
+
+      // See if the function should be called again.
+      if (--num == 0)
+      {
+      	if (regetTimeOut != undefined)
+      	{
+          clearInterval(regetTimeOut);
+          delete regetTracker[reget_code];
+        }
+        return false;
+      }
+      else
+      {
+      	// We need to iterate again.
+      	var strTimeout = "regetURLLoad('" + freq + "', '" + num + "', '" + name + "', '" + reget_code + "', '" + force_reload + "', '" + strURL + "');";
+      	regetTimeOut = setTimeout(strTimeout, freq * 1000);
+      	regetTracker[reget_code] = regetTimeOut;
+      }
+      return true;
+    }
+
+
+	function reget(q, switches)
+	{
+	  if (q == "")
+	  {
+	    alert("ReGet will auto-reload a URL at a given frequency:\n'reget 10 20 http://www.gymamerica.com' will reload gymamerica every 20 seconds for 10 iterations.\n'reget 0 20 http://www.yahoo.com' will reload yahoo every 20 seconds until cancelled.");
+	    return false;
+	  }
+
+  	  // First parse the arguments
+  	  var args_array = q.split(' ');
+  	  var args_num = args_array.shift();
+  	  var args_freq = args_array.shift();
+  	  var args_rest = args_array.join(' ');
+  	  var reget_base = 1;
+
+	  // Does the member want to cancel a previous reget
+	  if (args_num == 'cancel')
+	  {
+	    // The member wants to cancel a particular reget session
+	    var reget_code;
+	    if (args_freq == undefined)
+	    {
+	      args_freq = reget_base;
+	      reget_code = "";
+	    }
+		else
+		  reget_code = args_freq + " ";
+
+	    if (regetTracker[args_freq] != undefined)
+	    {
+	      clearInterval(regetTracker[args_freq]);
+	      delete regetTracker[args_freq];
+	      document.deff.q.value = "reget " + reget_code + "canceled";
+	      setTimeout("document.deff.q.value='';",1000);
+	      return true;
+	    }
+	    else
+	    {
+	      alert("reget not found");
+	      return false;
+	  	}
+	  }
+
+	  // Next determine if the first argument is an integer or not.
+	  if ( !(args_num.match(/^(\d)+$/)) )
+	  {
+	    alert("The first argument must be an integer representing the number of page reloads");
+	    return false;
+	  }
+
+	  // Next determine if the next argument is a valid integer
+	  if (args_freq == undefined || args_freq.match(/^(\d)+$/) == null || args_freq == 0)
+	  {
+	    alert("The second argument must be an integer representing the reload frequency in seconds");
+	    return false;
+	  }
+
+	  // Next determine if the next argument has something to open in a browser:
+	  var strURL = regetIsURL(args_rest);
+	  if (args_rest == undefined || strURL == false)
+	  {
+	    alert("The third argument must be a valid URL");
+	    return false;
+	  }
+
+      // Determine if the reload forcing string should be used or not.
+	  var bforce_reload = 1;
+	  if (switches == "noforce")
+	    bforce_reload = 0
+
+	  // Generate a reget code and target name
+	  // The purpose of the reget code is to allow the user to cancel a
+	  // reget once it has begun.  The regetTracker array will keep track of
+	  // all of the active regets and associate a reget code to a setTimeout handle
+	  // so the user doesn't have to keep track of the changing setTimeout handles.
+	  // The array serves the dual purpose of also allowing reget to create a unique
+	  // name for target window so that each reget shows up in a different browser.
+      for (var reget_code = reget_base; regetTracker[reget_code] != undefined; ++reget_code)
+
+      var reget_target = "target_" + reget_code;
+
+      // Start getting the URL
+      regetURLLoad(args_freq, args_num, reget_target, reget_code, bforce_reload, strURL);
+
+      // Display the cancel code.
+      if (reget_code == reget_base)
+        reget_code = "";
+      else
+      	reget_code = " " + reget_code;
+      document.deff.q.value = "To cancel: 'reget cancel" + reget_code + "'";
+      setTimeout("document.deff.q.value='';",2000);
+
+      return true;
+    }
+
+  ]]></script>
+</search>
