@@ -1,3 +1,7 @@
+Version 1.2 (final) 14-May-2003
+
+* Stopped excluding INPUT elements of type="submit" since some searches need them.
+
 Version 1.1 (final) 19-Jan-2003
 
 * Added ability to specify subcategories

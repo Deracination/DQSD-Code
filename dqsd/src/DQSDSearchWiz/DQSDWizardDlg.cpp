@@ -644,9 +644,10 @@ string CDQSDWizardDlg::GetForms( const string& rstrSearchName, string& rstrFormS
 						{
 							strInputName = W2T( varInputName.bstrVal );
 
-							// Ignore INPUT type=submit
-
 							string strInputType = _T("");
+
+							// Ignore INPUT type=submit
+/*
 							_variant_t varInputType;
 							if ( SUCCEEDED( spElement->getAttribute( _bstr_t( _T("type") ), 0, &varInputType ) ) )
 							{
@@ -654,6 +655,7 @@ string CDQSDWizardDlg::GetForms( const string& rstrSearchName, string& rstrFormS
 							}
 							if ( !_tcsicmp( _T("submit"), strInputType.c_str() ) )
 								continue;
+*/
 
 							// Was this the active element?
 
