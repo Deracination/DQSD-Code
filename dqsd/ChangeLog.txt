@@ -9,6 +9,7 @@ Enhancements
 * added edit local stylesheet menu option and a new variable to set for the css editor called cssEditorExe so you can use TopStyle, Dreamweaver, etc (from Brent Beardsley)
 * added Belgian National Holidays (from Joris Verhuyck)
 * Modified the US holidays file for 2003
+* created an empty localsearches folder
 
 New Searches
 
@@ -41,6 +42,7 @@ New Searches
 * abt - Search About.com
 * alistapart - Search the A List Apart site (from Sarah S.)
 * mg - Search MajorGeeks site for shareware and freeware
+* winf - Brian's Buzz WinFind
 
 Bug Fixes
 
