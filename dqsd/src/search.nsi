@@ -203,6 +203,10 @@ Section "Quick Search Deskbar (required)"
   Delete $INSTDIR\search.nsi
   Delete $INSTDIR\dqsd.xml
   Delete $INSTDIR\search.xml
+  
+  ; Remove stuff introduced by 3.1.8 beta-1
+  Delete $INSTDIR\dqsd.gif
+  Delete $INSTDIR\httpinst.js
 
   ; old versions of searches to delete; most renamed or consolidated
   Delete $INSTDIR\searches\aim.xml
