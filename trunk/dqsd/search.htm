@@ -440,7 +440,10 @@ function showQuickSearch()
 // strt() called on page load; show help message after 4 seconds
 function strt()
 {
-  setTimeout( postStartup, typeof startupdelay == 'undefined' ? 15000 : parseInt(startupdelay) );
+  if (startupdelay > 0)
+    setTimeout( postStartup, startupdelay );
+  else
+    postStartup();
 
   if (!clock || clockdelay > 0)
     showQuickSearch();
