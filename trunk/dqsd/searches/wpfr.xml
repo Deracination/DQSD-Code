@@ -1,0 +1,86 @@
+<search function="wpfr">
+  <name>French white pages</name>
+  <category>People and Places</category>
+  <contributor>MLL</contributor>
+  <link>http://www.pagesblanches.fr/</link>
+  <description>
+  Get an address from a name in France
+    <div class="helpboxDescLabels">Usage:</div>
+    <table class="helpboxDescTable">
+      <tr><td>wpfr name [/prenom] [/adresse] /localite|/departement</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/prenom</td><td> - </td><td>first name</td></tr>
+      <tr><td>/adresse</td><td> - </td><td>address</td></tr>
+      <tr><td>/localite</td><td> - </td><td>location or zip code</td></tr>
+      <tr><td>/departement</td><td> - </td><td>department or region</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+      <tr><td>wpfr mus&#233;e du louvre /localite:paris</td></tr>
+    </table>
+  </description>
+
+  <form name="wpfrf"
+        method="post"
+        action="http://www.pagesjaunes.fr/pb.cgi">
+    <input type="hidden" name="faire" value="decode_input_image" />
+    <input type="hidden" name="DEFAULT_ACTION" value="bf_inscriptions_req" />
+    <input type="hidden" name="mode" value="web" />
+    <input type="hidden" name="SESSION_ID" value="GF-5219B4C-19CFC" />
+    <input type="hidden" name="VID" value="GF-5219B4C-19CFC" />
+    <input type="hidden" name="lang" value="FR" />
+    <input type="hidden" name="pays" value="FR" />
+    <input type="hidden" name="srv" value="PB" />
+    <input type="hidden" name="TYPE_RECHERCHE" value="ZZZ" />
+    <input type="hidden" name="input_image" value="" />
+    <input type="hidden" name="FRM_NOM" value="" />
+    <input type="hidden" name="FRM_PRENOM" value="" />
+    <input type="hidden" name="FRM_ADRESSE" value="" />
+    <input type="hidden" name="FRM_LOCALITE" value="" />
+    <input type="hidden" name="FRM_DEPARTEMENT" value="" />
+  </form>
+
+  <script><![CDATA[
+    function wpfr(q)
+    {
+      var args = parseArgs(q, "prenom, adresse, localite, departement");
+      if( nullArgs("wpfr", args.q) )
+        return;
+      for (var iSwitch = 0; iSwitch < args.switches.length; iSwitch++)
+      {
+        switch( args.switches[iSwitch].name )
+        {
+          case "prenom":
+            document.wpfrf.FRM_PRENOM.value = args.switches[iSwitch].value;
+            break;
+          case "adresse":
+            document.wpfrf.FRM_ADRESSE.value = args.switches[iSwitch].value;
+            break;
+          case "localite":
+            document.wpfrf.FRM_LOCALITE.value = args.switches[iSwitch].value;
+            break;
+          case "departement":
+            document.wpfrf.FRM_DEPARTEMENT.value = args.switches[iSwitch].value;
+            break;
+          default:
+            break;
+        }
+      }
+
+      document.wpfrf.FRM_NOM.value = args.q;
+
+      submitForm(wpfrf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 09/23/02 at 09:30:12
+    by Dave's Quick Search Deskbar Search Wizard version 0.9.1 (beta),
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>

@@ -11,6 +11,7 @@ New Searches
 * dhl - Track DHL packages
 * usps - Track USPS packages
 * abex - Track Airborne Express packages
+* wpfr - Get an address from a name in France
 
 Modified Searches
 
