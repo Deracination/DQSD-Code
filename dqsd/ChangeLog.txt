@@ -8,7 +8,8 @@ New Searches
 Modified Searches
 
 * qsfind - Changed to display a popup window instead of an alert dialog when
-           no match is found
+           no match is found.
+* ebay - Fixed regular expression so "ebay <itemnumber>" will work correctly.
 
 Bug Fixes
 
