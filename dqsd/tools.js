@@ -205,7 +205,10 @@ function getMSXMLDOMDocumentInstance()
 
 function getDefaultLanguage()
 {
-  language=navigator.userLanguage.substr(0,2);
+  if (typeof language == "undefined" || language == "")
+  {
+    language = navigator.userLanguage.substr(0,2);
+  }
 }
 
 function initGlobals()
