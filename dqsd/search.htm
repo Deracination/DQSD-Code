@@ -688,6 +688,11 @@ function banner()
     document.deff.q.value = local(HELP_TEXT);
     bant=window.setTimeout("unbanner();", helptime);
   }
+  else
+  {
+    // explicitly call unbanner() to force clock display
+    unbanner();
+  }  
 }
 
 // called when the banner naturally goes away
