@@ -1,36 +1,31 @@
-  <search function="ebay">
-    <name>Ebay Item Search</name>
-    <description>By name or number: "ebay guitars"</description>
-    <category>Shopping</category>
-    <link>http://www.ebay.com/</link>
-    <form name="ebyf"
-        method="get"
+<search function="ebay">
+  <name>eBay</name>
+  <description>Search eBay either by description or item number. Examples: "ebay guitars", "ebay 1503826268"</description>
+  <category>Shopping</category>
+  <link>http://www.ebay.com/</link>
+  <form name="ebyf"
+        target="_blank"
         action="http://search.ebay.com/search/search.dll"
-        target="_blank">
-        <input type="hidden" name="MfcISAPICommand" value="GetResult"/>
-        <input type="hidden" name="ht" value="1"/>
-        <input type="hidden" name="SortProperty" value="MetaEndSort"/>
-        <input type="hidden" name="query" value=""/>
-    </form>
-    <script><![CDATA[
-      function ebay(q)
+        method="get">
+    <input type="hidden" name="MfcISAPICommand" value="GetResult"/>
+    <input type="hidden" name="ht" value="1"/>
+    <input type="hidden" name="SortProperty" value="MetaEndSort"/>
+    <input type="hidden" name="query"/>
+  </form>
+  <script><![CDATA[
+    function ebay(q, switches)
+    {
+      var res = null;
+      
+      if( q == "" )
+        openSearchWindow("http://www.ebay.com/");
+      else if( (res = q.match( /^\s*(\d{9,)\s*$/ )) != null )
+        openSearchWindow('http://cgi.ebay.com/aw-cgi/eBayISAPI.dll?MfcISAPICommand=ViewItem&item=' + res[1]);
+      else
       {
-        if (q == "")
-        {
-          openSearchWindow("http://www.ebay.com/");
-        }
-        else if (Number(q))
-        {
-          if ((Number(q) > '99999999') && (Number(q) < '2147483647'))
-          {
-            openSearchWindow('http://cgi.ebay.com/aw-cgi/eBayISAPI.dll?MfcISAPICommand=ViewItem&item=' + q);
-          }
-        }
-        else
-        {
-          document.ebyf.query.value=q;
-          submitForm(ebyf);
-        }
+        document.ebyf.query.value = q;
+        submitForm(ebyf);
       }
-    ]]></script>
-  </search>
+    }
+  ]]></script>
+</search>
