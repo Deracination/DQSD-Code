@@ -69,7 +69,7 @@ if (useExternalBrowser)
 // Open a search window either with the default browser or with IE
 function openSearchWindow(url)
 {
-  openNamedSearchWindow(url, reuseBrowserWindow ? DQSD_BROWSER_WINDOW_NAME : "_blank");
+  openNamedSearchWindow(url, reuseBrowserWindowMode ? DQSD_BROWSER_WINDOW_NAME : "_blank");
 }
 
 // Open a search window in an existing frame
