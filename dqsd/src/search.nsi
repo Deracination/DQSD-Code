@@ -6,12 +6,17 @@
 ; The name of the installer
 Name "Dave's Quick Search Deskbar"
 
+; What is the minimum required version of IE?
+!Define IE_MAJOR_REQUIRED  6
+!Define IE_MINOR_REQUIRED  0
+
 ; Silent install
 DirShow hide
 CRCCheck on
 SetDatablockOptimize on
 Icon search.ico
 SilentInstall silent
+;ShowInstDetails show
 
 ; The file to write
 OutFile "..\dqsd.exe"
@@ -31,10 +36,34 @@ Section "Quick Search Deskbar (required)"
 
   ; Set output path to the installation directory.
   SetOutPath $INSTDIR
-  
+
+  ; Confirm that the user really does want to install  
   MessageBox MB_YESNO|MB_ICONINFORMATION|MB_DEFBUTTON2 "This will install Dave's Quick Search Deskbar.  Would you like to continue?" IDYES userconfirmedinstall
   Abort
   userconfirmedinstall:
+
+  ; Verify that they've got the correct version of IE installed.
+  GetDLLVersion "shdocvw.dll" $1 $4
+  IntOp $2 $1 & 0xffff0000
+  IntOp $2 $2 /    0x10000
+  IntOp $3 $1 & 0x0000ffff
+  IntOp $5 $4 & 0xffff0000
+  IntOp $5 $5 /    0x10000
+  IntOp $6 $4 & 0x0000ffff
+  DetailPrint 'IE Version: $2.$3.$5.$6: OK'
+  IntCmpU $2 ${IE_MAJOR_REQUIRED} ieMajorVersionOK ieVersionNotOK ieMajorVersionOK
+  ieMajorVersionOK:
+  IntCmpU $3 ${IE_MINOR_REQUIRED} ieMinorVersionOK ieVersionNotOK ieMinorVersionOK
+  ieMinorVersionOK:
+  Goto ieVersionOK
+
+  ieVersionNotOK:
+    MessageBox MB_YESNO|MB_ICONEXCLAMATION|MB_DEFBUTTON2 "This version of Dave's Quick Search Deskbar requires IE version ${IE_MAJOR_REQUIRED}.${IE_MINOR_REQUIRED} or higher.  You are currently running version $2.$3.$5.$6.$\n$\nWould you like to visit Microsoft's IE download web site now?" IDNO dontvisitms
+    ExecShell "" "http://www.microsoft.com/windows/ie"
+    dontvisitms:
+    Abort
+    
+  ieVersionOK:
 
   ; Old versions to delete
   UnRegDLL $INSTDIR\DQSDTools.dll
@@ -205,7 +234,7 @@ Section "Quick Search Deskbar (required)"
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\$9" "UninstallString" '"$INSTDIR\uninstall.exe"'
 
   ; Message box
-  MessageBox MB_OK "$8"
+  MessageBox MB_OK|MB_ICONINFORMATION "$8"
 
 SectionEnd
 
