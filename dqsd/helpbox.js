@@ -56,7 +56,7 @@ function about()
         {
           var alias = search.aliases[j].replace(/&/g, "&amp;").replace(/</g, "&lt;");
           if (alias == "")
-            alias = "<font face='Wingdings 3'>&#56;</font>";
+            alias = "<em>Enter</em>";
           helptable += alias;
           if (j < search.aliases.length)
             helptable += "<br>"

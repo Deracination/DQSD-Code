@@ -25,18 +25,9 @@ function calculate(expr)
     document.deff.q.value = expr + "=ERR=";
   }
   document.deff.q.createTextRange().select();
-}
 
-// constants for use in calculator
-pi = Math.PI;
-ln10 = Math.LN10;
-ln2 = Math.LN2;
-log10e = Math.LOG10E;
-log2e = Math.LOG2E;
-sqrt1_2 = Math.SQRT1_2;
-sqrt2 = Math.SQRT2;
-ln = Math.log;
-e = Math.exp(1);
+  savevars();
+}
 
 // based log functions
 function log10(n) { return ln(n)/ln10; }
@@ -168,5 +159,63 @@ function mathexp(t)
   calculate(t);
   return true;
 }
+
+
+function savevars()
+{
+  var savetext = "";
+  for (var ii = 'a'.charCodeAt(0); ii <= 'z'.charCodeAt(0); ii++)
+  {
+    var varname = String.fromCharCode(ii);
+    var vartype = eval("typeof " + varname);
+    if (vartype == "number" || vartype == "string")
+    {
+       savetext += varname + "\t" + vartype + "\t" + eval(varname) + "\r\n";
+    }
+  }
+  for (var ii = 'A'.charCodeAt(0); ii <= 'Z'.charCodeAt(0); ii++)
+  {
+    var varname = String.fromCharCode(ii);
+    var vartype = eval("typeof " + varname);
+    if (vartype == "number" || vartype == "string")
+    {
+       savetext += varname + "\t" + vartype + "\t" + eval(varname) + "\r\n";
+    }
+  }
+  writeFile("calcmem", savetext);
+}
+
+function loadvars()
+{
+  var values = readTabDelimitedFile("calcmem")
+  for (var ii = 0; ii < values.length; ii++)
+  {
+    var value = values[ii];
+    if (value.length == 3)
+    {
+      if (value[1] == "number")
+      {
+        eval(value[0] + " = " + value[2]);
+      }
+      else if (value[1] == "string")
+      {
+        eval(value[0] + " = \"" + value[2] + "\"");
+      }
+    }
+  }
+}
+
+loadvars();
+
+// constants for use in calculator
+pi = Math.PI;
+ln10 = Math.LN10;
+ln2 = Math.LN2;
+log10e = Math.LOG10E;
+log2e = Math.LOG2E;
+sqrt1_2 = Math.SQRT1_2;
+sqrt2 = Math.SQRT2;
+ln = Math.log;
+e = Math.exp(1);
 
 
