@@ -1,0 +1,42 @@
+<search function="revdic">
+  <name>OneLook Reverse Dictionary</name>
+  <category>Reference<category>Language</category></category>
+  <contributor>Sarah Sweeney</contributor>
+  <link>http://www.onelook.com/reverse-dictionary.shtml</link>
+  <email>poohbear@designshift.com</email>
+  <description>
+  Find a word by describing a concept.
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>revdic afraid of heights</td></tr>
+    </table>
+  </description>
+  <form name="revdicf"
+        method="get"
+        action="http://www.onelook.com/">
+    <input type="hidden" name="w" value="*" />
+    <input type="hidden" name="loc" value="revfp2" />
+    <input type="hidden" name="clue" value="" />
+  </form>
+  <script><![CDATA[
+    function revdic(q)
+    {
+      if( nullArgs("revdic", q) )
+        return;
+
+      // FORM variables for revdicf
+      document.revdicf.clue.value = q;
+
+      submitForm(revdicf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 02/12/04 at 14:03:40
+    by Dave's Quick Search Deskbar Search Wizard version 1.2,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>

@@ -1,0 +1,58 @@
+<search function="adtunes">
+  <name>Ad Tunes</name>
+  <category>Entertainment</category>
+  <contributor>Sarah Sweeney</contributor>
+  <link>http://adtunes.com/forums/</link>
+  <email>poohbear@designshift.com</email>
+  <description>
+  Find out the name of a song you heard in an ad.
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>adtunes Mitsubishi</td></tr>
+    </table>
+  </description>
+  <form name="adtunesf"
+        method="post"
+        action="http://adtunes.com/forums/index.php?act=Search&amp;CODE=01">
+    <input type="hidden" name="keywords" value="" />
+    <input type="hidden" name="namesearch" value="" />
+    <input type="hidden" name="exactname" value="1" />
+    <input type="hidden" name="forums[]" value="all" />
+    <input type="hidden" name="searchsubs" value="1" />
+    <input type="hidden" name="searchsubs" value="value" />
+    <input type="hidden" name="prune" value="0" />
+    <input type="hidden" name="prune_type" value="older" />
+    <input type="hidden" name="prune_type" value="newer" />
+    <input type="hidden" name="prune_type" value="newer" />
+    <input type="hidden" name="sort_key" value="last_post" />
+    <input type="hidden" name="sort_order" value="desc" />
+    <input type="hidden" name="sort_order" value="asc" />
+    <input type="hidden" name="sort_order" value="value" />
+    <input type="hidden" name="search_in" value="posts" />
+    <input type="hidden" name="search_in" value="titles" />
+    <input type="hidden" name="search_in" value="value" />
+    <input type="hidden" name="result_type" value="topics" />
+    <input type="hidden" name="result_type" value="posts" />
+  </form>
+  <script><![CDATA[
+    function adtunes(q)
+    {
+      if( nullArgs("adtunes", q) )
+        return;
+
+      // FORM variables for adtunesf
+      document.adtunesf.keywords.value = q;
+
+      submitForm(adtunesf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 02/12/04 at 13:56:36
+    by Dave's Quick Search Deskbar Search Wizard version 1.2,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>
