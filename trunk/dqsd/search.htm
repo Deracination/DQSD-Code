@@ -155,6 +155,7 @@ td
  margin:0px;
  position:absolute;
  overflow:hidden;
+ word-break:break-all;
 }
 .clock
 {
@@ -287,7 +288,9 @@ function def()
 
   // try to execute a shortcut
   if (shortcut(t)) return false;
-  
+
+  // if all else fails, do a google search
+  gg(t);
   return false;
 }
 
@@ -729,7 +732,7 @@ if (dopopup)
    <td id=info style="display:none">
     <img width=0 height=36><br>
     <b><a style=text-decoration:none;color:black href=http://notesbydave.com/toolbar/searchdoc.htm target=_blank tabindex=-1>
-      Dave's Quick Search Taskbar Toolbar Deskbar</a></b>
+      Dave's Quick Search Deskbar</a></b>
     <br>
     Designed to be placed on the Windows taskbar.<br>
     For documentation,
