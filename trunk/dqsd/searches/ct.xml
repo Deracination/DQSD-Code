@@ -2,7 +2,7 @@
   <name>Content Type Listings</name>
   <category>Computers<category>Reference</category></category>
   <contributor>Brent Beardsley</contributor>
-  <link>http://www.reliableanswers.com/ContentType/</link>
+  <link>http://reliableanswers.com/ContentType/</link>
   <email></email>
   <description>
   Search the Content-Type Listings from Reliable Answers.com
@@ -14,7 +14,7 @@
   </description>
   <form name="ctf"
         method="post"
-        action="http://www.reliableanswers.com/ContentType/CType.asp?ord=">
+        action="http://reliableanswers.com/ContentType/CType.asp?ord=">
     <input type="hidden" name="ct-FsClass" value="" />
     <input type="hidden" name="ct-FsContentType" value="" />
 	<input type="hidden" name="filter" value="Filter" />
