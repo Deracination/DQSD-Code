@@ -131,6 +131,11 @@ function appendMRUMenuSelections( mb )
   
 }
 
+function isInternalSearch( fn )
+{
+  return (fn.substr(0,INTERNAL_FUNC_PREFIX.length) == INTERNAL_FUNC_PREFIX)
+}
+
 function getSearchAlias( search )
 {
   return (search.aliases[0].substr(0,INTERNAL_FUNC_PREFIX.length) == INTERNAL_FUNC_PREFIX) ? search.aliases[1] : search.aliases.join(', ');
@@ -158,13 +163,15 @@ function showpop()
   
   appendMRUMenuSelections( mb );
 
-  var alias = mb.Display();
-  if ( alias )
+  var fn = mb.Display();
+  if ( fn )
   {
-    alias = alias.split(', ')[0];
-    mnu( alias, "" );
-    if ( alias != 'about' )
-      saveMenuHistory( alias );
+    var alias = null;
+    if ( isInternalSearch( fn ) )
+      alias = searches[fn].aliases[1]
+    mnu( fn, alias );
+    if ( fn != 'about' )
+      saveMenuHistory( alias ? alias : fn );
   }
   return false;
 }
