@@ -49,7 +49,7 @@
                   result = genealogy_age_calc(startDate);
             }
       }
-      document.deff.q.value = result;
+      setSearchWindowText(result);
     }
   ]]></script>
   <copyright>

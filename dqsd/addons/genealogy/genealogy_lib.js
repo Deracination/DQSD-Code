@@ -5,7 +5,7 @@ Distributed under the terms of the GNU Lesser General Public License Version 2.1
 (http://www.gnu.org/licenses/lgpl.txt)
 **********************************************************************************/
 	var genealogy_debug = 0;
-    var genealogy_lib_version = "1.9";
+    var genealogy_lib_version = "1.10";
 
 	var genealogy_month_names = new Array("JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER");
 	var genealogy_date_format_1 = "([0-9]{1,2})\\s*(?:/|-)\\s*([0-9]{1,2})\\s*(?:/|-)\\s*([0-9]{4})";
@@ -495,12 +495,12 @@ function genealogy_check_lib_version(required_version)
 	var cur_version_parts = genealogy_lib_version.split(".");
 	var required_version_parts = required_version.split(".");
 	
-	var major_cur_version = cur_version_parts[0];
-	var minor_cur_version = (cur_version_parts.length > 1) ? cur_version_parts[1] : 0;
+	var major_cur_version = parseInt(cur_version_parts[0], 10);
+	var minor_cur_version = (cur_version_parts.length > 1) ? parseInt(cur_version_parts[1], 10) : 0;
 
-	var major_required_version = required_version_parts[0];
-	var minor_required_version = (required_version_parts.length > 1) ? required_version_parts[1] : 0;
-	
+	var major_required_version = parseInt(required_version_parts[0], 10);
+	var minor_required_version = (required_version_parts.length > 1) ? parseInt(required_version_parts[1], 10) : 0;
+
 	if (major_cur_version >= major_required_version) {
 		if (minor_cur_version >= minor_required_version) {
 			return true;
@@ -781,15 +781,40 @@ function genealogy_hasArg(args, argname)
 
 function genealogy_submitForm(form, searchName, searchArgs)
 {
-	genealogy_alert("genealogy_submitForm called with "+form.action+", "+searchName + ", "+searchArgs);
+    if ( typeof genealogy_searchHooks != 'undefined' ) {
+      for ( var i = 0; i < genealogy_searchHooks.length; i++ )
+      {
+         genealogy_searchHooks[i]( searchName, searchArgs, form.action, form.name );        
+      }
+    }
 	submitForm(form);
 }
 
 function genealogy_openSearchWindow(searchUrl, searchName, searchArgs)
 {
-	genealogy_alert("genealogy_openSearchWindow called with "+searchUrl+", "+searchName + ", "+searchArgs);
+    if ( typeof genealogy_searchHooks != 'undefined' ) {
+      for ( var i = 0; i < genealogy_searchHooks.length; i++ )
+      {
+         genealogy_searchHooks[i]( searchName, searchArgs, searchUrl);        
+      }
+    }
 	openSearchWindow(searchUrl);
 }
+
+function genealogy_registerSearchHook( searchHook )
+{
+  if ( typeof genealogy_searchHooks == 'undefined' )
+    genealogy_searchHooks = new Array();
+    
+  genealogy_searchHooks.push( searchHook );
+}
+
+function genealogy_searchHook_alert(searchName, searchArgs, searchUrl, formName)
+{
+	alert("genealogy_search name: "+searchName+", args: "+searchArgs + ", url: "+searchUrl+((typeof formName != "undefined") ? (", form name: "+formName) : ""));
+}
+//genealogy_registerSearchHook(genealogy_searchHook_alert);
+
 
 function genealogy_check_dqsd_version(majorHi, majorLo, minorHi, minorLo)
 {
