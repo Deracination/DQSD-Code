@@ -93,6 +93,7 @@ Miscellaneous
 * added a logo-size graphic (dqsd.gif) for use with the new banner feature (Shawn K. Hall)
 * added several more bit-depth and size formats to the dqsd search.ico icon file (Shawn K. Hall)
 * Replaced dqsd.gif with dqsd.png from Monty Scroggins, and updated all dependent files (Kim Gräsman)
+* Added 2004 holidays for Canada, Great Britain and Singapore (Bill Hewitt, James Robertson and Sidney Chong)
 
 -- What's new for 3.1.6.0 (20-Apr-2003)
 
