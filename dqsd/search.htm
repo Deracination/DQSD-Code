@@ -935,7 +935,7 @@ function httpInstall(searchUrl)
 	  xmlHttp.open("GET", searchUrl, false);
 	  xmlHttp.send();
 
-		// Verify well-formed-ness of response
+		// Verify wellformed-ness of response
 		var xmlDom = xmlHttp.responseXml;
 	  if(xmlDom.parseError.errorCode != 0)
 	  {
@@ -960,9 +960,9 @@ function httpInstall(searchUrl)
 			return false;
 		}
 
-		// Save xml file to searches directory
-		writeFile("searches/" + searchName, xmlHttp.responseText);
-				
+		// Save xml file to localsearches directory
+		writeFile("localsearches/" + searchName, xmlHttp.responseText);
+
 		// Tell the user all went well
 		if(confirm("Successfully installed search " + searchName + ".\nWould you like to reload the toolbar?"))
 		{
