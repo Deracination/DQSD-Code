@@ -124,6 +124,8 @@ New / Modified Searches
 * af - Acronym Finder now accepts switches: /reverse, /begins_with, /wildcard
 * rz - RhymeZone search (an online tool that aspires to be the best and fastest way for writers to find words.)
 * mm - Changed to use generic multimap server and client rather than uk2.multimap.   Helps when their system is busy.
+* sp - Safe Proxy; Anonymous browsing through the safeproxy.org proxy.
+* anon - Anonymizer; Anonymous browsing through the Anonymizer proxy.
 
 
 Miscellaneous
