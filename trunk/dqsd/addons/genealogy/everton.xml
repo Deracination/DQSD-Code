@@ -19,4 +19,9 @@
 		       "&amp;given_name="+genealogy_parse_givenname(q));
     }
   ]]></script>
+  <copyright>
+	Copyright (c) 2002 Brent Beardsley
+	Distributed under the terms of the
+	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
 </search>
