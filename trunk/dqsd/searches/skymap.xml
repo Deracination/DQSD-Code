@@ -1,0 +1,257 @@
+<search function="skymap">
+  <name>Sky Map</name>
+  <category>Reference<category>General</category></category>
+  <contributor>Gregory Krohne</contributor>
+  <link>http://www.fourmilab.ch/yoursky/#Skymap</link>
+  <email>zeakz1d02@sneakemail.com</email>
+  <description>
+  The sky map shows the entire sky as viewed from a given location, date, and time.
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/latitude</td><td> - </td><td>degrees, minutes, seconds</td></tr>
+      <tr><td>/longitude</td><td> - </td><td>or decimal form</td></tr>
+      <tr><td>/north|south</td><td> - </td><td>latitude direction</td></tr>
+      <tr><td>/east|west</td><td> - </td><td>longitude direction</td></tr>
+      <tr><td>/city|location</td><td> - </td><td>A nearby city, instead of lat/lon</td></tr>
+      <tr><td>/date|universal</td><td> - </td><td>date/time in universal format</td></tr>
+      <tr><td>/julian</td><td> - </td><td>date/time in Julian format</td></tr>
+      <tr><td>/image|size</td><td> - </td><td>Image width/height in pixels</td></tr>
+      <tr><td colspan="3">/colour|color:[colour|color|black|white|night|red]</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>skymap 90 0</td></tr>
+      <tr><td> - at the south pole</td></tr>
+      <tr><td>skymap /lat:21d18m21s /north /lon:157d51m36s /west</td></tr>
+      <tr><td> - Hololulu, Hawaii</td></tr>
+      <tr><td>skymap /city:Paris /date:[2000-01-01,1:00:00]</td></tr>
+      <tr><td> - Paris at the turn of the century</td></tr>
+      <tr><td>skymap /color:night /size:1024</td></tr>
+      <tr><td> - large, red (night vision) map</td></tr>
+    </table>
+  </description>
+  <form name="skymapf"
+        method="post"
+        action="http://www.fourmilab.ch/cgi-bin/uncgi/Yoursky">
+		<input type="radio" name="date" checked="true" value="0"/>
+		<input type="radio" name="date" value="1"/>
+		<input type="radio" name="date" value="2"/>
+    <input type="hidden" name="utc" value="2000-01-01 12:00:00" />
+    <input type="hidden" name="jd" value="2451545.00000" />
+    <input type="hidden" name="lat" value="47°" />
+    <input type="hidden" name="ns" value="North" />
+    <input type="hidden" name="lon" value="7°" />
+    <input type="hidden" name="ew" value="East" />
+    <input type="hidden" name="coords" value="on" />
+    <input type="hidden" name="moonp" value="on" />
+    <input type="hidden" name="deep" value="on" />
+    <input type="hidden" name="deepm" value="2.5" />
+    <input type="hidden" name="consto" value="on" />
+    <input type="hidden" name="constn" value="on" />
+    <input type="hidden" name="consta" value="on" />
+    <input type="hidden" name="constb" value="on" />
+    <input type="hidden" name="limag" value="5.5" />
+    <input type="hidden" name="starn" value="on" />
+    <input type="hidden" name="starnm" value="2.0" />
+    <input type="hidden" name="starb" value="on" />
+    <input type="hidden" name="starbm" value="2.5" />
+    <input type="hidden" name="flip" value="on" />
+    <input type="hidden" name="imgsize" value="640" />
+    <input type="hidden" name="scheme" value="0" />
+    <input type="hidden" name="edump" value="-xe" />
+    <input type="hidden" name="elements" value="" />
+  </form>
+  <script><![CDATA[
+    function skymap(q)
+    {
+      if( nullArgs("skymap", q) )
+        return;
+			
+			// Default FORM variables for skymapf
+      document.skymapf.date.value = "0";
+      document.skymapf.utc.value = "";
+      document.skymapf.jd.value = "";
+      document.skymapf.lat.value = "";
+      document.skymapf.ns.value = "";
+      document.skymapf.lon.value = "";
+      document.skymapf.ew.value = "";
+      //document.skymapf.coords.value = "";
+      //document.skymapf.moonp.value = "";
+      //document.skymapf.deep.value = "";
+      //document.skymapf.deepm.value = "";
+      //document.skymapf.consto.value = "";
+      //document.skymapf.constn.value = "";
+      //document.skymapf.consta.value = "";
+      //document.skymapf.constb.value = "";
+      //document.skymapf.limag.value = "";
+      //document.skymapf.starn.value = "";
+      //document.skymapf.starnm.value = "";
+      //document.skymapf.starb.value = "";
+      //document.skymapf.starbm.value = "";
+      //document.skymapf.flip.value = "";
+      //document.skymapf.imgsize.value = "";
+      //document.skymapf.scheme.value = "";
+      //document.skymapf.edump.value = "";
+      //document.skymapf.elements.value = "";
+			
+      // Parse switches with parseArgs:
+      var args = parseArgs(q, "latitude, longitude, north, south, east, west, city, location, date, image, size, colour, color, julian, universal");
+      for (var iSwitch = 0; iSwitch < args.switches.length; iSwitch++)
+      {
+        switch( args.switches[iSwitch].name )
+        {
+          case "latitude":
+						document.skymapf.lat.value = args.switches[iSwitch].value;
+            break;
+          case "longitude":
+            document.skymapf.lon.value = args.switches[iSwitch].value;
+            break;
+          case "north":
+						document.skymapf.ns.value = "North";
+            break;
+          case "south":
+						document.skymapf.ns.value = "South";
+            break;
+          case "east":
+						document.skymapf.ew.value = "East";
+            break;
+          case "west":
+						document.skymapf.ew.value = "West";
+            break;
+          case "city":
+          case "location":
+						getCity(args.switches[iSwitch].value);
+            break;
+          case "date":
+					case "universal":
+						// Parse out the date/time portion, however it was enclosed
+						var pattern = /\d+[\/-]\d+[\/-]\d+[\D\d+:\d+[:\d+]?]?/;
+						var result = args.switches[iSwitch].value.match(pattern);
+						if (result != null) {
+							document.skymapf.utc.value = result[0];
+							document.skymapf.date[1].checked=true;
+						}
+						break;
+					case "julian":
+						document.skymapf.date[2].checked=true;
+						document.skymapf.jd.value = args.switches[iSwitch].value;
+						break;
+          case "image":
+          case "size":
+						document.skymapf.imgsize.value = args.switches[iSwitch].value;
+            break;
+          case "colour":
+          case "color":
+						switch( args.switches[iSwitch].value.toLowerCase() )
+						{
+							case "black":
+							case "b":
+								document.skymapf.scheme.value = "1";
+								break;
+							case "white":
+							case "w":
+								document.skymapf.scheme.value = "2";
+								break;
+							case "night":
+							case "n":
+							case "red":
+							case "r":
+								document.skymapf.scheme.value = "3";
+								break;
+							default:
+								document.skymapf.scheme.value = "0";
+								break;
+						}
+            break;
+          default:
+            break;
+        }
+				
+      }
+			
+			if (args.q) {
+				var parsed = args.q.split(/ /);
+				document.skymapf.lat.value = parsed[0];
+				document.skymapf.lon.value = parsed[1];
+			}
+			
+      // FORM variables for skymapf
+      //document.skymapf.date.value = "";
+      //document.skymapf.utc.value = "";
+      //document.skymapf.jd.value = "";
+      //document.skymapf.lat.value
+      //document.skymapf.ns.value = "";
+      //document.skymapf.lon.value = "";
+      //document.skymapf.ew.value = "";
+      //document.skymapf.coords.value = "";
+      //document.skymapf.moonp.value = "";
+      //document.skymapf.deep.value = "";
+      //document.skymapf.deepm.value = "";
+      //document.skymapf.consto.value = "";
+      //document.skymapf.constn.value = "";
+      //document.skymapf.consta.value = "";
+      //document.skymapf.constb.value = "";
+      //document.skymapf.limag.value = "";
+      //document.skymapf.starn.value = "";
+      //document.skymapf.starnm.value = "";
+      //document.skymapf.starb.value = "";
+      //document.skymapf.starbm.value = "";
+      //document.skymapf.flip.value = "";
+      //document.skymapf.imgsize.value = "";
+      //document.skymapf.scheme.value = "";
+      //document.skymapf.edump.value = "";
+      //document.skymapf.elements.value = "";
+
+      submitForm(skymapf);
+    }
+		
+		function getCity(strCity) {
+			
+			var citiesURL = "http://www.fourmilab.ch/yoursky/cities.html";
+			// get the target city from the list
+			var citiesXmlHttp = new ActiveXObject("Microsoft.XmlHttp");
+			citiesXmlHttp.open("GET", citiesURL, false);
+			citiesXmlHttp.send();
+			
+			var citiesBody = citiesXmlHttp.responseText;
+			
+			// parse out the city we want
+			/*
+<a href="/cgi-bin/uncgi/Yoursky?z=1&lat=48.84&ns=North&lon=2.34&ew=East">
+Paris, France</a>
+			*/
+			var cityRegExp = new RegExp(
+					'<a href\\="\\/cgi\\-bin\\/uncgi\\/Yoursky\\?z\\=1\\&lat\\=(.*)\\&ns\\=(North|South)\\&lon\\=(.*)\\&ew\\=(East|West)">'
+					+ '\\n?.*'
+					+ strCity
+					+ '.*'
+					+ '<\\/a>', "i");
+			var cityResult = cityRegExp.exec(citiesBody);
+			
+			if (cityResult == null)
+			{
+				
+				alert( "City/Location [" + strCity + "] not found" );
+				
+			} else {
+				document.skymapf.lat.value = cityResult[1];
+				document.skymapf.ns.value = cityResult[2];
+				document.skymapf.lon.value = cityResult[3];						
+				document.skymapf.ew.value = cityResult[4];
+			
+			}
+			
+			return;
+				
+		}
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 08/18/04 at 11:54:39
+    by Dave's Quick Search Deskbar Search Wizard version 1.3,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>
