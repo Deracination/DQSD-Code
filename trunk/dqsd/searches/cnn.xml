@@ -1,8 +1,15 @@
 <search function="cnn">
   <name>CNN News</name>
-  <description>Search for news topics: "cnn Saddam"</description>
+  <description>
+    Search for news topics at CNN.com.<br/>
+    <a class="helpboxDescLabels">Example:</a><br/>
+    <table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">cnn Saddam Hussein</td></tr>
+  	</table>
+  </description>
   <category>News</category>
   <link>http://www.cnn.com/</link>
+  
   <form name="cnnf"
         action="http://cnn.looksmart.com/r_search"
         method="get">
@@ -20,20 +27,19 @@
     <input type="hidden" name="keyword" value=""/>
     <input type="hidden" name="qp" value=""/>
     <input type="hidden" name="comefrom" value="izch-search"/>
-    <input type="hidden" name="isp" value="zcb"/>
+    <input type="hidden" name="isp" value="zch"/>
     <input type="hidden" name="search" value="0"/>
     <input type="hidden" name="qt" value=""/>
   </form>
+  
   <script><![CDATA[
     function cnn(q)
     {
-      if( q == "" )
-        openSearchWindow("http://www.cnn.com/");
+      if( nullArgs("cnn",q) )
+        return false;
       else
       {
-        document.cnnf.qt.value = q;
-        document.cnnf.key.value = q;
-        document.cnnf.isp.value = "zch";
+        document.cnnf.qt.value = document.cnnf.key.value = q;
         submitForm(cnnf);
       }
     }

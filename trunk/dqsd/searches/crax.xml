@@ -1,21 +1,29 @@
 <search function="crax">
   <name>Astalavista</name>
-  <description>Search Astalavista for software cracks and patches.</description>
+  <description>
+    Search Astalavista for software cracks and patches.<br/>
+    <a class="helpboxDescLabels">Example:</a><br/>
+    <table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">crax DQSD</td></tr>
+  	</table>
+  </description>
   <category>Search the Web</category>
   <link>http://astalavista.box.sk/</link>
+  
   <form name="craxf"
         action="http://astalavista.box.sk/cgi-bin/robot"
         method="get">
     <input type="hidden" name="srch"/>
   </form>
+  
   <script><![CDATA[
     function crax(q)
     {
-      if( q == "" )
-        openSearchWindow("http://astalavista.box.sk/");
+      if( nullArgs("crax",q) )
+        return false;
       else
       {
-        document.craxf.srch.value=q;
+        document.craxf.srch.value = q;
         submitForm(craxf);
       }
     }
