@@ -4,10 +4,10 @@
 one command line expression: "multi av gg wood planes" will search both alta
 vista and google for "wood planes".</description>
   <contributor>Neel Doshi</contributor>
-  <category>Other</category>
+  <category>Search the Web</category>
   <script><![CDATA[
    // This function is almost identical to the shortcut function in search.html
-   function isCommand(t)
+   function multiIsCommand(t)
    {
    // look for matching commands first
    var search = null;
@@ -66,8 +66,18 @@ vista and google for "wood planes".</description>
       return search;
    }
 
+ // the multi function actually performs the multiple searches given
+ // the input parameters.  if the user's reuseBrowserWindowMode parameter
+ // is set to 1, multi will not work.  Also, if the user's launchmode
+ // is not set to zero, multi will pause between searches
+ // to allow multi to work with browsers other than IE.
     function multi(q)
     {
+      if ( reuseBrowserWindowMode == 1 )
+      {
+       alert("Multisearch requires the reuseBrowserWindowMode parameter to be set to zero or two.  Otherwise, all the searches will be spawned in the same window.");
+       return false;
+      }
       if (q == "")
       {
         alert("Multisearch needs at least one search type parameter.");
@@ -77,8 +87,8 @@ vista and google for "wood planes".</description>
         if (result = q.split( /[,\s]+/ ) )
         {
 
-          arrCmds = new Array(0);
-          arrParams = new Array(0);
+          var arrCmds = new Array(0);
+          var arrParams = new Array(0);
 
           // Loop through the arguments to filter out the commands.
           // if an argument is not a command, then no future arguments
@@ -87,7 +97,7 @@ vista and google for "wood planes".</description>
 
           for ( var i = 1; i <= result.length; i++ )
           {
-            strCommandName = isCommand(result[i - 1])
+            var strCommandName = multiIsCommand(result[i - 1]);
             if (strCommandName != false && fLoopBool == 1)
             {
               // Append the command list with this command
@@ -112,8 +122,18 @@ vista and google for "wood planes".</description>
           {
             // Perform each of the searches
             for ( var j = 1; j <= arrCmds.length; j++ )
-              performsearch(arrCmds[j - 1], arrParams.join(" "));
-              return true;
+            {
+              // if the user's launchmode is anything but zero, pause between searches.
+              if (launchmode != 0)
+              {
+                var Timeoutms = 1500
+                var SearchString = "performsearch('" + arrCmds[j - 1] + "','" + arrParams.join(" ") + "');";
+                setTimeout( SearchString, Timeoutms * (j-1) );
+              }
+              else
+                performsearch(arrCmds[j - 1], arrParams.join(" "));
+            }
+            return true;
           }
         }
       }
