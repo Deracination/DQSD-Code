@@ -32,26 +32,29 @@ Section "Quick Search Deskbar (required)"
   ; Set output path to the installation directory.
   SetOutPath $INSTDIR
 
-  ; Try to upgrade the DLL
+  ; Old versions to delete
   UnRegDLL $INSTDIR\DQSDTools.dll
+  Delete /REBOOTOK $INSTDIR\DQSDTools.dll
+
+  ; install new DLL
   SetOverwrite try
   ClearErrors
-  File "..\DQSDTools.dll"
+  File "..\dqsdt253.dll"
   IfErrors seeifsame register
 
   ; If was unable to upgrade, see if files are the same anyway
   seeifsame:
   ClearErrors
-  GetDLLVersionLocal "..\DQSDTools.dll" $1 $2
-  GetDLLVersion $INSTDIR\DQSDTools.dll $3 $4
+  GetDLLVersionLocal "..\dqsdt253.dll" $1 $2
+  GetDLLVersion $INSTDIR\dqsdt253.dll $3 $4
   IfErrors isdifferent
   IntCmpU $1 $3 test1 isdifferent isdifferent
   test1:
   IntCmpU $2 $4 test2 isdifferent isdifferent
   test2:
   ClearErrors
-  GetFileTimeLocal "..\DQSDTools.dll" $1 $2
-  GetFileTime $INSTDIR\DQSDTools.dll $3 $4
+  GetFileTimeLocal "..\dqsdt253.dll" $1 $2
+  GetFileTime $INSTDIR\dqsdt253.dll $3 $4
   IfErrors isdifferent
   IntCmpU $1 $3 test3 isdifferent isdifferent
   test3:
@@ -64,12 +67,12 @@ Section "Quick Search Deskbar (required)"
 
   ; We can register the dll and continue
   register:
-  RegDLL $INSTDIR\DQSDTools.dll
+  RegDLL $INSTDIR\dqsdt253.dll
 
   SetOverwrite on
 
   ; Determine if this is an upgrade
-  StrCpy $8 "The Deskbar has been upgraded.$\n$\nRight-click in your taskbar and select$\n$\n    Toolbar > Add Quick Search...$\n$\nto add the Quick Search Deskbar to your taskbar.$\n$\nIf the search bar is already present on your$\ntaskbar, right-click on the handle to the left of$\nthe search bar and select 'Refresh' to reload it.$\n$\nDave's Quick Search Deskbar$\nCopyright (c) 2001 David Bau$\nDistributed under the terms of the$\nGNU General Public License, Version 2"
+  StrCpy $8 "The Deskbar has been upgraded.$\n$\nRight-click in your taskbar and select$\n$\n    Toolbar > Add Quick Search...$\n$\nto add the Quick Search Deskbar to your taskbar.$\n$\nIf the search bar is already present on your$\ntaskbar, right-click on the handle to the left of$\nthe search bar and select 'Refresh' to reload it.$\n$\nDave's Quick Search Deskbar$\nCopyright (c) 2002 David Bau$\nDistributed under the terms of the$\nGNU General Public License, Version 2"
   IfFileExists "$INSTDIR\search.htm" upgradebar
   StrCpy $8 "The Deskbar has been installed.$\n$\nRight-click in your taskbar and select$\n$\n    Toolbar > Add Quick Search...$\n$\nto add the Quick Search Deskbar to your taskbar.$\n$\nDave's Quick Search Deskbar$\nCopyright (c) 2001 David Bau$\nDistributed under the terms of the$\nGNU General Public License, Version 2"
   upgradebar:
@@ -172,13 +175,14 @@ Section "Uninstall"
   StrCpy $9 "{226b64e8-dc75-4eea-a6c8-abcb4d1d37ff}"
 
   ; Unegister DQSDTools
-  UnRegDLL $INSTDIR\DQSDTools.dll
+  UnRegDLL $INSTDIR\dqsdt253.dll
 
   ; remove registry keys
   DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\$9"
   DeleteRegKey HKCR "CLSID\$9"
 
   ; remove files
+  Delete /REBOOTOK $INSTDIR\dqsdt253.dll
   Delete /REBOOTOK $INSTDIR\readme.txt
   Delete /REBOOTOK $INSTDIR\search.htm
   Delete /REBOOTOK $INSTDIR\search.xml
@@ -197,7 +201,6 @@ Section "Uninstall"
   Delete /REBOOTOK $INSTDIR\tools.js
   Delete /REBOOTOK $INSTDIR\translate.js"
   Delete /REBOOTOK $INSTDIR\src\dqsd.xml
-  Delete /REBOOTOK $INSTDIR\DQSDTools.dll
   Delete /REBOOTOK $INSTDIR\src\build.cmd
   Delete /REBOOTOK $INSTDIR\src\clean.cmd
   Delete /REBOOTOK $INSTDIR\src\scrub.cmd
