@@ -14,23 +14,6 @@ LPCTSTR CMenuBuilder::DQSD_SEC_KEY = _T("CLSID\\{226b64e8-dc75-4eea-a6c8-abcb4d1
 #define TOOLBAR_TRACKER_WINDOW_NAME				"DQSDMenuTracker"
 
 HWND		CMenuBuilder::m_hTooltipWnd;
-//HWND		CMenuBuilder::m_hToolWnd;
-
-/*
-STDMETHODIMP CMenuBuilder::InterfaceSupportsErrorInfo(REFIID riid)
-{
-	static const IID* arr[] = 
-	{
-		&IID_IMenuBuilder
-	};
-	for (int i=0; i < sizeof(arr) / sizeof(arr[0]); i++)
-	{
-		if (InlineIsEqualGUID(*arr[i],riid))
-			return S_OK;
-	}
-	return S_FALSE;
-}
-*/
 
 STDMETHODIMP CMenuBuilder::SetSite(IUnknown* pUnkSite)
 {
@@ -103,47 +86,11 @@ STDMETHODIMP CMenuBuilder::Display( VARIANT* pvarSelection )
 
 	HWND hwndDQSD = UtilitiesFindDQSDWindow();
 
-/*
-	// The following window hierarchy was determined using Spy++ on Windows XP Pro Build 2600.
-	// Should be the same at least on Windows 2000 and other Win XP versions.
-	LPCTSTR rgszClassNames[] = { _T("Shell_TrayWnd"), 
-								 _T("ReBarWindow32"), 
-								 _T("OCHost"), 
-								 _T("Shell Embedding"), 
-								 _T("Shell DocObject View"), 
-								 _T("Internet Explorer_Server") };
-
-	//We now traverse the array of window classes. Set hwnd NULL to start with the desktop.
-	HWND hwndDQSD = NULL;
-	for ( int i = 0; i < sizeof(rgszClassNames)/sizeof(rgszClassNames[0]); i++ ) 
-	{
-		if ( NULL == ( hwndDQSD = ::FindWindowEx( hwndDQSD, NULL, rgszClassNames[i], NULL ) ) )
-		{
-			// If unable to traverse the first list, then assume it's a separate browser window
-			LPCTSTR rgszClassNames[] = { _T("IEFrame"), 
-										 _T("Shell DocObject View"), 
-										 _T("Internet Explorer_Server") };
-
-			hwndDQSD = m_hwndBrowser;
-
-			for ( int j = 0; j < sizeof(rgszClassNames)/sizeof(rgszClassNames[0]); j++ )
-			{
-				if ( NULL == ( hwndDQSD = ::FindWindowEx( hwndDQSD, NULL, rgszClassNames[j], NULL ) ) )
-				{
-					hwndDQSD = m_hwndBrowser;
-				}
-			}
-
-			break;
-		}
-	}
-*/
-
 	RECT rcParentWnd;
 	::GetWindowRect( hwndDQSD, &rcParentWnd );
 
 	HWND hPopupLinkedWindow;
-	UINT menuOptions = TPM_RETURNCMD|TPM_BOTTOMALIGN|getHorizontalAlignment();
+	UINT menuOptions = TPM_RETURNCMD|TPM_BOTTOMALIGN|getHorizontalPosition();
 	// Are we going to try tooltip tracking?
 	if(m_hTrackerWnd != NULL)
 	{
@@ -155,7 +102,21 @@ STDMETHODIMP CMenuBuilder::Display( VARIANT* pvarSelection )
 		menuOptions |= TPM_NONOTIFY;
 	}
 
-	int iMenuItem = ::TrackPopupMenuEx( m_hMain, menuOptions, rcParentWnd.right, rcParentWnd.top, hPopupLinkedWindow, NULL );
+	int nMenuX = rcParentWnd.right;
+	switch ( m_nHorizontalAlignment )
+	{
+	case EHorizontalAlignment::CENTER: 
+		nMenuX = rcParentWnd.left + ( ( rcParentWnd.right - rcParentWnd.left ) / 2 );
+		break;
+	case EHorizontalAlignment::LEFT:
+		nMenuX = rcParentWnd.left;
+		break;
+	case EHorizontalAlignment::RIGHT:
+		nMenuX = rcParentWnd.right;
+		break;
+	}
+
+	int iMenuItem = ::TrackPopupMenuEx( m_hMain, menuOptions, nMenuX, rcParentWnd.top, hPopupLinkedWindow, NULL );
 	if ( iMenuItem > 0 )
 	{
 		bstrSelection = ::SysAllocString( T2CW( m_mapKeys[ iMenuItem ].c_str() ) );
@@ -226,9 +187,9 @@ STDMETHODIMP CMenuBuilder::put_HorizontalAlignment(short newVal)
 {
 	switch ( newVal )
 	{
-	case 0:
-	case 1:
-	case 2:
+	case EHorizontalAlignment::CENTER:
+	case EHorizontalAlignment::LEFT:
+	case EHorizontalAlignment::RIGHT:
 		m_nHorizontalAlignment = newVal;
 		break;
 	default:
@@ -239,13 +200,13 @@ STDMETHODIMP CMenuBuilder::put_HorizontalAlignment(short newVal)
 	return S_OK;
 }
 
-UINT CMenuBuilder::getHorizontalAlignment()
+UINT CMenuBuilder::getHorizontalPosition()
 {
 	switch ( m_nHorizontalAlignment )
 	{
-	case 0: return TPM_CENTERALIGN;
-	case 1: return TPM_LEFTALIGN;
-	case 2: return TPM_RIGHTALIGN;
+	case EHorizontalAlignment::CENTER: return TPM_CENTERALIGN;
+	case EHorizontalAlignment::LEFT: return TPM_LEFTALIGN;
+	case EHorizontalAlignment::RIGHT: return TPM_RIGHTALIGN;
 	}
 	return TPM_RIGHTALIGN;
 }

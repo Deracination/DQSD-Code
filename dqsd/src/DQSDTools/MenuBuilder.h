@@ -17,9 +17,8 @@ class ATL_NO_VTABLE CMenuBuilder :
 {
 public:
 	CMenuBuilder() 
-	: //m_hwndBrowser( NULL ),
-	 m_nMenuItem( 0 )
-	, m_nHorizontalAlignment( 2 )
+	: m_nMenuItem( 0 )
+	, m_nHorizontalAlignment( EHorizontalAlignment::RIGHT )
 	{
 		m_hMain = ::CreatePopupMenu();
 
@@ -55,10 +54,6 @@ BEGIN_COM_MAP(CMenuBuilder)
 	COM_INTERFACE_ENTRY(IObjectSafety)
 END_COM_MAP()
 
-// ISupportsErrorInfo
-//public:
-//	STDMETHOD(InterfaceSupportsErrorInfo)(REFIID riid);
-
 public:
 	STDMETHOD(SetSite)(IUnknown* pUnkSite);
 
@@ -76,8 +71,6 @@ public:
 protected:
 	static LPCTSTR	DQSD_REG_KEY;
 	static LPCTSTR	DQSD_SEC_KEY;
-// WGD - I've removed this because it's not actually referenced, other than as a way of nulling hwndDQSD during failed window searches
-//	HWND			m_hwndBrowser;
 	HMENU			m_hMain;
 	int				m_nMenuItem;
 	std::map< int, std::string > m_mapKeys;
@@ -88,7 +81,14 @@ protected:
 	CComPtr<IHTMLWindow2> m_spIHTMLWindow2;
 	CComPtr<IHTMLDocument2> m_spIHTMLDoc2;
 
-	UINT getHorizontalAlignment();
+	UINT getHorizontalPosition();
+
+	enum EHorizontalAlignment
+	{
+		CENTER,
+		LEFT,
+		RIGHT,
+	};
 
 protected:
 	static LRESULT CALLBACK TrackerWndProc(
@@ -100,8 +100,6 @@ protected:
 
 	HWND			m_hTrackerWnd;
 	static HWND		m_hTooltipWnd;
-//	static HWND		m_hToolWnd;
-	
 
 };
 

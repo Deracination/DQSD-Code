@@ -3,6 +3,10 @@ function showpop()
   document.deff.q.focus();
   document.deff.q.createTextRange().select();
   var mb = new ActiveXObject("DQSDTools.MenuBuilder");
+
+  // Align the menu with the button
+  mb.HorizontalAlignment = ( buttonalign == 'left' ? 1 : 2 ); // 1 = left, 2 = right (default)
+  
   mb.AppendMenuItem( local(ABOUT_TEXT), "about", "Help on using Dave's Quick Search Deskbar" );
   mb.AppendSeparator( 0 );
   for (i = 0; i < categoryarray.length; i++)
