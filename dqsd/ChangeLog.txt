@@ -17,7 +17,9 @@ Removed Searches
 * 
 
 Miscellaneous
-* localsearches directory is now created by installation unless it already exists (Kim Gräsman)
+* Installer now lives by the following rules: (Kim Gräsman)
+  - localsearches directory is now created by installation unless it already exists
+  - Uninstaller leaves local*, mrumenu.txt and history.txt behind
 
 -- What's new for 3.1.8 (date 2004-01-18)
 

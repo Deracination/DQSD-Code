@@ -10,7 +10,7 @@ Name "Dave's Quick Search Deskbar"
 !Define IE_MAJOR_REQUIRED  5
 !Define IE_MINOR_REQUIRED  5
 !Define HOW_TO_TURN_ON_TOOLBAR "Right-click in your taskbar and select$\n$\n    Toolbar > Add Quick Search...$\n$\nto add the Quick Search Deskbar to your taskbar."
-!Define TITLE_AND_COPYRIGHT "Dave's Quick Search Deskbar$\nCopyright (c) 2002 David Bau$\nDistributed under the terms of the$\nGNU General Public License, Version 2"
+!Define TITLE_AND_COPYRIGHT "Dave's Quick Search Deskbar$\nCopyright © 2002-2003 David Bau$\nDistributed under the terms of the$\nGNU General Public License, Version 2"
 !Define DQSD_CLSID "{226b64e8-dc75-4eea-a6c8-abcb4d1d37ff}"
 !Define DQSD_TITLE "Dave's Quick Search Deskbar"
 
@@ -66,8 +66,6 @@ Section "Quick Search Deskbar (required)"
   ieVersionOK:
 
   ; Old versions to delete
-;  UnRegDLL $INSTDIR\DQSDTools.dll
-;  Delete /REBOOTOK $INSTDIR\DQSDTools.dll
   UnRegDLL $INSTDIR\dqsdt253.dll
   Delete /REBOOTOK $INSTDIR\dqsdt253.dll
   UnRegDLL $INSTDIR\dqsdt254.dll
@@ -118,9 +116,8 @@ Section "Quick Search Deskbar (required)"
   StrCpy $8 "The Deskbar has been upgraded.  $\nIf the search bar is already present $\non your taskbar, right-click on $\nthe handle to the left of the search bar $\nand select 'Refresh' to reload it.  $\nIf the search bar is not present, $\n${HOW_TO_TURN_ON_TOOLBAR}$\n$\n${TITLE_AND_COPYRIGHT}"
   IfFileExists "$INSTDIR\search.htm" upgradebar
   StrCpy $8 "The Deskbar has been installed.$\n$\n${HOW_TO_TURN_ON_TOOLBAR}$\n$\n${TITLE_AND_COPYRIGHT}"
+
   upgradebar:
-
-
   WriteUninstaller "$INSTDIR\uninstall.exe"
 
   ; Put files there
@@ -161,8 +158,10 @@ Section "Quick Search Deskbar (required)"
   File "..\localsearch_silver.css"
   File "..\localsearch_olive.css"
   File "..\localsearch_blue.css"
+  
   SetOutPath "$INSTDIR\searches"
   File "..\searches\*.xml"
+  
   SetOutPath "$INSTDIR\src"
   File "search.ico"
   File "search.nsi"
@@ -170,6 +169,7 @@ Section "Quick Search Deskbar (required)"
   File "clean.cmd"
   File "scrub.cmd"
   File "dqsd.xml"
+  
   SetOutPath "$INSTDIR\src\DQSDTools"
   File "DQSDTools\DQSDTools.cpp"
   File "DQSDTools\DQSDTools.def"
@@ -206,7 +206,7 @@ Section "Quick Search Deskbar (required)"
   CreateDirectory "$INSTDIR\localsearches"
   SetOverwrite on
 
-  ; old source files used to live here
+  ; Remove deprecated stuff
   Delete $INSTDIR\license.txt
   Delete $INSTDIR\search.ico
   Delete $INSTDIR\search.nsi
@@ -220,7 +220,7 @@ Section "Quick Search Deskbar (required)"
   Delete $INSTDIR\dqsd.gif
   Delete $INSTDIR\httpinst.js
 
-  ; old versions of searches to delete; most renamed or consolidated
+  ; Old versions of searches to delete; most renamed or consolidated
   Delete $INSTDIR\searches\aim.xml
   Delete $INSTDIR\searches\ask.xml
   Delete $INSTDIR\searches\at.xml
@@ -360,19 +360,16 @@ Section "Uninstall"
   Delete /REBOOTOK $INSTDIR\localsearch_silver.css
   Delete /REBOOTOK $INSTDIR\localsearch_olive.css
   Delete /REBOOTOK $INSTDIR\localsearch_blue.css
+  Delete /REBOOTOK $INSTDIR\preferences.js
+  Delete /REBOOTOK $INSTDIR\uninstall.exe
   RmDir /r $INSTDIR\src
   RmDir /r $INSTDIR\searches
   RmDir /r $INSTDIR\addons
 
-  ; Remove preferences too
-  Delete /REBOOTOK $INSTDIR\preferences.js
+  ; Remove localsearches if it's empty (i.e. no /r)
+  RmDir $INSTDIR\localsearches
 
-  ; MUST REMOVE UNINSTALLER, too
-  Delete /REBOOTOK $INSTDIR\uninstall.exe
-
-  ; Delete directory
-  RmDir /r $INSTDIR
+  ; Remove install directory if it's empty (hardly ever will be)
+  RmDir /REBOOTOK $INSTDIR
 
 SectionEnd
-
-; eof
