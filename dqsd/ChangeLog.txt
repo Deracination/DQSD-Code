@@ -50,6 +50,7 @@ New Searches
 * seq - Shows argument URLs in sequence in a browser window (Neel Doshi)
 * randomsearch - Searches a given engine for the definition of a random word (Neel Doshi)
 * rxlib - Search the Regular Expression library at RegExLib.com (Shawn K. Hall)
+* crit - Metacritic compiles reviews from respected critics and publications for film, video/dvd, music and games (Tom C.)
 
 Modified Searches
 
