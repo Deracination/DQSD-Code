@@ -20,8 +20,8 @@ import "ocidl.idl";
 		[propget, id(3), helpstring("Path of default browser executable")] HRESULT pathDefaultBrowser([out, retval] BSTR *pVal);
 		[propput, id(4), helpstring("Debug setting")] HRESULT Debug( [in] VARIANT_BOOL bDebug );
 		[propget, id(4), helpstring("Debug setting")] HRESULT Debug( [out,retval] VARIANT_BOOL *pbDebug );
-		[id(5)] HRESULT ReadFile([in] BSTR bstrFilename, [out,retval] BSTR* pbstrResult);
-		[id(6)] HRESULT WriteFile([in] BSTR bstrFilename, [in] BSTR bstrValue);
+		[id(5), helpstring("Return the contents of the specified file as a string")] HRESULT ReadFile([in] BSTR bstrFilename, [out,retval] BSTR* pbstrResult);
+		[id(6), helpstring("Write the string to the specified file")] HRESULT WriteFile([in] BSTR bstrFilename, [in] BSTR bstrValue);
 	};
 
 [
