@@ -77,6 +77,52 @@
     {
       en: "Installed Addons"
     };
+    
+    var CONFIGURE_COLOR_SCHEME_DESCRIPTION = 
+    {
+      en: "Load Color Scheme"
+    };
+
+    var CONFIGURE_BLUE_SCHEME_DESCRIPTION = 
+    {
+      en: "Load the blue color scheme"
+    };
+    
+    var CONFIGURE_OLIVE_SCHEME_DESCRIPTION = 
+    {
+      en: "Load the olive color scheme"
+    };
+    
+    var CONFIGURE_SILVER_SCHEME_DESCRIPTION = 
+    {
+      en: "load the silver color scheme"
+    };
+    
+    var CONFIGURE_NONE_SCHEME_DESCRIPTION = 
+    {
+      en: "Revert to no color scheme"
+    };
+    
+    var CONFIGURE_BLUE_SCHEME_NAME = 
+    {
+      en: "Blue"
+    };
+    
+    var CONFIGURE_OLIVE_SCHEME_NAME = 
+    {
+      en: "Olive"
+    };
+    
+    var CONFIGURE_SILVER_SCHEME_NAME = 
+    {
+      en: "Silver"
+    };
+    
+    var CONFIGURE_NONE_SCHEME_NAME = 
+    {
+      en: "None"
+    };
+
 
 	function editSearchFile(strFilename)
 	{
@@ -114,6 +160,13 @@
 		mb.AppendMenuItem( local(CONFIGURE_LOCAL_ALIASES_NAME), "editConfigFile(\"localaliases.txt\")", local(CONFIGURE_LOCAL_ALIASES_DESCRIPTION), hmenu);
 		mb.AppendMenuItem( local(CONFIGURE_LOCAL_PREFERENCES_NAME), "editConfigFile(\"localprefs.js\")", local(CONFIGURE_LOCAL_PREFERENCES_DESCRIPTION), hmenu);
 		mb.AppendMenuItem( local(CONFIGURE_LOCAL_STYLESHEET_NAME), "editCSSFile(\"localsearch.css\")", local(CONFIGURE_LOCAL_STYLESHEET_DESCRIPTION), hmenu);
+	   
+	   var confthememenu = mb.AppendSubMenu( local(CONFIGURE_COLOR_SCHEME_DESCRIPTION), hmenu);
+	   mb.AppendMenuItem( local(CONFIGURE_BLUE_SCHEME_NAME), "loadcssfile(\"theme_blue.css\")", local(CONFIGURE_BLUE_SCHEME_DESCRIPTION), confthememenu);
+		mb.AppendMenuItem( local(CONFIGURE_OLIVE_SCHEME_NAME), "loadcssfile(\"theme_olive.css\")", local(CONFIGURE_OLIVE_SCHEME_DESCRIPTION), confthememenu);
+		mb.AppendMenuItem( local(CONFIGURE_SILVER_SCHEME_NAME), "loadcssfile(\"theme_silver.css\")", local(CONFIGURE_SILVER_SCHEME_DESCRIPTION), confthememenu);
+   	mb.AppendMenuItem( local(CONFIGURE_NONE_SCHEME_NAME), "loadcssfile(\"none\")", local(CONFIGURE_NONE_SCHEME_DESCRIPTION), confthememenu);
+		
 		mb.AppendSeparator(hmenu);
 		mb.AppendMenuItem( local(CONFIGURE_SYSTEM_ALIASES_NAME), "editConfigFile(\"aliases.txt\")", local(CONFIGURE_SYSTEM_ALIASES_DESCRIPTION), hmenu);
 		mb.AppendMenuItem( local(CONFIGURE_SYSTEM_PREFERENCES_NAME), "editConfigFile(\"preferences.js\")", local(CONFIGURE_SYSTEM_PREFERENCES_DESCRIPTION), hmenu);	
@@ -142,6 +195,19 @@
 		}
 
 	}
+	function loadcssfile (cssfilename)
+	{
+	   var install_dir = DQSDLauncher.InstallationDirectory;
+	   if (cssfilename == "none") {
+	      writeFile(install_dir+'\\theme.css', "");
+	      reload();
+	      return;
+	   }
+      var cssContent=readFile(install_dir+'\\'+cssfilename);
+      writeFile(install_dir+'\\theme.css', cssContent);
+	   reload();
+	}
+	
 	function configureDQSD(q)
 	{
           // build the menu
