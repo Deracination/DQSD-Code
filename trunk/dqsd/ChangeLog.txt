@@ -7,6 +7,10 @@ Enhancements
 
 -- What's new for 3.1.4.4 beta (October 24, 2002)
 
+Modified Searches
+
+* php - fix problem with spaces in URL (from Nikolai Devereaux)
+
 Bug Fixes
 
 * Popup menu fix - 'Configure' was showing up in the list of search categories

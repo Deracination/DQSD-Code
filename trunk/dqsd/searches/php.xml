@@ -16,7 +16,7 @@
       if( nullArgs("php",q) )
         return false;
       else
-        openSearchWindow("http://www.php.net/" + q);
+        openSearchWindow("http://www.php.net/" + q.replace(/\s+/g, "+"));
     }
   ]]></script>
 
