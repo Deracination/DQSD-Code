@@ -188,55 +188,55 @@ function parseArgs(q, expectedSwitches, expandSwitches)
 //
 function nullArgs(func, q)
 {
-	if (q == "")
-	{
-		if (searches[func].link)
-		{
-			openSearchWindow(searches[func].link);
-			return true;
-		}
-	}
-	if (q == "?" || q == "")
-	{
-		if (searches[func].desc)
-		{
+  if (q == "")
+  {
+    if (searches[func].link)
+    {
+      openSearchWindow(searches[func].link);
+      return true;
+    }
+  }
+  if (q == "?" || q == "")
+  {
+    if (searches[func].desc)
+    {
 
-			if ((typeof qsfind) == 'function')
-			{
-				// If QSFind exists use that to display the help
-				var qsarg = func + " /function";
-				qsfind(qsarg);
-			}
-			else
-			{
-				// Otherwise use an alert box
-				var search_desc = searches[func].desc;
+      if ((typeof qsfind) == 'function')
+      {
+        // If QSFind exists use that to display the help
+        var qsarg = func + " /function";
+        qsfind(qsarg);
+      }
+      else
+      {
+        // Otherwise use an alert box
+        var search_desc = searches[func].desc;
 
-				// convery <br> tags to newlines
-				var re = new RegExp("(<br)( )?(\/>)", "g");
-				search_desc = search_desc.replace(re, "\n");
+        // convery <br> tags to newlines
+        var re = new RegExp("(<br)( )?(\/>)", "g");
+        search_desc = search_desc.replace(re, "\n");
 
-				// Replace tabs and multiple spaces in the description with one space
-				var re = new RegExp("((\\t)|( ))+", "g");
-				search_desc = search_desc.replace(re, " ");
+        // Replace tabs and multiple spaces in the description with one space
+        var re = new RegExp("((\\t)|( ))+", "g");
+        search_desc = search_desc.replace(re, " ");
 
-				// Replace newline space with nothing
-				var re = new RegExp("\n( )", "g");
-				search_desc = search_desc.replace(re, "");
+        // Replace newline space with nothing
+        var re = new RegExp("\n( )", "g");
+        search_desc = search_desc.replace(re, "");
 
-				// Remove any more HTML tags
-				var re = new RegExp("<(\/)?\\w+( )?[\\w\"\=\ ]*(\/)?>", "g");
-				var search_desc = search_desc.replace(re, "");
-				alert(search_desc);
-			}
-			return true;
-		}
-	}
-	else
-		return false;
+        // Remove any more HTML tags
+        var re = new RegExp("<(\/)?\\w+( )?[\\w\"\=\ ]*(\/)?>", "g");
+        var search_desc = search_desc.replace(re, "");
+        alert(search_desc);
+      }
+      return true;
+    }
+  }
+  else
+    return false;
 }
 
 function getReuseBrowserWindowMode()
 {
-	return reuseBrowserWindowModeOverride;
+  return reuseBrowserWindowModeOverride;
 }
