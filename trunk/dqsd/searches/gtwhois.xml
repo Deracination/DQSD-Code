@@ -1,0 +1,34 @@
+<search function="gtwhois">
+  <name>GeekTools Whois</name>
+  <description>
+    Whois service by GeekTools.  Searches can be done by IP or domain name<br/>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>gtwhois microsoft</td></tr>
+  		<tr><td>gtwhois 207.46.230.219</td></tr>
+  	</table>
+  </description>
+  <category>Computers</category>
+  <link>http://geektools.com/cgi-bin/proxy.cgi</link>
+  <contributor>Monty Scroggins</contributor>
+  
+  <form name="gtwhoisf"
+        action="http://geektools.com/cgi-bin/proxy.cgi"
+        method="post">
+    <input type="hidden" name="query" value=""/>
+    <input type="hidden" name="targetnic" value="auto"/>
+  </form>
+  
+  <script><![CDATA[
+  function gtwhois(q)
+  {
+    if( nullArgs("gtwhois", q) )
+      return false;
+    else
+    {
+      document.gtwhoisf.query.value = q;
+      submitForm(gtwhoisf)
+    }
+  }
+ ]]></script>
+</search>
