@@ -7,7 +7,6 @@
 // User aliases should be placed in the localaliases.txt file which
 // will not be overwritten when a new version of the toolbar is installed.
 //
- |gg
 !|ifl
 ?|yh
 -|fst
