@@ -59,7 +59,7 @@ Section "Quick Search Deskbar (required)"
 
   ; If different, stop the install and tell the user
   isdifferent:
-  MessageBox MB_OK "Did not finish installing the deskbar because DQSDTools.dll is in use.$\nThe DLL has now been unregistered.$\n$\nPlease quit the Windows explorer (logout/login or simply restart)$\nand run this installer again."
+  MessageBox MB_OK "Did not finish installing the deskbar because DQSDTools.dll is in use.$\n$\nTo finish installation, please logout and login again (or just reboot)$\nand then run this installer again."
   Abort
 
   ; We can register the dll and continue
@@ -82,8 +82,6 @@ Section "Quick Search Deskbar (required)"
   File "..\readme.txt"
   File "..\search.htm"
   File "..\search.xml"
-  File "..\aliases.txt"
-  File "..\menu.txt"
   File "..\calculate.js"
   File "..\calendar.js"
   File "..\clock.js"
@@ -127,6 +125,8 @@ Section "Quick Search Deskbar (required)"
   SetOverwrite off
   SetOutPath "$INSTDIR"
   File "..\preferences.js"
+  File "..\aliases.txt"
+  File "..\menu.txt"
   SetOverwrite on
 
   ; old source files used to live here
