@@ -69,9 +69,13 @@ public:
 	STDMETHOD(InsertMenuItem)(/*[in]*/ BSTR bstrItem, /*[in]*/ BSTR bstrKey, /*[in]*/ BSTR bstrToolTip, /*[in]*/ UINT position, /*[in,optional]*/ VARIANT* pvhMenu );
 	STDMETHOD(InsertSeparator)(/*[in]*/ UINT position, /*[in]*/ long hmenu);
 	STDMETHOD(InsertSubMenu)(/*[in]*/ BSTR bstrName, /*[in]*/ UINT position, /*[in,optional]*/ VARIANT* pvParentMenu, /*[out,retval]*/ long *phmenu);
-	STDMETHOD(GetMenuItemCount)(/*[in]*/ long hmenu, /*[out,retval]*/ long *pCount);
+	STDMETHOD(GetMenuItemCount)(/*[in,optional]*/ VARIANT* pvParentMenu, /*[out,retval]*/ long *pCount);
 	STDMETHOD(FindSubMenu)(/*[in]*/ BSTR bstrName, /*[in,optional]*/ VARIANT* pvParentMenu, /*[out,retval]*/ long *phmenu);
 	STDMETHOD(FindMenuItem)(/*[in]*/ BSTR bstrName, /*[in,optional]*/ VARIANT* pvParentMenu, /*[out,retval]*/ long *pPosition);
+	STDMETHOD(GetMenuString)(/*[in]*/ UINT position, /*[in,optional]*/ VARIANT* pvParentMenu, /*[out, retval]*/ BSTR* pbstrResult);
+	STDMETHOD(GetMenuItemID)(/*[in]*/ UINT position, /*[in,optional]*/ VARIANT* pvParentMenu, /*[out, retval]*/ long *nID);
+	STDMETHOD(EnableMenuItem)(/*[in]*/ UINT position, /*[in,optional]*/ VARIANT* pvParentMenu);
+	STDMETHOD(DisableMenuItem)(/*[in]*/ UINT position, /*[in,optional]*/ VARIANT* pvParentMenu);
 
 // Implementation
 protected:

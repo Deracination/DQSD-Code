@@ -4,7 +4,9 @@
 #include "KeyboardHook.h"
 #include "Launcher.h"
 #include "Utilities.h"
-
+#include <objbase.h>
+#include <shlguid.h>
+#include <shlobj.h>
 
 #pragma comment(lib, "Version.lib")
 
@@ -636,5 +638,98 @@ STDMETHODIMP CLauncher::get_InstallationDirectory(BSTR* pbstrDirectory)
 	CComBSTR bstrInstallDir;
 	bstrInstallDir.Append(szInstallDir);
 	*pbstrDirectory = bstrInstallDir.Detach();
+	return S_OK;
+}
+
+typedef struct SPECIAL_FOLDER_MAP_S {
+	LPCTSTR strName;
+	int csidl_value;
+} SPECIAL_FOLDER_MAP_T, *PSPECIAL_FOLDER_MAP_T, **PPSPECIAL_FOLDER_MAP_T;
+
+static SPECIAL_FOLDER_MAP_T SpecialFolders[] =
+{
+	{"AppData",             CSIDL_APPDATA},
+	{"Desktop",             CSIDL_DESKTOP},
+	{"Favorites",           CSIDL_FAVORITES},
+	{"History",             CSIDL_HISTORY},
+	{"MyDocuments",         CSIDL_PERSONAL},
+	{"Recent",              CSIDL_RECENT},
+	{"StartMenu",           CSIDL_STARTMENU}
+};
+#define SpecialFoldersCount  (sizeof(SpecialFolders) / sizeof(SPECIAL_FOLDER_MAP_T))
+
+STDMETHODIMP CLauncher::GetSpecialFolderLocation(BSTR bstrSpecialFolder, BSTR* pbstrLocation)
+{
+	USES_CONVERSION;
+	
+	// map from special folder name to id
+	BOOL bFound = FALSE;
+	int nFolder;
+	LPCTSTR ptstrSpecialFolder = W2CT(bstrSpecialFolder);
+	for (int i=0; i < SpecialFoldersCount; i++) {
+		PSPECIAL_FOLDER_MAP_T pMap = &SpecialFolders[i];
+		if (pMap != NULL && _tcscmp(ptstrSpecialFolder, pMap->strName) == 0) {
+			bFound = TRUE;
+			nFolder = pMap->csidl_value;
+		}
+	}
+
+
+	if (!bFound) {
+		return E_FAIL;
+	}
+
+	LPITEMIDLIST pidl;
+	HRESULT hr = SHGetSpecialFolderLocation(NULL, nFolder, &pidl);
+	if (!SUCCEEDED(hr)) {
+		return E_FAIL;
+	}
+
+	TCHAR szPath[_MAX_PATH];
+	if (!::SHGetPathFromIDList(pidl, szPath)) {
+		return E_FAIL;
+	}
+
+	CComBSTR bstrLocation;
+	bstrLocation.Append(szPath);
+	*pbstrLocation = bstrLocation.Detach();
+	return S_OK;
+}
+
+STDMETHODIMP CLauncher::GetFolders(BSTR bstrBaseFolder, BSTR* pbstrFolders)
+{
+	USES_CONVERSION;
+
+	TCHAR szBaseFolder[ _MAX_PATH ];
+	HRESULT hr = GetFilename( W2CT( bstrBaseFolder ), szBaseFolder, _T("*.*") );
+	if ( FAILED( hr ) )
+	{
+		Error(IDS_ERR_FILENOTFOUND, IID_ILauncher, hr);
+		return hr;
+	}
+
+	WIN32_FIND_DATA fd;
+	memset( &fd, 0, sizeof(fd) );
+	HANDLE handle = ::FindFirstFile( szBaseFolder, &fd );
+	if (INVALID_HANDLE_VALUE == handle)
+	{
+		Error(IDS_ERR_FILENOTFOUND, IID_ILauncher, HRESULT_FROM_WIN32(::GetLastError()));
+		return HRESULT_FROM_WIN32(::GetLastError());
+	}
+
+	CComBSTR bstrFolders( fd.cFileName );
+	while ( ::FindNextFile( handle, &fd ) )
+	{
+		if (_tcscmp(fd.cFileName, _T(".")) == 0 || _tcscmp(fd.cFileName, _T("..")) == 0)
+			continue;
+
+		if (!(fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY))
+			continue;
+
+		bstrFolders.Append( _T("\n") );
+		bstrFolders.Append( fd.cFileName );
+	}
+
+	*pbstrFolders = bstrFolders.Detach();
 	return S_OK;
 }
