@@ -1,0 +1,29 @@
+<search function="tm">
+  <name>Teoma Search</name>
+  <description>Teoma search using Subject Specific Popularity : "tm denali"</description>
+  <category>Search the Web</category>
+  <link>http://www.teoma.com/</link>
+  <contributor>tomjcorcoran</contributor>
+  <form name="teomaf"
+        target="_blank"
+        action="http://www.teoma.com/search.asp"
+        method="get">
+    <input type="hidden" name="t" value=""/>
+    <input type="hidden" name="qcat" value="1"/>
+  </form>
+  <script><![CDATA[
+    function tm(q)
+    {
+      if (q == "")
+      {
+        openSearchWindow("http://www.teoma.com/");
+      }
+      else
+      {
+        document.teomaf.t.value=q;
+        document.teomaf.qcat.value=1;
+        submitForm(teomaf);
+      }
+    }
+  ]]></script>
+</search>
