@@ -4,7 +4,7 @@
       Directly login as an admin to your setiqueue web admin interface without having the hassle to go through the login page.<br/>
     <div class="helpboxDescLabels">Usage:</div>
     <table class="helpboxDescTable">
-      <tr><td>setiq &lt;<i>password</i>&gt; [/server:&lt;<i>serveraddress</i>&gt; [/port:&lt;<i>portnumber</i>&gt;]] [/connect[:&lt;<i>duration</i>&gt;]] [/display:&lt;<i>page</i>&gt;]</td></tr>
+      <tr><td>setiq &lt;<i>password</i>&gt; [/server:&lt;<i>serveraddress</i>&gt; [/port:&lt;<i>portnumber</i>&gt;]] [/connect[:&lt;<i>duration</i>&gt;]] [/display:&lt;<i>page</i>&gt;] [/delay:&lt;<i>delay</i>&gt;]</td></tr>
     </table>
     <div class="helpboxDescLabels">Switches:</div>
     <table class="helpboxDescTable">
@@ -19,11 +19,12 @@
         </table>
       </td></tr>
       <tr><td>/dislay:page</td><td> - </td><td>display specified page (without htm extension)</td></tr>
+      <tr><td>/delay:delay</td><td> - </td><td>delay in ms between 2 form submissions (500 by default). Increase for slow computers.</td></tr>
     </table>
     <div class="helpboxDescLabels">Examples:</div>
     <table class="helpBoxDescTable">
       <tr><td>setiq mypassword</td></tr>
-      <tr><td>setiq mypassword /server:localhost /port:6000 /connect:4 /display:logs</td></tr>
+      <tr><td>setiq mypassword /server:localhost /port:6000 /connect:4 /display:logs /delay:2000</td></tr>
     </table>
     <div class="helpboxDescLabels" style="color: red">Security warning:<br/>
     <table class="helpBoxDescTable">
@@ -70,7 +71,7 @@
         return false;
       else
       {
-        var switch_list = new Array( "server", "port", "connect", "display" );
+        var switch_list = new Array( "server", "port", "connect", "display", "delay" );
         var args = parseArgs( q, switch_list );
         
         var serveraddress="127.0.0.1";
@@ -83,6 +84,12 @@
         if( !( typeof args.switch_val["port"] == "undefined" || args.switch_val["port"] == "" ) )
         {
           portnumber=args.switch_val["port"];
+        }
+        
+        var mydelay="500";
+        if( !( typeof args.switch_val["delay"] == "undefined" || args.switch_val["delay"] == "" ) )
+        {
+          mydelay=args.switch_val["delay"];
         }
         
 
@@ -120,7 +127,7 @@
           document.setiqcf.action = "http://"+serveraddress+":"+portnumber+"/connect.htm?";
           document.setiqcf.Connect.value=duration;
           document.setiqcf.target=document.setiqf.target;
-          setTimeout( "submitForm(document.setiqcf, true);", 250 );
+          setTimeout( "submitForm(document.setiqcf, true);", mydelay );
         }
 
         if( !( typeof args.switch_val["display"] == "undefined" || args.switch_val["display"] == "" ) )
@@ -128,7 +135,7 @@
           //mmh... I use a form, but I'm sure it's overkill. How to change the location URL of the opened window?
           document.setiqlf.action = "http://"+serveraddress+":"+portnumber+"/" + args.switch_val["display"] + ".htm";
           document.setiqlf.target=document.setiqf.target;
-          setTimeout( "submitForm(document.setiqlf, true);", 250 );
+          setTimeout( "submitForm(document.setiqlf, true);", mydelay );
         }
 
         return true;

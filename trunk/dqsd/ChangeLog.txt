@@ -21,6 +21,7 @@ Modified Searches
 
 * ascii - added link to www asciitable com so an ascii table will pop up if no parameters are specified
 * multi - added ability to have multiple searches with different arguments and allow commas in arguments
+* setiq - added delay parameter
 
 Enhancements
 
