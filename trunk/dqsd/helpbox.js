@@ -21,11 +21,18 @@ function closeabout()
 
 function searchCompare( s1, s2 )
 {
-
-  var alias1 = isInternalSearch(s1.aliases[0]) ? s1.aliases[1] : s1.aliases[0];
-  var alias2 = isInternalSearch(s2.aliases[0]) ? s2.aliases[1] : s2.aliases[0];
-  if ( alias1 < alias2 ) return -1;
-  if ( alias1 > alias2 ) return 1;
+  // by default, sort by first alias
+  var key1 = (isInternalSearch(s1.aliases[0]) ? s1.aliases[1] : s1.aliases[0]).toLowerCase();
+  var key2 = (isInternalSearch(s2.aliases[0]) ? s2.aliases[1] : s2.aliases[0]).toLowerCase();
+  switch ( helpSortKey.toLowerCase() )
+  {
+  case 'name':
+    key1 = s1.name.toLowerCase();
+    key2 = s2.name.toLowerCase();
+    break;
+  }
+  if ( key1 < key2 ) return -1;
+  if ( key1 > key2 ) return 1;
 
   return 0;
 }
