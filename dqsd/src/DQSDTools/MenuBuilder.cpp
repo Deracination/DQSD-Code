@@ -204,15 +204,7 @@ STDMETHODIMP CMenuBuilder::AppendSubMenu(BSTR bstrName, VARIANT* pvParentMenu, l
 	}
 
 	::AppendMenu( hmenu, MF_POPUP, (UINT_PTR)*phmenu, W2T( bstrName ) );
-
-	// Store a 'this' pointer on the menu
-	MENUINFO menuInfo;
-	ZeroMemory(&menuInfo, sizeof(menuInfo));
-	menuInfo.cbSize = sizeof(menuInfo);
-	menuInfo.fMask = MIM_MENUDATA | MIM_APPLYTOSUBMENUS;
-	menuInfo.dwMenuData = (DWORD)this;
-	::SetMenuInfo(hmenu, &menuInfo);
-
+	
 	return S_OK;
 }
 
@@ -300,12 +292,7 @@ LRESULT CALLBACK CMenuBuilder::TrackerWndProc(
 			HMENU hMenu = (HMENU)lParam;
 			CMenuBuilder* pThis;
 
-			MENUINFO menuInfo;
-			ZeroMemory(&menuInfo, sizeof(menuInfo));
-			menuInfo.cbSize = sizeof(menuInfo);
-			menuInfo.fMask = MIM_MENUDATA;
-			::GetMenuInfo(hMenu, &menuInfo);
-			pThis = (CMenuBuilder*)menuInfo.dwMenuData;
+			pThis = (CMenuBuilder*)GetWindowLong(hwnd, GWL_USERDATA);
 
 			// Is there a tooltip for this item?
 			if(pThis != NULL && pThis->m_toolTips.count(itemId) > 0)
@@ -465,6 +452,10 @@ STDMETHODIMP CMenuBuilder::InitialiseTooltips()
 		return Error(IDS_ERR_MENU_TRACKER_WINDOW_FAILED, IID_ILauncher, E_FAIL);
 	}
 
+	// Store a 'this' pointer on the tracker window
+	::SetWindowLong(m_hTrackerWnd, GWL_USERDATA, (LONG)this);
+
+	// Create a tooltip window
 	if(m_hTooltipWnd != NULL)
 	{
 		DestroyWindow(m_hTooltipWnd);
@@ -502,7 +493,6 @@ STDMETHODIMP CMenuBuilder::InitialiseTooltips()
 	RECT workArea;
 	SystemParametersInfo(SPI_GETWORKAREA, 0, (PVOID)&workArea, 0);
 	::SendMessage(m_hTooltipWnd, TTM_SETMAXTIPWIDTH, 0, (workArea.right-workArea.left)/3);
-
 
 // Subclass the tooltip window - just for debugging
 //	lpfnOldWndProc = (WNDPROC)SetWindowLong(m_hTooltipWnd, GWL_WNDPROC, (DWORD)ToolTipSubClassFunc);
