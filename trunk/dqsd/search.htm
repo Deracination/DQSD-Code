@@ -308,13 +308,19 @@ function performsearch(fname, term)
   else
   {
     try
-    {
+	{
+      if (fname.match(/\(.*\)/)) {
+        // function with parameters specified
+        eval(fname); 
+      } else {
+        // just function no parameters
         eval(fname + "()");
+      }
     }
-    catch(e)
-    {
-        alert('An error (' + e + '/' + e.description + ') occurred while trying to run the search "'+fname+'()'+'"');
-    }
+	catch(e)
+	{
+        alert('An error (' + e + '/' + e.description + ') occurred while trying to run the search "'+fname+'"');
+	}
   }
 }
 
@@ -324,7 +330,7 @@ function mnu(text, alias)
 {
   var fn = (alias ? alias : text);
   var search = (fn + ' ' + document.deff.q.value).replace( /^\s*(\S+)\s*$/, "$1" ); // trim leading/trailing whitespace
-  if ( fn != 'about' && !isInternalSearch(fn) && fn != 'checkWebForUpdateNotifyAll' )
+  if (searches[fn]) 
     addhist( search );
   performsearch( text, document.deff.q.value );
 }
