@@ -12,9 +12,9 @@
       <tr><td class="helpboxDescColumns">/related</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Given a URL, finds other sites closely related.</td></tr>
       <tr><td class="helpboxDescColumns">/link</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Given a URL, finds other sites that link to it.</td></tr>
     </table>
-    <a class="helpboxDescLabels">Locals:</a><br/>
+    <a class="helpboxDescLabels">Locales:</a><br/>
   	<table class="helpBoxDescTable">
-      <tr><td class="helpboxDescColumns">/local</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">If a local has been specified, this switch limits search results to that local.</td></tr>
+      <tr><td class="helpboxDescColumns">/local</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Limits search results to the specified locale.</td></tr>
       <tr><td class="helpboxDescColumns">/uk</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Use the localized United Kingdom version of Google.</td></tr>
       <tr><td class="helpboxDescColumns">/canada</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Use the localized Canadian version of Google.</td></tr>
   	</table>
@@ -59,15 +59,15 @@
     function gg(q)
     {
       var args = parseArgs(q, "advanced, images, directory, related, cache, link, groups, uk, canada, local");
-      var mode, local, local_meta = "", local_tld = "com";
+      var mode, local, locale_meta = "", locale_tld = "com";
       
-      // Establish the local and mode the search will run in.
+      // Establish the locale and mode the search will run in.
       if( args.switches.length > 0 )
         for( var j=0; j<args.switches.length; j++ )
           switch( args.switches[j].name )
           {
-            case "uk": local_tld = "co.uk"; local_meta = "cr=countryUK|countryGB"; break;
-            case "canada": local_tld = "ca"; local_meta = "cr=countryCA"; break;
+            case "uk": locale_tld = "co.uk"; locale_meta = "cr=countryUK|countryGB"; break;
+            case "canada": locale_tld = "ca"; locale_meta = "cr=countryCA"; break;
             
             case "local": local = true; break;
             
@@ -79,18 +79,18 @@
               break;
           }
       
-      // Change the form data to use the correct local
-      document.ggf.action = "http://www.google." + local_tld + "/search";
-      document.ggf_adv.action = "http://www.google." + local_tld + "/advanced_search";
-      document.ggf_image.action = "http://images.google." + local_tld + "/images";
-      document.ggf_news.action = "http://groups.google." + local_tld + "/groups";
+      // Change the form data to use the correct locale
+      document.ggf.action = "http://www.google." + locale_tld + "/search";
+      document.ggf_adv.action = "http://www.google." + locale_tld + "/advanced_search";
+      document.ggf_image.action = "http://images.google." + locale_tld + "/images";
+      document.ggf_news.action = "http://groups.google." + locale_tld + "/groups";
       
       // If the user specified to search localized content only, restrict it now.
       if(local)
       {
-        document.ggf.meta.value = local_meta;
-        document.ggf_image.meta.value = local_meta;
-        document.ggf_news.meta.value = local_meta;
+        document.ggf.meta.value = locale_meta;
+        document.ggf_image.meta.value = locale_meta;
+        document.ggf_news.meta.value = locale_meta;
       }
       else
         document.ggf.meta.value = document.ggf_image.meta.value = document.ggf_news.meta.value = "";
@@ -99,11 +99,11 @@
       if( args.q == "" )
         switch( mode )
         {
-          case "advanced": openSearchWindow("http://www.google." + local_tld + "/advanced_search"); return;
-          case "images": openSearchWindow("http://images.google." + local_tld); return;
-          case "directory": openSearchWindow("http://images.google." + local_tld + "/dirhp"); return;
-          case "groups": openSearchWindow("http://www.google." + local_tld + "/grphp"); return;
-          default: openSearchWindow("http://www.google." + local_tld); return;
+          case "advanced": openSearchWindow("http://www.google." + locale_tld + "/advanced_search"); return;
+          case "images": openSearchWindow("http://images.google." + locale_tld); return;
+          case "directory": openSearchWindow("http://images.google." + locale_tld + "/dirhp"); return;
+          case "groups": openSearchWindow("http://www.google." + locale_tld + "/grphp"); return;
+          default: openSearchWindow("http://www.google." + locale_tld); return;
         }
         
       // Show the help pop-up
