@@ -1,17 +1,17 @@
 HKCR
 {
-	DQSDTools.Launcher.1 = s 'DQSD Launcher Class'
+	DQSDTools.Launcher.1 = s 'DQSD Tools Component'
 	{
 		CLSID = s '{FA8211C1-F85B-4CCD-8C51-1587A37E566A}'
 	}
-	DQSDTools.Launcher = s 'DQSD Launcher Class'
+	DQSDTools.Launcher = s 'DQSD Tools Component'
 	{
 		CLSID = s '{FA8211C1-F85B-4CCD-8C51-1587A37E566A}'
 		CurVer = s 'DQSDTools.Launcher.1'
 	}
 	NoRemove CLSID
 	{
-		ForceRemove {FA8211C1-F85B-4CCD-8C51-1587A37E566A} = s 'Launcher Class'
+		ForceRemove {FA8211C1-F85B-4CCD-8C51-1587A37E566A} = s 'DQSD Tools Component'
 		{
 			ProgID = s 'DQSDTools.Launcher.1'
 			VersionIndependentProgID = s 'DQSDTools.Launcher'
