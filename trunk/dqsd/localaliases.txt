@@ -15,20 +15,26 @@
 // The <category> can be used to define a category other than the default
 // Shortcuts for the alias to be listed under. 
 //
+// NOTE: Only the <alias> and <action> fields are required, BUT currently all 
+// preceeding fields must be supplied.  I.e., this will work:
+//               <alias>|<action>|<title>
+// But, this will not:
+//               <alias>|<action>|||<category>
+//
+// (I.e., consecutive delimiters will be collapsed to a single delimiter.)
+//
 // ----------------------------------------------------------------------------
 // The following are some example aliases that you can use or modify for your
 // own purposes:
 //
-// movie	ym
+// movie|ym
+// mov|movie
 // sf|http://sourceforge.net/|SourceForge|SourceForge main web site
 // sfp|http://sourceforge.net/projects/%s|SourceForge project page|SourceForge project page - Ex. "sfp dqsd"
-// word	run winword
-// excel	run excel
-// exp	run explorer /e, "%s"
-// ml	run keyhh -#klink "%s" "E:\Program Files\Microsoft Visual Studio\MSDN\2001JAN\1033\MSDN100.COL"
-// tulsa	map %s, Tulsa, OK
-// expd	run explorer /e, "E:\Program Files\Quick Search Deskbar"	Run Explorer
-// mov	movie
+// excel|run excel
+// exp|run explorer /e, "%s"
+// tulsa|map %s, Tulsa, OK
+// word|run winword|Microsoft Word|Start Microsoft Word|Microsoft Office
+// cp|run control|Control Panel
 // 
 // ----------------------------------------------------------------------------
-//
