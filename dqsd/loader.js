@@ -88,6 +88,8 @@ function addhelp(search)
   {
     categories[cat] = [];
     categoryarray.push(cat);
+    //sort the list of categories
+    categoryarray.sort(); 
   }
   var helparray = categories[cat];
   helparray.push(search);
@@ -131,6 +133,8 @@ try
   // Get searches in the 'searches' subdirectory
   var searches = getFiles( "searches\\*.xml" );
   searches = searches.split('\n');
+  //sort the list of searches
+  searches.sort(); 
   
   var xmldoc = new ActiveXObject( "MSXML.DOMDocument" );
   for ( var i = 0; i < searches.length; i++ )
