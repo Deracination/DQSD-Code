@@ -12,10 +12,10 @@
   <idea>David Brake david.brake@ukonline.co.uk</idea>
   
   <form name="mmf"
-        action="http://uk2.multimap.com/map/places.cgi"
+        action="http://www.multimap.com/map/places.cgi"
         method="get">
     <input type="hidden" name="source" value="quicksearch"/>
-    <input type="hidden" name="client" value="M6"/>
+    <input type="hidden" name="client" value="europe"/>
     <input type="hidden" name="quicksearch"/>
   </form>
   
