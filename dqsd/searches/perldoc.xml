@@ -1,0 +1,135 @@
+<search function="perldoc">
+  <name>Perldoc Search</name>
+  <category>Computers<category>Programming</category></category>
+  <contributor>Dean Wilson</contributor>
+  <link>http://perldoc.com/</link>
+  <email>dean dot wilson3 at virgin dot net</email>
+  <description>
+  Search the online documentation for builtin functions from any released
+	version of Perl. Defaults to version 5.8.0 (The newest release as of May
+	25 2003)
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+	<tr><td>/perl5.8.0</td><td> - </td><td>Search within Perl version 5.8.0</td></tr>
+	<tr><td>/perl5.6.1</td><td> - </td><td>Search within Perl version  5.6.1</td></tr>
+	<tr><td>/perl5.6.0</td><td> - </td><td>Search within Perl version 5.6.0</td></tr>
+	<tr><td>/perl5.005_03</td><td> - </td><td>Search within Perl version 5.005_03</td></tr>
+	<tr><td>/perl5.004_05</td><td> - </td><td>Search within Perl version 5.004_05</td></tr>
+    </table>
+
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+        <tr><td>perldoc fileno</td></tr>
+	<tr><td>perldoc opendir /perl5.6.1</td></tr>
+	<tr><td>perldoc closedir /561</td></tr>
+	<tr><td>perldoc readdir /56</td></tr>
+    </table>
+
+  </description>
+  <form name="perldocf"
+        method="get"
+        action="http://perldoc.com/cgi-bin/htsearch">
+
+    <input type="hidden" name="words" value="" />
+    <input type="hidden" name="restrict" value="" />
+  </form>
+
+  <script><![CDATA[
+    function perldoc(q)
+    {
+      if( nullArgs("perldoc", q) )
+        return;
+		
+      var args = parseArgs(q, "perl5.6, perl5.8.0, perl5.6.1, perl5.6.0, perl5.005_03, perl5.004_05, perl5.8, perl58, 5.8.0, 580, 58, perl56, 5.6.0, 560, 56, perl561, 5.6.1, 561, 5.005_03, 5.004_05");
+
+       if ( args.switches.length == 1)
+      {
+        switch( args.switches[0].name )
+        {
+	  //basic catches, these are identical to params passed to the cgi
+          case "perl5.6":
+            document.perldocf.restrict.value = "perl5.6";
+            break;
+          case "perl5.8.0":
+            document.perldocf.restrict.value = "perl5.8.0";
+            break;
+          case "perl5.6.1":
+            document.perldocf.restrict.value = "perl5.6.1";
+            break;
+          case "perl5.6.0":
+            document.perldocf.restrict.value = "perl5.6";
+            break;
+          case "perl5.005_03":
+            document.perldocf.restrict.value = "perl5.005_03";
+            break;
+          case "perl5.004_05":
+            document.perldocf.restrict.value = "perl5.004_05";
+            break;
+          // shorthand catches for the lazy, and me.
+          case "perl5.8":
+            document.perldocf.restrict.value = "perl5.8.0";
+            break;
+          case "perl58":
+            document.perldocf.restrict.value = "perl5.8.0";
+            break;
+          case "5.8.0":
+            document.perldocf.restrict.value = "perl5.8.0";
+            break;
+          case "580":
+            document.perldocf.restrict.value = "perl5.8.0";
+            break;
+          case "58":
+            document.perldocf.restrict.value = "perl5.8.0";
+            break;
+          case "perl56":
+            document.perldocf.restrict.value = "perl5.6";
+            break;
+          case "5.6.0":
+            document.perldocf.restrict.value = "perl5.6";
+            break;
+          case "560":
+            document.perldocf.restrict.value = "perl5.6";
+            break;
+          case "56":
+            document.perldocf.restrict.value = "perl5.6";
+            break;
+          case "perl561":
+            document.perldocf.restrict.value = "perl5.6.1";
+            break;
+          case "5.6.1":
+            document.perldocf.restrict.value = "perl5.6.1";
+            break;
+          case "561":
+            document.perldocf.restrict.value = "perl5.6.1";  //56 calls this
+            break;
+            //these are old, less used and have a verbose version number.
+            //if your still using them you deserve pain. :)
+          case "5.005_03":
+            document.perldocf.restrict.value = "perl5.005_03";
+            break;
+          case "5.004_05":
+            document.perldocf.restrict.value = "perl5.004_05";
+            break;
+          default:
+            document.perldocf.restrict.value = "perl5.8.0";
+            break;
+        }
+      } else {
+          document.perldocf.restrict.value = "perl5.8.0";
+      }
+
+      document.perldocf.words.value = args.q;
+
+      submitForm(perldocf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 05/24/03 at 12:53:16
+    by Dave's Quick Search Deskbar Search Wizard version 1.0.1 ,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>
