@@ -1,0 +1,84 @@
+<search function="mb">
+  <name>MapBlast maps and and driving directions</name>
+  <description>
+    Get driving directions and maps for the USA and many other countries. Uses MapBlast LineDrive directions and USA, by default.<br/>
+   <div class="helpboxDescLabels">Usage:</div>
+   <table class="helpboxDescTable">
+    <tr><td>mb <I>[street,] city, state</I> [to <I>[street,] city, state</I>]</td></tr>
+   </table>
+   <div class="helpboxDescLabels">Examples:</div>
+   <table class="helpboxDescTable">
+    <tr><td>mb Lebanon, KS</td></tr>
+    <tr><td>mb Port Orford, OR to Lubec, ME</td></tr>
+	<tr><td>mb 1600 Pennsylvania Ave, Washington, DC to Rockefeller Plaza, New York, NY</td></tr>
+   </table>
+  </description>
+  <category>Travel</category>
+  <link>http://www.mapblast.com</link>
+  <contributor>Gregory Krohne, from Peter Heath's mapquest directions</contributor>
+  
+  <script><![CDATA[
+  	function mb(q)
+  	{
+		if (q=="") {
+			openSearchWindow("http://www.mapblast.com/myblastd/driveStart.dsp");
+			return;
+		}
+
+		//DEFAULTS
+		var StartCountry="USA";
+		var EndCountry="USA";
+		var StartZip="";
+		var EndZip="";
+  
+		if ( nullArgs("mb", q) )
+  			return false;
+  		else
+  		{
+    			var start = "";
+    			var finish = "";
+
+			parseddirs = q.split(" to ");
+			start = parseddirs[0];
+			finish = parseddirs[1];
+
+			parsedloc = start.split(",");
+			if (typeof parsedloc[2] == 'undefined'){ //has no Street
+				StartState = (parsedloc[1] ? parsedloc[1] : "");
+				StartCity  = (parsedloc[0] ? parsedloc[0] : "");
+				StartStreet = "";
+			} else { //has street
+				StartState = (parsedloc[2] ? parsedloc[2] : "");
+				StartCity  = (parsedloc[1] ? parsedloc[1] : "");
+				StartStreet= (parsedloc[0] ? parsedloc[0] : "");
+			}
+			if (typeof parseddirs[1] == 'undefined'){ //has only 1 location
+				SearchPage = "http://www.mapblast.com/myblastd/createmap.d?&AD4=" + StartCountry + "&AD2=" + StartStreet + "&AD3=" + StartCity + "%2C" + StartState + "+" + StartZip + "&AIR=&selCategory=defaultCat&x=0&y=0&E=ahV-jzkx2zJTnra7fjG_bW2-V_heUmgKXcekupd2aH3M9J3rOZn2wrXMp_fRUH5lL9nv_T8Sl6R6pjM";
+				openSearchWindow(SearchPage);
+			} else {	//has 2 locations
+				parsedloc = finish.split(",");
+				if (typeof parsedloc[2] == 'undefined'){ //has no Street
+					EndState = (parsedloc[1] ? parsedloc[1] : "");
+					EndCity  = (parsedloc[0] ? parsedloc[0] : "");
+					EndStreet = "";
+				} else { //has street
+					EndState = (parsedloc[2] ? parsedloc[2] : "");
+					EndCity  = (parsedloc[1] ? parsedloc[1] : "");
+					EndStreet= (parsedloc[0] ? parsedloc[0] : "");
+				}
+					
+				var SearchPage="http://www.mapblast.com/myblastd/getdd.d?AD4_1=" + StartCountry + "&AD2_1=" + StartStreet + "&AD3_1=" + StartCity + "%2C" + StartState + StartZip + "&AIR_1=" + "&AD4_2=" + EndCountry + "&AD2_2=" + EndStreet + "&AD3_2=" + EndCity + "%2C" + EndState + "+" + EndZip + "&mapstyle=line&E=ahV-jzkx2zJTnra7fjG_bW2-V_heUmgKXcekupd2aH3M9J3rOZn2wrXMr2cZXSM9-yfiUvXVxTz-UvnEw";
+			     	openSearchWindow(SearchPage);
+  			}
+
+  		}
+  	}
+  ]]></script>
+
+  <copyright>
+	Copyright (c) 2002 David Bau
+	Distributed under the terms of the
+	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>
+ 
