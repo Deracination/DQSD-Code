@@ -136,7 +136,7 @@ LRESULT CDQSDWizardDlg::OnInitDialog(UINT uMsg, WPARAM wParam, LPARAM lParam, BO
 	ctlFormList2.SendMessage( LVM_INSERTCOLUMN, 0, (LPARAM)&lvc );
 	
 	lvc.pszText = _T("action");
-	lvc.cx = 250;
+	lvc.cx = 500;
 	lvc.iOrder = 1;
 	ctlFormList2.SendMessage( LVM_INSERTCOLUMN, 1, (LPARAM)&lvc );
 
@@ -295,7 +295,7 @@ LRESULT CDQSDWizardDlg::OnOK(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHa
 	ctlSearchName.GetWindowText( &bstrSearchName );
 	if ( bstrSearchName.Length() == 0 )
 	{
-		MessageBox( _T("Enter a search name"), _T("DQSD Search Wizard"), MB_OK|MB_ICONWARNING );
+		MessageBox( _T("Please enter a search name."), _T("DQSD Search Wizard"), MB_OK|MB_ICONWARNING );
 		ctlSearchName.SetFocus();
 		return 0;
 	}
@@ -305,7 +305,7 @@ LRESULT CDQSDWizardDlg::OnOK(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHa
 	ctlSearchTitle.GetWindowText( &bstrSearchTitle );
 	if ( bstrSearchTitle.Length() == 0 )
 	{
-		MessageBox( _T("Enter a search title"), _T("DQSD Search Wizard"), MB_OK|MB_ICONWARNING );
+		MessageBox( _T("Please enter a search title."), _T("DQSD Search Wizard"), MB_OK|MB_ICONWARNING );
 		ctlSearchTitle.SetFocus();
 		return 0;
 	}
@@ -320,7 +320,7 @@ LRESULT CDQSDWizardDlg::OnOK(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHa
 	}
 	if ( !bChecked && cItems > 0 )
 	{
-		MessageBox( _T("Select one or more of the FORMs"), _T("DQSD Search Wizard"), MB_OK|MB_ICONWARNING );
+		MessageBox( _T("Please select one or more forms."), _T("DQSD Search Wizard"), MB_OK|MB_ICONWARNING );
 		ctlFormList.SetFocus();
 		return 0;
 	}

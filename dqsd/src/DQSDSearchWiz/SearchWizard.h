@@ -31,6 +31,10 @@ END_COM_MAP()
 public:
 	STDMETHOD(QueryStatus)(const GUID* pguidCmdGroup, ULONG cCmds, OLECMD prgCmds[], OLECMDTEXT* pCmdText);
 	STDMETHOD(Exec)(const GUID*, DWORD nCmdID, DWORD, VARIANTARG*, VARIANTARG* pvaOut);
+
+private:
+	CComPtr<IHTMLDocument2> GetActiveFrame( CComPtr<IHTMLDocument2>& spDoc );
+
 };
 
 #endif //__SEARCHWIZARD_H_
