@@ -60,7 +60,11 @@ var floaxButtons =<br />
       return false;
 
     } else {
-    //format the view-port
+	   if (typeof floaxButtons == "undefined") {
+			nullArgs( "floax", "?" );
+			return true;
+	   }
+       //format the view-port
       var floaxs = "";
       for (var i = 0; i < floaxButtons.length; i++) {
         floaxs += "<img width=16 height=16";
