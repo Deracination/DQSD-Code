@@ -122,6 +122,7 @@ New / Modified Searches
 * googletrans - Google.com Language Translation
 * dicfr - Search French words definition
 * af - Acronym Finder now accepts switches: /reverse, /begins_with, /wildcard
+* rz - RhymeZone search (an online tool that aspires to be the best and fastest way for writers to find words.)
 
 
 Miscellaneous
