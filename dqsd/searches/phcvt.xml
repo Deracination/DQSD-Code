@@ -1,0 +1,57 @@
+<search function="phcvt">
+  <name>Phone Number Converter</name>
+  <description>
+    Convert phone number letters to numbers.<br/>
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/us</td><td> - </td><td>A seven or ten digit U.S. number</td></tr>
+	</table>
+  <div class="helpboxDescLabels">Example:</div> 
+  <table class="helpboxDescTable">
+    <tr><td>phcvt 877-WHITEHOUSE</td><td> - </td><td>would put 877-9448346873 in the edit box</td></tr>
+    <tr><td>phcvt /us 877-WHITEHOUSE</td><td> - </td><td>would put 877-944-8346 in the edit box</td></tr>
+    <tr><td>phcvt /us:* 877-WHITEHOUSE</td><td> - </td><td>would put 877*944*8346 in the edit box</td></tr>
+  </table>
+  </description>
+  <link></link>
+  <category>Functions</category>
+  <contributor>Brent Beardsley</contributor>
+
+  <script><![CDATA[
+    function phcvt(q)
+    {
+      if( nullArgs("phcvt", q) )
+        return;
+
+      var args = parseArgs(q, "us"); 
+	  var delimiter = "-";
+	  var ph = args.q.replace(/[ABC]/gi,"2").replace(/[DEF]/gi, "3").replace(/[GHI]/gi, "4").replace(/[JKL]/gi, "5").replace(/[MNO]/gi, "6").replace(/[PQRS]/gi, "7").replace(/[TUV]/gi, "8").replace(/[WXYZ]/gi, "9");
+      if (args.switches.length > 0) {
+          sw = args.switches[0];
+		  if (sw.name == "us") {
+		    if (sw.value != "") {
+				delimiter = sw.value;
+			}
+			usph = ph.replace(/^1[\-\s]/, "").replace(/\D/g, "");
+			m = usph.match(/^(\d{3})(\d{3})(\d{4})/);
+			if (m != null) {
+				ph = "" + m[1] + delimiter + m[2] + delimiter + m[3];	
+			} else {
+				m = usph.match(/^(\d{3})(\d{4})/);
+				if (m != null) {
+					ph = "" + m[1] + delimiter + m[2];	
+				}
+			}
+		  }
+	  }
+      setSearchWindowText(ph, true);
+    }
+    ]]></script>
+  <copyright>
+    Copyright (c) 2004 Brent Beardsley
+    Distributed under the terms of the
+    GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>
+
+

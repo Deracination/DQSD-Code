@@ -15,6 +15,7 @@ New Searches
 * pmid - a search for the PubMed database at www.ncbi.nlm.nih.gov. (James Robertson)
 * gmane - gmane.org mail to news service and search engine (Kim Gräsman)
 * adbn - search auaubon society. (JB)
+* phcvt - converts phone number letters to the appropriate number optionally formatting it as a U.S. 7 or 10 digit number (Brent Beardsley)
 
 Modified Searches
 * jdk - updated urls for j2ee and 1.4, added 1.5, 1.2, 1.1 and api switches (Brent Beardsley)
