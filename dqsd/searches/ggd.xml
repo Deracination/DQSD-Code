@@ -5,17 +5,33 @@
   <email>Shawn[@]ReliableAnswers.com</email>
   <link>http://desktop.google.com/</link>
   <description>
-    Search Google Desktop Search from DQSD
+    Search Google Desktop Search from DQSD<br /><br />
+    Since this search requires access to a 'google desktop key' that is 
+    unique to your installation, you must first set a variable within 
+    your localprefs as so:<br /><br />
+    <b>var ggd_GoogleKey = "123456789";</b><br />
+    You can have this script automagically <b>discover</b> your Key using<br />
+    <b>ggd /discover</b><br />
+    Simply use this within your DQSD box and it'll report the results and set
+    the key for the current session. Once the variable is assigned in 
+    LocalPrefs.js you will no longer need to run the discovery before using 
+    the ggd search.<br /><br />
+    As with any other search that relies upon other services or applications,
+    you <b>must</b> have the related application/service installed. Please
+    ensure you actually have <i>Google Desktop Search</i> installed and
+    running before requesting assistance.<br /><br />
     <div class="helpboxDescLabels">Switches:</div>
     <table class="helpboxDescTable">
       <tr><td> [term] </td><td> Search Google Desktop </td></tr>
       <tr><td> /about </td><td> About Google Desktop </td></tr>
+      <tr><td> /discover </td><td> Discover Google Key </td></tr>
     </table>
     <div class="helpboxDescLabels">Examples:</div>
     <table class="helpboxDescTable">
       <tr><td> ggd dqsd search	</td></tr>
       <tr><td> ggd asp design	</td></tr>
       <tr><td> ggd /about	</td></tr>
+      <tr><td> ggd /discover	</td></tr>
     </table>
   </description>
   <comment>
@@ -29,20 +45,65 @@
   </form>
   <script><![CDATA[
     function ggd(q){
-      if( nullArgs( "ggd", q ) ){
-        return false;
+	if( nullArgs( "ggd", q ) ){
+	  return false;
+	}
+	var args = parseArgs(q, "about, discover");
+	for (var i = 0; i < args.switches.length; i++){
+	  sw = args.switches[i];
+	  switch(sw.name){
+	    case "about":
+	      openSearchWindow("http://desktop.google.com/");
+	      return;
+	    case "discover":
+	      ggd_discover();
+	      return;
+	  }
+	}
+	document.ggdf.q.value = args.q;
+	submitForm(ggdf);
+    }
+
+    function ggd_discover(){
+	var sUrl = "http://www.google.com/search?q=dqsd";
+	try{
+	//attempt to obtain the remote RSS feed
+	  var xmlHttp = new ActiveXObject("Microsoft.XmlHttp");
+	  xmlHttp.onreadystatechange = function(){ 
+	    if (xmlHttp.readyState == 4){
+	      ggd_discovered( xmlHttp );
+	    }
+	  };
+	  xmlHttp.open("GET", sUrl, true);
+	  xmlHttp.setRequestHeader ( "Accept", "image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, application/vnd.ms-excel, application/msword, application/x-shockwave-flash, */*" );
+	  xmlHttp.setRequestHeader ( "Accept-Language", "en-us" );
+	  xmlHttp.setRequestHeader ( "Accept-Encoding", "gzip, deflate" );
+	  xmlHttp.setRequestHeader ( "User-Agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0; .NET CLR 1.1.4322)" );
+	  xmlHttp.setRequestHeader ( "Host", "www.google.com" );
+	  xmlHttp.setRequestHeader ( "Connection", "Keep-Alive" );
+	  xmlHttp.send(null);
+	}catch(e){
+	  alert("Failure!\n" + e.number + "::" + e.description);
+	}
+    }
+
+    function ggd_discovered(xh){
+	try{
+	  var r; var s = xh.responseText;
+	  var rx = /href='http:\/\/127\.0\.0\.1:4664\/search[^>]s=([\d]*)\?q=dqsd'>/gim;
+	  while ((r = rx.exec( s )) != null){var sGoogleKey = r[1];}
+	  if(sGoogleKey==""){sGoogleKey="Not Found!";}
+          document.ggdf.action = "http://127.0.0.1:4664/search&s=" + sGoogleKey;
+	  setSearchWindowText("Key: " + sGoogleKey, false);
+	}catch(e){
+	  alert("Failure!\n" + e.number + "::" + e.description + "\nGoogle Desktop Key: Not Found!");
+	}
+    }
+
+    if(typeof ggd_GoogleKey != "undefined"){
+      if(ggd_GoogleKey != ""){
+	document.ggdf.action = "http://127.0.0.1:4664/search&s=" + ggd_GoogleKey;
       }
-      var args = parseArgs(q, "about");
-      for (var i = 0; i < args.switches.length; i++){
-        sw = args.switches[i];
-        switch(sw.name){
-          case "about":
-            openSearchWindow("http://desktop.google.com/");
-            return;
-        }
-      }
-      document.ggdf.q.value = args.q;
-      submitForm(ggdf);
     }
   ]]></script>
 </search>
