@@ -5,7 +5,7 @@
 #include "AboutDlg.h"
 #include "OptionsDlg.h"
 #include "ModulVer.h"
-
+#include "Options.h"
 
 void srch_repl( string& s, const string& to_find, const string& repl_with ) 
 {
@@ -117,7 +117,7 @@ LRESULT CDQSDWizardDlg::OnInitDialog(UINT uMsg, WPARAM wParam, LPARAM lParam, BO
 
 	// Save the base URL for later use
 
-	szBaseURL[ _tcslen( szBaseURL ) - 1 ] = _T('\0');
+	szBaseURL[ _tcslen( szBaseURL ) ] = _T('\0');
 	m_strBaseURL = szBaseURL;
 
 	// Set up the list for the FORM elements
@@ -341,16 +341,19 @@ LRESULT CDQSDWizardDlg::OnOK(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHa
 	TCHAR szTime[ 128 ];
 	_tstrtime( szTime );
 
-	strSearchFile += _T("\r\n  <COMMENT>"
-						"\r\n"
-						"\r\n    This search file was initially created by Dave's Quick Search Deskbar"
-						"\r\n    Search Wizard version ") + m_strVersion + _T(" on ") + string( szDate ) + _T(" at ") + string( szTime );
-	strSearchFile += _T("\r\n"
-						"\r\n    Even though this XML search will probably load and is a healthy start"
-						"\r\n    toward a completed search, please be aware that this search will probably"
-						"\r\n    not work as is and will require some human inspection and modification."
-						"\r\n"
-						"\r\n  </COMMENT>");
+	if ( m_options.IncludeComments() )
+	{
+		strSearchFile += _T("\r\n  <COMMENT>"
+							"\r\n"
+							"\r\n    This search file was initially created by Dave's Quick Search Deskbar"
+							"\r\n    Search Wizard version ") + m_strVersion + _T(" on ") + string( szDate ) + _T(" at ") + string( szTime );
+		strSearchFile += _T("\r\n"
+							"\r\n    Even though this XML search will probably load and is a healthy start"
+							"\r\n    toward a completed search, please be aware that this search will probably"
+							"\r\n    not work as is and will require some human inspection and modification."
+							"\r\n"
+							"\r\n  </COMMENT>");
+	}
 
 	CWindow( GetDlgItem( IDC_SearchTitle ) ).GetWindowText( &bstr );
 	strSearchFile += _T("\r\n  <name>") + EscapeXML( string( W2T( bstr ) ) ) + _T("</name>");
@@ -436,26 +439,12 @@ LRESULT CDQSDWizardDlg::OnOK(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHa
 
 			// Throw the file up in an editor if they so choose
 
-			CRegKey rk;
-			BOOL bEditResult = TRUE;
-			string strEditor = _T("notepad.exe");
-			if ( ERROR_SUCCESS == rk.Open( HKEY_CURRENT_USER, _T("SOFTWARE\\Dave's Quick Search Deskbar\\DQSDSearchWizard\\Settings") ) )
-			{
-				DWORD dwValue = 0;
-				if ( ERROR_SUCCESS == rk.QueryValue( dwValue, _T("EditResult") ) )
-					bEditResult = dwValue;
-
-				TCHAR szValue[ MAX_PATH + 1 ];
-				DWORD dwSize = LENGTHOF( szValue );
-				if ( ERROR_SUCCESS == rk.QueryValue( szValue, _T("ResultEditor"), &dwSize ) )
-					strEditor = string( szValue );
-			}
-			rk.Close();
-
-			if ( bEditResult )
+			COptions options;
+			options.Load();
+			if ( options.EditResults() )
 			{
 				TCHAR szCommandLine[ 1024 ];
-				_tcscpy( szCommandLine, ( _T("\"") + strEditor + _T("\" \"") + string( ofn.lpstrFile ) + _T("\"") ).c_str() );
+				_tcscpy( szCommandLine, ( _T("\"") + options.Editor() + _T("\" \"") + string( ofn.lpstrFile ) + _T("\"") ).c_str() );
 				::WinExec( szCommandLine, SW_SHOW );
 			}
 		}
@@ -610,7 +599,7 @@ string CDQSDWizardDlg::GetForms( const string& rstrSearchName, string& rstrFormS
 							continue;
 						}
 
-						if ( bActiveElement  )
+						if ( bActiveElement && m_options.IncludeComments() )
 						{
 							strFormXML += _T("\r\n\r\n    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>\r\n");
 						}
@@ -635,7 +624,7 @@ string CDQSDWizardDlg::GetForms( const string& rstrSearchName, string& rstrFormS
 							rstrFormScript += _T("\r\n      //document.") + strFormName + GetScriptFieldName( strInputName ) + _T(" = \"\";");
 						}
 
-						if ( !_tcsicmp( _T("checkbox"), strInputType.c_str() ) )
+						if ( m_options.IncludeComments() && !_tcsicmp( _T("checkbox"), strInputType.c_str() ) )
 						{
 							strFormXML += _T("\r\n    <COMMENT>"
 											 "\r\n      The input element above, \"") + strInputName + _T("\", was a checkbox that was ") + 
@@ -643,7 +632,7 @@ string CDQSDWizardDlg::GetForms( const string& rstrSearchName, string& rstrFormS
 							strFormXML += _T("\r\n    </COMMENT>\r\n");
 						}
 
-						if ( !_tcsicmp( W2T( bstrTagName ), _T("SELECT") ) )
+						if ( m_options.IncludeComments() && !_tcsicmp( W2T( bstrTagName ), _T("SELECT") ) )
 						{
 							strFormXML += _T("\r\n    <COMMENT>"
 											 "\r\n      The input element above, \"") + strInputName + _T("\", was a SELECT element with the following options..."
@@ -719,7 +708,11 @@ string CDQSDWizardDlg::GetForms( const string& rstrSearchName, string& rstrFormS
 						strRadioValues += _T("\r\n    </COMMENT>\r\n");
 
 						strFormXML += strRadioElement;
-						strFormXML += strRadioValues;
+						
+						if ( m_options.IncludeComments() )
+						{
+							strFormXML += strRadioValues;
+						}
 					}
 				}
 
@@ -761,6 +754,10 @@ string CDQSDWizardDlg::GetAbsoluteActionPath( _variant_t& varAction )
 	{
 		strAction = W2A( varAction.bstrVal );
 	}
+	else if ( _tcslen( W2CT(varAction.bstrVal) ) == 0 )
+	{
+		strAction = m_strBaseURL;
+	}
 	else
 	{
 		strAction = m_strBaseURL + ( *varAction.bstrVal != L'/' ? _T("/") : _T("") ) + W2A( varAction.bstrVal );
@@ -783,23 +780,28 @@ string CDQSDWizardDlg::GetSwitches()
 		_tcscpy( szSwitches, W2T( bstr ) );
 		LPTSTR pszSwitch = _tcstok( szSwitches, _T("\r\n") );
 		strSwitches = _T("\r\n"
-						 "\r\n      // Parse switches with parseArgs:"
-						 "\r\n"
-						 "\r\n      // parseArgs usage:"
-						 "\r\n      // Arguments:"
-						 "\r\n      //    q                - string from the search function"
-						 "\r\n      //    expectedSwitches - list or array of the expected switch values"
-						 "\r\n      //    expandSwitches   - optional parameter [default = true] used to determine "
-						 "\r\n      //                       if the switch shortcuts should be expanded (i.e. /f becomes /foo)"
-						 "\r\n      // Returns an object with these properties:"
-						 "\r\n      //    q        - the input string with the switches removed"
-						 "\r\n      //    switches - array of objects with these two properties:"
-						 "\r\n      //                  name:   expanded name of the matched switch (i.e. foo as in /foo:bar)"
-						 "\r\n      //                  value:  value of switch (i.e. bar as in /foo:bar)"
-						 "\r\n      //    switch_val - associative array with the switch name as the key with the switch value "
-						 "\r\n      //                 as the value. (i.e. switch_val[\"foo\"] = \"bar\" as in /foo:bar)"
-						 "\r\n"
-						 "\r\n      //var args = parseArgs(q, \"");
+						 "\r\n      // Parse switches with parseArgs:");
+		
+		if ( m_options.IncludeComments() )
+		{
+			strSwitches += _T("\r\n"
+							 "\r\n      // parseArgs usage:"
+							 "\r\n      // Arguments:"
+							 "\r\n      //    q                - string from the search function"
+							 "\r\n      //    expectedSwitches - list or array of the expected switch values"
+							 "\r\n      //    expandSwitches   - optional parameter [default = true] used to determine "
+							 "\r\n      //                       if the switch shortcuts should be expanded (i.e. /f becomes /foo)"
+							 "\r\n      // Returns an object with these properties:"
+							 "\r\n      //    q        - the input string with the switches removed"
+							 "\r\n      //    switches - array of objects with these two properties:"
+							 "\r\n      //                  name:   expanded name of the matched switch (i.e. foo as in /foo:bar)"
+							 "\r\n      //                  value:  value of switch (i.e. bar as in /foo:bar)"
+							 "\r\n      //    switch_val - associative array with the switch name as the key with the switch value "
+							 "\r\n      //                 as the value. (i.e. switch_val[\"foo\"] = \"bar\" as in /foo:bar)"
+							 "\r\n");
+		}
+		
+		strSwitches += _T("\r\n      //var args = parseArgs(q, \"");
 		TCHAR pszDelim[ 16 ];
 		_tcscpy( pszDelim, _T("") );
 
@@ -839,7 +841,7 @@ string CDQSDWizardDlg::EscapeXML( string& xml )
 	srch_repl( xml, _T(">"), _T("&gt;") );
 //	srch_repl( xml, _T("'"), _T("&apos;") );
 //	srch_repl( xml, _T("\""), _T("&quot;") );
-	srch_repl( xml, _T("\r\n"), _T("\\n") );
+//	srch_repl( xml, _T("\r\n"), _T("\\n") );
 
 	return xml;
 }
@@ -906,36 +908,9 @@ LRESULT CDQSDWizardDlg::OnClickedAbout(WORD wNotifyCode, WORD wID, HWND hWndCtl,
 
 LRESULT CDQSDWizardDlg::OnClickedOptions(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHandled)
 {
-	USES_CONVERSION;
-
-	DWORD dwSize = 0;
-	TCHAR szValue[ 1024 ];
-	DWORD dwValue = 0;
-
 	COptionsDlg dlgOptions;
-
-	CRegKey rk;
-	if ( ERROR_SUCCESS == rk.Open( HKEY_CURRENT_USER, _T("SOFTWARE\\Dave's Quick Search Deskbar\\DQSDSearchWizard\\Settings") ) )
-	{
-		if ( ERROR_SUCCESS == rk.QueryValue( dwValue, _T("EditResult") ) )
-		{
-			dlgOptions.m_bEditResult = dwValue;
-		}
-
-		dwSize = LENGTHOF( szValue );
-		if ( ERROR_SUCCESS == rk.QueryValue( szValue, _T("ResultEditor"), &dwSize ) )
-		{
-			dlgOptions.m_strEditor = string( szValue );
-		}
-	}
-	
-	if ( dlgOptions.DoModal() == IDOK )
-	{
-		rk.SetValue( dlgOptions.m_bEditResult, _T("EditResult") );
-		rk.SetValue( dlgOptions.m_strEditor.c_str(), _T("ResultEditor") );
-	}
-
-	rk.Close();
+	if ( IDOK == dlgOptions.DoModal() )
+		m_options.Load();
 	return 0;
 }
 

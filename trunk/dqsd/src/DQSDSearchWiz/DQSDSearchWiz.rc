@@ -156,17 +156,23 @@ BEGIN
     ICON            IDI_WIZARD,IDC_STATIC,7,4,20,20
 END
 
-IDD_OPTIONSDLG DIALOG DISCARDABLE  0, 0, 248, 46
+IDD_OPTIONSDLG DIALOG DISCARDABLE  0, 0, 253, 63
 STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "DQSD Search Wizard Options"
 FONT 8, "MS Sans Serif"
 BEGIN
-    CONTROL         "&Edit search file",IDC_EditXML,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,6,8,62,10
-    RTEXT           "E&ditor:",IDC_STATIC,72,9,25,8
-    EDITTEXT        IDC_Editor,99,6,138,14,ES_AUTOHSCROLL
-    DEFPUSHBUTTON   "OK",1,66,26,50,14
-    PUSHBUTTON      "Cancel",2,132,26,50,14
+    CONTROL         "&Edit generated search file",IDC_EditXML,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,6,6,96,10
+    RTEXT           "E&ditor:",IDC_EditLabel,12,19,25,8
+    EDITTEXT        IDC_Editor,39,16,138,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "&...",IDC_Browse,178,16,11,14
+    CONTROL         "Include &comments in generated search file",
+                    IDC_IncludeComments,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,6,35,174,10
+    CONTROL         "&Warn if no active element",IDC_WarnNotActive,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,6,48,97,10
+    DEFPUSHBUTTON   "OK",1,197,7,50,14
+    PUSHBUTTON      "Cancel",2,197,24,50,14
 END
 
 IDD_ABOUTDLG DIALOG DISCARDABLE  0, 0, 274, 135
@@ -211,9 +217,9 @@ BEGIN
     IDD_OPTIONSDLG, DIALOG
     BEGIN
         LEFTMARGIN, 6
-        RIGHTMARGIN, 242
+        RIGHTMARGIN, 247
         TOPMARGIN, 6
-        BOTTOMMARGIN, 40
+        BOTTOMMARGIN, 57
     END
 
     IDD_ABOUTDLG, DIALOG

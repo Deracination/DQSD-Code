@@ -1,6 +1,5 @@
 // SearchWizard.cpp : Implementation of CSearchWizard
 #include "stdafx.h"
-#include "DQSDSearchWiz.h"
 #include "SearchWizard.h"
 #include "DQSDWizardDlg.h"
 
@@ -9,6 +8,7 @@
 
 #include <initguid.h>
 #include <ShlGuid.h>
+#include "Options.h"
 
 STDMETHODIMP CSearchWizard::QueryStatus(const GUID* pguidCmdGroup, ULONG cCmds, OLECMD prgCmds[], OLECMDTEXT* pCmdText)
 {
@@ -48,6 +48,9 @@ STDMETHODIMP CSearchWizard::Exec(const GUID*, DWORD nCmdID, DWORD, VARIANTARG*, 
 	HR(spFormCollection->get_length( &cForms ));
 
 
+	COptions options;
+
+
 	HWND hwndBrowser = NULL;
 	HR(spWB2->get_HWND(reinterpret_cast<long *>(&hwndBrowser)));
 	
@@ -61,7 +64,7 @@ STDMETHODIMP CSearchWizard::Exec(const GUID*, DWORD nCmdID, DWORD, VARIANTARG*, 
 			return S_OK;
 		}
 	}
-	else
+	else if ( options.WarnNotActive() )
 	{
 		// Give the user a chance to select a FORM field
 		CComPtr< IHTMLElement > spActiveElement;
