@@ -1,9 +1,11 @@
 <search function="comx">
   <name>Comic Strip</name>
   <description>Displays a daily comic strip in a popup window.
-    <div class="helpboxDescLabels">Switches:</div>
-    <div class="helpboxDescLabels">(Note: All the switches can be abbreviated)</div>
     <table class="helpboxDescTable">
+    <tr><td colspan="2"><div class="helpboxDescLabels">Note:</div> All the switches can be abbreviated 
+    and multiple switches can be specified at one time.</td></tr>
+    <tr><td>--</td></tr>
+    <tr><td><div class="helpboxDescLabels">Switches:</div></td></tr>
     <tr><td>9 Chickweed Lane</td><td>/9chickweed</td></tr>
     <tr><td>A Case in Point</td><td>/caseinpoint</td></tr>
     <tr><td>Adam at Home</td><td>/adamathome</td></tr>
@@ -145,9 +147,9 @@
     <tr><td>comx /wiz   </td><td>(Wizard of Id)</td></tr>
     <tr><td>comx /workingit  </td><td>(Working it Out)</td></tr>
     <tr><td>comx /rip   </td><td>(Ripleys Believe it or Not)</td></tr>
+    <tr><td>comx /wiz /workingit /rip</td><td>(Opens all three)</td></tr>
     </table>
   </description>
-  <link>http://www.comics.com</link>
   <category>Fun</category>
   <script><![CDATA[
   
@@ -157,29 +159,6 @@
         return false;
      }
      
-     //default window sizes for the comic strips window
-     var windowW = 600; var windowH = 215;
-     //default window sizes for the comic strips window on Sundays
-     var sunwindowW = 725; var sunwindowH = 546;
-     //default window sizes for the ucomic strips window on Sundays
-     var ucsunwindowW = 600; var ucsunwindowH = 425;
-     
-     var site;
-     var endurl;
-     var imgtitle;
-     var imgkey;
-     var urlstart;
-     var endurl;
-     var urlcat;
-     var urldir;
-
-     //default regex for finding the image in the page source..
-     var rx = /.+(\/archive\/images\/\w+\.\w+)"\s+ALT="Today's\s+Comic"/i;
-
-     //get the current day so the sizes can be adjusted for sunday comics
-     var dat = new Date();
-     var today = dat.getDay();
-                   
      var args = parseArgs(q, "9chickweedlane,agnes,alleyoop,andycapp,arloandjanis,bc,\
      ballardstreet,ben,betty,bignate,bonanas,bornloser,buckets,bullsnbears,candorville,\
      caseinpoint,ceodad,cheapthrills,committed,drabble,fatcats,ferdnand,\
@@ -199,241 +178,269 @@
      middletons,misterboffo,mixedmedia,mullets,nonsequitur,overboard,pluggers,poochcafe,popculture,\
      preteena,reallife,reynoldsunwrapped,shoe,stonesoup,tankmcnamara,willynethel,ziggy");
      
-     if ( args.switches.length > 0 ){
-        sw = args.switches[0];
-        switch( sw.name ){
-           case "9chickweedlane": endurl="comics/chickweed/index.html";sunwindowH=533;break;
-           case "agnes": endurl="creators/agnes/index.html";sunwindowH=272;break;
-           case "alleyoop": endurl="comics/alleyoop/index.html";break;
-           case "andycapp": endurl="creators/andycapp/index.html";sunwindowH=385;break;
-           case "arloandjanis": endurl="comics/arlonjanis/index.html";break;
-           case "bc": endurl="creators/bc/index.html";sunwindowW=725;sunwindowH=521;break;
-           case "ballardstreet": endurl="creators/ballardst/index.html";windowW=300;windowH=329;sunwindowH=268;break;
-           case "ben": endurl="comics/ben/index.html";sunwindowW=600;sunwindowH=200;break;
-           case "betty": endurl="comics/betty/index.html";sunwindowH=378;break;
-           case "bignate": endurl="comics/bignate/index.html";sunwindowH=537;break;
-           case "bonanas": endurl="wash/bonanas/index.html";sunwindowH=357;break;
-           case "bornloser": endurl="comics/bornloser/index.html";sunwindowH=542;break;
-           case "buckets": endurl="comics/buckets/index.html";sunwindowH=385;break;
-           case "bullsnbears": endurl="comics/bullsnbears/index.html";sunwindowW=600;sunwindowH=200;break;
-           case "candorville": endurl="wash/candorville/index.html";sunwindowH=513;break;
-           case "caseinpoint": endurl="comics/acaseinpoint/index.html";windowW=348;windowH=460;sunwindowW=348;sunwindowH=460;break;
-           case "ceodad": endurl="creators/ceodad/index.html";sunwindowW=600;sunwindowH=200;break;
-           case "cheapthrills": endurl="wash/cheapthrills/index.html";windowW=725;windowH=273;sunwindowH=273;break;
-           case "committed": endurl="comics/committed/index.html";windowW=321;windowH=394;sunwindowH=377;break;
-           case "drabble": endurl="comics/drabble/index.html";sunwindowH=525;break;
-           case "fatcats": endurl="comics/fatcats/index.html";sunwindowW=600;sunwindowH=209;break;
-           case "ferdnand": endurl="comics/ferdnand/index.html";windowW=600;windowH=177;break;
-           case "flightdeck": endurl="creators/flightdeck/index.html";windowW=300;windowH=332;sunwindowH=272;break;
-           case "floandfriends": endurl="creators/floandfriends/index.html";sunwindowH=272;break;
-           case "forbetterorforworse": endurl="comics/forbetter/index.html";sunwindowW=750;sunwindowH=575;break;
-           case "frankandernest": endurl="comics/franknernest/index.html";break;
-           case "frazz": endurl="comics/frazz/index.html";sunwindowH=385;break;
-           case "geech": endurl="comics/geech/index.html";break;
-           case "getfuzzy": endurl="comics/getfuzzy/index.html";sunwindowH=371;break;
-           case "gingermeggs": endurl="comics/gingermeggs/index.html";sunwindowW=600;sunwindowH=370;break;
-           case "gofish": endurl="comics/gofish/index.html";windowW=321;windowH=352;sunwindowW=600;sunwindowH=314;break;
-           case "graffiti": endurl="comics/graffiti/index.html";windowW=321;windowH=541;sunwindowW=321;sunwindowH=550;break;
-           case "grandavenue": endurl="comics/grandave/index.html";sunwindowH=370;break;
-           case "grizzwells": endurl="comics/grizzwells/index.html";sunwindowW=600;sunwindowH=202;break;
-           case "heathcliff": endurl="creators/heathcliff/index.html";windowW=300;windowH=331;break;
-           case "herbandjamaal": endurl="creators/herbnjamaal/index.html";break;
-           case "herman": endurl="comics/herman/index.html";windowW=300;windowH=381;break;
-           case "janesworld": endurl="comics/janesworld/index.html";sunwindowW=600;sunwindowH=211;break;
-           case "jumpstart": endurl="comics/jumpstart/index.html";break;
-           case "kitncarlyle": endurl="comics/kitncarlyle/index.html";windowW=321;windowH=349;sunwindowW=321;sunwindowH=349;break;
-           case "libertymeadows": endurl="creators/liberty/index.html";sunwindowH=271;break;
-           case "lilabner": endurl="comics/lilabner/index.html";windowW=800;windowH=226;sunwindowW=800;sunwindowH=228;break;
-           case "luann": endurl="comics/luann/index.html";sunwindowH=376;break;
-           case "lupoalberto": endurl="comics/lupo/index.html";sunwindowW=600;sunwindowH=205;break;
-           case "marmaduke": endurl="comics/marmaduke/index.html";windowW=321;windowH=347;break;
-           case "meatloafnight": endurl="comics/meatloaf/index.html";sunwindowW=600;sunwindowH=197;break;
-           case "meg": endurl="comics/meg/index.html";sunwindowW=600;sunwindowH=200;break;
-           case "moderatelyconfused": endurl="comics/moderatelyconfused/index.html";windowW=321;windowH=399;sunwindowW=321;sunwindowH=399;break;
-           case "momma": endurl="creators/momma/index.html";sunwindowH=366;break;
-           case "monty": endurl="comics/monty/index.html";break;
-           case "motley": endurl="comics/motley/index.html";windowW=504;windowH=146;sunwindowW=504;sunwindowH=142;break;
-           case "nancy": endurl="comics/nancy/index.html";break;
-           case "naturalselection": endurl="creators/naturalselection/index.html";windowW=300;windowH=356;sunwindowW=300;sunwindowH=356;break;
-           case "offthemark": endurl="comics/offthemark/index.html";windowW=321;windowH=359;sunwindowH=251;break;
-           case "onebighappyclassics": endurl="creators/onebighappy/index.html";sunwindowW=650;sunwindowH=300;break;
-           case "othercoast": endurl="creators/othercoast/index.html";sunwindowH=358;break;
-           case "outofthegenepool": endurl="wash/genepool/index.html";sunwindowH=356;break;
-           case "overthehedge": endurl="comics/hedge/index.html";break;
-           case "pcandpixel": endurl="wash/pcnpixel/index.html";sunwindowH=502;break;
-           case "pearlsbeforeswine": endurl="comics/pearls/index.html";sunwindowH=382;break;
-           case "pibgorn": endurl="comics/pibgorn/index.html";windowW=600;windowH=420;break;
-           case "pickles": endurl="wash/pickles/index.html";sunwindowH=502;break;
-           case "potluckparish": endurl="comics/potluck/index.html";windowH=198;sunwindowW=600;sunwindowH=198;break;
-           case "raisingduncan": endurl="comics/raisingduncan/index.html";sunwindowH=371;break;
-           case "realitycheck": endurl="comics/reality/index.html";windowW=321;windowH=340;sunwindowH=510;break;
-           case "redandrover": endurl="wash/redandrover/index.html";sunwindowH=357;break;
-           case "ripleysbelieveitornot": endurl="comics/ripleys/index.html";windowW=315;windowH=410;sunwindowH=500;break;
-           case "roseisrose": endurl="comics/roseisrose/index.html";break;
-           case "rubes": endurl="creators/rubes/index.html";windowW=300;windowH=349;sunwindowH=385;break;
-           case "rudypark": endurl="comics/rudypark/index.html";sunwindowH=382;break;
-           case "sheldon": endurl="comics/sheldon/index.html";windowH=208;sunwindowW=600;sunwindowH=208;break;
-           case "shirleyandson": endurl="comics/shirleynson/index.html";break;
-           case "souptonutz": endurl="comics/soup2nutz/index.html";sunwindowH=377;break;
-           case "speedbump": endurl="creators/speedbump/index.html";windowW=300;windowH=313;sunwindowH=257;break;
-           case "spotthefrog": endurl="comics/spotthefrog/index.html";sunwindowH=377;break;
-           case "strangebrew": endurl="creators/strangebrew/index.html";windowW=300;windowH=327;sunwindowH=272;break;
-           case "sunshineclub": endurl="comics/sunshineclub/index.html";break;
-           case "tarzan": endurl="comics/tarzan/index.html";break;
-           case "thatslife": endurl="wash/thatslife/index.html";windowW=300;windowH=349;sunwindowH=354;break;
-           case "topoftheworld": endurl="comics/topofworld/index.html";sunwindowW=600;sunwindowH=206;break;
-           case "wizardofid": endurl="creators/wizardofid/index.html";break;
-           case "workingdaze": endurl="comics/workingdaze/index.html";windowW=335;windowH=408;sunwindowW=335;sunwindowH=408;break;
-           case "workingitout": endurl="creators/workingitout/index.html";windowW=300;windowH=332;sunwindowW=300;sunwindowH=332;break;
-           // the two oddball ones.. have to have their own rx pattern
-           case "peanuts": endurl="comics/peanuts/index.html";windowW=600;windowH=139;rx=/.+(\/archive\/images\/\w+\.\w+)"\s+ALT="Today's Strip"/;break;
-           case "dilbert": endurl="comics/dilbert/index.html";rx=/.+(\/archive\/images\/\w+\.\w+)"\s+BORDER=0\s+ALT="Today's Dilbert Comic"/;break;
-           // comics from ucomics.com
-           case "animalcrackers": imgtitle="Animal Crackers";site="ucomics";imgkey="tmani";break;
-           case "adamathome": imgtitle="Adam at Home";site="ucomics";imgkey="ad";break;
-           case "annie": imgtitle="Annie";site="ucomics";imgkey="tmann";break;
-           case "baldo": imgtitle="Baldo";site="ucomics";imgkey="ba";ucsunwindowH=298;break;
-           case "bigtop": imgtitle="Big Top";site="ucomics";imgkey="bt";ucsunwindowH=298;break;
-           case "boondocks": imgtitle="Boondocks";site="ucomics";imgkey="bo";ucsunwindowH=298;break;
-           case "boundandgagged": imgtitle="Bound and Gagged";site="ucomics";imgkey="tmbou";ucsunwindowH=296;break;
-           case "brendastarr": imgtitle="Brenda Starr";site="ucomics";imgkey="tmbre";break;
-           case "broomhilda": imgtitle="Broom Hilda";site="ucomics";imgkey="tmbro";break;
-           case "cathy": imgtitle="Cathy";site="ucomics";imgkey="ca";break;
-           case "catswithhands": imgtitle="Cats With Hands";site="ucomics";imgkey="tmcat";break;
-           case "cleats": imgtitle="Cleats";site="ucomics";imgkey="cle";ucsunwindowH=298;break;
-           case "closetohome": imgtitle="Close to Home";site="ucomics";imgkey="cl";windowW=300;windowH=401;ucsunwindowH=296;break;
-           case "cornered": imgtitle="Cornered";site="ucomics";imgkey="co";windowW=300;windowH=385;ucsunwindowH=370;;break;
-           case "dicktracy": imgtitle="Dick Tracy";site="ucomics";imgkey="tmdic";ucsunwindowH=830;break;
-           case "doonesbury": imgtitle="Doonesbury";site="ucomics";imgkey="db";ucsunwindowH=787;break;
-           case "duplex": imgtitle="Duplex";site="ucomics";imgkey="dp";ucsunwindowH=296;break;
-           case "foxtrot": imgtitle="Foxtrot";site="ucomics";imgkey="ft";break;
-           case "fredbasset": imgtitle="Fred Basset";site="ucomics";imgkey="tmfba";break;
-           case "fuscobrothers": imgtitle="Fusco Brothers";site="ucomics";imgkey="fu";ucsunwindowH=406;break;
-           case "garfield": imgtitle="Garfield";site="ucomics";imgkey="ga";windowH=179;ucsunwindowH=399;break;
-           case "gasolinealley": imgtitle="Gasoline Alley";site="ucomics";imgkey="tmgas";break;
-           case "heartofthecity": imgtitle="Heart of the City";site="ucomics";imgkey="hc";ucsunwindowW=400;ucsunwindowH=825;break;
-           case "helenoftheinternet": imgtitle="Helen of the Internet";site="ucomics";imgkey="tmhel";break;
-           case "housebroken": imgtitle="Housebroken";site="ucomics";imgkey="tmhou";break;
-           case "inthebleachers": imgtitle="In the Bleachers";site="ucomics";imgkey="bl";windowW=300;windowH=385;ucsunwindowH=285;break;
-           case "kudzu": imgtitle="Kudzu";site="ucomics";imgkey="tmkud";break;
-           case "lacucaracha": imgtitle="La Cucaracha";site="ucomics";imgkey="lc";break;
-           case "lola": imgtitle="Lola";site="ucomics";imgkey="tmlol";ucsunwindowH=297;break;
-           case "looseparts": imgtitle="Loose Parts";site="ucomics";imgkey="tmloo";windowW=300;windowH=385;ucsunwindowH=297;break;
-           case "lostsheep": imgtitle="Lost Sheep";site="ucomics";imgkey="lost";ucsunwindowH=360;break;
-           case "luckycow": imgtitle="Lucky Cow";site="ucomics";imgkey="luc";ucsunwindowH=300;break;
-           case "meehanstreak": imgtitle="Meehan Streak";site="ucomics";imgkey="tmmee";ucsunwindowH=300;break;
-           case "middletons": imgtitle="Middletons";site="ucomics";imgkey="tmmid";break;
-           case "misterboffo": imgtitle="Mister Boffo";site="ucomics";imgkey="mb";break;
-           case "mixedmedia": imgtitle="Mixed Media";site="ucomics";imgkey="tmmix";ucsunwindowH=281;break;
-           case "mullets": imgtitle="Mullets";site="ucomics";imgkey="mul";ucsunwindowH=291;break;
-           case "nonsequitur": imgtitle="Nonsequitur";site="ucomics";imgkey="nq";ucsunwindowW=300;ucsunwindowH=1193;break;
-           case "overboard": imgtitle="Overboard";site="ucomics";imgkey="ob";ucsunwindowH=291;break;
-           case "pluggers": imgtitle="Pluggers";site="ucomics";imgkey="tmplu";windowW=300;windowH=308;break;
-           case "poochcafe": imgtitle="Pooch Cafe";site="ucomics";imgkey="poc";ucsunwindowH=279;break;
-           case "popculture": imgtitle="Pop Culture";site="ucomics";imgkey="pop";break;
-           case "preteena": imgtitle="Preteena";site="ucomics";imgkey="pr";ucsunwindowH=291;break;
-           case "reallife": imgtitle="Real Life";site="ucomics";imgkey="rl";windowW=300;windowH=382;ucsunwindowH=295;break;
-           case "reynoldsunwrapped": imgtitle="Reynolds Unwrapped";site="ucomics";imgkey="rw";windowW=300;windowH=400;ucsunwindowW=300;ucsunwindowH=400;break;
-           case "shoe": imgtitle="Shoe";site="ucomics";imgkey="tmsho";ucsunwindowH=808;break;
-           case "stonesoup": imgtitle="Stone Soup";site="ucomics";imgkey="ss";ucsunwindowH=295;break;
-           case "tankmcnamara": imgtitle="Tank Mcnamara";site="ucomics";imgkey="tm";ucsunwindowH=295;break;
-           case "willynethel": imgtitle="Willy n Ethel";site="ucomics";imgkey="wes";ucsunwindowH=295;break;
-           case "ziggy": imgtitle="Ziggy";site="ucomics";imgkey="zi";windowW=300;windowH=299;break;
-           case "calvinandhobbes": imgtitle="Calvin And Hobbes";site="ucomics";imgkey="ch";break;
-           default:endurl=null;imgkey=null;break;
-        }//switch
-     }//if
+     if ( args.switches.length > 0 ){    
+      
+        //get the current day so the sizes can be adjusted for sunday comics
+        var dat = new Date();
+        var today = dat.getDay();                              
+        for (i=0; i < args.switches.length; i++){
+           //default window sizes for the comic strips window
+           var windowW = 600; var windowH = 215;
+           //default window sizes for the comic strips window on Sundays
+           var sunwindowW = 725; var sunwindowH = 546;
+           //default window sizes for the ucomic strips window on Sundays
+           var ucsunwindowW = 600; var ucsunwindowH = 425;
+            
+           var site=null;
+           var endurl=null;
+           var imgtitle=null;
+           var imgkey=null;
+           var urlstart=null;
+           var endurl=null;
+           var urlcat=null;
+           var urldir=null;
+           
+           //default regex for finding the image in the page source..
+           var rx = /.+(\/archive\/images\/\w+\.\w+)"\s+ALT="Today's\s+Comic"/i;
+           switch( args.switches[i].name ){
+              case "9chickweedlane": endurl="comics/chickweed/index.html";sunwindowH=533;break;
+              case "agnes": endurl="creators/agnes/index.html";sunwindowH=272;break;
+              case "alleyoop": endurl="comics/alleyoop/index.html";break;
+              case "andycapp": endurl="creators/andycapp/index.html";sunwindowH=385;break;
+              case "arloandjanis": endurl="comics/arlonjanis/index.html";break;
+              case "bc": endurl="creators/bc/index.html";sunwindowW=725;sunwindowH=521;break;
+              case "ballardstreet": endurl="creators/ballardst/index.html";windowW=300;windowH=329;sunwindowH=268;break;
+              case "ben": endurl="comics/ben/index.html";sunwindowW=600;sunwindowH=200;break;
+              case "betty": endurl="comics/betty/index.html";sunwindowH=378;break;
+              case "bignate": endurl="comics/bignate/index.html";sunwindowH=537;break;
+              case "bonanas": endurl="wash/bonanas/index.html";sunwindowH=357;break;
+              case "bornloser": endurl="comics/bornloser/index.html";sunwindowH=542;break;
+              case "buckets": endurl="comics/buckets/index.html";sunwindowH=385;break;
+              case "bullsnbears": endurl="comics/bullsnbears/index.html";sunwindowW=600;sunwindowH=200;break;
+              case "candorville": endurl="wash/candorville/index.html";sunwindowH=513;break;
+              case "caseinpoint": endurl="comics/acaseinpoint/index.html";windowW=348;windowH=460;sunwindowW=348;sunwindowH=460;break;
+              case "ceodad": endurl="creators/ceodad/index.html";sunwindowW=600;sunwindowH=200;break;
+              case "cheapthrills": endurl="wash/cheapthrills/index.html";windowW=725;windowH=273;sunwindowH=273;break;
+              case "committed": endurl="comics/committed/index.html";windowW=321;windowH=394;sunwindowH=377;break;
+              case "drabble": endurl="comics/drabble/index.html";sunwindowH=525;break;
+              case "fatcats": endurl="comics/fatcats/index.html";sunwindowW=600;sunwindowH=209;break;
+              case "ferdnand": endurl="comics/ferdnand/index.html";windowW=600;windowH=177;break;
+              case "flightdeck": endurl="creators/flightdeck/index.html";windowW=300;windowH=332;sunwindowH=272;break;
+              case "floandfriends": endurl="creators/floandfriends/index.html";sunwindowH=272;break;
+              case "forbetterorforworse": endurl="comics/forbetter/index.html";sunwindowW=750;sunwindowH=575;break;
+              case "frankandernest": endurl="comics/franknernest/index.html";break;
+              case "frazz": endurl="comics/frazz/index.html";sunwindowH=385;break;
+              case "geech": endurl="comics/geech/index.html";break;
+              case "getfuzzy": endurl="comics/getfuzzy/index.html";sunwindowH=371;break;
+              case "gingermeggs": endurl="comics/gingermeggs/index.html";sunwindowW=600;sunwindowH=370;break;
+              case "gofish": endurl="comics/gofish/index.html";windowW=321;windowH=352;sunwindowW=600;sunwindowH=314;break;
+              case "graffiti": endurl="comics/graffiti/index.html";windowW=321;windowH=541;sunwindowW=321;sunwindowH=550;break;
+              case "grandavenue": endurl="comics/grandave/index.html";sunwindowH=370;break;
+              case "grizzwells": endurl="comics/grizzwells/index.html";sunwindowW=600;sunwindowH=202;break;
+              case "heathcliff": endurl="creators/heathcliff/index.html";windowW=300;windowH=331;break;
+              case "herbandjamaal": endurl="creators/herbnjamaal/index.html";break;
+              case "herman": endurl="comics/herman/index.html";windowW=300;windowH=381;break;
+              case "janesworld": endurl="comics/janesworld/index.html";sunwindowW=600;sunwindowH=211;break;
+              case "jumpstart": endurl="comics/jumpstart/index.html";break;
+              case "kitncarlyle": endurl="comics/kitncarlyle/index.html";windowW=321;windowH=349;sunwindowW=321;sunwindowH=349;break;
+              case "libertymeadows": endurl="creators/liberty/index.html";sunwindowH=271;break;
+              case "lilabner": endurl="comics/lilabner/index.html";windowW=800;windowH=226;sunwindowW=800;sunwindowH=228;break;
+              case "luann": endurl="comics/luann/index.html";sunwindowH=376;break;
+              case "lupoalberto": endurl="comics/lupo/index.html";sunwindowW=600;sunwindowH=205;break;
+              case "marmaduke": endurl="comics/marmaduke/index.html";windowW=321;windowH=347;break;
+              case "meatloafnight": endurl="comics/meatloaf/index.html";sunwindowW=600;sunwindowH=197;break;
+              case "meg": endurl="comics/meg/index.html";sunwindowW=600;sunwindowH=200;break;
+              case "moderatelyconfused": endurl="comics/moderatelyconfused/index.html";windowW=321;windowH=399;sunwindowW=321;sunwindowH=399;break;
+              case "momma": endurl="creators/momma/index.html";sunwindowH=366;break;
+              case "monty": endurl="comics/monty/index.html";break;
+              case "motley": endurl="comics/motley/index.html";windowW=504;windowH=146;sunwindowW=504;sunwindowH=142;break;
+              case "nancy": endurl="comics/nancy/index.html";break;
+              case "naturalselection": endurl="creators/naturalselection/index.html";windowW=300;windowH=356;sunwindowW=300;sunwindowH=356;break;
+              case "offthemark": endurl="comics/offthemark/index.html";windowW=321;windowH=359;sunwindowH=251;break;
+              case "onebighappyclassics": endurl="creators/onebighappy/index.html";sunwindowW=650;sunwindowH=300;break;
+              case "othercoast": endurl="creators/othercoast/index.html";sunwindowH=358;break;
+              case "outofthegenepool": endurl="wash/genepool/index.html";sunwindowH=356;break;
+              case "overthehedge": endurl="comics/hedge/index.html";break;
+              case "pcandpixel": endurl="wash/pcnpixel/index.html";sunwindowH=502;break;
+              case "pearlsbeforeswine": endurl="comics/pearls/index.html";sunwindowH=382;break;
+              case "pibgorn": endurl="comics/pibgorn/index.html";windowW=600;windowH=420;break;
+              case "pickles": endurl="wash/pickles/index.html";sunwindowH=502;break;
+              case "potluckparish": endurl="comics/potluck/index.html";windowH=198;sunwindowW=600;sunwindowH=198;break;
+              case "raisingduncan": endurl="comics/raisingduncan/index.html";sunwindowH=371;break;
+              case "realitycheck": endurl="comics/reality/index.html";windowW=321;windowH=340;sunwindowH=510;break;
+              case "redandrover": endurl="wash/redandrover/index.html";sunwindowH=357;break;
+              case "ripleysbelieveitornot": endurl="comics/ripleys/index.html";windowW=315;windowH=410;sunwindowH=500;break;
+              case "roseisrose": endurl="comics/roseisrose/index.html";break;
+              case "rubes": endurl="creators/rubes/index.html";windowW=300;windowH=349;sunwindowH=385;break;
+              case "rudypark": endurl="comics/rudypark/index.html";sunwindowH=382;break;
+              case "sheldon": endurl="comics/sheldon/index.html";windowH=208;sunwindowW=600;sunwindowH=208;break;
+              case "shirleyandson": endurl="comics/shirleynson/index.html";break;
+              case "souptonutz": endurl="comics/soup2nutz/index.html";sunwindowH=377;break;
+              case "speedbump": endurl="creators/speedbump/index.html";windowW=300;windowH=313;sunwindowH=257;break;
+              case "spotthefrog": endurl="comics/spotthefrog/index.html";sunwindowH=377;break;
+              case "strangebrew": endurl="creators/strangebrew/index.html";windowW=300;windowH=327;sunwindowH=272;break;
+              case "sunshineclub": endurl="comics/sunshineclub/index.html";break;
+              case "tarzan": endurl="comics/tarzan/index.html";break;
+              case "thatslife": endurl="wash/thatslife/index.html";windowW=300;windowH=349;sunwindowH=354;break;
+              case "topoftheworld": endurl="comics/topofworld/index.html";sunwindowW=600;sunwindowH=206;break;
+              case "wizardofid": endurl="creators/wizardofid/index.html";break;
+              case "workingdaze": endurl="comics/workingdaze/index.html";windowW=335;windowH=408;sunwindowW=335;sunwindowH=408;break;
+              case "workingitout": endurl="creators/workingitout/index.html";windowW=300;windowH=332;sunwindowW=300;sunwindowH=332;break;
+              // the two oddball ones.. have to have their own rx pattern
+              case "peanuts": endurl="comics/peanuts/index.html";windowW=600;windowH=139;rx=/.+(\/archive\/images\/\w+\.\w+)"\s+ALT="Today's Strip"/;break;
+              case "dilbert": endurl="comics/dilbert/index.html";rx=/.+(\/archive\/images\/\w+\.\w+)"\s+BORDER=0\s+ALT="Today's Dilbert Comic"/;break;
+              // comics from ucomics.com
+              case "animalcrackers": imgtitle="Animal Crackers";site="ucomics";imgkey="tmani";break;
+              case "adamathome": imgtitle="Adam at Home";site="ucomics";imgkey="ad";break;
+              case "annie": imgtitle="Annie";site="ucomics";imgkey="tmann";break;
+              case "baldo": imgtitle="Baldo";site="ucomics";imgkey="ba";ucsunwindowH=298;break;
+              case "bigtop": imgtitle="Big Top";site="ucomics";imgkey="bt";ucsunwindowH=298;break;
+              case "boondocks": imgtitle="Boondocks";site="ucomics";imgkey="bo";ucsunwindowH=298;break;
+              case "boundandgagged": imgtitle="Bound and Gagged";site="ucomics";imgkey="tmbou";ucsunwindowH=296;break;
+              case "brendastarr": imgtitle="Brenda Starr";site="ucomics";imgkey="tmbre";break;
+              case "broomhilda": imgtitle="Broom Hilda";site="ucomics";imgkey="tmbro";break;
+              case "cathy": imgtitle="Cathy";site="ucomics";imgkey="ca";break;
+              case "catswithhands": imgtitle="Cats With Hands";site="ucomics";imgkey="tmcat";break;
+              case "cleats": imgtitle="Cleats";site="ucomics";imgkey="cle";ucsunwindowH=298;break;
+              case "closetohome": imgtitle="Close to Home";site="ucomics";imgkey="cl";windowW=300;windowH=401;ucsunwindowH=296;break;
+              case "cornered": imgtitle="Cornered";site="ucomics";imgkey="co";windowW=300;windowH=385;ucsunwindowH=370;;break;
+              case "dicktracy": imgtitle="Dick Tracy";site="ucomics";imgkey="tmdic";ucsunwindowH=830;break;
+              case "doonesbury": imgtitle="Doonesbury";site="ucomics";imgkey="db";ucsunwindowH=787;break;
+              case "duplex": imgtitle="Duplex";site="ucomics";imgkey="dp";ucsunwindowH=296;break;
+              case "foxtrot": imgtitle="Foxtrot";site="ucomics";imgkey="ft";break;
+              case "fredbasset": imgtitle="Fred Basset";site="ucomics";imgkey="tmfba";break;
+              case "fuscobrothers": imgtitle="Fusco Brothers";site="ucomics";imgkey="fu";ucsunwindowH=406;break;
+              case "garfield": imgtitle="Garfield";site="ucomics";imgkey="ga";windowH=179;ucsunwindowH=399;break;
+              case "gasolinealley": imgtitle="Gasoline Alley";site="ucomics";imgkey="tmgas";break;
+              case "heartofthecity": imgtitle="Heart of the City";site="ucomics";imgkey="hc";ucsunwindowW=400;ucsunwindowH=825;break;
+              case "helenoftheinternet": imgtitle="Helen of the Internet";site="ucomics";imgkey="tmhel";break;
+              case "housebroken": imgtitle="Housebroken";site="ucomics";imgkey="tmhou";break;
+              case "inthebleachers": imgtitle="In the Bleachers";site="ucomics";imgkey="bl";windowW=300;windowH=385;ucsunwindowH=285;break;
+              case "kudzu": imgtitle="Kudzu";site="ucomics";imgkey="tmkud";break;
+              case "lacucaracha": imgtitle="La Cucaracha";site="ucomics";imgkey="lc";break;
+              case "lola": imgtitle="Lola";site="ucomics";imgkey="tmlol";ucsunwindowH=297;break;
+              case "looseparts": imgtitle="Loose Parts";site="ucomics";imgkey="tmloo";windowW=300;windowH=385;ucsunwindowH=297;break;
+              case "lostsheep": imgtitle="Lost Sheep";site="ucomics";imgkey="lost";ucsunwindowH=360;break;
+              case "luckycow": imgtitle="Lucky Cow";site="ucomics";imgkey="luc";ucsunwindowH=300;break;
+              case "meehanstreak": imgtitle="Meehan Streak";site="ucomics";imgkey="tmmee";ucsunwindowH=300;break;
+              case "middletons": imgtitle="Middletons";site="ucomics";imgkey="tmmid";break;
+              case "misterboffo": imgtitle="Mister Boffo";site="ucomics";imgkey="mb";break;
+              case "mixedmedia": imgtitle="Mixed Media";site="ucomics";imgkey="tmmix";ucsunwindowH=281;break;
+              case "mullets": imgtitle="Mullets";site="ucomics";imgkey="mul";ucsunwindowH=291;break;
+              case "nonsequitur": imgtitle="Nonsequitur";site="ucomics";imgkey="nq";ucsunwindowW=300;ucsunwindowH=1193;break;
+              case "overboard": imgtitle="Overboard";site="ucomics";imgkey="ob";ucsunwindowH=291;break;
+              case "pluggers": imgtitle="Pluggers";site="ucomics";imgkey="tmplu";windowW=300;windowH=308;break;
+              case "poochcafe": imgtitle="Pooch Cafe";site="ucomics";imgkey="poc";ucsunwindowH=279;break;
+              case "popculture": imgtitle="Pop Culture";site="ucomics";imgkey="pop";break;
+              case "preteena": imgtitle="Preteena";site="ucomics";imgkey="pr";ucsunwindowH=291;break;
+              case "reallife": imgtitle="Real Life";site="ucomics";imgkey="rl";windowW=300;windowH=382;ucsunwindowH=295;break;
+              case "reynoldsunwrapped": imgtitle="Reynolds Unwrapped";site="ucomics";imgkey="rw";windowW=300;windowH=400;ucsunwindowW=300;ucsunwindowH=400;break;
+              case "shoe": imgtitle="Shoe";site="ucomics";imgkey="tmsho";ucsunwindowH=808;break;
+              case "stonesoup": imgtitle="Stone Soup";site="ucomics";imgkey="ss";ucsunwindowH=295;break;
+              case "tankmcnamara": imgtitle="Tank Mcnamara";site="ucomics";imgkey="tm";ucsunwindowH=295;break;
+              case "willynethel": imgtitle="Willy n Ethel";site="ucomics";imgkey="wes";ucsunwindowH=295;break;
+              case "ziggy": imgtitle="Ziggy";site="ucomics";imgkey="zi";windowW=300;windowH=299;break;
+              case "calvinandhobbes": imgtitle="Calvin And Hobbes";site="ucomics";imgkey="ch";break;
+              default:endurl=null;imgkey=null;break;
+           }//switch
+        
+        //default to www.comics.com
+        if (site==null) {
+           var urlstart="http://www.comics.com/";
+           //if the day is Sunday, use the larger Sunday comics sizes..
+           if (today == 0) {
+              windowW=sunwindowW;
+              windowH=sunwindowH;
+           }
 
-     //default to www.comics.com
-     if (site==null) {
-        var urlstart="http://www.comics.com/";
-        //if the day is Sunday, use the larger Sunday comics sizes..
-        if (today == 0) {
-            windowW=sunwindowW;
-            windowH=sunwindowH;
-        }
-     }else{
-        //get the other date parameters for the ucomics image urls
-        var mday = dat.getDate();
-        var month = dat.getMonth()+1;
-        var year = dat.getYear();
-        var subyear = year.toString();
-        subyear = subyear.substr(2,2);
-        // I cant believe javascript doesn't have an sprintf function.
-        if (mday<10) mday= '0'+mday;
-        if (month<10) month= '0'+month;
-                
-        //special handling for the calvinandhobbes comic.. It displays for year 1993
-        if (sw.name=="calvinandhobbes") {
-           year=1993; subyear=93;
-           if (today==6) {windowW=600;windowH=421;}
-           ucsunwindowW = 600; ucsunwindowH = 215;
+           var sUrl=urlstart+endurl;
+           urlmatch = endurl.match(/^(\w+)(\/\w+)/);
+           var urlcat=urlmatch[1];
+           var urldir=urlmatch[2];
+   
+           var xmlHttp = new ActiveXObject("Microsoft.XmlHttp");
+           xmlHttp.open("GET", sUrl, false);
+           xmlHttp.send();
+   
+           //get the response content from the remote site
+           var sBody = xmlHttp.responseText;
+   
+           //run the regex to parse out the image url
+           var imgurl = urlstart+urlcat+urldir+rx.exec(sBody)[1];
+
+           if (imgtitle==null) {
+              //regex for finding the image title in the page source..
+              var tx = /<title>(.+)<\/title>/i;
+              var imgtitle = tx.exec(sBody)[1];
+           }
+        //www.ucomics.com
+        }else{
+           var urlstart="http://images.ucomics.com/comics/";
+           //get the other date parameters for the ucomics image urls                      
+           var mday = dat.getDate();
+           var month = dat.getMonth()+1;
+           var year = dat.getYear();
+           var subyear = year.toString();
+           subyear = subyear.substr(2,2);
+           // I cant believe javascript doesn't have an sprintf function.
+           if (mday<10) mday= '0'+mday;
+           if (month<10) month= '0'+month;
+                   
+           //special handling for the calvinandhobbes comic.. It displays for year 1993
+           if (args.switches[i].name == "calvinandhobbes") {
+              year=1993; subyear=93;
+              if (today==6) {windowW=600;windowH=421;}
+              ucsunwindowW = 600; ucsunwindowH = 215;
            }           
+           
+           //if the day is Sunday, use the larger Sunday comics sizes for ucomics..
+           if (today == 0) {
+              windowW=ucsunwindowW;
+              windowH=ucsunwindowH;
+           }
+           var imgurl = urlstart+imgkey+"/"+year+"/"+imgkey+subyear+month+mday+".gif"
+        }//else
+           
+        // make sure the popup height isnt larger than the display screen (like nonsequitur)
+        windowH = windowH > window.screen.availheight-38 ? window.screen.availheight-38 : windowH;
         
-        var urlstart="http://images.ucomics.com/comics/";
-        
-        //if the day is Sunday, use the larger Sunday comics sizes for ucomics..
-        if (today == 0) {
-            windowW=ucsunwindowW;
-            windowH=ucsunwindowH;
-        }
-     }//else
-     
-     if (endurl==null && imgkey==null) {
-        setSearchWindowText("Bad Comic Name..  try 'comx ?' to see a list");
-        setTimeout("setSearchWindowText('comx ')", 2000)
-        return;
-     }
-
-     // the comics.com comics have to have the web text parsed to get the img url..  the ucomics.com ones dont.
-     if (imgkey==null) {
-        var sUrl=urlstart+endurl;
-        urlmatch = endurl.match(/^(\w+)(\/\w+)/);
-        var urlcat=urlmatch[1];
-        var urldir=urlmatch[2];
-
-        var xmlHttp = new ActiveXObject("Microsoft.XmlHttp");
-        xmlHttp.open("GET", sUrl, false);
-        xmlHttp.send();
-
-        //get the response content from the remote site
-        var sBody = xmlHttp.responseText;
-
-        //run the regex to parse out the image url
-        var imgurl = urlstart+urlcat+urldir+rx.exec(sBody)[1];
+        //put up the window
+        if (imgurl != ""){
+           // if only one comic is being pulled, use a popup.. otherwise use a regular window
+           if (args.switches.length == 1) {
+              comxSearchPopup = window.createPopup();
+              var comxSearchPopupBody = comxSearchPopup.document.body;
+              var comxSearchPopupBodyCode = "<html><head></head><body><style>" + convertStylesToInline() + "</style>";
+              comxSearchPopupBodyCode += "<img src=" +imgurl +" width="+windowW+" height="+windowH+" alt='"+imgtitle+"' onclick='window.blur()'; galleryimg='no' />";
+              comxSearchPopupBodyCode += "</body></html>";
+              comxSearchPopupBody.innerHTML = comxSearchPopupBodyCode;
+              comxSearchPopup.document.body.style.border="outset 1px";
+              comxSearchPopup.document.body.style.background='window';
+              comxSearchPopup.document.body.style.overflowY='auto';
+              comxSearchPopup.document.body.style.overflowX='auto';
+              //a little window padding
+              windowH+=4;
+              windowW+=2;
+              comxSearchPopup.show((buttonalign == "left" ? 0 : document.body.clientWidth - windowW), -windowH, windowW, windowH, document.body);
+           }else{
+              var comxSearchPopupBodyCode = "<html><head></head><body><style>" + convertStylesToInline() + "</style>";
+              comxSearchPopupBodyCode += "<img src=" +imgurl +" width="+windowW+" height="+windowH+" alt='"+imgtitle+"' onclick='self.close()'; galleryimg='no' />";
+              comxSearchPopupBodyCode += "</body></html>";
+              var top=((screen.availheight-windowH)-38);
+              var left=((screen.width-windowW)-10);
+              //alert(screen.height+ ' -(' +screen.height+ '-' +windowH+ ') '+top);
+              popupImage = window.open('','_blank','width='+windowW+', height='+windowH+',toolbar=0,status=0,titlebar=0,location=0,directories=0,menuBar=0,scrollbars=auto,resizable=1,left='+left+',top='+top);
+              popupImage.document.open();
+              popupImage.document.write(comxSearchPopupBodyCode);
+              popupImage.document.close()
+           }//else
+        }//if imgurl        
+        }// for i <...
      }else{
-        var imgurl = urlstart+imgkey+"/"+year+"/"+imgkey+subyear+month+mday+".gif"
-     }
-     
-     if (imgtitle==null) {
-        //regex for finding the image title in the page source..
-        var tx = /<title>(.+)<\/title>/i;
-        var imgtitle = tx.exec(sBody)[1];
-     }
-     
-     // make sure the popup height isnt larger than the display screen (like nonsequitur)
-     windowH = windowH > window.screen.height-40 ? window.screen.height-40 : windowH;
-     
-     //put up the window
-     if (imgurl != ""){
-        comxSearchPopup = window.createPopup();
-        var comxSearchPopupBody = comxSearchPopup.document.body;
-        var comxSearchPopupBodyCode = "<html><head></head><body><style>" + convertStylesToInline() + "</style>";
-        comxSearchPopupBodyCode += "<img src=" +imgurl +" width="+windowW+" height="+windowH+" alt='"+imgtitle+"' onclick='window.blur()'; galleryimg='no' />";
-        comxSearchPopupBodyCode += "</body></html>";
-        comxSearchPopupBody.innerHTML = comxSearchPopupBodyCode;
-        comxSearchPopup.document.body.style.border="outset 1px";
-        comxSearchPopup.document.body.style.background='window';
-        comxSearchPopup.document.body.style.overflowY='auto';
-        comxSearchPopup.document.body.style.overflowX='auto';
-        //a little window padding
-        windowH+=4;
-        windowW+=2;
-        comxSearchPopup.show((buttonalign == "left" ? 0 : document.body.clientWidth - windowW), -windowH, windowW, windowH, document.body);
-        //samples of the html we are parsing for the image urls
-        // <IMG SRC="/creators/andycapp/archive/images/andycapp2004026099921.gif" ALT="Today's Comic" BORDER="0"></TD>
-        // <IMG SRC="/comics/dilbert/archive/images/dilbert2004026099921.gif" BORDER=0 ALT="Today's Dilbert Comic"></A><BR></TD>
-     }//if
+           setSearchWindowText("Bad Comic Name..  try 'comx ?' to see a list");
+           setTimeout("setSearchWindowText('comx ')", 2000);
+           return;
+     }//else
   } //function
 
   ]]></script>
