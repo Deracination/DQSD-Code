@@ -4,6 +4,13 @@
   <link>http://www.odci.gov/cia/publications/factbook/index.html</link>
   <category>Reference</category>
   <contributor>David Bau</contributor>
+  
+  <form name="wfbf" action="http://www.google.com/search" method="get">
+    <input type="hidden" name="q"/>
+    <input type="hidden" name="meta" value=""/>
+    <input type="hidden" name="btnI" value="I'm Feeling Lucky"/>
+  </form>
+
   <script><![CDATA[
     // world factbook, uses Google I'm feeling lucky search
     function wfb(q)
@@ -12,8 +19,8 @@
         openSearchWindow("http://www.odci.gov/cia/publications/factbook/index.html");
       else
       {
-        document.iflf.q.value=q + " site:www.odci.gov inurl:factbook";
-        submitForm(iflf);
+        document.wfbf.q.value=q + " site:www.odci.gov inurl:factbook";
+        submitForm(wfbf);
       }
     }
   ]]></script>
