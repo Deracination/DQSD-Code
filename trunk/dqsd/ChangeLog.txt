@@ -2,6 +2,7 @@
 Enhancements
 * Moved txp search to computers->reference subcategory.  Added a usage example.
 New Searches
+* dseek - downseek.com software search
 Bug Fixes
 Modified Searches
 
