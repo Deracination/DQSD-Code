@@ -38,9 +38,7 @@
         }
       }
       else
-      {
-        qsfind("temp");
-      }
+        nullArgs("temp","?");
     }
   ]]></script>
 </search>
