@@ -243,7 +243,7 @@ function addAliasesFromFile( aliasFile )
     var fields = aliasTable[iPrivate];
     if (fields.length != 2)
     {
-      if (fields.length > 2 || !fields[0].match(/^\s*$/))
+      if (fields.length > 2 || !fields[0].match(/^\s*($|\/\/)/))
       {
         alert("Error on line " + (iPrivate + 1) + " of aliases.txt:\n\n" + aliasTable[iPrivate] + 
               "\n\n(Make sure there is a tab between the alias and command.)");
