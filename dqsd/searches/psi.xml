@@ -2,9 +2,9 @@
   <name>PriceSCAN Price Guide</name>
   <description>
     Search PriceSCAN for an ISBN.<br/>
-    <a class="helpboxDescLabels">Example:</a><br/>
-    <table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">psi 0898713617</td></tr>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>psi 0898713617</td></tr>
   	</table>
   </description>
   <category>Shopping</category>

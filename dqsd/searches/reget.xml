@@ -2,19 +2,19 @@
   <name>ReGet</name>
   <description>
     ReGet will auto-reload a URL at a given frequency. The first argument is an integer representing the number of page reloads, The second is an integer representing the reload frequency in seconds. Settings the number of iterations to 0 will cause the cycle to continue indefinately.<br/>
-    <a class="helpboxDescLabels">Usage:</a><br/>
-  	<table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">Set</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">reget &lt;<i>iterations</i>&gt; &lt;<i>interval</i>&gt; &lt;<i>url</i>&gt; [/noforce]</td></tr>
-      <tr><td class="helpboxDescColumns">Cancel</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">reget cancel</td></tr>
+    <div class="helpboxDescLabels">Usage:</div>
+  	<table class="helpboxDescTable">
+  		<tr><td>Set</td><td> - </td><td>reget &lt;<i>iterations</i>&gt; &lt;<i>interval</i>&gt; &lt;<i>url</i>&gt; [/noforce]</td></tr>
+      <tr><td>Cancel</td><td> - </td><td>reget cancel</td></tr>
   	</table>
-    <a class="helpboxDescLabels">Switches:</a><br/>
-  	<table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">/noforce</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Forces ReGet to use the cached copy of the web page when reloading.</td></tr>
+    <div class="helpboxDescLabels">Switches:</div>
+  	<table class="helpboxDescTable">
+  		<tr><td>/noforce</td><td> - </td><td>Forces ReGet to use the cached copy of the web page when reloading.</td></tr>
   	</table>
-    <a class="helpboxDescLabels">Example:</a><br/>
-    <table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">reget 10 20 http://www.gymamerica.com</td></tr>
-      <tr><td class="helpboxDescColumns">reget 0 20 http://www.whitehouse.gov /noforce</td></tr>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>reget 10 20 http://www.gymamerica.com</td></tr>
+      <tr><td>reget 0 20 http://www.whitehouse.gov /noforce</td></tr>
   	</table>
   </description>
   <category>Functions</category>

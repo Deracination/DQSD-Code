@@ -2,14 +2,14 @@
   <name>Alarm</name>
   <description>
     Schedule an alarm to go off at a certain time. The alarm message is optional. (All times are in Military (24hr) Time. Supports only a single alarm.)<br/>
-    <a class="helpboxDescLabels">Usage:</a><br/>
-  	<table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">Set Alarm</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">alarm &lt;<i>time</i>&gt; [&lt;<i>message</i>&gt;]</td></tr>
-  		<tr><td class="helpboxDescColumns">Cancel Alarm</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">alarm cancel</td></tr>
+    <div class="helpboxDescLabels">Usage:</div>
+  	<table class="helpboxDescTable">
+  		<tr><td>Set Alarm</td><td> - </td><td>alarm &lt;<i>time</i>&gt; [&lt;<i>message</i>&gt;]</td></tr>
+  		<tr><td>Cancel Alarm</td><td> - </td><td>alarm cancel</td></tr>
   	</table>
-    <a class="helpboxDescLabels">Example:</a><br/>
-    <table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">alarm 14:00 Staff Meeting</td></tr>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>alarm 14:00 Staff Meeting</td></tr>
   	</table>
   </description>
   <category>Functions</category>

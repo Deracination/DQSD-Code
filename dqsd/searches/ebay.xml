@@ -2,10 +2,10 @@
   <name>eBay</name>
   <description>
     Search eBay by description or by item number.<br/>
-    <a class="helpboxDescLabels">Examples:</a><br/>
-    <table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">ebay guitars</td></tr>
-      <tr><td class="helpboxDescColumns">ebay 1503826268</td></tr>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>ebay guitars</td></tr>
+      <tr><td>ebay 1503826268</td></tr>
   	</table>
   </description>
   <category>Shopping</category>

@@ -2,10 +2,10 @@
   <name>Phone Number Speller</name>
   <description>
     Spells out phone numbers.<br/>
-    <a class="helpboxDescLabels">Examples:</a><br/>
-    <table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">phsp 227-4332</td></tr>
-      <tr><td class="helpboxDescColumns">phsp bar-idea</td></tr>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>phsp 227-4332</td></tr>
+      <tr><td>phsp bar-idea</td></tr>
   	</table>
   </description>
   <category>Fun</category>

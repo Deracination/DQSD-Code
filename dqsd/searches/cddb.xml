@@ -2,16 +2,16 @@
   <name>Gracenote CDDB</name>
   <description>
     Search CDDB by artist, album, song, or a combination of the three. Searches by artist by default.<br/>
-    <a class="helpboxDescLabels">Switches:</a><br/>
-  	<table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">/artist</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Search for artists.</td></tr>
-  		<tr><td class="helpboxDescColumns">/album</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Search for albums.</td></tr>
-  		<tr><td class="helpboxDescColumns">/song</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Search for songs.</td></tr>
+    <div class="helpboxDescLabels">Switches:</div>
+  	<table class="helpboxDescTable">
+  		<tr><td>/artist</td><td> - </td><td>Search for artists.</td></tr>
+  		<tr><td>/album</td><td> - </td><td>Search for albums.</td></tr>
+  		<tr><td>/song</td><td> - </td><td>Search for songs.</td></tr>
   	</table>
-    <a class="helpboxDescLabels">Examples:</a><br/>
-    <table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">cddb Blender</td></tr>
-  		<tr><td class="helpboxDescColumns">cddb Let It Be /artist /title</td></tr>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>cddb Blender</td></tr>
+  		<tr><td>cddb Let It Be /artist /title</td></tr>
   	</table>
   </description>
   <category>Entertainment</category>

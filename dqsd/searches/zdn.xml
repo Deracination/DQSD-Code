@@ -1,18 +1,18 @@
 <search function="zdn">
   <name>ZDNet Downloads</name>
   <description>Search Ziff-Davis Net for software. Searches for Windows software by default.<br/>
-  <a class="helpboxDescLabels">Switches:</a><br/>
+  <div class="helpboxDescLabels">Switches:</div>
 	<table cellpadding="0" cellspacing="0" border="0">
-		<tr><td class="helpboxDescColumns">/all</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">All Platform Downloads</td></tr>
-		<tr><td class="helpboxDescColumns">/mac</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">MacOS Downloads</td></tr>
-    <tr><td class="helpboxDescColumns">/linux</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Linux Downloads</td></tr>
-    <tr><td class="helpboxDescColumns">/palm</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Palm Downloads</td></tr>
-    <tr><td class="helpboxDescColumns">/ce</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">CE Downloads</td></tr>
-    <tr><td class="helpboxDescColumns">/psion</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Psion/EPOC Downloads</td></tr>
+		<tr><td>/all</td><td> - </td><td>All Platform Downloads</td></tr>
+		<tr><td>/mac</td><td> - </td><td>MacOS Downloads</td></tr>
+    <tr><td>/linux</td><td> - </td><td>Linux Downloads</td></tr>
+    <tr><td>/palm</td><td> - </td><td>Palm Downloads</td></tr>
+    <tr><td>/ce</td><td> - </td><td>CE Downloads</td></tr>
+    <tr><td>/psion</td><td> - </td><td>Psion/EPOC Downloads</td></tr>
 	</table>
-  <a class="helpboxDescLabels">Example:</a><br/>
+  <div class="helpboxDescLabels">Example:</div>
   <table cellpadding="0" cellspacing="0" border="0">
-		<tr><td class="helpboxDescColumns">zdn quicktime /mac</td></tr>
+		<tr><td>zdn quicktime /mac</td></tr>
 	</table>
   </description>
   

@@ -2,9 +2,9 @@
   <name>SurfWax</name>
   <description>
     Delivers results from a broad range of sources including the visible and invisible Web, newsfeeds, and intranets.<br/>
-    <a class="helpboxDescLabels">Example:</a><br/>
-    <table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">sw horses</td></tr>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>sw horses</td></tr>
   	</table>
   </description>
   <category>Search the Web</category>

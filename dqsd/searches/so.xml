@@ -2,9 +2,9 @@
   <name>Societe.com</name>
   <description>
     Lookup info on French companies using a SIREN number.<br/>
-    <a class="helpboxDescLabels">Example:</a><br/>
-    <table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">so 352568091</td></tr>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>so 352568091</td></tr>
   	</table>
   </description>
   <category>People and Places</category>

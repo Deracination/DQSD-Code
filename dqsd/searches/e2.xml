@@ -2,9 +2,9 @@
   <name>everything2</name>
   <description>
     Search across many different reference sources.<br/>
-    <a class="helpboxDescLabels">Example:</a><br/>
-    <table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">e2 whatever</td></tr>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>e2 whatever</td></tr>
   	</table>
   </description>
   <category>Reference</category>

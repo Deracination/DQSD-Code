@@ -2,9 +2,9 @@
   <name>Foldoc</name>
   <description>
     Free On-Line dictionary of computing.<br/>
-    <a class="helpboxDescLabels">Example:</a><br/>
-    <table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">fd xhtml</td></tr>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>fd xhtml</td></tr>
   	</table>
   </description>
   <category>Computers</category>

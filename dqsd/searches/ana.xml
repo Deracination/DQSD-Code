@@ -2,9 +2,9 @@
   <name>Anagrams</name>
   <description>
     List all possible anagrams for a given text string.<br/>
-    <a class="helpboxDescLabels">Example:</a><br/>
-    <table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">ana Clint Eastwood</td></tr>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>ana Clint Eastwood</td></tr>
   	</table>
   </description>
   <category>Fun</category>

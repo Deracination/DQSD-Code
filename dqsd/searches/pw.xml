@@ -2,26 +2,26 @@
   <name>Price Watch</name>
   <description>
     Street price search for computer related items.<br/>
-    <a class="helpboxDescLabels">Switches:</a><br/>
-    	<table class="helpBoxDescTable">
-    		<tr><td class="helpboxDescColumns">/motherboard</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Motherboards</td></tr>
-    		<tr><td class="helpboxDescColumns">/cpu</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">CPU / Processors</td></tr>
-    		<tr><td class="helpboxDescColumns">/ram</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Memory</td></tr>
-    		<tr><td class="helpboxDescColumns">/video</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Video Cards</td></tr>
-    		<tr><td class="helpboxDescColumns">/sound</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Sound Cards</td></tr>
-    		<tr><td class="helpboxDescColumns">/hd</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Hard Drives</td></tr>
-    		<tr><td class="helpboxDescColumns">/cd</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">CD-ROM Drives</td></tr>
-    		<tr><td class="helpboxDescColumns">/cdrw</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">CD Burners</td></tr>
-    		<tr><td class="helpboxDescColumns">/dvd</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">DVD-ROM Drives</td></tr>
-    		<tr><td class="helpboxDescColumns">/fd</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Floppy Drives</td></tr>
-    		<tr><td class="helpboxDescColumns">/monitor</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Monitors</td></tr>
-    		<tr><td class="helpboxDescColumns">/case</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Cases</td></tr>
-    		<tr><td class="helpboxDescColumns">/psu</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Power Supplies</td></tr>
-    		<tr><td class="helpboxDescColumns">/barebones</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">PC Bare Bones Kits</td></tr>
+    <div class="helpboxDescLabels">Switches:</div>
+    	<table class="helpboxDescTable">
+    		<tr><td>/motherboard</td><td> - </td><td>Motherboards</td></tr>
+    		<tr><td>/cpu</td><td> - </td><td>CPU / Processors</td></tr>
+    		<tr><td>/ram</td><td> - </td><td>Memory</td></tr>
+    		<tr><td>/video</td><td> - </td><td>Video Cards</td></tr>
+    		<tr><td>/sound</td><td> - </td><td>Sound Cards</td></tr>
+    		<tr><td>/hd</td><td> - </td><td>Hard Drives</td></tr>
+    		<tr><td>/cd</td><td> - </td><td>CD-ROM Drives</td></tr>
+    		<tr><td>/cdrw</td><td> - </td><td>CD Burners</td></tr>
+    		<tr><td>/dvd</td><td> - </td><td>DVD-ROM Drives</td></tr>
+    		<tr><td>/fd</td><td> - </td><td>Floppy Drives</td></tr>
+    		<tr><td>/monitor</td><td> - </td><td>Monitors</td></tr>
+    		<tr><td>/case</td><td> - </td><td>Cases</td></tr>
+    		<tr><td>/psu</td><td> - </td><td>Power Supplies</td></tr>
+    		<tr><td>/barebones</td><td> - </td><td>PC Bare Bones Kits</td></tr>
     	</table>
-      <a class="helpboxDescLabels">Examples:</a><br/>
-      <table class="helpBoxDescTable">
-    		<tr><td class="helpboxDescColumns">pw Athlon XP 1900 /cpu</td></tr>
+      <div class="helpboxDescLabels">Examples:</div>
+      <table class="helpboxDescTable">
+    		<tr><td>pw Athlon XP 1900 /cpu</td></tr>
     	</table>
     </description>
   <category>Shopping</category>

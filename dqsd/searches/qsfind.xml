@@ -2,9 +2,9 @@
   <name>Quick Search Find</name>
   <description>
     Get information on built-in Dave's Quick Search functions by searching through their descriptions. Click on the name of the search in the resuling popup to fill the search text box with the function name.<br/>
-    <a class="helpboxDescLabels">Example:</a><br/>
-    <table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">qsfind phone number</td></tr>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>qsfind phone number</td></tr>
   	</table>
   </description>
   <category>Functions</category>

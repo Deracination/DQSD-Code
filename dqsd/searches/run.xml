@@ -2,9 +2,9 @@
   <name>Run</name>
   <description>
     Replacement for the Windows Start menu Run command.<br/>
-    <a class="helpboxDescLabels">Example:</a><br/>
-    <table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">run winword</td></tr>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>run winword</td></tr>
   	</table>
   </description>
   <category>Functions</category>

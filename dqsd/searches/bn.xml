@@ -2,15 +2,15 @@
   <name>Borland Newsgroups</name>
   <description>
     Search the Borland Newsgroup Database. Results are sorted by rank and article.<br/>
-    <a class="helpboxDescLabels">Switches:</a><br/>
-  	<table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">/thread</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Sort results by thread instead of by article.</td></tr>
-  		<tr><td class="helpboxDescColumns">/date</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Sort results by date instead of by rank.</td></tr>
+    <div class="helpboxDescLabels">Switches:</div>
+  	<table class="helpboxDescTable">
+  		<tr><td>/thread</td><td> - </td><td>Sort results by thread instead of by article.</td></tr>
+  		<tr><td>/date</td><td> - </td><td>Sort results by date instead of by rank.</td></tr>
    	</table>
-    <a class="helpboxDescLabels">Examples:</a><br/>
-    <table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">bn delphi 7</td></tr>
-      <tr><td class="helpboxDescColumns">bn jbuilder linux kde /date /thread</td></tr>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>bn delphi 7</td></tr>
+      <tr><td>bn jbuilder linux kde /date /thread</td></tr>
   	</table>
   </description>
   <category>Computers</category>

@@ -3,23 +3,23 @@
   <description>
     Translate text or webpages from one language to another.<br/>
   	<a class="helpboxDescLabels">Switches:</a><br />
-  	<table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">/from:en</td><td class="helpboxDescColumns">/to:fr</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">English to French</td></tr>
-  		<tr><td class="helpboxDescColumns">/from:en</td><td class="helpboxDescColumns">/to:de</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">English to German</td></tr>
-  		<tr><td class="helpboxDescColumns">/from:en</td><td class="helpboxDescColumns">/to:it</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">English to Italian</td></tr>
-  		<tr><td class="helpboxDescColumns">/from:en</td><td class="helpboxDescColumns">/to:pt</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">English to Portuguese</td></tr>
-  		<tr><td class="helpboxDescColumns">/from:en</td><td class="helpboxDescColumns">/to:es</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">English to Spanish</td></tr>
-  		<tr><td class="helpboxDescColumns">/from:en</td><td class="helpboxDescColumns">/to:no</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">English to Norwegian</td></tr>
-  		<tr><td class="helpboxDescColumns">/from:fr</td><td class="helpboxDescColumns">/to:en</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">French to English</td></tr>
-  		<tr><td class="helpboxDescColumns">/from:de</td><td class="helpboxDescColumns">/to:en</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">German to English</td></tr>
-  		<tr><td class="helpboxDescColumns">/from:it</td><td class="helpboxDescColumns">/to:en</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Italian to English</td></tr>
-  		<tr><td class="helpboxDescColumns">/from:pt</td><td class="helpboxDescColumns">/to:en</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Portuguese to English</td></tr>
-  		<tr><td class="helpboxDescColumns">/from:es</td><td class="helpboxDescColumns">/to:en</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Spanish to English</td></tr>
+  	<table class="helpboxDescTable">
+  		<tr><td>/from:en</td><td>/to:fr</td><td> - </td><td>English to French</td></tr>
+  		<tr><td>/from:en</td><td>/to:de</td><td> - </td><td>English to German</td></tr>
+  		<tr><td>/from:en</td><td>/to:it</td><td> - </td><td>English to Italian</td></tr>
+  		<tr><td>/from:en</td><td>/to:pt</td><td> - </td><td>English to Portuguese</td></tr>
+  		<tr><td>/from:en</td><td>/to:es</td><td> - </td><td>English to Spanish</td></tr>
+  		<tr><td>/from:en</td><td>/to:no</td><td> - </td><td>English to Norwegian</td></tr>
+  		<tr><td>/from:fr</td><td>/to:en</td><td> - </td><td>French to English</td></tr>
+  		<tr><td>/from:de</td><td>/to:en</td><td> - </td><td>German to English</td></tr>
+  		<tr><td>/from:it</td><td>/to:en</td><td> - </td><td>Italian to English</td></tr>
+  		<tr><td>/from:pt</td><td>/to:en</td><td> - </td><td>Portuguese to English</td></tr>
+  		<tr><td>/from:es</td><td>/to:en</td><td> - </td><td>Spanish to English</td></tr>
   	</table>
-    <a class="helpboxDescLabels">Examples:</a><br/>
-    <table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">freetrans /from:en /to:es hello how are you</td></tr>
-      <tr><td class="helpboxDescColumns">freetrans /from:en /to:es http://www.whitehouse.gov</td></tr>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>freetrans /from:en /to:es hello how are you</td></tr>
+      <tr><td>freetrans /from:en /to:es http://www.whitehouse.gov</td></tr>
   	</table>
   </description>
   <category>Reference</category>

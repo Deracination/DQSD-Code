@@ -2,10 +2,10 @@
   <name>Microsoft Knowledge Base</name>
   <description>
     Search the Microsoft Knowledge Base using either a regular search expression or a 6-digit "Q" code.<br/>
-    <a class="helpboxDescLabels">Examples:</a><br/>
-    <table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">msk Windows Bugs</td></tr>
-  		<tr><td class="helpboxDescColumns">msk q252795</td></tr>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>msk Windows Bugs</td></tr>
+  		<tr><td>msk q252795</td></tr>
   	</table>
   </description>
   <category>Computers</category>

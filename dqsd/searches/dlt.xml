@@ -2,9 +2,9 @@
   <name>DealTime Price Comparison</name>
   <description>
     Compare products, prices, and stores.<br/>
-    <a class="helpboxDescLabels">Example:</a><br/>
-    <table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">dlt Harry Potter</td></tr>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>dlt Harry Potter</td></tr>
   	</table>
   </description>
   <category>Shopping</category>

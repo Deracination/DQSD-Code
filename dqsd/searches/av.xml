@@ -2,9 +2,9 @@
   <name>AltaVista</name>
   <description>
     Search with AltaVista.com.<br/>
-    <a class="helpboxDescLabels">Example:</a><br/>
-    <table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">av digital</td></tr>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>av digital</td></tr>
   	</table>
   </description>
   <category>Search the Web</category>

@@ -2,9 +2,9 @@
   <name>Bomis</name>
   <description>
     Search through Bomis.com Internet rings.<br/>
-    <a class="helpboxDescLabels">Example:</a><br/>
-    <table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">bomis firewalls</td></tr>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>bomis firewalls</td></tr>
   	</table>
   </description>
   <category>Search the Web</category>

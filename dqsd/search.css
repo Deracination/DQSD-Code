@@ -253,13 +253,13 @@ Styles for the help box
   font-weight:bold;
   color:activeCaption;
 }
-.helpboxDescTable
+TABLE.helpboxDescTable
 {
   border:0px;
   border-collapse:collapse;
   border-spacing:0;
 }
-.helpboxDescColumns
+TABLE.helpboxDescTable TD
 {
   color:activeCaption;
   vertical-align:top;

@@ -2,9 +2,9 @@
   <name>Dogpile</name>
   <description>
     Parallel search via the popular Dogpile metasearch.<br/>
-    <a class="helpboxDescLabels">Example:</a><br/>
-    <table class="helpBoxDescTable">
-  		<tr><td class="helpboxDescColumns">dp travel</td></tr>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>dp travel</td></tr>
   	</table>
   </description>
   <category>Search the Web</category>
