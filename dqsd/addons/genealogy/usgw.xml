@@ -1,7 +1,7 @@
 <search function="usgw">
-  <name>GenWeb</name>
+  <name>US GenWeb</name>
   <description>
-    Goto GenWeb State web pages.<br/>
+    Goto US GenWeb State web pages.<br/>
     <div class="helpboxDescLabels">Examples:</div>
     <table class="helpboxDescTable">
       <tr><td>usgw berrien, mi</td></tr>
@@ -9,11 +9,9 @@
     </table>
   </description>
   <link>http://www.usgenweb.org/statelinks-table.html</link>
-  <category>Genealogy</category>
+  <category>Genealogy<category>Reference</category></category>
   <contributor>Brent Beardsley</contributor>
-  <form name="usgenwebf">
 
-  </form>
   <script src="addons/genealogy/genealogy_lib.js"></script>
   <script><![CDATA[
 

@@ -1,0 +1,42 @@
+<search function="feefhs">
+  <name>FEEFHS Website Index</name>
+  <category>Genealogy</category>
+  <contributor>Brent Beardsley</contributor>
+  <link>http://feefhs.org/</link>
+  <email></email>
+  <description>
+  Search Federation of East European Family History Societies Website Index
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td></td></tr>
+      <tr><td></td></tr>
+    </table>
+  </description>
+  <form name="feefhsf"
+        method="post"
+        action="http://feefhs.org/cgi-bin/w4ais">
+    <input type="hidden" name="keywords" value="" />
+    <input type="hidden" name="maxhits" value="" />
+    <input type="hidden" name="format" value="" />
+    <input type="hidden" name="sorttype" value="" />
+    <input type="hidden" name="message" value="If you can see this, then your browser can't support hidden fields." />
+    <input type="hidden" name="source" value="index.swish" />
+    <input type="hidden" name="sourcedir" value="/var/www/search/" />
+    <input type="hidden" name="host" value="" />
+    <input type="hidden" name="port" value="" />
+    <input type="hidden" name="searchprog" value="swish" />
+    <input type="hidden" name="iconurl" value="/icons" />
+    <input type="hidden" name="useicons" value="yes" />
+    <input type="hidden" name="conffile" value="/etc/roxen/swish/w4ais.conf" />
+  </form>
+  <script><![CDATA[
+    function feefhs(q)
+    {
+      if( nullArgs("feefhs", q) )
+        return;
+
+      document.feefhsf.keywords.value = q;
+      submitForm(feefhsf);
+    }
+  ]]></script>
+</search>

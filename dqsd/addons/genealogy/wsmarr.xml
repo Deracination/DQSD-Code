@@ -1,14 +1,4 @@
 <search function="wsmarr">
-  <COMMENT>
-
-    This search file was initially created by Dave's Quick Search Deskbar
-    Search Wizard version 0.4 (beta) on 08/15/02 at 18:51:23
-
-    Even though this XML search will probably load and is a healthy start
-    toward a completed search, please be aware that this search will probably
-    not work as is and will require some human inspection and modification.
-
-  </COMMENT>
   <name>Western States Marriage Record Index</name>
   <category>Genealogy</category>
   <contributor>Brent Beardsley</contributor>
@@ -32,9 +22,6 @@
         method="post"
         action="http://abish.byui.edu/specialCollections/fhc/gbret.idc">
     <input type="hidden" name="g_firstname" value="" />
-
-    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
-
     <input type="hidden" name="g_lastname" value="" />
   </form>
   <form name="wsmarrbf"
@@ -43,6 +30,7 @@
     <input type="hidden" name="b_firstname" value="" />
     <input type="hidden" name="b_lastname" value="" />
   </form>
+
   <script src="addons/genealogy/genealogy_lib.js"></script>
   <script><![CDATA[
     function wsmarr(q)
@@ -50,46 +38,40 @@
       if( nullArgs("wsmarr", q) )
         return;
 
-      if( q == "" )
-      {
-        openSearchWindow("http://abish.byui.edu/specialCollections/fhc/gbsearch.htm");
-        return;
-      }
-
       var args = parseArgs(q, "all, bride, groom");
       if (args != null) {
-	var do_groom = 1;
-	var do_bride = 1;
+	var do_groom = true;
+	var do_bride = true;
 	if (args.switches.length > 0) {
-		do_groom = 0;
-		do_bride = 0;
+		do_groom = false;
+		do_bride = false;
 	        for (var i=0; i < args.switches.length; i++) {
 		  switch (args.switches[i].name)
 		  {
-			case "groom": do_groom = 1; break;
-			case "bride": do_bride = 1; break;
+			case "groom": do_groom = true; break;
+			case "bride": do_bride = true; break;
 			case "all":
 			default:
-			  do_groom = 1; do_bride = 1; break;
+			  do_groom = true; do_bride = true; break;
   		  }
 		}
-	}
+	}   
 	if (args.q == "") {
-		do_groom = 0;
-		do_bride = 0;
-	}
+		do_groom = false;
+		do_bride = false;
+	}   
 	if (!do_groom && !do_bride) {
 		nullArgs("wsmarr", "?");
 		return;
 	}
 	if (do_bride) {
-		document.wsmarrbf.b_firstname.value = "";
-		document.wsmarrbf.b_lastname.value = args.q;
+		document.wsmarrbf.b_firstname.value = genealogy_parse_givenname(args.q);
+		document.wsmarrbf.b_lastname.value = genealogy_parse_surname(args.q);
 		submitForm(wsmarrbf);
 	}
 	if (do_groom) {
-		document.wsmarrgf.g_firstname.value = "";
-		document.wsmarrgf.g_lastname.value = args.q;
+		document.wsmarrgf.g_firstname.value = genealogy_parse_givenname(args.q);
+		document.wsmarrgf.g_lastname.value = genealogy_parse_surname(args.q);
 		submitForm(wsmarrgf);
 	}
       }
