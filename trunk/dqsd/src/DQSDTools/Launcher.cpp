@@ -8,6 +8,7 @@
 #include <shlguid.h>
 #include <shlobj.h>
 
+
 #pragma comment(lib, "Version.lib")
 
 /////////////////////////////////////////////////////////////////////////////
@@ -685,7 +686,7 @@ STDMETHODIMP CLauncher::GetSpecialFolderLocation(BSTR bstrSpecialFolder, BSTR* p
 	}
 
 	LPITEMIDLIST pidl;
-	HRESULT hr = SHGetSpecialFolderLocation(NULL, nFolder, &pidl);
+	HRESULT hr = ::SHGetSpecialFolderLocation(NULL, nFolder, &pidl);
 	if (!SUCCEEDED(hr)) {
 		return E_FAIL;
 	}
@@ -738,5 +739,85 @@ STDMETHODIMP CLauncher::GetFolders(BSTR bstrBaseFolder, BSTR* pbstrFolders)
 	::FindClose(handle);
 
 	*pbstrFolders = bstrFolders.Detach();
+	return S_OK;
+}
+
+STDMETHODIMP CLauncher::FileExists(BSTR bstrFilename, VARIANT_BOOL *pbExists)
+{
+	USES_CONVERSION;
+
+	// Get the full pathname after applying some defaults
+	TCHAR szFilename[ _MAX_PATH ];
+	HRESULT hr = GetFilename( W2CT( bstrFilename ), szFilename );
+	if ( FAILED( hr ) )
+		return hr;
+
+	DWORD dwAttributes = ::GetFileAttributes(szFilename);
+#pragma warning(disable: 4310) // cast truncates constant value
+	*pbExists = ( (dwAttributes == -1) ? VARIANT_FALSE : VARIANT_TRUE);
+#pragma warning(default: 4310) // cast truncates constant value
+	
+	return S_OK;
+}
+
+STDMETHODIMP CLauncher::RenameFile(BSTR bstrFromFilename, BSTR bstrToFilename)
+{
+	USES_CONVERSION;
+
+	// Get the full from pathname after applying some defaults and terminate with double \0's
+	TCHAR szFromFilename[ _MAX_PATH ];
+	HRESULT hr = GetFilename( W2CT( bstrFromFilename ), szFromFilename );
+	if ( FAILED( hr ) )
+		return hr;
+
+	szFromFilename[lstrlen(szFromFilename)+1] = '\0';
+
+	// Make sure that from filename already exists
+	VARIANT_BOOL bExists;
+	hr = FileExists( bstrFromFilename, &bExists);
+	if ( FAILED(hr))
+		return hr;
+
+#pragma warning(disable: 4310) // cast truncates constant value
+	if (bExists == VARIANT_FALSE)
+	{
+		return Error(_T("Source filename does not exist."), IID_ILauncher, E_FAIL);
+	}
+#pragma warning(default: 4310) // cast truncates constant value
+
+	// Get the full to pathname after applying some defaults and terminate with double \0's
+	TCHAR szToFilename[ _MAX_PATH ];
+	hr = GetFilename( W2CT( bstrToFilename ), szToFilename );
+	if ( FAILED( hr ) )
+		return hr;
+
+	szToFilename[lstrlen(szToFilename)+1] = '\0';
+
+	// Make sure to filename doesn't already exist
+	hr = FileExists( bstrToFilename, &bExists);
+	if ( FAILED(hr))
+		return hr;
+
+#pragma warning(disable: 4310) // cast truncates constant value
+	if (bExists == VARIANT_TRUE)
+	{
+		return Error(_T("Destination filename already exists."), IID_ILauncher, E_FAIL);
+	}
+#pragma warning(default: 4310) // cast truncates constant value
+
+	 // Rename the file
+	SHFILEOPSTRUCT sfo;
+    ZeroMemory ( &sfo, sizeof ( sfo ) );
+
+    sfo.hwnd = NULL;
+    sfo.wFunc = FO_RENAME;
+    sfo.pFrom = szFromFilename;
+    sfo.pTo = szToFilename;
+    sfo.fFlags = FOF_SILENT | FOF_NOCONFIRMATION | FOF_NOCONFIRMMKDIR | FOF_FILESONLY | FOF_NOERRORUI;
+
+    hr = ::SHFileOperation(&sfo);
+	if (FAILED( hr) )
+		return hr;
+
 	return S_OK;
 }

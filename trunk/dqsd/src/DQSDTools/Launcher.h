@@ -78,6 +78,8 @@ public:
 	STDMETHOD(get_InstallationDirectory)(/*[out,retval]*/ BSTR* pbstrDirectory);
 	STDMETHOD(GetSpecialFolderLocation)(/*[in]*/ BSTR bstrSpecialFolder, /*[out,retval]*/ BSTR* pbstrLocation);
 	STDMETHOD(GetFolders)(/*[in]*/ BSTR bstrBaseFolder, /*[out,retval]*/ BSTR* pbstrFolders);
+	STDMETHOD(FileExists)(/*[in]*/ BSTR bstrFilename, /*[out,retval]*/ VARIANT_BOOL* pbExists);
+	STDMETHOD(RenameFile)(/*[in]*/ BSTR bstrFromFilename, /*[in]*/ BSTR bstrToFilename);
 
 public:
 	STDMETHOD(RegisterHotKey)(long hotkeyVkCode, BSTR bstrModifierName, LPDISPATCH pDispDocument);
