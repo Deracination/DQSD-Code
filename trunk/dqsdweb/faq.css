@@ -3,6 +3,11 @@ BODY, P, TD, DIV {
 	 font-size: x-small;
 }
 
+H1, H2, H3 { 
+	text-align: center;
+	margin-bottom: 0px;
+}
+
 TABLE.keybindings TD {
 	vertical-align: top;
 	font-size: 70%;
@@ -15,7 +20,7 @@ TD.keyname {
 }
 
 A, A:Visited {
-	color: #0000ff;
+	color: #000080;
 }
 
 A:Visited:hover {
@@ -27,11 +32,15 @@ A:Visited:hover {
 	font-size: 110%;
 	margin-top: 1em;
 	color: #000080;
+	border-bottom: solid 1px #cccccc;
+}
+.categorytitle {
+ 	width: 75%;
 }
 
 DIV.question {
 	margin-left: 2em;
-	margin-top: 0.2em;
+	/*margin-top: 0.2em;*/
 	cursor: hand;
 }
 
@@ -41,14 +50,30 @@ DIV.answer, DIV.answer TABLE {
 DIV.answer {
 	font-weight: normal;
 	margin-left: 5em;
-	margin-bottom: 1em;
+	/*margin-bottom: 1em;*/
 	/*border: inset 2px;*/
 	background: #eeeeee;
-	padding: 5px 5px;
+	padding: 3px 3px;
 }
 
 A:Visited.toggle {
 	width: 1em;
 	text-align: center;
 	text-decoration: none;
+}
+
+.toplink {
+	font-size: 60%;
+	font-weight: normal;
+}
+
+.lastupdate {
+    font-style: italic;
+    text-align: center;
+    font-size: 80%;
+}
+
+DIV.homepage {
+	text-align: center;
+	padding: 1em 1em;
 }
