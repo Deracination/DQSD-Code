@@ -49,6 +49,36 @@ function ensureLauncher()
   return (DQSDLauncher != null);
 }
 
+// file exists
+function fileExists(filename)
+{
+  if (ensureLauncher())
+  {
+    return DQSDLauncher.FileExists(filename);
+  }
+  else
+    throw "Unable to check if file " + filename + " exists";
+}
+
+// rename file
+function renameFile(fromFilename, toFilename)
+{
+  if (ensureLauncher())
+  {
+	  try
+	  {
+		DQSDLauncher.RenameFile(fromFilename, toFilename);
+		return true;
+	  }
+	  catch (e)
+	  {
+		  return false;
+	  }
+  }
+  else
+    throw "Unable to rename file " + filename;
+}
+
 // read file
 function readFile(filename)
 {
