@@ -1,14 +1,21 @@
 <search function="so">
   <name>Societe.com</name>
-  <description>Retrieve info on french companies directory through societe.com. Use with SIREN number. <nobr>Example: "so 352568091"</nobr></description>
-  <category>Business</category>
+  <description>
+    Lookup info on French companies using a SIREN number.<br/>
+    <a class="helpboxDescLabels">Example:</a><br/>
+    <table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">so 352568091</td></tr>
+  	</table>
+  </description>
+  <category>People and Places</category>
   <link>http://www.societe.com/</link>
   <contributor>MLL</contributor>
+  
   <script><![CDATA[
     function so(q)
     {
-      if (q == "")
-        openSearchWindow("http://www.societe.com/");
+      if( nullArgs("so",q) )
+        return false;
       else
         openSearchWindow("http://societe.com/cgi-bin/recherche?rncs=" + q);
     }
