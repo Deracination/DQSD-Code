@@ -119,6 +119,7 @@ function advanceclock()
 function paintclock()
 {
   // Display date and time
+  document.selection.empty();
   document.deff.q.className = "clock";
   var now = new Date();
   document.deff.q.value = formatdate(now, clockformat);

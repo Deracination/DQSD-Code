@@ -495,6 +495,7 @@ function okp()
     {
        document.deff.q.value = t;
        addhist(t);
+       document.deff.q.createTextRange().select();
     }
 
     return false;
@@ -562,13 +563,20 @@ function prevnext(direction)
   range.select();
 }
 
+// show the text "Quick Search"
+function showQuickSearch()
+{
+  document.selection.empty();
+  document.deff.q.value = local(QUICK_SEARCH);
+}
+
 // strt() called on page load; show help message after 4 seconds
 function strt()
 {
   rsz();
 
   if (!clock || clockdelay > 0)
-    document.deff.q.value = local(QUICK_SEARCH);
+    showQuickSearch;
 
   if (helptime > 0)
   {
@@ -600,7 +608,7 @@ function unbanner()
 {
   stopbanner();
   if (!clock || clockdelay >0)
-    document.deff.q.value = local(QUICK_SEARCH);
+    showQuickSearch();
   startclock(clockdelay);
 }
 
@@ -667,7 +675,7 @@ function rst()
   {
     init = true;
     if (!clock || clockdelay > 0)
-      document.deff.q.value = local(QUICK_SEARCH);
+      showQuickSearch();
   }
   startclock(clockdelay);
 }
