@@ -19,6 +19,10 @@ Modified Searches
 * setiq - MLL added warning to description about password retention
 * so - Non-digits characters are removed form the search string
 
+Bug Fixes
+
+* Will fixed problem with leading zeros in XML holiday files
+
 
 -- What's new for 3.0.0.18 (beta)
 
