@@ -1107,6 +1107,7 @@ void CDQSDWizardDlg::RestoreFields()
 			dwValue = 0;
 			rk.QueryValue( dwValue, _T("ShowTips") );
 			CWindow( GetDlgItem( IDC_ShowTips ) ).SendMessage( BM_SETCHECK, dwValue ? BST_CHECKED : BST_UNCHECKED );
+			m_tip.Activate( dwValue );
 		}
 		else
 		{
