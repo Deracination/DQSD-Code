@@ -30,6 +30,3 @@ $$$	pw
 ,	ggn
 ,,	faq
 >>	dl
-#*	phsp
-~	uns
-:-)	aim
