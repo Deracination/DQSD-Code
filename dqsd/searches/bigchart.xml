@@ -1,0 +1,56 @@
+<search function="bigchart">
+  <name>BigCharts Stock Quotes</name>
+  <description>
+    BigCharts stock quotes by symbol.<br/>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>bigchart WMT</td></tr>
+  	</table>
+  </description>
+  <category>Finance</category>
+  <link>http://www.bigcharts.com/</link>
+  
+  <form name="bigchartf"
+      action="http://www.bigcharts.com/quickchart/quickchart.asp"
+      method="get">
+    <input type="hidden" name="symb"/>
+    <input type="hidden" name="time" value="6"/>
+    <!-- the time value can be any of:
+  	 1: 1 day
+  	 2: 2 days
+  	 3: 5 days
+  	18: 10 days
+  	 4: 1 month
+  	 5: 2 months
+  	 6: 3 months
+  	 7: 6 months
+  	19: YTD
+  	 8: 1 year
+  	 9: 2 years
+  	10: 3 years
+  	11: 4 years
+  	12: 5 years
+  	13: 1 decade
+  	20: All Data
+    -->
+  </form>
+  
+  <script><![CDATA[
+    function bigchart(q)
+    {
+      if( nullArgs("bigchart",q) )
+        return false;
+      else
+      {
+        document.bigchartf.symb.value = q;
+        submitForm(bigchartf);
+      }
+    }
+  ]]></script>
+
+  <copyright>
+	Copyright (c) 2002 David Bau
+	Distributed under the terms of the
+	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>

@@ -1,0 +1,30 @@
+<search function="manpage">
+  <name>Linux man pages</name>
+  <description>
+    Search Linux man pages.<br/>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+    </table>
+  </description>
+  <link>http://www.oreillynet.com/linux/cmd/</link>
+  <category>Computers</category>
+  <contributor>Brent Beardsley</contributor>
+
+  <script><![CDATA[
+    function manpage(q)
+    {
+      if( nullArgs("manpage", q) )
+        return false;
+
+      var cmd = q.toLowerCase();
+      openSearchWindow("http://www.oreillynet.com/linux/cmd/"+cmd.substring(0,1)+"/"+cmd+".html");
+    }
+    ]]>
+  </script>
+
+  <copyright>
+	Copyright (c) 2002 David Bau
+	Distributed under the terms of the
+	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>

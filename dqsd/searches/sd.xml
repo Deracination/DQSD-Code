@@ -1,0 +1,39 @@
+<search function="sd">
+  <name>Slashdot</name>
+  <description>
+    Search Slashdot<br/>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  <tr><td>slash linux</td></tr>
+  </table>
+  </description>
+  <category>Reference</category>
+  <link>http://slashdot.org/</link>
+  <contributor>Paul Bowers</contributor>
+  <email>pbowers_at_pipingdesign_dot_com</email>
+
+  <form name="sdf"
+        action="http://slashdot.org/search.pl?"
+        method="get">
+    <input type="hidden" name="query" value=""/>
+  </form>
+
+  <script><![CDATA[
+    function sd(q)
+    {
+      if( nullArgs("sd", q) )
+        return false;
+      else
+      {
+        document.sdf.query.value= q;
+        submitForm(sdf);
+      }
+    }
+  ]]></script>
+
+  <copyright>
+	Copyright (c) 2002 David Bau
+	Distributed under the terms of the
+	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>

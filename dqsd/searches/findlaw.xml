@@ -1,0 +1,75 @@
+<search function="findlaw">
+   <name>FindLaw Law Library</name>
+   <description>Search FindLaw's Law Library.  Options include Dictionary /dictionary, Author /author, Title /title, Abstract /abstract, and Full Text which is the default. <nobr>Example: "findlaw adoption"</nobr></description>
+   <category>Reference</category>
+   <link>http://library.lp.findlaw.com/</link>
+   <contributor>John W. Bairen, Jr. proxy for David Leighni</contributor>
+   
+   <form name="findlawf1" action="http://library.lp.findlaw.com/scripts/libsearch.pl" method="get">
+      <input type="hidden" name="TYPE" value="CiRestriction" />
+      <input type="hidden" name="ENTRY" />
+   </form>
+
+   <form name="findlawf2" action="http://library.lp.findlaw.com/scripts/authorsearch.pl" method="get">
+      <input type="hidden" name="AUTHOR" />
+   </form>
+
+
+   <form name="findlawf3" action="http://library.lp.findlaw.com/scripts/abstractsearch.pl" method="get">
+      <input type="hidden" name="ABSTRACT" />
+   </form>
+
+   <form name="findlawf4" action="http://library.lp.findlaw.com/scripts/titlesearch.pl" method="get">
+      <input type="hidden" name="TITLE" />
+   </form>
+   
+   <form name="findlawf5" action="http://dictionary.lp.findlaw.com/scripts/search.pl" method="GET">
+      <input type="hidden" name="s" value="" />
+   </form>
+
+
+   <script><![CDATA[
+      function findlaw(q)
+      {
+         var args = parseArgs(q, "author, abstract, dictionary, title") ;
+         if( q == "" )
+            openSearchWindow(" http://library.lp.findlaw.com/") ;
+         else if( args.switches.length == 1 )
+         {
+            switch( args.switches[0].name )
+            {
+               case "author":
+                  document.findlawf2.AUTHOR.value = args.q ;
+                  submitForm(findlawf2);
+                  break ;
+               case "abstract":
+                  document.findlawf3.ABSTRACT.value = args.q ;
+                  submitForm(findlawf3);
+                  break ;
+               case "dictionary":
+                  document.findlawf5.s.value = args.q ;
+                  submitForm(findlawf5);
+                  break ;
+               case "title":
+                  document.findlawf4.TITLE.value = args.q ;
+                  submitForm(findlawf4);
+                  break ;
+               default:
+                  document.findlawf1.ENTRY.value = args.q ;
+                  submitForm(findlawf1) ;
+            }
+         }
+         else
+         {
+            document.findlawf1.ENTRY.value = args.q ;
+            submitForm(findlawf1);
+         }
+      }
+   ]]></script>
+
+  <copyright>
+	Copyright (c) 2002 David Bau
+	Distributed under the terms of the
+	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>

@@ -1,0 +1,80 @@
+<search function="atech">
+  <name>AnandTech</name>
+  <description>
+    Hardware analysis and news. Search for articles or for user posts on the forums. Searches for articles by default.<br/>
+    <div class="helpboxDescLabels">Switches:</div>
+  	<table class="helpboxDescTable">
+  		<tr><td>/subject</td><td> - </td><td>Search forums by subject.</td></tr>
+  		<tr><td>/author</td><td> - </td><td>Search forums by author.</td></tr>
+  	</table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>atech cpu</td></tr>
+  		<tr><td>atech motherboard /subject</td></tr>
+  	</table>
+  </description>
+  <category>Computers</category>
+  <link>http://www.anandtech.com/</link>
+  <contributor>Ryan Edwards</contributor>
+  
+  <form name="atechf"
+        action="http://www.anandtech.com/searchresults.html"
+        method="post">
+    <input type="hidden" name="keyword"/>
+    <input type="hidden" name="quicksearch" value=""/>
+    <input type="hidden" name="Engine" value="AnandTech"/>
+  </form>
+  
+  <form name="atechforums"
+        action="http://forums.anandtech.com/searchresults.cfm?requesttimeout=500"
+        method="post">
+    <input type="hidden" name="FTVAR_KEYWORD1FRM"/>
+    <input type="hidden" name="FTVAR_KEYWORD2FRM"/>
+    <input type="hidden" name="FTVAR_OPERATORFRM"/>
+    <input type="hidden" name="FTVAR_SEARCHWHATFRM" value="t"/>
+    <input type="hidden" name="FTVAR_AUTHORFRM"/>
+    <input type="hidden" name="FTVAR_TABLECHOICEFRM" value="current"/>
+    <input type="hidden" name="FTVAR_DATESELFRM" value="50"/>
+    <input type="hidden" name="FTVAR_STARTDATEFRM" value=""/>
+    <input type="hidden" name="FTVAR_ENDDATEFRM" value=""/>
+    <input type="hidden" name="FTVAR_CATEGORYIDFRM" value="44,46,37,28,39,45,42,27,50,40,29,36,38,34,30,33,32,31"/>
+  </form>
+  
+  <script><![CDATA[
+    function atech(q)
+    {
+      var args = parseArgs(q, "subject, author");
+      
+      if( nullArgs("atech", q) )
+        return false;
+      else if( args.switches.length == 1 )
+      {
+        switch( args.switches[0].name )
+        { 
+          case "subject":
+            document.atechforums.FTVAR_KEYWORD1FRM.value = args.q;
+            document.atechforums.FTVAR_AUTHORFRM.value = "";
+            break;
+          case "author":
+            document.atechforums.FTVAR_KEYWORD1FRM.value = "";
+            document.atechforums.FTVAR_AUTHORFRM.value = args.q;
+            break;
+        }
+        submitForm(atechforums);
+      }
+      else if( args.switches.length > 1 )
+        nullArgs("atech","?");
+      else
+      {
+        document.atechf.keyword.value = args.q;
+        submitForm(atechf);
+      }
+    }
+  ]]></script>
+
+  <copyright>
+	Copyright (c) 2002 David Bau
+	Distributed under the terms of the
+	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>

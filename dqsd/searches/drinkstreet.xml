@@ -1,0 +1,37 @@
+<search function="drinkstreet">
+  <name>DrinkStreet</name>
+  <description>
+    Search the DrinkStreet.com site for drink recipes.<br/>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>drinkstreet bloody mary</td></tr>
+  	</table>
+  </description>
+  <category>Fun</category>
+  <link>http://www.drinkstreet.com/</link>
+  
+  <form name="drinkstreetf"
+        action="http://www.drinkstreet.com/searchresults.cgi"
+        method="post">
+    <input type="hidden" name="drinkname" value=""/>
+  </form>
+  
+  <script><![CDATA[
+    function drinkstreet(q)
+    {
+      if( nullArgs("drinkstreet",q) )
+        return false;
+      else
+      {
+        document.drinkstreetf.drinkname.value = q;
+        submitForm(drinkstreetf);
+      }
+    }
+  ]]></script>
+
+  <copyright>
+	Copyright (c) 2002 David Bau
+	Distributed under the terms of the
+	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>

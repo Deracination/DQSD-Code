@@ -1,0 +1,42 @@
+<search function="nlstart">
+  <name>START</name>
+  <description>
+    The natural language question answering system answers questions in English about the MIT AI Laboratory, geography, and assorted other topics.<br/>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>nlstart show me a map of China</td></tr>
+      <tr><td>nlstart when was stanford started</td></tr>
+  	</table>
+  </description>
+  <category>Fun</category>
+  <link>http://www.ai.mit.edu/projects/infolab/</link>
+  <contributor>Jimmy Lin</contributor>
+  
+  <form name="nlstartf" 
+        action="http://www.ai.mit.edu/projects/infolab/startfarm.cgi"
+        method="post">
+    <input type="hidden" name="server" value="ailab"/>
+    <input type="hidden" name="farm" value="anatolia.ai.mit.edu"/>
+    <input type="hidden" name="machine" value="production"/>
+    <input type="hidden" name="query" value=""/>
+  </form>
+  
+  <script><![CDATA[
+    function nlstart(q)
+    {
+      if( nullArgs("nlstart",q) )
+        return false;
+      else
+      {
+        document.nlstartf.query.value = q;
+        submitForm(nlstartf);
+      }
+    }
+  ]]></script>
+
+  <copyright>
+	Copyright (c) 2002 David Bau
+	Distributed under the terms of the
+	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>

@@ -1,4 +1,4 @@
--- What's new for 3.1.0.? (beta)
+-- What's new for 3.1.1 (September 6, 2002)
 
 New Searches
 
@@ -17,11 +17,25 @@ Modified Searches
 * msk - added /google switch
 * setiq - cosmetic change
 * wfb - standardized layout
+* short - renamed to msl to avoid English word "short"
+* drink - renamed to drinkstreet to avoid English word "drink"
+* slash - renamed to sd to avoid English word "slash"
+* phone - renamed to anywho to avoid English word "phone"
+* chart - renamed to bigchart to avoid English word "chart"
+* at - renamed to atech to avoid English word "at"
+* pw - fixed bugs in pricewatch search
+* map - improved address parsing code, renamed to mq to avoid English word "map"
+* man - renamed to manpage to avoid English word "man"
+* day - renamed to daypop to avoid English word "day"
+* roman - renamed to rnum to avoid English word "Roman"
+* lottery - renamed to lottogen to avoid English word "lottery"; and modified to handle arbitrary number ranges.
+* base - renamed to radix to avoid English word "base"; and modified to take an optional arbitrary radix.
 * so - now name / chairman / department / APE searches possible
 
 Enhancements
 
 * When dragging text to the search bar, if the shift key is held down when dropping the text the default search won't be automatically invoked.
+* Returned to using msxml.document (without the 2) and changed dicit.xml and acine.xml and holidays.fr.xml to be ASCII only, using entity escapes.
 
 
 -- What's new for 3.1 (August 27, 2002)

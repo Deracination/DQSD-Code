@@ -188,9 +188,17 @@ function getFirstAlias( search )
 }
 
 // This method just is just a convenience for instantiating the same
-// same MSXML DOM each time.  Allows us to change the progid in only
-// one place, if it needs to be changed in the future.
+// same MSXML DOM each time. This method is now changed
+// to probe for older versions of MSXML, in case the newest
+// version is not installed on the machine.
 function getMSXMLDOMDocumentInstance()
 {
-  return new ActiveXObject("Msxml.DOMDocument");
+  try
+  {
+     return new ActiveXObject("Msxml2.DOMDocument");
+  }
+  catch(e)
+  {
+     return new ActiveXObject("Msxml.DOMDocument");
+  }
 }

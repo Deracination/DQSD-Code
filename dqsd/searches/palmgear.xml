@@ -1,0 +1,41 @@
+<search function="palmgear">
+  <name>PalmGear.com</name>
+  <description>Search PalmGear.com for software.<br/>
+  <div class="helpboxDescLabels">Example:</div>
+  <table class="helpboxDescTable">
+    <tr><td>palmgear aigo</td></tr>
+  </table>
+  </description>
+
+  <category>Computers</category>
+  <link>http://www.palmgear.com/</link>
+  <contributor>Herman Fuchs</contributor>
+  <email>fux_at_theend_dot_com_dot_br</email>
+  <form name="palmgearf"
+        method="post"
+        action="http://www.palmgear.com/shared/answer.cfm">
+    <input type="hidden" name="diroffset" value="../"/>
+    <input type="hidden" name="sid" value="77810420020731113959"/>
+    <input type="hidden" name="softwareflag" value="checked"/>
+    <input type="hidden" name="searchterm" value=""/>
+  </form>
+
+   <script><![CDATA[
+    function palmgear(q)
+    {
+      if( nullArgs("palmgear", q) )
+        return false;
+      else
+      {
+        document.palmgearf.searchterm.value = q;
+        submitForm(palmgearf);
+      }
+    }
+  ]]></script>
+
+  <copyright>
+	Copyright (c) 2002 David Bau
+	Distributed under the terms of the
+	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>

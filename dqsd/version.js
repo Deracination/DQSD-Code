@@ -23,13 +23,13 @@ function versionCheck()
       // this number
       if(!testObject.VersionIsCorrect(3,1,0,1))
       {
-         alert("The DQSD helper DLL is out of date");
+         alert("The DQSD helper DLL is out of date.\nPlease reboot and run the setup program again.");
          bSuccess = false;
       }
     }
     catch(e)
     {
-      alert("The DQSD helper DLL version couldn't be checked (error '" + e.description + "')");
+      alert("The DQSD helper DLL version couldn't be checked (error '" + e.description + "').\nPlease reboot and run the setup program again.");
       bSuccess = false;
     }
   }

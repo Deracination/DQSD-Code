@@ -1,0 +1,66 @@
+<search function="aolim">
+  <name>AOL Instant Messaging (AIM)</name>
+  <description>
+    Send an instant message to a user on your AIM list. AIM must be installed for this to work.<br/>
+    <div class="helpboxDescLabels">Usage:</div>
+  	<table class="helpboxDescTable">
+  		<tr><td>aolim &lt;<i>screenname</i>&gt;:&lt;<i>message</i>&gt;</td></tr>
+  	</table>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>aolim ehartmann2:hey dude!</td></tr>
+  	</table>
+  </description>
+  <category>Functions</category>
+  <link>http://www.aim.com/</link>
+  <contributor>Erik Hartmann</contributor>
+  <email>ehartman_at_hipbone_dot_com</email>
+  
+  <form name="aolimf"
+        target="_self"
+        action="aim:goim"
+        method="get">
+    <input type="hidden" name="screenname"/>
+    <input type="hidden" name="message"/>
+  </form>
+  
+  <script><![CDATA[
+    function aolim(q)
+    {
+      if( nullArgs("aolim", q) )
+        return false;
+      else
+      {
+        document.aolimf.screenname.value = "";
+        document.aolimf.message.value = "";
+        if (q != "" )
+        {
+          var parsed = q.split(/\:/);
+          var msg = '';
+          if( parsed[1] != null && parsed[1].length != 0 )
+            msg = parsed[1];
+          document.aolimf.screenname.value = parsed[0];
+          document.aolimf.message.value = msg;
+        }
+        if (protocolHandled(document.aolimf.action))
+          document.aolimf.submit();
+        else
+          alert("No protocol handler for " + document.aolimf.action);
+      }
+    }
+
+    function blankIM(q)
+    {
+      document.deff.q.value = "";
+      document.aolimf.screenname.value = "";
+      document.aolimf.message.value = "";
+      document.aolimf.submit();
+    }
+  ]]></script>
+
+  <copyright>
+	Copyright (c) 2002 David Bau
+	Distributed under the terms of the
+	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>

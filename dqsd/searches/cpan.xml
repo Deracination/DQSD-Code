@@ -10,7 +10,8 @@
    	</table>
     <div class="helpboxDescLabels">Example:</div>
     <table class="helpboxDescTable">
-  		<tr><td>cpan wrap /author</td></tr>
+  		<tr><td>cpan wrap</td></tr>
+  		<tr><td>cpan wall /author</td></tr>
   	</table>
   </description>
   <category>Computers</category>

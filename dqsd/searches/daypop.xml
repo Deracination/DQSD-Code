@@ -1,0 +1,68 @@
+<search function="daypop">
+  <name>Daypop</name> 
+  <description>
+    A current events/weblog/news search engine. Searches News &amp; Weblogs by default.<br/>
+    <div class="helpboxDescLabels">Switches:</div>
+  	<table class="helpboxDescTable">
+  		<tr><td>/news</td><td> - </td><td>Search News only.</td></tr>
+  		<tr><td>/weblogs</td><td> - </td><td>Search Weblogs only.</td></tr>
+  		<tr><td>/headlines</td><td> - </td><td>Search RSS Headlines only.</td></tr>
+  	</table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>daypop quick search</td></tr>
+      <tr><td>daypop Mars /news</td></tr>
+  	</table>
+  </description>
+  <category>Search the Web</category> 
+  <link>http://www.daypop.com/</link> 
+  <contributor>Rick Olson, Ryan Edwards</contributor>
+  
+  <form name="daypopf"
+        action="http://www.daypop.com/search"
+        method="get">
+    <input type="hidden" name="q"/> 
+    <input type="hidden" name="t" value="a"/> 
+  </form>
+  
+  <script><![CDATA[ 
+    function daypop(q)
+    {
+      var args = parseArgs(q, "news, weblogs, headlines");
+      
+      if( nullArgs("daypop",q) )
+        return false;
+      else if( args.switches.length == 1 )
+      {
+        switch( args.switches[0].name )
+        {
+          case "news":
+            document.daypopf.t.value = "n";
+            break;
+          case "weblogs":
+            document.daypopf.t.value = "w";
+            break;
+          case "headlines":
+            document.daypopf.t.value = "h"
+            break;
+        }
+        document.daypopf.q.value = q;
+        submitForm(daypopf);
+      }
+      else if( args.switches.length > 1 )
+        nullArgs("daypop","?");
+      else
+      {
+        document.daypopf.t.value = "a";
+        document.daypopf.q.value = q;
+        submitForm(daypopf);
+      }
+    }
+  ]]></script>
+
+  <copyright>
+	Copyright (c) 2002 David Bau
+	Distributed under the terms of the
+	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>
