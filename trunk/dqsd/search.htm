@@ -175,9 +175,9 @@ calbackground="menu";
 caltextcolor="menutext";
 calhighbackground="highlight";
 calhightext="highlighttext";
-caltodaybackground="infobackground";
-caltodaytext="infotext";
-calgraybackground="window";
+caltodaybackground="window";
+caltodaytext="windowtext";
+calgraybackground="menu";
 calgraytext="graytext";
 calmonthstyle="font-family:Tahoma;font-size:8pt;font-weight:bold";
 calnavstyle="font-family:Tahoma;font-size:8pt;font-weight:bold";
@@ -3421,10 +3421,10 @@ function buildcal()
   var today_end   = '</CENTER></TD>';
   function gray_start(d)
   {
-     return '<TD style="cursor:default;color:' + calgraytext + ';' + caldaystyle + '" ' +
+     return '<TD style="cursor:default;background-color:' + calgraybackground + ';' + 'color:' + calgraytext + ';' + caldaystyle + '" ' +
            (defaultcal ? ' onmouseover=this.style.background="' + calhighbackground +
                '";this.style.color="' + calhightext +
-               '"; onmouseout=this.style.background="' + calbackground +
+               '"; onmouseout=this.style.background="' + calgraybackground +
                '";this.style.color="' + calgraytext +
                '" onmouseup=parent.opencal(' + d + ');'  +
                'this.style.background="' + calbackground +
