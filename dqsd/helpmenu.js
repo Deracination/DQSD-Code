@@ -91,8 +91,11 @@ function showpop()
         {
           hsubmenu = hcatmenu;
         }
+        
+        // Remove HTML tags from name
+        var searchname = search.name.replace( /<[^<]*>/g, '' );
       
-        mb.AppendMenuItem( search.name + (search.local ? ' [local]' : '' )  + '\t' + (search.aliasmenudisplay ? alias.replace(/&/g, '&&') : ""),  // menu text along with alias
+        mb.AppendMenuItem( searchname + (search.local ? ' [local]' : '' )  + '\t' + (search.aliasmenudisplay ? alias.replace(/&/g, '&&') : ""),  // menu text along with alias
                            search.aliases[0],         // function invoked when user selects menu item
                            makeToolTipString(search), 
                            hsubmenu );

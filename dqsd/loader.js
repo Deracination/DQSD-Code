@@ -30,7 +30,7 @@ function addsearch(fname, name, desc, link, cat, local, subcats, nomenu)
 internalShortcutIndex = 0;
 INTERNAL_FUNC_PREFIX = "_dqsd_internal_fn_";
 
-function addalias(alias, fname, name, desc, cat, subcats)
+function addalias(alias, fname, name, desc, cat, subcats, local)
 {
   // If this alias is already defined, then remove it from the search it was previously defined for
   // so that the last alias definition wins (i.e., localaliases.txt overrides aliases.txt)
@@ -87,7 +87,7 @@ function addalias(alias, fname, name, desc, cat, subcats)
                            "  direct(url.replace( /%s/g, t ));"
                           );
       eval( fname + " = f;" );
-      addsearch( fname, name ? name : url, desc ? desc : url, url.search(/%s/) < 0 ? url : "", cat, true, subcats);
+      addsearch( fname, name ? name : url, desc ? desc : url, url.search(/%s/) < 0 ? url : "", cat, local, subcats);
     }
     else if ((res = fname.match(/^(\w+) +(.+)/)) && searches[res[1]]) // starts with a valid search function
     {
@@ -98,7 +98,7 @@ function addalias(alias, fname, name, desc, cat, subcats)
                            res[1] + "(cmd.replace( /%s/g, t ));"
                           );
       eval( fname + " = f;" );
-      addsearch( fname, name ? name : cmd, desc ? desc : cmd, "", cat, true, subcats);
+      addsearch( fname, name ? name : cmd, desc ? desc : cmd, "", cat, local, subcats);
     }
     else
     {
@@ -323,10 +323,10 @@ function getCategories( categoryNode, categories )
 
 // 4. load and execute the alias file
 
-addAliasesFromFile( "aliases" );
-addAliasesFromFile( localaliases, "Shortcuts" );
+addAliasesFromFile( "aliases", null, false );
+addAliasesFromFile( localaliases, "Shortcuts", true );
 
-function addAliasesFromFile( aliasFile, category )
+function addAliasesFromFile( aliasFile, category, local )
 {
   var aliasTable = readTabDelimitedFile(aliasFile);
   for (var iPrivate = 0; iPrivate < aliasTable.length; iPrivate++)
@@ -344,9 +344,9 @@ function addAliasesFromFile( aliasFile, category )
                  fields[1],
                  (fields.length >= 3 && fields[2] != '') ? fields[2] : null,   // name
                  (fields.length >= 4 && fields[3] != '') ? fields[3] : null,   // description
-                 (fields.length >= 5 && fields[4] != "") ? fields[4] : ((arguments.length >= 2) ? category : null), // category
-                 (fields.length >= 6 && fields[5] != "") ? fields[5].split(',') : new Array() // subcategories
-                 );
+                 (fields.length >= 5 && fields[4] != "") ? fields[4] : ((arguments.length >= 2 && arguments[1] != null) ? category : null), // category
+                 (fields.length >= 6 && fields[5] != "") ? fields[5].split(',') : new Array(), // subcategories
+                 local );
       }
     }
   }
