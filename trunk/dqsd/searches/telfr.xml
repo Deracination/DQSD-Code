@@ -11,12 +11,23 @@
   <link>http://www.infobel.com/france/default.asp?qSearchType=RWP</link>
   <contributor>MLL</contributor>
   <todo>allow several criterias (last name, city,...)</todo>
+  
+  <form name="telfrf"
+        method="get"
+        action="http://www.infobel.com/france/wp/revsearch/result.asp">
+    <input type="hidden" name="qcitycode" value="" />
+    <input type="hidden" name="qstreetcode" value="" />
+    <input type="hidden" name="qnacecode" value="" />
+    <input type="hidden" name="qphone" value="" />
+  </form>
 
   <script><![CDATA[
     function telfr(q)
     {
       if( nullArgs( "telfr", q ) ) return false;
-      openSearchWindow( "http://www.infobel.com/france/wp/search/result.asp?qSearchType=RWP&qCountryCode=fr&QLANGUAGE=1&qphone=" + q );
+
+      document.telfrf.qphone.value = q;
+      submitForm(telfrf);
     }
   ]]></script>
 
@@ -26,3 +37,4 @@
 	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
   </copyright>
 </search>
+
