@@ -15,6 +15,8 @@ New Searches
 * msda - Microsoft Discussion Archive search
 * shack - Search the shacknews.com comments database (from Wolfgang Deutsch)
 * dps - Search for the best DVD prices from several online merchants (from Steven J. Heil)
+* pgrab - Price searches, product info, vendor ratings & reviews. (from Andrew D. Myers)
+
 
 Modified Searches
 

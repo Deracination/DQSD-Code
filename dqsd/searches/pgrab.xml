@@ -1,0 +1,98 @@
+<search function="pgrab">
+  <COMMENT>
+    This search was created with Glen Carr's DQSD Search Wizard v 0.9.1 (beta),
+    which kicks sufficient ass to enable a clueless schlub crank one of these 
+    suckers out in under a half hour.
+  </COMMENT>
+  <name>PriceGrabber</name>
+  <category>Shopping</category>
+  <contributor>Andrew D. Myers</contributor>
+  <link>http://www.pricegrabber.com/</link>
+  <email>myers@pobox.com</email>
+  <description>
+  Price searches, product info, vendor ratings &amp; reviews. 
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/computers</td><td> - </td><td>Computers &amp; parts</td></tr>
+      <tr><td>/software</td><td> - </td><td>Software</td></tr>
+      <tr><td>/electronics</td><td> - </td><td>Consumer Electronics</td></tr>
+      <tr><td>/videogames</td><td> - </td><td>Video Games</td></tr>
+      <tr><td>/movies</td><td> - </td><td>Movies</td></tr>
+      <tr><td>/music</td><td> - </td><td>Music</td></tr>
+      <tr><td>/books</td><td> - </td><td>Books</td></tr>
+      <tr><td>/toys</td><td> - </td><td>Toys</td></tr>
+      <tr><td>/office</td><td> - </td><td>Office Products</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>pgrab GeForce4 4400</td></tr>
+      <tr><td>pgrab Lord of the Rings /books</td></tr>
+    </table>
+  </description>
+  <form name="pgrabf"
+        method="get"
+        action="http://www.pricegrabber.com/search_gen.php/">
+    <input type="hidden" name="topcat_id" value="" />
+    <input type="hidden" name="topcat_search" value="1" />
+    <input type="hidden" name="form_keyword" value="" />
+    <input type="hidden" name="ut" value="" />
+  </form>
+  <script><![CDATA[
+    function pgrab(q)
+    {
+      if( nullArgs("pgrab", q) )
+        return;
+
+      var args = parseArgs(q, "computers, software, electronics, videogames, movies, music, books, toys, office");
+      if ( args.switches.length > 0 )
+      {
+        switch( args.switches[0].name )
+        {
+          case "computers":
+            document.pgrabf.topcat_id.value = "1";
+            break;
+          case "software":
+            document.pgrabf.topcat_id.value = "9";
+            break;
+          case "electronics":
+            document.pgrabf.topcat_id.value = "2";
+            break;
+          case "videogames":
+            document.pgrabf.topcat_id.value = "3";
+            break;
+          case "movies":
+            document.pgrabf.topcat_id.value = "4";
+            break;
+          case "music":
+            document.pgrabf.topcat_id.value = "6";
+            break;
+          case "books":
+            document.pgrabf.topcat_id.value = "10";
+            break;
+          case "toys":
+            document.pgrabf.topcat_id.value = "12";
+            break;
+          case "office":
+            document.pgrabf.topcat_id.value = "13";
+            break;
+          default:
+            document.pgrabf.topcat_id.value = "";
+            break;
+        }
+      }
+
+      document.pgrabf.form_keyword.value = args.q;
+      document.pgrabf.ut.value = "";
+
+      submitForm(pgrabf);
+    }
+  ]]></script>
+  <copyright>
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 09/25/02 at 01:55:13
+    by Dave's Quick Search Deskbar Search Wizard version 0.9.1 (beta),
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>
