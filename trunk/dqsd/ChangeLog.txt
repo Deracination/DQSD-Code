@@ -39,6 +39,7 @@ New Searches
 * horizonview - Your Sky horizon view (Gregory Krohne)
 * skymap - Your Sky sky map (Gregory Krohne)
 * nb - nichebot - find what people are searching for (Brent Beardsley)
+* wiq - wordiq.com search (Tom Corcoran)
 
 Modified Searches
 * jdk - updated urls for j2ee and 1.4, added 1.5, 1.2, 1.1 and api switches (Brent Beardsley)
