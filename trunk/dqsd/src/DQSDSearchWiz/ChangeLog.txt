@@ -1,3 +1,7 @@
+Version 1.1 (final) 19-Jan-2003
+
+* Added ability to specify subcategories
+
 Version 1.0.1 (final) 26-Nov-2002
 
 * Substitute ampersands (&) with '&amp;' in link and form action

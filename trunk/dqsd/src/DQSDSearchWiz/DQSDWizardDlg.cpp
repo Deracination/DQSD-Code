@@ -132,7 +132,9 @@ LRESULT CDQSDWizardDlg::OnInitDialog(UINT uMsg, WPARAM wParam, LPARAM lParam, BO
 			CModuleVersion moduleVersion;
 			if ( moduleVersion.GetFileVersionInfo( szModule ) )
 			{
-				m_strVersion = moduleVersion.GetValue( _T("ProductVersion") ) + _T(" ") + moduleVersion.GetValue( _T("SpecialBuild") );
+				m_strVersion = moduleVersion.GetValue( _T("ProductVersion") );
+				if ( moduleVersion.GetValue( _T("SpecialBuild") ).size() > 0 )
+					m_strVersion += _T(" ") + moduleVersion.GetValue( _T("SpecialBuild") );
 				SetWindowText( ( _T("DQSD Search Wizard - Version ") + m_strVersion ).c_str() );
 
 				m_strCopyright = moduleVersion.GetValue( _T("LegalCopyright") );
@@ -185,9 +187,15 @@ LRESULT CDQSDWizardDlg::OnInitDialog(UINT uMsg, WPARAM wParam, LPARAM lParam, BO
 		ctlFormList2.SendMessage( LVM_INSERTCOLUMN, 1, (LPARAM)&lvc );
 
 		// Set up the combobox
+		// ??? It would be really cool to actually base these on the current
+		// ??? search categories/subcategories
 
 		LPCTSTR rgszCategories[] = {
 			_T("Computers"),
+			_T("Computers/Networking"),
+			_T("Computers/Programming"),
+			_T("Computers/Reference"),
+			_T("Computers/Software"),
 			_T("Entertainment"),
 			_T("Finance"),
 			_T("Fun"),
@@ -195,6 +203,8 @@ LRESULT CDQSDWizardDlg::OnInitDialog(UINT uMsg, WPARAM wParam, LPARAM lParam, BO
 			_T("News"),
 			_T("People and Places"),
 			_T("Reference"),
+			_T("Reference/General"),
+			_T("Reference/Language"),
 			_T("Search the Web"),
 			_T("Shipping"),
 			_T("Shopping"),
@@ -432,7 +442,7 @@ LRESULT CDQSDWizardDlg::OnOK(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHa
 		::SysFreeString( bstr );
 
 		CWindow( GetDlgItem( IDC_Category ) ).GetWindowText( &bstr );
-		strSearchFile += _T("\r\n  <category>") + EscapeXML( string( W2T( bstr ) ) ) + _T("</category>");
+		strSearchFile += _T("\r\n  <category>") + ParseCategory( W2T( bstr ) ) + _T("</category>");
 		::SysFreeString( bstr );
 		
 		CWindow( GetDlgItem( IDC_Contributor ) ).GetWindowText( &bstr );
@@ -1226,4 +1236,25 @@ LRESULT CDQSDWizardDlg::OnChangeSwitches(WORD wNotifyCode, WORD wID, HWND hWndCt
 	CWindow( GetDlgItem( IDC_DescSwitches ) ).EnableWindow( _tcslen( szSwitches ) > 0 );
 
 	return 0;
+}
+
+string CDQSDWizardDlg::ParseCategory( LPCTSTR sz )
+{
+	string XMLCategory( _T("") );
+	LPTSTR szRawCategories = (LPTSTR)_alloca( _tcslen(sz) * sizeof(TCHAR) + 2 );
+	_tcscpy( szRawCategories, sz );
+	LPTSTR pszCategory = _tcstok( szRawCategories, _T("/") );
+	int cCategories = 0;
+	while ( pszCategory )
+	{
+		XMLCategory.append( EscapeXML( string( pszCategory ) ) );
+		pszCategory = _tcstok( NULL, _T("/") );
+		cCategories += 1;
+		if ( pszCategory )
+			XMLCategory.append( _T("<category>") );
+	}
+	for ( ; cCategories > 1; cCategories-- )
+		XMLCategory.append( _T("</category>") );
+
+	return XMLCategory;
 }
