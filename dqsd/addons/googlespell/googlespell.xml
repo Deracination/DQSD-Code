@@ -4,8 +4,14 @@
   <link>http://www.google.com/apis/</link>
   <category>Search the Web</category>
   <contributor>Glenn Carr</contributor>
+  <dqsd_version>
+      <majorhi>3</majorhi>
+      <majorlo>0</majorlo>
+      <minorhi>0</minorhi>
+      <minorlo>25</minorlo>
+  </dqsd_version>
   <form name="googlespellf">
-    <div id="googleWebService" name="googleWebService" style="behavior:url(addons\\googlespell\\webservice.htc)" onresult="onWebServiceResult()" />
+    <div id="googlespell_googleWebService" name="googlespell_googleWebService" style="behavior:url(addons\\googlespell\\webservice.htc)" onresult="googlespell_onWebServiceResult()" />
   </form>
   <script><![CDATA[
     function googlespell(q)
@@ -15,30 +21,30 @@
 
       if ( typeof googleLicenseKey == 'undefined' )
       {
-        alert( 'This requires a Google APIs license key.  You can obtain one for free at http://www.google.com/apis/.\n' +
-               'Once you obtain a key, assign it to \'googleLicenseKey\' in your localprefs.js.');
+        displayPopupMessage( 'This requires a Google APIs license key.  You can obtain one for free at <A target="_blank" HREF="http://www.google.com/apis/">http://www.google.com/apis/</A>.<br/>' +
+                             'Once you obtain a key, assign it to \'googleLicenseKey\' in your localprefs.js.');
         return;
       }
-      callWebService(q)
+      googlespell_callWebService(q)
     }
 
-    function initWebService()
+    function googlespell_initWebService()
     {
       try 
       {
-        document.all.googleWebService.useService("http://api.google.com/GoogleSearch.wsdl", "GoogleSearchService");
+        document.all.googlespell_googleWebService.useService("http://api.google.com/GoogleSearch.wsdl", "GoogleSearchService");
         return true;
       } 
       catch (ex) 
       {
-        alert("Web service failed to initialize. " + ex.description);
+        displayPopupMessage("Web service failed to initialize. " + ex.description);
         return false;
       }
     }
 
-    function callWebService(sSearch)
+    function googlespell_callWebService(sSearch)
     {
-      if (initWebService()) {
+      if (googlespell_initWebService()) {
 
         var objCall = new Object();
         objCall.funcName = "doSpellingSuggestion";
@@ -46,39 +52,43 @@
 
         try 
         {
-          iCallID = document.all.googleWebService.GoogleSearchService.callService(objCall, googleLicenseKey, sSearch, 0, 10, true, "", false, "lang_en", "latin1", "latin1");
+          iCallID = document.all.googlespell_googleWebService.GoogleSearchService.callService(objCall, googleLicenseKey, sSearch, 0, 10, true, "", false, "lang_en", "latin1", "latin1");
         } 
         catch (ex) 
         {
-          alert("Failed: " + ex.description);
+          displayPopupMessage("Failed: " + ex.description);
         }
       }
 
       return false;
     }
 
-    function onWebServiceResult()
+    function googlespell_onWebServiceResult()
     {
       if(event.result.error) 
       {
-        alert("Error executing web service. " + event.result.errorDetail.code + ", " + event.result.errorDetail.string + " " + event.result.errorDetail.raw);
+        displayPopupMessage("Error executing web service. " + event.result.errorDetail.code + ", " + event.result.errorDetail.string + " " + event.result.errorDetail.raw);
       } 
       else 
       {
         var oDoc = event.result.raw;
         resultXml = oDoc.xml;
-
         var sSuggestedSpelling = oDoc.selectSingleNode("SOAP-ENV:Body/ns1:doSpellingSuggestionResponse/return").text;
         if ( sSuggestedSpelling != '' )
         {
-          document.deff.q.value = sSuggestedSpelling;
+          displayPopupMessage( "<b>Google suggests:</b>&nbsp; "+ sSuggestedSpelling );
+
+          return true;
         }
         else
         {
-          //document.deff.q.value = '[No suggestions found]';
-          alert( 'Google found no suggestions.' );
+          displayPopupMessage( "Correct or Unrecognizable" );
+          
+          return false;
         }
-        document.deff.q.createTextRange().select();
+
+        // document.deff.q.createTextRange().select();
+
       }
     }
   ]]></script>
