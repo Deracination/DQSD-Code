@@ -5,7 +5,7 @@
 
 !Define APPNAME       "GoogleSpell Add-on for Dave's Quick Search Deskbar"
 !Define ADDON_SUBDIR  "$INSTDIR\addons\googlespell"
-!Define INSTALL_PKG   "..\googlespell.exe"
+!Define INSTALL_PKG   "..\dqsd_googlespell.exe"
 
 !Define DQSD_UUID     "{226b64e8-dc75-4eea-a6c8-abcb4d1d37ff}"
 
@@ -30,8 +30,13 @@ Section "GoogleSpell"
     SetAutoClose true
     MessageBox MB_OK|MB_ICONEXCLAMATION "Unable to find installation of Dave's Quick Search Deskbar.$\n$\nPlease install this add-on after installing the latest version of Dave's Quick Search Deskbar."
     Quit
+  Installed:
 
-Installed:
+  ; Confirm that the user really does want to install  
+  MessageBox MB_YESNO|MB_ICONINFORMATION|MB_DEFBUTTON2 "This will install the ${APPNAME}.  Would you like to continue?" IDYES userconfirmedinstall
+  Quit
+  userconfirmedinstall:
+
   StrCpy $R1 "${ADDON_SUBDIR}"
   StrCpy $R3 "${DQSD_UUID}"
 

@@ -30,8 +30,13 @@ Section "Genealogy"
     SetAutoClose true
     MessageBox MB_OK|MB_ICONEXCLAMATION "Unable to find installation of Dave's Quick Search Deskbar.$\n$\nPlease install this add-on after installing the latest version of Dave's Quick Search Deskbar."
     Quit
+  Installed:
 
-Installed:
+  ; Confirm that the user really does want to install  
+  MessageBox MB_YESNO|MB_ICONINFORMATION|MB_DEFBUTTON2 "This will install the ${APPNAME}.  Would you like to continue?" IDYES userconfirmedinstall
+  Quit
+  userconfirmedinstall:
+
   StrCpy $R1 "${ADDON_SUBDIR}"
   StrCpy $R3 "${DQSD_UUID}"
 
@@ -43,60 +48,15 @@ Installed:
 
   SetOverwrite on
 
-  File "accgen.xml"
-  File "ancestry.xml"
-  File "ancmb.xml"
-  File "blm.xml"
-  File "bwo.xml"
-  File "cadi.xml"
-  File "cemetery.xml"
-  File "census.xml"
-  File "cousin.xml"
-  File "cyndi.xml"
-  File "everton.xml"
-  File "genforum.xml"
-  File "genlookup.xml"
-  File "gentoday.xml"
-  File "ghl.xml"
-  File "gnis.xml"
-  File "gwar.xml"
-  File "gwcp.xml"
-  File "iddi.xml"
-  File "ildi.xml"
-  File "illp.xml"
-  File "ilmi.xml"
-  File "interment.xml"
-  File "kydi.xml"
-  File "lds.xml"
-  File "medi.xml"
-  File "melvyl.xml"
-  File "mi1870.xml"
-  File "midi.xml"
-  File "mimi.xml"
-  File "raogk.xml"
-  File "rsl.xml"
-  File "rwres.xml"
-  File "sampub.xml"
-  File "sndx.xml"
-  File "ssdi.xml"
-  File "surhelp.xml"
-  File "town.xml"
-  File "txdi.xml"
-  File "usgw.xml"
-  File "usgx.xml"
-  File "vital.xml"
-  File "vitalrec.xml"
-  File "wcon.xml"
-  File "wsmarr.xml"
+  File "*.xml"
   File "genealogy_lib.js"
-  File "genealogy.nsi"
 
   ; Uninstallation keys
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\$R3" "DisplayName" "${APPNAME} (remove only)"
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\$R3" "UninstallString" '"$R2"'
   
   DetailPrint ""
-  DetailPrint "Usage: 'See the Genealogy section of the menu for usage details'"
+  DetailPrint "Usage: See the Genealogy section of the menu for usage details."
   DetailPrint ""
   DetailPrint "Enter ! in the search bar to load this add-on."
 
