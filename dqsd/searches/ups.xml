@@ -44,10 +44,17 @@
       {
         if (result = q.split( /\s*,+\s*/ ) )
         {
-          for ( var i = 1; i <= result.length && i <= 20; i++ )
-            eval( "document.upsf.InquiryNumber" + i + ".value='" + result[i - 1] + "';" );
+          for ( var i = 1; i <= 20; i++ ) {
+            if (i <= result.length) {
+              track = result[i - 1];
+            } else {
+              track = "";
+            }
+            track = track.replace(/\W/g,"");
+            eval( "document.upsf.InquiryNumber" + i + ".value='" + track + "';" );
+          }
     
-          document.upsf.tracknums_displayed.value = (i - 1);
+          document.upsf.tracknums_displayed.value = result.length;
           submitForm(upsf);
         }
       }
