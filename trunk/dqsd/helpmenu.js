@@ -18,6 +18,9 @@ function showpop()
   mb.AppendMenuItem( local(ABOUT_TEXT), "about", "Help on using Dave's Quick Search Deskbar" );
   mb.AppendMenuItem( "Check for update...", "checkWebForUpdateNotifyAll", "Check for update to Dave's Quick Search Deskbar" );
   mb.AppendSeparator( 0 );
+  
+  menuHandles = new Object();
+
   for (i = 0; i < categoryarray.length; i++)
   {
     var categoryName = categoryarray[i];
@@ -32,7 +35,7 @@ function showpop()
     if ( k == helparray.length )
       continue;
 
-    var hsubmenu = mb.AppendSubMenu( categoryName );
+    var hcatmenu = mb.AppendSubMenu( categoryName );
     helparray.sort( searchCompare );
     for (var k = 0; k < helparray.length; k++)
     {
@@ -40,10 +43,35 @@ function showpop()
       var alias = getSearchAliases( search );
 
       if ( search.enabled )
+      {
+      
+        // If there are subcategories, nest them
+        if ( search.subcats && search.subcats.length >= 1 )
+        {
+          subcatPath = categoryName;
+          hsubmenu = hcatmenu;
+          for ( var isubmenu = 0; isubmenu < search.subcats.length; isubmenu++ )
+          {
+            subcatPath += '~' + search.subcats[ isubmenu ];
+            if ( menuHandles[ subcatPath ] )
+              hsubmenu = menuHandles[ subcatPath ]
+            else
+            {
+              hsubmenu = mb.AppendSubMenu( search.subcats[ isubmenu ], hsubmenu );
+              menuHandles[ subcatPath ] = hsubmenu;
+            }
+          }
+        }
+        else // no subcategories, append menu items
+        {
+          hsubmenu = hcatmenu;
+        }
+      
         mb.AppendMenuItem( search.name + (search.local ? ' [local]' : '' )  + '\t' + (search.aliasmenudisplay ? alias.replace(/&/g, '&&') : ""),  // menu text along with alias
                            search.aliases[0],         // function invoked when user selects menu item
                            makeToolTipString(search), 
                            hsubmenu );
+      }
     }
   }
   
