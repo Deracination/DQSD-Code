@@ -1,7 +1,7 @@
 <search function="imdb">
   <name>Internet Movie Database (IMDB)</name>
   <description>
-    Lookup movies, television shows, actors, dicectors and more.<br/>
+    Lookup movies, television shows, actors, directors and more.<br/>
     <div class="helpboxDescLabels">Example:</div>
     <table class="helpboxDescTable">
   		<tr><td>imdb jaws</td></tr>
