@@ -64,10 +64,10 @@ public:
 	STDMETHOD(put_HorizontalAlignment)(/*[in]*/ short newVal);
 	STDMETHOD(AppendSubMenu)(/*[in]*/ BSTR bstrName, VARIANT* pvParentMenu, /*[out,retval]*/ long* phmenu);
 	STDMETHOD(AppendMenuItem)(/*[in]*/ BSTR bstrItem, /*[in]*/ BSTR bstrKey, /*[in]*/ BSTR bstrToolTip, /*[in,optional]*/ VARIANT* pvhMenu);
-	STDMETHOD(AppendSeparator)(/*[in]*/ long hmenu);
+	STDMETHOD(AppendSeparator)(/*[in,optional]*/ VARIANT* pvParentMenu);
 	STDMETHOD(Display)(LPDISPATCH pDispDocument, VARIANT* pbstrSelection);
 	STDMETHOD(InsertMenuItem)(/*[in]*/ BSTR bstrItem, /*[in]*/ BSTR bstrKey, /*[in]*/ BSTR bstrToolTip, /*[in]*/ UINT position, /*[in,optional]*/ VARIANT* pvhMenu );
-	STDMETHOD(InsertSeparator)(/*[in]*/ UINT position, /*[in]*/ long hmenu);
+	STDMETHOD(InsertSeparator)(/*[in]*/ UINT position, /*[in,optional]*/ VARIANT* pvParentMenu);
 	STDMETHOD(InsertSubMenu)(/*[in]*/ BSTR bstrName, /*[in]*/ UINT position, /*[in,optional]*/ VARIANT* pvParentMenu, /*[out,retval]*/ long *phmenu);
 	STDMETHOD(GetMenuItemCount)(/*[in,optional]*/ VARIANT* pvParentMenu, /*[out,retval]*/ long *pCount);
 	STDMETHOD(FindSubMenu)(/*[in]*/ BSTR bstrName, /*[in,optional]*/ VARIANT* pvParentMenu, /*[out,retval]*/ long *phmenu);
