@@ -1,0 +1,161 @@
+<search function="wrp">
+  <name>Wrap Clipboard Text</name>
+  <description>
+    Wraps the contents of the clipboard to a certain number of characters,
+    inserting optional prefix and places it back onto the clipboard.<br />
+    <div class="helpboxDescLabels">Usage:</div>
+    <table class="helpboxDescTable">
+      <tr><td>wrp <strong>[[/pre <em>&lt;prefix&gt;</em>]|[/np]] [/max <em>&lt;num&gt;</em>] [/no]</strong></td></tr>
+    </table>
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/pre</td><td> &gt;  </td><td>Prefix each line with this string</td></tr>
+      <tr><td>/np</td><td> - </td><td>Disable line prefixing</td></tr>
+      <tr><td>/max</td><td> 64 </td><td>Maximum characters per line</td></tr>
+      <tr><td>/no</td><td> False </td><td>Prevent removal of existing prefix before processing</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+      <tr><td>wrp</td></tr>
+      <tr><td>wrp /no /max 65</td></tr>
+      <tr><td>wrp /pre &gt; /max 76</td></tr>
+      <tr><td>wrp /pre // /max 72</td></tr>
+      <tr><td>wrp /pre -- /max 30</td></tr>
+      <tr><td>wrp /pre REM /no</td></tr>
+      <tr><td>wrp /np /max 10000</td></tr>
+    </table>
+  </description>
+  <category>Functions</category>
+  <link>http://www.ReliableAnswers.com/</link>
+  <contributor>Shawn K. Hall</contributor>
+  
+  <form name="wrpf"
+    action="http://reliableanswers.com/x/"
+    method="post">
+    <input type="hidden" name="q" value="" />
+    <textarea name="vbscode" style="display: none;"><![CDATA[
+
+Dim lq, lqe, qsPrefix, qlMax, qbRemove, q
+q = document.wrpf.q.value
+lq = InStr(1, q, "/np", 1)
+If lq > 0 Then
+  qsPrefix = ""
+Else
+  lq = InStr(1, q, "/pre", 1)
+  If lq > 0 Then
+    lq = lq + 5
+    lqe = InStr(lq, q, "/", 1)
+    If lqe > 0 Then
+      lqe = lqe - lq
+      qsPrefix = Mid(q, lq, lqe)
+    Else
+      qsPrefix = Mid(q, lq)
+    End If
+  Else
+    qsPrefix = "> "
+  End If
+End If
+lq = InStr(1, q, "/max", 1)
+If lq > 0 Then
+  lq = lq + 5
+  lqe = InStr(lq, q, "/", 1)
+  If lqe > 0 Then
+    lqe = lqe - lq
+    qlMax = CLng(Trim(Mid(q, lq, lqe)))
+  Else
+    qlMax = CLng(Trim(Mid(q, lq)))
+  End If
+Else
+  qlMax = 64
+End If
+If qlMax < 0 Then
+  qlMax = 64
+End If
+lq = InStr(1, q, "/no", 1)
+If lq > 0 Then
+  qbRemove = False
+Else
+  qbRemove = True
+End If
+q = ClipBoardGetText
+q = Wrp(q, qsPrefix, qlMax, qbRemove)
+Call ClipBoardSetText (q)
+Function Wrp(ByVal sString, sPrefix, sMax, bRemove)
+  Dim sBuild, lLast, lLen
+  lLen = Len(sPrefix)
+  sMax = sMax - lLen
+  If sMax < 0 Then
+    sMax = 62
+  End If
+  If bRemove = True Then
+    While InStr(1, sString, sPrefix, 1) = 1
+      sString = Mid(sString, Len(sPrefix) + 1)
+    Wend
+    While InStr(1, sString, vbCrLf & sPrefix, 1)
+      sString = Replace(sString, vbCrLf & sPrefix, vbCrLf)
+    Wend
+    While InStr(1, sString, vbCrLf & " ", 1)
+      sString = Replace(sString, vbCrLf & " ", vbCrLf)
+    Wend
+    sString = Trim(sString)
+  End If
+  sString = Replace(sString, vbCrLf & vbCrLf, " {|} ")
+  sString = Replace(sString, vbCrLf, " ")
+  While InStr(sString, "  ")
+    sString = Replace(sString, "  ", " ")
+  Wend
+  sString = Trim(sString)
+  sString = Replace(sString, "{|}", vbCrLf & sPrefix) & " "
+  While Len(sString) > 0
+    If InStrRev(sString, vbLf, sMax) <> 0 Then
+      lLast = InStrRev(sString, vbCrLf, sMax) + 2
+    ElseIf sMax >= Len(sString) Then
+      lLast = Len(sString)
+    Else
+      lLast = InStrRev(sString, " ", sMax + 1)
+    End If
+    sBuild = sBuild & vbCrLf & sPrefix & Mid(sString, 1, lLast)
+    sString = Mid(sString, lLast + 1)
+  Wend
+  Wrp = sBuild
+End Function
+Function ClipBoardSetText( sText )
+  ClipBoardSetText = window.clipboardData.SetData( "Text", sText )
+End Function
+Function ClipBoardGetText()
+  ClipBoardGetText = window.clipboardData.GetData( "Text" )
+End Function
+
+    ]]></textarea>
+  </form>
+
+  <script><![CDATA[
+
+  function wrp (q)
+  {
+    document.wrpf.q.value = q;
+
+  //get the vbs code
+    var wrpt = "";
+    wrpt = document.wrpf.vbscode.value;
+
+  //remove CDATA prefix and trailer
+    wrpt = wrpt.replace( /(\<\!\[CDATA\[)/g, '' ).replace( /(\]\]\>)/g, '' );
+
+  //trim it
+    wrpt = wrpt.replace(/^\s+/g, '' ).replace(/\s+$/g, '' );
+
+  //run the script
+    window.execScript( wrpt, "vbscript" );
+
+  //return
+    return ( true );
+  }
+
+  ]]></script>
+  <copyright>
+	Copyright (c) 2002 David Bau
+	Distributed under the terms of the
+	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>

@@ -1,0 +1,133 @@
+<search function="vbsx">
+  <name>VB Script</name>
+  <description>
+    Performs Visual Basic Script code interpretation.<br />
+    <div class="helpboxDescLabels">Usage:</div>
+    <table class="helpboxDescTable">
+      <tr><td>vbsx <em>[?]vb-script</em></td></tr>
+    </table>
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>?</td><td> - </td><td>Return value is to appear in DQSD, like the Debug Window of Visual Basic</td></tr>
+      <tr><td>=</td><td> - </td><td>Return value is to replace the text in DQSD, like using Debug.Clear before Debug.Print in Visual Basic</td></tr>
+      <tr><td>:</td><td> - </td><td>Return value is to be placed on the clipboard</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Supporting Functions:</div>
+    <table class="helpboxDescTable">
+      <tr><td nowrap="nowrap"> ClipBoardSetText( sText ) </td><td> Places sText, a text value, onto the clipboard </td></tr>
+      <tr><td> ClipBoardGetText() </td><td> Obtains the clipboard text data </td></tr>
+      <tr><td> DebugClear() </td><td> Clears the debug window </td></tr>
+      <tr><td> DebugPrint( sText ) </td><td> Print data to the debug window, without replacing current content </td></tr>
+      <tr><td> JoinTo( sArray, ToIndex, Seperator ) </td><td> 'Join's an array to the specified index </td></tr>
+      <tr><td> RX( sRegEx, sString ) </td><td> Tests a Regular Expression against a string, returning all matches </td></tr>
+      <tr><td> - </td><td> ...add more by editing vbsx.xml to include additional functions within the vbscode &lt;textarea&gt; </td></tr>
+    </table>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+      <tr><td>vbsx msgbox("hi")</td></tr>
+      <tr><td>vbsx ?Replace("This ugly text", "ugly ", "")</td></tr>
+      <tr><td>vbsx ClipBoardSetText Replace(ClipBoardGetText, vbCrLf, " ")</td></tr>
+      <tr><td>vbsx ClipBoardSetText UCase(ClipBoardGetText)</td></tr>
+    </table>
+  </description>
+  <category>Computers<category>Programming</category></category>
+  <link>http://www.ReliableAnswers.com/</link>
+  <contributor>Shawn K. Hall</contributor>
+  
+  <form name="vbsxf"
+    action="http://reliableanswers.com/x/"
+    method="post">
+    <input type="hidden" name="qs" value="" />
+    <textarea name="vbscode" style="display: none;"><![CDATA[
+
+Function ClipBoardSetText( sText )
+  ClipBoardSetText = window.clipboardData.SetData( "Text", sText )
+End Function
+Function ClipBoardGetText()
+  ClipBoardGetText = window.clipboardData.GetData( "Text" )
+End Function
+Sub DebugPrint( sText )
+  If Len(document.deff.q.value) = 0 Then
+    document.deff.q.value = sText
+  Else
+    document.deff.q.value = document.deff.q.value & vbCrLf & sText
+  End If
+End Sub
+Sub DebugClear()
+  document.deff.q.value = ""
+End Sub
+Function JoinTo(sArray, ToIndex, Seperator)
+  Dim lAt
+  If ToIndex > UBound(sArray) Then
+    ToIndex = UBound(sArray)
+  End If
+  For lAt = LBound(sArray) To ToIndex
+    JoinTo = JoinTo & Seperator & sArray(lAt)
+  Next
+  JoinTo = Mid(JoinTo, Len(Seperator) + 1)
+End Function
+Function RX(sRegEx, sString)
+  Dim RE, Match, Matches, sBuild
+  Set RE = New RegExp
+  RE.Pattern = sRegEx
+  RE.IgnoreCase = True
+  RE.Global = True
+  Set Matches = RE.Execute(sString)
+  For Each Match In Matches
+    sBuild = sBuild & "Match: @"
+    sBuild = sBuild & Match.FirstIndex & ", '"
+    sBuild = sBuild & Match.Value & "'" & vbCrLf
+  Next
+  Set Match = Nothing
+  Set Matches = Nothing
+  Set RE = Nothing
+  RX = sBuild
+End Function
+
+    ]]></textarea>
+  </form>
+
+  <script><![CDATA[
+
+  function vbsx (q)
+  {
+  //set debug mode
+    var qs = q;
+    switch (qs.charAt(0)){
+      case "=":
+        qs = "Call DebugClear() \nDebugPrint " + qs.substring(1, qs.length);
+        break;
+      case "?":
+        qs = "DebugPrint " + qs.substring(1, qs.length);
+        break;
+      case "!":
+        qs = "MsgBox " + qs.substring(1, qs.length);
+        break;
+      case ":":
+        qs = "ClipboardSetText " + qs.substring(1, qs.length);
+        break;
+    }
+
+  //get the vbs code
+    var vbsxt = "";
+    vbsxt = document.vbsxf.vbscode.value;
+  //remove CDATA prefix and trailer
+    vbsxt = vbsxt.replace( /(\<\!\[CDATA\[)/g, '' ).replace( /(\]\]\>)/g, '' );
+  //trim it
+    vbsxt = vbsxt.replace(/^\s+/g, '' ).replace(/\s+$/g, '' );
+
+  //append functions
+    qs = qs + "\n" + vbsxt;
+
+  //execute code
+    window.execScript (qs, "vbscript");
+    return ( true );
+  }
+
+  ]]></script>
+  <copyright>
+	Copyright (c) 2002 David Bau
+	Distributed under the terms of the
+	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>
