@@ -1,0 +1,52 @@
+<search function="mag">
+  <COMMENT>
+
+    Even though this XML search will probably load and is a good start
+    toward a completed search, please be aware that this search will probably
+    not work as is and will probably require some changes.
+
+  </COMMENT>
+  <name>Newspapers &amp; Magazines</name>
+  <category>Reference<category>General</category></category>
+  <contributor>Glenn Carr</contributor>
+  <link>http://www.itools.com/</link>
+  <email></email>
+  <description>
+  Search online library of periodicals, journals, and reference books.
+  </description>
+  <form name="magf"
+        method="get"
+        action="http://www.itools.com/Go">
+    <input type="hidden" name="qt" value="elibrary" />
+
+    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
+
+    <input type="hidden" name="q" value="" />
+  </form>
+  <script><![CDATA[
+    function mag(q)
+    {
+      if( nullArgs("mag", q) )
+        return;
+
+      // FORM variables for magf
+      //document.magf.qt.value = "";
+
+      // The wizard assigned the search string to this form field value because
+      // this field was the active element when the search file was generated.
+      // Change this to args.q if the search string is parsed with parseArgs.
+      document.magf.q.value = q;
+
+      submitForm(magf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 01/27/03 at 09:37:53
+    by Dave's Quick Search Deskbar Search Wizard version 1.0.1 $,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>

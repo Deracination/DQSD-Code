@@ -1,0 +1,50 @@
+<search function="bio">
+  <COMMENT>
+
+    Even though this XML search will probably load and is a good start
+    toward a completed search, please be aware that this search will probably
+    not work as is and will probably require some changes.
+
+  </COMMENT>
+  <name>Biographies</name>
+  <category>People and Places</category>
+  <contributor>Mel Neff</contributor>
+  <link>http://search.biography.com/bio_ft_search.pl?word=bill+cosby&amp;submit=Go%21</link>
+  <email>cybermel716@hotmail.com</email>
+  <description>
+  Search the Biography.com database. Has  over 25,000 different listings.
+  </description>
+  <form name="biof"
+        method="get"
+        action="http://search.biography.com/bio_ft_search.pl">
+
+    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
+
+    <input type="hidden" name="word" value="" />
+  </form>
+  <script><![CDATA[
+    function bio(q)
+    {
+      if( nullArgs("bio", q) )
+        return;
+
+      // FORM variables for biof
+
+      // The wizard assigned the search string to this form field value because
+      // this field was the active element when the search file was generated.
+      // Change this to args.q if the search string is parsed with parseArgs.
+      document.biof.word.value = q;
+
+      submitForm(biof);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 02/23/03 at 20:55:55
+    by Dave's Quick Search Deskbar Search Wizard version 1.0.1 $,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>
