@@ -161,13 +161,31 @@ loadAddons();
 
 if (searchRoot)
 {
+
+// ??? This XQuery will only allow the searches that are enabled to be evaluated.  This should
+// decrease load time, but it needs to be tested and determined if it makes sense first.
 //  var xscripts = searchRoot.selectNodes("search[" + xpathquery + "]/script");
+
   var xscripts = searchRoot.selectNodes("search/script");
   for (var iPrivate = 0; iPrivate < xscripts.length; iPrivate++)
   {
-    eval(xscripts[iPrivate].text);
+    // ??? This seems like a hack, but the only way I can determine to load and evaluate
+    // external scripts (referenced with the 'src' attribute), is by manually loading them.
+    var externalScriptRef = xscripts[iPrivate].attributes.getNamedItem("src");
+    if ( externalScriptRef )
+    {
+      eval( readFile( externalScriptRef.text ) );
+    }
+    else
+    {
+      eval( xscripts[iPrivate].text );
+    }
   }
+
+// ??? This XQuery will only allow the searches that are enabled to be evaluated.  This should
+// decrease load time, but it needs to be tested and determined if it makes sense first.
 //  var xforms = searchRoot.selectNodes("search[" + xpathquery + "]/form");
+
   var xforms = searchRoot.selectNodes("search/form");
   for (var iPrivate = 0; iPrivate < xforms.length; iPrivate++)
   {
