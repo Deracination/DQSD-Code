@@ -1,6 +1,6 @@
 <search function="googlespell">
   <name>Google Spellcheck</name>
-  <description>Invoke Google webservice for spelling suggestion.  Requires license key.  You can obtain one for free at http://www.google.com/apis/.</description>
+  <description>Invoke Google webservice for spelling suggestion.  Requires license key.  You can obtain one for free at http://www.google.com/apis/, with a restriction on the number of calls per day.</description>
   <link>http://www.google.com/apis/</link>
   <category>Search the Web</category>
   <contributor>Glenn Carr</contributor>
