@@ -1,23 +1,19 @@
 <search function="winres">
   <name>WinRes</name>
   <description>WinRes will open a browser window of a specified size.
+  <div class="helpboxDescLabels">Switches:</div>
+  <table class="helpboxDescTable">
+	<tr><td> url </td><td> [default] or <em>strwinresurl</em> </td><td> url to preview </td></tr>
+	<tr><td> /width or {1st #} </td><td> <em>strwinresw</em> </td><td> width of new browser window </td></tr>
+	<tr><td> /height or {2nd #} </td><td> <em>strwinresh</em> </td><td> height of new browser window </td></tr>
+  </table>
   <div class="helpboxDescLabels">Examples:</div> 
   <table class="helpboxDescTable">
-    <tr>
-      <td>winres 800 600 or winres /height:800 /width:600</td>
-    </tr>
-    <tr>
-      <td>will open a browser window that is 800 pixels wide and 600 pixels tall.</td>
-    </tr>
-    <tr>
-      <td>Optionally, specify a URL as the last argument: </td>
-    </tr>
-    <tr>
-      <td>winres 800 600 http://www.mysite.com or</td>
-    </tr>
-    <tr>
-      <td>winres http://www.mysite.com /w:800 /h:600</td>
-    </tr>
+	<tr><td> winres 800 600 </td></tr>
+	<tr><td> winres /height:800 /width:600 </td></tr>
+	<tr><td> winres 800 600 http://www.mysite.com </td></tr>
+	<tr><td> winres 800 http://www.mysite.com 600 </td></tr>
+	<tr><td> winres http://www.mysite.com /w:800 /h:600 </td></tr>
   </table>
   </description>
   <contributor>Neel Doshi</contributor>
@@ -27,54 +23,65 @@ function winres(q) {
 	if (nullArgs("winres", q))
 		return false;
 
-	// First parse the arguments
-	var switch_list = new Array("height", "width");
-	var args = parseArgs(q, switch_list);
-	var args_width = "";
-	var args_height = "";
-	var url = "";
+	var args_width = "";	if (typeof strwinresw != "undefined") args_width  = strwinresw;
+	var args_height = "";	if (typeof strwinresh != "undefined") args_height = strwinresh;
+	var url = "";		if (typeof strwinresurl != "undefined") url = strwinresurl;
+	var bwidth = false; var serrors = ""; var av = ""; var am = "";
 
 	// check if the required switches are set
-	if ( typeof args.switch_val["height"] == "undefined" || args.switch_val["height"] == "" )
-	{
-		// Try using the original syntax if the from switch was not found
-	     var args_array = q.split(' ');
-	     var args_width = args_array.shift();
-	     var args_height = args_array.shift();
-	     url = args_array.shift();
-	}
-	else
-	{
-		args_height = args.switch_val["height"];
-		if ( typeof args.switch_val["width"] != "undefined" && args.switch_val["width"] != "" )
-		{
-			args_width = args.switch_val["width"];
-		}
-		url = args.q;
+	var args = parseArgs(q, "height", "width");
+	for (var i = 0; i < args.switches.length; i++){
+	 sw = args.switches[i];
+	 switch(sw.name){
+	  case "height": args_height = sw.value; break;
+	  case "width":  args_width  = sw.value; break;
+	  case "url":    url = sw.value; break;
+	 }
 	}
 
+	var args_array = args.q.split(" ");
+	for (var i = 0; i < args_array.length; i++){
+	  av = args_array[i];
+	  if(av.match(/^(\d)+$/) == null){
+	    url = av;
+	  }else{
+	    if(bwidth == false){
+	      args_width  = av; bwidth = true;
+	    }else{
+	      args_height = av;
+	    }
+	  }
+	}
 
-   // Next determine if the next argument is a valid integer
-   if (args_width.match(/^(\d)+$/) == null || args_width == 0)
-   {
-     alert("The first argument must be an integer representing the window width in pixels");
-     return false;
-   }
+	//determine errors
+	if((args_width.match(/^(\d)+$/) == null) || (args_width == 0))
+	  serrors += "The first numerical argument must be an integer representing the window width in pixels\n";
 
-   // Next determine if the next argument is a valid integer
-   if (args_height.match(/^(\d)+$/) == null || args_height == 0)
-   {
-     alert("The second argument must be an integer representing the window height in pixels");
-     return false;
-   }
-      var WinAttrib;
-      WinAttrib = 'width=' + args_width + ',height=' + args_height +
-      ',scrollbars=yes,toolbar=yes,menubar=yes,location=yes,resizable=yes,status=yes,directories=yes';
-      window.open(url,'New1',WinAttrib);
+	if((args_height.match(/^(\d)+$/) == null) || (args_height == 0))
+	  serrors += "The second numerical argument must be an integer representing the window height in pixels\n";
+
+	if (serrors != ""){
+	  alert(serrors);
+	  return false;
+	}
+
+	//fix the url
+	if(url == "")
+	  url = "about:blank";
+	else if(url.indexOf("http://") == -1)
+	  url = "http://" + url;
+
+	//display
+	var WinAttrib;
+	WinAttrib = 'width=' + args_width + ',height=' + args_height +
+		',scrollbars=yes,toolbar=yes,menubar=yes'+
+		',location=yes,resizable=yes,status=yes,directories=yes';
+	window.open(url,'_blank',WinAttrib);
 }
     ]]></script>
 
   <copyright>
+	This search file was last modified on 2004/12/27 by Shawn K. Hall
 	Copyright (c) 2002 David Bau
 	Distributed under the terms of the
 	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)

@@ -226,6 +226,9 @@ function def()
     // detect strings that look like currency conversions
     if ((typeof autodetect_currency) == 'function' && autodetect_currency(t)) return false;
 
+    // detect strings that look like ip addresses
+    if ((typeof autodetect_ip) == 'function' && autodetect_ip(t)) return false;
+
     // detect math expressions
     if (mathexp(t)) return false;
   }
