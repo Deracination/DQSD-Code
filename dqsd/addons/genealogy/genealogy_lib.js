@@ -5,7 +5,7 @@ Distributed under the terms of the GNU Lesser General Public License Version 2.1
 (http://www.gnu.org/licenses/lgpl.txt)
 **********************************************************************************/
 	var genealogy_debug = 0;
-    var genealogy_lib_version = "1.10";
+    var genealogy_lib_version = "1.11";
 
 	var genealogy_month_names = new Array("JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER");
 	var genealogy_date_format_1 = "([0-9]{1,2})\\s*(?:/|-)\\s*([0-9]{1,2})\\s*(?:/|-)\\s*([0-9]{4})";
@@ -375,7 +375,7 @@ function genealogy_get_webpage(webpage_url, search_name, refresh_time)
 	return genealogy_webpage_get(webpage_url);
 }
 
-function genealogy_webpage_get(webpage_url)
+function genealogy_webpage_get(webpage_url, sendAddonHeader)
 {
 	var xmlhttp = false;
 	try	{
@@ -387,6 +387,9 @@ function genealogy_webpage_get(webpage_url)
 		return "";
 	}
     xmlhttp.Open('GET',webpage_url,false);
+	if (typeof sendAddonHeader != "undefined" && sendAddonHeader == true) {
+  	  xmlhttp.setRequestHeader("DQSD-Genealogy-Addon","Yes");
+	}
 	try	{
 		xmlhttp.Send();
 	}
@@ -781,24 +784,23 @@ function genealogy_hasArg(args, argname)
 
 function genealogy_submitForm(form, searchName, searchArgs)
 {
-    if ( typeof genealogy_searchHooks != 'undefined' ) {
-      for ( var i = 0; i < genealogy_searchHooks.length; i++ )
-      {
-         genealogy_searchHooks[i]( searchName, searchArgs, form.action, form.name );        
-      }
-    }
+	genealogy_processSearchHooks(searchName, searchArgs, form.action, form.name);
 	submitForm(form);
 }
 
 function genealogy_openSearchWindow(searchUrl, searchName, searchArgs)
 {
+	genealogy_processSearchHooks(searchName, searchArgs, searchUrl);
+	openSearchWindow(searchUrl);
+}
+
+function genealogy_processSearchHooks(searchName, searchArgs, searchUrl, formName)
+{
     if ( typeof genealogy_searchHooks != 'undefined' ) {
-      for ( var i = 0; i < genealogy_searchHooks.length; i++ )
-      {
-         genealogy_searchHooks[i]( searchName, searchArgs, searchUrl);        
+      for ( var i = 0; i < genealogy_searchHooks.length; i++ ) {
+         genealogy_searchHooks[i]( searchName, searchArgs, searchUrl, formName);        
       }
     }
-	openSearchWindow(searchUrl);
 }
 
 function genealogy_registerSearchHook( searchHook )
@@ -809,12 +811,33 @@ function genealogy_registerSearchHook( searchHook )
   genealogy_searchHooks.push( searchHook );
 }
 
-function genealogy_searchHook_alert(searchName, searchArgs, searchUrl, formName)
+function genealogy_searchHook(searchName, searchArgs, searchUrl, formName)
 {
 	alert("genealogy_search name: "+searchName+", args: "+searchArgs + ", url: "+searchUrl+((typeof formName != "undefined") ? (", form name: "+formName) : ""));
 }
-//genealogy_registerSearchHook(genealogy_searchHook_alert);
+//genealogy_registerSearchHook(genealogy_searchHook);
 
+
+function genealogy_keypressHook(keypressEvent)
+{
+//  alert("genealogy_keypressHook: "+keypressEvent.keyCode);
+  return false;
+}
+
+function genealogy_okp()
+{
+  if (okp() == false) {
+	return false;
+  } else {
+	return (genealogy_keypressHook(window.event) == false) ? true : false;  
+  }
+}
+
+if (typeof registerKeypressHook == "function") {
+  registerKeypressHook(genealogy_keypressHook);
+} else {
+  document.onkeypress = genealogy_okp;
+}
 
 function genealogy_check_dqsd_version(majorHi, majorLo, minorHi, minorLo)
 {
@@ -856,6 +879,7 @@ function genealogy_check_dqsd_version(majorHi, majorLo, minorHi, minorLo)
 
 genealogy_alert("genealogy_lib.js loaded");
 
-if (!genealogy_check_dqsd_version(3,1,4,0)) {
+if (!genealogy_check_dqsd_version(3,1,5,0)) {
 	genealogy_error("ERROR: The Genealogy Add-on requires Dave's Quick Search Bar Version 3.1.4.0.");
 }
+
