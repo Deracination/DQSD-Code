@@ -15,6 +15,7 @@ New Searches
 
 Modified Searches
 * httpinst - added additional parameter /filename to specify the local filename (Brent Beardsley)
+* bb - updated to work with new Best Buy website (Shawn Hall)
 
 Removed Searches
 * nwtsr and httpd replaced by whats (Kim Gräsman)
