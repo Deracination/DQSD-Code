@@ -3,77 +3,77 @@
   <description>
     Perform multiple searches with a single command line expression.<br/>
     <div class="helpboxDescLabels">Usage:</div>
-  	<table class="helpboxDescTable">
-  		<tr><td>multi &lt;<i>search1</i>&gt; [&lt;<i>search2</i>&gt; [...]] &lt;<i>term</i>&gt;</td></tr>
-  	</table>
+    <table class="helpboxDescTable">
+      <tr><td>multi &lt;<i>search1</i>&gt; [&lt;<i>search2</i>&gt; [...]] &lt;<i>term</i>&gt;</td></tr>
+    </table>
     <div class="helpboxDescLabels">Example:</div>
     <table class="helpboxDescTable">
-  		<tr><td>multi av gg wood planes</td></tr>
-  	</table>
+      <tr><td>multi av gg wood planes</td></tr>
+    </table>
   </description>
   <category>Search the Web</category>
   <contributor>Neel Doshi</contributor>
   
   <script><![CDATA[
-   // This function is almost identical to the shortcut function in search.html
-   function multiIsCommand(t)
-   {
-   // look for matching commands first
-   var search = null;
-   var term = null;
-   var result = t.match(/^([a-zA-Z]+)\b/)
-   if (result)
-   {
-     if (aliases[result[1]])
-     {
-       search = aliases[result[1]];
-       term = t.slice(result[1].length);
-     }
-   }
+    // This function is almost identical to the shortcut function in search.html
+    function multiIsCommand(t)
+    {
+      // look for matching commands first
+      var search = null;
+      var term = null;
+      var result = t.match(/^([a-zA-Z]+)\b/)
+      if (result)
+      {
+        if (aliases[result[1]])
+        {
+          search = aliases[result[1]];
+          term = t.slice(result[1].length);
+        }
+      }
 
-   // then look for longest matching punctuation prefix
-   if (!search)
-   {
-     result = t.match(/^([\s~`!@#$%\^&\*()\-=\+{}\[\];:'<>,\.\/\?]+)/);
-     if (result)
-     {
-       for (var subs = result[1].length; subs>0; subs--)
-       {
-         search = aliases[result[1].slice(0, subs)];
-         if (search)
-         {
-           term = t.slice(subs);
-           break;
-         }
-       }
-     }
-   }
+      // then look for longest matching punctuation prefix
+      if (!search)
+      {
+        result = t.match(/^([\s~`!@#$%\^&\*()\-=\+{}\[\];:'<>,\.\/\?]+)/);
+        if (result)
+        {
+          for (var subs = result[1].length; subs>0; subs--)
+          {
+            search = aliases[result[1].slice(0, subs)];
+            if (search)
+            {
+              term = t.slice(subs);
+              break;
+            }
+          }
+        }
+      }
 
-   // then look for longest matching punctuation suffix
-   if (!search)
-   {
-     result = t.match(/([\s~`!@#$%\^&\*()\-=\+{}\[\];:'<>,\.\/\?]+)$/);
-     if (result)
-     {
-       for (var subs = result[1].length; subs>0; subs--)
-       {
-         search = aliases[result[1].slice(-subs)];
-         if (search)
-         {
-           term = t.slice(0, -subs);
-           break;
-         }
-       }
-     }
-   }
+      // then look for longest matching punctuation suffix
+      if (!search)
+      {
+        result = t.match(/([\s~`!@#$%\^&\*()\-=\+{}\[\];:'<>,\.\/\?]+)$/);
+        if (result)
+        {
+          for (var subs = result[1].length; subs>0; subs--)
+          {
+            search = aliases[result[1].slice(-subs)];
+            if (search)
+            {
+              term = t.slice(0, -subs);
+              break;
+            }
+          }
+        }
+      }
 
-   // no match, no dice
-   if (!search)
-     return false;
-
+      // no match, no dice
+      if (!search)
+        return false;
+ 
       // return the proper search term for the asking procedure
       return search;
-   }
+    }
 
  // the multi function actually performs the multiple searches given
  // the input parameters.  if the user's reuseBrowserWindowMode parameter
@@ -100,10 +100,11 @@
           // if an argument is not a command, then no future arguments
           // can be commands either.  The following variable keeps track of this.
           var fLoopBool = 1;
+          var strCommandName;
 
           for ( var i = 1; i <= result.length; i++ )
           {
-            var strCommandName = multiIsCommand(result[i - 1]);
+            strCommandName = multiIsCommand(result[i - 1]);
             if (strCommandName != false && fLoopBool == 1)
             {
               // Append the command list with this command
@@ -115,7 +116,7 @@
               fLoopBool = 0;
 
               // Append the parameter string with this word
-              arrParams.push(result[i - 1]);
+              arrParams.push(result[i - 1].replace("\x27","\\x27"));
             }
           }
           // Loop through the command list and perform the search
@@ -132,7 +133,7 @@
               // if the user's launchmode is anything but zero, pause between searches.
               if (launchmode != 0)
               {
-                var Timeoutms = 1500
+                var Timeoutms = 1500;
                 var SearchString = "performsearch('" + arrCmds[j - 1] + "','" + arrParams.join(" ") + "');";
                 setTimeout( SearchString, Timeoutms * (j-1) );
               }
