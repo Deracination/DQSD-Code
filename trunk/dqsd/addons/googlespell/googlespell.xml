@@ -2,6 +2,7 @@
   <name>Google Spellcheck</name>
   <description>Invoke Google webservice for spelling suggestion</description>
   <link>http://www.google.com/apis/</link>
+  <category>Search the Web</category>
   <contributor>Glenn Carr</contributor>
   <form name="googlespellf">
     <div id="googleWebService" name="googleWebService" style="behavior:url(addons\\googlespell\\webservice.htc)" onresult="onWebServiceResult()" />
