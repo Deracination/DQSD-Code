@@ -3,25 +3,25 @@
   <category>Finance</category>
   <contributor>Shawn K. Hall</contributor>
   <email>Shawn[@]ReliableAnswers.com</email>
-  <description>Login to My Yahoo
+  <description>Login to Paypal
   <div class="helpboxDescLabels">Example:</div>
   <table class="helpboxDescTable">
-    <tr><td>yy</td></tr>
-    <tr><td>yy myid</td></tr>
-    <tr><td>yy myotherid</td></tr>
+    <tr><td>pp</td></tr>
+    <tr><td>pp myid</td></tr>
+    <tr><td>pp myotherid</td></tr>
   </table>
   <div class="helpboxDescLabels">Variables:</div>
   <table class="helpboxDescTable">
-    <tr><td>yyid('user','pwd');</td><td>An array storing a user and password profile for Yahoo! 
-	You SHOULD provide the <em>yyid()</em> variable, however, you may also provide as many other 
-	profiles as necessary to account for your Yahoo ID's. If you were to create a 'second' profile 
+    <tr><td>ppid('user','pwd');</td><td>An array storing a user and password profile for Paypal.
+	You SHOULD provide the <em>ppid()</em> variable, however, you may also provide as many other 
+	profiles as necessary to account for your Paypal ID's. If you were to create a 'second' profile 
 	you would need only to pass the variable name on the command line: <br />
-	<strong>yy otherVariable</strong><br />
+	<strong>pp otherVariable</strong><br />
 	These variables are, however, case sensitive. If the variable passed does not exist (misspelled, 
-	incorrect case...), this search will 'default' to using the <em>yyid</em> variable.</td></tr>
+	incorrect case...), this search will 'default' to using the <em>ppid</em> variable.</td></tr>
   </table>
   </description>
-  <link>http://my.yahoo.com/</link>
+  <link>http://www.paypal.com/</link>
   <comment>
     This is pretty spiffy, eh?
   </comment>
