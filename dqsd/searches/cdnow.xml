@@ -1,6 +1,6 @@
 <search function="cdnow">
   <name>CDNOW</name>
-  <description>Search CDNOW by artist. Options include searchign by /album, /song, /label, /video, /actor, or /director.<nobr>Example: "cdnow Lobster /song"</nobr></description>
+  <description>Search CDNOW by artist. Options include searchign by /album, /song, /label, /video, /actor, or /director. <nobr>Example: "cdnow Lobster /song"</nobr></description>
   <category>Entertainment</category>
   <link>http://www.cdnow.com/</link>
   <switches>album, song, label, video, actor, director</switches>
