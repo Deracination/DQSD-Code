@@ -145,10 +145,11 @@ STDMETHODIMP CMenuBuilder::AppendMenuItem(BSTR bstrItem, BSTR bstrKey, BSTR bstr
 		hmenu = pvhMenu->intVal ? (HMENU)pvhMenu->intVal : (HMENU)m_hMain;
 	}
 
-	BOOL bSuccess = ::AppendMenu( hmenu, MF_STRING, ++m_nMenuItem, W2T( bstrItem ) );
+	BOOL bSuccess = ::AppendMenu( hmenu, MF_STRING, m_nMenuItem+1, W2T( bstrItem ) );
 	if ( !bSuccess )
 		return E_FAIL;
 
+	m_nMenuItem++;
 	m_mapKeys[ m_nMenuItem ] = std::string( W2T( bstrKey ) );
 	m_toolTips[m_nMenuItem] = std::string( W2T( bstrToolTip ) );
 
@@ -293,7 +294,7 @@ Even worse!  This doesn't work on scrolling menus...
 				cursorPos.x = GET_X_LPARAM(messagePos);
 				cursorPos.y = GET_Y_LPARAM(messagePos);
 
-				int nItems = GetMenuItemCount(hMenu);
+				int nItems = ::GetMenuItemCount(hMenu);
 				int nItemPosition;
 				for(nItemPosition = 0; nItemPosition < nItems; nItemPosition++)
 				{
@@ -553,3 +554,160 @@ STDMETHODIMP CMenuBuilder::InitialiseTooltips(long displayTimeMultiplier)
 
 	return S_OK;
 }
+
+STDMETHODIMP CMenuBuilder::InsertMenuItem(BSTR bstrItem, BSTR bstrKey, BSTR bstrToolTip, UINT position, VARIANT* pvhMenu )
+{
+	USES_CONVERSION;
+
+	HMENU hmenu = (HMENU)m_hMain;
+	if (pvhMenu && ((VT_I4 == pvhMenu->vt) || (VT_I2 == pvhMenu->vt)) )
+	{
+		hmenu = pvhMenu->intVal ? (HMENU)pvhMenu->intVal : (HMENU)m_hMain;
+	}
+
+	MENUITEMINFO menuItem;
+	memset(&menuItem, 0, sizeof(MENUITEMINFO));
+	menuItem.cbSize = sizeof(MENUITEMINFO);
+	menuItem.fMask = MIIM_TYPE | MIIM_STATE | MIIM_ID; 
+	menuItem.fType = MFT_STRING; 
+	menuItem.fState = MFS_ENABLED; 
+	menuItem.wID = (m_nMenuItem+1);
+	menuItem.dwTypeData = W2T( bstrItem );
+	menuItem.cch = lstrlen( W2T( bstrItem) );
+
+	BOOL bSuccess = ::InsertMenuItem( hmenu, position, TRUE, &menuItem);
+	if ( !bSuccess)
+		return E_FAIL;
+
+	m_nMenuItem++;
+	m_mapKeys[ m_nMenuItem ] = std::string( W2T( bstrKey ) );
+	m_toolTips[m_nMenuItem] = std::string( W2T( bstrToolTip ) );
+
+	return S_OK;
+}
+
+STDMETHODIMP CMenuBuilder::InsertSeparator(UINT position, long hmenu)
+{
+	USES_CONVERSION;
+
+	MENUITEMINFO menuItem;
+	memset(&menuItem, 0, sizeof(MENUITEMINFO));
+	menuItem.cbSize = sizeof(MENUITEMINFO);
+	menuItem.fMask = MIIM_TYPE | MIIM_STATE; 
+	menuItem.fType = MFT_SEPARATOR; 
+	menuItem.fState = MFS_ENABLED; 
+
+	BOOL bSuccess = ::InsertMenuItem( (HMENU)hmenu, position, TRUE, &menuItem);
+	if ( !bSuccess)
+		return E_FAIL;
+
+	return S_OK;
+}
+
+STDMETHODIMP CMenuBuilder::InsertSubMenu(BSTR bstrName, UINT position, VARIANT* pvParentMenu, long *phmenu)
+{
+	*phmenu = (long)::CreatePopupMenu();
+
+	USES_CONVERSION;
+
+	HMENU hmenu = (HMENU)m_hMain;
+	if (pvParentMenu && ((VT_I4 == pvParentMenu->vt) || (VT_I2 == pvParentMenu->vt)) )
+	{
+		hmenu = pvParentMenu->intVal ? (HMENU)pvParentMenu->intVal : (HMENU)m_hMain;
+	}
+
+	MENUITEMINFO menuItem;
+	memset(&menuItem, 0, sizeof(MENUITEMINFO));
+	menuItem.cbSize = sizeof(MENUITEMINFO);
+	menuItem.fMask = MIIM_TYPE | MIIM_STATE | MIIM_SUBMENU; 
+	menuItem.fType = MFT_STRING; 
+	menuItem.fState = MFS_ENABLED; 
+	menuItem.hSubMenu = (HMENU)*phmenu;
+	menuItem.dwTypeData = W2T( bstrName );
+	menuItem.cch = lstrlen( W2T( bstrName) );
+
+	BOOL bSuccess = ::InsertMenuItem( (HMENU)hmenu, position, TRUE, &menuItem);
+	if ( !bSuccess)
+		return E_FAIL;
+
+	return S_OK;
+}
+
+STDMETHODIMP CMenuBuilder::GetMenuItemCount(long hmenu, long *pCount)
+{
+	USES_CONVERSION;
+
+	int retval = ::GetMenuItemCount((HMENU)hmenu);
+	if (retval == -1)
+	{
+		return Error(_T("Invalid menu handle"), IID_IMenuBuilder, E_FAIL);
+	}
+	*pCount = (long)retval;
+	return S_OK;
+}
+
+STDMETHODIMP CMenuBuilder::FindSubMenu(BSTR bstrName, VARIANT* pvParentMenu, long *phmenu)
+{
+	USES_CONVERSION;
+
+	*phmenu = -1;
+
+	HMENU hmenu = (HMENU)m_hMain;
+	if (pvParentMenu && ((VT_I4 == pvParentMenu->vt) || (VT_I2 == pvParentMenu->vt)) )
+	{
+		hmenu = pvParentMenu->intVal ? (HMENU)pvParentMenu->intVal : (HMENU)m_hMain;
+	}
+
+	int nItems = ::GetMenuItemCount(hmenu);
+	int nItemPosition;
+	for(nItemPosition = 0; nItemPosition < nItems; nItemPosition++)
+	{
+		TCHAR menuName[101];
+		int len = ::GetMenuString(hmenu, nItemPosition, menuName, 100, MF_BYPOSITION);
+		if (len != 0)
+		{
+			if (lstrcmp(W2T(bstrName), menuName)==0)
+			{
+				*phmenu = (long)::GetSubMenu(hmenu, nItemPosition);
+				if (*phmenu == 0)
+				{
+					*phmenu = -1;
+				}
+				break;
+			}
+		}
+	}
+
+	return S_OK;
+}
+
+STDMETHODIMP CMenuBuilder::FindMenuItem(BSTR bstrName, VARIANT* pvParentMenu, long *pPosition)
+{
+	USES_CONVERSION;
+
+	*pPosition = -1;
+
+	HMENU hmenu = (HMENU)m_hMain;
+	if (pvParentMenu && ((VT_I4 == pvParentMenu->vt) || (VT_I2 == pvParentMenu->vt)) )
+	{
+		hmenu = pvParentMenu->intVal ? (HMENU)pvParentMenu->intVal : (HMENU)m_hMain;
+	}
+
+	int nItems = ::GetMenuItemCount(hmenu);
+	int nItemPosition;
+	for(nItemPosition = 0; nItemPosition < nItems; nItemPosition++)
+	{
+		TCHAR menuName[101];
+		int len = ::GetMenuString(hmenu, nItemPosition, menuName, 100, MF_BYPOSITION);
+		if (len != 0)
+		{
+			if (lstrcmp(W2T(bstrName), menuName)==0)
+			{
+				*pPosition = (long)nItemPosition;
+				break;
+			}
+		}
+	}
+	return S_OK;
+}
+

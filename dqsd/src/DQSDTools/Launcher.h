@@ -75,6 +75,7 @@ public:
 	STDMETHOD(WriteFile)(/*[in]*/ BSTR bstrFilename, /*[in]*/ BSTR bstrValue);
 	STDMETHOD(GetProtocolHandler)(/*[in]*/ BSTR bstrProtocol, /*[out,retval]*/ BSTR* pbstrHandler);
 	STDMETHOD(GetFiles)(/*[in]*/ BSTR bstrFileSpec, /*[out,retval]*/ BSTR* pbstrFiles);
+	STDMETHOD(get_InstallationDirectory)(/*[out,retval]*/ BSTR* pbstrDirectory);
 
 public:
 	STDMETHOD(RegisterHotKey)(long hotkeyVkCode, BSTR bstrModifierName, LPDISPATCH pDispDocument);
