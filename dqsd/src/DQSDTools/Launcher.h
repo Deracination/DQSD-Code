@@ -74,12 +74,12 @@ public:
 	STDMETHOD(GetFiles)(/*[in]*/ BSTR bstrFileSpec, /*[out,retval]*/ BSTR* pbstrFiles);
 
 public:
-	STDMETHOD(RegisterHotKey)(long hotkeyVkCode, BSTR bstrModifierName);
-	STDMETHOD(InstallKeyboardHook)();
+	STDMETHOD(RegisterHotKey)(long hotkeyVkCode, BSTR bstrModifierName, LPDISPATCH pDispDocument);
+	STDMETHOD(InstallKeyboardHook)(LPDISPATCH pDispDocument);
 	STDMETHOD(MapKeyCode)(long lVKCode, long lCharCode);
 
 public:
-	STDMETHOD(ShutdownBar)();
+	STDMETHOD(ShutdownBar)(LPDISPATCH pDispDocument );
 	STDMETHOD(get_VersionIsCorrect)(int v1, int v2, int v3, int v4, /*[out, retval]*/ VARIANT_BOOL *pVal);
 	STDMETHOD(SetSite)(IUnknown* pUnkSite);
 

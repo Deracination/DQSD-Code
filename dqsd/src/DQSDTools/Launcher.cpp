@@ -5,6 +5,7 @@
 #include "KeyboardHook.h"
 #include "Utilities.h"
 
+
 #pragma comment(lib, "Version.lib")
 
 /////////////////////////////////////////////////////////////////////////////
@@ -381,16 +382,16 @@ STDMETHODIMP CLauncher::GetFiles(BSTR bstrFileSpec, BSTR *pbstrFiles)
 // This is nothing to do with the launcher - I've just piggybacked it on to save
 // creating another class/interface
 //
-STDMETHODIMP CLauncher::InstallKeyboardHook()
+STDMETHODIMP CLauncher::InstallKeyboardHook(LPDISPATCH pDispDocument)
 {
-	return KeyboardHookInstall();
+	return KeyboardHookInstall(UtilitiesFindDQSDWindow(pDispDocument));
 }
 
-STDMETHODIMP CLauncher::RegisterHotKey(long hotkeyVkCode, BSTR bstrModifierName)
+STDMETHODIMP CLauncher::RegisterHotKey(long hotkeyVkCode, BSTR bstrModifierName, LPDISPATCH pDispDocument)
 {
 	USES_CONVERSION;
 
-	return KeyboardInstallHotkey(hotkeyVkCode, W2T(bstrModifierName), &m_hHotkeyNotificationWindow);
+	return KeyboardInstallHotkey(hotkeyVkCode, W2T(bstrModifierName), &m_hHotkeyNotificationWindow, pDispDocument);
 }
 
 //
@@ -518,13 +519,15 @@ __declspec(dllexport) void CALLBACK RestartExplorer(HWND hParent, HINSTANCE hIns
 	::WinExec("Explorer.exe",SW_SHOW);
 }
 
-DWORD WINAPI ShutdownThread(void*)
+DWORD WINAPI ShutdownThread(void* pParam)
 {
+	HWND hDQSDWnd = (HWND)pParam;
+
 	// Wait for DQSD to be gone
 	LONG startTime = GetTickCount();
 	while(((LONG)GetTickCount() - startTime) < 10000)
 	{
-		if(!IsWindow(UtilitiesFindDQSDWindow(false)))
+		if(!IsWindow(hDQSDWnd))
 		{
 			// We're gone
 
@@ -538,12 +541,12 @@ DWORD WINAPI ShutdownThread(void*)
 }
 
 
-STDMETHODIMP CLauncher::ShutdownBar()
+STDMETHODIMP CLauncher::ShutdownBar(LPDISPATCH pDispDocument)
 {
 //	return Error(_T("Shutdown bar not implemented yet..."), IID_ILauncher, E_NOTIMPL);
 
 
-	HWND hDQSDWnd = UtilitiesFindDQSDWindow(false);
+	HWND hDQSDWnd = UtilitiesFindDQSDWindow(pDispDocument);
 	if(hDQSDWnd == NULL)
 	{
 		return Error(_T("DQSD was not found on the taskbar"), IID_ILauncher, E_FAIL);
@@ -585,7 +588,7 @@ STDMETHODIMP CLauncher::ShutdownBar()
 				DestroyWindow(hRebarBand);
 
 				DWORD threadId;
-				::CreateThread(NULL, 0, ShutdownThread, NULL,0, &threadId);
+				::CreateThread(NULL, 0, ShutdownThread, hDQSDWnd,0, &threadId);
 
 				return S_OK;
 			}

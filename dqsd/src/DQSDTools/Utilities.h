@@ -1,6 +1,8 @@
 
 #pragma once
 
+extern HWND g_hDQSDWindow;
+
 INTERNET_SCHEME GetScheme(LPCTSTR szURL);
 int URLMatchesFilename(LPCTSTR szURL, LPCTSTR szFile);
 
@@ -10,4 +12,4 @@ int URLMatchesFilename(LPCTSTR szURL, LPCTSTR szFile);
 // Return:
 //		The window handle, or null if we fail
 HWND
-UtilitiesFindDQSDWindow(bool bCheckForNonTaskbar = true);
+UtilitiesFindDQSDWindow(LPDISPATCH pDispDocument);

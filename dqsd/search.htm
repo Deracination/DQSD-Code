@@ -857,12 +857,13 @@ function postStartup()
   try
   {
     keyboardHook = new ActiveXObject("DQSDTools.Launcher");
-    keyboardHook.InstallKeyboardHook();
+
+    keyboardHook.InstallKeyboardHook(document);
 
     if(hotkeyCharacter != "")
-      keyboardHook.RegisterHotKey(hotkeyCharacter.charCodeAt(0), hotkeyModifiers);
+      keyboardHook.RegisterHotKey(hotkeyCharacter.charCodeAt(0), hotkeyModifiers, document);
     else if(hotkeyVkCode != 0)
-      keyboardHook.RegisterHotKey(hotkeyVkCode, hotkeyModifiers);
+      keyboardHook.RegisterHotKey(hotkeyVkCode, hotkeyModifiers, document);
 
     keyboardHook.MapKeyCode( historySearchVkCode, 2 ); // Map key to the history search
 
@@ -880,7 +881,7 @@ function shutdown()
 {
    try
    {
-      keyboardHook.ShutdownBar();
+      keyboardHook.ShutdownBar(document);
    }
    catch(e)
    {

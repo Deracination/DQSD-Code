@@ -163,7 +163,7 @@ LRESULT CALLBACK NotificationWndProc(
 			}
 		}
 
-		HWND hBarWnd = UtilitiesFindDQSDWindow();
+		HWND hBarWnd = g_hDQSDWindow; // UtilitiesFindDQSDWindow();
 		if(hBarWnd == NULL)
 		{
 			return 0;
@@ -244,9 +244,9 @@ LRESULT CALLBACK NotificationWndProc(
 // Install a keyboard hook on the search deskbars message handler thread
 //
 //
-HRESULT KeyboardHookInstall()
+HRESULT KeyboardHookInstall(HWND hBarWnd)
 {
-	HWND hBarWnd = UtilitiesFindDQSDWindow();
+//	HWND hBarWnd = UtilitiesFindDQSDWindow();
 
 	// Did we find the window?
 	if(hBarWnd == NULL)
@@ -275,9 +275,9 @@ HRESULT KeyboardHookInstall()
 //		HRESULT
 //
 HRESULT
-KeyboardInstallHotkey(int vkCode, LPCTSTR pModifierNames, HWND* phwndNotification)
+KeyboardInstallHotkey(int vkCode, LPCTSTR pModifierNames, HWND* phwndNotification, LPDISPATCH pDispDocument)
 {
-	HWND hBarWnd = UtilitiesFindDQSDWindow();
+	HWND hBarWnd = UtilitiesFindDQSDWindow(pDispDocument);
 	if(hBarWnd == NULL)
 	{
 		return CLauncher::Error(IDS_ERR_HOTKEY_NO_BAR_WINDOW, IID_ILauncher, E_FAIL);

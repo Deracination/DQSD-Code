@@ -75,7 +75,7 @@ STDMETHODIMP CMenuBuilder::SetSite(IUnknown* pUnkSite)
   return S_OK;
 }
 
-STDMETHODIMP CMenuBuilder::Display( VARIANT* pvarSelection )
+STDMETHODIMP CMenuBuilder::Display(LPDISPATCH pDispDocument, VARIANT* pvarSelection)
 {
 	USES_CONVERSION;
 
@@ -84,7 +84,7 @@ STDMETHODIMP CMenuBuilder::Display( VARIANT* pvarSelection )
 	pvarSelection->pbstrVal = NULL;
 	pvarSelection->vt = VT_NULL;
 
-	HWND hwndDQSD = UtilitiesFindDQSDWindow();
+	HWND hwndDQSD = UtilitiesFindDQSDWindow(pDispDocument);
 
 	RECT rcParentWnd;
 	::GetWindowRect( hwndDQSD, &rcParentWnd );

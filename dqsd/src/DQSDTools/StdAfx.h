@@ -15,6 +15,7 @@
 #endif
 
 #define WINVER 0x410
+#define _WIN32_IE 0x0501
 
 #define _ATL_APARTMENT_THREADED
 
