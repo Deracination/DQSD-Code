@@ -38,6 +38,7 @@
 #define IDC_CSSbackgroundColor          234
 #define IDC_CSSborder                   235
 #define IDC_MutuallyExclusiveSwitches   236
+#define IDC_ShowHideHTML                237
 
 // Next default values for new objects
 // 
@@ -45,7 +46,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        206
 #define _APS_NEXT_COMMAND_VALUE         32768
-#define _APS_NEXT_CONTROL_VALUE         237
+#define _APS_NEXT_CONTROL_VALUE         238
 #define _APS_NEXT_SYMED_VALUE           106
 #endif
 #endif

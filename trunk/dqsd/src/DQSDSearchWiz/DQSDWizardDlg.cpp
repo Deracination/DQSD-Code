@@ -61,6 +61,14 @@ LRESULT CDQSDWizardDlg::OnInitDialog(UINT uMsg, WPARAM wParam, LPARAM lParam, BO
 	{
 		USES_CONVERSION;
 
+		RECT rcDialog;
+		GetWindowRect( &rcDialog );
+
+		m_nTallDialogHeight = rcDialog.bottom - rcDialog.top;
+		ShrinkDialog();
+
+		OnChangeSwitches( 0, 0, NULL, bHandled );
+
 	#ifdef _DEBUG
 		CWindow( GetDlgItem( IDC_SearchName ) ).SetWindowText( _T("xyzzy") );
 		CWindow( GetDlgItem( IDC_SearchTitle ) ).SetWindowText( _T("xyzzy Search") );
@@ -124,7 +132,7 @@ LRESULT CDQSDWizardDlg::OnInitDialog(UINT uMsg, WPARAM wParam, LPARAM lParam, BO
 		ctlFormList2.SendMessage( LVM_INSERTCOLUMN, 0, (LPARAM)&lvc );
 		
 		lvc.pszText = _T("action");
-		lvc.cx = 500;
+		lvc.cx = 430;
 		lvc.iOrder = 1;
 		ctlFormList2.SendMessage( LVM_INSERTCOLUMN, 1, (LPARAM)&lvc );
 
@@ -259,6 +267,14 @@ LRESULT CDQSDWizardDlg::OnFormListItemChanged(int idCtrl, LPNMHDR pNMHDR, BOOL& 
 
 		if ( pNMListView->uNewState == 3 )
 		{
+			BSTR bstr = NULL;
+			if ( SUCCEEDED( (*pspForm)->get_outerHTML( &bstr ) ) )
+			{
+				CWindow ctlForm = GetDlgItem( IDC_FormFields );
+				ctlForm.SetWindowText( W2T( bstr ) );
+				::SysFreeString( bstr );
+			}
+
 			m_spSelectedStyle = NULL;
 			(*pspForm)->get_style( &m_spSelectedStyle );
 
@@ -285,6 +301,7 @@ LRESULT CDQSDWizardDlg::OnFormListItemChanged(int idCtrl, LPNMHDR pNMHDR, BOOL& 
 			return 1;
 		}
 
+#if 0
 		// Get the current FORM selection and display it's HTML
 		// just to help the user know which form to use
 
@@ -315,6 +332,8 @@ LRESULT CDQSDWizardDlg::OnFormListItemChanged(int idCtrl, LPNMHDR pNMHDR, BOOL& 
 				}
 			}
 		}
+#endif
+
 	}
 	catch ( ... )
 	{
@@ -1074,8 +1093,63 @@ string CDQSDWizardDlg::GetScriptFieldName( const string& rstrFieldName )
 
 LRESULT CDQSDWizardDlg::OnDestroy(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 {
-	m_spSelectedStyle->put_cssText( m_bstrUnselectedStyle );
-	m_spSelectedStyle = NULL;
+	if ( m_spSelectedStyle )
+	{
+		m_spSelectedStyle->put_cssText( m_bstrUnselectedStyle );
+		m_spSelectedStyle = NULL;
+	}
+
+	return 0;
+}
+
+LRESULT CDQSDWizardDlg::OnClickedShowHideHTML(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHandled)
+{
+	RECT rcDialog;
+	GetWindowRect( &rcDialog );
+
+	if ( m_nTallDialogHeight == ( rcDialog.bottom - rcDialog.top ) )
+	{
+		ShrinkDialog();
+	}
+	else
+	{
+		GrowDialog();
+	}
+	return 0;
+}
+
+void CDQSDWizardDlg::ShrinkDialog()
+{
+	RECT rcDialog;
+	GetWindowRect( &rcDialog );
+
+	RECT rcHTML;
+	CWindow( GetDlgItem( IDC_FormFields ) ).GetWindowRect( &rcHTML );
+	CWindow( GetDlgItem( IDC_ShowHideHTML ) ).SetWindowText( _T("&HTML >>") );
+
+	rcDialog.bottom -= ( rcHTML.bottom - rcHTML.top + 7 );
+
+	SetWindowPos( HWND_NOTOPMOST, &rcDialog, 0 );
+}
+
+void CDQSDWizardDlg::GrowDialog()
+{
+	RECT rcDialog;
+	GetWindowRect( &rcDialog );
+
+	CWindow( GetDlgItem( IDC_ShowHideHTML ) ).SetWindowText( _T("<< &HTML") );
+
+	rcDialog.bottom = ( rcDialog.top + m_nTallDialogHeight );
+
+	SetWindowPos( HWND_NOTOPMOST, &rcDialog, 0 );
+}
+
+LRESULT CDQSDWizardDlg::OnChangeSwitches(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHandled)
+{
+	TCHAR szSwitches[ 8 ];
+	::GetWindowText( GetDlgItem( IDC_Switches ), szSwitches, LENGTHOF( szSwitches ) - 1 );
+
+	CWindow( GetDlgItem( IDC_MutuallyExclusiveSwitches ) ).EnableWindow( _tcslen( szSwitches ) > 0 );
 
 	return 0;
 }
