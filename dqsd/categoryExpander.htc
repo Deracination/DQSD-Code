@@ -4,81 +4,81 @@
 <property name="type"/>
 
 <script language="JScript">
-	function onReadyStateChange()
-	{
-		var el = event.srcElement;
+  function onReadyStateChange()
+  {
+    var el = event.srcElement;
 
-		el.style.cursor = 'hand';
-		el.style.color = "#800080";
+    el.style.cursor = 'hand';
+    el.style.color = "#800080";
 
-		if ( type )
-		{
-			el.title = (type == 'expandall' ? 'Expand all category groupings.  (Very helpful if searching this window)' : 'Collapse all category groupings');
-			return;
-		}
-		
-		el.innerText = '[-]';
-		el.style.fontFamily = 'Courier New';
-		el.style.fontSize = '11px';
-		el.title = 'Collapse list of searches for this category';
-		
-		doClick();
+    if ( type )
+    {
+      el.title = (type == 'expandall' ? 'Expand all category groupings.  (Very helpful if searching this window)' : 'Collapse all category groupings');
+      return;
+    }
+    
+    el.innerText = '[-]';
+    el.style.fontFamily = 'Courier New';
+    el.style.fontSize = '11px';
+    el.title = 'Collapse list of searches for this category';
+    
+    doClick();
 
-		var elTable = el.parentElement;
-		while ( elTable && elTable.tagName != 'TABLE' )
-			elTable = elTable.parentElement;
+    var elTable = el.parentElement;
+    while ( elTable && elTable.tagName != 'TABLE' )
+      elTable = elTable.parentElement;
 
-		elTable = elTable.parentElement;
-		while ( elTable && elTable.tagName != 'TBODY' )
-			elTable = elTable.parentElement;
+    elTable = elTable.parentElement;
+    while ( elTable && elTable.tagName != 'TBODY' )
+      elTable = elTable.parentElement;
 
-		var elCount = el.parentElement.all('categoryCount');
-		var nCount = elTable.children[ category ].length;
-		elCount.innerText = '(' + (nCount ? nCount : 1) + ')';
-	}
-	
-	function doClick()
-	{
-		try
-		{
-			var el = event.srcElement;
-			if ( type )
-			{
-				var elBody = el.parentElement;
-				while ( elBody && elBody.tagName != 'BODY' )
-					elBody = elBody.parentElement;
-				var expanders = elBody.all( 'categoryExpander' );
-				for ( var i = 0; i < expanders.length; i++ )
-				{
-					expanders[i].innerText = type == 'expandall' ? '[+]' : '[-]';
-					expanders[i].fireEvent("onclick");
-				}
-				return;
-			}
-		
-			var elTable = el.parentElement;
-			while ( elTable && elTable.tagName != 'TABLE' )
-				elTable = elTable.parentElement;
+    var elCount = el.parentElement.all('categoryCount');
+    var nCount = elTable.children[ category ].length;
+    elCount.innerText = '(' + (nCount ? nCount : 1) + ')';
+  }
 
-			elTable = elTable.parentElement;
-			while ( elTable && elTable.tagName != 'TBODY' )
-				elTable = elTable.parentElement;
-				
-			var expand = el.innerText.substring( 0, 3 ) == '[+]';
+  function doClick()
+  {
+    try
+    {
+      var el = event.srcElement;
+      if ( type )
+      {
+        var elBody = el.parentElement;
+        while ( elBody && elBody.tagName != 'BODY' )
+          elBody = elBody.parentElement;
+        var expanders = elBody.all( 'categoryExpander' );
+        for ( var i = 0; i < expanders.length; i++ )
+        {
+          expanders[i].innerText = type == 'expandall' ? '[+]' : '[-]';
+          expanders[i].fireEvent("onclick");
+        }
+        return;
+      }
+    
+      var elTable = el.parentElement;
+      while ( elTable && elTable.tagName != 'TABLE' )
+        elTable = elTable.parentElement;
 
-			var rows = elTable.children[ category ];
-			if ( !rows.length )
-				rows = new Array( rows );
-			for ( var i = 0; i < rows.length; i++ )
-				rows[i].style.display = (expand ? '' : 'none');
-				
-			el.innerText = '[' + (expand ? '-' : '+') + ']';
-			el.title = (expand ? 'Collapse' : 'Expand') + ' list of searches for this category';
+      elTable = elTable.parentElement;
+      while ( elTable && elTable.tagName != 'TBODY' )
+        elTable = elTable.parentElement;
+        
+      var expand = el.innerText.substring( 0, 3 ) == '[+]';
 
-		}
-		catch ( e )
-		{
-			alert( e.description );
-		}
-	}
+      var rows = elTable.children[ category ];
+      if ( !rows.length )
+        rows = new Array( rows );
+      for ( var i = 0; i < rows.length; i++ )
+        rows[i].style.display = (expand ? '' : 'none');
+        
+      el.innerText = '[' + (expand ? '-' : '+') + ']';
+      el.title = (expand ? 'Collapse' : 'Expand') + ' list of searches for this category';
+
+    }
+    catch ( e )
+    {
+      alert( e.description );
+    }
+  }
 </script>
