@@ -91,6 +91,7 @@ function checkWebForUpdate()
     // Load asynchronously to make sure explorer.exe doesn't lock up if this takes a while
     // (has been known to happen)
     checkUpdateOnlineVersionDOM = getMSXMLDOMDocumentInstance();
+    checkUpdateOnlineVersionDOM.async = true;
     checkUpdateOnlineVersionDOM.onreadystatechange = onVersionLoadReadyStateChange;
     checkUpdateOnlineVersionDOM.load( DQSD_CHECKUPDATE_URL );
   }
