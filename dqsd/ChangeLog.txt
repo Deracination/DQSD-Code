@@ -26,6 +26,8 @@ Modified Searches
 Bug Fixes
 
 * Depending on the configured editor, spaces in the config file path would cause problems.  Fix by quoting filename.
+* Fix from Gregg Tavares for "[ 643945 ] Does not run in Japanese Windows":
+  http://sourceforge.net/tracker/index.php?func=detail&aid=643945&group_id=42081&atid=432066
 
 
 -- What's new for 3.1.4.4 beta (October 24, 2002)
