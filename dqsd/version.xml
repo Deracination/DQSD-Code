@@ -5,10 +5,10 @@
         <majorhi>3</majorhi>
         <majorlo>0</majorlo>
         <minorhi>0</minorhi>
-        <minorlo>19</minorlo>
+        <minorlo>18</minorlo>
     </version>
     <date>
-    12-Jul-2002
+    7-Jul-2002
     </date>
     <html_description>
         You are currently running version %lv <nobr>(%ld)</nobr> of <a href="http://www.dqsd.net" onclick="window.close();">Dave's Quick Search Deskbar</a>.<br/><br/>
