@@ -26,6 +26,7 @@ Modified Searches
 * tinyurl - changed example so it wouldn't wrap
 * mac - added help display if a question mark or no args are specified
 * rgb - added ability to accept hex numbers and decimal numbers separated with non-digits, display hsl in the output
+* md5 - select the generated md5 hash
 
 Bug Fixes
 
