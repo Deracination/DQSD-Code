@@ -1,11 +1,11 @@
-Version 0.6 (beta) - ???
+Version 0.6 (beta) - 4-Sep-2002
 
-* Fixed some problems with IFRAMEs
+* Fixed handling of no ACTION attribute for FORMs
+* Fixed problems with IFRAMEs and FRAMES
 * Display outerHTML for FORM elements instead of innerHTML
 * Added <copyright> to search files
 * Fixed bugs causing incorrect URLs for the <LINK> and the form 'action'
-* Removed unnecessary generated script for opening a window, because 
-  nullArgs does it automatically if a <LINK> is supplied.
+* Removed unnecessary generated script for opening a window, because 'nullArgs()' does it automatically if a <LINK> is supplied.
 * Fixed crash when an OPTION tag with no value and no text is encountered.
 
 Version 0.5 (beta) - 21-Aug-2002

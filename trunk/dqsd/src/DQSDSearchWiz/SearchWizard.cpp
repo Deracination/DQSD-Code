@@ -67,7 +67,12 @@ STDMETHODIMP CSearchWizard::Exec(const GUID*, DWORD nCmdID, DWORD, VARIANTARG*, 
 		HR(spDoc2->get_forms(&spFormCollection));
 		HR(spFormCollection->get_length( &cForms ));
 
-		if ( cForms == 0 ) // ??? Should really check to see if this is a <FRAMESET> I think
+		CComQIPtr<IHTMLFramesCollection2> spFrames;
+		HR(spDoc2->get_frames( &spFrames ));
+		long cFrames = 0;
+		HR(spFrames->get_length( &cFrames ));
+
+		if ( cForms == 0 && cFrames > 0 )
 		{
 			if ( IDNO == ::MessageBox( hwndBrowser, 
 									   _T("There are multiple frames in the current document, none of which are active.  "
@@ -86,6 +91,7 @@ STDMETHODIMP CSearchWizard::Exec(const GUID*, DWORD nCmdID, DWORD, VARIANTARG*, 
 
 	// Get the forms
 
+	spFormCollection = NULL;
 	HR(spActiveFrameDoc->get_forms(&spFormCollection));
 
 	cForms = 0;
