@@ -3,43 +3,63 @@
   <description>Search references of various flavors of Javascript. Uses Google.
     <div class="helpboxDescLabels">Usage:</div>
     <table class="helpboxDescTable">
-      <tr><td>jsref &lt;<i>item</i>&gt; [/version] [/unlucky]</td></tr>
+      <tr><td>jsref &lt;<i>item</i>&gt; [/<i>reference</i>] [/unlucky]</td></tr>
     </table>
     <div class="helpboxDescLabels">Switches:</div>
       <table class="helpboxDescTable">
-        <tr><td>/<i>version</i></td><td> - </td><td>
-          One of the following references:<br/>
+        <tr><td>/<i>reference</i></td><td> - </td><td>Search one of the following references:</td></tr>
+        <tr><td></td><td></td><td>
+          <b>The ones that use Google</b> (they take you directly to the page):<br/>
           <table class="helpboxDescTable">
-            <tr><td>/1.3</td><td> - </td><td>1.3 Netscape version</td></tr>
-            <tr><td>/1.4</td><td> - </td><td>1.4 Netscape version</td></tr>
-            <tr><td>/1.5</td><td> - </td><td>1.5 Netscape version</td></tr>
-            <tr><td>/5.6</td><td> - </td><td>5.6 Microsoft version (default)</td></tr>
-            <tr><td>/7</td><td> - </td><td>.NET Microsoft version</td></tr>
-          </table></td></tr>
-        <tr><td>/unlucky</td><td> - </td><td>Try this if you feel unlucky :(</td></tr>
-        
+            <tr><td>1.3</td><td> - </td><td>1.3 Netscape version</td></tr>
+            <tr><td>1.4</td><td> - </td><td>1.4 Netscape version</td></tr>
+            <tr><td>1.5</td><td> - </td><td>1.5 Netscape version</td></tr>
+            <tr><td><b>5.6</b></td><td> - </td><td>5.6 Microsoft version <b>(default)</b></td></tr>
+            <tr><td>7</td><td> - </td><td>.NET Microsoft version</td></tr>
+          </table>
+          <b>The one that uses the MS search</b>:<br/>
+          <table class="helpboxDescTable">
+            <tr><td>ms</td><td> - </td><td>Microsoft's latest version</td></tr>
+          </table>
+        </td></tr>
+        <tr><td>/unlucky</td><td> - </td><td>Try this if you feel unlucky (only for Google-based switches)</td></tr>
       </table>
-    <div class="helpboxDescLabels">Example:</div>
+    <div class="helpboxDescLabels">Examples:</div>
     <table class="helpboxDescTable">
       <tr><td>jsref split</td></tr>
       <tr><td>jsref split /1.5</td></tr>
       <tr><td>jsref split /7</td></tr>
+      <tr><td>jsref logical or /unlucky</td></tr>
       <tr><td>jsref abstract /7</td></tr>
+      <tr><td>jsref abstract /ms</td></tr>
     </table>
   </description>
   <link>http://developer.netscape.com/docs/manuals/javascript.html</link>
   <category>Computers</category>
   <contributor>MLL, from jdk.xml</contributor>
   
-  <form name="jsreff" action="http://www.google.com/search" method="get">
+  <form name="jsreff_gg" action="http://www.google.com/search" method="get">
     <input type="hidden" name="q"/>
     <input type="hidden" name="meta" value=""/>
     <input type="hidden" name="btnI" value="I'm Feeling Lucky"/>
   </form>
  
- <form name="jsreff_ul" action="http://www.google.com/search" method="get">
+ <form name="jsreff_ggul" action="http://www.google.com/search" method="get">
     <input type="hidden" name="q"/>
     <input type="hidden" name="meta" value=""/>
+  </form>
+
+  <form name="jsreff_ms"
+        method="get"
+        action="http://search.microsoft.com/default.asp">
+    <input type="hidden" name="so" value="RECCNT" />
+    <input type="hidden" name="siteid" value="us/dev" />
+    <input type="hidden" name="p" value="1" />
+    <input type="hidden" name="nq" value="NEW" />
+    <input type="hidden" name="qu" value="" />
+    <input type="hidden" name="boolean" value="ALL" />
+    <input type="hidden" name="ig" value="02" />
+    <input type="hidden" name="i" value="60" />
   </form>
 
   <script><![CDATA[
@@ -51,10 +71,12 @@
         openSearchWindow(defpage);
       else
       {
-        var args = parseArgs(q, "1.5, 1.4, 1.3, 5.6, 7, unlucky");
+        var args = parseArgs(q, "1.3, 1.4, 1.5, 5.6, 7, ms, unlucky");
         if( args.q == "?" ) return nullArgs( "jsref", "?" );
 
-        var myform = document.jsreff;
+        var myform = document.jsreff_gg;
+        var myfield = myform.q;
+        var ul = false, ms=false
 
         /*
         we somehow shoot in the dark here. putting args.q in a inurl operator would be much better,
@@ -72,28 +94,31 @@
             switch (args.switches[j].name)
             {
               case "unlucky":
-                myform = document.jsreff_ul;
+                ul = true;
+                myform = document.jsreff_ggul;
+                myfield = myform.q;
                 break;
               case "1.3":
+                k++;
                 defpage = 'http://developer.netscape.com/docs/manuals/js/client/jsref/index.htm';
                 query = args.q + ' inurl:jsref -inurl:ix -inurl:whatsnew site:developer.netscape.com';
-                k++;
                 break;
               case "1.4":
+                k++;
                 defpage = 'http://developer.netscape.com/docs/manuals/js/core/jsref14/index.htm';
                 query = args.q + ' inurl:jsref14 -inurl:ix site:developer.netscape.com';
-                k++;
                 break;
               case "1.5":
+                k++;
                 defpage = 'http://developer.netscape.com/docs/manuals/js/core/jsref15/contents.html';
                 query = args.q + ' inurl:jsref15 -inurl:ix site:developer.netscape.com';
-                k++;
                 break;
               case "5.6":
-                //we don't change anything : default search - political choice <g>
                 k++;
+                //we don't change anything : default search - political choice <g>
                 break;
               case "7":
+                k++;
                 defpage = 'http://msdn.microsoft.com/library/en-us/jscript7/html/jsoriProgrammingWithJScriptNET.asp';
                 /*
                 we somehow shoot in the dark here. putting args.q in a inurl operator would be much better,
@@ -102,14 +127,21 @@
                 the query below may be fine-tuned somewhat more
                 */
                 var query = args.q + ' jscript requirements inurl:"jscript7" site:msdn.microsoft.com';
-                k++;
                 break;
+              case "ms":
+                k++;
+                ms = true;
+                defpage = 'http://msdn.microsoft.com/library/en-us/jscript7/html/jsoriProgrammingWithJScriptNET.asp';
+                query = args.q;
+                myform = document.jsreff_ms;
+                myfield = myform.qu
+                break;;
               default:
                 nullArgs ( "jsref" , "?" );
                 return false;
             } //switch
           } //for
-          if( k > 1 )
+          if( k > 1 || (ul && ms) )
           {
             nullArgs ( "jsref" , "?" );
             return false;
@@ -120,15 +152,15 @@
           openSearchWindow(defpage);
           return;
         }
-        myform.q.value = query;
+        myfield.value = query;
         submitForm(myform);
       }
     }
   ]]></script>
 
   <copyright>
-	Copyright (c) 2002 David Bau
-	Distributed under the terms of the
-	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  Copyright (c) 2002 David Bau
+  Distributed under the terms of the
+  GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
   </copyright>
 </search>
