@@ -1,6 +1,6 @@
 <search function="racetv">
    <name>Racing TV Coverage</name>
-   <description>Displays a current TV listing of racing events in US and Canada.
+   <description>Displays a current TV listing of auto racing events in US and Canada.
    <table class="helpboxDescTable">
       <tr><td><div class="helpboxDescLabels">Switches:</div></td></tr>
       <tr><td>US (default)</td><td>/us</td></tr>
@@ -27,8 +27,6 @@
       return false;
    }
    //defaults
-   var windowW = 760; 
-   var windowH = 215;
    var urlstart="http://www.geocities.com/racefantv/USTV.htm";
    var wintitle="US"
    var tzname="Eastern";
@@ -88,13 +86,16 @@
    //get the response content from the remote site
    var sBody = xmlHttp.responseText;
 
+   // Replace the third column width with null so the text will stretch to the end of the table
+   var rex = new RegExp ('width="570"', 'g') ;
+   sBody = sBody.replace(rex, '') ;
 
    // Replace the line breaks with returns or the regex wont work
-   var rex = new RegExp ('\n', 'g') ;
+   rex = new RegExp ('\n', 'g') ;
    sBody = sBody.replace(rex, '\r') ;
    
-   var re = new RegExp( ".*" + datestring + "(.*)", "im" ); 
-   var r = sBody.match( re )[1];
+   rex = new RegExp( ".*" + datestring + "(.*)", "im" ); 
+   var r = sBody.match( rex )[1];
 
    //dont do anything unless there is an offset from the default Eastern timezone
    if (offset>0) {
@@ -151,7 +152,7 @@
    if (typeof r == 'undefined'){
       return;
    }else{
-      var RacingSearchBodyCode = "<html><head><style>table,td {border:1px solid black;margin:0px;padding-left:2px;border-collapse:collapse;}</style></head><body>";
+      var RacingSearchBodyCode = "<html><head><style>table {width:100%;border-collapse:collapse;}td {border:1px solid black;margin:0px;padding-left:2px;}</style></head><body>";
       RacingSearchBodyCode += "<center><span style=font-weight:bold;color:#900000;>"+wintitle+" Racing TV times ("+tzname+" Timezone)</span></center><table><tr> "+tableleadin+r+"</body></html>";
 
       var racetvoutfile = DQSDLauncher.AppDataDirectory + '\\racetv.html';     
