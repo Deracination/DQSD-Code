@@ -1,5 +1,5 @@
 <search function="cddb">
-  <name>Gracenote CDDB Search</name>
+  <name>Gracenote CDDB</name>
   <description>Search CDDB by /artist, /album, /song, or a combination of the three. <nobr>Example: "cddb Madonna /artist /title"</nobr></description>
   <category>Entertainment</category>
   <link>http://www.cddb.com/</link>

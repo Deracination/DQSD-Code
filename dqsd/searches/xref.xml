@@ -1,29 +1,26 @@
-  <search function="xref">
-    <name>Xrefer Reference Lookup</name>
-    <description>Searches dozens of reference titles: "xref venice"</description>
-    <category>Reference</category>
-    <link>http://www.xrefer.com/</link>
-    <contributor></contributor>
-    <form name="xreferf"
-        method="get"
+<search function="xref">
+  <name>Xrefer Reference Lookup</name>
+  <description>Searches dozens of reference titles: "xref venice"</description>
+  <category>Reference</category>
+  <link>http://www.xrefer.com/</link>
+  <form name="xreferf"
+        target="_blank"
         action="http://www.xrefer.com/results.jsp"
-        target="_blank">
-      <input type="hidden" name="shelf"/>
-      <input type="hidden" name="term"/>
-    </form>
-    <script><![CDATA[
-    function xref(q)
+        method="get">
+    <input type="hidden" name="shelf"/>
+    <input type="hidden" name="term"/>
+  </form>
+  <script><![CDATA[
+  function xref(q)
+  {
+    if (q == "")
+      openSearchWindow("http://www.xrefer.com");
+    else
     {
-      if (q == "")
-      {
-        openSearchWindow("http://www.xrefer.com");
-      }
-      else
-      {
-        document.xreferf.term.value = q;
-        document.xreferf.shelf.value = "search all"
-        submitForm(xreferf);
-      }
+      document.xreferf.term.value = q;
+      document.xreferf.shelf.value = "search all"
+      submitForm(xreferf);
     }
-    ]]></script>
-  </search>
+  }
+  ]]></script>
+</search>
