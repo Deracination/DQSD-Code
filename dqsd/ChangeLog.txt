@@ -23,6 +23,10 @@ New Searches
 * whsc - search whois.sc
 * mmoz - Search for music info at MusicMoz.org
 * j2 - Searches JavaScript-2.com, an index of 8,000+ free JavaScript codes offered by the top JavaScript code libraries (M. Wong)
+* tvtm - "Here is a little search I whipped up, using DSQD Search Wizard, after discovering www.tvtome.com." (Steve P.)
+* banyg - A search to ban email addresses from several yahoogroups at once. (Shawn H.)
+* mefi - An XML file to enable searching for the Metafilter community weblog (Pete M.)
+* ts - A search to access the Terminal Services/RD Web Client. (shawn H.)
 
 Modified Searches
 
