@@ -27,6 +27,7 @@ Modified Searches
 * &, gg /cache - Moved from 'Other' category to 'Search the Web'
 * pg - Added /ebi switch to search Tecriture.com's Ebook Initiative site.
 * af - changed the default search to use an GET instead of a POST. Improved load time in mozilla.
+* jdk - restricted to target English-language reference pages (Google is picking up a mix of languages).
 
 Enhancements
 

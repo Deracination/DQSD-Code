@@ -24,6 +24,7 @@
   <form name="jdkf" action="http://www.google.com/search" method="get">
     <input type="hidden" name="q"/>
     <input type="hidden" name="meta" value=""/>
+    <input type="hidden" name="lr" value="lang_en"/>
     <input type="hidden" name="btnI" value="I'm Feeling Lucky"/>
   </form>
 
