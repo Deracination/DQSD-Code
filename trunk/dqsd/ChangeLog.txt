@@ -1,3 +1,22 @@
+-- What's new for ?????
+
+New Searches
+
+* 
+
+Modified Searches
+
+* gg - /fresh switch disappeared (/since is enough) - /since now requires a number of days, to a d, w or m and gets independant of goosearch
+
+Enhancements
+
+* 
+
+Bug Fixes
+
+* 
+
+
 -- What's new for 3.0.0.22 (beta)
 
 New Searches

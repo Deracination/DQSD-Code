@@ -10,14 +10,7 @@
       <tr><td>/directory</td><td> - </td><td>Search Google's copy of the DMOZ open directory.</td></tr>
       <tr><td>/images</td><td> - </td><td>Search for images.</td></tr>
       <tr><td>/news</td><td> - </td><td>Search for news (<i>warning : google news still in beta, .com only, english only mode</i>).</td></tr>
-      <tr><td>/fresh</td><td> - </td><td>Search pages based on when they were indexed.  Use /since to specify when:
-                                         <div style="padding: 0 0 0 20px">
-                                         /since:t - indexed today (default)<br/>
-                                         /since:y - indexed yesterday<br/>
-                                         /since:w - indexed in the last 7 days<br/>
-                                         /since:m - indexed in the last 30 days
-                                         </div>
-                                         </td></tr>
+      <tr><td>/since:days</td><td> - </td><td>Search pages based on when they were indexed.  Use days to specify when.</td></tr>
       <tr><td>/cache</td><td> - </td><td>Given a URL, loads Google's cached copy of the web page.</td></tr>
       <tr><td>/related</td><td> - </td><td>Given a URL, finds other sites closely related.</td></tr>
       <tr><td>/link</td><td> - </td><td>Given a URL, finds other sites that link to it.</td></tr>
@@ -92,9 +85,9 @@
   <form name="ggf_news"
         action="http://news.google.com/news"
         method="get">
-  	<!-- commented out for test <input type="hidden" name="hl" value="en"/> -->
+    <!-- commented out for test <input type="hidden" name="hl" value="en"/> -->
     <input type="hidden" name="hl" value=""/>
-	  <input type="hidden" name="q"/>
+    <input type="hidden" name="q"/>
   </form>
   
   <form name="ggf_fresh"
@@ -104,12 +97,26 @@
     <input type="hidden" name="datemod" value="0" />
   </form>
 
-  
+
   <script><![CDATA[
-  //by MLL: warning : news service is still in beta stage, so URLs below may change
+
+
+    function julian(Y,M,D) {
+    //inspired from http://pacific.commerce.ubc.ca/xr/julian.html
+    //(did not check it toroughly, but seems to work)
+       with (Math) {
+         jd=367*Y-floor(7*(Y+floor((M+9)/12))/4)
+           -floor(3*(floor((Y+(M-9)/7)/100)+1)/4)
+           +floor(275*M/9)+D+1721028;
+       }
+       return jd;
+    }
+
+
     function gg(q)
+    //by MLL: warning : news service is still in beta stage, so URLs below may change
     {
-      var args = parseArgs(q, "ifl, advanced, groups, directory, images, news, fresh, cache, related, link, local, canada, deutschland, france, italia, uk, language, since");
+      var args = parseArgs(q, "ifl, advanced, groups, directory, images, news, since, cache, related, link, local, canada, deutschland, france, italia, uk, language");
       var mode, local, local_meta = "", local_tld = "com", msglang = "";
       
       if( nullArgs( "gg", args.q ) ) return false;
@@ -168,85 +175,90 @@
           case "directory": openSearchWindow("http://images.google." + local_tld + "/dirhp"); return;
           case "groups": openSearchWindow("http://www.google." + local_tld + "/grphp"); return;
           case "news": openSearchWindow("http://www.google." + local_tld + "/news"); return;
-          case "fresh": openSearchWindow("http://www.researchbuzz.com/toolbox/goofresh.shtml"); return;
           default: openSearchWindow("http://www.google." + local_tld); return;
         }
       
-      else if( mode )
-      {
-        // Perform a validity check on the specified switch
-        if((mode == "related" || mode == "cache" || mode == "link") && !isURL(args.q))
-        {
-          nullArgs("gg","?"); 
-          return false;
-        }
-        
-        switch( mode )
-        {
-          case "ifl":
-            document.ggf_ifl.q.value = args.q;
-            document.ggf_ifl.hl.value = msglang;
-            submitForm(ggf_ifl);
-            break;
-          case "advanced":
-            document.ggf_adv.q.value = args.q;
-            document.ggf_adv.hl.value = msglang;
-            submitForm(ggf_adv);
-            break;
-          case "directory":
-            document.ggf.q.value = args.q;
-            document.ggf.hl.value = msglang;
-            document.ggf.cat.value = "gwd/Top";
-            submitForm(ggf);
-            break;
-          case "images":
-            document.ggf_image.q.value = args.q;
-            document.ggf_image.hl.value = msglang;
-            submitForm(ggf_image);
-            break;
-          case "related":
-            document.ggf.q.value="related:" + args.q;
-            document.ggf.hl.value = msglang;
-            submitForm(ggf);
-            break;
-          case "cache":
-            document.ggf.q.value="cache:" + args.q;
-            document.ggf.hl.value = msglang;
-            submitForm(ggf);
-            break;
-          case "link":
-            document.ggf.q.value="link:" + args.q;
-            document.ggf.hl.value = msglang;
-            submitForm(ggf);
-            break;
-          case "groups":
-            document.ggf_groups.q.value = args.q;
-            document.ggf_groups.hl.value = msglang;
-            submitForm(ggf_groups);
-            break;
-          case "news":
-            document.ggf_news.q.value = args.q;
-            document.ggf_news.hl.value = msglang;
-            submitForm(ggf_news);
-            break;
-          case "fresh":
-            document.ggf_fresh.query.value = args.q;
-            switch ( args.switch_val["since"] )
-            {
-              case "y": document.ggf_fresh.datemod.value = "1"; break;
-              case "w": document.ggf_fresh.datemod.value = "7"; break;
-              case "m": document.ggf_fresh.datemod.value = "30"; break;
-              default: document.ggf_fresh.datemod.value = "0"; break;
-            }
-            submitForm(ggf_fresh);
-            break;
-        }
-      }
       else
       {
-        document.ggf.q.value = args.q;
-        document.ggf.hl.value = msglang;
-        submitForm(ggf);
+        //apply the daterange specification
+        if( args.switch_val["since"] == "" )
+        {
+          nullArgs("gg","?");
+          return false;
+        }
+        if( typeof args.switch_val["since"] != "undefined" )
+        {
+          var today = new Date();
+          var todayj = julian(today.getYear(),today.getMonth()+1,today.getDate());
+          var sincej = todayj - args.switch_val["since"];
+          args.q = args.q + " daterange:" + sincej + "-" + todayj;
+        }
+
+        if( mode )
+        {
+          // Perform a validity check on the specified switch
+          if((mode == "related" || mode == "cache" || mode == "link") && !isURL(args.q))
+          {
+            nullArgs("gg","?"); 
+            return false;
+          }
+
+          switch( mode )
+          {
+            case "ifl":
+              document.ggf_ifl.q.value = args.q;
+              document.ggf_ifl.hl.value = msglang;
+              submitForm(ggf_ifl);
+              break;
+            case "advanced":
+              document.ggf_adv.q.value = args.q;
+              document.ggf_adv.hl.value = msglang;
+              submitForm(ggf_adv);
+              break;
+            case "directory":
+              document.ggf.q.value = args.q;
+              document.ggf.hl.value = msglang;
+              document.ggf.cat.value = "gwd/Top";
+              submitForm(ggf);
+              break;
+            case "images":
+              document.ggf_image.q.value = args.q;
+              document.ggf_image.hl.value = msglang;
+              submitForm(ggf_image);
+              break;
+            case "related":
+              document.ggf.q.value="related:" + args.q;
+              document.ggf.hl.value = msglang;
+              submitForm(ggf);
+              break;
+            case "cache":
+              document.ggf.q.value="cache:" + args.q;
+              document.ggf.hl.value = msglang;
+              submitForm(ggf);
+              break;
+            case "link":
+              document.ggf.q.value="link:" + args.q;
+              document.ggf.hl.value = msglang;
+              submitForm(ggf);
+              break;
+            case "groups":
+              document.ggf_groups.q.value = args.q;
+              document.ggf_groups.hl.value = msglang;
+              submitForm(ggf_groups);
+              break;
+            case "news":
+              document.ggf_news.q.value = args.q;
+              document.ggf_news.hl.value = msglang;
+              submitForm(ggf_news);
+              break;
+          }
+        }
+        else
+        {
+          document.ggf.q.value = args.q;
+          document.ggf.hl.value = msglang;
+          submitForm(ggf);
+        }
       }
     }
   ]]></script>
