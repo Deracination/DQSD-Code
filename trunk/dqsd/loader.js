@@ -21,6 +21,31 @@ INTERNAL_FUNC_PREFIX = "_dqsd_internal_fn_";
 
 function addalias(alias, fname, name, desc, cat)
 {
+
+  // If this alias is already defined, then remove it from the search it was previously defined for
+  // so that the last alias definition wins (i.e., localaliases.txt overrides aliases.txt)
+  if (aliases[alias])
+  {
+    try 
+    {
+      var prevfname = aliases[alias];
+      var newaliases = [];
+      for ( var i = 0; i < searches[prevfname].aliases.length; i++ )
+      {
+        if ( searches[prevfname].aliases[i] != alias )
+        {
+          newaliases.push( searches[prevfname].aliases[i] );
+        }
+      }
+      searches[prevfname].aliases = newaliases;
+    }
+    catch (e)
+    {
+      alert("Error adding alias " + alias + " for function " + fname + ": " + e.description);
+      return;
+    }
+  }
+
   if (!searches[fname]) // no matching searches
   {
     var res;
