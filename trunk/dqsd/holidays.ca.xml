@@ -1,8 +1,8 @@
 <!--
    This file contains a listing of public holidays in Canada
-   (Ontario and Quebec) for the year(s) 2002.
+   (Ontario and Quebec) for the year(s) 2002/3.
 
-   - Bill Hewitt [bill.hewitt@mochamail.com] (02/04/2002)
+   - Bill Hewitt [bill.hewitt@mochamail.com] (02/04/2002 & 10/11/02)
      amended to include Quebec, thanks to Jocelyn Legault (02/13/2002)
 -->
 
@@ -14,7 +14,8 @@
      <date day="2" month="2"/>
   </event>
   <event name="Ash Wednesday" type="public_holiday">
-     <date dat="13" month="2" year="2002"/>
+     <date day="13" month="2" year="2002"/>
+     <date day="5" month="3" year="2003"/>
   </event>
   <event name="St. Valentine's Day" type="public_holiday">
      <date day="14" month="2"/>
@@ -24,24 +25,38 @@
   </event>
   <event name="Palm Sunday" type="public_holiday">
      <date day="24" month="3" year="2002"/>
+     <date day="13" month="4" year="2003"/>
+  </event>
+  <event name="Passover" type="public_holiday">
+     <date day="17" month="4" year="2003"/>
+  </event>
+  <event name="Good Friday" type="public_holiday">
+     <date day="29" month="3" year="2002"/>
+     <date day="18" month="4" year="2003"/>
   </event>
   <event name="Easter Sunday" type="public_holiday">
      <date day="31" month="3" year="2002"/>
+     <date day="20" month="4" year="2003"/>
   </event>
-  <event name="Easter Monday/April Fools" type="public_holiday">
+  <event name="Easter Monday" type="public_holiday">
      <date day="1" month="4" year="2002"/>
+     <date day="21" month="4" year="2003"/>
   </event>
-    <event name="Eastern Daylight Time Begins" type="public_holiday">
-       <date day="7" month="4" year="2002"/>
-    </event>
+  <event name="Eastern Daylight Time Begins" type="public_holiday">
+     <date day="7" month="4" year="2002"/>
+     <date day="6" month="4" year="2003"/>
+  </event>
   <event name="Mother's Day" type="public_holiday">
      <date day="12" month="5" year="2002"/>
+     <date day="11" month="5" year="2003"/>
   </event>
   <event name="Victoria Day" type="public_holiday">
      <date day="20" month="5" year="2002"/>
+     <date day="19" month="5" year="2003"/>
   </event>
   <event name="Father's Day" type="public_holiday">
      <date day="16" month="6" year="2002"/>
+     <date day="15" month="6" year="2003"/>
   </event>
   <event name="St. Jean Baptiste Day" type="public_holiday">
      <date day="24" month="6"/>
@@ -51,21 +66,27 @@
   </event>
   <event name="Simcoe Day" type="public_holiday">
      <date day="5" month="8" year="2002"/>
+     <date day="4" month="8" year="2003"/>
   </event>
   <event name="Labour Day" type="public_holiday">
      <date day="2" month="9" year="2002"/>
+     <date day="1" month="9" year="2003"/>
   </event>
   <event name="Rosh Hashanah" type="public_holdiay">
      <date day="7" month="9" year="2002"/>
+     <date day="27" month="9" year="2003"/>
   </event>
   <event name="Yom Kippur" type="public_holiday">
      <date day="16" month="9" year="2002"/>
+     <date day="6" month="10" year="2003"/>
   </event>
   <event name="Thanksgiving Day" type="public_holiday">
      <date day="14" month="10" year="2002"/>
+     <date day="13" month="10" year="2003"/>
   </event>
   <event name="Eastern Standard Time Begins" type="public_holiday">
      <date day="27" month="10" year="2002"/>
+     <date day="26" month="10" year="2003"/>
   </event>
   <event name="Halloween" type="public_holiday">
      <date day="31" month="10"/>
@@ -75,6 +96,7 @@
   </event>
   <event name="Hanukkah" type="public_holiday">
      <date day="30" month="11" year="2002"/>
+     <date day="20" month="12" year="2003"/>
   </event>
   <event name="Christmas Day" type="public_holiday">
      <date day="25" month="12"/>
