@@ -9,20 +9,20 @@
   </table>
   </description>
   <category>Fun</category>
-  <link>http://www.concordance.com/unscrambler.htm</link>
+  <link>http://www.wordsmith.org/anagram/anagram.cgi</link>
   <form name="unsf"
-        action="http://64.65.56.251/cgi-bin/unscrambler.pl"
-        method="post">
-    <input type="hidden" name="letters" value=""/>
+        action="http://www.wordsmith.org/anagram/anagram.cgi"
+        method="get">
+    <input type="hidden" name="anagram" value=""/>
   </form>
   <script><![CDATA[
     function uns(q)
     {
       if (q == "")
-        openSearchWindow("http://www.concordance.com/unscrambler.htm");
+        openSearchWindow("http://www.wordsmith.org/anagram/anagram.cgi");
       else
       {
-        document.unsf.letters.value=q;
+        document.unsf.anagram.value=q;
         submitForm(unsf);
       }
     }
