@@ -64,7 +64,7 @@
   <date day="30" month="4"></date>
   </event>
  <event name="Labor Day" type="public_holiday">
-  <date day="1" month="5" year="2003"></date>
+  <date day="1" month="5"></date>
  </event>
  <event name="Memorial Day" type="public_holiday">
   <date day="4" month="5"></date>
