@@ -1,6 +1,6 @@
 <search function="encarta">
   <name>Encarta Online Deluxe Search</name>
-  <category>Reference</category>
+  <category>Reference<category>General</category></category>
   <contributor> Andrew N. Carpenter</contributor>
   <link>http://encarta.msn.com/</link>
   <email>andy@andrewcarpenter.net</email>

@@ -14,7 +14,7 @@
   		<tr><td>cpan wall /author</td></tr>
   	</table>
   </description>
-  <category>Computers</category>
+  <category>Computers<category>Programming</category></category>
   <link>http://search.cpan.org/</link>
   <contributor>Monty Scroggins, Ryan Edwards</contributor>
   

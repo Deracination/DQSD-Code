@@ -1,6 +1,6 @@
 <search function="msda">
   <name>Microsoft Discussion List Archive</name>
-  <category>Computers</category>
+  <category>Computers<category>Reference</category></category>
   <contributor>Glenn Carr</contributor>
   <link>http://discuss.microsoft.com/archives/index.html</link>
   <email>glenn at glenncarr dot com</email>

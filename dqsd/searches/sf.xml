@@ -18,7 +18,7 @@
       <tr><td>sf /cvs dqsd</td></tr>
     </table>
   </description>
-  <category>Computers</category>
+  <category>Computers<category>Programming</category></category>
   <link>http://www.sourceforge.net/</link>
   <contributor>Brent Beardsley</contributor>
   

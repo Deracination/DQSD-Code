@@ -8,7 +8,7 @@
   		<tr><td>gtwhois 207.46.230.219</td></tr>
   	</table>
   </description>
-  <category>Computers</category>
+  <category>Computers<category>Networking</category></category>
   <link>http://geektools.com/cgi-bin/proxy.cgi</link>
   <contributor>Monty Scroggins</contributor>
   

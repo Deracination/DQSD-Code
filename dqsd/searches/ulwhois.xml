@@ -7,7 +7,7 @@
   		<tr><td>ulwhois dqsd.net</td></tr>
   	</table>
   </description>
-  <category>Computers</category>
+  <category>Computers<category>Networking</category></category>
   <link>http://whois.userland.com/</link>
   <contributor>Glenn Carr</contributor>
   

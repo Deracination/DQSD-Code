@@ -7,7 +7,7 @@
     </table>
   </description>
   <link>http://www.odci.gov/cia/publications/factbook/index.html</link>
-  <category>Reference</category>
+  <category>Reference<category>General</category></category>
   <contributor>David Bau</contributor>
   
   <form name="wfbf" action="http://www.google.com/search" method="get">

@@ -1,6 +1,6 @@
 <search function="wik">
   <name>Wikipedia</name>
-  <category>Reference</category>
+  <category>Reference<category>General</category></category>
   <contributor>Thad Kerosky</contributor>
   <link>http://www.wikipedia.org/</link>
   <description>

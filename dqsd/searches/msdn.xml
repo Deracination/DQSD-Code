@@ -12,7 +12,7 @@
   		<tr><td>msdn iframes /library</td></tr>
   	</table>
   </description>
-  <category>Computers</category>
+  <category>Computers<category>Programming</category></category>
   <link>http://msdn.microsoft.com/</link>
   <contributor>Ryan Edwards</contributor>
   

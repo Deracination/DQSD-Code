@@ -22,7 +22,7 @@
       <tr><td>freetrans /from:en /to:es http://www.whitehouse.gov</td></tr>
   	</table>
   </description>
-  <category>Reference</category>
+  <category>Reference<category>Language</category></category>
   <link>http://www.freetranslation.com</link>
   <contributor>Neel Doshi, Greg Mitchell</contributor>
   

@@ -8,7 +8,7 @@
     </tr>
   </table>  
   </description>
-  <category>Computers</category>
+  <category>Computers<category>Reference</category></category>
   <link>http://whatis.techtarget.com/</link>
   <form name="whatisf"
         action="http://whatis.techtarget.com/wsearchResults/1,290214,,00.html"

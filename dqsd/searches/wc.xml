@@ -12,7 +12,7 @@
   </description>
   <contributor>John W. Bairen, Jr.</contributor>
   <email>john_at_bairen_dot_net</email>
-  <category>Reference</category>
+  <category>Reference<category>General</category></category>
   <link>http://www.timeanddate.com/worldclock/search.html</link>
   
  <form name="wcf" method="get" action="http://www.timeanddate.com/worldclock/results.html">

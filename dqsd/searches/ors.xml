@@ -32,7 +32,7 @@
       <tr><td>ors /moz</td></tr>
     </table>
   </description>
-  <category>Computers</category>
+  <category>Computers<category>Networking</category></category>
   <link>http://www.oreillynet.com/</link>
   <contributor>Brent Beardsley</contributor>
   

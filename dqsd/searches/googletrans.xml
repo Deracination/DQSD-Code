@@ -25,7 +25,7 @@
       <tr><td>googletrans /from:en /to:es http://www.whitehouse.gov</td></tr>
     </table>
   </description>
-  <category>Reference</category>
+  <category>Reference<category>Language</category></category>
   <link>http://www.google.com/language_tools</link>
   <contributor>MLL, inspired by Neel Doshi &amp; Greg Mitchell's freetrans.xml</contributor>
 

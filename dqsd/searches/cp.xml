@@ -14,7 +14,7 @@
       <tr><td>cp Saurwein /a</td></tr>
     </table>
   </description>
-  <category>Computers</category>
+  <category>Computers<category>Programming</category></category>
   <link>http://www.codeproject.com/</link>
   <contributor>Andreas Saurwein</contributor>
   <form name="cpf" action="http://www.codeproject.com/info/search.asp" method="get">
