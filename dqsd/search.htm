@@ -123,6 +123,7 @@ ie_version=(uaMatch ? parseFloat(uaMatch[1]) : 0.0);
 
 <body onload='strt()' scroll='no'>
 
+
 <div style='display:none' id='delaymsg'></div>
 
 <script type='text/Jscript'>
@@ -621,6 +622,8 @@ function reload()
   window.location.reload(false);
 }
 </script>
+
+
   <table align='left'
         border=0
         cellpadding=0
@@ -684,7 +687,7 @@ if (dopopup)
   </tr>
   <tr>
    <td id='info' style='display:none'>
-    <img width=0 height=36><br>
+    <img width=0 height=36><br> 
     <b><a style='text-decoration:none;color:black' href='http://notesbydave.com/toolbar/searchdoc.htm' target='_blank' tabindex='-1'>
       Dave's Quick Search Deskbar</a></b>
     <br>
@@ -733,6 +736,7 @@ function handleResize()
 
   if (document.body.clientHeight > 256 && document.body.clientWidth > 256)
   {
+    // We seem to be off the toolbar
     document.all.info.style.display="block";
     document.deff.q.style.display="block";
     document.deff.q.style.top=0;
@@ -795,21 +799,22 @@ function postStartup()
 
   try
   {
-	  keyboardHook = new ActiveXObject("DQSDTools.Launcher");
-	  keyboardHook.InstallKeyboardHook();
+    keyboardHook = new ActiveXObject("DQSDTools.Launcher");
+    keyboardHook.InstallKeyboardHook();
 
-	  if(hotkeyCharacter != "")
-		keyboardHook.RegisterHotKey(hotkeyCharacter.charCodeAt(0));
-	  else if(hotkeyVkCode != 0)
-		keyboardHook.RegisterHotKey(hotkeyVkCode);
+    if(hotkeyCharacter != "")
+      keyboardHook.RegisterHotKey(hotkeyCharacter.charCodeAt(0), hotkeyModifiers);
+    else if(hotkeyVkCode != 0)
+      keyboardHook.RegisterHotKey(hotkeyVkCode, hotkeyModifiers);
+    
+//	keyboardHook.InitialiseBaseTooltip();
   }
   catch(e)
   {
-	  alert("There was a problem initializing the enhanced keyboard support - some key combinations and hotkeys may not work");
+	  alert("There was a problem initializing the enhanced keyboard support - some key combinations and hotkeys may not work (Error '" + e.description + "')");
 	  keyboardHook = null;
   }
 }
-
 </script>
 
 </body>
