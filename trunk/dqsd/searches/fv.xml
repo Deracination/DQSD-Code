@@ -1,5 +1,9 @@
 <search function="fv">
   <name>flightview.com</name>
+  <category>Travel</category>
+  <contributor>Allen B. MacKenzie (modified by Kim Gräsman)</contributor>
+  <link>http://www.flightview.com/</link>
+  <email>kim@mvps.org</email>
   <description>
     Obtain real-time info on commercial flights.  Type the two letter airline code followed by the flight number.  Airline codes can be obtained from the drop down box on <a href="http://www.flightview.com">www.flightview.com</a>.
     <br/><br/>
@@ -23,22 +27,18 @@
     <div class="helpboxDescLabels">Examples:</div>
     <table class="helpboxDescTable">
   		<tr><td>fv aa 2035</td></tr>
-  		<tr><td>fv us 5323</td></tr>
+  		<tr><td>fv as 341</td></tr>
     </table>
   </description>
-  <category>Travel</category>
-  <link>http://www.flightview.com/</link>
-  <contributor>Allen B. MacKenzie</contributor>
-  
   <form name="fvf"
-        action="http://www.flightview.com/fvFlightView/FlightViewCGI.exe"
-        method="get">
-    <input type="hidden" name="qtype" value="htm"/>
-    <input type="hidden" name="AL"/>
-    <input type="hidden" name="acid"/>
-    <input type="hidden" name="Find1" value="Find flight"/>
+        method="post"
+        action="http://www.flightview.com/TravelTools/ProcessFTQuery.asp?qt=af">
+    <input type="hidden" name="aln" value="" />
+    <input type="hidden" name="deparr" value="dep" />
+    <input type="hidden" name="alnn" value="-1" />
+    <input type="hidden" name="fn" value="" />
+    <input type="hidden" name="ddate" value="" />
   </form>
-  
   <script><![CDATA[
     function fv(q)
     {
@@ -48,18 +48,17 @@
       vars = q.split(" ")
       if (vars.length == 2)
       {
-        document.fvf.AL.value = vars[0].toUpperCase();
-        document.fvf.acid.value= vars[1];
+        document.fvf.aln.value = vars[0].toUpperCase();
+        document.fvf.fn.value = vars[1];
+        document.fvf.ddate.value = "Today";
         submitForm(fvf);
       }
       else
         nullArgs("fv","?");
     }
   ]]></script>
-
   <copyright>
-	Copyright (c) 2002 David Bau
-	Distributed under the terms of the
-	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
   </copyright>
 </search>
