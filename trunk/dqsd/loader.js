@@ -124,11 +124,27 @@ if (!searchRoot)
 
 try
 {
+  var xmldoc = new ActiveXObject( "MSXML.DOMDocument" );
+
   // Get optional searches in localsearch.xml
   var localSearches = document.all("localsearch").selectNodes("/searches/search");
   if (localSearches)
+  {
+    var localSearchFile = document.all("localsearch").src;
+    if (!xmldoc.loadXML(readFile(localSearchFile)))
+      alert('Unable to load search from ' + localSearchFile + ':  ' + xmldoc.parseError.reason );
+    else
+    {
     for (var iPrivate = 0; iPrivate < localSearches.length; iPrivate++)
+      {
+        var searchNode = localSearches[iPrivate];
+        if (searchNode.selectSingleNode("FORM") && !searchNode.selectSingleNode("form"))
+          alert('Search "' + searchNode.attributes.getNamedItem("function").text + '" needs lowercase <form> element');
+        else
       searchRoot.appendChild(localSearches[iPrivate]);
+      }
+    }
+  }
 
   // Get searches in the 'searches' subdirectory
   var searches = getFiles( "searches\\*.xml" );
@@ -136,7 +152,6 @@ try
   //sort the list of searches
   searches.sort(); 
   
-  var xmldoc = new ActiveXObject( "MSXML.DOMDocument" );
   for ( var i = 0; i < searches.length; i++ )
   {
     var xml = readFile("searches\\" + searches[i]);
@@ -153,6 +168,10 @@ try
       {
         qualifiedalert('Search "' + funcname + '" found in ' + "searches\\" + searches[i] + ' already exists.');
         continue;
+      }
+      else if (searchNode.selectSingleNode("/search/FORM"))
+      {
+        alert('Search "' + funcname + '" has a <FORM> element which probably needs to be lowercased (<form>)');
       }
       else
         searchRoot.appendChild(searchNode);
