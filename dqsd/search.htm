@@ -3,7 +3,7 @@
 <html>
 <!--
 Dave's Quick Search Deskbar
-Version 2.5.8-Beta 10 - June 11, 2002
+Version 2.5.8-Beta 11 - June 17, 2002
 
 Copyright (c) 2002 David Bau
 
@@ -464,7 +464,7 @@ function okp()
     case 14:
       prevnext(1);
       break;
-    
+
     default:
       return true;
   }
@@ -694,7 +694,7 @@ if (dopopup)
   </tr>
   <tr>
    <td id='info' style='display:none'>
-    <img width=0 height=36><br> 
+    <img width=0 height=36><br>
     <b><a style='text-decoration:none;color:black' href='http://notesbydave.com/toolbar/searchdoc.htm' target='_blank' tabindex='-1'>
       Dave's Quick Search Deskbar</a></b>
     <br>
@@ -813,7 +813,7 @@ function postStartup()
       keyboardHook.RegisterHotKey(hotkeyCharacter.charCodeAt(0), hotkeyModifiers);
     else if(hotkeyVkCode != 0)
       keyboardHook.RegisterHotKey(hotkeyVkCode, hotkeyModifiers);
-    
+
 //  keyboardHook.InitialiseBaseTooltip();
   }
   catch(e)
