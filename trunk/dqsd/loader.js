@@ -343,16 +343,33 @@ function loadAddons()
 {
   try
   {
-    // Get searches in the 'searches' subdirectory
-    var fileSearches = getFiles( "addons\\*" ).split('\n');
+    // Get searches in the 'addons' subdirectory
+    var addonDirs = getFiles( "addons\\*" ).split('\n');
     
-    for ( var i = 0; i < fileSearches.length; i++ )
+    for ( var i = 0; i < addonDirs.length; i++ )
     {
     
-      if ( fileSearches[i] == "." )
+      if ( addonDirs[i] == "." )
         continue;
+	
+	  // load addon js library file
+      var addonLibraryFileName = "addons\\"+addonDirs[i]+"\\"+addonDirs[i]+"_lib.js";
+      var addonLibrary = getFiles(addonLibraryFileName).split('\n');
+	  if (addonLibrary != null && addonLibrary.length == 1) {
+		document.write("<script type=\"text/Jscript\" src=\""+addonLibraryFileName+"\"></script>");
+	  }
 
-      loadSearchFile( "addons\\" + fileSearches[i] + "\\" + fileSearches[i] + ".xml" );
+      // load all addon xml search files
+	  var addonSearches = getFiles("addons\\"+addonDirs[i]+"\\*.xml").split('\n');
+	  for (var j = 0; j < addonSearches.length; j++)
+	  {
+	    // getFiles doesn't always work as expected; a problem with FindFirstFile/FindNextFile
+	    // especially with files named *.xml_sav or something similar.
+		if ( !/\.xml$/.test( addonSearches[j] ) )
+			continue;
+
+	      loadSearchFile( "addons\\" + addonDirs[i] + "\\" + addonSearches[j] );
+	  }
 
     }
 
