@@ -1,7 +1,7 @@
 <html>
 <!--
 Dave's Quick Search Deskbar
-Version 2.5.0 - December 22, 2001
+Version 2.5.1 dev version - December 23, 2001
 
 Copyright (c) 2001 David Bau
 
@@ -3449,7 +3449,7 @@ function buildcal()
     // highlight appropriately
     if (whichmonth != 0)
       cal += gray_start(Calendar.getTime()) + Calendar.getDate() + gray_end;
-    else if (weekday>0 && today.getDate()==Calendar.getDate())
+    else if (today.getDate()==Calendar.getDate())
       cal += today_start(Calendar.getTime()) + Calendar.getDate() + today_end;
     else
       cal += TD_start(Calendar.getTime()) + Calendar.getDate() + TD_end;
