@@ -1,7 +1,7 @@
 <search function="wik">
   <name>Wikipedia</name>
   <category>Reference<category>General</category></category>
-  <contributor>Thad Kerosky</contributor>
+  <contributor>Thad Kerosky, international stuff by MLL</contributor>
   <link>http://www.wikipedia.org/</link>
   <description>
   An open encylopedia based upon visitor contributions.
@@ -11,19 +11,46 @@
         <td>wik tuscanny</td>
       </tr>
     </table>
+    <div class="helpboxDescLabels">Language edition:</div>
+    <table class="helpboxDescTable">
+      <tr><td colspan="3">Display the wikipedia edition in...</td></tr>
+      <tr><td>/language:en</td><td> - </td><td>english (<strong>default</strong>)</td></tr>
+      <tr><td>/language:de</td><td> - </td><td>german</td></tr>
+      <tr><td>/language:ja</td><td> - </td><td>japanese</td></tr>
+      <tr><td>/language:fr</td><td> - </td><td>french</td></tr>
+      <tr><td>/language:nl</td><td> - </td><td>dutch</td></tr>
+      <tr><td>/language:es</td><td> - </td><td>spanish</td></tr>
+      <tr><td colspan="3">and many more... see <a href="http://meta.wikimedia.org/wiki/Complete_list_of_language_Wikipedias_available" target="_new">meta.wikimedia.org/wiki/Complete_list_of_language_Wikipedias_available</a></td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>wik earth</td></tr>
+      <tr><td>wik terre /language:fr</td></tr>
+    </table>
   </description>
+
   <form name="wikf"
         method="get"
-        action="http://www.wikipedia.org/w/wiki.phtml">
+        action="">
     <input type="hidden" name="search" value="" />
+    <input type="hidden" name="go" value="Go" />
+    <input type="hidden" name="fulltext" value="" />
   </form>
+
   <script><![CDATA[
     function wik(q)
     {
-      if( nullArgs("wik", q) )
-        return;
+      var args = parseArgs(q, "language");
+      var common_url = ".wikipedia.org/wiki/Special:Search", edition;
+      
+      if( nullArgs( "wik", args.q ) ) return false;
 
-      document.wikf.search.value = q;
+      // Establish the language edition the search will run in.
+      if ( !(args.switch_val["language"]) ) { edition = "en" } else { edition = args.switch_val["language"] } ;
+      document.wikf.action = "http://"+edition+common_url;
+
+
+      document.wikf.search.value = args.q;
       submitForm(wikf);
     }
   ]]></script>
