@@ -19,13 +19,11 @@
   <script><![CDATA[
     function ths(q)
     {
-      if (q == "")
-        openSearchWindow("http://www.thesaurus.com/");
-      else
-      {
-        document.thsf.words.value=q;
-        submitForm(thsf);
-      }
+      if( nullArgs("ths", q) )
+        return false;
+
+ 	  document.thsf.words.value=q;
+	  submitForm(thsf);
     }
   ]]></script>
 
