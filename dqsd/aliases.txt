@@ -6,6 +6,12 @@
 // localaliases.txt file which will not be overwritten when a new version of the
 // toolbar is installed.
 //
+// The format is as follows:
+// shortcut | search command | link/menu text | description text | category
+//
+// Shortcuts that reference a function name only, have the menu text extracted
+// from the function definition directly.
+//
 !|gg %s /ifl|I'm Feeling Lucky!|Automatically takes you to the first web page returned for your query|Search the Web
 ,|gg %s /groups|Google Groups|Search Usenet discussion forums|Search the Web
 >|gg %s /advanced|Google Advanced|Google Advanced Search|Search the Web
