@@ -94,18 +94,58 @@ var categories = {};
 var categoryarray = [];
 
 
-// 1. load search.xml and merge localsearch.xml
+// 1. load search.xml (if present), merge localsearch.xml (if present), merge files in 'searches' subdirectory
 
 var searchRoot = null;
 try
 {
   searchRoot = document.all("searchxml").selectSingleNode("searches");
+}
+catch (e) {}
+
+// If there's no searchxml XML, then create an empty search root
+if (!searchRoot)
+{
+  var searchDOM = new ActiveXObject("MSXML.DOMDocument");
+  searchRoot = searchDOM.createElement("searches");
+}
+
+try
+{
+  // Get optional searches in localsearch.xml
   var localSearches = document.all("localsearch").selectNodes("/searches/search");
-  for (var iPrivate = 0; iPrivate < localSearches.length; iPrivate++)
-    searchRoot.appendChild(localSearches[iPrivate]);
+  if (localSearches)
+    for (var iPrivate = 0; iPrivate < localSearches.length; iPrivate++)
+      searchRoot.appendChild(localSearches[iPrivate]);
+
+  // Get searches in the 'searches' subdirectory
+  var searches = getFiles( "searches\\*.xml" );
+  searches = searches.split('\n');
+  
+  var xmldoc = new ActiveXObject( "MSXML.DOMDocument" );
+  for ( var i = 0; i < searches.length; i++ )
+  {
+    var xml = readFile("searches\\" + searches[i]);
+    if (!xmldoc.loadXML(xml))
+    {
+      alert('Unable to load search from ' + searches[i] + ':  ' + xmldoc.parseError.reason );
+      continue;
+    }
+    else
+    {
+      var searchNode = xmldoc.selectSingleNode("/search");
+      var funcname = searchNode.attributes.getNamedItem("function").text;
+      if (searchRoot.selectSingleNode("/searches/search[@function='" + funcname + "']"))
+      {
+        alert('Search "' + funcname + '" found in ' + "searches\\" + searches[i] + ' already exists.');
+        continue;
+      }
+      else
+        searchRoot.appendChild(searchNode);
+    }
+  }
 }
 catch (except) {}
-
 
 
 // 2. eval all the scripts and doc.write all the forms
@@ -123,7 +163,6 @@ if (searchRoot)
     document.write(xforms[iPrivate].xml);
   }
 }
-
 
 
 // 3. define all the searches
