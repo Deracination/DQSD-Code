@@ -98,7 +98,7 @@
       en: "load the silver color scheme"
     };
     
-    var CONFIGURE_NONE_SCHEME_DESCRIPTION = 
+    var CONFIGURE_CLASSIC_SCHEME_DESCRIPTION = 
     {
       en: "Revert to no color scheme"
     };
@@ -118,9 +118,9 @@
       en: "Silver"
     };
     
-    var CONFIGURE_NONE_SCHEME_NAME = 
+    var CONFIGURE_CLASSIC_SCHEME_NAME = 
     {
-      en: "None"
+      en: "Classic"
     };
 
 
@@ -165,7 +165,7 @@
 	   mb.AppendMenuItem( local(CONFIGURE_BLUE_SCHEME_NAME), "loadcssfile(\"theme_blue.css\")", local(CONFIGURE_BLUE_SCHEME_DESCRIPTION), confthememenu);
 		mb.AppendMenuItem( local(CONFIGURE_OLIVE_SCHEME_NAME), "loadcssfile(\"theme_olive.css\")", local(CONFIGURE_OLIVE_SCHEME_DESCRIPTION), confthememenu);
 		mb.AppendMenuItem( local(CONFIGURE_SILVER_SCHEME_NAME), "loadcssfile(\"theme_silver.css\")", local(CONFIGURE_SILVER_SCHEME_DESCRIPTION), confthememenu);
-   	mb.AppendMenuItem( local(CONFIGURE_NONE_SCHEME_NAME), "loadcssfile(\"none\")", local(CONFIGURE_NONE_SCHEME_DESCRIPTION), confthememenu);
+   	mb.AppendMenuItem( local(CONFIGURE_CLASSIC_SCHEME_NAME), "loadcssfile(\"classic\")", local(CONFIGURE_CLASSIC_SCHEME_DESCRIPTION), confthememenu);
 		
 		mb.AppendSeparator(hmenu);
 		mb.AppendMenuItem( local(CONFIGURE_SYSTEM_ALIASES_NAME), "editConfigFile(\"aliases.txt\")", local(CONFIGURE_SYSTEM_ALIASES_DESCRIPTION), hmenu);
@@ -198,7 +198,7 @@
 	function loadcssfile (cssfilename)
 	{
 	   var install_dir = DQSDLauncher.InstallationDirectory;
-	   if (cssfilename == "none") {
+	   if (cssfilename == "classic") {
 	      writeFile(install_dir+'\\theme.css', "");
 	      reload();
 	      return;
