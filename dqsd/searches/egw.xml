@@ -17,10 +17,7 @@
     <input type="hidden" name="QUERY" value="" />
     <input type="hidden" name="MAXDOCS" value="20" />
   </form>
-  <form name="passwordf" action="">
-	<input type="hidden" name="password" value="" />
-	<input type="hidden" name="password_done" value="" />
-  </form>
+
   <script><![CDATA[
     function egw(q)
     {
