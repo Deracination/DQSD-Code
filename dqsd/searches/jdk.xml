@@ -3,13 +3,17 @@
   <description>Search Sun's JDK Javadoc. Uses Google.
     <div class="helpboxDescLabels">Switches:</div>
       <table class="helpboxDescTable">
-        <tr><td>/1.4</td><td> - </td><td>Version 1.4 JDK (default)</td></tr>
+        <tr><td>/1.1</td><td> - </td><td>Version 1.1 JDK</td></tr>
+        <tr><td>/1.2</td><td> - </td><td>Version 1.2 JDK</td></tr>
         <tr><td>/1.3</td><td> - </td><td>Version 1.3 JDK</td></tr>
-        <tr><td>/tutorial</td><td> - </td><td>Java language tutorial</td></tr>
+        <tr><td>/1.4</td><td> - </td><td>Version 1.4 JDK (default)</td></tr>
+        <tr><td>/1.5</td><td> - </td><td>Version 1.5 JDK</td></tr>
+        <tr><td>/all</td><td> - </td><td>Search all of java.sun.com</td></tr>
+        <tr><td>/api</td><td> - </td><td>Java API documentation list</td></tr>
         <tr><td>/j2ee</td><td> - </td><td>J2EE documentation</td></tr>
         <tr><td>/jls</td><td> - </td><td>Java language specification</td></tr>
         <tr><td>/jvm</td><td> - </td><td>Java VM specification</td></tr>
-        <tr><td>/all</td><td> - </td><td>Search all of java.sun.com</td></tr>
+        <tr><td>/tutorial</td><td> - </td><td>Java language tutorial</td></tr>
       </table>
     <div class="helpboxDescLabels">Example:</div>
     <table class="helpboxDescTable">
@@ -17,7 +21,7 @@
       <tr><td>jdk catch /tutorial</td></tr>
     </table>
   </description>
-  <link>http://java.sun.com/j2se/1.4.2/docs/api/</link>
+  <link>http://java.sun.com/j2se/1.4/docs/api/</link>
   <category>Computers<category>Programming</category></category>
   <contributor>David Bau</contributor>
   
@@ -34,22 +38,31 @@
     {
       var defpage = 'http://java.sun.com/j2se/1.4/docs/api/';
       var version = '"v1.4.2" inurl:api intitle:';
-      var args = parseArgs(q, "1.4, 1.3, all, tutorial, jls, jvm, j2ee");
+      var args = parseArgs(q, "all,api,jls,jvm,j2ee,tutorial,1.5,1.4,1.3,1.2,1.1");
 
-      if( nullArgs("jdk", args.q) )
+      if( nullArgs("jdk", q) )
+	  {
         return false;
-      else if (args.switches.length > 1)
+      }
+	  else if (args.switches.length > 1)
+	  {
         nullArgs("jdk","?");
-      else
+      }
+	  else
       {
         if (args.switches.length == 1)
         {
           switch (args.switches[0].name)
           {
             case "all":
-              version = ''; break;
+              version = '';
+			  break;
+			case "api":
+			  defpage = 'http://java.sun.com/reference/api/';
+			  version = '';
+			  break;
             case "tutorial":
-              defpage = 'http://java.sun.com/docs/books/tutorial/index.html';
+              defpage = 'http://java.sun.com/docs/books/tutorial/';
               version = 'inurl:nutsandbolts -inurl:reallybigindex -inurl:_keywords -inurl:TOC ';
               break;
             case "jls":
@@ -61,13 +74,25 @@
               version = 'inurl:vmspec inurl:2nd -inurl:VMSpecTOC ';
               break;
             case "j2ee":
-              defpage = 'http://java.sun.com/j2ee/sdk_1.3/techdocs/api/index.html';
+              defpage = 'http://java.sun.com/j2ee/1.4/docs/api/';
               version = 'inurl:j2ee inurl:api intitle:';
               break;
+			case "1.1":
+			  defpage = 'http://java.sun.com/products/archive/jdk/1.1/';
+			  version = '"v1.1" inurl:api intitle:';
+			  break;
+			case "1.2":
+			  defpage = 'http://java.sun.com/products/jdk/1.2/docs/api/';
+			  version = '"v1.2" inurl:api intitle:';
+			  break;
             case "1.3":
               defpage = 'http://java.sun.com/j2se/1.3/docs/api/';
               version = '"v1.3.1" inurl:api intitle:';
               break;
+			case "1.5":
+			  defpage = 'http://java.sun.com/j2se/1.5.0/docs/api/';
+			  version = '"v1.5" inurl:api intitle:';
+			  break;
             case "1.4":
             default:
               // this is the default already
