@@ -33,6 +33,7 @@
     action="http://translate.google.com/translate_t"
     method="post">
     <input type="hidden" name="text" />
+    <input type="hidden" name="ie" value="UTF8" />
     <input type="hidden" name="langpair" />
   </form>
 
@@ -40,6 +41,7 @@
   <form name="googletransfURL"
     action="http://translate.google.com/translate">
     <input type="hidden" name="u" />
+    <input type="hidden" name="ie" value="UTF8" />
     <input type="hidden" name="langpair" />
   </form>
 
@@ -71,7 +73,8 @@
       }
       else
       {
-        googletransfTEXT.text.value = args.q;
+         // Force UTF-8 encoding
+  	googletransfTEXT.text.value = utf8(args.q);
         googletransfTEXT.langpair.value = args.switch_val["from"] + "|" + args.switch_val["to"];
         submitForm(googletransfTEXT);
       }
