@@ -1,10 +1,10 @@
 <search function="webopedia">
   <name>Webopedia</name>
-  <description>Seach the weboopedia for technical terms and links: "we HTTP"</description>
+  <description>Seach the weboopedia for technical terms and links: "webopedia HTTP"</description>
   <contributor>Neel Doshi</contributor>
   <category>Computers</category>
   <link>http://www.webopedia.com/</link>
-  <form name="wef"
+  <form name="webopediaf"
         action="http://www.webopedia.com/SHARED/search_action.asp"
         method="post">
     <input type="hidden" name="term"/>
@@ -17,8 +17,8 @@
         return false;
       else
       {
-        document.wef.term.value = q;
-        submitForm(wef);
+        document.webopediaf.term.value = q;
+        submitForm(webopediaf);
         return true;
       }
     }
