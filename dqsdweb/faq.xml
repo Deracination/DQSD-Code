@@ -37,6 +37,7 @@
             <key name="F1">Display menu.</key>
             <key name="Ctrl-P, Up">Display previous search in history.</key>
             <key name="Ctrl-N, Down">Display next search in history.</key>
+            <key name="Shift [drag-n-drop]">When dragging text to the search bar, if the shift key is held down when dropping the text the default search won't be automatically invoked.</key>
           </key_bindings>
         </answer>
       </faq>
