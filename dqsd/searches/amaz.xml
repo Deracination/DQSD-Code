@@ -1,57 +1,52 @@
-  <search function="amaz">
-    <name>Search Amazon.com</name>
-    <description>Search specific stores
-      including books: "amaz b:harry potter", DVDs: "amaz d:shawshank",
-      music: "amaz m:moxy fruvous", toys: "amaz t:mindstorms"
-    </description>
-    <category>Shopping</category>
-    <link>http://amazon.com/</link>
-    <contributor>Dan Sanderson</contributor>
-    <form name="amzf"
-          target="_blank"
-          action="http://www.amazon.com/exec/obidos/search-handle-form"
-          method="post">
-      <input type="hidden" name="index" value="blended"/>
-      <input type="hidden" name="field-keywords"/>
-    </form>
-    <script><![CDATA[
-      function amaz(q)
+<search function="amaz">
+  <name>Amazon.com</name>
+  <description>Search specific stores including Books: "amaz harry potter /books", DVDs: "amaz shawshank /dvd", music: "amaz moxy fruvous /music", toys: "amaz mindstorms /toys"</description>
+  <category>Shopping</category>
+  <link>http://www.amazon.com/</link>
+  <switches>books, music, classical, dvd, vhs, movies, toys, baby, computers, software, games, electronics, photography, tools, magazines, garden, kitchen, travel, cellular, outlet, auctions, zshops</switches>
+  <contributor>Dan Sanderson, Ryan Edwards</contributor>
+  <form name="amzf"
+        target="_blank"
+        action="http://www.amazon.com/exec/obidos/search-handle-form"
+        method="post">
+    <input type="hidden" name="index"/>
+    <input type="hidden" name="field-keywords"/>
+  </form>
+  <script><![CDATA[
+    function amaz(q, switches)
+    {
+      if( q == "" )
+        openSearchWindow("http://www.amazon.com/");
+      else if( switches.length == 1 )
       {
-        var qa;
-        var nq;
-
-        if (q == "")
+        switch( switches[0] )
         {
-          openSearchWindow("http://www.amazon.com/");
+          case "movies":
+            document.amzf.index.value = "theatrical"; break;
+          case "computers":
+            document.amzf.index.value = "pc-hardware"; break;
+          case "games":
+            document.amzf.index.value = "videogames"; break;
+          case "photography":
+            document.amzf.index.value = "photo"; break;
+          case "cellular":
+            document.amzf.index.value = "wireless-phones"; break;
+          case "auctions":
+            document.amzf.index.value = "auction-redirect"; break;
+          case "zshops":
+            document.amzf.index.value = "fixed-price-redirect"; break;
+          default:
+            document.amzf.index.value = switches[0];
         }
-        else
-        {
-          // Check for special store queries, such as !!b:harry potter
-          if (qa = q.match(/^(.*):(.*)/)) {
-            nq = qa[2];
-
-            if (qa[1] == 'b') {
-              document.amzf.index.value="books";
-            } else if (qa[1] == 'm') {
-              document.amzf.index.value="music";
-            } else if (qa[1] == 'd') {
-              document.amzf.index.value="dvd";
-            } else if (qa[1] == 't') {
-              document.amzf.index.value="toys";
-
-            } else {
-              // If no single letter matches, use everything
-              // before the colon as the store name.
-              // For example:  !!kitchen:oxo good grips y-peeler
-              document.amzf.index.value=qa[1];
-            }
-
-            q = nq;
-          }
-      
-          document.amzf["field-keywords"].value=q;
-          submitForm(amzf);
-        }
+        document.amzf["field-keywords"].value = q;
+        submitForm(amzf);
       }
-    ]]></script>
-  </search>
+      else
+      {
+        document.amzf.index.value = "blended";
+        document.amzf["field-keywords"].value = q;
+        submitForm(amzf);
+      }
+    }
+  ]]></script>
+</search>
