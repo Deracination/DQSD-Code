@@ -1,6 +1,12 @@
 <search function="xref">
   <name>Xrefer Reference</name>
-  <description>Searches dozens of reference titles: "xref venice"</description>
+  <description>
+  Searches dozens of reference titles
+  <div class="helpboxDescLabels">Example:</div>
+  <table class="helpboxDescTable">
+     <tr><td>xref venice</td></tr>
+  </table>
+  </description>
   <category>Reference<category>General</category></category>
   <link>http://www.xrefer.com/</link>
   <form name="xreff"
