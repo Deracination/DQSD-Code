@@ -1,3 +1,5 @@
+var DQSD_BROWSER_WINDOW_NAME = "DQSDBrowserWindow";
+
 // IE 5.0 and earlier don't have splice, push
 if (!Array.prototype.splice)
 {
@@ -67,7 +69,7 @@ if (useExternalBrowser)
 // Open a search window either with the default browser or with IE
 function openSearchWindow(url)
 {
-  openNamedSearchWindow(url, "_blank");
+  openNamedSearchWindow(url, reuseBrowserWindow ? DQSD_BROWSER_WINDOW_NAME : "_blank");
 }
 
 // Open a search window in an existing frame
@@ -92,6 +94,19 @@ function openDocument(path)
 // Submit a form either with the default browser or with IE
 function submitForm(form)
 {
+  // Here's a safeguard for forgetting to put a target in the FORM
+  if (!form.target || (form.target && form.target == ''))
+    form.target = '_blank';
+
+  // Reuse a single window if the user wants to and the target is _blank
+  // Don't override targets with any other name because some searches may want
+  // their own window.
+  if ((reuseBrowserWindowMode > 0) && form.target && (form.target == '_blank'))
+  {
+    // 1=new window always; 2=new window for each search type
+    form.target = (reuseBrowserWindowMode == 1 ? DQSD_BROWSER_WINDOW_NAME : ("DQSDWindow_" + form.name));
+  }
+    
   if (useExternalBrowser && DQSDLauncher)
     DQSDLauncher.SubmitForm(form);
   else
