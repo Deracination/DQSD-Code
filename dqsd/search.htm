@@ -326,6 +326,7 @@ function direct(t)
 }
 
 reuseBrowserWindowModeOverride = reuseBrowserWindowMode;
+searchPrefix = '';
 
 // handle onkeypress: cut-copy-paste, ctrl-n, ctrl-p for next and previous
 // we need to do this because for some reason it's not done for us when
@@ -338,8 +339,17 @@ function okp()
   if (window.event.keyCode != 14 && window.event.keyCode != 16
       && window.event.keyCode != 3 && window.event.keyCode != 22
       && window.event.keyCode != 24 && window.event.keyCode != 10
-      && window.event.keyCode != 13 && window.event.keyCode != 1)
+      && window.event.keyCode != 13 && window.event.keyCode != 1
+      && window.event.keyCode != 2)
     return true;
+
+  if (window.event.keyCode == 2)
+  {
+  	histsearch( document.deff.q.value, window.event.shiftKey );
+  	return false;
+  }
+
+  searchPrefix = '';
 
   if (window.event.keyCode == 13)
   {
