@@ -1,0 +1,33 @@
+<search function="jdk">
+  <name>JDK Javadoc Search</name>
+  <description>Search Sun's JDK Javadoc. Uses Google.
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>php fopen</td></tr>
+  	</table>
+  </description>
+  <link>http://java.sun.com/j2se/1.4/docs/api/</link>
+  <category>Computers</category>
+  <contributor>David Bau</contributor>
+  
+  <form name="jdkf" action="http://www.google.com/search" method="get">
+    <input type="hidden" name="q"/>
+    <input type="hidden" name="meta" value=""/>
+    <input type="hidden" name="btnI" value="I'm Feeling Lucky"/>
+  </form>
+
+  <script><![CDATA[
+    // Uses Google I'm feeling lucky search
+    function jdk(q)
+    {
+      version = "v1.4.0";
+      if (q == "")
+        openSearchWindow("http://java.sun.com/j2se/1.4/docs/api/");
+      else
+      {
+        document.jdkf.q.value='intitle:' + q + ' "v1.4.0" site:java.sun.com inurl:docs/api';
+        submitForm(jdkf);
+      }
+    }
+  ]]></script>
+</search>

@@ -2,17 +2,21 @@
 
 New Searches
 
-* 
+* fm - Freshmeat.net search from Brent Beardsley
+* sf - Sourceforget.net search from Brent Beardsley 
+* jdk - searches the Sun JDK
 
 Modified Searches
 
 * acine - added /video switch
+* amaz - now tags to dqsd associate account, and added switches for catalog areas and restaurants
 * thw - updated the search (the form changed on the site) and added /category switch
 * ups - now allows spaces in tracking number(s)
 
 Enhancements
 
-* 
+* Dutch holidays to 2013 (in both Dutch and English language) from Johan Geertsma 
+
 
 Bug Fixes
 
