@@ -1,3 +1,18 @@
+-- What's new for ???
+
+New Searches
+
+* ns - New Scientist (from Glenn Carr)
+
+Modified Searches
+
+
+Enhancements
+
+
+Bug Fixes
+
+
 -- What's new for 3.1.4.3 beta (October 23, 2002)
 
 New aliases

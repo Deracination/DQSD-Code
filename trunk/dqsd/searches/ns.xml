@@ -1,0 +1,39 @@
+<search function="ns">
+  <name>New Scientist</name>
+  <category>Reference</category>
+  <contributor>Glenn Carr</contributor>
+  <link>http://www.newscientist.com/</link>
+  <email>glenn at glenncarr dot com</email>
+  <description>
+  Search NewScientist.com
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>ns jesus</td></tr>
+    </table>
+  </description>
+  <form name="nsf"
+        method="get"
+        action="http://www.newscientist.com/news/search/dosearch.jsp">
+    <input type="hidden" name="advsearch" value="" />
+    <input type="hidden" name="searchtype" value="all" />
+  </form>
+  <script><![CDATA[
+    function ns(q)
+    {
+      if( nullArgs("ns", q) )
+        return;
+
+      document.nsf.advsearch.value = q;
+      submitForm(nsf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 10/23/02 at 09:28:28
+    by Dave's Quick Search Deskbar Search Wizard version 1.0.0 ,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>
