@@ -1,0 +1,92 @@
+<search function="brit">
+  <name>Encyclopedia Britannica</name>
+  <description>
+    Search Encylopedia Britannica.<br/>
+    <div class="helpboxDescLabels">Switches:</div>
+  	<table class="helpboxDescTable">
+  		<tr><td>/all</td><td> - </td><td>All Britannica.com</td></tr>
+  		<tr><td>/eb</td><td> - </td><td>Encyclopedia Britannica</td></tr>
+  		<tr><td>/bse</td><td> - </td><td>Britannica Student Encyclopedia</td></tr>
+  		<tr><td>/bce</td><td> - </td><td>Britannica Concise Encyclopedia</td></tr>
+  		<tr><td>/web</td><td> - </td><td>Websites</td></tr>
+  		<tr><td>/vm</td><td> - </td><td>Video and Media</td></tr>
+  		<tr><td>/mag</td><td> - </td><td>Magazines</td></tr>
+  		<tr><td>/dict</td><td> - </td><td>Dictionary</td></tr>
+  		<tr><td>/thes</td><td> - </td><td>Thesaurus</td></tr>
+		
+  	</table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>brit tuba</td></tr>
+  	</table>
+  </description>
+  <category>Reference</category>
+  <link>http://www.britannica.com/</link>
+  <contributor>Brent Beardsley</contributor>
+  
+  <form name="brit_mag_search"
+	action="http://www.britannica.com/search/magazine"
+	method="get">
+	<input type="hidden" name="query" />
+
+  </form>
+
+  <form name="brit_search"
+        action="http://www.britannica.com/search"
+        method="get">
+    <input type="hidden" name="query"/>
+    <input type="hidden" name="ct"/>
+    <input type="hidden" name="fuzzy" value="N" />
+  </form>
+  
+  <script><![CDATA[
+    function brit(q)
+    {
+      if( nullArgs("brit", q) )
+        return false;
+
+      var args = parseArgs(q, "all, eb, bse, bce, web, vm, dict, thes, mag");
+      if( q == "" )
+        openSearchWindow("http://www.britannica.com/");
+      else if( args.switches.length == 1 )
+      {
+        switch( args.switches[0].name )
+        {
+          case "all":
+            document.brit_search.ct.value = ""; break;
+          case "eb":
+            document.brit_search.ct.value = "eb"; break;
+          case "bse":
+            document.brit_search.ct.value = "ebi"; break;
+          case "bce":
+            document.brit_search.ct.value = "gen1"; break;
+          case "web":
+            document.brit_search.ct.value = "igv"; break;
+          case "vm":
+            document.brit_search.ct.value = "vastvideo"; break;
+          case "dict":
+            document.brit_search.ct.value = "dict"; break;
+          case "thes":
+            document.brit_search.ct.value = "thes"; break;
+	  case "mag":
+	    document.brit_mag_search.query.value = args.q;
+	    submitForm(brit_mag_search);
+	    return false;
+	    break;
+          default:
+            document.brit_search.ct.value = args.switches[0].name; break;
+        }
+        document.brit_search.query.value = args.q;
+        submitForm(brit_search);
+      }
+      else if( args.switches.length > 1 )
+        nullArgs("brit","?");
+      else
+      {
+        document.brit_search.ct.value = "";
+        document.brit_search["query"].value = args.q;
+        submitForm(brit_search);
+      }
+    }
+  ]]></script>
+</search>

@@ -1,0 +1,111 @@
+<search function="ors">
+  <name>O'Reilly.com Search</name>
+  <description>
+    Search O'Reilly.com for articles, books, etc<br/>
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/all [default]</td><td> - </td><td>All of O'Reilly.com</td></tr>
+      <tr><td>/art</td><td> - </td><td>Articles</td></tr>
+      <tr><td>/book</td><td> - </td><td>Books</td></tr>
+      <tr><td>/conf</td><td> - </td><td>Conferences</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Dev Centers:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/apache</td><td> - </td><td>Apache Dev Center</td></tr>
+      <tr><td>/dotnet</td><td> - </td><td>.NET Dev Center</td></tr>
+      <tr><td>/java</td><td> - </td><td>Java Dev Center</td></tr>
+      <tr><td>/linux</td><td> - </td><td>Linux Dev Center</td></tr>
+      <tr><td>/moz</td><td> - </td><td>Mozilla Dev Center</td></tr>
+      <tr><td>/palm</td><td> - </td><td>Palm Dev Center</td></tr>
+      <tr><td>/php</td><td> - </td><td>PHP Dev Center</td></tr>
+      <tr><td>/perl</td><td> - </td><td>Perl Dev Center</td></tr>
+      <tr><td>/python</td><td> - </td><td>Python Dev Center</td></tr>
+      <tr><td>/soap</td><td> - </td><td>SOAP Dev Center</td></tr>
+      <tr><td>/webdev</td><td> - </td><td>Web Dev Center</td></tr>
+      <tr><td>/websevices</td><td> - </td><td>Web Services Dev Center</td></tr>
+      <tr><td>/wireless</td><td> - </td><td>Wireless Dev Center</td></tr>
+      <tr><td>/xml</td><td> - </td><td>XML Dev Center</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>ors php</td></tr>
+      <tr><td>ors /moz</td></tr>
+    </table>
+  </description>
+  <category>Computers</category>
+  <link>http://www.oreillynet.com/</link>
+  <contributor>Brent Beardsley</contributor>
+  
+  <form name="orssearch"
+        action="http://www.oreillynet.com/search/"
+        method="get">
+    <input type="hidden" name="sp-q"/>
+    <input type="hidden" name="sp-k"/>
+  </form>
+  
+  <script><![CDATA[
+    function ors(q)
+    {
+      if( nullArgs("ors", q) )
+        return false;
+
+      var args = parseArgs(q, "all, book, art, conf, apache, dotnet, java, linux, moz, palm, php, perl, python, soap, webdev, webservices, wireless, xml");
+      if( q == "" )
+        openSearchWindow("http://www.oreillynet.com");
+      else if( args.switches.length == 1 )
+      {
+        switch( args.switches[0].name )
+        {
+          case "all":
+            document.orssearch["sp-k"].value = "all"; break;
+          case "book":
+            document.orssearch["sp-k"].value = "books"; break;
+          case "art":
+            document.orssearch["sp-k"].value = "articles"; break;
+          case "conf":
+            document.orssearch["sp-k"].value = "conferences"; break;
+          case "apache":
+	    openSearchWindow("http://www.onlamp.com/apache/"); return false;
+          case "dotnet":
+	    openSearchWindow("http://www.oreillynet.com/dotnet/"); return false;
+          case "java":
+	    openSearchWindow("http://www.onjava.com/"); return false;
+          case "linux":
+	    openSearchWindow("http://linux.oreillynet.com/"); return false;
+          case "moz":
+	    openSearchWindow("http://www.oreillynet.com/mozilla/"); return false;
+	  case "palm":
+	    openSearchWindow("http://palmos.oreilly.com/"); return false;
+	  case "php":
+	    openSearchWindow("http://www.onlamp.com/php/"); return false;
+	  case "perl":
+	    openSearchWindow("http://perl.oreilly.com/"); return false;
+	  case "python":
+	    openSearchWindow("http://www.onlamp.com/python/"); return false;
+	  case "soap":
+	    openSearchWindow("http://www.oreillynet.com/topics/webservices/soap"); return false;
+	  case "webdev":
+	    openSearchWindow("http://www.oreillynet.com/javascript/"); return false;
+	  case "webservices":
+	    openSearchWindow("http://www.oreillynet.com/webservices/"); return false;
+	  case "wireless":
+	    openSearchWindow("http://www.oreillynet.com/wireless/"); return false;
+	  case "xml":
+	    openSearchWindow("http://www.xml.com/"); return false;
+	  default:
+            document.orssearch["sp-k"].value = args.switches[0].name; break;
+        }
+        document.orssearch["sp-q"].value = args.q;
+        submitForm(orssearch);
+      }
+      else if( args.switches.length > 1 )
+        nullArgs("ors","?");
+      else
+      {
+        document.orssearch["sp-k"].value = "all";
+        document.orssearch["sp-q"].value = args.q;
+        submitForm(orssearch);
+      }
+    }
+  ]]></script>
+</search>
