@@ -1,4 +1,4 @@
--- What's new for ???????
+-- What's new for 3.0.0.20 (beta)
 
 New Searches
 
