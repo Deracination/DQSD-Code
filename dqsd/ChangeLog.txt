@@ -6,6 +6,7 @@ Enhancements
 * Added windowOpenFeatures that can be set in local preferences to further customize the search windows that open up (from anonymous poster via Brent Beardsley)
 * Performance improvement to calendar (Will Dean)
 * Performance improvement to inline style generation (used by calendar and message boxes) (Will Dean)
+* added edit local stylesheet menu option and a new variable to set for the css editor called cssEditorExe so you can use TopStyle, Dreamweaver, etc (from Brent Beardsley)
 
 New Searches
 
