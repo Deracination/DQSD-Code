@@ -49,11 +49,12 @@
 		if (SearchFound)
 		{
 			//  Define the popup's final width
-			var windowW = 300;
+			var windowW = 350;
 			var QSFPopup = window.createPopup();
 			var QSFPopupBody = QSFPopup.document.body;
-  			var QFSBodyCode = "<table align=left border=0 cellspacing=1 cellpadding=2 width=" + (windowW - 5) +
-  				"><tr><td valign=top><style>" + convertStylesToInline() + "</style>";
+
+  			var QFSBodyCode = "<table border=0 cellspacing=1 cellpadding=2 width=100%>";
+  			QFSBodyCode += "<tr><td valign=top><style>" + convertStylesToInline() + "</style>";
 
 			//  Loop through the results to build the table in the popup
 			for (var i in SearchResults)
@@ -109,8 +110,10 @@
 			}
 			QFSBodyCode += "</table>";
 			QSFPopupBody.innerHTML = QFSBodyCode;
-  			QSFPopupBody.document.body.style.border="outset 2px";
-  			QSFPopupBody.document.body.style.background='menu';
+
+  			QSFPopup.document.body.style.border="outset 2px";
+  			QSFPopup.document.body.style.background='menu';
+  			QSFPopup.document.body.style.overflowY='auto';
 
 			// Temporatily show the popup to determine the proper final
 			// height for the popup.
@@ -119,7 +122,7 @@
 			QSFPopup.hide();
 
 			// Put a cap on the popup height
-			if (windowH  > window.screen.height-30)
+			if ( windowH  > window.screen.height-30 )
 			{
 				windowH = window.screen.height-30;
 			}
