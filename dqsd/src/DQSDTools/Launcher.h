@@ -60,6 +60,7 @@ public:
 	STDMETHOD(GetFiles)(/*[in]*/ BSTR bstrFileSpec, /*[out,retval]*/ BSTR* pbstrFiles);
 
 public:
+	STDMETHOD(InstallKeyboardHook)();
 	STDMETHOD(SetSite)(IUnknown* pUnkSite);
 
 // Implementation

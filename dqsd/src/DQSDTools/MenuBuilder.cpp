@@ -19,7 +19,9 @@ STDMETHODIMP CMenuBuilder::InterfaceSupportsErrorInfo(REFIID riid)
 	};
 	for (int i=0; i < sizeof(arr) / sizeof(arr[0]); i++)
 	{
-		if (InlineIsEqualGUID(*arr[i],riid))
+// WGD - I added the :: to the front of this because on my m/c, with the Platform SDK leading the include
+// order, there's a namespace problem here.
+		if (::InlineIsEqualGUID(*arr[i],riid))
 			return S_OK;
 	}
 	return S_FALSE;

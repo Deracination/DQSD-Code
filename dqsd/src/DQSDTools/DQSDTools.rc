@@ -129,6 +129,8 @@ BEGIN
     IDS_ERR_CANTFINDDQSD    "Cannot locate DQSD window"
     IDS_ERR_INVALIDHORIZALIGNMENT 
                             "Invalid HorizontalAlignment property value: 0 - Center, 1 - Left, 2 - Right"
+    IDS_ERR_CANT_INSTALL_KEYBOARD_HOOK 
+                            "DQSDTools.KeyboardHook - Can't install hook"
 END
 
 #endif    // English (U.S.) resources
