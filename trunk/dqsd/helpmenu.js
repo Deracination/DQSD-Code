@@ -127,7 +127,11 @@ function appendMRUMenuSelections( mb )
           if ( menus[i] == search.aliases[iAlias] )
           {
             var alias = getSearchAliases( search );
-            mb.AppendMenuItem( "&" + (menus.length - i) + "  " + search.name + '\t' + alias, search.aliases[0], 0 );
+            
+            // Create 'mneumonic' using the last digit of the number
+            var mnemonic = (menus.length - i).toString();
+            mnemonic = mnemonic.substr( 0, mnemonic.length - 1 ) + "&" + mnemonic.substr( mnemonic.length - 1 );
+            mb.AppendMenuItem( mnemonic + "  " + search.name + '\t' + alias, search.aliases[0], 0 );
             break;
           }
         }
