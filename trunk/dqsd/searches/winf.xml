@@ -1,0 +1,39 @@
+<search function="winf">
+  <name>Brian's Buzz WinFind</name>
+  <category>Computers<category>Reference</category></category>
+  <contributor>MLL</contributor>
+  <link>http://www.briansbuzz.com/</link>
+  <todo>add <a href="http://www.briansbuzz.com/search/">advanced search</a> possibilities</todo>
+  <description>
+  The Windows Tips Search Engine finds information for you from more than a dozen sources of reliable, trusted expertise
+  </description>
+  <form name="winff"
+        method="get"
+        action="http://search.atomz.com/search/">
+    <input type="hidden" name="sp-q" value="" />
+    <input type="hidden" name="sp-a" value="sp10026188" />
+    <input type="hidden" name="sp-p" value="all" />
+    <input type="hidden" name="sp-f" value="ISO-8859-1" />
+    <input type="hidden" name="sp-c" value="25" />
+    <input type="hidden" name="sp-x-1" value="body" />
+  </form>
+  <script><![CDATA[
+    function winf(q)
+    {
+      if( nullArgs("winf", q) )
+        return;
+
+      document.winff["sp-q"].value = q;
+      submitForm(winff);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 03/14/03 at 01:00:09
+    by Dave's Quick Search Deskbar Search Wizard version 1.1,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>
