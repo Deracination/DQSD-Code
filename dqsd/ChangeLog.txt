@@ -96,6 +96,7 @@ Modified Searches
 * jsref - attempts at fitting site changes (MLL)
 * winres - changed parsing to correct 'undefined' error and added ability to use preference variables (Shawn K. Hall)
 * enc - changed according to site changes (MLL)
+* wik - now supports international versions (MLL)
 
 Removed Searches
 * nwtsr and httpd replaced by whats (Kim Gräsman)
