@@ -205,27 +205,39 @@ if (searchRoot)
 //  var xscripts = searchRoot.selectNodes("search[" + xpathquery + "]/script");
 
   var xscripts = searchRoot.selectNodes("search/script");
+  var loadedScripts = new Object();
   for (var iPrivate = 0; iPrivate < xscripts.length; iPrivate++)
   {
     // ??? This seems like a hack, but the only way I can determine to load and evaluate
     // external scripts (referenced with the 'src' attribute), is by manually loading them.
     var externalScriptRef = xscripts[iPrivate].attributes.getNamedItem("src");
-    var xScriptVal;
+    var xScriptVal = null;
+
     if ( externalScriptRef )
     {
-      xScriptVal = readFile( externalScriptRef.text );
+      var externalScriptName = externalScriptRef.text;
+      if ( loadedScripts[ externalScriptName ] ) // External script is already loaded
+      {
+        //alert( externalScriptName + ' already loaded' );
+        continue;
+      }
+      
+      xScriptVal = readFile( externalScriptName );
+
+      loadedScripts[ externalScriptName ] = true;
     }
     else
     {
       xScriptVal = xscripts[iPrivate].text;
     }
+
     try
     {
       eval(xScriptVal);
     }
     catch(e)
     {
-      alert("An error ("+e+") occurred loading script '"+xScriptVal+"'");
+      alert("An error (" + e + ") occurred loading script '" + xScriptVal + "'");
     }
   }
 
