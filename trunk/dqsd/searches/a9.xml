@@ -7,9 +7,6 @@
   <description>
   Use A9 to search the web and "Search Inside the Book™" on Amazon.com. Includes helpful search history features.
   </description>
-  <form name="a9f" method="get" action="http://a9.com/">
-    <input type="hidden" name="q" value="" />
-  </form>
 
   <script><![CDATA[
     function a9(q)
@@ -17,8 +14,14 @@
       if( nullArgs("a9", q) )
         return;
 
-      document.a9f.q.value = q;
-      submitForm(a9f);
+      var urlprefix = "";
+      var args = parseArgs(q, "generic");
+      if ( args.switches.length > 0 ) {
+        switch( args.switches[0].name ) {
+          case "generic": urlprefix = "generic."; break;
+		}
+	  }
+	  openSearchWindow("http://" + urlprefix + "a9.com/" + escape(args.q));
     }
   ]]></script>
 
@@ -26,10 +29,4 @@
     The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
     Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
   </copyright>
-
-  <created_by>
-    This search file was initially created on 04/15/04 at 07:57:46
-    by Dave's Quick Search Deskbar Search Wizard version 1.2,
-    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
-  </created_by>
 </search>
