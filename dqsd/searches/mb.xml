@@ -1,0 +1,79 @@
+<search function="mb">
+  <name>MusicBrainz.org</name>
+  <category>Entertainment</category>
+  <contributor>MLL</contributor>
+  <link>http://musicbrainz.org/newsearch.html?search=dutr&amp;table=Artist</link>
+  <description>
+  Search the online user-contributed MusicBrainz music database
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr style="font-weight:bolder;"><td>/artist</td><td> - </td><td>search for an artist name (default)</td></tr>
+      <tr><td>/album</td><td> - </td><td>search for an album name</td></tr>
+      <tr><td>/track</td><td> - </td><td>search for a track name</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>mb bach</td></tr>
+      <tr><td>mb ting /album</td></tr>
+      <tr><td>mb jennifer she said /track</td></tr>
+    </table>
+  </description>
+  <form name="mbf"
+        method="get"
+        action="http://musicbrainz.org/newsearch.html">
+    <input type="hidden" name="limit" value="25" />
+    <input type="hidden" name="table" value="" />
+    <input type="hidden" name="search" value="" />
+  </form>
+  <script><![CDATA[
+    function mb(q)
+    {
+      if( nullArgs("mb", q) )
+        return;
+
+      // Parse switches with parseArgs:
+
+      // parseArgs usage:
+      // Arguments:
+      //    q                - string from the search function
+      //    expectedSwitches - list or array of the expected switch values
+      //    expandSwitches   - optional parameter [default = true] used to determine 
+      //                       if the switch shortcuts should be expanded (i.e. /f becomes /foo)
+      // Returns an object with these properties:
+      //    q        - the input string with the switches removed
+      //    switches - array of objects with these two properties:
+      //                  name:   expanded name of the matched switch (i.e. foo as in /foo:bar)
+      //                  value:  value of switch (i.e. bar as in /foo:bar)
+      //    switch_val - associative array with the switch name as the key with the switch value 
+      //                 as the value. (i.e. switch_val["foo"] = "bar" as in /foo:bar)
+
+      document.mbf.table.value = "artist";
+      var args = parseArgs(q, "artist, album, track");
+
+      //eliminate cases where you got more than 1 switch
+      if( args.switches.length > 1 )
+      {
+        nullArgs( "acine", "?" );
+        return false;
+      }
+
+      if ( args.switches.length == 1 )
+      {
+      document.mbf.table.value = args.switches[0].name;
+      }
+
+      document.mbf.search.value = args.q;
+
+      submitForm(mbf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 12/04/04 at 18:12:35
+    by Dave's Quick Search Deskbar Search Wizard version 1.3,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>
