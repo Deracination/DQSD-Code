@@ -10,6 +10,14 @@
       <tr><td>/directory</td><td> - </td><td>Search Google's copy of the DMOZ open directory.</td></tr>
       <tr><td>/images</td><td> - </td><td>Search for images.</td></tr>
       <tr><td>/news</td><td> - </td><td>Search for news (<i>warning : google news still in beta, .com only, english only mode</i>).</td></tr>
+      <tr><td>/fresh</td><td> - </td><td>Search pages based on when they were indexed.  Use /since to specify when:
+                                         <div style="padding: 0 0 0 20px">
+                                         /since:t - indexed today (default)<br/>
+                                         /since:y - indexed yesterday<br/>
+                                         /since:w - indexed in the last 7 days<br/>
+                                         /since:m - indexed in the last 30 days
+                                         </div>
+                                         </td></tr>
       <tr><td>/cache</td><td> - </td><td>Given a URL, loads Google's cached copy of the web page.</td></tr>
       <tr><td>/related</td><td> - </td><td>Given a URL, finds other sites closely related.</td></tr>
       <tr><td>/link</td><td> - </td><td>Given a URL, finds other sites that link to it.</td></tr>
@@ -89,18 +97,28 @@
 	  <input type="hidden" name="q"/>
   </form>
   
+  <form name="ggf_fresh"
+        action="http://www.researchbuzz.com/cgi-bin/goofresh.cgi" 
+        method="get">
+    <input type="hidden" Name="query" />
+    <input type="hidden" name="datemod" value="0" />
+  </form>
+
+  
   <script><![CDATA[
   //by MLL: warning : news service is still in beta stage, so URLs below may change
     function gg(q)
     {
-      var args = parseArgs(q, "ifl, advanced, groups, directory, images, news, cache, related, link, local, canada, deutschland, france, italia, uk, language");
+      var args = parseArgs(q, "ifl, advanced, groups, directory, images, news, fresh, cache, related, link, local, canada, deutschland, france, italia, uk, language, since");
       var mode, local, local_meta = "", local_tld = "com", msglang = "";
       
       if( nullArgs( "gg", args.q ) ) return false;
       
       // Establish the locale and mode the search will run in.
       if( args.switches.length > 0 )
+      {
         for( var j=0; j<args.switches.length; j++ )
+        {
           switch( args.switches[j].name )
           {
             case "canada": local_tld = "ca"; local_meta = "cr=countryCA"; break;
@@ -112,6 +130,7 @@
             case "local": local = true; break;
             
             case "language": msglang = args.switch_val["language"]; break;
+            case "since": break;
             
             default:
               if(mode) 
@@ -123,6 +142,8 @@
                 mode = args.switches[j].name;
               break;
           }
+        }
+      }
       
       // Change the form data to use the correct locale
       document.ggf.action = document.ggf_ifl.action = "http://www.google." + local_tld + "/search";
@@ -147,6 +168,7 @@
           case "directory": openSearchWindow("http://images.google." + local_tld + "/dirhp"); return;
           case "groups": openSearchWindow("http://www.google." + local_tld + "/grphp"); return;
           case "news": openSearchWindow("http://www.google." + local_tld + "/news"); return;
+          case "fresh": openSearchWindow("http://www.researchbuzz.com/toolbox/goofresh.shtml"); return;
           default: openSearchWindow("http://www.google." + local_tld); return;
         }
       
@@ -206,6 +228,17 @@
             document.ggf_news.q.value = args.q;
             document.ggf_news.hl.value = msglang;
             submitForm(ggf_news);
+            break;
+          case "fresh":
+            document.ggf_fresh.query.value = args.q;
+            switch ( args.switch_val["since"] )
+            {
+              case "y": document.ggf_fresh.datemod.value = "1"; break;
+              case "w": document.ggf_fresh.datemod.value = "7"; break;
+              case "m": document.ggf_fresh.datemod.value = "30"; break;
+              default: document.ggf_fresh.datemod.value = "0"; break;
+            }
+            submitForm(ggf_fresh);
             break;
         }
       }
