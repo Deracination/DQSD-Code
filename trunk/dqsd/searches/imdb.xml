@@ -1,29 +1,26 @@
-  <search function="imdb">
-    <name>Internet Movie Database</name>
-    <description>Lookup movies on imdb: "imdb jaws"</description>
-    <category>Entertainment</category>
-    <link>http://imdb.com/</link>
-    <form name="mdbf"
-          target="_blank"
-          action="http://www.imdb.com/Find"
-          method="post">
-      <input type="hidden" name="select" value="All"/>
-      <input type="hidden" name="for"/>
-      <input type="hidden" name="Go" value="Go"/>
-    </form>
-    <script><![CDATA[
-      // IMDB
-      function imdb(q)
+<search function="imdb">
+  <name>Internet Movie Database (IMDB)</name>
+  <description>Lookup movies, television shows, actors, dicectors and more on the IMDB: "imdb jaws"</description>
+  <category>Entertainment</category>
+  <link>http://www.imdb.com/</link>
+  <form name="mdbf"
+        target="_blank"
+        action="http://www.imdb.com/Find"
+        method="post">
+    <input type="hidden" name="select" value="All"/>
+    <input type="hidden" name="for"/>
+    <input type="hidden" name="Go" value="Go"/>
+  </form>
+  <script><![CDATA[
+    function imdb(q, switches)
+    { 
+      if( q == "" )
+        openSearchWindow("http://www.imdb.com/");
+      else
       {
-        if (q == "")
-        {
-          openSearchWindow("http://www.imdb.com/");
-        }
-        else
-        {
-          document.mdbf["for"].value = q;
-          submitForm(mdbf);
-        }
+        document.mdbf["for"].value = q;
+        submitForm(mdbf);
       }
-    ]]></script>
-  </search>
+    }
+  ]]></script>
+</search>
