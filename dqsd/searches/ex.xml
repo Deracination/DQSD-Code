@@ -1,19 +1,27 @@
 <search function="ex">
   <name>Excite</name>
-  <description>Search using Excite: "ex cable modems"</description>
+  <description>
+    Search using Excite.<br/>
+    <a class="helpboxDescLabels">Example:</a><br/>
+    <table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">ex cable modems</td></tr>
+  	</table>
+  </description>
   <category>Search the Web</category>
   <link>http://www.excite.com/</link>
+  
   <form name="exf"
         action="http://search.excite.com/search.gw"
         method="get">
     <input type="hidden" name="c" value="web"/>
     <input type="hidden" name="search"/>
   </form>
+  
   <script><![CDATA[
     function ex(q)
     {
-      if( q == "" )
-        openSearchWindow("http://www.excite.com/");
+      if( nullArgs("ex",q) )
+        return false;
       else
       {
         document.exf.search.value = q;

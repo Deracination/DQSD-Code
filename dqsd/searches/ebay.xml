@@ -1,8 +1,17 @@
 <search function="ebay">
   <name>eBay</name>
-  <description>Search eBay either by description or item number. Examples: "ebay guitars", "ebay 1503826268"</description>
+  <description>
+    Search eBay by description or by item number.<br/>
+    <a class="helpboxDescLabels">Examples:</a><br/>
+    <table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">ebay guitars</td></tr>
+      <tr><td class="helpboxDescColumns">ebay 1503826268</td></tr>
+  	</table>
+  </description>
   <category>Shopping</category>
   <link>http://www.ebay.com/</link>
+  <contributor>Ryan Edwards</contributor>
+  
   <form name="ebayf"
         action="http://search.ebay.com/search/search.dll"
         method="get">
@@ -11,13 +20,14 @@
     <input type="hidden" name="SortProperty" value="MetaEndSort"/>
     <input type="hidden" name="query"/>
   </form>
+  
   <script><![CDATA[
     function ebay(q)
     {
       var res = null;
       
-      if( q == "" )
-        openSearchWindow("http://www.ebay.com/");
+      if( nullArgs("ebay",q) )
+        return false;
       else if( (res = q.match( /^\s*(\d{9,)\s*$/ )) != null )
         openSearchWindow('http://cgi.ebay.com/aw-cgi/eBayISAPI.dll?MfcISAPICommand=ViewItem&item=' + res[1]);
       else

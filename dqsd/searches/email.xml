@@ -1,12 +1,22 @@
 <search function="email">
   <name>Email</name>
-  <description>Send an email using default handler: "email recepient(s); subject; body"</description>
+  <description>
+    Send an email using the default handler.<br/>
+    <a class="helpboxDescLabels">Usage:</a><br/>
+    <table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">email &lt;<i>recipient1</i>&gt;[,&lt;<i>recipient2</i>&gt;[,...]]; &lt;<i>subject</i>&gt;; &lt;<i>body</i>&gt;</td></tr>
+  	</table>
+  </description>
   <category>Functions</category>
   <contributor>Glenn Carr</contributor>
   <idea>Nikolai Devereaux</idea>
+  
   <script><![CDATA[
     function email(q)
     {
+      if( nullArgs("email",q) )
+        return false;
+        
       var action = "mailto:";
       var tokens = q.split( ';' );
       if( tokens[0] )
