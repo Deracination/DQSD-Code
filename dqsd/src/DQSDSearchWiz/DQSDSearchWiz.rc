@@ -116,61 +116,63 @@ IDI_WIZARD              ICON    DISCARDABLE     "wizard.ico"
 // Dialog
 //
 
-IDD_DQSDWIZARDDLG DIALOGEX 0, 0, 380, 271
+IDD_DQSDWIZARDDLG DIALOGEX 0, 0, 394, 271
 STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
-EXSTYLE WS_EX_CONTEXTHELP
-FONT 8, "MS Sans Serif", 0, 0, 0x1
+FONT 8, "MS Sans Serif"
 BEGIN
-    RTEXT           "* &Name:",IDC_STATIC,32,9,33,8
-    EDITTEXT        IDC_SearchName,67,6,102,14,ES_LOWERCASE | ES_AUTOHSCROLL
-    RTEXT           "* &Title:",IDC_STATIC,32,24,33,8
-    EDITTEXT        IDC_SearchTitle,67,21,102,14,ES_AUTOHSCROLL
-    RTEXT           "&Link:",IDC_STATIC,20,38,45,8
-    EDITTEXT        IDC_Link,67,35,102,14,ES_AUTOHSCROLL
-    RTEXT           "&Category:",IDC_STATIC,172,9,45,8
-    COMBOBOX        IDC_Category,219,6,102,127,CBS_DROPDOWN | 
+    RTEXT           "* &Abbreviation:",IDC_STATIC,29,9,49,8
+    EDITTEXT        IDC_SearchName,80,6,102,14,ES_LOWERCASE | ES_AUTOHSCROLL
+    RTEXT           "* &Title:",IDC_STATIC,45,24,33,8
+    EDITTEXT        IDC_SearchTitle,80,21,102,14,ES_AUTOHSCROLL
+    RTEXT           "&Link:",IDC_STATIC,33,38,45,8
+    EDITTEXT        IDC_Link,80,35,102,14,ES_AUTOHSCROLL
+    RTEXT           "&Category:",IDC_STATIC,185,9,45,8
+    COMBOBOX        IDC_Category,232,6,102,127,CBS_DROPDOWN | 
                     CBS_AUTOHSCROLL | CBS_SORT | WS_VSCROLL | WS_TABSTOP
-    RTEXT           "C&ontributor:",IDC_STATIC,172,22,45,8
-    EDITTEXT        IDC_Contributor,219,19,102,14,ES_AUTOHSCROLL
-    RTEXT           "&Email:",IDC_STATIC,172,38,45,8
-    EDITTEXT        IDC_Email,219,34,102,14,ES_AUTOHSCROLL
-    GROUPBOX        "&Description",IDC_STATIC,6,51,165,69
-    EDITTEXT        IDC_Description,12,61,154,43,ES_MULTILINE | 
+    RTEXT           "C&ontributor:",IDC_STATIC,185,22,45,8
+    EDITTEXT        IDC_Contributor,232,19,102,14,ES_AUTOHSCROLL
+    RTEXT           "&Email:",IDC_STATIC,185,38,45,8
+    EDITTEXT        IDC_Email,232,34,102,14,ES_AUTOHSCROLL
+    GROUPBOX        "&Description",IDC_STATIC,7,51,165,69
+    EDITTEXT        IDC_Description,13,61,154,43,ES_MULTILINE | 
                     ES_WANTRETURN | WS_VSCROLL
     CONTROL         "Include e&xamples",IDC_DescExamples,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,12,107,71,10
-    GROUPBOX        "&Switches (comma-separated)",IDC_STATIC,172,51,149,69
-    EDITTEXT        IDC_Switches,177,61,138,34,ES_MULTILINE | ES_WANTRETURN | 
+                    BS_AUTOCHECKBOX | WS_TABSTOP,13,107,71,10
+    GROUPBOX        "&Switches (comma-separated)",IDC_STATIC,177,51,157,69
+    EDITTEXT        IDC_Switches,184,61,145,34,ES_MULTILINE | ES_WANTRETURN | 
                     WS_VSCROLL
     CONTROL         "&Mutually exclusive",IDC_MutuallyExclusiveSwitches,
-                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,177,96,73,10
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,184,96,73,10
     CONTROL         "&Include in description",IDC_DescSwitches,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,177,107,104,10
-    LTEXT           "* &FORMs on current page:",IDC_STATIC,6,123,84,8
+                    BS_AUTOCHECKBOX | WS_TABSTOP,184,107,104,10
+    LTEXT           "* &FORMs on current page:",IDC_STATIC,7,123,84,8
     CONTROL         "List2",IDC_FormList2,"SysListView32",LVS_REPORT | 
                     LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_NOSORTHEADER | 
-                    WS_BORDER | WS_TABSTOP,6,133,315,49,WS_EX_CLIENTEDGE
-    DEFPUSHBUTTON   "OK",1,324,6,50,14
-    PUSHBUTTON      "Cancel",2,324,22,50,14
-    PUSHBUTTON      "O&ptions...",IDC_Options,324,39,50,14
-    PUSHBUTTON      "&About...",IDC_About,324,55,50,14
-    PUSHBUTTON      "&HTML >>",IDC_ShowHideHTML,324,168,50,14
-    EDITTEXT        IDC_FormFields,6,193,368,74,ES_MULTILINE | 
+                    WS_BORDER | WS_TABSTOP,6,133,330,49,WS_EX_CLIENTEDGE
+    DEFPUSHBUTTON   "OK",IDOK,338,6,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,338,22,50,14
+    PUSHBUTTON      "O&ptions...",IDC_Options,338,39,50,14
+    PUSHBUTTON      "&About...",IDC_About,338,55,50,14
+    CONTROL         "&Show help",IDC_ShowTips,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | BS_NOTIFY | WS_TABSTOP,338,71,50,14,
+                    WS_EX_STATICEDGE
+    PUSHBUTTON      "&HTML >>",IDC_ShowHideHTML,338,168,50,14
+    EDITTEXT        IDC_FormFields,6,192,382,75,ES_MULTILINE | 
                     ES_AUTOVSCROLL | ES_READONLY | WS_VSCROLL
-    ICON            IDI_WIZARD,IDC_STATIC,7,4,20,20
+    ICON            IDI_WIZARD,IDC_STATIC,6,5,20,20
     LTEXT           "* = Required",IDC_STATIC,6,183,40,8
 END
 
-IDD_OPTIONSDLG DIALOG DISCARDABLE  0, 0, 253, 110
+IDD_OPTIONSDLG DIALOGEX 0, 0, 253, 110
 STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "DQSD Search Wizard Options"
 FONT 8, "MS Sans Serif"
 BEGIN
     CONTROL         "&Edit generated search file",IDC_EditXML,"Button",
                     BS_AUTOCHECKBOX | WS_TABSTOP,6,6,96,10
-    RTEXT           "E&ditor:",IDC_EditLabel,12,19,25,8
-    EDITTEXT        IDC_Editor,39,16,138,14,ES_AUTOHSCROLL
-    PUSHBUTTON      "&...",IDC_Browse,178,16,11,14
+    RTEXT           "E&ditor:",IDC_EditLabel,13,20,25,8
+    EDITTEXT        IDC_Editor,40,17,138,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "&...",IDC_Browse,179,17,11,14
     CONTROL         "Include &comments in generated search file",
                     IDC_IncludeComments,"Button",BS_AUTOCHECKBOX | 
                     WS_TABSTOP,6,35,174,10
@@ -179,8 +181,10 @@ BEGIN
     LTEXT           "CSS for selected &FORM elements:",IDC_STATIC,6,62,108,8
     EDITTEXT        IDC_CSS,6,72,241,32,ES_MULTILINE | ES_AUTOVSCROLL | 
                     WS_VSCROLL
-    DEFPUSHBUTTON   "OK",1,197,7,50,14
-    PUSHBUTTON      "Cancel",2,197,24,50,14
+    DEFPUSHBUTTON   "OK",1,197,6,50,14
+    PUSHBUTTON      "Cancel",2,197,23,50,14
+    CONTROL         "&Show help",IDC_ShowTips,"Button",BS_AUTOCHECKBOX | 
+                    BS_PUSHLIKE | WS_TABSTOP,197,40,50,14,WS_EX_STATICEDGE
 END
 
 IDD_ABOUTDLG DIALOG DISCARDABLE  0, 0, 274, 135
@@ -188,18 +192,20 @@ STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "About DQSD Search Wizard..."
 FONT 8, "MS Sans Serif"
 BEGIN
+    LTEXT           "Dave's Quick Search Deskbar Search Wizard",IDC_Caption,
+                    38,8,174,8,WS_TABSTOP
+    LTEXT           "Glenn Carr",IDC_GlennCarr,97,36,34,8,WS_TABSTOP
+    LTEXT           "&Version History",IDC_STATIC,38,74,48,8
+    EDITTEXT        IDC_ChangeHistory,38,84,230,45,ES_MULTILINE | 
+                    ES_READONLY | WS_VSCROLL
     DEFPUSHBUTTON   "OK",1,218,5,50,14
     PUSHBUTTON      "Cancel",2,218,22,50,14
     ICON            IDI_WIZARD,IDC_STATIC,6,5,20,20
-    LTEXT           "Dave's Quick Search Deskbar Search Wizard",IDC_Caption,
-                    38,8,174,8,WS_TABSTOP
-    LTEXT           "Copyright (c) 2002 Glenn Carr\nDistributed under the terms of the\nGNU General Public License, Version 2",
-                    IDC_STATIC,38,42,171,25
+    LTEXT           "Distributed under the terms of the\nGNU General Public License, Version 2",
+                    IDC_STATIC,38,44,173,17
     LTEXT           "<version>",IDC_Version,38,18,175,15
     LTEXT           "",IDC_STATIC,91,78,176,1,SS_SUNKEN | NOT WS_GROUP
-    LTEXT           "Version History",IDC_STATIC,38,74,48,8
-    EDITTEXT        IDC_ChangeHistory,38,84,230,45,ES_MULTILINE | 
-                    ES_READONLY | WS_VSCROLL | NOT WS_TABSTOP
+    LTEXT           "Copyright (c) 2002",IDC_STATIC,38,36,58,8
 END
 
 
@@ -214,9 +220,7 @@ BEGIN
     IDD_DQSDWIZARDDLG, DIALOG
     BEGIN
         LEFTMARGIN, 6
-        RIGHTMARGIN, 374
-        VERTGUIDE, 307
-        VERTGUIDE, 321
+        RIGHTMARGIN, 388
         TOPMARGIN, 6
         BOTTOMMARGIN, 268
     END
@@ -261,6 +265,42 @@ END
 STRINGTABLE DISCARDABLE 
 BEGIN
     IDS_AboutURL            "http://www.dqsd.net/searchwizard.htm"
+    IDS_MailToGlennCarr     "mailto:glenn@glenncarr.com"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    1001                    "Enter the abbreviation for the search.  This is used to invoke the search and should be a short abbreviation which isn't a common word.  You also won't be able to enter uppercase or non-alphanumeric characters."
+    1002                    "Enter the title or name of the search.  This is what will be displayed in the menu."
+    1003                    "Enter the URL that this search should default to if no parameters are entered for the search.  The wizard will try to guess this based on the current URL, but it may not be the best default, so you should double-check it."
+    1004                    "Enter the category for this search.  You can select one from the list or enter a unique category.  If you don't enter a category the search will be grouped in the ""Other"" category in the menu and the help."
+    1005                    "If you want to receive lavish quantities of praise for writing this search enter your name here.  Or, if you feel you are not deserving of such praise because the most excellent DQSD Search Wizard did most of the work for you, then enter my name, Glenn Carr <just kidding>."
+    1006                    "If you want to be able to be contacted about this search enter your email address here.  Please note that if this search ends up being distributed with DQSD, your email will be out there for everyone to see, which isn't necessarily bad, but I like to enter my email in the form 'glenn at glenncarr dot com' just to keep bot email harvesters from finding it."
+    1007                    "Enter a helpful description for this search.  It can be as long or as short as you prefer."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    1008                    "Enter switches, if any, that you want to use with this search.  Script will be generated for parsing the switches if you do enter some."
+    1009                    "Do you want to include examples in the description?  If so, check this box and some placeholders with the standard formatting will be inserted in the description."
+    1010                    "OK, so what this really means is... ""Does it make sense for this search to get only one switch at a time (i.e., they are mutually exclusive), or does it use a combination of switches?""  The switch parsing code which is generated will be a little different depending on your choice here."
+    1011                    "Do you want to include the switches in the description?  I don't really see why you wouldn't want to, but if so uncheck this box."
+    1012                    "This is a list of the form elements on the current web page.  Check the box next to the form(s) which are required for your search.  If you selected, or made active, an input field before you started up this wizard, its form should be checked below.  If you select or highlight a form, an attempt will be made to make it visually standout according to the CSS styles (check the options).  This can be helpful if you aren't quite sure which form to include in your search."
+    1013                    "This button will hide or display the HTML for the selected form.  This was simply provided as another aid in determining the correct form(s) to include in your search."
+    1014                    "This should display the HTML for the selected form.  This was simply provided as another aid in determining the correct form(s) to include in your search."
+    1015                    "Change various options."
+    1016                    "Check out who wrote this wizard and recent changes."
+    1017                    "Show help in the form of tool tips."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    2001                    "Check this box if you want to edit the new search after the wizard generates it."
+    2002                    "Choose the editor your want to use here.  If none is specified, then Notepad will be used."
+    2003                    "Browse for your favorite editor executable."
+    2004                    "Include helpful comments in the generated search file."
+    2005                    "Prompt with a message if you start up the wizard, but a search field hasn't been selected.  Selecting or activating the field which receives the search string, will cause a more complete search to be generated."
+    2006                    "Enter CSS (cascading style sheet) attributes for form selected in the list of forms.  A good default value is: ""background: yellow; border: 2px dotted red"".  Check a good CSS reference for more options."
 END
 
 #endif    // English (U.S.) resources

@@ -61,23 +61,71 @@ LRESULT CDQSDWizardDlg::OnInitDialog(UINT uMsg, WPARAM wParam, LPARAM lParam, BO
 	{
 		USES_CONVERSION;
 
+		// Create tooltip for controls
+
+		m_tip.Create( m_hWnd );
+
+		int rgCtrlIDs[] = { 
+			IDC_SearchName,
+			IDC_SearchTitle,
+			IDC_Link,
+			IDC_Category,
+			IDC_Contributor,
+			IDC_Email,
+			IDC_Description,
+			IDC_Switches,
+			IDC_DescExamples,
+			IDC_MutuallyExclusiveSwitches,
+			IDC_DescSwitches,
+			IDC_FormList2,
+			IDC_ShowHideHTML,
+			IDC_FormFields,
+			IDC_Options,
+			IDC_About,
+			IDC_ShowTips,
+		};
+
+		for ( int iCtrl = 0; iCtrl < LENGTHOF( rgCtrlIDs ); iCtrl++ )
+		{
+			CString csTip;
+			if ( csTip.LoadString( rgCtrlIDs[ iCtrl ] ) )
+			{
+				m_tip.AddTool( rgCtrlIDs[ iCtrl ], csTip.LockBuffer() );
+				csTip.UnlockBuffer();
+			}
+		}
+
+		ATLTRACE( "CWindow( GetDlgItem( IDC_ShowTips ) ).SendMessage( BM_GETCHECK, 0, 0 ): %d\n", CWindow( GetDlgItem( IDC_ShowTips ) ).SendMessage( BM_GETCHECK, 0, 0 ) );
+		ATLTRACE( "BST_CHECKED: %d\n", BST_CHECKED );
+		m_tip.Activate( ( CWindow( GetDlgItem( IDC_ShowTips ) ).SendMessage( BM_GETCHECK, 0, 0 ) == BST_CHECKED ) );
+
+		// Shrink dialog initially
+		
 		RECT rcDialog;
 		GetWindowRect( &rcDialog );
 
 		m_nTallDialogHeight = rcDialog.bottom - rcDialog.top;
 		ShrinkDialog();
 
+		// Disable controls dependent on having switches
+		
 		OnChangeSwitches( 0, 0, NULL, bHandled );
 
-	#ifdef _DEBUG
+		// Just for debugging
+	
+		#ifdef _DEBUG
 		CWindow( GetDlgItem( IDC_SearchName ) ).SetWindowText( _T("xyzzy") );
 		CWindow( GetDlgItem( IDC_SearchTitle ) ).SetWindowText( _T("xyzzy Search") );
-	#endif
+		#endif
 
 		CenterWindow( GetActiveWindow() ); // ??? should probably use the actual browser window
 
+		// Subclass search name to restrict to lowercase and no spaces
+		
 		m_editSearchName.SubclassWindow( GetDlgItem( IDC_SearchName ) );
 		
+		// Get the copyright for use in various places
+
 		TCHAR szModule[ MAX_PATH + 1 ];
 		if ( GetModuleFileName( _Module.GetResourceInstance(), szModule, LENGTHOF(szModule) ) )
 		{
@@ -1010,6 +1058,8 @@ void CDQSDWizardDlg::SaveFields()
 
 		rk.SetValue( CWindow( GetDlgItem( IDC_DescExamples ) ).SendMessage( BM_GETCHECK, 0, 0 ) == BST_CHECKED, _T("IncludeDescriptionExamples") );
 
+		rk.SetValue( CWindow( GetDlgItem( IDC_ShowTips ) ).SendMessage( BM_GETCHECK, 0, 0 ) == BST_CHECKED, _T("ShowTips") );
+
 		rk.Close();
 	}
 	catch ( ... )
@@ -1053,6 +1103,10 @@ void CDQSDWizardDlg::RestoreFields()
 			dwValue = 1;
 			rk.QueryValue( dwValue, _T("IncludeDescriptionExamples") );
 			CWindow( GetDlgItem( IDC_DescExamples ) ).SendMessage( BM_SETCHECK, dwValue ? BST_CHECKED : BST_UNCHECKED );
+
+			dwValue = 0;
+			rk.QueryValue( dwValue, _T("ShowTips") );
+			CWindow( GetDlgItem( IDC_ShowTips ) ).SendMessage( BM_SETCHECK, dwValue ? BST_CHECKED : BST_UNCHECKED );
 		}
 		else
 		{
