@@ -12,36 +12,38 @@
 // Shortcuts that reference a function name only, have the menu text extracted
 // from the function definition directly.
 //
+// ----------------------------------------------------------------------------
+//
+~|uns
 !|gg %s /ifl|I'm Feeling Lucky!|Go directly to Google's top-ranked result.|Search the Web
-,|gg %s /groups|Google Groups|Search Google's newsgroup archive.|Search the Web
->|gg %s /advanced|Google Advanced|Use the Google Advanced Search page.|Search the Web
-?|qsfind
--|fst
-^|av
-{|dp
-??|gg %s /directory|Google Directory|Search Google's copy of the DMOZ open directory.|Search the Web
-???|ask
-+|map
-#|sb
-##|sb %s /business|Switchboard Business|Search Switchboard Yellow Pages|People and Places
 @|yhe
 @@|bfe
-=|clc
-.|cnn
-*|aw
+#|sb
+##|sb %s /business|Switchboard Business|Search the Switchboard Yellow Pages.|People and Places
+#*|phsp
 $|stk
+$$|dlt
+$$$|pw
+%|ebay
+^|av
+&|gg %s /cache|Google Cache|Given a URL, loads Google's cached copy of the web page.|Other
+&&|ia
+*|aw
+-|fst
++|map
+=|clc
+[|enc
+]|xref
+{|dp
 :|mwd
 ::|dic
 ;|ths
 ;;|mwt
-[|enc
-]|xref
-&|gg %s /cache|Google Cache|Given a URL, loads Google's cached copy of the web page.|Other
-&&|ia
-$$|dlt
-$$$|pw
-%|ebay
+,|gg %s /groups|Google Groups|Search Google's newsgroup archive.|Search the Web
 ,,|faq
+.|cnn
+>|gg %s /advanced|Google Advanced|Use the Google Advanced Search page.|Search the Web
 >>|dl
-~|uns
-#*|phsp
+?|qsfind
+??|gg %s /directory|Google Directory|Search Google's copy of the DMOZ open directory.|Search the Web
+???|ask
