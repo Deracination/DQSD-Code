@@ -35,6 +35,21 @@ function versionCheck()
   }
   testObject = null;
 
+  // Verify that the scripting engine version is what we need
+  if(bSuccess)
+  {
+  	var reqMajor = 5;
+  	var reqMinor = 6;
+  	
+  	var instMajor = ScriptEngineMajorVersion();
+  	var instMinor = ScriptEngineMinorVersion();
+  	
+  	if(instMajor < reqMajor || (instMajor == reqMajor && instMinor < reqMinor))
+  	{
+  		alert("Your version of the Windows Script Components (" + instMajor + "." + instMinor + ") is outdated.\nGet the latest from http://msdn.microsoft.com/downloads/list/webdev.asp");
+  		bSuccess = false;
+  	}
+  }
 
   return bSuccess;
 }
