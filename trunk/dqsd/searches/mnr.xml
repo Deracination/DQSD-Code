@@ -1,0 +1,39 @@
+<search function="mnr">
+  <name>Mailinator.com</name>
+  <category>Functions</category>
+  <contributor>Brent Beardsley</contributor>
+  <link>http://www.mailinator.com/</link>
+  <email></email>
+  <description>
+  Check an anonymous email account at Mailinator.com
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>mnr bob</td></tr>
+      <tr><td>mnr asdfasdf</td></tr>
+    </table>
+  </description>
+  <form name="mnrf"
+        method="post"
+        action="http://www.mailinator.com/mailinator/CheckMail.do">
+    <input type="hidden" name="email" value="" />
+  </form>
+  <script><![CDATA[
+    function mnr(q)
+    {
+      if( nullArgs("mnr", q) )
+        return;
+
+      document.mnrf.email.value = q;
+      submitForm(mnrf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 09/19/03 at 14:06:07
+    by Dave's Quick Search Deskbar Search Wizard version 1.0.1 ,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>
