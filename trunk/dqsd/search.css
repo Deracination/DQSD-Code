@@ -319,7 +319,7 @@ A.helpboxLinkTop:HOVER, A.helpboxLink:HOVER, A.helpboxLinkJump:HOVER, A.helpboxC
 TABLE#keybindings
 {
   margin-left: 1em;
-  border: 1px inset;
+  border: 0px;
   margin-top: 5px;
 }
 
@@ -327,7 +327,7 @@ TABLE#keybindings TD
 {
   vertical-align: top;
   border: 1px inset;
-  padding: 1px 1px;
+  padding: 2px 2px 2px 5px;
 }
 
 TABLE#keybindings TD.keyname
@@ -339,7 +339,6 @@ TABLE#keybindings TD.keyname
 TABLE#keybindings TH
 {
   border: 1px outset;
-  font-style: italic;
   font-weight: bold;
 }
 
