@@ -1,14 +1,4 @@
 <search function="wcon">
-  <COMMENT>
-
-    This search file was initially created by Dave's Quick Search Deskbar
-    Search Wizard version 0.5 (beta) on 08/21/02 at 18:22:55
-
-    Even though this XML search will probably load and is a healthy start
-    toward a completed search, please be aware that this search will probably
-    not work as is and will require some human inspection and modification.
-
-  </COMMENT>
   <name>WorldConnect at Rootsweb.com</name>
   <category>Genealogy</category>
   <contributor>Brent Beardsley</contributor>
@@ -16,13 +6,16 @@
   <email></email>
   <description>
   Search WorldConnect Project at Rootsweb.com
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>wcon beardsley</td></tr>
+      <tr><td>wcon beardsley, william</td></tr>
+    </table>
+
   </description>
   <form name="wconf"
         method="post"
         action="http://worldconnect.genealogy.rootsweb.com/cgi-bin/igm.cgi">
-
-    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
-
     <input type="hidden" name="surname" value="" />
     <input type="hidden" name="given" value="" />
   </form>
@@ -33,20 +26,8 @@
       if( nullArgs("wcon", q) )
         return;
 
-      if( q == "" )
-      {
-        openSearchWindow("http://worldconnect.genealogy.rootsweb.com/");
-        return;
-      }
-
-      // FORM variables for wconf
-
-      // The wizard assigned the search string to this form field value because
-      // this field was the active element when the search file was generated.
-      // Change this to args.q if the search string is parsed with parseArgs.
       document.wconf.surname.value = genealogy_parse_surname(q);
       document.wconf.given.value = genealogy_parse_givenname(q);
-
       submitForm(wconf);
     }
   ]]></script>
