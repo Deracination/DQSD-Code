@@ -45,6 +45,7 @@ Modified Searches
 * encarta - updated to work with site changes and added /dictionary switch (Glenn Carr)
 * mys - updated broken search form (Brent Beardsley)
 * configure - now return "" for the edit functions so they'll work better in aliases (Brent Beardsley)
+* palmgear - updated search to work again, added /new and /updated switches
 
 Removed Searches
 * nwtsr and httpd replaced by whats (Kim Gräsman)

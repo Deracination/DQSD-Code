@@ -1,6 +1,11 @@
 <search function="palmgear">
   <name>PalmGear.com</name>
   <description>Search PalmGear.com for software.<br/>
+  <div class="helpboxDescLabels">Switches:</div>
+  <table class="helpboxDescTable">
+    <tr><td>/new</td><td> - </td><td>Show new items on PalmGear.com</td></tr>
+    <tr><td>/updated</td><td> - </td><td>Show updated items on PalmGear.com</td></tr>
+  </table>
   <div class="helpboxDescLabels">Example:</div>
   <table class="helpboxDescTable">
     <tr><td>palmgear aigo</td></tr>
@@ -13,11 +18,10 @@
   <email>fux_at_theend_dot_com_dot_br</email>
   <form name="palmgearf"
         method="post"
-        action="http://www.palmgear.com/shared/answer.cfm">
-    <input type="hidden" name="diroffset" value="../"/>
-    <input type="hidden" name="sid" value="77810420020731113959"/>
-    <input type="hidden" name="softwareflag" value="checked"/>
-    <input type="hidden" name="searchterm" value=""/>
+        action="http://www.palmgear.com/index.cfm?fuseaction=shared.answer&amp;SID=&amp;PartnerREF=">
+     <input type="hidden" name="URL" value="#" />
+     <input type="hidden" name="siteid" value="1" />
+     <input type="hidden" name="searchterm" value=""/>
   </form>
 
    <script><![CDATA[
@@ -25,11 +29,17 @@
     {
       if( nullArgs("palmgear", q) )
         return false;
-      else
-      {
-        document.palmgearf.searchterm.value = q;
-        submitForm(palmgearf);
-      }
+
+      var args = parseArgs(q, "new, updated");
+	  if (args.switches.length > 0) {
+	    switch (args.switches[i].name) {
+			case 'updated': openSearchWindow('http://www.palmgear.com/index.cfm?fuseaction=software.updatedproducts1day&SID=&PartnerREF='); return;
+			case 'new': openSearchWindow('http://www.palmgear.com/index.cfm?fuseaction=software.newproducts1day&SID=&PartnerREF='); return;
+			default: break;
+		}
+	  }
+      document.palmgearf.searchterm.value = args.q;
+      submitForm(palmgearf);
     }
   ]]></script>
 
