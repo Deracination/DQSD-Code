@@ -87,12 +87,16 @@ function openDocument(path)
   ensureLauncher();
   if (DQSDLauncher)
   {
-    var params = path.match( /^(\S+) *(.*)/ );
-    if ( params && params[2] != "" )
-      DQSDLauncher.OpenDocument(params[1], params[2]);
+    var params = path.match(/^(("[^"]*")|\S*)\s*(.*)/);
+    if (params)
+    {
+      DQSDLauncher.OpenDocument(params[1], params[3]);
+    }
     else
+    {
     DQSDLauncher.OpenDocument(path);
   }
+}
 }
 
 // Submit a form either with the default browser or with IE

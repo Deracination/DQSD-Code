@@ -14,6 +14,7 @@
 // yg	http://groups.yahoo.com/
 // ygg	http://groups.yahoo.com/group/%s
 // exp	run explorer
+// expd	run explorer /e, "c:\\program Files\\quick Search Deskbar"
 // np	run notepad
 // word	run winword
 // excel	run excel
