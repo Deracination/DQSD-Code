@@ -141,6 +141,7 @@ Section "Quick Search Deskbar (required)"
   File "..\holidays.sg.xml"
   File "..\holidays.us.xml"
   File "..\loader.js"
+  File "..\preferences.js"
   File "..\readme.txt"
   File "..\savesearchsettings.js"
   File "..\search.css"
@@ -189,21 +190,9 @@ Section "Quick Search Deskbar (required)"
   SetOutPath "$INSTDIR"
   File "..\localaliases.txt"
   File "..\mrumenu.txt"
+  File "..\localsearches.css"
+  File "..\localprefs.js"
   SetOverwrite on
-
-  ; Check to see if localprefs exists.  If it doesn't, the user's preferences
-  ; file should be turned into localprefs to avoid losing the user's settings.
-  IfFileExists "$INSTDIR\localprefs.js" overwriteprefs renameprefs
-
-  renameprefs:
-  SetOutPath "$INSTDIR"
-  Rename "$INSTDIR\preferences.js" "$INSTDIR\localprefs.js"
-  goto overwriteprefs
-
-  overwriteprefs:
-  SetOverwrite on
-  SetOutPath "$INSTDIR"
-  File "..\preferences.js"
 
   ; old source files used to live here
   Delete $INSTDIR\license.txt
