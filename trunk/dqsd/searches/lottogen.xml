@@ -1,0 +1,69 @@
+<search function="lottogen">
+  <name>Lottery Number Generation</name>
+  <description>
+    Generate the winning lottery numbers from DQSD's crystal ball..<br/>
+    <div class="helpboxDescLabels">Usage:</div>
+    <table class="helpboxDescTable">
+        <tr><td>lottogen [&lt;<i>number of values to generate</i>&gt;] <br/>(Defaults to 6)</td></tr>
+    </table>
+    <a class="helpboxDescLabels">Example:</a><br/>
+    <table class="helpBoxDescTable">
+        <tr><td class="helpboxDescColumns">lottogen</td></tr>
+        <tr><td class="helpboxDescColumns">lottogen 4</td></tr>
+    </table>
+  </description>
+  <category>Fun</category>
+  <contributor>Monty Scroggins</contributor>
+  <script><![CDATA[
+    function lottogen(c) {
+      var args = c.split(/\s+|,/);
+
+      // new york lotto: 6 numbers from 1-59.
+      var numbercount = 6;
+      var maxnumbers = 59;
+
+      if (args.length == 1 && args[0] != "")
+      {
+          maxnumbers = parseInt(args[0]);
+      }
+      else if (args.length == 2)
+      {
+          numbercount = parseInt(args[0]);
+          maxnumbers = parseInt(args[1]);
+      }
+
+      if (numbercount > maxnumbers)
+      {
+          temp = numbercount;
+          numbercount = maxnumbers;
+          maxnumbers = temp;
+      }
+
+      var ok = 1;
+      r = new Array (numbercount);
+      for (var i = 1; i <= numbercount; i++) {
+        r[i] = Math.round(Math.random() * (maxnumbers-1))+1;
+      }
+      for (var i = numbercount; i >= 1; i--) {
+        for (var j = numbercount; j >= 1; j--) {
+          if ((i != j) && (r[i] == r[j])) ok = 0; 
+        }   
+      }
+      if (ok) {
+        var output = "Lucky numbers:";
+        for (var k = 1; k <= numbercount; k++) {
+          output += " "+r[k];
+        }
+        document.deff.q.value = output;
+      }     
+      else lottogen(numbercount + " " + maxnumbers);
+        
+  }
+  ]]></script>
+
+  <copyright>
+  Copyright (c) 2002 David Bau
+  Distributed under the terms of the
+  GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>

@@ -1,0 +1,44 @@
+<search function="radix">
+  <name>Base Conversion: Decimal</name>
+  <description>
+    Convert decimal values to equivlaents in an arbitrary radix.
+    Defaults to show decimal, octal, hex, and binary if radix unspecified.<br/>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>radix 32767</td></tr>
+  		<tr><td>radix 7 42332</td></tr>
+  	</table>
+  </description>
+  <category>Functions</category>
+  <contributor>Monty Scroggins</contributor>
+  
+  <script><![CDATA[
+    function radix(c)
+    {
+      var args = c.split(/\s+|,/);
+
+      if (args.length == 0 || args[0] == "")
+        return;
+      if (args.length == 1)
+      {
+        var dec = parseInt(c);
+        document.deff.q.value = "dec: "+dec+
+          "  oct: "+dec.toString(8)+
+          "  hex: "+dec.toString(16)+
+          "  bin: "+dec.toString(2);
+      }
+      else if (args.length == 2)
+      {
+        var r = parseInt(args[0]);
+        var dec = parseInt(args[1]);
+        document.deff.q.value = dec.toString(r);
+      }
+    }
+  ]]></script>
+
+  <copyright>
+	Copyright (c) 2002 David Bau
+	Distributed under the terms of the
+	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>

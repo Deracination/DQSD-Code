@@ -4,7 +4,7 @@
   <category>Fun</category>
   <link>http://www.concordance.com/unscrambler.htm</link>
   <form name="unsf"
-        action="http://www.concordance.com/cgi-bin/unscrambler.pl"
+        action="http://64.65.56.251/cgi-bin/unscrambler.pl"
         method="post">
     <input type="hidden" name="letters" value=""/>
   </form>

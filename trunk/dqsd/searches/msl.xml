@@ -1,0 +1,39 @@
+<search function="msl">
+  <name>Make a Shorter Link</name>
+  <description>
+    Abbreviate long and convoluted URLs.<br/>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+      <tr><td>msl http://www.braithwaite-lee.com/source/index.html</td></tr>
+    </table>
+  </description>
+  <category>Functions</category>
+  <link>http://www.makeashorterlink.com/</link>
+  <contributor>Reginald Braithwaite-Lee</contributor>
+  <email>raganwald_at_yahoo_dot_com</email>
+
+  <form name="makeashorterlinkf"
+        action="http://www.makeashorterlink.com/index.php"
+        method="post">
+    <input type="hidden" name="url"/>
+  </form>
+
+  <script><![CDATA[
+    function msl(q)
+    {
+      if( nullArgs("msl", q) )
+        return false;
+      else
+      {
+        document.makeashorterlinkf.url.value = q;
+        submitForm(makeashorterlinkf);
+      }
+    }
+  ]]></script>
+
+  <copyright>
+	Copyright (c) 2002 David Bau
+	Distributed under the terms of the
+	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>

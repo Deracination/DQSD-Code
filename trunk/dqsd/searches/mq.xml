@@ -1,0 +1,110 @@
+<search function="mq">
+  <name>Mapquest Maps</name>
+  <description>
+    Find maps of United States locations.<br/>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>mq 1400 Constitution Ave NE, Washington DC</td></tr>
+  	</table>
+  </description>
+  <category>People and Places</category>
+  <link>http://www.mapquest.com/</link>
+  
+  <form name="mqf"
+        action="http://www.mapquest.com/maps/map.adp" 
+        method="get">
+    <input type="hidden" name="country" value="US"/>
+    <input type="hidden" name="address"/>
+    <input type="hidden" name="city"/>
+    <input type="hidden" name="state"/>
+    <input type="hidden" name="zipcode"/>
+  </form>
+  
+  <script><![CDATA[
+    function mq(q)
+    {
+      if( nullArgs("mq",q) )
+        return false;
+      else
+      {
+        // What follows is a fairly "ergonomic" parser for US addresses that I slapped together.
+        // It recognizes states, zip+4 codes, and common street enders such as st, ave, and rd.
+        // It doesn't yet recognize apartment numbers.
+
+        var address = "";
+        var city = "";
+        var state = "";
+        var zipcode = "";
+
+        // trim trailing zip
+        var res = q.match(/(\d{5}(-\d{4})?)[\s\.,;]*$/);
+        if (res && res[1])
+        {
+          zipcode = res[1];
+          q = q.substring(0, res.index);
+        }
+
+        // trim trailing state code
+        res = q.match(/\b(AL|AK|AS|AZ|AR|CA|CO|CT|DE|DC|FM|FL|GA|GU|HI|ID|IL|IN|IA|KS|KY|LA|ME|MH|MD|MA|MI|MN|MS|MO|MT|NE|NV|NH|NJ|NM|NY|NC|ND|MP|OH|OK|OR|PW|PA|PR|RI|SC|SD|TN|TX|UT|VT|VI|VA|WA|WV|WI|WY)[\s\.,;]*$/i);
+        if (res && res[1])
+        {
+          state = res[1];
+          q = q.substring(0, res.index);
+        }
+
+        // detect leading ### w w w st
+        res = q.match(/^\s*(\d+(\s+\w+)+\s+(st|ave|rd|ln|dr|blvd|cir|ct|pkwy|pl|way|aly|pk|sq|ter|plz))[\s\.,;]*(.*)$/i);
+        if (res && res[1])
+        {
+          address = res[1];
+          city = res[4];
+        }
+
+        // detect trailing comma or semicolon; prefer this way of finding city
+        res = q.match(/[\.,;]\s*([^\d][^,;]+)[\s\.,;]*$/i);
+        if (res && res[1])
+        {
+          city = res[1];
+          address = q.substring(0, res.index);
+        }
+
+        // last resorts: we really want a city
+        if (city == "")
+        {
+          // drop requirement for street number and precise abbreviation and look for street
+          res = q.match(/^\s*((\w+\s+)+(st|ave|rd|ln|dr|blvd|cir|ct|pkwy|pl|way|aly|pk|sq|ter|plz|street|avenue|road|lane|drive|boulevard|circle|court|parkway|place|loop|alley|park|square|terrace|plaza|mall))[\s\.,;]*(.*)$/i);
+          if (res && res[1])
+          {
+            address = res[1];
+            city = res[4];
+          }
+          // has a number: city is last word
+          else if (q.match(/^\s*\d/))
+          {
+            res = q.match(/(\w+)[\s\.,;]*$/);
+            city = res[1];
+            address = q.substring(0, res.index);
+          }
+          // otherwise, looks like it doesn't have a street; city is whole thing
+          else
+          {
+            city = q;
+            address = "";
+          }
+        }
+        
+        document.mqf.address.value=address;
+        document.mqf.city.value   =city;
+        document.mqf.state.value  =state.toUpperCase();
+        document.mqf.zipcode.value=zipcode;
+        submitForm(mqf);
+      }
+    }
+  ]]></script>
+
+  <copyright>
+	Copyright (c) 2002 David Bau
+	Distributed under the terms of the
+	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>

@@ -1,0 +1,35 @@
+<search function="aj">
+  <name>Ask Jeeves</name>
+  <description>
+    Jeeves answers questions written in the common question format.<br/>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>aj Why is the sky blue</td></tr>
+  	</table>
+  </description>
+  <category>Search the Web</category>
+  <link>http://www.askjeeves.com/</link>
+  <form name="ajf"
+        action="http://www.askjeeves.com/main/askjeeves.asp"
+        method="post">
+    <input type="hidden" name="ask"/>
+  </form>
+  <script><![CDATA[
+    function aj(q)
+    {
+      if( nullArgs("aj", q) )
+        return false;
+      else
+      {
+        document.ajf.ask.value = q;
+        submitForm(ajf);
+      }
+    }
+  ]]></script>
+
+  <copyright>
+	Copyright (c) 2002 David Bau
+	Distributed under the terms of the
+	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>

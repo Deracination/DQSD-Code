@@ -1,0 +1,72 @@
+<search function="anywho">
+  <name>AnyWho</name>
+  <description>
+    Find a person or business by telephone number.<br/>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>anywho 972-555-1212</td></tr>
+  	</table>
+  </description>
+  <category>People and Places</category>
+  <link>http://www.anywho.com/qry/wp_rl</link>
+  
+  <form name="anywhof"
+    action="http://www.anywho.com/qry/wp_rl"
+    method="get">
+    <input type="hidden" name="npa" value=""/>
+    <input type="hidden" name="telephone" value=""/>
+  </form>
+  
+  <script><![CDATA[
+    phone_regex = new RegExp("^([0-9]{3})\\s*[-.]?\\s*([0-9]{3}\\s*[-.]?\\s*[0-9]{4})\\s*$" +
+                             "|^\\(([0-9]{3})\\)\\s*([0-9]{3}\\s*-?\\s*[0-9]{4})\\s*$", "");
+
+    // the auto-detection routine used for special handling of strings entered into the
+    // toolbar that look like phone number lookups
+    function autodetect_phone(q) 
+    {
+      // detect strings that look like phone numbers
+      res = phone_regex.exec(q);
+      if (res)
+      {
+        anywho(q);
+        return true;
+      }
+    }
+
+    function anywho(q)
+    {
+      if( nullArgs("anywho",q) )
+        return false;
+      else
+      {
+        // detect strings that look like phone numbers
+        res = phone_regex.exec(q);
+        if (res)
+        {
+          if (res[1])
+          {
+            ac=res[1].replace( / /, "", "g");
+            pn=res[2].replace( / /, "", "g");
+          }
+          else
+          {
+            ac=res[3].replace( / /, "", "g");
+            pn=res[4].replace( / /, "", "g");;
+          }
+        document.anywhof.npa.value=ac;
+        document.anywhof.telephone.value=pn;
+        submitForm(anywhof);
+        }
+        else
+          return false;
+      }
+    }
+  ]]></script>
+
+  <copyright>
+	Copyright (c) 2002 David Bau
+	Distributed under the terms of the
+	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>
