@@ -1,7 +1,55 @@
-  <search function="gg">
-    <name>Google Search</name>
-    <description>Google is reputed to be the fastest web search engine: "gg quick search"</description>
-    <link>http://www.google.com</link>
-    <category>Search the Web</category>
-    <contributor>David Bau</contributor>
-  </search>
+<search function="gg">
+  <name>Google</name>
+  <description>Google is reputed to be the fastest web search engine. Search for /images, /related sites, or sites that /link to the search term. <nobr>Example: "gg david bau /images"</nobr></description>
+  <category>Search the Web</category>
+  <link>http://www.google.com</link>
+  <switches>images, related, similar, cache, link</switches>
+  <contributor>David Bau, Ryan Edwards</contributor>
+  <form name="ggf"
+        target="_blank"
+        action="http://www.google.com/search"
+        method="get">
+    <input type="hidden" name="q"/>
+  </form>
+  <form name="imagef"
+        target="_blank"
+        action="http://images.google.com/images"
+        method="get">
+    <input type="hidden" name="q"/>
+  </form>
+  <script><![CDATA[
+    function gg(q, switches)
+    {
+      if (q == "")
+        openSearchWindow("http://www.google.com/");
+      else if( switches.length == 1 )
+      {
+        switch( switches[0] )
+        {
+          case "images":
+            document.imagef.q.value = q;
+            submitForm(imagef);
+            break;
+          case "related":
+          case "similar":
+            document.ggf.q.value="related:" + q;
+            submitForm(ggf);
+            break;
+          case "cache":
+            document.ggf.q.value="cache:" + q;
+            submitForm(ggf);
+            break;
+          case "link":
+            document.ggf.q.value="link:" + q;
+            submitForm(ggf);
+            break;
+        }
+      }   
+      else
+      {
+        document.ggf.q.value = q;
+        submitForm(ggf);
+      }
+    }
+  ]]></script>
+</search>
