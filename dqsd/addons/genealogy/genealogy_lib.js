@@ -1,10 +1,11 @@
     var genealogy_debug = 0;
-    var genealogy_lib_version = "1.5";
+    var genealogy_lib_version = "1.6";
 
 	var genealogy_month_names = new Array("JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER");
-	var genealogy_date_format_1 = "([0-9]{1,2})\\s*/\\s*([0-9]{1,2})\\s*/\\s*([0-9]{4})";
+	var genealogy_date_format_1 = "([0-9]{1,2})\\s*(?:/|-)\\s*([0-9]{1,2})\\s*(?:/|-)\\s*([0-9]{4})";
 	var genealogy_date_format_2 = "([0-9]{1,2})\\s+([a-zA-Z]{3,})\\s+([0-9]{4})";
-	var genealogy_date_format_all = "(("+genealogy_date_format_1+")|("+genealogy_date_format_2+"))";
+	var genealogy_date_format_3 = "([a-zA-Z]{3,})\\s+([0-9]{1,2})(?:\\s+|\\s*,\\s*)?([0-9]{4})";
+	var genealogy_date_format_all = "(("+genealogy_date_format_1+")|("+genealogy_date_format_2+")|("+genealogy_date_format_3+"))";
 
 	var genealogy_states = new Array(
 	"ALABAMA", "ALASKA", "ARIZONA", "ARKANSAS",
@@ -629,6 +630,7 @@ function genealogy_parse_date(dateString)
 	var valid_fmt = false;
 	var dateFmt1RegExp = new RegExp(genealogy_date_format_1);
 	var dateFmt2RegExp = new RegExp(genealogy_date_format_2);
+	var dateFmt3RegExp = new RegExp(genealogy_date_format_3);
 	if ( (r = dateFmt1RegExp.exec(dateString)) != null) {
 		month = r[1]-1;
 		day = r[2];
@@ -647,6 +649,26 @@ function genealogy_parse_date(dateString)
 				break;
 			}
 		}
+	} else if ( (r = dateFmt3RegExp.exec(dateString)) != null) {
+		day = r[2];
+		month = -1;
+		year = r[3];
+		var monthName = (r[1]).toUpperCase();
+		for (var i=0; i < genealogy_month_names.length; i++) {
+			if (monthName == genealogy_month_names[i] ||
+				monthName == genealogy_month_names[i].substring(0,3)) {
+				month = i;
+				valid_fmt = true;
+				break;
+			}
+		}
+	} else {
+		r = Date.parse(dateString);
+		if (r != null && !isNaN(r)) {
+			return new Date(r);
+		} else {
+			return false;
+		}
 	}
 	if (valid_fmt) {
 		if (month < 0 || month > 11) {
@@ -660,4 +682,46 @@ function genealogy_parse_date(dateString)
 	}
 }
 
+function genealogy_check_dqsd_version(majorHi, majorLo, minorHi, minorLo)
+{
+  var bSuccess = true;
+  var testObject;
+
+  // First, see if we can create the object at all
+  try
+  {
+    testObject = new ActiveXObject("DQSDTools.Launcher");
+  }
+  catch(e)
+  {
+    genealogy_error("The DQSD helper DLL is not correctly installed");
+    bSuccess = false;
+  }
+
+  // Try a version query on it
+  if(bSuccess)
+  {
+    try
+    {
+      // The DLL version has to be great than or equal to
+      // this number
+      if(!testObject.VersionIsCorrect(majorHi,majorLo,minorHi,minorLo))
+      {
+         bSuccess = false;
+      }
+    }
+    catch(e)
+    {
+      genealogy_error("The DQSD helper DLL version couldn't be checked (error '" + e.description + "').\nPlease reboot and run the setup program again.");
+      bSuccess = false;
+    }
+  }
+  testObject = null;
+  return bSuccess;
+}
+
 genealogy_alert("genealogy_lib.js loaded");
+
+if (!genealogy_check_dqsd_version(3,1,4,0)) {
+	genealogy_error("ERROR: The Genealogy Add-on requires Dave's Quick Search Bar Version 3.1.4.0.");
+}
