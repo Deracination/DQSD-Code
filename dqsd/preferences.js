@@ -442,9 +442,9 @@ refreshIconsAtStartup = true;
 *                without a search in the box
 */
 bannerasgo   = false;
-bannerurl    = "dqsd.gif"; // "http://reliableanswers.com/x/dqsd/dqsd.gif"
-bannerwidth  =  18;        // 0 := autodetect banner size
-bannerheight =  18;        // 0 := autodetect banner size
+bannerurl    = "dqsd.png"; // "http://reliableanswers.com/x/dqsd/dqsd.gif"
+bannerwidth  =  21;        // 0 := autodetect banner size
+bannerheight =  19;        // 0 := autodetect banner size
 bannerlink   = "http://www.dqsd.net/";  // examples:
                                         //   (action)="floax";
                                         //   (action)="gg";

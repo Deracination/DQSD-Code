@@ -131,7 +131,7 @@ Section "Quick Search Deskbar (required)"
   File "..\categoryExpander.htc"
   File "..\clock.js"
   File "..\defer_tools.js"
-  File "..\dqsd.gif"  
+  File "..\dqsd.png"  
   File "..\helpbox.js"
   File "..\helpmenu.js"
   File "..\history.js"
@@ -313,7 +313,7 @@ Section "Uninstall"
   Delete /REBOOTOK $INSTDIR\categoryExpander.htc
   Delete /REBOOTOK $INSTDIR\clock.js
   Delete /REBOOTOK $INSTDIR\defer_tools.js
-  Delete /REBOOTOK $INSTDIR\dqsd.gif
+  Delete /REBOOTOK $INSTDIR\dqsd.png
   Delete /REBOOTOK $INSTDIR\helpbox.js
   Delete /REBOOTOK $INSTDIR\helpmenu.js
   Delete /REBOOTOK $INSTDIR\history.js
