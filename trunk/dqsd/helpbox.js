@@ -106,7 +106,7 @@ function about()
     txt = txt.replace(/(view-source:)/g, '$1' + basedir);
     var mesg = "<title>About Dave's Quick Search Deskbar</title>";
     mesg += "<head><style>body{margin:20px;border:0;padding:0;background-color:threedface;font-family:Tahoma,Arial;scrollbar-track-color:threedface}" +
-           "td{font-size:8pt;border-collapse:collapse} .lg{background:lightgreen;} .lb{background:skyblue;} .top{font-size:60%} SPAN.categoryExpander { font-size: 80%; behavior: url(categoryExpander.htc); } #categoryCount { font-size: 80% }</style>"
+           "td{font-size:8pt;border-collapse:collapse} TD.lg{background:lightgreen;width:99%} .lb{background:skyblue;} .top{font-size:60%} SPAN.categoryExpander { font-size: 80%; behavior: url(categoryExpander.htc); } #categoryCount { font-size: 70% }</style>"
     if (typeof helpstyle == 'undefined')
       helpstyle = '';
     mesg += "<style>TD {" + helpstyle + "}</style></head>";
