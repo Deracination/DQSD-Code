@@ -8,6 +8,7 @@ Modified Searches
 
 * acine - added /video switch
 * thw - updated the search (the form changed on the site) and added /category switch
+* ups - now allows spaces in tracking number(s)
 
 Enhancements
 
