@@ -12,6 +12,7 @@ New Searches
 
 * txp - Search the tweak database on tweakxp.com (from Wolfgang Deutsch)
 * chmodconv - convert chmod numbers to strings and vice versa (from Brent Beardsley)
+* bb - Search BestBuy (from Glenn Carr)
 
 Modified Searches
 
