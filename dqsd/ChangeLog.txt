@@ -13,6 +13,7 @@ New Searches
 * abex - Track Airborne Express packages
 * wpfr - Get an address from a name in France
 * msda - Microsoft Discussion Archive search
+* shack - Search the shacknews.com comments database (from Wolfgang Deutsch)
 
 Modified Searches
 
