@@ -1,5 +1,6 @@
 Version 0.6 (beta) - ???
 
+* Fixed some problems with IFRAMEs
 * Display outerHTML for FORM elements instead of innerHTML
 * Added <copyright> to search files
 * Fixed bugs causing incorrect URLs for the <LINK> and the form 'action'
