@@ -84,6 +84,8 @@ Finally, the following are default key bindings.  Some of these can be customize
 <tr><td class='keyname'>Ctrl-P, Up</td><td class='desc'>Display previous search</td></tr>
 
 <tr><td class='keyname'>Ctrl-N, Down</td><td class='desc'>Display next search</td></tr>
+
+<tr><td class='keyname'>Shift [drag-n-drop]</td><td class='desc'>When dragging text to the search bar, if the shift key is held down when dropping the text the default search won't be automatically invoked.</td></tr>
 </table>
 
 </p>
@@ -648,7 +650,11 @@ function dodrop()
     document.deff.q.value = q;
 
     rst();
-    mnu( "", "");
+
+    // Don't invoke the default search if they are holding down the shift key
+    // when they drop the selection
+    if ( !window.event.shiftKey )
+      mnu( "", "");
   }
   catch (e)
   {
