@@ -33,17 +33,21 @@ INTDIR=.\Debug
 OutDir=.\Debug
 # End Custom Macros
 
-ALL : "$(OUTDIR)\DQSDTools.dll" ".\Debug\regsvr32.trg"
+ALL : "$(OUTDIR)\DQSDTools.dll" ".\DQSDTools.tlb" ".\DQSDTools.h" ".\DQSDTools_i.c" "$(OUTDIR)\DQSDTools.bsc" ".\Debug\regsvr32.trg"
 
 
 CLEAN :
 	-@erase "$(INTDIR)\DQSDTools.obj"
 	-@erase "$(INTDIR)\DQSDTools.pch"
 	-@erase "$(INTDIR)\DQSDTools.res"
+	-@erase "$(INTDIR)\DQSDTools.sbr"
 	-@erase "$(INTDIR)\Launcher.obj"
+	-@erase "$(INTDIR)\Launcher.sbr"
 	-@erase "$(INTDIR)\StdAfx.obj"
+	-@erase "$(INTDIR)\StdAfx.sbr"
 	-@erase "$(INTDIR)\vc60.idb"
 	-@erase "$(INTDIR)\vc60.pdb"
+	-@erase "$(OUTDIR)\DQSDTools.bsc"
 	-@erase "$(OUTDIR)\DQSDTools.dll"
 	-@erase "$(OUTDIR)\DQSDTools.exp"
 	-@erase "$(OUTDIR)\DQSDTools.ilk"
@@ -58,7 +62,7 @@ CLEAN :
     if not exist "$(OUTDIR)/$(NULL)" mkdir "$(OUTDIR)"
 
 CPP=cl.exe
-CPP_PROJ=/nologo /MTd /W3 /Gm /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /Fp"$(INTDIR)\DQSDTools.pch" /Yu"stdafx.h" /Fo"$(INTDIR)\\" /Fd"$(INTDIR)\\" /FD /GZ /c 
+CPP_PROJ=/nologo /MTd /W3 /Gm /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /FR"$(INTDIR)\\" /Fp"$(INTDIR)\DQSDTools.pch" /Yu"stdafx.h" /Fo"$(INTDIR)\\" /Fd"$(INTDIR)\\" /FD /GZ /c 
 
 .c{$(INTDIR)}.obj::
    $(CPP) @<<
@@ -97,9 +101,17 @@ RSC_PROJ=/l 0x409 /fo"$(INTDIR)\DQSDTools.res" /d "_DEBUG"
 BSC32=bscmake.exe
 BSC32_FLAGS=/nologo /o"$(OUTDIR)\DQSDTools.bsc" 
 BSC32_SBRS= \
-	
+	"$(INTDIR)\DQSDTools.sbr" \
+	"$(INTDIR)\Launcher.sbr" \
+	"$(INTDIR)\StdAfx.sbr"
+
+"$(OUTDIR)\DQSDTools.bsc" : "$(OUTDIR)" $(BSC32_SBRS)
+    $(BSC32) @<<
+  $(BSC32_FLAGS) $(BSC32_SBRS)
+<<
+
 LINK32=link.exe
-LINK32_FLAGS=kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib wininet.lib /nologo /subsystem:windows /dll /incremental:yes /pdb:"$(OUTDIR)\DQSDTools.pdb" /debug /machine:I386 /def:".\DQSDTools.def" /out:"$(OUTDIR)\DQSDTools.dll" /implib:"$(OUTDIR)\DQSDTools.lib" /pdbtype:sept 
+LINK32_FLAGS=kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib wininet.lib shlwapi.lib /nologo /subsystem:windows /dll /incremental:yes /pdb:"$(OUTDIR)\DQSDTools.pdb" /debug /machine:I386 /def:".\DQSDTools.def" /out:"$(OUTDIR)\DQSDTools.dll" /implib:"$(OUTDIR)\DQSDTools.lib" /pdbtype:sept 
 DEF_FILE= \
 	".\DQSDTools.def"
 LINK32_OBJS= \
@@ -209,7 +221,7 @@ BSC32_SBRS= \
 <<
 
 LINK32=link.exe
-LINK32_FLAGS=kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib wininet.lib /nologo /base:"0x5ddb0000" /subsystem:windows /dll /incremental:no /pdb:"$(OUTDIR)\DQSDTools.pdb" /machine:I386 /def:".\DQSDTools.def" /out:"$(OUTDIR)\DQSDTools.dll" /implib:"$(OUTDIR)\DQSDTools.lib" 
+LINK32_FLAGS=kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib wininet.lib shlwapi.lib /nologo /base:"0x5ddb0000" /subsystem:windows /dll /incremental:no /pdb:"$(OUTDIR)\DQSDTools.pdb" /machine:I386 /def:".\DQSDTools.def" /out:"$(OUTDIR)\DQSDTools.dll" /implib:"$(OUTDIR)\DQSDTools.lib" 
 DEF_FILE= \
 	".\DQSDTools.def"
 LINK32_OBJS= \
@@ -252,19 +264,8 @@ SOURCE="$(InputPath)"
 SOURCE=.\dlldatax.c
 SOURCE=.\DQSDTools.cpp
 
-!IF  "$(CFG)" == "DQSDTools - Win32 Debug"
-
-
-"$(INTDIR)\DQSDTools.obj" : $(SOURCE) "$(INTDIR)" "$(INTDIR)\DQSDTools.pch" ".\DQSDTools.h" ".\DQSDTools_i.c"
-
-
-!ELSEIF  "$(CFG)" == "DQSDTools - Win32 Release MinDependency"
-
-
 "$(INTDIR)\DQSDTools.obj"	"$(INTDIR)\DQSDTools.sbr" : $(SOURCE) "$(INTDIR)" "$(INTDIR)\DQSDTools.pch"
 
-
-!ENDIF 
 
 SOURCE=.\DQSDTools.idl
 
@@ -292,33 +293,22 @@ MTL_SWITCHES=/tlb ".\DQSDTools.tlb" /h "DQSDTools.h" /iid "DQSDTools_i.c" /Oicf
 
 SOURCE=.\DQSDTools.rc
 
-"$(INTDIR)\DQSDTools.res" : $(SOURCE) "$(INTDIR)" ".\DQSDTools.tlb"
+"$(INTDIR)\DQSDTools.res" : $(SOURCE) "$(INTDIR)"
 	$(RSC) $(RSC_PROJ) $(SOURCE)
 
 
 SOURCE=.\Launcher.cpp
 
-!IF  "$(CFG)" == "DQSDTools - Win32 Debug"
-
-
-"$(INTDIR)\Launcher.obj" : $(SOURCE) "$(INTDIR)" "$(INTDIR)\DQSDTools.pch" ".\DQSDTools.h"
-
-
-!ELSEIF  "$(CFG)" == "DQSDTools - Win32 Release MinDependency"
-
-
 "$(INTDIR)\Launcher.obj"	"$(INTDIR)\Launcher.sbr" : $(SOURCE) "$(INTDIR)" "$(INTDIR)\DQSDTools.pch"
 
-
-!ENDIF 
 
 SOURCE=.\StdAfx.cpp
 
 !IF  "$(CFG)" == "DQSDTools - Win32 Debug"
 
-CPP_SWITCHES=/nologo /MTd /W3 /Gm /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /Fp"$(INTDIR)\DQSDTools.pch" /Yc"stdafx.h" /Fo"$(INTDIR)\\" /Fd"$(INTDIR)\\" /FD /GZ /c 
+CPP_SWITCHES=/nologo /MTd /W3 /Gm /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /D "_USRDLL" /FR"$(INTDIR)\\" /Fp"$(INTDIR)\DQSDTools.pch" /Yc"stdafx.h" /Fo"$(INTDIR)\\" /Fd"$(INTDIR)\\" /FD /GZ /c 
 
-"$(INTDIR)\StdAfx.obj"	"$(INTDIR)\DQSDTools.pch" : $(SOURCE) "$(INTDIR)"
+"$(INTDIR)\StdAfx.obj"	"$(INTDIR)\StdAfx.sbr"	"$(INTDIR)\DQSDTools.pch" : $(SOURCE) "$(INTDIR)"
 	$(CPP) @<<
   $(CPP_SWITCHES) $(SOURCE)
 <<
