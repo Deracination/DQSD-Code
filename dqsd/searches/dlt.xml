@@ -1,8 +1,15 @@
 <search function="dlt">
   <name>DealTime Price Comparison</name>
-  <description>Compare products, prices, and stores: "dlt Harry Potter"</description>
+  <description>
+    Compare products, prices, and stores.<br/>
+    <a class="helpboxDescLabels">Example:</a><br/>
+    <table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">dlt Harry Potter</td></tr>
+  	</table>
+  </description>
   <category>Shopping</category>
   <link>http://www.dealtime.com/</link>
+  
   <form name="dltf"
         action="http://www.dealtime.com/GS2/GS2StatReDirect"
         method="get">
@@ -16,11 +23,12 @@
     <input type="hidden" name="Operator" value="2"/>
     <input type="hidden" name="keyword" value=""/>
   </form>
+  
   <script><![CDATA[
     function dlt(q)
     {
-      if( q == "" )
-        openSearchWindow("http://www.dealtime.com/");
+      if( nullArgs("dlt",q) )
+        return false;
       else
       {
         document.dltf.keyword.value = q;

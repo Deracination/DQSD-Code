@@ -1,25 +1,27 @@
 <search function="dl">
-  <name>Download.com</name>
+  <name>CNET Download.com</name>
   <description>
-    Search CNET's shareware archive.<br/>
+    Search CNET's shareware archive for Windows software.<br/>
     <a class="helpboxDescLabels">Example:</a><br/>
-    <table cellpadding="0" cellspacing="0" border="0">
+    <table class="helpBoxDescTable">
 		  <tr><td class="helpboxDescColumns">dl Dave's Quick Search</td></tr>
 	  </table>
   </description>
   <category>Computers</category>
   <link>http://download.cnet.com/</link>
+  
   <form name="dlf"
         action="http://download.com.com/3120-20-0.html"
         method="get">
     <input type="hidden" name="tg" value="dl-20"/>
     <input type="hidden" name="qt"/>
   </form>
+  
   <script><![CDATA[
     function dl(q)
     {
-      if( q == "" )
-        openSearchWindow("http://download.cnet.com/");
+      if( nullArgs("dl",q) )
+        return false;
       else
       {
         document.dlf.qt.value = q;
