@@ -32,19 +32,23 @@ function openDocument(path)
 }
 
 // Submit a form either with the default browser or with IE
-function submitForm(form)
+function submitForm(form, dontChangeTarget)
 {
-  // Here's a safeguard for forgetting to put a target in the FORM
-  if ( (getReuseBrowserWindowMode() == 0) || !form.target || (form.target && form.target == '') )
-    form.target = '_blank';
-
-  // Reuse a single window if the user wants to and the target is _blank
-  // Don't override targets with any other name because some searches may want
-  // their own window.
-  if ((getReuseBrowserWindowMode() > 0) && form.target && (form.target == '_blank'))
+  //allow the Override
+  if ( !dontChangeTarget )
   {
-    // 1=same window always; 2=new window for each search type
-    form.target = ((getReuseBrowserWindowMode() == 1) ? DQSD_BROWSER_WINDOW_NAME : (DQSD_BROWSER_WINDOW_NAME + '_' + form.name));
+    // Here's a safeguard for forgetting to put a target in the FORM
+    if ( (getReuseBrowserWindowMode() == 0) || !form.target || (form.target && form.target == '') )
+      form.target = '_blank';
+
+    // Reuse a single window if the user wants to and the target is _blank
+    // Don't override targets with any other name because some searches may want
+    // their own window.
+    if ((getReuseBrowserWindowMode() > 0) && form.target && (form.target == '_blank'))
+    {
+      // 1=same window always; 2=new window for each search type
+      form.target = ((getReuseBrowserWindowMode() == 1) ? DQSD_BROWSER_WINDOW_NAME : (DQSD_BROWSER_WINDOW_NAME + '_' + form.name));
+    }
   }
 
   if (useExternalBrowser && DQSDLauncher)
@@ -145,7 +149,7 @@ function parseArgs(q, expectedSwitches, expandSwitches)
   var args_array = q.split(' ');
 
   // Regular expression that defines switches
-  var re_switch = /\/(([-.\w]+)(?::?(\S*)))\s*/;
+  var re_switch = /\/((\w+)(?::?(\S*)))\s*/;
   var re_res_args;
   var re_res_switch;
 
@@ -158,12 +162,10 @@ function parseArgs(q, expectedSwitches, expandSwitches)
     {
       for (var j = 0; j < expectedSwitches.length && !re_res_switch; j++)
       {
-        var expect_regex = new RegExp(
-            '^(' + re_res_args[2].replace('.', '\\.') +
-             ')' + (expandSwitches ? '' : '$'), 'i');
-
-        re_res_switch = expectedSwitches[j].match(expect_regex);
-
+        if (expandSwitches)
+          re_res_switch = expectedSwitches[j].match(new RegExp('^(' + re_res_args[2] + ')', 'i'));
+        else
+          re_res_switch = expectedSwitches[j].match(new RegExp('^(' + re_res_args[2] + ')$', 'i'));
         //  If there is a match, adjust the args_array, and save the values.
         if (re_res_switch)
         {
