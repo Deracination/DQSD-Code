@@ -70,6 +70,7 @@ Modified Searches
 * viam - Changed to fit site changes
 * sd - changed for a correct example
 * smlnk - Updated to take advantage of new server features (Shawn K. Hall)
+* twn - repaired to fit site changes (Sarah Sweeney)
 
 Removed Searches
 
