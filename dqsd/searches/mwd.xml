@@ -1,19 +1,27 @@
 <search function="mwd">
   <name>Merriam-Webster Dictionary</name>
-  <description>Search for word definitions: "mwd idempotent"</description>
+  <description>
+    Search for word definitions.<br/>
+    <a class="helpboxDescLabels">Example:</a><br/>
+    <table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">mwd idempotent</td></tr>
+  	</table>
+  </description>
   <category>Reference</category>
   <link>http://www.m-w.com/</link>
+  
   <form name="mwdf"
         action="http://www.m-w.com/cgi-bin/dictionary"
         method="post">
     <input type="hidden" name="book" value="Dictionary"/>
     <input type="hidden" name="va"/>
   </form>
+  
   <script><![CDATA[
     function mwd(q)
     {
-      if( q == "" )
-        openSearchWindow("http://www.m-w.com/");
+      if( nullArgs("mwd",q) )
+        return false;
       else
       {
         document.mwdf.va.value = q;

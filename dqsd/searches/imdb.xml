@@ -1,8 +1,15 @@
 <search function="imdb">
   <name>Internet Movie Database (IMDB)</name>
-  <description>Lookup movies, television shows, actors, dicectors and more on the IMDB: "imdb jaws"</description>
+  <description>
+    Lookup movies, television shows, actors, dicectors and more.<br/>
+    <a class="helpboxDescLabels">Example:</a><br/>
+    <table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">imdb jaws</td></tr>
+  	</table>
+  </description>
   <category>Entertainment</category>
   <link>http://www.imdb.com/</link>
+  
   <form name="imdbf"
         action="http://www.imdb.com/Find"
         method="post">
@@ -10,11 +17,12 @@
     <input type="hidden" name="for"/>
     <input type="hidden" name="Go" value="Go"/>
   </form>
+  
   <script><![CDATA[
     function imdb(q)
     { 
-      if( q == "" )
-        openSearchWindow("http://www.imdb.com/");
+      if( nullArgs("imdb",q) )
+        return false;
       else
       {
         document.imdbf["for"].value = q;

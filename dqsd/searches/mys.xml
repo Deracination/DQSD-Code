@@ -1,19 +1,27 @@
 <search function="mys">
   <name>MySQL Reference</name>
-  <description>Lookup on mysql.com: "mysql create table"</description>
+  <description>
+    Lookup on mysql.com.<br/>
+    <a class="helpboxDescLabels">Example:</a><br/>
+    <table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">mysql create table</td></tr>
+  	</table>
+  </description>
   <category>Computers</category>
   <link>http://www.mysql.com/</link>
+  
   <form name="mysf"
         action="http://www.mysql.com/doc/manual.php"
         method="get">
     <input type="hidden" name="search_query"/>
     <input type="hidden" name="depth" value="0"/>
   </form>
+  
   <script><![CDATA[
     function mys(q)
     {
-      if( q == "" )
-        openSearchWindow("http://www.mysql.com/");
+      if( nullArgs("mys",q) )
+        return false;
       else
       {
         document.mysf.search_query.value = q;

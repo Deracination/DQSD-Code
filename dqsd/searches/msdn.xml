@@ -1,19 +1,21 @@
 <search function="msdn">
   <name>Microsoft Developer Network (MSDN)</name>
-  <description>Search for articles on the MSDN.<br/>
-  <a class="helpboxDescLabels">Switches:</a><br/>
-	<table cellpadding="0" cellspacing="0" border="0">
-		<tr><td class="helpboxDescColumns">/library</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Limits search to the MSDN Library.</td></tr>
-	</table>
-  <a class="helpboxDescLabels">Examples:</a><br/>
-  <table cellpadding="0" cellspacing="0" border="0">
-		<tr><td class="helpboxDescColumns">msdn ocx</td></tr>
-		<tr><td class="helpboxDescColumns">msdn iframes /library</td></tr>
-	</table>
+  <description>
+    Search for articles on the MSDN.<br/>
+    <a class="helpboxDescLabels">Switches:</a><br/>
+  	<table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">/library</td><td class="helpboxDescColumns"> - </td><td class="helpboxDescColumns">Limits search to the MSDN Library.</td></tr>
+  	</table>
+    <a class="helpboxDescLabels">Examples:</a><br/>
+    <table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">msdn ocx</td></tr>
+  		<tr><td class="helpboxDescColumns">msdn iframes /library</td></tr>
+  	</table>
   </description>
   <category>Computers</category>
   <link>http://msdn.microsoft.com/</link>
   <contributor>Ryan Edwards</contributor>
+  
   <form name="msdnf"
         action="http://msdn.microsoft.com/library/shared/searchtab/searchHandoff.asp" 
         method="get">
@@ -22,12 +24,13 @@
     <input type="hidden" name="stcfg" value="/library/searchtabconfig.xml"/>
     <input type="hidden" Name="scopeid"/>
   </form>
+  
   <script><![CDATA[
     function msdn(q)
     {
       var args = parseArgs(q, "library");
-      if( q == "" )
-        openSearchWindow("http://msdn.microsoft.com/");
+      if( nullArgs("msdn",q) )
+        return false;
       else if( args.switches.length == 1 && args.switches[0].name == "library" )
       {
         document.msdnf.scopeid.value = "2";

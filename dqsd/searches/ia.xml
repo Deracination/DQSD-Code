@@ -1,13 +1,20 @@
 <search function="ia">
   <name>Internet Archive</name>
-  <description>Look way back in time on the web: "ia cnet.com"</description>
+  <description>
+    Look at copies of web pages archived at periodic intervals.<br/>
+    <a class="helpboxDescLabels">Example:</a><br/>
+    <table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">ia cnet.com</td></tr>
+  	</table>
+  </description>
   <category>Fun</category>
   <link>http://web.archive.org/</link>
+  
   <script><![CDATA[
     function ia(q)
     {
-      if( q == "" )
-        openSearchWindow("http://web.archive.org/");
+      if( nullArgs("ia",q) )
+        return false;
       else if (q.indexOf("://") >= 0)
         openSearchWindow("http://web.archive.org/web/*/" + q);
       else

@@ -1,10 +1,19 @@
 <search function="multi">
   <name>MultiSearch</name>
-  <description>Multi search allows the user to run multiple searches with one command line expression:
-    "multi av gg wood planes" will search both alta vista and google for "wood planes".
+  <description>
+    Perform multiple searches with a single command line expression.<br/>
+    <a class="helpboxDescLabels">Usage:</a><br/>
+  	<table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">multi &lt;<i>search1</i>&gt; [&lt;<i>search2</i>&gt; [...]] &lt;<i>term</i>&gt;</td></tr>
+  	</table>
+    <a class="helpboxDescLabels">Example:</a><br/>
+    <table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">multi av gg wood planes</td></tr>
+  	</table>
   </description>
-  <contributor>Neel Doshi</contributor>
   <category>Search the Web</category>
+  <contributor>Neel Doshi</contributor>
+  
   <script><![CDATA[
    // This function is almost identical to the shortcut function in search.html
    function multiIsCommand(t)
@@ -79,9 +88,7 @@
         return false;
       }
       if ( nullArgs("multi", q) )
-      {
         return false;
-      }
       else
         if (result = q.split( /[,\s]+/ ) )
         {
