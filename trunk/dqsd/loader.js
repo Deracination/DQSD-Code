@@ -4,7 +4,7 @@ function addsearch(fname, name, desc, link, cat)
 {
   try
   {
-    searches[fname] = {fname:fname, name:name, desc:desc, link:link, cat:cat, fun:eval(fname), aliases:[], enabled:!disabledsearches[fname]};
+    searches[fname] = {fname:fname, name:name, desc:desc, link:link, cat:cat, fun:eval(fname), aliases:[], enabled:!disabledsearches[fname], menudisplay:true};
     if( !aliases[fname] )
       addalias( fname, fname );
     addhelp( searches[fname] );
@@ -36,7 +36,19 @@ function addalias(alias, fname, name, desc, cat)
           newaliases.push( searches[prevfname].aliases[i] );
         }
       }
-      searches[prevfname].aliases = newaliases;
+      // Gotta have one alias; even if the local alias overrides a non-local alias
+      if ( newaliases.length > 0 )
+      {
+        searches[prevfname].aliases = newaliases;
+      }
+      else
+      {
+        // reset the one and only alias to the search name
+        // but don't display the alias on the menu because
+        // there's a local alias that is overriding it.
+        searches[prevfname].aliases = [ prevfname ];
+        searches[prevfname].menudisplay = false;
+      }
     }
     catch (e)
     {
@@ -248,8 +260,8 @@ if (searchRoot)
       if(descriptionNode)
       {
         // There may be a better way to do this - I'm
-		// trying to remove the <description> tags which end-up bracketing
-		// the description XML
+    // trying to remove the <description> tags which end-up bracketing
+    // the description XML
         descriptionXml = descriptionNode.xml.replace(/\<description\>/, '');
         descriptionXml = descriptionXml.replace(/\<\/description\>/, '');
       }
