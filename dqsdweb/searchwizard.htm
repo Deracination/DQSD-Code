@@ -48,31 +48,27 @@ If you have no desire to ever write a search for DQSD, then don't read any furth
 </p>
 
 <p>
-One of the first things I typically do when creating a new search is to view the source for the page, and strip out everything but the FORM for the search.&nbsp;&nbsp;But, it's tedious.&nbsp;&nbsp;And, it's hard to find the right FORM when there are multiple FORMs in the page.&nbsp;&nbsp;Also, it's error-prone because I have to convert the HTML to well-formed XML (and I always forget to close the INPUT elements with "/>").
-</p>
-
-<p>
-There had to be an easier way.
+The first thing I typically do when creating a new search is to view the source for the page and strip out everything but the FORM for the search.&nbsp;&nbsp;This is tedious.&nbsp;&nbsp;And, often it's hard to find the right FORM when there are multiple FORMs in the page.&nbsp;&nbsp;Also, the process of converting the FORM's HTML to well-formed XML is error-prone (I always forget to close the INPUT elements with "/>").&nbsp;&nbsp;There had to be an easier way.
 </p>
 
 <h3>OK, so how do I use it?</h3>
 
 <p>
 <ol>
-<li><a href="http://sourceforge.net/project/showfiles.php?group_id=42081&release_id=104770">Install</a> the Search Wizard.</li>&nbsp;&nbsp;You should see a new button on your toolbar.&nbsp;&nbsp;If you don't, simply right-click on the IE toolbar, and click 'Customize...'.&nbsp;&nbsp;Add the button labeled "DQSD Search Wizard" in the list of available toolbar buttons.
-<li>Go to the web page with the search.</li>
-<li>Click in the field you want to receive the search string.</li>
-<li>Start up the wizard by clicking on its Internet Explorer toolbar button:<br/>
+<li><a href="http://sourceforge.net/project/showfiles.php?group_id=42081&release_id=104770">Install</a> the Search Wizard.</li>&nbsp;&nbsp;You should see a new button on your toolbar:<br/>
 <center>
 <img src="wizard_toolbar.jpg">
 </center>
-</li>
+If you don't, simply right-click on the IE toolbar, and click 'Customize...'.&nbsp;&nbsp;Add the button labeled "DQSD Search Wizard" in the list of available toolbar buttons.
+<li>Go to the web page containing the search you want to add to DQSD.</li>
+<li>Click in the field that contains the search string.</li>
+<li>Start up the wizard by clicking on its Internet Explorer toolbar button.</li>
 <li>
 You should see a dialog that looks something like the following.&nbsp;&nbsp;Some of the fields will be automatically filled in.&nbsp;&nbsp;Enter a name and a title for the new search.&nbsp;&nbsp;The name is the string that will invoke the search and will be used for the file name, so keep it short and simple.<br/>
 <center><img src="dqsdsearchwiz.jpg" align="top"></center>
 </li>
 <li>
-Make sure at least one FORM is checked in the list of FORMs.&nbsp;&nbsp;If you clicked in a field before invoking the wizard, the FORM containing that field should be already be checked.&nbsp;&nbsp;Selecting a FORM in the list will show the HTML content of the FORM in the area below the list.&nbsp;&nbsp;This is really just to provide some help in determining which FORM(s) you need.&nbsp;&nbsp;You can check multiple FORMs which will all be included in the search file.
+In the list of FORM elements, make sure at least one FORM is checked.&nbsp;&nbsp;If you clicked in a field before invoking the wizard, the FORM containing that field should be already be checked.&nbsp;&nbsp;Selecting a FORM in the list will show the HTML content of the FORM in the area below the list.&nbsp;&nbsp;This is really just to provide some help in determining which FORM(s) you need.&nbsp;&nbsp;You can check multiple FORMs, all of which will be included in the search file.
 </li>
 <li>Hit OK and you'll be prompted to save the search file to your DQSD 'searches' directory.</li>
 <li>After saving the file, it will come up in Notepad by default.&nbsp;&nbsp;(Click 'Options...' to change the editor to something other than Notepad.)
@@ -88,7 +84,7 @@ Then I clicked the 'DQSD Search Wizard' button.&nbsp;&nbsp;All the FORM elements
 </p>
 
 <p>
-The resulting XML file search file will look something like <a href="#searchxml">the following</a>.&nbsp;&nbsp;And, in spite of the comment at the top of the file, this search works without modification.&nbsp;&nbsp;<i>Woo hoo!</i>&nbsp;&nbsp;(Well, I find it fairly exciting.)&nbsp;&nbsp;Granted, complicated searches won't 'just work', but the wizard will at least do a bunch of the tedious work for you.
+The resulting XML file search file will look something like <a href="#searchxml">the following</a>.&nbsp;&nbsp;And, in spite of the comment at the top of the file, this search just works.&nbsp;&nbsp;<i>Woo hoo!</i>&nbsp;&nbsp;(Well, I find it fairly exciting.)&nbsp;&nbsp;Granted, complicated searches won't 'just work', but the wizard will at least do a bunch of the tedious work for you.
 </p>
 
 <a name="searchxml" />
@@ -256,6 +252,9 @@ August 13, 2002
 Feel free to grab the source and make the following improvements.&nbsp;&nbsp;These are not in any particular order.
 <ul>
 <li>
+Add support for sites with frames.
+</li>
+<li>
 Add some context-sensitive help.&nbsp;&nbsp;The little help button is there, but it does nothing.
 </li>
 <li>
@@ -275,7 +274,7 @@ Add a 'DQSD Search Wizard' menu item to the IE context and tools menus.
 <a href="http://notesbydave.com">David Bau</a> for such a cool tool.&nbsp;&nbsp;Aren't the best things in life usually the simplest?
 </li>
 <li>
-<a href="http://www.cheztabor.com/projects.htm">Tim Tabor</a> for sharing his code.&nbsp;&nbsp;Probably couldn't (and wouldn't) have done it without those examples.
+<a href="http://www.cheztabor.com/projects.htm">Tim Tabor</a> for sharing his code.&nbsp;&nbsp;Probably couldn't (and for sure wouldn't) have done it without those examples.
 </li>
 </ul>
 
