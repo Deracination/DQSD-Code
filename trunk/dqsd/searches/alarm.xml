@@ -35,7 +35,7 @@
         setSearchWindowText("Alarm Canceled.");
         setTimeout("document.deff.q.value='';",1000);
       }
-      else if( parsedLine = t.match(/(\d\d\:\d\d)\s+(.*)/) ) 
+      else if( parsedLine = t.match(/(\d\d\:\d\d)\s*(.*)/) ) 
       {
 		if( parsedLine[1] != null && parsedLine[1].length != 0) { 
 		  if(parsedTime = parsedLine[1].match(/(\d\d):(\d\d)/)) {
@@ -58,7 +58,7 @@
 		setSearchWindowText("Alarm Set for "+alarmTime+".");
 		setTimeout("document.deff.q.value='';",1000);
       }
-	  else if( parsedLine = t.match(/^(\d+)\s+(.*)$/) )
+	  else if( parsedLine = t.match(/^(\d+)\s*(.*)$/) )
 	  {
         if( parsedLine[1] != null && parsedLine[1].length != 0) {
 		  var dt = new Date();
