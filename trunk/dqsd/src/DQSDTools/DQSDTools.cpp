@@ -2,7 +2,6 @@
 
 #include "stdafx.h"
 #include "resource.h"
-#include <initguid.h>
 #include "DQSDTools.h"
 
 #include "DQSDTools_i.c"
