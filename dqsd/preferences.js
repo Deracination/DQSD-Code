@@ -430,6 +430,18 @@ checkForUpdateTypes = 'final';
 */
 refreshIconsAtStartup = true;
 
+
+/* Include a banner/logo on the search bar?
+*  bannerurl     Identifies the resource to use, either a url or file 
+*                reference from the DQSD install directory.
+*  bannerwidth   Specify the width of the banner image, or "0" to autodetect
+*  bannerheight  Specify the height of the banner image, or "0" to autodetect
+*/
+//bannerurl    = "dqsd.gif"; // "http://reliableanswers.com/x/dqsd/dqsd.gif"
+//bannerwidth  = 18;         // 0 := autodetect banner size
+//bannerheight = 12;         // 0 := autodetect banner size
+
+
 /* Startup functions
 *  Used to allow for personalized startup routines through the Quick Search Deskbar.
 *  TIP:  If you wish to call a function, use the escape character to escape parentheses
