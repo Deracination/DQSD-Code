@@ -10,9 +10,11 @@ function openNamedSearchWindow(url, name)
   if (useExternalBrowser && DQSDLauncher)
     DQSDLauncher.OpenDocument(url);
   else if (typeof windowOpenFeatures != "undefined") {
-    window.open(url, name, windowOpenFeatures);
+    var w = window.open(pagetemplate, name, windowOpenFeatures);
+    w.navigate(url);
   } else {
-    window.open(url, name);
+    var w = window.open(pagetemplate, name);
+    w.navigate(url);
   }
 }
 
