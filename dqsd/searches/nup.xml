@@ -1,0 +1,49 @@
+<search function="nup">
+  <COMMENT>
+
+    This search file was initially created by Dave's Quick Search Deskbar
+    Search Wizard version 0.5 (beta) on 08/25/02 at 00:39:15
+
+    Even though this XML search will probably load and is a healthy start
+    toward a completed search, please be aware that this search will probably
+    not work as is and will require some human inspection and modification.
+
+  </COMMENT>
+  <name>Nupedia</name>
+  <category>Reference</category>
+  <contributor>Thad Kerosky</contributor>
+  <link>http://www.nupedia.com/</link>
+  <description>
+  Nupedia is a new online, peer-reviewed, international encyclopedia.  It is searchable and will also be organized hierarchically and alphabetically.  Nupedia is "open content" or "free"; we want the contents of the encyclopedia to receive the widest possible distribution.  Reading Nupedia.com will always be free of charge and therefore the project of building it depends on volunteers--possibly you! 
+  </description>
+  <form name="nupf"
+        method="get"
+        action="http://www.nupedia.com/n_search.fcgi">
+
+    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
+
+    <input type="hidden" name="request" value="" />
+  </form>
+  <script><![CDATA[
+    function nup(q)
+    {
+      if( nullArgs("nup", q) )
+        return;
+
+      if( q == "" )
+      {
+        openSearchWindow("http://www.nupedia.com/");
+        return;
+      }
+
+      // FORM variables for nupf
+
+      // The wizard assigned the search string to this form field value because
+      // this field was the active element when the search file was generated.
+      // Change this to args.q if the search string is parsed with parseArgs.
+      document.nupf.request.value = q;
+
+      submitForm(nupf);
+    }
+  ]]></script>
+</search>
