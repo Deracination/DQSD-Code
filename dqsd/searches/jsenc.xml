@@ -1,0 +1,144 @@
+<search function="jsenc">
+  <name>Javascript String URL encoder/decoder</name>
+  <description>
+    Converts to/from url encoded strings<br/>
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>/all</td><td> - </td><td>encode all characters</td></tr>
+  		<tr><td>/mailto</td><td> - </td><td>generates a javascript encoded mailto string that can be pasted into your webpage to hide it from email address harvesters</td></tr>
+  	</table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>jsenc %78%20%79%20%7A</td><td> - </td><td>Returns x y z</td></tr>
+  		<tr><td>jsenc x%20y%20z</td><td> - </td><td>Returns x y z</td></tr>
+  		<tr><td>jsenc x y z</td><td> - </td><td>Returns x%20y%20z</td></tr>
+  		<tr><td>jsenc /all x y z</td><td> - </td><td>Returns %78%20%79%20%7A</td></tr>
+        <tr><td>jsenc /mailto info@microsoft.com</td><td> - </td><td>link name and email address are both info@microsoft.com</td></tr>
+        <tr><td>jsenc /mailto info@microsoft.com Microsoft Information</td><td> - </td><td>link name is Microsoft Information and email address is info@microsoft.com</td></tr>
+  	</table>
+  </description>
+  <category>Functions</category>
+  <contributor>Brent Beardsley</contributor>
+  
+  <script><![CDATA[
+    function jsenc(q)
+    {
+	  if (nullArgs("jsenc",q))
+        return false;
+
+      var all_chars = false;
+      var args = parseArgs(q, "all, mailto");
+      var str = args.q;
+      if (args.switches.length > 0) {
+        if (args.switches[0].name == 'all') {
+          all_chars = true;
+        } else if (args.switches[0].name == 'mailto') {
+          var r = jsenc_mailto(args.q);
+          if (r == false) {
+            // failed to encode mailto
+            nullArgs("jsenc", "?");
+          } else {
+            // successfully encoded mailto
+            document.deff.q.value = r;
+          }
+          return false;
+        } else {
+          nullArgs("jsenc", "?");        
+          return false;
+        }
+      }
+     
+      var ret_value = "";
+      if (str.match(/(%[0-9A-Fa-f]{2}|%u[0-9A-Fa-f]{4})+/)) {
+        // decode
+        ret_value = jsenc_decode(str);
+      } else {
+        // encode
+        ret_value = jsenc_encode(str, all_chars);
+      }
+      document.deff.q.value = ret_value;
+    }
+
+    function jsenc_mailto(q)
+    {
+      var r = q.match(/(\S+@\S+\.\S+)(\s+(.*))?/);
+      if (r == null) 
+        return false;
+     
+      var email_address = r[1];
+      var email_name = r[3];
+      if (email_name == '') {
+        email_name = email_address;
+      }
+      email_address = "mailto:"+email_address;
+
+      var should_swap_name = (email_name.match(/@.*?\./) != null) ? true : false;
+
+      var swapped_email_address = jsenc_email_swap(email_address);
+      var swapped_email_name = should_swap_name ? jsenc_email_swap(email_name) : email_name;
+
+      var encstr = "";
+      encstr += "var s='"+swapped_email_address+"';var r='';for(var i=0;i<s.length;i++,i++){r=r+s.substring(i+1,i+2)+s.substring(i,i+1)}";
+      if (should_swap_name) {
+        // encrypt the name too if it's an email address
+        encstr += "var u='"+swapped_email_name+"';var t='';for(var j=0;j<u.length;j++,j++){t=t+u.substring(j+1,j+2)+u.substring(j,j+1)}";
+        encstr += ("document.write('<a href=\"'+r+'\">'+t+'</a>')");
+      } else {
+        // name isn't an email address - don't waste the space swapping it
+        encstr += ("document.write('<a href=\"'+r+'\">"+email_name+"</a>')");
+      }
+      var outstr = "";
+      outstr += "<SCRIPT language=\"javascript\">eval(unescape('";
+      outstr += jsenc_encode(encstr, true);
+      outstr += "'))</SCRIPT>";
+      return outstr;
+    }
+
+    function jsenc_email_swap(str)
+    {
+        var r = '';
+        for(var i=0;i<str.length;i++,i++)
+        {
+            r=r+str.substring(i+1,i+2)+str.substring(i,i+1);
+        }
+        return r;
+    }
+
+    function jsenc_encode(str, all_chars)
+    {
+      var myall_chars = (typeof all_chars != "undefined") ? all_chars : true;
+      var outstr = '';
+      if (myall_chars != true) {
+        // encode all spaces, punctuation, accented characters, and any other non-ASCII characters
+        outstr = escape(str);
+      } else {
+        // encode all characters
+        for (var i=0; i < str.length; i++) {
+          var code = str.charCodeAt(i);
+          if (code > 255)	{
+            // unicode
+            var enc_str = "%u"+code.toString(16).toUpperCase();
+            while (enc_str.length < 6)
+              enc_str = "0" + enc_str;
+            outstr += enc_str;
+          } else {
+            // ascii
+            outstr += "%";
+            outstr += ((code < 16) ? "0" : "") + code.toString(16).toUpperCase();
+          } 
+        }
+      }
+      return outstr;
+    }
+
+    function jsenc_decode(str) 
+    {
+      return unescape(str);
+    }
+  ]]></script>
+  <copyright>
+	Copyright (c) 2002 David Bau
+	Distributed under the terms of the
+	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>
