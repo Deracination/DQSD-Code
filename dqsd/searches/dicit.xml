@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+The previous statement allows using accentuated characters.
+- SGP 20020716
+
+The /en and /it switches require a free user registration on the site.
+It's better to set reuseBrowserWindowMode=2 in ..\localprefs.js in
+order to reuse the same login with each search, since the site does not
+send out cookies to save login parameters.
+-->
+
+<search function="dicit">
+	<name>Dizionario italiano Garzanti e inglese-italiano Hazon</name>
+	<description>
+		Ricerca una parola italiana nel Garzanti oppure ricerca nell'Hazon la sua traduzione in inglese/italiano<br/>
+		<div class="helpboxDescLabels">Per la traduzione (bisogna prima registrarsi):</div>
+		<table class="helpboxDescTable">
+			<tr><td>dicit /it WORD </td><td> - </td><td>da inglese a italiano</td></tr>
+			<tr><td>dicit /en PAROLA </td><td> - </td><td>da italiano a inglese</td></tr>
+		</table>
+		<div class="helpboxDescLabels">Esempi:</div>
+		<table class="helpboxDescTable">
+			<tr><td>dicit capo</td></tr>
+			<tr><td>dicit /en capo</td></tr>
+			<tr><td>dicit /it boss</td></tr>
+		</table>
+		<div class="helpboxDescLabels">Per registrarsi:</div>
+		Ci si registra gratis sul sito (dicit). Per tutte le ricerche è meglio riutilizzare la stessa finestra del browser, altrimenti la login verrà richiesta per ogni nuova ricerca che la comporti.
+	</description>
+	<category>Reference</category>
+	<link>http://www.garzantilinguistica.it/</link>
+	<contributor>SGP</contributor>
+	<version>1.0 20020715</version>
+	
+	<script><![CDATA[
+		function dicit(q)
+		{
+		var url = "http://www.garzantilinguistica.it/";
+		if ( nullArgs("dicit", q) )
+		  return false;
+		  else {
+		    var args = parseArgs(q, "en, it");
+		    if (args.switches.length == 1 && args.switches[0].name == "en")
+		      return openSearchWindow(url + "club/inglese/hazon.html?cerca=1&dizionario=1&parola=" + args.q);
+		    else { if (args.switches.length == 1 && args.switches[0].name == "it")
+		      return openSearchWindow(url + "club/inglese/hazon.html?cerca=1&dizionario=2&parola=" + args.q);
+		           else
+			     return openSearchWindow(url + "digita/parola.html?parola=" + args.q);
+			 }
+			}
+		}
+	]]></script>
+</search>
+
