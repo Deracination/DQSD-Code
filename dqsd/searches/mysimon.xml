@@ -1,0 +1,136 @@
+<search function="mysimon">
+  <name>My Simon</name>
+  <category>Shopping</category>
+  <contributor>David Bau</contributor>
+  <link>http://www.mysimon.com/</link>
+  <email>davidbau@hotmail.com</email>
+  <description>
+  Compare products and prices using MySimon
+    <div class="helpboxDescLabels">Switches:</div>
+  	<table class="helpboxDescTable">
+  		<tr><td>/apparel</td><td> - </td><td>Apparel</td></tr>
+  		<tr><td>/babies</td><td> - </td><td>Babies</td></tr>
+  		<tr><td>/beauty /health</td><td> - </td><td>Beauty and Health</td></tr>
+  		<tr><td>/books /movies /music</td><td> - </td><td>Books, Movies, Music</td></tr>
+  		<tr><td>/computers</td><td> - </td><td>Computers</td></tr>
+  		<tr><td>/electronics</td><td> - </td><td>Electronics</td></tr>
+  		<tr><td>/flowers /gifts</td><td> - </td><td>Flowers and Gifts</td></tr>
+  		<tr><td>/food /wine</td><td> - </td><td>Food and Wine</td></tr>
+  		<tr><td>/home /garden</td><td> - </td><td>Home and Garden</td></tr>
+  		<tr><td>/office</td><td> - </td><td>Office</td></tr>
+  		<tr><td>/sports /hobbies</td><td> - </td><td>Sports and Hobbies</td></tr>
+  		<tr><td>/toys</td><td> - </td><td>Toys and Games</td></tr>
+  		<tr><td>/games</td><td> - </td><td>Video Games</td></tr>
+  	</table>
+    <div class="helpboxDescLabels">Examples:</div>
+        <table class="helpboxDescTable">
+  		<tr><td>mysimon Pentax Cameras</td></tr>
+  		<tr><td>mysimon Trefethen /books</td></tr>
+  	</table>
+  </description>
+
+  <form name="mysimonf"
+        method="get"
+        action="http://chkpt.zdnet.com/chkpt/mys.ksrch.hp/http://www.mysimon.com/ksrch/kwaction.jhtml">
+    <input type="hidden" name="pgid" value="" />
+    <input type="hidden" name="fromURI" value="/index.jhtml" />
+    <input type="hidden" name="oldc" value="" />
+
+    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
+
+    <input type="hidden" name="kw" value="" />
+    <input type="hidden" name="c" value="" />
+    <COMMENT>
+      The input element above, "c", was a SELECT element with the following options...
+      <select name="c">
+        <option value="">Entire Site</option>
+        <option value="apparel">Apparel</option>
+        <option value="babieskids">Babies</option>
+        <option value="health">Beauty &amp; Health</option>
+        <option value="media">Books,Music,Movies</option>
+        <option value="computers">Computers</option>
+        <option value="electronics">Electronics</option>
+        <option value="flowersgifts">Flowers &amp; Gifts</option>
+        <option value="gourmet">Food &amp; Wine</option>
+        <option value="home">Home &amp; Garden</option>
+        <option value="office">Office</option>
+        <option value="sportshobbies">Sports &amp; Hobbies</option>
+        <option value="toyscollectibles">Toys &amp; Games</option>
+        <option value="computerandvideogames">Video Games</option>
+      </select>
+    </COMMENT>
+
+  </form>
+  <script><![CDATA[
+    function mysimon(q)
+    {
+      if( nullArgs("mysimon", q) )
+        return;
+
+      var args = parseArgs(q, "apparel, babies, beauty, health, books, movies, music, computers, electronics, flowers, gifts, food, wine, home, garden, office, sports, hobbies, toys, games");
+      var c = "";
+      if ( args.switches.length > 0 )
+      {
+        switch( args.switches[0].name )
+        {
+          case "apparel":
+            c = "apparel"; break;
+          case "babies":
+            c = "babieskids"; break;
+          case "beauty":
+            c = "health"; break;
+          case "health":
+            c = "health"; break;
+          case "books":
+            c = "media"; break;
+          case "movies":
+            c = "media"; break;
+          case "music":
+            c = "media"; break;
+          case "computers":
+            c = "computers"; break;
+          case "electronics":
+            c = "electronics"; break;
+          case "flowers":
+            c = "flowersgifts"; break;
+          case "gifts":
+            c = "flowersgifts"; break;
+          case "food":
+            c = "gourmet"; break;
+          case "wine":
+            c = "gourmet"; break;
+          case "home":
+            c = "home"; break;
+          case "garden":
+            c = "home"; break;
+          case "office":
+            c = "office"; break;
+          case "sports":
+            c = "sportshobbies"; break;
+          case "hobbies":
+            c = "sportshobbies"; break;
+          case "toys":
+            c = "toyscollectibles"; break;
+          case "games":
+            c = "computerandvideogames"; break;
+          default:
+            break;
+        }
+      }
+
+      document.mysimonf.kw.value = args.q;
+      document.mysimonf.c.value = c;
+
+      submitForm(mysimonf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 09/19/02 at 07:19:47
+    by Dave's Quick Search Deskbar Search Wizard version 0.7 (beta),
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>

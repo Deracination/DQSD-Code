@@ -1,0 +1,42 @@
+<search function="abex">
+  <name>Track Airborne Express Packages</name>
+  <category>Shipping</category>
+  <contributor>David Bau</contributor>
+  <link>http://track.airborne.com/TrackByNbr.asp</link>
+  <email>davidbau@hotmail.com</email>
+  <description>
+  Track Airborne Express packages by tracking number (up to 25):
+  <br/>abex [tracking #1] [tracking #2]
+  </description>
+  <form name="abexf"
+        method="post"
+        action="http://track.airborne.com/TrackByNbr.asp">
+
+    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
+
+    <input type="hidden" name="txtTrackNbrs" value="" />
+    <input type="hidden" name="hdnTrackMode" value="nbr" />
+    <input type="hidden" name="hdnPostType" value="init" />
+    <input type="hidden" name="hdnRefPage" value="0" />
+  </form>
+  <script><![CDATA[
+    function abex(q)
+    {
+      if( nullArgs("abex", q) )
+        return;
+
+      document.abexf.txtTrackNbrs.value = q.replace(/\s+/g, "\n");;
+
+      submitForm(abexf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 09/19/02 at 06:36:00
+    by Dave's Quick Search Deskbar Search Wizard version 0.7 (beta),
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>

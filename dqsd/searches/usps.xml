@@ -1,0 +1,37 @@
+<search function="usps">
+  <name>Track US Postal Packages</name>
+  <category>Shipping</category>
+  <contributor>David Bau</contributor>
+  <link>http://trkcnfrm1.smi.usps.com/netdata-cgi/db2www/cbd_243.d2w/output</link>
+  <email>davidbau@hotmail.com</email>
+  <description>
+  Tracks a USPS package by the number from the shipping receipt:
+  <br/>usps [tracking #]
+  </description>
+  <form name="uspsf"
+        method="post"
+        action="http://trkcnfrm1.smi.usps.com/netdata-cgi/db2www/cbd_243.d2w/output">
+    <input type="hidden" name="CAMEFROM" value="OK" />
+    <input type="hidden" name="strOrigTrackNum" value="" />
+  </form>
+  <script><![CDATA[
+    function usps(q)
+    {
+      if( nullArgs("usps", q) )
+        return;
+
+      document.uspsf.strOrigTrackNum.value = q;
+
+      submitForm(uspsf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 09/19/02 at 06:31:35
+    by Dave's Quick Search Deskbar Search Wizard version 0.7 (beta),
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>
