@@ -68,6 +68,24 @@ static LRESULT CALLBACK KeyboardProc(
 				}
 			}
 		}
+		else if(wParam == VK_UP)
+		{
+			if ( bKeyDown )
+			{
+				// Send a CTRL-P
+				SendMessage(GetFocus(), WM_CHAR, 'P'-'@', 0);
+				return 0;
+			}
+		}
+		else if(wParam == VK_DOWN)
+		{
+			if ( bKeyDown )
+			{
+				// Send a CTRL-N
+				SendMessage(GetFocus(), WM_CHAR, 'N'-'@', 0);
+				return 0;
+			}
+		}
 		else
 		{
 			_RPT1(_CRT_WARN, _T("Hook: %d\n"), wParam);
