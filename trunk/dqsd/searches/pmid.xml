@@ -1,9 +1,4 @@
 <search function="pmid">
-  <COMMENT>
-    Even though this XML search will probably load and is a good start
-    toward a completed search, please be aware that this search will probably
-    not work as is and will probably require some changes.
-  </COMMENT>
   <name>PubMed</name>
   <category>Reference<category>General</category></category>
   <contributor>James Robertson</contributor>
@@ -21,40 +16,10 @@
   <form name="pmidf"
         method="post"
         action="http://www.ncbi.nlm.nih.gov:80/entrez/query.fcgi?SUBMIT=y">
-    <input type="hidden" name="WebEnv" value="0Ps8Nljx0HfQlmZIUjyLx76jZcnna2NhhrUbq6GWTiXgQxfa6EkHAE" />
+    <input type="hidden" name="WebEnv" value="" />
     <input type="hidden" name="CMD" value="" />
     <input type="hidden" name="db" value="PubMed" />
-    <COMMENT>
-      The input element above, "db", was a SELECT element with the following options...
-      <select name="db">
-        <option value="PubMed">PubMed</option>
-        <option value="protein">Protein</option>
-        <option value="nucleotide">Nucleotide</option>
-        <option value="structure">Structure</option>
-        <option value="genome">Genome</option>
-        <option value="books">Books</option>
-        <option value="domains">3D Domains</option>
-        <option value="cdd">Domains</option>
-        <option value="gene">Gene</option>
-        <option value="geo">GEO</option>
-        <option value="gds">GEO DataSets</option>
-        <option value="journals">Journals</option>
-        <option value="mesh">MeSH</option>
-        <option value="ncbisearch">NCBI Web Site</option>
-        <option value="omim">OMIM</option>
-        <option value="pmc">PMC</option>
-        <option value="popset">PopSet</option>
-        <option value="snp">SNP</option>
-        <option value="taxonomy">Taxonomy</option>
-        <option value="unigene">UniGene</option>
-        <option value="UniSts">UniSTS</option>
-      </select>
-    </COMMENT>
-
     <input type="hidden" name="orig_db" value="PubMed" />
-
-    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
-
     <input type="hidden" name="term" value="" />
     <input type="hidden" name="Clear" value="Clear" />
     <input type="hidden" name="cmd" value="Search" />
