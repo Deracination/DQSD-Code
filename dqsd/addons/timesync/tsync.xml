@@ -1,0 +1,34 @@
+<search function="tsync">
+  <COMMENT>
+  This utility is made possible by the freeware OCX obtained from http://getit.at/freeocxsite.
+  Special thanks goes out to the folks who provided the OCX.  I was unable to thank them via
+  any of the links on their site.  So if you know any of those folks, pass on my appreciation.
+  </COMMENT>
+  <name>Internet Time Sync</name>
+  <description>
+    Synchrinize PC time to Internet Time Servers<br/>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+	<tr><td>tsync</td><td> - </td><td>Sync PC clock to default Time Server.</td></tr>
+	<tr><td>tsync time.nist.gov</td><td> - </td><td>Sync PC clock to specified Time Server.</td></tr>
+    </table>
+  </description>
+  <link></link>
+  <category>Functions</category>
+  <contributor>John Bairen</contributor>
+
+  <script src="addons/timesync/tsync.js"></script>
+  <script><![CDATA[
+    function tsync(q){
+
+      if( q == "" ){
+        synchit(ServerName);
+      }
+      
+      else{
+        ServerName = q;
+        synchit(ServerName);
+      }
+    }
+  ]]></script>
+</search>
