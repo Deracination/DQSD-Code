@@ -16,6 +16,7 @@ Modified Searches
 * setiq - new switches : connect and display
 * conv - missing "/" in the usage section
 * dicfr, gg, googletrans, telfr - better use of nullargs
+* gg - added /fresh switch to find pages index over the last day, week, month
 
 Enhancements
 
