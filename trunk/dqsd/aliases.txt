@@ -47,5 +47,5 @@ $$$|pw
 ?|qsfind
 ??|gg %s /directory|Google Directory|Search Google's copy of the DMOZ open directory.|Search the Web
 ???|aj
-dhr|gg /ifl %s site:msdn.microsoft.com inurl:dhtml|<a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/dhtmlrefs.asp">DHTML reference at Microsoft</a>|Lookup a DHTML item reference on the MS site|Computers
-w3r|gg /ifl %s element site:www.w3.org inurl:REC-html40|<a href="http://www.w3.org/TR/REC-html40/">DHTML reference at the World Wide Web Consortium</a>|Lookup a DHTML item reference on the W3.org site|Computers
+dhr|gg /ifl %s site:msdn.microsoft.com inurl:dhtml|<a href="http://msdn.microsoft.com/workshop/author/dhtml/reference/dhtmlrefs.asp">DHTML reference at Microsoft</a>|Lookup a DHTML item reference on the MS site|Computers|Reference
+w3r|gg /ifl %s element site:www.w3.org inurl:REC-html40|<a href="http://www.w3.org/TR/REC-html40/">DHTML reference at the World Wide Web Consortium</a>|Lookup a DHTML item reference on the W3.org site|Computers|Reference
