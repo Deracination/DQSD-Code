@@ -12,9 +12,14 @@
       <tr><td>setiq mypassword</td></tr>
       <tr><td>setiq mypassword /server:localhost /port:6000</td></tr>
     </table>
-    <div class="helpboxDescLabels" style="color: red">Warning:<br/>
+    <div class="helpboxDescLabels" style="color: red">Security warning:<br/>
     <table class="helpBoxDescTable">
-      <tr><td style="color: red">If you are using DQSD v3.0 or earlier and you specify an IP address for the serveraddress parameter, you might need to edit defer_tools.js and change<br/>
+      <tr><td style="color: red">Be aware that your password will remain in DQSD's history.</td></tr>
+    </table>
+    </div>
+    <div class="helpboxDescLabels" style="color: red">Compatibility warning:<br/>
+    <table class="helpBoxDescTable">
+      <tr><td style="color: red">If you are using DQSD v3.0 or earlier and you specify an IP address for the serveraddress parameter, you will need to edit defer_tools.js and change<br/>
         <nobr><span style="font-family: monospace; color: #000000">  var re_switch = /\/((\w+)(?::?(\w*)))\s*/;</span></nobr><br/>
         to<br/>
         <nobr><span style="font-family: monospace; color: #000000">  var re_switch = /\/((\w+)(?::?(\S*)))\s*/;</span></nobr></td></tr>
