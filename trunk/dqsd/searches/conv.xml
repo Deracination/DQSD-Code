@@ -3,65 +3,64 @@
   <description>
     Convert units from one unit to another using ConvertIt.com. The second unit is optional.<br/>
     <div class="helpboxDescLabels">Usage:</div>
-  	<table class="helpboxDescTable">
-  		<tr><td>conv &lt;<i>unit1</i>&gt; [to &lt;<i>unit2</i>&gt;]</td></tr>
+    <table class="helpboxDescTable">
+      <tr><td>conv &lt;<i>unit1</i>&gt; [/to &lt;<i>unit2</i>&gt;]</td></tr>
       <tr><td>conv /from:&lt;<i>unit1</i>&gt; [/to:&lt;<i>unit2</i>&gt;]</td></tr>
-  	</table>
+    </table>
     <div class="helpboxDescLabels">Examples:</div>
     <table class="helpboxDescTable">
-  		<tr><td>conv 1/5 gallon</td></tr>
+      <tr><td>conv 1/5 gallon</td></tr>
       <tr><td>conv astronomical unit to football fields</td></tr>
       <tr><td>conv /from:astronomical_unit /to:football_fields</td></tr>
-  	</table>
+    </table>
   </description>
   <category>Functions</category>
   <link>http://www.convertit.com/Go/Entisoft/Measurement/Converter.ASP</link>
   <contributor>Monty Scroggins, Neel Doshi</contributor>
-  
+
   <form name="convf"
         action="http://www.convertit.com/Go/Entisoft/Measurement/Converter.ASP"
         method="post">
     <input type="hidden" name="From"/>
     <input type="hidden" name="To" value=""/>
   </form>
-  
+
   <script><![CDATA[
-  	function conv(q)
-  	{
-  		if ( nullArgs("conv", q) )
-  			return false;
-  		else
-  		{
-  			var switch_list = new Array("from", "to");
-  			var switch_list_req = new Array("from");
-  			var args = parseArgs(q, switch_list);
-  
-  			var convf_from = "";
-  			var convf_to = "";
-  
-  			// check if the required switches are set
-  			if ( typeof args.switch_val["from"] == "undefined" || args.switch_val["from"] == "" )
-  			{
-  				// Try using the original syntax if the from switch was not found
-  				parsedunits = q.split(" to ");
-  				convf_from = parsedunits[0];
-  				if (typeof parsedunits[1] != 'undefined')
-  					convf_to = parsedunits[1];
-  			}
-  			else
-  			{
-  				convf_from = args.q + " " + args.switch_val["from"].replace('_', ' ');
-  				if ( typeof args.switch_val["to"] != "undefined" && args.switch_val["to"] != "" )
-  				{
-  					convf_to = args.switch_val["to"].replace('_', ' ');
-  				}
-  			}
-  			document.convf.From.value = convf_from;
-  			document.convf.To.value = convf_to;
-  			submitForm(convf);
-  			return(true);
-  		}
-  	}
+    function conv(q)
+    {
+      if ( nullArgs("conv", q) )
+        return false;
+      else
+      {
+        var switch_list = new Array("from", "to");
+        var switch_list_req = new Array("from");
+        var args = parseArgs(q, switch_list);
+
+        var convf_from = "";
+        var convf_to = "";
+
+        // check if the required switches are set
+        if ( typeof args.switch_val["from"] == "undefined" || args.switch_val["from"] == "" )
+        {
+          // Try using the original syntax if the from switch was not found
+          parsedunits = q.split(" to ");
+          convf_from = parsedunits[0];
+          if (typeof parsedunits[1] != 'undefined')
+            convf_to = parsedunits[1];
+        }
+        else
+        {
+          convf_from = args.q + " " + args.switch_val["from"].replace('_', ' ');
+          if ( typeof args.switch_val["to"] != "undefined" && args.switch_val["to"] != "" )
+          {
+            convf_to = args.switch_val["to"].replace('_', ' ');
+          }
+        }
+        document.convf.From.value = convf_from;
+        document.convf.To.value = convf_to;
+        submitForm(convf);
+        return(true);
+      }
+    }
   ]]></script>
 </search>
- 

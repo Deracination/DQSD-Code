@@ -13,6 +13,7 @@ Modified Searches
 * thw - updated the search (the form changed on the site) and added /category switch
 * ups - now allows spaces in tracking number(s)
 * setiq - new switches : connect and display
+* conv - missing "/" in the usage section
 
 Enhancements
 
