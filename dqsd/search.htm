@@ -897,8 +897,8 @@ function okp()
     var t = document.deff.q.value;
 
     // trim leading and trailing whitespace and punctuation
-    t = t.replace(/^[\s~`!@#$%\^&\*()-=\+{}\[\];:'<>,\.\/\?]*/, '')
-         .replace(/[\s~`!@#$%\^&\*()-=\+{}\[\];:'<>,\.\/\?]*$/, '');
+    t = t.replace(/^[\s~`!@#$%\^&\*()\-=\+{}\[\];:'<>,\.\/\?]*/, '')
+         .replace(/[\s~`!@#$%\^&\*()\-=\+{}\[\];:'<>,\.\/\?]*$/, '');
 
     // prepend www. and append .com
     t = "www." + t + ".com";
