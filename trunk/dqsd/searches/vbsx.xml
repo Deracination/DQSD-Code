@@ -41,10 +41,10 @@
     <textarea name="vbscode" style="display: none;"><![CDATA[
 
 Function ClipBoardSetText( sText )
-  ClipBoardSetText = window.clipboardData.SetData( "Text", sText )
+  ClipBoardSetText = window.clipboardData.setData( "Text", sText )
 End Function
 Function ClipBoardGetText()
-  ClipBoardGetText = window.clipboardData.GetData( "Text" )
+  ClipBoardGetText = window.clipboardData.getData( "Text" )
 End Function
 Sub DebugPrint( sText )
   If Len(document.deff.q.value) = 0 Then
@@ -93,19 +93,31 @@ End Function
   {
   //set debug mode
     var qs = q;
-    switch (qs.charAt(0)){
-      case "=":
-        qs = "Call DebugClear() \nDebugPrint " + qs.substring(1, qs.length);
-        break;
-      case "?":
-        qs = "DebugPrint " + qs.substring(1, qs.length);
-        break;
-      case "!":
-        qs = "MsgBox " + qs.substring(1, qs.length);
-        break;
-      case ":":
-        qs = "ClipboardSetText " + qs.substring(1, qs.length);
-        break;
+    if (q.length == 1) {
+      switch (qs.charAt(0)){
+        case "=":
+        case "?":
+        case "!":
+        case ":":
+          //show help
+            window.execScript ("qsfind('vbsx');", "javascript");
+            return ( true );
+      }
+    }else{
+      switch (qs.charAt(0)){
+        case "=":
+          qs = "Call DebugClear() \nDebugPrint " + qs.substring(1, qs.length);
+          break;
+        case "?":
+          qs = "DebugPrint " + qs.substring(1, qs.length);
+          break;
+        case "!":
+          qs = "MsgBox " + qs.substring(1, qs.length);
+          break;
+        case ":":
+          qs = "ClipboardSetText " + qs.substring(1, qs.length);
+          break;
+      }
     }
 
   //get the vbs code
