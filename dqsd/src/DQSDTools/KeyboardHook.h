@@ -6,7 +6,7 @@
 #define KEYBOARDHOOK_H
 
 
-HHOOK KeyboardHookInstall();
+HRESULT KeyboardHookInstall();
 
 //
 // Install a hotkey
@@ -15,7 +15,7 @@ HHOOK KeyboardHookInstall();
 //		HRESULT
 //
 HRESULT
-KeyboardInstallHotkey(int vkCode);
+KeyboardInstallHotkey(int vkCode, LPCTSTR pModifierNames);
 
 extern std::map< long, long > g_mapKeyCodeToCharCode;
 

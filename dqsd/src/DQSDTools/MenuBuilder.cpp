@@ -2,6 +2,7 @@
 #include "stdafx.h"
 #include "DQSDTools.h"
 #include "MenuBuilder.h"
+#include "Utilities.h"
 
 /////////////////////////////////////////////////////////////////////////////
 // CMenuBuilder
@@ -9,7 +10,6 @@
 LPCTSTR CMenuBuilder::DQSD_REG_KEY = _T("CLSID\\{226b64e8-dc75-4eea-a6c8-abcb4d1d37ff}");
 LPCTSTR CMenuBuilder::DQSD_SEC_KEY = _T("CLSID\\{226b64e8-dc75-4eea-a6c8-abcb4d1d37ff}\\SecureFiles");
 
-int URLMatchesFilename(LPCTSTR szURL, LPCTSTR szFile);
 
 /*
 STDMETHODIMP CMenuBuilder::InterfaceSupportsErrorInfo(REFIID riid)
@@ -96,6 +96,9 @@ STDMETHODIMP CMenuBuilder::Display( VARIANT* pvarSelection )
 	pvarSelection->pbstrVal = NULL;
 	pvarSelection->vt = VT_NULL;
 
+	HWND hwndDQSD = UtilitiesFindDQSDWindow();
+
+/*
 	// The following window hierarchy was determined using Spy++ on Windows XP Pro Build 2600.
 	// Should be the same at least on Windows 2000 and other Win XP versions.
 	LPCTSTR rgszClassNames[] = { _T("Shell_TrayWnd"), 
@@ -129,6 +132,7 @@ STDMETHODIMP CMenuBuilder::Display( VARIANT* pvarSelection )
 			break;
 		}
 	}
+*/
 
 	RECT rcParentWnd;
 	::GetWindowRect( hwndDQSD, &rcParentWnd );

@@ -6,6 +6,11 @@
 #include "DQSDTools.h"
 #include "KeyboardHook.h" 
 #include "Launcher.h" 
+#include "Utilities.h" 
+
+
+#define HOTKEY_WINDOW_CLASS_NAME	_T("DQSDHotKeyWindowClass")
+#define HOTKEY_WINDOW_NAME			_T("DQSDHotKeyWindow")
 
 std::map< long, long > g_mapKeyCodeToCharCode;
 
@@ -106,7 +111,7 @@ static LRESULT CALLBACK KeyboardProc(
 }
 
 
-
+/*
 static BOOL CALLBACK EnumProc(
 							  HWND hwnd,		// handle to child window
 							  LPARAM lParam		// Pointer to discovered taskbar window
@@ -126,6 +131,7 @@ static BOOL CALLBACK EnumProc(
 
 	return TRUE;
 }
+*/
 
 HWND hBarWnd = NULL;
 
@@ -207,10 +213,10 @@ void KillerThread(void*)
 // Install a keyboard hook on the search deskbars message handler thread
 //
 //
-HHOOK KeyboardHookInstall()
+HRESULT KeyboardHookInstall()
 {
 
-	// Find the parent of the search window
+/*	// Find the parent of the search window
 	HWND hTrayWnd = FindWindow(_T("Shell_TrayWnd"), _T(""));
 	if(hTrayWnd == NULL)
 	{
@@ -220,16 +226,18 @@ HHOOK KeyboardHookInstall()
 
 	// Look through its children to find the search window
 	EnumChildWindows(hTrayWnd, EnumProc, (LPARAM)&hBarWnd);
+*/
+
+	hBarWnd = UtilitiesFindDQSDWindow();
 
 	// Did we find the window?
 	if(hBarWnd == NULL)
 	{
-		MessageBox(NULL, _T("Can't find search bar"), NULL, MB_OK);
-		return FALSE;
+		return CLauncher::Error(IDS_ERR_CANT_INSTALL_KEYBOARD_HOOK, IID_ILauncher);
 	}
 
 	// Get a handle to the thread which owns the message queue for this window
-	DWORD threadId = GetWindowThreadProcessId(hTrayWnd, NULL);
+	DWORD threadId = GetWindowThreadProcessId(hBarWnd, NULL);
 
 	_RPT1(_CRT_WARN, "Thread ID 0x%x\n", threadId);
 
@@ -237,12 +245,9 @@ HHOOK KeyboardHookInstall()
 
 	_RPT1(_CRT_WARN, "hHook 0x%x\n", hHook);
 
-
 //	_beginthread(KillerThread, 0, NULL);
 
-
-
-	return hHook;
+	return S_OK;
 }
 
 
@@ -253,42 +258,35 @@ HHOOK KeyboardHookInstall()
 //		HRESULT
 //
 HRESULT
-KeyboardInstallHotkey(int vkCode)
+KeyboardInstallHotkey(int vkCode, LPCTSTR pModifierNames)
 {
 	if(hBarWnd == NULL)
 	{
 		return CLauncher::Error(IDS_ERR_HOTKEY_NO_BAR_WINDOW, IID_ILauncher, E_FAIL);
 	}
 
-//	char buffer[100];
-//	wsprintf(buffer, "HotKeyReg: %d", vkCode);
-//	OutputDebugString(buffer);
-
-
 	// Create a window which we use to receive notifications
 	WNDCLASS wc;
 	ZeroMemory(&wc, sizeof(wc));
 	wc.lpfnWndProc = NotificationWndProc;
-	wc.lpszClassName = _T("DQSDHotKeyWindowClass");
+	wc.lpszClassName = HOTKEY_WINDOW_CLASS_NAME;
 
 	HWND hNotificationWindow;
 
-	HWND hExistingWindow = FindWindow(wc.lpszClassName, _T("DQSDHotKeyWindow"));
+	HWND hExistingWindow = FindWindow(wc.lpszClassName, HOTKEY_WINDOW_NAME);
 	if(hExistingWindow != NULL)
 	{
 		// THere's already hotkey window
-//		OutputDebugString("Hotkey - wnd exists");
+		ATLTRACE("HotKey - window exists\n");
 		DestroyWindow(hExistingWindow);
 	}
-	else
-	{
-		RegisterClass(&wc);
-	}
 
-	hNotificationWindow = CreateWindow(wc.lpszClassName, _T("DQSDHotKeyWindow"), 0, 0, 0, 0, 0, hBarWnd, NULL, NULL, NULL);
+	RegisterClass(&wc);
+
+	hNotificationWindow = CreateWindow(wc.lpszClassName, HOTKEY_WINDOW_NAME, 0, 0, 0, 0, 0, hBarWnd, NULL, NULL, NULL);
 	if(hNotificationWindow == NULL)
 	{
-		_RPT0(_CRT_WARN, "Failed to create a window for hotkeys\n");
+		ATLTRACE("Failed to create a window for hotkeys (err %d)\n", GetLastError());
 		return CLauncher::Error(IDS_ERR_HOTKEY_WINDOW_FAILED, IID_ILauncher, E_FAIL);
 	}
 
@@ -297,8 +295,33 @@ KeyboardInstallHotkey(int vkCode)
 	ATOM hotKeyId = GlobalAddAtom(_T("DQSDHotKeyAtom"));
 	SetWindowLong(hNotificationWindow, GWL_USERDATA, hotKeyId);
 
-	if(!RegisterHotKey(hNotificationWindow, hotKeyId, MOD_WIN, vkCode))
+	// Try and work out the modifier - default to the Windows key
+	UINT keyModifier = 0;
+	if(StrStrI(pModifierNames, _T("WIN")) != NULL)
 	{
+		keyModifier |= MOD_WIN;
+	}
+	if(StrStrI(pModifierNames, _T("ALT")) != NULL)
+	{
+		keyModifier |= MOD_ALT;
+	}
+	if(StrStrI(pModifierNames, _T("SHIFT")) != NULL)
+	{
+		keyModifier |= MOD_SHIFT;
+	}
+	if(StrStrI(pModifierNames, _T("CONTROL"))!= NULL)
+	{
+		keyModifier |= MOD_CONTROL;
+	}
+	if(keyModifier == 0)
+	{
+		// Blank or invalid modifier string - use WIN
+		keyModifier = MOD_WIN;
+	}
+	
+	if(!RegisterHotKey(hNotificationWindow, hotKeyId, keyModifier, vkCode))
+	{
+		ATLTRACE("Failed to register hotkey (err %d)\n", GetLastError());
 		return CLauncher::Error(IDS_ERR_HOTKEY_REG_FAILED, IID_ILauncher, E_FAIL);
 	}
 

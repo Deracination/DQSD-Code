@@ -3,6 +3,7 @@
 #include "DQSDTools.h"
 #include "Launcher.h"
 #include "KeyboardHook.h"
+#include "Utilities.h"
 
 #pragma comment(lib, "Version.lib")
 
@@ -12,7 +13,6 @@
 LPCTSTR CLauncher::DQSD_REG_KEY = _T("CLSID\\{226b64e8-dc75-4eea-a6c8-abcb4d1d37ff}");
 LPCTSTR CLauncher::DQSD_SEC_KEY = _T("CLSID\\{226b64e8-dc75-4eea-a6c8-abcb4d1d37ff}\\SecureFiles");
 
-int URLMatchesFilename(LPCTSTR szURL, LPCTSTR szFile);
 
 STDMETHODIMP CLauncher::SetSite(IUnknown* pUnkSite)
 {
@@ -383,19 +383,14 @@ STDMETHODIMP CLauncher::GetFiles(BSTR bstrFileSpec, BSTR *pbstrFiles)
 //
 STDMETHODIMP CLauncher::InstallKeyboardHook()
 {
-	if(KeyboardHookInstall() != NULL)
-	{
-		return S_OK;
-	}
-	else
-	{
-		return Error(IDS_ERR_CANT_INSTALL_KEYBOARD_HOOK, IID_ILauncher);
-	}
+	return KeyboardHookInstall();
 }
 
-STDMETHODIMP CLauncher::RegisterHotKey(long hotkeyVkCode)
+STDMETHODIMP CLauncher::RegisterHotKey(long hotkeyVkCode, BSTR bstrModifierName)
 {
-	return KeyboardInstallHotkey(hotkeyVkCode);
+	USES_CONVERSION;
+
+	return KeyboardInstallHotkey(hotkeyVkCode, W2T(bstrModifierName));
 }
 
 //
@@ -508,4 +503,78 @@ STDMETHODIMP CLauncher::get_VersionIsCorrect(int v1, int v2, int v3, int v4, VAR
 	{
 		return Error(IDS_EXCEPTION_IN_VERSION_CHECK, IID_ILauncher, E_FAIL);
 	}
+}
+
+STDMETHODIMP CLauncher::InitialiseBaseTooltip(void)
+{
+	return Error(_T("Tooltip functions not implemented yet..."), IID_ILauncher, E_NOTIMPL);
+
+	/*
+	ATLTRACE("InitialiseBaseTooltip: Starting\n");
+
+
+	if(m_hBaseTooltipWnd != NULL)
+	{
+		DestroyWindow(m_hBaseTooltipWnd);
+	}
+
+	HWND hDQSDWindow = UtilitiesFindDQSDWindow();
+	if(hDQSDWindow == NULL)
+	{
+		return Error(_T("InitialiseBaseTooltip: Can't find DQSD window"), IID_ILauncher, E_FAIL);
+	}
+	
+	m_hBaseTooltipWnd = CreateWindowEx(WS_EX_TOPMOST,
+		TOOLTIPS_CLASS,
+		NULL,
+		WS_POPUP | TTS_NOPREFIX | TTS_ALWAYSTIP,		 
+		CW_USEDEFAULT,
+		CW_USEDEFAULT,
+		CW_USEDEFAULT,
+		CW_USEDEFAULT,
+		hDQSDWindow,
+		NULL,
+		_Module.GetModuleInstance(),
+		NULL
+		);
+	if(m_hBaseTooltipWnd == NULL)
+	{
+		return Error(_T("Failed to create tooltip window"), IID_ILauncher, E_FAIL);
+	}
+
+	::SetWindowPos(m_hBaseTooltipWnd,
+		HWND_TOPMOST,
+		0,
+		0,
+		0,
+		0,
+		SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
+
+	TOOLINFO ti;
+	unsigned int uid = 0;       // for ti initialization
+	char strTT[30] = "This is your ToolTip string.";
+	LPTSTR lptstr = strTT;
+	RECT rect;                  // for client area coordinates
+
+	GetClientRect(hDQSDWindow, &rect);
+
+	// INITIALIZE MEMBERS OF THE TOOLINFO STRUCTURE 
+	ti.cbSize = sizeof(TOOLINFO);
+	ti.uFlags = TTF_SUBCLASS | TTF_IDISHWND;
+	ti.hwnd = GetParent(hDQSDWindow);
+	ti.hinst = _Module.GetModuleInstance();
+	ti.uId = (UINT)hDQSDWindow;
+	ti.lpszText = lptstr;
+	// ToolTip control will cover the whole window
+	ti.rect.left = rect.left;    
+	ti.rect.top = rect.top;
+	ti.rect.right = rect.right;
+	ti.rect.bottom = rect.bottom;
+
+	// SEND AN ADDTOOL MESSAGE TO THE TOOLTIP CONTROL WINDOW 
+	::SendMessage(m_hBaseTooltipWnd, TTM_ADDTOOL, 0, (LPARAM) (LPTOOLINFO) &ti);	
+
+	return S_OK;
+*/
+
 }
