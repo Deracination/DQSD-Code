@@ -51,6 +51,9 @@ Modified Searches
 * chap - updated to work again (from Sarah Sweeney)
 * babel - updated to work again (from Brent Beardsley)
 * aj updated Ask Jeeves search (from Sam Mulube)
+* freetrans - updated to work again (from Brent Beardsley)
+* yg - added mygroups switch to go to mygroups page (from Brent Beardsley)
+* php - added ability to search through the Smarty manual and for PEAR packages
 
 Miscellaneous
 
