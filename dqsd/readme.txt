@@ -17,7 +17,13 @@ DOCUMENTATION
 
 Full documentation is available at
 
-http://notesbydave.com/toolbar/doc.htm
+http://www.dqsd.net
+
+
+Visit our FAQ at
+
+http://www.dqsd.net/faq.htm
+
 
 A complete reference for shortcut codes can be shown by
 typing "?" and Enter in the deskbar.
