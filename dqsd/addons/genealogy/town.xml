@@ -33,12 +33,6 @@
       if( nullArgs("town", q) )
         return;
 
-      if( q == "" )
-      {
-        openSearchWindow("http://resources.rootsweb.com/cgi-bin/townco.cgi");
-        return;
-      }
-
       // Parse switches with parseArgs:
 
       // parseArgs usage:
@@ -64,7 +58,7 @@
         switch( args.switches[0].name )
         {
           case "state":
-	       document.townf.state.value = args.switch_val["state"];
+	       document.townf.state.value = genealogy_lookup_place_abbrev(args.switch_val["state"]);
                break;
           default:
                break;
