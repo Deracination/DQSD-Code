@@ -5,12 +5,14 @@ Enhancements
 * Holidays for Czech Republic up until 2020 (Jiri Sedlacek)
 * Added dragdropautosearch configuration option to control automatic searching on drag&drop. (Thad Kerosky)
 * Added (for real this time) Mouse Wheel history browsing. (Thad Kerosky)
+* Added AppDataProperty to DQSDTools.Launcher component for possible future use. (Glenn Carr)
 
 Bug Fixes
 * Removed 'Type "!<em>prefix</em>" to see only matching entries.' from help. This action launches lucky Google.
 * Fixed clock bug found by John Bairen, where the clock would fail to display if displayHelp was false (Kim Gräsman)
 * Fixed the alias parsing to allow spaces aroung the delimiters (Monty Scroggins)
 * Check to see if startupCommands is defined before trying to use it (Brent Beardsley)
+* Removed creation of temporary .html file by DQSDTools.dll on startup to determine default browser. (Glenn Carr)
 
 New Searches
 * riaar - riaaradar.org RIAA label and artist membership search. (Thad Kerosky)
