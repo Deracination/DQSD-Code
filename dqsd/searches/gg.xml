@@ -17,10 +17,11 @@
     <div class="helpboxDescLabels">Locales:</div>
     <table class="helpboxDescTable">
       <tr><td>/local</td><td> - </td><td>Limits search results to the specified locale.</td></tr>
-      <tr><td>/uk</td><td> - </td><td>Use the localized United Kingdom version of Google.</td></tr>
       <tr><td>/canada</td><td> - </td><td>Use the localized canadian version of Google.</td></tr>
-      <tr><td>/france</td><td> - </td><td>Use the localized french version of Google.</td></tr>
       <tr><td>/deutschland</td><td> - </td><td>Use the localized german version of Google.</td></tr>
+      <tr><td>/france</td><td> - </td><td>Use the localized french version of Google.</td></tr>
+      <tr><td>/italia</td><td> - </td><td>Use the localized italian version of Google.</td></tr>
+      <tr><td>/uk</td><td> - </td><td>Use the localized United Kingdom version of Google.</td></tr>
     </table>
     <div class="helpboxDescLabels">Language:</div>
     <table class="helpboxDescTable">
@@ -28,6 +29,7 @@
       <tr><td>/language:de</td><td> - </td><td>german</td></tr>
       <tr><td>/language:es</td><td> - </td><td>spanish</td></tr>
       <tr><td>/language:fr</td><td> - </td><td>french</td></tr>
+      <tr><td>/language:it</td><td> - </td><td>italian</td></tr>
       <tr><td colspan="3">and many more... see <a href="http://www.google.com/help/customize.html#displang" target="_new">www.google.com/help/customize.html#displang</a></td></tr>
     </table>
     <div class="helpboxDescLabels">Examples:</div>
@@ -91,7 +93,7 @@
   //by MLL: warning : news service is still in beta stage, so URLs below may change
     function gg(q)
     {
-      var args = parseArgs(q, "ifl, advanced, groups, directory, images, news, cache, related, link, local, uk, canada, france, deutschland, language");
+      var args = parseArgs(q, "ifl, advanced, groups, directory, images, news, cache, related, link, local, canada, deutschland, france, italia, uk, language");
       var mode, local, local_meta = "", local_tld = "com", msglang = "";
       
       if( q == "?" )
@@ -105,10 +107,11 @@
         for( var j=0; j<args.switches.length; j++ )
           switch( args.switches[j].name )
           {
-            case "uk": local_tld = "co.uk"; local_meta = "cr=countryUK|countryGB"; break;
             case "canada": local_tld = "ca"; local_meta = "cr=countryCA"; break;
-            case "france": local_tld = "fr"; local_meta = "cr=countryFR"; break;
             case "deutschland": local_tld = "de"; local_meta = "cr=countryDE"; break;
+            case "france": local_tld = "fr"; local_meta = "cr=countryFR"; break;
+            case "italia": local_tld = "it"; local_meta = "cr=countryIT"; break;
+            case "uk": local_tld = "co.uk"; local_meta = "cr=countryUK|countryGB"; break;
             
             case "local": local = true; break;
             
