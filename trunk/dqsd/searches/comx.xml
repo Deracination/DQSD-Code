@@ -287,8 +287,8 @@
               case "workingdaze": endurl="comics/workingdaze/index.html";windowW=335;windowH=408;sunwindowW=335;sunwindowH=408;break;
               case "workingitout": endurl="creators/workingitout/index.html";windowW=300;windowH=332;sunwindowW=300;sunwindowH=332;break;
               // the two oddball ones.. have to have their own rx pattern
-              case "peanuts": endurl="comics/peanuts/index.html";windowW=600;windowH=139;rx=/.+(\/archive\/images\/\w+\.\w+)"\s+ALT="Today's Strip"/;break;
-              case "dilbert": endurl="comics/dilbert/index.html";rx=/.+(\/archive\/images\/\w+\.\w+)"\s+BORDER=0\s+ALT="Today's Dilbert Comic"/;break;
+              case "peanuts": endurl="comics/peanuts/index.html";windowW=600;windowH=139;rx=/.+(\/archive\/images\/\w+\.\w+)"\s+ALT="Today's Strip"/;imgtitle="Peanuts";break;
+              case "dilbert": endurl="comics/dilbert/index.html";rx=/.+(\/archive\/images\/\w+\.\w+)"\s+BORDER=0\s+ALT="Today's Dilbert Comic"/;imgtitle="Dilbert";break;
               // comics from ucomics.com
               case "animalcrackers": imgtitle="Animal Crackers";site="ucomics";imgkey="tmani";break;
               case "adamathome": imgtitle="Adam at Home";site="ucomics";imgkey="ad";break;
@@ -421,7 +421,7 @@
               comxSearchPopup.show((buttonalign == "left" ? 0 : document.body.clientWidth - windowW), -windowH, windowW, windowH, document.body);
            }else{
               var comxSearchPopupBodyCode = "<html><head></head><body><style>" + convertStylesToInline() + "</style>";
-              comxSearchPopupBodyCode += "<img src=" +imgurl +" width="+windowW+" height="+windowH+" alt='"+imgtitle+"' onclick='self.close()'; galleryimg='no' />";
+              comxSearchPopupBodyCode += "<img src=" +imgurl +" width="+windowW+" height="+windowH+" alt=\""+imgtitle+"\" onclick='self.close()'; galleryimg='no' />";
               comxSearchPopupBodyCode += "</body></html>";
               var top=((screen.availheight-windowH)-38);
               var left=((screen.width-windowW)-10);
@@ -430,6 +430,7 @@
               popupImage.document.open();
               popupImage.document.write(comxSearchPopupBodyCode);
               popupImage.document.close()
+              popupImage.document.title=imgtitle;
            }//else
         }//if imgurl        
         }// for i <...
