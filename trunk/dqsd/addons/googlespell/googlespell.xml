@@ -4,7 +4,7 @@
   <link>http://www.google.com/apis/</link>
   <contributor>Glenn Carr</contributor>
   <form name="googlespellf">
-    <div id="googleWebService" name="googleWebService" style="behavior:url(extensions\\googlespell\\webservice.htc)" onresult="onWebServiceResult()" />
+    <div id="googleWebService" name="googleWebService" style="behavior:url(addons\\googlespell\\webservice.htc)" onresult="onWebServiceResult()" />
   </form>
   <script><![CDATA[
     function googlespell(q)
