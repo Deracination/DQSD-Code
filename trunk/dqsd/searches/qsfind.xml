@@ -9,7 +9,7 @@
   <script><![CDATA[
     function qsfind(q)
     {
-	    if (q == "")
+	    if (q == q.match(/^\s*$/))
 	    {
 	    	about();
 	    	return false;
