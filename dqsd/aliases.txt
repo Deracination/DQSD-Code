@@ -1,21 +1,19 @@
 	gg
 !	ifl
 ?	yh
-yho	yh
-af	acr
 -	fst
 ^	av
-{	dog
+{	dp
 ??	gwd
 ???	ask
 +	map
-#	swp
-##	swb
+#	sb
+##	sbb
 @	yhe
 @@	bfe
 =	clc
 .	cnn
-*	acw
+*	aw
 $	stk
 :	mwd
 ::	dic
