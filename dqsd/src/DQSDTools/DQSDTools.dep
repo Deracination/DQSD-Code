@@ -2,8 +2,9 @@
 
 .\DQSDTools.cpp : \
 	".\dlldatax.h"\
+	".\DQSDTools.h"\
+	".\DQSDTools_i.c"\
 	".\Launcher.h"\
-	".\StdAfx.h"\
 	
 
 .\DQSDTools.rc : \
@@ -11,11 +12,12 @@
 	
 
 .\Launcher.cpp : \
+	".\DQSDTools.h"\
 	".\Launcher.h"\
-	".\StdAfx.h"\
 	".\Utilities.h"\
 	
 
 .\StdAfx.cpp : \
+	"..\..\..\..\..\..\program files\microsoft visual studio\vc98\include\basetsd.h"\
 	".\StdAfx.h"\
 	
