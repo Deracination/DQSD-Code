@@ -1,0 +1,56 @@
+<search function="bmie">
+  <name>Internet Explorer Bookmarks</name>
+  <description>
+    Goto Internet Explorer Bookmarks<br/>
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+	<tr><td>/reload</td><td> - </td><td>Force reload and update cache</td></tr>
+	<tr><td>/help</td><td> - </td><td>Show the help menu</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+	<tr><td>bmie</td><td> - </td><td>Show Internet Explorer bookmarks menu (cached if not the first time)</td></tr>
+	<tr><td>bmie /r</td><td> - </td><td>Reload cache and show Internet Explorer bookmarks menu</td></tr>
+    </table>
+  </description>
+  <link></link>
+  <category>Bookmarks</category>
+  <contributor>Brent Beardsley</contributor>
+
+  <script src="addons/bookmarks/bookmarks_lib.js"></script>
+  <script><![CDATA[
+    var ie_bookmarks_array = null;
+
+    function bmie(q)
+    {
+        var args = parseArgs(q, "reload, help");
+	if (args != null && args.switches.length >= 1) {
+	  if (args.switches[0].name == "reload") {
+		ie_bookmarks_array = null;
+	  } else if (args.switches[0].name == "help") {
+		nullArgs("bmie", "?");
+		return;
+	  }
+	}
+	if (args.q == "?") {
+		nullArgs("bmie", "?");
+		return;
+	}
+
+	if (ie_bookmarks_array == null) {
+		var user_specified_dir = (typeof bookmarks_ie_location != "undefined" && bookmarks_ie_location != "");
+		var fav_location = "";
+		if (user_specified_dir) {
+			fav_location = bookmarks_ie_location;
+		} else {
+			var shell_obj = new ActiveXObject("WScript.Shell");
+			fav_location = shell_obj.SpecialFolders ("Favorites");
+			shell_obj = null;
+		}
+		ie_bookmarks_array = bookmarks_get_bookmarks_array_from_ie(fav_location);
+	}
+	bookmarks_show_menu(ie_bookmarks_array);
+    }
+    ]]>
+  </script>
+</search>

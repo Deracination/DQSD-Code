@@ -1,0 +1,63 @@
+<search function="bmns4">
+  <name>Netscape 4 Bookmarks</name>
+  <description>
+    Goto Netscape 4 Bookmarks<br/>
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+	<tr><td>/reload</td><td> - </td><td>Force reload and update cache</td></tr>
+	<tr><td>/help</td><td> - </td><td>Show the help menu</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+	<tr><td>bmns4</td><td> - </td><td>Show Netscape 4 bookmarks menu - cached if not the first time</td></tr>
+	<tr><td>bmns4 /r</td><td> - </td><td>Reload cache and show Netscape 4 bookmarks menu</td></tr>
+    </table>
+  </description>
+  <link></link>
+  <category>Bookmarks</category>
+  <contributor>Brent Beardsley</contributor>
+
+  <script src="addons/bookmarks/bookmarks_lib.js"></script>
+  <script><![CDATA[
+    var netscape4_bookmarks_array = null;
+
+    function bmns4(q)
+    {
+        var args = parseArgs(q, "reload, help");
+	if (args != null && args.switches.length >= 1) {
+	  if (args.switches[0].name == "reload") {
+		netscape4_bookmarks_array = null;
+	  } else if (args.switches[0].name == "help") {
+		nullArgs("bmns4", "?");
+		return;
+	  }
+	}
+	if (args.q == "?") {
+		nullArgs("bmns4", "?");
+		return;
+	}
+
+	if (netscape4_bookmarks_array == null) {
+		var bmk_location = (typeof bookmarks_netscape4_location != "undefined" && bookmarks_netscape4_location != "") ? bookmarks_netscape4_location : "C:\\Program Files\\Netscape";
+		bmk_location += "\\Users";
+		var bmk_profile = (typeof bookmarks_netscape4_profile != "undefined" && bookmarks_netscape4_profile != "") ? bookmarks_netscape4_profile : "";
+		var bmk_file = (typeof bookmarks_netscape4_file != "undefined" && bookmarks_netscape4_file != "") ? bookmarks_netscape4_file : "bookmark.htm";
+		if (bmk_profile == "") {
+			// if no profile specified grab the first one you find in bmk_location
+			var fso = new ActiveXObject("Scripting.FileSystemObject");
+			var fc = new Enumerator(fso.GetFolder(bmk_location).SubFolders);
+			if (!fc.atEnd()) {
+			  bmk_profile = fso.GetFileName(fc.item());
+			}
+			fso = null;
+		}
+
+		var bookmarks_full_path = bmk_location+"\\"+bmk_profile+"\\"+bmk_file;
+		var bookmarks_page = bookmarks_get_file(bookmarks_full_path);
+		netscape4_bookmarks_array = bookmarks_get_bookmarks_array_from_netscape(bookmarks_page);
+	}
+	bookmarks_show_menu(netscape4_bookmarks_array);
+    }
+    ]]>
+  </script>
+</search>
