@@ -30,10 +30,6 @@ if (!Array.prototype.push)
 
 // Tools that rely on DQSDTools.dll
 
-var DQSDLauncher = null;
-var triedToCreateLauncher = false;
-useExternalBrowser = (launchmode > 0);
-
 function ensureLauncher()
 {
   if (!triedToCreateLauncher)
@@ -51,20 +47,6 @@ function ensureLauncher()
     }
   }
   return (DQSDLauncher != null);
-}
-
-if (useExternalBrowser)
-{
-  if (ensureLauncher())
-  {
-    var browserPath = DQSDLauncher.pathDefaultBrowser
-    if (launchmode != 0 && browserPath.toLowerCase().indexOf("iexplore.exe") > 0)
-      useExternalBrowser = false;
-  }
-  else // Gracefully ignore problems creating the control.
-  {
-    useExternalBrowser = false;
-  }
 }
 
 // read file
@@ -201,4 +183,67 @@ function getMSXMLDOMDocumentInstance()
   {
      return new ActiveXObject("Msxml.DOMDocument");
   }
+}
+
+function getDefaultLanguage()
+{
+  language=navigator.userLanguage.substr(0,2);
+}
+
+function initGlobals()
+{
+  DQSDLauncher = null;
+  triedToCreateLauncher = false;
+
+  firsterror = null;
+  // window.onerror=handleerror;
+
+  var uaMatch = navigator.userAgent.toLowerCase().match("msie\\s+(\\d+\\.\\d*)");
+  var ie_version = (uaMatch ? parseFloat(uaMatch[1]) : 0.0);
+  dopopup = (ie_version >= 5.5);
+
+  useExternalBrowser = (launchmode > 0);
+  if (useExternalBrowser)
+  {
+    if (ensureLauncher())
+    {
+      var browserPath = DQSDLauncher.pathDefaultBrowser
+      if (launchmode != 0 && browserPath.toLowerCase().indexOf("iexplore.exe") > 0)
+        useExternalBrowser = false;
+    }
+    else // Gracefully ignore problems creating the control.
+    {
+      useExternalBrowser = false;
+    }
+  }
+
+  reuseBrowserWindowModeOverride = reuseBrowserWindowMode;
+  searchPrefix = '';
+
+  init = true;
+  selfdrag = false;
+
+  bant = null;
+
+  // eliminate Go button if window is narrow
+  gowidth = -1;
+  textheight = -1;
+
+  keyboardHook = null;
+}
+
+// catch errors
+function handleerror(msg, url, lineno)
+{
+  if (!firsterror)
+  {
+     firsterror = msg;
+     alert("Error (line " + lineno + "):\n" + msg);
+  }
+  return true;
+}
+
+function qualifiedalert(s)
+{
+  alertmode && alert(s);
 }

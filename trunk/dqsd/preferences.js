@@ -17,20 +17,17 @@
 *  localsearchurl     = "localsearch.xml"
 *  localaliases       = "localaliases.txt"
 *  localstylesurl     = "localsearch.css"
-*  localprefs         = "localprefs.js"
 *
 *  NOTE:
 *  localeventsfileurl - the format of this file is just like a standard events file (holidays.us.xml)
 *  localsearchurl - the format of this file is <searches>[search definition like in /searches/amax.xml]</searches>
 *  localaliases - the format of this file is just like aliases.txt
 *  localstylesurl - this is a standard cascading stylesheet
-*  localprefs - this is a standard javascript source file
 */
 localeventsfileurl = "localevents.xml";   // local events to be added to the calendar
 localsearchurl     = "localsearch.xml";   // local search file
 localaliases       = "localaliases.txt";  // local aliases file
 localstylesurl     = "localsearch.css";   // local stylsheet (to overwrite defaults in search.css)
-localprefs         = "localprefs.js";     // local preferences (to overwrite defaults in this file)
 
 
 /* Personalization variables
