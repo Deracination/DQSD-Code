@@ -10,7 +10,14 @@
       <tr><td>/directory</td><td> - </td><td>Search Google's copy of the DMOZ open directory.</td></tr>
       <tr><td>/images</td><td> - </td><td>Search for images.</td></tr>
       <tr><td>/news</td><td> - </td><td>Search for news (<i>warning : google news still in beta, .com only, english only mode</i>).</td></tr>
-      <tr><td>/since:days</td><td> - </td><td>Search pages based on when they were indexed.  Use days to specify when.</td></tr>
+      <tr><td>/since:days</td><td> - </td><td>Search pages based on when they were indexed.  Use either a number to specify when, or 
+        <div style="padding: 0 0 0 20px">
+          /since:t - indexed today<br/>   
+          /since:y - indexed yesterday<br/>   
+          /since:w - indexed in the last 7 days<br/>   
+          /since:m - indexed in the last 30 days   
+        </div> 
+      </td></tr>
       <tr><td>/cache</td><td> - </td><td>Given a URL, loads Google's cached copy of the web page.</td></tr>
       <tr><td>/related</td><td> - </td><td>Given a URL, finds other sites closely related.</td></tr>
       <tr><td>/link</td><td> - </td><td>Given a URL, finds other sites that link to it.</td></tr>
@@ -190,7 +197,21 @@
         {
           var today = new Date();
           var todayj = julian(today.getYear(),today.getMonth()+1,today.getDate());
-          var sincej = todayj - args.switch_val["since"];
+          var deltadays;
+          switch ( args.switch_val["since"] )
+          {
+            case "t": deltadays = 0; break;
+            case "y": deltadays = 1; break;
+            case "w": deltadays = 7; break;
+            case "m": deltadays = 30; break;
+            default: deltadays = args.switch_val["since"]; break;
+           }
+          if( isNaN(deltadays) )
+          {
+            nullArgs("gg","?");
+            return false;
+          }
+          var sincej = todayj - deltadays;
           args.q = args.q + " daterange:" + sincej + "-" + todayj;
         }
 
