@@ -4,7 +4,6 @@
 #define __OPTIONSDLG_H_
 
 #include "resource.h"       // main symbols
-#include <atlhost.h>
 
 /////////////////////////////////////////////////////////////////////////////
 // COptionsDlg

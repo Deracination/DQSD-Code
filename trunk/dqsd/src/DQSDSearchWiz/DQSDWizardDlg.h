@@ -59,6 +59,7 @@ private:
 	vector< CComPtr< IHTMLElement >* > m_vecFormHTMLs;
 	string m_strInstallDir;
 	string m_strBaseURL;
+	string m_strVersion;
 
 private:
 	string GetAbsoluteActionPath( _variant_t& varAction );
