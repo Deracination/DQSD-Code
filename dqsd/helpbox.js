@@ -27,8 +27,8 @@ function searchCompare( s1, s2 )
   switch ( helpSortKey.toLowerCase() )
   {
   case 'name':
-    key1 = s1.name.toLowerCase();
-    key2 = s2.name.toLowerCase();
+    key1 = s1.name.toLowerCase().replace( /<[^<]*>/g, '' );
+    key2 = s2.name.toLowerCase().replace( /<[^<]*>/g, '' );
     break;
   }
   if ( key1 < key2 ) return -1;
