@@ -7,6 +7,7 @@ Enhancements
 * Added parseArgsEx and trimWhitespace functions for additional argument parsing capabilities (from Brent Beardsley)
 * Added ability to change specify the first day of the week (from Harry-Anton Talvik)
 * Added Estonian calendar - holidays.et.xml (from Harry-Anton Talvik)
+* Added Lyricsfind search by Steve Heil
 
 New Searches
 
