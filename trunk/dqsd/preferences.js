@@ -391,6 +391,12 @@ hotkeyModifiers="WIN";
 */
 historySearchVkCode = 119 // F8 (kinda' like DOSKEY)
 
+/* Perform a google search on anything dragged and dropped onto DQSD immediately
+ (no editing). Holding Shift key during reverses the configured behavior.
+  The options are 'true' or 'false'
+*/
+dragdropautosearch = true;
+
 /* How to sort the searches in the help window and the popup menu
 *  'name'  = sort by search name
 *  'alias' = sort by first alias
