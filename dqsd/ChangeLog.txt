@@ -83,11 +83,13 @@ Modified Searches
 * whatis - Made sure it accepts ? to show help (Kim Gräsman)
 * php - fixed smarty search (Brent Beardsley)
 * uns - now uses wordsmith.com - the original service is gone (Thad Kerosky)
+* alarm - now accepts minutes-from-now format, rendering the timer search unnecessary. Added an alias timer->alarm (Monty Scroggins)
 
 Removed Searches
 
 * webpoll - discontinued (Dean Wilson)
 * jsexec - renamed to jsx
+* timer - Aliased to alarm (Monty Scroggins)
 
 Miscellaneous
 

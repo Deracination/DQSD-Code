@@ -1,15 +1,18 @@
 <search function="alarm">
   <name>Alarm</name>
   <description>
-    Schedule an alarm to go off at a certain time. The alarm message is optional. (All times are in Military (24hr) Time. Supports only a single alarm.)<br/>
+    Schedule an alarm to go off at a certain time. The alarm message is optional. All times are in Military (24hr) Time. 
+    <br/>A minutes-from-now value can also be specified instead of a timestamp.
+    <br/>Alarm only supports a single alarm.<br/>
     <div class="helpboxDescLabels">Usage:</div>
   	<table class="helpboxDescTable">
-  		<tr><td>Set Alarm</td><td> - </td><td>alarm &lt;<i>time</i>&gt; [&lt;<i>message</i>&gt;]</td></tr>
+  		<tr><td>Set Alarm</td><td> - </td><td>alarm &lt;<i>time or delay</i>&gt; [&lt;<i>message</i>&gt;]</td></tr>
   		<tr><td>Cancel Alarm</td><td> - </td><td>alarm cancel</td></tr>
   	</table>
     <div class="helpboxDescLabels">Example:</div>
     <table class="helpboxDescTable">
   		<tr><td>alarm 14:00 Staff Meeting</td></tr>
+	      <tr><td>alarm 5 Staff Meeting in 5 minutes</td></tr>
   	</table>
   </description>
   <category>Functions</category>
@@ -35,11 +38,15 @@
         setSearchWindowText("Alarm Canceled.");
         setTimeout("document.deff.q.value='';",1000);
       }
-      else if( parsedLine = t.match(/(\d\d\:\d\d)\s*(.*)/) ) 
+      else if( parsedLine = t.match(/(\d?\d\:\d\d)\s*(.*)/) ) 
       {
 		if( parsedLine[1] != null && parsedLine[1].length != 0) { 
-		  if(parsedTime = parsedLine[1].match(/(\d\d):(\d\d)/)) {
+		  if(parsedTime = parsedLine[1].match(/(\d?\d):(\d\d)/)) {
 			alarmTimeHours = parsedTime[1];
+                  if (alarmTimeHours.length == 1) 
+                  {
+                  alarmTimeHours='0'+alarmTimeHours;
+                  }
 			alarmTimeMins = parsedTime[2];
 
 			if(alarmTimeHours > 23) alarmTimeHours = 23;
@@ -55,7 +62,7 @@
           alarmMsg = 'Alarm: ' + alarmTime + '\n\n' + parsedMsg;
           
         alarmOn();
-		setSearchWindowText("Alarm Set for "+alarmTime+".");
+		setSearchWindowText("Alarm Set for "+alarmTime);
 		setTimeout("document.deff.q.value='';",1000);
       }
 	  else if( parsedLine = t.match(/^(\d+)\s*(.*)$/) )
@@ -75,7 +82,7 @@
           alarmMsg = 'Alarm: ' + alarmTime + '\n\n' + parsedMsg;
           
         alarmOn();
-		setSearchWindowText("Alarm Set for "+alarmTime+".");
+		setSearchWindowText("Alarm Set for "+alarmTime);
         setTimeout("document.deff.q.value='';",1000);
 	  }
       else 
