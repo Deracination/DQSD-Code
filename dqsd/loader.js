@@ -149,7 +149,8 @@ for (var iPrivate = 0; iPrivate < aliasTable.length; iPrivate++)
   {
     if (fields.length > 2 || !fields[0].match(/^\s*$/))
     {
-      alert("Error on line " + (i + 1) + " of aliases.txt.");
+      alert("Error on line " + (iPrivate + 1) + " of aliases.txt:\n\n" + aliasTable[iPrivate] + 
+            "\n\n(Make sure there is a tab between the alias and command.)");
       break;
     }
   }
