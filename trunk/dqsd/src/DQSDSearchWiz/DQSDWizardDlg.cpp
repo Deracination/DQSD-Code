@@ -655,7 +655,7 @@ string CDQSDWizardDlg::GetForms( const string& rstrSearchName, string& rstrFormS
 									if ( bstrOptionValue )
 										strFormXML += _T(" value=\"") + EscapeXML( string( W2T( bstrOptionValue ) ) ) + _T("\"");
 									strFormXML += _T(">");
-									strFormXML += EscapeXML( string( W2T( bstrOptionText ) ) ) + _T("</option>");
+									strFormXML += (bstrOptionText ? EscapeXML( string( W2T( bstrOptionText ) ) ) : string(_T("")) ) + _T("</option>");
 
 									::SysFreeString( bstrOptionValue );
 								}
