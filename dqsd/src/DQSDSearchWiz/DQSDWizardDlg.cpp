@@ -99,12 +99,13 @@ LRESULT CDQSDWizardDlg::OnInitDialog(UINT uMsg, WPARAM wParam, LPARAM lParam, BO
 		// Get the base URL and put it in the 'Link' element
 
 		CComBSTR bstrURL;
-		HR( m_spDoc2->get_URL( &bstrURL ) );
+		HR( m_spMainDoc->get_URL( &bstrURL ) );
 
 		CWindow ctl = GetDlgItem( IDC_Link );
 		ctl.SetWindowText( W2CT(bstrURL.m_str) );
 
-		// Save the base URL for later use
+		// Save the base URL of this frame for later use
+		HR( m_spDoc2->get_URL( &bstrURL ) );
 		m_strBaseURL = W2CT(bstrURL);
 
 		// Set up the list for the FORM elements

@@ -63,6 +63,7 @@ END_MSG_MAP()
 
 public:
 	CComPtr<IHTMLDocument2> m_spDoc2;
+	CComPtr<IHTMLDocument2> m_spMainDoc;
 
 private:
 	vector< CComPtr< IHTMLElement >* > m_vecFormHTMLs;
