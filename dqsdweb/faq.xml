@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="faq.xsl"?>
-<faqs>
+<faqs xmlns:html="http://www.w3.org/1999/xhtml">
 
   <category name="General">
     <faq>
@@ -27,38 +27,38 @@
     <faq>
       <question>What are the key bindings used by DQSD?</question>
       <answer>
-        <ul>
-          <li>
+        <html:ul>
+          <html:li>
           Ctrl-Enter - Adds www. prefix and/or .com suffix to string if necessary and
           launches URL. Like IE key-binding (only better since the prefix/suffix are only
           add if needed).
-          </li>
-          <li>
+          </html:li>
+          <html:li>
           Shift-Enter - Always opens a new window for the search regardless of the
           reuseWindowMode setting. This works only when IE is the default browser.
-          </li>
-          <li>
+          </html:li>
+          <html:li>
           Ctrl-B / F8 - Search the search history for the current text. (user
           configurable in localprefs.js)
-          </li>
-          <li>
+          </html:li>
+          <html:li>
           Shift-Ctrl-B / Shift-F8 - Search forward through the history for the current text.
           (user configurable in localprefs.js)
-          </li>
-          <li>
+          </html:li>
+          <html:li>
           Win-S - Make the search bar active (i.e., make it have the current focus).
           (user configurable in localprefs.js)
-          </li>
-          <li>
+          </html:li>
+          <html:li>
           F1 - Display menu.
-          </li>
-          <li>
+          </html:li>
+          <html:li>
           Ctrl-P / Up - Display previous search in history.
-          </li>
-          <li>
+          </html:li>
+          <html:li>
             Ctrl-N / Down - Display next search in history.
-          </li>
-        </ul>
+          </html:li>
+        </html:ul>
       </answer>
     </faq>
   </category>
@@ -67,6 +67,98 @@
     <faq>
       <question>I've installed it, but I want to uninstall it, and I can't figure out how! Help!</question>
       <answer>Right-click on the shoe to the left and choose 'Close Toolbar'. Then find the uninstaller under the control panel. Some people find the control panel entry, but they don't know they need to close DQSD before uninstalling. </answer>
+    </faq>
+    <faq>
+      <question>I'm having trouble upgrading. What do I do?</question>
+      <answer>To be perfectly safe, 1. close the toolbar, 2. reboot the computer, 3. install the upgrade.</answer>
+    </faq>
+  </category>
+
+  <category name="Searches">
+    <faq>
+      <question>How do I find out what searches are available?</question>
+      <answer>Enter ? as the search or select 'Help / About...' from the menu. The About Box that appears lists all the current searches. </answer>
+    </faq>
+    <faq>
+      <question>How do I add my own searches?</question>
+      <answer>
+        Searches are defined by XML files in the 'searches' 
+        subdirectory.&#160; You need to be comfortable hacking on HTML forms and a bit 
+        of JavaScript to add a search site to the search bar.<html:br/><html:br/>If you are, here's 
+        what you do:<html:br/>
+        
+        <html:ol>
+          <html:li>Take a look at the original HTML form for the search, and create your own 
+          HTML form to do the same thing, but where you make all the input fields hidden 
+          instead of visible (i.e., change the type to "hidden"). Be sure to be explicit 
+          about the "action" of the form (it has to be an absolute URL).
+          </html:li>
+          <html:li>
+          Write a JavaScript function that takes one text parameter and assigns values 
+          the hidden fields of your form, and then submits it. By convention, if the text 
+          parameter is blank, you should open a window into a useful page that helps you 
+          launch the search -- typically the home page of the search. If there are 
+          multiple fields in the form, then your JavaScript should use a regular 
+          expression of some kind to pull apart the single text field to fill in the 
+          multiple form fields. The easiest way to do this is with the 'parseArgs' 
+          function, which will handle the parsing for optional 'switches' and their 
+          values. 
+          </html:li>
+          <html:li>
+          Paste your new HTML form and your new JavaScript function into its own XML 
+          file (SEARCHNAME).xml in the searches sub-directory - copy the bits of xml from 
+          an existing search xml file - and include the attribute indicating your 
+          JavaScript function name, a short name for the search, a long description, a 
+          link to a description of the search engine, your name, and so on. Be sure to 
+          follow XML rules - all your attributes need to be quoted, remember the trailing 
+          slash in the INPUT tag, etc... 
+          </html:li>
+          <html:li>
+          You can test your xml syntax by opening the xml file directly in IE. It will 
+          tell you if you've got a simple syntax error. 
+          </html:li>
+          <html:li>
+          Once your xml file is in good shape, you can "activate" your changes by 
+          typing "!" alone in the search bar. This causes it to reload itself. 
+          </html:li>
+          <html:li>
+          Test things out. It usually takes some twiddling to make sure your shortcut 
+          works, and that you can also see your new search described in the "?" about box. 
+          </html:li>
+          <html:li>
+          Then post your new search onto the Source Forge mailing list to share it 
+          with the world! :-) 
+          </html:li>
+        </html:ol>
+        
+        <html:p>Here is some information about the XML:</html:p>
+        <html:ul>
+          <html:li>
+          Your search will be callable using the function="..." name. E.g., if 
+          function="foo" then you can do the search saying "foo bar". So pick a good short 
+          name for your JavaScript function. 
+          </html:li>
+          <html:li>
+            Every search's NAME attribute will be displayed if the search is put on the 
+            menu, so keep it short and descriptive, like a menu item. 
+          </html:li>
+          <html:li>
+            If you include a LINK attribute, then the link will appear in the ? help box 
+            for the search. 
+          </html:li>
+          <html:li>
+            The DESCRIPTION attribute is also included in the ? help box. 
+          </html:li>
+          <html:li>
+            The CATEGORY attribute defines the name of the category in which the search 
+            appears in the ? help box. 
+          </html:li>
+          <html:li>
+            The CONTRIBUTOR attribute is for your name, and the EMAIL attribute is for 
+            your email address.
+          </html:li>
+        </html:ul>
+      </answer>
     </faq>
   </category>
 

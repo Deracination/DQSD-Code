@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+<xsl:stylesheet version="1.0" 
+                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:html="http://www.w3.org/1999/xhtml">
   <xsl:output method="html" version="1.0" encoding="UTF-8" indent="yes"/>
   <xsl:template match="/">
     <HTML>
@@ -60,4 +62,16 @@
   <xsl:template match="link">
     <a href="{@href}"><xsl:value-of select="."/></a>
   </xsl:template>
+
+  <xsl:template match="html:*">
+    <xsl:element name="{local-name()}">
+      <xsl:for-each select="@html:*">
+        <xsl:attribute name="{local-name()}">
+          <xsl:value-of select="." />
+        </xsl:attribute>
+      </xsl:for-each>
+      <xsl:apply-templates />
+    </xsl:element>
+  </xsl:template>
+
 </xsl:stylesheet>
