@@ -26,6 +26,7 @@ extern CComModule _Module;
 #include <wininet.h>
 
 #include <string>
+#include <vector>
 using namespace std;
 
 // Many thanks to Tim Tabor for the following (www.cheztabor.com)

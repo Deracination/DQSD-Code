@@ -124,7 +124,7 @@ BEGIN
     RTEXT           "&Category:",IDC_STATIC,6,40,45,8
     COMBOBOX        IDC_Category,53,38,102,127,CBS_DROPDOWN | CBS_SORT | 
                     WS_VSCROLL | WS_TABSTOP
-    RTEXT           "&Contributor:",IDC_STATIC,6,56,45,8
+    RTEXT           "C&ontributor:",IDC_STATIC,6,56,45,8
     EDITTEXT        IDC_Contributor,53,53,102,14,ES_AUTOHSCROLL
     RTEXT           "&Email:",IDC_STATIC,6,72,45,8
     EDITTEXT        IDC_Email,53,69,102,14,ES_AUTOHSCROLL
@@ -134,15 +134,13 @@ BEGIN
     LTEXT           "&Switches:",IDC_STATIC,171,49,32,8
     EDITTEXT        IDC_Switches,205,47,102,39,ES_MULTILINE | ES_WANTRETURN | 
                     WS_VSCROLL
-    LTEXT           "FORM elements in the current page:",IDC_STATIC,6,95,115,
-                    8
+    LTEXT           "&FORMs:",IDC_STATIC,6,91,27,8
     CONTROL         "List2",IDC_FormList2,"SysListView32",LVS_REPORT | 
                     LVS_SINGLESEL | LVS_NOSORTHEADER | WS_BORDER | 
-                    WS_TABSTOP,6,104,356,43
-    GROUPBOX        "FORM fields:",IDC_STATIC,6,151,356,66
-    EDITTEXT        IDC_FormFields,12,161,344,49,ES_MULTILINE | 
-                    ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_READONLY | NOT 
-                    WS_TABSTOP
+                    WS_TABSTOP,6,100,356,47
+    LTEXT           "&HTML for selected FORM:",IDC_STATIC,6,150,84,8
+    EDITTEXT        IDC_FormFields,6,158,356,59,ES_MULTILINE | 
+                    ES_AUTOVSCROLL | ES_READONLY | WS_VSCROLL
     DEFPUSHBUTTON   "OK",1,312,6,50,14
     PUSHBUTTON      "Cancel",2,312,23,50,14
 END
