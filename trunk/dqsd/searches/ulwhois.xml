@@ -1,0 +1,30 @@
+<search function="ulwhois">
+  <name>WhoIs.Userland.Com</name>
+  <description>
+    Get whois information from WhoIs.Userland.Com<br/>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>ulwhois dqsd.net</td></tr>
+  	</table>
+  </description>
+  <category>Computers</category>
+  <link>http://whois.userland.com/</link>
+  <contributor>Glenn Carr</contributor>
+  
+  <form name="ulwhoisf" 
+        action="http://whois.userland.com/default" 
+        method="POST">
+    <input type="hidden" name="name" value="" />
+  </form>
+
+  <script><![CDATA[
+    function ulwhois(q)
+    {
+      if( nullArgs("ulwhois", q) )
+        return false;
+
+      document.ulwhoisf.name.value=q;
+      submitForm(ulwhoisf);
+    }
+  ]]></script>
+</search>
