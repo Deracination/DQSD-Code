@@ -79,7 +79,7 @@ The deskbar is customizable and completely open-source.
 
 defaultsearch="gg";
 defaultcal="yhocal";           // yahoo is the default calendar
-eventsfileurl="";               // default no events
+eventsfileurl="";              // default no events
 
 historylength=50;              // number of searches to remember
 
@@ -101,6 +101,7 @@ helptime=8500;                 // help message shows for 8.5 secs
 launchmode=2;                  // 0 = use ie; 1 = default browser; 2 = auto
 reuseBrowserWindowMode=0;      // 0=new window always; 1=single window for all; 2=single window for each search type
 multiline=true;                // Use a mult-line search field instead of a single line
+alertmode=0;                   // 0=no qualified alerts; 1=all qualified alerts
 
 language=navigator.userLanguage.substr(0,2);
 
@@ -144,6 +145,11 @@ function handleerror(msg, url, lineno)
 firsterror = null;
 // window.onerror=handleerror;
 
+
+function qualifiedalert(s)
+{
+  alertmode && alert(s);
+}
 </script>
 
 <style>
