@@ -751,6 +751,11 @@ function postStartup()
 
   keyboardHook = new ActiveXObject("DQSDTools.Launcher");
   keyboardHook.InstallKeyboardHook();
+  
+  if(hotkeyCharacter != "")
+    keyboardHook.RegisterHotKey(hotkeyCharacter.charCodeAt(0));
+  else if(hotkeyVkCode != 0)
+    keyboardHook.RegisterHotKey(hotkeyVkCode);
 }
 
 </script>
