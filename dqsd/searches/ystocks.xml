@@ -1,0 +1,139 @@
+<search function="ystocks">
+  <name>Yahoo Finance</name>
+  <description>Use Yahoo Finance to find information about specific stocks.<br />
+	<b>Info Mode</b> (default): use to lookup stock symbols: "ystocks C /chart".  Optional switches:<br />
+	basic (default),  daywatch,  performance,  realtime,  detailed,  chart,  research,  options,  orderbook<br />
+
+	<b>Lookup Mode</b> (/lookup): Use to find symbols. "ystocks /lookup Citigroup".  Optional switches:<br />
+	Market:  world or us (default)<br />
+	Instrument Type: any (default),  stocks,  options,  funds,  index<br />
+  </description>
+  <category>Finance</category>
+  <link>http://finance.yahoo.com/</link>
+  <contributor>Neel Doshi</contributor>
+  <form name="ystocksf1"
+        action="http://finance.yahoo.com/q"
+        method="post">
+    <input type="hidden" name="h" value="1" />
+	<input type="hidden" name="s" />
+	<input type="hidden" name="d" value="v1" />
+  </form>
+  <form name="ystocksf2"
+        action="http://finance.yahoo.com/l"
+        method="post">
+    <input type="hidden" name="m" value="US" />
+	<input type="hidden" name="s" />
+	<input type="hidden" name="t" value="" />
+  </form>
+  <script><![CDATA[
+    function ystocks(q)
+    {
+		if( nullArgs("ystocks", q ) )
+			return false;
+
+		// Layout all of the possible switches.
+		var switch_list_searches = new Array("basic", "daywatch", "performance", "realtime", "detailed", "chart", "research", "options", "orderbook");
+		var switch_list_markets = new Array("us", "world");
+		var switch_list_lookup = new Array("any", "stocks", "options", "funds", "index");
+		var switch_list_modes = new Array("info", "lookup");
+		var switch_list = new Array();
+		switch_list = switch_list_modes.concat(switch_list_markets).concat(switch_list_searches).concat(switch_list_lookup);
+
+		// Parse the arguments.
+		var args = parseArgs(q, switch_list);
+
+		// determine if the mode is info (default) or lookup
+		var FuncMode = "info";
+		if ( typeof args.switch_val[ "lookup" ] != "undefined")
+			FuncMode = "lookup"
+
+		if (FuncMode == "lookup")
+		{
+			// Iterate through market switch list to determine which market the user wants to search
+			document.ystocksf2.m.value = "US";
+			for (var j = 0; j < switch_list_markets.length; j++)
+			{
+				if ( typeof args.switch_val[ switch_list_markets[j] ] != "undefined")
+				{
+					switch( switch_list_markets[j].toLowerCase() )
+					{
+					case "us":
+						document.ystocksf2.m.value = "US"; break;
+					case "world":
+						document.ystocksf2.m.value = ""; break;
+					default:
+						document.ystocksf2.m.value = "US"; break;
+					}
+				}
+			}
+			// Iterate through the lookup switch list to determine what kind of lookup the user wants
+			document.ystocksf2.t.value = "";
+			for (var j = 0; j < switch_list_lookup.length; j++)
+			{
+				if ( typeof args.switch_val[ switch_list_lookup[j] ] != "undefined")
+				{
+					switch( switch_list_lookup[j].toLowerCase() )
+					{
+					case "any":
+						document.ystocksf2.t.value = ""; break;
+					case "stocks":
+						document.ystocksf2.t.value = "S"; break;
+					case "options":
+						document.ystocksf2.t.value = "O"; break;
+					case "funds":
+						document.ystocksf2.t.value = "M"; break;
+					case "index":
+						document.ystocksf2.t.value = "I"; break;
+					default:
+						document.ystocksf2.t.value = ""; break;
+					}
+				}
+			}
+
+			// Set the query and submit the form
+        	document.ystocksf2.s.value = args.q;
+        	submitForm(ystocksf2);
+			return true;
+		}
+		else
+		{
+			// Iterate through the switch_list_searches switch list to determine what kind of search the user wants
+			document.ystocksf1.d.value = "v1";
+			for (var j = 0; j < switch_list_searches.length; j++)
+			{
+				if ( typeof args.switch_val[ switch_list_searches[j] ] != "undefined")
+				{
+					switch( switch_list_searches[j].toLowerCase() )
+					{
+					case "basic":
+						document.ystocksf1.d.value = "v1"; break;
+					case "daywatch":
+						document.ystocksf1.d.value = "v2"; break;
+					case "performance":
+						document.ystocksf1.d.value = "v3"; break;
+					case "realtime":
+						document.ystocksf1.d.value = "e"; break;
+					case "detailed":
+						document.ystocksf1.d.value = "t"; break;
+					case "chart":
+						document.ystocksf1.d.value = "c"; break;
+					case "research":
+						document.ystocksf1.d.value = "r"; break;
+					case "options":
+						document.ystocksf1.d.value = "o"; break;
+					case "orderbook":
+						document.ystocksf1.d.value = "f8"; break;
+					default:
+						document.ystocksf1.d.value = ""; break;
+					}
+				}
+			}
+
+			// Set the query and submit the form
+        	document.ystocksf1.s.value = args.q;
+        	submitForm(ystocksf1);
+			return true;
+		}
+    }
+  ]]></script>
+</search>
