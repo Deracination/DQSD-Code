@@ -8,11 +8,15 @@ New Searches
 * encarta - Microsoft Encarta (from Andrew Carpenter)
 * ep - Epinions (from Andrew Carpenter)
 * wc - Get the time around the world at timeanddate.com (from John Bairen)
+* jsexec - Execute a Javascript command
+* jsref - Search for Javascript commands reference
 
 Modified Searches
 
 * bible - David Thompson added switches for multiple translations
 * msk - added /google switch
+* setiq - cosmetic change
+* wfb - standardized layout
 
 
 -- What's new for 3.1 (August 27, 2002)

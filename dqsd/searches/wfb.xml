@@ -1,6 +1,11 @@
 <search function="wfb">
   <name>World Fact Book</name>
-  <description>Search the CIA's world fact book. Uses Google. <nobr>Example: "wfb somalia"</nobr></description>
+  <description>Search the CIA's world fact book. Uses Google.
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+      <tr><td>wfb somalia</td></tr>
+    </table>
+  </description>
   <link>http://www.odci.gov/cia/publications/factbook/index.html</link>
   <category>Reference</category>
   <contributor>David Bau</contributor>
@@ -12,11 +17,10 @@
   </form>
 
   <script><![CDATA[
-    // world factbook, uses Google I'm feeling lucky search
     function wfb(q)
     {
-      if (q == "")
-        openSearchWindow("http://www.odci.gov/cia/publications/factbook/index.html");
+      if( nullArgs("wfb",q) )
+        return false;
       else
       {
         document.wfbf.q.value=q + " site:www.odci.gov inurl:factbook";
