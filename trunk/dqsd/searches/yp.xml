@@ -1,0 +1,23 @@
+<search function="yp">
+  <name>Yahoo Yellow Pages</name>
+  <description>Search the Yahoo Yellow Pages: "yp pizza"</description>
+  <category>People and Places</category>
+  <link>http://yp.yahoo.com/</link>
+  <form name="ypf"
+        action="http://yp.yahoo.com/py/ypResults.py"
+        method="get">
+    <input type="hidden" name="stx" value=""/>
+  </form>
+  <script><![CDATA[
+    function yp(q)
+    {
+      if (q == "")
+        openSearchWindow("http://yp.yahoo.com/");
+      else
+      {
+        document.ypf.stx.value=q;
+        submitForm(ypf);
+      }
+    }
+  ]]></script>
+</search>
