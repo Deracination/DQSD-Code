@@ -113,8 +113,11 @@ Section "Quick Search Deskbar (required)"
   File "..\preferences.js"
   SetOverwrite on
 
-  ; redundant with readme
+  ; old source files used to live here
   Delete $INSTDIR\license.txt
+  Delete $INSTDIR\search.ico
+  Delete $INSTDIR\search.nsi
+  Delete $INSTDIR\dqsd.xml
 
   ; The unique uuid for our taskbar
   StrCpy $9 "{226b64e8-dc75-4eea-a6c8-abcb4d1d37ff}"
@@ -160,37 +163,37 @@ Section "Uninstall"
   DeleteRegKey HKCR "CLSID\$9"
 
   ; remove files
-  Delete $INSTDIR\readme.txt
-  Delete $INSTDIR\search.htm
-  Delete $INSTDIR\search.nsi
-  Delete $INSTDIR\search.ico
-  Delete $INSTDIR\search.xml
-  Delete $INSTDIR\dqsd.xml
-  Delete $INSTDIR\DQSDTools.dll
-  Delete $INSTDIR\src\build.cmd
-  Delete $INSTDIR\src\clean.cmd
-  Delete $INSTDIR\src\DQSDTools\DQSDTools.cpp
-  Delete $INSTDIR\src\DQSDTools\DQSDTools.def
-  Delete $INSTDIR\src\DQSDTools\DQSDTools.dsp
-  Delete $INSTDIR\src\DQSDTools\DQSDTools.dsw
-  Delete $INSTDIR\src\DQSDTools\DQSDTools.idl
-  Delete $INSTDIR\src\DQSDTools\DQSDTools.rc
-  Delete $INSTDIR\src\DQSDTools\Launcher.cpp
-  Delete $INSTDIR\src\DQSDTools\Launcher.h
-  Delete $INSTDIR\src\DQSDTools\Launcher.rgs
-  Delete $INSTDIR\src\DQSDTools\License.txt
-  Delete $INSTDIR\src\DQSDTools\StdAfx.cpp
-  Delete $INSTDIR\src\DQSDTools\StdAfx.h
-  Delete $INSTDIR\src\DQSDTools\Utilities.h
-  Delete $INSTDIR\src\DQSDTools\dlldatax.c
-  Delete $INSTDIR\src\DQSDTools\dlldatax.h
-  Delete $INSTDIR\src\DQSDTools\resource.h
+  Delete /REBOOTOK $INSTDIR\readme.txt
+  Delete /REBOOTOK $INSTDIR\search.htm
+  Delete /REBOOTOK $INSTDIR\search.nsi
+  Delete /REBOOTOK $INSTDIR\search.ico
+  Delete /REBOOTOK $INSTDIR\search.xml
+  Delete /REBOOTOK $INSTDIR\dqsd.xml
+  Delete /REBOOTOK $INSTDIR\DQSDTools.dll
+  Delete /REBOOTOK $INSTDIR\src\build.cmd
+  Delete /REBOOTOK $INSTDIR\src\clean.cmd
+  Delete /REBOOTOK $INSTDIR\src\DQSDTools\DQSDTools.cpp
+  Delete /REBOOTOK $INSTDIR\src\DQSDTools\DQSDTools.def
+  Delete /REBOOTOK $INSTDIR\src\DQSDTools\DQSDTools.dsp
+  Delete /REBOOTOK $INSTDIR\src\DQSDTools\DQSDTools.dsw
+  Delete /REBOOTOK $INSTDIR\src\DQSDTools\DQSDTools.idl
+  Delete /REBOOTOK $INSTDIR\src\DQSDTools\DQSDTools.rc
+  Delete /REBOOTOK $INSTDIR\src\DQSDTools\Launcher.cpp
+  Delete /REBOOTOK $INSTDIR\src\DQSDTools\Launcher.h
+  Delete /REBOOTOK $INSTDIR\src\DQSDTools\Launcher.rgs
+  Delete /REBOOTOK $INSTDIR\src\DQSDTools\License.txt
+  Delete /REBOOTOK $INSTDIR\src\DQSDTools\StdAfx.cpp
+  Delete /REBOOTOK $INSTDIR\src\DQSDTools\StdAfx.h
+  Delete /REBOOTOK $INSTDIR\src\DQSDTools\Utilities.h
+  Delete /REBOOTOK $INSTDIR\src\DQSDTools\dlldatax.c
+  Delete /REBOOTOK $INSTDIR\src\DQSDTools\dlldatax.h
+  Delete /REBOOTOK $INSTDIR\src\DQSDTools\resource.h
 
   ; Remove preferences too
-  Delete $INSTDIR\preferences.js
+  Delete /REBOOTOK $INSTDIR\preferences.js
 
   ; MUST REMOVE UNINSTALLER, too
-  Delete $INSTDIR\uninstall.exe
+  Delete /REBOOTOK $INSTDIR\uninstall.exe
 
   ; Delete directory
   RmDir /r $INSTDIR

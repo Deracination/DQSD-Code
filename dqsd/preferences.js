@@ -1,4 +1,4 @@
-// Configuration for the clock feature.
+// Configuration for Dave's Quick Search Deskbar features.
 // After you've saved your changes, enter "!" in the deskbar to reload.
 
 clock=true;          // false disables the clock
@@ -9,6 +9,7 @@ clockgray=false;     // true draws clock on gray background
 clocklongwidth=139;  // long form is used if this pixel width is exceeded
 
 launchmode=2;        // 0=use ie; 1=use default browser; 2=auto
+// language="en";    // uncomment to override default language
 defaultsearch="goo"; // use google search
 defaultcal="yhocal"; // use yahoo calendar
 
