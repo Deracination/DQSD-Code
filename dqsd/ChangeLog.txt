@@ -33,7 +33,7 @@ Miscellaneous
 * Installer now lives by the following rules: (Kim Gräsman)
   - localsearches directory is now created by installation unless it already exists
   - Uninstaller leaves local*, mrumenu.txt and history.txt behind
-
+* Slight visual tweaks for the XP color Schemes to help the vertical alignment (css and bmp mods) (Monty Scroggins)
 
 -- What's new for 3.1.8 (date 2004-01-18)
 
