@@ -36,12 +36,12 @@ BOOL WINAPI DllMain(HINSTANCE hInstance, DWORD dwReason, LPVOID lpReserved)
         _Module.Init(ObjectMap, hInstance, &LIBID_DQSDTOOLSLib);
         DisableThreadLibraryCalls(hInstance);
 
-		OutputDebugString("DQSDTools loading\n");
+		ATLTRACE("DQSDTools loading\n");
     }
     else if (dwReason == DLL_PROCESS_DETACH)
 	{
         _Module.Term();
-		OutputDebugString("DQSDTools unloading\n");
+		ATLTRACE("DQSDTools unloading\n");
 	}
     return TRUE;    // ok
 }

@@ -814,6 +814,9 @@ function postStartup()
       keyboardHook.RegisterHotKey(hotkeyCharacter.charCodeAt(0), hotkeyModifiers);
     else if(hotkeyVkCode != 0)
       keyboardHook.RegisterHotKey(hotkeyVkCode, hotkeyModifiers);
+
+
+//	 keyboardHook.ShutdownBar();
   }
   catch(e)
   {

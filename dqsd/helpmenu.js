@@ -37,7 +37,12 @@ function showpop()
   {
     try
     {
-      mb.InitialiseTooltips();
+      if(typeof helpMenuToolTipsDisplayTime == undefined)
+      {
+         helpMenuToolTipsDisplayTime = 3;
+      }
+
+      mb.InitialiseTooltips(helpMenuToolTipsDisplayTime);
     }
     catch(e)
     {

@@ -390,7 +390,7 @@ STDMETHODIMP CLauncher::RegisterHotKey(long hotkeyVkCode, BSTR bstrModifierName)
 {
 	USES_CONVERSION;
 
-	return KeyboardInstallHotkey(hotkeyVkCode, W2T(bstrModifierName));
+	return KeyboardInstallHotkey(hotkeyVkCode, W2T(bstrModifierName), &m_hHotkeyNotificationWindow);
 }
 
 //
@@ -576,4 +576,76 @@ STDMETHODIMP CLauncher::InitialiseBaseTooltip(void)
 
 	return S_OK;
 */
+}
+
+
+// Will Dean - this was just an experiment to do with termination
+// it doesn't work, but I'm still thinking about it...
+
+#include <process.h> 
+
+void KillerThread(void*)
+{
+//	HANDLE hEvent = CreateEvent(NULL, TRUE, FALSE, "DQSDStopperEvent");
+
+//	ResetEvent(hEvent);
+	//	WaitForSingleObject(hEvent, INFINITE);
+
+	Sleep(3000);
+
+	CoFreeUnusedLibraries();
+	CoFreeUnusedLibraries();
+	CoFreeUnusedLibraries();
+}
+
+
+
+STDMETHODIMP CLauncher::ShutdownBar()
+{
+	return Error(_T("Shutdown bar not implemented yet..."), IID_ILauncher, E_NOTIMPL);
+
+/*
+	HWND hDQSDWnd = UtilitiesFindDQSDWindow();
+
+	// The window hierachy goes 
+//		 _T("Shell_TrayWnd"), 
+//		_T("ReBarWindow32"), 
+//		_T("OCHost"), 
+//		_T("Shell Embedding"), 
+//		_T("Shell DocObject View"), 
+//		_T("Internet Explorer_Server") <== This is us
+
+
+	HWND hRebarBand = GetParent(GetParent(GetParent(hDQSDWnd)));
+	HWND hRebar = GetParent(hRebarBand);
+
+	ATLTRACE("Rebar: 0x%x, Pane 0x%x\n", hRebar, hRebarBand);
+
+	int nBands = ::SendMessage(hRebar, RB_GETBANDCOUNT, 0, 0);
+	for(int nBand = 0; nBand < nBands; nBand++)
+	{
+		REBARBANDINFO info;
+		ZeroMemory(&info, sizeof(info));
+		info.cbSize = sizeof(info);
+		info.fMask = RBBIM_CHILD;
+
+		if(::SendMessage(hRebar, RB_GETBANDINFO, nBand, (LPARAM)&info))
+		{
+			ATLTRACE("Band %d - hWnd = 0x%x\n", nBand, info.hwndChild);
+
+			if(info.hwndChild == hRebarBand)
+			{
+				// We've found our band - shut it down
+				DestroyWindow(hRebarBand);
+				::SendMessage(hRebar, RB_DELETEBAND, nBand, 0);
+
+				_beginthread(KillerThread, 0, NULL);
+
+
+			}
+		}
+	}
+
+*/
+	return S_OK;
 }

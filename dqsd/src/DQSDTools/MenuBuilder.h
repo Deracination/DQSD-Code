@@ -64,7 +64,7 @@ public:
 
 // IMenuBuilder
 public:
-	STDMETHOD(InitialiseTooltips)();
+	STDMETHOD(InitialiseTooltips)(long displayTimeMultiplier);
 	STDMETHOD(get_HorizontalAlignment)(/*[out, retval]*/ short *pVal);
 	STDMETHOD(put_HorizontalAlignment)(/*[in]*/ short newVal);
 	STDMETHOD(AppendSubMenu)(/*[in]*/ BSTR bstrName, VARIANT* pvParentMenu, /*[out,retval]*/ long* phmenu);

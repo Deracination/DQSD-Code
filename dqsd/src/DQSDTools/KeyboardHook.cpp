@@ -17,6 +17,8 @@ std::map< long, long > g_mapKeyCodeToCharCode;
 // The handle of our hook
 static HHOOK hHook;
 
+//HWND hHotkeyNotificationWindow;
+
 
 static LRESULT CALLBACK KeyboardProc(
 							  int code,       // hook code
@@ -188,26 +190,6 @@ LRESULT CALLBACK NotificationWndProc(
 	return DefWindowProc(hwnd, uMsg,wParam,lParam);
 }
 
-/*
-// Will Dean - this was just an experiment to do with termination
-// it doesn't work, but I'm still thinking about it...
-
-#include <process.h>
-
-void KillerThread(void*)
-{
-	HANDLE hEvent = CreateEvent(NULL, TRUE, FALSE, "DQSDStopperEvent");
-
-	ResetEvent(hEvent);
-	WaitForSingleObject(hEvent, INFINITE);
-
-	ATLTRACE("Killer Invoked\n");
-	CoFreeUnusedLibraries();
-
-	DeleteObject(hEvent);
-}
-*/
-
 
 //
 // Install a keyboard hook on the search deskbars message handler thread
@@ -245,8 +227,6 @@ HRESULT KeyboardHookInstall()
 
 	_RPT1(_CRT_WARN, "hHook 0x%x\n", hHook);
 
-//	_beginthread(KillerThread, 0, NULL);
-
 	return S_OK;
 }
 
@@ -258,7 +238,7 @@ HRESULT KeyboardHookInstall()
 //		HRESULT
 //
 HRESULT
-KeyboardInstallHotkey(int vkCode, LPCTSTR pModifierNames)
+KeyboardInstallHotkey(int vkCode, LPCTSTR pModifierNames, HWND* phwndNotification)
 {
 	if(hBarWnd == NULL)
 	{
@@ -271,8 +251,6 @@ KeyboardInstallHotkey(int vkCode, LPCTSTR pModifierNames)
 	wc.lpfnWndProc = NotificationWndProc;
 	wc.lpszClassName = HOTKEY_WINDOW_CLASS_NAME;
 
-	HWND hNotificationWindow;
-
 	HWND hExistingWindow = FindWindow(wc.lpszClassName, HOTKEY_WINDOW_NAME);
 	if(hExistingWindow != NULL)
 	{
@@ -283,8 +261,8 @@ KeyboardInstallHotkey(int vkCode, LPCTSTR pModifierNames)
 
 	RegisterClass(&wc);
 
-	hNotificationWindow = CreateWindow(wc.lpszClassName, HOTKEY_WINDOW_NAME, 0, 0, 0, 0, 0, hBarWnd, NULL, NULL, NULL);
-	if(hNotificationWindow == NULL)
+	*phwndNotification = CreateWindow(wc.lpszClassName, HOTKEY_WINDOW_NAME, 0, 0, 0, 0, 0, hBarWnd, NULL, NULL, NULL);
+	if(*phwndNotification == NULL)
 	{
 		ATLTRACE("Failed to create a window for hotkeys (err %d)\n", GetLastError());
 		return CLauncher::Error(IDS_ERR_HOTKEY_WINDOW_FAILED, IID_ILauncher, E_FAIL);
@@ -293,7 +271,7 @@ KeyboardInstallHotkey(int vkCode, LPCTSTR pModifierNames)
 	// Make an ID for the window and store it in the windows userdata slot
 	// so that it can be used to unregister the hotkey
 	ATOM hotKeyId = GlobalAddAtom(_T("DQSDHotKeyAtom"));
-	SetWindowLong(hNotificationWindow, GWL_USERDATA, hotKeyId);
+	SetWindowLong(*phwndNotification, GWL_USERDATA, hotKeyId);
 
 	// Try and work out the modifier - default to the Windows key
 	UINT keyModifier = 0;
@@ -319,7 +297,7 @@ KeyboardInstallHotkey(int vkCode, LPCTSTR pModifierNames)
 		keyModifier = MOD_WIN;
 	}
 	
-	if(!RegisterHotKey(hNotificationWindow, hotKeyId, keyModifier, vkCode))
+	if(!RegisterHotKey(*phwndNotification, hotKeyId, keyModifier, vkCode))
 	{
 		ATLTRACE("Failed to register hotkey (err %d)\n", GetLastError());
 		return CLauncher::Error(IDS_ERR_HOTKEY_REG_FAILED, IID_ILauncher, E_FAIL);

@@ -426,7 +426,7 @@ LONG FAR PASCAL ToolTipSubClassFunc(   HWND hWnd,
 */
 
 // Set up the tracking window which can follow the menu position and display tooltips
-STDMETHODIMP CMenuBuilder::InitialiseTooltips()
+STDMETHODIMP CMenuBuilder::InitialiseTooltips(long displayTimeMultiplier)
 {
 	// Create a window which we use to receive menu tracking info
 	WNDCLASS wc;
@@ -493,6 +493,12 @@ STDMETHODIMP CMenuBuilder::InitialiseTooltips()
 	RECT workArea;
 	SystemParametersInfo(SPI_GETWORKAREA, 0, (PVOID)&workArea, 0);
 	::SendMessage(m_hTooltipWnd, TTM_SETMAXTIPWIDTH, 0, (workArea.right-workArea.left)/3);
+
+	// Set the tool tip time multiplier
+	// (GetDoubleClickTime()*10 is the system default)
+	ATLTRACE("InitToolTips: DisplayTimeMult %d\n", displayTimeMultiplier);
+	displayTimeMultiplier = max(1, displayTimeMultiplier);
+	::SendMessage(m_hTooltipWnd, TTM_SETDELAYTIME, TTDT_AUTOPOP, GetDoubleClickTime()*10*displayTimeMultiplier);
 
 // Subclass the tooltip window - just for debugging
 //	lpfnOldWndProc = (WNDPROC)SetWindowLong(m_hTooltipWnd, GWL_WNDPROC, (DWORD)ToolTipSubClassFunc);
