@@ -38,16 +38,18 @@ function submitForm(form, dontChangeTarget)
   if ( !dontChangeTarget )
   {
     // Here's a safeguard for forgetting to put a target in the FORM
-    if ( (getReuseBrowserWindowMode() == 0) || !form.target || (form.target && form.target == '') )
-      form.target = '_blank';
+    if ( (getReuseBrowserWindowMode() == 0) || !form.attributes["target"].value || (form.attributes["target"].value && form.attributes["target"].value == '') )
+    {
+      form.attributes["target"].value = '_blank';
+    }
 
     // Reuse a single window if the user wants to and the target is _blank
     // Don't override targets with any other name because some searches may want
     // their own window.
-    if ((getReuseBrowserWindowMode() > 0) && form.target && (form.target == '_blank'))
+    if ((getReuseBrowserWindowMode() > 0) && form.attributes["target"].value && (form.attributes["target"].value == '_blank'))
     {
       // 1=same window always; 2=new window for each search type
-      form.target = ((getReuseBrowserWindowMode() == 1) ? DQSD_BROWSER_WINDOW_NAME : (DQSD_BROWSER_WINDOW_NAME + '_' + form.name));
+      form.attributes["target"].value = ((getReuseBrowserWindowMode() == 1) ? DQSD_BROWSER_WINDOW_NAME : (DQSD_BROWSER_WINDOW_NAME + '_' + form.name));
     }
   }
 
