@@ -509,7 +509,7 @@ STDMETHODIMP CLauncher::InitialiseBaseTooltip(void)
 {
 	return Error(_T("Tooltip functions not implemented yet..."), IID_ILauncher, E_NOTIMPL);
 
-	/*
+/*
 	ATLTRACE("InitialiseBaseTooltip: Starting\n");
 
 
@@ -532,7 +532,7 @@ STDMETHODIMP CLauncher::InitialiseBaseTooltip(void)
 		CW_USEDEFAULT,
 		CW_USEDEFAULT,
 		CW_USEDEFAULT,
-		hDQSDWindow,
+		NULL, // hDQSDWindow,
 		NULL,
 		_Module.GetModuleInstance(),
 		NULL
@@ -560,10 +560,10 @@ STDMETHODIMP CLauncher::InitialiseBaseTooltip(void)
 
 	// INITIALIZE MEMBERS OF THE TOOLINFO STRUCTURE 
 	ti.cbSize = sizeof(TOOLINFO);
-	ti.uFlags = TTF_SUBCLASS | TTF_IDISHWND;
-	ti.hwnd = GetParent(hDQSDWindow);
+	ti.uFlags = TTF_SUBCLASS;
+	ti.hwnd = hDQSDWindow;
 	ti.hinst = _Module.GetModuleInstance();
-	ti.uId = (UINT)hDQSDWindow;
+	ti.uId = 0;
 	ti.lpszText = lptstr;
 	// ToolTip control will cover the whole window
 	ti.rect.left = rect.left;    
@@ -572,9 +572,8 @@ STDMETHODIMP CLauncher::InitialiseBaseTooltip(void)
 	ti.rect.bottom = rect.bottom;
 
 	// SEND AN ADDTOOL MESSAGE TO THE TOOLTIP CONTROL WINDOW 
-	::SendMessage(m_hBaseTooltipWnd, TTM_ADDTOOL, 0, (LPARAM) (LPTOOLINFO) &ti);	
+	::SendMessage(m_hBaseTooltipWnd, TTM_ADDTOOL, 0, (LPARAM)&ti);	
 
 	return S_OK;
 */
-
 }

@@ -352,10 +352,10 @@ hotkeyVkCode = 0;
 
 /* The modifiers for the hotkey
   Options are combinations of 
-				WIN for the windows key (default)
+                WIN for the windows key (default)
                 ALT for ALT
-				CONTROL for CONTROL
-				SHIFT for SHIFT
+                CONTROL for CONTROL
+                SHIFT for SHIFT
   e.g.    hotkeyModifiers="WIN ALT";
   Spaces are optional, so ALTSHIFTWIN is just as good
   You wouldn't want to use anything on its own other than WIN, unless you're deliberately trying to upset people
@@ -367,3 +367,10 @@ hotkeyModifiers="WIN";
 *  'alias' = sort by first alias
 */
 helpSortKey = 'name';
+
+/* Enable tooltips on menu help menu items 
+    The options are 'true' or 'false'
+*/
+helpMenuToolTipsEnabled = false;
+
+
