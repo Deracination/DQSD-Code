@@ -71,7 +71,7 @@ Customisation
 
 * localaliases.txt - Added name and description fields
 
-* Support for 'addons' - see FAQ
+* Support for Add-ons - see FAQ
 
 
 New / Modified Searches
@@ -122,3 +122,7 @@ New / Modified Searches
 * googletrans - Google.com Language Translation
 * dicfr - Search French words definition
 
+
+Miscellaneous
+
+* Added default key-binding descriptions to help
