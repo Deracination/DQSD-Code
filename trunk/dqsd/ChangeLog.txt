@@ -21,6 +21,7 @@ Bug Fixes
 * Fixed the alias parsing to allow spaces around the delimiters (Monty Scroggins)
 * Check to see if startupCommands is defined before trying to use it (Brent Beardsley)
 * Removed creation of temporary .html file by DQSDTools.dll on startup to determine default browser. (Glenn Carr)
+* Added the nifty line to search.htm to workaround the XP SP2 activex security problem. (Lee Hasiuk)
 
 New Searches
 * riaar - riaaradar.org RIAA label and artist membership search. (Thad Kerosky)
