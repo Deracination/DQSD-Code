@@ -94,6 +94,7 @@ clocklongwidth=139;
 *  A    - 12-hour clock am/pm uppercase (AM)
 *  EEEE - day-of-week full name (Monday)
 *  EEE  - day-of-week abbreviation (Mon)
+*  W    - week number (1-52)
 *
 *  default long form = " EEE d MMM yyyy h:mm A "
 *  default short form = " h:mm A "

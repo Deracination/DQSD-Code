@@ -4,10 +4,23 @@ var clocktimer = null;
 var clockrunning = false;
 var clockformat = clocklongform;
 
+// Adapted from http://www.merlyn.demon.co.uk/weekinfo.htm
+function calcWeekNo(date)
+{
+	var day = date.getDay();
+	if (day == 0) day = 7;
+	date.setDate(date.getDate() + (4 - day));
+	
+	// Jan 1; -6h allows for Summer Time
+	var januaryFirst = new Date(date.getFullYear(), 0, 1, -6);
+
+	var dayOfYear = Math.floor( (date.getTime() - januaryFirst) / 86400000);
+	var weekNo = Math.floor(dayOfYear / 7) + 1;
+	return weekNo;
+}
+
 // Date formatting code adapted from
 // http://www.mattkruse.com/javascript/date/source.html
-
-
 function formatdate(date,format)
 {
   format = format+"";
@@ -22,7 +35,7 @@ function formatdate(date,format)
   var m = date.getMinutes();
   var s = date.getSeconds();
   var E = date.getDay() + 1;
-  var yyyy,yy,MMMM,MMM,MM,dd,hh,h,mm,ss,ampm,AMPM,HH,H,EEE,EEEE,E;
+  var yyyy,yy,MMMM,MMM,MM,dd,hh,h,mm,ss,ampm,AMPM,HH,H,EEE,EEEE,E, W;
 
   // Convert real date parts into formatted versions
 
@@ -37,6 +50,9 @@ function formatdate(date,format)
   MM = ((M < 10) ? "0" + M : M);
   MMMM = getMonthName(M);
   MMM = getMonthName(M+12);
+
+  // Week no
+  W = calcWeekNo(date);
 
   // Day of month
   dd = ((d < 10) ? "0" + d : d);
@@ -86,6 +102,7 @@ function formatdate(date,format)
   value["E"] = E;
   value["EEE"] = EEE;
   value["EEEE"] = EEEE;
+  value["W"] = W;
   while (i_format < format.length)
   {
     // Get next token from format string
