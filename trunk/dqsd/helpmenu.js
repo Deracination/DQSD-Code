@@ -169,7 +169,7 @@ function showpop()
       var search = helparray[k];
       var alias = getSearchAliases( search );
       if ( search.enabled )
-        mb.AppendMenuItem( search.name + '\t' + alias, search.aliases[0], hsubmenu );
+        mb.AppendMenuItem( search.name + '\t' + alias.replace(/&/g, '&&'), search.aliases[0], hsubmenu );
     }
   }
   
