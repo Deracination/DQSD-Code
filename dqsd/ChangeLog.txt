@@ -54,6 +54,7 @@ New Searches
 * koders - Koders.com Search (Shawn K. Hall)
 * copys - CopyScape Search (Shawn K. Hall)
 * note.xml - Nifty quick note search (Peter Heath)
+* floax - 'mouser' interaction in the alternate viewport (read the help) (Shawn K. Hall)
 
 Modified Searches
 * jdk - updated urls for j2ee and 1.4, added 1.5, 1.2, 1.1 and api switches (Brent Beardsley)
@@ -79,6 +80,9 @@ Modified Searches
 * ch.xml - Base URL changed (James Robertson)
 * mq.xml - Now handles latitude/longitude searches (Gregory Krohne)
 * comx - Changed to use a single browser window to aid in winXP SP2 compatibility (Monty Scroggins) 
+* banyg - Removed client-based server authentication code so it used only a single auth scheme (Shawn K. Hall)
+* tvg - Corrected to work with new (limited) TVGuide search engine (Shawn K. Hall)
+* icap - Corrected Safari 1.2 form parameter (Shawn K. Hall)
 
 Removed Searches
 * nwtsr and httpd replaced by whats (Kim Gräsman)
