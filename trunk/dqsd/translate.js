@@ -90,14 +90,14 @@ function freetranslate(l,q)
   q = q.replace(/^\s*/, '').replace(/\s*$/, '');
   if (dns.exec(q))
   {
-    fturl.Language.value = l;
-    fturl.Url.value = "http://" + q;
+    fturl.language.value = l;
+    fturl.url.value = "http://" + q;
     submitForm(fturl);
   }
   else if (prot.exec(q))
   {
-    fturl.Language.value = l;
-    fturl.Url.value = q;
+    fturl.language.value = l;
+    fturl.url.value = q;
     submitForm(fturl);
   }
   else
@@ -113,7 +113,7 @@ function freetranslate(l,q)
 document.write(
   "<form name=babl"
 + "      target=_blank"
-+ "      action=http://babelfish.altavista.com/tr"
++ "      action=http://babelfish.altavista.com/babelfish/tr"
 + "      method=post>"
 + "  <input type=hidden name=doit value=done>"
 + "  <input type=hidden name=lp>"
@@ -127,10 +127,10 @@ document.write(
 document.write(
   "<form name=fturl"
 + "      target=_blank"
-+ "      action=http://fets3.freetranslation.com:5081/"
++ "      action=http://www.freetranslation.com/web.asp"
 + "      method=get>"
-+ "  <input type=hidden name=Language>"
-+ "  <input type=hidden name=Url>"
++ "  <input type=hidden name=language>"
++ "  <input type=hidden name=url>"
 + "  <input type=hidden name=Sequence VALUE=core>"
 + "</form>");
 
@@ -139,7 +139,7 @@ document.write(
 document.write(
   "<form name=fttext"
 + "      target=_blank"
-+ "      action=http://ets.freetranslation.com:5081/"
++ "      action=http://ets.freetranslation.com/"
 + "      method=get>"
 + "  <input type=hidden name=Sequence VALUE=core>"
 + "  <input type=hidden name=Mode value=html>"
