@@ -35,11 +35,14 @@
   <script><![CDATA[
     function ups(q)
     {
+      if( nullArgs("ups", q) )
+        return false;
+
       if (q == "")
         openSearchWindow("http://www.ups.com/tracking/tracking.html");
       else
       {
-        if (result = q.split( /[,\s]+/ ) )
+        if (result = q.split( /\s*,+\s*/ ) )
         {
           for ( var i = 1; i <= result.length && i <= 20; i++ )
             eval( "document.upsf.InquiryNumber" + i + ".value='" + result[i - 1] + "';" );
