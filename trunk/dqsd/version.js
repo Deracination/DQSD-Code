@@ -101,7 +101,7 @@ function getVersionFromVersionFile( versionXML )
 {
   var version = null;
 
-  var msxml = new ActiveXObject( "MSXML.DOMDocument" );
+  var msxml = getMSXMLDOMDocumentInstance();
   msxml.async = false;
   if ( msxml.load( versionXML ) )
   {
