@@ -30,7 +30,7 @@
         openSearchWindow("http://www.filext.com/" + q.charAt(0) + ".htm");
       } else if (/^[0-9]/i.test(q)) {
         openSearchWindow("http://www.filext.com/num.htm");
-      } else if (/^[\w_]/i.test(q)) {
+      } else if (/^[\W_]/i.test(q)) {
         openSearchWindow("http://www.filext.com/sym.htm");
       } else {
           nullArgs("fe","?");
