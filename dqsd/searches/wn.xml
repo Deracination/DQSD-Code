@@ -1,0 +1,42 @@
+<search function="wn">
+  <name>Web WordNet 1.7.1</name>
+  <description>
+    WordNet: A lexical database for the English language<br/>
+    WordNet is an online lexical reference system whose design 
+    is inspired by current psycholinguistic theories of human 
+    lexical memory.<br/> 
+    English nouns, verbs, adjectives and adverbs are organized 
+    into synonym sets, each representing one underlying lexical 
+    concept. Different relations link the synonym sets.<br/>
+    WordNet was developed by the Cognitive Science Laboratory 
+    at Princeton University.<br/>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>wn rule</td></tr>
+  	</table>
+  </description>
+
+  <category>Reference</category>
+  <link>http://www.cogsci.princeton.edu/~wn/</link>
+  <contributor>Shakeel Mahate</contributor>
+  
+  <form name="wnf"
+        action="http://www.cogsci.princeton.edu/cgi-bin/webwn1.7.1"
+        method="get">
+    <input type="hidden" name="stage" value="1"/>
+    <input type="hidden" name="word" value=""/>
+  </form>
+  
+  <script><![CDATA[
+    function wn(q)
+    {
+      if( nullArgs("wn",q) )
+        return false;
+      else
+      {
+        document.wnf.word.value = q;
+        submitForm(wnf);
+      }
+    }
+  ]]></script>
+</search>
