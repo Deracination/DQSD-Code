@@ -1,0 +1,24 @@
+<search function="telfr">
+   <name>French phone numbers</name>
+   <description>
+      Get the name behind the phone number. Spaces and other separators allowed.<br/>
+      <div class="helpboxDescLabels">Example:</div>
+      <table class="helpBoxDescTable">
+  		<tr><td class="helpboxDescColumns">telfr 01.42-92*81_00</td></tr>
+  	</table>
+   </description>
+  <category>People and Places</category>
+  <link>http://www.infobel.com/france/default.asp?qSearchType=RWP</link>
+  <contributor>MLL</contributor>
+  <todo>allow several criterias (last name, city,...)</todo>
+  <version>1.1 (updated URIs)</version>
+  <script><![CDATA[
+    function telfr(q)
+    {
+      if (q == "")
+        openSearchWindow("http://www.infobel.com/france/default.asp?qSearchType=RWP");
+      else
+        openSearchWindow("http://www.infobel.com/france/wp/search/result.asp?qSearchType=RWP&qCountryCode=fr&QLANGUAGE=1&qphone=" + q);
+    }
+  ]]></script>
+</search>
