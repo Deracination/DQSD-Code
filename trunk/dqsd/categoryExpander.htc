@@ -29,6 +29,8 @@
 
     var elCount = el.parentElement.all('categoryCount');
     var rows = elTable.children[ category ];
+    if ( !rows.length )
+      rows = new Array(rows); // in case there's only one
     var nCount = rows.length;
     var nEnabled = 0;
     for ( var iSearch = 0; iSearch < nCount; iSearch++ )
