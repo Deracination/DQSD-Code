@@ -5,6 +5,11 @@ New Searches
 * yp - Yellow pages search from Tim Danner
 * setiq - Login as an admin to your setiqueue web admin interface - from MLL
 
+Modified Searches
+
+* qsfind - Changed to display a popup window instead of an alert dialog when
+           no match is found
+
 Bug Fixes
 
 * Changed regex in parseArgs to allow any non-whitespace character in switch values.  
