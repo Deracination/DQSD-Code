@@ -13,6 +13,7 @@ Enhancements
 * Aggressive code cleanup and optimization in loader.js. 25% performance increase with MSXML4 installed (Kim Gräsman)
 * Minor optimization in DQSDTools - install directory name is now cached rather than read from registry at every access (Kim Gräsman)
 * Added week number support for clock - formattable using the W symbol (Kim Gräsman)
+* Swedish holidays for 2005 (woo, early!) (Kim Gräsman)
 
 Bug Fixes
 * Removed 'Type "!<em>prefix</em>" to see only matching entries.' from help. This action launches lucky Google.
