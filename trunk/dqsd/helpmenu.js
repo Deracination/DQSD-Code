@@ -10,7 +10,7 @@ function mi(name, func, sym)
     " onmouseover=\"this.className='menuRowHigh';\"" +
     " onmouseout=\"this.className='menuRow';\"" +
     " onmouseup=\"this.className='menuRow';parent.mnu('" + func + "', &quot;" + qsym + "&quot;);\"" +
-     " style=\"" + actualmenustyle + "\">" +
+    " >" +
     "<td nowrap class=menuCommands>" +
     name +
     "</td><td nowrap class=menuAlias>" + sym + "</td></tr>";
