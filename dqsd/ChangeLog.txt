@@ -9,7 +9,7 @@ Bug Fixes
 
 New Searches
 
-*
+* dmda - Searches DevelopMentor's list archives (Kim Gräsman)
 
 Modified Searches
 
