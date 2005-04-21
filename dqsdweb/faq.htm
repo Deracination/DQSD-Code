@@ -31,10 +31,9 @@
 			</table>
 		</center>
 		<br>
-		<div class="category">1.<span class="categorytitle"><a name="General"> General</a></span><span class="toplink">[ 
-         <a href="#top"> Top</a>
-
-         ]</span></div>
+		<div class="category">1.<span class="categorytitle"><a name="General"> General</a></span>
+			<span class="toplink">[<a href="#top"> Top</a>]</span>
+		</div>
 		<div class="faq">
 			<div class="question">1.1 Can I assign a hotkey to it so I don't need to mouse to 
 				it?</div>
@@ -120,6 +119,28 @@
 						</tr>
 					</tbody>
 				</table>
+			</div>
+		</div>
+		<div class="faq">
+			<div class="question">1.7 Why do I constantly get an error at startup: "Hotkey registration failed"?</div>
+			<div class="answer">DQSD registers Win-S as a system-wide hotkey to set focus on the search bar. 
+					If another application has managed to register Win-S before DQSD, it will throw this error to let 
+					you know why keyboard support is degraded. Known perpetrators are:
+					<ul>
+						<li><a href="http://www.microsoft.com/office/onenote/prodinfo/">Microsoft Office's OneNote</a></li>
+						<li><a href="http://www.nattyware.com/pixie.html">Nattyware's Pixie</a></li>
+						<li><a href="http://www.trillian.cc/">Trillian</a></li>
+					</ul>
+					You can solve this easily by configuring DQSD to use another hotkey. Add the following to your localprefs.js 
+					in the DQSD installation directory:
+<pre>
+	/* The character we use with the 'Windows key' as a hotkey to jump to the searchbar
+	*  This should be a single UPPER CASE letter
+	*/
+	hotkeyCharacter = "Q";
+</pre>
+					Change the "Q" if you want some other hotkey &mdash; as the comment says, any single uppercase character is fine. 
+					You will need to restart your machine (or at least explorer.exe) for the settings to take effect.
 			</div>
 		</div>
 		<div class="category">2.<span class="categorytitle"><a name="Installation"> Installation</a></span><span class="toplink">[ 
