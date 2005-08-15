@@ -13,6 +13,7 @@ New Searches
 * sarc - Searches the Symantec AntiVirus Research Corp (SARC) site. (Shawn K. Hall)
 * ans - get answers at answers.com (google now links to them, too) (MLL)
 * ggl - Google Local Search (Brent Beardsley)
+* tn - Technorati.com search (Brent Beardsley)
 
 Modified Searches
 * tinyurl - changed it to copy the tinyurl into the DQSD text box and select it instead of popping up the tinyurl webpage. (Brent Beardsley)
