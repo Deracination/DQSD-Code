@@ -1,0 +1,60 @@
+<search function="tn">
+  <name>Technorati.com Search</name>
+  <category>Search Technorati.com</category>
+  <contributor>Brent Beardsley</contributor>
+  <link>http://www.technorati.com/</link>
+  <description>
+  Search Technorati.com for blog entries
+  <div class="helpboxDescLabels">Switches:</div>
+  <table class="helpboxDescTable">
+   <tr><td>/about</td><td> - </td><td>Learn about Technorati.com</td></tr>
+   <tr><td>/help</td><td> - </td><td>Goto Technorati.com help</td></tr>
+   <tr><td>/popular {books|blogs|movies|news}</td><td> - </td><td>Show most popular items for a particular category</td></tr>
+   <tr><td>/tags</td><td> - </td><td>Search for blog entries with a specified tag </td></tr>
+  </table>
+  <div class="helpboxDescLabels">Example:</div>
+  <table class="helpboxDescTable">
+     <tr><td>tn javascript</td></tr>
+     <tr><td>tn /t javascript</td></tr>
+     <tr><td>tn /p books</td></tr>
+  </table>
+  </description>
+
+  <script><![CDATA[
+    function tn(q)
+    {
+      if( nullArgs("tn", q) )
+        return;
+
+	  var url = false;
+	  var pop_types = new Array("blogs", "books", "news", "movies");
+
+      var args = parseArgs(q, "about,help,popular,tags");
+      if ( args.switches.length > 0 ) {
+        switch( args.switches[0].name ) {
+		  case "about": url = "http://www.technorati.com/about/"; break;
+		  case "help": url = "http://www.technorati.com/help/"; break;
+          case "tags": url = "http://www.technorati.com/tags/" + escape(args.q); break;
+		  case "popular": url = "http://www.technorati.com/pop/";
+		    var popsubtype = args.q.toLowerCase();
+			for (i=0; i < pop_types.length; i++) {
+				if (pop_types[i] == popsubtype){
+					url += args.q + "/";
+					break;
+				}
+			}
+			break;
+		}
+	  }
+	  if (!url) {
+          url = "http://www.technorati.com/search/" + escape(args.q);
+	  }
+	  openSearchWindow(url);
+    }
+  ]]></script>
+
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>
