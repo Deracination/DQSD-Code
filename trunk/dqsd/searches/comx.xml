@@ -365,9 +365,8 @@
                  xmlHttp.open("GET", sUrl, false);
                  xmlHttp.send();
 
-                 //get the response content from the remote site
-                 var sBody = xmlHttp.responseText;
-
+                 //get the response content from the remote site and remove tne newlines
+                 var sBody = xmlHttp.responseText.replace(/[\r\n]/g, '');
                  //run the regex to parse out the image url
                  var relativeImgUrl = '';
                  var imgmatch = rx.exec(sBody);
