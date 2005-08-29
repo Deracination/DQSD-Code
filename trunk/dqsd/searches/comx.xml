@@ -347,8 +347,12 @@
                  if (mday<10) mday= '0'+mday;
                  if (month<10) month= '0'+month;
 
-                 //special handling for the calvinandhobbes comic.. It displays for year 1993
-                 if (args.switches[i].name == "calvinandhobbes") {year=1993; subyear=93;}
+                 //special handling for the calvinandhobbes comic.. It displays for year 1993 in 2004
+                 if (args.switches[i].name == "calvinandhobbes") {
+					var year_offset = -11;
+					year += year_offset;
+					subyear = year % 100; 
+				 }
                  
                  var imgurl = urlstart+imgkey+"/"+year+"/"+imgkey+subyear+month+mday+".gif";
                  break;
@@ -365,8 +369,9 @@
                  xmlHttp.open("GET", sUrl, false);
                  xmlHttp.send();
 
-                 //get the response content from the remote site and remove tne newlines
-                 var sBody = xmlHttp.responseText.replace(/[\r\n]/g, '');
+                 //get the response content from the remote site and remove the newlines
+                 var sBody = xmlHttp.responseText.replace(/[\r\n]/g, ' ');
+
                  //run the regex to parse out the image url
                  var relativeImgUrl = '';
                  var imgmatch = rx.exec(sBody);
