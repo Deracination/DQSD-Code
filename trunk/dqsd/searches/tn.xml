@@ -29,10 +29,11 @@
 	  var url = false;
 	  var pop_types = new Array("blogs", "books", "news", "movies");
 
-      var args = parseArgs(q, "about,help,popular,tags");
+      var args = parseArgs(q, "about,blogs,help,popular,tags");
       if ( args.switches.length > 0 ) {
         switch( args.switches[0].name ) {
 		  case "about": url = "http://www.technorati.com/about/"; break;
+          case "blogs": url = "http://www.technorati.com/blogs/" + escape(args.q); break;
 		  case "help": url = "http://www.technorati.com/help/"; break;
           case "tags": url = "http://www.technorati.com/tags/" + escape(args.q); break;
 		  case "popular": url = "http://www.technorati.com/pop/";
