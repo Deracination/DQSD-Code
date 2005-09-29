@@ -40,6 +40,7 @@
     <tr><td>Dilbert</td><td>/dilbert</td></tr>
     <tr><td>Doonesbury</td><td>/doonesbury</td></tr>
     <tr><td>Drabble</td><td>/drabble</td></tr>
+    <tr><td>Dr. Fun</td><td>/drfun</td></tr>
     <tr><td>Duplex</td><td>/duplex</td></tr>
     <tr><td>Fat Cats</td><td>/fatcats</td></tr>
     <tr><td>Ferdnand</td><td>/ferdnand</td></tr>
@@ -137,11 +138,52 @@
     <tr><td>Working Daze</td><td>/workingdaze</td></tr>
     <tr><td>Working It Out</td><td>/workingitout</td></tr>
     <tr><td>Ziggy</td><td>/ziggy</td></tr>
+    <tr><td>Zits</td><td>/zits</td></tr>
+    <tr><td colspan="2"><div class="helpboxDescLabels">Editorials (not published every day):</div></td></tr>
+    <tr><td>All editorials for today</td><td>/editorials</td></tr>
+    <tr><td>Animated Oliphant</td><td>/animatedoliphant</td></tr>
+    <tr><td>Ann Telneas</td><td>/anntelneas</td></tr>
+    <tr><td>Barbara Brandon</td><td>/barbarabrandon</td></tr>
+    <tr><td>Ben Sargent</td><td>/bensargent</td></tr>
+    <tr><td>Bill Deore</td><td>/billdeore</td></tr>
+    <tr><td>Chan Lowe</td><td>/chanlowe</td></tr>
+    <tr><td>Chip Bok</td><td>/chipbok</td></tr>
+    <tr><td>Chuck Asay</td><td>/chuckasay</td></tr>
+    <tr><td>Dana Summers</td><td>/danasummers</td></tr>
+    <tr><td>Dana Wasserman</td><td>/danawasserman</td></tr>
+    <tr><td>David Horsey</td><td>/davidhorsey</td></tr>
+    <tr><td>Dick Locher</td><td>/dicklocher</td></tr>
+    <tr><td>Dick Wright</td><td>/dickwright</td></tr>
+    <tr><td>Don Wright</td><td>/donwright</td></tr>
+    <tr><td>Doug Marlette</td><td>/dougmarlette</td></tr>
+    <tr><td>Drew Sheneman</td><td>/drewsheneman</td></tr>
+    <tr><td>Faces In The News</td><td>/facesinthenews</td></tr>
+    <tr><td>Gary Varvel</td><td>/garyvarvel</td></tr>
+    <tr><td>Glenn McCoy</td><td>/glennmccoy</td></tr>
+    <tr><td>Jack Higgins</td><td>/jackhiggins</td></tr>
+    <tr><td>Jack Ohman</td><td>/jackohman</td></tr>
+    <tr><td>Jeff Danziger</td><td>/jeffdanziger</td></tr>
+    <tr><td>Lalo Alcaraz</td><td>/laloalcaraz</td></tr>
+    <tr><td>Matt Davies</td><td>/mattdavies</td></tr>
+    <tr><td>Mike Luckovich</td><td>/mikeluckovich</td></tr>
+    <tr><td>Nick Anderson</td><td>/nickanderson</td></tr>
+    <tr><td>Pat Oliphant</td><td>/patoliphant</td></tr>
+    <tr><td>Paul Conrad</td><td>/paulconrad</td></tr>
+    <tr><td>Paul Szep</td><td>/paulszep</td></tr>
+    <tr><td>Signe Wilkinson</td><td>/signewilkinson</td></tr>
+    <tr><td>Steve Sack</td><td>/stevesack</td></tr>
+    <tr><td>Stuart Carlson</td><td>/stuartcarlson</td></tr>
+    <tr><td>Ted Rall</td><td>/tedrall</td></tr>
+    <tr><td>Tom Toles</td><td>/tomtoles</td></tr>
+    <tr><td>Tony Auth</td><td>/tonyauth</td></tr>
+    <tr><td>Walt Handelsman</td><td>/walthandelsman</td></tr>
+    <tr><td>Wayne Stayskal</td><td>/waynestayskal</td></tr>
     <tr><td colspan="2"><div class="helpboxDescLabels">Examples:</div></td></tr>
     <tr><td>comx /wiz   </td><td>(Wizard of Id)</td></tr>
     <tr><td>comx /workingit  </td><td>(Working it Out)</td></tr>
     <tr><td>comx /rip   </td><td>(Ripleys Believe it or Not)</td></tr>
     <tr><td>comx /wiz /workingit /rip</td><td>(Opens all three)</td></tr>
+    <tr><td>comx /dil /editorials</td><td>Opens Dilbert and all editorial cartoons for today</td></tr>
     </table>
     </description>
     <category>Fun</category>
@@ -155,9 +197,22 @@
      var comxoutfile = DQSDLauncher.AppDataDirectory + '\\comx.html';     
      var pagebody="<html><head></head><body>";
      
+	 var editorial_switches = new Array(
+		"animatedoliphant","anntelneas","barbarabrandon","bensargent", "billdeore","chanlowe",
+		"chipbok","chuckasay","danasummers","danawasserman","davidhorsey","dicklocher",
+		"dickwright","donwright","dougmarlette","drewsheneman","facesinthenews","garyvarvel",
+		"glennmccoy","jackhiggins","jackohman","jeffdanziger","laloalcaraz", "mattdavies",
+		"mikeluckovich","nickanderson","patoliphant","paulconrad","paulszep","signewilkinson",
+		"stevesack","stuartcarlson","tedrall","tomtoles","tonyauth","walthandelsman","waynestayskal"
+		);
+
+	 if (q.search("/editorials") >= 0) {
+		q = q.replace("/editorials", "/" + editorial_switches.join(" /"));
+	 }
+
      var args = parseArgs(q, "9chickweedlane,agnes,alleyoop,andycapp,arloandjanis,bc,\
      ballardstreet,ben,betty,bignate,bonanas,bornloser,buckets,bullsnbears,candorville,\
-     caseinpoint,ceodad,cheapthrills,committed,drabble,fatcats,ferdnand,\
+     caseinpoint,ceodad,cheapthrills,committed,drabble,drfun,fatcats,ferdnand,\
      flightdeck,floandfriends,forbetterorforworse,frankandernest,frazz,geech,getfuzzy,\
      gofish,graffiti,grandavenue,grizzwells,heathcliff,herbandjamaal,herman,\
      janesworld,jumpstart,kitncarlyle,libertymeadows,lilabner,luann,lupoalberto,marmaduke,\
@@ -172,7 +227,7 @@
      fuscobrothers,garfield,gasolinealley,heartofthecity,helenoftheinternet,housebroken,\
      inthebleachers,kudzu,lacucaracha,lola,looseparts,lostsheep,luckycow,meehanstreak,\
      middletons,misterboffo,mixedmedia,mullets,nonsequitur,overboard,pluggers,poochcafe,popculture,\
-     preteena,reallife,reynoldsunwrapped,shoe,stonesoup,tankmcnamara,willynethel,ziggy");
+     preteena,reallife,reynoldsunwrapped,shoe,stonesoup,tankmcnamara,willynethel,ziggy,zits," + editorial_switches.join(','));
 
      if ( args.switches.length > 0 ){
         //get the current date
@@ -187,6 +242,7 @@
            var endurl=null;
            var urlcat=null;
            var urldir=null;
+		   var editorial=false;
 
            //default regex for finding the image in the page source..
            var rx = /.+(\/archive\/images\/\w+\.\w+)"\s+ALT="Today's\s+Comic"/i;
@@ -328,6 +384,48 @@
               case "willynethel": imgtitle="Willy n Ethel";site="ucomics";imgkey="wes";break;
               case "ziggy": imgtitle="Ziggy";site="ucomics";imgkey="zi";break;
               case "calvinandhobbes": imgtitle="Calvin And Hobbes";site="ucomics";imgkey="ch";break;
+			  // misc
+			  case "zits": imgtitle="Zits";site="seattlepi";imgkey="Zits";break;
+			  case "drfun": imgtitle="Dr. Fun"; site="drfun";imgkey="df";break;
+              // editorials from ucomics.com
+              case "animatedoliphant": imgtitle="Animated Oliphant";site="ucomics";imgkey="oa";editorial=true;break;
+              case "anntelneas": imgtitle="Ann Telneas";site="ucomics";imgkey="tmate";editorial=true;break;
+              case "barbarabrandon": imgtitle="Barbara Brandon";site="ucomics";imgkey="bb";editorial=true;break;
+              case "bensargent": imgtitle="Ben Sargent";site="ucomics";imgkey="bs";editorial=true;break;
+              case "billdeore": imgtitle="Bill DeOre";site="ucomics";imgkey="bd";editorial=true;break;
+              case "chanlowe": imgtitle="Chan Lowe";site="ucomics";imgkey="tmclo";editorial=true;break;
+              case "chipbok": imgtitle="Chip Bok";site="ucomics";imgkey="crcbo";editorial=true;break;
+              case "chuckasay": imgtitle="Chuck Asay";site="ucomics";imgkey="crcas";editorial=true;break;
+              case "danasummers": imgtitle="Dana Summers";site="ucomics";imgkey="tmdsu";editorial=true;break;
+              case "danawasserman": imgtitle="Dana Wasserman";site="ucomics";imgkey="tmdwa";editorial=true;break;
+              case "davidhorsey": imgtitle="David Horsey";site="ucomics";imgkey="tmdho";editorial=true;break;
+              case "dicklocher": imgtitle="Dick Locher";site="ucomics";imgkey="tmdlo";editorial=true;break;
+              case "dickwright": imgtitle="Dick Wright";site="ucomics";imgkey="tmdiw";editorial=true;break;
+              case "donwright": imgtitle="Don Wright";site="ucomics";imgkey="tmdow";editorial=true;break;
+              case "dougmarlette": imgtitle="Doug Marlette";site="ucomics";imgkey="tmdma";editorial=true;break;
+              case "drewsheneman": imgtitle="Drew Sheneman";site="ucomics";imgkey="tmdsh";editorial=true;break;
+              case "facesinthenews": imgtitle="Faces in the News";site="ucomics";imgkey="kw";editorial=true;break;
+              case "garyvarvel": imgtitle="Gary Varvel";site="ucomics";imgkey="crgva";editorial=true;break;
+              case "glennmccoy": imgtitle="Glenn McCoy";site="ucomics";imgkey="gm";editorial=true;break;
+			  case "jackhiggins": imgtitle="Jack Higgins";site="ucomics";imgkey="jh";editorial=true;break;
+			  case "jackohman": imgtitle="Jack Ohman";site="ucomics";imgkey="tmjoh";editorial=true;break;
+			  case "jeffdanziger": imgtitle="Jeff Danziger";site="ucomics";imgkey="jd";editorial=true;break;
+			  case "laloalcaraz": imgtitle="Lalo Alcaraz";site="ucomics";imgkey="la";editorial=true;break;
+              case "mattdavies": imgtitle="Matt Davies";site="ucomics";imgkey="tmmda";editorial=true;break;
+              case "mikeluckovich": imgtitle="Mike Luckovich";site="ucomics";imgkey="crmlu";editorial=true;break;
+              case "nickanderson": imgtitle="Nick Anderson";site="ucomics";imgkey="wpnan";editorial=true;break;
+              case "patoliphant": imgtitle="Pat Oliphant";site="ucomics";imgkey="po";editorial=true;break;
+              case "paulconrad": imgtitle="Paul Conrad";site="ucomics";imgkey="tmpco";editorial=true;break;
+              case "paulszep": imgtitle="Paul Szep";site="ucomics";imgkey="crpsz";editorial=true;break;
+              case "signewilkinson": imgtitle="Signe Wilkinson";site="ucomics";imgkey="wpswi";editorial=true;break;
+              case "stevesack": imgtitle="Steve Sack";site="ucomics";imgkey="tmssa";editorial=true;break;
+              case "stuartcarlson": imgtitle="Stuart Carlson";site="ucomics";imgkey="sc";editorial=true;break;
+              case "tedrall": imgtitle="Ted Rall";site="ucomics";imgkey="tr";editorial=true;break;
+              case "tomtoles": imgtitle="Tom Toles";site="ucomics";imgkey="tt";editorial=true;break;
+              case "tonyauth": imgtitle="Tony Auth";site="ucomics";imgkey="ta";editorial=true;break;
+              case "walthandelsman": imgtitle="Walt Handelsman";site="ucomics";imgkey="tmwha";editorial=true;break;
+              case "waynestayskal": imgtitle="Wayne Stayskal";site="ucomics";imgkey="tmwst";editorial=true;break;
+
               default:endurl=null;imgkey=null;break;
            }//switch
 
@@ -335,9 +433,35 @@
            switch(site){
               case "altcomics": //not yet implemented
                  break;
+			  case "drfun":
+			     imgurl = "http://www.ibiblio.org/Dave/Dr-Fun/latest.jpg";
+			     break;
+			  case "seattlepi":
+		        if (typeof wgetExe == "undefined") {
+					pagebody += '<br><h4>' +imgtitle+'</h4><br>This comic requires <a href="http://xoomer.virgilio.it/hherold/">wget</a> and uses WScript.Shell to invoke it.  Please set wgetExe in your localprefs.js file to the location of your wget.exe. For example:<br><br>wgetExe="c:\\\\bin\\\\wget";';
+					imgurl = "";
+				} else {
+                    var mday = dat.getDate();
+                    var month = dat.getMonth()+1;
+                    var year = dat.getYear();
+                    if (mday<10) mday= '0'+mday;
+                    if (month<10) month= '0'+month;
+				
+				    imgurl = "http://pst.rbma.com/content/" + imgkey + "?date=" + year + month + mday;
+				    var output_file = DQSDLauncher.AppDataDirectory + '\\' + imgkey + '.gif';
+				    var cmd = '"' + wgetExe + '" --referer="http://seattlepi.nwsource.com/fun/" --output-document="' + output_file + '" "' + imgurl + '"';
+				    var shell = new ActiveXObject("WScript.Shell");
+					alert(cmd);
+				    shell.Run(cmd, 0, true);
+				    imgurl = "file:///"+output_file;
+				 }
+			     break;
                  
               case "ucomics":
                  var urlstart="http://images.ucomics.com/comics/";
+				 if (editorial) {
+					urlstart="http://picayune.uclick.com/comics/";
+				 }
                  //get the other date parameters for the ucomics image urls
                  var mday = dat.getDate();
                  var month = dat.getMonth()+1;
@@ -355,6 +479,30 @@
 				 }
                  
                  var imgurl = urlstart+imgkey+"/"+year+"/"+imgkey+subyear+month+mday+".gif";
+				 if (editorial) {
+					 var xmlHttp = new ActiveXObject("Microsoft.XmlHttp");
+					 var tries = 1;  // 1 == just try today's comic, > 1 look for previous days comics
+					 var status = -1;
+					 var cur_mday = mday;
+					 while (status != 200 && tries > 0) {
+						 imgurl = urlstart+imgkey+"/"+year+"/"+imgkey+subyear+month+cur_mday+".gif";
+						 xmlHttp.open("HEAD", imgurl, false);
+						 xmlHttp.send();
+						 status = xmlHttp.status;
+						 if (status == 200) {
+						    // found it
+							break;
+						 }
+ 					     // none for today try previous day
+						 imgurl = "";
+						 tries--;
+						 cur_mday--;
+						 // should be smarter here and go to end of previous month
+						 if (cur_mday < 1)
+							break;
+		                 if (cur_mday<10) cur_mday= '0'+cur_mday;
+					 }
+				 }
                  break;
 
               default:
@@ -369,7 +517,7 @@
                  xmlHttp.open("GET", sUrl, false);
                  xmlHttp.send();
 
-                 //get the response content from the remote site and remove the newlines
+                 //get the response content from the remote site
                  var sBody = xmlHttp.responseText.replace(/[\r\n]/g, ' ');
 
                  //run the regex to parse out the image url

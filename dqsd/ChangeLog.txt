@@ -14,11 +14,13 @@ New Searches
 * ans - get answers at answers.com (google now links to them, too) (MLL)
 * ggl - Google Local Search (Brent Beardsley)
 * tn - Technorati.com search (Brent Beardsley)
+* dlc - Del.icio.us search (Brent Beardsley)
 
 Modified Searches
 * tinyurl - changed it to copy the tinyurl into the DQSD text box and select it instead of popping up the tinyurl webpage. (Brent Beardsley)
 * googletrans - Encodes all queries as UTF-8, per their new default (MLL)
 * mnr - updated mailinator.com email checking url (Brent Beardsley)
+* comx - added Zits (Seattle PI) and editorials (Brent Beardsley)
 
 Removed Searches
 

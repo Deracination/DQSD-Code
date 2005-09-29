@@ -1,0 +1,99 @@
+<search function="dlc">
+  <name>Del.icio.us Search</name>
+  <category>Search Del.icio.us</category>
+  <contributor>Brent Beardsley</contributor>
+  <link>http://del.icio.us/</link>
+  <description>
+  Search Del.icio.us
+  <div class="helpboxDescLabels">Switches:</div>
+  <table class="helpboxDescTable">
+   <tr><td>/about</td><td> - </td><td>Learn about Del.icio.us</td></tr>
+   <tr><td>/all</td><td> - </td><td>Searches all users</td></tr>
+   <tr><td>/bookmarks</td><td> - </td><td>Goto your bookmarks</td></tr>
+   <tr><td>/blog</td><td> - </td><td>Goto the Del.icio.us blog</td></tr>
+   <tr><td>/for</td><td> - </td><td>Tagged for you</td></tr>
+   <tr><td>/inbox</td><td> - </td><td>Goto your inbox</td></tr>
+   <tr><td>/login</td><td> - </td><td>Login</td></tr>
+   <tr><td>/logout</td><td> - </td><td>Logout</td></tr>
+   <tr><td>/popular {tag}</td><td> - </td><td>Show most popular items for a particular tag (tag is optional)</td></tr>
+   <tr><td>/post</td><td> - </td><td>Post a url</td></tr>
+   <tr><td>/search</td><td> - </td><td>Searches your bookmarks</td></tr>
+   <tr><td>/settings</td><td> - </td><td>Goto your settings</td></tr>
+   <tr><td>/tag {tag}</td><td> - </td><td>Show items for a particular tag (tag is optional)</td></tr>
+  </table>
+  <div class="helpboxDescLabels">Examples:</div>
+  <table class="helpboxDescTable">
+     <tr><td>dlc javascript</td></tr>
+     <tr><td>dlc /p javascript</td></tr>
+  </table>
+  <div class="helpboxDescLabels">Variables</div>
+  <table class="helpboxDescTable">
+     <tr><td>dlc_user</td><td> - </td><td>Set your username in preferences</td></tr>
+  </table>
+  </description>
+
+  <script><![CDATA[
+    function dlc(q)
+    {
+      if( nullArgs("dlc", q) )
+        return;
+
+      var url = false;
+	  var search_all = false;
+	  var user = (typeof dlc_user != 'undefined') ? dlc_user : false;
+      var args = parseArgs(q, "all,about,bookmarks,blog,for,inbox,login,logout,popular,post,search,settings,tag");
+      if ( args.switches.length > 0 ) {
+        switch( args.switches[0].name ) {
+		  case "all": search_all = true; break;
+		  case "about": url = "http://del.icio.us/doc/about"; break;
+		  case "bookmarks": 
+		    if (!dlc_check_user(user)) return;
+			url = "http://del.icio.us/" + user;
+			break;
+		  case "blog": url = "http://blog.del.icio.us/"; break;
+		  case "for":
+   		    if (!dlc_check_user(user)) return;
+			url = "http://del.icio.us/for/" + user;
+		    break;
+		  case "inbox":
+   		    if (!dlc_check_user(user)) return;
+			url = "http://del.icio.us/inbox/" + user;
+			break;
+		  case "login": 
+			url = "http://del.icio.us/login";
+			if (user) {
+				url += "?user_name=" + user;
+			}
+			break;
+		  case "logout": url = "http://del.icio.us/logout"; break;
+		  case "popular": url = "http://del.icio.us/popular/" + escape(args.q); break;
+		  case "post": url = "http://del.icio.us/post/"; break;
+		  case "settings":
+   		    if (!dlc_check_user(user)) return;
+			url = "http://del.icio.us/settings/" + user + "/profile";
+		    break;
+		  case "tag": url = "http://del.icio.us/tag/" + escape(args.q); break;
+		}
+	  }
+	  if (!url) {
+          url = "http://del.icio.us/search/";
+		  if (search_all) url += "all";
+		  url += "?search=" + escape(args.q);
+	  }
+	  openSearchWindow(url);
+    }
+
+	function dlc_check_user(user) {
+		if (!user) {
+			displayPopupMessage("<b>'dlc_user'</b> variable has not been set in your preferences.  Set it to your Del.icio.us user." );
+			return false;
+		} else {
+			return true;
+		}
+	}
+  ]]></script>
+
+  <copyright>
+    Copyright (c) 2005 Brent Beardsley; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>
