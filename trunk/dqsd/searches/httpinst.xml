@@ -7,6 +7,7 @@
       <tr><td>/filename</td><td> - </td><td>Set the filename instead of deriving it from the url.</td></tr>
       <tr><td>/local</td><td> - </td><td>Put search in localsearches folder.</td></tr>
       <tr><td>/overwrite</td><td> - </td><td>Overwrite existing search unconditionally.</td></tr>
+      <tr><td>/update</td><td> - </td><td>Updates or installs search from cvs repository.</td></tr>
     </table>
     <div class="helpboxDescLabels">Example:</div>
     <table class="helpboxDescTable">
@@ -14,6 +15,7 @@
   		<tr><td>httpinst /local http://www.example.com/dqsd/localsearch.xml</td></tr>
   		<tr><td>httpinst /o http://www.example.com/dqsd/whois.xml</td></tr>
   		<tr><td>httpinst /f:test.xml /o http://www.example.com/dqsd/gensearch/?dynamically=1</td></tr>
+  		<tr><td>httpinst /up dlc</td></tr>
   	</table>
   </description>
   <category>Functions</category>
@@ -30,11 +32,16 @@
     	var forceOverwrite = false;
 		var filename = "";
 
-    	var args = parseArgs(q, "filename, local, overwrite");
+    	var args = parseArgs(q, "filename, local, overwrite, update");
     	for(var n = 0; n < args.switches.length; ++n)
     	{
     		switch(args.switches[n].name)
     		{
+			case "update":
+			    var reqSearch = args.q;
+				args.q = "http://cvs.sourceforge.net/viewcvs.py/*checkout*/dqsd/dqsd/searches/" + reqSearch + ".xml?content-type=text%2Fplain";
+				filename = reqSearch + ".xml";
+			    break;
     		case "local":
     			destinationFolder = "localsearches";
     			break;
