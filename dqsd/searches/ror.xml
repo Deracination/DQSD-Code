@@ -15,6 +15,7 @@
    <tr><td>/forge</td><td> - </td><td>Search RubyForge.org for projects</td></tr>
    <tr><td>/forum</td><td> - </td><td>Search ruby-forum.com for message threads</td></tr>
    <tr><td>/garden</td><td> - </td><td>Search rubygarden.org</td></tr>
+   <tr><td>/irc</td><td> - </td><td>Search the rubyonrails channel logs</td></tr>
    <tr><td>/jobs</td><td> - </td><td>Search jobs.rubynow.com</td></tr>
    <tr><td>/news</td><td> - </td><td>Goto rubyweeklynews.org</td></tr>
    <tr><td>/planet</td><td> - </td><td>Goto PlanetRubyOnRails.org</td></tr>
@@ -37,7 +38,7 @@
         return;
 
 	  var url = false;
-      var args = parseArgs(q, "api,archive,blog,core,documentation,forum,forge,garden,jobs,news,planet,ruby,stdlib,wiki,weenie,snippets,source");
+      var args = parseArgs(q, "api,archive,blog,core,documentation,forum,forge,garden,irc,jobs,news,planet,ruby,stdlib,wiki,weenie,snippets,source");
       if ( args.switches.length > 0 ) {
         switch( args.switches[0].name ) {
 		  case "api": 
@@ -90,6 +91,13 @@
 				url = 'http://www.rubygarden.org/';
 			}
 			break;
+		  case 'irc':
+			if (args.q != '') {
+				url = 'http://www.loglibrary.com/search/?search%5BAdvanced%5D=' + escape(args.q) + '&search%5BTitle%5D=%23rubyonrails&search%5BRange%5D=&search%5BDate%5D=&search%5BSortByDate%5D=0';
+			} else {
+				url = 'http://www.loglibrary.com/show_page/latest/62';
+			}
+		    break;
 		  case 'jobs':
 		    if (args.q != '') {
 				url = 'http://jobs.rubynow.com/jobs/search_results?job%5Bterms%5D=' + escape(args.q) + '&commit=Search';
