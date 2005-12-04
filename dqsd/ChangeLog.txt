@@ -15,6 +15,7 @@ New Searches
 * ggl - Google Local Search (Brent Beardsley)
 * tn - Technorati.com search (Brent Beardsley)
 * dlc - Del.icio.us search (Brent Beardsley)
+* ror - Ruby on Rails search (Brent Beardsley)
 
 Modified Searches
 * tinyurl - changed it to copy the tinyurl into the DQSD text box and select it instead of popping up the tinyurl webpage. (Brent Beardsley)
