@@ -1,0 +1,135 @@
+<search function="ror">
+  <name>Ruby on Rails Search</name>
+  <category>Programming</category>
+  <contributor>Brent Beardsley</contributor>
+  <link>http://www.rubyonrails.com/</link>
+  <description>
+  Search Ruby on Rails
+  <div class="helpboxDescLabels">Switches:</div>
+  <table class="helpboxDescTable">
+   <tr><td>/api</td><td> - </td><td>Search the rails api</td></tr>
+   <tr><td>/archive</td><td> - </td><td>Search the Ruby Application Archive (RAA)</td></tr>
+   <tr><td>/blog</td><td> - </td><td>Search the rails blog</td></tr>
+   <tr><td>/core</td><td> - </td><td>Search the ruby core for class documentation</td></tr>
+   <tr><td>/documentation</td><td> - </td><td>Goto the main rails documentation page</td></tr>
+   <tr><td>/forge</td><td> - </td><td>Search RubyForge.org for projects</td></tr>
+   <tr><td>/forum</td><td> - </td><td>Search ruby-forum.com for message threads</td></tr>
+   <tr><td>/garden</td><td> - </td><td>Search rubygarden.org</td></tr>
+   <tr><td>/jobs</td><td> - </td><td>Search jobs.rubynow.com</td></tr>
+   <tr><td>/news</td><td> - </td><td>Goto rubyweeklynews.org</td></tr>
+   <tr><td>/planet</td><td> - </td><td>Goto PlanetRubyOnRails.org</td></tr>
+   <tr><td>/ruby</td><td> - </td><td>Goto ruby-lang.org</td></tr>
+   <tr><td>/source</td><td> - </td><td>Goto ruby on rails download page</td></tr>
+   <tr><td>/stdlib</td><td> - </td><td>Search the ruby stdlib for class documentation</td></tr>
+   <tr><td>/weenie</td><td> - </td><td>Search rails weenie</td></tr>
+   <tr><td>/wiki</td><td> - </td><td>Search the wiki for rails topics</td></tr>
+  </table>
+  <div class="helpboxDescLabels">Examples:</div>
+  <table class="helpboxDescTable">
+     <tr><td>ror /api</td></tr>
+  </table>
+  </description>
+
+  <script><![CDATA[
+    function ror(q)
+    {
+      if( nullArgs("ror", q) )
+        return;
+
+	  var url = false;
+      var args = parseArgs(q, "api,archive,blog,core,documentation,forum,forge,garden,jobs,news,planet,ruby,stdlib,wiki,weenie,snippets,source");
+      if ( args.switches.length > 0 ) {
+        switch( args.switches[0].name ) {
+		  case "api": 
+			if (args.q != '') {
+				url = 'http://www.google.com/search?hl=en&q=' + escape(args.q) + '+site%3Aapi.rubyonrails.com&btnI=I%27m+Feeling+Lucky';
+			} else {
+				url = 'http://api.rubyonrails.com/';
+			}
+			break;
+		  case 'archive':
+		    if (args.q != '') {
+				url = 'http://raa.ruby-lang.org/search.rhtml?search=' + escape(args.q);
+		    } else {
+				url = 'http://raa.ruby-lang.org/';
+			}
+		    break;
+		  case "blog": 
+			if (args.q != '') {
+				url = 'http://weblog.rubyonrails.com/live/search?q=' + escape(args.q) + '&_=';
+			} else {
+				url = "http://weblog.rubyonrails.com/";
+			}
+			break;
+		  case "core": 
+			if (args.q != '') {
+				url = 'http://www.google.com/search?hl=en&q=allintitle:+' + escape(args.q) + '+site%3Aruby-doc.org%3Acore%3Aclasses%3A&&btnI=I%27m+Feeling+Lucky';
+			} else {
+				url = "http://www.ruby-doc.org/core/";
+			}
+			break;
+		  case "documentation": url = "http://documentation.rubyonrails.com/"; break;
+		  case 'forge':
+			if (args.q != '') {
+			    url = 'http://rubyforge.org/search/?type_of_search=soft&words=' + escape(args.q) + '&Search=Search';
+			} else {
+				url = 'http://rubyforge.org/';
+			}
+		    break;
+		  case "forum": 
+			if (args.q != '') {
+				url = 'http://www.ruby-forum.com/forum/search?query=' + escape(args.q) + '&forums%5B%5D=3&forums%5B%5D=4';
+			} else {
+				url = "http://www.ruby-forum.com/";
+			}
+			break;
+		  case 'garden':
+			if (args.q != '') {
+				url = 'http://www.rubygarden.org/?terms=' + escape(args.q) + '&handler=searching';
+ 			} else {
+				url = 'http://www.rubygarden.org/';
+			}
+			break;
+		  case 'jobs':
+		    if (args.q != '') {
+				url = 'http://jobs.rubynow.com/jobs/search_results?job%5Bterms%5D=' + escape(args.q) + '&commit=Search';
+		    } else {
+				url = 'http://jobs.rubynow.com/';
+			}
+			break;
+		  case 'news': url = 'http://rubyweeklynews.org/'; break;
+		  case 'planet': url = 'http://www.planetrubyonrails.org/'; break;
+		  case 'ruby': url = 'http://www.ruby-lang.org/en/'; break;
+		  case 'snippets': url = 'http://www.bigbold.com/snippets/tag/ruby'; break;
+		  case "source": url = "http://dev.rubyonrails.org/"; break;
+		  case "stdlib": 
+			if (args.q != '') {
+				url = 'http://www.google.com/search?hl=en&q=allintitle:+' + escape(args.q) + '+site%3Aruby-doc.org%3Astdlib%3A&&btnI=I%27m+Feeling+Lucky';
+			} else {
+				url = "http://www.ruby-doc.org/stdlib/";
+			}
+			break;
+		  case 'weenie': 
+			if (args.q != '') {
+				url = 'http://rails.techno-weenie.net/search?q=' + escape(args.q) + '&commit=Go';
+			} else {
+				url = 'http://rails.techno-weenie.net/';
+			}
+			break;
+		  case "wiki":
+			if (args.q != '') {
+				url = 'http://www.google.com/search?q=' + escape(args.q) + '&Submit=Search+with+Google&domains=wiki.rubyonrails.com&sitesearch=wiki.rubyonrails.com';
+			} else {
+				url = "http://wiki.rubyonrails.com/rails/";
+			}
+			break;
+		}
+	  }
+	  openSearchWindow(url);
+    }
+  ]]></script>
+
+  <copyright>
+    Copyright (c) 2005 Brent Beardsley; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>
