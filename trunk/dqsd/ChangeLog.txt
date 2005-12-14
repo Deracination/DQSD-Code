@@ -2,6 +2,7 @@
 
 Enhancements
 * Holidays for Portugal through 2009 (Paulo Ferrão)
+* Holidays for Canada for 2006 (Bill Hewitt)
 * Calendar.js modified to allow color definitions in the events xml files (Monty Scroggins)
 
 Bug Fixes
