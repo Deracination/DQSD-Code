@@ -17,6 +17,7 @@ New Searches
 * tn - Technorati.com search (Brent Beardsley)
 * dlc - Del.icio.us search (Brent Beardsley)
 * ror - Ruby on Rails search (Brent Beardsley)
+* seedler - Search for seedler.org (Shawn K. Hall)
 
 Modified Searches
 * tinyurl - changed it to copy the tinyurl into the DQSD text box and select it instead of popping up the tinyurl webpage. (Brent Beardsley)
