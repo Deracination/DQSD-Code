@@ -1,0 +1,48 @@
+<search function="seedler">
+  <name>Seedler</name>
+  <category>Search the Web</category>
+  <contributor>Shawn K. Hall</contributor>
+  <link>http://www.seedler.org/en/</link>
+  <email>N/A</email>
+  <description>
+    Search Seedler.org - The BitTorrent Source
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>query</td><td> [default] </td><td> Query term to search for </td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td> seedler tv </td></tr>
+      <tr><td> seedler batman </td></tr>
+    </table>
+  </description>
+
+  <form name="seedlerf"
+        method="get"
+        action="http://www.seedler.org/en/torrents_list.x">
+    <input type="hidden" name="t" value="1" />
+    <input type="hidden" name="search" value="" />
+  </form>
+
+  <script><![CDATA[
+  function seedler(q){
+	if((q=="") && (typeof seedlerQuery == "undefined")){
+		if( nullArgs( "seedler", q ) ) {return false;}
+	}
+	var seedlerQueryQ = "";
+	if (typeof seedlerQuery != "undefined")	seedlerQueryQ = seedlerQuery;
+
+	var seedlerQueryInput = q;
+	if (seedlerQueryInput == "")	seedlerQueryInput = seedlerQueryQ;
+
+	document.seedlerf.search.value = seedlerQueryInput;
+	submitForm(seedlerf);
+  }
+  ]]></script>
+  <copyright>
+    Copyright (c) 2005 Shawn K. Hall; Distributed under the terms of the GNU General Public License, Version 2
+  </copyright>
+  <created_by>
+    This search file was created on 2005/10/29 by Shawn K. Hall
+  </created_by>
+</search>
