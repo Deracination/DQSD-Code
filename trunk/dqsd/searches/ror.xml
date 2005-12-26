@@ -18,6 +18,7 @@
    <tr><td>/irc</td><td> - </td><td>Search the rubyonrails channel logs</td></tr>
    <tr><td>/jobs</td><td> - </td><td>Search jobs.rubynow.com</td></tr>
    <tr><td>/news</td><td> - </td><td>Goto rubyweeklynews.org</td></tr>
+   <tr><td>/pickaxe</td><td> - </td><td>Search Programming Ruby (Pickaxe) book</td></tr>
    <tr><td>/planet</td><td> - </td><td>Goto PlanetRubyOnRails.org</td></tr>
    <tr><td>/ruby</td><td> - </td><td>Goto ruby-lang.org</td></tr>
    <tr><td>/source</td><td> - </td><td>Goto ruby on rails download page</td></tr>
@@ -38,7 +39,7 @@
         return;
 
 	  var url = false;
-      var args = parseArgs(q, "api,archive,blog,core,documentation,forum,forge,garden,irc,jobs,news,planet,ruby,stdlib,wiki,weenie,snippets,source");
+      var args = parseArgs(q, "api,archive,blog,core,documentation,forum,forge,garden,irc,jobs,news,pickaxe,planet,ruby,stdlib,wiki,weenie,snippets,source");
       if ( args.switches.length > 0 ) {
         switch( args.switches[0].name ) {
 		  case "api": 
@@ -106,6 +107,7 @@
 			}
 			break;
 		  case 'news': url = 'http://rubyweeklynews.org/'; break;
+		  case 'pickaxe': url = 'http://ruby-doc.org/find/pickaxe/' + args.q; break;
 		  case 'planet': url = 'http://www.planetrubyonrails.org/'; break;
 		  case 'ruby': url = 'http://www.ruby-lang.org/en/'; break;
 		  case 'snippets': url = 'http://www.bigbold.com/snippets/tag/ruby'; break;
