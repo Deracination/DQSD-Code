@@ -1,0 +1,32 @@
+<search function="om">
+  <name>Omgili</name>
+  <category>Search the Web</category>
+  <contributor></contributor>
+  <link>http://omgili.com/</link>
+  <email></email>
+  <description>Search through web-based discussion forums
+  </description>
+  <form name="omf"
+        method="get"
+        action="http://omgili.com/OmgiliSearch.dll">
+    <input type="hidden" name="q" value="" />
+    <input type="hidden" name="p" value="0" />
+  </form>
+  <script><![CDATA[
+    function om(q)
+    {
+      if( nullArgs("om", q) )
+        return;
+
+      // FORM variables for omf
+
+      // The wizard assigned the search string to this form field value because
+      // this field was the active element when the search file was generated.
+      // Change this to args.q if the search string is parsed with parseArgs.
+      document.omf.q.value = q;
+      //document.omf.p.value = "";
+
+      submitForm(omf);
+    }
+  ]]></script>
+</search>
