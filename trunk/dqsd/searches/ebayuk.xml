@@ -28,7 +28,7 @@
   <contributor>Ryan Edwards, Darrick, Brent Beardsley, David Golding</contributor>
   
   <form name="ebayukf"
-        action="http://search.ebay.co.uk/search/search.dll";
+        action="http://search.ebay.co.uk/search/search.dll"
         method="get">
     <input type="hidden" name="MfcISAPICommand" value="GetResult"/>
     <input type="hidden" name="ht" value="1"/>
