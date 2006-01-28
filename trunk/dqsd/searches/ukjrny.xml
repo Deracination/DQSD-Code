@@ -1,0 +1,212 @@
+<search function="ukjrny">
+  <name>UK Public transport Journey Planner</name>
+  <category>Travel</category>
+  <contributor>Tom Corcoran></contributor>
+  <link>http://journeyplanner.tfl.gov.uk</link>
+  <email></email>
+  <description>
+        UK Public transport Journey Planner
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>Must use one of these to indicate type of departure :</td><td>
+        <div>
+          /oss - station or stop<br/>   
+          /opc - post code<br/>   
+          /oa - address
+          /opl - place of interest
+        </div> 
+      </td></tr>
+      <tr><td>Must use one of these to indicate type of destination :</td><td>
+        <div>
+          /dss - station or stop<br/>   
+          /dpc - post code<br/>   
+          /da - address
+          /dpl - place of interest
+        </div> 
+      </td></tr>
+      <tr><td>Must Indicate travel day :</td><td>
+        <div>
+          /day 0..[28,30,31]<br/>   
+        </div> 
+      </td></tr>
+      <tr><td>Must Indicate travel month :</td><td>
+        <div>
+          /mth 1..12<br/>   
+        </div> 
+      </td></tr>
+      <tr><td>Must Indicate travel hour :</td><td>
+        <div>
+          /hr 0..23<br/>   
+        </div> 
+      </td></tr>
+      <tr><td>Must Indicate travel min :</td><td>
+        <div>
+          /day 0..59<br/>   
+        </div> 
+      </td></tr>
+      <tr><td>Indicate arrival or departure :</td><td>
+        <div>
+          /arr (default)<br/>   
+          /dep<br/>   
+        </div> 
+      </td></tr>
+      <tr><td>Use today's date :</td><td>
+        <div>
+          /today<br/>   
+        </div> 
+      </td></tr>
+      <tr><td>Use today's date and time :</td><td>
+        <div>
+          /now [number of hours in the future]<br/>   
+        </div> 
+      </td></tr>
+    </table>
+    <div class="helpboxDescLabels">Example:</div> 
+    <table class="helpboxDescTable">
+      <tr>
+        <td>In your LocalAliases.txt add something like : <div></div>
+            rail|ukjrny /oss staines /dss waterloo %s<div></div>
+            To check your journey on this route to depart :<div></div>
+             eg. at 20:30 on 3 March, type : rail /day 3 / mth 3 / hr 29 /min 30 /dep<div></div>
+             rail /today / hr 29 /min 30<div></div>
+             rail /now 3
+             Also :<div></div>
+             rail|ukjrny /oss staines /dss waterloo /now %s<div></div>
+             rail 3
+        </td>
+      </tr>
+    </table>
+  </description>
+  <form name="ukjrnyf"
+        method="post"
+        action="http://journeyplanner.tfl.gov.uk/user/XSLT_TRIP_REQUEST2">
+    <input type="hidden" name="language" value="en" />
+    <input type="hidden" name="sessionID" value="0" />
+    <input type="hidden" name="requestID" value="0" />
+    <input type="hidden" name="ptOptionsActive" value="-1" />
+    <input type="hidden" name="execInst" value="normal" />
+    <input type="hidden" name="command" value="" />
+    <input type="hidden" name="selLanguage" value="en" />
+    <input type="hidden" name="type_origin" value="stop" />
+    <input type="hidden" name="name_origin" value="" />
+    <input type="hidden" name="nameState_origin" value="notidentified" />
+    <input type="hidden" name="place_origin" value="" />
+    <input type="hidden" name="type_destination" value="stop" />
+    <input type="hidden" name="name_destination" value="Enter location" />
+    <input type="hidden" name="nameState_destination" value="notidentified" />
+    <input type="hidden" name="place_destination" value="" />
+    <input type="hidden" name="place_destination" value="value" />
+    <input type="hidden" name="itdTripDateTimeDepArr" value="dep" />
+    <input type="hidden" name="itdDateDay" value="" />
+    <input type="hidden" name="itdDateYearMonth" value="" />
+    <input type="hidden" name="itdTimeHour" value="" />
+    <input type="hidden" name="itdTimeMinute" value="" />
+  </form>
+  <script><![CDATA[
+    function ukjrny(q)
+    {
+      function ReturnYearMonth(year, month)
+      {
+        // month needs to be zero padded
+        var todaym = "0" + month;
+        todaym = todaym.substring(todaym.length-2); 
+        
+        return [year,todaym].join('');
+      }
+    
+      function DoToday()
+      {
+        var today = new Date();
+        document.ukjrnyf.itdDateDay.value = today.getDate();
+        document.ukjrnyf.itdDateYearMonth.value = ReturnYearMonth(today.getYear(),today.getMonth()+1);
+      }
+     
+      if( nullArgs("ukjrny",q) )
+        return false;
+      else
+      {
+        var switch_list = new Array( "oss","opc","oa","opl","dss","dpc","da","dpl","day","mth","arr","dep","hr","min","today","now");
+        var args = parseArgsEx( q, switch_list );
+        
+        if( args.switches.length > 0 )
+          for( var j=0; j<args.switches.length; j++ ) {
+            switch( args.switches[j].name ) {
+
+              // TODO : language has not been implemented
+              //case "en": document.ukjrnyf.selLanguage.value = "en"; break;
+              //case "de": document.ukjrnyf.selLanguage.value = "de"; break;
+              //case "fr": document.ukjrnyf.selLanguage.value = "fr"; break;
+              //case "it": document.ukjrnyf.selLanguage.value = "it"; break;
+              //case "es": document.ukjrnyf.selLanguage.value = "es"; break;
+
+              case "oss": 
+                document.ukjrnyf.type_origin.value = "stop"; 
+                document.ukjrnyf.name_origin.value = args.switches[j].value; 
+                break;
+              case "opc": 
+                document.ukjrnyf.type_origin.value = "locator"; 
+                document.ukjrnyf.name_origin.value = args.switches[j].value; 
+                break;
+              case "oa": 
+                document.ukjrnyf.type_origin.value = "address"; 
+                document.ukjrnyf.name_origin.value = args.switches[j].value; 
+                break;
+              case "opl": 
+                document.ukjrnyf.type_origin.value = "poi"; 
+                document.ukjrnyf.name_origin.value = args.switches[j].value; 
+                break;
+              case "dss": 
+                document.ukjrnyf.type_destination.value = "stop"; 
+                document.ukjrnyf.name_destination.value = args.switches[j].value; 
+                break;
+              case "dpc": 
+                document.ukjrnyf.type_destination.value = "locator"; 
+                document.ukjrnyf.name_destination.value = args.switches[j].value; 
+                break;
+              case "da": 
+                document.ukjrnyf.type_destination.value = "address"; 
+                document.ukjrnyf.name_destination.value = args.switches[j].value; 
+                break;
+              case "dpl": 
+                document.ukjrnyf.type_destination.value = "poi"; 
+                document.ukjrnyf.name_destination.value = args.switches[j].value; 
+                break;
+              
+              case "arr": document.ukjrnyf.itdTripDateTimeDepArr.value = "arr"; break;
+              case "dep": document.ukjrnyf.itdTripDateTimeDepArr.value = "dep"; break;
+              
+              case "day": document.ukjrnyf.itdDateDay.value = args.switches[j].value; break;
+              
+              case "today":
+                DoToday();
+                break;
+
+              case "now":
+                DoToday();
+                
+                var now = new Date();
+                if (args.switches[j].value == "")
+                  var nowh = now.getHours();
+                else
+                  var nowh = parseInt(now.getHours()) + parseInt(args.switches[j].value);
+                  
+                var nowm = now.getMinutes();
+                
+                document.ukjrnyf.itdTimeHour.value = nowh;
+                document.ukjrnyf.itdTimeMinute.value = nowm;
+                break;
+               
+              case "mth":
+                var today = new Date();
+                document.ukjrnyf.itdDateYearMonth.value = ReturnYearMonth(today.getYear(),args.switches[j].value);
+      		break;
+              
+              case "hr": document.ukjrnyf.itdTimeHour.value = args.switches[j].value; break;
+              case "min": document.ukjrnyf.itdTimeMinute.value = args.switches[j].value; break;
+            }
+         }   
+      }
+      submitForm(ukjrnyf);
+    }
+  ]]></script>
+</search>
