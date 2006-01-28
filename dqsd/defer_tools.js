@@ -253,7 +253,7 @@ function parseArgsEx(q, expectedSwitches, expandSwitches)
 
   var switches = [];
   var switch_val = [];
-  var args_array = q.split('/');
+  var args_array = (" " + q).split(" /");
   for (var i=0; i < args_array.length; i++)
   {
     var one_arg = trimWhitespace(args_array[i]);
