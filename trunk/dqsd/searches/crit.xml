@@ -2,51 +2,54 @@
   <name>metacritic</name>
   <category>Entertainment</category>
   <contributor>Tom Corcoran</contributor>
-  <link>http://www.metacritic.com/</link>
+	<contributor>Kim Gräsman</contributor>
+  <link>http://www.metacritic.com/search/</link>
   <email></email>
-  <description>Metacritic compiles reviews from respected critics and publications for film, video/dvd, music and games.<br/>
+  <description>Metacritic compiles reviews from respected critics and publications for film, music, games, books and TV.<br/>
     <div class="helpboxDescLabels">Usage:</div>
-   <table class="helpboxDescTable">
-    <tr><td>crit &lt;<i>title</i>&gt; [{/movie | /music | /games | /all}]</td></tr>
-   </table>
+  	<table class="helpboxDescTable">
+  		<tr><td>crit [{/all | /film | /music | /games | /book | /tv}] &lt;<i>title</i>&gt; </td></tr>
+  	</table>
     <div class="helpboxDescLabels">Examples:</div>
     <table class="helpboxDescTable">
-    <tr><td>crit bright orange bright yellow /music</td></tr>
-    <tr><td>crit bringing down the house /movie</td></tr>
-   </table>
- 
+  		<tr><td>crit /music bright orange bright yellow</td></tr>
+  		<tr><td>crit /film bringing down the house</td></tr>
+  	</table>
   </description>
- 
+
   <form name="critf"
         method="post"
-        action="http://search.metacritic.com/search/process">
-    <input type="hidden" name="sort" value="relevance" />
-    <input type="hidden" name="termType" value="all" />
-    <input type="hidden" name="term" value="" />
-    <input type="hidden" name="mode" value="all" />
+        action="http://www.metacritic.com/search/process">
+    <input type="hidden" name="ts" value="" />
+    <input type="hidden" name="ty" value="0" />
   </form>
- 
+
   <script><![CDATA[
     function crit(q)
     {
       if( nullArgs("crit", q) )
         return false;
       else
-        {
-          var args = parseArgs(q, "movie,music,games,all");
- 
-          if( args.switches.length > 0 )
-            for( var j=0; j<args.switches.length; j++ )
-              switch( args.switches[j].name )
-              {
-                case "movie": document.critf.mode.value = "movie"; break;
-                case "music": document.critf.mode.value = "music"; break;
-                case "games": document.critf.mode.value = "games"; break;
-                case "all": document.critf.mode.value = "all"; break;
-              }
-        }  
-      document.critf.term.value = args.q;
- 
+      {
+        var args = parseArgs(q, "all,film,music,games,book,tv");
+        if( args.switches.length > 0 )
+				{
+          for( var j=0; j<args.switches.length; j++ )
+					{
+            switch( args.switches[j].name )
+            {
+              case "all": document.critf.ty.value = "0"; break;
+              case "film": document.critf.ty.value = "1"; break;
+              case "music": document.critf.ty.value = "2"; break;
+              case "games": document.critf.ty.value = "3"; break;
+              case "book": document.critf.ty.value = "4"; break;
+              case "tv": document.critf.ty.value = "6"; break;
+            }
+					}
+				}
+      }  
+
+      document.critf.ts.value = args.q;
       submitForm(critf);
     }
   ]]></script>
