@@ -2,9 +2,10 @@
   <name>Merriam-Webster Dictionary</name>
   <description>
     Search for word definitions.<br/>
-    <div class="helpboxDescLabels">Example:</div>
+    <div class="helpboxDescLabels">Examples:</div>
     <table class="helpboxDescTable">
   		<tr><td>mwd idempotent</td></tr>
+			<tr><td>mwd /popup idempotent</td></tr>
   	</table>
   </description>
   <category>Reference<category>Language</category></category>
@@ -20,18 +21,78 @@
   <script><![CDATA[
     function mwd(q)
     {
-      if( nullArgs("mwd",q) )
+      if (nullArgs("mwd", q))
         return false;
+
+			if (typeof mwdPopup == "undefined")
+			{
+				mwdPopup = 0;
+			}
+
+			var args = parseArgs(q, "popup");
+			if (args.switches.length > 0 || mwdPopup != 0)
+			{
+				mwdx(args.q)
+			}
+			else
+			{
+				document.mwdf.va.value = args.q;
+				submitForm(mwdf);
+			}
+    }
+
+		function mwdx(q)
+		{
+			var xmlHttp = new ActiveXObject("Microsoft.XmlHttp");
+			xmlHttp.open("GET", "http://www.m-w.com/dictionary/" + q, false);
+			xmlHttp.send();
+
+			var sBody = xmlHttp.responseText.replace( /[\r\n]/gi, "" );
+			var re = /(Main Entry:.+)<img src="\/images\/pixt\.gif".+More Information on/mig;
+			var results = re.exec( sBody );
+			var windowW = 500;
+			if ( results != null )
+			{
+				var html = results[ 1 ].replace( /(src=")/gi, "src=\"http://www.m-w.com" ).replace( /(href="\/)/gi, "href=\"http://www.m-w.com/" );
+				html = html.replace( new RegExp( String.fromCharCode(65535), "g" ), '-' ); // weirdness
+				html = html.replace( /<font size="-1">([^<]+)<\/font>/gi, "$1" );
+			}
       else
       {
-        document.mwdf.va.value = q;
-        submitForm(mwdf);
-      }
-    }
-  ]]></script>
+				results = /(Suggestions for.+<\/PRE>)/ig.exec( sBody );
+				if ( results != null )
+				{
+					var html = results[ 1 ].replace( /(src=")/gi, "src=\"http://www.m-w.com" ).replace( /(href=")/gi, "href=\"http://www.m-w.com" ).replace( /<\/a>/g, '</a>\r\n' );
+				}
+				else
+				{
+					windowW = 200;
+					var html = '<center><b>' + q + '</b> not found</center>';
+				}
+			}
 
+      var dictPopup = window.createPopup();
+      var dictPopupBody = dictPopup.document.body;
+
+      dictPopupBody.innerHTML = '<table style="font-size: 70%; border: inset 2px" height="100%"><tr><td>' + html + "</td></tr></table>";
+
+      // dictPopup.document.head.base = "http://www.m-w.com/";
+      dictPopup.document.body.style.border="outset 2px";
+      dictPopup.document.body.style.padding="1px 1px; background: navy";
+      dictPopup.document.body.style.background='menu';
+      dictPopup.document.body.style.overflowY='auto';
+      dictPopup.document.body.style.fontFamily='Verdana';
+
+      // Temporarily show the popup to determine the proper final height for the popup.
+      dictPopup.show(0, 0, windowW, 0);
+      var windowH = dictPopupBody.scrollHeight + 6;
+      dictPopup.hide();
+      windowH = windowH > window.screen.height-100 ? window.screen.height-100 : windowH;
+      dictPopup.show((buttonalign == "left" ? 0 : document.body.clientWidth - windowW), -windowH, windowW, windowH, document.body);
+		}
+  ]]></script>
   <copyright>
-	Copyright (c) 2002 David Bau
+	Copyright (c) 2006 David Bau, Glenn Carr and Kim Gräsman
 	Distributed under the terms of the
 	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
   </copyright>
