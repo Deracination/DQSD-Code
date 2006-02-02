@@ -79,7 +79,7 @@
         if ( isNaN( entriesFound ) )
           entriesFound = 1;
 
-        var html = results[ 1 ].replace( /(src=")/gi, "src=\"http://www.m-w.com" ).replace( /(href="\/)/gi, "href=\"http://www.m-w.com/" );
+        var html = results[ 1 ].replace( /(src="\/)/gi, "src=\"http://www.m-w.com/" ).replace( /(href="\/)/gi, "href=\"http://www.m-w.com/" );
         
         if ( entriesFound == 1 )
           html = html.replace( /(Main Entry:)/, '<br/><br/>$1' );
@@ -111,8 +111,9 @@
         html = html.replace( new RegExp( String.fromCharCode(65535), "g" ), '-' ); // weirdness
         html = html.replace( /<font size="-1">([^<]+)<\/font>/gi, "$1" );
         html = html.replace( /<form.*<\/form>/ig, '' );
-        html = html.replace( /(<a\s+)href=("http:\/\/www.m-w.com\/dictionary\/([^"]+)")([^>]*>)/gi, "$1 href=\"\" onMouseUp=parent.mwdx(\"$3\"); $4" );
-        html = html.replace( /<a href="javascript:popWin\('\/cgi-bin\/(audio.pl[^'>]+)'\)">/gi, '<a href="" onMouseUp=parent.openSearchWindow(\"http://www.m-w.com/cgi-bin/$1\");>' );
+        html = html.replace( /(<a\s+)href=("http:\/\/www.m-w.com\/dictionary\/([^"]+)")([^>]*>)/gi, '$1 href="" onMouseUp=parent.mwdx("$3"); $4' );
+        html = html.replace( /<a href="javascript:popWin\('\/cgi-bin\/(audio.pl[^'>]+)'\)">/gi, '<a href="" onMouseUp=parent.openSearchWindow("http://www.m-w.com/cgi-bin/$1");>' );
+        html = html.replace( /(<a\s+)href=("http:\/\/www.m-w.com\/([^"]+)")([^>]*>)/gi, '$1 href="" onMouseUp=parent.openSearchWindow($2);>' );
       }
       else
       {
