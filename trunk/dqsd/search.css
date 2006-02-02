@@ -265,7 +265,7 @@ Styles for the help box
 .helpboxDescLabels
 {
   font-weight:bold;
-  color:activeCaption;
+  color:black;
 }
 TR.disabledSearch TD
 ,TR.disabledSearch TD TABLE.helpboxDescTable TD
@@ -294,7 +294,7 @@ TABLE.helpboxDescTable
 }
 TABLE.helpboxDescTable TD
 {
-  color:activeCaption;
+  color:black;
   vertical-align:top;
   padding:0px;
   padding-left:6px;

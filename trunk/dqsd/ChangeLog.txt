@@ -27,12 +27,14 @@ Modified Searches
 * mnr - updated mailinator.com email checking url (Brent Beardsley)
 * comx - added Zits (Seattle PI) and editorials (Brent Beardsley)
 * httpinst - added /update switch to update or install searches from dqsd cvs repository (Brent Beardsley)
+* mwd - added /popup switch to display results in a popup window (Glenn Carr, Kim Gräsman)
 
 Removed Searches
 
 Miscellaneous
 * Added IRC url autodetection (only really useful for people that have IRC software that handles the URL hook) (Shawn K. Hall)
 * Removed most of the default aliases, saved a backup in aliases.deprecated (Kim Gräsman)
+* Changed default color for help text from 'activeCaption' to 'black' since activeCaption is too light in many cases (Glenn Carr)
 
 
 -- What's new for 3.1.9.1 (date 2005-01-06)

@@ -1,12 +1,16 @@
 <search function="mwd">
   <name>Merriam-Webster Dictionary</name>
   <description>
-    Search for word definitions.<br/>
+    Search for word definitions.
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/p[opup]</td><td> - </td><td>Display in popup window instead of regular browser window</td></tr>
+    </table>
     <div class="helpboxDescLabels">Examples:</div>
     <table class="helpboxDescTable">
-  		<tr><td>mwd idempotent</td></tr>
-			<tr><td>mwd /popup idempotent</td></tr>
-  	</table>
+      <tr><td>mwd idempotent</td></tr>
+      <tr><td>mwd /p idempotent</td></tr>
+    </table>
   </description>
   <category>Reference<category>Language</category></category>
   <link>http://www.m-w.com/</link>
@@ -21,62 +25,113 @@
   <script><![CDATA[
     function mwd(q)
     {
-      if (nullArgs("mwd", q))
+      if( nullArgs("mwd",q) )
         return false;
 
-			if (typeof mwdPopup == "undefined")
-			{
-				mwdPopup = 0;
-			}
-
-			var args = parseArgs(q, "popup");
-			if (args.switches.length > 0 || mwdPopup != 0)
-			{
-				mwdx(args.q)
-			}
-			else
-			{
-				document.mwdf.va.value = args.q;
-				submitForm(mwdf);
-			}
-    }
-
-		function mwdx(q)
-		{
-			var xmlHttp = new ActiveXObject("Microsoft.XmlHttp");
-			xmlHttp.open("GET", "http://www.m-w.com/dictionary/" + q, false);
-			xmlHttp.send();
-
-			var sBody = xmlHttp.responseText.replace( /[\r\n]/gi, "" );
-			var re = /(Main Entry:.+)<img src="\/images\/pixt\.gif".+More Information on/mig;
-			var results = re.exec( sBody );
-			var windowW = 500;
-			if ( results != null )
-			{
-				var html = results[ 1 ].replace( /(src=")/gi, "src=\"http://www.m-w.com" ).replace( /(href="\/)/gi, "href=\"http://www.m-w.com/" );
-				html = html.replace( new RegExp( String.fromCharCode(65535), "g" ), '-' ); // weirdness
-				html = html.replace( /<font size="-1">([^<]+)<\/font>/gi, "$1" );
-			}
+      var args = parseArgs(q, "popup");
+      if( args.switches.length > 0 )
+      {
+        mwdx(args.q)
+      }
       else
       {
-				results = /(Suggestions for.+<\/PRE>)/ig.exec( sBody );
-				if ( results != null )
-				{
-					var html = results[ 1 ].replace( /(src=")/gi, "src=\"http://www.m-w.com" ).replace( /(href=")/gi, "href=\"http://www.m-w.com" ).replace( /<\/a>/g, '</a>\r\n' );
-				}
-				else
-				{
-					windowW = 200;
-					var html = '<center><b>' + q + '</b> not found</center>';
-				}
-			}
+        document.mwdf.va.value = args.q;
+        submitForm(mwdf);
+      }
+    }
+    
+    function mwdx(q)
+    {
+      var extraArgDelim = '\1';
+      var listOption = false;
+      var p = q.search( extraArgDelim );
+      if ( p >= 0 )
+      {
+        postArgs = unescape( q.substr( p + 1 ) );
+        listOption = true;
+        q = q.substr( 0, p );
+      }
+    
+      var xmlHttp = new ActiveXObject("Microsoft.XmlHttp");
+      if ( listOption )
+      {
+        xmlHttp.open("POST", "http://www.m-w.com/cgi-bin/dictionary", false);
+        xmlHttp.setRequestHeader( "Content-Type", "application/x-www-form-urlencoded" );
+        xmlHttp.send( postArgs );
+      }
+      else
+      {
+        xmlHttp.open("GET", "http://www.m-w.com/dictionary/" + q, false);
+        xmlHttp.send();
+      }
+      
+      var windowW = 500;
 
-      var dictPopup = window.createPopup();
+      var sBody = xmlHttp.responseText.replace( /[\r\n]/gi, "" );
+      var re = /(<h2>.+<\/h2>.*([^>]+)\s+entr.+found for.+Main Entry:.+)<img src="\/images\/pixt\.gif".+More Information on/mig;
+      var results = re.exec( sBody );
+      if ( results != null )
+      {
+        var optionHtml = '';
+        var entriesFound = parseInt( results[ 2 ], 10 );
+        if ( isNaN( entriesFound ) )
+          entriesFound = 1;
+
+        var html = results[ 1 ].replace( /(src=")/gi, "src=\"http://www.m-w.com" ).replace( /(href="\/)/gi, "href=\"http://www.m-w.com/" );
+        
+        if ( entriesFound == 1 )
+          html = html.replace( /(Main Entry:)/, '<br/><br/>$1' );
+        else
+        {
+          html = html.replace( /(Main Entry:)/, '<br/>$1' );
+
+          var options = /(<option.*)<\/select>/.exec( html );
+          if ( options != null )
+          {
+            var allFormVars = html.replace( /.*<input.*name="?hdwd"? value="([^"]+)".*<input.*name="?listword"? value="([^"]+)".*<input.*name="?list"? value="([^"]+)".*/i, 
+                                            "listword=$2&book=Dictionary&list=$3" );
+            options = options[ 1 ].split( '<option>' );
+            optionHtml += '<ul style="margin-top: 0px; margin-bottom: 0px">';
+            for ( var i = 0; i < options.length; i++ )
+              if ( options[ i ] != "" )
+              {
+                var words = /([^[]+)(.*)/.exec( options[ i ] );
+                var formVars = 'hdwd=' + options[ i ] + '&' + allFormVars;
+                optionHtml += '<li><a href="" onMouseUp=parent.mwdx("' + escape( words[ 1 ] ) + extraArgDelim + escape( formVars ) + '");>' + options[ i ] + '</a></li>';
+              }
+            optionHtml += '</ul>';
+          }
+          
+          html = html.replace( /(To select an entry, click on it\..*)<form/, '$1' + optionHtml + '<form' );
+        }
+        html = html.replace( /For more results.*click here<\/a>\./gi, '' );
+        html = html.replace( /<h2>/i, '<h2 style="font-size: 16px">' );
+        html = html.replace( new RegExp( String.fromCharCode(65535), "g" ), '-' ); // weirdness
+        html = html.replace( /<font size="-1">([^<]+)<\/font>/gi, "$1" );
+        html = html.replace( /<form.*<\/form>/ig, '' );
+        html = html.replace( /(<a\s+)href=("http:\/\/www.m-w.com\/dictionary\/([^"]+)")([^>]*>)/gi, "$1 href=\"\" onMouseUp=parent.mwdx(\"$3\"); $4" );
+        html = html.replace( /<a href="javascript:popWin\('\/cgi-bin\/(audio.pl[^'>]+)'\)">/gi, '<a href="" onMouseUp=parent.openSearchWindow(\"http://www.m-w.com/cgi-bin/$1\");>' );
+      }
+      else
+      {
+        results = /(Suggestions for.+<\/PRE>)/ig.exec( sBody );
+        if ( results != null )
+        {
+          var html = results[ 1 ].replace( /href="[^"]+va=([^"]+)"/gi, 'href="" onMouseUp=parent.mwdx("$1"); ' ).replace( /<\/a>/g, '</a>\r\n' );
+        }
+        else
+        {
+          windowW = 200;
+          var html = '<center><b>' + q + '</b> not found</center><br/>' + xmlHttp.responseText;
+        }
+      }
+
+      if ( typeof dictPopup == 'undefined' )
+        dictPopup = window.createPopup();
       var dictPopupBody = dictPopup.document.body;
 
-      dictPopupBody.innerHTML = '<table style="font-size: 70%; border: inset 2px" height="100%"><tr><td>' + html + "</td></tr></table>";
+      dictPopupBody.innerHTML = '<table id=defTable style="font-size: 70%; border: inset 2px" height="100%" width="100%"><tr><td style="padding: 5px 5px">' + html + "</td></tr></table>";
 
-      // dictPopup.document.head.base = "http://www.m-w.com/";
       dictPopup.document.body.style.border="outset 2px";
       dictPopup.document.body.style.padding="1px 1px; background: navy";
       dictPopup.document.body.style.background='menu';
@@ -87,13 +142,15 @@
       dictPopup.show(0, 0, windowW, 0);
       var windowH = dictPopupBody.scrollHeight + 6;
       dictPopup.hide();
+      dictPopup.document.all.defTable.style.width = windowW - 5;
       windowH = windowH > window.screen.height-100 ? window.screen.height-100 : windowH;
       dictPopup.show((buttonalign == "left" ? 0 : document.body.clientWidth - windowW), -windowH, windowW, windowH, document.body);
-		}
+    }
   ]]></script>
   <copyright>
-	Copyright (c) 2006 David Bau, Glenn Carr and Kim Gräsman
-	Distributed under the terms of the
-	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  Copyright (c) 2006 David Bau, Glenn Carr and Kim Gräsman
+  Distributed under the terms of the
+  GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
   </copyright>
 </search>
+
