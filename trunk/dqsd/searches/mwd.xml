@@ -4,7 +4,7 @@
     Search for word definitions.
     <div class="helpboxDescLabels">Switches:</div>
     <table class="helpboxDescTable">
-      <tr><td>/p[opup]</td><td> - </td><td>Display in popup window instead of regular browser window</td></tr>
+      <tr><td>/popup</td><td> - </td><td>Display in popup window instead of regular browser window</td></tr>
     </table>
     <div class="helpboxDescLabels">Examples:</div>
     <table class="helpboxDescTable">
@@ -29,14 +29,16 @@
         return false;
 
       var args = parseArgs(q, "popup");
-      if( args.switches.length > 0 )
+      if ( typeof mwdDisplayInPopup == "undefined" )
+        mwdDisplayInPopup = 0;
+      if ( (args.switches.length > 0) || (mwdDisplayInPopup != 0) )
       {
-        mwdx(args.q)
+        mwdx(args.q) // Display in popup window
       }
       else
       {
         document.mwdf.va.value = args.q;
-        submitForm(mwdf);
+        submitForm(mwdf); // Display in regular browser window
       }
     }
     
