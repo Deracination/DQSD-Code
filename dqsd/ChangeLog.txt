@@ -27,7 +27,7 @@ Modified Searches
 * mnr - updated mailinator.com email checking url (Brent Beardsley)
 * comx - added Zits (Seattle PI) and editorials (Brent Beardsley)
 * httpinst - added /update switch to update or install searches from dqsd cvs repository (Brent Beardsley)
-* mwd - added /popup switch to display results in a popup window (Glenn Carr, Kim Gräsman)
+* mwd - added /popup switch to display results in a popup window; added mwdDisplayInPopup usage to preferences.js (Glenn Carr, Kim Gräsman)
 
 Removed Searches
 

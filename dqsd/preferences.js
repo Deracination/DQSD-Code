@@ -197,19 +197,13 @@ defaultcal="yhocal";
 
 /* Events file for the popup calendar events
 *  holidays.us.xml - United States [default]
-*  holidays.be.NL.xml - Belgium (Dutch language)
-*  holidays.be.EN.xml - Belgium (English language)
 *  holidays.ca.xml - Canada
-*  holidays.cs.xml - Czech Republic
-*  holidays.et.xml - Estonia
-*  holidays.fr.xml - France
-*  holidays.gb.xml - England and Wales
+*  holidays.sg.xml - Singapore
 *  holidays.it.xml - Italy
+*  holidays.fr.xml - France
 *  holidays.nl.NL.xml - Netherlands (Dutch language)
 *  holidays.nl.EN.xml - Netherlands (English language)
-*  holidays.pt.xml - Portugal
-*  holidays.se.sv.xml - Sweden
-*  holidays.sg.xml - Singapore
+*  holidays.et.xml - Estonia
 */
 eventsfileurl="holidays.us.xml";
 
@@ -471,3 +465,11 @@ bannerlink   = "http://www.dqsd.net/";  // examples:
 *  presuming you have defined FunctionFoo() someplace else.
 */
 var startupCommands = new String();
+
+/* mwd (Merriam-Webster) search behavior.
+*  Set to anything other than 0 (zero) to have mwd display results in a popup window
+*  instead of a regular browser window
+*/
+/*
+mwdDisplayInPopup = 1;
+*/
