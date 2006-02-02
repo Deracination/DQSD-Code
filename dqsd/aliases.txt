@@ -12,6 +12,10 @@
 // Shortcuts that reference a function name only, have the menu text extracted
 // from the function definition directly.
 //
+// If you are missing default aliases from versions prior to 3.1.9.2, you can 
+// find them in aliases.deprecated. Copy the ones you liked from there into
+// localaliases.txt.
+//
 // ----------------------------------------------------------------------------
 //
 !|gg %s /ifl|I'm Feeling Lucky!|Go directly to Google's top-ranked result.|Search the Web
