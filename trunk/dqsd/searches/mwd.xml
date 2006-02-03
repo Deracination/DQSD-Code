@@ -111,7 +111,7 @@
         html = html.replace( new RegExp( String.fromCharCode(65535), "g" ), '-' ); // weirdness
         html = html.replace( /<font size="-1">([^<]+)<\/font>/gi, "$1" );
         html = html.replace( /<form.*<\/form>/ig, '' );
-        html = html.replace( /(<a\s+)href=("http:\/\/www.m-w.com\/dictionary\/([^"]+)")([^>]*>)/gi, '$1 href="" onMouseUp=parent.mwdx("$3"); $4' );
+        html = html.replace( /(<a\s+)href=("http:\/\/www.m-w.com\/dictionary\/([^"]+)")([^>]*>)/gi, '$1 href="" onMouseUp=parent.mwdGoToWord("$3"); $4' );
         html = html.replace( /<a href="javascript:popWin\('\/cgi-bin\/(audio.pl[^'>]+)'\)">/gi, '<a href="" onMouseUp=parent.openSearchWindow("http://www.m-w.com/cgi-bin/$1");>' );
         html = html.replace( /(<a\s+)href=("http:\/\/www.m-w.com\/([^"]+)")([^>]*>)/gi, '$1 href="" onMouseUp=parent.openSearchWindow($2);>' );
       }
@@ -140,14 +140,33 @@
       dictPopup.document.body.style.background='menu';
       dictPopup.document.body.style.overflowY='auto';
       dictPopup.document.body.style.fontFamily='Verdana';
+      dictPopup.document.body.attachEvent('onmouseup',mwdCopySelection);
 
       // Temporarily show the popup to determine the proper final height for the popup.
       dictPopup.show(0, 0, windowW, 0);
       var windowH = dictPopupBody.scrollHeight + 6;
       dictPopup.hide();
       dictPopup.document.all.defTable.style.width = windowW - 5;
-      windowH = windowH > window.screen.height-100 ? window.screen.height-100 : windowH;
+      windowH = windowH > window.screen.height/2 ? window.screen.height/2 : windowH;
       dictPopup.show((buttonalign == "left" ? 0 : document.body.clientWidth - windowW), -windowH, windowW, windowH, document.body);
+    }
+    
+    function mwdCopySelection()
+    {
+      dictPopup.document.execCommand( "Copy" );
+      dictPopup.document.selection.empty();
+    }
+    
+    function mwdGoToWord(w)
+    {
+      if ( dictPopup.document.selection.type == "Text" )
+      {
+        mwdCopySelection();
+      }
+      else
+      {
+        mwdx(w);
+      }
     }
   ]]></script>
   <copyright>
