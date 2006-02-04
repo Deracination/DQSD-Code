@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!--
-  Svenska helgdagar för 2004
-  Kim Gräsman, kim@mvps.org, 2004-01-03  
+  Svenska helgdagar för 2004-2006
+  Kim Gräsman, kim@mvps.org
 -->
 <events>
   <event name="Nyårsdagen" type="public_holiday">
@@ -13,14 +13,17 @@
   <event name="Långfredag" type="public_holiday">
      <date day="9" month="4" year="2004"/>
      <date day="25" month="3" year="2005"/>
+     <date day="14" month="4" year="2006"/>
   </event>
   <event name="Påskdagen" type="public_holiday">
      <date day="11" month="4" year="2004"/>
      <date day="27" month="3" year="2005"/>
+     <date day="16" month="4" year="2006"/>
   </event>
   <event name="Annandag påsk" type="public_holiday">
      <date day="12" month="4" year="2004"/>
      <date day="28" month="3" year="2005"/>
+     <date day="17" month="4" year="2006"/>
   </event>
   <event name="Första maj" type="public_holiday">
      <date day="1" month="5"/>
@@ -28,22 +31,29 @@
   <event name="Kristi himmelsfärd" type="public_holiday">
      <date day="20" month="5" year="2004"/>
      <date day="5" month="5" year="2005"/>
+     <date day="25" month="5" year="2006"/>
   </event>
   <event name="Pingstdagen" type="public_holiday">
      <date day="30" month="5" year="2004"/>
      <date day="15" month="5" year="2005"/>
+     <date day="4" month="6" year="2006"/>
   </event>
   <event name="Annandag pingst" type="public_holiday">
      <date day="31" month="5" year="2004"/>
      <date day="16" month="5" year="2005"/>
   </event>
+  <event name="Nationaldagen" type="public_holiday">
+     <date day="6" month="6" year="2006"/>
+  </event>
   <event name="Midsommardagen" type="public_holiday">
      <date day="26" month="6" year="2004"/>
      <date day="25" month="6" year="2005"/>
+     <date day="24" month="6" year="2006"/>
   </event>
   <event name="Alla helgons dag" type="public_holiday">
      <date day="6" month="11" year="2004"/>
      <date day="5" month="11" year="2005"/>
+     <date day="4" month="11" year="2006"/>
   </event>
   <event name="Juldagen" type="public_holiday">
      <date day="25" month="12"/>
