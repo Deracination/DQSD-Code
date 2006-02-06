@@ -54,17 +54,25 @@
         q = q.substr( 0, p );
       }
     
-      var xmlHttp = new ActiveXObject("Microsoft.XmlHttp");
-      if ( listOption )
+      try
       {
-        xmlHttp.open("POST", "http://www.m-w.com/cgi-bin/dictionary", false);
-        xmlHttp.setRequestHeader( "Content-Type", "application/x-www-form-urlencoded" );
-        xmlHttp.send( postArgs );
+        var xmlHttp = new ActiveXObject("Microsoft.XmlHttp");
+        if ( listOption )
+        {
+          xmlHttp.open("POST", "http://www.m-w.com/cgi-bin/dictionary", false);
+          xmlHttp.setRequestHeader( "Content-Type", "application/x-www-form-urlencoded" );
+          xmlHttp.send( postArgs );
+        }
+        else
+        {
+          xmlHttp.open("GET", "http://www.m-w.com/dictionary/" + q, false);
+          xmlHttp.send();
+        }
       }
-      else
+      catch ( e )
       {
-        xmlHttp.open("GET", "http://www.m-w.com/dictionary/" + q, false);
-        xmlHttp.send();
+        alert( e.description );
+        return;
       }
       
       var windowW = 500;
