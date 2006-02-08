@@ -1,3 +1,6 @@
+CALCMEM_FILE = DQSDLauncher.AppDataDirectory + '\\calcmem.txt';
+
+
 // offline calculator
 function calculate(expr)
 {
@@ -17,7 +20,7 @@ function calculate(expr)
             abs(round(answer * 1e+7) - answer * 1e+7) < 0.001)
           answer = round(answer * 1e+7)/1e+7;
       }
-	  setSearchWindowText(answer, true);
+      setSearchWindowText(answer, true);
     }
   }
   catch (exception)
@@ -181,12 +184,12 @@ function savevars()
        savetext += varname + "\t" + vartype + "\t" + escape(eval(varname)) + "\r\n";
     }
   }
-  writeFile("calcmem", savetext);
+  writeFile( CALCMEM_FILE, savetext);
 }
 
 function loadvars()
 {
-  var values = readTabDelimitedFile("calcmem")
+  var values = readTabDelimitedFile( CALCMEM_FILE )
   for (var ii = 0; ii < values.length; ii++)
   {
     var value = values[ii];
