@@ -1,0 +1,41 @@
+<search function="bbust">
+  <name>Blockbuster</name>
+  <category>Entertainment</category>
+  <contributor>Glenn Carr</contributor>
+  <link>http://www.blockbuster.com/</link>
+  <email>glenn at glenncarr dot com</email>
+  <description>Search Blockbuster for a movie
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>bbust great raid</td></tr>
+    </table>
+  </description>
+  <form name="bbustf"
+        method="post"
+        action="http://www.blockbuster.com/search/PerformKeyWordSearchAction.action">
+    <input type="hidden" name="schannel" value="Movies" />
+    <input type="hidden" name="ssubChannel" value="" />
+    <input type="hidden" name="searchType" value="Movies" />
+    <input type="hidden" name="keyword" value="" />
+  </form>
+  <script><![CDATA[
+    function bbust(q)
+    {
+      if ( nullArgs("bbust", q) )
+        return;
+
+      document.bbustf.keyword.value = q;
+
+      submitForm(bbustf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 02/08/06 at 09:08:53
+    by Dave's Quick Search Deskbar Search Wizard version 1.0.1,
+    Copyright (c) 2006 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>
