@@ -473,3 +473,11 @@ var startupCommands = new String();
 /*
 mwdDisplayInPopup = 1;
 */
+
+/* Quick Search Frequency
+*  Log frequency of searches.  Set to anything other than zero (0) to log search frequency.
+*  Search frequency can be displayed with the qsfreq command/search.
+*/
+/*
+qsfreqLogSearchFrequency = 1;
+*/

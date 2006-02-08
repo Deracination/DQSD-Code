@@ -1,0 +1,137 @@
+<search function="qsfreq">
+  <name>Quick Search Frequency Tool</name>
+  <description>
+    Display and manage search frequency log
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>clear</td><td> - </td><td>Clear the search frequency log.</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+      <tr><td>qsfreq</td></tr>
+      <tr><td>qsfreq clear</td></tr>
+    </table>
+  </description>
+  <category>Functions</category>
+  <contributor>Glenn Carr</contributor>
+  
+  <script><![CDATA[
+    function qsfreq( q )
+    {
+      q = trimWhitespace(q.toLowerCase());
+
+      switch ( q )
+      {
+        case '?':
+          nullArgs("qsfreq",q);
+          break;
+        case 'clear':
+          qsfreqClearFrequencyLog();
+          break;
+        default:
+          qsfreqDisplayFrequency();
+          break;
+      }
+    }
+    
+    function qsfreqClearFrequencyLog()
+    {
+      if ( !confirm( "Are you sure you want to clear the search frequency log?" ) )
+        return;
+      
+      try
+      {
+        writeFile( FREQUENCY_LOG, '' );
+      }
+      catch(e) { }
+    }
+
+    function qsfreqDisplayFrequency()
+    {
+      try
+      {
+        var frequencyLogContent = readFile( FREQUENCY_LOG );
+      }
+      catch(e) { }
+
+      var html = new Array();
+      html.push( '<table style="font-size: 11px; text-align: center; border-collapse: collapse" border="1" align="center" width="100%">' );
+
+      if ( typeof qsfreqLogSearchFrequency == 'undefined' || qsfreqLogSearchFrequency == 0 )
+        html.push( '<tr><td colspan="3"><b style="color: red">Search frequency logging is not enabled.</b>&nbsp;&nbsp;<br/><b>qsfreqLogSearchFrequency</b> should be set to 1 in your localprefs.js.</td></tr>' );
+
+      html.push( '<tr><th>Search</th><th>Occurrences</th><th>Last Used</th></tr>' );
+      if (frequencyLogContent)
+      {
+        var recentSearches = frequencyLogContent.replace(/\r\n/g, '\n').split('\n');
+        var lastDate = new Date();
+
+        for (var i = 0; i < recentSearches.length; i++)
+        {
+          var searchFields = recentSearches[i].split( FREQ_LOG_DELIM );
+          html.push( '<tr><td>' );
+          html.push( searchFields[ 0 ] ); // search
+          html.push( '</td><td>' );
+          html.push( searchFields[ 1 ] ); // occurrences
+          html.push( '</td><td>' );
+          var dt = new Date();
+          dt.setTime( searchFields[ 2 ] );
+          html.push( dt.toString() ); // last occurrence
+          html.push( '</td></tr>' );
+
+          lastDate = dt;
+        }
+        html.push( '<tr><td colspan="3">(' );
+        html.push( recentSearches.length );
+        html.push( ' of ' );
+
+        var installedSearchCount = 0;
+        try
+        {
+          installedSearchCount += getFiles( "searches\\*.xml" ).split('\n').length;
+          installedSearchCount += getFiles( "localsearches\\*.xml" ).split('\n').length;
+        } catch ( e ) { }
+
+        html.push( installedSearchCount );
+        html.push( ' installed searches have been used since <nobr>' );
+        html.push( lastDate.toString() );
+        html.push( '.)</nobr></td></tr>' );
+      }
+      else
+      {
+        html.push( '<tr><td colspan="3">No searches recorded. Make sure that <b>qsfreqLogSearchFrequency</b> has been set in your localprefs.js.</td></tr>' );
+      }
+      html.push( '</table>' );
+      html = html.join( '' );
+
+      if ( typeof freqLogPopup == 'undefined' )
+        freqLogPopup = window.createPopup();
+      var dictPopupBody = freqLogPopup.document.body;
+
+      dictPopupBody.innerHTML = '<table id=defTable style="font-size: 70%; border: inset 2px" height="100%" width="100%"><tr><td style="padding: 5px 5px">' + html + "</td></tr></table>";
+
+      freqLogPopup.document.body.style.border="outset 2px";
+      freqLogPopup.document.body.style.padding="1px 1px; background: navy";
+      freqLogPopup.document.body.style.background='menu';
+      freqLogPopup.document.body.style.overflowY='auto';
+      freqLogPopup.document.body.style.fontFamily='Verdana';
+
+      // Temporarily show the popup to determine the proper final height for the popup.
+      var windowW = 400;
+      freqLogPopup.show(0, 0, windowW, 0);
+      var windowH = dictPopupBody.scrollHeight + 6;
+      freqLogPopup.hide();
+      freqLogPopup.document.all.defTable.style.width = windowW - 5;
+      windowH = windowH > window.screen.height/2 ? window.screen.height/2 : windowH;
+      freqLogPopup.show((buttonalign == "left" ? 0 : document.body.clientWidth - windowW), -windowH, windowW, windowH, document.body);
+
+      return '';
+    }
+  ]]></script>
+
+  <copyright>
+  Copyright (c) 2002-2006 David Bau, Glenn Carr
+  Distributed under the terms of the
+  GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>
