@@ -3,6 +3,8 @@
 histarray = [];
 histedit = new Array(historylength + 1);
 histcurr = 0;
+HISTORY_FILE = DQSDLauncher.AppDataDirectory + '\\history.txt';
+FREQUENCY_LOG = DQSDLauncher.AppDataDirectory + '\\frequency_log.txt';
 
 restoreHistory();
 
@@ -21,7 +23,7 @@ function saveHistory()
 {
   try
   {
-    writeFile("history.txt", histarray.join('\r\n'));
+    writeFile( HISTORY_FILE, histarray.join('\r\n'));
   }
   catch(e) { }
 }
@@ -32,14 +34,19 @@ function restoreHistory()
   var historyFileContent = null;
   try
   {
-    historyFileContent = readFile("history.txt");
+    historyFileContent = readFile( HISTORY_FILE );
   }
-  catch (e) {}
+  catch (e) 
+  {
+    // Legacy location
+    historyFileContent = readFile( "history.txt" );
+    renameFile("history.txt", "history.txt-obsolete-safe-to-delete");
+  }
   
   var loaded = null;
   if (historyFileContent)
     loaded = historyFileContent.replace(/\r\n/g, '\n').split('\n');
-  else // history.txt probably doesn't exist
+  else // history file probably doesn't exist
     loaded = new Array(0);
 
   for (var i = loaded.length - 1; i >= 0; i--)
@@ -243,4 +250,57 @@ function escapeString( s )
     es += "\\x" + s.charCodeAt(i).toString(16);
   }
   return es;
+}
+
+var FREQ_LOG_DELIM = '\1';
+function logFrequency( s )
+{
+// ; Format
+// : <search>|<occurrence>|<last search occurrence (number of milliseconds since midnight January 1, 1970)>|<pretty date, just to make log more readable>
+
+  var frequencyLogContent = null;
+  var dateNow = new Date();
+  var dateSeconds = Date.parse(dateNow);
+  try
+  {
+    var frequencyLogContent = readFile( FREQUENCY_LOG );
+  }
+  catch(e) { }
+
+  var recentSearches = null;
+  if (frequencyLogContent)
+    recentSearches = frequencyLogContent.replace(/\r\n/g, '\n').split('\n');
+  else
+    recentSearches = new Array(0);
+    
+  for (var i = 0; i < recentSearches.length; i++)
+  {
+    var searchFields = recentSearches[i].split( FREQ_LOG_DELIM );
+    var thisSearch = searchFields[ 0 ];
+    if (thisSearch == s) 
+    {
+      recentSearches[i] = s + FREQ_LOG_DELIM + (parseInt(searchFields[ 1 ],10)+1) + FREQ_LOG_DELIM + dateSeconds + FREQ_LOG_DELIM + dateNow.toString();
+      break;
+    }
+  }
+
+  if (i == recentSearches.length)
+    recentSearches.push( s + FREQ_LOG_DELIM + '1' + FREQ_LOG_DELIM + dateSeconds + FREQ_LOG_DELIM + dateNow.toString() );
+    
+  recentSearches.sort( sortFrequencyDataByDate );
+  try
+  {
+    writeFile( FREQUENCY_LOG, recentSearches.join('\r\n'));
+  }
+  catch(e) { }
+}
+
+function sortFrequencyDataByDate( a, b )
+{
+  aa = a.split( FREQ_LOG_DELIM );
+  ab = b.split( FREQ_LOG_DELIM );
+  
+  if ( parseFloat(aa[2]) > parseFloat(ab[2]) ) return -1;
+  if ( parseFloat(aa[2]) < parseFloat(ab[2]) ) return 1;
+  return 0;
 }

@@ -327,6 +327,9 @@ function performsearch(fname, term)
        fname = defaultsearch;
   }
 
+  if ( typeof qsfreqLogSearchFrequency != 'undefined' && qsfreqLogSearchFrequency != 0 )
+  	logFrequency( fname );
+
   term = term.replace(/^\s+/g, '').replace(/\s+$/g, '')       // strip out leading and trailing spaces
   if (searches[fname])
     searches[fname].fun(term);
@@ -600,8 +603,8 @@ function toggleDisplayIsToggled() {
 }
 
 // toggleDisplay: toggles the viewport between 'normal' view and the viewport
-//       this function takes one argument, which if passed, will be used to 
-//       set the contents of the viewport. If not passed or empty it will 
+//       this function takes one argument, which if passed, will be used to
+//       set the contents of the viewport. If not passed or empty it will
 //       reset the view to 'normal'.
 function toggleDisplay( contents ){
   //set a reference to the toggleView-port
@@ -677,12 +680,12 @@ function strt()
     startbanner(clockdelay);
   else
     startclock(clockdelay);
-    
+
   // Allow users to define a startup function to enable customized startups.
   if ((typeof startup) == 'function')
   {
 		startup();
-  }    
+  }
 }
 
 // starts the banner timer
@@ -703,7 +706,7 @@ function banner()
   {
     // explicitly call unbanner() to force clock display
     unbanner();
-  }  
+  }
 }
 
 // called when the banner naturally goes away
@@ -932,7 +935,7 @@ function mousewheel()
     //yesprevnext = true;
   return false;
 }
-	
+
 function handleResize()
 {
   if (typeof bannerurl == "undefined") { bannerurl = ""; }
