@@ -5,6 +5,8 @@ Enhancements
 * Holidays for Canada for 2006 (Bill Hewitt)
 * Holidays for Sweden for 2006 (Kim Gräsman)
 * Calendar.js modified to allow color definitions in the events xml files (Monty Scroggins)
+* History data is now located in <AppData>\history.txt instead of <install dir>\history.txt (old history should be relocated automatically). (Glenn Carr)
+* Calculator state data (calcmem.txt) has been relocated to <AppData> from <install dir>. (Glenn Carr)
 
 Bug Fixes
 * Clock tooltip no longer off by 3 days - thanks to Ed Stegman for the exquisit bug report
@@ -22,6 +24,7 @@ New Searches
 * om - Omgili search (Tom Corcoran)
 * ebayuk - Specialized EBay UK search (David Golding, by reminder of Tom C)
 * bbust - Search blockbuster.com (Glenn Carr)
+* qsfreq - Display frequency of searches used; requires change to history.js and enabled with "qsfreqLogSearchFrequency = 1" in localprefs.js (Glenn Carr)
 
 Modified Searches
 * tinyurl - changed it to copy the tinyurl into the DQSD text box and select it instead of popping up the tinyurl webpage. (Brent Beardsley)
