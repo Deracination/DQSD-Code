@@ -5,6 +5,8 @@
     <div class="helpboxDescLabels">Switches:</div>
     <table class="helpboxDescTable">
       <tr><td>clear</td><td> - </td><td>Clear the search frequency log.</td></tr>
+      <tr><td>disable_unused</td><td> - </td><td>Disable all searches not recorded in the frequency log.</td></tr>
+      <tr><td>enable_all</td><td> - </td><td>Renable all previously disabled searches.</td></tr>
     </table>
     <div class="helpboxDescLabels">Example:</div>
     <table class="helpboxDescTable">
@@ -18,19 +20,32 @@
   <script><![CDATA[
     function qsfreq( q )
     {
-      q = trimWhitespace(q.toLowerCase());
-
-      switch ( q )
+      if ( q == "?" )
       {
-        case '?':
-          nullArgs("qsfreq",q);
-          break;
-        case 'clear':
-          qsfreqClearFrequencyLog();
-          break;
-        default:
-          qsfreqDisplayFrequency();
-          break;
+        nullArgs("qsfreq", q);
+        return;
+      }
+
+      var args = parseArgs( q, "clear,disable_unused,enable_all" );
+
+      if ( args.switches.length == 0 )
+        return qsfreqDisplayFrequency();
+        
+      for (var i = 0; i < args.switches.length; i++)
+      {
+        sw = args.switches[i];
+        switch ( sw.name )
+        {
+          case "clear":
+            qsfreqClearFrequencyLog();
+            return;
+          case "disable_unused":
+            qsfreqDisableUnusedSearches();
+            return;
+          case "enable_all":
+            qsfreqEnableAllSearches();
+            return;
+        }
       }
     }
     
@@ -45,6 +60,100 @@
       }
       catch(e) { }
     }
+    
+
+    function qsfreqDisableUnusedSearches()
+    {
+      var frequencyLogContent = readFile( FREQUENCY_LOG );
+      if ( frequencyLogContent == null )
+      {
+        alert( "Unable to find any frequency log data" );
+        return;
+      }
+      
+      var recentSearches = frequencyLogContent.replace(/\r\n/g, '\n').split('\n');
+      var recentSearchHash = new Object();
+      for (var i = 0; i < recentSearches.length; i++)
+      {
+        var searchFields = recentSearches[i].split( FREQ_LOG_DELIM );
+        recentSearchHash[ searchFields[ 0 ] ] = true;
+      }
+      // Some searches we simply don't want to ever disable
+      recentSearchHash[ 'gg' ] = true;
+      recentSearchHash[ 'qsfind' ] = true;
+      recentSearchHash[ 'qsfreq' ] = true;
+      
+      var toDisable = new Array();
+      var toEnable = new Array();
+      var enabledSearches = getFiles( "searches\\*.xml" ).replace( /\.xml/gi, '' ).split('\n');
+      var renames = new Array();
+      for (var i = 0; i < enabledSearches.length; i++)
+      {
+        var search = enabledSearches[ i ];
+        if ( !recentSearchHash.hasOwnProperty( search ) )
+        {
+          renames.push( { search:search, from:"searches\\" + search + ".xml", to:"searches\\" + search + ".disabled" } );
+          toDisable.push( search );
+        }
+        else
+        {
+          toEnable.push( search );
+        }
+      }
+      if ( renames.length == 0 )
+      {
+        alert( "Unused searches have already been disabled." );
+        return;
+      }
+      if ( !confirm( "Are you sure you want to disable the following unused searches?\r\n\r\n" + toDisable.join( ', ' ) + "\r\n\r\nThese searches will remain enabled:\r\n\r\n" + toEnable.join( ', ' ) ) )
+        return;
+        
+      for ( var i = 0; i < renames.length; i++ )
+      {
+        try
+        {
+          renameFile( renames[ i ].from, renames[ i ].to );
+        }
+        catch ( e )
+        {
+          alert( "Unable to disable search, " + renames[ i ].search );
+          return;
+        }
+      }
+      alert( 'The following searches have been disabled:\r\n\r\n' + toDisable.join( ', ' ) + '\r\n\r\nThe following searches are still enabled:\r\n\r\n' + toEnable.join( ', ' ) + '\r\n\r\nClick OK to reload the search bar.' );
+      reload();
+    }
+
+
+    function qsfreqEnableAllSearches()
+    {
+      var disabledSearches = getFiles( "searches\\*.disabled" ).replace( /\.disabled/gi, '' ).split( /\n+/ );
+      var toEnable = new Array();
+      for (var i = 0; i < disabledSearches.length; i++)
+      {
+        var search = disabledSearches[ i ];
+        if ( search == "" )
+          continue;
+        try
+        {
+          renameFile( "searches\\" + search + ".disabled", "searches\\" + search + ".xml");
+          toEnable.push( search );
+        }
+        catch ( e )
+        {
+          alert( "Unable to enable search, " + search );
+          return;
+        }
+      }      
+      if ( toEnable.length == 0 )
+      {
+        alert( "There are no disabled searches." );
+        return;
+      }
+      alert( 'The following searches have been renabled:\r\n\r\n' + toEnable.join( ', ' ) + '\r\n\r\nClick OK to reload the search bar.' );
+      reload();
+    }
+
 
     function qsfreqDisplayFrequency()
     {
@@ -73,11 +182,11 @@
           html.push( searchFields[ 0 ] ); // search
           html.push( '</td><td>' );
           html.push( searchFields[ 1 ] ); // occurrences
-          html.push( '</td><td>' );
+          html.push( '</td><td><nobr>' );
           var dt = new Date();
           dt.setTime( searchFields[ 2 ] );
           html.push( dt.toString() ); // last occurrence
-          html.push( '</td></tr>' );
+          html.push( '</nobr></td></tr>' );
 
           lastDate = dt;
         }
@@ -89,7 +198,8 @@
         try
         {
           installedSearchCount += getFiles( "searches\\*.xml" ).split('\n').length;
-          installedSearchCount += getFiles( "localsearches\\*.xml" ).split('\n').length;
+          // Probably not a great idea to mess with local searches
+          // installedSearchCount += getFiles( "localsearches\\*.xml" ).split('\n').length;
         } catch ( e ) { }
 
         html.push( installedSearchCount );

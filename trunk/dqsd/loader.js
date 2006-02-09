@@ -94,7 +94,7 @@ function addalias(alias, fname, name, desc, cat, subcats, local)
       fname = INTERNAL_FUNC_PREFIX + (++internalShortcutIndex);
       var f = new Function("t", 
                            "var cmd = unescape('" + escape(res[2]) + "');" +
-                           res[1] + "(cmd.replace( /%s/g, t ));"
+                           "performsearch('" + res[1] + "',cmd.replace( /%s/g, t ));"
                           );
       eval( fname + " = f;" );
       addsearch( fname, name ? name : cmd, desc ? desc : cmd, "", cat, local, subcats);
@@ -289,7 +289,7 @@ for (var iSearch = 0; iSearch < searchNodes.length; iSearch++)
   // this gets called after addsearch so you can call addalias, etc
   var onloadNode = searchNode.selectSingleNode("onload");
   if (onloadNode != null) {
-	  eval(onloadNode.text);
+      eval(onloadNode.text);
   }
 }
 

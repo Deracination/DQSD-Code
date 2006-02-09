@@ -258,6 +258,9 @@ function logFrequency( s )
 // ; Format
 // : <search>|<occurrence>|<last search occurrence (number of milliseconds since midnight January 1, 1970)>|<pretty date, just to make log more readable>
 
+  if ( s.substr( 0, INTERNAL_FUNC_PREFIX.length ) == INTERNAL_FUNC_PREFIX )
+    return;
+
   var frequencyLogContent = null;
   var dateNow = new Date();
   var dateSeconds = Date.parse(dateNow);
