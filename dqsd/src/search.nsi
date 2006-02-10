@@ -309,6 +309,9 @@ Section "Quick Search Deskbar (required)"
   Delete $INSTDIR\searches\encyfr.xml
   Delete $INSTDIR\searches\pcm.xml
   Delete $INSTDIR\searches\wiq.xml
+  
+  ; Remove any searches that were possibly disabled.  They should be reinstalled anyway
+  Delete $INSTDIR\searches\*.disabled*
 
   ; Write the installation path into the registry
   WriteRegStr HKCR "CLSID\${DQSD_CLSID}" "InstallDir" "$INSTDIR"
