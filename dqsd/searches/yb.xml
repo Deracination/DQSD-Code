@@ -1,0 +1,34 @@
+<search function="yb">
+  <name>yubnub.org</name>
+  <category>Search the Web</category>
+  <contributor>Brent Beardsley</contributor>
+  <link>http://yubnub.org/</link>
+  <email></email>
+  <description>
+  Search via yubnub.org
+  </description>
+  <form name="ybf"
+        method="get"
+        action="http://yubnub.org/parser/parse">
+    <input type="hidden" name="command" value="" />
+  </form>
+  <script><![CDATA[
+    function yb(q)
+    {
+      if( nullArgs("yb", q) )
+        return;
+
+      document.ybf.command.value = q;
+      submitForm(ybf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 02/10/06 at 13:54:01
+    by Dave's Quick Search Deskbar Search Wizard version 1.2,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>

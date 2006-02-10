@@ -48,6 +48,7 @@ New Searches
 * pys - Python Search (Shawn K. Hall)
 * sbase - SenderBase email statistics aggregation (Shawn K. Hall)
 * xforce - X-Force security database (Shawn K. Hall)
+* yb - Search using yubnub.org (Brent Beardsley)
 
 Modified Searches
 * tinyurl - changed it to copy the tinyurl into the DQSD text box and select it instead of popping up the tinyurl webpage. (Brent Beardsley)
