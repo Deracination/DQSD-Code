@@ -108,50 +108,61 @@
       if ( !confirm( "Are you sure you want to disable the following unused searches?\r\n\r\n" + toDisable.join( ', ' ) + "\r\n\r\nThese searches will remain enabled:\r\n\r\n" + toEnable.join( ', ' ) ) )
         return;
         
+      var errors = new Array();
+      var renamed = new Array();
       for ( var i = 0; i < renames.length; i++ )
       {
-        try
+        if ( renameFile( renames[ i ].from, renames[ i ].to ) || 
+             ( renameFile( renames[ i ].to, renames[ i ].to + "_" + (new Date()).getTime() ) && renameFile( renames[ i ].from, renames[ i ].to ) ) )
         {
-          renameFile( renames[ i ].from, renames[ i ].to );
+          renamed.push( renames[ i ].search ); 
         }
-        catch ( e )
+        else
         {
-          alert( "Unable to disable search, " + renames[ i ].search );
-          return;
+          errors.push( renames[ i ].search );
         }
       }
-      alert( 'The following searches have been disabled:\r\n\r\n' + toDisable.join( ', ' ) + '\r\n\r\nThe following searches are still enabled:\r\n\r\n' + toEnable.join( ', ' ) + '\r\n\r\nClick OK to reload the search bar.' );
-      reload();
+      alert( ( ( renamed.length > 0 ) ? ( 'The following searches have been disabled:\r\n\r\n' + toDisable.join( ', ' ) ) : '' ) +
+             ( ( errors.length > 0 ) ? ( '\r\n\r\nThere were problems disabling the following searches:\r\n\r\n' + errors.join( ', ' ) ) : '' ) +
+             ( ( toEnable.length > 0 ) ? ( '\r\n\r\nThe following searches are still enabled:\r\n\r\n' + toEnable.join( ', ' ) ) : '' ) +
+             ( ( renamed.length > 0 ) ? '\r\n\r\nClick OK to reload the search bar.' : '' ) );
+      if ( renamed.length > 0 )
+        reload();
     }
 
 
     function qsfreqEnableAllSearches()
     {
       var disabledSearches = getFiles( "searches\\*.disabled" ).replace( /\.disabled/gi, '' ).split( /\n+/ );
-      var toEnable = new Array();
+      var renamed = new Array();
+      var errors = new Array();
       for (var i = 0; i < disabledSearches.length; i++)
       {
         var search = disabledSearches[ i ];
         if ( search == "" )
           continue;
-        try
+        var from = "searches\\" + search + ".disabled";
+        var to = "searches\\" + search + ".xml";
+        if ( renameFile( from, to ) )
         {
-          renameFile( "searches\\" + search + ".disabled", "searches\\" + search + ".xml");
-          toEnable.push( search );
+          renamed.push( search );
         }
-        catch ( e )
+        else
         {
-          alert( "Unable to enable search, " + search );
-          return;
+          renameFile( from, from + "_" + (new Date()).getTime() );
+          errors.push( search );
         }
       }      
-      if ( toEnable.length == 0 )
+      if ( disabledSearches.length == 0 )
       {
         alert( "There are no disabled searches." );
         return;
       }
-      alert( 'The following searches have been renabled:\r\n\r\n' + toEnable.join( ', ' ) + '\r\n\r\nClick OK to reload the search bar.' );
-      reload();
+      alert( ( ( renamed.length > 0 ) ? ( 'The following searches have been enabled:\r\n\r\n' + renamed.join( ', ' ) + '' ) : 'There were no disabled searches.' ) +
+             ( ( errors.length > 0 ) ? ( '\r\n\r\nThere were problems enabling the following searches:\r\n\r\n' + errors.join( ', ' ) ) : '' ) +
+             ( ( renamed.length > 0 ) ? '\r\n\r\nClick OK to reload the search bar.' : '' ) );
+      if ( renamed.length > 0 )
+        reload();
     }
 
 
@@ -170,6 +181,7 @@
         html.push( '<tr><td colspan="3"><b style="color: red">Search frequency logging is not enabled.</b>&nbsp;&nbsp;<br/><b>qsfreqLogSearchFrequency</b> should be set to 1 in your localprefs.js.</td></tr>' );
 
       html.push( '<tr><th>Search</th><th>Occurrences</th><th>Last Used</th></tr>' );
+      var startLogDate = null;
       if (frequencyLogContent)
       {
         var recentSearches = frequencyLogContent.replace(/\r\n/g, '\n').split('\n');
@@ -178,6 +190,13 @@
         for (var i = 0; i < recentSearches.length; i++)
         {
           var searchFields = recentSearches[i].split( FREQ_LOG_DELIM );
+          if ( searchFields[ 0 ] == '[file_created]' )
+          {
+            startLogDate = new Date();
+            startLogDate.setTime( searchFields[ 2 ] );
+            continue;
+          }
+          
           html.push( '<tr><td>' );
           html.push( searchFields[ 0 ] ); // search
           html.push( '</td><td>' );
@@ -203,9 +222,13 @@
         } catch ( e ) { }
 
         html.push( installedSearchCount );
-        html.push( ' installed searches have been used since <nobr>' );
-        html.push( lastDate.toString() );
-        html.push( '.)</nobr></td></tr>' );
+        html.push( ' installed searches' );
+        if ( startLogDate != null )
+        {
+          html.push( ' have been used since ' );
+          html.push( startLogDate.toString() );
+        }
+        html.push( '.)</td></tr>' );
       }
       else
       {
