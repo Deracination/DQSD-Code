@@ -1,0 +1,28 @@
+<search function="dragondb">
+  <name>DragonSoft Vulnerability DataBase</name>
+  <category>Computers<category>Software</category></category>
+  <contributor>Shawn K. Hall</contributor>
+  <link>http://vdb.dragonsoft.com/</link>
+  <email>shawn@reliableanswers.com</email>
+  <description>
+  DragonSoft Vulnerability DataBase includes CVE and other indices of security and popular tracking for software vulnerability assessment.
+  </description>
+  <form name="dragondbf"
+        method="post"
+        action="http://vdb.dragonsoft.com/search_ds.php">
+    <input type="hidden" name="keywd" value="" />
+    <input type="hidden" name="Action" value="GO" />
+  </form>
+  <script><![CDATA[
+    function dragondb(q){
+      if( nullArgs("dragondb", q) )
+        return;
+      document.dragondbf.keywd.value = q;
+      submitForm(dragondbf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>

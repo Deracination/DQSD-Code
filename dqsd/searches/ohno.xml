@@ -1,0 +1,75 @@
+<search function="ohno">
+  <name>OhNoRobot.com</name>
+  <category>Fun</category>
+  <contributor>Shawn K. Hall</contributor>
+  <link>http://www.ohnorobot.com/index.pl?&amp;show=advanced</link>
+  <email>shawn@reliableanswers.com</email>
+  <description>
+  OhNoRobot Personalized comic search and transcription
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/random</td><td> - </td><td></td></tr>
+      <tr><td>/dialogue</td><td> - </td><td></td></tr>
+      <tr><td>/speakers</td><td> - </td><td></td></tr>
+      <tr><td>/sound</td><td> - </td><td></td></tr>
+      <tr><td>/meta</td><td> - </td><td></td></tr>
+      <tr><td>/link</td><td> - </td><td></td></tr>
+      <tr><td>/scene</td><td> - </td><td></td></tr>
+      <tr><td>/new</td><td> - </td><td></td></tr>
+      <tr><td>/series</td><td> - </td><td></td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td></td></tr>
+      <tr><td></td></tr>
+    </table>
+  </description>
+  <form name="ohnof"
+        method="get"
+        action="http://www.ohnorobot.com/index.pl">
+    <input type="hidden" name="s" value="" />
+    <input type="hidden" name="Search" value="Search" />
+    <input type="hidden" name="lucky" value="" />
+    <input type="hidden" name="comic" value="" />
+    <input type="hidden" name="show" value="advanced" />
+    <input type="hidden" name="b" value="" />
+    <input type="hidden" name="n" value="" />
+    <input type="hidden" name="d" value="" />
+    <input type="hidden" name="e" value="" />
+    <input type="hidden" name="t" value="" />
+    <input type="hidden" name="m" value="" />
+  </form>
+  <script><![CDATA[
+    function ohno(q){
+      if( nullArgs("ohno", q) )
+        return;
+
+      var args = parseArgs(q, "random, dialogue, speakers, sound, meta, link, scene, series, lucky");
+      for (var iSwitch = 0; iSwitch < args.switches.length; iSwitch++){
+        switch( args.switches[iSwitch].name ){
+          case "random":	openSearchWindow("http://www.ohnorobot.com/random.pl"); return;
+          case "series":	openSearchWindow("http://www.ohnorobot.com/series.pl"); return;
+          case "lucky": 	document.ohnof.Search.value = ""; document.ohnof.lucky.value = "Let the Robot Decide!"; break;
+          case "dialogue":	document.ohnof.b.value = "1"; break;
+          case "speakers":	document.ohnof.n.value = "1"; break;
+          case "sound":	document.ohnof.e.value = "1"; break;
+          case "meta":	document.ohnof.m.value = "1"; break;
+          case "link":	document.ohnof.t.value = "1"; break;
+          case "scene":	document.ohnof.d.value = "1"; break;
+          case "all":	document.ohnof.b.value = "1"; document.ohnof.n.value = "1";
+			document.ohnof.e.value = "1"; document.ohnof.m.value = "1";
+			document.ohnof.t.value = "1"; document.ohnof.d.value = "1";
+			break;
+          default:	break;
+        }
+      }
+
+      document.ohnof.s.value = args.q;
+      submitForm(ohnof);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>

@@ -1,0 +1,60 @@
+<search function="dblt">
+  <name>DoubleTrust</name>
+  <category>Search the Web</category>
+  <contributor>Shawn K. Hall</contributor>
+  <link>http://www.doubletrust.net/</link>
+  <email>shawn@reliableanswers.com</email>
+  <description>
+  DoubleTrust is based on the simple premise that trusting two authorities is better than one. You want better search results, but don't want to use the top two search engines separately. DoubleTrust solves the problem for you.
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/google</td><td> - </td><td>I really really trust Google</td></tr>
+      <tr><td>/gy</td><td> - </td><td>I trust Google more</td></tr>
+      <tr><td>/eq</td><td> (default) </td><td>I trust them equally</td></tr>
+      <tr><td>/yg</td><td> - </td><td>I trust Yahoo more</td></tr>
+      <tr><td>/yahoo</td><td> - </td><td>Yahoo is the best</td></tr>
+      <tr><td>/compact</td><td> - </td><td>Compact Results</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>dblt french fries</td></tr>
+      <tr><td>dblt mathematical formulae /google</td></tr>
+      <tr><td>dblt peeps /yahoo</td></tr>
+    </table>
+  </description>
+  <form name="dbltf"
+        method="get"
+        action="http://sushil01.securesites.net/~ashish/doubletrust/../cgi-bin/rainbow.cgi">
+    <input type="hidden" name="query" value="" />
+    <input type="hidden" name="compact" value="" />
+    <input type="hidden" name="trustbox" value="1,1" />
+    <input type="hidden" name="B1" value="Submit" />
+  </form>
+  <script><![CDATA[
+    function dblt(q)
+    {
+      if( nullArgs("dblt", q) )
+        return;
+
+      var args = parseArgs(q, "google, gy, eq, yg, yahoo, compact");
+      for (var iSwitch = 0; iSwitch < args.switches.length; iSwitch++){
+        switch( args.switches[iSwitch].name ){
+          case "google":  document.dbltf.trustbox.value = "20,1"; break;
+          case "gy":	  document.dbltf.trustbox.value = "10,1"; break;
+          case "eq":	  document.dbltf.trustbox.value = "1,1"; break;
+          case "yg":	  document.dbltf.trustbox.value = "1,10"; break;
+          case "yahoo":	  document.dbltf.trustbox.value = "1,20"; break;
+          case "compact": document.dbltf.compact.value  = "1"; break;
+          default: break;
+        }
+      }
+
+      document.dbltf.query.value = args.q;
+      submitForm(dbltf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>

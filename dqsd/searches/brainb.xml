@@ -1,0 +1,34 @@
+<search function="brainb">
+  <name>BrainBoost</name>
+  <category>Search the Web</category>
+  <contributor>Shawn K. Hall</contributor>
+  <link>http://www.brainboost.com/</link>
+  <email>shawn@reliableanswers.com</email>
+  <description>
+  BrainBoost answer engine, powered by Answers.com
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>brainb who was the third person to set foot on the moon?</td></tr>
+      <tr><td>brainb How were the moon landings faked?</td></tr>
+    </table>
+  </description>
+  <form name="brainbf"
+        method="get"
+        action="http://www.brainboost.com/search.asp">
+    <input type="hidden" name="Q" value="" />
+    <input type="hidden" name="Submit" value="Ask" />
+  </form>
+  <script><![CDATA[
+    function brainb(q)
+    {
+      if( nullArgs("brainb", q) )
+        return;
+      document.brainbf.Q.value = q;
+      submitForm(brainbf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>

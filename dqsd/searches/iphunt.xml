@@ -1,0 +1,62 @@
+<search function="iphunt">
+  <name>IP Hunt</name>
+  <category>Computers<category>Networking</category></category>
+  <contributor>Shawn K. Hall</contributor>
+  <link>http://www.searchmee.com/web-info/ip-hunt.php</link>
+  <email>shawn@reliableanswers.com</email>
+  <description>
+  Search the web by IP address or hostname
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>iphunt microsoft.com</td></tr>
+      <tr><td>iphunt 72.14.207.99</td></tr>
+      <tr><td>iphunt 66.94.234.13/29</td></tr>
+    </table>
+  </description>
+  <form name="iphuntf"
+        method="get"
+        action="http://www.searchmee.com/web-info/ip-hunt.php">
+    <input type="hidden" name="hosttofind" value="" />
+    <input type="hidden" name="ip" value="" />
+    <input type="hidden" name="cidr" value="" />
+    <input type="hidden" name="action" value="Search" />
+  </form>
+  <script><![CDATA[
+    function iphunt(q){
+      if( nullArgs("iphunt", q) )
+        return;
+
+    //IP requests
+      var ip_rx = new RegExp("^((\\d{1,2}|1\\d\\d|2[0-4]\\d|25[0-5])\\.){3}(\\d{1,2}|1\\d\\d|2[0-4]\\d|25[0-5])$", "");
+      resip     = ip_rx.exec(q);
+      if (resip){
+	document.iphuntf.ip.value   = RegExp.lastMatch;
+	document.iphuntf.cidr.value = "";
+	document.iphuntf.hosttofind.value = "";
+	submitForm(iphuntf);
+	return;
+      }
+
+    //CIDR requests
+      var ip_rx = new RegExp("^(((\\d{1,2}|1\\d\\d|2[0-4]\\d|25[0-5])\\.){3}(\\d{1,2}|1\\d\\d|2[0-4]\\d|25[0-5]))\\/(\\d+)$", "");
+      rescidr   = ip_rx.exec(q);
+      if(rescidr){
+	document.iphuntf.ip.value   = RegExp.$1;
+	document.iphuntf.cidr.value = RegExp.$5;
+	document.iphuntf.hosttofind.value = "";
+	submitForm(iphuntf);
+	return;
+      }
+
+      //everything else
+	document.iphuntf.ip.value = "";
+	document.iphuntf.cidr.value = "";
+	document.iphuntf.hosttofind.value = q;
+	submitForm(iphuntf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>

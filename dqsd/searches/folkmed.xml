@@ -1,0 +1,60 @@
+<search function="folkmed">
+  <name>Folk Medicine</name>
+  <category>Reference</category>
+  <contributor>Shawn K. Hall</contributor>
+  <link>http://www.folkmed.ucla.edu/</link>
+  <email>shawn@reliableanswers.com</email>
+  <description>
+  Online archive of american folk medicine
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/and</td><td> - </td><td>must match all these words (and)</td></tr>
+      <tr><td>/or</td><td> - </td><td>may match any of these words (or)</td></tr>
+      <tr><td>/10</td><td> - </td><td>10 results</td></tr>
+      <tr><td>/20</td><td> - </td><td>20 results</td></tr>
+      <tr><td>/30</td><td> - </td><td>30 results</td></tr>
+      <tr><td>/50</td><td> - </td><td>50 results</td></tr>
+      <tr><td>/all</td><td> - </td><td>all results</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>folkmed garlic /all</td></tr>
+      <tr><td>folkmed cigar smoke /and</td></tr>
+    </table>
+  </description>
+  <form name="folkmedf"
+        method="post"
+        action="http://www.folkmed.ucla.edu/FMResults.cfm">
+    <input type="hidden" name="Text" value="" />
+    <input type="hidden" name="Find" value="Start Search" />
+    <input type="hidden" name="BoolOp" value="AND" />
+    <input type="hidden" name="MaxRecords" value="50" />
+  </form>
+  <script><![CDATA[
+    function folkmed(q){
+      if( nullArgs("folkmed", q) )
+        return;
+
+      var args = parseArgs(q, "and, or, 10, 20, 30, 50, all");
+      for (var iSwitch = 0; iSwitch < args.switches.length; iSwitch++){
+        switch( args.switches[iSwitch].name ){
+          case "and": document.folkmedf.BoolOp.value = "AND"; break;
+          case "or":  document.folkmedf.BoolOp.value = "OR";  break;
+          case "10":  document.folkmedf.MaxRecords.value = "10"; break;
+          case "20":  document.folkmedf.MaxRecords.value = "20"; break;
+          case "30":  document.folkmedf.MaxRecords.value = "30"; break;
+          case "50":  document.folkmedf.MaxRecords.value = "50"; break;
+          case "all": document.folkmedf.MaxRecords.value = "all"; break;
+          default:    break;
+        }
+      }
+
+      document.folkmedf.Text.value = args.q;
+      submitForm(folkmedf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>

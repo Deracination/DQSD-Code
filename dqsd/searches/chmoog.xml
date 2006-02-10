@@ -1,0 +1,52 @@
+<search function="chmoog">
+  <name>Chmoogle</name>
+  <category>Reference<category>General</category></category>
+  <contributor>Shawn K. Hall</contributor>
+  <link>http://www.chmoogle.com/</link>
+  <email>shawn@reliableanswers.com</email>
+  <description>
+  Chemical name and suppliers search
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/substructure</td></tr>
+      <tr><td>/exact</td></tr>
+      <tr><td>/commercial</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>chmoog glucose</td></tr>
+      <tr><td>chmoog nitroglycerine</td></tr>
+    </table>
+  </description>
+  <form name="chmoogf"
+        method="get"
+        action="http://www.chmoogle.com/cgi-bin/chemistry">
+    <input type="hidden" name="t" value="ss" />
+    <input type="hidden" name="q" value="" />
+    <input type="hidden" name="c" value="" />
+  </form>
+  <script><![CDATA[
+    function chmoog(q)
+    {
+      if( nullArgs("chmoog", q) )
+        return;
+      document.chmoogf.t.value = "ss";
+      document.chmoogf.c.value = "";
+      var args = parseArgs(q, "substructure, exact, commercial");
+      for (var iSwitch = 0; iSwitch < args.switches.length; iSwitch++){
+        switch( args.switches[iSwitch].name ){
+          case "substructure":	document.chmoogf.t.value = "ss"; break;
+          case "exact":		document.chmoogf.t.value = "ex"; break;
+          case "commercial":	document.chmoogf.c.value = "1";  break;
+          default: break;
+        }
+      }
+      document.chmoogf.q.value = args.q;
+      submitForm(chmoogf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>

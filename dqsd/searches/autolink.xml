@@ -1,0 +1,55 @@
+<search function="autolink">
+  <name>Auto Linker</name>
+  <category>Computers<category>Networking</category></category>
+  <contributor>Shawn K. Hall</contributor>
+  <link>http://blog.outer-court.com/yahoo/autolinker.php5</link>
+  <email>shawn@reliableanswers.com</email>
+  <description>
+  This tool uses the Yahoo and Google APIs to link significant words and phrases from a text you provide.
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/nofollow</td><td> - </td><td>Include the 'nofollow' attribute on links</td></tr>
+      <tr><td>/yahoo</td><td> - </td><td>Use the Yahoo API</td></tr>
+      <tr><td>/google</td><td> - </td><td>Use the Google API</td></tr>
+    </table>
+  </description>
+  <form name="autolinkf"
+        method="post"
+        action="http://blog.outer-court.com/yahoo/autolinker.php5">
+    <input type="hidden" name="text" value="" />
+    <input type="hidden" name="rel" value="" />
+    <input type="hidden" name="engine" value="yahoo" />
+  </form>
+  <script><![CDATA[
+    function autolink(q){
+      if (q=="?"){
+        nullArgs("autolink", q);
+        return false;
+      }
+
+      var args = parseArgs(q, "nofollow, yahoo, google");
+      if ( args.switches.length > 0 ){
+        for( var j=0; j<args.switches.length; j++ ){
+          switch( args.switches[j].name ){
+            case "nofollow": document.autolinkf.rel.value = "nofollow"; break;
+            case "yahoo":    document.autolinkf.engine.value = "yahoo"; break;
+            case "google":   document.autolinkf.engine.value = "google"; break;
+            default: break;
+          }
+        }
+      }
+
+      if(args.q==""){
+        document.autolinkf.text.value = window.clipboardData.getData( "Text" );
+      }else{
+        document.autolinkf.text.value = args.q;
+      }
+
+      submitForm(autolinkf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>

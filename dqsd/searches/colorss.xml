@@ -1,0 +1,63 @@
+<search function="colorss">
+  <name>ColorCombos</name>
+  <category>Computers<category>Reference</category></category>
+  <contributor>Shawn K. Hall</contributor>
+  <link>http://www.colorcombos.com/</link>
+  <email>shawn@reliableanswers.com</email>
+  <description>
+  ColorCombos.com was built to help web developers quickly select and test color combinations.
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>[color]</td><td> - </td><td>Test this color</td></tr>
+      <tr><td>[url]</td><td> - </td><td>Obtain color combinations from URL</td></tr>
+      <tr><td>/test</td><td> - </td><td>Open the combo tester</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>colorss aqua</td></tr>
+      <tr><td>colorss http://www.google.com</td></tr>
+      <tr><td>colorss /test</td></tr>
+    </table>
+  </description>
+  <form name="colorssf"
+        method="post"
+        action="http://www.colorcombos.com/combolibrary.html">
+    <input type="hidden" name="search_hex" value="" />
+  </form>
+  <form name="colorssf2"
+        method="post"
+        action="http://www.colorcombos.com/grabcolors.html">
+    <input type="hidden" name="temp_url" value="" />
+  </form>
+  <script><![CDATA[
+    function colorss(q)
+    {
+      if( nullArgs("colorss", q) )
+        return;
+
+      var args = parseArgs(q, "test");
+      for (var iSwitch = 0; iSwitch < args.switches.length; iSwitch++){
+        switch( args.switches[iSwitch].name ){
+          case "test":
+            openSearchWindow("http://www.colorcombos.com/combotester.html");
+            return;
+          default: break;
+        }
+      }
+
+      var sQuery = q;
+      var sUrl = ((isURL(q)) ? q : "");
+      if(sUrl==""){
+        document.colorssf['search_hex'].value = sQuery;
+        submitForm(colorssf);
+      }else{
+        document.colorssf2['temp_url'].value = sUrl;
+        submitForm(colorssf2);
+      }
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>

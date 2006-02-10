@@ -1,0 +1,51 @@
+<search function="becom">
+  <name>Become</name>
+  <category>Shopping</category>
+  <contributor>Shawn K. Hall</contributor>
+  <link>http://www.become.com/</link>
+  <email>shawn@reliableanswers.com</email>
+  <description>
+  Be Smart. Be Thrifty. Just Be. Become is a nifty little AJAX search engine that can return potential values as you type. This search will open the results page. Set focus to the end of your search term and fine-tune the results in real time.
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/research</td><td> - </td><td></td></tr>
+      <tr><td>/shop</td><td> - </td><td></td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>becom psp</td></tr>
+      <tr><td>becom mac osx /research</td></tr>
+      <tr><td>becom windows /shop</td></tr>
+    </table>
+  </description>
+  <form name="becomf"
+        method="get"
+        action="http://www.become.com/start">
+    <input type="hidden" name="q" value="" />
+    <input type="hidden" name="p" value="1" />
+    <input type="hidden" name="b" value="Research" />
+  </form>
+  <script><![CDATA[
+    function becom(q)
+    {
+      if( nullArgs("becom", q) )
+        return;
+
+      var args = parseArgs(q, "research, shop");
+      if ( args.switches.length > 0 ){
+        switch( args.switches[0].name ){
+          case "research": document.becomf.b.value = "Research"; break;
+          case "shop": document.becomf.b.value = "Shop"; break;
+          default: break;
+        }
+      }
+
+      document.becomf.q.value = args.q;
+      submitForm(becomf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>

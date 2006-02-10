@@ -1,0 +1,34 @@
+<search function="ay2z">
+  <name>aytozon</name>
+  <category>Shopping</category>
+  <contributor>Shawn K. Hall</contributor>
+  <link>http://aytozon.com/</link>
+  <email>shawn@reliableanswers.com</email>
+  <description>
+  aytozon is a mashup for shopping eBay and Amazon simultaneously.
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>ay2z psp</td></tr>
+      <tr><td>ay2z piers anthony</td></tr>
+    </table>
+  </description>
+  <form name="ay2zf"
+        method="get"
+        action="http://aytozon.com/search">
+    <input type="hidden" name="q" value="" />
+    <input type="hidden" name="searchbtn" value="Search" />
+  </form>
+  <script><![CDATA[
+    function ay2z(q)
+    {
+      if( nullArgs("ay2z", q) )
+        return;
+      document.ay2zf.q.value = q;
+      submitForm(ay2zf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>
