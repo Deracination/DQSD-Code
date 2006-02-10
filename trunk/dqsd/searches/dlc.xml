@@ -21,6 +21,7 @@
    <tr><td>/search</td><td> - </td><td>Searches your bookmarks</td></tr>
    <tr><td>/settings</td><td> - </td><td>Goto your settings</td></tr>
    <tr><td>/tag {tag}</td><td> - </td><td>Show items for a particular tag (tag is optional)</td></tr>
+   <tr><td>/url {url}</td><td> - </td><td>See how other del.icio.us users have tagged a particular {url}</td></tr>
   </table>
   <div class="helpboxDescLabels">Examples:</div>
   <table class="helpboxDescTable">
@@ -42,7 +43,7 @@
       var url = false;
 	  var search_all = false;
 	  var user = (typeof dlc_user != 'undefined') ? dlc_user : false;
-      var args = parseArgs(q, "all,about,bookmarks,blog,for,help,inbox,login,logout,popular,post,search,settings,tag");
+      var args = parseArgs(q, "all,about,bookmarks,blog,for,help,inbox,login,logout,popular,post,search,settings,tag,url");
       if ( args.switches.length > 0 ) {
         switch( args.switches[0].name ) {
 		  case "all": search_all = true; break;
@@ -71,7 +72,6 @@
 		  case "logout": url = "http://del.icio.us/logout"; break;
 		  case "popular": url = "http://del.icio.us/popular/" + escape(args.q); break;
 		  case "post": 
-   		    if (!dlc_check_user(user)) return;
 			url = "http://del.icio.us/post/?url=" + escape(args.q);
 			break;
 		  case "settings":
@@ -79,6 +79,7 @@
 			url = "http://del.icio.us/settings/" + user + "/profile";
 		    break;
 		  case "tag": url = "http://del.icio.us/tag/" + escape(args.q); break;
+		  case "url": url = "http://del.icio.us/url/?url=" + escape(args.q); break;
 		}
 	  }
 	  if (!url) {
