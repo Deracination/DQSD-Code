@@ -1,0 +1,34 @@
+<search function="blinkx">
+  <name>Blinkx TV</name>
+  <category>Entertainment</category>
+  <contributor>Shawn K. Hall</contributor>
+  <link>http://www.blinkx.tv/</link>
+  <email>shawn@reliableanswers.com</email>
+  <description>
+  Blinkx.tv television/media clips - over 1 million hours of TV and video
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td></td></tr>
+      <tr><td></td></tr>
+    </table>
+  </description>
+  <form name="blinkxf"
+        method="get"
+        action="http://searchus.blinkx.com/tv/search.do">
+    <input type="hidden" name="query" value="" />
+    <input type="hidden" name="external" value="true" />
+  </form>
+  <script><![CDATA[
+    function blinkx(q)
+    {
+      if( nullArgs("blinkx", q) )
+        return;
+      document.blinkxf.query.value = q;
+      submitForm(blinkxf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>

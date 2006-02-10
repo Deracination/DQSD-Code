@@ -1,0 +1,84 @@
+<search function="domdb">
+  <name>DomainsDB</name>
+  <category>Computers<category>Networking</category></category>
+  <contributor>Shawn K. Hall</contributor>
+  <link>http://domainsdb.net/</link>
+  <email>shawn@reliableanswers.com</email>
+  <description>
+  DomainsDB is one of the top domain aggregating resources on the 'net, providing up to 500 results for each query under simple (free) registration.
+  If you have an account set the 'domdbuser' and 'domdbpass' variables in your localprefs.js file and use 'domdb /login' before making your 
+  requests in order to ensure that you make the most of your queries.
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>domdb ns1.12pointdesign.com</td></tr>
+      <tr><td>domdb /login</td></tr>
+      <tr><td>domdb 216.239.39.99</td></tr>
+      <tr><td>domdb</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Variables:</div>
+    <table class="helpboxDescTable">
+      <tr><td>domdbuser</td><td> - </td><td>Username associated with your account</td></tr>
+      <tr><td>domdbpass</td><td> - </td><td>Password associated with your account</td></tr>
+    </table>
+  </description>
+  <form name="domdbf"
+        method="post"
+        action="http://domainsdb.net/">
+    <input type="hidden" name="d" value="" />
+    <input type="hidden" name="user" value="" />
+    <input type="hidden" name="pass" value="" />
+  </form>
+  <form name="domdbflogin"
+        method="post"
+        action="http://domainsdb.net/cgi-bin/login.cgi">
+    <input type="hidden" name="user" value="" />
+    <input type="hidden" name="pass" value="" />
+    <input type="hidden" name="action" value="login" />
+    <input type="hidden" name="1action" value="GetByDomain" />
+    <input type="hidden" name="domain" value="...." />
+  </form>
+  <script><![CDATA[
+    function domdb(q)
+    {
+      if( nullArgs("domdb", q) )
+        return;
+
+      var domdbuserint = ""; if (typeof domdbuser != "undefined") domdbuserint = domdbuser;
+      var domdbpassint = ""; if (typeof domdbpass != "undefined") domdbpassint = domdbpass;
+
+      var args = parseArgs(q, "login, direct");
+      if( args.switches.length > 0 ){
+        switch( args.switches[0].name ){
+          case "login":
+	      if((domdbuserint!=="") && (domdbpassint!=="")){
+		try{
+		  document.domdbflogin.user.value = domdbuser;
+		  document.domdbflogin.pass.value = domdbpass;
+		  submitForm(domdbflogin);
+		  return;
+		}catch(e){
+		  openSearchWindow("http://domainsdb.net/login.html");
+		  return;
+		}
+	      }else{
+		openSearchWindow("http://domainsdb.net/login.html");
+		return;
+	      }
+          case "direct":
+	    openSearchWindow("http://domainsdb.net/");
+            break;
+          default:
+            break;
+        }
+      }
+
+      document.domdbf.d.value = q;
+      document.domdbf.action = "http://domainsdb.net/" + q;
+      submitForm(domdbf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>

@@ -5,10 +5,12 @@
   <link>http://www.a9.com/</link>
   <email>zeakz1d02@sneakemail.com</email>
   <description>
-  Use A9 to search the web and "Search Inside the Book™" on Amazon.com. Includes helpful search history features.
+  Use A9 to search the web and "Search Inside the Book™" on Amazon.com or within A9 mapping services. Includes helpful search history features.
   <div class="helpboxDescLabels">Example:</div>
   <table class="helpboxDescTable">
      <tr><td>a9 windows crash</td></tr>
+     <tr><td>a9 95383 /map</td></tr>
+     <tr><td>a9 sacramento, ca /map</td></tr>
   </table>
   </description>
 
@@ -18,14 +20,15 @@
       if( nullArgs("a9", q) )
         return;
 
-      var urlprefix = "";
-      var args = parseArgs(q, "generic");
+      var urlprefix = "http://a9.com/";
+      var args = parseArgs(q, "generic, maps");
       if ( args.switches.length > 0 ) {
         switch( args.switches[0].name ) {
-          case "generic": urlprefix = "generic."; break;
+          case "generic": urlprefix = "http://generic.a9.com/"; break;
+          case "maps":    urlprefix = "http://maps.a9.com/?ypLoc="; break;
 		}
 	  }
-	  openSearchWindow("http://" + urlprefix + "a9.com/" + escape(args.q));
+	  openSearchWindow(urlprefix + escape(args.q));
     }
   ]]></script>
 

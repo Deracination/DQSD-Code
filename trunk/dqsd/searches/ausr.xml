@@ -1,0 +1,28 @@
+<search function="ausr">
+  <name>AusRegistry</name>
+  <category>Computers<category>Networking</category></category>
+  <contributor>Shawn K. Hall</contributor>
+  <link>http://whois.ausregistry.net.au/index.php</link>
+  <email>shawn@reliableanswers.com</email>
+  <description>
+  WHOIS for australian domains
+  </description>
+  <form name="ausrf"
+        method="post"
+        action="http://whois.ausregistry.net.au/index.php">
+    <input type="hidden" name="domain" value="" />
+  </form>
+  <script><![CDATA[
+    function ausr(q)
+    {
+      if( nullArgs("ausr", q) )
+        return;
+      document.ausrf.domain.value = q;
+      submitForm(ausrf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>

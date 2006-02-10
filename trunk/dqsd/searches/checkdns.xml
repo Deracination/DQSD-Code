@@ -1,0 +1,33 @@
+<search function="checkdns">
+  <name>CheckDNS</name>
+  <category>Computers<category>Networking</category></category>
+  <contributor>Shawn K. Hall</contributor>
+  <link>http://www.checkdns.net/quickcheck.aspx</link>
+  <email>shawn@reliableanswers.com</email>
+  <description>
+  CheckDNS provides realtime DNS analysis for domain and server problems
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>checkdns microsoft.com</td></tr>
+    </table>
+  </description>
+  <form name="checkdnsf"
+        method="get"
+        action="http://www.checkdns.net/quickcheck.aspx">
+    <input type="hidden" name="domain" value="" />
+    <input type="hidden" name="detailed" value="1" />
+  </form>
+  <script><![CDATA[
+    function checkdns(q)
+    {
+      if( nullArgs("checkdns", q) )
+        return;
+      document.checkdnsf.domain.value = q;
+      submitForm(checkdnsf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>

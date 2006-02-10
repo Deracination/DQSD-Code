@@ -1,0 +1,66 @@
+<search function="xforce">
+  <name>X-Force Vulnerability and Security Database</name>
+  <category>Computers<category>Software</category></category>
+  <contributor>Shawn K. Hall</contributor>
+  <link>http://xforce.iss.net/xforce/search.php</link>
+  <email>shawn@reliableanswers.com</email>
+  <description>
+  The Internet Security Systems' X-Force Database is the world's most comprehensive threats and vulnerabilities database. This database is the result of thousands of hours of work by X-Force researchers and developers, and much of the data is incorporated into ISS' own products. As of July 2005, the database contains over 21,000 unique vulnerabilities, threats, and security checks, compiled from the Internet, original X-Force research, ISS software, and other software.
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/score</td><td> - </td><td>Order by score</td></tr>
+      <tr><td>/age</td><td> - </td><td>Order by age</td></tr>
+      <tr><td>/title</td><td> - </td><td>Order by title</td></tr>
+      <tr><td>/10</td><td> - </td><td>10 results</td></tr>
+      <tr><td>/20</td><td> - </td><td>20 results</td></tr>
+      <tr><td>/30</td><td> - </td><td>30 results</td></tr>
+      <tr><td>/any</td><td> - </td><td>Match any portion</td></tr>
+      <tr><td>/all</td><td> - </td><td>Match all</td></tr>
+      <tr><td>/boolean</td><td> - </td><td>Boolean matching</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>xforce retina</td></tr>
+      <tr><td>xforce google-toolbar</td></tr>
+    </table>
+  </description>
+  <form name="xforcef"
+        method="get"
+        action="http://xforce.iss.net/xforce/search.php">
+    <input type="hidden" name="type" value="2" />
+    <input type="hidden" name="pattern" value="" />
+    <input type="hidden" name="sort" value="score" />
+    <input type="hidden" name="display" value="all" />
+    <input type="hidden" name="show" value="20" />
+  </form>
+  <script><![CDATA[
+    function xforce(q)
+    {
+      if( nullArgs("xforce", q) )
+        return;
+
+      var args = parseArgs(q, "score, age, title, 10, 20, 30, any, all, boolean");
+      for (var iSwitch = 0; iSwitch < args.switches.length; iSwitch++){
+        switch( args.switches[iSwitch].name ){
+          case "score":	document.xforcef.sort.value = "score"; break;
+          case "age":	document.xforcef.sort.value = "time";  break;
+          case "title":	document.xforcef.sort.value = "title"; break;
+          case "10":	document.xforcef.show.value = "10"; break;
+          case "20":	document.xforcef.show.value = "20"; break;
+          case "30":	document.xforcef.show.value = "30"; break;
+          case "any":	document.xforcef.display.value = "any"; break;
+          case "all":	document.xforcef.display.value = "all"; break;
+          case "boolean":	document.xforcef.display.value = "boolean"; break;
+          default: break;
+        }
+      }
+
+      document.xforcef.pattern.value = args.q;
+      submitForm(xforcef);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>

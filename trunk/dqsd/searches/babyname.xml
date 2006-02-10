@@ -1,0 +1,74 @@
+<search function="babyname">
+  <name>ThinkBabyNames</name>
+  <category>People and Places</category>
+  <contributor>Shawn K. Hall</contributor>
+  <link>http://www.thinkbabynames.com/</link>
+  <email>shawn@reliableanswers.com</email>
+  <description>
+  ThinkBabyNames provides a broad searchable index of names and their meanings, genders and various spellings. Perfect for any parent-to-be.
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/boy</td><td> - </td><td>Names for boys</td></tr>
+      <tr><td>/girl</td><td> - </td><td>Names for girls</td></tr>
+      <tr><td>/neuter</td><td> - </td><td>Names for either gender</td></tr>
+      <tr><td>/starting</td><td> - </td><td>Starting with...</td></tr>
+      <tr><td>/ending</td><td> - </td><td>Ending with...</td></tr>
+      <tr><td>/means</td><td> - </td><td>Meaning</td></tr>
+      <tr><td>/relates</td><td> - </td><td>Relates to</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>babyname q /starting</td></tr>
+      <tr><td>babyname jesus /relates</td></tr>
+    </table>
+  </description>
+  <form name="babynamef"
+        method="get"
+        action="http://www.thinkbabynames.com/search.php">
+    <input type="hidden" name="s" value="" />
+    <input type="hidden" name="g" value="1" />
+    <input type="hidden" name="n" value="On" />
+    <input type="hidden" name="t" value="1" />
+    <input type="hidden" name="t" value="2" />
+    <input type="hidden" name="t" value="3" />
+    <input type="hidden" name="t" value="4" />
+    <input type="hidden" name="t" value="0" />
+  </form>
+  <script><![CDATA[
+    function babyname(q)
+    {
+      if( nullArgs("babyname", q) )
+        return;
+
+      document.babynamef.t.value = "1";
+      var args = parseArgs(q, "boy, girl, neuter, name, starting, ending, means, relates");
+      for (var iSwitch = 0; iSwitch < args.switches.length; iSwitch++){
+        switch( args.switches[iSwitch].name )
+        {
+          case "boy":
+		document.babynamef.n.value = "";
+		document.babynamef.g.value = "1";
+		break;
+          case "girl":
+		document.babynamef.n.value = "";
+		document.babynamef.g.value = "0";
+		break;
+          case "neuter":	document.babynamef.n.value = "On"; break;
+          case "name":		document.babynamef.t.value = "1"; break;
+          case "starting":	document.babynamef.t.value = "2"; break;
+          case "ending":	document.babynamef.t.value = "3"; break;
+          case "means":		document.babynamef.t.value = "4"; break;
+          case "relates":	document.babynamef.t.value = "0"; break;
+          default:		break;
+        }
+      }
+
+      document.babynamef.s.value = args.q;
+      submitForm(babynamef);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>

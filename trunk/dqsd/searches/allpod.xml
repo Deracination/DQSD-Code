@@ -1,0 +1,27 @@
+<search function="allpod">
+  <name>AllPodcasts</name>
+  <category>Computers<category>Networking</category></category>
+  <contributor>Shawn K. Hall</contributor>
+  <link>http://www.allpodcasts.com/PingAll/Default.aspx</link>
+  <email>shawn@reliableanswers.com</email>
+  <description>Enter your RSS feed URL to ping a broad array of pod-aggregating directories.</description>
+  <form name="allpodf"
+        method="post"
+        action="http://www.allpodcasts.com/PingAll/Default.aspx">
+    <input type="hidden" name="__VIEWSTATE" value="/wEPDwULLTEwMzYyNDk4NTZkZG9b+RDPXE1r2VFuIZY3Zj9D4OBr" />
+    <input type="hidden" name="feed" value="" />
+  </form>
+  <script><![CDATA[
+    function allpod(q)
+    {
+      if( nullArgs("allpod", q) )
+        return;
+      document.allpodf.feed.value = q;
+      submitForm(allpodf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>

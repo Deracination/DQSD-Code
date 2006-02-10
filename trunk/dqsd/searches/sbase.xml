@@ -1,0 +1,34 @@
+<search function="sbase">
+  <name>Senderbase</name>
+  <category>Computers<category>Networking</category></category>
+  <contributor>Shawn K. Hall</contributor>
+  <link>http://www.senderbase.org/search</link>
+  <email>shawn@reliableanswers.com</email>
+  <description>
+  SenderBase email statistics aggregation
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>sbase example.com</td></tr>
+      <tr><td>sbase 1.2.3.4</td></tr>
+      <tr><td>sbase 1.2.3.4/29</td></tr>
+    </table>
+  </description>
+  <form name="sbasef"
+        method="get"
+        action="http://www.senderbase.org/search">
+    <input type="hidden" name="searchString" value="" />
+  </form>
+  <script><![CDATA[
+    function sbase(q)
+    {
+      if( nullArgs("sbase", q) )
+        return;
+      document.sbasef.searchString.value = q;
+      submitForm(sbasef);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>

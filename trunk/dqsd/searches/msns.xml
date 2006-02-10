@@ -1,0 +1,65 @@
+<search function="msns">
+  <name>MSN Search</name>
+  <category>Search the Web</category>
+  <contributor>Shawn K. Hall</contributor>
+  <link>http://search.msn.com/</link>
+  <email>shawn@reliableanswers.com</email>
+  <description>
+  MSN Search
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/web</td><td> - </td><td>Search the web</td></tr>
+      <tr><td>/news</td><td> - </td><td>Search news articles</td></tr>
+      <tr><td>/images</td><td> - </td><td>Search for images</td></tr>
+      <tr><td>/local</td><td> - </td><td>Search local information</td></tr>
+      <tr><td>/word</td><td> - </td><td>Define a word</td></tr>
+      <tr><td>/encarta</td><td> - </td><td>Search Encarta</td></tr>
+      <tr><td>/stock</td><td> - </td><td>Stock quotes</td></tr>
+      <tr><td>/movies</td><td> - </td><td>Find movies</td></tr>
+      <tr><td>/shopping</td><td> - </td><td>Shopping</td></tr>
+      <tr><td>/music</td><td> - </td><td>Music</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>msns local support groups</td></tr>
+      <tr><td>msns goog /stock</td></tr>
+      <tr><td>msns iraq /news</td></tr>
+    </table>
+  </description>
+  <form name="msnsf"
+        method="get"
+        action="http://search.msn.com/results.aspx">
+    <input type="hidden" name="q" value="" />
+    <input type="hidden" name="srch_type" value="0" />
+  </form>
+  <script><![CDATA[
+    function msns(q){
+      if( nullArgs("msns", q) )
+        return;
+
+      var args = parseArgs(q, "web, news, images, local, word, encarta, stock, movies, shopping, music");
+      if ( args.switches.length > 0 ){
+        switch( args.switches[0].name ){
+          case "web":		document.msnsf.srch_type.value = "0"; break;
+          case "news":		document.msnsf.srch_type.value = "1"; break;
+          case "images":	document.msnsf.srch_type.value = "2"; break;
+          case "local":		document.msnsf.srch_type.value = "3"; break;
+          case "word":		document.msnsf.srch_type.value = "4"; break;
+          case "encarta":	document.msnsf.srch_type.value = "5"; break;
+          case "stock":		document.msnsf.srch_type.value = "6"; break;
+          case "movies":	document.msnsf.srch_type.value = "7"; break;
+          case "shopping":	document.msnsf.srch_type.value = "8"; break;
+          case "music":		document.msnsf.srch_type.value = "9"; break;
+          default:		break;
+       }
+      }
+
+      document.msnsf.q.value = args.q;
+      submitForm(msnsf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>

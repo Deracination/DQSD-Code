@@ -25,6 +25,29 @@ New Searches
 * ebayuk - Specialized EBay UK search (David Golding, by reminder of Tom C)
 * bbust - Search blockbuster.com (Glenn Carr)
 * qsfreq - Display frequency of searches used; requires change to history.js and enabled with "qsfreqLogSearchFrequency = 1" in localprefs.js (Glenn Carr)
+* allpod - AllPodcasts Podcast promotional engine (Shawn K. Hall)
+* ausr - Australian Domain Registry search (Shawn K. Hall)
+* autolink - AutoLink automatic text-linking from supplied text (Shawn K. Hall)
+* ay2z - aytozon is a mashup for shopping eBay and Amazon simultaneously. (Shawn K. Hall)
+* babyname - ThinkBabyNames provides a broad searchable index of names and their meanings, genders and various spellings. (Shawn K. Hall)
+* becom - Become search (Shawn K. Hall)
+* blinkx - Blinkx.tv television/media clips (Shawn K. Hall)
+* brainb - BrainBoost answer engine, powered by Answers.com (Shawn K. Hall)
+* checkdns - CheckDNS provides realtime DNS analysis for domain and server problems (Shawn K. Hall)
+* chmoog - Chemical name and suppliers search (Shawn K. Hall)
+* ciseek - Competitive Intelligence Resource Index (Shawn K. Hall)
+* colorss - ColorCombos.com was built to help web developers quickly select and test color combinations. (Shawn K. Hall)
+* dblt - DoubleTrust (Yahoo+Google results) (Shawn K. Hall)
+* defpass - Huge default password database for hardware and software of all genres (Shawn K. Hall)
+* domdb - DomainsDB login, ip, name server and domain search (Shawn K. Hall)
+* dragondb - DragonSoft Vulnerability Database (Shawn K. Hall)
+* folkmed - Folk Medicine archive at UCLA (Shawn K. Hall)
+* iphunt - IPHunt, an IP dig tool with CIDR support (Shawn K. Hall)
+* msns - MSN Search (Shawn K. Hall)
+* ohno - OhNoRobot text-based comic search (Shawn K. Hall)
+* pys - Python Search (Shawn K. Hall)
+* sbase - SenderBase email statistics aggregation (Shawn K. Hall)
+* xforce - X-Force security database (Shawn K. Hall)
 
 Modified Searches
 * tinyurl - changed it to copy the tinyurl into the DQSD text box and select it instead of popping up the tinyurl webpage. (Brent Beardsley)
@@ -33,6 +56,7 @@ Modified Searches
 * comx - added Zits (Seattle PI) and editorials (Brent Beardsley)
 * httpinst - added /update switch to update or install searches from dqsd cvs repository (Brent Beardsley)
 * mwd - added /popup switch to display results in a popup window; added mwdDisplayInPopup usage to preferences.js (Glenn Carr, Kim Gräsman)
+* a9 - added maps feature (Shawn K. Hall)
 
 Removed Searches
 

@@ -1,0 +1,53 @@
+<search function="defpass">
+  <name>Big Bertha Says: Default Passwords</name>
+  <category>Computers<category>Reference</category></category>
+  <contributor>Shawn K. Hall</contributor>
+  <link>http://defaultpassword.com/</link>
+  <email>shawn@reliableanswers.com</email>
+  <description>
+  Huge default password database for hardware and software of all genres.
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/manufacturer</td></tr>
+      <tr><td>/product</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>defpass wrt54g</td></tr>
+      <tr><td>defpass oracle /man</td></tr>
+      <tr><td>defpass apple /man</td></tr>
+    </table>
+  </description>
+  <form name="defpassf"
+        method="get"
+        action="http://defaultpassword.com/">
+    <input type="hidden" name="char" value="" />
+    <input type="hidden" name="type" value="prod" />
+    <input type="hidden" name="action" value="dpl" />
+  </form>
+  <script><![CDATA[
+    function defpass(q)
+    {
+      if( nullArgs("defpass", q) )
+        return;
+
+      document.defpassf.type.value = "prod";
+
+      var args = parseArgs(q, "manufacturer, product");
+      if ( args.switches.length > 0 ){
+        switch( args.switches[0].name ){
+          case "manufacturer": document.defpassf.type.value = "";     break;
+          case "product":      document.defpassf.type.value = "prod"; break;
+          default: break;
+        }
+      }
+
+      document.defpassf.char.value = args.q;
+      submitForm(defpassf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>

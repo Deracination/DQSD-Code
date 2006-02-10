@@ -1,0 +1,33 @@
+<search function="ciseek">
+  <name>CIseek</name>
+  <category>Reference<category>General</category></category>
+  <contributor>Shawn K. Hall</contributor>
+  <link>http://www.bidigital.com/ci/</link>
+  <email>shawn@reliableanswers.com</email>
+  <description>
+  Competitive Intelligence Resource Index - A search engine and listing of sites-by-category for finding CI resources.
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>ciseek act</td></tr>
+      <tr><td>ciseek microsoft</td></tr>
+    </table>
+  </description>
+  <form name="ciseekf"
+        method="get"
+        action="http://www.bidigital.com/cgi-bin/links/search.cgi">
+    <input type="hidden" name="query" value="" />
+  </form>
+  <script><![CDATA[
+    function ciseek(q)
+    {
+      if( nullArgs("ciseek", q) )
+        return;
+      document.ciseekf.query.value = q;
+      submitForm(ciseekf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>

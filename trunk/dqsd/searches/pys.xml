@@ -1,0 +1,28 @@
+<search function="pys">
+  <name>Python Search</name>
+  <category>Computers<category>Programming</category></category>
+  <contributor>Shawn K. Hall</contributor>
+  <link>http://www.voidspace.org.uk/cgi-bin/pysearch/search.py</link>
+  <email>shawn@reliableanswers.com</email>
+  <description>
+  A Python Programming Specific Search Engine. Search the internet for results relevant to python programming.
+  </description>
+  <form name="pysf"
+        method="get"
+        action="http://www.voidspace.org.uk/cgi-bin/pysearch/search.py">
+    <input type="hidden" name="query" value="" />
+  </form>
+  <script><![CDATA[
+    function pys(q)
+    {
+      if( nullArgs("pys", q) )
+        return;
+      document.pysf.query.value = q;
+      submitForm(pysf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>
