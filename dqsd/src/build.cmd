@@ -23,6 +23,6 @@ copy /y ReleaseMinDependency\DQSDTools.dll ..\..\DQSDTools.dll
 popd
 
 REM The LZMA compressor should yield the smallest installer with NSIS 2.0
-rem makensis /X"SetCompressor /FINAL lzma" search.nsi
+makensis /X"SetCompressor /FINAL lzma" search.nsi
 
 popd
