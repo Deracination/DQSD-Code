@@ -78,6 +78,7 @@ UtilitiesFindDQSDWindow(LPDISPATCH pDispDocument)
 	}
 	catch(_com_error& e)
 	{
+		e;
 		ATLTRACE("UtilitiesFindDQSDWindow: COM exception: Desc %s, Message %d\n", 
 			(LPCTSTR)e.Description(), 
 			(LPCTSTR)e.ErrorMessage());

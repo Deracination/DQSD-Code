@@ -238,7 +238,7 @@ STDMETHODIMP CLauncher::ReadFile(BSTR bstrFilename, BSTR *pbstrResult)
 		return Error(_T("Filename is not in the installation or app data directory trees."), IID_ILauncher, E_FAIL);
 	}
 
-	// Make sure it's extension is not one of the bad extensions
+	// Make sure its extension is not one of the bad extensions
 	TCHAR *szBadExtensions = _T(".exe;.dll");
 	if (IsFileExtension(szFilename, szBadExtensions))
 	{
@@ -327,7 +327,7 @@ STDMETHODIMP CLauncher::GetProtocolHandler(BSTR bstrProtocol, BSTR *pbstrHandler
 	CRegKey rk;
 	if ( ( ERROR_SUCCESS != rk.Open( HKEY_CLASSES_ROOT, szProtocolHandlerKey, KEY_READ ) )
 		 ||
-	     ( ERROR_SUCCESS != rk.QueryValue( szProtocolHandler, _T(""), &dwCount ) ) )
+	     ( ERROR_SUCCESS != rk.QueryValue( _T(""), NULL, szProtocolHandler, &dwCount ) ) )
 	{
 		Error(IDS_ERR_PROTOCOLNOTFOUND, IID_ILauncher);
 		return E_UNEXPECTED;
@@ -861,7 +861,7 @@ HRESULT CLauncher::GetInstallationDirectory( LPTSTR szResult, DWORD dwResultSize
 		}
 
 		DWORD dwCount = sizeof(m_szInstallDir);
-		ret = rk.QueryValue( m_szInstallDir, _T("InstallDir"), &dwCount );
+		ret = rk.QueryValue( _T("InstallDir"), NULL, m_szInstallDir, &dwCount );
 		if ( ERROR_SUCCESS != ret )
 		{
 			Error(IDS_ERR_REGKEYNOTFOUND, IID_ILauncher);
