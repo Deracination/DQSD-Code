@@ -39,7 +39,9 @@ extern CComModule _Module;
 
 #pragma warning(push, 3)
 
+#pragma warning (disable : 4702)  // warning C4702: unreachable code 
 #include <map>
+#pragma warning (default : 4702) 
 #include <string>
 
 #pragma warning(pop)
