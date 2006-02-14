@@ -58,6 +58,7 @@ Modified Searches
 * httpinst - added /update switch to update or install searches from dqsd cvs repository (Brent Beardsley)
 * mwd - added /popup switch to display results in a popup window; added mwdDisplayInPopup usage to preferences.js (Glenn Carr, Kim Gräsman)
 * a9 - added maps feature (Shawn K. Hall)
+* viam - Changed to fit site changes (MLL)
 
 Removed Searches
 
