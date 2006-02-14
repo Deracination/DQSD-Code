@@ -25,9 +25,6 @@
   <script><![CDATA[
     function mwd(q)
     {
-      if( nullArgs("mwd",q) )
-        return false;
-
       var args = parseArgs(q, "popup");
       if ( typeof mwdDisplayInPopup == "undefined" )
         mwdDisplayInPopup = 0;
@@ -37,6 +34,9 @@
       }
       else
       {
+        if( nullArgs("mwd",q) )
+          return false;
+
         document.mwdf.va.value = args.q;
         submitForm(mwdf); // Display in regular browser window
       }
@@ -75,6 +75,24 @@
         return;
       }
       
+      if ( q == '' )
+      {
+        if ( typeof dictPopup != 'undefined' && dictPopup_ring.length > 0 )
+        {
+          if ( --dictPopup_sp < 0 )
+            dictPopup_sp = dictPopup_ring.length - 1;
+
+          var prev = dictPopup_ring[ dictPopup_sp ];
+          dictPopup.document.body.innerHTML = prev.html;
+          dictPopup.show(prev.x, prev.y, prev.width, prev.height, dictPopup.document.body);
+        }
+        else
+        {
+          nullArgs("mwd",q)
+        }
+        return;
+      }
+
       var windowW = 500;
 
       var sBody = xmlHttp.responseText.replace( /[\r\n]/gi, "" );
@@ -156,7 +174,15 @@
       dictPopup.hide();
       dictPopup.document.all.defTable.style.width = windowW - 5;
       windowH = windowH > window.screen.height/2 ? window.screen.height/2 : windowH;
-      dictPopup.show((buttonalign == "left" ? 0 : document.body.clientWidth - windowW), -windowH, windowW, windowH, document.body);
+      dictPopup_x = (buttonalign == "left" ? 0 : document.body.clientWidth - windowW);
+      dictPopup_y = -windowH;
+      dictPopup_width = windowW;
+      dictPopup_height = windowH;
+      if ( typeof dictPopup_ring == 'undefined' )
+        dictPopup_ring = new Array();
+      dictPopup_ring.push( { x:dictPopup_x, y:dictPopup_y, width:dictPopup_width, height:dictPopup_height, html:dictPopupBody.innerHTML } );
+      dictPopup_sp = dictPopup_ring.length - 1;
+      dictPopup.show(dictPopup_x, dictPopup_y, dictPopup_width, dictPopup_height, document.body);
     }
     
     function mwdCopySelection()
