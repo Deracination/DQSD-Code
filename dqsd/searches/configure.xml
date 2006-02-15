@@ -29,14 +29,14 @@
     }
 
     var CONFIGURE_LOCAL_STYLESHEET_NAME = 
-	{
-	  en: "Local Stylesheet..."
-	}
+    {
+      en: "Local Stylesheet..."
+    }
 
-	var CONFIGURE_LOCAL_STYLESHEET_DESCRIPTION = 
-	{
-	  en: "Edit local stylesheet"
-	}
+    var CONFIGURE_LOCAL_STYLESHEET_DESCRIPTION = 
+    {
+      en: "Edit local stylesheet"
+    }
 
     var CONFIGURE_SYSTEM_ALIASES_NAME = 
     {
@@ -123,116 +123,124 @@
       en: "Classic"
     };
 
-
-	function editSearchFile(strFilename)
-	{
-		return editConfigFile(strFilename);
-	}
+    function editSearchFile(strFilename)
+    {
+      var myEditor = (typeof searchEditorExe != "undefined") ? searchEditorExe : "notepad";
+      var install_dir = ".";
+      if (ensureLauncher())
+      {
+        install_dir = DQSDLauncher.InstallationDirectory;
+      }
+      var cmd = "\""+myEditor+"\" \""+install_dir+"\\"+strFilename + "\"";
+      openDocument(cmd);
+      return "";
+    }
 
     function editCSSFile(strFilename)
-	{
-		var myEditor = (typeof cssEditorExe != "undefined") ? cssEditorExe : "notepad";
-		var install_dir = ".";
-		if (ensureLauncher())
-		{
-			install_dir = DQSDLauncher.InstallationDirectory;
-		}
-		var cmd = "\""+myEditor+"\" \""+install_dir+"\\"+strFilename + "\"";
-		openDocument(cmd);
-		return "";
-	}
+    {
+      var myEditor = (typeof cssEditorExe != "undefined") ? cssEditorExe : "notepad";
+      var install_dir = ".";
+      if (ensureLauncher())
+      {
+        install_dir = DQSDLauncher.InstallationDirectory;
+      }
+      var cmd = "\""+myEditor+"\" \""+install_dir+"\\"+strFilename + "\"";
+      openDocument(cmd);
+      return "";
+    }
 
-	function editConfigFile(strFilename)
-	{
-		var myEditor = (typeof configureEditorExe != "undefined") ? configureEditorExe : "notepad";
-		var install_dir = ".";
-		if (ensureLauncher())
-		{
-			install_dir = DQSDLauncher.InstallationDirectory;
-		}
-		var cmd = "\""+myEditor+"\" \""+install_dir+"\\"+strFilename + "\"";
-		openDocument(cmd);
-		return "";
-	}
+    function editConfigFile(strFilename)
+    {
+      var myEditor = (typeof configureEditorExe != "undefined") ? configureEditorExe : "notepad";
+      var install_dir = ".";
+      if (ensureLauncher())
+      {
+        install_dir = DQSDLauncher.InstallationDirectory;
+      }
+      var cmd = "\""+myEditor+"\" \""+install_dir+"\\"+strFilename + "\"";
+      openDocument(cmd);
+      return "";
+    }
 
-        function buildConfigureMenu(mb, hmenu)
-	{
-		mb.AppendMenuItem( local(CONFIGURE_LOCAL_ALIASES_NAME), "editConfigFile(\"localaliases.txt\")", local(CONFIGURE_LOCAL_ALIASES_DESCRIPTION), hmenu);
-		mb.AppendMenuItem( local(CONFIGURE_LOCAL_PREFERENCES_NAME), "editConfigFile(\"localprefs.js\")", local(CONFIGURE_LOCAL_PREFERENCES_DESCRIPTION), hmenu);
-		mb.AppendMenuItem( local(CONFIGURE_LOCAL_STYLESHEET_NAME), "editCSSFile(\"localsearch.css\")", local(CONFIGURE_LOCAL_STYLESHEET_DESCRIPTION), hmenu);
-	   
-	   var confthememenu = mb.AppendSubMenu( local(CONFIGURE_COLOR_SCHEME_DESCRIPTION), hmenu);
-	   mb.AppendMenuItem( local(CONFIGURE_BLUE_SCHEME_NAME), "loadcssfile(\"theme_blue.css\")", local(CONFIGURE_BLUE_SCHEME_DESCRIPTION), confthememenu);
-		mb.AppendMenuItem( local(CONFIGURE_OLIVE_SCHEME_NAME), "loadcssfile(\"theme_olive.css\")", local(CONFIGURE_OLIVE_SCHEME_DESCRIPTION), confthememenu);
-		mb.AppendMenuItem( local(CONFIGURE_SILVER_SCHEME_NAME), "loadcssfile(\"theme_silver.css\")", local(CONFIGURE_SILVER_SCHEME_DESCRIPTION), confthememenu);
-   	mb.AppendMenuItem( local(CONFIGURE_CLASSIC_SCHEME_NAME), "loadcssfile(\"classic\")", local(CONFIGURE_CLASSIC_SCHEME_DESCRIPTION), confthememenu);
-		
-		mb.AppendSeparator(hmenu);
-		mb.AppendMenuItem( local(CONFIGURE_SYSTEM_ALIASES_NAME), "editConfigFile(\"aliases.txt\")", local(CONFIGURE_SYSTEM_ALIASES_DESCRIPTION), hmenu);
-		mb.AppendMenuItem( local(CONFIGURE_SYSTEM_PREFERENCES_NAME), "editConfigFile(\"preferences.js\")", local(CONFIGURE_SYSTEM_PREFERENCES_DESCRIPTION), hmenu);	
-		mb.AppendSeparator(hmenu);
-		mb.AppendMenuItem( local(CONFIGURE_RELOAD_DQSD_NAME), "if (confirm('"+local(CONFIGURE_RELOAD_DQSD_PROMPT)+"')) reload();", local(CONFIGURE_RELOAD_DQSD_DESCRIPTION), hmenu);
+    function buildConfigureMenu(mb, hmenu)
+    {
+      mb.AppendMenuItem( local(CONFIGURE_LOCAL_ALIASES_NAME), "editConfigFile(\"localaliases.txt\")", local(CONFIGURE_LOCAL_ALIASES_DESCRIPTION), hmenu);
+      mb.AppendMenuItem( local(CONFIGURE_LOCAL_PREFERENCES_NAME), "editConfigFile(\"localprefs.js\")", local(CONFIGURE_LOCAL_PREFERENCES_DESCRIPTION), hmenu);
+      mb.AppendMenuItem( local(CONFIGURE_LOCAL_STYLESHEET_NAME), "editCSSFile(\"localsearch.css\")", local(CONFIGURE_LOCAL_STYLESHEET_DESCRIPTION), hmenu);
 
-		ensureLauncher();
-		var addonFolders = getFolders(DQSDLauncher.InstallationDirectory+"\\addons\\");
-		var installedAddons = null;
-		if (addonFolders != "") {
-			installedAddons = addonFolders.split('\n');
-			if (installedAddons.length > 0 && installedAddons[0] == ".") {
-				installedAddons = installedAddons.slice(1);
-			}
-		} else {
-			installedAddons = new Array();
-		}
+      var confthememenu = mb.AppendSubMenu( local(CONFIGURE_COLOR_SCHEME_DESCRIPTION), hmenu);
+      mb.AppendMenuItem( local(CONFIGURE_BLUE_SCHEME_NAME), "loadcssfile(\"theme_blue.css\")", local(CONFIGURE_BLUE_SCHEME_DESCRIPTION), confthememenu);
+      mb.AppendMenuItem( local(CONFIGURE_OLIVE_SCHEME_NAME), "loadcssfile(\"theme_olive.css\")", local(CONFIGURE_OLIVE_SCHEME_DESCRIPTION), confthememenu);
+      mb.AppendMenuItem( local(CONFIGURE_SILVER_SCHEME_NAME), "loadcssfile(\"theme_silver.css\")", local(CONFIGURE_SILVER_SCHEME_DESCRIPTION), confthememenu);
+      mb.AppendMenuItem( local(CONFIGURE_CLASSIC_SCHEME_NAME), "loadcssfile(\"classic\")", local(CONFIGURE_CLASSIC_SCHEME_DESCRIPTION), confthememenu);
 
-		if (installedAddons.length > 0) {
-		        mb.AppendSeparator(hmenu);
-			var haddons = mb.AppendSubMenu(local(CONFIGURE_INSTALLED_ADDONS_NAME)+" ("+installedAddons.length+")", hmenu);
-			for (var i=0; i < installedAddons.length; i++) {
-				mb.AppendMenuItem(installedAddons[i], "", installedAddons[i], haddons);
-				mb.DisableMenuItem(i, haddons);
-			}
-		}
+      mb.AppendSeparator(hmenu);
+      mb.AppendMenuItem( local(CONFIGURE_SYSTEM_ALIASES_NAME), "editConfigFile(\"aliases.txt\")", local(CONFIGURE_SYSTEM_ALIASES_DESCRIPTION), hmenu);
+      mb.AppendMenuItem( local(CONFIGURE_SYSTEM_PREFERENCES_NAME), "editConfigFile(\"preferences.js\")", local(CONFIGURE_SYSTEM_PREFERENCES_DESCRIPTION), hmenu); 
+      mb.AppendSeparator(hmenu);
+      mb.AppendMenuItem( local(CONFIGURE_RELOAD_DQSD_NAME), "if (confirm('"+local(CONFIGURE_RELOAD_DQSD_PROMPT)+"')) reload();", local(CONFIGURE_RELOAD_DQSD_DESCRIPTION), hmenu);
 
-	}
-	function loadcssfile (cssfilename)
-	{
-	   var install_dir = DQSDLauncher.InstallationDirectory;
-	   if (cssfilename == "classic") {
-	      writeFile(install_dir+'\\theme.css', "");
-	      reload();
-	      return;
-	   }
-      var cssContent=readFile(install_dir+'\\'+cssfilename);
-      writeFile(install_dir+'\\theme.css', cssContent);
-	   reload();
-	}
-	
-	function configureDQSD(q)
-	{
-          // build the menu
-          var mb = new ActiveXObject("DQSDTools.MenuBuilder");
-          if (mb != null) {
-            // Align the menu with the button
-            mb.HorizontalAlignment = ( buttonalign == 'left' ? 1 : 2 ); // 1 = left, 2 = right (default)
+      ensureLauncher();
+      var addonFolders = getFolders(DQSDLauncher.InstallationDirectory+"\\addons\\");
+      var installedAddons = null;
+      if (addonFolders != "") {
+        installedAddons = addonFolders.split('\n');
+        if (installedAddons.length > 0 && installedAddons[0] == ".") {
+          installedAddons = installedAddons.slice(1);
+        }
+      } else {
+        installedAddons = new Array();
+      }
 
-	    var hmenu = 0;
-            buildConfigureMenu(mb, hmenu);
-            var fn = mb.Display(document);
-            if (fn) {
-              eval(fn);
-            }
-            mb = null;
-          }
-	}
+      if (installedAddons.length > 0) {
+              mb.AppendSeparator(hmenu);
+        var haddons = mb.AppendSubMenu(local(CONFIGURE_INSTALLED_ADDONS_NAME)+" ("+installedAddons.length+")", hmenu);
+        for (var i=0; i < installedAddons.length; i++) {
+          mb.AppendMenuItem(installedAddons[i], "", installedAddons[i], haddons);
+          mb.DisableMenuItem(i, haddons);
+        }
+      }
 
-	function configureMenuHook(mb)
-	{
-		var confhmenu = mb.InsertSubMenu("Configure", 2);
-		buildConfigureMenu(mb, confhmenu);
-	}
-	
-	registerMenuHook(configureMenuHook);
+    }
+
+    function loadcssfile (cssfilename)
+    {
+       var install_dir = DQSDLauncher.InstallationDirectory;
+       if (cssfilename == "classic") {
+          writeFile(install_dir+'\\theme.css', "");
+          reload();
+          return;
+       }
+        var cssContent=readFile(install_dir+'\\'+cssfilename);
+        writeFile(install_dir+'\\theme.css', cssContent);
+       reload();
+    }
+  
+    function configureDQSD(q)
+    {
+      // build the menu
+      var mb = new ActiveXObject("DQSDTools.MenuBuilder");
+      if (mb != null) {
+        // Align the menu with the button
+        mb.HorizontalAlignment = ( buttonalign == 'left' ? 1 : 2 ); // 1 = left, 2 = right (default)
+
+        var hmenu = 0;
+        buildConfigureMenu(mb, hmenu);
+        var fn = mb.Display(document);
+        if (fn) {
+          eval(fn);
+        }
+        mb = null;
+      }
+    }
+
+  function configureMenuHook(mb)
+  {
+    var confhmenu = mb.InsertSubMenu("Configure", 2);
+    buildConfigureMenu(mb, confhmenu);
+  }
+  
+  registerMenuHook(configureMenuHook);
     ]]>
   </script>
 </search>

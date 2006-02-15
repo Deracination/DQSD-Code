@@ -1,0 +1,37 @@
+<search function="qsedit">
+  <name>Quick Search Edit</name>
+  <description>Edit a search file
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>qsedit amaz</td></tr>
+    </table>
+  </description>
+  <category nomenu="true">Configure</category>
+  <script><![CDATA[
+    function qsedit(q)
+    {
+      if( nullArgs("qsedit", q) )
+        return false;
+
+      var searchFile = q;
+      if ( searchFile.substr( searchFile.length - 4 ) != ".xml" )
+        searchFile += ".xml"
+      try
+      {
+        ensureLauncher();
+        searchFile = '\\searches\\' + searchFile;
+        readFile( DQSDLauncher.InstallationDirectory + searchFile );
+        editSearchFile( searchFile );
+      }
+      catch ( e )
+      {
+        alert( 'Unable to open ' + searchFile );
+      }
+    }
+  ]]></script>
+  <copyright>
+  Copyright (c) 2006 David Bau, Glenn Carr
+  Distributed under the terms of the
+  GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>

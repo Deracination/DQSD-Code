@@ -54,7 +54,7 @@
         case "feedback": openSearchWindow('http://cgi.ebay.com/aw-cgi/eBayISAPI.dll?ViewFeedback&userid=' + args.q); return false;
         case "items": openSearchWindow('http://cgi.ebay.com/ws/eBayISAPI.dll?ViewSellersOtherItems&userid=' + args.q + 
                                        '&include=0&since=-1&sort=3&rows=25'); return false;
-        case "my": openSearchWindow('http://cgi.ebay.com/aw-cgi/eBayISAPI.dll?MyEbayLogin'); return false;
+        case "my": openSearchWindow('http://my.ebay.com/'); return false;
         case "user": openSearchWindow('http://cgi.ebay.com/aw-cgi/eBayISAPI.dll?' +
                                       'MfcISAPICommand=ViewBidItems&userid=' + args.q +
                                       '&completed=0&sort=3&all=1&rows=25'); return false;

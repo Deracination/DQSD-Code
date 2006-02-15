@@ -7,11 +7,13 @@ Enhancements
 * Calendar.js modified to allow color definitions in the events xml files (Monty Scroggins)
 * History data is now located in <AppData>\history.txt instead of <install dir>\history.txt (old history should be relocated automatically). (Glenn Carr)
 * Calculator state data (calcmem.txt) has been relocated to <AppData> from <install dir>. (Glenn Carr)
+* Added documentation to preferences.js for configure.xml options (Glenn Carr)
 
 Bug Fixes
-* Clock tooltip no longer off by 3 days - thanks to Ed Stegman for the exquisit bug report
+* Clock tooltip no longer off by 3 days - thanks to Ed Stegman for the exquisite bug report
 * Installer no longer removes deprecated mb.xml, since it was re-added as a new search in 3.1.9.1
 * openSearchWindow function now uses pagetemplate setting (Shawn K. Hall)
+* ebay,ebayuk - /my switch wasn't working anymore (Glenn Carr)
 
 New Searches
 * sarc - Searches the Symantec AntiVirus Research Corp (SARC) site. (Shawn K. Hall)
@@ -49,6 +51,7 @@ New Searches
 * sbase - SenderBase email statistics aggregation (Shawn K. Hall)
 * xforce - X-Force security database (Shawn K. Hall)
 * yb - Search using yubnub.org (Brent Beardsley)
+* qsedit - Edit a search file in the installed search directory (Glenn Carr)
 
 Modified Searches
 * tinyurl - changed it to copy the tinyurl into the DQSD text box and select it instead of popping up the tinyurl webpage. (Brent Beardsley)
