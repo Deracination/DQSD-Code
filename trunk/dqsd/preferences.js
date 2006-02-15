@@ -481,3 +481,11 @@ mwdDisplayInPopup = 1;
 /*
 qsfreqLogSearchFrequency = 1;
 */
+
+/* Configure DQSD options
+*/
+/*
+configureEditorExe = "notepad.exe"
+cssEditorExe = "notepad.exe"
+searchEditorExe = "notepad.exe"
+*/
