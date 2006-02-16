@@ -13,7 +13,7 @@
     </table>
   </description>
   <form name="mnrf"
-        method="post"
+        method="get"
         action="http://www.mailinator.com/mailinator/maildir.jsp">
     <input type="hidden" name="email" value="" />
   </form>
