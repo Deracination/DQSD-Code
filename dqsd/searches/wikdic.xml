@@ -1,0 +1,35 @@
+<search function="wikdic">
+  <name>Wikitionary</name>
+  <category>Reference</category>
+  <contributor>Tom Corcoran</contributor>
+  <link>http://en.wiktionary.org/wiki/Main_Page</link>
+  <email>tom.corcoran[@]moonbade.co.uk</email>
+  <description>
+     A collaborative project to produce a free multilingual dictionary in every language, with definitions, etymologies, pronunciations and quotations.
+    <div class="helpboxDescLabels">Usage:</div>
+    <table class="helpboxDescTable">
+     <tr><td>wikdic hobbit</td></tr>
+    </table>   
+  </description>
+  <form name="wikdicf"
+        method="get"
+        action="http://en.wiktionary.org/wiki/Special:Search">
+    <input type="hidden" name="search" value="" />
+    <input type="hidden" name="go" value="Go" />
+    <input type="hidden" name="fulltext" value="Search" />
+  </form>
+  <script><![CDATA[
+    function wikdic(q)
+    {
+      if( nullArgs("wikdic", q) )
+        return;
+
+      // FORM variables for wikdicf
+      document.wikdicf.search.value = q;
+      //document.wikdicf.go.value = "";
+      //document.wikdicf.fulltext.value = "";
+
+      submitForm(wikdicf);
+    }
+  ]]></script>
+</search>
