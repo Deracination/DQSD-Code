@@ -52,6 +52,9 @@ New Searches
 * xforce - X-Force security database (Shawn K. Hall)
 * yb - Search using yubnub.org (Brent Beardsley)
 * qsedit - Edit a search file in the installed search directory (Glenn Carr)
+* wikdic - Search Wiktionary.org (Tom Corcoran)
+* clusty - Search Clusty.com (Tom Corcoran)
+* snip - SnipURL - Snippetty snip snip with your long URLs! (Tom Corcoran)
 
 Modified Searches
 * tinyurl - changed it to copy the tinyurl into the DQSD text box and select it instead of popping up the tinyurl webpage. (Brent Beardsley)

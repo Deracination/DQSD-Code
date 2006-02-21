@@ -1,0 +1,24 @@
+<search function="clusty">
+  <name>Clusty the clustering engine</name>
+  <category>Search the Web</category>
+  <contributor>Tom Corcoran</contributor>
+  <link>http://clusty.com/</link>
+  <email>tom.corcoran[@]moonbade.co.uk</email>
+  <description>
+  </description>
+  <form name="clustyf"
+        method="get"
+        action="http://clusty.com/search">
+    <input type="hidden" name="query" value="" />
+  </form>
+  <script><![CDATA[
+    function clusty(q)
+    {
+      if( nullArgs("clusty", q) )
+        return;
+      document.clustyf.query.value = q;
+
+      submitForm(clustyf);
+    }
+  ]]></script>
+</search>
