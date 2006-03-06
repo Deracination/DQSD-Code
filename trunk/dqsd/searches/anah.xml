@@ -1,0 +1,34 @@
+<search function="anah">
+  <name>Analyze HTTP Headers</name>
+  <category>Computers<category>Programming</category></category>
+  <contributor>Shawn K. Hall</contributor>
+  <link>http://www.forret.com/projects/analyze/</link>
+  <email>shawn@reliableanswers.com</email>
+  <description>
+  HTTP Header Analysis
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>anah http://12pointdesign.com/</td></tr>
+    </table>
+  </description>
+  <form name="anahf"
+        method="get"
+        action="http://www.forret.com/projects/analyze/">
+    <input type="hidden" name="url" value="" />
+  </form>
+  <script><![CDATA[
+    function anah(q)
+    {
+      if( nullArgs("anah", q) )
+        return;
+
+      document.anahf.url.value = q;
+
+      submitForm(anahf);
+    }
+  ]]></script>
+  <copyright>
+  Copyright (c) 2006 Shawn K. Hall
+  Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>

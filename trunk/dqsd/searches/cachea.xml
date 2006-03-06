@@ -1,0 +1,47 @@
+<search function="cachea">
+  <name>cacheability Engine Query</name>
+  <category>Computers<category>Networking</category></category>
+  <contributor>Shawn K. Hall</contributor>
+  <link>http://www.web-caching.com/cacheability.html</link>
+  <email>shawn@reliableanswers.com</email>
+  <description>
+  Determines cacheability of a webpage and the pages it links to
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/extras</td><td> - </td><td>Include links to cacheability for extra links</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>cachea http://12pointdesign.com/</td></tr>
+      <tr><td>cachea http://www.microsoft.com/</td></tr>
+    </table>
+  </description>
+  <form name="cacheaf"
+        method="get"
+        action="http://www.web-caching.com/cgi-web-caching/cacheability.py">
+    <input type="hidden" name="query" value="http://" />
+    <input type="hidden" name="descend" value="" />
+  </form>
+  <script><![CDATA[
+    function cachea(q){
+      if( nullArgs("cachea", q) )
+        return;
+
+      var args = parseArgs(q, "extras");
+      for (var iSwitch = 0; iSwitch < args.switches.length; iSwitch++){
+        switch( args.switches[iSwitch].name ){
+          case "extras": document.cacheaf.descend.value = "on"; break;
+          default: break;
+        }
+      }
+
+      document.cacheaf.query.value = q;
+
+      submitForm(cacheaf);
+    }
+  ]]></script>
+  <copyright>
+  Copyright (c) 2006 Shawn K. Hall
+  Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>
