@@ -47,8 +47,9 @@
 	<input type="hidden" name="hasMsgr" value="0" />
 	<input type="hidden" name=".chkP" value="Y" />
 	<input type="hidden" name=".done" value="http://my.yahoo.com" />
-	<input type="hidden" id="login" name="login" size="17" value="" />
-	<input type="hidden" name="passwd" id="passwd" size="17" maxlength="32" />
+	<input type="hidden" name="login" value="" />
+	<input type="hidden" name="passwd" value="" />
+	<input type="hidden" name=".persistent"	value="y" />
 	<input type="hidden" name=".save" value="Sign In" />
   </form>
   <script><![CDATA[
@@ -74,7 +75,7 @@
     }
   ]]></script>
   <copyright>
-  Copyright (c) 2003 Shawn K. Hall
+  Copyright (c) 2003-2006 Shawn K. Hall
   Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
   </copyright>
 </search>

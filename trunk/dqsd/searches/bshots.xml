@@ -1,0 +1,35 @@
+<search function="bshots">
+  <name>Browsershots</name>
+  <category>Computers<category>Programming</category></category>
+  <contributor>Shawn K. Hall</contributor>
+  <link>http://browsershots.org/submit/</link>
+  <email>shawn@reliableanswers.com</email>
+  <description>
+  Generates screenshots of a webpage from various different operating systems and browsers.
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>bshots http://mozilla.org/firefox/</td></tr>
+      <tr><td>bshots http://reliableanswers.com/</td></tr>
+    </table>
+  </description>
+  <form name="bshotsf"
+        method="post"
+        action="http://browsershots.org/submit/">
+    <input type="hidden" name="url" value="" />
+  </form>
+  <script><![CDATA[
+    function bshots(q)
+    {
+      if( nullArgs("bshots", q) )
+        return;
+
+      document.bshotsf.url.value = q;
+
+      submitForm(bshotsf);
+    }
+  ]]></script>
+  <copyright>
+  Copyright (c) 2006 Shawn K. Hall
+  Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>

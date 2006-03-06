@@ -1,0 +1,35 @@
+<search function="yvsg">
+  <name>Yahoo vs Google</name>
+  <category>Search the Web</category>
+  <contributor>Shawn K. Hall</contributor>
+  <link>http://www.langreiter.com/exec/yahoo-vs-google.html</link>
+  <email>shawn@reliableanswers.com</email>
+  <description>
+  Compare the results of the Yahoo and Google search engines.
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>yvsg homeschool support groups</td></tr>
+      <tr><td>yvsg freefalling</td></tr>
+    </table>
+  </description>
+  <form name="yvsgf"
+        method="get"
+        action="http://www.langreiter.com/exec/yahoo-vs-google.html">
+    <input type="hidden" name="q" value="" />
+  </form>
+  <script><![CDATA[
+    function yvsg(q)
+    {
+      if( nullArgs("yvsg", q) )
+        return;
+
+      document.yvsgf.q.value = q;
+
+      submitForm(yvsgf);
+    }
+  ]]></script>
+  <copyright>
+  Copyright (c) 2006 Shawn K. Hall
+  Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>
