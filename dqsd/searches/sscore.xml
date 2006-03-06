@@ -1,0 +1,41 @@
+<search function="sscore">
+  <name>SiteScore</name>
+  <category>Computers<category>Programming</category></category>
+  <contributor>Shawn K. Hall</contributor>
+  <link>http://www.silktide.com/tools/sitescore</link>
+  <email>shawn@reliableanswers.com</email>
+  <description>
+  Silktide SiteScore is a powerful page diagnostic tool for web developers
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>sscore mozilla.org/firefox/</td></tr>
+    </table>
+  </description>
+  <form name="sscoref"
+        method="get"
+        action="http://www.silktide.com/index.php">
+    <input type="hidden" name="node" value="5632" />
+    <input type="hidden" name="form_refresh_single" value="0" />
+    <input type="hidden" name="form2" value="1" />
+    <input type="hidden" name="f2_url" value="" />
+    <input type="hidden" name="f2_ok" value="OK" />
+    <input type="hidden" name="pagetree" value="" />
+    <input type="hidden" name="editSessionid" value="" />
+    <input type="hidden" name="objectid" value="" />
+  </form>
+  <script><![CDATA[
+    function sscore(q)
+    {
+      if( nullArgs("sscore", q) )
+        return;
+
+      document.sscoref.f2_url.value = q;
+
+      submitForm(sscoref);
+    }
+  ]]></script>
+  <copyright>
+  Copyright (c) 2006 Shawn K. Hall
+  Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>

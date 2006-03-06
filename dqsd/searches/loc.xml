@@ -21,8 +21,8 @@
   <form name="locf"
         action="http://thomas.loc.gov/cgi-bin/query"
         method="post">
-    <input type="hidden" id="locdocidc" name="docidc108" value="" />
-    <input type="hidden" id="locqueryc" name="queryc108" value="" />
+    <input type="hidden" id="locdocidc" name="docidc109" value="" />
+    <input type="hidden" id="locqueryc" name="queryc109" value="" />
     <input type="hidden" name="submit"  value="Search" />
   </form>
 

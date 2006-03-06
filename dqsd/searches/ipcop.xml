@@ -1,0 +1,196 @@
+<search function="ipcop">
+  <name>Manage IPCOP Firewall</name>
+  <category>System Tools</category>
+  <contributor>Shawn K. Hall</contributor>
+  <link>http://ipcop:81/</link>
+  <email>Shawn[@]ReliableAnswers.com</email>
+  <description>
+    Do a whole bunch of stuff with your IPCOP firewall
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td> <b>/home</b> /main	</td><td> IPCOP Main Console </td></tr>
+      <tr><td> /dial		</td><td> 'Connect' using the Default Device </td></tr>
+      <tr><td> /disconnect	</td><td> 'Disconnect' using the Default Device  </td></tr>
+      <tr><td> /status			</td><td> View current status </td></tr>
+      <tr><td> /connections	</td><td> Edit/View Connections </td></tr>
+      <tr><td> /logs		</td><td> View Log Data </td></tr>
+      <tr><td> /firewall		</td><td> View Firewall Logs </td></tr>
+      <tr><td> /proxy			</td><td> View Proxy Logs </td></tr>
+      <tr><td> /idslog			</td><td> View Intrusion Detection System (IDS) Logs </td></tr>
+      <tr><td> /control /panel	</td><td> Primary Control Panel </td></tr>
+      <tr><td> /dns		</td><td> Edit Dynamic DNS Settings </td></tr>
+      <tr><td> /portfw	</td><td> Edit Port Forwarding Settings </td></tr>
+      <tr><td> /updates		</td><td> View Updates </td></tr>
+      <tr><td> /add-ons	</td><td> View Addons (only works if the add-on package is installed) </td></tr>
+      <tr><td> /time			</td><td> View  </td></tr>
+      <tr><td> /passwords		</td><td> Edit Passwords </td></tr>
+      <tr><td> /ssh [<b>1</b> | on | 0 | off] </td><td> Enable/Disable SSH </td></tr>
+      <tr><td> /ids [<b>1</b> | on | 0 | off] </td><td> Enable/Disable Intrusion Detection System (IDS) </td></tr>
+      <tr><td> /backup		</td><td> Backup current configuration (be sure a floppy exists in the IPCOP floppy drive) </td></tr>
+      <tr><td> /shutdown		</td><td> Shut down the IPCOP firewall </td></tr>
+      <tr><td> /reboot		</td><td> Reboot the IPCOP firewall </td></tr>
+      <tr><td> /help /about		</td><td> Visit the ipcop.org website </td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td> ipcop		</td></tr>
+      <tr><td> ipcop /ids 0	</td></tr>
+      <tr><td> ipcop /reboot	</td></tr>
+      <tr><td> ipcop /dis	</td></tr>
+      <tr><td> ipcop /dial	</td></tr>
+      <tr><td> ipcop /dns	</td></tr>
+    </table>
+  </description>
+  <comment>
+    This is pretty spiffy, eh?
+  </comment>
+
+  <form method="get" name="ipcopf" 
+        action="http://ipcop:81/">
+  </form>
+  <form method="POST" name="ipcopdialf"
+        action="http://ipcop:81/cgi-bin/dial.cgi">
+	<input type="hidden" name="ACTION" value="Connect" />
+  </form>
+  <form method="POST" name="ipcopsshf"
+	action="http://ipcop:81/cgi-bin/remote.cgi">
+	<input type="hidden" name="ENABLE_SSH" value="on" />
+	<input type="hidden" name="ACTION" value="Save" />
+  </form>
+  <form method="POST" name="ipcopidsf"
+	action="http://ipcop:81/cgi-bin/ids.cgi">
+	<input type="hidden" name="ENABLE_SNORT" value="on" />
+	<input type="hidden" name="ACTION" value="Save" />
+  </form>
+  <form method="POST" name="ipcopbuf"
+        action="http://ipcop:81/cgi-bin/backup.cgi">
+	<input type="hidden" name="ACTION" value="Backup" />
+  </form>
+  <form method="POST" name="ipcopsdf"
+        action="http://ipcop:81/cgi-bin/shutdown.cgi">
+	<input type="hidden" name="ACTION" value="Reboot" />
+  </form>
+
+  <script><![CDATA[
+    function ipcop(q)
+    {
+      if( nullArgs( "ipcop", q ) ){
+        return false;
+      }
+
+      var args = parseArgs(q, "home, main, dial, disconnect, status, connections, logs, firewall, proxy, idslog, control, panel, dns, portfw, updates, add-ons, time, passwords, ssh, ids, backup, shutdown, reboot, help, about");
+      for (var i = 0; i < args.switches.length; i++)
+      {
+        sw = args.switches[i];
+        switch(sw.name)
+        {
+          case "home":
+          case "main":
+            openSearchWindow("http://ipcop:81/");
+            break;
+
+          case "dial":
+            document.ipcopdialf.ACTION.value = "Connect";
+            submitForm( ipcopdialf );
+            break;
+          case "disconnect":
+            document.ipcopdialf.ACTION.value = "Disconnect";
+            submitForm( ipcopdialf );
+            break;
+          case "status":
+            openSearchWindow("http://ipcop:81/cgi-bin/status.cgi");
+            break;
+          case "connections":
+            openSearchWindow("http://ipcop:81/cgi-bin/connections.cgi");
+            break;
+
+          case "logs":
+            openSearchWindow("http://ipcop:81/cgi-bin/logs.cgi/log.dat");
+            break;
+          case "firewall":
+            openSearchWindow("http://ipcop:81/cgi-bin/logs.cgi/firewalllog.dat");
+            break;
+          case "proxy":
+            openSearchWindow("http://ipcop:81/cgi-bin/logs.cgi/proxylog.dat");
+            break;
+          case "idslog":
+            openSearchWindow("http://ipcop:81/cgi-bin/logs.cgi/ids.dat");
+            break;
+
+          case "control":
+          case "panel":
+            openSearchWindow("http://ipcop:81/cgi-bin/proxy.cgi");
+            break;
+
+          case "dns":
+            openSearchWindow("http://ipcop:81/cgi-bin/ddns.cgi");
+            break;
+          case "portfw":
+            openSearchWindow("http://ipcop:81/cgi-bin/portfw.cgi");
+            break;
+          case "updates":
+            openSearchWindow("http://ipcop:81/cgi-bin/updates.cgi");
+            break;
+          case "add-ons":
+            openSearchWindow("http://ipcop:81/cgi-bin/addons.cgi");
+            break;
+          case "time":
+            openSearchWindow("http://ipcop:81/cgi-bin/time.cgi");
+            break;
+
+          case "passwords":
+            openSearchWindow("http://ipcop:81/cgi-bin/changepw.cgi");
+            break;
+
+          case "ssh":
+            switch (sw.value){
+              case "0":
+              case "off":
+                document.ipcopsshf.ENABLE_SSH.value="";
+              case "1":
+              case "on":
+              default:
+                document.ipcopsshf.ENABLE_SSH.value="on";
+            }
+            submitForm( ipcopsshf );
+            break;
+
+          case "ids":
+            switch (sw.value){
+              case "0":
+              case "off":
+                document.ipcopidsf.ENABLE_SNORT.value="";
+              case "1":
+              case "on":
+              default:
+                document.ipcopidsf.ENABLE_SNORT.value="on";
+            }
+            submitForm( ipcopidsf );
+            break;
+
+          case "backup":
+            submitForm( ipcopbuf );
+            break;
+
+          case "shutdown":
+            document.ipcopsdf.ACTION.value = "Shutdown";
+            submitForm( ipcopsdf );
+            break;
+
+          case "reboot":
+            document.ipcopsdf.ACTION.value = "Reboot";
+            submitForm( ipcopsdf );
+            break;
+
+          case "help":
+          case "about":
+            openSearchWindow("http://www.ipcop.org/");
+            break;
+
+          default:
+        }
+      }
+    }
+
+  ]]></script>
+</search>

@@ -1,0 +1,37 @@
+<search function="mindset">
+  <name>Yahoo Mindset</name>
+  <category>Search the Web</category>
+  <contributor>Shawn K. Hall</contributor>
+  <link>http://mindset.research.yahoo.com/</link>
+  <email>shawn@reliableanswers.com</email>
+  <description>
+  Yahoo Mindset 'Intent-driven search'
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>mindset support groups</td></tr>
+      <tr><td>mindset star trek voyager</td></tr>
+    </table>
+  </description>
+  <form name="mindsetf"
+        method="get"
+        action="http://mindset.research.yahoo.com/search.php">
+    <input type="hidden" name="" value="" />
+    <input type="hidden" name="p" value="" />
+    <input type="hidden" name="prssweb" value="Search the Web" />
+  </form>
+  <script><![CDATA[
+    function mindset(q)
+    {
+      if( nullArgs("mindset", q) )
+        return;
+
+      document.mindsetf.p.value = q;
+
+      submitForm(mindsetf);
+    }
+  ]]></script>
+  <copyright>
+  Copyright (c) 2006 Shawn K. Hall
+  Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>

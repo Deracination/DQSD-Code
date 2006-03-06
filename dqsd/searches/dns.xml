@@ -126,6 +126,18 @@
 	submitForm(dnslongf);
       }
     }
+
+    ip_regex = new RegExp("^((\\d{1,2}|1\\d\\d|2[0-4]\\d|25[0-5])\\.){3}(\\d{1,2}|1\\d\\d|2[0-4]\\d|25[0-5])$", "");
+    // autodetection for ip addresses
+    function autodetect_ip(q){
+      res = ip_regex.exec(q);
+      if (res){
+	document.dnsf.ip.value = res;
+	document.dnsf.action="http://www.dnsstuff.com/tools/whois.ch";
+	submitForm(dnsf);
+        return true;
+      }
+    }
   ]]></script>
 
   <copyright>

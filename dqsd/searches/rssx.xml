@@ -1,0 +1,288 @@
+<search function="rssx">
+  <name>RSS Feed Parser</name>
+  <category>Functions</category>
+  <link>http://ReliableAnswers.com/x/dqsd/</link>
+  <contributor>Shawn K. Hall</contributor>
+  <description>Parses an RSS feed and pops the results every 8 seconds (configurable).<br />
+	Use 'rssxDefaultUrl' variable in localprefs.js to change the default URL used when only 'rssx' is passed. <br />
+	var rssxDefaultUrl = "http://sourceforge.net/export/rss2_projfiles.php?group_id=42081";<br />
+	Use 'rssxTimeOutAfter' variable in localprefs.js to change the period between item displays. <br />
+        rssxTimeOutAfter = 2000;
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td> url   </td><td> - </td><td> URL of RSS Feed to process. </td></tr>
+      <tr><td> /stop </td><td> - </td><td> Terminate RSS processing and display </td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td> rssx http://ReliableAnswers.com/rss.asp </td></tr>
+      <tr><td> rssx http://slashdot.org/slashdot.rdf </td></tr>
+      <tr><td> rssx http://www.eff.org/rss/press.xml </td></tr>
+      <tr><td> rssx /stop </td></tr>
+    </table>
+  </description>
+  <script><![CDATA[
+      function rssx(q){
+	if( q == "?" ){
+	  qsfind("rssx /function");
+	  return false;
+	}
+	if (q == "/stop"){
+	  rssxSearchTerminate = true;
+	  rssxDisplayAgain= false;
+	  rssxSearchArray = rssxSearchArray.slice(rssxSearchArray.length);
+	  setSearchWindowText("rssx terminated");
+	  return false;
+	}
+	rssxSearchTerminate = false;
+	var sDefaultUrl = "http://reliableanswers.com/rss/";
+	  if (typeof rssxDefaultUrl != "undefined")	sDefaultUrl = rssxDefaultUrl;
+	var sUrl = ((isURL(q)) ? q : sDefaultUrl);
+
+	try{
+	//attempt to obtain the remote RSS feed
+	  var xmlHttp = new ActiveXObject("Microsoft.XmlHttp");
+	  xmlHttp.onreadystatechange = function() { 
+		 if (xmlHttp.readyState==4) {
+		  rssxXmlParser( xmlHttp, sUrl );
+		 }
+		};
+	  xmlHttp.open("GET", sUrl, true);
+	  xmlHttp.setRequestHeader ( "Accept", "application/xml, text/xml, text/rss, application/xml+rdf, */*" );
+	  xmlHttp.setRequestHeader ( "User-Agent", "Mozilla/4.0 (compatible; DQSD ( http://www.dqsd.net/ ); rssx Search ( http://ReliableAnswers.com/x/dqsd/ ))" );
+	  xmlHttp.send(null);
+	}catch(e){
+	  alert("RSSX: Failure!\n" + e.number + "::" + e.description);
+	}
+      }
+
+function rssxXmlParser( xmlHttp, sUrl ){
+ if (rssxSearchTerminate == true) {return false;}
+ var sBuild = "";
+ try{
+//get the response content from the remote site
+  var sBody = xmlHttp.responseText;
+  sBody = sBody.replace(/(\<\?xml-stylesheet[^>]*>)/gim,"<!-- $1 -->");
+  var xBody = new ActiveXObject("MSXML2.DOMDocument");
+  xBody.loadXML( sBody );
+  if(xBody.parseError.errorCode != 0)
+    throw new Error(0, "RSS is not well-formed.\nParse error: " + xBody.parseError.reason + " line: " + xBody.parseError.line.toString() + ", col: " + xBody.parseError.linepos.toString() + "\n" + xBody.parseError.srcText);
+
+//parse it
+  var xElement = xBody.documentElement;
+
+//rss version, capabilities and format
+//default paths and properties
+  var rDate    = "pubdate";
+  var rLanguage= "";
+  var rItems   = "item";
+  var rImage   = "image";
+  var rInput   = "textinput";
+  var rVersion = "";
+  var rSyPeriod= "";
+  var rSyFreq  = "";
+  var rContent = "";
+  var rsTitle  = "";
+  var rsImage  = "";
+  var rsLink   = "";
+
+//document element name
+  var rDocElem = xElement.nodeName;
+
+//version="1.0"
+  xNode = xElement.attributes.getNamedItem("version");
+  if (xNode != null) rVersion = xNode.nodeTypedValue;
+  switch (rVersion){
+	case "":	rItems = "item"; rImage = "image"; rInput = "textinput"; break;
+	case "0.9":
+	case "0.91":
+	case "0.92":
+	case "1.0":
+	case "2.0":
+	default:
+		rItems = "channel/item"; rImage = "channel/image"; rInput = "channel/textinput"; break;
+  }
+
+//xmlns="http://purl.org/rss/1.0/"
+  xNode = xElement.attributes.getNamedItem("xmlns");
+  var rXmlns = ((xNode != null) ? xNode.nodeTypedValue : "");
+
+//xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xNode = xElement.attributes.getNamedItem("xmlns:dc");
+  var rXmlnsDc = ((xNode != null) ? xNode.nodeTypedValue : "");
+  if (rXmlnsDc != "") {
+    rDate = "dc:date";
+    xNode = xElement.selectSingleNode("channel");
+    if (xNode != null) {
+      xNodeSub = xNode.selectSingleNode("dc:language");
+      if (xNodeSub != null) rLanguage = xNodeSub.nodeTypedValue;
+    }
+  }
+
+//xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xNode = xElement.attributes.getNamedItem("xmlns:rdf");
+  var rXmlnsRdf= ((xNode != null) ? xNode.nodeTypedValue : "");
+
+//xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+  xNode = xElement.attributes.getNamedItem("xmlns:sy");
+  var rXmlnsSy = ((xNode != null) ? xNode.nodeTypedValue : "");
+  if (rXmlnsSy != "") {
+    xNode = xElement.selectSingleNode("channel");
+    if (xNode != null) {
+      xNodeSub = xNode.selectSingleNode("sy:UpdatePeriod");
+      if (xNodeSub != null) rSyPeriod = xNodeSub.nodeTypedValue;
+      xNodeSub = xNode.selectSingleNode("sy:UpdateFrequency");
+      if (xNodeSub != null) rSyFreq   = xNodeSub.nodeTypedValue;
+    }
+  }
+
+//xmlns:content="http://purl.org/rss/1.0/modules/content/"
+  xNode = xElement.attributes.getNamedItem("xmlns:content");
+  var rXmlnsContent = ((xNode != null) ? xNode.nodeTypedValue : "");
+  if (rXmlnsContent != "") rContent = "content:encoded";
+
+//obtain image/title/link properties
+  xNode = xElement.selectSingleNode( rImage );
+  if (xNode != null) {
+    xNodeSub = xNode.selectSingleNode("title");
+    if (xNodeSub != null) rsTitle= xNodeSub.nodeTypedValue;
+    xNodeSub = xNode.selectSingleNode("url");
+    if (xNodeSub != null) rsImage= xNodeSub.nodeTypedValue;
+    xNodeSub = xNode.selectSingleNode("link");
+    if (xNodeSub != null) rsLink = xNodeSub.nodeTypedValue;
+  }
+
+//enumerate RSS items
+  var xNodes = xElement.selectNodes( rItems );
+  for (i=0; i < xNodes.length; i++){
+  //get variables for this resource
+    var xNode = xNodes.item(i);
+    xNodeSub  = xNode.selectSingleNode("title");
+    var sTitle= ((xNodeSub != null) ? xNodeSub.nodeTypedValue : "");
+    xNodeSub  = xNode.selectSingleNode("description");
+    var sDesc = ((xNodeSub != null) ? xNodeSub.nodeTypedValue : "");
+    sDesc = sDesc.replace(/<a[\s]*[^>]href="([^"]+)"[^>]*>/gim,"<a onClick=\"window.parent.openSearchWindow('$1')\">");
+    xNodeSub  = xNode.selectSingleNode("link");
+    var sLink = ((xNodeSub != null) ? xNodeSub.nodeTypedValue : "");
+    if (sLink == ""){
+      xNodeSub  = xNode.selectSingleNode("guid");
+      var sLink = ((xNodeSub != null) ? xNodeSub.nodeTypedValue : "");
+    }
+    if (rContent != ""){
+      xNodeSub  = xNode.selectSingleNode( rContent );
+      var sContent = ((xNodeSub != null) ? xNodeSub.nodeTypedValue : "");
+      sContent = sContent.replace(/<a[\s]*[^>]href="([^"]+)"[^>]*>/gim,"<a onClick=\"window.parent.openSearchWindow('$1')\">");
+    }else{
+      var sContent = "";
+    }
+
+  //append this record
+    sBuild = "";
+    sBuild+= "<table width=\"100%\" border=\"0\" onClick=\"window.parent.openSearchWindow('" + sLink + "')\"><tr>";
+    if (rsLink != ""){
+      sBuild+= "<td width=\"5%\">";
+      sBuild+= "<a href=\"" + rsLink + "\" title=\"" + rsTitle + "\">";
+      if (rsImage != ""){
+        sBuild+= "<img src=\"" + rsImage + "\" border=\"0\" />";
+      }else{
+	sBuild+= rsTitle;
+      }
+      sBuild+= "</a></td>";
+    }else{
+      sBuild+= "<td width=\"5%\">";
+      sBuild+= "<a href=\"http://reliableanswers.com/x/dqsd/?rss=" + sUrl + "\">";
+      if (rsImage != ""){
+        sBuild+= "<img src=\"" + rsImage + "\" border=\"0\" />";
+      }else{
+        sBuild+= "[RSSX]";
+      }
+      sBuild+= "</a></td>";
+    }
+    sBuild+= "<td>";
+    sBuild+= "<p align=\"left\"><b>" + sTitle + "</b></p>";
+    sBuild+= "</td></tr>\n";
+    sBuild+= "<tr><td colspan=\"2\">";
+    sBuild+= "<p>" + sDesc + "</p>";
+    if (sContent != ""){
+      sBuild+= "<hr />" + sContent;
+    }
+    sBuild+= "</td></tr>\n";
+    sBuild+= "</table>\n\n";
+    rssxSearchArray[rssxSearchArray.length] = sBuild;
+  }
+  if (rssxSearchArray.length > 0){
+    if (rssxDisplayAgain == false) displayRssxSearchPopup();
+  }
+ }catch(e){
+  alert("RSSX: Failure!\n" + e.number + "::" + e.description);
+ }
+}
+
+
+var rssxSearchPopup;
+var rssxSearchTerminate = false;
+var rssxSearchIndex = 0;
+var rssxSearchArray = Array();
+var rssxDisplayAgain= false;
+var rssxSearchURL   = '';
+if (typeof rssxTimeOutAfter == "undefined") rssxTimeOutAfter = 6000;
+
+
+function displayRssxSearchPopup(){
+ if (typeof rssxTimeOutAfter == "undefined") rssxTimeOutAfter = 8000;
+ var windowW = 380;
+ var rssxContent = "undefined";
+ try{
+  if (rssxSearchArray.length>=1){
+    var rssxContent = rssxSearchArray[0];
+    rssxSearchArray = rssxSearchArray.slice(1);
+  }
+ }catch(e){}
+
+ if (rssxContent != "undefined") {
+  try{
+   rssxSearchPopup = window.createPopup();
+   var rssxSearchPopupBody = rssxSearchPopup.document.body;
+   var rssxSearchPopupBodyCode = "<html><head></head><body>";
+   rssxSearchPopupBodyCode += "<table id=rstable border=0 cellspacing=1 cellpadding=2 width=100% height=100%>";
+   rssxSearchPopupBodyCode += "<tr><td valign=top><style>" + convertStylesToInline() + "</style>";
+   rssxSearchPopupBodyCode += "<tr><td valign=top style='text-align: center' class=helpboxDescriptions>" + rssxContent;
+   rssxSearchPopupBodyCode += "</tr></td></table></body></html>";
+   rssxSearchPopupBody.innerHTML = rssxSearchPopupBodyCode;
+   rssxSearchPopup.document.body.style.border="outset 2px";
+   rssxSearchPopup.document.body.style.background='menu';
+   rssxSearchPopup.document.body.style.overflowY='auto';
+
+ // Temporarily show the popup to determine the proper final height for the popup.
+   rssxSearchPopup.show(0, 0, windowW, 0);
+   var windowH = rssxSearchPopupBody.scrollHeight + 6;
+   rssxSearchPopup.hide();
+
+ // Put a cap on the popup height
+   windowH = windowH > window.screen.height-100 ? window.screen.height-100 : windowH;
+
+ // Display it
+   rssxSearchPopup.show((buttonalign == "left" ? 0 : document.body.clientWidth - windowW), -windowH, windowW, windowH, document.body);
+  }catch(e){
+   rssxDisplayAgain = false;
+  }
+ }
+// Set next display + timeout
+ try{
+  if (rssxSearchArray.length > 0){
+    rssxDisplayAgain = true;
+    setTimeout("try{rssxSearchPopup.hide();rssxSearchPopup='';displayRssxSearchPopup();}catch(e){}",rssxTimeOutAfter);
+  }else{
+    rssxDisplayAgain = false;
+    setTimeout("try{rssxSearchPopup.hide();rssxSearchPopup='';}catch(e){}",rssxTimeOutAfter);
+  }
+ }catch(e){
+   rssxDisplayAgain = false;
+ }
+}
+  ]]></script>
+  <copyright>
+  Copyright (c) 2004 Shawn K. Hall
+  Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>

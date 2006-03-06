@@ -1,0 +1,83 @@
+<search function="lv">
+  <name>LyricVault.com</name>
+  <category>Entertainment</category>
+  <contributor>Shawn K. Hall</contributor>
+  <link>http://www.lyricvault.com/</link>
+  <email>shawn@reliableanswers.com</email>
+  <description>
+  Lyric Vault is the fastest growing music lyrics website, providing Lyrics FREE from over 7,000 artists, album reviews, biographies, and song ratings.
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/artist</td><td> - </td><td>Search by Artist</td></tr>
+      <tr><td>/album</td><td> - </td><td>Search by Album</td></tr>
+      <tr><td>/song</td><td> - </td><td>Search by Song</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>lv black eyed peas</td></tr>
+      <tr><td>lv rain /artist</td></tr>
+    </table>
+  </description>
+  <form name="lvf"
+        method="post"
+        action="http://www.lyricvault.com/search.php">
+    <input type="hidden" name="artist" value="" />
+    <input type="hidden" name="album" value="" />
+    <input type="hidden" name="song" value="" />
+    <input type="hidden" name="search" value="SEARCH" />
+  </form>
+  <form name="lvflogin"
+        method="post"
+	action="http://www.lyricvault.com/login.php">
+    <input type="hidden" name="username" value="" />
+    <input type="hidden" name="password" value="" />
+  </form>
+  <script><![CDATA[
+    function lv(q){
+      if( nullArgs("lv", q) )
+        return;
+
+      //set defaults
+	document.lvf.artist.value = "";
+	document.lvf.album.value = "";
+	document.lvf.song.value = "";
+
+      var args = parseArgsEx(q, "artist, album, song, signup, login");
+      for (var iSwitch = 0; iSwitch < args.switches.length; iSwitch++){
+        switch( args.switches[iSwitch].name ){
+          case "artist":
+		document.lvf.artist.value = args.switches[iSwitch].value;
+		break;
+          case "album":
+		document.lvf.album.value = args.switches[iSwitch].value;
+		break;
+          case "song":
+		document.lvf.song.value = args.switches[iSwitch].value;
+		break;
+          case "login":
+		var lvlogin_username = ""; if (typeof lv_username != "undefined") lvlogin_username = lv_username;
+		var lvlogin_password = ""; if (typeof lv_password != "undefined") lvlogin_password = lv_password;
+		document.lvflogin.username.value = lvlogin_username;
+		document.lvflogin.password.value = lvlogin_password;
+		submitForm(lvflogin);
+		return;
+          case "signup":
+		openSearchWindow("http://www.lyricvault.com/signup.php");
+		return;
+          default:
+		document.lvf.song.value = args.switches[iSwitch].value;
+		break;
+        }
+      }
+
+      if(args.q != ""){
+	document.lvf.song.value = args.q;
+      }
+      submitForm(lvf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>

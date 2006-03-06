@@ -55,6 +55,13 @@ New Searches
 * wikdic - Search Wiktionary.org (Tom Corcoran)
 * clusty - Search Clusty.com (Tom Corcoran)
 * snip - SnipURL - Snippetty snip snip with your long URLs! (Tom Corcoran)
+* lv - LyricVault.com lyric, artist and album search (Shawn K. Hall)
+* ipcop - IPCop firewall automation (Shawn K. Hall)
+* rssx - inline RSS parser (Shawn K. Hall)
+* sscore - Silktide SiteScore (Shawn K. Hall)
+* mindset - Yahoo Mindset 'Intent-driven search' (Shawn K. Hall)
+* yvsg - Yahoo vs Google (Shawn K. Hall)
+* bshots - Browsershots, generates screenshots of a webpage from various different operating systems and browsers (Shawn K. Hall)
 
 Modified Searches
 * tinyurl - changed it to copy the tinyurl into the DQSD text box and select it instead of popping up the tinyurl webpage. (Brent Beardsley)
@@ -65,6 +72,12 @@ Modified Searches
 * mwd - added /popup switch to display results in a popup window; added mwdDisplayInPopup usage to preferences.js (Glenn Carr, Kim Gräsman)
 * a9 - added maps feature (Shawn K. Hall)
 * viam - Changed to fit site changes (MLL)
+* vbsx - added native ProperCase function (Shawn K. Hall)
+* yy - added persistence (Shawn K. Hall)
+* loc - set to current legislative session (Shawn K. Hall)
+* arin - removed autodetection (Shawn K. Hall)
+* dns - added ip autodetection (Shawn K. Hall)
+
 
 Removed Searches
 
