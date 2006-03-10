@@ -1,52 +1,127 @@
 <search function="ggd">
   <name>Google Desktop Search</name>
   <category>Search the Web</category>
-  <contributor>Shawn K. Hall</contributor>
+  <contributor>Shawn K. Hall - V2 by MLL</contributor>
   <email>Shawn[@]ReliableAnswers.com</email>
   <link>http://desktop.google.com/</link>
   <description>
     Search Google Desktop Search from DQSD<br /><br />
-    Since this search requires access to a 'google desktop key' that is 
-    unique to your installation, you must first set a variable within 
-    your localprefs.js file as so:<br /><br />
+    Since this search requires access to a 'google desktop key' that is unique to your installation, you must first set a variable within your localprefs.js file as so:<br /><br />
     <b>ggd_GoogleKey = "123456789";</b><br />
-    If you do not have this variable setup in your localprefs.js file it
-    will direct you to a page on my site that will help you determine what
-    your Google Desktop Key is. Please remember to reload DQSD (!) after
-    changing variables or settings in localprefs.js!<br /><br />
-    As with any other search that relies upon other services or applications,
-    you <b>must</b> have the related application/service installed. Please
-    ensure you actually have <i>Google Desktop Search</i> installed and
-    running before requesting assistance.<br /><br />
+    If you do not have this variable setup in your localprefs.js file it will direct you to a page on my site that will help you determine what your Google Desktop Key is. Please remember to reload DQSD (!) after changing variables or settings in localprefs.js!<br /><br />
+    As with any other search that relies upon other services or applications, you <b>must</b> have the related application/service installed. Please ensure you actually have <i>Google Desktop Search</i> installed and running before requesting assistance.<br /><br />
     <div class="helpboxDescLabels">Switches:</div>
     <table class="helpboxDescTable">
-      <tr><td> [term] </td><td> Search Google Desktop </td></tr>
+      <tr>
+        <td> [term] </td>
+        <td colspan="2"> Search Google Desktop on [term]. Hints: may include:<ul>
+          <li>-[avoid_this_term]</li>
+          <li>from:[mail_sender] <i>(/email implied)</i></li>
+          <li>to:[mail_recipient] <i>(/email implied)</i></li>
+          <li>under:"[path_to_search]" <i>(/files implied)</i></li></ul>
+        </td>
+      </tr>
+      <tr><td>/emails</td><td> - </td><td>Search in MS Outlook emails.</td></tr>
+      <tr><td>/files</td><td> - </td><td>Search in files. See the /type switch below.</td></tr>
+      <tr><td>/type:[ext1]|[ext2]|...</td><td> - </td><td>Search files with the extension [ext1] or [ext2] or... <i>(/files implied)</i></td></tr>
+      <tr><td>/web_history</td><td> - </td><td>Search in web history.</td></tr>
+      <tr><td>/chats</td><td> - </td><td>Search in Chats.</td></tr>
+      <tr><td colspan="3">Search in <b>MS Outlook items</b>:</td></tr>
+      <tr><td>/appointments</td><td> - </td><td>Search in MS Outlook appointments.</td></tr>
+      <tr><td>/contacts</td><td> - </td><td>Search in  MS Outlook contacts.</td></tr>
+      <tr><td>/journal</td><td> - </td><td>Search in MS Outlook journal.</td></tr>
+      <tr><td>/notes</td><td> - </td><td>Search in MS Outlook notes.</td></tr>
+      <tr><td>/tasks</td><td> - </td><td>Search in MS Outlook tasks.</td></tr>
     </table>
     <div class="helpboxDescLabels">Examples:</div>
     <table class="helpboxDescTable">
-      <tr><td> ggd dqsd search	</td></tr>
-      <tr><td> ggd asp design	</td></tr>
+      <tr><td> ggd dqsd search  </td></tr>
+      <tr><td> ggd asp design </td></tr>
+      <tr><td> ggd john doe /contacts</td></tr>
     </table>
   </description>
   <comment>
     This is pretty spiffy, eh?
+    <mll>A lot ;)</mll>
   </comment>
   <form name="ggdf" method="GET"
-        action="http://reliableanswers.com/x/dqsd/ggd-discover.asp">
-    <input type="hidden" name="q" value="" />
+        action="">
+    <input type="hidden" name="ie" value="UTF-8" />
+    <input type="hidden" name="adv" value="1" />
+    <input type="hidden" name="type" value="cat_all" />
+    <input type="hidden" name="ot" value="" />
+    <input type="hidden" name="file" value="" />
+    <input type="hidden" name="has" value="" />
   </form>
   <script><![CDATA[
     function ggd(q){
-	if( nullArgs( "ggd", q ) ){
-	  return false;
-	}
-	if(typeof ggd_googleKey == "undefined"){
-	  openSearchWindow("http://reliableanswers.com/x/dqsd/ggd-discover.asp");
-	}else{
-	  document.ggdf.action  = "http://127.0.0.1:4664/search&s=" + ggd_googleKey;
-	  document.ggdf.q.value = q;
-	  submitForm(ggdf);
-	}
+      var args = parseArgs(q, "emails, files, web_history, chats, appointments, contacts, journal, notes, tasks, type");
+
+      if( nullArgs( "ggd", args.q ) ){ return false; }
+
+      if(typeof ggd_googleKey == "undefined"){
+        openSearchWindow("http://reliableanswers.com/x/dqsd/ggd-discover.asp");
+      }else{
+        document.ggdf.action  = "http://127.0.0.1:4664/search&s=" + ggd_googleKey;
+        document.ggdf.has.value = args.q;
+      if( args.switches.length > 0 )
+      {
+        for( var j=0; j<args.switches.length; j++ )
+        {
+          switch( args.switches[j].name )
+          {
+            case "emails":
+              document.ggdf.type.value = "email";
+              break;
+            case "files":
+              document.ggdf.type.value = "cat_files";
+              break;
+            case "type":
+              document.ggdf.type.value = "cat_files";
+              document.ggdf.file.value = args.switch_val["type"];
+              break;
+            case "web_history":
+              document.ggdf.type.value = "web";
+              break;
+            case "chats":
+              document.ggdf.type.value = "im";
+              break;
+            //MS OL items
+            case "contacts":
+              document.ggdf.type.value = "cat_other";
+              document.ggdf.ot.value = "contacts";
+              break;
+            case "appointments":
+              document.ggdf.type.value = "cat_other";
+              document.ggdf.ot.value = "calendar";
+              break;
+            case "tasks":
+              document.ggdf.type.value = "cat_other";
+              document.ggdf.ot.value = "tasks";
+              break;
+            case "notes":
+              document.ggdf.type.value = "cat_other";
+              document.ggdf.ot.value = "note";
+              break;
+            case "journal":
+              document.ggdf.type.value = "cat_other";
+              document.ggdf.ot.value = "journal";
+              break;
+
+            default:
+              nullArgs("ggd","?");
+              return false;
+              break;
+          }
+        }
+      }
+
+
+      submitForm(ggdf);
+
+      //reset the file field
+      document.ggdf.file.value = "";
+      }
     }
 
   ]]></script>
