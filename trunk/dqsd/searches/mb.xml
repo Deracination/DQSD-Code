@@ -20,49 +20,36 @@
   </description>
   <form name="mbf"
         method="get"
-        action="http://musicbrainz.org/newsearch.html">
+        action="http://musicbrainz.org/search/textsearch.html">
     <input type="hidden" name="limit" value="25" />
-    <input type="hidden" name="table" value="" />
-    <input type="hidden" name="search" value="" />
+    <input type="hidden" name="type" value="" />
+    <input type="hidden" name="query" value="" />
   </form>
   <script><![CDATA[
     function mb(q)
     {
-      if( nullArgs("mb", q) )
-        return;
 
-      // Parse switches with parseArgs:
-
-      // parseArgs usage:
-      // Arguments:
-      //    q                - string from the search function
-      //    expectedSwitches - list or array of the expected switch values
-      //    expandSwitches   - optional parameter [default = true] used to determine 
-      //                       if the switch shortcuts should be expanded (i.e. /f becomes /foo)
-      // Returns an object with these properties:
-      //    q        - the input string with the switches removed
-      //    switches - array of objects with these two properties:
-      //                  name:   expanded name of the matched switch (i.e. foo as in /foo:bar)
-      //                  value:  value of switch (i.e. bar as in /foo:bar)
-      //    switch_val - associative array with the switch name as the key with the switch value 
-      //                 as the value. (i.e. switch_val["foo"] = "bar" as in /foo:bar)
-
-      document.mbf.table.value = "artist";
+      document.mbf.type.value = "artist";
       var args = parseArgs(q, "artist, album, track");
+      if( nullArgs("mb", args.q) ) return;
 
       //eliminate cases where you got more than 1 switch
       if( args.switches.length > 1 )
       {
-        nullArgs( "acine", "?" );
+        nullArgs( "mb", "?" );
         return false;
       }
 
       if ( args.switches.length == 1 )
       {
-      document.mbf.table.value = args.switches[0].name;
+        //albums correction due to new search filed name "release"
+        if ( args.switches[0].name=="album" ) {args.switches[0].name = "release"; }
+        document.mbf.type.value = args.switches[0].name;
       }
 
-      document.mbf.search.value = args.q;
+      // Force UTF-8 encoding
+      args.q = utf8(args.q);
+      document.mbf.query.value = args.q;
 
       submitForm(mbf);
     }
