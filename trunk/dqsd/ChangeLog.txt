@@ -64,6 +64,7 @@ New Searches
 * bshots - Browsershots, generates screenshots of a webpage from various different operating systems and browsers (Shawn K. Hall)
 * cachea - Cache Analysis (Shawn K. Hall)
 * anah - Analyze HTTP Headers (Shawn K. Hall)
+* surfc - SurfControl Filter Testing and Submission (Shawn K. Hall)
 
 Modified Searches
 * tinyurl - changed it to copy the tinyurl into the DQSD text box and select it instead of popping up the tinyurl webpage. (Brent Beardsley)
