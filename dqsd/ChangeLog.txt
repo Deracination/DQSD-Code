@@ -1,4 +1,4 @@
--- What's new for 3.1.9.2 (date xxxx-xx-xx)
+-- What's new for 3.1.9.2 (date 2006-03-19)
 
 Enhancements
 * Holidays for Portugal through 2009 (Paulo Ferrão)
@@ -65,6 +65,7 @@ New Searches
 * cachea - Cache Analysis (Shawn K. Hall)
 * anah - Analyze HTTP Headers (Shawn K. Hall)
 * surfc - SurfControl Filter Testing and Submission (Shawn K. Hall)
+* mb - Search the online user-contributed MusicBrainz music database (MLL)
 
 Modified Searches
 * tinyurl - changed it to copy the tinyurl into the DQSD text box and select it instead of popping up the tinyurl webpage. (Brent Beardsley)
@@ -80,7 +81,7 @@ Modified Searches
 * loc - set to current legislative session (Shawn K. Hall)
 * arin - removed autodetection (Shawn K. Hall)
 * dns - added ip autodetection (Shawn K. Hall)
-
+* ggd - now with most of the advanced search switches (MLL)
 
 Removed Searches
 
