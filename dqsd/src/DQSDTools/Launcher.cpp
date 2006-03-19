@@ -21,8 +21,6 @@ STDMETHODIMP CLauncher::SetSite(IUnknown* pUnkSite)
 #if defined(DQSD_NOSECURITY) && defined(_DEBUG)
 #pragma message(  __FILE__ " ** WARNING! ** Compilation without security restrictions...do not distribute the resulting binary! " )
 #else
-	USES_CONVERSION;
-
 	HRESULT hr;
 
 	m_spUnkSite = pUnkSite;
@@ -56,7 +54,7 @@ STDMETHODIMP CLauncher::SetSite(IUnknown* pUnkSite)
 	while (ERROR_SUCCESS == RegEnumValue(hDqsdKey, idw, filebuf, &filelen, NULL, &dt, NULL, NULL))
 	{
 		idw++;
-		if (URLMatchesFilename(OLE2T(bstrURL), filebuf))
+		if (URLMatchesFilename(CW2T(bstrURL), filebuf))
 		{
 			success = TRUE;
 			break;
@@ -133,8 +131,6 @@ STDMETHODIMP CLauncher::SubmitForm(VARIANT idForm)
 		if (hFile == INVALID_HANDLE_VALUE)
 			return HRESULT_FROM_WIN32(::GetLastError());
 
-		USES_CONVERSION;
-
 		CComBSTR bstrOutput, bstrBanner;
 		bstrBanner.LoadString(IDS_BANNER);
 		bstrOutput.Append(L"<html><body onload=\"document.");
@@ -144,7 +140,7 @@ STDMETHODIMP CLauncher::SubmitForm(VARIANT idForm)
 		bstrOutput.Append(L"\n");
 		bstrOutput.Append(bstrHTML);
 		bstrOutput.Append(L"\n</body></html>\n");
-		::WriteFile(hFile, OLE2T(bstrOutput), bstrOutput.Length(), &dwBytesWritten, NULL);
+		::WriteFile(hFile, CW2T(bstrOutput), bstrOutput.Length(), &dwBytesWritten, NULL);
 		::FlushFileBuffers(hFile);
 
 		::CloseHandle(hFile);
@@ -160,18 +156,16 @@ STDMETHODIMP CLauncher::SubmitForm(VARIANT idForm)
 
 STDMETHODIMP CLauncher::OpenDocument(BSTR strDoc, VARIANT* pvParameters)
 {
-	USES_CONVERSION;
-
 	// Check for optional string parameter.  Any non-existent parameter should be indicated
 	// by a VARIANT of type VT_ERROR with a value of DISP_E_PARAMNOTFOUND.
 	HINSTANCE hInstance = NULL;
 	if (pvParameters && (VT_BSTR == pvParameters->vt))
 	{
-		hInstance = ::ShellExecute(NULL, NULL, OLE2T(strDoc), OLE2T(pvParameters->bstrVal), NULL, SW_SHOWNORMAL);
+		hInstance = ::ShellExecute(NULL, NULL, CW2T(strDoc), CW2T(pvParameters->bstrVal), NULL, SW_SHOWNORMAL);
 	}
 	else
 	{
-		hInstance = ::ShellExecute(NULL, NULL, OLE2T(strDoc), NULL, NULL, SW_SHOWNORMAL);
+		hInstance = ::ShellExecute(NULL, NULL, CW2T(strDoc), NULL, NULL, SW_SHOWNORMAL);
 	}
 	if (reinterpret_cast<INT>(hInstance) <= 32)
 		return E_FAIL;
@@ -181,7 +175,6 @@ STDMETHODIMP CLauncher::OpenDocument(BSTR strDoc, VARIANT* pvParameters)
 
 STDMETHODIMP CLauncher::get_pathDefaultBrowser(BSTR *pVal)
 {
-	USES_CONVERSION;
 	HRESULT hr = S_OK;
 
 	DWORD cbDocPath = _MAX_PATH;
@@ -226,11 +219,9 @@ STDMETHODIMP CLauncher::put_Debug(VARIANT_BOOL bDebug)
 
 STDMETHODIMP CLauncher::ReadFile(BSTR bstrFilename, BSTR *pbstrResult)
 {
-	USES_CONVERSION;
-
 	// Get the full pathname after applying some defaults
 	TCHAR szFilename[ _MAX_PATH ];
-	HRESULT hr = GetFilename( W2CT( bstrFilename ), szFilename );
+	HRESULT hr = GetFilename( CW2T( bstrFilename ), szFilename );
 	if ( FAILED( hr ) )
 		return hr;
 
@@ -272,11 +263,9 @@ STDMETHODIMP CLauncher::ReadFile(BSTR bstrFilename, BSTR *pbstrResult)
 
 STDMETHODIMP CLauncher::WriteFile(BSTR bstrFilename, BSTR bstrValue)
 {
-	USES_CONVERSION;
-
 	// Get the full pathname after applying some defaults
 	TCHAR szFilename[ _MAX_PATH ];
-	HRESULT hr = GetFilename( W2CT( bstrFilename ), szFilename );
+	HRESULT hr = GetFilename( CW2T( bstrFilename ), szFilename );
 	if ( FAILED( hr ) )
 		return hr;
 
@@ -303,7 +292,7 @@ STDMETHODIMP CLauncher::WriteFile(BSTR bstrFilename, BSTR bstrValue)
 	// TODO: Avoid using conversion macros here -- it's dangerous, 
 	// since there's no telling how large bstrValue is
 	DWORD dwBytesWritten = 0;
-	BOOL bResult = ::WriteFile( hFile, W2CT( bstrValue ), SysStringLen(bstrValue), &dwBytesWritten, NULL );
+	BOOL bResult = ::WriteFile( hFile, CW2T( bstrValue ), SysStringLen(bstrValue), &dwBytesWritten, NULL );
 	::FlushFileBuffers( hFile );
 	::CloseHandle( hFile );
 	
@@ -315,10 +304,8 @@ STDMETHODIMP CLauncher::WriteFile(BSTR bstrFilename, BSTR bstrValue)
 
 STDMETHODIMP CLauncher::GetProtocolHandler(BSTR bstrProtocol, BSTR *pbstrHandler)
 {
-	USES_CONVERSION;
-
 	TCHAR szProtocolHandlerKey[ 128 ];
-	StrCpyN( szProtocolHandlerKey, W2CT( bstrProtocol ), lengthof(szProtocolHandlerKey));
+	StrCpyN( szProtocolHandlerKey, CW2T( bstrProtocol ), lengthof(szProtocolHandlerKey));
 	StrNCat( szProtocolHandlerKey, _T("\\shell\\open\\command"), lengthof(szProtocolHandlerKey) - SysStringLen(bstrProtocol) - 1);
 
 	TCHAR szProtocolHandler[ _MAX_PATH ];
@@ -340,10 +327,8 @@ STDMETHODIMP CLauncher::GetProtocolHandler(BSTR bstrProtocol, BSTR *pbstrHandler
 
 STDMETHODIMP CLauncher::GetFiles(BSTR bstrFileSpec, BSTR *pbstrFiles)
 {
-	USES_CONVERSION;
-
 	TCHAR szFilename[ _MAX_PATH ];
-	HRESULT hr = GetFilename( W2CT( bstrFileSpec ), szFilename, _T("*.*") );
+	HRESULT hr = GetFilename( CW2T( bstrFileSpec ), szFilename, _T("*.*") );
 	if ( FAILED( hr ) )
 	{
 		Error(IDS_ERR_FILENOTFOUND, IID_ILauncher, hr);
@@ -390,9 +375,7 @@ STDMETHODIMP CLauncher::InstallKeyboardHook(LPDISPATCH pDispDocument)
 
 STDMETHODIMP CLauncher::RegisterHotKey(long hotkeyVkCode, BSTR bstrModifierName, LPDISPATCH pDispDocument)
 {
-	USES_CONVERSION;
-
-	return KeyboardInstallHotkey(hotkeyVkCode, W2T(bstrModifierName), &m_hHotkeyNotificationWindow, pDispDocument);
+	return KeyboardInstallHotkey(hotkeyVkCode, CW2T(bstrModifierName), &m_hHotkeyNotificationWindow, pDispDocument);
 }
 
 //
@@ -612,8 +595,6 @@ STDMETHODIMP CLauncher::RefreshTrayIcons()
 
 STDMETHODIMP CLauncher::get_InstallationDirectory(BSTR* pbstrDirectory)
 {
-	USES_CONVERSION;
-
 	TCHAR szInstallDir[ _MAX_PATH ];
 	HRESULT hr = GetInstallationDirectory(szInstallDir, sizeof(szInstallDir));
 	if (FAILED (hr) )
@@ -627,14 +608,12 @@ STDMETHODIMP CLauncher::get_InstallationDirectory(BSTR* pbstrDirectory)
 
 STDMETHODIMP CLauncher::get_AppDataDirectory(BSTR* pbstrDirectory)
 {
-	USES_CONVERSION;
-
 	CComBSTR bstrAppData;
 	HRESULT hr = GetSpecialFolderLocation( CComBSTR(L"AppData"), &bstrAppData );
 	if ( SUCCEEDED( hr ) )
 	{
 		bstrAppData.Append(L"\\DQSD");
-		::CreateDirectory( W2CT( bstrAppData ), NULL );
+		::CreateDirectory( CW2T( bstrAppData ), NULL );
 
 		*pbstrDirectory = bstrAppData.Detach();
 	}
@@ -660,12 +639,10 @@ static SPECIAL_FOLDER_MAP_T SpecialFolders[] =
 
 STDMETHODIMP CLauncher::GetSpecialFolderLocation(BSTR bstrSpecialFolder, BSTR* pbstrLocation)
 {
-	USES_CONVERSION;
-	
 	// map from special folder name to id
 	BOOL bFound = FALSE;
 	int nFolder = 0;
-	LPCTSTR ptstrSpecialFolder = W2CT(bstrSpecialFolder);
+	LPCTSTR ptstrSpecialFolder = CW2T(bstrSpecialFolder);
 	for (int i=0; i < SpecialFoldersCount; i++) {
 		PSPECIAL_FOLDER_MAP_T pMap = &SpecialFolders[i];
 		if (pMap != NULL && _tcscmp(ptstrSpecialFolder, pMap->strName) == 0) {
@@ -698,10 +675,8 @@ STDMETHODIMP CLauncher::GetSpecialFolderLocation(BSTR bstrSpecialFolder, BSTR* p
 
 STDMETHODIMP CLauncher::GetFolders(BSTR bstrBaseFolder, BSTR* pbstrFolders)
 {
-	USES_CONVERSION;
-
 	TCHAR szBaseFolder[ _MAX_PATH ];
-	HRESULT hr = GetFilename( W2CT( bstrBaseFolder ), szBaseFolder, _T("*.*") );
+	HRESULT hr = GetFilename( CW2T( bstrBaseFolder ), szBaseFolder, _T("*.*") );
 	if ( FAILED( hr ) )
 	{
 		Error(IDS_ERR_FILENOTFOUND, IID_ILauncher, hr);
@@ -738,11 +713,9 @@ STDMETHODIMP CLauncher::GetFolders(BSTR bstrBaseFolder, BSTR* pbstrFolders)
 
 STDMETHODIMP CLauncher::FileExists(BSTR bstrFilename, VARIANT_BOOL *pbExists)
 {
-	USES_CONVERSION;
-
 	// Get the full pathname after applying some defaults
 	TCHAR szFilename[ _MAX_PATH ];
-	HRESULT hr = GetFilename( W2CT( bstrFilename ), szFilename );
+	HRESULT hr = GetFilename( CW2T( bstrFilename ), szFilename );
 	if ( FAILED( hr ) )
 		return hr;
 
@@ -760,13 +733,11 @@ STDMETHODIMP CLauncher::FileExists(BSTR bstrFilename, VARIANT_BOOL *pbExists)
 
 STDMETHODIMP CLauncher::RenameFile(BSTR bstrFromFilename, BSTR bstrToFilename)
 {
-	USES_CONVERSION;
-
 	HRESULT hr;
 
 	// Get the full from pathname after applying some defaults
 	TCHAR szFromFilename[ _MAX_PATH + 1];
-	hr = GetFilename( W2CT( bstrFromFilename ), szFromFilename );
+	hr = GetFilename( CW2T( bstrFromFilename ), szFromFilename );
 	if ( FAILED( hr ) )
 		return hr;
 
@@ -799,7 +770,7 @@ STDMETHODIMP CLauncher::RenameFile(BSTR bstrFromFilename, BSTR bstrToFilename)
 
 	// Get the full to pathname after applying some defaults
 	TCHAR szToFilename[ _MAX_PATH + 1 ];
-	hr = GetFilename( W2CT( bstrToFilename ), szToFilename );
+	hr = GetFilename( CW2T( bstrToFilename ), szToFilename );
 	if ( FAILED( hr ) )
 		return hr;
 
@@ -899,8 +870,6 @@ HRESULT CLauncher::GetFilename( LPCTSTR szName, LPTSTR szResult, LPCTSTR pszDefa
 {
 	HRESULT hr;
 	
-	USES_CONVERSION;
-
 	// Get the installation directory from the registry
 	TCHAR szInstallDir[ _MAX_PATH ];
 	hr = GetInstallationDirectory(szInstallDir, sizeof(szInstallDir));
@@ -937,8 +906,6 @@ BOOL CLauncher::IsFileExtension( LPCTSTR szFilename, LPCTSTR szExts)
 
 BOOL CLauncher::IsValidFileDirectory(LPCTSTR szFilename)
 {
-	USES_CONVERSION;
-
 	HRESULT hr;
 
 	// Get the installation directory from the registry to use for making sure the filenames are in the install path
@@ -955,7 +922,7 @@ BOOL CLauncher::IsValidFileDirectory(LPCTSTR szFilename)
 
 	// Make sure from filename is in the installation or app data directory trees
 	if (!VerifyFileInDirectoryTree(szFilename, szInstallDir) &&
-		!VerifyFileInDirectoryTree(szFilename, W2CT((BSTR)bstrAppData)))
+		!VerifyFileInDirectoryTree(szFilename, CW2T((BSTR)bstrAppData)))
 	{
 		return FALSE;
 	}
@@ -964,16 +931,14 @@ BOOL CLauncher::IsValidFileDirectory(LPCTSTR szFilename)
 
 STDMETHODIMP CLauncher::CreateDirectory(BSTR bstrDir)
 {
-	USES_CONVERSION;
-
-	if (!IsValidFileDirectory(W2CT(bstrDir))) {
+	if (!IsValidFileDirectory(CW2T(bstrDir))) {
 		return Error(_T("Can't create directory unless in the app data or installation directory tree."), IID_ILauncher, E_FAIL);
 	}
 
 	// TODO: Re-implement later to support recursive dir creation
 	// like SHCreateDirectoryEx. The latter cannot be used, since it's
 	// not supported on pre-Win2k
-	::CreateDirectoryEx(NULL, W2CT(bstrDir), NULL);
+	::CreateDirectoryEx(NULL, CW2T(bstrDir), NULL);
 	int retval = ::GetLastError();
 	switch (retval) {
 		case ERROR_FILE_EXISTS:
