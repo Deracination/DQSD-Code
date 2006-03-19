@@ -15,7 +15,9 @@ REM We don't need a makefile if we run msdev.exe directly
 REM msdev DQSDTools.dsp /MAKE "DQSDTools - Win32 Release MinDependency" /REBUILD
 
 REM Use this instead if you only have VS.NET 2003 - make sure DQSDTools.mak is up to date
-nmake -a -f "DQSDTools.mak" CFG="DQSDTools - Win32 Release MinDependency" SDKINCLUDE="%SDKINCLUDE%"
+REM nmake -a -f "DQSDTools.mak" CFG="DQSDTools - Win32 Release MinDependency" SDKINCLUDE="%SDKINCLUDE%"
+
+devenv DQSDTools.sln /rebuild "Release MinDependency"
 
 REM **** Build installer ****
 
