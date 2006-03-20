@@ -31,18 +31,17 @@ function saveHistory()
 // restore at most historylength entries from the saved history
 function restoreHistory()
 {
-  var historyFileContent = null;
-  try
-  {
-    historyFileContent = readFile( HISTORY_FILE );
-  }
-  catch (e) 
-  {
+  var historyFileContent = loadHistoryFile(HISTORY_FILE);
+	if (historyFileContent == null)
+	{
     // Legacy location
     historyFileContent = readFile( "history.txt" );
-    renameFile("history.txt", "history.txt-obsolete-safe-to-delete");
-  }
-  
+		if (historyFileContent)
+		{
+			renameFile("history.txt", "history.deprecated");
+		}
+	}
+
   var loaded = null;
   if (historyFileContent)
     loaded = historyFileContent.replace(/\r\n/g, '\n').split('\n');
@@ -306,4 +305,17 @@ function sortFrequencyDataByDate( a, b )
   if ( parseFloat(aa[2]) > parseFloat(ab[2]) ) return -1;
   if ( parseFloat(aa[2]) < parseFloat(ab[2]) ) return 1;
   return 0;
+}
+
+function loadHistoryFile(filename)
+{
+	try
+  {
+    return readFile( HISTORY_FILE );
+  }
+  catch (e)
+	{
+	}
+
+	return null;
 }
