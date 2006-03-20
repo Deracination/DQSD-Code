@@ -35,7 +35,7 @@ function restoreHistory()
 	if (historyFileContent == null)
 	{
     // Legacy location
-    historyFileContent = readFile( "history.txt" );
+    historyFileContent = loadHistoryFile("history.txt");
 		if (historyFileContent)
 		{
 			renameFile("history.txt", "history.deprecated");
