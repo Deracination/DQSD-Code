@@ -451,7 +451,6 @@
 				    var output_file = DQSDLauncher.AppDataDirectory + '\\' + imgkey + '.gif';
 				    var cmd = '"' + wgetExe + '" --referer="http://seattlepi.nwsource.com/fun/" --output-document="' + output_file + '" "' + imgurl + '"';
 				    var shell = new ActiveXObject("WScript.Shell");
-					alert(cmd);
 				    shell.Run(cmd, 0, true);
 				    imgurl = "file:///"+output_file;
 				 }
