@@ -1,8 +1,9 @@
 <search function="comx">
     <name>Comic Strip</name>
     <description>Displays comic strip(s) in a single window.
-    <table class="helpboxDescTable"><tr><td colspan="2"><div class="helpboxDescLabels">Note:</div> All the switches can be abbreviated
-    and multiple switches can be specified at one time.</td></tr><tr><td>--</td></tr><tr><td><div class="helpboxDescLabels">Switches:</div></td></tr>
+    <table class="helpboxDescTable">
+    <tr><td colspan="2"><div class="helpboxDescLabels">Note:</div> All the switches can be abbreviated and multiple switches can be specified at one time.</td></tr>
+    <tr><td>--</td></tr><tr><td><div class="helpboxDescLabels">Switches:</div></td></tr>
     <tr><td>9 Chickweed Lane</td><td>/9chickweed</td></tr>
     <tr><td>A Case in Point</td><td>/caseinpoint</td></tr>
     <tr><td>Adam at Home</td><td>/adamathome</td></tr>
@@ -130,9 +131,11 @@
     <tr><td>The Born Loser</td><td>/bornloser</td></tr>
     <tr><td>The Buckets</td><td>/buckets</td></tr>
     <tr><td>The Grizzwells</td><td>/grizzwells</td></tr>
+    <tr><td>The Joy of Tech</td><td>/joyoftech</td></tr>
     <tr><td>The Other Coast</td><td>/othercoast</td></tr>
     <tr><td>The Sunshine Club</td><td>/sunshineclub</td></tr>
     <tr><td>Top of the World!</td><td>/topoftheworld</td></tr>
+    <tr><td>User Friendly</td><td>/userfriendly</td></tr>
     <tr><td>Willy n Ethel</td><td>/willynethel</td></tr>
     <tr><td>Wizard of Id</td><td>/wizardofid</td></tr>
     <tr><td>Working Daze</td><td>/workingdaze</td></tr>
@@ -195,20 +198,20 @@
         return false;
      }
      var comxoutfile = DQSDLauncher.AppDataDirectory + '\\comx.html';     
-     var pagebody="<html><head></head><body>";
+     var pagebody="<html>\n<head>\n<style>h4 {color:#900000;margin:0;}img {margin-bottom:16px;}</style>\n</head>\n<body>\n";
      
-	 var editorial_switches = new Array(
-		"animatedoliphant","anntelneas","barbarabrandon","bensargent", "billdeore","chanlowe",
-		"chipbok","chuckasay","danasummers","danawasserman","davidhorsey","dicklocher",
-		"dickwright","donwright","dougmarlette","drewsheneman","facesinthenews","garyvarvel",
-		"glennmccoy","jackhiggins","jackohman","jeffdanziger","laloalcaraz", "mattdavies",
-		"mikeluckovich","nickanderson","patoliphant","paulconrad","paulszep","signewilkinson",
-		"stevesack","stuartcarlson","tedrall","tomtoles","tonyauth","walthandelsman","waynestayskal"
-		);
+   var editorial_switches = new Array(
+    "animatedoliphant","anntelneas","barbarabrandon","bensargent", "billdeore","chanlowe",
+    "chipbok","chuckasay","danasummers","danawasserman","davidhorsey","dicklocher",
+    "dickwright","donwright","dougmarlette","drewsheneman","facesinthenews","garyvarvel",
+    "glennmccoy","jackhiggins","jackohman","jeffdanziger","laloalcaraz", "mattdavies",
+    "mikeluckovich","nickanderson","patoliphant","paulconrad","paulszep","signewilkinson",
+    "stevesack","stuartcarlson","tedrall","tomtoles","tonyauth","walthandelsman","waynestayskal"
+    );
 
-	 if (q.search("/editorials") >= 0) {
-		q = q.replace("/editorials", "/" + editorial_switches.join(" /"));
-	 }
+   if (q.search("/editorials") >= 0) {
+    q = q.replace("/editorials", "/" + editorial_switches.join(" /"));
+   }
 
      var args = parseArgs(q, "9chickweedlane,agnes,alleyoop,andycapp,arloandjanis,bc,\
      ballardstreet,ben,betty,bignate,bonanas,bornloser,buckets,bullsnbears,candorville,\
@@ -225,9 +228,9 @@
      baldo,bigpicture,bigtop,boondocks,boundandgagged,brendastarr,broomhilda,calvinandhobbes,\
      catswithhands,cathy,cleats,closetohome,cornered,dicktracy,doonesbury,duplex,foxtrot,fredbasset,\
      fuscobrothers,garfield,gasolinealley,heartofthecity,helenoftheinternet,housebroken,\
-     inthebleachers,kudzu,lacucaracha,lola,looseparts,lostsheep,luckycow,meehanstreak,\
+     inthebleachers,joyoftech,kudzu,lacucaracha,lola,looseparts,lostsheep,luckycow,meehanstreak,\
      middletons,misterboffo,mixedmedia,mullets,nonsequitur,overboard,pluggers,poochcafe,popculture,\
-     preteena,reallife,reynoldsunwrapped,shoe,stonesoup,tankmcnamara,willynethel,ziggy,zits," + editorial_switches.join(','));
+     preteena,reallife,reynoldsunwrapped,shoe,stonesoup,tankmcnamara,userfriendly,willynethel,ziggy,zits," + editorial_switches.join(','));
 
      if ( args.switches.length > 0 ){
         //get the current date
@@ -242,7 +245,7 @@
            var endurl=null;
            var urlcat=null;
            var urldir=null;
-		   var editorial=false;
+       var editorial=false;
 
            //default regex for finding the image in the page source..
            var rx = /.+(\/archive\/images\/\w+\.\w+)"\s+ALT="Today's\s+Comic"/i;
@@ -285,6 +288,7 @@
               case "herbandjamaal": endurl="creators/herbnjamaal/index.html";break;
               case "herman": endurl="comics/herman/index.html";break;
               case "janesworld": endurl="comics/janesworld/index.html";break;
+              case "joyoftech": imgtitle="The Joy of Tech";site="joyoftech";imgkey="jot";break;
               case "jumpstart": endurl="comics/jumpstart/index.html";break;
               case "kitncarlyle": endurl="comics/kitncarlyle/index.html";break;
               case "libertymeadows": endurl="creators/liberty/index.html";break;
@@ -384,9 +388,10 @@
               case "willynethel": imgtitle="Willy n Ethel";site="ucomics";imgkey="wes";break;
               case "ziggy": imgtitle="Ziggy";site="ucomics";imgkey="zi";break;
               case "calvinandhobbes": imgtitle="Calvin And Hobbes";site="ucomics";imgkey="ch";break;
-			  // misc
-			  case "zits": imgtitle="Zits";site="seattlepi";imgkey="Zits";break;
-			  case "drfun": imgtitle="Dr. Fun"; site="drfun";imgkey="df";break;
+        // misc
+              case "userfriendly": imgtitle="User Friendly";site="userfriendly";imgkey="uf";break;
+              case "zits": imgtitle="Zits";site="seattlepi";imgkey="Zits";break;
+              case "drfun": imgtitle="Dr. Fun"; site="drfun";imgkey="df";break;
               // editorials from ucomics.com
               case "animatedoliphant": imgtitle="Animated Oliphant";site="ucomics";imgkey="oa";editorial=true;break;
               case "anntelneas": imgtitle="Ann Telneas";site="ucomics";imgkey="tmate";editorial=true;break;
@@ -407,10 +412,10 @@
               case "facesinthenews": imgtitle="Faces in the News";site="ucomics";imgkey="kw";editorial=true;break;
               case "garyvarvel": imgtitle="Gary Varvel";site="ucomics";imgkey="crgva";editorial=true;break;
               case "glennmccoy": imgtitle="Glenn McCoy";site="ucomics";imgkey="gm";editorial=true;break;
-			  case "jackhiggins": imgtitle="Jack Higgins";site="ucomics";imgkey="jh";editorial=true;break;
-			  case "jackohman": imgtitle="Jack Ohman";site="ucomics";imgkey="tmjoh";editorial=true;break;
-			  case "jeffdanziger": imgtitle="Jeff Danziger";site="ucomics";imgkey="jd";editorial=true;break;
-			  case "laloalcaraz": imgtitle="Lalo Alcaraz";site="ucomics";imgkey="la";editorial=true;break;
+              case "jackhiggins": imgtitle="Jack Higgins";site="ucomics";imgkey="jh";editorial=true;break;
+              case "jackohman": imgtitle="Jack Ohman";site="ucomics";imgkey="tmjoh";editorial=true;break;
+              case "jeffdanziger": imgtitle="Jeff Danziger";site="ucomics";imgkey="jd";editorial=true;break;
+              case "laloalcaraz": imgtitle="Lalo Alcaraz";site="ucomics";imgkey="la";editorial=true;break;
               case "mattdavies": imgtitle="Matt Davies";site="ucomics";imgkey="tmmda";editorial=true;break;
               case "mikeluckovich": imgtitle="Mike Luckovich";site="ucomics";imgkey="crmlu";editorial=true;break;
               case "nickanderson": imgtitle="Nick Anderson";site="ucomics";imgkey="wpnan";editorial=true;break;
@@ -431,36 +436,71 @@
 
            //default to www.comics.com
            switch(site){
-              case "altcomics": //not yet implemented
-                 break;
-			  case "drfun":
-			     imgurl = "http://www.ibiblio.org/Dave/Dr-Fun/latest.jpg";
-			     break;
-			  case "seattlepi":
-		        if (typeof wgetExe == "undefined") {
-					pagebody += '<br><h4>' +imgtitle+'</h4><br>This comic requires <a href="http://xoomer.virgilio.it/hherold/">wget</a> and uses WScript.Shell to invoke it.  Please set wgetExe in your localprefs.js file to the location of your wget.exe. For example:<br><br>wgetExe="c:\\\\bin\\\\wget";';
-					imgurl = "";
-				} else {
+              case "altcomics": //not yet implemented break;
+              case "drfun": imgurl = "http://www.ibiblio.org/Dave/Dr-Fun/latest.jpg";break;
+              case "seattlepi":
+                 if (typeof wgetExe == "undefined") {
+                    pagebody += '<br><h4>' +imgtitle+'</h4><br>This comic requires <a href="http://xoomer.virgilio.it/hherold/">wget</a> and uses WScript.Shell to invoke it.  Please set wgetExe in your localprefs.js file to the location of your wget.exe. For example:<br><br>wgetExe="c:\\\\bin\\\\wget";';
+                    imgurl = "";
+                 } else {
                     var mday = dat.getDate();
                     var month = dat.getMonth()+1;
                     var year = dat.getYear();
                     if (mday<10) mday= '0'+mday;
                     if (month<10) month= '0'+month;
-				
-				    imgurl = "http://pst.rbma.com/content/" + imgkey + "?date=" + year + month + mday;
-				    var output_file = DQSDLauncher.AppDataDirectory + '\\' + imgkey + '.gif';
-				    var cmd = '"' + wgetExe + '" --referer="http://seattlepi.nwsource.com/fun/" --output-document="' + output_file + '" "' + imgurl + '"';
-				    var shell = new ActiveXObject("WScript.Shell");
-				    shell.Run(cmd, 0, true);
-				    imgurl = "file:///"+output_file;
-				 }
-			     break;
-                 
+        
+                    imgurl = "http://pst.rbma.com/content/" + imgkey + "?date=" + year + month + mday;
+                    var output_file = DQSDLauncher.AppDataDirectory + '\\' + imgkey + '.gif';
+                    var cmd = '"' + wgetExe + '" --referer="http://seattlepi.nwsource.com/fun/" --output-document="' + output_file + '" "' + imgurl + '"';
+                    var shell = new ActiveXObject("WScript.Shell");
+                    alert(cmd);
+                    shell.Run(cmd, 0, true);
+                    imgurl = "file:///"+output_file;
+                }
+                break; 
+              case "joyoftech":
+                 var sUrl="http://www.geekculture.com/joyoftech/index.html";
+                 var xmlHttp = new ActiveXObject("Microsoft.XmlHttp");
+                 xmlHttp.open("GET", sUrl, false);
+                 xmlHttp.send();
+
+                 //get the response content from the remote site
+                 var sBody = xmlHttp.responseText;
+
+                 // what I'm looking for
+                 //<img src="joyimages/555.png" height="431" width="485" border="0">
+                 var pattern = /joyimages\/\S+.[jpg|png|gif]/ig;
+                 var result = sBody.match(pattern)[0];
+                 var imgurl = "http://www.geekculture.com/joyoftech/"+result;
+                 break;
+
+              case "userfriendly":
+                 var urlstart="http://ars.userfriendly.org/cartoons";
+                 // format the date param for today's comic
+                 var mday = "0" + dat.getDate().toString();
+                 var month = "0" + (dat.getMonth()+1);
+                 var year = dat.getYear();
+
+                 var sUrl=urlstart;
+                 var xmlHttp = new ActiveXObject("Microsoft.XmlHttp");
+                 xmlHttp.open("GET", sUrl, false);
+                 xmlHttp.send();
+
+                 //get the response content from the remote site
+                 var sBody = xmlHttp.responseText;
+
+                 // what I'm looking for
+                 //<IMG ALT="Latest Strip" height="219" WIDTH="576" BORDER=0 SRC="http://www.userfriendly.org/cartoons/archives/04may/xuf006703.gif">
+                 var pattern = /http\:\S+userfriendly\.org\/cartoons\/\S+\.gif/ig;
+                 var result = sBody.match(pattern);
+                 var imgurl = result[0];
+                 break;
+
               case "ucomics":
                  var urlstart="http://images.ucomics.com/comics/";
-				 if (editorial) {
-					urlstart="http://picayune.uclick.com/comics/";
-				 }
+                 if (editorial) {
+                    urlstart="http://picayune.uclick.com/comics/";
+                 }
                  //get the other date parameters for the ucomics image urls
                  var mday = dat.getDate();
                  var month = dat.getMonth()+1;
@@ -472,38 +512,38 @@
 
                  //special handling for the calvinandhobbes comic.. It displays for year 1993 in 2004
                  if (args.switches[i].name == "calvinandhobbes") {
-					var year_offset = -11;
-					year += year_offset;
-					subyear = year % 100; 
-				 }
+                    var year_offset = -11;
+                    year += year_offset;
+                    subyear = year % 100; 
+                 }
                  
                  var imgurl = urlstart+imgkey+"/"+year+"/"+imgkey+subyear+month+mday+".gif";
-				 if (editorial) {
-					 var xmlHttp = new ActiveXObject("Microsoft.XmlHttp");
-					 var tries = 1;  // 1 == just try today's comic, > 1 look for previous days comics
-					 var status = -1;
-					 var cur_mday = mday;
-					 while (status != 200 && tries > 0) {
-						 imgurl = urlstart+imgkey+"/"+year+"/"+imgkey+subyear+month+cur_mday+".gif";
-						 xmlHttp.open("HEAD", imgurl, false);
-						 xmlHttp.send();
-						 status = xmlHttp.status;
-						 if (status == 200) {
-						    // found it
-							break;
-						 }
- 					     // none for today try previous day
-						 imgurl = "";
-						 tries--;
-						 cur_mday--;
-						 // should be smarter here and go to end of previous month
-						 if (cur_mday < 1)
-							break;
-		                 if (cur_mday<10) cur_mday= '0'+cur_mday;
-					 }
-				 }
+                 if (editorial) {
+                    var xmlHttp = new ActiveXObject("Microsoft.XmlHttp");
+                    var tries = 1;  // 1 == just try today's comic, > 1 look for previous days comics
+                    var status = -1;
+                    var cur_mday = mday;
+                    while (status != 200 && tries > 0) {
+                       imgurl = urlstart+imgkey+"/"+year+"/"+imgkey+subyear+month+cur_mday+".gif";
+                        xmlHttp.open("HEAD", imgurl, false);
+                        xmlHttp.send();
+                        status = xmlHttp.status;
+                        if (status == 200) {
+                           // found it
+                           break;
+                        }
+                     // none for today try previous day
+                     imgurl = "";
+                     tries--;
+                     cur_mday--;
+                     // should be smarter here and go to end of previous month
+                     if (cur_mday < 1)
+                        break;
+                        if (cur_mday<10) cur_mday= '0'+cur_mday;
+                     }
+                 }
                  break;
-
+                 
               default:
                  var urlstart="http://www.comics.com/";
 
@@ -539,7 +579,7 @@
 
            //put up the window
            if (imgurl != ""){
-                pagebody += '<br><h4>'+imgtitle+'</h4><br><img src="' +imgurl +'">';
+                pagebody += '<h4>'+imgtitle+'</h4>\n<img src="' +imgurl +'">\n';
            }//if imgurl
         }// for i <...
      }else{
@@ -547,10 +587,11 @@
            setTimeout("setSearchWindowText('comx ')", 2000);
            return;
      }//else
-     pagebody += '<br></body></html>';
-     
-     writeFile(comxoutfile, pagebody);
-     openSearchWindow("file://" + comxoutfile);
+     pagebody += '\n</body>\n</html>';
+    myWindow = window.open("", "comx", 'resizable,scrollbars,width=1000,height=700')
+    myWindow.document.write(pagebody)
+    //writeFile(comxoutfile, pagebody);
+    //openSearchWindow("file://" + comxoutfile);
   } //function
 
   ]]></script>
