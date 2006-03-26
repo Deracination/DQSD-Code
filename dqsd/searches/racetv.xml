@@ -142,26 +142,27 @@
       }//if tstest
    }//for
   
-   var tableleadin='<td colspan="3" width="100%" style="border:0;background-color: #ffff33;padding-top: 0.0416667in; padding-bottom: 0.0416667in;" valign="top"><p>';
-   tableleadin+='<span style="font-weight: bold; font-family:Verdana, sans-serif"><font size="1">'+datestring;
-   var RacingSearchBodyCode = "<html><head><style>body {font-family:Verdana;} table {width:100%;border-collapse:collapse;}  td, {border:0;margin:0px;padding-left:2px;}</style></head><body>";
-   RacingSearchBodyCode += "<center><span style=font-weight:bold;color:#900000;>"+wintitle+" Racing TV times ("+tzname+" Timezone)</span></center><table><tr> "+tableleadin;
-
+   //var tableleadin='<td colspan="3" width="100%" style="border:0;background-color: #ffff33;padding-top: 0.0416667in; padding-bottom: 0.0416667in;" valign="top"><p>';
+   //tableleadin+='<span style="font-weight: bold; font-family:Verdana, sans-serif"><font size="1">'+datestring;
+   var pagebody = "<html><head><style>body {font-family:Verdana;} table {width:100%;border-collapse:collapse;}  td, {border:0;margin:0px;padding-left:2px;}</style></head><body>";
+   pagebody += "<center><span style=font-weight:bold;color:#900000;>"+wintitle+" Racing TV times ("+tzname+" Timezone)</span></center><table><tr> ";
+   pagebody += '<td colspan="3" width="100%" style="border:0;background-color: #ffff33;padding-top: 0.0416667in; padding-bottom: 0.0416667in;" valign="top"><p>';
+   pagebody += '<span style="font-weight: bold; font-family:Verdana, sans-serif"><font size="1">'+datestring;
+   
    var racetvoutfile = DQSDLauncher.AppDataDirectory + '\\racetv.html';
-   var pagebody=""
-
-   //var pagebody=sBody_array.join("<tr>");
 
    //work around the writefile limit of the amount of data that can be written to a file..
    //for (var i = 0; i < sBody_array.length; i++) {
-   for (var i = 0; i < 115; i++) {
+   //var pagebody=sBody_array.join("<tr>");
+   for (var i = 0; i < 120; i++) {
       pagebody += sBody_array[i]+"<tr>\r\n";
    }
-   //sbodytop=RacingSearchBodyCode+sbodytop+'<td colspan=3 style="border:0;">&ltsnip&gt<br></td></tr></table></body></html>';
-   writeFile(racetvoutfile,RacingSearchBodyCode+pagebody+'<td colspan=3 style="border:0;">&ltsnip&gt<br></td></tr></table></body></html>');
-
-   //appendFile(racetvoutfile,"<td colspan=3 style='border:0;'>&ltsnip&gt<br></td></tr></table></body></html>");
-   openSearchWindow("file://" + racetvoutfile);         
+   pagebody+='<td colspan=3 style="border:0;">&lt;snip&gt;<br></td></tr></table></body></html>';
+   
+   myWindow = window.open("", "racetv", 'resizable,scrollbars,width=1000,height=700')
+   myWindow.document.write(pagebody)
+   //writeFile(racetvoutfile,pagebody);
+   //openSearchWindow("file://" + racetvoutfile);         
 } //function
   ]]></script>
 </search>
