@@ -71,7 +71,7 @@ Modified Searches
 * tinyurl - changed it to copy the tinyurl into the DQSD text box and select it instead of popping up the tinyurl webpage. (Brent Beardsley)
 * googletrans - Encodes all queries as UTF-8, per their new default (MLL)
 * mnr - updated mailinator.com email checking url (Brent Beardsley)
-* comx - added Zits (Seattle PI) and editorials (Brent Beardsley)
+* comx - added Zits (Seattle PI) and editorials (Brent Beardsley) Re-added "joy of tech" and "user friendly" toons.  Changed to open in window directly without an html file (Monty Scroggins)
 * httpinst - added /update switch to update or install searches from dqsd cvs repository (Brent Beardsley)
 * mwd - added /popup switch to display results in a popup window; added mwdDisplayInPopup usage to preferences.js (Glenn Carr, Kim Gräsman)
 * a9 - added maps feature (Shawn K. Hall)
@@ -82,6 +82,7 @@ Modified Searches
 * arin - removed autodetection (Shawn K. Hall)
 * dns - added ip autodetection (Shawn K. Hall)
 * ggd - now with most of the advanced search switches (MLL)
+* racetv - changed to open in new window directly without using an html file (Monty Scroggins)
 
 Removed Searches
 
