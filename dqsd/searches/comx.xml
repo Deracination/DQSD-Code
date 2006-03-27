@@ -2,7 +2,7 @@
     <name>Comic Strip</name>
     <description>Displays comic strip(s) in a single window.
     <table class="helpboxDescTable">
-    <tr><td colspan="2"><div class="helpboxDescLabels">Note:</div> All the switches can be abbreviated and multiple switches can be specified at one time.</td></tr>
+    <tr><td colspan="2"><div class="helpboxDescLabels">Note:</div> All the comic switches can be abbreviated and multiple switches can be specified at one time.</td></tr>
     <tr><td>--</td></tr><tr><td><div class="helpboxDescLabels">Switches:</div></td></tr>
     <tr><td>9 Chickweed Lane</td><td>/9chickweed</td></tr>
     <tr><td>A Case in Point</td><td>/caseinpoint</td></tr>
@@ -47,7 +47,7 @@
     <tr><td>Ferdnand</td><td>/ferdnand</td></tr>
     <tr><td>Flight Deck</td><td>/flightdeck</td></tr>
     <tr><td>Flo and Friends</td><td>/floandfriends</td></tr>
-    <tr><td>For Better or For Worse</td><td>/forbetterorforworse</td></tr>
+    <tr><td>For Better or for Worse</td><td>/forbetterorforworse</td></tr>
     <tr><td>FoxTrot</td><td>/foxtrot</td></tr>
     <tr><td>Frank and Ernest</td><td>/frankandernest</td></tr>
     <tr><td>Frazz</td><td>/frazz</td></tr>
@@ -128,6 +128,7 @@
     <tr><td>Tank Mcnamara</td><td>/tankmcnamara</td></tr>
     <tr><td>Tarzan</td><td>/tarzan</td></tr>
     <tr><td>Thats Life</td><td>/thatslife</td></tr>
+    <tr><td>The 5th Wave</td><td>/5thwave</td></tr>
     <tr><td>The Born Loser</td><td>/bornloser</td></tr>
     <tr><td>The Buckets</td><td>/buckets</td></tr>
     <tr><td>The Grizzwells</td><td>/grizzwells</td></tr>
@@ -181,11 +182,14 @@
     <tr><td>Tony Auth</td><td>/tonyauth</td></tr>
     <tr><td>Walt Handelsman</td><td>/walthandelsman</td></tr>
     <tr><td>Wayne Stayskal</td><td>/waynestayskal</td></tr>
+    <tr><td colspan="2"><div class="helpboxDescLabels">Extra Switch:</div></td></tr>
+    <tr><td>comx /popup</td><td>Open the comics in a popup window instead of the default browser.</td></tr>
     <tr><td colspan="2"><div class="helpboxDescLabels">Examples:</div></td></tr>
     <tr><td>comx /wiz   </td><td>(Wizard of Id)</td></tr>
     <tr><td>comx /workingit  </td><td>(Working it Out)</td></tr>
     <tr><td>comx /rip   </td><td>(Ripleys Believe it or Not)</td></tr>
     <tr><td>comx /wiz /workingit /rip</td><td>(Opens all three)</td></tr>
+    <tr><td>comx /wiz /workingit /rip /popup</td><td>(Opens all three) in a popup window</td></tr>
     <tr><td>comx /dil /editorials</td><td>Opens Dilbert and all editorial cartoons for today</td></tr>
     </table>
     </description>
@@ -199,21 +203,27 @@
      }
      var comxoutfile = DQSDLauncher.AppDataDirectory + '\\comx.html';     
      var pagebody="<html>\n<head>\n<style>h4 {color:#900000;margin:0;}img {margin-bottom:16px;}</style>\n</head>\n<body>\n";
-     
-   var editorial_switches = new Array(
-    "animatedoliphant","anntelneas","barbarabrandon","bensargent", "billdeore","chanlowe",
-    "chipbok","chuckasay","danasummers","danawasserman","davidhorsey","dicklocher",
-    "dickwright","donwright","dougmarlette","drewsheneman","facesinthenews","garyvarvel",
-    "glennmccoy","jackhiggins","jackohman","jeffdanziger","laloalcaraz", "mattdavies",
-    "mikeluckovich","nickanderson","patoliphant","paulconrad","paulszep","signewilkinson",
-    "stevesack","stuartcarlson","tedrall","tomtoles","tonyauth","walthandelsman","waynestayskal"
-    );
+     var fileout=1;     
+     //if the fileout switch was used, set the fileout flag to true and remove it from the list of comics to fetch
+     if (q.search("/popup") >= 0) {
+        fileout=0;
+        q = q.replace("/popup", "");
+     }
 
-   if (q.search("/editorials") >= 0) {
-    q = q.replace("/editorials", "/" + editorial_switches.join(" /"));
-   }
+     var editorial_switches = new Array(
+     "animatedoliphant","anntelneas","barbarabrandon","bensargent", "billdeore","chanlowe",
+     "chipbok","chuckasay","danasummers","danawasserman","davidhorsey","dicklocher",
+     "dickwright","donwright","dougmarlette","drewsheneman","facesinthenews","garyvarvel",
+     "glennmccoy","jackhiggins","jackohman","jeffdanziger","laloalcaraz", "mattdavies",
+     "mikeluckovich","nickanderson","patoliphant","paulconrad","paulszep","signewilkinson",
+     "stevesack","stuartcarlson","tedrall","tomtoles","tonyauth","walthandelsman","waynestayskal"
+     );
 
-     var args = parseArgs(q, "9chickweedlane,agnes,alleyoop,andycapp,arloandjanis,bc,\
+     if (q.search("/editorials") >= 0) {
+        q = q.replace("/editorials", "/" + editorial_switches.join(" /"));
+     }
+
+     var args = parseArgs(q, "5thwave,9chickweedlane,agnes,alleyoop,andycapp,arloandjanis,bc,\
      ballardstreet,ben,betty,bignate,bonanas,bornloser,buckets,bullsnbears,candorville,\
      caseinpoint,ceodad,cheapthrills,committed,drabble,drfun,fatcats,ferdnand,\
      flightdeck,floandfriends,forbetterorforworse,frankandernest,frazz,geech,getfuzzy,\
@@ -230,13 +240,13 @@
      fuscobrothers,garfield,gasolinealley,heartofthecity,helenoftheinternet,housebroken,\
      inthebleachers,joyoftech,kudzu,lacucaracha,lola,looseparts,lostsheep,luckycow,meehanstreak,\
      middletons,misterboffo,mixedmedia,mullets,nonsequitur,overboard,pluggers,poochcafe,popculture,\
-     preteena,reallife,reynoldsunwrapped,shoe,stonesoup,tankmcnamara,userfriendly,willynethel,ziggy,zits," + editorial_switches.join(','));
+     preteena,reallife,reynoldsunwrapped,shoe,stonesoup,tankmcnamara,userfriendly,willynethel,ziggy,\
+     zits" + editorial_switches.join(','));
 
      if ( args.switches.length > 0 ){
         //get the current date
         var dat = new Date();
         for (i=0; i < args.switches.length; i++){
-
            var site=null;
            var endurl=null;
            var imgtitle=null;
@@ -245,8 +255,8 @@
            var endurl=null;
            var urlcat=null;
            var urldir=null;
-       var editorial=false;
-
+           var editorial=false;
+                      
            //default regex for finding the image in the page source..
            var rx = /.+(\/archive\/images\/\w+\.\w+)"\s+ALT="Today's\s+Comic"/i;
            switch( args.switches[i].name ){
@@ -275,7 +285,6 @@
               case "ferdnand": endurl="comics/ferdnand/index.html";break;
               case "flightdeck": endurl="creators/flightdeck/index.html";break;
               case "floandfriends": endurl="creators/floandfriends/index.html";break;
-              case "forbetterorforworse": endurl="comics/forbetter/index.html";break;
               case "frankandernest": endurl="comics/franknernest/index.html";break;
               case "frazz": endurl="comics/frazz/index.html";break;
               case "geech": endurl="comics/geech/index.html";break;
@@ -336,6 +345,7 @@
               // the oddball one.. has to have its own rx pattern
               case "peanuts": endurl="comics/peanuts/index.html";rx=/.+(\/archive\/images\/\w+\.\w+)"\s+ALT="Today's Strip"/;imgtitle="Peanuts";break;
               // comics from ucomics.com
+              case "5thwave": imgtitle="The 5th Wave";site="ucomics";imgkey="fw";break;
               case "animalcrackers": imgtitle="Animal Crackers";site="ucomics";imgkey="tmani";break;
               case "adamathome": imgtitle="Adam at Home";site="ucomics";imgkey="ad";break;
               case "annie": imgtitle="Annie";site="ucomics";imgkey="tmann";break;
@@ -356,6 +366,7 @@
               case "duplex": imgtitle="Duplex";site="ucomics";imgkey="dp";break;
               case "foxtrot": imgtitle="Foxtrot";site="ucomics";imgkey="ft";break;
               case "fredbasset": imgtitle="Fred Basset";site="ucomics";imgkey="tmfba";break;
+              case "forbetterorforworse": imgtitle="For Better Or For Worse";site="ucomics";imgkey="fb";break;
               case "fuscobrothers": imgtitle="Fusco Brothers";site="ucomics";imgkey="fu";break;
               case "garfield": imgtitle="Garfield";site="ucomics";imgkey="ga";break;
               case "gasolinealley": imgtitle="Gasoline Alley";site="ucomics";imgkey="tmgas";break;
@@ -388,7 +399,7 @@
               case "willynethel": imgtitle="Willy n Ethel";site="ucomics";imgkey="wes";break;
               case "ziggy": imgtitle="Ziggy";site="ucomics";imgkey="zi";break;
               case "calvinandhobbes": imgtitle="Calvin And Hobbes";site="ucomics";imgkey="ch";break;
-        // misc
+              // misc
               case "userfriendly": imgtitle="User Friendly";site="userfriendly";imgkey="uf";break;
               case "zits": imgtitle="Zits";site="seattlepi";imgkey="Zits";break;
               case "drfun": imgtitle="Dr. Fun"; site="drfun";imgkey="df";break;
@@ -430,7 +441,6 @@
               case "tonyauth": imgtitle="Tony Auth";site="ucomics";imgkey="ta";editorial=true;break;
               case "walthandelsman": imgtitle="Walt Handelsman";site="ucomics";imgkey="tmwha";editorial=true;break;
               case "waynestayskal": imgtitle="Wayne Stayskal";site="ucomics";imgkey="tmwst";editorial=true;break;
-
               default:endurl=null;imgkey=null;break;
            }//switch
 
@@ -525,26 +535,26 @@
                     var cur_mday = mday;
                     while (status != 200 && tries > 0) {
                        imgurl = urlstart+imgkey+"/"+year+"/"+imgkey+subyear+month+cur_mday+".gif";
-                        xmlHttp.open("HEAD", imgurl, false);
-                        xmlHttp.send();
-                        status = xmlHttp.status;
-                        if (status == 200) {
-                           // found it
-                           break;
-                        }
-                     // none for today try previous day
-                     imgurl = "";
-                     tries--;
-                     cur_mday--;
-                     // should be smarter here and go to end of previous month
-                     if (cur_mday < 1)
-                        break;
-                        if (cur_mday<10) cur_mday= '0'+cur_mday;
-                     }
+                       xmlHttp.open("HEAD", imgurl, false);
+                       xmlHttp.send();
+                       status = xmlHttp.status;
+                       if (status == 200) {
+                          // found it
+                          break;
+                       }
+                       // none for today try previous day
+                       imgurl = "";
+                       tries--;
+                       cur_mday--;
+                       // should be smarter here and go to end of previous month
+                       if (cur_mday < 1)
+                          break;
+                       if (cur_mday<10) cur_mday= '0'+cur_mday;
+                    }
                  }
                  break;
-                 
               default:
+              
                  var urlstart="http://www.comics.com/";
 
                  var sUrl=urlstart+endurl;
@@ -588,10 +598,15 @@
            return;
      }//else
      pagebody += '\n</body>\n</html>';
-    myWindow = window.open("", "comx", 'resizable,scrollbars,width=1000,height=700')
-    myWindow.document.write(pagebody)
-    //writeFile(comxoutfile, pagebody);
-    //openSearchWindow("file://" + comxoutfile);
+     
+     if (fileout == 1) {
+        writeFile(comxoutfile, pagebody);
+        openSearchWindow("file://" + comxoutfile);
+     }else{
+        myWindow = window.open("", "comx", 'resizable,scrollbars,width=1000,height=700')
+        myWindow.document.write(pagebody)
+     }
+
   } //function
 
   ]]></script>
