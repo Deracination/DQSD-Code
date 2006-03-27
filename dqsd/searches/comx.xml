@@ -446,7 +446,8 @@
 
            //default to www.comics.com
            switch(site){
-              case "altcomics": //not yet implemented break;
+              case "altcomics": //not yet implemented
+				break;
               case "drfun": imgurl = "http://www.ibiblio.org/Dave/Dr-Fun/latest.jpg";break;
               case "seattlepi":
                  if (typeof wgetExe == "undefined") {
@@ -463,7 +464,6 @@
                     var output_file = DQSDLauncher.AppDataDirectory + '\\' + imgkey + '.gif';
                     var cmd = '"' + wgetExe + '" --referer="http://seattlepi.nwsource.com/fun/" --output-document="' + output_file + '" "' + imgurl + '"';
                     var shell = new ActiveXObject("WScript.Shell");
-                    alert(cmd);
                     shell.Run(cmd, 0, true);
                     imgurl = "file:///"+output_file;
                 }
