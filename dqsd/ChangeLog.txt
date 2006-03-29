@@ -85,6 +85,7 @@ Modified Searches
 * racetv - changed to open in new window directly without using an html file (Monty Scroggins)
 
 Removed Searches
+* ch - Site changes made it difficult to adapt search (James Robertson, via Kim Gräsman)
 
 Miscellaneous
 * Added IRC url autodetection (only really useful for people that have IRC software that handles the URL hook) (Shawn K. Hall)
