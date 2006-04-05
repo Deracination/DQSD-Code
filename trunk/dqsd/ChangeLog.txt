@@ -1,4 +1,19 @@
--- What's new for 3.1.9.2 (date 2006-03-19)
+-- What's new for x.x.x.x (date xxxx-xx-xx)
+
+Enhancements
+
+Bug Fixes
+
+New Searches
+
+Modified Searches
+
+Removed Searches
+
+Miscellaneous
+
+
+-- What's new for 3.1.9.2 (date 2006-04-05)
 
 Enhancements
 * Holidays for Portugal through 2009 (Paulo Ferrão)
@@ -15,6 +30,7 @@ Bug Fixes
 * openSearchWindow function now uses pagetemplate setting (Shawn K. Hall)
 * ebay,ebayuk - /my switch wasn't working anymore (Glenn Carr)
 * musicbrainz - fixed broken link (MLL)
+
 New Searches
 * sarc - Searches the Symantec AntiVirus Research Corp (SARC) site. (Shawn K. Hall)
 * ans - get answers at answers.com (google now links to them, too) (MLL)
