@@ -14,7 +14,7 @@ Bug Fixes
 * Installer no longer removes deprecated mb.xml, since it was re-added as a new search in 3.1.9.1
 * openSearchWindow function now uses pagetemplate setting (Shawn K. Hall)
 * ebay,ebayuk - /my switch wasn't working anymore (Glenn Carr)
-
+* musicbrainz - fixed broken link (MLL)
 New Searches
 * sarc - Searches the Symantec AntiVirus Research Corp (SARC) site. (Shawn K. Hall)
 * ans - get answers at answers.com (google now links to them, too) (MLL)
