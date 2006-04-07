@@ -152,7 +152,7 @@
       }//if tstest
    }//for
   
-   var pagebody = "<html><head><style>body {font-family:Verdana;} table {width:100%;border-collapse:collapse;}  td, {border:0;margin:0px;padding-left:2px;}</style></head><body>";
+   var pagebody = "<html><head><style>body {font-family:Verdana;} table {width:100%;border-collapse:collapse;}  td {border:0;margin:0px;padding-left:2px;font-family:verdana;font-size:11px;}</style></head><body>";
    pagebody += "<center><span style=font-weight:bold;color:#900000;>"+wintitle+" Racing TV times ("+tzname+" Timezone)</span></center><table><tr> ";
    pagebody += '<td colspan="3" width="100%" style="border:0;background-color: #ffff33;padding-top: 0.0416667in; padding-bottom: 0.0416667in;" valign="top"><p>';
    pagebody += '<span style="font-weight: bold; font-family:Verdana, sans-serif"><font size="1">'+datestring;
