@@ -3,6 +3,7 @@
 Enhancements
 
 Bug Fixes
+* racetv - fixed a font issue - (Monty Scroggins)
 
 New Searches
 
