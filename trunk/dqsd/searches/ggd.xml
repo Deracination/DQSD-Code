@@ -119,8 +119,10 @@
 
       submitForm(ggdf);
 
-      //reset the file field
+      //reset the fields
+      document.ggdf.type.value = "";
       document.ggdf.file.value = "";
+      document.ggdf.ot.value = "";
       }
     }
 
