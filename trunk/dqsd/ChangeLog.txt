@@ -4,6 +4,7 @@ Enhancements
 
 Bug Fixes
 * racetv - fixed a font issue - (Monty Scroggins)
+* ggd now resets switches between calls (MLL)
 
 New Searches
 
