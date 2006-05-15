@@ -1,0 +1,65 @@
+<search function="wdc">
+  <COMMENT>
+
+    Even though this XML search will probably load and is a good start
+    toward a completed search, please be aware that this search will probably
+    not work as is and will probably require some changes.
+
+  </COMMENT>
+  <name>Weather Dot Com</name>
+  <category>News</category>
+  <contributor>John W. Bairen, Jr.</contributor>
+  <link>http://www.weather.com/</link>
+  <email>john_at_bairen_dot_net</email>
+  <description>
+  Get your forcast form weather.com
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td></td></tr>
+      <tr><td></td></tr>
+    </table>
+  </description>
+  <form name="wdcf"
+        method="get"
+        action="http://www.weather.com/search/enhanced">
+    <input type="hidden" name="whatprefs" value="" />
+    <input type="hidden" name="what" value="WeatherLocalUndeclared" />
+    <input type="hidden" name="lswe" value="" />
+    <input type="hidden" name="lswa" value="" />
+    <input type="hidden" name="from" value="whatwhere" />
+
+    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
+
+    <input type="hidden" name="where" value="" />
+  </form>
+  <script><![CDATA[
+    function wdc(q)
+    {
+      if( nullArgs("wdc", q) )
+        return;
+
+      // FORM variables for wdcf
+      //document.wdcf.whatprefs.value = "";
+      //document.wdcf.what.value = "";
+      //document.wdcf.lswe.value = "";
+      //document.wdcf.lswa.value = "";
+      //document.wdcf.from.value = "";
+
+      // The wizard assigned the search string to this form field value because
+      // this field was the active element when the search file was generated.
+      // Change this to args.q if the search string is parsed with parseArgs.
+      document.wdcf.where.value = q;
+
+      submitForm(wdcf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 05/14/06 at 20:02:35
+    by Dave's Quick Search Deskbar Search Wizard version 1.3,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>

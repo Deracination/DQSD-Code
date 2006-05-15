@@ -7,6 +7,7 @@ Bug Fixes
 * ggd now resets switches between calls (MLL)
 
 New Searches
+* wdc - weather.com search (John Bairen)
 
 Modified Searches
 
