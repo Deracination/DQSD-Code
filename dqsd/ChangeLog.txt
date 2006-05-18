@@ -35,6 +35,8 @@ Bug Fixes
 * musicbrainz - fixed broken link (MLL)
 
 New Searches
+* wdc - get forecast from weather.com (JB)
+* twe - search both yahoo and google from twingine.com (JB)
 * sarc - Searches the Symantec AntiVirus Research Corp (SARC) site. (Shawn K. Hall)
 * ans - get answers at answers.com (google now links to them, too) (MLL)
 * ggl - Google Local Search (Brent Beardsley)
