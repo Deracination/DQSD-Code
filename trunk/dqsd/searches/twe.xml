@@ -1,0 +1,32 @@
+<search function="twe">
+  <name>Twingine</name>
+  <category>Search the Web</category>
+  <contributor>John W. Bairen, Jr.</contributor>
+  <link>http://www.twingine.com/</link>
+  <email>john_dot_bairen_at_philips_dot_com</email>
+  <description>
+  Search both Yahoo and Google (renamed Twingine).
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>twe modem drivers</td></tr>
+      <tr><td>twe flowers</td></tr>
+    </table>
+  </description>
+  <form name="twef"
+        method="get"
+        action="http://www.twingine.com/search.php">
+    <input type="hidden" name="q" value="" />
+  </form>
+  <script><![CDATA[
+    function twe(q)
+    {
+      if( nullArgs("twe", q) )
+        return;
+
+      // FORM variables for twingine
+      document.twef.q.value = q;
+
+      submitForm(twef);
+    }
+  ]]></script>
+</search>
