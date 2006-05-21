@@ -1,0 +1,68 @@
+<search function="tvc">
+  <name>TV.com</name>
+  <category>Entertainment</category>
+  <contributor>Steve Poirier</contributor>
+  <link>http://www.tv.com/search.php</link>
+  <description>
+  Search TV.com for programs, people or both
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+    <tr><td>/program</td><td> - </td><td>Search by program (default)</td></tr>
+    <tr><td>/person</td><td> - </td><td>Search by actor</td></tr>
+    <tr><td>/all</td><td> - </td><td>Search by program and/or actor</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+     <tr><td>tvc csi</td></tr>
+     <tr><td>tvc bob crane /person</td></tr>
+     <tr><td>tvc seinfeld /all</td></tr>
+    </table>
+  </description>
+  <form name="tvcf"
+        method="get"
+        action="http://www.tv.com/search.php">
+    <input type="hidden" name="type" value="11" />
+    <input type="hidden" name="stype" value="program" />
+    <input type="hidden" name="qs" value="" />
+  </form>
+  <script><![CDATA[
+    function tvc(q)
+    {
+      if( nullArgs("tvc", q) )
+        return;
+
+      var args = parseArgs(q, "program, person, all");
+      if ( args.switches.length > 0 )
+      {
+        switch( args.switches[0].name )
+        {
+          case "program":
+            document.tvcf.stype.value = "program";
+            break;
+          case "person":
+            document.tvcf.stype.value = "person";
+            break;
+          case "all":
+            document.tvcf.stype.value = "all";
+            break;
+          default:
+            document.tvcf.stype.value = "program";
+            break;
+        }
+      }
+
+      document.tvcf.qs.value = args.q;
+
+      submitForm(tvcf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 04/05/06 at 20:53:45
+    by Dave's Quick Search Deskbar Search Wizard version 1.3,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>
