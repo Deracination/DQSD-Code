@@ -8,10 +8,14 @@ Bug Fixes
 
 New Searches
 * wdc - weather.com search (John Bairen)
+* tvc - tv.com search (Steve Poirier)
+* yghg - YahooGoogle (John Bairen)
 
 Modified Searches
+* usps - Updated to go to the right page (Steve Poirier)
 
 Removed Searches
+* tvtm - Replaced by tvc (Kim Gräsman)
 
 Miscellaneous
 
