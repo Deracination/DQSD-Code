@@ -11,29 +11,37 @@
   <link>http://www.webmd.com/</link>
   <contributor>John W. Bairen, Jr.</contributor>
   
-  <form name="mdf" 
-        action="http://my.webmd.com/search_results" 
-        method="post">        
-    <input type="hidden" name="query"/>
-    <input type="hidden" name="filter" value="library_filter"/>
+  <form name="mdf"
+        method="get"
+        action="http://www.webmd.com/search/search_results/default.aspx">
+
+    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
+
+    <input type="hidden" name="query" value="" />
   </form>
-  
   <script><![CDATA[
     function md(q)
     {
-      if( nullArgs("md",q) )
-        return false;
-      else
-      {
-        document.mdf.query.value = q;
-        submitForm(mdf);
-      }
+      if( nullArgs("md", q) )
+        return;
+
+      // FORM variables for mdf
+
+      // The wizard assigned the search string to this form field value because
+      // this field was the active element when the search file was generated.
+      // Change this to args.q if the search string is parsed with parseArgs.
+      document.mdf.query.value = q;
+
+      submitForm(mdf);
     }
   ]]></script>
-
   <copyright>
-	Copyright (c) 2002 David Bau
-	Distributed under the terms of the
-	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
   </copyright>
+  <created_by>
+    This search file was initially created on 06/01/06 at 14:22:25
+    by Dave's Quick Search Deskbar Search Wizard version 1.3,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
 </search>
