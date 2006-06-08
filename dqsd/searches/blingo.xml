@@ -1,0 +1,118 @@
+<search function="blingo">
+  <COMMENT>
+
+    Even though this XML search will probably load and is a good start
+    toward a completed search, please be aware that this search will probably
+    not work as is and will probably require some changes.
+
+  </COMMENT>
+  <name>Blingo</name>
+  <category>Search the Web</category>
+  <contributor>John W. Bairen, Jr.</contributor>
+  <link>http://www.blingo.com/</link>
+  <email>john_at_bairen_dot_net</email>
+  <description>Search the web using the Google search engine and maybe win something just for searching.
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/web</td><td> - </td><td>Search the web</td></tr>
+      <tr><td>/images</td><td> - </td><td>Images</td></tr>
+      <tr><td>/news</td><td> - </td><td>News <i><b>- not implimented by Blingo, yet.</b></i></td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>blingo dqsd</td></tr>
+      <tr><td>blingo dog /images</td></tr>
+    </table>
+  </description>
+  <form name="blingofw"
+        method="get"
+        action="http://www.blingo.com/search">
+
+    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
+
+    <input type="hidden" name="q" value="" />
+  </form>
+  <form name="blingofi"
+        method="get"
+        action="http://www.blingo.com/images">
+
+    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
+
+    <input type="hidden" name="q" value="" />
+  </form>
+  <form name="blingofn"
+        method="get"
+        action="http://www.blingo.com/news">
+
+    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
+
+    <input type="hidden" name="q" value="" />
+  </form>
+  <script><![CDATA[
+    function blingo(q)
+    {
+      if( nullArgs("blingo", q) )
+        return;
+
+      // Parse switches with parseArgs:
+
+      // parseArgs usage:
+      // Arguments:
+      //    q                - string from the search function
+      //    expectedSwitches - list or array of the expected switch values
+      //    expandSwitches   - optional parameter [default = true] used to determine 
+      //                       if the switch shortcuts should be expanded (i.e. /f becomes /foo)
+      // Returns an object with these properties:
+      //    q        - the input string with the switches removed
+      //    switches - array of objects with these two properties:
+      //                  name:   expanded name of the matched switch (i.e. foo as in /foo:bar)
+      //                  value:  value of switch (i.e. bar as in /foo:bar)
+      //    switch_val - associative array with the switch name as the key with the switch value 
+      //                 as the value. (i.e. switch_val["foo"] = "bar" as in /foo:bar)
+
+      var args = parseArgs(q, "web, images, news");
+      if ( args.switches.length > 0 )
+      {
+        switch( args.switches[0].name )
+        {
+          case "web":
+	    document.blingofw.q.value = args.q;
+      	    submitForm(blingofw);
+	    break;
+          
+	  case "images":
+	    document.blingofi.q.value = args.q;
+	    submitForm(blingofi);
+	    break;
+
+	  case "news":
+	    document.blingofn.q.value = args.q;
+	    submitForm(blingofn);
+	    break;
+
+	  default:
+	    document.blingofw.q.value = args.q;
+	    submitForm(blingofw);
+	    break;
+        }
+      
+      }
+      
+      else
+      {
+        document.blingofw.q.value = args.q;
+        submitForm(blingofw);
+      }
+      
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 06/08/06 at 09:49:45
+    by Dave's Quick Search Deskbar Search Wizard version 1.3,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>
