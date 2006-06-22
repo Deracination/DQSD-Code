@@ -39,7 +39,7 @@
     		{
 			case "update":
 			    var reqSearch = args.q;
-				args.q = "http://cvs.sourceforge.net/viewcvs.py/*checkout*/dqsd/dqsd/searches/" + reqSearch + ".xml?content-type=text%2Fplain";
+				args.q = "http://dqsd.cvs.sourceforge.net/*checkout*/dqsd/dqsd/searches/" + reqSearch + ".xml?content-type=text%2Fplain";
 				filename = reqSearch + ".xml";
 			    break;
     		case "local":
