@@ -7,13 +7,9 @@
       <tr><td>/cvs</td><td> - </td><td>Browse project's CVS repository</td></tr>
       <tr><td>/dloads</td><td> - </td><td>Browse project's downloadable files</td></tr>
       <tr><td>/exact</td><td> - </td><td>Require all words in when searching</td></tr>
-      <tr><td>/foundry</td><td> - </td><td>Goto a Sourceforge foundry</td></tr>
-      <tr><td>/freshmeat</td><td> - </td><td>Freshmeat.net</td></tr>
       <tr><td>/list[:admin]</td><td> - </td><td>Display list info or admin page</td></tr>
       <tr><td>/new</td><td> - </td><td>New Releases</td></tr>
-      <tr><td>/people</td><td> - </td><td>People</td></tr>
       <tr><td>/project</td><td> - </td><td>Project's summary page</td></tr>
-      <tr><td>/software [default]</td><td> - </td><td>Software</td></tr>
       <tr><td>/status</td><td> - </td><td>Site Status</td></tr>
     </table>
     <div class="helpboxDescLabels">Examples:</div>
@@ -23,7 +19,6 @@
       <tr><td>sf /proj dqsd</td></tr>
       <tr><td>sf /cvs dqsd</td></tr>
       <tr><td>sf /list dqsd-users</td></tr>
-      <tr><td>sf /fo java</td></tr>
       <tr><td>sf /status cvs</td></tr>
     </table>
   </description>
@@ -46,29 +41,21 @@
         return false;
 
       var exact = false;
-      var args = parseArgs(q, "dloads, exact, new, software, people, freshmeat, project, cvs, list, foundry, status");
+      var args = parseArgs(q, "dloads, exact, new, project, cvs, list, status");
       if( args.switches.length == 1 )
       {
         switch( args.switches[0].name )
         {
           case "exact":
             exact = true; break;
-          case "foundry":
-            openSearchWindow("http://"+args.q.toLowerCase()+".foundries.sourceforge.net/"); return false;
 		  case "dloads":
 		    openSearchWindow("http://prdownloads.sourceforge.net/" + args.q); return false;
           case "new":
             openSearchWindow("http://www.sourceforge.net/new/"); return false;
-          case "software":
-            document.sfsearch.type_of_search.value = "soft"; break;
-          case "people":
-            document.sfsearch.type_of_search.value = "people"; break;
-          case "freshmeat":
-            document.sfsearch.type_of_search.value = "freshmeat"; break;
           case "project":
             openSearchWindow("http://sourceforge.net/projects/" + args.q); return false;
           case "cvs":
-            openSearchWindow("http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/" + args.q); return false;
+            openSearchWindow("http://" + args.q + ".cvs.sourceforge.net/" + args.q); return false;
           case "list":
             var listtype = args.switch_val["list"].toLowerCase();
             openSearchWindow("https://lists.sourceforge.net/lists/" + ( listtype.length && ( listtype == "admin".substr(0, listtype.length) ) ? "admin/" : "listinfo/" ) + args.q); return false;
