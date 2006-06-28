@@ -25,6 +25,7 @@
    <tr><td>/ruby</td><td> - </td><td>Goto ruby-lang.org</td></tr>
    <tr><td>/source</td><td> - </td><td>Goto ruby on rails download page</td></tr>
    <tr><td>/stdlib</td><td> - </td><td>Search the ruby stdlib for class documentation</td></tr>
+   <tr><td>/ticket</td><td> - </td><td>Goto ruby on rails ticket (patch)</td></tr>
    <tr><td>/weenie</td><td> - </td><td>Search rails weenie</td></tr>
    <tr><td>/wiki</td><td> - </td><td>Search the wiki for rails topics</td></tr>
   </table>
@@ -41,7 +42,7 @@
         return;
 
 	  var url = false;
-      var args = parseArgs(q, "api,archive,blog,core,documentation,forum,forge,garden,irc,jobs,news,ocs,pickaxe,plugins,planet,ruby,stdlib,wiki,weenie,snippets,source");
+      var args = parseArgs(q, "api,archive,blog,core,documentation,forum,forge,garden,irc,jobs,news,ocs,pickaxe,plugins,planet,ruby,stdlib,ticket,wiki,weenie,snippets,source");
       if ( args.switches.length > 0 ) {
         switch( args.switches[0].name ) {
 		  case "api": 
@@ -129,6 +130,13 @@
 				url = "http://www.ruby-doc.org/stdlib/";
 			}
 			break;
+		  case 'ticket':
+		    if (args.q != '') {
+			  url = 'http://dev.rubyonrails.org/ticket/' + escape(args.q);
+		    } else {
+			  url = 'http://dev.rubyonrails.org/report/3';   
+			}
+		    break;
 		  case 'weenie': 
 			if (args.q != '') {
 				url = 'http://rails.techno-weenie.net/search?q=' + escape(args.q) + '&commit=Go';
@@ -150,6 +158,6 @@
   ]]></script>
 
   <copyright>
-    Copyright (c) 2005 Brent Beardsley; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+    Copyright (c) 2005-2006 Brent Beardsley; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
   </copyright>
 </search>
