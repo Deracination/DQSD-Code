@@ -1,0 +1,26 @@
+HKCR
+{
+	DQSDHost.DeskBand.1 = s 'DQSD-400'
+	{
+		CLSID = s '{EC9FE983-E520-4D8F-B1A7-ACBCA0439C70}'
+	}
+	DQSDHost.DeskBand = s 'DQSD-400'
+	{
+		CLSID = s '{EC9FE983-E520-4D8F-B1A7-ACBCA0439C70}'
+		CurVer = s 'DQSDHost.DeskBand.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {EC9FE983-E520-4D8F-B1A7-ACBCA0439C70} = s 'DQSD-400'
+		{
+			ProgID = s 'DQSDHost.DeskBand.1'
+			VersionIndependentProgID = s 'DQSDHost.DeskBand'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			val AppID = s '%APPID%'
+			'TypeLib' = s '{6E43F169-92C8-49F7-A554-4950A097DC8E}'
+		}
+	}
+}
