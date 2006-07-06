@@ -1,4 +1,4 @@
-//Microsoft Developer Studio generated resource script.
+// Microsoft Visual C++ generated resource script.
 //
 #include "resource.h"
 
@@ -27,18 +27,18 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 // TEXTINCLUDE
 //
 
-1 TEXTINCLUDE DISCARDABLE 
+1 TEXTINCLUDE 
 BEGIN
     "resource.h\0"
 END
 
-2 TEXTINCLUDE DISCARDABLE 
+2 TEXTINCLUDE 
 BEGIN
     "#include ""winres.h""\r\n"
     "\0"
 END
 
-3 TEXTINCLUDE DISCARDABLE 
+3 TEXTINCLUDE 
 BEGIN
     "1 TYPELIB ""DQSDTools.tlb""\r\n"
     "\0"
@@ -47,15 +47,14 @@ END
 #endif    // APSTUDIO_INVOKED
 
 
-#ifndef _MAC
 /////////////////////////////////////////////////////////////////////////////
 //
 // Version
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 3,1,9,2
- PRODUCTVERSION 3,1,9,2
+ FILEVERSION 4,0,0,0
+ PRODUCTVERSION 4,0,0,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -70,20 +69,16 @@ BEGIN
     BEGIN
         BLOCK "040904b0"
         BEGIN
-            VALUE "Comments", "Distributed under the terms of the GNU Public License, Version 2: http://www.gnu.org/copyleft/gpl.txt\0"
-            VALUE "CompanyName", "Dave's Quick Search Deskbar\0"
-            VALUE "ContributingAuthors", "Koen Mannaerts (WhirlyWiryWeb.com), David Bau (notesbydave.com), Glenn Carr (glenncarr.com), Will Dean (indcomp.co.uk), Brent Beardsley, Kim Gräsman (winwonk.com)\0"
-            VALUE "FileDescription", "ActiveX Tools for Dave's Quick Search Bar \0"
-            VALUE "FileVersion", "3, 1, 9, 2\0"
-            VALUE "InternalName", "DQSDTools\0"
-            VALUE "LegalCopyright", "Copyright (c) 2002-2005 David Bau. GNU Public License Version 2 applies.\0"
-            VALUE "LegalTrademarks", "\0"
-            VALUE "OLESelfRegister", "\0"
-            VALUE "OriginalFilename", "DQSDTools.DLL\0"
-            VALUE "PrivateBuild", "\0"
-            VALUE "ProductName", "DQSDTools ActiveX Components\0"
-            VALUE "ProductVersion", "3, 1, 9, 2\0"
-            VALUE "SpecialBuild", "\0"
+            VALUE "Comments", "Distributed under the terms of the GNU Public License, Version 2: http://www.gnu.org/copyleft/gpl.txt"
+            VALUE "CompanyName", "Dave's Quick Search Deskbar"
+            VALUE "ContributingAuthors", "Koen Mannaerts (WhirlyWiryWeb.com), David Bau (notesbydave.com), Glenn Carr (glenncarr.com), Will Dean (indcomp.co.uk), Brent Beardsley, Kim Gräsman (winwonk.com)"
+            VALUE "FileDescription", "ActiveX Tools for Dave's Quick Search Bar "
+            VALUE "FileVersion", "4, 0, 0, 0"
+            VALUE "InternalName", "DQSDTools"
+            VALUE "LegalCopyright", "Copyright (c) 2002-2005 David Bau. GNU Public License Version 2 applies."
+            VALUE "OriginalFilename", "DQSDTools.DLL"
+            VALUE "ProductName", "DQSDTools ActiveX Components"
+            VALUE "ProductVersion", "4, 0, 0, 0"
         END
     END
     BLOCK "VarFileInfo"
@@ -92,28 +87,26 @@ BEGIN
     END
 END
 
-#endif    // !_MAC
-
 
 /////////////////////////////////////////////////////////////////////////////
 //
 // REGISTRY
 //
 
-IDR_LAUNCHER            REGISTRY DISCARDABLE    "Launcher.rgs"
-IDR_MENUBUILDER         REGISTRY DISCARDABLE    "MenuBuilder.rgs"
+IDR_LAUNCHER            REGISTRY                "Launcher.rgs"
+IDR_MENUBUILDER         REGISTRY                "MenuBuilder.rgs"
 
 /////////////////////////////////////////////////////////////////////////////
 //
 // String Table
 //
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE 
 BEGIN
     IDS_PROJNAME            "DQSDTools"
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE 
 BEGIN
     IDS_ERR_NEEDFORMOBJECT  "Need form object as argument."
     IDS_ERR_NEEDFORMNAME    "FORM needs to have a valid NAME"
@@ -124,7 +117,7 @@ BEGIN
     IDS_ERR_PROTOCOLNOTFOUND "DQSDTools.Launcher : protocol handler not found"
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE 
 BEGIN
     IDS_ERR_CANTFINDDQSD    "Cannot locate DQSD window"
     IDS_ERR_INVALIDHORIZALIGNMENT 
@@ -135,7 +128,7 @@ BEGIN
                             "The hotkey couldn't be registered because the DQSD window couldn't be located."
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE 
 BEGIN
     IDS_ERR_HOTKEY_WINDOW_FAILED 
                             "The hotkey notification window couldn't be created"
