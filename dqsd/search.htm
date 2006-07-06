@@ -158,10 +158,7 @@ document.title=local(SEARCH_TITLE);
 
 <div style='display:none' id='delaymsg'></div>
 
-<!-- saved from url=(0020)http://www.dqsd.net/ -->
-
 <script type='text/jscript'>
-
 // register key press hooks so addons, etc can handle keypresses
 function registerKeypressHook( keypressHook )
 {
@@ -180,8 +177,9 @@ function def()
   // grab the contents
   var t = document.deff.q.value;
 
+	// NOTE: window.external in the new host does not expose AutoCompleteSaveForm!
   // store the query in the windows autocomplete cache (MSKB:Q329156)
-  window.external.AutoCompleteSaveForm(deff);
+  // window.external.AutoCompleteSaveForm(deff);
 
   // Major hack!  Due to 'constructor' being a property of every object, we can't
   // just test for it in the associative 'searches' array later without a
@@ -360,6 +358,7 @@ function mnu(text, alias)
   var search = trimWhitespace(fn + ' ' + document.deff.q.value); // trim leading/trailing whitespace
   if (searches[fn])
     addhist( search );
+    
   performsearch( text, document.deff.q.value );
 }
 
@@ -484,24 +483,6 @@ function okp()
       }
       break;
 
-    // CTRL-C or CTRL-INS (the latter from the keyboard hook) - COPY
-    case 3:
-      range = document.selection.createRange();
-      range.execCommand("Copy");
-      break;
-
-    // CTRL-V or SHIFT-INS - PASTE
-    case 22:
-      document.execCommand("Paste");
-      break;
-
-    // CTRL-X or SHIFT-DEL - CUT
-    case 24:
-      range = document.selection.createRange();
-      if (range.parentElement().name != "q") return true;
-      range.execCommand("Cut");
-      break;
-
     // CTRL-A - select all
     case 1:
       document.execCommand("SelectAll");
@@ -513,19 +494,6 @@ function okp()
       if (window.event.ctrlKey) {
         clearHistory();
       }
-      else {
-        document.execCommand("Delete");
-      }
-      break;
-
-    // CTRL-P or UP for previous history
-    case 16:
-      prevnext(-1);
-      break;
-
-    // CTRL-N or DOWN for next history
-    case 14:
-      prevnext(1);
       break;
 
     default:
@@ -542,7 +510,7 @@ function okp()
       }
     }
   }
-
+  
   return retval;
 }
 
@@ -603,8 +571,8 @@ function toggleDisplayIsToggled() {
 }
 
 // toggleDisplay: toggles the viewport between 'normal' view and the viewport
-//       this function takes one argument, which if passed, will be used to
-//       set the contents of the viewport. If not passed or empty it will
+//       this function takes one argument, which if passed, will be used to 
+//       set the contents of the viewport. If not passed or empty it will 
 //       reset the view to 'normal'.
 function toggleDisplay( contents ){
   //set a reference to the toggleView-port
@@ -680,12 +648,12 @@ function strt()
     startbanner(clockdelay);
   else
     startclock(clockdelay);
-
+    
   // Allow users to define a startup function to enable customized startups.
   if ((typeof startup) == 'function')
   {
 		startup();
-  }
+  }    
 }
 
 // starts the banner timer
@@ -706,7 +674,7 @@ function banner()
   {
     // explicitly call unbanner() to force clock display
     unbanner();
-  }
+  }  
 }
 
 // called when the banner naturally goes away
@@ -935,7 +903,7 @@ function mousewheel()
     //yesprevnext = true;
   return false;
 }
-
+	
 function handleResize()
 {
   if (typeof bannerurl == "undefined") { bannerurl = ""; }
@@ -1053,8 +1021,6 @@ function postStartup()
   try
   {
     keyboardHook = new ActiveXObject("DQSDTools.Launcher");
-
-    keyboardHook.InstallKeyboardHook(document);
 
     if(hotkeyCharacter != "")
       keyboardHook.RegisterHotKey(hotkeyCharacter.charCodeAt(0), hotkeyModifiers, document);

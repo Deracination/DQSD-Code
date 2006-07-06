@@ -460,6 +460,14 @@ STDMETHODIMP CBrowserHost::TranslateAcceleratorIO(LPMSG pMsg)
             }
         }
     }
+    else if (pMsg->message == WM_KEYDOWN && pMsg->wParam == VK_F8)
+    {
+        // HACK: Map F8 to Ctrl+B - should be generalized so users can 
+        // register keycode->char mappings like DQSDTools.Launcher.MapKeyCode()
+        ::SendMessage(pMsg->hwnd, WM_CHAR, 2, 0);
+        hr = S_OK;
+    }
+
 
     return hr;
 }

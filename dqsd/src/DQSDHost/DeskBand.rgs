@@ -1,17 +1,17 @@
 HKCR
 {
-	DQSDHost.DeskBand.1 = s 'DQSD-400'
+	DQSDHost.DeskBand.1 = s 'DQSD Deskbar'
 	{
 		CLSID = s '{EC9FE983-E520-4D8F-B1A7-ACBCA0439C70}'
 	}
-	DQSDHost.DeskBand = s 'DQSD-400'
+	DQSDHost.DeskBand = s 'DQSD Deskbar'
 	{
 		CLSID = s '{EC9FE983-E520-4D8F-B1A7-ACBCA0439C70}'
 		CurVer = s 'DQSDHost.DeskBand.1'
 	}
 	NoRemove CLSID
 	{
-		ForceRemove {EC9FE983-E520-4D8F-B1A7-ACBCA0439C70} = s 'DQSD-400'
+		ForceRemove {EC9FE983-E520-4D8F-B1A7-ACBCA0439C70} = s 'DQSD Deskbar'
 		{
 			ProgID = s 'DQSDHost.DeskBand.1'
 			VersionIndependentProgID = s 'DQSDHost.DeskBand'

@@ -1,6 +1,7 @@
--- What's new for x.x.x.x (date xxxx-xx-xx)
+-- What's new for 4.0.0.0 (date xxxx-xx-xx)
 
 Enhancements
+* DQSD is now hosted by a custom webbrowser host, rather than the undocumented one shipped with IE
 
 Bug Fixes
 * racetv - fixed a font issue - (Monty Scroggins)
@@ -19,6 +20,7 @@ Removed Searches
 * tvtm - Replaced by tvc (Kim Gräsman)
 
 Miscellaneous
+* Modified version.js to check that DQSDTools version matches version.xml version, rather than hard-coding the expected version.
 
 
 -- What's new for 3.1.9.2 (date 2006-04-05)
