@@ -7,7 +7,6 @@ RELEASE PROCEDURE FOR DQSD - Kim Gräsman, December 2003
 
 - Update version stuff in scripts
 	- Update version in version.xml
-	- Update version.js to check for the new version of DQSDTools.dll
 
 - Build DLL and installer
 	- Run build.cmd
