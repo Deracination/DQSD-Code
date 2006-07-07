@@ -10,7 +10,7 @@
    <tr><td>/about</td><td> - </td><td>Learn about Technorati.com</td></tr>
    <tr><td>/help</td><td> - </td><td>Goto Technorati.com help</td></tr>
    <tr><td>/popular {books|blogs|movies|news}</td><td> - </td><td>Show most popular items for a particular category</td></tr>
-   <tr><td>/tags</td><td> - </td><td>Search for blog entries with a specified tag </td></tr>
+   <tr><td>/tag</td><td> - </td><td>Search for blog entries with a specified tag </td></tr>
   </table>
   <div class="helpboxDescLabels">Example:</div>
   <table class="helpboxDescTable">
@@ -29,13 +29,13 @@
 	  var url = false;
 	  var pop_types = new Array("blogs", "books", "news", "movies");
 
-      var args = parseArgs(q, "about,blogs,help,popular,tags");
+      var args = parseArgs(q, "about,blogs,help,popular,tag");
       if ( args.switches.length > 0 ) {
         switch( args.switches[0].name ) {
 		  case "about": url = "http://www.technorati.com/about/"; break;
           case "blogs": url = "http://www.technorati.com/blogs/" + escape(args.q); break;
 		  case "help": url = "http://www.technorati.com/help/"; break;
-          case "tags": url = "http://www.technorati.com/tags/" + escape(args.q); break;
+          case "tag": url = "http://www.technorati.com/tag/" + escape(args.q); break;
 		  case "popular": url = "http://www.technorati.com/pop/";
 		    var popsubtype = args.q.toLowerCase();
 			for (i=0; i < pop_types.length; i++) {
