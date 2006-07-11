@@ -340,6 +340,7 @@ Section "Quick Search Deskbar (required)"
   Delete $INSTDIR\searches\encyfr.xml
   Delete $INSTDIR\searches\pcm.xml
   Delete $INSTDIR\searches\wiq.xml
+  Delete $INSTDIR\searches\sp.xml
   
   ; Remove any searches that were possibly disabled.  They should be reinstalled anyway
   Delete $INSTDIR\searches\*.disabled*
