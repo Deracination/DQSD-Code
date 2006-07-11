@@ -131,7 +131,7 @@
       {
         install_dir = DQSDLauncher.InstallationDirectory;
       }
-      var cmd = "\""+myEditor+"\" \""+install_dir+"\\"+strFilename + "\"";
+      var cmd = "\""+myEditor+"\" \""+install_dir+"\\searches\\"+strFilename + ".xml\"";
       openDocument(cmd);
       return "";
     }
