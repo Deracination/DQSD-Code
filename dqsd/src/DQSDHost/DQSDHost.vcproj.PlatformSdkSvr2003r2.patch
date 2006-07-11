@@ -1,0 +1,39 @@
+Index: src/DQSDHost/DQSDHost.vcproj
+===================================================================
+RCS file: /cvsroot/dqsd/dqsd/src/DQSDHost/DQSDHost.vcproj,v
+retrieving revision 1.2
+diff -u -r1.2 DQSDHost.vcproj
+--- src/DQSDHost/DQSDHost.vcproj	3 Jul 2006 18:18:55 -0000	1.2
++++ src/DQSDHost/DQSDHost.vcproj	11 Jul 2006 17:00:00 -0000
+@@ -21,6 +21,7 @@
+ 			<Tool
+ 				Name="VCCLCompilerTool"
+ 				Optimization="0"
++				AdditionalIncludeDirectories="&quot;C:\Program Files\Microsoft Platform SDK for Windows Server 2003 R2\Include&quot;"
+ 				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG;_USRDLL"
+ 				MinimalRebuild="TRUE"
+ 				BasicRuntimeChecks="3"
+@@ -36,6 +37,7 @@
+ 				IgnoreImportLibrary="TRUE"
+ 				OutputFile="$(OutDir)/DQSDHost.dll"
+ 				LinkIncremental="2"
++				AdditionalLibraryDirectories="&quot;C:\Program Files\Microsoft Platform SDK for Windows Server 2003 R2\Lib&quot;"
+ 				ModuleDefinitionFile=".\DQSDHost.def"
+ 				GenerateDebugInformation="TRUE"
+ 				SubSystem="2"
+@@ -84,6 +86,7 @@
+ 			CharacterSet="2">
+ 			<Tool
+ 				Name="VCCLCompilerTool"
++				AdditionalIncludeDirectories="&quot;C:\Program Files\Microsoft Platform SDK for Windows Server 2003 R2\Include&quot;"
+ 				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;_USRDLL"
+ 				ExceptionHandling="TRUE"
+ 				RuntimeLibrary="0"
+@@ -98,6 +101,7 @@
+ 				IgnoreImportLibrary="TRUE"
+ 				OutputFile="$(OutDir)/DQSDHost.dll"
+ 				LinkIncremental="1"
++				AdditionalLibraryDirectories="&quot;C:\Program Files\Microsoft Platform SDK for Windows Server 2003 R2\Lib&quot;"
+ 				ModuleDefinitionFile=".\DQSDHost.def"
+ 				GenerateDebugInformation="TRUE"
+ 				SubSystem="2"
