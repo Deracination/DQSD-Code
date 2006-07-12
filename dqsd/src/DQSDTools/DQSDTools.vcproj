@@ -26,7 +26,7 @@
 				InlineFunctionExpansion="1"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL"
 				StringPooling="TRUE"
-				RuntimeLibrary="4"
+				RuntimeLibrary="0"
 				EnableFunctionLevelLinking="TRUE"
 				UsePrecompiledHeader="3"
 				PrecompiledHeaderThrough="stdafx.h"
@@ -41,6 +41,7 @@
 				Name="VCCustomBuildTool"/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalOptions="/IGNORE:4089"
 				AdditionalDependencies="shlwapi.lib odbc32.lib odbccp32.lib wininet.lib imm32.lib"
 				OutputFile=".\ReleaseMinDependency/DQSDTools.dll"
 				LinkIncremental="1"
@@ -111,7 +112,7 @@ echo regsvr32 exec. time &gt; &quot;$(OutDir)\regsvr32.trg&quot;
 				Name="VCLinkerTool"
 				AdditionalDependencies="shlwapi.lib odbc32.lib odbccp32.lib wininet.lib imm32.lib"
 				OutputFile=".\Debug/DQSDTools.dll"
-				LinkIncremental="1"
+				LinkIncremental="0"
 				SuppressStartupBanner="TRUE"
 				ModuleDefinitionFile=".\DQSDTools.def"
 				GenerateDebugInformation="TRUE"
