@@ -1,3 +1,5 @@
+MRUMENU_FILE = DQSDLauncher.AppDataDirectory + '\\mrumenu.txt';
+
 function registerMenuHook( menuHook )
 {
   if ( typeof menuHooks == 'undefined' )
@@ -149,7 +151,7 @@ function saveMenuHistory( alias )
   var menuContent = null;
   try
   {
-    menuContent = readFile( "mrumenu.txt" );
+    menuContent = readFile( MRUMENU_FILE );
   }
   catch (e) {}
   var menus = menuContent ? menuContent.replace(/\r\n/g, '\n').split('\n') : new Array(0);
@@ -169,7 +171,7 @@ function saveMenuHistory( alias )
   menus.push( alias );
   if ( menus.length > menuMRUlength )
     menus.splice( 0, menus.length - menuMRUlength );
-  writeFile( "mrumenu.txt", menus.join('\r\n') );
+  writeFile( MRUMENU_FILE, menus.join('\r\n') );
 }
 
 function appendMRUMenuSelections( mb )
@@ -177,7 +179,7 @@ function appendMRUMenuSelections( mb )
   var menuContent = null;
   try
   {
-    menuContent = readFile( "mrumenu.txt" );
+    menuContent = readFile( MRUMENU_FILE );
   }
   catch (e) {}
   if ( menuContent )

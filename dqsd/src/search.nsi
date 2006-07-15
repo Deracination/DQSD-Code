@@ -268,7 +268,6 @@ Section "Quick Search Deskbar (required)"
   SetOverwrite off
   SetOutPath "$INSTDIR"
   File "..\localaliases.txt"
-  File "..\mrumenu.txt"
   File "..\localsearch.css"
   File "..\localprefs.js"
   
