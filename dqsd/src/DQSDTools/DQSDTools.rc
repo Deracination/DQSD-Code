@@ -98,6 +98,48 @@ IDR_MENUBUILDER         REGISTRY                "MenuBuilder.rgs"
 
 /////////////////////////////////////////////////////////////////////////////
 //
+// Dialog
+//
+
+IDD_USEROPTIONSDIALOG DIALOGEX 0, 0, 342, 223
+STYLE DS_SYSMODAL | DS_SETFONT | DS_MODALFRAME | DS_SETFOREGROUND | WS_POPUP | 
+    WS_CAPTION | WS_SYSMENU
+CAPTION "Dave's Quick Search Options"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,229,200,50,16
+    PUSHBUTTON      "Cancel",IDCANCEL,285,200,50,16
+    CONTROL         "",IDC_NavigationTree,"SysTreeView32",TVS_HASLINES | 
+                    TVS_LINESATROOT | TVS_SHOWSELALWAYS | TVS_NOSCROLL | 
+                    WS_BORDER | WS_TABSTOP,7,7,102,209
+    GROUPBOX        "General",IDC_GeneralOptionGroup,115,7,220,189,NOT 
+                    WS_VISIBLE
+    GROUPBOX        "Personalization",IDC_PersonalizationOptionsGroup,115,7,
+                    220,189,NOT WS_VISIBLE
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_USEROPTIONSDIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 335
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 216
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
 // String Table
 //
 

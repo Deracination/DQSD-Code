@@ -297,6 +297,9 @@ echo regsvr32 exec. time &gt; &quot;$(OutDir)\regsvr32.trg&quot;
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath=".\UserOptionsDialog.cpp">
+			</File>
+			<File
 				RelativePath="Utilities.cpp">
 				<FileConfiguration
 					Name="Release MinDependency|Win32">
@@ -333,7 +336,13 @@ echo regsvr32 exec. time &gt; &quot;$(OutDir)\regsvr32.trg&quot;
 				RelativePath="Resource.h">
 			</File>
 			<File
+				RelativePath=".\resource1.h">
+			</File>
+			<File
 				RelativePath="StdAfx.h">
+			</File>
+			<File
+				RelativePath=".\UserOptionsDialog.h">
 			</File>
 			<File
 				RelativePath="Utilities.h">
@@ -358,5 +367,8 @@ echo regsvr32 exec. time &gt; &quot;$(OutDir)\regsvr32.trg&quot;
 		</Filter>
 	</Files>
 	<Globals>
+		<Global
+			Name="RESOURCE_FILE"
+			Value="DQSDTools.rc"/>
 	</Globals>
 </VisualStudioProject>
