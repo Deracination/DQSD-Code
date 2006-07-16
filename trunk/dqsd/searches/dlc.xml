@@ -16,8 +16,10 @@
    <tr><td>/inbox</td><td> - </td><td>Goto your inbox</td></tr>
    <tr><td>/login</td><td> - </td><td>Login</td></tr>
    <tr><td>/logout</td><td> - </td><td>Logout</td></tr>
+   <tr><td>/network</td><td> - </td><td>Goto your network or specify another network</td></tr>
    <tr><td>/popular {tag}</td><td> - </td><td>Show most popular items for a particular tag (tag is optional)</td></tr>
    <tr><td>/post</td><td> - </td><td>Post a url</td></tr>
+   <tr><td>/recent</td><td> - </td><td>Goto recent additions to Del.icio.us</td></tr>
    <tr><td>/search</td><td> - </td><td>Searches your bookmarks</td></tr>
    <tr><td>/settings</td><td> - </td><td>Goto your settings</td></tr>
    <tr><td>/tag {tag}</td><td> - </td><td>Show items for a particular tag (tag is optional)</td></tr>
@@ -43,7 +45,7 @@
       var url = false;
 	  var search_all = false;
 	  var user = (typeof dlc_user != 'undefined') ? dlc_user : false;
-      var args = parseArgs(q, "all,about,bookmarks,blog,for,help,inbox,login,logout,popular,post,search,settings,tag,url");
+      var args = parseArgs(q, "all,about,bookmarks,blog,for,help,inbox,login,logout,network,popular,post,recent,search,settings,tag,url");
       if ( args.switches.length > 0 ) {
         switch( args.switches[0].name ) {
 		  case "all": search_all = true; break;
@@ -70,10 +72,19 @@
 			}
 			break;
 		  case "logout": url = "http://del.icio.us/logout"; break;
+		  case "network":
+		    if (args.q == '')
+			{
+			    if (!dlc_check_user(user)) return;
+				args.q = user;
+		    }
+			url = "http://del.icio.us/network/" + args.q;
+		    break;
 		  case "popular": url = "http://del.icio.us/popular/" + escape(args.q); break;
 		  case "post": 
 			url = "http://del.icio.us/post/?url=" + escape(args.q);
 			break;
+		  case "recent": url = "http://del.icio.us/recent"; break;
 		  case "settings":
    		    if (!dlc_check_user(user)) return;
 			url = "http://del.icio.us/settings/" + user + "/profile";
