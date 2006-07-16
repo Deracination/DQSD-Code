@@ -47,7 +47,7 @@
   
   <form name="abef"
         method="post"
-        action="http://dogbert.abebooks.com/abe/BookSearch">
+        action="http://www.abebooks.com/servlet/SearchResults">
     
     <!-- <comment>
       Including a <comment> tag without the HTML comment string will
