@@ -1,10 +1,15 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Developer Studio generated include file.
+// Microsoft Visual C++ generated include file.
 // Used by DQSDTools.rc
 //
 #define IDS_PROJNAME                    100
 #define IDR_LAUNCHER                    101
 #define IDR_MENUBUILDER                 102
+#define IDD_USEROPTIONSDIALOG           104
+#define IDC_NavigationTree              202
+#define IDC_General                     203
+#define IDC_GeneralOptionGroup          203
+#define IDC_PersonalizationOptionsGroup 204
 #define IDS_ERR_NEEDFORMOBJECT          512
 #define IDS_ERR_NEEDFORMNAME            513
 #define IDS_BANNER                      514
@@ -28,7 +33,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        201
 #define _APS_NEXT_COMMAND_VALUE         32768
-#define _APS_NEXT_CONTROL_VALUE         201
-#define _APS_NEXT_SYMED_VALUE           104
+#define _APS_NEXT_CONTROL_VALUE         205
+#define _APS_NEXT_SYMED_VALUE           105
 #endif
 #endif

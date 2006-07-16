@@ -89,6 +89,7 @@ public:
 	STDMETHOD(SetSite)(IUnknown* pUnkSite);
 	STDMETHOD(get_AppDataDirectory)(/*[out,retval]*/ BSTR* pbstrDirectory);
 	STDMETHOD(CreateDirectory)(/*[in]*/ BSTR bstrDirectory);
+	STDMETHOD(DisplayUserOptions)();
 
 // Implementation
 private:

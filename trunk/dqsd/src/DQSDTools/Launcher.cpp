@@ -4,6 +4,7 @@
 #include "KeyboardHook.h"
 #include "Launcher.h"
 #include "Utilities.h"
+#include "UserOptionsDialog.h"
 #include <objbase.h>
 #include <shlguid.h>
 #include <shlobj.h>
@@ -951,4 +952,14 @@ STDMETHODIMP CLauncher::CreateDirectory(BSTR bstrDir)
 		default:
 			return Error(_T("Failed to create directory."), IID_ILauncher, E_FAIL);
 	}
+}
+
+
+STDMETHODIMP CLauncher::DisplayUserOptions()
+{
+	CUserOptionsDialog dlg;
+
+	dlg.DoModal( NULL );
+
+	return S_OK;
 }

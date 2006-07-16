@@ -38,6 +38,7 @@ import "ocidl.idl";
 		[id(20), helpstring("method RenameFile")] HRESULT RenameFile([in] BSTR bstrFromFile, [in] BSTR bstrToFile);
 		[propget, id(21), helpstring("AppDataDirectory")] HRESULT AppDataDirectory([out,retval] BSTR *pbstrDirectory);
 		[id(22), helpstring("method CreateDirectory")] HRESULT CreateDirectory([in] BSTR bstrDirectory);
+		[id(23), helpstring("method DisplayUserOptions")] HRESULT DisplayUserOptions();
 	};
 	[
 		object, 
