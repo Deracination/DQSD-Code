@@ -1,34 +1,31 @@
 @echo off
 
-REM For this build to work, both the VC tools and
-REM the NSIS tools need to be on your path.
-set PATH=%PATH%;C:\Program Files\Microsoft Visual Studio .NET 2003\Common7\IDE;C:\Program Files\NSIS
-set SDKINCLUDE=C:\Program Files\Microsoft Visual Studio .NET 2003\VC7\PlatformSDK\include
+REM Customize these paths to your local install
+set VSINSTALLDIR=C:\Program Files\Microsoft Visual Studio .NET 2003
+set NSISINSTALLDIR=C:\Program Files\NSIS
+set SDKINCLUDE=C:\Program Files\Microsoft Platform SDK for Windows XP SP2\include
+set SDKLIB=C:\Program Files\Microsoft Platform SDK for Windows XP SP2\lib
 
-REM **** Build DQSDTools ****
+REM **** Build DQSD DLLs ****
+call "%VSINSTALLDIR%\Common7\Tools\vsvars32.bat"
 
-call vcvars32.bat
+set INCLUDE=%SDKINCLUDE%;%INCLUDE%
+set LIB=%SDKLIB%;%LIB%
+
 pushd %~dp0
 
 pushd DQSDTools
-REM We don't need a makefile if we run msdev.exe directly
-REM msdev DQSDTools.dsp /MAKE "DQSDTools - Win32 Release MinDependency" /REBUILD
-
-REM Use this instead if you only have VS.NET 2003 - make sure DQSDTools.mak is up to date
-REM nmake -a -f "DQSDTools.mak" CFG="DQSDTools - Win32 Release MinDependency" SDKINCLUDE="%SDKINCLUDE%"
-
-devenv DQSDTools.sln /rebuild "Release MinDependency"
+devenv /useenv DQSDTools.sln /rebuild "Release MinDependency"
 copy /y ReleaseMinDependency\DQSDTools.dll ..\..\DQSDTools.dll
 popd
 
 pushd DQSDHost
-devenv DQSDHost.sln /rebuild "Release"
-copy /y release\DQSDHost.dll ..\..\DQSDHost.dll
+devenv /useenv DQSDHost.sln /rebuild "Release"
+copy /y Release\DQSDHost.dll ..\..\DQSDHost.dll
 popd
 
 REM **** Build installer ****
-
 REM The LZMA compressor should yield the smallest installer with NSIS 2.0
-makensis /X"SetCompressor /FINAL lzma" search.nsi
+"%NSISINSTALLDIR%\makensis" /X"SetCompressor /FINAL lzma" search.nsi
 
 popd
