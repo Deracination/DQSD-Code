@@ -2,7 +2,7 @@
   <name>A List Apart</name>
   <category>Computers<category>Programming</category></category>
   <contributor>Sarah Sweeney</contributor>
-  <link>http://www.alistapart.com/index.html</link>
+  <link>http://www.alistapart.com</link>
   <email>poohbear@designshift.com</email>
   <description>
   Search the A List Apart site.
@@ -12,17 +12,22 @@
     </table>
   </description>
   <form name="alistapartf"
-        method="post"
-        action="http://www.alistapart.com/cgi-bin/search.pl">
-    <input type="hidden" name="search" />
+        method="get"
+		action="http://search.atomz.com/search/">
+  <input type="hidden" name="sp-q" id="search" />
+  <input type="hidden" name="sp-a" value="sp1002d27b" />
+  <input type="hidden" name="sp-f" value="ISO-8859-1" />
+  <input type="hidden" name="sp-p" value="All" />
+  <input type="hidden" name="sp-k" value="All" />
   </form>
+
   <script><![CDATA[
     function alistapart(q)
     {
       if( nullArgs("alistapart", q) )
         return;
 
-      document.alistapartf.search.value = q;
+      document.alistapartf.elements['sp-q'].value = q;
 
       submitForm(alistapartf);
     }
