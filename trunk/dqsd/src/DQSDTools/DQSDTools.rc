@@ -107,15 +107,30 @@ STYLE DS_SYSMODAL | DS_SETFONT | DS_MODALFRAME | DS_SETFOREGROUND | WS_POPUP |
 CAPTION "Dave's Quick Search Options"
 FONT 8, "MS Sans Serif", 0, 0, 0x0
 BEGIN
-    DEFPUSHBUTTON   "OK",IDOK,229,200,50,16
-    PUSHBUTTON      "Cancel",IDCANCEL,285,200,50,16
     CONTROL         "",IDC_NavigationTree,"SysTreeView32",TVS_HASLINES | 
                     TVS_LINESATROOT | TVS_SHOWSELALWAYS | TVS_NOSCROLL | 
                     WS_BORDER | WS_TABSTOP,7,7,102,209
     GROUPBOX        "General",IDC_GeneralOptionGroup,115,7,220,189,NOT 
                     WS_VISIBLE
+    CONTROL         "Display &clock",IDC_DisplayClock,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,125,20,73,10
     GROUPBOX        "Personalization",IDC_PersonalizationOptionsGroup,115,7,
                     220,189,NOT WS_VISIBLE
+    LTEXT           "&Address:",IDC_lblUserAddress,125,20,28,8,NOT 
+                    WS_VISIBLE
+    EDITTEXT        IDC_txtUserAddress,169,17,158,14,ES_AUTOHSCROLL | NOT 
+                    WS_VISIBLE
+    LTEXT           "&City:",IDC_lblUserCity,125,35,14,8,NOT WS_VISIBLE
+    EDITTEXT        IDC_txtUserCity,169,33,158,14,ES_AUTOHSCROLL | NOT 
+                    WS_VISIBLE
+    LTEXT           "&State:",IDC_lblUserState,125,52,20,8,NOT WS_VISIBLE
+    EDITTEXT        IDC_txtUserState,169,49,38,14,ES_AUTOHSCROLL | NOT 
+                    WS_VISIBLE
+    LTEXT           "&Zip:",IDC_lblUserZip,216,52,13,8,NOT WS_VISIBLE
+    EDITTEXT        IDC_txtUserZip,231,49,96,14,ES_AUTOHSCROLL | NOT 
+                    WS_VISIBLE
+    DEFPUSHBUTTON   "OK",IDOK,229,200,50,16
+    PUSHBUTTON      "Cancel",IDCANCEL,285,200,50,16
 END
 
 
