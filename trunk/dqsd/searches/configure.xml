@@ -125,14 +125,26 @@
 
     function editSearchFile(strFilename)
     {
-      var myEditor = (typeof searchEditorExe != "undefined") ? searchEditorExe : "notepad";
+
+	  var myEditor = (typeof searchEditorExe != "undefined") ? searchEditorExe : "notepad";
       var install_dir = ".";
       if (ensureLauncher())
       {
         install_dir = DQSDLauncher.InstallationDirectory;
       }
-      var cmd = "\""+myEditor+"\" \""+install_dir+"\\searches\\"+strFilename + ".xml\"";
-      openDocument(cmd);
+	  var searchFile = install_dir+"\\searches\\"+strFilename;
+      if ( searchFile.substr( searchFile.length - 4 ) != ".xml" )
+        searchFile += ".xml"
+	  try
+	  {
+        readFile( searchFile );
+        var cmd = "\""+myEditor+"\" \""+searchFile + "\"";
+        openDocument(cmd);
+	  }
+	  catch (e)
+	  {
+        alert( 'Unable to open ' + strFilename );
+	  }
       return "";
     }
 
@@ -161,6 +173,55 @@
       openDocument(cmd);
       return "";
     }
+
+	function enableSearch(strSearchName)
+	{
+      var install_dir = ".";
+      if (ensureLauncher())
+      {
+        install_dir = DQSDLauncher.InstallationDirectory;
+      }
+	  var disabledSearchFile = install_dir+"\\searches\\"+strSearchName + ".disabled";
+	  var searchFile = install_dir+"\\searches\\"+strSearchName + ".xml";
+      if(fileExists(searchFile)) {
+		alert(strSearchName + " is already enabled");  
+	  } else if (fileExists(disabledSearchFile)) {
+        if (renameFile(disabledSearchFile, searchFile)) {
+		  if (confirm(strSearchName + " has been enabled.  Would you like to restart DQSD to activate your changes?"))
+		    reload();
+		} else {
+		  alert("Failed to enable " + strSearchName);
+		}
+	  } else {
+	    alert("Disabled " + strSearchName + " not found");
+	  }
+	  return "";
+	}
+
+	function disableSearch(strSearchName)
+	{
+      var install_dir = ".";
+      if (ensureLauncher())
+      {
+        install_dir = DQSDLauncher.InstallationDirectory;
+      }
+	  var disabledSearchFile = install_dir+"\\searches\\"+strSearchName + ".disabled";
+	  var searchFile = install_dir+"\\searches\\"+strSearchName + ".xml";
+      if(fileExists(disabledSearchFile)) {
+		alert(strSearchName + " is already disabled");  
+	  } else if (fileExists(searchFile)) {
+        if (renameFile(searchFile, disabledSearchFile)) {
+		  if (confirm(strSearchName + " has been disabled.  Would you like to restart DQSD to activate your changes?"))
+		    reload();
+		} else {
+		  alert("Failed to disable " + strSearchName);
+		}
+	  } else {
+	    alert("Enabled " + strSearchName + " not found");
+	  }
+	  return "";
+	}
+
 
     function buildConfigureMenu(mb, hmenu)
     {
