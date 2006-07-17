@@ -12,21 +12,8 @@
     {
       if( nullArgs("qsedit", q) )
         return false;
-
-      var searchFile = q;
-      if ( searchFile.substr( searchFile.length - 4 ) != ".xml" )
-        searchFile += ".xml"
-      try
-      {
-        ensureLauncher();
-        searchFile = '\\searches\\' + searchFile;
-        readFile( DQSDLauncher.InstallationDirectory + searchFile );
-        editSearchFile( searchFile );
-      }
-      catch ( e )
-      {
-        alert( 'Unable to open ' + searchFile );
-      }
+      
+	  editSearchFile(q);
     }
   ]]></script>
   <copyright>
