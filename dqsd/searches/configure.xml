@@ -176,6 +176,11 @@
 
 	function enableSearch(strSearchName)
 	{
+	  if (strSearchName == null || strSearchName.length < 1)
+	  {
+	    alert("No search name specified");
+	    return "";
+	  }
       var install_dir = ".";
       if (ensureLauncher())
       {
@@ -200,6 +205,12 @@
 
 	function disableSearch(strSearchName)
 	{
+	  if (strSearchName == null || strSearchName.length < 1)
+	  {
+	    alert("No search name specified");
+	    return "";
+	  }
+
       var install_dir = ".";
       if (ensureLauncher())
       {
