@@ -7,9 +7,19 @@
 #define IDR_MENUBUILDER                 102
 #define IDD_USEROPTIONSDIALOG           104
 #define IDC_NavigationTree              202
-#define IDC_General                     203
 #define IDC_GeneralOptionGroup          203
 #define IDC_PersonalizationOptionsGroup 204
+#define IDC_lblUserAddress              205
+#define IDC_txtUserAddress              206
+#define IDC_lblUserCity                 207
+#define IDC_txtUserCity                 208
+#define IDC_lblUserState                209
+#define IDC_txtUserState                210
+#define IDC_lblUserZip                  211
+#define IDC_txtUserState2               212
+#define IDC_txtUserZip                  212
+#define IDC_ShowClock                   213
+#define IDC_DisplayClock                213
 #define IDS_ERR_NEEDFORMOBJECT          512
 #define IDS_ERR_NEEDFORMNAME            513
 #define IDS_BANNER                      514
@@ -33,7 +43,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        201
 #define _APS_NEXT_COMMAND_VALUE         32768
-#define _APS_NEXT_CONTROL_VALUE         205
+#define _APS_NEXT_CONTROL_VALUE         214
 #define _APS_NEXT_SYMED_VALUE           105
 #endif
 #endif
