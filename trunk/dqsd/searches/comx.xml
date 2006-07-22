@@ -8,6 +8,7 @@
     <tr><td>A Case in Point</td><td>/caseinpoint</td></tr>
     <tr><td>Adam at Home</td><td>/adamathome</td></tr>
     <tr><td>Agnes</td><td>/agnes</td></tr>
+    <tr><td>Alex</td><td>/alex</td></tr>
     <tr><td>Alley Oop</td><td>/alleyoop</td></tr>
     <tr><td>Andy Capp</td><td>/andycapp</td></tr>
     <tr><td>Animal Crackers</td><td>/animalcrackers</td></tr>
@@ -223,7 +224,7 @@
         q = q.replace("/editorials", "/" + editorial_switches.join(" /"));
      }
 
-     var args = parseArgs(q, "5thwave,9chickweedlane,agnes,alleyoop,andycapp,arloandjanis,bc,\
+     var args = parseArgs(q, "5thwave,9chickweedlane,agnes,alex,alleyoop,andycapp,arloandjanis,bc,\
      ballardstreet,ben,betty,bignate,bonanas,bornloser,buckets,bullsnbears,candorville,\
      caseinpoint,ceodad,cheapthrills,committed,drabble,drfun,fatcats,ferdnand,\
      flightdeck,floandfriends,forbetterorforworse,frankandernest,frazz,geech,getfuzzy,\
@@ -403,6 +404,7 @@
               case "userfriendly": imgtitle="User Friendly";site="userfriendly";imgkey="uf";break;
               case "zits": imgtitle="Zits";site="seattlepi";imgkey="Zits";break;
               case "drfun": imgtitle="Dr. Fun"; site="drfun";imgkey="df";break;
+              case "alex": imgtitle="Alex";site="alex";imgkey="ax";break;
               // editorials from ucomics.com
               case "animatedoliphant": imgtitle="Animated Oliphant";site="ucomics";imgkey="oa";editorial=true;break;
               case "anntelneas": imgtitle="Ann Telneas";site="ucomics";imgkey="tmate";editorial=true;break;
@@ -504,6 +506,19 @@
                  var pattern = /http\:\S+userfriendly\.org\/cartoons\/\S+\.gif/ig;
                  var result = sBody.match(pattern);
                  var imgurl = result[0];
+                 break;
+
+              //http://www.telegraph.co.uk/money/graphics/2006/07/21/calex21.gif
+              case "alex":
+                 var urlstart="http://www.telegraph.co.uk/money/graphics";
+                 // format the date param for today's comic
+                 var mday = dat.getDate();
+                 var month = dat.getMonth()+1;
+                 var year = dat.getYear();
+                 if (mday<10) mday= '0'+mday;
+                 if (month<10) month= '0'+month;
+                 var sUrl=urlstart;
+                 var imgurl = urlstart+'/'+year+'/'+month+'/'+mday+'/calex'+mday+'.gif';
                  break;
 
               case "ucomics":
