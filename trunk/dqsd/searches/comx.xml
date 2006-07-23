@@ -511,14 +511,32 @@
               //http://www.telegraph.co.uk/money/graphics/2006/07/21/calex21.gif
               case "alex":
                  var urlstart="http://www.telegraph.co.uk/money/graphics";
-                 // format the date param for today's comic
-                 var mday = dat.getDate();
-                 var month = dat.getMonth()+1;
-                 var year = dat.getYear();
+                 
+                 //no comic is available for Sat or Sun.. default to Friday on these occasions
+                 var dow=dat.getDay();
+                 
+                 //get a new instance of the date object to play with
+                 var today=new Date();
+                 
+                 //day is Sunday - set the date object back two days
+                 if (dow == 0) {
+                     today.setDate(today.getDate()-2); 
+                 }
+                 //Day is Saturday - set the date object back one days
+                 if (dow == 6) {
+                    today.setDate(today.getDate()-1); 
+                 }
+                 // fetch the date elements from the local date object
+                 var mday = today.getDate();
+                 var month = today.getMonth()+1;
+                 var year = today.getYear();  
+                                
                  if (mday<10) mday= '0'+mday;
                  if (month<10) month= '0'+month;
+                 
                  var sUrl=urlstart;
                  var imgurl = urlstart+'/'+year+'/'+month+'/'+mday+'/calex'+mday+'.gif';
+                 alert(urlstart+'/'+year+'/'+month+'/'+mday+'/calex'+mday+'.gif');
                  break;
 
               case "ucomics":
