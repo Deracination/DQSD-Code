@@ -536,7 +536,6 @@
                  
                  var sUrl=urlstart;
                  var imgurl = urlstart+'/'+year+'/'+month+'/'+mday+'/calex'+mday+'.gif';
-                 alert(urlstart+'/'+year+'/'+month+'/'+mday+'/calex'+mday+'.gif');
                  break;
 
               case "ucomics":
