@@ -8,13 +8,14 @@ Bug Fixes
 * ggd now resets switches between calls (MLL)
 
 New Searches
-*blingo - Search the web using the Google search engine and maybe win something just for searching. (John Bairen)
+* blingo - Search the web using the Google search engine and maybe win something just for searching. (John Bairen)
 * wdc - weather.com search (John Bairen)
 * tvc - tv.com search (Steve Poirier)
-*twe - Twingine (John Bairen)
+* twe - Twingine (John Bairen)
 
 Modified Searches
 * usps - Updated to go to the right page (Steve Poirier)
+* comx - Added the Alex comic (Monty Scroggins)
 
 Removed Searches
 * tvtm - Replaced by tvc (Kim Gräsman)
