@@ -1,22 +1,45 @@
 <configuration>
-  <option display_name="User address" type="string" var_name="user_address">6615 E 89th Place</option>
-  <option display_name="User city" type="string" var_name="user_city">Tulsa</option>
-  <option display_name="User state" type="string" var_name="user_state">OK</option>
-  <option display_name="User ZIP" type="string" var_name="user_zip">74133</option>
+  <option display_name="User address" type="string" var_name="user_address" value="6615 E 89th Place"></option>
+  <option display_name="User city" type="string" var_name="user_city" value="Tulsa"></option>
+  <option display_name="User state" type="string" var_name="user_state" value="OK"></option>
+  <option display_name="User ZIP" type="string" var_name="user_zip" value="74133"></option>
 
-  <option display_name="Local events file" type="string" var_name="localeventsfileurl">localevents.xml</option>
-  <option display_name="Local search file" type="string" var_name="localsearchurl">localsearch.xml</option>
-  <option display_name="Local aliases file" type="string" var_name="localaliases">localaliases.txt</option>
-  <option display_name="Local stylesheet" type="string" var_name="localstylesurl">localsearch.css</option>
+  <option display_name="Local events file" type="string" var_name="localeventsfileurl" value="localevents.xml"></option>
+  <option display_name="Local search file" type="string" var_name="localsearchurl" value="localsearch.xml"></option>
+  <option display_name="Local aliases file" type="string" var_name="localaliases" value="localaliases.txt"></option>
+  <option display_name="Local stylesheet" type="string" var_name="localstylesurl" value="localsearch.css"></option>
 
-  <option display_name="Startup delay" type="int" var_name="startupdelay">0</option>
-  <option display_name="Display clock?" type="bool" var_name="startupdelay">true</option>
+  <option display_name="Startup delay" type="int" var_name="startupdelay" value="0"></option>
+  <option display_name="Display clock?" type="bool" var_name="startupdelay" value="true"></option>
 
-  <option display_name="Clock delay (milliseconds)" type="int" var_name="clockdelay">5000</option>
-  <option display_name="Clock update rate (milliseconds)" type="int" var_name="clockupdate">1000</option>
-  <option display_name="Clock long form width (pixels)" type="int" var_name="clocklongwidth">139</option>
+  <option display_name="Clock delay (milliseconds)" type="int" var_name="clockdelay" value="5000"></option>
+  <option display_name="Clock update rate (milliseconds)" type="int" var_name="clockupdate" value="1000"></option>
+  <option display_name="Clock long form width (pixels)" type="int" var_name="clocklongwidth" value="139"></option>
 
-  <option display_name="Clock long form" type="string" var_name="clocklongform"> EEE MMM d, yyyy h:mm A </option>
-  <option display_name="Clock short form" type="string" var_name="clockshortform"> h:mm A </option>
-  <option display_name="Clock tool tip form" type="string" var_name="clocktooltipform"></option>
+  <option display_name="Clock long form" type="string" var_name="clocklongform" value=" EEE MMM d, yyyy h:mm A "></option>
+  <option display_name="Clock short form" type="string" var_name="clockshortform" value=" h:mm A "></option>
+  <option display_name="Clock tool tip form" type="string" var_name="clocktooltipform" value=""></option>
+
+  <option display_name="Reuse browser window mode" type="int" var_name="reuseBrowserWindowMode" value="0">
+    <possible_values>
+      <value display="New window always [default]">0</value>
+      <value display="Single window for all">1</value>
+      <value display="Single window for each search type">2</value>
+    </possible_values>
+  </option>
+  <option display_name="Browser launch mode" type="int" var_name="launchmode" value="0"></option>
+  <option display_name="Page template" type="string" var_name="pagetemplate" value=""></option>
+  <option display_name="Language" type="string" var_name="language" value="en"></option>
+  <option display_name="Default search" type="string" var_name="defaultsearch" value="gg"></option>
+
+  <option display_name="Display calendar?" type="bool" var_name="cal" value="true"></option>
+  <option display_name="Calendar width" type="int" var_name="calwidth" value="179"></option>
+  <option display_name="Calendar height" type="int" var_name="calheight" value="156"></option>
+  <option display_name="Calendar start method" type="int" var_name="calStart" value="0"></option>
+  <option display_name="Calendar start day of week" type="int" var_name="weekStartDay" value="1"></option>
+  <option display_name="Default calendar" type="string" var_name="weekStartDay" value="yhocal"></option>
+  <option display_name="Events file for the popup calendar events" type="string" var_name="eventsfileurl" value="holidays.us.xml"></option>
+  
+  <option display_name="Use multi-line searchbar?" type="bool" var_name="multiline" value="true"></option>
+  <option display_name="Show the menu '>>' popup button?" type="bool" var_name="showbutton" value="2"></option>
 </configuration>

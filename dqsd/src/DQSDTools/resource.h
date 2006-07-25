@@ -6,8 +6,11 @@
 #define IDR_LAUNCHER                    101
 #define IDR_MENUBUILDER                 102
 #define IDD_USEROPTIONSDIALOG           104
-#define IDC_LIST1                       201
+#define IDD_SETOPTIONDIALOG             106
 #define IDC_OptionsList                 201
+#define IDC_Caption                     204
+#define IDC_EDIT1                       205
+#define IDC_EditValue                   205
 #define IDS_ERR_NEEDFORMOBJECT          512
 #define IDS_ERR_NEEDFORMNAME            513
 #define IDS_BANNER                      514
@@ -29,9 +32,9 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        201
+#define _APS_NEXT_RESOURCE_VALUE        202
 #define _APS_NEXT_COMMAND_VALUE         32768
-#define _APS_NEXT_CONTROL_VALUE         202
-#define _APS_NEXT_SYMED_VALUE           105
+#define _APS_NEXT_CONTROL_VALUE         206
+#define _APS_NEXT_SYMED_VALUE           107
 #endif
 #endif
