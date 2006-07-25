@@ -35,6 +35,7 @@ BOOL WINAPI DllMain(HINSTANCE hInstance, DWORD dwReason, LPVOID lpReserved)
     {
         _Module.Init(ObjectMap, hInstance, &LIBID_DQSDTOOLSLib);
         DisableThreadLibraryCalls(hInstance);
+		InitCommonControls(); 
 
 		ATLTRACE("DQSDTools loading\n");
     }

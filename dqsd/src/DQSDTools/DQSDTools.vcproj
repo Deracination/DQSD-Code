@@ -42,7 +42,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalOptions="/IGNORE:4089"
-				AdditionalDependencies="shlwapi.lib odbc32.lib odbccp32.lib wininet.lib imm32.lib"
+				AdditionalDependencies="shlwapi.lib odbc32.lib odbccp32.lib wininet.lib imm32.lib comctl32.lib"
 				OutputFile=".\ReleaseMinDependency/DQSDTools.dll"
 				LinkIncremental="1"
 				SuppressStartupBanner="TRUE"
@@ -110,7 +110,7 @@ echo regsvr32 exec. time &gt; &quot;$(OutDir)\regsvr32.trg&quot;
 				Outputs="$(OutDir)\regsvr32.trg"/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="shlwapi.lib odbc32.lib odbccp32.lib wininet.lib imm32.lib"
+				AdditionalDependencies="shlwapi.lib odbc32.lib odbccp32.lib wininet.lib imm32.lib comctl32.lib"
 				OutputFile=".\Debug/DQSDTools.dll"
 				LinkIncremental="0"
 				SuppressStartupBanner="TRUE"
@@ -153,6 +153,9 @@ echo regsvr32 exec. time &gt; &quot;$(OutDir)\regsvr32.trg&quot;
 		<Filter
 			Name="Source Files"
 			Filter="cpp;c;cxx;rc;def;r;odl;idl;hpj;bat">
+			<File
+				RelativePath=".\ConfigurationSettings.cpp">
+			</File>
 			<File
 				RelativePath="DQSDTools.cpp">
 				<FileConfiguration
@@ -323,6 +326,9 @@ echo regsvr32 exec. time &gt; &quot;$(OutDir)\regsvr32.trg&quot;
 		<Filter
 			Name="Header Files"
 			Filter="h;hpp;hxx;hm;inl">
+			<File
+				RelativePath=".\ConfigurationSettings.h">
+			</File>
 			<File
 				RelativePath="KeyboardHook.h">
 			</File>

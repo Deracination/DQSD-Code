@@ -36,6 +36,8 @@ extern CComModule _Module;
 #include <shellapi.h>				// ShellExecute, 
 #include <commctrl.h>
 
+#import <msxml4.dll> named_guids
+//using namespace MSXML2;
 
 #pragma warning(push, 3)
 
