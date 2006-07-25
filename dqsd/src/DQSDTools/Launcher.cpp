@@ -16,7 +16,6 @@
 
 STDMETHODIMP CLauncher::SetSite(IUnknown* pUnkSite)
 {
-#define DQSD_NOSECURITY
 #if defined(DQSD_NOSECURITY) && defined(_DEBUG)
 	pUnkSite;
 #pragma message(  __FILE__ " ** WARNING! ** Compilation without security restrictions...do not distribute the resulting binary! " )
