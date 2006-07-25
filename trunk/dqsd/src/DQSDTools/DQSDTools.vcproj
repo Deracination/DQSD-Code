@@ -278,6 +278,9 @@ echo regsvr32 exec. time &gt; &quot;$(OutDir)\regsvr32.trg&quot;
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath=".\SetOptionDialog.cpp">
+			</File>
+			<File
 				RelativePath="StdAfx.cpp">
 				<FileConfiguration
 					Name="Release MinDependency|Win32">
@@ -343,6 +346,9 @@ echo regsvr32 exec. time &gt; &quot;$(OutDir)\regsvr32.trg&quot;
 			</File>
 			<File
 				RelativePath=".\resource1.h">
+			</File>
+			<File
+				RelativePath=".\SetOptionDialog.h">
 			</File>
 			<File
 				RelativePath="StdAfx.h">
