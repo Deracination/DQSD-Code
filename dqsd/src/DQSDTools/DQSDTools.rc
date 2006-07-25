@@ -101,7 +101,7 @@ IDR_MENUBUILDER         REGISTRY                "MenuBuilder.rgs"
 // Dialog
 //
 
-IDD_USEROPTIONSDIALOG DIALOGEX 0, 0, 342, 223
+IDD_USEROPTIONSDIALOG DIALOGEX 0, 0, 342, 222
 STYLE DS_SYSMODAL | DS_SETFONT | DS_MODALFRAME | DS_SETFOREGROUND | WS_POPUP | 
     WS_CAPTION | WS_SYSMENU
 CAPTION "Dave's Quick Search Options"
@@ -109,10 +109,14 @@ FONT 8, "MS Sans Serif", 0, 0, 0x0
 BEGIN
     CONTROL         "",IDC_NavigationTree,"SysTreeView32",TVS_HASLINES | 
                     TVS_LINESATROOT | TVS_SHOWSELALWAYS | TVS_NOSCROLL | 
-                    WS_BORDER | WS_TABSTOP,7,7,102,209
+                    WS_BORDER | WS_TABSTOP,7,7,102,208
     GROUPBOX        "General",IDC_GeneralOptionGroup,115,7,220,189,NOT 
                     WS_VISIBLE
     CONTROL         "Display &clock",IDC_DisplayClock,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,125,20,73,10
+    GROUPBOX        "Calendar",IDC_CalendarOptionGroup,115,7,220,189,NOT 
+                    WS_VISIBLE
+    CONTROL         "Display &calendar",IDC_DisplayCalendar,"Button",
                     BS_AUTOCHECKBOX | WS_TABSTOP,125,20,73,10
     GROUPBOX        "Personalization",IDC_PersonalizationOptionsGroup,115,7,
                     220,189,NOT WS_VISIBLE
@@ -129,8 +133,8 @@ BEGIN
     LTEXT           "&Zip:",IDC_lblUserZip,216,52,13,8,NOT WS_VISIBLE
     EDITTEXT        IDC_txtUserZip,231,49,96,14,ES_AUTOHSCROLL | NOT 
                     WS_VISIBLE
-    DEFPUSHBUTTON   "OK",IDOK,229,200,50,16
-    PUSHBUTTON      "Cancel",IDCANCEL,285,200,50,16
+    DEFPUSHBUTTON   "OK",IDOK,229,199,50,16
+    PUSHBUTTON      "Cancel",IDCANCEL,285,199,50,16
 END
 
 
@@ -147,7 +151,7 @@ BEGIN
         LEFTMARGIN, 7
         RIGHTMARGIN, 335
         TOPMARGIN, 7
-        BOTTOMMARGIN, 216
+        BOTTOMMARGIN, 215
     END
 END
 #endif    // APSTUDIO_INVOKED

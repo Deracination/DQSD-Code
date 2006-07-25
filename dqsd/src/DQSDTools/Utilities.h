@@ -33,5 +33,9 @@ BOOL IsWindowOnTaskbar(HWND hwnd);
 //
 BOOL IsWindowOnScreen(HWND hwnd);
 
+extern LPCTSTR DQSD_REG_KEY;
+extern LPCTSTR DQSD_SEC_KEY;
+
+HRESULT GetInstallationDirectory( LPTSTR szResult, DWORD dwResultSize );
 
 #endif //__UTILITIES_H__

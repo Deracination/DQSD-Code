@@ -16,10 +16,10 @@
 #define IDC_lblUserState                209
 #define IDC_txtUserState                210
 #define IDC_lblUserZip                  211
-#define IDC_txtUserState2               212
 #define IDC_txtUserZip                  212
-#define IDC_ShowClock                   213
 #define IDC_DisplayClock                213
+#define IDC_CalendarOptionGroup         214
+#define IDC_DisplayCalendar             215
 #define IDS_ERR_NEEDFORMOBJECT          512
 #define IDS_ERR_NEEDFORMNAME            513
 #define IDS_BANNER                      514
@@ -43,7 +43,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        201
 #define _APS_NEXT_COMMAND_VALUE         32768
-#define _APS_NEXT_CONTROL_VALUE         214
+#define _APS_NEXT_CONTROL_VALUE         216
 #define _APS_NEXT_SYMED_VALUE           105
 #endif
 #endif

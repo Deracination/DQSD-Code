@@ -8,6 +8,9 @@
 
 HWND g_hDQSDWindow;
 
+LPCTSTR DQSD_REG_KEY = _T("CLSID\\{226b64e8-dc75-4eea-a6c8-abcb4d1d37ff}");
+LPCTSTR DQSD_SEC_KEY = _T("CLSID\\{226b64e8-dc75-4eea-a6c8-abcb4d1d37ff}\\SecureFiles");
+
 INTERNET_SCHEME GetScheme(LPCTSTR szURL)
 {
   TCHAR             buf[32];
@@ -118,4 +121,26 @@ BOOL IsWindowOnTaskbar(HWND hwnd)
 			wndRect.left >= taskbarRect.left && 
 			wndRect.bottom <= taskbarRect.bottom && 
 			wndRect.right <= taskbarRect.right);
+}
+
+HRESULT GetInstallationDirectory( LPTSTR szResult, DWORD dwResultSize )
+{
+	// Get the installation directory from the registry to use for making sure the filenames are in the install path
+	CRegKey rk;
+	LONG ret = rk.Open( HKEY_CLASSES_ROOT, DQSD_REG_KEY, KEY_READ );
+	if ( ERROR_SUCCESS != ret)
+	{
+		return HRESULT_FROM_WIN32(ret);
+	}
+
+	TCHAR szInstallDir[ _MAX_PATH ];
+	DWORD dwCount = lengthof(szInstallDir);
+	ret = rk.QueryValue( _T("InstallDir"), NULL, szInstallDir, &dwCount );
+	if ( ERROR_SUCCESS != ret )
+	{
+		return HRESULT_FROM_WIN32(ret);
+	}
+	lstrcpyn( szResult, szInstallDir, dwResultSize / sizeof(TCHAR) );
+
+	return S_OK;
 }

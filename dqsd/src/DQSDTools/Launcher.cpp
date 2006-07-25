@@ -14,12 +14,11 @@
 /////////////////////////////////////////////////////////////////////////////
 // CLauncher
 
-LPCTSTR CLauncher::DQSD_REG_KEY = _T("CLSID\\{226b64e8-dc75-4eea-a6c8-abcb4d1d37ff}");
-LPCTSTR CLauncher::DQSD_SEC_KEY = _T("CLSID\\{226b64e8-dc75-4eea-a6c8-abcb4d1d37ff}\\SecureFiles");
-
 STDMETHODIMP CLauncher::SetSite(IUnknown* pUnkSite)
 {
+#define DQSD_NOSECURITY
 #if defined(DQSD_NOSECURITY) && defined(_DEBUG)
+	pUnkSite;
 #pragma message(  __FILE__ " ** WARNING! ** Compilation without security restrictions...do not distribute the resulting binary! " )
 #else
 	HRESULT hr;
@@ -821,24 +820,9 @@ STDMETHODIMP CLauncher::RenameFile(BSTR bstrFromFilename, BSTR bstrToFilename)
 HRESULT CLauncher::GetInstallationDirectory( LPTSTR szResult, DWORD dwResultSize )
 {
 	// Cache install directory, so we don't have to hit the registry as much
-	if(m_szInstallDir[0] == 0)
+	if ( m_szInstallDir[0] == 0 )
 	{
-		// Get the installation directory from the registry to use for making sure the filenames are in the install path
-		CRegKey rk;
-		LONG ret = rk.Open( HKEY_CLASSES_ROOT, DQSD_REG_KEY, KEY_READ );
-		if ( ERROR_SUCCESS != ret)
-		{
-			Error(IDS_ERR_REGKEYNOTFOUND, IID_ILauncher);
-			return HRESULT_FROM_WIN32(ret);
-		}
-
-		DWORD dwCount = sizeof(m_szInstallDir);
-		ret = rk.QueryValue( _T("InstallDir"), NULL, m_szInstallDir, &dwCount );
-		if ( ERROR_SUCCESS != ret )
-		{
-			Error(IDS_ERR_REGKEYNOTFOUND, IID_ILauncher);
-			return HRESULT_FROM_WIN32(ret);
-		}
+		return GetInstallationDirectory( szResult, dwResultSize );
 	}
 
 	lstrcpyn( szResult, m_szInstallDir, dwResultSize / sizeof(TCHAR) );
