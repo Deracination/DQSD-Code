@@ -21,6 +21,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
+				AdditionalIncludeDirectories="&quot;C:\Program Files\Microsoft Platform SDK for Windows Server 2003 R2\Include&quot;"
 				PreprocessorDefinitions="WIN32;_WINDOWS;_DEBUG;_USRDLL"
 				MinimalRebuild="TRUE"
 				BasicRuntimeChecks="3"
@@ -36,6 +37,7 @@
 				IgnoreImportLibrary="TRUE"
 				OutputFile="$(OutDir)/DQSDHost.dll"
 				LinkIncremental="2"
+				AdditionalLibraryDirectories="&quot;C:\Program Files\Microsoft Platform SDK for Windows Server 2003 R2\Lib&quot;"
 				ModuleDefinitionFile=".\DQSDHost.def"
 				GenerateDebugInformation="TRUE"
 				SubSystem="2"
@@ -84,6 +86,7 @@
 			CharacterSet="2">
 			<Tool
 				Name="VCCLCompilerTool"
+				AdditionalIncludeDirectories="&quot;C:\Program Files\Microsoft Platform SDK for Windows Server 2003 R2\Include&quot;"
 				PreprocessorDefinitions="WIN32;_WINDOWS;NDEBUG;_USRDLL"
 				ExceptionHandling="TRUE"
 				RuntimeLibrary="0"
@@ -98,6 +101,7 @@
 				IgnoreImportLibrary="TRUE"
 				OutputFile="$(OutDir)/DQSDHost.dll"
 				LinkIncremental="1"
+				AdditionalLibraryDirectories="&quot;C:\Program Files\Microsoft Platform SDK for Windows Server 2003 R2\Lib&quot;"
 				ModuleDefinitionFile=".\DQSDHost.def"
 				GenerateDebugInformation="TRUE"
 				SubSystem="2"

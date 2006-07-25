@@ -93,8 +93,6 @@ public:
 
 // Implementation
 private:
-	static LPCTSTR DQSD_REG_KEY;
-	static LPCTSTR DQSD_SEC_KEY;
 	bool	m_bDebug;
 	HHOOK	m_hKeyboardHook;
 	HWND	m_hHotkeyNotificationWindow;
