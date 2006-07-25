@@ -1,0 +1,22 @@
+<configuration>
+  <option display_name="User address" type="string" var_name="user_address">6615 E 89th Place</option>
+  <option display_name="User city" type="string" var_name="user_city">Tulsa</option>
+  <option display_name="User state" type="string" var_name="user_state">OK</option>
+  <option display_name="User ZIP" type="string" var_name="user_zip">74133</option>
+
+  <option display_name="Local events file" type="string" var_name="localeventsfileurl">localevents.xml</option>
+  <option display_name="Local search file" type="string" var_name="localsearchurl">localsearch.xml</option>
+  <option display_name="Local aliases file" type="string" var_name="localaliases">localaliases.txt</option>
+  <option display_name="Local stylesheet" type="string" var_name="localstylesurl">localsearch.css</option>
+
+  <option display_name="Startup delay" type="int" var_name="startupdelay">0</option>
+  <option display_name="Display clock?" type="bool" var_name="startupdelay">true</option>
+
+  <option display_name="Clock delay (milliseconds)" type="int" var_name="clockdelay">5000</option>
+  <option display_name="Clock update rate (milliseconds)" type="int" var_name="clockupdate">1000</option>
+  <option display_name="Clock long form width (pixels)" type="int" var_name="clocklongwidth">139</option>
+
+  <option display_name="Clock long form" type="string" var_name="clocklongform"> EEE MMM d, yyyy h:mm A </option>
+  <option display_name="Clock short form" type="string" var_name="clockshortform"> h:mm A </option>
+  <option display_name="Clock tool tip form" type="string" var_name="clocktooltipform"></option>
+</configuration>
