@@ -1,45 +1,45 @@
 <configuration>
-  <option name="User address" type="string" var="user_address" value="6615 E 89th Place" />
-  <option name="User city" type="string" var="user_city" value="Tulsa" />
-  <option name="User state" type="string" var="user_state" value="OK" />
-  <option name="User ZIP" type="string" var="user_zip" value="74133" />
+  <option name="User address" type="string" var="user_address" value="6615 E 89th Place" description="" />
+  <option name="User city" type="string" var="user_city" value="Tulsa" description="" />
+  <option name="User state" type="string" var="user_state" value="OK" description="" />
+  <option name="User ZIP" type="string" var="user_zip" value="74133" description="" />
 
-  <option name="Local events file" type="string" var="localeventsfileurl" value="localevents.xml" />
-  <option name="Local search file" type="string" var="localsearchurl" value="localsearch.xml" />
-  <option name="Local aliases file" type="string" var="localaliases" value="localaliases.txt" />
-  <option name="Local stylesheet" type="string" var="localstylesurl" value="localsearch.css" />
+  <option name="Local events file" type="string" var="localeventsfileurl" value="localevents.xml" description="" />
+  <option name="Local search file" type="string" var="localsearchurl" value="localsearch.xml" description="" />
+  <option name="Local aliases file" type="string" var="localaliases" value="localaliases.txt" description="" />
+  <option name="Local stylesheet" type="string" var="localstylesurl" value="localsearch.css" description="" />
 
-  <option name="Startup delay" type="int" var="startupdelay" value="0" />
-  <option name="Display clock?" type="bool" var="startupdelay" value="true" />
+  <option name="Startup delay" type="int" var="startupdelay" value="0" description="Increasing this might help if your tray icons don't all show up when you startup windows. [milliseconds (1000 milliseconds = 1 second)]" />
+  <option name="Display clock?" type="bool" var="startupdelay" value="true" description="" />
 
-  <option name="Clock delay (milliseconds)" type="int" var="clockdelay" value="5000" />
-  <option name="Clock update rate (milliseconds)" type="int" var="clockupdate" value="1000" />
-  <option name="Clock long form width (pixels)" type="int" var="clocklongwidth" value="139" />
+  <option name="Clock delay (milliseconds)" type="int" var="clockdelay" value="5000" description="Clock display delay in milliseconds" />
+  <option name="Clock update rate (milliseconds)" type="int" var="clockupdate" value="1000" description="" />
+  <option name="Clock long form width (pixels)" type="int" var="clocklongwidth" value="139" description="" />
 
-  <option name="Clock long form" type="string" var="clocklongform" value=" EEE MMM d, yyyy h:mm A " />
-  <option name="Clock short form" type="string" var="clockshortform" value=" h:mm A " />
-  <option name="Clock tool tip form" type="string" var="clocktooltipform" value="" />
+  <option name="Clock long form" type="string" var="clocklongform" value=" EEE MMM d, yyyy h:mm A " description="" />
+  <option name="Clock short form" type="string" var="clockshortform" value=" h:mm A " description="" />
+  <option name="Clock tool tip form" type="string" var="clocktooltipform" value="" description="" />
 
-  <option name="Reuse browser window mode" type="int" var="reuseBrowserWindowMode" value="0">
+  <option name="Reuse browser window mode" type="int" var="reuseBrowserWindowMode" value="0" description="">
     <validValues>
       <value display="New window always [default]">0</value>
       <value display="Single window for all">1</value>
       <value display="Single window for each search type">2</value>
     </validValues>
   </option>
-  <option name="Browser launch mode" type="int" var="launchmode" value="0" />
-  <option name="Page template" type="string" var="pagetemplate" value="" />
-  <option name="Language" type="string" var="language" value="en" />
-  <option name="Default search" type="string" var="defaultsearch" value="gg" />
+  <option name="Browser launch mode" type="int" var="launchmode" value="0" description="" />
+  <option name="Page template" type="string" var="pagetemplate" value="" description="" />
+  <option name="Language" type="string" var="language" value="en" description="" />
+  <option name="Default search" type="string" var="defaultsearch" value="gg" description="" />
 
-  <option name="Display calendar?" type="bool" var="cal" value="true" />
-  <option name="Calendar width" type="int" var="calwidth" value="179" />
-  <option name="Calendar height" type="int" var="calheight" value="156" />
-  <option name="Calendar start method" type="int" var="calStart" value="0" />
-  <option name="Calendar start day of week" type="int" var="weekStartDay" value="1" />
-  <option name="Default calendar" type="string" var="weekStartDay" value="yhocal" />
-  <option name="Events file for the popup calendar events" type="string" var="eventsfileurl" value="holidays.us.xml" />
+  <option name="Display calendar?" type="bool" var="cal" value="true" description="" />
+  <option name="Calendar width" type="int" var="calwidth" value="179" description="" />
+  <option name="Calendar height" type="int" var="calheight" value="156" description="" />
+  <option name="Calendar start method" type="int" var="calStart" value="0" description="" />
+  <option name="Calendar start day of week" type="int" var="weekStartDay" value="1" description="" />
+  <option name="Default calendar" type="string" var="weekStartDay" value="yhocal" description="" />
+  <option name="Events file for the popup calendar events" type="string" var="eventsfileurl" value="holidays.us.xml" description="" />
   
-  <option name="Use multi-line searchbar?" type="bool" var="multiline" value="true" />
-  <option name="Show the menu '>>' popup button?" type="bool" var="showbutton" value="2" />
+  <option name="Use multi-line searchbar?" type="bool" var="multiline" value="true" description="" />
+  <option name="Show the menu '>>' popup button?" type="bool" var="showbutton" value="2" description="" />
 </configuration>
