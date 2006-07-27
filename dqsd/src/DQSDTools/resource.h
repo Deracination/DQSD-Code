@@ -5,12 +5,6 @@
 #define IDS_PROJNAME                    100
 #define IDR_LAUNCHER                    101
 #define IDR_MENUBUILDER                 102
-#define IDD_USEROPTIONSDIALOG           104
-#define IDD_SETOPTIONDIALOG             106
-#define IDC_OptionsList                 201
-#define IDC_Caption                     204
-#define IDC_EDIT1                       205
-#define IDC_EditValue                   205
 #define IDS_ERR_NEEDFORMOBJECT          512
 #define IDS_ERR_NEEDFORMNAME            513
 #define IDS_BANNER                      514
