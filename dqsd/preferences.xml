@@ -27,7 +27,12 @@
       <value display="Single window for each search type">2</value>
     </validValues>
   </option>
-  <option name="Browser launch mode" type="int" var="launchmode" value="0" description="" />
+  <option name="Browser launch mode" type="int" var="launchmode" value="0" description="">
+    <validValues>
+      <value display="Use Internet Explorer">0</value>
+      <value display="Use default browser">1</value>
+    </validValues>
+  </option>
   <option name="Page template" type="string" var="pagetemplate" value="" description="" />
   <option name="Language" type="string" var="language" value="en" description="" />
   <option name="Default search" type="string" var="defaultsearch" value="gg" description="" />
@@ -36,10 +41,21 @@
   <option name="Calendar width" type="int" var="calwidth" value="179" description="" />
   <option name="Calendar height" type="int" var="calheight" value="156" description="" />
   <option name="Calendar start method" type="int" var="calStart" value="0" description="" />
-  <option name="Calendar start day of week" type="int" var="weekStartDay" value="1" description="" />
+  <option name="Calendar start day of week" type="int" var="weekStartDay" value="1" description="">
+    <validValues>
+      <value display="Sunday">1</value>
+      <value display="Monday">2</value>
+      <value display="Tuesday">3</value>
+      <value display="Wednesday">4</value>
+      <value display="Thursday">5</value>
+      <value display="Friday">6</value>
+      <value display="Saturday">7</value>
+    </validValues>
+  </option>
+
   <option name="Default calendar" type="string" var="weekStartDay" value="yhocal" description="" />
   <option name="Events file for the popup calendar events" type="string" var="eventsfileurl" value="holidays.us.xml" description="" />
   
   <option name="Use multi-line searchbar?" type="bool" var="multiline" value="true" description="" />
-  <option name="Show the menu '>>' popup button?" type="bool" var="showbutton" value="2" description="" />
+  <option name="Show the menu '>>' popup button?" type="int" var="showbutton" value="2" description="" />
 </configuration>

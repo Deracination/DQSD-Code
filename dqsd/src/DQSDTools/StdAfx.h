@@ -46,8 +46,13 @@ extern CComModule _Module;
 #include <list>
 #pragma warning (default : 4702) 
 #include <string>
+#include <memory>
 
 #pragma warning(pop)
+
+#ifndef _countof
+#define _countof(array) (sizeof(array)/sizeof(array[0]))
+#endif
 
 //{{AFX_INSERT_LOCATION}}
 // Microsoft Visual C++ will insert additional declarations immediately before the previous line.

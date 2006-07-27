@@ -9,4 +9,3 @@
 #endif
 
 #include "utilities.h"
-

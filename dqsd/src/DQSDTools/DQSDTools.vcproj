@@ -278,6 +278,9 @@ echo regsvr32 exec. time &gt; &quot;$(OutDir)\regsvr32.trg&quot;
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath=".\OptionsDialog.cpp">
+			</File>
+			<File
 				RelativePath="StdAfx.cpp">
 				<FileConfiguration
 					Name="Release MinDependency|Win32">
@@ -334,6 +337,21 @@ echo regsvr32 exec. time &gt; &quot;$(OutDir)\regsvr32.trg&quot;
 			</File>
 			<File
 				RelativePath="MenuBuilder.h">
+			</File>
+			<File
+				RelativePath=".\OptionsDialog.h">
+			</File>
+			<File
+				RelativePath=".\PropertyItem.h">
+			</File>
+			<File
+				RelativePath=".\PropertyItemEditors.h">
+			</File>
+			<File
+				RelativePath=".\PropertyItemImpl.h">
+			</File>
+			<File
+				RelativePath=".\PropertyList.h">
 			</File>
 			<File
 				RelativePath="Resource.h">
