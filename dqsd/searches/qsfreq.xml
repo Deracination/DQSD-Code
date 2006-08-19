@@ -7,12 +7,14 @@
       <tr><td>[no switches]</td><td> - </td><td>Display the search frequency data.</td></tr>
       <tr><td>/clear</td><td> - </td><td>Clear the search frequency log.</td></tr>
       <tr><td>/disable_unused</td><td> - </td><td>Disable all searches not recorded in the frequency log.</td></tr>
-      <tr><td>/enable_all</td><td> - </td><td>Renable all previously disabled searches.</td></tr>
+      <tr><td>/enable_all</td><td> - </td><td>Re-enable all previously disabled searches.</td></tr>
+      <tr><td>/add</td><td> - </td><td>Re-enable specific searches.</td></tr>
     </table>
     <div class="helpboxDescLabels">Example:</div>
     <table class="helpboxDescTable">
       <tr><td>qsfreq</td></tr>
       <tr><td>qsfreq /clear</td></tr>
+      <tr><td>qsfreq /add note alarm racetv comx imdb</td></tr>
     </table>
   </description>
   <category>Functions</category>
@@ -27,8 +29,7 @@
         return;
       }
 
-      var args = parseArgs( q, "clear,disable_unused,enable_all" );
-
+      var args = parseArgs( q, "clear,disable_unused,add,enable_all" );
       if ( args.switches.length == 0 )
         return qsfreqDisplayFrequency();
         
@@ -45,6 +46,9 @@
             return;
           case "enable_all":
             qsfreqEnableAllSearches();
+            return;
+          case "add":
+            qsfreqEnableSingleSearches(args.q);
             return;
         }
       }
@@ -165,6 +169,21 @@
              ( ( renamed.length > 0 ) ? '\r\n\r\nClick OK to reload the search bar.' : '' ) );
       if ( renamed.length > 0 )
         reload();
+    }
+
+    function qsfreqEnableSingleSearches(searchlist)
+    {
+      parsedsearches = searchlist.split(" ");
+      for (var i = 0; i < parsedsearches.length; i++)
+      {
+        var search = parsedsearches[i];
+        var from = "searches\\" + search + ".disabled";
+        var to = "searches\\" + search + ".xml";       
+        //alert('rename ('+from+') to ('+to+')');
+        renameFile( from, to );
+        //renameFile( from, to + "_" + (new Date()).getTime() );
+      }
+      reload();
     }
 
 
