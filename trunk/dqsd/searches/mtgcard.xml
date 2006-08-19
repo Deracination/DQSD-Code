@@ -1,0 +1,71 @@
+<search function="mtgcard">
+  <COMMENT>
+  
+	Search for Magic the Gathering cards on MagicCard.info. Use all or part of the card name.
+	Look up random cards, or open the advanced search window to get specific.
+
+  </COMMENT>
+  <name>Magic the Gathering card search</name>
+  <category>Fun</category>
+  <contributor> Gregory Krohne</contributor>
+  <link>http://magiccards.info/</link>
+  <email>swysjri02@sneakemail.com</email>
+  <description>
+  Research Magic the Gathering cards on MagicCards.info.
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/advanced</td><td> - </td><td>open advanced search window</td></tr>
+      <tr><td>/random</td><td> - </td><td>view random card</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>mtgcard wrath of god</td></tr>
+      <tr><td>mtgcard paradise</td></tr>
+    </table>
+  </description>
+  <form name="mtgcardf"
+        method="post"
+        action="http://magiccards.info/query.php">
+
+    <COMMENT> Loading... </COMMENT>
+
+    <input type="hidden" name="cardname" value="" />
+  </form>
+  <script><![CDATA[
+    function mtgcard(q)
+    {
+      if( nullArgs("mtgcard", q) )
+        return;
+
+      var args = parseArgs(q, "advanced, random");
+      if ( args.switches.length > 0 )
+      {
+        switch( args.switches[0].name )
+        {
+          case "advanced":
+			openSearchWindow("http://magiccards.info/search/");
+            break;
+          case "random":
+			openSearchWindow("http://magiccards.info/random/");
+            break;
+          default:
+            break;
+        }
+      } else {
+
+		  document.mtgcardf.cardname.value = q;
+	
+		  submitForm(mtgcardf);
+      }
+    }
+  ]]></script>
+  <copyright>
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 08/15/06 at 10:07:41
+    by Dave's Quick Search Deskbar Search Wizard version 1.3,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+    Filled out and completed on 08/15/06 at 10:25 by Gregory Krohne
+  </created_by>
+</search>
