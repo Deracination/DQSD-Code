@@ -179,9 +179,7 @@
         var search = parsedsearches[i];
         var from = "searches\\" + search + ".disabled";
         var to = "searches\\" + search + ".xml";       
-        //alert('rename ('+from+') to ('+to+')');
         renameFile( from, to );
-        //renameFile( from, to + "_" + (new Date()).getTime() );
       }
       reload();
     }
