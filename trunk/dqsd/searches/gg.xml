@@ -24,6 +24,8 @@
       <tr><td>/cache</td><td> - </td><td>Given a URL, loads Google's cached copy of the web page.</td></tr>
       <tr><td>/related</td><td> - </td><td>Given a URL, finds other sites closely related.</td></tr>
       <tr><td>/link</td><td> - </td><td>Given a URL, finds other sites that link to it.</td></tr>
+      <tr><td>/video</td><td> - </td><td>Search recent TV programs online.</td></tr>
+      <tr><td>/maps</td><td> - </td><td>Search for maps, directions, or businesses.</td></tr>
     </table>
     <div class="helpboxDescLabels">Locales:</div>
     <table class="helpboxDescTable">
@@ -50,11 +52,13 @@
       <tr><td>gg /froogle cd clock radio</td></tr>
       <tr><td>gg /glossary wrt</td></tr>
       <tr><td>gg /define wrt</td></tr>
+      <tr><td>gg /video "search engine"</td></tr>
+      <tr><td>gg /maps hotels near lax</td></tr>
     </table>
   </description>
   <category>Search the Web</category>
   <link>http://www.google.com/</link>
-  <contributor>Ryan Edwards, David Bau, news and language switches by MLL</contributor>
+  <contributor>Ryan Edwards, David Bau, news and language switches by MLL, video and maps by Gregory Krohne</contributor>
   
   <form name="ggf"
         action="http://www.google.com/search"
@@ -130,11 +134,24 @@
     <input type="hidden" name="ie" value="utf-8"/>
   </form>
 
+  <form name="ggf_video"
+        method="get"
+        action="http://video.google.com/videosearch">
+    <input type="hidden" name="q" value="" />
+    <input type="hidden" name="ie" value="utf-8"/>
+  </form>
+
+  <form name="ggf_maps"
+        method="get"
+        action="http://maps.google.com/maps">
+    <input type="hidden" name="q" value="" />
+  </form>
+
   <script><![CDATA[
     function gg(q)
     //by MLL: warning : news service is still in beta stage, so URLs below may change
     {
-      var args = parseArgs(q, "ifl, advanced, groups, directory, images, news, since, cache, related, link, froogle, glossary, define, local, canada, deutschland, france, italia, uk, language");
+      var args = parseArgs(q, "ifl, advanced, groups, directory, images, news, since, cache, related, link, froogle, glossary, define, local, video, maps, canada, deutschland, france, italia, uk, language");
       var mode, local, local_meta = "", local_tld = "com", msglang = "";
       
       if( nullArgs( "gg", q ) ) return false;
@@ -312,6 +329,14 @@
               document.ggf.hl.value = msglang;
               document.ggf.cat.value = "";
               submitForm(ggf);
+              break;
+            case "video":
+              document.ggf_video.q.value = args.q;
+              submitForm(ggf_video);
+              break;
+            case "maps":
+              document.ggf_maps.q.value = args.q;
+              submitForm(ggf_maps);
               break;
           }
         }
