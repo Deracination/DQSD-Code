@@ -17,6 +17,7 @@ New Searches
 Modified Searches
 * usps - Updated to go to the right page (Steve Poirier)
 * comx - Added the Alex comic (Monty Scroggins)
+* qsfreq - Added individual search re-enabling feature (Monty Scroggins)
 
 Removed Searches
 * tvtm - Replaced by tvc (Kim Gräsman)
