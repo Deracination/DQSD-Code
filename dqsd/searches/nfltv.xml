@@ -1,0 +1,151 @@
+<search function="nfltv">
+   <name>NFL TV Coverage Schedule</name>
+   <description>Displays a current TV listing of the NFL.
+   <table class="helpboxDescTable">
+      <tr><td><div class="helpboxDescLabels">Switches:</div></td></tr>
+      <tr><td>US (default)</td><td>/us</td></tr>
+      <tr><td>Central Timezone</td><td>/central</td></tr>
+      <tr><td>Mountain Timezone</td><td>/mountain</td></tr>
+      <tr><td>Pacific Timezone</td><td>/pacific</td></tr>
+      <tr><td colspan="2"><div class="helpboxDescLabels">Notes:</div></td></tr>
+      <tr><td colspan="2">All the timezone switches can be abbreviated.</td></tr>
+      <tr><td colspan="2">All times are US Eastern by default.</td></tr>
+      <tr><td colspan="2">The /popup switch will open in a popup window.</td></tr>
+      <tr><td colspan="2"><div class="helpboxDescLabels">Examples:</div></td></tr>
+      <tr><td>nfltv</td><td>(US Eastern Schedule)</td></tr>
+      <tr><td>nfltv /pac</td><td>(US Pacific Schedule)</td></tr>
+      <tr><td>nfltv /cen</td><td>(US Central Schedule)</td></tr>
+      <tr><td>nfltv /cen /popup</td><td>(US Central Schedule in a popup)</td></tr>
+   </table>
+   </description>
+   <link>http://www.nfl.com/schedules</link>
+   <category>Entertainment</category>
+   <script><![CDATA[
+
+   function getWeekNr(Month,Day)
+   {
+   	var today = new Date()
+   	var Year = today.getYear()
+   	now = Date.UTC(Year,Month,Day+1,0,0,0);
+   	var Firstday = new Date();
+   	Firstday.setYear(Year);
+   	Firstday.setMonth(0);
+   	Firstday.setDate(1);
+   	then = Date.UTC(Year,0,1,0,0,0);
+   	var Compensation = Firstday.getDay();
+   	if (Compensation > 3) Compensation -= 4;
+   	else Compensation += 3;
+   	NumberOfWeek =  Math.round((((now-then)/86400000)+Compensation)/7);
+   	return NumberOfWeek;
+   }
+   
+   function takeYear(theDate)
+   {
+   	x = theDate.getYear();
+   	var y = x % 100;
+   	y += (y < 38) ? 2000 : 1900;
+   	return y;
+   }
+   
+   function calcweeknum(startweeknum,currweeknum) 
+   { 
+   	var weekdiff= (currweeknum - startweeknum);
+   	return (weekdiff <1) ? 1 : weekdiff; 
+   }
+   
+   //the first week of the NFL schedule is September 7th
+   var startweeknum=getWeekNr(9, 7);   
+   var thisdate = new Date();
+   var currmonth=thisdate.getMonth()+1;
+   var currday=thisdate.getDate();
+   var currweeknum=getWeekNr(currmonth, currday);  
+   var schedweeknum=calcweeknum(startweeknum,currweeknum); 
+   
+   function nfltv(q){
+   if( q == "?" ){
+      qsfind("nfltv /function");
+      return false;
+   }
+   //defaults
+   var urlstart="http://www.nfl.com/schedules";
+   var tzname="Eastern";
+   var offset=0;
+   var nfltboutfile = DQSDLauncher.AppDataDirectory + '\\nfltb.html'; 
+   var args = parseArgs(q, "eastern,central,mountain,pacific");   
+   
+   var fileout=1;     
+   //if the fileout switch was used, set the fileout flag to true and remove it
+   if (q.search("/popup") >= 0) {
+      fileout=0;
+      q = q.replace("/popup", "");
+   }
+   
+   if ( args.switches.length > 0 ){
+      for (i=0; i < args.switches.length; i++){
+         switch( args.switches[i].name ){
+         case "eastern":  tzname="Eastern";offset=0;break;
+         case "central":  tzname="Central";offset=1;break;
+         case "mountain": tzname="Mountain";offset=2;break;
+         case "pacific":  tzname="Pacific";offset=3;break;
+         }//switch
+      }//for
+   }//if
+   var sUrl=urlstart;
+   var xmlHttp = new ActiveXObject("Microsoft.XmlHttp");
+   xmlHttp.open("GET", urlstart, false);
+   xmlHttp.send();
+   //get the response content from the remote site
+   var sBody = xmlHttp.responseText;
+   rex = new RegExp ('\n', 'g') ;
+   sBody = sBody.replace(rex, '\r') ;
+   rex1 = new RegExp( '.+<a name="week' + schedweeknum + '"></a>', 'im' );
+   rex2 = new RegExp('</table>'+'(.*)', 'im' );
+   sBody = sBody.replace(rex1, '');
+   sBody = sBody.replace(rex2, '');
+
+   //generate an array of the return text
+   var sBody_array=sBody.split("<tr");   
+   for (var i = 3; i < sBody_array.length; i++) {
+      var tsorig=sBody_array[i].match(/(\d?\d:\d\d\s+\w)/);
+      // detect if tsorig is null (not matched)
+      var tstest=tsorig*1;
+      if (tstest != 0) {
+         tsmatch_array=tsorig[1].match(/(\d?\d):(\d\d)\s+(\w)/);
+         var begh=tsmatch_array[1];
+         var begm=tsmatch_array[2];
+         var ampm=tsmatch_array[3];
+         for (var t = 0; t <offset; t++) {
+         if (begh == 12 && ampm == 'a') {
+            ampm = 'p';
+         }else if (begh == 12 && ampm == 'p') {
+            ampm = 'a';
+         }//else
+         
+         begh--;
+         if (begh==0) {begh=12;}
+         }//for
+         sBody_array[i]=sBody_array[i].replace(tsorig[1],begh+":"+begm+" "+ampm);
+      }
+   }
+
+   sBody=sBody_array.join("<tr");
+   var pagebody = "<html><head><style>.optselwhite {font-weight:bold; text-decoration:none;}";
+   pagebody += ".bg0 {background-color:#8E9FBC; font-weight:bold; color:#FFFFFF;}";
+   pagebody += ".bg1 {background-color:#B9B9B9; font-weight:bold;}";
+   pagebody += ".bg2 {background-color:#E8E8EA;}";
+   pagebody += ".bg4 {background-color:#CCCCCC;}";
+   pagebody += "h4 {color:#900000;margin:0;}h5 {margin:0;}</style></head><body>";
+   pagebody += "<center><h4>NFL Schedule</h4><h5>All times are "+tzname+"</h5>";
+   pagebody += ""+sBody+"</table></center></body></html>";
+
+   if (fileout == 1) {
+      writeFile(nfltboutfile, pagebody);
+      openSearchWindow("file://" + nfltboutfile);
+   }else{
+      myWindow = window.open("", "nfltb", 'resizable,scrollbars,width=1000,height=700')
+      myWindow.document.write(pagebody)
+   }      
+} //function
+  ]]></script>
+</search>
+
