@@ -13,6 +13,7 @@ New Searches
 * tvc - tv.com search (Steve Poirier)
 * twe - Twingine (John Bairen)
 * cty - city-data search (Monty Scroggins)
+* nfltv - NFL tv schedule parsed by timezone (Monty Scroggins)
 
 Modified Searches
 * usps - Updated to go to the right page (Steve Poirier)
