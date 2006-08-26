@@ -1,26 +1,13 @@
-<!--
-   This file contains a listing of public holidays in the U.S.
-   for the years 2000-2004.
--->
-
 <events>
+  /*holidays on a specific day */
   <event name="New Year's Day" type="public_holiday">
      <date day="1" month="1"/>
   </event>
-  <event name="Martin Luther King Day" type="public_holiday">
-     <date day="19" month="1" year="2004"/>
-  </event> 
   <event name="GroundHog Day" type="public_holiday">
      <date day="2" month="2"/>
   </event>
   <event name="Valentines Day" type="public_holiday">
      <date day="14" month="2"/>
-  </event>
-  <event name="Presidents Day" type="public_holiday">
-     <date day="16" month="2" year="2004"/>
-  </event>
-  <event name="Leap Day" type="public_holiday">
-     <date day="29" month="2" year="2004"/>
   </event>
   <event name="St Patricks Day" type="public_holiday">
      <date day="17" month="3"/>
@@ -28,38 +15,120 @@
   <event name="April Fools" type="public_holiday">
      <date day="1" month="4"/>
   </event>
-  <event name="Easter" type="public_holiday">
-     <date day="11" month="4" year="2004"/>
+  <event name="Cinco de Mayo" type="public_holiday">
+     <date day="5" month="5"/>
   </event>
-    <event name="Daylight Savings Time Begins" type="public_holiday">
-       <date day="4" month="4" year="2004"/>
-    </event>
-  <event name="Mothers Day" type="public_holiday">
-     <date day="9" month="5" year="2004"/>
-  </event>
-  <event name="Memorial Day" type="public_holiday">
-     <date day="31" month="5" year="2004"/>
-  </event>
-  <event name="Fathers Day" type="public_holiday">
-     <date day="20" month="6" year="2004"/>
+  <event name="Summer Solstice" type="public_holiday">
+     <date day="21" month="6"/>
   </event>
   <event name="Independence day" type="public_holiday">
      <date day="4" month="7" />
   </event>
-  <event name="Labor Day" type="public_holiday">
-     <date day="6" month="9" year="2004"/>
-  </event>
-  <event name="Halloween, DST Ends" type="public_holiday">
+  <event name="Halloween" type="public_holiday">
      <date day="31" month="10"/>
   </event>
   <event name="Veterans Day" type="public_holiday">
-     <date day="11" month="11" year="2004"/>
+     <date day="11" month="11" />
   </event>
-  <event name="Thanksgiving" type="public_holiday">
-     <date day="25" month="11" year="2004"/>
+  <event name="Christmas Eve" type="public_holiday">
+     <date day="24" month="12"/>
   </event>
   <event name="Christmas" type="public_holiday">
      <date day="25" month="12"/>
+  </event>
+ <event name="New Years Eve" type="public_holiday">
+     <date day="31" month="12"/>
+  </event>
+  
+/* holidays that float */
+  <event name="Martin Luther King Day" type="public_holiday">
+     <date day="16" month="1" year="2006"/>
+  </event> 
+  <event name="Presidents Day" type="public_holiday">
+     <date day="20" month="2" year="2006"/>
+  </event> 
+  <event name="Spring Equinox" type="public_holiday">
+     <date day="20" month="3" year="2006"/>
+  </event> 
+   <event name="Daylight Savings Begins" type="public_holiday">
+     <date day="2" month="4" year="2006"/>
+  </event>
+   <event name="Easter" type="public_holiday">
+     <date day="16" month="4" year="2006"/>
+  </event>
+  <event name="Mothers Day" type="public_holiday">
+     <date day="14" month="5" year="2006"/>
+  </event> 
+  <event name="Memorial Day" type="public_holiday">
+     <date day="29" month="5" year="2006"/>
+  </event>
+  <event name="Fathers Day" type="public_holiday">
+     <date day="18" month="6" year="2006"/>
+  </event>
+  <event name="Labor Day" type="public_holiday">
+     <date day="4" month="9" year="2006"/>
+  </event>
+  <event name="Fall Equinox" type="public_holiday">
+     <date day="23" month="9" year="2006"/>
+  </event>
+  <event name="Columbus Day" type="public_holiday">
+     <date day="9" month="10" year="2006"/>
+  </event>
+  <event name="Daylight Savings Ends" type="public_holiday">
+     <date day="29" month="10" year="2006"/>
+  </event>
+  <event name="Election Day" type="public_holiday">
+     <date day="7" month="11" year="2006"/>
+  </event>
+  <event name="Thanksgiving" type="public_holiday">
+     <date day="23" month="11" year="2006"/>
+  </event>
+  <event name="Winter Solstice" type="public_holiday">
+     <date day="22" month="12" year="2006"/>
+  </event>
+
+ 
+  <event name="Martin Luther King Day" type="public_holiday">
+     <date day="15" month="1" year="2007"/>
+  </event>  
+   <event name="Presidents Day" type="public_holiday">
+     <date day="19" month="2" year="2007"/>
+  </event>
+  <event name="Daylight Savings Begins" type="public_holiday">
+     <date day="11" month="3" year="2007"/>
+  </event>
+  <event name="Spring Equinox" type="public_holiday">
+     <date day="21" month="3" year="2007"/>
+  </event> 
+   <event name="Easter" type="public_holiday">
+     <date day="8" month="4" year="2007"/>
+  </event>
+   <event name="Mothers Day" type="public_holiday">
+     <date day="13" month="5" year="2007"/>
+  </event> 
+  <event name="Memorial Day" type="public_holiday">
+     <date day="28" month="5" year="2007"/>
+  </event>
+  <event name="Fathers Day" type="public_holiday">
+     <date day="17" month="6" year="2007"/>
+  </event>
+  <event name="Labor Day" type="public_holiday">
+     <date day="3" month="9" year="2007"/>
+  </event>
+  <event name="Fall Equinox" type="public_holiday">
+     <date day="23" month="9" year="2007"/>
+  </event>
+  <event name="Columbus Day" type="public_holiday">
+     <date day="8" month="10" year="2007"/>
+  </event>
+  <event name="Daylight Savings Ends" type="public_holiday">
+     <date day="4" month="11" year="2007"/>
+  </event>
+  <event name="Thanksgiving" type="public_holiday">
+     <date day="22" month="11" year="2007"/>
+  </event>
+  <event name="Winter Solstice" type="public_holiday">
+     <date day="22" month="12" year="2007"/>
   </event>
 </events>
 
