@@ -26,7 +26,7 @@ Removed Searches
 Miscellaneous
 * Modified version.js to check that DQSDTools version matches version.xml version, rather than hard-coding the expected version.
 * Moved location of mrumenu.txt to the current user's DQSD application directory. (Glenn Carr)
-
+* Updated the US holidays database thru 2007 - (Monty Scroggins)
 
 -- What's new for 3.1.9.2 (date 2006-04-05)
 
