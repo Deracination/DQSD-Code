@@ -22,7 +22,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories=""
+				AdditionalIncludeDirectories="..\WTL\include"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;UNICODE;STRICT"
 				StringPooling="TRUE"
 				RuntimeLibrary="0"
@@ -64,7 +64,7 @@
 				Name="VCResourceCompilerTool"
 				PreprocessorDefinitions="NDEBUG"
 				Culture="1033"
-				AdditionalIncludeDirectories=""/>
+				AdditionalIncludeDirectories="..\WTL\include"/>
 			<Tool
 				Name="VCWebServiceProxyGeneratorTool"/>
 			<Tool
@@ -88,7 +88,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="1"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories=""
+				AdditionalIncludeDirectories="..\WTL\include"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;STRICT"
 				StringPooling="TRUE"
 				RuntimeLibrary="0"
@@ -130,7 +130,7 @@
 				Name="VCResourceCompilerTool"
 				PreprocessorDefinitions="NDEBUG"
 				Culture="1033"
-				AdditionalIncludeDirectories=""/>
+				AdditionalIncludeDirectories="..\WTL\include"/>
 			<Tool
 				Name="VCWebServiceProxyGeneratorTool"/>
 			<Tool
