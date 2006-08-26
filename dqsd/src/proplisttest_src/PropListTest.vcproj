@@ -153,7 +153,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories=""
+				AdditionalIncludeDirectories="..\WTL\include"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;STRICT"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="1"
@@ -197,7 +197,7 @@
 				Name="VCResourceCompilerTool"
 				PreprocessorDefinitions="_DEBUG"
 				Culture="1033"
-				AdditionalIncludeDirectories=""/>
+				AdditionalIncludeDirectories="..\WTL\include"/>
 			<Tool
 				Name="VCWebServiceProxyGeneratorTool"/>
 			<Tool
