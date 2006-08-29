@@ -261,8 +261,8 @@
 		</div>
 		<div class="faq">
 			<div class="question">3.4 Where do I go to download searches?</div>
-			<div class="answer">Searches can be downloaded from Source Forge at <a href="http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/dqsd/dqsd/searches/">
-					http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/dqsd/dqsd/searches/</a>. 
+			<div class="answer">Searches can be downloaded from Source Forge at <a href="http://svn.sourceforge.net/cgi-bin/viewvc/dqsd/dqsd/searches/">
+					http://svn.sourceforge.net/cgi-bin/viewvc/dqsd/dqsd/searches/</a>. 
 				Other more specialized searches can be found here <a href="http://www.dqsd.net/contrib/index.html">
 					http://www.dqsd.net/contrib/index.html</a>.</div>
 		</div>
@@ -306,16 +306,16 @@
 				show two shortcuts in the helpbox:
 				<ul>
 					<li>
-						dqsdcvs|http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/dqsd/dqsd/</li>
+						dqsdsvn|http://svn.sourceforge.net/cgi-bin/viewvc/dqsd</li>
 					<li>
-						dqsd|dqsdcvs</li>
+						dqsd|dqsdsvn</li>
 				</ul>
-				<p>But these two lines will only show the dqsdcvs one:</p>
+				<p>But these two lines will only show the dqsdsvn one:</p>
 				<ul>
 					<li>
-						dqsd|dqsdcvs</li>
+						dqsd|dqsdsvn</li>
 					<li>
-						dqsdcvs|http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/dqsd/dqsd/</li>
+						dqsdsvn|http://svn.sourceforge.net/cgi-bin/viewvc/dqsd/dqsd/</li>
 				</ul>
 				<p>The same two lines, but the second set sets an alias to call another alias that 
 					hasn't been defined yet.</p>
@@ -379,11 +379,11 @@
 		<div class="faq">
 			<div class="question">7.1 Are there any guidelines I should be aware of when making 
 				modifications for DQSD?</div>
-			<div class="answer">Ground rules for checkins into CVS:
+			<div class="answer">Ground rules for checkins into SVN:
 				<ul>
 					<li>
 						If you want to merge in some changes, just let Dave know which SourceForge 
-						account needs CVS write access. Access is no problem if you're going to 
+						account needs SVN write access. Access is no problem if you're going to 
 						contribute; just don't abuse it.</li>
 					<li>
 						When you do commit a change, please let Dave and the <a href="https://lists.sourceforge.net/lists/listinfo/dqsd-users">
@@ -416,7 +416,7 @@
 						<li>
 							Sources should be included in the distribution itself since this is the easiest 
 							way to conform to the GPL. So all source files should be listed in 
-							"search.nsi"; i.e., you shouldn't need CVS to get a working build.</li>
+							"search.nsi"; i.e., you shouldn't need SVN to get a working build.</li>
 						<li>
 							Please keep "build.cmd" working. In particular this means that DQSDTools.mak 
 							needs to be kept up to date. Also, any files that are automatically generated 
@@ -460,9 +460,9 @@
 						<li>
 							cd ~</li>
 						<li>
-							cvs -d:pserver:anonymous@c...:/cvsroot/dqsd login</li>
+							svn -d:pserver:anonymous@c...:/cvsroot/dqsd login</li>
 						<li>
-							cvs -d:pserver:anonymous@c...:/cvsroot/dqsd co dqsd</li>
+							svn -d:pserver:anonymous@c...:/cvsroot/dqsd co dqsd</li>
 					</ul>
 					<li>
 						And whenever you want to get the latest:</li>
@@ -470,7 +470,7 @@
 						<li>
 							cd ~/dqsd</li>
 						<li>
-							cvs update -dP</li>
+							svn update -dP</li>
 					</ul>
 					<li>
 						Type the following to build:</li>
@@ -490,15 +490,15 @@
 				permissions to your account.
 				<br>
 				<br>
-				Alternate CVS Utilities:
+				Alternate SVN Utilities:
 				<ul>
 					<li>
 						WinCVS is a GUI front-end to CVS that you can use. You can pull the latest 
 						version here: <a href="http://sourceforge.net/projects/cvsgui">http://sourceforge.net/projects/cvsgui</a>.</li>
 					<li>
-						Check out Tortoise CVS. It adds the most basic/common CVS command functionality 
+						Check out Tortoise SVN. It adds the most basic/common SVN command functionality 
 						to Explorer, so you can update, commit, add, diff, etc.. with a right click 
-						from an Explorer window. Get it here: <a href="http://www.tortoisecvs.org/">http://www.tortoisecvs.org/</a>.</li>
+						from an Explorer window. Get it here: <a href="http://www.tortoisesvn.org/">http://www.tortoisesvn.org/</a>.</li>
 				</ul>
 			</div>
 		</div>
