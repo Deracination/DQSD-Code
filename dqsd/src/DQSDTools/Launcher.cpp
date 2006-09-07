@@ -4,7 +4,6 @@
 #include "KeyboardHook.h"
 #include "Launcher.h"
 #include "Utilities.h"
-#include "OptionsDialog.h"
 #include <objbase.h>
 #include <shlguid.h>
 #include <shlobj.h>
@@ -940,9 +939,9 @@ STDMETHODIMP CLauncher::CreateDirectory(BSTR bstrDir)
 
 STDMETHODIMP CLauncher::DisplayUserOptions()
 {
-	COptionsDialog dlg;
+//	CUserOptionsDialog dlg;
 
-	dlg.DoModal( NULL );
+//	dlg.DoModal( NULL );
 
 	return S_OK;
 }
