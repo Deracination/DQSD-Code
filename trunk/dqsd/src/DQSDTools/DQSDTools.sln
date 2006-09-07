@@ -3,34 +3,16 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DQSDTools", "DQSDTools.vcpr
 	ProjectSection(ProjectDependencies) = postProject
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PropListTest", "..\proplisttest_src\PropListTest.vcproj", "{3DC3E3DF-6A73-4B12-BED2-7AEDD7C2DFDB}"
-	ProjectSection(ProjectDependencies) = postProject
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfiguration) = preSolution
 		Debug = Debug
-		Release = Release
 		Release MinDependency = Release MinDependency
-		UNICODE Release = UNICODE Release
 	EndGlobalSection
 	GlobalSection(ProjectConfiguration) = postSolution
 		{5E5A706B-D94A-4392-9A41-264EBA01218A}.Debug.ActiveCfg = Debug|Win32
 		{5E5A706B-D94A-4392-9A41-264EBA01218A}.Debug.Build.0 = Debug|Win32
-		{5E5A706B-D94A-4392-9A41-264EBA01218A}.Release.ActiveCfg = Release MinDependency|Win32
-		{5E5A706B-D94A-4392-9A41-264EBA01218A}.Release.Build.0 = Release MinDependency|Win32
 		{5E5A706B-D94A-4392-9A41-264EBA01218A}.Release MinDependency.ActiveCfg = Release MinDependency|Win32
 		{5E5A706B-D94A-4392-9A41-264EBA01218A}.Release MinDependency.Build.0 = Release MinDependency|Win32
-		{5E5A706B-D94A-4392-9A41-264EBA01218A}.UNICODE Release.ActiveCfg = Debug|Win32
-		{5E5A706B-D94A-4392-9A41-264EBA01218A}.UNICODE Release.Build.0 = Debug|Win32
-		{3DC3E3DF-6A73-4B12-BED2-7AEDD7C2DFDB}.Debug.ActiveCfg = Debug|Win32
-		{3DC3E3DF-6A73-4B12-BED2-7AEDD7C2DFDB}.Debug.Build.0 = Debug|Win32
-		{3DC3E3DF-6A73-4B12-BED2-7AEDD7C2DFDB}.Release.ActiveCfg = Release|Win32
-		{3DC3E3DF-6A73-4B12-BED2-7AEDD7C2DFDB}.Release.Build.0 = Release|Win32
-		{3DC3E3DF-6A73-4B12-BED2-7AEDD7C2DFDB}.Release MinDependency.ActiveCfg = Release|Win32
-		{3DC3E3DF-6A73-4B12-BED2-7AEDD7C2DFDB}.Release MinDependency.Build.0 = Release|Win32
-		{3DC3E3DF-6A73-4B12-BED2-7AEDD7C2DFDB}.UNICODE Release.ActiveCfg = UNICODE Release|Win32
-		{3DC3E3DF-6A73-4B12-BED2-7AEDD7C2DFDB}.UNICODE Release.Build.0 = UNICODE Release|Win32
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 	EndGlobalSection
