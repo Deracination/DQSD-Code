@@ -481,7 +481,7 @@
 
                  // what I'm looking for
                  //<img src="joyimages/555.png" height="431" width="485" border="0">
-                 var pattern = /joyimages\/\S+.[jpg|png|gif]/ig;
+                 var pattern = /joyimages\/\S+.[jpg|png|gif]" alt="The Joy/ig;
                  var result = sBody.match(pattern)[0];
                  var imgurl = "http://www.geekculture.com/joyoftech/"+result;
                  break;
