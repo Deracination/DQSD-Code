@@ -1,37 +1,26 @@
 <search function="sams">
   <name>Sam Spade Whois Utility</name>
-  <description>
-    Check internet addresses using SamSpade.org.<br/>
-    <div class="helpboxDescLabels">Example:</div>
-    <table class="helpboxDescTable">
-  		<tr><td>sams amazon.com</td></tr>
-  	</table>
-  </description>
-  <category>Computers<category>Networking</category></category>
-  <link>http://www.samspade.org/</link>
-  
-  <form name="samsf"
-        action="http://www.samspade.org/t/lookat"
-        method="get">
-    <input type="hidden" name="a"/>
+  <description>Check internet addresses using SamSpade.org: "sams amazon.com"</description>
+  <category>Computers</category>
+  <link>http://samspade.org/</link>
+  <form name="samw"
+        target="_blank"
+        action="http://samspade.org/whois"
+        method="POST">
+    <input type="hidden" name="query"/>
+    <input type="hidden" name="server" value="auto" />
   </form>
-  
   <script><![CDATA[
     function sams(q)
     {
-      if( nullArgs("sams",q) )
-        return false;
+      if (q == "")
+        openSearchWindow("http://samspade.org/");
       else
       {
-        document.samsf.a.value = q;
-        submitForm(samsf);
+        document.samw.query.value = q;
+        submitForm(samw);
       }
     }
   ]]></script>
-
-  <copyright>
-	Copyright (c) 2002 David Bau
-	Distributed under the terms of the
-	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
-  </copyright>
 </search>
+

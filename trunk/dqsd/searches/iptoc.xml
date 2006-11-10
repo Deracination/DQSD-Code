@@ -1,0 +1,26 @@
+<search function="iptoc">
+  <name>IP-to-Country</name>
+  <description>Find the country of the specified IP address: "iptoc 202.125.14.248"</description>
+  <category>People and Places</category>
+  <contributor>Nick Jenkins</contributor>  
+  <link>http://ip-to-country.webhosting.info/</link>
+  <form name="iptocf"
+        target="_blank"
+        action="http://ip-to-country.webhosting.info/node/view/36"
+        method="post">
+    <input type="hidden" name="ip_address"/>
+  </form>
+  <script><![CDATA[
+    function iptoc(q, switches)
+    {
+      if( q == "" )
+        openSearchWindow("http://ip-to-country.webhosting.info/");
+      else
+      {
+        document.iptocf.ip_address.value = q;
+        submitForm(iptocf);
+      }
+    }
+  ]]></script>
+</search>
+
