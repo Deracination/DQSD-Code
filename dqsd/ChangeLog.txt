@@ -14,11 +14,15 @@ New Searches
 * twe - Twingine (John Bairen)
 * cty - city-data search (Monty Scroggins)
 * nfltv - NFL tv schedule parsed by timezone (Monty Scroggins)
+* iptoc - IP to country name lookup (Nick Jenkins)
+* iploc - IP to map lookup (Nick Jenkins)
+* si - Static ice search, Australian tech price comparison (Nick Jenkins)
 
 Modified Searches
 * usps - Updated to go to the right page (Steve Poirier)
 * comx - Added the Alex comic (Monty Scroggins)
 * qsfreq - Added individual search re-enabling feature (Monty Scroggins)
+* sams - Updated to work with new site (Nick Jenkins)
 
 Removed Searches
 * tvtm - Replaced by tvc (Kim Gräsman)

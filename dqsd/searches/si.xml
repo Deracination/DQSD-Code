@@ -1,0 +1,26 @@
+<search function="si">
+  <name>Static Ice</name>
+  <description>Find lowest price in Australia for computer components</description>
+  <category>Comparison Shopping</category>
+  <contributor>Nick Jenkins</contributor>
+  <link>http://staticice.com.au/</link>
+  <form name="f"
+        target="_blank"
+        action="http://staticice.com.au/cgi-bin/search.cgi"
+        method="get">
+    <input type="hidden" name="q"/>
+  </form>
+  <script><![CDATA[
+    function si(q, switches)
+    {
+      if( q == "" )
+        openSearchWindow("http://staticice.com.au/");
+      else
+      {
+        document.f.q.value = q;
+        submitForm(f);
+      }
+    }
+  ]]></script>
+</search>
+

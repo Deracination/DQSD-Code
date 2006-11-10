@@ -1,0 +1,26 @@
+<search function="iploc">
+  <name>IP-to-Location</name>
+  <description>Find the location of the specified IP address: "iploc 202.125.14.248"</description>
+  <category>People and Places</category>
+  <contributor>Nick Jenkins</contributor>
+  <link>http://www.ip2location.com/free.asp</link>
+  <form name="iptocl"
+        target="_blank"
+        action="http://www.ip2location.com/free.asp"
+        method="post">
+    <input type="hidden" name="ipaddresses"/>
+  </form>
+  <script><![CDATA[
+    function iploc(q, switches)
+    {
+      if( q == "" )
+        openSearchWindow("http://www.ip2location.com/free.asp");
+      else
+      {
+        document.iptocl.ipaddresses.value = q;
+        submitForm(iptocl);
+      }
+    }
+  ]]></script>
+</search>
+
