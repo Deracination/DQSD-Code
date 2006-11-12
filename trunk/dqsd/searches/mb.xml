@@ -8,13 +8,13 @@
     <div class="helpboxDescLabels">Switches:</div>
     <table class="helpboxDescTable">
       <tr style="font-weight:bolder;"><td>/artist</td><td> - </td><td>search for an artist name (default)</td></tr>
-      <tr><td>/album</td><td> - </td><td>search for an album name</td></tr>
+      <tr><td>/release</td><td> - </td><td>search for a release name</td></tr>
       <tr><td>/track</td><td> - </td><td>search for a track name</td></tr>
     </table>
     <div class="helpboxDescLabels">Examples:</div>
     <table class="helpboxDescTable">
       <tr><td>mb bach</td></tr>
-      <tr><td>mb ting /album</td></tr>
+      <tr><td>mb ting /release</td></tr>
       <tr><td>mb jennifer she said /track</td></tr>
     </table>
   </description>
@@ -30,7 +30,7 @@
     {
 
       document.mbf.type.value = "artist";
-      var args = parseArgs(q, "artist, album, track");
+      var args = parseArgs(q, "artist, release, track");
       if( nullArgs("mb", args.q) ) return;
 
       //eliminate cases where you got more than 1 switch
@@ -42,8 +42,6 @@
 
       if ( args.switches.length == 1 )
       {
-        //albums correction due to new search filed name "release"
-        if ( args.switches[0].name=="album" ) {args.switches[0].name = "release"; }
         document.mbf.type.value = args.switches[0].name;
       }
 
