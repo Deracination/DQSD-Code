@@ -1,0 +1,34 @@
+<search function="lastfm">
+  <name>Last.fm</name>
+  <description>Search last.fm, a music social site, for artist / album / track</description>
+  <category>Entertainment<category>Music</category></category>
+  <contributor>MLL</contributor>
+  <link>http://www.last.fm</link>
+  <email>http://mll02.free.fr</email>
+  <form name="lfmf"
+        method="get"
+        action="http://www.last.fm/explore/search/">
+    <input type="hidden" name="m" value="" />
+    <input type="hidden" name="q" value="" />
+  </form>
+  <script><![CDATA[
+    function lfm(q)
+    {
+      if( nullArgs("lfm", q) )
+        return;
+
+      document.lfmf.q.value = q;
+
+      submitForm(lfmf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 10/08/06 at 21:43:14
+    by Dave's Quick Search Deskbar Search Wizard version 1.3,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>

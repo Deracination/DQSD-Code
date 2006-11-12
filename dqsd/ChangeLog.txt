@@ -17,12 +17,14 @@ New Searches
 * iptoc - IP to country name lookup (Nick Jenkins)
 * iploc - IP to map lookup (Nick Jenkins)
 * si - Static ice search, Australian tech price comparison (Nick Jenkins)
+* lfm - Search last.fm,; the leading music social site (MLL)
 
 Modified Searches
 * usps - Updated to go to the right page (Steve Poirier)
 * comx - Added the Alex comic (Monty Scroggins)
 * qsfreq - Added individual search re-enabling feature (Monty Scroggins)
 * sams - Updated to work with new site (Nick Jenkins)
+* mb - Updated to follow site changes ("relelases" instead of "albums") (MLL)
 
 Removed Searches
 * tvtm - Replaced by tvc (Kim Gräsman)
