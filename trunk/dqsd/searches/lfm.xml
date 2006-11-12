@@ -1,4 +1,4 @@
-<search function="lastfm">
+<search function="lfm">
   <name>Last.fm</name>
   <description>Search last.fm, a music social site, for artist / album / track</description>
   <category>Entertainment<category>Music</category></category>
