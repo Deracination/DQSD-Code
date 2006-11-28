@@ -817,15 +817,30 @@ STDMETHODIMP CLauncher::RenameFile(BSTR bstrFromFilename, BSTR bstrToFilename)
 // Private methods
 HRESULT CLauncher::GetInstallationDirectory( LPTSTR szResult, DWORD dwResultSize )
 {
-	// Cache install directory, so we don't have to hit the registry as much
-	if ( m_szInstallDir[0] == 0 )
-	{
-		return GetInstallationDirectory( szResult, dwResultSize );
-	}
+    // Cache install directory, so we don't have to hit the registry as much
+    if (m_szInstallDir[0] == 0)
+    {
+        // Get the installation directory from the registry to use for making sure the filenames are in the install path
+        CRegKey rk;
+        LONG ret = rk.Open( HKEY_CLASSES_ROOT, DQSD_REG_KEY, KEY_READ );
+        if ( ERROR_SUCCESS != ret)
+        {
+            Error(IDS_ERR_REGKEYNOTFOUND, IID_ILauncher);
+            return HRESULT_FROM_WIN32(ret);
+        }
 
-	lstrcpyn( szResult, m_szInstallDir, dwResultSize / sizeof(TCHAR) );
-	
-	return S_OK;
+        DWORD dwCount = sizeof(m_szInstallDir);
+        ret = rk.QueryValue( _T("InstallDir"), NULL, m_szInstallDir, &dwCount );
+        if ( ERROR_SUCCESS != ret )
+        {
+            Error(IDS_ERR_REGKEYNOTFOUND, IID_ILauncher);
+            return HRESULT_FROM_WIN32(ret);
+        }
+    }
+
+    lstrcpyn(szResult, m_szInstallDir, dwResultSize / sizeof(TCHAR));
+
+    return S_OK;
 }
 
 BOOL CLauncher::VerifyFileInDirectoryTree( LPCTSTR szFilename, LPCTSTR szDir)
