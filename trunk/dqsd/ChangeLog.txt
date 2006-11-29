@@ -26,14 +26,18 @@ Modified Searches
 * qsfreq - Added individual search re-enabling feature (Monty Scroggins)
 * sams - Updated to work with new site (Nick Jenkins)
 * mb - Updated to follow site changes ("relelases" instead of "albums") (MLL)
+* whsc - Updated to follow site changes (MLL)
 
 Removed Searches
 * tvtm - Replaced by tvc (Kim Gräsman)
+* gtwhois - Unusable through DQSD because of antiscrap form (MLL)
 
 Miscellaneous
 * Modified version.js to check that DQSDTools version matches version.xml version, rather than hard-coding the expected version.
 * Moved location of mrumenu.txt to the current user's DQSD application directory. (Glenn Carr)
 * Updated the US holidays database thru 2007 - (Monty Scroggins)
+* removed temporary file aliases.deprecated (MLL)
+* removed .cvsignore (remain of the CVS days) (MLL)
 
 -- What's new for 3.1.9.2 (date 2006-04-05)
 
