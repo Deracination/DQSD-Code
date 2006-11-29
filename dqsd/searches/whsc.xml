@@ -4,19 +4,25 @@
     <div class="helpboxDescLabels">Examples:</div>
     <table class="helpboxDescTable">
       <tr><td>whsc dqsd.net</td></tr>
-      <tr><td>whsc 68.80.224.11</td></tr>
+      <tr><td>whsc 207.46.230.219</td></tr>
       <tr><td>whsc microsoft</td></tr>
     </table>
   </description>
   <category>Computers<category>Networking</category></category>
-  <link>http://www.whois.sc/</link>
+  <link>http://domaintools.com/</link>
   <contributor>MLL</contributor>
   <script><![CDATA[
     function whsc(q)
     {
       if( nullArgs( "whsc", q ) ) return;
-
-      openSearchWindow("http://www.whois.sc/search/?q="+q);
+      
+      if( q.indexOf('.') == -1 ) {
+        //absence of dot indicates domain name suggestion request
+        openSearchWindow("http://domain-suggestions.domaintools.com/?q="+q);
+      } else {
+        //presence of dot indicates either domain name or IP address
+        openSearchWindow("http://whois.domaintools.com/"+q);
+      }
     }
   ]]></script>
 </search>
