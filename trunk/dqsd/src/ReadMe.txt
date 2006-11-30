@@ -7,6 +7,8 @@ RELEASE PROCEDURE FOR DQSD - Kim Gräsman, December 2003
 
 - Update version stuff in scripts
 	- Update version in version.xml
+	- Set date for latest changes in ChangeLog.txt
+	- Commit changes
 
 - Build DLL and installer
 	- Run build.cmd
