@@ -38,6 +38,7 @@ Miscellaneous
 * Updated the US holidays database thru 2007 - (Monty Scroggins)
 * removed temporary file aliases.deprecated (MLL)
 * removed .cvsignore (remain of the CVS days) (MLL)
+* cosmetic change: post-install popup used to say "DQSD Deskband" :) (MLL)
 
 -- What's new for 3.1.9.2 (date 2006-04-05)
 
