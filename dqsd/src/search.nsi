@@ -2,6 +2,7 @@
 ;
 ; Installs Dave's Quick Search Deskbar
 ;
+!include "nsisXML.nsh"
 
 ; The name of the installer
 Name "Dave's Quick Search Deskbar"
@@ -10,7 +11,7 @@ Name "Dave's Quick Search Deskbar"
 !Define IE_MAJOR_REQUIRED  5
 !Define IE_MINOR_REQUIRED  5
 !Define HOW_TO_TURN_ON_TOOLBAR "Right-click in your taskbar and select$\n$\n    Toolbar > DQSD Deskbar$\n$\nto add the Quick Search Deskbar to your taskbar."
-!Define TITLE_AND_COPYRIGHT "Dave's Quick Search Deskbar$\nCopyright © 2002-2005 David Bau$\nDistributed under the terms of the$\nGNU General Public License, Version 2"
+!Define TITLE_AND_COPYRIGHT "Dave's Quick Search Deskbar$\nCopyright © 2002-2006 David Bau$\nDistributed under the terms of the$\nGNU General Public License, Version 2"
 !Define DQSD_CLSID "{226b64e8-dc75-4eea-a6c8-abcb4d1d37ff}"
 !Define DQSDHOST_CLSID "{EC9FE983-E520-4D8F-B1A7-ACBCA0439C70}"
 !Define DQSD_TITLE "Dave's Quick Search Deskbar"
@@ -82,9 +83,27 @@ Section "Quick Search Deskbar (required)"
   ; Set output path to the installation directory.
   SetOutPath $INSTDIR
 
+  ; If the currently installed version is less 4.0, then force them to uninstall before proceeding.
+  IfFileExists "$INSTDIR\search.htm" +1 noUninstallNeeded ; If they don't have a search.htm, assume this is a clean installation
+  IfFileExists "$INSTDIR\version.xml" +1 uninstallNeeded  ; If they don't have a version.xml, this is really old installation
+  ${nsisXML->xPath} "$INSTDIR\version.xml" "/dqsd_version_info/version/majorhi" ${VAR_1} ; Check version in version.xml
+  IntCmp $1 4 noUninstallNeeded +1 noUninstallNeeded
+  uninstallNeeded:
+    MessageBox MB_OK|MB_ICONINFORMATION "Before installing this version of ${DQSD_TITLE}, you must uninstall the current installation."
+    Abort
+  noUninstallNeeded:
+
+  ; Check if Administrator
+  # call userInfo plugin to get user info.  The plugin puts the result in the stack
+  userInfo::getAccountType
+  pop $0
+  strCmp $0 "Admin" +3
+  MessageBox MB_OK|MB_ICONINFORMATION "You need to run this installer as an administrator of this machine."
+    Abort
+
   ; Confirm that the user really does want to install  
-  MessageBox MB_YESNO|MB_ICONINFORMATION|MB_DEFBUTTON2 "This will install ${DQSD_TITLE}.$\nYou should run this installer as an administrator of this machine, or it will not complete correctly.$\n$\nWould you like to continue?" IDYES userconfirmedinstall
-  Abort
+  MessageBox MB_YESNO|MB_ICONINFORMATION|MB_DEFBUTTON2 "This will install ${DQSD_TITLE}.$\n$\nWould you like to continue?" IDYES userconfirmedinstall
+    Abort
   userconfirmedinstall:
 
   ; Verify that they've got the correct version of IE installed.
@@ -103,7 +122,6 @@ Section "Quick Search Deskbar (required)"
   ieVersionNotOK:
     MessageBox MB_YESNO|MB_ICONEXCLAMATION|MB_DEFBUTTON2 "This version of ${DQSD_TITLE} requires IE version ${IE_MAJOR_REQUIRED}.${IE_MINOR_REQUIRED} or higher.  You are currently running version $2.$3.$\n$\nWould you like to continue with the installation anyway?" IDYES ieVersionOK
     Abort
-    
   ieVersionOK:
 
   ; Old versions to delete
