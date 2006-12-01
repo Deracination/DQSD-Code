@@ -1,28 +1,23 @@
 <search function="guardster">
-  <COMMENT>
-	A privacy proxy service. It can filter cookies, scripts, ads, images, and referrer,
-	but by default, it leaves them all on.
-  </COMMENT>
   <name>Guardster VPN</name>
   <category>Functions</category>
   <contributor>Gregory Krohne</contributor>
-  <link>http://proxy.guardster.com/cgi-bin/nph-proxy.cgi/010100A/http/www.google.com</link>
+  <link>http://proxy.guardster.com</link>
   <email>Gregory.Krohne@afrc.af.mil</email>
   <description>
   Guardster's free webproxy - visit websites anonymously.
   </description>
   <form name="guardsterf"
         method="post"
-        action="http://proxy.guardster.com/cgi-bin/nph-proxy.cgi/010100A/782d70726f78792f7374617274">
-    <input type="hidden" name="rc" value="" />
-    <input type="hidden" name="rs" value="" />
-    <input type="hidden" name="fa" value="" />
-    <input type="hidden" name="br" value="" />
-    <input type="hidden" name="ff" value="" />
-
-    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
-
-    <input type="hidden" name="URL" value="http://www.google.com" />
+        action="http://proxy.guardster.com/proxy.php">
+    <input type="hidden" name="cookies" value="" />
+    <input type="hidden" name="javascript" value="" />
+    <input type="hidden" name="images" value="" />
+    <input type="hidden" name="referrer" value="" />
+    <input type="hidden" name="agent" value="" />
+    <input type="hidden" name="header" value="" />
+    <input type="hidden" name="title" value="" />
+    <input type="hidden" name="URL" value="" />
   </form>
   <script><![CDATA[
     function guardster(q)
@@ -33,11 +28,13 @@
       // FORM variables for guardsterf
       // These are optional filters that guardster offers
       // Set value = "on" to activate filter, and remove that element from the destination page
-      //document.guardsterf.rc.value = "";	// Cookies
-      //document.guardsterf.rs.value = "";	// Scripts
-      //document.guardsterf.fa.value = "";	// Ads
-      //document.guardsterf.br.value = "";	// Referrer
-      //document.guardsterf.ff.value = "";	// Images
+      document.guardsterf.cookies.value = (typeof guardster_hide_cookies != "undefined" && guardster_hide_cookies) ? "on" : "";	
+      document.guardsterf.javascript.value = (typeof guardster_hide_javascript != "undefined" && guardster_hide_javascript) ? "on" : "";	
+      document.guardsterf.images.value = (typeof guardster_hide_images != "undefined" && guardster_hide_images) ? "on" : "";
+      document.guardsterf.referrer.value = (typeof guardster_hide_referrer != "undefined" && guardster_hide_referrer) ? "on" : "";
+      document.guardsterf.agent.value = (typeof guardster_hide_agent != "undefined" && guardster_hide_agent) ? "on" : "";	
+	  document.guardsterf.header.value = (typeof guardster_hide_header != "undefined" && guardster_hide_header) ? "on" : "";
+	  document.guardsterf.title.value = (typeof guardster_hide_title != "undefined" && guardster_hide_title) ? "on" : "";
 
       // The wizard assigned the search string to this form field value because
       // this field was the active element when the search file was generated.
