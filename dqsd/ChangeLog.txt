@@ -29,6 +29,7 @@ Modified Searches
 * sams - Updated to work with new site (Nick Jenkins)
 * mb - Updated to follow site changes ("relelases" instead of "albums") (MLL)
 * whsc - Updated to follow site changes (MLL)
+* guardster - Updated url and added local preference settings to hide cookies, javascript, etc (Brent Beardsley)
 
 Removed Searches
 * tvtm - Replaced by tvc (Kim Gräsman)
