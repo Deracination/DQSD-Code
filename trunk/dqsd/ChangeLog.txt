@@ -1,7 +1,9 @@
--- What's new for 4.0.0.0 (Nov 30, 2006)
+-- What's new for 4.0.0.2 (Dec 1, 2006)
 
 Enhancements
 * DQSD is now hosted by a custom webbrowser host, rather than the undocumented one shipped with IE
+* Installation is only allowed from an administrator account
+* If upgrading from version 3 or earlier, the previous version must be uninstalled before the new install is allowed.
 
 Bug Fixes
 * racetv - fixed a font issue - (Monty Scroggins)
