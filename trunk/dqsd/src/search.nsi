@@ -2,6 +2,9 @@
 ;
 ; Installs Dave's Quick Search Deskbar
 ;
+
+; The nsis plugin requires the following file in the %PROGRAMFILES%\NSIS\Include and NSISdl.dll the %PROGRAMFILES%\NSIS\Plugins directory. 
+; Both of these files are available in dqsd\src\NSIS\nsisxml.zip
 !include "nsisXML.nsh"
 
 ; The name of the installer
