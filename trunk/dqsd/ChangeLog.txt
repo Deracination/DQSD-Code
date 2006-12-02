@@ -19,8 +19,9 @@ New Searches
 * iptoc - IP to country name lookup (Nick Jenkins)
 * iploc - IP to map lookup (Nick Jenkins)
 * si - Static ice search, Australian tech price comparison (Nick Jenkins)
-* lfm - Search last.fm,; the leading music social site (MLL)
+* lfm - Search last.fm, the leading music social site (MLL)
 * yt - Simple YouTube search (Glenn Carr)
+* dicfr - resurrected from a new reference site (MLL)
 
 Modified Searches
 * usps - Updated to go to the right page (Steve Poirier)
