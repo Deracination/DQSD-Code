@@ -39,7 +39,8 @@ Removed Searches
 Miscellaneous
 * Modified version.js to check that DQSDTools version matches version.xml version, rather than hard-coding the expected version.
 * Moved location of mrumenu.txt to the current user's DQSD application directory. (Glenn Carr)
-* Updated the US holidays database thru 2007 - (Monty Scroggins)
+* Updated the US holidays database thru 2007 (Monty Scroggins)
+* Updated the Canadian calendar for 2007 (Bill)
 * removed temporary file aliases.deprecated (MLL)
 * removed .cvsignore (remain of the CVS days) (MLL)
 * cosmetic change: post-install popup used to say "DQSD Deskband" :) (MLL)

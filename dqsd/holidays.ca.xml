@@ -1,7 +1,7 @@
 <!--
    This file contains a listing of notable dates in Canada
-   for 2006
-   - Bill Hewitt [bill.hewitt@mochamail.com] (06Nov05)
+   for 2007
+   - Bill Hewitt [bill.hewitt@mochamail.com] (06Dec06)
 -->
 
 <events>
@@ -64,6 +64,7 @@
      <date day="4" month="4" year="2004"/>
      <date day="3" month="4" year="2005"/>
      <date day="2" month="4" year="2006"/>
+     <date day="11" month="3" year="2007"/>
   </event>
   <event name="Mother's Day" type="public_holiday">
      <date day="12" month="5" year="2002"/>
@@ -71,6 +72,7 @@
      <date day="9" month="5" year="2004"/>
      <date day="8" month="5" year="2005"/>
      <date day="14" month="5" year="2006"/>
+     <date day="13" month="5" year="2007"/>
   </event>
   <event name="Victoria Day" type="public_holiday">
      <date day="20" month="5" year="2002"/>
@@ -86,6 +88,7 @@
      <date day="13" month="6" year="2004"/>
      <date day="19" month="6" year="2005"/>
      <date day="18" month="6" year="2006"/>
+     <date day="17" month="6" year="2007"/>
   </event>
   <event name="National Day (QC)" type="public_holiday">
      <date day="24" month="6"/>
@@ -143,6 +146,7 @@
      <date day="31" month="10" year="2004"/>
      <date day="30" month="10" year="2005"/>
      <date day="29" month="10" year="2006"/>
+     <date day="4" month="11" year="2007"/>
   </event>
   <event name="Halloween" type="public_holiday">
      <date day="31" month="10"/>
