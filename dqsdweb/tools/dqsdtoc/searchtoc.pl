@@ -5,13 +5,9 @@
 #
 # Monty Scroggins
 #
-
-
 ############################################################################
-
 ## +++++++++++++++++++++++++++ Maintenance Log +++++++++++++++++++++++++++++
 # Monty Scroggins Thu Sep 19 19:25:06 GMT 2002 Script created.
-
 
 $|=1;    # set output buffering to off
 $[=0;    # set array base to 0
@@ -35,30 +31,24 @@ print q{
 <title>DQSD Searches</title>
 <link rel='stylesheet' type='text/css' href='searchtoc.css'>
 <style>
-th
-{
+th {
    text-align: left;
    font-weight: bold;
    border: 1px outset;
    padding-left:2px;
 }
-td
-{
+td {
    vertical-align:top;
 }
-.funcName
-{
+.funcName {
    color: #600000;
 }
-.description
-{
+.description {
    color: #606040;
-
    padding-left: 4px;
    padding-right: 4px;
 }
-.category
-{
+.category {
 
    color: #a07040;
    padding-right: 4px;
@@ -84,12 +74,10 @@ foreach $datafile (@datafiles) {
    my $filedata=read_file("$searchdir/$datafile");
    for ($t=0; $t<scalar(@$filedata); $t++) {
       #----------------------------------------------
-
-
       #trigger if the line contains the <name> tags
       if (@$filedata[$t]=~/<name.+\<\/name/i) {
          $name=(split(/<*\/*name>*/i,"@$filedata[$t]"))[1];
-         }#if
+      }#if
       #----------------------------------------------
       #trigger if the line contains the <description> tag
       if (@$filedata[$t]=~/\<description/i) {
@@ -101,29 +89,27 @@ foreach $datafile (@datafiles) {
             until (@$filedata[$t+$advance]=~/\/description *>/i) {
                $desctext.="@$filedata[$t+$advance]"; 
                $advance++;
-               }#until
-            }#else
-         }#if
+            }#until
+         }#else
+      }#if
       #----------------------------------------------
-
-
       #trigger if the line contains the category tags
       if (@$filedata[$t]=~/<category.+\<\/category/i) {
-
-         $category=(split(/ *<*\/*category *>*/i,"@$filedata[$t]"))[1];
+      $category=(split(/ *<*\/*category *>*/i,"@$filedata[$t]"))[1];
+         $category =~ s/ *nomenu="true">//;
          push(@categories,"$category");
-         }#if
-
+      }#if
       #----------------------------------------------
       #trigger if the line contains the link tags
       if (@$filedata[$t]=~/<link.+\<\/link/i) {
          $link=(split(/<*\/*link>*/i,"@$filedata[$t]"))[1];
          $link="<a href=\"$link\"</a>";
-         }#if
-         
-      }#for
-   push(@html,"<td class=\"category\"><a name=\"$category\">$category</a></td>\n<td><a href=\"http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/*checkout*/dqsd/dqsd/searches/$datafile?rev=HEAD&content-type=text/xml\">$datafile</a></td>\n<td class=\"funcNamehelpboxCommands\">$link$name</td>\n<td class=description>$desctext<br></td>\n</tr>");
-   }#foreach
+      }#if
+   }#for
+   push(@html,"<td class=\"category\"><a name=\"$category\">$category</a></td>\n<td><a href=\"
+   http://dqsd.svn.sourceforge.net/viewvc/*checkout*/dqsd/trunk/dqsd/searches/$datafile\">$datafile</a></td>\n<td class=\"funcNamehelpboxCommands\">$link$name</td>\n<td class=description>$desctext<br></td>\n</tr>");
+   #<a href=\"http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/*checkout*/dqsd/dqsd/searches/$datafile?rev=HEAD&content-type=text/xml\">$datafile</a></td>\n<td class=\"funcNamehelpboxCommands\">$link$name</td>\n<td class=description>$desctext<br></td>\n</tr>");
+}#foreach
 
 #sort by the categories
 @html=sort(@html);
@@ -135,15 +121,14 @@ $categorylink="";
 for ($t=0; $t<=scalar(@categories); $t++) {
    next if ($categories[$t]=~/^ *$/);
    $categorylink .="\n<a class=\"helpboxLink\" href=\"\#$categories[$t]\">$categories[$t]</a>";
-   }
+}
 print "<center><br><h3>DQSD Searches</h3><b>";
 print scalar(@html)." Total</b> <br>$categorylink";
 
 print "<table>\n<th style=background-color:#fcfcfc;></th><th>Category</th><th>File</th><th>Name</th><th>Description</th>";
 for ($t=1; $t<=scalar(@html); $t++) {
    print "\n<tr>\n<td class=\"body\">$t</td>\n$html[$t-1]";
-
-   }
+}
    
 #end html
 print qq{
