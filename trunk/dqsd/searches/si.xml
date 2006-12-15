@@ -1,7 +1,7 @@
 <search function="si">
   <name>Static Ice</name>
   <description>Find lowest price in Australia for computer components</description>
-  <category>Comparison Shopping</category>
+  <category>Shopping</category>
   <contributor>Nick Jenkins</contributor>
   <link>http://staticice.com.au/</link>
   <form name="f"
