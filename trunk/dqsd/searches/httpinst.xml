@@ -7,16 +7,18 @@
       <tr><td>/filename</td><td> - </td><td>Set the filename instead of deriving it from the url.</td></tr>
       <tr><td>/local</td><td> - </td><td>Put search in localsearches folder.</td></tr>
       <tr><td>/overwrite</td><td> - </td><td>Overwrite existing search unconditionally.</td></tr>
-      <tr><td>/update</td><td> - </td><td>Updates or installs search from cvs repository.</td></tr>
+      <tr><td>/update</td><td> - </td><td>Updates or installs search from repository.</td></tr>
+      <tr><td>/list</td><td> - </td><td>Display listing of current searches in repository.</td></tr>
     </table>
-    <div class="helpboxDescLabels">Example:</div>
+    <div class="helpboxDescLabels">Examples:</div>
     <table class="helpboxDescTable">
-  		<tr><td>httpinst http://www.example.com/dqsd/coolsearch.xml</td></tr>
-  		<tr><td>httpinst /local http://www.example.com/dqsd/localsearch.xml</td></tr>
-  		<tr><td>httpinst /o http://www.example.com/dqsd/whois.xml</td></tr>
-  		<tr><td>httpinst /f:test.xml /o http://www.example.com/dqsd/gensearch/?dynamically=1</td></tr>
-  		<tr><td>httpinst /up dlc</td></tr>
-  	</table>
+      <tr><td nowrap="nowrap">httpinst http://www.example.com/dqsd/coolsearch.xml</td></tr>
+      <tr><td nowrap="nowrap">httpinst /local http://www.example.com/dqsd/localsearch.xml</td></tr>
+      <tr><td nowrap="nowrap">httpinst /o http://www.example.com/dqsd/whois.xml</td></tr>
+      <tr><td nowrap="nowrap">httpinst /f:test.xml /o http://www.example.com/dqsd/gensearch/?dynamically=1</td></tr>
+      <tr><td nowrap="nowrap">httpinst /up dlc</td></tr>
+      <tr><td nowrap="nowrap">httpinst /list</td></tr>
+    </table>
   </description>
   <category>Functions</category>
   <contributor>Kim Gr&#228;sman</contributor>
@@ -27,52 +29,55 @@
       if (nullArgs("httpinst", q))
         return false;
 
-    	// Parse arguments
-    	var destinationFolder = 'searches';
-    	var forceOverwrite = false;
-		var filename = "";
+      // Parse arguments
+      var destinationFolder = 'searches';
+      var forceOverwrite = false;
+      var filename = "";
 
-    	var args = parseArgs(q, "filename, local, overwrite, update");
-    	for(var n = 0; n < args.switches.length; ++n)
-    	{
-    		switch(args.switches[n].name)
-    		{
-			case "update":
-			    var reqSearch = args.q;
-				args.q = "http://dqsd.cvs.sourceforge.net/*checkout*/dqsd/dqsd/searches/" + reqSearch + ".xml?content-type=text%2Fplain";
-				filename = reqSearch + ".xml";
-			    break;
-    		case "local":
-    			destinationFolder = "localsearches";
-    			break;
-    		case "overwrite":
-    			forceOverwrite = true;
-    			break;
-			case "filename":
-				filename = args.switches[n].value;
-	    		// Must end with ".xml"
-				if(!/\.xml$/.test(filename))
-    			{
-					alert("Not a valid search filename: " + filename);
-					return false;
-    			}		
-				break;
-    		} 
-    	}
+      var args = parseArgs(q, "filename, local, overwrite, update, list");
+      for(var n = 0; n < args.switches.length; ++n)
+      {
+        switch(args.switches[n].name)
+        {
+        case "update":
+          var reqSearch = args.q;
+          args.q = "http://dqsd.svn.sourceforge.net/viewvc/*checkout*/dqsd/trunk/dqsd/searches/" + reqSearch + ".xml";
+          filename = reqSearch + ".xml";
+          break;
+        case "local":
+          destinationFolder = "localsearches";
+          break;
+        case "overwrite":
+          forceOverwrite = true;
+          break;
+        case "filename":
+          filename = args.switches[n].value;
+          // Must end with ".xml"
+          if(!/\.xml$/.test(filename))
+          {
+            alert("Not a valid search filename: " + filename);
+            return false;
+          }   
+          break;
+        case "list":
+          openSearchWindow("http://dqsd.svn.sourceforge.net/viewvc/dqsd/trunk/dqsd/searches/?sortby=date#dirlist");
+          return false;
+        } 
+      }
 
-    	// Validate URL arg
-    	var searchUrl = isURL(args.q);
-    	if(!searchUrl)
-    	{
-    		alert(args.q + " does not appear to be a valid URL");
-    	}
-    	else
-    	{		
-    		// Call worker	
-    		installFromUrl(searchUrl, filename, destinationFolder, forceOverwrite);
-    	}
+      // Validate URL arg
+      var searchUrl = isURL(args.q);
+      if(!searchUrl)
+      {
+        alert(args.q + " does not appear to be a valid URL");
+      }
+      else
+      {   
+        // Call worker  
+        installFromUrl(searchUrl, filename, destinationFolder, forceOverwrite);
+      }
 
-    	return true;
+      return true;
     }
 
     // Reads XML file from searchUrl and writes it to destFolder, silently overwriting existing files if forceOverwrite is true
@@ -80,104 +85,104 @@
     {
       try
       { 
-    		// Parse out search filename
-			if (searchName == null || searchName == "") {
-				searchName = searchFilenameFromUrl(searchUrl);
-			}
-      	var outputFilePath = destFolder + "/" + searchName;
+        // Parse out search filename
+        if (searchName == null || searchName == "") {
+          searchName = searchFilenameFromUrl(searchUrl);
+        }
+        var outputFilePath = destFolder + "/" + searchName;
 
-      	// Request search xml from provided URL
-    	  var xmlHttp = new ActiveXObject("Microsoft.XmlHttp")
-    	  xmlHttp.open("GET", searchUrl, false);
-    	  xmlHttp.send();
+        // Request search xml from provided URL
+        var xmlHttp = new ActiveXObject("Microsoft.XmlHttp")
+        xmlHttp.open("GET", searchUrl, false);
+        xmlHttp.send();
+  
+        // if we don't get a http status of 200 abort
+        if (xmlHttp.status != 200) {
+            throw new Error(0, "Search failed to be retrieved from the specified url.\nHTTP status: " + xmlHttp.status);
+        }
 
-          // if we don't get a http status of 200 abort
-          if (xmlHttp.status != 200) {
-              throw new Error(0, "Search failed to be retrieved from the specified url.\nHTTP status: " + xmlHttp.status);
-		  }
-
-		  // validate that the contents starts with <search function=... and ends with </search>
-          var searchContent = xmlHttp.responseText;
-          var validContentsRegex = /^\s*\<search\s+functio.*?\>/m;
-          if (!validContentsRegex.test(searchContent)) {
-              throw new Error(0, "Search is not well-formed.\nIt should begin with a <search function=...>");
-          }
-
-    		// Verify that response is well-formed
-    		var xmlDom = xmlHttp.responseXml;
-    	  if(xmlDom.parseError.errorCode != 0)
-    	  {
-    	    throw new Error(0, "Search is not well-formed.\nParse error: " + xmlDom.parseError.reason + " line: " + xmlDom.parseError.line.toString() + ", col: " + xmlDom.parseError.linepos.toString() + "\n" + xmlDom.parseError.srcText);
-    	  }
+        // validate that the contents starts with <search function=... and ends with </search>
+        var searchContent = xmlHttp.responseText;
+        var validContentsRegex = /^\s*\<search\s+functio.*?\>/m;
+        if (!validContentsRegex.test(searchContent)) {
+          throw new Error(0, "Search is not well-formed.\nIt should begin with a <search function=...>");
+        }
+  
+        // Verify that response is well-formed
+        var xmlDom = xmlHttp.responseXml;
+        if(xmlDom.parseError.errorCode != 0)
+        {
+          throw new Error(0, "Search is not well-formed.\nParse error: " + xmlDom.parseError.reason + " line: " + xmlDom.parseError.line.toString() + ", col: " + xmlDom.parseError.linepos.toString() + "\n" + xmlDom.parseError.srcText);
+        }
 
         var cancelInstall = false;
-    		if(!forceOverwrite)
-    		{
-    			// Check if file already exists
-    			if(fileExists(outputFilePath))
-    			{
-    				cancelInstall = !confirm("There's already a search called " + searchName + " in your " + destFolder + " folder. Do you wish to overwrite it?");
-    			}
-    		}
+        if(!forceOverwrite)
+        {
+          // Check if file already exists
+          if(fileExists(outputFilePath))
+          {
+            cancelInstall = !confirm("There's already a search called " + searchName + " in your " + destFolder + " folder. Do you wish to overwrite it?");
+          }
+        }
 
-    		if(!cancelInstall)
-    		{
-    			// Save xml file to destination directory
-    			writeFile(outputFilePath, xmlHttp.responseText);
+        if(!cancelInstall)
+        {
+          // Save xml file to destination directory
+          writeFile(outputFilePath, xmlHttp.responseText);
 
-    			// Tell the user all went well, and reload if asked to
-    			if(confirm("Successfully installed search " + searchName + ".\n\nWould you like to reload the toolbar?"))
-    			{
-    				reload();		
-    			}
-    		}
+          // Tell the user all went well, and reload if asked to
+          if(confirm("Successfully installed search " + searchName + ".\n\nWould you like to reload the toolbar?"))
+          {
+            reload();   
+          }
+        }
       }
       catch(e)
       {
-    		alert("Unable to install search from " + searchUrl + ".\nError message: " + e.message);
+        alert("Unable to install search from " + searchUrl + ".\nError message: " + e.message);
       }
     }
 
     // Gets the search filename from an URL (everything after the last slash, must end with .xml)
     function searchFilenameFromUrl(searchUrl)
     {
-    	var searchName = "";
+      var searchName = "";
 
-    	try
-    	{
-    		// Parse out search filename
-    		for(var p = searchUrl.length - 1; p > 0; --p)
-    		{
-    			if(searchUrl.charAt(p) == '/')
-    			{
-    				searchName = searchUrl.substr(p + 1, searchUrl.length - p);
-    				break;
-    			}
-    		}
+      try
+      {
+        // Parse out search filename
+        for(var p = searchUrl.length - 1; p > 0; --p)
+        {
+          if(searchUrl.charAt(p) == '/')
+          {
+            searchName = searchUrl.substr(p + 1, searchUrl.length - p);
+            break;
+          }
+        }
 
-    		// May not be empty
-    		if(searchName == "")
-    		{
-    			throw new Error(0, "Failed to find search filename in URL: " + searchUrl);
-    		}
+        // May not be empty
+        if(searchName == "")
+        {
+          throw new Error(0, "Failed to find search filename in URL: " + searchUrl);
+        }
 
-    		// Must end with ".xml"
-    		if(!/\.xml$/.test(searchName))
-    		{
-    			throw new Error(0, "Not a valid search filename: " + searchName);
-    		}		
-    	}
-    	catch(e)
-    	{
-    		throw e;
-    	}
+        // Must end with ".xml"
+        if(!/\.xml$/.test(searchName))
+        {
+          throw new Error(0, "Not a valid search filename: " + searchName);
+        }   
+      }
+      catch(e)
+      {
+        throw e;
+      }
 
-    	return searchName;
+      return searchName;
     }
   ]]></script>
 
   <copyright>
-	Copyright (c) 2003 Kim Gr&#228;sman
-	Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  Copyright (c) 2003 Kim Gr&#228;sman
+  Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
   </copyright>
 </search>

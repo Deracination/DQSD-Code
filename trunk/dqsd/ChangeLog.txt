@@ -2,6 +2,7 @@
 
 Modified Searches
 * wmd - Fixed to work with site changes (Glenn Carr)
+* httpinst - Updated repository url; Added /list option to display search repository listing (Glenn Carr)
 
 -- What's new for 4.0.0.2 (Dec 1, 2006)
 
