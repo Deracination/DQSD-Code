@@ -96,7 +96,7 @@
       var windowW = 500;
 
       var sBody = xmlHttp.responseText.replace( /[\r\n]/gi, "" );
-      var re = /(<h2>.+<\/h2>.*([^>]+)\s+entr.+found for.+Main Entry:.+)<img src="\/images\/pixt\.gif".+More Information on/mig;
+      var re = /(<h1>.+<\/h1>.*([^>]+)\s+entr.+found for.+Main Entry:.+)/mig;
       var results = re.exec( sBody );
       if ( results != null )
       {
@@ -133,9 +133,10 @@
           html = html.replace( /(To select an entry, click on it\..*)<form/, '$1' + optionHtml + '<form' );
         }
         html = html.replace( /For more results.*click here<\/a>\./gi, '' );
-        html = html.replace( /<h2>/i, '<h2 style="font-size: 16px">' );
+        html = html.replace( /<h1>/i, '<h1 style="font-size: 16px">' );
         html = html.replace( new RegExp( String.fromCharCode(65535), "g" ), '-' ); // weirdness
         html = html.replace( /<font size="-1">([^<]+)<\/font>/gi, "$1" );
+        html = html.replace( /<div class="result_ad healthline".*/gi, '' );
         html = html.replace( /<form.*<\/form>/ig, '' );
         html = html.replace( /(<a\s+)href=("http:\/\/www.m-w.com\/dictionary\/([^"]+)")([^>]*>)/gi, '$1 href="" onMouseUp=parent.mwdGoToWord("$3"); $4' );
         html = html.replace( /<a href="javascript:popWin\('\/cgi-bin\/(audio.pl[^'>]+)'\)">/gi, '<a href="" onMouseUp=parent.openSearchWindow("http://www.m-w.com/cgi-bin/$1");>' );
