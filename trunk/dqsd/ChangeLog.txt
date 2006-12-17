@@ -1,3 +1,8 @@
+-- What's new for x.x.x.x (mmm d, yyyy)
+
+Modified Searches
+* wmd - Fixed to work with site changes (Glenn Carr)
+
 -- What's new for 4.0.0.2 (Dec 1, 2006)
 
 Enhancements
