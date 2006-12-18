@@ -3,6 +3,7 @@
 Modified Searches
 * wmd - Fixed to work with site changes (Glenn Carr)
 * httpinst - Updated repository url; Added /list option to display search repository listing (Glenn Carr)
+* sf - Added /svn to SourceForge search to display browseable SVN repository (Glenn Carr)
 
 Enhancements
 * Added Vista bitmaps and CSS files to allow a better Vista look/theme for the toolbar (Charlie Russel)
