@@ -1,0 +1,385 @@
+/* localsearch.css
+*
+* Add stylesheet preferences here to keep them from being
+* overwritten on upgrades.
+* 
+* Use search.css as a guide, copying settings from that
+* file to this file, and then modifying them to suit your
+* personal taste.
+*/
+/*
+ * modified by Charlie Russel for Vista defaults 17 December, 2006
+ *
+ * $Revision: 1.2.1
+ * $Date: 2006/12/17 00:00:00
+ *
+*/
+
+/*
+Styles for the search field
+*/
+body 
+{
+ margin: 0px;
+ border: 0;
+ padding: 0;
+ // background-color: threedface;
+ background-color: #303132;
+}
+div#delaymsg
+{
+ font: menu;
+ text-align: center;
+}
+td, th
+{
+ font: menu;
+}
+.txtfld, .clock
+{
+/* font : menu;
+ */
+ font : calibri;
+ background-color: #303132;
+ color: windowtext;
+ border-style: inset;
+ border-width:0px;
+ padding-top:7px;
+ padding-left:2px;
+ padding-right:5px;
+ padding-bottom:0px;
+ margin:0px;
+ position:absolute;
+ overflow:hidden;
+ word-break:break-all;
+}
+.clock
+{
+ background-color: menu;
+ border-width:3px;
+ padding-top:4px;
+ color: windowtext;
+ cursor:hand;
+ text-align:right;
+}
+*/
+.gobutton, .mogobutton, .mdgobutton
+{
+ font : menu;
+ padding-bottom:1px;
+ padding-top:1px;
+ padding-right:1px;
+ padding-left:1px;
+ border:1px;
+ border-style:solid;
+ border-color: #707172;
+ background-color:#303132;
+ color:red;
+ margin:1px;
+ position:absolute;
+}
+.mogobutton
+{
+ border-style:outset;
+ border-color: #707172;
+}
+.mdgobutton
+{
+ padding-bottom:0px;
+ padding-top:2px;
+ padding-right:0px;
+ padding-left:2px;
+ border-style:inset;
+ border-color: #707172;
+}
+
+
+/*
+Styles for the calendar
+*/
+.cal
+{
+  border:2px;
+  border-style:outset;
+}
+.calnavmonth, .calnavmonthhigh, .calnavyear, .calnavyearhigh
+{
+  font-weight:bold;
+  border-width:0;
+  border-style:solid;
+  border-color:menu;
+  color:red;
+}
+.calnavyear, .calnavyearhigh
+{
+  color:firebrick;
+}
+.calmonth, .calmonthhigh
+{
+  font-weight:bold;
+}
+.caleventday, .caleventdayhigh, .localcaleventday, .localcaleventdayhigh
+{
+  color:red;
+  font-weight:bold;
+}
+.caltodayevent, .caltodayeventhigh
+{
+  color:red;
+  background-color:window;
+  font-weight:bold;
+  border-width:0;
+  border-style:solid;
+  border-color:threedshadow;
+}
+.caltoday, .caltodayhigh
+{
+  background-color:gray;
+  font-weight:bold;
+  border-width:1;
+  border-style:solid;
+  border-color:threedshadow;
+}
+.calgray, .calgrayhigh
+{
+  color:graytext;
+}
+.caldow
+{
+  text-align:center;
+}
+.calmonth, .calnavmonth, .calnavyear, .calday, .caleventday, .caltodayevent, .caltoday, .calgray, .localcaleventday
+{
+  text-align:center;
+  cursor:hand;
+}
+.calmonthhigh, .calnavmonthhigh, .calnavyearhigh, .caldayhigh, .caleventdayhigh, .caltodayeventhigh, .caltodayhigh, .calgrayhigh, .localcaleventday, .localcaleventdayhigh
+{
+  cursor:hand;
+  background-color: #303132;
+  color:black;
+  text-align:center;
+}
+.calmonth
+{
+  cursor:default;
+}
+
+
+/*
+Styles for the pop-up menu
+*/
+.menuCommands
+{
+  padding-left:20px;
+}
+.menuAlias
+{
+  padding-left:10px;
+  padding-right:10px;
+  color:red;
+}
+.menuRow, .menuRowHigh
+{
+  height:18px;
+  background-color:menu;
+  color:silver;
+  cursor:hand;
+}
+.menuRowHigh
+{
+  background-color:highlight;
+  color:highlighttext;
+}
+.menuSeparator
+{
+  height:1px;
+  padding-top:0px;
+  padding-bottom:0px;
+  padding-left:4px;
+  padding-right:4px;
+}
+.menuHR
+{
+  height:2px;
+}
+
+
+/*
+Styles for the help box
+*/
+.helpboxCategoryExpander, .helpboxCategoryExpanderSign
+{
+  behavior: url(categoryExpander.htc);
+  vertical-align:top;
+}
+.helpboxCategoryExpander, .helpboxCategoryExpanderSign,
+{
+  cursor:hand;
+  font-size: 9px;
+  font-weight:normal;
+  color: blue;
+}
+.helpboxCategoryExpanderSign
+{
+  color: silver;
+  font-family: "Courier New", Courier, monospace;
+}
+.helpboxCategory, .helpboxCategoryTop, .helpboxCategoryCount, .helpboxCategoryExpanderRow
+{
+  font:menu;
+  background-color:highlight;
+}
+.helpboxCategory
+{
+  font-weight:bold;
+  color:white;
+}
+.helpboxCategoryTop, .helpboxCategoryCount
+{
+  color:silver;
+  font-size: 10px;
+  font-weight:normal;
+}
+.helpboxCategoryDisabledCount
+{
+  color: #cFc4e4;
+  font-size: 10px;
+  font-weight:normal;
+}
+.helpboxAlias
+{
+  color:buttonhighlight;
+}
+.helpbox
+{
+  font:menu;
+}
+.helpboxDescriptions, .helpboxToggle
+{
+  font:menu;
+  background-color:window;
+  width:99%;
+  vertical-align:top;
+}
+.helpboxToggle
+{
+  width:1px;
+}
+.helpboxCommands
+{
+  font-weight:bold;
+  background-color:highlight;
+  color:white;
+  vertical-align:top;
+}
+.helpboxDescLabels
+{
+  font-weight:bold;
+  color:black;
+}
+TR.disabledSearch TD
+,TR.disabledSearch TD TABLE.helpboxDescTable TD
+,TR.disabledSearch .helpboxDescLabels
+,TR.disabledSearch A.helpboxLink
+,TR.disabledSearch A.helpboxLink:VISITED
+,TR.disabledSearch A.helpboxLink:ACTIVE
+,TR.disabledSearch .helpboxSearchName
+,TR.disabledSearch A.helpboxAlias
+,TR.disabledSearch A.helpboxCommandLink
+,TR.disabledSearch A.helpboxCommandLink:ACTIVE
+{
+  background: scrollbar;
+  color: graytext;
+}
+TR.localSearch .helpboxCommands
+{
+  background-color:#008000;
+}
+
+TABLE.helpboxDescTable
+{
+  border:0px;
+  border-collapse:collapse;
+  border-spacing:0;
+}
+TABLE.helpboxDescTable TD
+{
+  color:black;
+  vertical-align:top;
+  padding:0px;
+  padding-left:6px;
+  padding-right:6px;
+}
+A.helpboxLink:ACTIVE, A.helpboxLink:LINK, A.helpboxLink:VISITED, A.helpboxLink:HOVER, .helpboxSearchName
+{
+  color:silver;
+}
+A.helpboxLinkTop:ACTIVE,  A.helpboxLinkTop:LINK, A.helpboxLinkTop:VISITED, A.helpboxLinkTop:HOVER
+{
+  color:gray;
+}
+A.helpboxLinkJump:ACTIVE,  A.helpboxLinkJump:LINK, A.helpboxLinkJump:VISITED, A.helpboxLinkJump:HOVER
+{
+  color:silver;
+}
+A.helpboxCommandLink:ACTIVE, A.helpboxCommandLink:LINK, A.helpboxCommandLink:VISITED, A.helpboxCommandLink:HOVER
+{
+  color:white;
+}
+A.helpboxLinkTop:HOVER, A.helpboxLink:HOVER, A.helpboxLinkJump:HOVER, A.helpboxCommandLink:HOVER
+{
+  color:red
+}
+
+TABLE#keybindings
+{
+  margin-left: 1em;
+  border: 0px;
+  margin-top: 5px;
+}
+
+TABLE#keybindings TD
+{
+  vertical-align: top;
+  border: 1px inset;
+  padding: 2px 2px 2px 2px;
+}
+
+TABLE#keybindings TD.keyname
+{
+  white-space: nowrap;
+}
+
+TABLE#keybindings TH
+{
+  border: 1px outset;
+  font-weight: bold;
+}
+
+
+/* STYLES FOR ORIGINAL HELP BOX :: Uncomment these styles to make the help box look like the original help box */
+/*
+.helpboxDescriptions
+{
+  background-color:lightgreen;
+}
+.helpboxCommands, .helpboxCategory, .helpboxCategoryTop, .helpboxCategoryCount, .helpboxCategoryExpanderRow
+{
+  background-color:skyblue;
+  color:black;
+}
+.helpboxAlias
+{
+  color:black;
+}
+A.helpboxLinkTop:ACTIVE,  A.helpboxLinkTop:LINK, A.helpboxLinkTop:VISITED, A.helpboxLinkTop:HOVER, .helpboxCategoryTop, .helpboxCategoryExpanderSign
+{
+  color:blue;
+}
+A.helpboxLinkTop:HOVER, A.helpboxLink:HOVER, A.helpboxLinkJump:HOVER
+{
+  color:red
+}
+*/
+/* END STYLES FOR ORIGINAL HELP BOX */
