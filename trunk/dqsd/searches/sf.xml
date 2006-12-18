@@ -5,6 +5,7 @@
     <div class="helpboxDescLabels">Switches:</div>
     <table class="helpboxDescTable">
       <tr><td>/cvs</td><td> - </td><td>Browse project's CVS repository</td></tr>
+      <tr><td>/svn</td><td> - </td><td>Browse project's SVN repository</td></tr>
       <tr><td>/dloads</td><td> - </td><td>Browse project's downloadable files</td></tr>
       <tr><td>/exact</td><td> - </td><td>Require all words in when searching</td></tr>
       <tr><td>/list[:admin]</td><td> - </td><td>Display list info or admin page</td></tr>
@@ -18,8 +19,9 @@
       <tr><td>sf itext java /exact</td></tr>
       <tr><td>sf /proj dqsd</td></tr>
       <tr><td>sf /cvs dqsd</td></tr>
+      <tr><td>sf /svn dqsd</td></tr>
       <tr><td>sf /list dqsd-users</td></tr>
-      <tr><td>sf /status cvs</td></tr>
+      <tr><td>sf /status</td></tr>
     </table>
   </description>
   <category>Computers<category>Programming</category></category>
@@ -41,7 +43,7 @@
         return false;
 
       var exact = false;
-      var args = parseArgs(q, "dloads, exact, new, project, cvs, list, status");
+      var args = parseArgs(q, "dloads, exact, new, project, cvs, svn, list, status");
       if( args.switches.length == 1 )
       {
         switch( args.switches[0].name )
@@ -56,6 +58,8 @@
             openSearchWindow("http://sourceforge.net/projects/" + args.q); return false;
           case "cvs":
             openSearchWindow("http://" + args.q + ".cvs.sourceforge.net/" + args.q); return false;
+          case "svn":
+            openSearchWindow("http://" + args.q + ".svn.sourceforge.net/"); return false;
           case "list":
             var listtype = args.switch_val["list"].toLowerCase();
             openSearchWindow("https://lists.sourceforge.net/lists/" + ( listtype.length && ( listtype == "admin".substr(0, listtype.length) ) ? "admin/" : "listinfo/" ) + args.q); return false;
