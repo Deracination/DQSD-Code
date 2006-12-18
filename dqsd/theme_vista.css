@@ -1,0 +1,93 @@
+/* localsearch.css
+*
+* Add stylesheet preferences here to keep them from being
+* overwritten on upgrades.
+* 
+* Use search.css as a guide, copying settings from that
+* file to this file, and then modifying them to suit your
+* personal taste.
+*/
+
+body
+{
+ background: #BBBBBB url(vistatoolbar1_vista.bmp) repeat-x fixed top;
+}
+
+.clock
+{
+ background: transparent repeat-x fixed bottom;
+ color: #f0f1f2;
+ font-weight: bold;
+ border-width:3px;
+ padding-top:4px;
+ padding-left:4px;
+ padding-right:4px;
+ padding-bottom:0px;
+}
+
+.txtfld
+{
+ background: #A0A0A0 url(vistatoolbar2_vista.bmp) repeat-x fixed top;
+ color: #010203;
+ border-width:0px;
+ padding-top:7px;
+ padding-left:4px;
+ padding-right:4px;
+ padding-bottom:1px;
+}
+
+.gobutton, .mogobutton, .mdgobutton
+{
+ background: transparent repeat-x fixed bottom;
+ border:0px;
+ color: silver;
+ position:absolute;
+}
+
+
+/*
+Styles for the calendar
+*/
+.cal
+{
+ color: #000102;
+ background-color:#303132;
+}
+.calnavmonth, .calnavmonthhigh, .calnavyear, .calnavyearhigh
+{
+  padding:1px;
+  border-width:0;
+}
+.caltodayevent, .caltodayeventhigh
+{
+  color: #707172;
+  background-color:#000000;
+  border-width:0;
+}
+.caltoday, .caltodayhigh
+{
+  background-color:#ffffff;
+  border-width:0px;
+}
+.caleventday, .caleventdayhigh
+{   
+  font-weight:bold;
+  color:#303132;
+}
+.calgray, .helpboxCategoryExpanderSign, .helpboxCategoryCount, .helpboxCategoryTop, .helpboxLinkTop
+{
+    color:#303132;
+}
+.helpboxLinkTop,
+{
+    color:#0000b0;
+}
+/*
+Styles for the help box
+*/
+.helpboxBody
+{
+  background: window;
+}
+
+IMG#banner { cursor: hand; margin-top: 7px; }

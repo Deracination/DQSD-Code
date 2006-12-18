@@ -4,6 +4,9 @@ Modified Searches
 * wmd - Fixed to work with site changes (Glenn Carr)
 * httpinst - Updated repository url; Added /list option to display search repository listing (Glenn Carr)
 
+Enhancements
+* Added Vista bitmaps and CSS files to allow a better Vista look/theme for the toolbar (Charlie Russel)
+
 -- What's new for 4.0.0.2 (Dec 1, 2006)
 
 Enhancements
