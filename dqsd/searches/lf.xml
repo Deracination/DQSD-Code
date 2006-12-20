@@ -1,15 +1,9 @@
 <search function="lf">
   <name>lyricsfind.com</name>
-  <description>Search for song lyrics.  Default search is by title.<br/><b>NOTE:</b> The search engine remembers your last used search type, so the switches may not always be necessary.
-    <div class="helpboxDescLabels">Switches:</div>
+  <description>Search for song lyrics by title.
+    <div class="helpboxDescLabels">Example:</div>
     <table class="helpboxDescTable">
-      <tr><td>/title</td><td> - </td><td>Search by song title (Default)</td></tr>
-      <tr><td>/artist</td><td> - </td><td>Search by artist name</td></tr>
-    </table>
-    <div class="helpboxDescLabels">Examples:</div>
-    <table class="helpboxDescTable">
-      <tr><td>lf fight the power /title</td></tr>
-      <tr><td>lf public enemy /artist</td></tr>
+      <tr><td>lf fight the power</td></tr>
     </table>
   </description>
   <category>Entertainment</category>
@@ -17,9 +11,8 @@
   <contributor>Steven J. Heil</contributor>
   <email>sjheil_at_hotmail_dot_com</email>
   <form name="lff"
-        action="http://www.lyricsfind.com/list.php"
+        action="http://www.lyricsfind.com/search.php"
         method="get">
-    <input type="hidden" name="type" value="title"/>
     <input type="hidden" name="q" value=""/>
   </form>
   <script><![CDATA[
@@ -33,19 +26,6 @@
       if( q == "" )
         openSearchWindow("http://www.lyricsfind.com/");
 
-      else if( args.switches.length == 1 )
-      {
-        switch( args.switches[0].name )
-        {
-          case "artist":
-            document.lff.type.value = "artist"; break;
-          case "title":
-          default:
-            document.lff.type.value = "title"; break;
-        }
-        document.lff.q.value = args.q;
-        submitForm(lff);
-      }
       else if( args.switches.length > 1 )
         nullArgs("lf","?");
       else
