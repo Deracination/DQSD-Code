@@ -1,0 +1,63 @@
+<search function="tfd">
+  <name>The Free Dictionary</name>
+  <category>Reference</category>
+  <contributor>Glenn Carr</contributor>
+  <link>http://www.thefreedictionary.com/</link>
+  <email>glenn at glenncarr dot com</email>
+  <description>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td></td></tr>
+      <tr><td></td></tr>
+    </table>
+  </description>
+  <form name="tfdf"
+        method="get"
+        action="http://www.thefreedictionary.com/_/search.aspx">
+    <input type="hidden" name="tab" value="1" />
+
+    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
+
+    <input type="hidden" name="Word" value="" />
+    <input type="hidden" name="SearchBy" value="0" />
+    <COMMENT>
+      The input element above, "SearchBy" was a set of radio buttons with the following options...
+      "0", "4", "9", "8", "6", "7"
+    </COMMENT>
+
+    <input type="hidden" name="TFDBy" value="0" />
+    <COMMENT>
+      The input element above, "TFDBy" was a set of radio buttons with the following options...
+      "0", "1", "2", "3"
+    </COMMENT>
+
+  </form>
+  <script><![CDATA[
+    function tfd(q)
+    {
+      if( nullArgs("tfd", q) )
+        return;
+
+      // FORM variables for tfdf
+      //document.tfdf.tab.value = "";
+
+      // The wizard assigned the search string to this form field value because
+      // this field was the active element when the search file was generated.
+      // Change this to args.q if the search string is parsed with parseArgs.
+      document.tfdf.Word.value = q;
+      //document.tfdf.SearchBy.value = "";
+      //document.tfdf.TFDBy.value = "";
+
+      submitForm(tfdf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 12/21/06 at 16:21:37
+    by Dave's Quick Search Deskbar Search Wizard version 1.0.1,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>
