@@ -1,15 +1,19 @@
 -- What's new for x.x.x.x (mmm d, yyyy)
 
-Modified Searches
-* sf - Added /svn to SourceForge search to display browseable SVN repository (Glenn Carr)
+Enhancements
+* Added Vista bitmaps and CSS files to allow a better Vista look/theme for the toolbar (Charlie Russel)
 
 Bug Fixes
 * wmd - Fixed to work with site changes (Glenn Carr)
 * httpinst - Updated repository url; Added /list option to display search repository listing (Glenn Carr)
 * lf - Fixed to with with site changes (Glenn Carr)
 
-Enhancements
-* Added Vista bitmaps and CSS files to allow a better Vista look/theme for the toolbar (Charlie Russel)
+Modified Searches
+* sf - Added /svn to SourceForge search to display browseable SVN repository (Glenn Carr)
+* qsfreq - Added /remove and /status options.  /remove removes one or more specified searches.  /status displays which searches are enabled and disabled. (Glenn Carr)
+
+New Searches
+* tfd - Simple TheFreeDictionary.com search (Glenn Carr)
 
 -- What's new for 4.0.0.2 (Dec 1, 2006)
 
