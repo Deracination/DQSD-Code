@@ -48,38 +48,22 @@
   <form name="abef"
         method="post"
         action="http://www.abebooks.com/servlet/SearchResults">
-    
-    <!-- <comment>
-      Including a <comment> tag without the HTML comment string will
-      make the tag's value text appear in the blank form that is 
-      displayed before the website returns content
-    </comment> -->
-        
-    <comment>Searching abebooks.com...</comment>
-    
-    
-    <!-- <comment>
-      Defaults for these fields are set in abe() below to make sure we don't 
-      inherit previous search values 
-    </comment> -->
-    
-    <input type="hidden" name="ph" value="" />      <!-- <comment>Page handler? 2=go to results, ?other=go to advanced search page with fields filled as per POST data</comment> -->
-    <input type="hidden" name="an" value="" />      <!-- <comment>Author</comment> -->
-    <input type="hidden" name="tn" value="" />      <!-- <comment>Title</comment> -->
-    <input type="hidden" name="pn" value="" />      <!-- <comment>Publisher</comment> -->
-    <input type="hidden" name="kn" value="" />      <!-- <comment>Keywords</comment> -->
-    <input type="hidden" name="isbn" value="" />    <!-- <comment>ISBN</comment> -->
-    <input type="hidden" name="cty" value="" />     <!-- <comment>Three-letter ISO country code, or two-letter US-state code</comment> -->
-    <input type="hidden" name="bi" value="" />      <!-- <comment>Type of binding. ""=any, "H"=hardcover, "S"=softcover)</comment> -->
-    <input type="hidden" name="fe" value="" />      <!-- <comment>First edition</comment> -->
-    <input type="hidden" name="sgnd" value="" />    <!-- <comment>Signed</comment> -->
-    <input type="hidden" name="dj" value="" />      <!-- <comment>Dustjacket</comment> -->
-    <input type="hidden" name="prl" value="" />     <!-- <comment>Minimum price</comment> -->
-    <input type="hidden" name="prh" value="" />     <!-- <comment>Maximum price</comment> -->
-    <input type="hidden" name="ds" value="" />      <!-- <comment>Results per page. 10, 30 or 50</comment> -->
-    <input type="hidden" name="bx" value="" />      <!-- <comment>Boolean searching</comment> -->
-    <input type="hidden" name="sortby" value="" />  <!-- <comment>Sort criteria:  0=newest, 1=highest price, 2=lowest price, 4=author z-a, 5=author a-z, 6=title z-a, 7=title a-z  </comment> -->
-  
+    <input type="hidden" name="ph" value="" />
+    <input type="hidden" name="an" value="" />
+    <input type="hidden" name="tn" value="" />
+    <input type="hidden" name="pn" value="" />
+    <input type="hidden" name="kn" value="" />
+    <input type="hidden" name="isbn" value="" />
+    <input type="hidden" name="cty" value="" />
+    <input type="hidden" name="bi" value="" />
+    <input type="hidden" name="fe" value="" />
+    <input type="hidden" name="sgnd" value="" />
+    <input type="hidden" name="dj" value="" />
+    <input type="hidden" name="prl" value="" />
+    <input type="hidden" name="prh" value="" />
+    <input type="hidden" name="ds" value="" />
+    <input type="hidden" name="bx" value="" />
+    <input type="hidden" name="sortby" value="" />  
   </form>
   
   <script><![CDATA[

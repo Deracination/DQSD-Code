@@ -53,10 +53,6 @@
   <form name="setiqcf"
         method="post">
     <input type="hidden" name="Connect"/>
-    <!-- for future other options ?
-      <input type="hidden" name="StopService" value='Stop SetiQueue Service'>
-      <input type="hidden" name="Exit" value='Terminate Program'>
-    -->
   </form>
 
   <form name="setiqlf"
@@ -104,7 +100,7 @@
             case 1:   duration = "1 hour"; break;
             case 60:  duration = "1 hour"; break;
             case 2:   duration = "2 hours"; break;
-            case 120: duration = "2 hour3"; break;
+            case 120: duration = "2 hours"; break;
             case 4:   duration = "4 hours"; break;
             case 240: duration = "4 hours"; break;
             case "": duration = "30 min"; break;
