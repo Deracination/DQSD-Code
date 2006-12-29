@@ -1,10 +1,7 @@
-<!--
-   This file contains a local content for Australia - News
-   - Steve Lin [stephen@intense.com.au] (15/7/2002)
--->
-
 <search function="newsau">
   <name>news.com.au</name>
+	<contributor>Steve Lin</contributor>
+	<email>stephen@intense.com.au</email>
   <description>
     Search for news topics at news.com.au plus links to all other News Corp newspapers.
     <div class="helpboxDescLabels">Example:</div>
@@ -15,13 +12,11 @@
   <category>News</category>
   <link>http://www.news.com.au/</link>
 
-
   <form name="newsf"
         action="http://search.news.com.au/search"
         method="get">
     <input type="hidden" name="q" value=""/>
   </form>
-
 
   <script><![CDATA[
     function newsau(p)
