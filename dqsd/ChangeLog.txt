@@ -14,6 +14,7 @@ Modified Searches
 
 New Searches
 * tfd - Simple TheFreeDictionary.com search (Glenn Carr)
+* gt - Ultimate Guitar Tabs Archive search (Glenn Carr)
 
 -- What's new for 4.0.0.2 (Dec 1, 2006)
 
