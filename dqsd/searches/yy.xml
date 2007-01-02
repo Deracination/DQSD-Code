@@ -54,8 +54,7 @@
   </form>
   <script><![CDATA[
     function yy(q){
-	if (q=="?"){
-	  nullArgs("yy",q);
+	if (nullArgs("yy",q)){
 	  return false;
 	}
 	var yyids = yyid;

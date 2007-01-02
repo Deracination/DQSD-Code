@@ -9,6 +9,7 @@
       <tr><td>/overwrite</td><td> - </td><td>Overwrite existing search unconditionally.</td></tr>
       <tr><td>/update</td><td> - </td><td>Updates or installs search from repository.</td></tr>
       <tr><td>/list</td><td> - </td><td>Display listing of current searches in repository.</td></tr>
+      <tr><td>/new_searches</td><td> - </td><td>Display listing of searches in repository that are more recent than currently available.</td></tr>
     </table>
     <div class="helpboxDescLabels">Examples:</div>
     <table class="helpboxDescTable">
@@ -34,7 +35,7 @@
       var forceOverwrite = false;
       var filename = "";
 
-      var args = parseArgs(q, "filename, local, overwrite, update, list");
+      var args = parseArgs(q, "filename, local, overwrite, update, list, new_searches");
       for(var n = 0; n < args.switches.length; ++n)
       {
         switch(args.switches[n].name)
@@ -62,6 +63,9 @@
         case "list":
           openSearchWindow("http://dqsd.svn.sourceforge.net/viewvc/dqsd/trunk/dqsd/searches/?sortby=date#dirlist");
           return false;
+        case "new_searches":
+          httpinst_displayNewSearches();
+          return false;
         } 
       }
 
@@ -78,6 +82,48 @@
       }
 
       return true;
+    }
+    
+    function httpinst_displayNewSearches()
+    {
+      // TODO: This doesn't work correctly yet
+      try
+      {
+        // Request xml from provided URL
+        var xmlHttp = new ActiveXObject("Microsoft.XmlHttp")
+        xmlHttp.open("GET", "http://www.dqsd.net/tools/svnlist/svnlist_raw.pl", false);
+        xmlHttp.send();
+        if ( xmlHttp.status != 200 )
+            throw new Error(0, "Search failed to be retrieved from the specified url.\nHTTP status: " + xmlHttp.status);
+            
+        var installedSearches = new Object();
+        var nameNodes = xmlHttp.responseXML.selectNodes( "/lists/list/entry/name" );
+        for ( var i = 0; i < nameNodes.length; i++ )
+        {
+          var n = nameNodes[ i ].text.replace( /\.xml/, '' );
+          installedSearches[ n ] = false;
+        }
+        
+        var fileSearches = getFiles( "searches\\*.xml" ).split('\n').concat( getFiles("searches\\*.disabled" ).split('\n') ).sort();
+        for ( var i = 0; i < fileSearches.length; i++ )
+        {
+          var n = nameNodes[ i ].text.replace( /\.(xml|disabled)/, '' );
+          installedSearches[ n ] = true;
+        }
+
+        var uninstalled = new Array();
+        for ( var i = 0; i < fileSearches.length; i++ )
+        {
+          var n = fileSearches[ i ].replace( /\.(xml|disabled)/, '' )
+          if ( !installedSearches[ n ] )
+            uninstalled.push( n );
+        }
+        alert( 'The following searches are available but not installed: ' + uninstalled.join( ',' ) );
+      }
+      catch ( e )
+      {
+        alert("Unable to install retrieve search listing: " + e.message);
+      }
     }
 
     // Reads XML file from searchUrl and writes it to destFolder, silently overwriting existing files if forceOverwrite is true
