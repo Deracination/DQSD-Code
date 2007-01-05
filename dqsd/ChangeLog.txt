@@ -7,7 +7,8 @@ Bug Fixes
 * wmd - Fixed to work with site changes (Glenn Carr)
 * httpinst - Updated repository url; Added /list option to display search repository listing (Glenn Carr)
 * lf - Fixed to with with site changes (Glenn Carr)
-* yy - fix to handle no arguments (Glenn Carr)
+* yy - Fixed to handle no arguments (Glenn Carr)
+* msk - Fixed due to site changes (Glenn Carr)
 
 Modified Searches
 * sf - Added /svn to SourceForge search to display browseable SVN repository (Glenn Carr)
