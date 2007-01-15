@@ -428,7 +428,7 @@ SectionEnd
 
 ; uninstall stuff
 
-UninstallText "Click next to uninstall ${DQSD_TITLE}."
+UninstallText "Click Uninstall to remove ${DQSD_TITLE}."
 UninstallIcon search.ico
 
 ; special uninstall section.
