@@ -2,6 +2,8 @@
 
 Enhancements
 * Added Vista bitmaps and CSS files to allow a better Vista look/theme for the toolbar (Charlie Russel)
+* Holidays for Sweden for 2007 (Kim Gräsman)
+* Fixed "Click next" text in uninstaller (Charlie Russel)
 
 Bug Fixes
 * wmd - Fixed to work with site changes (Glenn Carr)
