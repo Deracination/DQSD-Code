@@ -553,11 +553,11 @@
                  if (month<10) month= '0'+month;
 
                  //special handling for the calvinandhobbes comic.. It displays for year 1993 in 2004
-                 if (args.switches[i].name == "calvinandhobbes") {
-                    var year_offset = -11;
-                    year += year_offset;
-                    subyear = year % 100; 
-                 }
+                //if (args.switches[i].name == "calvinandhobbes") {
+                //  var year_offset = -11;
+                //  year += year_offset;
+                //  subyear = year % 100; 
+               //}
                  
                  var imgurl = urlstart+imgkey+"/"+year+"/"+imgkey+subyear+month+mday+".gif";
                  if (editorial) {
