@@ -1,0 +1,44 @@
+<search function="kim">
+  <name>Kids-In-Mind Movie Ratings</name>
+  <category>Entertainment</category>
+  <contributor>Glenn Carr</contributor>
+  <link>http://www.kids-in-mind.com/</link>
+  <email>glenn at glenncarr dot com</email>
+  <description>
+  Search Kids-In-Mind for movie reviews
+  </description>
+  <form name="kimf"
+        method="get"
+        action="http://www.kids-in-mind.com/cgi-bin/search/search.pl">
+    <input type="hidden" name="q" value="Search" />
+    <input type="hidden" name="stpos" value="0" />
+    <input type="hidden" name="s" value="R" />
+  </form>
+  <script><![CDATA[
+    function kim(q)
+    {
+      if( nullArgs("kim", q) )
+        return;
+
+      // FORM variables for kimf
+
+      // The wizard assigned the search string to this form field value because
+      // this field was the active element when the search file was generated.
+      // Change this to args.q if the search string is parsed with parseArgs.
+      document.kimf.q.value = q;
+      //document.kimf.stpos.value = "";
+      //document.kimf.s.value = "";
+
+      submitForm(kimf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 01/16/07 at 22:47:51
+    by Dave's Quick Search Deskbar Search Wizard version 1.3,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>
