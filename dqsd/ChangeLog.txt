@@ -11,6 +11,7 @@ Bug Fixes
 * lf - Fixed to with with site changes (Glenn Carr)
 * yy - Fixed to handle no arguments (Glenn Carr)
 * msk - Fixed due to site changes (Glenn Carr)
+* comx - Commented out the "special handling" for Calvin and Hobbes to make it work in 2007 (John Bairen)
 
 Modified Searches
 * sf - Added /svn to SourceForge search to display browseable SVN repository (Glenn Carr)
@@ -21,6 +22,7 @@ New Searches
 * tfd - Simple TheFreeDictionary.com search (Glenn Carr)
 * gt - Ultimate Guitar Tabs Archive search (Glenn Carr)
 * wp - Seach for people using WhitePages.com (Glenn Carr)
+* kim - Search Kids-In-Mind for movie reviews (Glenn Carr)
 
 -- What's new for 4.0.0.2 (Dec 1, 2006)
 
