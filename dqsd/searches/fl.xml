@@ -1,0 +1,88 @@
+<search function="fl">
+  <name>Flickr search</name>
+  <category>Search the Web</category>
+  <contributor>mll</contributor>
+  <link>http://flickr.com/</link>
+  <email>http://mll02.free.fr</email>
+  <description>
+  Search Flickr, one of the best photo sharing websites.
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/relevant (default)|recent| interesting</td><td> - </td><td>view the most relevant / recent / interesting photos</td></tr>
+      <tr><td>/text (default)|tags</td><td> - </td><td>search in full text / tags only</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>fl boat</td></tr>
+      <tr><td>fl sunset /int</td></tr>
+      <tr><td>fl parry arc /int /t</td></tr>
+    </table>
+  </description>
+  <form name="flf"
+        method="get"
+        action="http://flickr.com/search/">
+    <input type="hidden" name="q" value="" />
+    <input type="hidden" name="s" value="" />
+    <input type="hidden" name="m" value="" />
+  </form>
+  <script><![CDATA[
+    function fl(q)
+    {
+      // Parse switches with parseArgs:
+
+      // parseArgs usage:
+      // Arguments:
+      //    q                - string from the search function
+      //    expectedSwitches - list or array of the expected switch values
+      //    expandSwitches   - optional parameter [default = true] used to determine 
+      //                       if the switch shortcuts should be expanded (i.e. /f becomes /foo)
+      // Returns an object with these properties:
+      //    q        - the input string with the switches removed
+      //    switches - array of objects with these two properties:
+      //                  name:   expanded name of the matched switch (i.e. foo as in /foo:bar)
+      //                  value:  value of switch (i.e. bar as in /foo:bar)
+      //    switch_val - associative array with the switch name as the key with the switch value 
+      //                 as the value. (i.e. switch_val["foo"] = "bar" as in /foo:bar)
+
+      var args = parseArgs(q, "relevant, recent, interesting, text, tags");
+      if( nullArgs("fl", args.q) ) return false;
+      document.flf.s.value = "";
+      document.flf.m.value = "text";
+      if ( args.switches.length > 0 && args.switches.length <= 2 )
+      {
+        switch( args.switches[0].name )
+        {
+          case "recent":
+            document.flf.s.value = "rec";
+            break;
+          case "interesting":
+            document.flf.s.value = "int";
+            break;
+          case "relevant":
+            break;
+        }
+        switch( args.switches[1].name )
+        {
+          case "text":
+            document.flf.m.value = "text";
+            break;
+          case "tags":
+            document.flf.m.value = "tags";
+            break;
+        }
+      } else {
+      return false;
+      }
+      document.flf.q.value = args.q;
+      submitForm(flf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created by Dave's Quick Search Deskbar Search Wizard version 1.3,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>
