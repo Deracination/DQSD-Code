@@ -1,0 +1,25 @@
+<search function="wiks">
+  <name>Wikiseek</name>
+  <category>Reference</category>
+  <contributor>Tom Corcoran</contributor>
+  <link>http://www.wikiseek.com/</link>
+  <email></email>
+  <description>WikiSeek is a search engine that has indexed only Wikipedia sites, plus 
+sites that are linked to from Wikipedia.</description>
+  <form name="wiksf"
+        method="get"
+        action="http://www.wikiseek.com/results.php">
+    <input type="hidden" name="q" value="" />
+  </form>
+  <script><![CDATA[
+    function wiks(q)
+    {
+      if( nullArgs("wiks", q) )
+        return;
+
+      document.wiksf.q.value = q;
+
+      submitForm(wiksf);
+    }
+  ]]></script>
+</search>
