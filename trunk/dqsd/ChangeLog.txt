@@ -24,6 +24,7 @@ New Searches
 * wp - Seach for people using WhitePages.com (Glenn Carr)
 * kim - Search Kids-In-Mind for movie reviews (Glenn Carr)
 * fl - Search Flickr, one of the best photo sharing websites (MLL)
+* wiks - Search with Wikiseek, a better way to search Wikipedia (Tom Corcoran)
 
 -- What's new for 4.0.0.2 (Dec 1, 2006)
 
