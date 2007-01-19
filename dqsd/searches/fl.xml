@@ -28,26 +28,14 @@
   <script><![CDATA[
     function fl(q)
     {
-      // Parse switches with parseArgs:
-
-      // parseArgs usage:
-      // Arguments:
-      //    q                - string from the search function
-      //    expectedSwitches - list or array of the expected switch values
-      //    expandSwitches   - optional parameter [default = true] used to determine 
-      //                       if the switch shortcuts should be expanded (i.e. /f becomes /foo)
-      // Returns an object with these properties:
-      //    q        - the input string with the switches removed
-      //    switches - array of objects with these two properties:
-      //                  name:   expanded name of the matched switch (i.e. foo as in /foo:bar)
-      //                  value:  value of switch (i.e. bar as in /foo:bar)
-      //    switch_val - associative array with the switch name as the key with the switch value 
-      //                 as the value. (i.e. switch_val["foo"] = "bar" as in /foo:bar)
-
       var args = parseArgs(q, "relevant, recent, interesting, text, tags");
       if( nullArgs("fl", args.q) ) return false;
+      
+      //set default values for optional fields
       document.flf.s.value = "";
       document.flf.m.value = "text";
+      
+      //define the options
       if ( args.switches.length > 0 && args.switches.length <= 2 )
       {
         switch( args.switches[0].name )
@@ -70,8 +58,9 @@
             document.flf.m.value = "tags";
             break;
         }
-      } else {
-      return false;
+      //error if more than 2 arguments provided
+      } else if ( args.switches.length > 2 ) {
+        return false;
       }
       document.flf.q.value = args.q;
       submitForm(flf);
