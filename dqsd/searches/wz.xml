@@ -1,0 +1,27 @@
+<search function="wz">
+  <name>Wize - product rankings based on collected reviews</name>
+  <category>Shopping</category>
+  <contributor>Tom Corcoran</contributor>
+  <link>http://wize.com/</link>
+  <email></email>
+  <description>
+  </description>
+  <form name="wzf"
+        method="post"
+        action="http://wize.com/search">
+    <input type="hidden" name="kw" value="" />
+  </form>
+  <script><![CDATA[
+    function wz(q)
+    {
+      if( nullArgs("wz", q) )
+        return;
+
+      // FORM variables for wzf
+
+      document.wzf.kw.value = q;
+
+      submitForm(wzf);
+    }
+  ]]></script>
+</search>
