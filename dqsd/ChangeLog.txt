@@ -25,6 +25,7 @@ New Searches
 * kim - Search Kids-In-Mind for movie reviews (Glenn Carr)
 * fl - Search Flickr, one of the best photo sharing websites (MLL)
 * wiks - Search with Wikiseek, a better way to search Wikipedia (Tom Corcoran)
+*wz - Looks like a good one-stop shop for getting an objective look for whatever you are thinking of picking up. (Tom Corcoran)
 
 -- What's new for 4.0.0.2 (Dec 1, 2006)
 
