@@ -1,0 +1,96 @@
+<search function="del">
+  <name>del.icio.us</name>
+  <category>Search the Web</category>
+  <contributor>Glenn Carr</contributor>
+  <link>http://del.icio.us/</link>
+  <email>glenn at glenncarr dot com</email>
+  <description>
+  Search del.icio.us
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/mine (default)</td><td> - </td><td>Search your favorites</td></tr>
+      <tr><td>/all, /delicious</td><td> - </td><td>Search del.icio.us</td></tr>
+      <tr><td>/web</td><td> - </td><td>Search the web</td></tr>
+    </table>
+    <COMMENT>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td></td></tr>
+      <tr><td></td></tr>
+    </table>
+    </COMMENT>
+  </description>
+  <form name="delf"
+        method="get"
+        action="http://del.icio.us/search/">
+    <input type="hidden" name="fr" value="del_icio_us" />
+    <input type="hidden" name="p" value="" />
+    <input type="hidden" name="type" value="all" />
+    <COMMENT>
+      The input element above, "type", was a SELECT element with the following options...
+      <select name="type">
+        <option value="user">your favorites</option>
+        <option value="all">del.icio.us</option>
+        <option value="web">the web</option>
+      </select>
+    </COMMENT>
+
+  </form>
+  <script><![CDATA[
+    function del(q)
+    {
+      if( nullArgs("del", q) )
+        return;
+
+      // Parse switches with parseArgs:
+
+      // parseArgs usage:
+      // Arguments:
+      //    q                - string from the search function
+      //    expectedSwitches - list or array of the expected switch values
+      //    expandSwitches   - optional parameter [default = true] used to determine 
+      //                       if the switch shortcuts should be expanded (i.e. /f becomes /foo)
+      // Returns an object with these properties:
+      //    q        - the input string with the switches removed
+      //    switches - array of objects with these two properties:
+      //                  name:   expanded name of the matched switch (i.e. foo as in /foo:bar)
+      //                  value:  value of switch (i.e. bar as in /foo:bar)
+      //    switch_val - associative array with the switch name as the key with the switch value 
+      //                 as the value. (i.e. switch_val["foo"] = "bar" as in /foo:bar)
+
+      var args = parseArgs(q, "mine, all, delicious, web");
+
+      // Search user's by default
+      document.delf.type.value = "user";
+
+      if ( args.switches.length > 0 )
+      {
+        switch( args.switches[0].name )
+        {
+          case "delicious":
+          case "all":
+            document.delf.type.value = "all";
+            break;
+          case "web":
+            document.delf.type.value = "web";
+            break;
+        }
+      }
+
+      // FORM variables for delf
+      //document.delf.fr.value = "";
+      document.delf.p.value = args.q;
+
+      submitForm(delf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 01/27/07 at 16:30:27
+    by Dave's Quick Search Deskbar Search Wizard version 1.3,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>

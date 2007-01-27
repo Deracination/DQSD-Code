@@ -8,7 +8,7 @@ Enhancements
 Bug Fixes
 * wmd - Fixed to work with site changes (Glenn Carr)
 * httpinst - Updated repository url; Added /list option to display search repository listing (Glenn Carr)
-* lf - Fixed to with with site changes (Glenn Carr)
+* lf - Fixed to work with site changes (Glenn Carr)
 * yy - Fixed to handle no arguments (Glenn Carr)
 * msk - Fixed due to site changes (Glenn Carr)
 * comx - Commented out the "special handling" for Calvin and Hobbes to make it work in 2007 (John Bairen)
@@ -25,7 +25,8 @@ New Searches
 * kim - Search Kids-In-Mind for movie reviews (Glenn Carr)
 * fl - Search Flickr, one of the best photo sharing websites (MLL)
 * wiks - Search with Wikiseek, a better way to search Wikipedia (Tom Corcoran)
-*wz - Looks like a good one-stop shop for getting an objective look for whatever you are thinking of picking up. (Tom Corcoran)
+* wz - Looks like a good one-stop shop for getting an objective look for whatever you are thinking of picking up. (Tom Corcoran)
+* del - Search del.icio.us (Glenn Carr)
 
 -- What's new for 4.0.0.2 (Dec 1, 2006)
 
