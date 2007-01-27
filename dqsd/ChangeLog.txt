@@ -26,7 +26,6 @@ New Searches
 * fl - Search Flickr, one of the best photo sharing websites (MLL)
 * wiks - Search with Wikiseek, a better way to search Wikipedia (Tom Corcoran)
 * wz - Looks like a good one-stop shop for getting an objective look for whatever you are thinking of picking up. (Tom Corcoran)
-* del - Search del.icio.us (Glenn Carr)
 
 -- What's new for 4.0.0.2 (Dec 1, 2006)
 
