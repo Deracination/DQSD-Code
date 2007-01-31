@@ -95,22 +95,22 @@
     
     var CONFIGURE_SILVER_SCHEME_DESCRIPTION = 
     {
-      en: "load the silver color scheme"
+      en: "Load the silver color scheme"
     };
     
-    var CONFIGURE_ZUNE_SCHEME_DESCRIPTION = 
+    var CONFIGURE_ROYALE_ZUNE_SCHEME_DESCRIPTION = 
     {
-      en: "load the Zune color scheme"
+      en: "Load the Royale Zune color scheme"
     };
     
     var CONFIGURE_ROYALE_NOIR_SCHEME_DESCRIPTION = 
     {
-      en: "load the Royale Noir color scheme"
+      en: "Load the Royale Noir color scheme"
     };
     
     var CONFIGURE_ROYALE_SCHEME_DESCRIPTION = 
     {
-      en: "load the Royale color scheme"
+      en: "Load the Royale color scheme"
     };
     
     var CONFIGURE_CLASSIC_SCHEME_DESCRIPTION = 
@@ -123,9 +123,9 @@
       en: "Blue"
     };
     
-    var CONFIGURE_ZUNE_SCHEME_NAME = 
+    var CONFIGURE_ROYALE_ZUNE_SCHEME_NAME = 
     {
-      en: "Zune"
+      en: "Royale Zune"
     };
     
     var CONFIGURE_ROYALE_NOIR_SCHEME_NAME = 
@@ -276,7 +276,7 @@
       mb.AppendMenuItem( local(CONFIGURE_SILVER_SCHEME_NAME), "loadcssfile(\"theme_silver.css\")", local(CONFIGURE_SILVER_SCHEME_DESCRIPTION), confthememenu);
       mb.AppendMenuItem( local(CONFIGURE_ROYALE_SCHEME_NAME), "loadcssfile(\"theme_royale.css\")", local(CONFIGURE_ROYALE_SCHEME_DESCRIPTION), confthememenu);
       mb.AppendMenuItem( local(CONFIGURE_ROYALE_NOIR_SCHEME_NAME), "loadcssfile(\"theme_royale_noir.css\")", local(CONFIGURE_ROYALE_NOIR_SCHEME_DESCRIPTION), confthememenu);
-      mb.AppendMenuItem( local(CONFIGURE_ZUNE_SCHEME_NAME), "loadcssfile(\"theme_zune.css\")", local(CONFIGURE_ZUNE_SCHEME_DESCRIPTION), confthememenu);
+      mb.AppendMenuItem( local(CONFIGURE_ROYALE_ZUNE_SCHEME_NAME), "loadcssfile(\"theme_royale_zune.css\")", local(CONFIGURE_ROYALE_ZUNE_SCHEME_DESCRIPTION), confthememenu);
       mb.AppendMenuItem( local(CONFIGURE_CLASSIC_SCHEME_NAME), "loadcssfile(\"classic\")", local(CONFIGURE_CLASSIC_SCHEME_DESCRIPTION), confthememenu);
 
       mb.AppendSeparator(hmenu);
