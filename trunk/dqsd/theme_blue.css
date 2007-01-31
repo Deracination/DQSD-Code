@@ -10,7 +10,7 @@
 
 body
 {
- background: #BBBDCD url(xptoolbar1_blue.bmp) repeat-x fixed top;
+ background: #1E50C4 url(xptoolbar1_blue.bmp) repeat-x fixed top;
 }
 
 .clock
@@ -27,7 +27,7 @@ body
 
 .txtfld
 {
- background: #A0A7AD url(xptoolbar2_blue.bmp) repeat-x fixed top;
+ background: #1E50C4 url(xptoolbar2_blue.bmp) repeat-x fixed top;
  color: black;
  border-width:0px;
  padding-top:9px;
