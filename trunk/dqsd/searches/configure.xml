@@ -98,6 +98,11 @@
       en: "load the silver color scheme"
     };
     
+    var CONFIGURE_ZUNE_SCHEME_DESCRIPTION = 
+    {
+      en: "load the Zune color scheme"
+    };
+    
     var CONFIGURE_CLASSIC_SCHEME_DESCRIPTION = 
     {
       en: "Revert to no color scheme"
@@ -106,6 +111,11 @@
     var CONFIGURE_BLUE_SCHEME_NAME = 
     {
       en: "Blue"
+    };
+    
+    var CONFIGURE_ZUNE_SCHEME_NAME = 
+    {
+      en: "Zune"
     };
     
     var CONFIGURE_OLIVE_SCHEME_NAME = 
@@ -244,6 +254,7 @@
       mb.AppendMenuItem( local(CONFIGURE_BLUE_SCHEME_NAME), "loadcssfile(\"theme_blue.css\")", local(CONFIGURE_BLUE_SCHEME_DESCRIPTION), confthememenu);
       mb.AppendMenuItem( local(CONFIGURE_OLIVE_SCHEME_NAME), "loadcssfile(\"theme_olive.css\")", local(CONFIGURE_OLIVE_SCHEME_DESCRIPTION), confthememenu);
       mb.AppendMenuItem( local(CONFIGURE_SILVER_SCHEME_NAME), "loadcssfile(\"theme_silver.css\")", local(CONFIGURE_SILVER_SCHEME_DESCRIPTION), confthememenu);
+      mb.AppendMenuItem( local(CONFIGURE_ZUNE_SCHEME_NAME), "loadcssfile(\"theme_zune.css\")", local(CONFIGURE_ZUNE_SCHEME_DESCRIPTION), confthememenu);
       mb.AppendMenuItem( local(CONFIGURE_CLASSIC_SCHEME_NAME), "loadcssfile(\"classic\")", local(CONFIGURE_CLASSIC_SCHEME_DESCRIPTION), confthememenu);
 
       mb.AppendSeparator(hmenu);
