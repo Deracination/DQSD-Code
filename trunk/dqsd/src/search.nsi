@@ -218,9 +218,18 @@ Section "Quick Search Deskbar (required)"
   File "..\xptoolbar2_olive.bmp"
   File "..\xptoolbar1_blue.bmp"
   File "..\xptoolbar2_blue.bmp"
+  File "..\xptoolbar1_royale.bmp"
+  File "..\xptoolbar2_royale.bmp"
+  File "..\xptoolbar1_royale_noir.bmp"
+  File "..\xptoolbar2_royale_noir.bmp"
+  File "..\xptoolbar1_zune.bmp"
+  File "..\xptoolbar2_zune.bmp"
   File "..\theme_silver.css"
   File "..\theme_olive.css"
   File "..\theme_blue.css"
+  File "..\theme_royale.css"
+  File "..\theme_royale_noir.css"
+  File "..\theme_zune.css"
   File "..\theme.css"
   
   SetOutPath "$INSTDIR\searches"
@@ -484,12 +493,21 @@ Section "Uninstall"
   Delete /REBOOTOK $INSTDIR\xptoolbar2_olive.bmp
   Delete /REBOOTOK $INSTDIR\xptoolbar1_blue.bmp
   Delete /REBOOTOK $INSTDIR\xptoolbar2_blue.bmp
+  Delete /REBOOTOK $INSTDIR\xptoolbar1_royale.bmp
+  Delete /REBOOTOK $INSTDIR\xptoolbar2_royale.bmp
+  Delete /REBOOTOK $INSTDIR\xptoolbar1_royale_noir.bmp
+  Delete /REBOOTOK $INSTDIR\xptoolbar2_royale_noir.bmp
+  Delete /REBOOTOK $INSTDIR\xptoolbar1_zune.bmp
+  Delete /REBOOTOK $INSTDIR\xptoolbar2_zune.bmp
   Delete /REBOOTOK $INSTDIR\preferences.js
   Delete /REBOOTOK $INSTDIR\theme.css
   Delete /REBOOTOK $INSTDIR\theme_blue.css
   Delete /REBOOTOK $INSTDIR\theme_default.css
   Delete /REBOOTOK $INSTDIR\theme_silver.css
   Delete /REBOOTOK $INSTDIR\theme_olive.css
+  Delete /REBOOTOK $INSTDIR\theme_royale.css
+  Delete /REBOOTOK $INSTDIR\theme_royale_noir.css
+  Delete /REBOOTOK $INSTDIR\theme_zune.css
   Delete /REBOOTOK $INSTDIR\uninstall.exe
 
 ; Ask to delete local files
