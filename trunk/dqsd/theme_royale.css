@@ -1,0 +1,90 @@
+/* localsearch_royale_noir.css
+*
+* Add stylesheet preferences here to keep them from being
+* overwritten on upgrades.
+*
+* Use search.css as a guide, copying settings from that
+* file to this file, and then modifying them to suit your
+* personal taste.
+*/
+
+body
+{
+ background: #3261BB url(xptoolbar1_royale.bmp) repeat-x fixed top;
+}
+
+.clock
+{
+ background: transparent repeat-x fixed bottom;
+ color: #fcfcfc;
+ font-weight: bold;
+ border-width:0px;
+ padding-top:9px;
+ padding-left:4px;
+ padding-right:4px;
+ padding-bottom:5px;
+}
+
+.txtfld
+{
+ background: #3261BB url(xptoolbar2_royale.bmp) repeat-x fixed top;
+ color: black;
+ border-width:0px;
+ padding-top:9px;
+ padding-left:4px;
+ padding-right:4px;
+ padding-bottom:5px;
+}
+
+.gobutton, .mogobutton, .mdgobutton
+{
+ background: transparent repeat-x fixed bottom;
+ border:0px;
+ color: white;
+ position:absolute;
+}
+
+
+/*
+Styles for the calendar
+*/
+.cal
+{
+ color:white;
+ background-color: highlight;
+}
+.calnavmonth, .calnavmonthhigh, .calnavyear, .calnavyearhigh
+{
+  padding:1px;
+  border-width:0;
+  color:yellow;
+}
+.caltodayevent, .caltodayeventhigh
+{
+  background-color:menu;
+  border-width:0;
+}
+
+.caltoday, .caltodayhigh
+{
+  background-color:#383838;
+  border-width:0px;
+}
+.caleventday, .caleventdayhigh
+{
+  font-weight:bold;
+    color:#FD904D;
+}
+.calgray
+{
+    color:#c0c0c0;
+}
+/*
+Styles for the help box
+*/
+.helpboxBody
+{
+  background: window;
+}
+
+IMG#banner { cursor: hand; margin-top: 7px; }
