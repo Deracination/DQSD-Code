@@ -2,7 +2,7 @@
 *
 * Add stylesheet preferences here to keep them from being
 * overwritten on upgrades.
-* 
+*
 * Use search.css as a guide, copying settings from that
 * file to this file, and then modifying them to suit your
 * personal taste.
@@ -10,7 +10,7 @@
 
 body
 {
- background: #383838 url(xptoolbar1_zune.bmp) repeat-x fixed top;
+ background: #383838 url(xptoolbar1_royale_zune.bmp) repeat-x fixed top;
 }
 
 .clock
@@ -27,7 +27,7 @@ body
 
 .txtfld
 {
- background: #383838 url(xptoolbar2_zune.bmp) repeat-x fixed top;
+ background: #383838 url(xptoolbar2_royale_zune.bmp) repeat-x fixed top;
  color: black;
  border-width:0px;
  padding-top:9px;
@@ -71,11 +71,11 @@ Styles for the calendar
   border-width:0px;
 }
 .caleventday, .caleventdayhigh
-{   
+{
   font-weight:bold;
     color:#FD904D;
 }
-.calgray 
+.calgray
 {
     color:#c0c0c0;
 }
