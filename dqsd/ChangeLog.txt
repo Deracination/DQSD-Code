@@ -5,6 +5,7 @@ Enhancements
 * Holidays for Sweden for 2007 (Kim Gräsman)
 * Fixed "Click next" text in uninstaller (Charlie Russel)
 * Added support for 'Zune' Windows XP theme (http://www.zune.net/en-us/meetzune/software.htm, http://go.microsoft.com/fwlink/?LinkID=75078) (Glenn Carr)
+* Added support for 'Royale' and 'Royale Noir' Windows XP themes (Glenn Carr)
 
 Bug Fixes
 * wmd - Fixed to work with site changes (Glenn Carr)
