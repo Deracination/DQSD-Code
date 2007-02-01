@@ -1,7 +1,7 @@
 <search function="qsfreq">
   <name>Quick Search Frequency Tool</name>
   <description>
-    Display and manage search frequency log
+    Display and manage search frequency log.  <div style="color:maroon; background:#ffffe0; padding:5px">You must add <b style="color:red"><br/>qsfreqLogSearchFrequency = 1</b><br/> to your localprefs.js file to enable logging.</div>
     <div class="helpboxDescLabels">Switches:</div>
     <table class="helpboxDescTable">
       <tr><td>[no switches]</td><td> - </td><td>Display the search frequency data.</td></tr>
@@ -308,7 +308,7 @@
         } catch ( e ) { }
 
         html.push( installedSearchCount );
-        html.push( ' installed searches' );
+        html.push( ' currently enabled searches' );
         if ( startLogDate != null )
         {
           html.push( ' have been used since ' );
