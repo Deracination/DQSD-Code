@@ -32,15 +32,15 @@ function saveHistory()
 function restoreHistory()
 {
   var historyFileContent = loadHistoryFile(HISTORY_FILE);
-	if (historyFileContent == null)
-	{
+  if (historyFileContent == null)
+  {
     // Legacy location
     historyFileContent = loadHistoryFile("history.txt");
-		if (historyFileContent)
-		{
-			renameFile("history.txt", "history.deprecated");
-		}
-	}
+    if (historyFileContent)
+    {
+      renameFile("history.txt", "history.deprecated");
+    }
+  }
 
   var loaded = null;
   if (historyFileContent)
@@ -85,6 +85,16 @@ function addhist(t)
   // History edits get cleared whenever something new goes in
   clearhistedits();
   histcurr = i + 1;
+}
+
+function deletecurrenthist()
+{
+  var i;
+  for (i = histcurr; i < histarray.length - 1; i++)
+    histarray[i] = histarray[i + 1];
+  histarray.splice( histarray.length - 1, 1 );
+  clearhistedits();
+  saveHistory();
 }
 
 // get the current history entry
@@ -309,13 +319,13 @@ function sortFrequencyDataByDate( a, b )
 
 function loadHistoryFile(filename)
 {
-	try
+  try
   {
     return readFile( HISTORY_FILE );
   }
   catch (e)
-	{
-	}
+  {
+  }
 
-	return null;
+  return null;
 }

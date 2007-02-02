@@ -5,6 +5,8 @@ Enhancements
 * Holidays for Sweden for 2007 (Kim Gräsman)
 * Fixed "Click next" text in uninstaller (Charlie Russel)
 * Added support for 'Royale', 'Royale Noir', and 'Royale Zune' Windows XP themes (Glenn Carr)
+* Modified Ctrl-D handling to only delete the current search from the history, intead of clearing entire history. (Glenn Carr)
+* Added Ctrl-Shift-D handling to clear the entire history.  This was previously bound to Ctrl-D.  Also added a confirmation prompt to prevent accidental clear of entire history. (Glenn Carr)
 
 Bug Fixes
 * wmd - Fixed to work with site changes (Glenn Carr)
@@ -13,7 +15,8 @@ Bug Fixes
 * yy - Fixed to handle no arguments (Glenn Carr)
 * msk - Fixed due to site changes (Glenn Carr)
 * comx - Commented out the "special handling" for Calvin and Hobbes to make it work in 2007 (John Bairen)
-* Fix Blue Windows XP stylesheet
+* Fix Blue Windows XP stylesheet (Glenn Carr)
+* Fixed a bug with Ctrl-Enter in which didn't handle text trailing the first slash correctly. (Glenn Carr)
 
 Modified Searches
 * sf - Added /svn to SourceForge search to display browseable SVN repository (Glenn Carr)
