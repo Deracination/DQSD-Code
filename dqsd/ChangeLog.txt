@@ -1,4 +1,4 @@
--- What's new for x.x.x.x (mmm d, yyyy)
+-- What's new for 4.0.0.3 (Feb 6, 2007)
 
 Enhancements
 * Added Vista bitmaps and CSS files to allow a better Vista look/theme for the toolbar (Charlie Russel)
