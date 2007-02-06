@@ -53,8 +53,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 4,0,0,2
- PRODUCTVERSION 4,0,0,2
+ FILEVERSION 4,0,0,3
+ PRODUCTVERSION 4,0,0,3
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -73,12 +73,12 @@ BEGIN
             VALUE "CompanyName", "Dave's Quick Search Deskbar"
             VALUE "ContributingAuthors", "Koen Mannaerts (WhirlyWiryWeb.com), David Bau (notesbydave.com), Glenn Carr (glenncarr.com), Will Dean (indcomp.co.uk), Brent Beardsley, Kim Gräsman (winwonk.com)"
             VALUE "FileDescription", "ActiveX Tools for Dave's Quick Search Bar "
-            VALUE "FileVersion", "4, 0, 0, 2"
+            VALUE "FileVersion", "4, 0, 0, 3"
             VALUE "InternalName", "DQSDTools"
             VALUE "LegalCopyright", "Copyright (c) 2002-2005 David Bau. GNU Public License Version 2 applies."
             VALUE "OriginalFilename", "DQSDTools.DLL"
             VALUE "ProductName", "DQSDTools ActiveX Components"
-            VALUE "ProductVersion", "4, 0, 0, 2"
+            VALUE "ProductVersion", "4, 0, 0, 3"
         END
     END
     BLOCK "VarFileInfo"
