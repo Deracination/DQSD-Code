@@ -1,0 +1,35 @@
+<html>
+<head>
+</head>
+<body>
+<script language="JavaScript" defer>
+<!--
+var reNonSearchChars = /(^\s+)|(\s+$)|&nbsp;|<[^>]*>/g;
+
+// specific to context menu extensions
+var win = external.menuArguments;
+// the document object the user right-clicked on
+var doc = win.document;
+// the text the user selected
+var sel = doc.selection;
+// an IHTMLElement containing all the html elements in the selection
+var rng = sel.createRange();
+// the html string composing the range
+var sztext = rng.htmlText.replace( reNonSearchChars, '' );
+if ( sztext.length == 0 )
+{
+	if ( doc.activeElement.tagName == 'A' )
+	{
+		sztext = doc.activeElement.innerText.replace( reNonSearchChars, '' );
+	}
+}
+if ( sztext.length > 0 )
+{
+	var url = "http://en.wikipedia.org/wiki/Special:Search?search=" + sztext + "&go=Go";
+	var wpwindow = win.open(url, "_blank");
+	wpwindow.focus();
+}
+//-->
+</script>
+</body>
+<head>
