@@ -1,6 +1,10 @@
 -- What's new for 4.x.x.x (mmm d, yyyy)
 
-* qsfind changes: Highlight search string; Stop searching within HTML tags; Handle special regular expression characters correctly.  (Glenn Carr)
+Enhancements
+* qsfind - Highlight search string; Stop searching within HTML tags; Handle special regular expression characters correctly.  (Glenn Carr)
+
+New Searches
+* as - Acronym Search
 
 -- What's new for 4.0.0.3 (Feb 6, 2007)
 
