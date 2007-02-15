@@ -345,6 +345,11 @@ TABLE#keybindings TH
   border: 1px outset;
   font-weight: bold;
 }
+.helpboxSearchStringHighlight
+{
+  background: #ffff66; 
+  color: #800000;
+}
 
 
 /* STYLES FOR ORIGINAL HELP BOX :: Uncomment these styles to make the help box look like the original help box */

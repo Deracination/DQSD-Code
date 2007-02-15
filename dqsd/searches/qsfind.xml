@@ -24,10 +24,20 @@
       var switch_list = new Array("function");
       var args = parseArgs(q, switch_list);
 
+      var specialChars = '.,\\,^,$,*,+,?,{,},:,(,),[,]'.split(',');
+      var reChars = '';
+      var delim = '';
+      for ( var c = 0; c < specialChars.length; c++ )
+      {
+        reChars += delim + '\\' + specialChars[ c ];
+        delim = '|';
+      }
+      reChars = new RegExp( reChars, "gim" );
+
       // Create an array to store the search results.
       var SearchResults = new Array();
       var SearchFound = false;
-      if ( typeof args.switch_val["function"] != "undefined")
+      if ( typeof args.switch_val["function"] != "undefined" )
       {
         if ( typeof searches[args.q] != "undefined" )
         {
@@ -41,16 +51,16 @@
         {
           if (isNaN(i))
           {
-            if( (searches[i].desc ? searches[i].desc.toLowerCase().match(args.q) : 0) 
-              || searches[i].name.toLowerCase().match(args.q) 
-              || (searches[i].link ? searches[i].link.toLowerCase().match(args.q) : 0) )
+            if( (searches[i].desc ? searches[i].desc.toLowerCase().replace( /<[^>]+>/gi, '' ).match(args.q.replace( reChars, '\\$1')) : 0) 
+              || searches[i].name.toLowerCase().replace( /<[^>]+>|\//gi, '' ).match(args.q.replace( reChars, '\\$1')) 
+              || (searches[i].link ? searches[i].link.toLowerCase().replace( /<[^>]+>|\/|http:\/\//gi, '' ).match(args.q.replace( reChars, '\\$1')) : 0) )
             {
               SearchResults[i] = searches[i];
               SearchFound = true;
             }
             for (var j = 0; j < searches[i].aliases.length; j++)
             {
-              if ( searches[i].aliases[j].toLowerCase().match(args.q) )
+              if ( searches[i].aliases[j].toLowerCase().match(args.q.replace( reChars, '\\$1')) )
               {
                 SearchResults[i] = searches[i];
                 SearchFound = true;
@@ -62,7 +72,7 @@
       }
 
       //  Define the popup's final width
-      var windowW = 350;
+      var windowW = 500;
       var QSFPopup = window.createPopup();
       var QSFPopupBody = QSFPopup.document.body;
 
@@ -71,7 +81,7 @@
 
       if (SearchFound)
       {
-        //  Loop through the results to build the table in the popup
+        // Loop through the results to build the table in the popup
         for (var i in SearchResults)
         {
           var search = SearchResults[i];
@@ -136,6 +146,8 @@
           }
           QFSBodyCode += "</td></tr>";
         }
+        if ( typeof args.switch_val["function"] == "undefined" )
+          QFSBodyCode = QFSBodyCode.replace( new RegExp( "(" + args.q.replace( reChars, '\\$1') + ")(?=[^>]*?<)", "gim" ), '<span class="helpboxSearchStringHighlight">$1</span>' )
       }
       else
       {
@@ -166,8 +178,8 @@
   ]]></script>
 
   <copyright>
-	Copyright (c) 2002 David Bau
-	Distributed under the terms of the
-	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  Copyright (c) 2002 David Bau
+  Distributed under the terms of the
+  GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
   </copyright>
 </search>
