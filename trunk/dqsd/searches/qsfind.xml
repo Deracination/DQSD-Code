@@ -77,7 +77,7 @@
       var QSFPopupBody = QSFPopup.document.body;
 
       var QFSBodyCode = "<table id=qstable border=0 cellspacing=1 cellpadding=2 width=100% height=100%>";
-      QFSBodyCode += "<tr><td valign=top><style>" + convertStylesToInline() + "</style>";
+      QFSBodyCode += "<tr><td valign=top><style>~~~STYLESPLACEHOLDER~~~</style>";
 
       if (SearchFound)
       {
@@ -147,7 +147,9 @@
           QFSBodyCode += "</td></tr>";
         }
         if ( typeof args.switch_val["function"] == "undefined" )
+        {
           QFSBodyCode = QFSBodyCode.replace( new RegExp( "(" + args.q.replace( reChars, '\\$1') + ")(?=[^>]*?<)", "gim" ), '<span class="helpboxSearchStringHighlight">$1</span>' )
+        }
       }
       else
       {
@@ -155,6 +157,7 @@
       }
 
       QFSBodyCode += "</table>";
+      QFSBodyCode = QFSBodyCode.replace( "<style>~~~STYLESPLACEHOLDER~~~</style>", "<style>" + convertStylesToInline() + "</style>" );
       QSFPopupBody.innerHTML = QFSBodyCode;
 
       QSFPopup.document.body.style.border="outset 2px";
