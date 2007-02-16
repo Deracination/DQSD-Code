@@ -4,7 +4,8 @@ Enhancements
 * qsfind - Highlight search string; Stop searching within HTML tags; Handle special regular expression characters correctly.  (Glenn Carr)
 
 New Searches
-* as - Acronym Search
+* as - Acronym Search (Glenn Carr)
+* sr - Sports search for US NBA/NFL/MLB players (Glenn Carr)
 
 -- What's new for 4.0.0.3 (Feb 6, 2007)
 
