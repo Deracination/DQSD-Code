@@ -1,0 +1,143 @@
+<search function="sr">
+  <name>Sports Reference Search</name>
+  <category>Search the Web</category>
+  <contributor>Glenn Carr</contributor>
+  <link>http://search.sports-reference.com/</link>
+  <email>glenn at glenncarr dot com</email>
+  <description>
+  Search for sports personalities using sports-reference.com and associated sites, along with Google for direct player searches.
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>[/sports]</td><td> - </td><td>Search all using search.sports-reference.com</td></tr>
+      <tr><td>/baseball</td><td> - </td><td>Search baseball-reference.com</td></tr>
+      <tr><td>/football</td><td> - </td><td>Search pro-football-reference.com</td></tr>
+      <tr><td>/basketball</td><td> - </td><td>Search basketball-reference.com</td></tr>
+      <tr><td>/books</td><td> - </td><td>Search baseballbooks.net</td></tr>
+      <tr><td>/mlb_player</td><td> - </td><td>Go directly to MLB (mlb.com) player page</td></tr>
+      <tr><td>/nfl_player</td><td> - </td><td>Go directly to NFL (nfl.com) player page</td></tr>
+      <tr><td>/nba_player</td><td> - </td><td>Go directly to NBA (nba.com) player page</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>sr Joe Frazier</td></tr>
+      <tr><td>sr Albert Pujols /base</td></tr>
+      <tr><td>sr Albert Pujols /mlb</td></tr>
+      <tr><td>sr Magic Johnson /bask</td></tr>
+      <tr><td>sr Shaquille /nba</td></tr>
+      <tr><td>sr Christian Okoye /f</td></tr>
+      <tr><td>sr Priest Holmes /nfl</td></tr>
+      <tr><td>sr Stan Musial /book</td></tr>
+    </table>
+  </description>
+  <form name="srf_sports"
+        method="get"
+        action="http://search.sports-reference.com/">
+    <input type="hidden" name="cx" value="013688466409588003494:rfft6zylyni" />
+    <input type="hidden" name="q" value="" />
+    <input type="hidden" name="cof" value="FORID:10" />
+  </form>
+  <form name="srf_baseball"
+        method="get"
+        action="http://www.baseball-reference.com/player_search.cgi">
+    <input type="hidden" name="search" value="" />
+  </form>
+  <form name="srf_football"
+        method="get"
+        action="http://www.pro-football-reference.com/cgi-bin/search.cgi">
+    <input type="hidden" name="player" value="" />
+  </form>
+  <form name="srf_basketball"
+        method="get"
+        action="http://www.basketball-reference.com/player_search.cgi">
+    <input type="hidden" name="search" value="" />
+  </form>
+  <form name="srf_baseballbooks"
+        method="get"
+        action="http://www.baseballbooks.net/search.cgi">
+    <input type="hidden" name="search" value="" />
+  </form>
+  <form name="google_player"
+        method="get"
+        action="http://www.google.com/search">
+    <input type="hidden" name="hl" value="en" />
+    <input type="hidden" name="q" value="" />
+    <input type="hidden" name="btnI" value="I'm Feeling Lucky" />
+  </form>
+  <script><![CDATA[
+    function sr(q)
+    {
+      if( nullArgs("sr", q) )
+        return;
+
+      // Parse switches with parseArgs:
+
+      // parseArgs usage:
+      // Arguments:
+      //    q                - string from the search function
+      //    expectedSwitches - list or array of the expected switch values
+      //    expandSwitches   - optional parameter [default = true] used to determine 
+      //                       if the switch shortcuts should be expanded (i.e. /f becomes /foo)
+      // Returns an object with these properties:
+      //    q        - the input string with the switches removed
+      //    switches - array of objects with these two properties:
+      //                  name:   expanded name of the matched switch (i.e. foo as in /foo:bar)
+      //                  value:  value of switch (i.e. bar as in /foo:bar)
+      //    switch_val - associative array with the switch name as the key with the switch value 
+      //                 as the value. (i.e. switch_val["foo"] = "bar" as in /foo:bar)
+
+      var args = parseArgs(q, "baseball, football, basketball, books, mlb_player, nfl_player, nba_player, sports");
+      if ( args.switches.length > 0 )
+      {
+        switch( args.switches[0].name )
+        {
+          case "baseball":
+            document.srf_baseball.search.value = args.q;
+            submitForm(srf_baseball);
+            break;
+          case "football":
+            document.srf_football.player.value = args.q;
+            submitForm(srf_football);
+            break;
+          case "basketball":
+            document.srf_basketball.search.value = args.q;
+            submitForm(srf_basketball);
+            break;
+          case "books":
+            document.srf_baseballbooks.search.value = args.q;
+            submitForm(srf_baseballbooks);
+            break;
+          case "nfl_player":
+            document.google_player.q.value = args.q + " site:nfl.com inurl:nfl.com/players/playerpage";
+            submitForm(google_player);
+            break;
+          case "mlb_player":
+            document.google_player.q.value = args.q + " site:mlb.com inurl:mlb.com/team/player";
+            submitForm(google_player);
+            break;
+          case "nba_player":
+            document.google_player.q.value = args.q + " site:nba.com inurl:nba.com/playerfile";
+            submitForm(google_player);
+            break;
+          default:
+            document.srf_sports.q.value = args.q;
+            submitForm(srf_sports);
+            break;
+        }
+      }
+      else
+      {
+        document.srf_sports.q.value = args.q;
+        submitForm(srf_sports);
+      }
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 02/16/07 at 10:37:11
+    by Dave's Quick Search Deskbar Search Wizard version 1.0.1 ,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>
