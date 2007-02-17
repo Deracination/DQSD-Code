@@ -7,6 +7,9 @@ New Searches
 * as - Acronym Search (Glenn Carr)
 * sr - Sports search for US NBA/NFL/MLB players (Glenn Carr)
 
+Modified Searches
+* comx - Fixed foxtrot - is now only available on sundays. (Monty Scroggins)
+
 -- What's new for 4.0.0.3 (Feb 6, 2007)
 
 Enhancements
