@@ -365,7 +365,7 @@
               case "dicktracy": imgtitle="Dick Tracy";site="ucomics";imgkey="tmdic";break;
               case "doonesbury": imgtitle="Doonesbury";site="ucomics";imgkey="db";break;
               case "duplex": imgtitle="Duplex";site="ucomics";imgkey="dp";break;
-              case "foxtrot": imgtitle="Foxtrot";site="ucomics";imgkey="ft";break;
+              case "foxtrot": imgtitle="Foxtrot";site="foxtrot";imgkey="ft";break;
               case "fredbasset": imgtitle="Fred Basset";site="ucomics";imgkey="tmfba";break;
               case "forbetterorforworse": imgtitle="For Better Or For Worse";site="ucomics";imgkey="fb";break;
               case "fuscobrothers": imgtitle="Fusco Brothers";site="ucomics";imgkey="fu";break;
@@ -536,6 +536,34 @@
                  
                  var sUrl=urlstart;
                  var imgurl = urlstart+'/'+year+'/'+month+'/'+mday+'/calex'+mday+'.gif';
+                 break;
+
+              case "foxtrot":
+                 //foxtrot is now only available on sundays..  if today is not sunday, calculate prior one
+                 //http://images.ucomics.com/comics/ft/2007/ft070217.gif
+                 var urlstart="http://images.ucomics.com/comics/ft";
+                 
+                 //get the current day of week 0=sunday
+                 var dow=dat.getDay();
+                 
+                 //get a new instance of the date object to play with
+                 var today=new Date();
+                 
+                 //get the delta to make dow = 0 (sunday) 
+                 today.setDate(today.getDate()- dow); 
+                 
+                 // fetch the date elements from the local date object
+                 var mday = today.getDate();
+                 var month = today.getMonth()+1;
+                 var year = today.getYear();
+                 //truncate the year to make a 2 digit one
+                 var shortyear = (year+"").substring(2,4);
+                                
+                 if (mday<10) mday= '0'+mday;
+                 if (month<10) month= '0'+month;
+                 
+                 var sUrl=urlstart;
+                 var imgurl = urlstart+'/'+year+'/ft'+shortyear+month+mday+'.gif';
                  break;
 
               case "ucomics":
