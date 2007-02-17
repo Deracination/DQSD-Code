@@ -7,6 +7,9 @@ New Searches
 * as - Acronym Search (Glenn Carr)
 * sr - Sports search for US NBA/NFL/MLB players (Glenn Carr)
 
+Bug Fixes
+* comx - Fixed a few broken comics and removed some that were not available anymore..  (Monty Scroggins)
+
 Modified Searches
 * comx - Fixed foxtrot - is now only available on sundays. (Monty Scroggins)
 
