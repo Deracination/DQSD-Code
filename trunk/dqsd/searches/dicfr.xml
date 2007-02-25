@@ -2,14 +2,14 @@
   <name>French dictionnary</name>
   <category>Reference<category>Language</category></category>
   <contributor>MLL</contributor>
-  <link>http://www.sdv.fr/orthonet/index.html</link>
+  <link>http://orthonet.sdv.fr/</link>
   <email>http://mll02.free.fr</email>
   <description>
   Search Orthonet's french lexicon
   </description>
   <form name="dicfrf"
         method="get"
-        action="http://www.sdv.fr/cgi/orthonet/orthonet">
+        action="http://orthonet.sdv.fr/php/rech_mot.php">
     <input type="hidden" name="mot" value="" />
   </form>
   <script><![CDATA[

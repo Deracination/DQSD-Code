@@ -1,7 +1,7 @@
 <!-- Do not switch encoding - MSXML in many IE 5.5 installations cannot handle it - xml version="1.0" encoding="ISO-8859-1" -->
 
 <search function="acine">
-  <name>Allocine.com</name>
+  <name>Allociné</name>
   <description>
     Search <i>the</i> french site about movies, stars, theaters schedules, critics, trailers, etc...<br/>
     <div class="helpboxDescLabels">Switches:</div>
@@ -26,12 +26,12 @@
     </table>
   </description>
   <category>Entertainment</category>
-  <link>http://www.allocine.com/</link>
+  <link>http://www.allocine.fr/</link>
   <contributor>MLL</contributor>
 
 
   <form name="acinef_general"
-        action="http://www.allocine.com/recherche/"
+        action="http://www.allocine.fr/recherche/"
         method="get">
     <input type="hidden" name="motcle" value="" />
     <input type="hidden" name="f" value="3" />
@@ -39,7 +39,7 @@
   </form>
 
   <form name="acinef_salleproche"
-        action="http://www.allocine.com/seance/salleproche.html"
+        action="http://www.allocine.fr/seance/salleproche.html"
         method="get">
     <input type="hidden" name="codepostal" value=""/>
     <input type="hidden" name="maxlignes" value=""/>
