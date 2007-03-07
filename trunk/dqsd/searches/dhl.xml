@@ -1,7 +1,7 @@
 <search function="dhl">
   <name>Track DHL Packages</name>
   <category>Shipping</category>
-  <contributor>David Bau</contributor>
+  <contributor>David Bau, Tom Corcoran</contributor>
   <link>http://www.dhl-usa.com/tracking</link>
   <email>davidbau@hotmail.com</email>
   <description>
@@ -10,6 +10,7 @@
   <table class="helpboxDescTable">
     <tr>
       <td>dhl [tracking #1] [tracking #2]</td>
+      <td>dhl /uk:tracking #1</td>
     </tr>
   </table>
   </description>
@@ -20,6 +21,7 @@
     <input type="hidden" name="LAN" value="ENG" />
     <input type="hidden" name="TID" value="US_ENG" />
     <input type="hidden" name="FIRST_DB" value="US" />
+    <input type="hidden" name="type" value="fasttrack" />
   </form>
   <script><![CDATA[
     function dhl(q)
@@ -27,7 +29,15 @@
       if( nullArgs("dhl", q) )
         return;
 
-      document.dhlf.AWB.value = q.replace(/\s+/g,"\r\n");
+      var args = parseArgs(q, "uk");
+        
+      if( (args.switches.length > 0) && (args.switches[0].name = "uk") )
+      {
+        document.dhlf.action = "http://www.dhl.co.uk/publish/gb/en/eshipping/international_air.high.html"
+        document.dhlf.AWB.value = args.switches[0].value.replace(/\s+/g,"\r\n");
+      }
+      else
+        document.dhlf.AWB.value = q.replace(/\s+/g,"\r\n");
 
       submitForm(dhlf);
     }
