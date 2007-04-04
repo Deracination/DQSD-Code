@@ -90,10 +90,10 @@ STDMETHODIMP CDeskBand::GetBandInfo(DWORD, DWORD, DESKBANDINFO* pdbi)
 
     if (pdbi->dwMask & DBIM_MINSIZE)
     {
-        // TODO: Find more reasonable min size. See:
-        // http://sourceforge.net/mailarchive/message.php?msg_name=BAY126-W134EFE6D2ADECFA3C80BB4D2660%40phx.gbl
-        pdbi->ptMinSize.x = 32;
-        pdbi->ptMinSize.y = 10;
+        // These should always be zero. See:
+        // http://discussms.hosting.lsoft.com/SCRIPTS/WA-MSD.EXE?A2=ind9901a&L=atl&T=0&O=D&P=2144
+        pdbi->ptMinSize.x = 0;
+        pdbi->ptMinSize.y = 0;
     }
 
     if (pdbi->dwMask & DBIM_MAXSIZE)
