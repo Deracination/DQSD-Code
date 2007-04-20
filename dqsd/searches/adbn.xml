@@ -1,11 +1,4 @@
 <search function="adbn">
-  <COMMENT>
-
-    Even though this XML search will probably load and is a good start
-    toward a completed search, please be aware that this search will probably
-    not work as is and will probably require some changes.
-
-  </COMMENT>
   <name>Audubon</name>
   <category>Reference<category>General</category></category>
   <contributor>John W. Bairen, Jr.</contributor>
@@ -25,9 +18,6 @@
     <input type="hidden" name="pageid" value="r" />
     <input type="hidden" name="mode" value="ALL" />
     <input type="hidden" name="n" value="0" />
-
-    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
-
     <input type="hidden" name="query" value="" />
   </form>
   <script><![CDATA[
