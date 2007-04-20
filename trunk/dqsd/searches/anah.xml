@@ -2,7 +2,7 @@
   <name>Analyze HTTP Headers</name>
   <category>Computers<category>Programming</category></category>
   <contributor>Shawn K. Hall</contributor>
-  <link>http://www.forret.com/projects/analyze/</link>
+  <link>http://web.forret.com/tools/analyze.aspx</link>
   <email>shawn@reliableanswers.com</email>
   <description>
   HTTP Header Analysis
@@ -13,7 +13,7 @@
   </description>
   <form name="anahf"
         method="get"
-        action="http://www.forret.com/projects/analyze/">
+        action="http://web.forret.com/tools/analyze.aspx">
     <input type="hidden" name="url" value="" />
   </form>
   <script><![CDATA[
