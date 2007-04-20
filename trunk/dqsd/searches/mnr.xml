@@ -14,7 +14,7 @@
   </description>
   <form name="mnrf"
         method="get"
-        action="http://www.mailinator.com/mailinator/maildir.jsp">
+        action="http://www.mailinator.com/maildir.jsp">
     <input type="hidden" name="email" value="" />
   </form>
   <script><![CDATA[
