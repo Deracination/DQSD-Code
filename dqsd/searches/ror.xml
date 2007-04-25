@@ -10,6 +10,7 @@
    <tr><td>/api</td><td> - </td><td>Search the rails api</td></tr>
    <tr><td>/archive</td><td> - </td><td>Search the Ruby Application Archive (RAA)</td></tr>
    <tr><td>/blog</td><td> - </td><td>Search the rails blog</td></tr>
+   <tr><td>/capistrano</td><td> - </td><td>Goto Capistrano at capify.org</td></tr>
    <tr><td>/core</td><td> - </td><td>Search the ruby core for class documentation</td></tr>
    <tr><td>/documentation</td><td> - </td><td>Goto the main rails documentation page</td></tr>
    <tr><td>/forge</td><td> - </td><td>Search RubyForge.org for projects</td></tr>
@@ -18,11 +19,13 @@
    <tr><td>/irc</td><td> - </td><td>Search the rubyonrails channel logs</td></tr>
    <tr><td>/jobs</td><td> - </td><td>Search jobs.rubynow.com</td></tr>
    <tr><td>/news</td><td> - </td><td>Goto rubyweeklynews.org</td></tr>
+   <tr><td>/ocs</td><td> - </td><td>Goto OCS ruby forums</td></tr>
    <tr><td>/pickaxe</td><td> - </td><td>Search Programming Ruby (Pickaxe) book</td></tr>
    <tr><td>/planet</td><td> - </td><td>Goto PlanetRubyOnRails.org</td></tr>
    <tr><td>/plugins</td><td> - </td><td>Search agilewebdevelopment.com plugins</td></tr>
-   <tr><td>/ocs</td><td> - </td><td>Goto OCS ruby forums</td></tr>
+   <tr><td>/prototype</td><td> - </td><td>Search Prototype api/goto prototypejs.org</td></tr>
    <tr><td>/ruby</td><td> - </td><td>Goto ruby-lang.org</td></tr>
+   <tr><td>/scriptaculous</td><td> - </td><td>Search Scriptaculous api/goto script.aculo.us</td></tr>
    <tr><td>/source</td><td> - </td><td>Goto ruby on rails download page</td></tr>
    <tr><td>/stdlib</td><td> - </td><td>Search the ruby stdlib for class documentation</td></tr>
    <tr><td>/ticket</td><td> - </td><td>Goto ruby on rails ticket (patch)</td></tr>
@@ -42,7 +45,7 @@
         return;
 
 	  var url = false;
-      var args = parseArgs(q, "api,archive,blog,core,documentation,forum,forge,garden,irc,jobs,news,ocs,pickaxe,plugins,planet,ruby,stdlib,ticket,wiki,weenie,snippets,source");
+      var args = parseArgs(q, "api,archive,blog,capistrano,core,documentation,forum,forge,garden,irc,jobs,news,ocs,pickaxe,plugins,planet,prototype,ruby,scriptaculous,stdlib,ticket,wiki,weenie,snippets,source");
       if ( args.switches.length > 0 ) {
         switch( args.switches[0].name ) {
 		  case "api": 
@@ -66,6 +69,7 @@
 				url = "http://weblog.rubyonrails.com/";
 			}
 			break;
+	      case "capistrano": url = "http://www.capify.org/"; break;
 		  case "core": 
 			if (args.q != '') {
 				url = 'http://www.google.com/search?hl=en&q=allintitle:+' + escape(args.q) + '+site%3Aruby-doc.org%3Acore%3Aclasses%3A&&btnI=I%27m+Feeling+Lucky';
@@ -111,16 +115,30 @@
 			break;
 		  case 'news': url = 'http://rubyweeklynews.org/'; break;
 		  case 'ocs': url = 'http://www.ocsforums.com/forumdisplay.php?f=1'; break;
-		  case 'pickaxe': url = 'http://ruby-doc.org/find/pickaxe/' + args.q; break;
+		  case 'pickaxe': url = 'http://ruby-doc.org/find/pickaxe/' + escape(args.q); break;
 		  case 'plugins':
 		    if (args.q != '') {
-				url = 'http://www.agilewebdevelopment.com/plugins/search?search=' + args.q; break;
+				url = 'http://www.agilewebdevelopment.com/plugins/search?search=' + escape(args.q); break;
 		    }
 			else {
 			    url = 'http://www.agilewebdevelopment.com/plugins'; break;
 			}
 		  case 'planet': url = 'http://www.planetrubyonrails.org/'; break;
+		  case 'prototype':
+		    if (args.q != '') {
+				url = 'http://prototypejs.org/api/' + escape(args.q.toLowerCase());
+		    } else {
+				url = 'http://www.prototypejs.org';
+			}
+		    break;
 		  case 'ruby': url = 'http://www.ruby-lang.org/en/'; break;
+		  case 'scriptaculous':
+		    if (args.q != '') {
+                url = 'http://wiki.script.aculo.us/scriptaculous/search/?page[name]=' + escape(args.q);
+		    } else {
+				url = 'http://script.aculo.us';
+			}
+		    break;
 		  case 'snippets': url = 'http://www.bigbold.com/snippets/tag/ruby'; break;
 		  case "source": url = "http://dev.rubyonrails.org/"; break;
 		  case "stdlib": 
