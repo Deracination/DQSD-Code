@@ -69,7 +69,13 @@
 				url = "http://weblog.rubyonrails.com/";
 			}
 			break;
-	      case "capistrano": url = "http://www.capify.org/"; break;
+	      case "capistrano": 
+		    if (args.q == 'wiki') {
+			  url = "http://capify.stikipad.com/";
+		    } else {
+		      url = "http://www.capify.org/";
+			}
+			break;
 		  case "core": 
 			if (args.q != '') {
 				url = 'http://www.google.com/search?hl=en&q=allintitle:+' + escape(args.q) + '+site%3Aruby-doc.org%3Acore%3Aclasses%3A&&btnI=I%27m+Feeling+Lucky';
