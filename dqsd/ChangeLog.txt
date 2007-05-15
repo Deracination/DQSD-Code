@@ -2,6 +2,7 @@
 
 Enhancements
 * qsfind - Highlight search string; Stop searching within HTML tags; Handle special regular expression characters correctly.  (Glenn Carr)
+* Holidays for UK through 2010 (Steve Bateman)
 
 New Searches
 * as - Acronym Search (Glenn Carr)
