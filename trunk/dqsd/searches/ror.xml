@@ -45,7 +45,7 @@
         return;
 
 	  var url = false;
-      var args = parseArgs(q, "api,archive,blog,capistrano,core,documentation,forum,forge,garden,irc,jobs,news,ocs,pastie,pickaxe,plugins,planet,prototype,ruby,scriptaculous,stdlib,ticket,wiki,weenie,snippets,source");
+      var args = parseArgs(q, "api,archive,blog,capistrano,core,documentation,forum,forge,garden,irc,jobs,news,ocs,pastie,plugins,planet,prototype,ruby,scriptaculous,stdlib,ticket,wiki,weenie,snippets,source");
       if ( args.switches.length > 0 ) {
         switch( args.switches[0].name ) {
 		  case "api": 
