@@ -1,40 +1,40 @@
-BODY, TD, P 
-{ 
-    font-family: Verdana; 
-    font-size: x-small; 
+BODY, TD, P
+{
+    font-family: Verdana;
+    font-size: 12px;
 }
 PRE
 {
-    font-size: x-small;
+    font-size: 12px;
 }
-HR 
-{ 
-    height: 1px 
-}
-H2 
-{ 
-    margin: 0px 0px 
-}
-A.category 
-{ 
-    font-weight:bold; 
-    text-decoration:underline; 
-}
-A.question 
+HR
 {
-    text-decoration:none; 
-    margin-left:2em; 
+    height: 1px
 }
-DIV.answer 
-{ 
-    text-decoration:none; 
-    color: rgb(204,51,0); 
-    margin-left:5em; 
+H2
+{
+    margin: 0px 0px
 }
-A.toplink 
-{ 
-    font-size:.80em; 
-    vertical-align: bottom; 
+A.category
+{
+    font-weight:bold;
+    text-decoration:underline;
+}
+A.question
+{
+    text-decoration:none;
+    margin-left:2em;
+}
+DIV.answer
+{
+    text-decoration:none;
+    color: rgb(204,51,0);
+    margin-left:5em;
+}
+A.toplink
+{
+    font-size: 11px;
+    vertical-align: bottom;
 }
 DIV.lastupdate
 {
@@ -42,5 +42,5 @@ DIV.lastupdate
 }
 .footnote
 {
-	font-size: 80%;
+	font-size: 11px;
 }
