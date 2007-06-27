@@ -334,7 +334,7 @@ function performsearch(fname, term)
   else
   {
     try
-  {
+    {
       if (fname.match(/\(.*\)/)) {
         // function with parameters specified
         eval(fname);
@@ -343,10 +343,10 @@ function performsearch(fname, term)
         eval(fname + "()");
       }
     }
-  catch(e)
-  {
-        alert('An error (' + e + '/' + e.description + ') occurred while trying to run the search "'+fname+'"');
-  }
+    catch(e)
+    {
+      alert('An error (' + e + '/' + e.description + ') occurred while trying to run the search "'+fname+'"');
+    }
   }
 }
 
