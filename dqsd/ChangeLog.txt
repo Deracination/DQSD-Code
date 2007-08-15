@@ -8,6 +8,8 @@ New Searches
 * as - Acronym Search (Glenn Carr)
 * sr - Sports search for US NBA/NFL/MLB players (Glenn Carr)
 * yl - Yahoo Local Search (Glenn Carr)
+* qac - Query Area Code, provides detailed information about the location and service of a given telephone number (Shawn K. Hall)
+* whi - WebHosting.info, Registrar data, Whois, RWhois, IP lookups, Reverse IP lookups (Shawn K. Hall)
 
 Bug Fixes
 * comx - Fixed a few broken comics and removed some that were not available anymore..  (Monty Scroggins)

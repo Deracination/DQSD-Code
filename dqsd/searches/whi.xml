@@ -1,0 +1,90 @@
+<search function="whi">
+  <name>www.webhosting.info</name>
+  <description>The Internet Research Authority; Registrar data, Whois, RWhois, IP lookups, Reverse IP lookups...
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>whi dqsd.net</td></tr>
+      <tr><td>whi 207.46.230.219</td></tr>
+      <tr><td>whi microsoft</td></tr>
+    </table>
+  </description>
+  <category>Computers<category>Networking</category></category>
+  <link>http://webhosting.info/</link>
+  <contributor>Shawn K. Hall</contributor>
+  <form action="http://www.webhosting.info/webhosts/search/"
+	name="whif" method="post">
+	<input type="hidden" name="search_value" value="" />
+	<input type="hidden" name="search_button" value="Go" />
+	<input type="hidden" name="registrar_value" value="" />
+	<input type="hidden" name="ccode" value="" />
+	<input type="hidden" name="search_crietria" value="DN" />
+  </form>
+  <form action="http://www.webhosting.info/news/search/"
+	name="whifq" method="get">
+	<input type="hidden" name="query" value="" />
+  </form>
+  <script><![CDATA[
+    function whi(q){
+      if( nullArgs( "whi", q ) ) return;
+      var args = parseArgs(q, "address, content, dns, domain, home, hosts, ip, nameserver, news, ns, power, registrar, reverse, search, whois");
+      for (var i = 0; i < args.switches.length; i++){
+        sw = args.switches[i];
+
+        switch(sw.name){
+	//open homepage
+	  case "home":		openSearchWindow("http://www.webhosting.info/"); break;
+	//open news
+	  case "news":		openSearchWindow("http://www.webhosting.info/news/"); break;
+	//website content search
+	  case "content":
+	  case "search":
+				document.whifq.query.value=args.q;
+				submitForm(whifq); break;
+	//web host
+	  case "hosts":		document.whif.search_crietria.value="HC";
+				document.whif.action='http://www.webhosting.info/webhosts/search/';
+				submitForm(whif); break;
+	//name server
+	  case "dns":
+	  case "nameserver":
+	  case "ns":		document.whif.search_crietria.value="NS";
+				document.whif.action='http://www.webhosting.info/webhosts/search/';
+				submitForm(whif); break;
+	//registrar
+	  case "registrar":
+				document.whif.action='http://www.webhosting.info/registrars/search/';
+				document.whif.registrar_value.value=args.q;
+				document.whif.ccode.value="all";
+				document.whif.search_crietria.value="RR";
+				submitForm(whif); break;
+	//reverse lookup and stuff
+	  case "address":
+	  case "domain":
+	  case "ip":
+	  case "power":
+	  case "reverse":
+	  case "whois":		openSearchWindow("http://whois.webhosting.info/"+args.q); break;
+	//best guess
+	  default:
+	      if( args.q.indexOf('.') == -1 ) {
+	      //absence of dot indicates content search
+		document.whifq.query.value=args.q;
+		submitForm(whifq);
+	      } else {
+	      //presence of dot indicates either domain name or IP address
+	        openSearchWindow("http://whois.webhosting.info/"+args.q);
+	      }
+        }
+      }
+    //attempt to parse freeform text
+      if( args.q.indexOf('.') == -1 ) {
+      //absence of dot indicates content search
+	document.whifq.query.value=args.q;
+	submitForm(whifq);
+      } else {
+      //presence of dot indicates either domain name or IP address
+        openSearchWindow("http://whois.webhosting.info/"+args.q);
+      }
+    }
+  ]]></script>
+</search>
