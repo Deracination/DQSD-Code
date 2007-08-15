@@ -12,6 +12,7 @@ New Searches
 Bug Fixes
 * comx - Fixed a few broken comics and removed some that were not available anymore..  (Monty Scroggins)
 * yy - Corrected to work with new Yahoo login form. (Shawn K. Hall)
+* dns - Corrected to work with website changes. Membership (free) is now required. (Shawn K. Hall)
 
 Modified Searches
 * comx - Fixed foxtrot - is now only available on sundays. (Monty Scroggins)
