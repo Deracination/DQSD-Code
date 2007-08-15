@@ -8,7 +8,6 @@
     Search for information on a North American telephone area code and prefix.
     <div class="helpboxDescLabels">Example:</div>
     <table class="helpboxDescTable">
-      <tr><td>qac 209</td></tr>
       <tr><td>qac 209-586</td></tr>
       <tr><td>qac 209-586-0000</td></tr>
     </table>
