@@ -1,0 +1,80 @@
+<search function="blg">
+  <name>Blogger.com</name>
+  <category>System Tools</category>
+  <link>http://www.blogger.com/</link>
+  <contributor>Shawn K. Hall</contributor>
+  <email>Shawn[@]ReliableAnswers.com</email>
+  <description>
+    Login to Blogger
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+      <tr><td> blg </td></tr>
+      <tr><td> blg myid </td></tr>
+      <tr><td> blg myotherid </td></tr>
+    </table>
+    <div class="helpboxDescLabels">Variables:</div>
+    <table class="helpboxDescTable">
+      <tr><td></td><td><em>blgid('user','pwd');</em><br />
+	An array storing a user and password profile for Blogger.
+	You SHOULD provide the <em>blgid()</em> variable, however, you may also provide as many other 
+	profiles as necessary to account for your Blogger ID's. If you were to create a 'second' profile 
+	you would need only to pass the variable name on the command line: <br />
+	<strong>blg otherVariable</strong><br />
+	These variables are, however, case sensitive. If the variable passed does not exist (misspelled, 
+	incorrect case...), this search will 'default' to using the <em>blgid</em> variable.</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Sample Variables (within localprefs.js):</div>
+    <table class="helpboxDescTable">
+      <tr><td></td><td>
+	var bb1 = Array("me@example.com", "mypassword");<br />
+	var bb2 = Array("you@example.net", "myotherpassword");<br />
+	var bb3 = Array("them@example.org", "mythirdpassword");<br />
+	var blgid = bb1;
+      </td></tr>
+    </table>
+  </description>
+  <comment>
+    This is pretty spiffy, eh?
+  </comment>
+
+  <form name="blgf" method="post"
+	action="https://www.google.com/accounts/ServiceLoginBoxAuth">
+	<input type="hidden" name="continue"	value="http://www2.blogger.com/loginz?d=http%3A%2F%2Fwww2.blogger.com%2Fhome" />
+	<input type="hidden" name="service"	value="blogger" />
+	<input type="hidden" name="nui"		value="1" />
+	<input type="hidden" name="naui"	value="8" />
+	<input type="hidden" name="fpui"	value="2" />
+	<input type="hidden" name="uilel"	value="3" />
+	<input type="hidden" name="skipvpage"	value="true" />
+	<input type="hidden" name="rm"		value="false" />
+	<input type="hidden" name="hl"		value="en" />
+	<input type="hidden" name="alwf"	value="true" />
+	<input type="hidden" name="alinsu"	value="1" />
+	<input type="hidden" name="GA3T"	value="3rW8H-los7U" />
+	<input type="hidden" name="Email"	value="" />
+	<input type="hidden" name="Passwd"	value="" />
+	<input type="hidden" name="PersistentCookie"	value="yes" />
+	<input type="hidden" name="rmShown"	value="1" />
+	<input type="hidden" name="null"	value="Sign in" />
+  </form>
+
+  <script><![CDATA[
+    function blg(q){
+	if (q=="?"){
+	  nullArgs("blg",q);
+	  return false;
+	}
+	var blgids = blgid;
+	try{
+	  eval("var blgids = " + q + ";");
+	}catch(e){
+	  var blgids = blgid;
+	}
+	try{
+	  document.blgf.Email.value = blgids[0];
+	  document.blgf.Passwd.value = blgids[1];
+	}catch(e){}
+	submitForm(blgf);
+    }
+  ]]></script>
+</search>
