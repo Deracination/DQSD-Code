@@ -1,0 +1,149 @@
+<search function="yoto">
+  <name>Yotophoto.com</name>
+  <category>Search the Web</category>
+  <link>http://Yotophoto.com/</link>
+  <contributor>Shawn K. Hall</contributor>
+  <email>Shawn[@]ReliableAnswers.com</email>
+  <description>
+    Search for copylefted images at yotophoto
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td> /all </td><td> Include <b>all</b> search terms </td></tr>
+      <tr><td> /any </td><td> Limit by <b>any</b> search terms </td></tr>
+      <tr><td> /exclude <em>terms</em> </td><td> <b>Exclude</b> these terms from result </td></tr>
+      <tr><td> /cc </td><td> <b>Include</b> images under the Creative Commons (CC) license </td></tr>
+      <tr><td> /cl /gnu /fdl </td><td> <b>Include</b> images under the GNU FDL (CL) license </td></tr>
+      <tr><td> /pd /public </td><td> <b>Include</b> images within the Public Domain (PD) </td></tr>
+      <tr><td> /ss /site </td><td> <b>Include</b> images under a Site specific (SS) license </td></tr>
+      <tr><td> /-cc </td><td> <b>Exclude</b> images under the Creative Commons (CC) license </td></tr>
+      <tr><td> /-cl /-gnu /-fdl </td><td> <b>Exclude</b> images under the GNU FDL (CL) license </td></tr>
+      <tr><td> /-pd /-public </td><td> <b>Exclude</b> images within the Public Domain (PD) </td></tr>
+      <tr><td> /-ss /-site </td><td> <b>Exclude</b> images under a Site specific (SS) license </td></tr>
+      <tr><td> /0 </td><td> Any image size </td></tr>
+      <tr><td> /500 </td><td> Images &gt;500px </td></tr>
+      <tr><td> /1000 </td><td> Images &gt;1000px </td></tr>
+      <tr><td> /1500 </td><td> Images &gt;1500px </td></tr>
+      <tr><td> /2000 </td><td> Images &gt;2000px </td></tr>
+      <tr><td> /landscape /horizontal </td><td> Landscape images </td></tr>
+      <tr><td> /portrait /vertical </td><td> Portrait images </td></tr>
+      <tr><td> /square </td><td> Square images </td></tr>
+      <tr><td> /color <em>hex-color-code</em> </td><td> Require this color </td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td> yoto butterfly </td></tr>
+      <tr><td> yoto butterfly /pd </td></tr>
+      <tr><td> yoto butterfly /-ss </td></tr>
+      <tr><td> yoto /color:ddff00 </td></tr>
+      <tr><td> yoto butterfly /exclude:tree </td></tr>
+      <tr><td> yoto soccer /portrait /-pd /1500 </td></tr>
+    </table>
+  </description>
+  <comment>
+    This is pretty spiffy, eh?
+  </comment>
+
+  <form method="post" name="yotof"
+	action="http://yotophoto.com/advancedsearch">
+	<input type="hidden" name="edit[kw]" value="" />
+	<input type="hidden" name="edit[bol]" value="0" title="0=all, 1=any" />
+	<input type="hidden" name="edit[sw]" value="" title="exclude" />
+	<input type="hidden" name="edit[lf][cc]" value="cc" title="License: Creative Commons (CC)" />
+	<input type="hidden" name="edit[lf][cl]" value="cl" title="License: GNU FDL (CL)" />
+	<input type="hidden" name="edit[lf][pd]" value="pd" title="License: Public Domain (PD)" />
+	<input type="hidden" name="edit[lf][ss]" value="ss" title="License: Site specific (SS)" />
+	<input type="hidden" name="edit[min]" value="0" title="Size: 0=any, 500=500px+, 1000=1000px+, 1500=1500px+, 2000=2000px+" />
+	<input type="hidden" name="edit[on]" value="0" title="Orientation: 0=Any, l=Horizontal/Landscape, p=Vertical/Portrait, s=Square" />
+	<input type="hidden" name="edit[clr]" value="" title="Color: hex value" />
+	<input type="hidden" name="op" value=""  />
+	<input type="hidden" name="edit[form_id]" value="advancedsearch" />
+  </form>
+
+  <script><![CDATA[
+    function yoto(q){
+      if( nullArgs( "yoto", q ) ){
+        return false;
+      }
+
+      var args = parseArgs(q, "all, any, exclude, stop, cc, cl, gnu, fdl, public, pd, site, ss, -cc, -cl, -gnu, -fdl, -public, -pd, -site, -ss, 0, 500, 1000, 1500, 2000, landscape, horizontal, portrait, vertical, square, color");
+
+      document.yotof["edit[kw]"].value = args.q;
+      document.yotof["edit[sw]"].value = "";
+      document.yotof["edit[bol]"].value = 0;
+      document.yotof["edit[lf][cc]"].value="cc";
+      document.yotof["edit[lf][cl]"].value="cl";
+      document.yotof["edit[lf][pd]"].value="pd";
+      document.yotof["edit[lf][ss]"].value="ss";
+      document.yotof["edit[on]"].value="0";
+      document.yotof["edit[min]"].value="0";
+      document.yotof["edit[clr]"].value="";
+
+      yotofreset=0;
+      for (var i = 0; i < args.switches.length; i++){
+        sw = args.switches[i];
+        switch(sw.name){
+	  case "cc":		yotofreset=1; break;
+	  case "cl":		yotofreset=1; break;
+	  case "gnu":		yotofreset=1; break;
+	  case "fdl":		yotofreset=1; break;
+	  case "public":	yotofreset=1; break;
+	  case "pd":		yotofreset=1; break;
+	  case "site":		yotofreset=1; break;
+	  case "ss":		yotofreset=1; break;
+	  default:
+        }
+      }
+      if(yotofreset==1){
+        document.yotof["edit[lf][cc]"].value="";
+        document.yotof["edit[lf][cl]"].value="";
+        document.yotof["edit[lf][pd]"].value="";
+        document.yotof["edit[lf][ss]"].value="";
+      }
+
+      for (var i = 0; i < args.switches.length; i++){
+        sw = args.switches[i];
+        switch(sw.name){
+	  case "all":		document.yotof["edit[bol]"].value = 0; break;
+	  case "any":		document.yotof["edit[bol]"].value = 1; break;
+
+	  case "exclude":	document.yotof["edit[sw]"].value = sw.value; break;
+	  case "stop":		document.yotof["edit[sw]"].value = sw.value; break;
+
+	  case "cc":		document.yotof["edit[lf][cc]"].value="cc"; break;
+	  case "cl":		document.yotof["edit[lf][cl]"].value="cl"; break;
+	  case "gnu":		document.yotof["edit[lf][cl]"].value="cl"; break;
+	  case "fdl":		document.yotof["edit[lf][cl]"].value="cl"; break;
+	  case "public":	document.yotof["edit[lf][pd]"].value="pd"; break;
+	  case "pd":		document.yotof["edit[lf][pd]"].value="pd"; break;
+	  case "site":		document.yotof["edit[lf][ss]"].value="ss"; break;
+	  case "ss":		document.yotof["edit[lf][ss]"].value="ss"; break;
+
+	  case "-cc":		document.yotof["edit[lf][cc]"].value=""; break;
+	  case "-cl":		document.yotof["edit[lf][cl]"].value=""; break;
+	  case "-gnu":		document.yotof["edit[lf][cl]"].value=""; break;
+	  case "-fdl":		document.yotof["edit[lf][cl]"].value=""; break;
+	  case "-public":	document.yotof["edit[lf][pd]"].value=""; break;
+	  case "-pd":		document.yotof["edit[lf][pd]"].value=""; break;
+	  case "-site":		document.yotof["edit[lf][ss]"].value=""; break;
+	  case "-ss":		document.yotof["edit[lf][ss]"].value=""; break;
+
+	  case "0":		document.yotof["edit[min]"].value="0"; break;
+	  case "500":		document.yotof["edit[min]"].value="500"; break;
+	  case "1000":		document.yotof["edit[min]"].value="1000"; break;
+	  case "1500":		document.yotof["edit[min]"].value="1500"; break;
+	  case "2000":		document.yotof["edit[min]"].value="2000"; break;
+
+	  case "landscape":	document.yotof["edit[on]"].value="l"; break;
+	  case "horizontal":	document.yotof["edit[on]"].value="l"; break;
+	  case "portrait":	document.yotof["edit[on]"].value="p"; break;
+	  case "vertical":	document.yotof["edit[on]"].value="p"; break;
+	  case "square":	document.yotof["edit[on]"].value="s"; break;
+
+	  case "color":		document.yotof["edit[clr]"].value=sw.value; break;
+	  default:
+        }
+      }
+      submitForm(yotof);
+    }
+  ]]></script>
+</search>
