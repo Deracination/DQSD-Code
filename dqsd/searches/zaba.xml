@@ -1,0 +1,88 @@
+<search function="zaba">
+  <name>ZabaSearch</name>
+  <category>People and Places</category>
+  <contributor>Gregory Krohne and Shawn K. Hall</contributor>
+  <link>http://www.zabasearch.com/</link>
+  <email>zeakz1d02@sneakemail.com</email>
+  <description>
+  Find a person by name anywhere in the United States.
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/yyyy</td><td>Year of Birth - defaults to any</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>zaba George P. Burdell</td></tr>
+      <tr><td>zaba George W. Bush, DC</td></tr>
+      <tr><td>zaba George W. Bush, DC, 1946</td></tr>
+      <tr><td>zaba jack, john smith, sonora, ca, 1930</td></tr>
+    </table>
+  </description>
+  <script><![CDATA[
+    function zaba(q){
+      if( nullArgs("zaba", q) )
+        return;
+      var sname = "";
+      var city  = "";
+      var state = "";
+      var doby  = "";
+      var gg= 0;
+      var d = new Date();
+      var y = d.getYear();
+      var a ="00";
+      for(var i=1900; i<y; i++){
+        a+=", "+i;
+      }
+      var args = parseArgs(q, a);
+      for (var i = 0; i < args.switches.length; i++){
+        sw = args.switches[i];
+        switch(sw.name){
+	  default:
+	    if(!isNaN(sw.name)){
+	      var doby=sw.name;
+	    }
+        }
+      }
+      var zab = args.q.split(", ");
+      zab.reverse();
+      var zz = "";
+      zl = zab.length;
+      for (var i=0; i < zl; i++){
+	gg=0;
+	zz = zab[i];
+	if(((doby=="") || (doby=="00")) && (!isNaN(zz)) && (gg==0)){
+	  var doby=zz;
+	  gg=1;
+	}
+	if(((state=="") || (state=="any")) && (zz.length==2) && (gg==0)){
+	  var state=zz.toUpperCase();
+	  gg=1;
+	}
+	if((city=="") && (zab.length>0) && (gg==0)){
+	  var city=zz;
+	  gg=1;
+	}
+	if((gg==0)){
+	  if(sname!=""){
+	    sname=zz + ", " + sname;
+	  }else{
+	    sname=zz;
+	  }
+	  gg=1;
+	}
+      }
+      openSearchWindow(
+	"http://www.zabasearch.com/query1_zaba.php"
+	+ "?sname=" + sname
+	+ "&city=" + city
+	+ "&state=" + state
+	+ "&doby=" + doby
+	+ "&ref=zaba&se=O&name_style=1"
+	);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>

@@ -12,6 +12,7 @@ New Searches
 * whi - WebHosting.info, Registrar data, Whois, RWhois, IP lookups, Reverse IP lookups (Shawn K. Hall)
 * blg - Blogger.com login tool for multiple Blogger profiles (Shawn K. Hall)
 * yoto - Yotophoto.com "copylefted" image search (Shawn K. Hall)
+* zaba - ZabaSearch.com people search (Shawn K. Hall)
 
 Bug Fixes
 * comx - Fixed a few broken comics and removed some that were not available anymore..  (Monty Scroggins)
