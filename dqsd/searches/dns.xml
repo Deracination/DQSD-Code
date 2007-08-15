@@ -33,7 +33,7 @@
   
   // the basic re-usable single element form for most of the lookups
   <form name="dnsf"
-	action="http://www.dnsstuff.com"
+	action="http://whois.dnsstuff.com"
 	method="get">
 	<input type="hidden" name="ip" value=""/>
   </form>
@@ -56,63 +56,63 @@
     {
       var args = parseArgs(q, "report, timing, whois, spam, rev, ipwhois, netgeo, dns, tracert, ping, cidr");
       if( q == "" ){
-	openSearchWindow("http://www.dnsstuff.com/");
+	openSearchWindow("http://member.dnsstuff.com/pages/tools.php");
       }else if( args.switches.length >= 1 ){
 	for (var i = 0; i < args.switches.length; i++){
 	  switch( args.switches[i].name ){
 	    case "report":
 		document.dnsrepf.domain.value = args.q;
-		document.dnsrepf.action="http://www.dnsreport.com/tools/dnsreport.ch"
+		document.dnsrepf.action="http://private.dnsstuff.com/tools/dnsreport.ch"
 		submitForm(dnsrepf);
 		break;
 	    case "dns":
 		document.dnslongf.name.value = args.q;
-		document.dnslongf.action="http://www.dnsstuff.com/tools/lookup.ch"
+		document.dnslongf.action="http://whois.dnsstuff.com/tools/lookup.ch"
 		submitForm(dnslongf);
 		break;
 	    case "timing":
 		document.dnslongf.name.value = args.q;
-		document.dnslongf.action="http://www.dnsstuff.com/tools/dnstime.ch"
+		document.dnslongf.action="http://whois.dnsstuff.com/tools/dnstime.ch"
 		submitForm(dnslongf);
 		break;
 	    case "whois":
 		document.dnsf.ip.value = args.q;
-		document.dnsf.action="http://www.dnsstuff.com/tools/whois.ch";
+		document.dnsf.action="http://whois.dnsstuff.com/tools/whois.ch";
 		submitForm(dnsf);
 		break;
 	    case "spam":
 		document.dnsf.ip.value = args.q;
-		document.dnsf.action="http://www.dnsstuff.com/tools/ip4r.ch";
+		document.dnsf.action="http://whois.dnsstuff.com/tools/ip4r.ch";
 		submitForm(dnsf);
 		break;
 	    case "rev":
 		document.dnsf.ip.value = args.q;
-		document.dnsf.action="http://www.dnsstuff.com/tools/ptr.ch";
+		document.dnsf.action="http://whois.dnsstuff.com/tools/ptr.ch";
 		submitForm(dnsf);
 		break;
 	    case "ipwhois":
 		document.dnsf.ip.value = args.q;
-		document.dnsf.action="http://www.dnsstuff.com/tools/whois.ch";
+		document.dnsf.action="http://whois.dnsstuff.com/tools/whois.ch";
 		submitForm(dnsf);
 		break;
 	    case "netgeo":
 		document.dnsf.ip.value = args.q;
-		document.dnsf.action="http://www.dnsstuff.com/tools/netgeo.ch";
+		document.dnsf.action="http://whois.dnsstuff.com/tools/netgeo.ch";
 		submitForm(dnsf);
 		break;
 	    case "tracert":
 		document.dnsf.ip.value = args.q;
-		document.dnsf.action="http://www.dnsstuff.com/tools/tracert.ch";
+		document.dnsf.action="http://whois.dnsstuff.com/tools/tracert.ch";
 		submitForm(dnsf);
 		break;
 	    case "ping":
 		document.dnsf.ip.value = args.q;
-		document.dnsf.action="http://www.dnsstuff.com/tools/ping.ch";
+		document.dnsf.action="http://whois.dnsstuff.com/tools/ping.ch";
 		submitForm(dnsf);
 		break;
 	    case "cidr":
 		document.dnsf.ip.value = args.q;
-		document.dnsf.action="http://www.dnsstuff.com/tools/cidr.ch";
+		document.dnsf.action="http://whois.dnsstuff.com/tools/cidr.ch";
 		submitForm(dnsf);
 		break;
 	  }
@@ -122,7 +122,7 @@
       }else{
 	//defaults to a standard dns lookup
 	document.dnslongf.name.value = args.q;
-	document.dnslongf.action="http://www.dnsstuff.com/tools/lookup.ch"
+	document.dnslongf.action="http://whois.dnsstuff.com/tools/lookup.ch"
 	submitForm(dnslongf);
       }
     }
@@ -132,8 +132,8 @@
     function autodetect_ip(q){
       res = ip_regex.exec(q);
       if (res){
-	document.dnsf.ip.value = res;
-	document.dnsf.action="http://www.dnsstuff.com/tools/whois.ch";
+	document.dnsf.ip.value = q;
+	document.dnsf.action="http://whois.dnsstuff.com/tools/whois.ch";
 	submitForm(dnsf);
         return true;
       }
@@ -141,7 +141,7 @@
   ]]></script>
 
   <copyright>
-	This search file was last modified on 2005/01/06 by Shawn K. Hall
+	This search file was last modified on 2007/08/15 by Shawn K. Hall
 	Copyright (c) 2002 David Bau
 	Distributed under the terms of the
 	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
