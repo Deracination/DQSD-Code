@@ -78,7 +78,12 @@
 			break;
 		  case "core": 
 			if (args.q != '') {
-				url = 'http://www.google.com/search?hl=en&q=allintitle:+' + escape(args.q) + '+site%3Aruby-doc.org%3Acore%3Aclasses%3A&&btnI=I%27m+Feeling+Lucky';
+			    query = escape(args.q);
+				known_modules_regexp = /^(abbrev|base64|benchmark|comparable|drb|enumerable|fileutils|find|forwardable|gc|generators|irb|kernel|math|net|objectspace|openuri|precision|process|rdoc|rexml|rinda|rss|singleforwardable|singleton|test::unit|timeout|uri|webrick|wsdl|xml|xsd|yaml)$/i
+				if (query.match(known_modules_regexp)) {
+				  query = "module+" + query;
+				}
+                url = "http://www.google.com/search?hl=en&q=allintitle%3A+" + query + "+site%3Aruby-doc.org%2Fcore%2Fclasses&btnI=I%27m+Feeling+Lucky";
 			} else {
 				url = "http://www.ruby-doc.org/core/";
 			}
@@ -123,7 +128,12 @@
 		  case 'ocs': url = 'http://www.ocsforums.com/forumdisplay.php?f=1'; break;
 		  case 'pastie':
 		    if (args.q != '') {
-				url = 'http://pastie.caboo.se/search/?q=' + escape(args.q);
+                if (args.q.match(/^author\//)) {
+				  /* technoweenie, topfunky, madrobby, drnic, ezmobius, nzkoz, bitsweat, caged, Dreamer3 */
+                  url = 'http://pastie.caboo.se/' + args.q;
+                } else {
+                  url = 'http://pastie.caboo.se/search/?q=' + escape(args.q);
+                }
 		    } else {
 				url = 'http://pastie.caboo.se/';
 			}
@@ -152,11 +162,11 @@
 				url = 'http://script.aculo.us';
 			}
 		    break;
-		  case 'snippets': url = 'http://www.bigbold.com/snippets/tag/ruby'; break;
+		  case 'snippets': url = 'http://snippets.dzone.com/tag/ruby'; break;
 		  case "source": url = "http://dev.rubyonrails.org/"; break;
 		  case "stdlib": 
 			if (args.q != '') {
-				url = 'http://www.google.com/search?hl=en&q=allintitle:+' + escape(args.q) + '+site%3Aruby-doc.org%3Astdlib%3A&&btnI=I%27m+Feeling+Lucky';
+				url = 'http://www.google.com/search?hl=en&q=allinurl:+rdoc+classes+' + escape(args.q) + '+site%3Aruby-doc.org%2Fstdlib%2F&btnI=I%27m+Feeling+Lucky';
 			} else {
 				url = "http://www.ruby-doc.org/stdlib/";
 			}
@@ -189,6 +199,6 @@
   ]]></script>
 
   <copyright>
-    Copyright (c) 2005-2006 Brent Beardsley; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+    Copyright (c) 2005-2007 Brent Beardsley; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
   </copyright>
 </search>
