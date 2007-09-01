@@ -17,12 +17,16 @@
   <idea>stickyc's buddy</idea>
   
   <form name="fedexf"
-        action="http://www.fedex.com/cgi-bin/tracking"
-        method="get">
-    <input type="hidden" name="tracknumbers"/>
-    <input type="hidden" name="action" VALUE="track"/>
-    <input type="hidden" name="language" VALUE="english"/>
-    <input type="hidden" name="cntry_code" VALUE="us"/>
+       method="get"
+        action="http://www.fedex.com/Tracking">
+    <input type="hidden" name="ascend_header" value="1" />
+    <input type="hidden" name="clienttype" value="dotcom" />
+    <input type="hidden" name="cntry_code" value="us" />
+    <input type="hidden" name="language" value="english" />
+
+    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
+
+    <input type="hidden" name="tracknumbers" value="" />
   </form>
   
   <script><![CDATA[
