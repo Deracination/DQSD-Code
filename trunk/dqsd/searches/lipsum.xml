@@ -25,14 +25,10 @@
   </description>
   <form name="lipsumf"
         method="post"
-        action="http://www.lipsum.com/cgi-bin/lipsum.pl">
+        action="http://www.lipsum.com/feed/html">
     <input type="hidden" name="amount" value="1" />
     <input type="hidden" name="start" value="yes" />
     <input type="hidden" name="what" value="paras" />
-    <COMMENT>
-      The input element above, "what" was a set of radio buttons with the following options...
-      "paras", "words", "bytes", "lists"
-    </COMMENT>
   </form>
   <script><![CDATA[
     function lipsum(q)
