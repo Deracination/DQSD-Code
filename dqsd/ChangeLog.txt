@@ -19,6 +19,7 @@ Bug Fixes
 * yy - Corrected to work with new Yahoo login form. (Shawn K. Hall)
 * dns - Corrected to work with website changes. Membership (free) is now required. (Shawn K. Hall)
 * fedex - Corrected to work with website changes. (John Bairen)
+* lipsum - Updated to use new form action (Kim Gräsman, after tip from Charlie Russel)
 
 Modified Searches
 * comx - Fixed foxtrot - is now only available on sundays. (Monty Scroggins)
