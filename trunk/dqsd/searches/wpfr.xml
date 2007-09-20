@@ -2,7 +2,7 @@
   <name>French white pages</name>
   <category>People and Places</category>
   <contributor>MLL</contributor>
-  <link>http://www.pagesblanches.fr/</link>
+  <link>http://www.pagesjaunes.fr/trouverunnom/RecherchePagesBlanches.do</link>
   <description>
   Get an address from a name in France
     <div class="helpboxDescLabels">Usage:</div>
@@ -24,22 +24,24 @@
 
   <form name="wpfrf"
         method="post"
-        action="http://www.pagesjaunes.fr/pb.cgi">
-    <input type="hidden" name="faire" value="decode_input_image" />
-    <input type="hidden" name="DEFAULT_ACTION" value="bf_inscriptions_req" />
-    <input type="hidden" name="mode" value="web" />
-    <input type="hidden" name="SESSION_ID" value="GF-5219B4C-19CFC" />
-    <input type="hidden" name="VID" value="GF-5219B4C-19CFC" />
-    <input type="hidden" name="lang" value="FR" />
-    <input type="hidden" name="pays" value="FR" />
-    <input type="hidden" name="srv" value="PB" />
-    <input type="hidden" name="TYPE_RECHERCHE" value="ZZZ" />
-    <input type="hidden" name="input_image" value="" />
-    <input type="hidden" name="FRM_NOM" value="" />
-    <input type="hidden" name="FRM_PRENOM" value="" />
-    <input type="hidden" name="FRM_ADRESSE" value="" />
-    <input type="hidden" name="FRM_LOCALITE" value="" />
-    <input type="hidden" name="FRM_DEPARTEMENT" value="" />
+        action="http://www.pagesjaunes.fr/trouverunnom/RecherchePagesBlanches.do;jsessionid=87BB2BBBCB20738C7322EBD96D2963F4.yas12f">
+    <input type="hidden" name="actionForwardName" value="reponse" />
+    <input type="hidden" name="codeLieu" value="" />
+    <input type="hidden" name="codeLieu" value="" />
+    <input type="hidden" name="nom" value="" />
+    <input type="hidden" name="prenom" value="" />
+    <input type="hidden" name="prenom" value="" />
+    <input type="hidden" name="voieLibelle" value="" />
+    <input type="hidden" name="voieInitiale" value="" />
+    <input type="hidden" name="voieCode" value="" />
+    <input type="hidden" name="numeroVoie" value="" />
+    <input type="hidden" name="localiteLibelle" value="" />
+    <input type="hidden" name="localiteInitiale" value="" />
+    <input type="hidden" name="localiteCode" value="" />
+    <input type="hidden" name="depRegLibelle" value="" />
+    <input type="hidden" name="departementInitiale" value="" />
+    <input type="hidden" name="departementCode" value="" />
+    <input type="hidden" name="regionCode" value="" />
   </form>
 
   <script><![CDATA[
@@ -49,33 +51,33 @@
       if( nullArgs("wpfr", args.q) )
         return;
 
-      document.wpfrf.FRM_PRENOM.value = "";
-      document.wpfrf.FRM_ADRESSE.value = "";
-      document.wpfrf.FRM_LOCALITE.value = "";
-      document.wpfrf.FRM_DEPARTEMENT.value = "";
+      document.wpfrf.prenom.value = "";
+      document.wpfrf.voieLibelle.value = "";
+      document.wpfrf.localiteLibelle.value = "";
+      document.wpfrf.depRegLibelle.value = "";
 
       for (var iSwitch = 0; iSwitch < args.switches.length; iSwitch++)
       {
         switch( args.switches[iSwitch].name )
         {
           case "prenom":
-            document.wpfrf.FRM_PRENOM.value = args.switches[iSwitch].value;
+            document.wpfrf.prenom.value = args.switches[iSwitch].value;
             break;
           case "adresse":
-            document.wpfrf.FRM_ADRESSE.value = args.switches[iSwitch].value;
+            document.wpfrf.voieLibelle.value = args.switches[iSwitch].value;
             break;
           case "localite":
-            document.wpfrf.FRM_LOCALITE.value = args.switches[iSwitch].value;
+            document.wpfrf.localiteLibelle.value = args.switches[iSwitch].value;
             break;
           case "departement":
-            document.wpfrf.FRM_DEPARTEMENT.value = args.switches[iSwitch].value;
+            document.wpfrf.depRegLibelle.value = args.switches[iSwitch].value;
             break;
           default:
             break;
         }
       }
 
-      document.wpfrf.FRM_NOM.value = args.q;
+      document.wpfrf.nom.value = args.q;
 
       submitForm(wpfrf);
     }
