@@ -25,6 +25,7 @@ Modified Searches
 * comx - Fixed foxtrot - is now only available on sundays. (Monty Scroggins)
 * acine - Changed to fit site changes (MLL)
 * dicfr - Changed to fit site changes (MLL)
+* wprf - Changed to fit site changes (MLL)
 
 -- What's new for 4.0.0.3 (Feb 6, 2007)
 
