@@ -20,6 +20,7 @@ Bug Fixes
 * dns - Corrected to work with website changes. Membership (free) is now required. (Shawn K. Hall)
 * fedex - Corrected to work with website changes. (John Bairen)
 * lipsum - Updated to use new form action (Kim Gräsman, after tip from Charlie Russel)
+* mwd - Fixed /popup functionality (Shawn K. Hall)
 
 Modified Searches
 * comx - Fixed foxtrot - is now only available on sundays. (Monty Scroggins)
