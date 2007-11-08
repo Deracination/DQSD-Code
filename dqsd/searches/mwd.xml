@@ -96,7 +96,7 @@
       var windowW = 500;
 
       var sBody = xmlHttp.responseText.replace( /[\r\n]/gi, "" );
-      var re = /(<h1>.+<\/h1>.*([^>]+)\s+entr.+found for.+Main Entry:.+)/mig;
+      var re = /(<div\sclass="entry\smisc">(.+)<\/div><\/div>)/mig;
       var results = re.exec( sBody );
       if ( results != null )
       {
@@ -106,7 +106,11 @@
           entriesFound = 1;
 
         var html = results[ 1 ].replace( /(src="\/)/gi, "src=\"http://www.m-w.com/" ).replace( /(href="\/)/gi, "href=\"http://www.m-w.com/" );
-        
+        var html = html.replace( /<span\sclass="sense_break"\/>/gi, "<br/>");
+        var html = html.replace( /<span\sclass="sense\_label\sstart">/gi, "<br/><br/><span>");
+        var html = html.replace( /javascript\:popWin\(\'/gi, "http://www.m-w.com/");
+        var html = html.replace( /\'\)"\sclass="audio"/gi, "\"");
+
         if ( entriesFound == 1 )
           html = html.replace( /(Main Entry:)/, '<br/><br/>$1' );
         else
