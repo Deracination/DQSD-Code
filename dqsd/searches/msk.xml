@@ -64,8 +64,8 @@
         }
       }
 
-      if ( res = args.q.match(/^\s*[qQ]?(\d{6})\s*$/) )
-        document.mskf.query.value = "Q" + res[1];
+      if ( res = args.q.match(/^\s*q?(\d{6})\s*$/i) )
+        document.mskf.query.value = res[1];
       else
         document.mskf.query.value = args.q;
       submitForm(mskf);
