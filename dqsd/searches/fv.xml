@@ -12,22 +12,41 @@
 	flight you enter must be "active" - usually this seems to mean from an hour
 	or two before takeoff until an hour or two after landing.
 	<br/><br/>
-	Airline codes can be entered in upper or lower case.  Some common US Airline
-	codes:
-	<br/><br/>
-	AA - American Airlines<br/>
-	CO - Continental Airlines<br/>
-	DL - Delta Airlines<br/>
-	B6 - Jet Blue<br/>
-	NW - Northwest Airlines<br/>
-	WN - Southwest Airlines<br/>
-	US - US Airways<br/>
-	UA - United Airlines<br/>
-	<br/>
+	Airline and Airport codes can be entered in upper or lower case.
+    <div class="helpboxDescLabels">Some common US Airline codes:</div>
+    <table class="helpboxDescTable">
+	<tr><td>AA - American Airlines</td></tr>
+	<tr><td>CO - Continental Airlines</td></tr>
+	<tr><td>DL - Delta Airlines</td></tr>
+	<tr><td>B6 - Jet Blue</td></tr>
+	<tr><td>NW - Northwest Airlines</td></tr>
+	<tr><td>WN - Southwest Airlines</td></tr>
+	<tr><td>SX - Skybus Airlines</td></tr>
+	<tr><td>US - US Airways</td></tr>
+	<tr><td>UA - United Airlines</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Common Airports (examples only):</div>
+    <table class="helpboxDescTable">
+	<tr><td>DEN - Denver</td></tr>
+	<tr><td>JFK - John F Kennedy</td></tr>
+	<tr><td>SMF - Sacramento Metro</td></tr>
+	<tr><td>SLC - Salt Lake City</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Syntax:</div>
+    <table class="helpboxDescTable">
+	<tr><td>fv [airport]</td></tr>
+	<tr><td>fv [airline] [flight number]</td></tr>
+	<tr><td>fv [airport] [airport] [time]</td></tr>
+    </table>
     <div class="helpboxDescLabels">Examples:</div>
     <table class="helpboxDescTable">
-  		<tr><td>fv aa 2035</td></tr>
-  		<tr><td>fv as 341</td></tr>
+	<tr><td>fv aa 2035</td></tr>
+	<tr><td>fv sx 341</td></tr>
+	<tr><td>fv jfk</td></tr>
+	<tr><td>fv slc</td></tr>
+	<tr><td>fv jfk slc m</td></tr>
+	<tr><td>fv jfk slc night</td></tr>
+	<tr><td>fv jfk den 16</td></tr>
     </table>
   </description>
   <form name="fvaf" method="get" 
@@ -99,6 +118,7 @@
 	  case "a":		document.fvcf.whenHour.value = "afternoon"; break;
 	  case "afternoon":	document.fvcf.whenHour.value = "afternoon"; break;
 	  case "e":		document.fvcf.whenHour.value = "night"; break;
+	  case "evening":	document.fvcf.whenHour.value = "night"; break;
 	  case "night":		document.fvcf.whenHour.value = "night"; break;
 	  default:		document.fvcf.whenHour.value = vars[2]; break;
 	}
