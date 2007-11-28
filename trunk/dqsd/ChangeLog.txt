@@ -22,6 +22,7 @@ Bug Fixes
 * lipsum - Updated to use new form action (Kim Gräsman, after tip from Charlie Russel)
 * mwd - Fixed /popup functionality (Shawn K. Hall)
 * msk - Fixed due to site changes (Glenn Carr)
+* fv - Corrected to work with website changes. Added functionality. (Shawn K. Hall)
 
 Modified Searches
 * comx - Fixed foxtrot - is now only available on sundays. (Monty Scroggins)

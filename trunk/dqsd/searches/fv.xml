@@ -1,7 +1,7 @@
 <search function="fv">
   <name>flightview.com</name>
   <category>Travel</category>
-  <contributor>Allen B. MacKenzie (modified by Kim Gr&#228;sman)</contributor>
+  <contributor>Allen B. MacKenzie (modified by Kim Gr&#228;sman and Shawn K. Hall)</contributor>
   <link>http://www.flightview.com/</link>
   <email>kim@mvps.org</email>
   <description>
@@ -30,31 +30,84 @@
   		<tr><td>fv as 341</td></tr>
     </table>
   </description>
-  <form name="fvf"
-        method="post"
-        action="http://www.flightview.com/TravelTools/ProcessFTQuery.asp?qt=af">
-    <input type="hidden" name="aln" value="" />
-    <input type="hidden" name="deparr" value="dep" />
-    <input type="hidden" name="alnn" value="-1" />
-    <input type="hidden" name="fn" value="" />
-    <input type="hidden" name="ddate" value="" />
+  <form name="fvaf" method="get" 
+	action="http://www.flightview.com/TravelTools/ViewAirport.asp">
+	<input type="hidden" name="airport" value="" title="airport code: AAA" />
+  </form>
+  <form name="fvf" method="post"
+	action="http://www.flightview.com/TravelTools/FlightTrackerQueryResults.asp">
+	<input type="hidden" name="qtype" value="sfi" />
+	<input type="hidden" name="sfw" value="/FV/Home/Main" />
+	<input type="hidden" name="whenArrDep" value="dep" />
+	<input type="hidden" name="selAl" value="" />
+	<input type="hidden" name="al" value="" />
+	<input type="hidden" name="fn" value="" />
+	<input type="hidden" name="whenDate" value="Today" />
+	<input type="hidden" name="x" value="1" />
+	<input type="hidden" name="y" value="1" />
+  </form>
+  <form name="fvcf" method="post"
+	action="http://www.flightview.com/TravelTools/FlightTrackerQueryResults.asp">
+	<input type="hidden" name="qtype" value="cpi" />
+	<input type="hidden" name="sfw" value="/FV/Home/Main" />
+	<input type="hidden" name="selDepap" value="" />
+	<input type="hidden" name="depap" value="" />
+	<input type="hidden" name="selArrap" value="" />
+	<input type="hidden" name="arrap" value="" />
+	<input type="hidden" name="whenArrDep" value="arr" />
+	<input type="hidden" name="whenHour" value="" />
+	<input type="hidden" name="whenDate" value="Today" />
+	<input type="hidden" name="x" value="1" />
+	<input type="hidden" name="y" value="1" />
   </form>
   <script><![CDATA[
-    function fv(q)
-    {
+    function fv(q){
       if( nullArgs("fv", q) )
         return false;
 
-      vars = q.split(" ")
-      if (vars.length == 2)
-      {
-        document.fvf.aln.value = vars[0].toUpperCase();
-        document.fvf.fn.value = vars[1];
-        document.fvf.ddate.value = "Today";
-        submitForm(fvf);
+      fvaction = 0;
+      var d = new Date();
+      var dd = d.getFullYear() + "" + (d.getMonth()+1) + "" + d.getDate();
+
+      vars = q.split(" ");
+      if (vars.length == 1){	// airport details
+	document.fvaf.airport.value = vars[0].toUpperCase();
+	fvaction = 1;
+	submitForm(fvaf);
       }
-      else
+      if (vars.length == 2){	// flight details by airline and number
+	document.fvf.selAl.value = vars[0].toUpperCase();
+	document.fvf.al.value = vars[0].toUpperCase();
+	document.fvf.fn.value = vars[1];
+	document.fvf.whenArrDep.value = "dep";
+	document.fvf.whenDate.value = dd;
+	fvaction = 1;
+	submitForm(fvf);
+      }
+      if(vars.length == 3){	// airport to airport with time
+	document.fvcf.selDepap.value = vars[0].toUpperCase();
+	document.fvcf.depap.value = vars[0].toUpperCase();
+	document.fvcf.selArrap.value = vars[1].toUpperCase();
+	document.fvcf.arrap.value = vars[1].toUpperCase();
+	document.fvcf.whenDate.value = dd;
+	vars[2] = vars[2].toLowerCase();
+	switch(vars[2]){
+	  case "m":		document.fvcf.whenHour.value = "morning"; break;
+	  case "morning":	document.fvcf.whenHour.value = "morning"; break;
+	  case "n":		document.fvcf.whenHour.value = "noonish"; break;
+	  case "noonish":	document.fvcf.whenHour.value = "noonish"; break;
+	  case "a":		document.fvcf.whenHour.value = "afternoon"; break;
+	  case "afternoon":	document.fvcf.whenHour.value = "afternoon"; break;
+	  case "e":		document.fvcf.whenHour.value = "night"; break;
+	  case "night":		document.fvcf.whenHour.value = "night"; break;
+	  default:		document.fvcf.whenHour.value = vars[2]; break;
+	}
+	fvaction = 1;
+	submitForm(fvcf);
+      }
+      if(fvaction == 0){
         nullArgs("fv","?");
+      }
     }
   ]]></script>
   <copyright>
