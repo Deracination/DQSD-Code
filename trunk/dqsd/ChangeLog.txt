@@ -2,6 +2,7 @@
 
 Enhancements
 * qsfind - Highlight search string; Stop searching within HTML tags; Handle special regular expression characters correctly.  (Glenn Carr)
+* note - Added preference (noteOpenAsDocument) to open note file using application associated with .txt.
 * Holidays for UK through 2010 (Steve Bateman)
 
 New Searches

@@ -1,7 +1,7 @@
 <search function="note">
   <name>Note</name>
   <description>
-   save a note or notes for later<br/>
+   Save a note or notes for later.  By default, notes are displayed in browser window.  Set 'noteOpenAsDocument' to true in localprefs.js to open in default text editor.<br/>
    <div class="helpboxDescLabels">Switches:</div>
    <table class="helpboxDescTable">
      <tr><td>/clear</td><td> - </td><td>clear existing notes</td></tr>
@@ -18,69 +18,72 @@
   </description>
   <category>Functions</category>
   <link>http://www.metrocast.net/~peteh</link>
-  <contributor>Peter Heath, Brent Beardsley</contributor>
+  <contributor>Peter Heath, Brent Beardsley, Glenn Carr</contributor>
   
   <script><![CDATA[
 
     var adddate=true;
+    
+    // Check for global preference
+    var openAsDoc = ( typeof noteOpenAsDocument == 'boolean' && noteOpenAsDocument );
 
     function getNoteFile() {
-		return DQSDLauncher.AppDataDirectory + "\\note.txt";
-	}
+        return DQSDLauncher.AppDataDirectory + '\\note.txt';
+    }
 
     function addNote(info) {
-		try {
-			appendFile(getNoteFile(), info+"\r\n");
-			setSearchWindowText("");
-		}
-		catch(e) { }
+        try {
+            appendFile(getNoteFile(), info+"\r\n");
+            setSearchWindowText("");
+        }
+        catch(e) { }
     }
 
     function clearNote() {
-		try {
-			writeFile(getNoteFile(), "");
-			setSearchWindowText("");
-		}
-		catch(e) { }
-	}
+        try {
+            writeFile(getNoteFile(), "");
+            setSearchWindowText("");
+        }
+        catch(e) { }
+    }
 
-	function displayNotes()	{
-		openSearchWindow(getNoteFile());
-	}
-	
+    function displayNotes() {
+        openAsDoc ? openDocument('"' + getNoteFile() + '"') : openSearchWindow(getNoteFile());
+    }
+    
     function note(info) {
-	    var cleared = false;
-		var display = false;
-		var args = parseArgs(info, "clear, display");
+        var cleared = false;
+        var display = false;
+        var args = parseArgs(info, "clear, display");
         for (var i = 0; i < args.switches.length; i++) {
-			sw = args.switches[i];
-			switch(sw.name) {
-			case 'clear': clearNote(); cleared = true; break;
-			case 'display': display = true; break;
-			default: break;
-			}
-		}
+            sw = args.switches[i];
+            switch(sw.name) {
+            case 'clear': clearNote(); cleared = true; break;
+            case 'display': display = true; break;
+            default: break;
+            }
+        }
 
-		info = args.q;
-		if (info == "?") {
-			nullArgs("note", info);
-		} else if (info == "") {
-		    if (!cleared) {
-				display = false;
-				displayNotes();
-			}
-		} else if (info == "clear") {
-			clearNote();
-		} else {
-			if (adddate) {
-				 var now = new Date();
-				 info = formatdate(now, clockformat) + "-   " +  info;
-			}
-			addNote(info);	
-	    }
-		if (display) {
-			displayNotes();
-		}
+        info = args.q;
+        if (info == "?") {
+            nullArgs("note", info);
+        } else if (info == "") {
+            if (!cleared) {
+                display = false;
+                displayNotes();
+            }
+        } else if (info == "clear") {
+            clearNote();
+        } else {
+            if (adddate) {
+                 var now = new Date();
+                 info = formatdate(now, clockformat) + "-   " +  info;
+            }
+            addNote(info);  
+        }
+        if (display) {
+            displayNotes();
+        }
     }
   ]]></script>
 </search>
