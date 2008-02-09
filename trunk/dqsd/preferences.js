@@ -272,7 +272,7 @@ menuMRUlength = 5;
 */
 hotkeyCharacter = "S";
 
-/* An alternative if you want to do something more elaborate - 
+/* An alternative if you want to do something more elaborate -
 *  set the hotkeyCharacter to "" and use this as a direct vkCode number
   VK_LBUTTON = 1;
   VK_RBUTTON = 2;
@@ -374,7 +374,7 @@ hotkeyCharacter = "S";
 hotkeyVkCode = 0;
 
 /* The modifiers for the hotkey
-  Options are combinations of 
+  Options are combinations of
                 WIN for the windows key (default)
                 ALT for ALT
                 CONTROL for CONTROL
@@ -403,7 +403,7 @@ dragdropautosearch = true;
 */
 helpSortKey = 'name';
 
-/* Enable tooltips on menu help menu items 
+/* Enable tooltips on menu help menu items
     The options are 'true' or 'false'
 */
 helpMenuToolTipsEnabled = true;
@@ -438,13 +438,13 @@ refreshIconsAtStartup = true;
 
 
 /* Include a banner/logo on the search bar?
-*  bannerasgo    Use 'go button' behavior for banner/logo button (click 
+*  bannerasgo    Use 'go button' behavior for banner/logo button (click
 *                performs search)?
-*  bannerurl     Identifies the resource to use, either a url or file 
+*  bannerurl     Identifies the resource to use, either a url or file
 *                reference from the DQSD install directory.
 *  bannerwidth   Specify the width of the banner image, or -1 to autodetect
 *  bannerheight  Specify the height of the banner image, or -1 to autodetect
-*  bannerlink    Specify a destination url/action when clicking banner/logo 
+*  bannerlink    Specify a destination url/action when clicking banner/logo
 *                without a search in the box
 */
 bannerasgo   = false;
@@ -488,4 +488,10 @@ qsfreqLogSearchFrequency = 1;
 configureEditorExe = "notepad.exe"
 cssEditorExe = "notepad.exe"
 searchEditorExe = "notepad.exe"
+*/
+
+/* note.xml
+*/
+/* Set this to true to open note.txt file using the default .txt application, otherwise open in the browser
+noteOpenAsDocument = true;
 */
