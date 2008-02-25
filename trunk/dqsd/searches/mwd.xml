@@ -13,10 +13,10 @@
     </table>
   </description>
   <category>Reference<category>Language</category></category>
-  <link>http://www.m-w.com/</link>
+  <link>http://www.merriam-webster.com/</link>
   
   <form name="mwdf"
-        action="http://www.m-w.com/cgi-bin/dictionary"
+        action="http://www.merriam-webster.com/cgi-bin/dictionary"
         method="post">
     <input type="hidden" name="book" value="Dictionary"/>
     <input type="hidden" name="va"/>
@@ -59,13 +59,13 @@
         var xmlHttp = new ActiveXObject("Microsoft.XmlHttp");
         if ( listOption )
         {
-          xmlHttp.open("POST", "http://www.m-w.com/cgi-bin/dictionary", false);
+          xmlHttp.open("POST", "http://www.merriam-webster.com/cgi-bin/dictionary", false);
           xmlHttp.setRequestHeader( "Content-Type", "application/x-www-form-urlencoded" );
           xmlHttp.send( postArgs );
         }
         else
         {
-          xmlHttp.open("GET", "http://www.m-w.com/dictionary/" + q, false);
+          xmlHttp.open("GET", "http://www.merriam-webster.com/dictionary/" + q, false);
           xmlHttp.send();
         }
       }
@@ -100,63 +100,96 @@
       var results = re.exec( sBody );
       if ( results != null )
       {
-        var optionHtml = '';
-        var entriesFound = parseInt( results[ 2 ], 10 );
-        if ( isNaN( entriesFound ) )
-          entriesFound = 1;
-
-        var html = results[ 1 ].replace( /(src="\/)/gi, "src=\"http://www.m-w.com/" ).replace( /(href="\/)/gi, "href=\"http://www.m-w.com/" );
+        var html = results[ 1 ].replace( /(src="\/)/gi, "src=\"http://www.merriam-webster.com/" ).replace( /(href="\/)/gi, "href=\"http://www.merriam-webster.com/" );
         var html = html.replace( /<span\sclass="sense_break"\/>/gi, "<br/>");
         var html = html.replace( /<span\sclass="sense\_label\sstart">/gi, "<br/><br/><span>");
-        var html = html.replace( /javascript\:popWin\(\'/gi, "http://www.m-w.com/");
+        var html = html.replace( /javascript\:popWin\(\'\//gi, "http://www.merriam-webster.com/");
         var html = html.replace( /\'\)"\sclass="audio"/gi, "\"");
 
-        if ( entriesFound == 1 )
-          html = html.replace( /(Main Entry:)/, '<br/><br/>$1' );
-        else
-        {
-          html = html.replace( /(Main Entry:)/, '<br/>$1' );
+        var optionHtml = '';
+        var numOfEntriesRegex = /<form name="entry"  method=post action="\/dictionary">(Entries [0-9]+ to [0-9]+ of )?([0-9]+)( entries found)?/.exec( sBody );
+        var entriesFound = 1;
+        if (numOfEntriesRegex != null)
+          entriesFound = parseInt( numOfEntriesRegex[ 2 ], 10 );
 
-          var options = /(<option.*)<\/select>/.exec( html );
-          if ( options != null )
+        if ( entriesFound > 1 )
+        {
+          var entryFormHTML = /(<form name="entry".*?\/form>)/.exec( sBody );
+          if ( entryFormHTML != null )
           {
-            var allFormVars = html.replace( /.*<input.*name="?hdwd"? value="([^"]+)".*<input.*name="?listword"? value="([^"]+)".*<input.*name="?list"? value="([^"]+)".*/i, 
-                                            "listword=$2&book=Dictionary&list=$3" );
-            options = options[ 1 ].split( '<option>' );
-            optionHtml += '<ul style="margin-top: 0px; margin-bottom: 0px">';
-            for ( var i = 0; i < options.length; i++ )
-              if ( options[ i ] != "" )
+            var options = /(<option.*)<\/select>/.exec( entryFormHTML[1] );
+            if ( options != null )
+            {
+              var allFormVars = entryFormHTML[1].replace( /.*<input.*name='?quer'? value="([^"]+)".*<input.*name='?list'? value="([^"]+)".*/i, 
+                                              "book=Dictionary&quer=$1&list=$2" );
+              options = options[ 1 ].split( '<option' );
+              optionHtml += numOfEntriesRegex[ 1 ] + numOfEntriesRegex[ 2 ] + numOfEntriesRegex[ 3 ] + '<br><ul style="margin-top: 0px; margin-bottom: 0px">';
+              for ( var i = 0; i < options.length; i++ )
+                if ( options[ i ] != "" )
+                {
+                  options[ i ] = options[ i ].replace(/.*>/, '');
+                  var words = /([^[]+)(.*)/.exec( options[ i ] );
+                  var formVars = 'jump=' + options[ i ] + '&' + allFormVars;
+                  optionHtml += '<li><a href="" onMouseUp=parent.mwdx("' + escape( words[ 1 ] ) + extraArgDelim + escape( formVars ) + '");>' + options[ i ] + '</a></li>';
+                }
+
+              // Also add the "Next 10" (or "Next nn") link if the submit button exists
+              var nextEntries = /value='(Next [0-9]+)' name='incr'/.exec( entryFormHTML[1] );
+              if ( nextEntries != null )
               {
-                var words = /([^[]+)(.*)/.exec( options[ i ] );
-                var formVars = 'hdwd=' + options[ i ] + '&' + allFormVars;
-                optionHtml += '<li><a href="" onMouseUp=parent.mwdx("' + escape( words[ 1 ] ) + extraArgDelim + escape( formVars ) + '");>' + options[ i ] + '</a></li>';
+                var formVars = 'incr=' + nextEntries[ 1 ] + '&' + allFormVars;
+                optionHtml += '<br><li><a href="" onMouseUp=parent.mwdx("' + q + extraArgDelim + escape( formVars ) + '");>' + nextEntries[ 1 ] + '</a></li>';                  
               }
-            optionHtml += '</ul>';
+              optionHtml += '</ul>';
+            }
           }
           
-          html = html.replace( /(To select an entry, click on it\..*)<form/, '$1' + optionHtml + '<form' );
+          html = optionHtml + html;
         }
-        html = html.replace( /For more results.*click here<\/a>\./gi, '' );
-        html = html.replace( /<h1>/i, '<h1 style="font-size: 16px">' );
+
         html = html.replace( new RegExp( String.fromCharCode(65535), "g" ), '-' ); // weirdness
-        html = html.replace( /<font size="-1">([^<]+)<\/font>/gi, "$1" );
-        html = html.replace( /<div class="result_ad healthline".*/gi, '' );
-        html = html.replace( /<form.*<\/form>/ig, '' );
-        html = html.replace( /(<a\s+)href=("http:\/\/www.m-w.com\/dictionary\/([^"]+)")([^>]*>)/gi, '$1 href="" onMouseUp=parent.mwdGoToWord("$3"); $4' );
-        html = html.replace( /<a href="javascript:popWin\('\/cgi-bin\/(audio.pl[^'>]+)'\)">/gi, '<a href="" onMouseUp=parent.openSearchWindow("http://www.m-w.com/cgi-bin/$1");>' );
-        html = html.replace( /(<a\s+)href=("http:\/\/www.m-w.com\/([^"]+)")([^>]*>)/gi, '$1 href="" onMouseUp=parent.openSearchWindow($2);>' );
+        html = html.replace( /(<a\s+)href="http:\/\/www.merriam-webster.com\/dictionary\/([^"]+)"([^>]*>)/gi, '$1 href="" onMouseUp=parent.mwdGoToWord("$2"); $3' );
+        html = html.replace( /<a href="javascript:popWin\('\/cgi-bin\/(audio.pl[^'>]+)'\)">/gi, '<a href="" onMouseUp=parent.openSearchWindow("http://www.merriam-webster.com/cgi-bin/$1");>' );
+        html = html.replace( /(<a\s+)href=("http:\/\/www.merriam-webster.com\/([^"]+)")([^>]*>)/gi, '$1 href="" onMouseUp=parent.openSearchWindow($2);>' );
+        // If the links we've replaced contains spaces (e.g. "brilliant " in "table"), assignment to "innerHTML" below gets confused and causes
+        //   "Unterminated string constant" error. On the other hand, we can not just go ahead and use single quotes around "onMouseUp"
+        //   event either, as there are also links that have them (e.g. "cat-o'-nine-tails" in "cat"), so let's also escape our links.
+        function inPlaceLinkReplacer(str, p1, p2, p3, offset, s)
+        {
+        	// Expected p1: prefix, p3: suffix (both sent back as-is)
+        	//  p2: the actual "link" material which may contain special characters
+        	return p1 + escape(p2) + p3;
+        }
+        function inPlaceLinkReplacerDebug(str, p1, p2, p3, offset, s)
+        {
+        	alert(' str = ' + str + '\n\n p1 = ' + p1 + '\n\n p2 = ' + p2 + '\n\n p3 = ' + p3);
+        	return p1 + escape(p2) + p3;
+        }
+        html = html.replace( /(onMouseUp=parent\.mwdGoToWord\(")(.+?)("\))/gi, inPlaceLinkReplacer );
+        html = html.replace( /(audio\.pl\?.*?=)(.+?)("\);>)/gi, inPlaceLinkReplacer );
       }
       else
       {
-        results = /(Suggestions for.+<\/PRE>)/ig.exec( sBody );
+        // MW site lists "Suggestions for" title for nonexistent words as well, so let's make sure there's at least one link underneath
+        results = /(Suggestions for.+href="\/dictionary\/.+<\/PRE>)/ig.exec( sBody );
         if ( results != null )
         {
-          var html = results[ 1 ].replace( /href="[^"]+va=([^"]+)"/gi, 'href="" onMouseUp=parent.mwdx("$1"); ' ).replace( /<\/a>/g, '</a>\r\n' );
+          var html = results[ 1 ].replace( /href="\/dictionary\/([^"]+)"/gi, 'href="" onMouseUp=\'parent.mwdx("$1");\' ' ).replace( />\s*([0-9]+)/g, '>\r\n$1' );
         }
         else
         {
+          // In these cases returned HTML doesn't really offer much other than a subscription link, or the whole homepage: Ignored.
           windowW = 200;
-          var html = '<center><b>' + q + '</b> not found</center><br/>' + xmlHttp.responseText;
+          results = /(<div\sclass="entry\steaser">)/ig.exec( sBody );
+          if ( results != null )
+          {
+            // Teaser entry
+            var html = '<center><b>' + q + '</b> can be found at Merriam-WebsterUnabridged.com (Subscription required).</center><br/>';
+          }
+          else
+          {
+            var html = '<center><b>' + q + '</b> not found</center><br/>';
+          }
         }
       }
 
@@ -164,7 +197,13 @@
         dictPopup = window.createPopup();
       var dictPopupBody = dictPopup.document.body;
 
-      dictPopupBody.innerHTML = '<table id=defTable style="font-size: 70%; border: inset 2px" height="100%" width="100%"><tr><td style="padding: 5px 5px">' + html + "</td></tr></table>";
+      // Let's concat on a local variable first for easier debugging - let's also copy over a couple of styles from linked "entry.css"
+      var dictPopupBodyInnerHTML = '<table id=defTable style="font-size: 70%; border: inset 2px" height="100%" width="100%"><style type="text/css">img { border-width: 0 } .variant { font-weight: bold; } .verb_class { display: block; } .unicode{font-family:"Lucida Sans Unicode";}</style><tr><td style="padding: 5px 5px">' + html + "</td></tr></table>";
+      // writeFile('InnerHTML_Final_' + q + '.txt', dictPopupBodyInnerHTML);
+
+      // This assignment will reformat the HTML extensively
+      dictPopupBody.innerHTML = dictPopupBodyInnerHTML;
+      // writeFile('InnerHTML_Assigned' + q + '.txt', dictPopupBody.innerHTML);
 
       dictPopup.document.body.style.border="outset 2px";
       dictPopup.document.body.style.padding="1px 1px; background: navy";
@@ -214,4 +253,3 @@
   GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
   </copyright>
 </search>
-
