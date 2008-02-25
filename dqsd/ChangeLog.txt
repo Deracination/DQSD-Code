@@ -21,7 +21,7 @@ Bug Fixes
 * dns - Corrected to work with website changes. Membership (free) is now required. (Shawn K. Hall)
 * fedex - Corrected to work with website changes. (John Bairen)
 * lipsum - Updated to use new form action (Kim Gräsman, after tip from Charlie Russel)
-* mwd - Fixed /popup functionality (Shawn K. Hall)
+* mwd - Fixed /popup functionality and changes required due to site changes. (Shawn K. Hall, David Blume)
 * msk - Fixed due to site changes (Glenn Carr)
 * fv - Corrected to work with website changes. Added functionality. (Shawn K. Hall)
 
