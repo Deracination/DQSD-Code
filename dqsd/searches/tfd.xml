@@ -2,35 +2,26 @@
   <name>The Free Dictionary</name>
   <category>Reference</category>
   <contributor>Glenn Carr</contributor>
-  <link>http://www.thefreedictionary.com/</link>
+  <link>http://www.thefreedictionary.com/declare</link>
   <email>glenn at glenncarr dot com</email>
   <description>
-    <div class="helpboxDescLabels">Examples:</div>
+    <div class="helpboxDescLabels">Switches:</div>
     <table class="helpboxDescTable">
-      <tr><td></td></tr>
-      <tr><td></td></tr>
+      <tr><td>/word_article</td><td> - </td><td>Word / Article</td></tr>
+      <tr><td>/starts_with</td><td> - </td><td>Starts with</td></tr>
+      <tr><td>/ends_with</td><td> - </td><td>Ends with</td></tr>
+      <tr><td>/text</td><td> - </td><td>Text</td></tr>
     </table>
   </description>
   <form name="tfdf"
         method="get"
         action="http://www.thefreedictionary.com/_/search.aspx">
     <input type="hidden" name="tab" value="1" />
-
-    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>
-
-    <input type="hidden" name="Word" value="" />
+    <input type="hidden" name="charset" value="iso-8859-1" />
     <input type="hidden" name="SearchBy" value="0" />
-    <COMMENT>
-      The input element above, "SearchBy" was a set of radio buttons with the following options...
-      "0", "4", "9", "8", "6", "7"
-    </COMMENT>
-
+    <input type="hidden" name="Word" value="" />
+    <input type="hidden" name="Search" value="Search" />
     <input type="hidden" name="TFDBy" value="0" />
-    <COMMENT>
-      The input element above, "TFDBy" was a set of radio buttons with the following options...
-      "0", "1", "2", "3"
-    </COMMENT>
-
   </form>
   <script><![CDATA[
     function tfd(q)
@@ -38,15 +29,50 @@
       if( nullArgs("tfd", q) )
         return;
 
+      // Parse switches with parseArgs:
+
+      // parseArgs usage:
+      // Arguments:
+      //    q                - string from the search function
+      //    expectedSwitches - list or array of the expected switch values
+      //    expandSwitches   - optional parameter [default = true] used to determine 
+      //                       if the switch shortcuts should be expanded (i.e. /f becomes /foo)
+      // Returns an object with these properties:
+      //    q        - the input string with the switches removed
+      //    switches - array of objects with these two properties:
+      //                  name:   expanded name of the matched switch (i.e. foo as in /foo:bar)
+      //                  value:  value of switch (i.e. bar as in /foo:bar)
+      //    switch_val - associative array with the switch name as the key with the switch value 
+      //                 as the value. (i.e. switch_val["foo"] = "bar" as in /foo:bar)
+
+      var args = parseArgs(q, "word_article, starts_with, ends_with, text");
+      if ( args.switches.length > 0 )
+      {
+        switch( args.switches[0].name )
+        {
+          case "starts_with":
+            document.tfdf.TFDBy.value = "1";
+            break;
+          case "ends_with":
+            document.tfdf.TFDBy.value = "2";
+            break;
+          case "text":
+            document.tfdf.TFDBy.value = "3";
+            break;
+          case "word_article":
+          default:
+            document.tfdf.TFDBy.value = "0";
+            break;
+        }
+      }
+
       // FORM variables for tfdf
       //document.tfdf.tab.value = "";
-
-      // The wizard assigned the search string to this form field value because
-      // this field was the active element when the search file was generated.
-      // Change this to args.q if the search string is parsed with parseArgs.
-      document.tfdf.Word.value = q;
+      //document.tfdf.charset.value = "";
       //document.tfdf.SearchBy.value = "";
-      //document.tfdf.TFDBy.value = "";
+      //document.tfdf.SearchBy.value = "";
+
+      document.tfdf.Word.value = args.q;
 
       submitForm(tfdf);
     }
@@ -56,8 +82,8 @@
     Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
   </copyright>
   <created_by>
-    This search file was initially created on 12/21/06 at 16:21:37
-    by Dave's Quick Search Deskbar Search Wizard version 1.0.1,
+    This search file was initially created on 02/26/08 at 07:39:06
+    by Dave's Quick Search Deskbar Search Wizard version 1.3,
     Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
   </created_by>
 </search>
