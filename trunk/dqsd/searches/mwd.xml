@@ -96,7 +96,7 @@
       var windowW = 500;
 
       var sBody = xmlHttp.responseText.replace( /[\r\n]/gi, "" );
-      var re = /(<div\sclass="entry\smisc">(.+)<\/div><\/div>)/mig;
+      var re = /(<div\sclass="entry\smisc">(.+)[<\/span>|<\/div>]<\/div>)/mig;
       var results = re.exec( sBody );
       if ( results != null )
       {
