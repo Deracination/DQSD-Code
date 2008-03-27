@@ -1,34 +1,50 @@
 <search function="wikdic">
-  <name>Wikitionary</name>
+  <name>Wiktionary</name>
   <category>Reference</category>
-  <contributor>Tom Corcoran</contributor>
-  <link>http://en.wiktionary.org/wiki/Main_Page</link>
+  <contributor>Tom Corcoran, international stuff by MLL</contributor>
+  <link>http://www.wiktionary.org/</link>
   <email>tom.corcoran[@]moonbade.co.uk</email>
   <description>
-     A collaborative project to produce a free multilingual dictionary in every language, with definitions, etymologies, pronunciations and quotations.
-    <div class="helpboxDescLabels">Usage:</div>
+    An open dictionary based upon visitor contributions.
+    <div class="helpboxDescLabels">Language edition:</div>
     <table class="helpboxDescTable">
-     <tr><td>wikdic hobbit</td></tr>
-    </table>   
+      <tr><td colspan="3">Display the wiktionary edition in...</td></tr>
+      <tr><td>/language:en</td><td> - </td><td>english (<strong>default</strong>)</td></tr>
+      <tr><td>/language:de</td><td> - </td><td>german</td></tr>
+      <tr><td>/language:ja</td><td> - </td><td>japanese</td></tr>
+      <tr><td>/language:fr</td><td> - </td><td>french</td></tr>
+      <tr><td>/language:nl</td><td> - </td><td>dutch</td></tr>
+      <tr><td>/language:es</td><td> - </td><td>spanish</td></tr>
+      <tr><td colspan="3">and many more... see <a href="http://meta.wikimedia.org/wiki/List_of_Wiktionaries" target="_new">meta.wikimedia.org/wiki/Complete_list_of_language_Wikipedias_available</a></td></tr>
+    </table>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>wikdic chair</td></tr>
+      <tr><td>wikdic chaise /language:fr</td></tr>
+    </table>
   </description>
+  
   <form name="wikdicf"
         method="get"
-        action="http://en.wiktionary.org/wiki/Special:Search">
+        action="">
     <input type="hidden" name="search" value="" />
     <input type="hidden" name="go" value="Go" />
-    <input type="hidden" name="fulltext" value="Search" />
+    <input type="hidden" name="fulltext" value="" />
   </form>
   <script><![CDATA[
     function wikdic(q)
     {
-      if( nullArgs("wikdic", q) )
-        return;
+      var args = parseArgs(q, "language");
+      var common_url = ".wiktionary.org/wiki/Special:Search", edition;
+      
+      if( nullArgs( "wikdic", args.q ) ) return false;
 
-      // FORM variables for wikdicf
-      document.wikdicf.search.value = q;
-      //document.wikdicf.go.value = "";
-      //document.wikdicf.fulltext.value = "";
+      // Establish the language edition the search will run in.
+      if ( !(args.switch_val["language"]) ) { edition = "en" } else { edition = args.switch_val["language"] } ;
+      document.wikdicf.action = "http://"+edition+common_url;
 
+
+      document.wikdicf.search.value = args.q;
       submitForm(wikdicf);
     }
   ]]></script>

@@ -31,6 +31,9 @@ Modified Searches
 * dicfr - Changed to fit site changes (MLL)
 * wprf - Changed to fit site changes (MLL)
 * tfd - Added switches (Glenn Carr)
+* wik - removed unused example in the description (MLL)
+* wikdic - now supports international versions (MLL)
+
 
 -- What's new for 4.0.0.3 (Feb 6, 2007)
 
