@@ -4,13 +4,7 @@
   <contributor>Thad Kerosky, international stuff by MLL</contributor>
   <link>http://www.wikipedia.org/</link>
   <description>
-  An open encylopedia based upon visitor contributions.
-  <div class="helpboxDescLabels">Example:</div> 
-    <table class="helpboxDescTable">
-      <tr>
-        <td>wik tuscanny</td>
-      </tr>
-    </table>
+    An open encylopedia based upon visitor contributions.
     <div class="helpboxDescLabels">Language edition:</div>
     <table class="helpboxDescTable">
       <tr><td colspan="3">Display the wikipedia edition in...</td></tr>
