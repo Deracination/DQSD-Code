@@ -33,6 +33,7 @@ Modified Searches
 * tfd - Added switches (Glenn Carr)
 * wik - removed unused example in the description (MLL)
 * wikdic - now supports international versions (MLL)
+* dqsd - changed the homepage according to the site change (MLL)
 
 
 -- What's new for 4.0.0.3 (Feb 6, 2007)
