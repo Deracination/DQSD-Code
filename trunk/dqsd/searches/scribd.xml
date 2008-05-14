@@ -1,0 +1,36 @@
+<search function="scribd">
+  <name>Search Scribd</name>
+  <category>Reference</category>
+  <contributor>Tom Corcoran</contributor>
+  <link>http://www.scribd.com/</link>
+  <email></email>
+  <description>
+  Search Scribd document titles
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>scribd hibernate</td></tr>
+    </table>
+  
+  </description>
+  <form name="scribdf"
+        method="get"
+        action="http://www.scribd.com/search/search2">
+    <input type="hidden" name="query2" value="" />
+  </form>
+  <script><![CDATA[
+    function scribd(q)
+    {
+      if( nullArgs("scribd", q) )
+        return;
+
+      // FORM variables for scribdf
+
+      // The wizard assigned the search string to this form field value because
+      // this field was the active element when the search file was generated.
+      // Change this to args.q if the search string is parsed with parseArgs.
+      document.scribdf.query2.value = q;
+
+      submitForm(scribdf);
+    }
+  ]]></script>
+</search>
