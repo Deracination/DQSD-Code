@@ -24,6 +24,7 @@ Bug Fixes
 * mwd - Fixed /popup functionality and changes required due to site changes. (Shawn K. Hall, David Blume)
 * msk - Fixed due to site changes (Glenn Carr)
 * fv - Corrected to work with website changes. Added functionality. (Shawn K. Hall)
+* ror - Fixed category so it ends up under Computers > Programming (Tom Corcoran via Kim Gräsman)
 
 Modified Searches
 * comx - Fixed foxtrot - is now only available on sundays. (Monty Scroggins)
