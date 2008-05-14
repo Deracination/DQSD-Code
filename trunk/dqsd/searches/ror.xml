@@ -24,6 +24,7 @@
    <tr><td>/planet</td><td> - </td><td>Goto PlanetRubyOnRails.org</td></tr>
    <tr><td>/plugins</td><td> - </td><td>Search agilewebdevelopment.com plugins</td></tr>
    <tr><td>/prototype</td><td> - </td><td>Search Prototype api/goto prototypejs.org</td></tr>
+   <tr><td>/refactormycode</td><td> - </td><td>Search refactormycode</td></tr>
    <tr><td>/ruby</td><td> - </td><td>Goto ruby-lang.org</td></tr>
    <tr><td>/scriptaculous</td><td> - </td><td>Search Scriptaculous api/goto script.aculo.us</td></tr>
    <tr><td>/source</td><td> - </td><td>Goto ruby on rails download page</td></tr>
@@ -46,7 +47,7 @@
 
 	  var use_edge_rails = (typeof ror_edgedocs != "undefined") ? ror_edgedocs : false;
 	  var url = false;
-      var args = parseArgs(q, "api,archive,blog,capistrano,core,documentation,forum,forge,garden,irc,jobs,news,ocs,pastie,plugins,planet,prototype,ruby,scriptaculous,stdlib,ticket,vlad,wiki,weenie,snippets,source");
+      var args = parseArgs(q, "api,archive,blog,capistrano,core,documentation,forum,forge,garden,irc,jobs,news,ocs,pastie,plugins,planet,prototype,refactormycode,ruby,scriptaculous,stdlib,ticket,vlad,wiki,weenie,snippets,source");
       if ( args.switches.length > 0 ) {
         switch( args.switches[0].name ) {
 		  case "api": 
@@ -159,6 +160,7 @@
 				url = 'http://www.prototypejs.org';
 			}
 		    break;
+		  case 'refactormycode': url = 'http://www.refactormycode.com/codes/recent/ruby'; break;
 		  case 'ruby': url = 'http://www.ruby-lang.org/en/'; break;
 		  case 'scriptaculous':
 		    if (args.q != '') {
