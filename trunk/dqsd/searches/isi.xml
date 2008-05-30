@@ -1,10 +1,10 @@
-<search function="is">
+<search function="isi">
   <name>InfoSpace.ca Individual Search</name>
   <description>
     Look up phone numbers and addresses in Canada.<br/>
     <div class="helpboxDescLabels">Example:</div>
     <table class="helpboxDescTable">
-      <tr><td>is John Smith (Halifax, NS)</td></tr>
+      <tr><td>isi John Smith (Halifax, NS)</td></tr>
     </table>
   </description>
   <category>People and Places</category>
@@ -24,9 +24,9 @@
     <input type="hidden" name="QS" />
   </form>
   <script><![CDATA[
-    function is(q)
+    function isi(q)
     {
-      if( nullArgs("is", q) )
+      if( nullArgs("isi", q) )
         return false;
 
       res = q.match(/(((\w+\s+)?\w+)\s+)?(\w+)(\s*\((([^,]+),?\s*)?(\w\w)\))?/);
