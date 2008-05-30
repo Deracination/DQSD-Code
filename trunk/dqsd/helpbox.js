@@ -19,6 +19,12 @@ function closeabout()
   catch (exception) {}
 }
 
+function getCopyrightYears()
+{
+  var currentYear = new Date().getFullYear();
+  return "2002-" + currentYear;
+}
+
 function searchCompare( s1, s2 )
 {
   // by default, sort by first alias
@@ -163,6 +169,7 @@ function about()
     txt = txt.replace(/\n\*/g, '<li />');
     txt = txt.replace(/\nVer/, '</b><br />Ver');
     txt = txt.replace(/\nCop/, '<p />Cop');
+    txt = txt.replace(/yyyy/, getCopyrightYears());
     txt = txt.replace(/\nDis/, '<br />Dis');
     txt = txt.replace(/(David Bau)/, '<a href="mailto:davidbau@hotmail.com">$1</a>');
     txt = txt.replace(/(GNU.*2)\s\((.*txt)\)/, '<br /><a href="$2" target=GNU>$1</a>');
