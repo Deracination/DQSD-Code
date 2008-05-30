@@ -10,7 +10,7 @@ RELEASE PROCEDURE FOR DQSD - Kim Gräsman, December 2003
 - Update version stuff in scripts
 	- Update version in version.xml
 	- Set date for latest changes in ChangeLog.txt
-	- DO NOT commit changes yet--update notifications will trigger when version.xml is committed
+	- Commit changes
 
 - Build DLL and installer
 	- Run build.cmd
@@ -56,7 +56,7 @@ RELEASE PROCEDURE FOR DQSD - Kim Gräsman, December 2003
 	"rel-3-1-8-0-beta" or "rel-3-1-8-0" for a final version
 
 - Update the site
-	- Check out the dqsdweb module from CVS
+	- Check out the dqsdweb folder from SVN
 	- Modify doc.htm
 		- If this is a beta, point the beta link to the 
 			Sourceforge release
@@ -65,9 +65,8 @@ RELEASE PROCEDURE FOR DQSD - Kim Gräsman, December 2003
 	- If final version
 		- Upload dqsd.exe (latest release must have this name)
 		- Upload dqsd<ver>.exe, e.g. dqsd318.exe
-		- Add general release notes under What's New
-  - Copy version.xml from dqsd module
-	- Commit changes to CVS - the files will be automatically distributed
+  - Copy version.xml from dqsd folder
+	- Commit changes to SVN - the files will be automatically distributed
 		to dqsd.net and update notification will be triggered by the new 
 		version.xml, in due time.
 
