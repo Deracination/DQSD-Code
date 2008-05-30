@@ -1,4 +1,4 @@
--- What's new for 4.x.x.x (mmm d, yyyy)
+-- What's new for 4.0.0.4 (May 30, 2008)
 
 Enhancements
 * qsfind - Highlight search string; Stop searching within HTML tags; Handle special regular expression characters correctly.  (Glenn Carr)
@@ -37,6 +37,7 @@ Modified Searches
 * wik - removed unused example in the description (MLL)
 * wikdic - now supports international versions (MLL)
 * dqsd - changed the homepage according to the site change (MLL)
+* is - renamed to isi to avoid hogging a well-known word (Kim Gräsman)
 
 
 -- What's new for 4.0.0.3 (Feb 6, 2007)

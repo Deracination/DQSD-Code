@@ -1,14 +1,16 @@
 RELEASE PROCEDURE FOR DQSD - Kim Gräsman, December 2003
 ========================================================================
 - Prepare for build
-	- Update version resource in DQSDTools DLL
-	- Make sure the paths in build.cmd match your private VC6 and 
+	- Make sure the paths in build.cmd match your private VS.NET, Windows SDK and 
 		NSIS paths
+	- Make sure you have the NSISXML plug-in installed
+	- Update version resource in DQSDTools DLL
+	- Update version resource in DQSDHost DLL
 
 - Update version stuff in scripts
 	- Update version in version.xml
 	- Set date for latest changes in ChangeLog.txt
-	- Commit changes
+	- DON'T commit changes yet--update notifications will trigger when version.xml is committed
 
 - Build DLL and installer
 	- Run build.cmd
@@ -23,8 +25,9 @@ RELEASE PROCEDURE FOR DQSD - Kim Gräsman, December 2003
 - Test newly-built installer
 
 - Put a new release up on SF
-	- Transfer installer to SF via anonymous FTP
-		- Connect to ftp://upload.sourceforge.net/ as anonymous
+	- Transfer installer to SF via the Web Upload form
+		- Go to https://frs.sourceforge.net/webupload
+		- Log in with your Sourceforge credentials
 		- Upload your installer (e.g. dqsd-318-beta.exe)
 	- Go to http://sourceforge.net/projects/dqsd
 	- Admin -> File Releases
