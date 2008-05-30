@@ -10,7 +10,7 @@ RELEASE PROCEDURE FOR DQSD - Kim Gräsman, December 2003
 - Update version stuff in scripts
 	- Update version in version.xml
 	- Set date for latest changes in ChangeLog.txt
-	- DON'T commit changes yet--update notifications will trigger when version.xml is committed
+	- DO NOT commit changes yet--update notifications will trigger when version.xml is committed
 
 - Build DLL and installer
 	- Run build.cmd
