@@ -12,7 +12,7 @@ Bug Fixes
 
 Modified Searches
 * dns - added support for login under dnsstuff.com (Shawn K. Hall)
-* whi added support for login under webhosting.info (Shawn K. Hall)
+* whi - added support for login under webhosting.info (Shawn K. Hall)
 * yy - corrected various issues with logins via yahoo (Shawn K. Hall)
 
 
