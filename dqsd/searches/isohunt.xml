@@ -1,0 +1,46 @@
+<search function="isohunt">
+  <name>isoHunt.com</name>
+  <category>Search</category>
+  <link>http://isohunt.com/</link>
+  <description>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>isohunt [search]</td></tr>
+    </table>
+  </description>
+
+  <form name="isohuntf" method="get"
+	action="http://isohunt.com/torrents/">
+	<input type="hidden" name="ihq" value="" />
+	<input type="hidden" name="iht" value="" />
+  </form>
+
+  <script><![CDATA[
+    function isohunt(q){
+      if( nullArgs( "isohunt", q ) ){
+        return false;
+      }
+      var args = parseArgs(q, "all, video, tv, audio, musicvideo, games, applications, pictures, anime, comics, books, misc, unclassified");
+      for (var i = 0; i < args.switches.length; i++){
+        sw = args.switches[i];
+        switch(sw.name){
+	  case "all":		document.isohuntf.iht.value = "-1";	break;
+	  case "video":		document.isohuntf.iht.value = "1";	break;
+	  case "tv":		document.isohuntf.iht.value = "3";	break;
+	  case "audio":		document.isohuntf.iht.value = "2";	break;
+	  case "musicvideo":	document.isohuntf.iht.value = "10";	break;
+	  case "games":		document.isohuntf.iht.value = "4";	break;
+	  case "applications":	document.isohuntf.iht.value = "5";	break;
+	  case "pictures":	document.isohuntf.iht.value = "6";	break;
+	  case "anime":		document.isohuntf.iht.value = "7";	break;
+	  case "comics":	document.isohuntf.iht.value = "8";	break;
+	  case "books":		document.isohuntf.iht.value = "9";	break;
+	  case "misc":		document.isohuntf.iht.value = "0";	break;
+	  case "unclassified":	document.isohuntf.iht.value = "11";	break;
+	}
+      }
+      document.isohuntf.ihq.value = args.q;
+      submitForm(isohuntf);
+    }
+  ]]></script>
+</search>
