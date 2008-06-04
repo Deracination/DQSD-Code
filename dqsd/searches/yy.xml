@@ -36,8 +36,7 @@
   <comment>
     This is pretty spiffy, eh?
   </comment>
-  <form name="yyf" method="post"
-	action="https://login.yahoo.com/config/login?">
+  <form name="yyf" method="post" action="https://login.yahoo.com/config/login?">
 	<input type="hidden" name=".tries" value="1" />
 	<input type="hidden" name=".src" value="" />
 	<input type="hidden" name=".md5" value="" />
@@ -48,18 +47,18 @@
 	<input type="hidden" name=".intl" value="us" />
 	<input type="hidden" name=".bypass" value="" />
 	<input type="hidden" name=".partner" value="" />
-	<input type="hidden" name=".u" value="7rufp9p38618g" />
+	<input type="hidden" name=".u" value="" />
 	<input type="hidden" name=".v" value="0" />
-	<input type="hidden" name=".challenge" value="dKwv00O1mQBbNX3j0QafTwDAcCD4" />
+	<input type="hidden" name=".challenge" value="" />
 	<input type="hidden" name=".yplus" value="" />
 	<input type="hidden" name=".emailCode" value="" />
 	<input type="hidden" name="pkg" value="" />
-	<input type="hidden" name="stepid" value="i" />
+	<input type="hidden" name="stepid" value="" />
 	<input type="hidden" name=".ev" value="" />
 	<input type="hidden" name="hasMsgr" value="0" />
 	<input type="hidden" name=".chkP" value="Y" />
 	<input type="hidden" name=".done" value="http://my.yahoo.com" />
-	<input type="hidden" name=".pd" value="_ver%3d0%26c=" />
+	<input type="hidden" name=".pd" value="" />
 	<input type="hidden" name="login" value="" />
 	<input type="hidden" name="passwd" value="" />
 	<input type="hidden" name=".persistent" value="y" />
@@ -75,17 +74,55 @@
 	  var yyids = Array("",""); if (typeof yyid != "undefined") yyids = yyid;
 	}
 	try{
+	  sUrl = "https://login.yahoo.com/config/login?";
+	  var xmlHttp = new ActiveXObject("Microsoft.XmlHttp");
+	  xmlHttp.open("GET", sUrl, false);
+	  xmlHttp.send("");
+	  var sBody = xmlHttp.responseText;
+	  yyfsupport(sBody, /.tries"\svalue\="([^"]+)"\>/g , ".tries");
+	  yyfsupport(sBody, /.src"\svalue\="([^"]+)"\>/g , ".src");
+	  yyfsupport(sBody, /.md5"\svalue\="([^"]+)"\>/g , ".md5");
+	  yyfsupport(sBody, /.hash"\svalue\="([^"]+)"\>/g , ".hash");
+	  yyfsupport(sBody, /.js"\svalue\="([^"]+)"\>/g , ".js");
+	  yyfsupport(sBody, /.last"\svalue\="([^"]+)"\>/g , ".last");
+	  yyfsupport(sBody, /promo"\svalue\="([^"]+)"\>/g , "promo");
+	  yyfsupport(sBody, /.intl"\svalue\="([^"]+)"\>/g , ".intl");
+	  yyfsupport(sBody, /.bypass"\svalue\="([^"]+)"\>/g , ".bypass");
+	  yyfsupport(sBody, /.partner"\svalue\="([^"]+)"\>/g , ".partner");
+	  yyfsupport(sBody, /.u"\svalue\="([^"]+)"\>/g , ".u");
+	  yyfsupport(sBody, /.v"\svalue\="([^"]+)"\>/g , ".v");
+	  yyfsupport(sBody, /.challenge"\svalue\="([^"]+)"\>/g , ".challenge");
+	  yyfsupport(sBody, /.yplus"\svalue\="([^"]+)"\>/g , ".yplus");
+	  yyfsupport(sBody, /.emailCode"\svalue\="([^"]+)"\>/g , ".emailCode");
+	  yyfsupport(sBody, /pkg"\svalue\="([^"]+)"\>/g , "pkg");
+	  yyfsupport(sBody, /stepid"\svalue\="([^"]+)"\>/g , "stepid");
+	  yyfsupport(sBody, /.ev"\svalue\="([^"]+)"\>/g , ".ev");
+	  yyfsupport(sBody, /hasMsgr"\svalue\="([^"]+)"\>/g , "hasMsgr");
+	  yyfsupport(sBody, /.chkP"\svalue\="([^"]+)"\>/g , ".chkP");
+	  yyfsupport(sBody, /.done"\svalue\="([^"]+)"\>/g , ".done");
+	  yyfsupport(sBody, /.pd"\svalue\="([^"]+)"\>/g , ".pd");
+
 	  document.yyf.login.value = yyids[0];
 	  document.yyf.passwd.value = yyids[1];
 	  if (yyids.length>1){
 	    document.yyf['.done'].value = yyids[2];
 	  }
 	}catch(e){}
+	if (document.yyf['.done'].value=="undefined"){
+	  document.yyf['.done'].value = "http://my.yahoo.com/";
+	}
+	document.yyf.action = "https://login.yahoo.com/config/login?";
 	submitForm(yyf);
+    }
+    function yyfsupport(sBody,rx,fld){
+	var r;
+	while ((r = rx.exec(sBody)) != null){
+	  document.yyf[fld].value = r[1];
+	}
     }
   ]]></script>
   <copyright>
-  Copyright (c) 2003-2007 Shawn K. Hall
+  Copyright (c) 2003-2008 Shawn K. Hall
   Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
   </copyright>
 </search>

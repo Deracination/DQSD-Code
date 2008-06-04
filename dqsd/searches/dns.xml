@@ -54,6 +54,12 @@
   <script><![CDATA[
     function dns(q)
     {
+      var xmlHttp = new ActiveXObject("Microsoft.XmlHttp");
+      xmlHttp.open("GET", "http://member.dnsstuff.com/pages/tools.php", false);
+      xmlHttp.setRequestHeader ( "Accept", "application/xml, text/xml, text/rss, application/xml+rdf, */*" );
+      xmlHttp.setRequestHeader ( "User-Agent", "Mozilla/4.0 (compatible; DQSD ( http://www.dqsd.net/ ); dns Search ( http://ReliableAnswers.com/x/dqsd/ ))" );
+      xmlHttp.send(null);
+
       var args = parseArgs(q, "report, timing, whois, spam, rev, ipwhois, netgeo, dns, tracert, ping, cidr");
       if( q == "" ){
 	openSearchWindow("http://member.dnsstuff.com/pages/tools.php");
