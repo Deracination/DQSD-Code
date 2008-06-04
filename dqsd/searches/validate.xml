@@ -1,0 +1,54 @@
+<search function="validate">
+  <name>W3C HTML Validator</name>
+  <description>Validate an HTML page. Examples: "validate http://www.metrocast.net/~peteh/toolbar.html"</description>
+  <category>Computers</category>
+  <link>http://validator.w3c.org/</link>
+  <contributor>Peter Heath</contributor>
+  <form name="validatef" method="get" action="http://validator.w3.org/check">
+   <input type="hidden" id="uri"     name="uri"/>
+   <input type="hidden" id="charset" name="charset" value="(detect automatically)"/>
+   <input type="hidden" id="doctype" name="doctype" value="Inline"/>
+   <input type="hidden"              name="ss"      value="" />
+   <input type="hidden"              name="sp"      value="" />
+   <input type="hidden"              name="outline" value="" />
+   <input type="hidden"              name="noatt"   value="" />
+  </form>
+  <form name="validatefeedf" method="get" action="http://feedvalidator.org/check.cgi">
+   <input type="hidden" name="url" value="" />
+  </form>
+  <form name="validatecssf" method="get" action="http://jigsaw.w3.org/css-validator/validator">
+   <input type="hidden" name="uri" value="" />
+   <input type="hidden" name="usermedium" value="all" />
+  </form>
+  <script><![CDATA[
+    function validate(q){
+      if( q == "" )
+        openSearchWindow("http://validator.w3c.org/");
+      else{
+	switch(true){
+		case q.indexOf("css.")!=-1:
+		case q.indexOf(".css")!=-1:
+		case q.indexOf("/style.")!=-1:
+			document.validatecssf.uri.value = q;
+			submitForm(validatecssf);
+			break;
+		case q.indexOf("/rss")!=-1:
+		case q.indexOf("/rss2")!=-1:
+		case q.indexOf("/atom")!=-1:
+		case q.indexOf("/rdf.")!=-1:
+		case q.indexOf(".feed")!=-1:
+		case q.indexOf(".atom")!=-1:
+		case q.indexOf(".rdf")!=-1:
+		case q.indexOf(".rss")!=-1:
+			document.validatefeedf.url.value = q;
+			submitForm(validatefeedf);
+			break;
+        	default:
+			document.validatef.uri.value = q;
+			submitForm(validatef);
+			break;
+	}
+      }
+    }
+  ]]></script>
+</search>
