@@ -98,6 +98,11 @@
       en: "Load the silver color scheme"
     };
     
+    var CONFIGURE_ENERGYBLUE_SCHEME_DESCRIPTION = 
+    {
+      en: "Load the Energy Blue color scheme"
+    };
+    
     var CONFIGURE_ROYALE_ZUNE_SCHEME_DESCRIPTION = 
     {
       en: "Load the Royale Zune color scheme"
@@ -114,6 +119,11 @@
     };
     
     var CONFIGURE_CLASSIC_SCHEME_DESCRIPTION = 
+    {
+      en: "Load the Classic color scheme"
+    };
+    
+    var CONFIGURE_NO_SCHEME_DESCRIPTION = 
     {
       en: "Revert to no color scheme"
     };
@@ -148,9 +158,19 @@
       en: "Silver"
     };
     
+    var CONFIGURE_ENERGYBLUE_SCHEME_NAME = 
+    {
+      en: "Energy Blue"
+    };
+    
     var CONFIGURE_CLASSIC_SCHEME_NAME = 
     {
       en: "Classic"
+    };
+    
+    var CONFIGURE_NO_SCHEME_NAME = 
+    {
+      en: "No Theme"
     };
 
     function editSearchFile(strFilename)
@@ -274,10 +294,13 @@
       mb.AppendMenuItem( local(CONFIGURE_BLUE_SCHEME_NAME), "loadcssfile(\"theme_blue.css\")", local(CONFIGURE_BLUE_SCHEME_DESCRIPTION), confthememenu);
       mb.AppendMenuItem( local(CONFIGURE_OLIVE_SCHEME_NAME), "loadcssfile(\"theme_olive.css\")", local(CONFIGURE_OLIVE_SCHEME_DESCRIPTION), confthememenu);
       mb.AppendMenuItem( local(CONFIGURE_SILVER_SCHEME_NAME), "loadcssfile(\"theme_silver.css\")", local(CONFIGURE_SILVER_SCHEME_DESCRIPTION), confthememenu);
+      mb.AppendMenuItem( local(CONFIGURE_ENERGYBLUE_SCHEME_NAME), "loadcssfile(\"theme_energy_blue.css\")", local(CONFIGURE_ENERGYBLUE_SCHEME_DESCRIPTION), confthememenu);
       mb.AppendMenuItem( local(CONFIGURE_ROYALE_SCHEME_NAME), "loadcssfile(\"theme_royale.css\")", local(CONFIGURE_ROYALE_SCHEME_DESCRIPTION), confthememenu);
       mb.AppendMenuItem( local(CONFIGURE_ROYALE_NOIR_SCHEME_NAME), "loadcssfile(\"theme_royale_noir.css\")", local(CONFIGURE_ROYALE_NOIR_SCHEME_DESCRIPTION), confthememenu);
       mb.AppendMenuItem( local(CONFIGURE_ROYALE_ZUNE_SCHEME_NAME), "loadcssfile(\"theme_royale_zune.css\")", local(CONFIGURE_ROYALE_ZUNE_SCHEME_DESCRIPTION), confthememenu);
-      mb.AppendMenuItem( local(CONFIGURE_CLASSIC_SCHEME_NAME), "loadcssfile(\"classic\")", local(CONFIGURE_CLASSIC_SCHEME_DESCRIPTION), confthememenu);
+      mb.AppendMenuItem( local(CONFIGURE_CLASSIC_SCHEME_NAME), "loadcssfile(\"theme_classic.css\")", local(CONFIGURE_CLASSIC_SCHEME_DESCRIPTION), confthememenu);
+      mb.AppendMenuItem( local(CONFIGURE_NO_SCHEME_NAME), "loadcssfile(\"none\")", local(CONFIGURE_NO_SCHEME_DESCRIPTION), confthememenu);
+//      mb.AppendMenuItem( "No theme", "loadcssfile(\"classic\")", local(CONFIGURE_NO_SCHEME_DESCRIPTION), confthememenu);
 
       mb.AppendSeparator(hmenu);
       mb.AppendMenuItem( local(CONFIGURE_SYSTEM_ALIASES_NAME), "editConfigFile(\"aliases.txt\")", local(CONFIGURE_SYSTEM_ALIASES_DESCRIPTION), hmenu);
@@ -311,7 +334,7 @@
     function loadcssfile (cssfilename)
     {
        var install_dir = DQSDLauncher.InstallationDirectory;
-       if (cssfilename == "classic") {
+       if (cssfilename == "none") {
           writeFile(install_dir+'\\theme.css', "");
           reload();
           return;

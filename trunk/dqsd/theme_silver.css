@@ -10,30 +10,33 @@
 
 body
 {
- background: #BBBDCD url(xptoolbar1_silver.bmp) repeat-x fixed top;
+ background: #C4CBD1 url(xptoolbar1_silver_top.bmp) repeat-x fixed top;
+}
+div#dqsdwrapper{
+ background: url(xptoolbar1_silver_bottom.bmp) repeat-x fixed bottom;
 }
 
 .clock
 {
- background: transparent repeat-x fixed bottom;
+ background: transparent;
  color: #000000;
  font-weight: bold;
  border-width:0px;
- padding-top:9px;
+ padding-top:2px;
  padding-left:4px;
  padding-right:4px;
- padding-bottom:5px;
+ padding-bottom:2px;
 }
 
 .txtfld
 {
- background: #A0A7AD url(xptoolbar2_silver.bmp) repeat-x fixed top;
+ background: #fcfcfc;
  color: #000000;
  border-width:0px;
- padding-top:9px;
+ padding-top:4px;
  padding-left:4px;
  padding-right:4px;
- padding-bottom:5px;
+ padding-bottom:4px;
 }
 
 .gobutton, .mogobutton, .mdgobutton
@@ -88,5 +91,3 @@ Styles for the help box
 {
   background: window;
 }
-
-IMG#banner { cursor: hand; margin-top: 7px; }
