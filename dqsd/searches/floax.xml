@@ -55,6 +55,7 @@ var floaxButtons =<br />
         if (nullArgs( "floax", "?" )) return true;
       }
     }
+
     if ( toggleDisplayIsToggled() ) {
       toggleDisplay('');
       return false;
@@ -67,9 +68,10 @@ var floaxButtons =<br />
        //format the view-port
       var floaxs = "";
       for (var i = 0; i < floaxButtons.length; i++) {
-        floaxs += "<img width=16 height=16";
+        floaxs += "<img width=14 height=14";
         floaxs += " src='" + floaxButtons[i][0] + "'";
         floaxs += " title='"   + floaxButtons[i][1] + "'";
+        floaxs += " style='float:left;width:14px;height:14px;margin:1px;padding:0'";
         floaxs += " onclick=\"toggleDisplay();document.deff.q.value='";
         floaxs += floaxButtons[i][2] + "';def();\"";
         floaxs += " />\n ";
