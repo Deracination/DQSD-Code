@@ -1,5 +1,5 @@
-RELEASE PROCEDURE FOR DQSD - Kim Gräsman, December 2003
-========================================================================
+RELEASE PROCEDURE FOR DQSD - Kim Gräsman, Updated June, 2008
+============================================================
 - Prepare for build
 	- Make sure the paths in build.cmd match your private VS.NET, Windows SDK and 
 		NSIS paths
@@ -36,6 +36,7 @@ RELEASE PROCEDURE FOR DQSD - Kim Gräsman, December 2003
 			for a final version
 		- Set status to Hidden
 		- Paste in change log from ChangeLog.txt
+		- Set "Keep pre-formatted text" check box
 		- [Submit/Refresh]
 	- Attach file
 		- Your uploaded installer should be listed under Step 2, check 
