@@ -9,6 +9,7 @@ New Searches
 * isohunt - torrent search
 
 Bug Fixes
+* Deskband can now be placed on a dedicated row in a multi-row taskbar. Thanks to Bob Coleman for bug report (Kim Gräsman)
 
 Modified Searches
 * dns - added support for login under dnsstuff.com (Shawn K. Hall)
