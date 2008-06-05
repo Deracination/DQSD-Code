@@ -90,10 +90,10 @@ STDMETHODIMP CDeskBand::GetBandInfo(DWORD, DWORD, DESKBANDINFO* pdbi)
 
     if (pdbi->dwMask & DBIM_MINSIZE)
     {
-        // These should always be zero. See:
-        // http://discussms.hosting.lsoft.com/SCRIPTS/WA-MSD.EXE?A2=ind9901a&L=atl&T=0&O=D&P=2144
+        // .x must be zero, to allow uninhibited width (or height-, in the case of a vertical taskbar) reduction
+        // .y cannot be zero, as it becomes the fixed height if the bar is placed on a dedicated row in a double-height taskbar
         pdbi->ptMinSize.x = 0;
-        pdbi->ptMinSize.y = 0;
+        pdbi->ptMinSize.y = 22; // 22 looks like the default bar height
     }
 
     if (pdbi->dwMask & DBIM_MAXSIZE)
