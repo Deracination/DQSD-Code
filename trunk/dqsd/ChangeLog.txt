@@ -14,7 +14,7 @@ Modified Searches
 * dns - added support for login under dnsstuff.com (Shawn K. Hall)
 * whi - added support for login under webhosting.info (Shawn K. Hall)
 * yy - corrected various issues with logins via yahoo (Shawn K. Hall)
-
+* comx - updated to work with site changes (Brian Dunworth)
 
 -- What's new for 4.0.0.4 (May 30, 2008)
 
