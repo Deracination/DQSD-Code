@@ -555,7 +555,7 @@
 		 //<img src="http://imgs.xkcd.com/comics/image_name.png" title="Constantly stopping [...]" alt=
 		 // 21May07 - BSD: sometimes, half (or more) of the humor is in the pop-up text on the image, so
 		 //           I've expanded the regex pattern to include the title text...
-                 var pattern = /comics\/\S+.[jpg|png|gif]" title=".*" alt=/ig;
+                 var pattern = /comics\/\S+.[jpg|png|gif]\" title=\".*\" alt=/ig;
                  var result = sBody.match(pattern)[0];
 		 var imgurl = "http://imgs.xkcd.com/"+result+"\"";
 		 break;
@@ -572,7 +572,8 @@
 		 // what I'm looking for
 		 // <img src="http://www.qwantz.com/comics/image_name.gif" title="blah blah blah [...]" border=0
 		 // 22May07 - BSD:  what?? this one, too?  am I sensing a trend?  anyway, updated regex
-		 var pattern = /comics\/\S+.[jpg|png|gif]" title=".*" border=0/ig;
+		 // var pattern = /comics\/S+.[jpg|png|gif]/ig;
+		 var pattern = /comics\/\S+.[jpg|png|gif]\" width=\".*\" height=\".*\" title=\".*\" border=\"0\"/ig;
 		 var result = sBody.match(pattern)[0];
 		 var imgurl = "http://www.qwantz.com/"+result;
 		 break;
