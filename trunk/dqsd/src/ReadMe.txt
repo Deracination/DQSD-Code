@@ -1,6 +1,7 @@
 RELEASE PROCEDURE FOR DQSD - Kim Gräsman, Updated June, 2008
 ============================================================
 - Prepare for build
+  - SVN update, so you have the latest changes
 	- Make sure the paths in build.cmd match your private VS.NET, Windows SDK and 
 		NSIS paths
 	- Make sure you have the NSISXML plug-in installed
@@ -17,6 +18,7 @@ RELEASE PROCEDURE FOR DQSD - Kim Gräsman, Updated June, 2008
 	or
 	- Build manually
 		- Build DQSDTools.dll from inside Visual Studio
+		- Build DQSDHost.dll from inside Visual Studio
 		- NSIS-compile search.nsi
 	- Generates dqsd.exe
 	- Rename to dqsd-<ver>-<type>.exe, e.g. dqsd-318-beta.exe or 
@@ -36,7 +38,7 @@ RELEASE PROCEDURE FOR DQSD - Kim Gräsman, Updated June, 2008
 			for a final version
 		- Set status to Hidden
 		- Paste in change log from ChangeLog.txt
-		- Set "Keep pre-formatted text" check box
+		- Set "Preserve my pre-formatted text" check box
 		- [Submit/Refresh]
 	- Attach file
 		- Your uploaded installer should be listed under Step 2, check 

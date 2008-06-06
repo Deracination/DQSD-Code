@@ -14,7 +14,7 @@ Name "Dave's Quick Search Deskbar"
 !Define IE_MAJOR_REQUIRED  5
 !Define IE_MINOR_REQUIRED  5
 !Define HOW_TO_TURN_ON_TOOLBAR "Right-click in your taskbar and select$\n$\n    Toolbar > DQSD Deskbar$\n$\nto add the Quick Search Deskbar to your taskbar."
-!Define TITLE_AND_COPYRIGHT "Dave's Quick Search Deskbar$\nCopyright © 2002-2006 David Bau$\nDistributed under the terms of the$\nGNU General Public License, Version 2"
+!Define TITLE_AND_COPYRIGHT "Dave's Quick Search Deskbar$\nCopyright © 2002-2008 David Bau$\nDistributed under the terms of the$\nGNU General Public License, Version 2"
 !Define DQSD_CLSID "{226b64e8-dc75-4eea-a6c8-abcb4d1d37ff}"
 !Define DQSDHOST_CLSID "{EC9FE983-E520-4D8F-B1A7-ACBCA0439C70}"
 !Define DQSD_TITLE "Dave's Quick Search Deskbar"
