@@ -1,4 +1,14 @@
--- What's new for 4.0.0.5 (mmm dd, yyyy)
+-- What's new for 4.0.x.x (mmm dd, yyyy)
+
+Enhancements
+
+New Searches
+
+Bug Fixes
+
+Modified Searches
+
+-- What's new for 4.0.0.5 (Jun 05, 2008)
 
 Enhancements
 * Dynamic copyright years in about box: 2002-%currentyear% (Kim Gräsman)
