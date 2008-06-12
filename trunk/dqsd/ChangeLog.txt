@@ -1,10 +1,13 @@
 -- What's new for 4.0.x.x (mmm dd, yyyy)
 
 Enhancements
+* Add two new themes, classic and energy blue
 
 New Searches
 
 Bug Fixes
+* Re-introduce multi-line fixes
+* update installer package
 
 Modified Searches
 

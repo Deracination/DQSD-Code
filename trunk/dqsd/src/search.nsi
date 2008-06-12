@@ -187,50 +187,44 @@ Section "Quick Search Deskbar (required)"
   WriteUninstaller "$INSTDIR\uninstall.exe"
 
   ; Put files there
-  File "..\ChangeLog.txt"
   File "..\aliases.txt"
+  File "..\categoryExpander.htc"
+  File "..\ChangeLog.txt"
+  File "..\readme.txt"
+  File "..\dqsd.png"
+  File "..\version.xml"
+  File "..\versiondialog.htm"
+  File "..\maximized.htm"
+  File "..\search.htm"
+  File "..\xptoolbar*.bmp"
+  File "..\holidays.*.xml"
+
   File "..\calculate.js"
   File "..\calendar.js"
-  File "..\categoryExpander.htc"
   File "..\clock.js"
   File "..\defer_tools.js"
-  File "..\dqsd.png"  
   File "..\helpbox.js"
   File "..\helpmenu.js"
   File "..\history.js"
-  File "..\holidays.*.xml"
   File "..\loader.js"
-  File "..\maximized.htm"
   File "..\preferences.js"
-  File "..\readme.txt"
   File "..\savesearchsettings.js"
-  File "..\search.css"
-  File "..\search.htm"
   File "..\strings.js"
   File "..\tools.js"
   File "..\translate.js"
   File "..\version.js"
-  File "..\version.xml"
-  File "..\versiondialog.htm"
-  File "..\xptoolbar1_silver.bmp"
-  File "..\xptoolbar2_silver.bmp"
-  File "..\xptoolbar1_olive.bmp"
-  File "..\xptoolbar2_olive.bmp"
-  File "..\xptoolbar1_blue.bmp"
-  File "..\xptoolbar2_blue.bmp"
-  File "..\xptoolbar1_royale.bmp"
-  File "..\xptoolbar2_royale.bmp"
-  File "..\xptoolbar1_royale_noir.bmp"
-  File "..\xptoolbar2_royale_noir.bmp"
-  File "..\xptoolbar1_royale_zune.bmp"
-  File "..\xptoolbar2_royale_zune.bmp"
-  File "..\theme_silver.css"
-  File "..\theme_olive.css"
+
+  File "..\search.css"
+  File "..\theme.css"
   File "..\theme_blue.css"
+  File "..\theme_classic.css"
+  File "..\theme_energy_blue.css"
+  File "..\theme_olive.css"
   File "..\theme_royale.css"
   File "..\theme_royale_noir.css"
   File "..\theme_royale_zune.css"
-  File "..\theme.css"
+  File "..\theme_silver.css"
+
   
   SetOutPath "$INSTDIR\searches"
   File "..\searches\*.xml"
@@ -460,55 +454,48 @@ Section "Uninstall"
   Delete /REBOOTOK $INSTDIR\DQSDHost.dll
   Delete /REBOOTOK $INSTDIR\ChangeLog.txt
   Delete /REBOOTOK $INSTDIR\aliases.deprecated
+  Delete /REBOOTOK $INSTDIR\menu.txt
+  Delete /REBOOTOK $INSTDIR\readme.txt
+  Delete /REBOOTOK $INSTDIR\uninstall.exe
+
   Delete /REBOOTOK $INSTDIR\aliases.txt
+  Delete /REBOOTOK $INSTDIR\categoryExpander.htc
+  Delete /REBOOTOK $INSTDIR\ChangeLog.txt
+  Delete /REBOOTOK $INSTDIR\readme.txt
+  Delete /REBOOTOK $INSTDIR\dqsd.png
+  Delete /REBOOTOK $INSTDIR\version.xml
+  Delete /REBOOTOK $INSTDIR\versiondialog.htm
+  Delete /REBOOTOK $INSTDIR\maximized.htm
+  Delete /REBOOTOK $INSTDIR\search.htm
+  Delete /REBOOTOK $INSTDIR\xptoolbar*.bmp
+  Delete /REBOOTOK $INSTDIR\holidays.*.xml
+
   Delete /REBOOTOK $INSTDIR\calculate.js
   Delete /REBOOTOK $INSTDIR\calendar.js
-  Delete /REBOOTOK $INSTDIR\categoryExpander.htc
   Delete /REBOOTOK $INSTDIR\clock.js
   Delete /REBOOTOK $INSTDIR\defer_tools.js
-  Delete /REBOOTOK $INSTDIR\dqsd.png
   Delete /REBOOTOK $INSTDIR\helpbox.js
   Delete /REBOOTOK $INSTDIR\helpmenu.js
   Delete /REBOOTOK $INSTDIR\history.js
-  Delete /REBOOTOK $INSTDIR\holidays.*.xml
   Delete /REBOOTOK $INSTDIR\loader.js
-  Delete /REBOOTOK $INSTDIR\maximized.htm
-  Delete /REBOOTOK $INSTDIR\menu.txt
-  Delete /REBOOTOK $INSTDIR\readme.txt
+  Delete /REBOOTOK $INSTDIR\preferences.js
   Delete /REBOOTOK $INSTDIR\savesearchsettings.js
-  Delete /REBOOTOK $INSTDIR\search.css
-  Delete /REBOOTOK $INSTDIR\search.htm
-  Delete /REBOOTOK $INSTDIR\search.xml
   Delete /REBOOTOK $INSTDIR\strings.js
   Delete /REBOOTOK $INSTDIR\tools.js
   Delete /REBOOTOK $INSTDIR\translate.js
   Delete /REBOOTOK $INSTDIR\version.js
-  Delete /REBOOTOK $INSTDIR\version.xml
-  Delete /REBOOTOK $INSTDIR\versiondialog.htm
-  Delete /REBOOTOK $INSTDIR\xptoolbar2_default.bmp
-  Delete /REBOOTOK $INSTDIR\xptoolbar1_default.bmp
-  Delete /REBOOTOK $INSTDIR\xptoolbar1_silver.bmp
-  Delete /REBOOTOK $INSTDIR\xptoolbar2_silver.bmp
-  Delete /REBOOTOK $INSTDIR\xptoolbar1_olive.bmp
-  Delete /REBOOTOK $INSTDIR\xptoolbar2_olive.bmp
-  Delete /REBOOTOK $INSTDIR\xptoolbar1_blue.bmp
-  Delete /REBOOTOK $INSTDIR\xptoolbar2_blue.bmp
-  Delete /REBOOTOK $INSTDIR\xptoolbar1_royale.bmp
-  Delete /REBOOTOK $INSTDIR\xptoolbar2_royale.bmp
-  Delete /REBOOTOK $INSTDIR\xptoolbar1_royale_noir.bmp
-  Delete /REBOOTOK $INSTDIR\xptoolbar2_royale_noir.bmp
-  Delete /REBOOTOK $INSTDIR\xptoolbar1_zune.bmp
-  Delete /REBOOTOK $INSTDIR\xptoolbar2_zune.bmp
-  Delete /REBOOTOK $INSTDIR\preferences.js
+
+  Delete /REBOOTOK $INSTDIR\search.css
   Delete /REBOOTOK $INSTDIR\theme.css
   Delete /REBOOTOK $INSTDIR\theme_blue.css
-  Delete /REBOOTOK $INSTDIR\theme_default.css
-  Delete /REBOOTOK $INSTDIR\theme_silver.css
+  Delete /REBOOTOK $INSTDIR\theme_classic.css
+  Delete /REBOOTOK $INSTDIR\theme_energy_blue.css
   Delete /REBOOTOK $INSTDIR\theme_olive.css
   Delete /REBOOTOK $INSTDIR\theme_royale.css
   Delete /REBOOTOK $INSTDIR\theme_royale_noir.css
-  Delete /REBOOTOK $INSTDIR\theme_zune.css
-  Delete /REBOOTOK $INSTDIR\uninstall.exe
+  Delete /REBOOTOK $INSTDIR\theme_royale_zune.css
+  Delete /REBOOTOK $INSTDIR\theme_silver.css
+
 
 ; Ask to delete local files
   MessageBox MB_YESNO|MB_ICONINFORMATION|MB_DEFBUTTON2 "Uninstall local settings too?" IDYES fulluninstall IDNO partialuninstall
