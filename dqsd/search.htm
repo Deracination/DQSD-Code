@@ -154,7 +154,7 @@ document.title=local(SEARCH_TITLE);
 
 </head>
 
-<body onload='strt()' scroll='no'>
+<body onload='strt()' scroll='no'><div id='dqsdwrapper'>
 
 <div style='display:none' id='delaymsg'></div>
 
@@ -571,10 +571,10 @@ var toggleView;
 //                         the default state (false) or toggled state (true)
 function toggleDisplayIsToggled() {
   var t = document.getElementById("defft");
-  if ( t.style.display == '' ){
-    return true;
-  } else {
+  if ( t.style.display == 'none' ){
     return false;
+  } else {
+    return true;
   }
 }
 
@@ -598,12 +598,16 @@ function toggleDisplay( contents ){
 
   } else {
   //show toggleView
-    toggleView.style.display ='';
-    toggleView.innerHTML     =contents;
+    toggleView.style.top = document.deff.q.style.top;
+    toggleView.style.left = bannerwidth;
+    toggleView.style.height = document.deff.q.style.height;
+    toggleView.style.width= Math.abs(document.deff.q.style.width.replace("px","")) + Math.abs(document.deff.gobutton.style.width.replace("px","")) + 10;
+    toggleView.style.display ='inline';
     obj = document.deff.q;
     obj.style.display        ='none';
     obj = document.deff.gobutton;
     obj.style.display        ='none';
+    toggleView.innerHTML     =contents;
 
   }
 }
@@ -952,8 +956,9 @@ function handleResize()
   {
     document.all.info.style.display="none";
     document.deff.q.style.display="block";
-    document.deff.q.style.top=0;
-    document.deff.q.style.height = document.body.clientHeight;
+    document.deff.q.style.top=2; //5
+    document.deff.q.style.height = document.body.clientHeight-4; //-10
+    document.getElementById('dqsdwrapper').style.height = document.body.clientHeight;
   }
 
   var targetwidth = document.body.clientWidth - gowidth - bannerwidth;
@@ -1074,5 +1079,6 @@ function refreshIcons()
    }
 }
 </script>
+</div>
 </body>
 </html>

@@ -1,0 +1,51 @@
+/* localsearch.css
+*
+* Add stylesheet preferences here to keep them from being
+* overwritten on upgrades.
+* 
+* Use search.css as a guide, copying settings from that
+* file to this file, and then modifying them to suit your
+* personal taste.
+*/
+
+body
+{
+ background: #D4D0C8;
+}
+div#dqsdwrapper{
+ background: transparent;
+ padding:0;
+}
+
+.clock
+{
+ background: transparent;
+ text-align:center;
+ color: #000000;
+ font-weight: bold;
+ border-width:0px;
+ padding-top:2px;
+ padding-left:4px;
+ padding-right:4px;
+ padding-bottom:2px;
+}
+
+.txtfld
+{
+ background: #fcfcfc;
+ color: #000000;
+ border-width:0px;
+ padding-top:4px;
+ padding-left:4px;
+ padding-right:4px;
+ padding-bottom:4px;
+ border: 1px solid #777;
+}
+
+.gobutton, .mogobutton, .mdgobutton
+{
+ background: transparent repeat-x fixed bottom;
+ border:0px;
+ color: #000000;
+ position:absolute;
+}

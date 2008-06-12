@@ -1,0 +1,93 @@
+/* localsearch.css
+*
+* Add stylesheet preferences here to keep them from being
+* overwritten on upgrades.
+* 
+* Use search.css as a guide, copying settings from that
+* file to this file, and then modifying them to suit your
+* personal taste.
+*/
+
+body
+{
+ background: #397DD0 url(xptoolbar1_energyblue_top.bmp) repeat-x fixed top;
+}
+div#dqsdwrapper{
+ background: url(xptoolbar1_energyblue_bottom.bmp) repeat-x fixed bottom;
+}
+
+.clock
+{
+ background: transparent;
+ color: #000000;
+ font-weight: bold;
+ border-width:0px;
+ padding-top:2px;
+ padding-left:4px;
+ padding-right:4px;
+ padding-bottom:2px;
+}
+
+.txtfld
+{
+ background: #fcfcfc;
+ color: #000000;
+ border-width:0px;
+ padding-top:4px;
+ padding-left:4px;
+ padding-right:4px;
+ padding-bottom:4px;
+}
+
+.gobutton, .mogobutton, .mdgobutton
+{
+ background: transparent repeat-x fixed bottom;
+ border:0px;
+ color: #000000;
+ position:absolute;
+}
+
+
+/*
+Styles for the calendar
+*/
+.cal
+{
+ color:white;
+ background-color: highlight;
+}
+.calnavmonth, .calnavmonthhigh, .calnavyear, .calnavyearhigh
+{
+  padding:1px;
+  border-width:0;
+}
+.caltodayevent, .caltodayeventhigh
+{
+  background-color:darkblue;
+  border-width:0;
+}
+.caltoday, .caltodayhigh
+{
+  background-color:darkblue;
+  border-width:0px;
+}
+.caleventday, .caleventdayhigh
+{   
+  font-weight:bold;
+  color:#e07070;
+}
+.calgray, .helpboxCategoryExpanderSign, .helpboxCategoryCount, .helpboxCategoryTop, .helpboxLinkTop
+{
+    color:#707070;
+}
+.helpboxLinkTop,
+{
+    color:#0000b0;
+}
+/*
+Styles for the help box
+*/
+.helpboxBody
+{
+  background: window;
+}
