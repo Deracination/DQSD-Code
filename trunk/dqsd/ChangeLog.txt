@@ -1,4 +1,14 @@
--- What's new for 4.0.x.x (mmm dd, yyyy)
+-- What's new for 4.x.x.x (mmm dd, yyyy)
+
+Enhancements
+
+New Searches
+
+Bug Fixes
+
+Modified Searches
+
+-- What's new for 4.0.0.6 (Jul 04, 2008)
 
 Enhancements
 * Add two new themes, classic and energy blue
