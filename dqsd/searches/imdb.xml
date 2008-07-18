@@ -1,5 +1,8 @@
 <search function="imdb">
   <name>Internet Movie Database (IMDB)</name>
+  <category>Entertainment</category>
+  <contributor>Steve Poirier</contributor>
+  <link>http://www.imdb.com</link>
   <description>
     Lookup movies, television shows, actors, directors and more.<br/>
     <div class="helpboxDescLabels">Example:</div>
@@ -7,33 +10,26 @@
   		<tr><td>imdb jaws</td></tr>
   	</table>
   </description>
-  <category>Entertainment</category>
-  <link>http://www.imdb.com/</link>
-  
+
   <form name="imdbf"
-        action="http://www.imdb.com/Find"
-        method="post">
-    <input type="hidden" name="select" value="All"/>
-    <input type="hidden" name="for"/>
-    <input type="hidden" name="Go" value="Go"/>
+        method="get"
+        action="http://www.imdb.com/find">
+    <input type="hidden" name="s" value="all" />
+    <input type="hidden" name="q" value="" />
   </form>
-  
+
   <script><![CDATA[
     function imdb(q)
-    { 
-      if( nullArgs("imdb",q) )
-        return false;
-      else
-      {
-        document.imdbf["for"].value = q;
-        submitForm(imdbf);
-      }
+    {
+      if( nullArgs("imdb", q) )
+        return;
+      document.imdbf.q.value = q;
+      submitForm(imdbf);
     }
   ]]></script>
 
   <copyright>
-	Copyright (c) 2002 David Bau
-	Distributed under the terms of the
-	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
   </copyright>
 </search>
