@@ -26,28 +26,21 @@
 //something, but do not change the name of _Module
 extern CComModule _Module;
 #include <atlcom.h>
+
 #include <shlwapi.h>
 #include <wininet.h>
 
-#include <atlctl.h>					// IObjectSafety,
-#include <exdisp.h>					// IWebBrowser2,
-#include <mshtml.h>
-#include <shlguid.h>				// SID_SWebBrowserApp, 
-#include <shellapi.h>				// ShellExecute, 
-#include <commctrl.h>
-
-#import <msxml4.dll> named_guids
-//using namespace MSXML2;
-
-#pragma warning(push, 3)
+#include <atlctl.h>					// IObjectSafety
+#include <exdisp.h>					// IWebBrowser2
+#include <shlguid.h>				// SID_SWebBrowserApp 
+#include <shellapi.h>				// ShellExecute 
+#include <shlobj.h>
 
 #pragma warning (disable : 4702)  // warning C4702: unreachable code 
 #include <map>
-#include <list>
 #pragma warning (default : 4702) 
-#include <string>
 
-#pragma warning(pop)
+#import <msxml4.dll> named_guids
 
 //{{AFX_INSERT_LOCATION}}
 // Microsoft Visual C++ will insert additional declarations immediately before the previous line.

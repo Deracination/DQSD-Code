@@ -9,41 +9,32 @@
 #include "Launcher.h"
 #include "MenuBuilder.h"
 
-#ifdef _MERGE_PROXYSTUB
-extern "C" HINSTANCE hProxyDll;
-#endif
-
 CComModule _Module;
 
 BEGIN_OBJECT_MAP(ObjectMap)
-OBJECT_ENTRY(CLSID_Launcher, CLauncher)
-OBJECT_ENTRY(CLSID_MenuBuilder, CMenuBuilder)
+    OBJECT_ENTRY(CLSID_Launcher, CLauncher)
+    OBJECT_ENTRY(CLSID_MenuBuilder, CMenuBuilder)
 END_OBJECT_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
 // DLL Entry Point
 
 extern "C"
-BOOL WINAPI DllMain(HINSTANCE hInstance, DWORD dwReason, LPVOID lpReserved)
+BOOL WINAPI DllMain(HINSTANCE hInstance, DWORD dwReason, LPVOID /*lpReserved*/)
 {
-    lpReserved;
-#ifdef _MERGE_PROXYSTUB
-    if (!PrxDllMain(hInstance, dwReason, lpReserved))
-        return FALSE;
-#endif
     if (dwReason == DLL_PROCESS_ATTACH)
     {
         _Module.Init(ObjectMap, hInstance, &LIBID_DQSDTOOLSLib);
         DisableThreadLibraryCalls(hInstance);
-		InitCommonControls(); 
+        InitCommonControls(); 
 
-		ATLTRACE("DQSDTools loading\n");
+        ATLTRACE("DQSDTools loading\n");
     }
     else if (dwReason == DLL_PROCESS_DETACH)
-	{
+    {
         _Module.Term();
-		ATLTRACE("DQSDTools unloading\n");
-	}
+        ATLTRACE("DQSDTools unloading\n");
+    }
     return TRUE;    // ok
 }
 
@@ -52,25 +43,18 @@ BOOL WINAPI DllMain(HINSTANCE hInstance, DWORD dwReason, LPVOID lpReserved)
 
 STDAPI DllCanUnloadNow(void)
 {
-	ATLTRACE("DQSD: DllCanUnloadNow called (lockcount %d)\n", _Module.GetLockCount());
-
-#ifdef _MERGE_PROXYSTUB
-    if (PrxDllCanUnloadNow() != S_OK)
-	{
-
-	}
-#endif
+    ATLTRACE("DQSD: DllCanUnloadNow called (lockcount %d)\n", _Module.GetLockCount());
 
     if(_Module.GetLockCount()==0)
-	{
-		ATLTRACE("DQSD: DllCanUnloadNow returns S_OK\n");
-		return S_OK;
-	}
-	else
-	{
-		ATLTRACE("DQSD: DllCanUnloadNow returns S_FALSE\n");
-		return S_FALSE;
-	}
+    {
+        ATLTRACE("DQSD: DllCanUnloadNow returns S_OK\n");
+        return S_OK;
+    }
+    else
+    {
+        ATLTRACE("DQSD: DllCanUnloadNow returns S_FALSE\n");
+        return S_FALSE;
+    }
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -78,10 +62,6 @@ STDAPI DllCanUnloadNow(void)
 
 STDAPI DllGetClassObject(REFCLSID rclsid, REFIID riid, LPVOID* ppv)
 {
-#ifdef _MERGE_PROXYSTUB
-    if (PrxDllGetClassObject(rclsid, riid, ppv) == S_OK)
-        return S_OK;
-#endif
     return _Module.GetClassObject(rclsid, riid, ppv);
 }
 
@@ -90,11 +70,6 @@ STDAPI DllGetClassObject(REFCLSID rclsid, REFIID riid, LPVOID* ppv)
 
 STDAPI DllRegisterServer(void)
 {
-#ifdef _MERGE_PROXYSTUB
-    HRESULT hRes = PrxDllRegisterServer();
-    if (FAILED(hRes))
-        return hRes;
-#endif
     // registers object, typelib and all interfaces in typelib
     return _Module.RegisterServer(TRUE);
 }
@@ -104,10 +79,5 @@ STDAPI DllRegisterServer(void)
 
 STDAPI DllUnregisterServer(void)
 {
-#ifdef _MERGE_PROXYSTUB
-    PrxDllUnregisterServer();
-#endif
     return _Module.UnregisterServer(TRUE);
 }
-
-

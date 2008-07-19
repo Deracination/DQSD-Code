@@ -4,9 +4,6 @@
 #include "KeyboardHook.h"
 #include "Launcher.h"
 #include "Utilities.h"
-#include <objbase.h>
-#include <shlguid.h>
-#include <shlobj.h>
 
 #pragma comment(lib, "Version.lib")
 

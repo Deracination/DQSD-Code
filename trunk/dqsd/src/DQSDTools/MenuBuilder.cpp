@@ -1,6 +1,5 @@
 // MenuBuilder.cpp : Implementation of CMenuBuilder
 #include "stdafx.h"
-#include <windowsx.h>		// For GET_X_LPARAM, etc macros
 
 #include "DQSDTools.h"
 #include "MenuBuilder.h"
