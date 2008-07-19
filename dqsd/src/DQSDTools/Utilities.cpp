@@ -1,10 +1,8 @@
 #include "StdAfx.h"
-#include <comdef.h>
+#include "Utilities.h"
 
 #define COMPILE_MULTIMON_STUBS
 #include <multimon.h>
-
-#include "Utilities.h"
 
 HWND g_hDQSDWindow;
 
