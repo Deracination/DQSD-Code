@@ -39,7 +39,7 @@ public:
 		}
 
 		ATLTRACE("CMenuBuilder - destroyed\n");
-		ATLTRACE("DQSDTools: Lock count %d\n", _Module.GetLockCount());
+		ATLTRACE("DQSDTools: Lock count %d\n", _pAtlModule->GetLockCount());
 	}
 
 DECLARE_REGISTRY_RESOURCEID(IDR_MENUBUILDER)
@@ -110,5 +110,7 @@ protected:
 	static HWND		m_hTooltipWnd;
 
 };
+
+OBJECT_ENTRY_AUTO(__uuidof(MenuBuilder), CMenuBuilder);
 
 #endif //__MENUBUILDER_H_

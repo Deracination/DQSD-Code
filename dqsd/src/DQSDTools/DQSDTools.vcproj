@@ -214,6 +214,23 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath=".\DQSDTools_i.c">
+				<FileConfiguration
+					Name="Release MinDependency|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="0"
+						PrecompiledHeaderThrough=""/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|Win32">
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="0"
+						PrecompiledHeaderThrough=""/>
+				</FileConfiguration>
+			</File>
+			<File
 				RelativePath="KeyboardHook.cpp">
 				<FileConfiguration
 					Name="Release MinDependency|Win32">
@@ -347,6 +364,9 @@
 		<Filter
 			Name="Resource Files"
 			Filter="ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe">
+			<File
+				RelativePath=".\DQSDTools.rgs">
+			</File>
 			<File
 				RelativePath="Launcher.rgs">
 			</File>

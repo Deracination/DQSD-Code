@@ -429,7 +429,7 @@ STDMETHODIMP CMenuBuilder::InitialiseTooltips(long displayTimeMultiplier)
 		CW_USEDEFAULT,
 		NULL,
 		NULL,
-		_Module.GetModuleInstance(),
+		_AtlBaseModule.GetModuleInstance(),
 		NULL
 		);
 	if(m_hTooltipWnd == NULL)
