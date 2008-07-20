@@ -17,6 +17,7 @@
 #define WINVER 0x410
 #define _WIN32_IE 0x0501
 
+#define _CRT_SECURE_NO_WARNINGS
 #define _ATL_APARTMENT_THREADED
 //#define _ATL_DEBUG_INTERFACES
 
@@ -32,6 +33,8 @@
 #include <shlguid.h>				// SID_SWebBrowserApp 
 #include <shellapi.h>				// ShellExecute 
 #include <shlobj.h>
+#include <shobjidl.h>
+#include <shlguid.h>
 
 #pragma warning (disable : 4702)  // warning C4702: unreachable code 
 #include <map>

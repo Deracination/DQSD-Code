@@ -97,15 +97,19 @@ static LRESULT CALLBACK KeyboardProc(
 				SendMessage(hFocusWnd, WM_CHAR, 'N'-'@', 0);
 				return 0;
 			}
-			else if(g_mapKeyCodeToCharCode.find(wParam) != g_mapKeyCodeToCharCode.end())
-			{
-				SendMessage(hFocusWnd, WM_CHAR, g_mapKeyCodeToCharCode[wParam], 0);
-				return 0;
-			}
 			else
-			{
-				ATLTRACE(_T("Hook: %d (focus 0x%x)\n"), wParam, GetFocus());
-			}
+      {
+        long keyCode = static_cast<long>(wParam);
+        if(g_mapKeyCodeToCharCode.find(keyCode) != g_mapKeyCodeToCharCode.end())
+			  {
+				  SendMessage(hFocusWnd, WM_CHAR, g_mapKeyCodeToCharCode[keyCode], 0);
+				  return 0;
+			  }
+			  else
+			  {
+				  ATLTRACE(_T("Hook: %d (focus 0x%x)\n"), wParam, GetFocus());
+			  }
+      }
 		}
 	}
 
@@ -229,7 +233,8 @@ LRESULT CALLBACK NotificationWndProc(
 	else if(uMsg == WM_DESTROY)
 	{
 		ATLTRACE("Unregistering HotKey...\n");
-		UnregisterHotKey(hwnd, GetWindowLong(hwnd, GWL_USERDATA));
+    int hotkeyId = static_cast<int>(GetWindowLong(hwnd, GWLP_USERDATA));
+		UnregisterHotKey(hwnd, hotkeyId);
 	}
 
 	return DefWindowProc(hwnd, uMsg,wParam,lParam);
@@ -319,7 +324,7 @@ HRESULT KeyboardInstallHotkey(int vkCode, LPCTSTR pModifierNames, HWND* phwndNot
 	// Make an ID for the window and store it in the windows userdata slot
 	// so that it can be used to unregister the hotkey
 	ATOM hotKeyId = GlobalAddAtom(_T("DQSDHotKeyAtom"));
-	SetWindowLong(*phwndNotification, GWL_USERDATA, hotKeyId);
+	SetWindowLong(*phwndNotification, GWLP_USERDATA, hotKeyId);
 
 	// Try and work out the modifier - default to the Windows key
 	UINT keyModifier = 0;

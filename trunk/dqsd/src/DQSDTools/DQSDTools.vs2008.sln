@@ -1,0 +1,25 @@
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DQSDTools", "DQSDTools.vs2008.vcproj", "{5E5A706B-D94A-4392-9A41-264EBA01218A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Debug|x64 = Debug|x64
+		Release MinDependency|Win32 = Release MinDependency|Win32
+		Release MinDependency|x64 = Release MinDependency|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5E5A706B-D94A-4392-9A41-264EBA01218A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{5E5A706B-D94A-4392-9A41-264EBA01218A}.Debug|Win32.Build.0 = Debug|Win32
+		{5E5A706B-D94A-4392-9A41-264EBA01218A}.Debug|x64.ActiveCfg = Debug|x64
+		{5E5A706B-D94A-4392-9A41-264EBA01218A}.Debug|x64.Build.0 = Debug|x64
+		{5E5A706B-D94A-4392-9A41-264EBA01218A}.Release MinDependency|Win32.ActiveCfg = Release MinDependency|Win32
+		{5E5A706B-D94A-4392-9A41-264EBA01218A}.Release MinDependency|Win32.Build.0 = Release MinDependency|Win32
+		{5E5A706B-D94A-4392-9A41-264EBA01218A}.Release MinDependency|x64.ActiveCfg = Release MinDependency|x64
+		{5E5A706B-D94A-4392-9A41-264EBA01218A}.Release MinDependency|x64.Build.0 = Release MinDependency|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

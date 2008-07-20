@@ -379,9 +379,6 @@
 				RelativePath="Resource.h">
 			</File>
 			<File
-				RelativePath=".\resource1.h">
-			</File>
-			<File
 				RelativePath=".\ServiceEntryTearOff.h">
 			</File>
 			<File
