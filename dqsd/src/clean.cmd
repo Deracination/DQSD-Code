@@ -18,20 +18,4 @@ if exist Debug rmdir /q /s Debug
 if exist ReleaseMinDependency rmdir /q /s ReleaseMinDependency
 popd
 
-pushd DQSDHost
-if exist DQSDHost.h del /q DQSDHost.h
-if exist DQSDHost.vcproj.vspscc del /q DQSDHost.vcproj.vspscc
-if exist DQSDHost.suo del /q /ah DQSDHost.suo
-if exist DQSDHost.ncb del /q DQSDHost.ncb
-if exist DQSDHost.opt del /q DQSDHost.opt
-if exist DQSDHost.plg del /q DQSDHost.plg
-if exist DQSDHost.tlb del /q DQSDHost.tlb
-if exist DQSDHost_i.c del /q DQSDHost_i.c
-if exist DQSDHost_p.c del /q DQSDHost_p.c
-if exist dlldata.c del /q dlldata.c
-if exist Debug rmdir /q /s Debug
-if exist Release rmdir /q /s Release
-if exist ReleaseMinDependency rmdir /q /s ReleaseMinDependency
-popd
-
 popd

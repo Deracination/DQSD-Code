@@ -2,7 +2,7 @@
 #include "resource.h"       // main symbols
 
 #include "CustomSecurityManager.h"
-#include "DQSDHost.h"
+#include "DQSDTools.h"
 
 class CBrowserHost :
     public CComObjectRootEx<CComSingleThreadModel>,
@@ -67,11 +67,7 @@ public:
 
     HRESULT Initialize(HWND hwndHost, IUnknown* pUnkSite, BSTR bstrUrl);
     HRESULT Uninitialize();
-
-    void ResetSite()
-    {
-        m_spUnkSite = 0;
-    }
+    HRESULT SetMessageTitle(LPCTSTR pszMessageTitle);
 
 private:
     // Message handlers
@@ -80,10 +76,7 @@ private:
 
     // Event sink
     void STDMETHODCALLTYPE OnNavigateComplete2(IDispatch *pDisp, VARIANT*);
-    void STDMETHODCALLTYPE OnWindowClosing(VARIANT_BOOL, VARIANT_BOOL*)
-    {
-        Uninitialize();
-    }
+    void STDMETHODCALLTYPE OnWindowClosing(VARIANT_BOOL, VARIANT_BOOL*);
 
 
 public:
@@ -128,7 +121,6 @@ public:
     STDMETHODIMP GetHostInfo(DOCHOSTUIINFO *pInfo);
     STDMETHODIMP UpdateUI(void);
     STDMETHODIMP EnableModeless(BOOL fEnable);
-    //STDMETHODIMP GetExternal(IDispatch **ppDispatch);
     STDMETHODIMP TranslateAccelerator(LPMSG lpMsg, const GUID* /*pguidCmdGroup*/, DWORD /*nCmdID*/);
 
 private:
@@ -144,5 +136,5 @@ private:
     CContainedWindow m_wndHtmlDoc;
     CContainedWindow m_wndHost;
 
-    TCHAR m_szMessageBoxTitle[256];
+    CComBSTR m_strMessageTitle;
 };

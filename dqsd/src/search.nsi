@@ -16,7 +16,6 @@ Name "Dave's Quick Search Deskbar"
 !Define HOW_TO_TURN_ON_TOOLBAR "Right-click in your taskbar and select$\n$\n    Toolbar > DQSD Deskbar$\n$\nto add the Quick Search Deskbar to your taskbar."
 !Define TITLE_AND_COPYRIGHT "Dave's Quick Search Deskbar$\nCopyright © 2002-2008 David Bau$\nDistributed under the terms of the$\nGNU General Public License, Version 2"
 !Define DQSD_CLSID "{226b64e8-dc75-4eea-a6c8-abcb4d1d37ff}"
-!Define DQSDHOST_CLSID "{EC9FE983-E520-4D8F-B1A7-ACBCA0439C70}"
 !Define DQSD_TITLE "Dave's Quick Search Deskbar"
 
 ; Silent install
@@ -173,10 +172,6 @@ Section "Quick Search Deskbar (required)"
   ; We can register the dll and continue
   register:
   RegDLL $INSTDIR\DQSDTools.dll
-
-  ; Register the new DQSDHost.dll
-  File "..\DQSDHost.dll"
-  RegDLL $INSTDIR\DQSDHost.dll
   
   ; Determine if this is an upgrade
   StrCpy $8 "The Deskbar has been upgraded.  $\nIf the search bar is already present $\non your taskbar, right-click on $\nthe handle to the left of the search bar $\nand select 'Refresh' to reload it.  $\nIf the search bar is not present, $\n${HOW_TO_TURN_ON_TOOLBAR}$\n$\n${TITLE_AND_COPYRIGHT}"
@@ -239,53 +234,15 @@ Section "Quick Search Deskbar (required)"
   File "ReadMe.txt"
   
   SetOutPath "$INSTDIR\src\DQSDTools"
-  File "DQSDTools\DQSDTools.cpp"
-  File "DQSDTools\DQSDTools.def"
-  File "DQSDTools\DQSDTools.dep"
-  File "DQSDTools\DQSDTools.dsp"
-  File "DQSDTools\DQSDTools.dsw"
-  File "DQSDTools\DQSDTools.idl"
-  File "DQSDTools\DQSDTools.mak"
-  File "DQSDTools\DQSDTools.rc"
-  File "DQSDTools\Launcher.cpp"
-  File "DQSDTools\Launcher.h"
-  File "DQSDTools\Launcher.rgs"
-  File "DQSDTools\MenuBuilder.rgs"
-  File "DQSDTools\MenuBuilder.h"
-  File "DQSDTools\MenuBuilder.cpp"
-  File "DQSDTools\KeyboardHook.h"
-  File "DQSDTools\KeyboardHook.cpp"
+  File "DQSDTools\*.cpp"
+  File "DQSDTools\*.def"
+  File "DQSDTools\*.idl"
+  File "DQSDTools\*.rc"
+  File "DQSDTools\*.h"
+  File "DQSDTools\*.rgs"
+  File "DQSDTools\*.sln"
+  File "DQSDTools\*.vcproj"
   File "DQSDTools\License.txt"
-  File "DQSDTools\StdAfx.cpp"
-  File "DQSDTools\StdAfx.h"
-  File "DQSDTools\Utilities.h"
-  File "DQSDTools\Utilities.cpp"
-  File "DQSDTools\resource.h"
-  File "DQSDTools\DQSDTools.sln"
-  File "DQSDTools\DQSDTools.vcproj"
-
-  SetOutPath "$INSTDIR\src\DQSDHost"
-  File "DQSDHost\BrowserHost.cpp"
-  File "DQSDHost\BrowserHost.h"
-  File "DQSDHost\CustomSecurityManager.cpp"
-  File "DQSDHost\CustomSecurityManager.h"
-  File "DQSDHost\DeskBand.cpp"
-  File "DQSDHost\DeskBand.h"
-  File "DQSDHost\DeskBand.rgs"
-  File "DQSDHost\DQSDHost.cpp"
-  File "DQSDHost\DQSDHost.def"
-  File "DQSDHost\DQSDHost.idl"
-  File "DQSDHost\DQSDHost.rc"
-  File "DQSDHost\DQSDHost.rgs"
-  File "DQSDHost\DQSDHost.sln"
-  File "DQSDHost\DQSDHost.vcproj"
-  File "DQSDHost\IDocHostUIHandlerFakeImpl.h"
-  File "DQSDHost\IOleClientSiteFakeImpl.h"
-  File "DQSDHost\IPersistStreamFakeImpl.h"
-  File "DQSDHost\resource.h"
-  File "DQSDHost\ServiceEntryTearOff.h"
-  File "DQSDHost\stdafx.cpp"
-  File "DQSDHost\stdafx.h"
 
   ; Create files with user preferences if they don't exist
   SetOverwrite off
@@ -317,6 +274,9 @@ Section "Quick Search Deskbar (required)"
   ; Remove stuff introduced by 3.1.8 beta-1
   Delete $INSTDIR\dqsd.gif
   Delete $INSTDIR\httpinst.js
+  
+  ; Remove DQSDHost.dll, it's been merged into DQSDTools
+  Delete /REBOOTOK $INSTDIR\DQSDHost.dll
 
   ; Old versions of searches to delete; most renamed or consolidated
   Delete $INSTDIR\searches\aim.xml
@@ -378,18 +338,11 @@ Section "Quick Search Deskbar (required)"
 
   ; Registry settings needed to function
   WriteRegStr HKCR "CLSID\${DQSD_CLSID}" "" "Quick Search"
-  ; WriteRegStr HKCR "CLSID\${DQSD_CLSID}" "MenuText" "Add Quick Search..."
   WriteRegStr HKCR "CLSID\${DQSD_CLSID}" "HelpText" "${DQSD_TITLE}"
-  ; WriteRegStr HKCR "CLSID\${DQSD_CLSID}\Implemented Categories\{00021492-0000-0000-C000-000000000046}" "" ""
-  ; WriteRegStr HKCR "CLSID\${DQSD_CLSID}\InprocServer32" "" "$SYSDIR\shdocvw.dll"
-  ; WriteRegStr HKCR "CLSID\${DQSD_CLSID}\InprocServer32" "ThreadingModel" "Apartment"
-  ; WriteRegStr HKCR "CLSID\${DQSD_CLSID}\Instance" "CLSID" "{7BA4C742-9E81-11CF-99D3-00AA004AE837}"
-  ; WriteRegStr HKCR "CLSID\${DQSD_CLSID}\Instance\InitPropertyBag" "Url" "$INSTDIR\search.htm"
   
   ; Add dqsd clsid to approved shell extensions - irrelevant on non-NT based OS - but doesn't hurt anything per
   ; http://msdn.microsoft.com/library/en-us/shellcc/platform/Shell/programmersguide/shell_int/shell_int_extending/extensionhandlers/shell_ext.asp
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Shell Extensions\Approved" "${DQSD_CLSID}" "${DQSD_TITLE}"
-  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Shell Extensions\Approved" "${DQSDHOST_CLSID}" "${DQSD_TITLE}"
   
   ; Uninstallation keys
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${DQSD_CLSID}" "DisplayName" "${DQSD_TITLE} (remove only)"
@@ -439,11 +392,9 @@ Section "Uninstall"
 
   ; Unregister DLLs
   UnRegDLL $INSTDIR\DQSDTools.dll
-  UnRegDLL $INSTDIR\DQSDHost.dll
 
   ; remove approved shell extension regkey
   DeleteRegValue HKLM "Software\Microsoft\Windows\CurrentVersion\Shell Extensions\Approved" "${DQSD_CLSID}"
-  DeleteRegValue HKLM "Software\Microsoft\Windows\CurrentVersion\Shell Extensions\Approved" "${DQSDHOST_CLSID}"
 
   ; remove registry keys
   DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${DQSD_CLSID}"
@@ -451,7 +402,6 @@ Section "Uninstall"
 
   ; remove files
   Delete /REBOOTOK $INSTDIR\DQSDTools.dll
-  Delete /REBOOTOK $INSTDIR\DQSDHost.dll
   Delete /REBOOTOK $INSTDIR\ChangeLog.txt
   Delete /REBOOTOK $INSTDIR\aliases.deprecated
   Delete /REBOOTOK $INSTDIR\menu.txt

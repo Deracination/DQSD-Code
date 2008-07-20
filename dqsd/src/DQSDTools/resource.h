@@ -23,6 +23,7 @@
 #define IDS_EXCEPTION_IN_VERSION_CHECK  707
 #define IDS_ERR_MENU_TRACKER_WINDOW_FAILED 708
 #define IDR_DQSDTOOLS                   709
+#define IDR_DESKBAND                    710
 
 // Next default values for new objects
 // 

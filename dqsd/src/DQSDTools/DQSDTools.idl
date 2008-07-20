@@ -94,4 +94,12 @@ library DQSDTOOLSLib
 	{
 		[default] interface IMenuBuilder;
 	};
+	[
+		uuid(EC9FE983-E520-4D8F-B1A7-ACBCA0439C70),
+		helpstring("DeskBand Class")
+	]
+	coclass DeskBand
+	{
+		[default] interface IUnknown;
+	};
 };
