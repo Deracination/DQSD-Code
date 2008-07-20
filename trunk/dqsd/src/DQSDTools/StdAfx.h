@@ -28,6 +28,7 @@
 
 #include <atlctl.h>					// IObjectSafety
 #include <exdisp.h>					// IWebBrowser2
+#include <exdispid.h>			    // DISPID_NAVIGATECOMPLETE, etc
 #include <shlguid.h>				// SID_SWebBrowserApp 
 #include <shellapi.h>				// ShellExecute 
 #include <shlobj.h>
@@ -37,6 +38,12 @@
 #pragma warning (default : 4702) 
 
 #import <msxml4.dll> named_guids
+
+#include "Utilities.h"
+#include "ServiceEntryTearOff.h"
+#include "IDocHostUIHandlerFakeImpl.h"
+#include "IPersistStreamFakeImpl.h"
+#include "IOleClientSiteFakeImpl.h"
 
 //{{AFX_INSERT_LOCATION}}
 // Microsoft Visual C++ will insert additional declarations immediately before the previous line.

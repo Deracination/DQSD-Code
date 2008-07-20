@@ -3,8 +3,8 @@
 REM Customize these paths to your local install
 set VSINSTALLDIR=C:\Program Files\Microsoft Visual Studio .NET 2003
 set NSISINSTALLDIR=C:\Program Files\NSIS
-set SDKINCLUDE=C:\Program Files\Microsoft Platform SDK for Windows XP SP2\include
-set SDKLIB=C:\Program Files\Microsoft Platform SDK for Windows XP SP2\lib
+set SDKINCLUDE=C:\Program Files\Microsoft SDKs\Windows\2003SP1\include
+set SDKLIB=C:\Program Files\Microsoft SDKs\Windows\2003SP1\lib
 
 REM **** Build DQSD DLLs ****
 call "%VSINSTALLDIR%\Common7\Tools\vsvars32.bat"
@@ -17,11 +17,6 @@ pushd %~dp0
 pushd DQSDTools
 devenv /useenv DQSDTools.sln /rebuild "Release MinDependency"
 copy /y ReleaseMinDependency\DQSDTools.dll ..\..\DQSDTools.dll
-popd
-
-pushd DQSDHost
-devenv /useenv DQSDHost.sln /rebuild "Release"
-copy /y Release\DQSDHost.dll ..\..\DQSDHost.dll
 popd
 
 REM **** Build installer ****

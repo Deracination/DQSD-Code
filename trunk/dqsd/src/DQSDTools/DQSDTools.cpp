@@ -19,6 +19,12 @@ CDQSDToolsModule _AtlModule;
 extern "C"
 BOOL WINAPI DllMain(HINSTANCE /*hInstance*/, DWORD dwReason, LPVOID lpReserved)
 {
+#ifdef _DEBUG
+    // Note - enable this if necessary
+    ATL::atlTraceCOM.SetStatus(ATLTRACESTATUS_DISABLED);
+    ATL::atlTraceRegistrar.SetStatus(ATLTRACESTATUS_DISABLED);
+#endif
+
     if (dwReason == DLL_PROCESS_ATTACH)
     {
         InitCommonControls(); 

@@ -370,7 +370,7 @@ STDMETHODIMP CLauncher::RegisterHotKey(long hotkeyVkCode, BSTR bstrModifierName,
 // KeyboardProc for every mapping
 STDMETHODIMP CLauncher::MapKeyCode(long lVKCode, long lCharCode)
 {
-	g_mapKeyCodeToCharCode[ lVKCode ] = lCharCode;
+	RegisterKeyCharMapping(lVKCode, lCharCode);
 	return S_OK;
 }
 

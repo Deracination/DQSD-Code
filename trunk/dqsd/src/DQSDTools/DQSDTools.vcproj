@@ -150,7 +150,16 @@
 			Name="Source Files"
 			Filter="cpp;c;cxx;rc;def;r;odl;idl;hpj;bat">
 			<File
+				RelativePath=".\BrowserHost.cpp">
+			</File>
+			<File
 				RelativePath=".\ConfigurationSettings.cpp">
+			</File>
+			<File
+				RelativePath=".\CustomSecurityManager.cpp">
+			</File>
+			<File
+				RelativePath=".\DeskBand.cpp">
 			</File>
 			<File
 				RelativePath="DQSDTools.cpp">
@@ -337,7 +346,25 @@
 			Name="Header Files"
 			Filter="h;hpp;hxx;hm;inl">
 			<File
+				RelativePath=".\BrowserHost.h">
+			</File>
+			<File
 				RelativePath=".\ConfigurationSettings.h">
+			</File>
+			<File
+				RelativePath=".\CustomSecurityManager.h">
+			</File>
+			<File
+				RelativePath=".\DeskBand.h">
+			</File>
+			<File
+				RelativePath=".\IDocHostUIHandlerFakeImpl.h">
+			</File>
+			<File
+				RelativePath=".\IOleClientSiteFakeImpl.h">
+			</File>
+			<File
+				RelativePath=".\IPersistStreamFakeImpl.h">
 			</File>
 			<File
 				RelativePath="KeyboardHook.h">
@@ -355,6 +382,9 @@
 				RelativePath=".\resource1.h">
 			</File>
 			<File
+				RelativePath=".\ServiceEntryTearOff.h">
+			</File>
+			<File
 				RelativePath="StdAfx.h">
 			</File>
 			<File
@@ -364,6 +394,9 @@
 		<Filter
 			Name="Resource Files"
 			Filter="ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe">
+			<File
+				RelativePath=".\DeskBand.rgs">
+			</File>
 			<File
 				RelativePath=".\DQSDTools.rgs">
 			</File>

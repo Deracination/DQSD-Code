@@ -1,6 +1,7 @@
 -- What's new for 4.x.x.x (mmm dd, yyyy)
 
 Enhancements
+* Folded DQSDHost functionality into DQSDTools.dll, and removed DQSDHost (Kim Gräsman)
 
 New Searches
 

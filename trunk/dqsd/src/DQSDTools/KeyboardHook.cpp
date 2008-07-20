@@ -285,8 +285,7 @@ KeyboardHookRemove(HHOOK hInstalledHook)
 // Return:
 //		HRESULT
 //
-HRESULT
-KeyboardInstallHotkey(int vkCode, LPCTSTR pModifierNames, HWND* phwndNotification, LPDISPATCH pDispDocument)
+HRESULT KeyboardInstallHotkey(int vkCode, LPCTSTR pModifierNames, HWND* phwndNotification, LPDISPATCH pDispDocument)
 {
 	HWND hBarWnd = UtilitiesFindDQSDWindow(pDispDocument);
 	if(hBarWnd == NULL)
@@ -353,4 +352,9 @@ KeyboardInstallHotkey(int vkCode, LPCTSTR pModifierNames, HWND* phwndNotificatio
 	}
 
 	return S_OK;
+}
+
+void RegisterKeyCharMapping(long virtualKeyCode, long charCode)
+{
+    g_mapKeyCodeToCharCode[virtualKeyCode] = charCode;
 }

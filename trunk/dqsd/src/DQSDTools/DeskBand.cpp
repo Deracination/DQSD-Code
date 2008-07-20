@@ -18,19 +18,26 @@ HRESULT CDeskBand::FinalConstruct()
     if (ret != ERROR_SUCCESS)
         return HRESULT_FROM_WIN32(ret);
 
-    ULONG dwCount = sizeof(m_szInstallDir) / sizeof(TCHAR);
+    ULONG dwCount = lengthof(m_szInstallDir);
     ret = rk.QueryStringValue(_T("InstallDir"), m_szInstallDir, &dwCount);
     if (ret != ERROR_SUCCESS)
         return HRESULT_FROM_WIN32(ret);
 
     ATLTRACE(_T("CDeskband::InstallDir = %s\n"), m_szInstallDir);
 
-    dwCount = sizeof(m_szDeskBandTitle) / sizeof(TCHAR);
+    dwCount = lengthof(m_szDeskBandTitle);
     ret = rk.QueryStringValue(_T(""), m_szDeskBandTitle, &dwCount);
     if (ret != ERROR_SUCCESS)
         return HRESULT_FROM_WIN32(ret);
 
     ATLTRACE(_T("CDeskband::DeskBandTitle = %s\n"), m_szDeskBandTitle);
+
+    dwCount = lengthof(m_szMessageTitle);
+    ret = rk.QueryStringValue(_T("HelpText"), m_szMessageTitle, &dwCount);
+    if (ret != ERROR_SUCCESS)
+        return HRESULT_FROM_WIN32(ret);
+
+    ATLTRACE(_T("CDeskband::MessageTitle = %s\n"), m_szMessageTitle);
 
     return S_OK;
 }
@@ -177,6 +184,7 @@ STDMETHODIMP CDeskBand::SetSite(IUnknown* pUnkSite)
         if (FAILED(hr)) return hr;
 
         m_pBrowserHost->AddRef();
+        m_pBrowserHost->SetMessageTitle(m_szMessageTitle);
 
         // Navigate to the search page
         CComBSTR strStartUrl = m_szInstallDir;

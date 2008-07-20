@@ -12,7 +12,7 @@
 #pragma once
 #include "resource.h"       // main symbols
 
-#include "DQSDHost.h"
+#include "DQSDTools.h"
 #include "BrowserHost.h"
 
 typedef CWinTraits<WS_CHILD, 0> CDeskBandTraits;
@@ -75,6 +75,7 @@ private:
 
     TCHAR m_szInstallDir[4096];
     TCHAR m_szDeskBandTitle[256];
+    TCHAR m_szMessageTitle[256];
 };
 
 OBJECT_ENTRY_AUTO(__uuidof(DeskBand), CDeskBand)

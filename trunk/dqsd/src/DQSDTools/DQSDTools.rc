@@ -96,6 +96,7 @@ END
 IDR_DQSDTOOLS           REGISTRY                "DQSDTools.rgs"
 IDR_LAUNCHER            REGISTRY                "Launcher.rgs"
 IDR_MENUBUILDER         REGISTRY                "MenuBuilder.rgs"
+IDR_DESKBAND            REGISTRY                "Deskband.rgs"
 
 /////////////////////////////////////////////////////////////////////////////
 //

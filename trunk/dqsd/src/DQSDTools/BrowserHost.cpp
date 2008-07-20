@@ -11,19 +11,6 @@ CBrowserHost::CBrowserHost()
 HRESULT CBrowserHost::FinalConstruct()
 {
     ATLTRACEMETHOD();
-
-    CRegKey rk;
-    LONG ret = rk.Open(HKEY_CLASSES_ROOT, DQSD_REG_KEY, KEY_READ);
-    if (ret != ERROR_SUCCESS)
-        return HRESULT_FROM_WIN32(ret);
-
-    ULONG dwCount = sizeof(m_szMessageBoxTitle) / sizeof(TCHAR);
-    ret = rk.QueryStringValue(_T("HelpText"), m_szMessageBoxTitle, &dwCount);
-    if (ret != ERROR_SUCCESS)
-        return HRESULT_FROM_WIN32(ret);
-
-    ATLTRACE(_T("CBrowserHost::MessageBoxTitle = %s\n"), m_szMessageBoxTitle);
-
     return S_OK;
 }
 
@@ -103,6 +90,15 @@ HRESULT CBrowserHost::Uninitialize()
     return S_OK;
 }
 
+HRESULT CBrowserHost::SetMessageTitle(LPCTSTR pszMessageTitle)
+{
+    m_strMessageTitle = pszMessageTitle;
+    if (m_strMessageTitle.m_str == NULL)
+        return E_OUTOFMEMORY;
+
+    return S_OK;
+}
+
 //////////////////////////////////////////////////////////////////////////
 /// Message handlers
 LRESULT CBrowserHost::OnSize(UINT, WPARAM, LPARAM, BOOL& bHandled)
@@ -121,25 +117,6 @@ LRESULT CBrowserHost::OnSize(UINT, WPARAM, LPARAM, BOOL& bHandled)
 LRESULT CBrowserHost::OnBrowserKeyDown(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 {
     ATLTRACEMETHOD();
-
-    //HRESULT hr;
-
-    // // Get an IOleInPlaceActiveObject pointer, and let it translate 
-    // // the accelerator for us
-    // CComPtr<IOleInPlaceActiveObject> spInPlaceActiveObject;
-    // hr = m_spWebBrowser->QueryInterface(&spInPlaceActiveObject);
-    // if (SUCCEEDED(hr))
-    // {
-    //	// Clone the message
-    //	MSG msg = {0};
-    //	msg.hwnd = GetFocus();
-    //	msg.message = uMsg;
-    //	msg.wParam = wParam;
-    //	msg.lParam = lParam;
-
-    //	hr = spInPlaceActiveObject->TranslateAccelerator(&msg);
-    //	bHandled = (hr == S_OK);
-    //}
 
     // Clone the message
     MSG msg = {0};
@@ -330,31 +307,11 @@ STDMETHODIMP CBrowserHost::EnableModeless(BOOL /*fEnable*/)
     return S_OK;
 }
 
-//STDMETHODIMP CBrowserHost::GetExternal(IDispatch **ppDispatch)
-//{
-//    ATLTRACEMETHOD();
-//
-//    HRESULT hr;
-//
-//    CComObject<CWindowLauncher>* pLauncher = 0;
-//    hr = CComObject<CWindowLauncher>::CreateInstance(&pLauncher);
-//    if (FAILED(hr)) return hr;
-//
-//    pLauncher->AddRef();
-//
-//    hr = pLauncher->QueryInterface(ppDispatch);
-//
-//    pLauncher->Release();
-//
-//    return hr;
-//}
-
 STDMETHODIMP CBrowserHost::TranslateAccelerator(LPMSG /*pMsg*/, const GUID* /*pguidCmdGroup*/, DWORD /*nCmdID*/)
 {
     ATLTRACE(_T("CBrowserHost::IDocHostUIHandler::TranslateAccelerator\n"));
     return S_FALSE;
 }
-
 
 //////////////////////////////////////////////////////////////////////////
 /// IDocHostShowUI
@@ -363,7 +320,7 @@ STDMETHODIMP CBrowserHost::ShowMessage(HWND hwnd, LPOLESTR lpstrText, LPOLESTR /
     ATLTRACEMETHOD();
 
     // Custom error reporting!
-    int mbRet = ::MessageBox(hwnd, COLE2T(lpstrText), m_szMessageBoxTitle, dwType);
+    int mbRet = ::MessageBox(hwnd, COLE2T(lpstrText), COLE2T(m_strMessageTitle), dwType);
 
     // If ShowMessage is called when you have specified no execution of ActiveX 
     // controls and there is an ActiveX control on the page, plResult is NULL
@@ -468,7 +425,6 @@ STDMETHODIMP CBrowserHost::TranslateAcceleratorIO(LPMSG pMsg)
         hr = S_OK;
     }
 
-
     return hr;
 }
 
@@ -503,6 +459,11 @@ void STDMETHODCALLTYPE CBrowserHost::OnNavigateComplete2(IDispatch *pDisp, VARIA
             }
         }
     }
+}
+
+void STDMETHODCALLTYPE CBrowserHost::OnWindowClosing( VARIANT_BOOL, VARIANT_BOOL* )
+{
+    Uninitialize();
 }
 
 //////////////////////////////////////////////////////////////////////////
