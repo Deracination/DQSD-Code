@@ -30,30 +30,7 @@ class ATL_NO_VTABLE CLauncher :
 	public ISupportErrorInfoImpl< &IID_ILauncher >
 {
 public:
-	CLauncher()
-		: m_bDebug(false)
-	{
-		ATLTRACE("CLauncher - created\n");
-		m_hHotkeyNotificationWindow = NULL;
-		m_hKeyboardHook = NULL;
-		memset(m_szInstallDir, 0, sizeof(m_szInstallDir));
-	}
-
-	virtual ~CLauncher()
-	{
-		ATLTRACE("CLauncher - destroyed\n");
-		ATLTRACE("DQSDTools: Lock count %d\n", _Module.GetLockCount());
-
-		if(m_hHotkeyNotificationWindow != NULL)
-		{
-			DestroyWindow(m_hHotkeyNotificationWindow);
-		}
-
-		KeyboardHookRemove(m_hKeyboardHook);
-	}
-
 DECLARE_REGISTRY_RESOURCEID(IDR_LAUNCHER)
-
 DECLARE_PROTECT_FINAL_CONSTRUCT()
 
 BEGIN_COM_MAP(CLauncher)
@@ -91,19 +68,20 @@ public:
 	STDMETHOD(CreateDirectory)(/*[in]*/ BSTR bstrDirectory);
 	STDMETHOD(DisplayUserOptions)();
 
+    HRESULT FinalConstruct();
+    void FinalRelease();
+
 // Implementation
 private:
-	bool	m_bDebug;
+    HRESULT GetFilename( LPCTSTR szName, LPTSTR szResult, LPCTSTR pszDefaultExt = _T(".txt") );
+    HRESULT GetInstallationDirectory( LPTSTR szResult, DWORD dwResultSize);
+    BOOL VerifyFileInDirectoryTree( LPCTSTR szFilename, LPCTSTR szDir);
+    BOOL IsValidFileDirectory(LPCTSTR szFilename);
+    BOOL IsFileExtension( LPCTSTR szFilename, LPCTSTR szExts);
+
 	HHOOK	m_hKeyboardHook;
 	HWND	m_hHotkeyNotificationWindow;
 	TCHAR	m_szInstallDir[MAX_PATH];
-
-private:
-	HRESULT GetFilename( LPCTSTR szName, LPTSTR szResult, LPCTSTR pszDefaultExt = _T(".txt") );
-	HRESULT GetInstallationDirectory( LPTSTR szResult, DWORD dwResultSize);
-	BOOL VerifyFileInDirectoryTree( LPCTSTR szFilename, LPCTSTR szDir);
-	BOOL IsValidFileDirectory(LPCTSTR szFilename);
-	BOOL IsFileExtension( LPCTSTR szFilename, LPCTSTR szExts);
 };
 
 #endif // __LAUNCHER_H_A43187EC_B518_40a5_9615_C628D10567E4__
