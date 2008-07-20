@@ -93,6 +93,7 @@ END
 // REGISTRY
 //
 
+IDR_DQSDTOOLS           REGISTRY                "DQSDTools.rgs"
 IDR_LAUNCHER            REGISTRY                "Launcher.rgs"
 IDR_MENUBUILDER         REGISTRY                "MenuBuilder.rgs"
 
@@ -141,7 +142,6 @@ END
 
 #endif    // English (U.S.) resources
 /////////////////////////////////////////////////////////////////////////////
-
 
 
 #ifndef APSTUDIO_INVOKED

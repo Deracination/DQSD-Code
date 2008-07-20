@@ -84,4 +84,6 @@ private:
 	TCHAR	m_szInstallDir[MAX_PATH];
 };
 
+OBJECT_ENTRY_AUTO(__uuidof(Launcher), CLauncher);
+
 #endif // __LAUNCHER_H_A43187EC_B518_40a5_9615_C628D10567E4__

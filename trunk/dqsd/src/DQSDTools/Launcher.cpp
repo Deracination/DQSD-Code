@@ -389,7 +389,7 @@ STDMETHODIMP CLauncher::get_VersionIsCorrect(int v1, int v2, int v3, int v4, VAR
 		ATLTRACE("CLauncher: Starting get_VersionIsCorrect\n");
 
 		TCHAR moduleName[MAX_PATH+1];
-		GetModuleFileName(_Module.GetModuleInstance(), moduleName, MAX_PATH);
+		GetModuleFileName(_AtlBaseModule.GetModuleInstance(), moduleName, MAX_PATH);
 		DWORD dummyZero;
 		DWORD versionSize = GetFileVersionInfoSize(moduleName, &dummyZero);
 		if(versionSize == 0)
@@ -407,12 +407,12 @@ STDMETHODIMP CLauncher::get_VersionIsCorrect(int v1, int v2, int v3, int v4, VAR
 			return Error(IDS_ERR_VERSION_RESOURCE, IID_ILauncher, E_FAIL);
 		}
 /*	
-		hVerRes = FindResource(_Module.GetResourceInstance(), MAKEINTRESOURCE(VS_VERSION_INFO), RT_VERSION);
+		hVerRes = FindResource(_pAtlModule->GetResourceInstance(), MAKEINTRESOURCE(VS_VERSION_INFO), RT_VERSION);
 		if(hVerRes == NULL)
 		{
 			return Error(IDS_ERR_VERSION_RESOURCE, IID_ILauncher, E_FAIL);
 		}
-		hVerResMem = LoadResource (_Module.GetResourceInstance(), hVerRes) ;
+		hVerResMem = LoadResource (_pAtlModule->GetResourceInstance(), hVerRes) ;
 		if(hVerResMem == NULL)
 		{
 			return Error(IDS_ERR_VERSION_RESOURCE, IID_ILauncher, E_FAIL);
@@ -838,7 +838,7 @@ HRESULT CLauncher::FinalConstruct()
 void CLauncher::FinalRelease()
 {
     ATLTRACE("CLauncher - destroyed\n");
-    ATLTRACE("DQSDTools: Lock count %d\n", _Module.GetLockCount());
+    ATLTRACE("DQSDTools: Lock count %d\n", _pAtlModule->GetLockCount());
 
     if(m_hHotkeyNotificationWindow != NULL)
     {

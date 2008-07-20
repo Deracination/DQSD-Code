@@ -259,7 +259,7 @@ HRESULT KeyboardHookInstall(HWND hBarWnd, HHOOK& hInstalledHook)
 		return CLauncher::Error(IDS_ERR_CANT_INSTALL_KEYBOARD_HOOK, IID_ILauncher);
 	}
 
-	hHook = SetWindowsHookEx(WH_KEYBOARD, KeyboardProc, _Module.GetModuleInstance(), threadId);
+	hHook = SetWindowsHookEx(WH_KEYBOARD, KeyboardProc, _AtlBaseModule.GetModuleInstance(), threadId);
 	hInstalledHook = hHook;
 	hHookedWindow = hBarWnd;
 
