@@ -5,7 +5,7 @@
 #include "Launcher.h"
 #include "Utilities.h"
 
-#pragma comment(lib, "Version.lib")
+#pragma comment(lib, "version.lib")
 
 /////////////////////////////////////////////////////////////////////////////
 // CLauncher
