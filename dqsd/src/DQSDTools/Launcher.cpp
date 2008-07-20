@@ -121,7 +121,7 @@ STDMETHODIMP CLauncher::SubmitForm(VARIANT idForm)
 		TCHAR szPath[_MAX_PATH];
 		::GetTempPath(cchPath, szPath);
 
-		StrNCat(szPath, _T("DQSDLaunch.html"), lengthof(szPath) - _tcslen(szPath) - 1);
+		StrNCat(szPath, _T("DQSDLaunch.html"), lengthof(szPath) - lstrlen(szPath) - 1);
 		HANDLE hFile = ::CreateFile(szPath, GENERIC_WRITE, FILE_SHARE_READ, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 		if (hFile == INVALID_HANDLE_VALUE)
 			return HRESULT_FROM_WIN32(::GetLastError());
@@ -530,8 +530,8 @@ STDMETHODIMP CLauncher::ShutdownBar(LPDISPATCH pDispDocument)
 
 	ATLTRACE("Rebar: 0x%x, Pane 0x%x\n", hRebar, hRebarBand);
 
-	int nBands = ::SendMessage(hRebar, RB_GETBANDCOUNT, 0, 0);
-	for(int nBand = 0; nBand < nBands; nBand++)
+	LRESULT nBands = ::SendMessage(hRebar, RB_GETBANDCOUNT, 0, 0);
+	for(LRESULT nBand = 0; nBand < nBands; nBand++)
 	{
 		REBARBANDINFO info;
 		ZeroMemory(&info, sizeof(info));
@@ -564,7 +564,7 @@ STDMETHODIMP CLauncher::ShutdownBar(LPDISPATCH pDispDocument)
 
 STDMETHODIMP CLauncher::RefreshTrayIcons()
 {
-	static DWORD result;
+	static DWORD_PTR result;
 	UINT msg = ::RegisterWindowMessage(_T("TaskbarCreated"));
 
 	ATLTRACE("DQSDTools: Refreshing tray icons (msg 0x%x)\n", msg);

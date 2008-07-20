@@ -18,7 +18,7 @@ class ATL_NO_VTABLE CMenuBuilder :
 public:
 	CMenuBuilder() 
 	: m_nMenuItem( 0 )
-	, m_nHorizontalAlignment( EHorizontalAlignment::RIGHT )
+	, m_nHorizontalAlignment( CMenuBuilder::RIGHT )
 	{
 		m_hMain = ::CreatePopupMenu();
 

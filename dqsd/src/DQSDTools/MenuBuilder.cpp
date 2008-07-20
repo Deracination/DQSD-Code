@@ -106,13 +106,13 @@ STDMETHODIMP CMenuBuilder::Display(LPDISPATCH pDispDocument, VARIANT* pvarSelect
 	int nMenuX = rcParentWnd.right;
 	switch ( m_nHorizontalAlignment )
 	{
-	case EHorizontalAlignment::CENTER: 
+	case CMenuBuilder::CENTER: 
 		nMenuX = rcParentWnd.left + ( ( rcParentWnd.right - rcParentWnd.left ) / 2 );
 		break;
-	case EHorizontalAlignment::LEFT:
+	case CMenuBuilder::LEFT:
 		nMenuX = rcParentWnd.left;
 		break;
-	case EHorizontalAlignment::RIGHT:
+	case CMenuBuilder::RIGHT:
 		nMenuX = rcParentWnd.right;
 		break;
 	}
@@ -197,9 +197,9 @@ STDMETHODIMP CMenuBuilder::put_HorizontalAlignment(short newVal)
 {
 	switch ( newVal )
 	{
-	case EHorizontalAlignment::CENTER:
-	case EHorizontalAlignment::LEFT:
-	case EHorizontalAlignment::RIGHT:
+	case CMenuBuilder::CENTER:
+	case CMenuBuilder::LEFT:
+	case CMenuBuilder::RIGHT:
 		m_nHorizontalAlignment = newVal;
 		break;
 	default:
@@ -214,9 +214,9 @@ UINT CMenuBuilder::getHorizontalPosition()
 {
 	switch ( m_nHorizontalAlignment )
 	{
-	case EHorizontalAlignment::CENTER: return TPM_CENTERALIGN;
-	case EHorizontalAlignment::LEFT: return TPM_LEFTALIGN;
-	case EHorizontalAlignment::RIGHT: return TPM_RIGHTALIGN;
+	case CMenuBuilder::CENTER: return TPM_CENTERALIGN;
+	case CMenuBuilder::LEFT: return TPM_LEFTALIGN;
+	case CMenuBuilder::RIGHT: return TPM_RIGHTALIGN;
 	}
 	return TPM_RIGHTALIGN;
 }
@@ -233,9 +233,9 @@ LRESULT CALLBACK CMenuBuilder::TrackerWndProc(
 	if(uMsg == WM_INITMENUPOPUP)
 	{
 		// It's a new popup - delete any tips
-		int nTools = ::SendMessage(m_hTooltipWnd, TTM_GETTOOLCOUNT, 0, 0);
+		LRESULT nTools = ::SendMessage(m_hTooltipWnd, TTM_GETTOOLCOUNT, 0, 0);
 		ATLTRACE("Tooltips: %d existing tools\n", nTools);
-		for(int nTool = nTools-1; nTool >= 0; nTool--)
+		for(LRESULT nTool = nTools-1; nTool >= 0; nTool--)
 		{
 			TOOLINFO ti;
 			ZeroMemory(&ti, sizeof(ti));
@@ -263,7 +263,7 @@ LRESULT CALLBACK CMenuBuilder::TrackerWndProc(
 			HMENU hMenu = (HMENU)lParam;
 			CMenuBuilder* pThis;
 
-			pThis = (CMenuBuilder*)GetWindowLong(hwnd, GWL_USERDATA);
+			pThis = (CMenuBuilder*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
 
 			// Is there a tooltip for this item?
 			if(pThis != NULL && pThis->m_toolTips.count(itemId) > 0)
@@ -412,7 +412,7 @@ STDMETHODIMP CMenuBuilder::InitialiseTooltips(long displayTimeMultiplier)
 	}
 
 	// Store a 'this' pointer on the tracker window
-	::SetWindowLong(m_hTrackerWnd, GWL_USERDATA, (LONG)this);
+	::SetWindowLongPtr(m_hTrackerWnd, GWLP_USERDATA, (LONG_PTR)this);
 
 	// Create a tooltip window
 	if(m_hTooltipWnd != NULL)
