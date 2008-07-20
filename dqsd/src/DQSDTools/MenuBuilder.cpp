@@ -9,9 +9,6 @@
 /////////////////////////////////////////////////////////////////////////////
 // CMenuBuilder
 
-LPCTSTR CMenuBuilder::DQSD_REG_KEY = _T("CLSID\\{226b64e8-dc75-4eea-a6c8-abcb4d1d37ff}");
-LPCTSTR CMenuBuilder::DQSD_SEC_KEY = _T("CLSID\\{226b64e8-dc75-4eea-a6c8-abcb4d1d37ff}\\SecureFiles");
-
 #define TOOLBAR_TRACKER_WINDOW_CLASS_NAME		_T("DQSDMenuTrackerClass")
 #define TOOLBAR_TRACKER_WINDOW_NAME				_T("DQSDMenuTracker")
 
@@ -140,10 +137,10 @@ STDMETHODIMP CMenuBuilder::AppendMenuItem(BSTR bstrItem, BSTR bstrKey, BSTR bstr
 {
 	USES_CONVERSION;
 
-	HMENU hmenu = (HMENU)m_hMain;
+	HMENU hmenu = m_hMain;
 	if (pvhMenu && ((VT_I4 == pvhMenu->vt) || (VT_I2 == pvhMenu->vt)) )
 	{
-		hmenu = pvhMenu->intVal ? (HMENU)pvhMenu->intVal : (HMENU)m_hMain;
+		hmenu = pvhMenu->intVal ? (HMENU)pvhMenu->intVal : m_hMain;
 	}
 
 	BOOL bSuccess = ::AppendMenu( hmenu, MF_STRING, m_nMenuItem+1, W2T( bstrItem ) );
@@ -163,10 +160,10 @@ STDMETHODIMP CMenuBuilder::AppendSubMenu(BSTR bstrName, VARIANT* pvParentMenu, l
 
 	USES_CONVERSION;
 
-	HMENU hmenu = (HMENU)m_hMain;
+	HMENU hmenu = m_hMain;
 	if (pvParentMenu && ((VT_I4 == pvParentMenu->vt) || (VT_I2 == pvParentMenu->vt)) )
 	{
-		hmenu = pvParentMenu->intVal ? (HMENU)pvParentMenu->intVal : (HMENU)m_hMain;
+		hmenu = pvParentMenu->intVal ? (HMENU)pvParentMenu->intVal : m_hMain;
 	}
 
 	::AppendMenu( hmenu, MF_POPUP, (UINT_PTR)*phmenu, W2T( bstrName ) );
@@ -178,10 +175,10 @@ STDMETHODIMP CMenuBuilder::AppendSeparator(VARIANT* pvParentMenu)
 {
 	USES_CONVERSION;
 
-	HMENU hmenu = (HMENU)m_hMain;
+	HMENU hmenu = m_hMain;
 	if (pvParentMenu && ((VT_I4 == pvParentMenu->vt) || (VT_I2 == pvParentMenu->vt)) )
 	{
-		hmenu = pvParentMenu->intVal ? (HMENU)pvParentMenu->intVal : (HMENU)m_hMain;
+		hmenu = pvParentMenu->intVal ? (HMENU)pvParentMenu->intVal : m_hMain;
 	}
 
 	::AppendMenu( hmenu, MF_SEPARATOR, NULL, NULL );
@@ -472,10 +469,10 @@ STDMETHODIMP CMenuBuilder::InsertMenuItem(BSTR bstrItem, BSTR bstrKey, BSTR bstr
 {
 	USES_CONVERSION;
 
-	HMENU hmenu = (HMENU)m_hMain;
+	HMENU hmenu = m_hMain;
 	if (pvhMenu && ((VT_I4 == pvhMenu->vt) || (VT_I2 == pvhMenu->vt)) )
 	{
-		hmenu = pvhMenu->intVal ? (HMENU)pvhMenu->intVal : (HMENU)m_hMain;
+		hmenu = pvhMenu->intVal ? (HMENU)pvhMenu->intVal : m_hMain;
 	}
 
 	MENUITEMINFO menuItem;
@@ -503,10 +500,10 @@ STDMETHODIMP CMenuBuilder::InsertSeparator(UINT position, VARIANT* pvParentMenu)
 {
 	USES_CONVERSION;
 
-	HMENU hmenu = (HMENU)m_hMain;
+	HMENU hmenu = m_hMain;
 	if (pvParentMenu && ((VT_I4 == pvParentMenu->vt) || (VT_I2 == pvParentMenu->vt)) )
 	{
-		hmenu = pvParentMenu->intVal ? (HMENU)pvParentMenu->intVal : (HMENU)m_hMain;
+		hmenu = pvParentMenu->intVal ? (HMENU)pvParentMenu->intVal : m_hMain;
 	}
 
 	MENUITEMINFO menuItem;
@@ -529,10 +526,10 @@ STDMETHODIMP CMenuBuilder::InsertSubMenu(BSTR bstrName, UINT position, VARIANT* 
 
 	USES_CONVERSION;
 
-	HMENU hmenu = (HMENU)m_hMain;
+	HMENU hmenu = m_hMain;
 	if (pvParentMenu && ((VT_I4 == pvParentMenu->vt) || (VT_I2 == pvParentMenu->vt)) )
 	{
-		hmenu = pvParentMenu->intVal ? (HMENU)pvParentMenu->intVal : (HMENU)m_hMain;
+		hmenu = pvParentMenu->intVal ? (HMENU)pvParentMenu->intVal : m_hMain;
 	}
 
 	MENUITEMINFO menuItem;
@@ -556,10 +553,10 @@ STDMETHODIMP CMenuBuilder::GetMenuItemCount(VARIANT* pvParentMenu, long *pCount)
 {
 	USES_CONVERSION;
 
-	HMENU hmenu = (HMENU)m_hMain;
+	HMENU hmenu = m_hMain;
 	if (pvParentMenu && ((VT_I4 == pvParentMenu->vt) || (VT_I2 == pvParentMenu->vt)) )
 	{
-		hmenu = pvParentMenu->intVal ? (HMENU)pvParentMenu->intVal : (HMENU)m_hMain;
+		hmenu = pvParentMenu->intVal ? (HMENU)pvParentMenu->intVal : m_hMain;
 	}
 
 	int retval = ::GetMenuItemCount(hmenu);
@@ -577,10 +574,10 @@ STDMETHODIMP CMenuBuilder::FindSubMenu(BSTR bstrName, VARIANT* pvParentMenu, lon
 
 	*phmenu = -1;
 
-	HMENU hmenu = (HMENU)m_hMain;
+	HMENU hmenu = m_hMain;
 	if (pvParentMenu && ((VT_I4 == pvParentMenu->vt) || (VT_I2 == pvParentMenu->vt)) )
 	{
-		hmenu = pvParentMenu->intVal ? (HMENU)pvParentMenu->intVal : (HMENU)m_hMain;
+		hmenu = pvParentMenu->intVal ? (HMENU)pvParentMenu->intVal : m_hMain;
 	}
 
 	int nItems = ::GetMenuItemCount(hmenu);
@@ -612,10 +609,10 @@ STDMETHODIMP CMenuBuilder::FindMenuItem(BSTR bstrName, VARIANT* pvParentMenu, lo
 
 	*pPosition = -1;
 
-	HMENU hmenu = (HMENU)m_hMain;
+	HMENU hmenu = m_hMain;
 	if (pvParentMenu && ((VT_I4 == pvParentMenu->vt) || (VT_I2 == pvParentMenu->vt)) )
 	{
-		hmenu = pvParentMenu->intVal ? (HMENU)pvParentMenu->intVal : (HMENU)m_hMain;
+		hmenu = pvParentMenu->intVal ? (HMENU)pvParentMenu->intVal : m_hMain;
 	}
 
 	int nItems = ::GetMenuItemCount(hmenu);
@@ -640,10 +637,10 @@ STDMETHODIMP CMenuBuilder::GetMenuString(UINT position, VARIANT* pvParentMenu, B
 {
 	USES_CONVERSION;
 
-	HMENU hmenu = (HMENU)m_hMain;
+	HMENU hmenu = m_hMain;
 	if (pvParentMenu && ((VT_I4 == pvParentMenu->vt) || (VT_I2 == pvParentMenu->vt)) )
 	{
-		hmenu = pvParentMenu->intVal ? (HMENU)pvParentMenu->intVal : (HMENU)m_hMain;
+		hmenu = pvParentMenu->intVal ? (HMENU)pvParentMenu->intVal : m_hMain;
 	}
 
 	CComBSTR bstrMenuName;
@@ -660,10 +657,10 @@ STDMETHODIMP CMenuBuilder::GetMenuItemID(UINT position, VARIANT* pvParentMenu, l
 {
 	USES_CONVERSION;
 
-	HMENU hmenu = (HMENU)m_hMain;
+	HMENU hmenu = m_hMain;
 	if (pvParentMenu && ((VT_I4 == pvParentMenu->vt) || (VT_I2 == pvParentMenu->vt)) )
 	{
-		hmenu = pvParentMenu->intVal ? (HMENU)pvParentMenu->intVal : (HMENU)m_hMain;
+		hmenu = pvParentMenu->intVal ? (HMENU)pvParentMenu->intVal : m_hMain;
 	}
 
 	if (nID != NULL) {
@@ -678,10 +675,10 @@ STDMETHODIMP CMenuBuilder::EnableMenuItem(UINT position, VARIANT* pvParentMenu)
 {
 	USES_CONVERSION;
 
-	HMENU hmenu = (HMENU)m_hMain;
+	HMENU hmenu = m_hMain;
 	if (pvParentMenu && ((VT_I4 == pvParentMenu->vt) || (VT_I2 == pvParentMenu->vt)) )
 	{
-		hmenu = pvParentMenu->intVal ? (HMENU)pvParentMenu->intVal : (HMENU)m_hMain;
+		hmenu = pvParentMenu->intVal ? (HMENU)pvParentMenu->intVal : m_hMain;
 	}
 
 	::EnableMenuItem(hmenu, position, MF_BYPOSITION | MF_ENABLED);
@@ -693,10 +690,10 @@ STDMETHODIMP CMenuBuilder::DisableMenuItem(UINT position, VARIANT* pvParentMenu)
 {
 	USES_CONVERSION;
 
-	HMENU hmenu = (HMENU)m_hMain;
+	HMENU hmenu = m_hMain;
 	if (pvParentMenu && ((VT_I4 == pvParentMenu->vt) || (VT_I2 == pvParentMenu->vt)) )
 	{
-		hmenu = pvParentMenu->intVal ? (HMENU)pvParentMenu->intVal : (HMENU)m_hMain;
+		hmenu = pvParentMenu->intVal ? (HMENU)pvParentMenu->intVal : m_hMain;
 	}
 	::EnableMenuItem(hmenu, position, MF_BYPOSITION | MF_GRAYED);
 	return S_OK;

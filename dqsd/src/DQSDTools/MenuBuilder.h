@@ -79,8 +79,6 @@ public:
 
 // Implementation
 protected:
-	static LPCTSTR	DQSD_REG_KEY;
-	static LPCTSTR	DQSD_SEC_KEY;
 	HMENU			m_hMain;
 	int				m_nMenuItem;
 	std::map< int, std::string > m_mapKeys;

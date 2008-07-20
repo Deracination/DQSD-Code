@@ -193,23 +193,14 @@ STDMETHODIMP CLauncher::get_pathDefaultBrowser(BSTR *pVal)
 	return hr;
 }
 
-STDMETHODIMP CLauncher::get_Debug(VARIANT_BOOL* pbDebug)
+STDMETHODIMP CLauncher::get_Debug(VARIANT_BOOL* /*pbDebug*/)
 {
-	if (NULL == pbDebug)
-		return E_INVALIDARG;
-
-#pragma warning(disable: 4310) // cast truncates constant value
-	*pbDebug = (m_bDebug ? VARIANT_TRUE : VARIANT_FALSE);
-#pragma warning(default: 4310) // cast truncates constant value
-
-	return S_OK;
+    return E_NOTIMPL;
 }
 
-STDMETHODIMP CLauncher::put_Debug(VARIANT_BOOL bDebug)
+STDMETHODIMP CLauncher::put_Debug(VARIANT_BOOL /*bDebug*/)
 {
-	m_bDebug = bDebug != VARIANT_FALSE;
-
-	return S_OK;
+	return E_NOTIMPL;
 }
 
 STDMETHODIMP CLauncher::ReadFile(BSTR bstrFilename, BSTR *pbstrResult)
@@ -486,13 +477,8 @@ STDMETHODIMP CLauncher::get_VersionIsCorrect(int v1, int v2, int v3, int v4, VAR
 	}
 }
 
-__declspec(dllexport) void CALLBACK RestartExplorer(HWND hParent, HINSTANCE hInst, LPTSTR lpCmdLine, int nShow)
+void RestartExplorer(HWND /*hParent*/, HINSTANCE /*hInst*/, LPTSTR /*lpCmdLine*/, int /*nShow*/)
 {
-	UNREFERENCED_PARAMETER(hParent);
-	UNREFERENCED_PARAMETER(hInst);
-	UNREFERENCED_PARAMETER(lpCmdLine);
-	UNREFERENCED_PARAMETER(nShow);
-
 	HWND hwndShell = FindWindow(_T("Progman"), NULL);
 	::PostMessage(hwndShell, WM_QUIT, 0, 0L);
 	::WinExec("Explorer.exe", SW_SHOW);
@@ -719,9 +705,7 @@ STDMETHODIMP CLauncher::FileExists(BSTR bstrFilename, VARIANT_BOOL *pbExists)
 	}
 
 	DWORD dwAttributes = ::GetFileAttributes(szFilename);
-#pragma warning(disable: 4310) // cast truncates constant value
 	*pbExists = ( (dwAttributes == -1) ? VARIANT_FALSE : VARIANT_TRUE);
-#pragma warning(default: 4310) // cast truncates constant value
 	
 	return S_OK;
 }
@@ -731,7 +715,7 @@ STDMETHODIMP CLauncher::RenameFile(BSTR bstrFromFilename, BSTR bstrToFilename)
 	HRESULT hr;
 
 	// Get the full from pathname after applying some defaults
-	TCHAR szFromFilename[ _MAX_PATH + 1];
+	TCHAR szFromFilename[_MAX_PATH + 1];
 	hr = GetFilename( CW2T( bstrFromFilename ), szFromFilename );
 	if ( FAILED( hr ) )
 		return hr;
@@ -756,12 +740,10 @@ STDMETHODIMP CLauncher::RenameFile(BSTR bstrFromFilename, BSTR bstrToFilename)
 	if ( FAILED(hr))
 		return hr;
 
-#pragma warning(disable: 4310) // cast truncates constant value
 	if (bExists == VARIANT_FALSE)
 	{
 		return Error(_T("Source filename does not exist."), IID_ILauncher, E_FAIL);
 	}
-#pragma warning(default: 4310) // cast truncates constant value
 
 	// Get the full to pathname after applying some defaults
 	TCHAR szToFilename[ _MAX_PATH + 1 ];
@@ -787,12 +769,10 @@ STDMETHODIMP CLauncher::RenameFile(BSTR bstrFromFilename, BSTR bstrToFilename)
 	if ( FAILED(hr))
 		return hr;
 
-#pragma warning(disable: 4310) // cast truncates constant value
 	if (bExists == VARIANT_TRUE)
 	{
 		return Error(_T("Destination filename already exists."), IID_ILauncher, E_FAIL);
 	}
-#pragma warning(default: 4310) // cast truncates constant value
 
 	 // Rename the file
 	SHFILEOPSTRUCT sfo;
@@ -811,7 +791,79 @@ STDMETHODIMP CLauncher::RenameFile(BSTR bstrFromFilename, BSTR bstrToFilename)
 	return S_OK;
 }
 
+STDMETHODIMP CLauncher::CreateDirectory(BSTR bstrDir)
+{
+	if (!IsValidFileDirectory(CW2T(bstrDir))) {
+		return Error(_T("Can't create directory unless in the app data or installation directory tree."), IID_ILauncher, E_FAIL);
+	}
+
+	// TODO: Re-implement later to support recursive dir creation
+	// like SHCreateDirectoryEx. The latter cannot be used, since it's
+	// not supported on pre-Win2k
+	::CreateDirectoryEx(NULL, CW2T(bstrDir), NULL);
+	int retval = ::GetLastError();
+	switch (retval) {
+		case ERROR_FILE_EXISTS:
+		case ERROR_ALREADY_EXISTS:
+		case ERROR_SUCCESS:
+			return S_OK;
+		case ERROR_BAD_PATHNAME:
+		case ERROR_FILENAME_EXCED_RANGE:
+		case ERROR_PATH_NOT_FOUND:
+		default:
+			return Error(_T("Failed to create directory."), IID_ILauncher, E_FAIL);
+	}
+}
+
+STDMETHODIMP CLauncher::DisplayUserOptions()
+{
+//	CUserOptionsDialog dlg;
+
+//	dlg.DoModal( NULL );
+
+	return S_OK;
+}
+
 // Private methods
+HRESULT CLauncher::FinalConstruct()
+{
+    ATLTRACE("CLauncher - created\n");
+    m_hHotkeyNotificationWindow = NULL;
+    m_hKeyboardHook = NULL;
+    memset(m_szInstallDir, 0, sizeof(m_szInstallDir));
+
+    return S_OK;
+}
+
+void CLauncher::FinalRelease()
+{
+    ATLTRACE("CLauncher - destroyed\n");
+    ATLTRACE("DQSDTools: Lock count %d\n", _Module.GetLockCount());
+
+    if(m_hHotkeyNotificationWindow != NULL)
+    {
+        DestroyWindow(m_hHotkeyNotificationWindow);
+    }
+
+    KeyboardHookRemove(m_hKeyboardHook);
+}
+
+HRESULT CLauncher::GetFilename( LPCTSTR szName, LPTSTR szResult, LPCTSTR pszDefaultExt /*= _T(".txt")*/ )
+{
+    HRESULT hr;
+
+    // Get the installation directory from the registry
+    TCHAR szInstallDir[ _MAX_PATH ];
+    hr = GetInstallationDirectory(szInstallDir, sizeof(szInstallDir));
+    if(FAILED(hr)) return hr;
+
+    // Add the install directory and an extension if not supplied
+    ::PathCombine( szResult, szInstallDir, szName );
+    ::PathAddExtension( szResult, pszDefaultExt );
+
+    return S_OK;
+}
+
 HRESULT CLauncher::GetInstallationDirectory( LPTSTR szResult, DWORD dwResultSize )
 {
     // Cache install directory, so we don't have to hit the registry as much
@@ -842,118 +894,68 @@ HRESULT CLauncher::GetInstallationDirectory( LPTSTR szResult, DWORD dwResultSize
 
 BOOL CLauncher::VerifyFileInDirectoryTree( LPCTSTR szFilename, LPCTSTR szDir)
 {
-	TCHAR szCanonFilename[_MAX_PATH];
-	TCHAR szCanonDir[_MAX_PATH];
+    TCHAR szCanonFilename[_MAX_PATH];
+    TCHAR szCanonDir[_MAX_PATH];
 
-	// canonicalize the dir and filename first to remove . and ..
-	if (!::PathCanonicalize(szCanonFilename, szFilename))
-	{
-		return FALSE;
-	}
+    // canonicalize the dir and filename first to remove . and ..
+    if (!::PathCanonicalize(szCanonFilename, szFilename))
+    {
+        return FALSE;
+    }
 
-	if (!::PathCanonicalize(szCanonDir, szDir))
-	{
-		return FALSE;
-	}
+    if (!::PathCanonicalize(szCanonDir, szDir))
+    {
+        return FALSE;
+    }
 
-	// Make sure to filename is in the directory
-	int nCommonPathLen = ::PathCommonPrefix(szCanonDir, szCanonFilename, NULL);
-	return (nCommonPathLen == (int)_tcslen(szCanonDir)) ? TRUE : FALSE;
+    // Make sure to filename is in the directory
+    int nCommonPathLen = ::PathCommonPrefix(szCanonDir, szCanonFilename, NULL);
+    return (nCommonPathLen == (int)_tcslen(szCanonDir)) ? TRUE : FALSE;
 }
 
-HRESULT CLauncher::GetFilename( LPCTSTR szName, LPTSTR szResult, LPCTSTR pszDefaultExt /*= _T(".txt")*/ )
+BOOL CLauncher::IsFileExtension(LPCTSTR szFilename, LPCTSTR szExts)
 {
-	HRESULT hr;
-	
-	// Get the installation directory from the registry
-	TCHAR szInstallDir[ _MAX_PATH ];
-	hr = GetInstallationDirectory(szInstallDir, sizeof(szInstallDir));
-	if(FAILED(hr)) return hr;
+    // szExts expects a string in the format ".ext1;.ext2" - notice the . must be included as well
+    LPTSTR szFileExt = ::PathFindExtension(szFilename);
+    LPTSTR szSeps = _T(";");
+    LPTSTR szTempExts = _tcsdup(szExts);  // make a copy of szExts because it modifies the buffer
+    LPTSTR szToken = _tcstok( szTempExts, szSeps);
+    BOOL retval = FALSE;
 
-	// Add the install directory and an extension if not supplied
-	::PathCombine( szResult, szInstallDir, szName );
-	::PathAddExtension( szResult, pszDefaultExt );
-
-	return S_OK;
-}
-
-BOOL CLauncher::IsFileExtension( LPCTSTR szFilename, LPCTSTR szExts)
-{
-	// szExts expects a string in the format ".ext1;.ext2" - notice the . must be included as well
-	LPTSTR szFileExt = ::PathFindExtension(szFilename);
-	LPTSTR szSeps = _T(";");
-	LPTSTR szTempExts = _tcsdup(szExts);  // make a copy of szExts because it modifies the buffer
-	LPTSTR szToken = _tcstok( szTempExts, szSeps);
-	BOOL retval = FALSE;
-
-	while (szToken != NULL)
-	{
-		if (_tcsicmp(szFileExt, szToken) == 0)
-		{
-			retval = TRUE;
-			break;
-		}
-		szToken = _tcstok( NULL, szSeps);
-	}
-	free(szTempExts);
-	return retval;
+    while (szToken != NULL)
+    {
+        if (_tcsicmp(szFileExt, szToken) == 0)
+        {
+            retval = TRUE;
+            break;
+        }
+        szToken = _tcstok( NULL, szSeps);
+    }
+    free(szTempExts);
+    return retval;
 }
 
 BOOL CLauncher::IsValidFileDirectory(LPCTSTR szFilename)
 {
-	HRESULT hr;
+    HRESULT hr;
 
-	// Get the installation directory from the registry to use for making sure the filenames are in the install path
-	TCHAR szInstallDir[ _MAX_PATH ];
-	hr = GetInstallationDirectory(szInstallDir, sizeof(szInstallDir));
-	if (FAILED ( hr) )
-		return FALSE;
+    // Get the installation directory from the registry to use for making sure the filenames are in the install path
+    TCHAR szInstallDir[ _MAX_PATH ];
+    hr = GetInstallationDirectory(szInstallDir, sizeof(szInstallDir));
+    if (FAILED ( hr) )
+        return FALSE;
 
-	// Get the app data directory from the registry to use for making sure the filenames are in the appdata path
-	CComBSTR bstrAppData;
-	hr = get_AppDataDirectory(&bstrAppData);
-	if (FAILED ( hr) )
-		return FALSE;
+    // Get the app data directory from the registry to use for making sure the filenames are in the appdata path
+    CComBSTR bstrAppData;
+    hr = get_AppDataDirectory(&bstrAppData);
+    if (FAILED ( hr) )
+        return FALSE;
 
-	// Make sure from filename is in the installation or app data directory trees
-	if (!VerifyFileInDirectoryTree(szFilename, szInstallDir) &&
-		!VerifyFileInDirectoryTree(szFilename, CW2T((BSTR)bstrAppData)))
-	{
-		return FALSE;
-	}
-	return TRUE;
-}
-
-STDMETHODIMP CLauncher::CreateDirectory(BSTR bstrDir)
-{
-	if (!IsValidFileDirectory(CW2T(bstrDir))) {
-		return Error(_T("Can't create directory unless in the app data or installation directory tree."), IID_ILauncher, E_FAIL);
-	}
-
-	// TODO: Re-implement later to support recursive dir creation
-	// like SHCreateDirectoryEx. The latter cannot be used, since it's
-	// not supported on pre-Win2k
-	::CreateDirectoryEx(NULL, CW2T(bstrDir), NULL);
-	int retval = ::GetLastError();
-	switch (retval) {
-		case ERROR_FILE_EXISTS:
-		case ERROR_ALREADY_EXISTS:
-		case ERROR_SUCCESS:
-			return S_OK;
-		case ERROR_BAD_PATHNAME:
-		case ERROR_FILENAME_EXCED_RANGE:
-		case ERROR_PATH_NOT_FOUND:
-		default:
-			return Error(_T("Failed to create directory."), IID_ILauncher, E_FAIL);
-	}
-}
-
-
-STDMETHODIMP CLauncher::DisplayUserOptions()
-{
-//	CUserOptionsDialog dlg;
-
-//	dlg.DoModal( NULL );
-
-	return S_OK;
+    // Make sure from filename is in the installation or app data directory trees
+    if (!VerifyFileInDirectoryTree(szFilename, szInstallDir) &&
+        !VerifyFileInDirectoryTree(szFilename, CW2T((BSTR)bstrAppData)))
+    {
+        return FALSE;
+    }
+    return TRUE;
 }
