@@ -6,13 +6,13 @@ EndProject
 Global
 	GlobalSection(SolutionConfiguration) = preSolution
 		Debug = Debug
-		Release MinDependency = Release MinDependency
+		Release = Release
 	EndGlobalSection
 	GlobalSection(ProjectConfiguration) = postSolution
 		{5E5A706B-D94A-4392-9A41-264EBA01218A}.Debug.ActiveCfg = Debug|Win32
 		{5E5A706B-D94A-4392-9A41-264EBA01218A}.Debug.Build.0 = Debug|Win32
-		{5E5A706B-D94A-4392-9A41-264EBA01218A}.Release MinDependency.ActiveCfg = Release MinDependency|Win32
-		{5E5A706B-D94A-4392-9A41-264EBA01218A}.Release MinDependency.Build.0 = Release MinDependency|Win32
+		{5E5A706B-D94A-4392-9A41-264EBA01218A}.Release.ActiveCfg = Release|Win32
+		{5E5A706B-D94A-4392-9A41-264EBA01218A}.Release.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 	EndGlobalSection
