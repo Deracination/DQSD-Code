@@ -230,7 +230,6 @@ Section "Quick Search Deskbar (required)"
   File "build.cmd"
   File "clean.cmd"
   File "scrub.cmd"
-  File "dqsd.xml"
   File "ReadMe.txt"
   
   SetOutPath "$INSTDIR\src\DQSDTools"
@@ -270,7 +269,8 @@ Section "Quick Search Deskbar (required)"
   Delete $INSTDIR\localsearch_blue.css
   Delete $INSTDIR\xptoolbar2_default.bmp
   Delete $INSTDIR\xptoolbar1_default.bmp
-
+  Delete $INSTDIR\src\dqsd.xml
+  
   ; Remove stuff introduced by 3.1.8 beta-1
   Delete $INSTDIR\dqsd.gif
   Delete $INSTDIR\httpinst.js
