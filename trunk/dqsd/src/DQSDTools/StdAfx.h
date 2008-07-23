@@ -11,11 +11,11 @@
 
 #define STRICT
 #ifndef _WIN32_WINNT
-#define _WIN32_WINNT 0x0410
+#define _WIN32_WINNT 0x0502 // Windows XP SP2
 #endif
 
 #define WINVER 0x410
-#define _WIN32_IE 0x0501
+#define _WIN32_IE 0x0603 // IE6 with XP SP2
 
 #define _CRT_SECURE_NO_WARNINGS
 #define _ATL_APARTMENT_THREADED

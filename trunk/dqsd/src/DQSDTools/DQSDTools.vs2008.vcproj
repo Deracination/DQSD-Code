@@ -22,7 +22,7 @@
 	</ToolFiles>
 	<Configurations>
 		<Configuration
-			Name="Release MinDependency|Win32"
+			Name="Release|Win32"
 			OutputDirectory=".\ReleaseMinDependency"
 			IntermediateDirectory=".\ReleaseMinDependency"
 			ConfigurationType="2"
@@ -118,7 +118,7 @@
 			/>
 		</Configuration>
 		<Configuration
-			Name="Release MinDependency|x64"
+			Name="Release|x64"
 			OutputDirectory="$(PlatformName)\$(ConfigurationName)"
 			IntermediateDirectory="$(PlatformName)\$(ConfigurationName)"
 			ConfigurationType="2"
@@ -430,7 +430,7 @@
 				RelativePath="DQSDTools.cpp"
 				>
 				<FileConfiguration
-					Name="Release MinDependency|Win32"
+					Name="Release|Win32"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -439,7 +439,7 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release MinDependency|x64"
+					Name="Release|x64"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -476,7 +476,7 @@
 				RelativePath="DQSDTools.idl"
 				>
 				<FileConfiguration
-					Name="Release MinDependency|Win32"
+					Name="Release|Win32"
 					>
 					<Tool
 						Name="VCMIDLTool"
@@ -487,7 +487,7 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release MinDependency|x64"
+					Name="Release|x64"
 					>
 					<Tool
 						Name="VCMIDLTool"
@@ -524,7 +524,7 @@
 				RelativePath="DQSDTools.rc"
 				>
 				<FileConfiguration
-					Name="Release MinDependency|Win32"
+					Name="Release|Win32"
 					>
 					<Tool
 						Name="VCResourceCompilerTool"
@@ -533,7 +533,7 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release MinDependency|x64"
+					Name="Release|x64"
 					>
 					<Tool
 						Name="VCResourceCompilerTool"
@@ -564,7 +564,7 @@
 				RelativePath=".\DQSDTools_i.c"
 				>
 				<FileConfiguration
-					Name="Release MinDependency|Win32"
+					Name="Release|Win32"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -573,7 +573,7 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release MinDependency|x64"
+					Name="Release|x64"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -604,7 +604,7 @@
 				RelativePath="KeyboardHook.cpp"
 				>
 				<FileConfiguration
-					Name="Release MinDependency|Win32"
+					Name="Release|Win32"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -613,7 +613,7 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release MinDependency|x64"
+					Name="Release|x64"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -646,7 +646,7 @@
 				RelativePath="Launcher.cpp"
 				>
 				<FileConfiguration
-					Name="Release MinDependency|Win32"
+					Name="Release|Win32"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -655,7 +655,7 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release MinDependency|x64"
+					Name="Release|x64"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -688,7 +688,7 @@
 				RelativePath="MenuBuilder.cpp"
 				>
 				<FileConfiguration
-					Name="Release MinDependency|Win32"
+					Name="Release|Win32"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -697,7 +697,7 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release MinDependency|x64"
+					Name="Release|x64"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -730,7 +730,7 @@
 				RelativePath="StdAfx.cpp"
 				>
 				<FileConfiguration
-					Name="Release MinDependency|Win32"
+					Name="Release|Win32"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -740,7 +740,7 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release MinDependency|x64"
+					Name="Release|x64"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -776,7 +776,7 @@
 				RelativePath="Utilities.cpp"
 				>
 				<FileConfiguration
-					Name="Release MinDependency|Win32"
+					Name="Release|Win32"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -785,7 +785,7 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release MinDependency|x64"
+					Name="Release|x64"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
