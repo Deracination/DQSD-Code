@@ -3,6 +3,8 @@
 #include "stdafx.h"
 #include "DeskBand.h"
 
+#include "BandConfig.h"
+
 CDeskBand::CDeskBand()
 : m_pBrowserHost(NULL)
 {
@@ -11,31 +13,26 @@ CDeskBand::CDeskBand()
 // CDeskBand
 HRESULT CDeskBand::FinalConstruct()
 {
+    HRESULT hr;
+
     ATLTRACEMETHOD();
 
-    CRegKey rk;
-    LONG ret = rk.Open(HKEY_CLASSES_ROOT, DQSD_REG_KEY, KEY_READ);
-    if (ret != ERROR_SUCCESS)
-        return HRESULT_FROM_WIN32(ret);
-
-    ULONG dwCount = lengthof(m_szInstallDir);
-    ret = rk.QueryStringValue(_T("InstallDir"), m_szInstallDir, &dwCount);
-    if (ret != ERROR_SUCCESS)
-        return HRESULT_FROM_WIN32(ret);
+    BandConfig config;
+    hr = config.GetInstallDirectory(m_szInstallDir, lengthof(m_szInstallDir));
+    if (FAILED(hr))
+        return hr;
 
     ATLTRACE(_T("CDeskband::InstallDir = %s\n"), m_szInstallDir);
 
-    dwCount = lengthof(m_szDeskBandTitle);
-    ret = rk.QueryStringValue(_T(""), m_szDeskBandTitle, &dwCount);
-    if (ret != ERROR_SUCCESS)
-        return HRESULT_FROM_WIN32(ret);
+    hr = config.GetDeskbandTitle(m_szDeskBandTitle, lengthof(m_szDeskBandTitle));
+    if (FAILED(hr))
+        return hr;
 
     ATLTRACE(_T("CDeskband::DeskBandTitle = %s\n"), m_szDeskBandTitle);
 
-    dwCount = lengthof(m_szMessageTitle);
-    ret = rk.QueryStringValue(_T("HelpText"), m_szMessageTitle, &dwCount);
-    if (ret != ERROR_SUCCESS)
-        return HRESULT_FROM_WIN32(ret);
+    hr = config.GetMessageTitle(m_szMessageTitle, lengthof(m_szMessageTitle));
+    if (FAILED(hr))
+        return hr;
 
     ATLTRACE(_T("CDeskband::MessageTitle = %s\n"), m_szMessageTitle);
 

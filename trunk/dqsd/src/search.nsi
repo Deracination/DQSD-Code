@@ -15,7 +15,7 @@ Name "Dave's Quick Search Deskbar"
 !Define IE_MINOR_REQUIRED  5
 !Define HOW_TO_TURN_ON_TOOLBAR "Right-click in your taskbar and select$\n$\n    Toolbar > DQSD Deskbar$\n$\nto add the Quick Search Deskbar to your taskbar."
 !Define TITLE_AND_COPYRIGHT "Dave's Quick Search Deskbar$\nCopyright © 2002-2008 David Bau$\nDistributed under the terms of the$\nGNU General Public License, Version 2"
-!Define DQSD_CLSID "{226b64e8-dc75-4eea-a6c8-abcb4d1d37ff}"
+!Define DQSD_CLSID "{EC9FE983-E520-4D8F-B1A7-ACBCA0439C70}"
 !Define DQSD_TITLE "Dave's Quick Search Deskbar"
 
 ; Silent install
@@ -331,14 +331,14 @@ Section "Quick Search Deskbar (required)"
   ; Write the installation path into the registry
   WriteRegStr HKCR "CLSID\${DQSD_CLSID}" "InstallDir" "$INSTDIR"
   
-  ; ??? Keep this for a while for backward compatibility
-  WriteRegStr HKCR "CLSID\${DQSD_CLSID}" "SecureFile" "$INSTDIR\search.htm"
-  WriteRegDWORD HKCR "CLSID\${DQSD_CLSID}\SecureFiles" "$INSTDIR\search.htm" 0
-  WriteRegDWORD HKCR "CLSID\${DQSD_CLSID}\SecureFiles" "$INSTDIR\settings.htm" 0
-
   ; Registry settings needed to function
   WriteRegStr HKCR "CLSID\${DQSD_CLSID}" "" "Quick Search"
   WriteRegStr HKCR "CLSID\${DQSD_CLSID}" "HelpText" "${DQSD_TITLE}"
+
+  ; DQSD COM objects check that the current URL is in the set of files listed below.
+  ; Add new ones if necessary, though search.htm should be sufficient
+  WriteRegDWORD HKCR "CLSID\${DQSD_CLSID}\SecureFiles" "$INSTDIR\search.htm" 0
+
   
   ; Add dqsd clsid to approved shell extensions - irrelevant on non-NT based OS - but doesn't hurt anything per
   ; http://msdn.microsoft.com/library/en-us/shellcc/platform/Shell/programmersguide/shell_int/shell_int_extending/extensionhandlers/shell_ext.asp

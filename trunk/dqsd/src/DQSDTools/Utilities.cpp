@@ -1,13 +1,11 @@
 #include "StdAfx.h"
 #include "Utilities.h"
+#include "BandConfig.h"
 
 #define COMPILE_MULTIMON_STUBS
 #include <multimon.h>
 
 HWND g_hDQSDWindow;
-
-LPCTSTR DQSD_REG_KEY = _T("CLSID\\{226b64e8-dc75-4eea-a6c8-abcb4d1d37ff}");
-LPCTSTR DQSD_SEC_KEY = _T("CLSID\\{226b64e8-dc75-4eea-a6c8-abcb4d1d37ff}\\SecureFiles");
 
 INTERNET_SCHEME GetScheme(LPCTSTR szURL)
 {
@@ -121,24 +119,22 @@ BOOL IsWindowOnTaskbar(HWND hwnd)
 			wndRect.right <= taskbarRect.right);
 }
 
-HRESULT GetInstallationDirectory( LPTSTR szResult, DWORD dwResultSize )
+HRESULT IsAllowedURL(IObjectWithSite* pSite)
 {
-	// Get the installation directory from the registry to use for making sure the filenames are in the install path
-	CRegKey rk;
-	LONG ret = rk.Open( HKEY_CLASSES_ROOT, DQSD_REG_KEY, KEY_READ );
-	if ( ERROR_SUCCESS != ret)
-	{
-		return HRESULT_FROM_WIN32(ret);
-	}
+    HRESULT hr;
 
-	TCHAR szInstallDir[ _MAX_PATH ];
-	DWORD dwCount = lengthof(szInstallDir);
-	ret = rk.QueryValue( _T("InstallDir"), NULL, szInstallDir, &dwCount );
-	if ( ERROR_SUCCESS != ret )
-	{
-		return HRESULT_FROM_WIN32(ret);
-	}
-	lstrcpyn( szResult, szInstallDir, dwResultSize / sizeof(TCHAR) );
+    CComPtr<IServiceProvider> spSrvProv;
+    if (FAILED(hr = pSite->GetSite(IID_IServiceProvider, (void**)&spSrvProv)))
+        return hr;
 
-	return S_OK;
+    CComPtr<IWebBrowser2> spWebBrowser;
+    if (FAILED(hr = spSrvProv->QueryService(SID_SWebBrowserApp, IID_IWebBrowser2, (void**)&spWebBrowser)))
+        return hr;
+
+    CComBSTR bstrURL;
+    if (FAILED(hr = spWebBrowser->get_LocationURL(&bstrURL)))
+        return hr;
+
+    BandConfig config;
+    return config.IsAllowedURL(CW2T(bstrURL));
 }

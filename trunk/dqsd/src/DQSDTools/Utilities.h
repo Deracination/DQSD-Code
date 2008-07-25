@@ -27,8 +27,6 @@ int URLMatchesFilename(LPCTSTR szURL, LPCTSTR szFile);
 HWND UtilitiesFindDQSDWindow(LPDISPATCH pDispDocument);
 
 extern HWND g_hDQSDWindow;
-extern LPCTSTR DQSD_REG_KEY;
-extern LPCTSTR DQSD_SEC_KEY;
 
 // 
 // Attempts to determine whether the window is placed on the taskbar or not.
@@ -40,6 +38,9 @@ BOOL IsWindowOnTaskbar(HWND hwnd);
 //
 BOOL IsWindowOnScreen(HWND hwnd);
 
-HRESULT GetInstallationDirectory( LPTSTR szResult, DWORD dwResultSize );
+//
+// Checks the URL associated with the site against a white-list from registry
+// 
+HRESULT IsAllowedURL(IObjectWithSite* pSite);
 
 #endif //__UTILITIES_H__
