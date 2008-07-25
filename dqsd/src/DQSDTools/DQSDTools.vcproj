@@ -151,6 +151,9 @@
 			Name="Source Files"
 			Filter="cpp;c;cxx;rc;def;r;odl;idl;hpj;bat">
 			<File
+				RelativePath=".\BandConfig.cpp">
+			</File>
+			<File
 				RelativePath=".\BrowserHost.cpp">
 			</File>
 			<File
@@ -334,6 +337,9 @@
 		<Filter
 			Name="Header Files"
 			Filter="h;hpp;hxx;hm;inl">
+			<File
+				RelativePath=".\BandConfig.h">
+			</File>
 			<File
 				RelativePath=".\BrowserHost.h">
 			</File>

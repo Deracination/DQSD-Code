@@ -4,6 +4,7 @@
 #include "KeyboardHook.h"
 #include "Launcher.h"
 #include "Utilities.h"
+#include "BandConfig.h"
 
 #pragma comment(lib, "version.lib")
 
@@ -13,59 +14,15 @@
 STDMETHODIMP CLauncher::SetSite(IUnknown* pUnkSite)
 {
 #if defined(DQSD_NOSECURITY) && defined(_DEBUG)
-	pUnkSite;
 #pragma message(  __FILE__ " ** WARNING! ** Compilation without security restrictions...do not distribute the resulting binary! " )
 #else
-	HRESULT hr;
+    m_spUnkSite = pUnkSite;
 
-	m_spUnkSite = pUnkSite;
-
-	CComPtr<IServiceProvider> spSrvProv;
-	if (FAILED(hr = GetSite(IID_IServiceProvider, (void**)&spSrvProv)))
-		return hr;
-
-	CComPtr<IWebBrowser2> spWebBrowser;
-	if (FAILED(hr = spSrvProv->QueryService(SID_SWebBrowserApp, IID_IWebBrowser2, (void**)&spWebBrowser)))
-		return hr;
-
-	CComBSTR bstrURL;
-	if (FAILED(hr = spWebBrowser->get_LocationURL(&bstrURL)))
-		return hr;
-
-	HKEY hDqsdKey;
-	if (ERROR_SUCCESS != RegOpenKey(HKEY_CLASSES_ROOT, DQSD_SEC_KEY, &hDqsdKey))
-	{
-		Error(IDS_ERR_UNAUTHCALLER, IID_ILauncher);
-		return E_FAIL;
-	}
-
-	
-	DWORD dt;
-	TCHAR filebuf[MAX_PATH];
-	DWORD filelen = sizeof(filebuf);
-	DWORD idw = 0;
-	BOOL success = FALSE;
-
-	while (ERROR_SUCCESS == RegEnumValue(hDqsdKey, idw, filebuf, &filelen, NULL, &dt, NULL, NULL))
-	{
-		idw++;
-		if (URLMatchesFilename(CW2T(bstrURL), filebuf))
-		{
-			success = TRUE;
-			break;
-		}
-
-		filelen = sizeof(filebuf);
-	}
-
-	RegCloseKey(hDqsdKey);
-
-    if (success == FALSE)
-	{
-		Error(IDS_ERR_UNAUTHCALLER, IID_ILauncher);
-		return E_FAIL;
-	}
-
+    if (IsAllowedURL(this) != S_OK)
+    {
+        Error(IDS_ERR_UNAUTHCALLER, IID_ILauncher);
+        return E_FAIL;
+    }
 #endif
 
   return S_OK;
@@ -869,26 +826,16 @@ HRESULT CLauncher::GetInstallationDirectory( LPTSTR szResult, DWORD dwResultSize
     // Cache install directory, so we don't have to hit the registry as much
     if (m_szInstallDir[0] == 0)
     {
-        // Get the installation directory from the registry to use for making sure the filenames are in the install path
-        CRegKey rk;
-        LONG ret = rk.Open( HKEY_CLASSES_ROOT, DQSD_REG_KEY, KEY_READ );
-        if ( ERROR_SUCCESS != ret)
+        BandConfig config;
+        HRESULT hr = config.GetInstallDirectory(m_szInstallDir, lengthof(m_szInstallDir));
+        if (FAILED(hr))
         {
             Error(IDS_ERR_REGKEYNOTFOUND, IID_ILauncher);
-            return HRESULT_FROM_WIN32(ret);
-        }
-
-        DWORD dwCount = sizeof(m_szInstallDir);
-        ret = rk.QueryValue( _T("InstallDir"), NULL, m_szInstallDir, &dwCount );
-        if ( ERROR_SUCCESS != ret )
-        {
-            Error(IDS_ERR_REGKEYNOTFOUND, IID_ILauncher);
-            return HRESULT_FROM_WIN32(ret);
+            return hr;
         }
     }
 
     lstrcpyn(szResult, m_szInstallDir, dwResultSize / sizeof(TCHAR));
-
     return S_OK;
 }
 

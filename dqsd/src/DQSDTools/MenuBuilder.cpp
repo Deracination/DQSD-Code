@@ -19,58 +19,13 @@ STDMETHODIMP CMenuBuilder::SetSite(IUnknown* pUnkSite)
 #if defined(DQSD_NOSECURITY) && defined(_DEBUG)
 #pragma message(  __FILE__ " ** WARNING! ** Compilation without security restrictions...do not distribute the resulting binary! " )
 #else
-	USES_CONVERSION;
-
-	HRESULT hr;
-
 	m_spUnkSite = pUnkSite;
 
-	CComPtr<IServiceProvider> spSrvProv;
-	if (FAILED(hr = GetSite(IID_IServiceProvider, (void**)&spSrvProv)))
-		return hr;
-
-	CComPtr<IWebBrowser2> spWebBrowser;
-	if (FAILED(hr = spSrvProv->QueryService(SID_SWebBrowserApp, IID_IWebBrowser2, (void**)&spWebBrowser)))
-		return hr;
-
-	CComBSTR bstrURL;
-	if (FAILED(hr = spWebBrowser->get_LocationURL(&bstrURL)))
-		return hr;
-
-	HKEY hDqsdKey;
-	if (ERROR_SUCCESS != RegOpenKey(HKEY_CLASSES_ROOT, DQSD_SEC_KEY, &hDqsdKey))
-	{
-		Error(IDS_ERR_UNAUTHCALLER, IID_ILauncher);
-		return E_FAIL;
-	}
-
-	
-	DWORD dt;
-	TCHAR filebuf[MAX_PATH];
-	DWORD filelen = sizeof(filebuf);
-	DWORD idw = 0;
-	BOOL success = FALSE;
-
-	while (ERROR_SUCCESS == RegEnumValue(hDqsdKey, idw, filebuf, &filelen, NULL, &dt, NULL, NULL))
-	{
-		idw++;
-		if (URLMatchesFilename(OLE2T(bstrURL), filebuf))
-		{
-			success = TRUE;
-			break;
-		}
-
-		filelen = sizeof(filebuf);
-	}
-
-	RegCloseKey(hDqsdKey);
-
-    if (success == FALSE)
-	{
-		Error(IDS_ERR_UNAUTHCALLER, IID_ILauncher);
-		return E_FAIL;
-	}
-
+    if (IsAllowedURL(this) != S_OK)
+    {
+        Error(IDS_ERR_UNAUTHCALLER, IID_IMenuBuilder);
+        return E_FAIL;
+    }
 #endif
 
   return S_OK;
