@@ -1,7 +1,8 @@
 <!--
    This file contains a listing of notable dates in Canada
-   for 2007
+   for 2008
    - Bill Hewitt [bill.hewitt@mochamail.com] (06Dec06)
+   - Charlie Russel (2008,2009)
 -->
 
 <events>
@@ -16,6 +17,8 @@
      <date day="21" month="2" year="2005"/>
      <date day="20" month="2" year="2006"/>
      <date day="19" month="2" year="2007"/>
+     <date day="18" month="2" year="2008"/>
+     <date day="16" month="2" year="2009"/>
   </event>
   <event name="St. Valentine's Day" type="public_holiday">
      <date day="14" month="2"/>
@@ -29,6 +32,8 @@
      <date day="20" month="3" year="2005"/>
      <date day="9" month="4" year="2006"/>  
      <date day="1" month="4" year="2007"/>
+     <date day="16" month="3" year="2008"/>
+     <date day="5" month="4" year="2009"/>
   </event>
   <event name="Good Friday" type="public_holiday">
      <date day="29" month="3" year="2002"/>
@@ -37,6 +42,8 @@
      <date day="25" month="3" year="2005"/>
      <date day="14" month="4" year="2006"/>  
      <date day="6" month="4" year="2007"/>
+     <date day="21" month="3" year="2008"/>
+     <date day="10" month="4" year="2009"/>
   </event>
   <event name="Easter Sunday" type="public_holiday">
      <date day="31" month="3" year="2002"/>
@@ -45,6 +52,8 @@
      <date day="27" month="3" year="2005"/>
      <date day="16" month="4" year="2006"/>  
      <date day="8" month="4" year="2007"/>
+     <date day="23" month="3" year="2008"/>
+     <date day="12" month="4" year="2009"/>
   </event>
   <event name="Easter Monday" type="public_holiday">
      <date day="1" month="4" year="2002"/>
@@ -53,10 +62,13 @@
      <date day="28" month="3" year="2005"/>
      <date day="17" month="4" year="2006"/>
      <date day="9" month="4" year="2007"/>
+     <date day="24" month="3" year="2008"/>
+     <date day="13" month="4" year="2009"/>
   </event>
   <event name="Passover" type="public_holiday">
      <date day="24" month="4" year="2005"/>
-
+     <date day="20" month="4" year="2008"/>
+     <date day="9" month="4" year="2009"/>
   </event>
   <event name="Eastern Daylight Time Begins" type="public_holiday">
      <date day="7" month="4" year="2002"/>
@@ -65,6 +77,11 @@
      <date day="3" month="4" year="2005"/>
      <date day="2" month="4" year="2006"/>
      <date day="11" month="3" year="2007"/>
+     <date day="9" month="3" year="2008"/>
+     <date day="8" month="3" year="2008"/>
+  </event>
+  <event name="Cinco de Mayo" type="public_holiday">
+     <date day="5" month="5"/>
   </event>
   <event name="Mother's Day" type="public_holiday">
      <date day="12" month="5" year="2002"/>
@@ -73,6 +90,8 @@
      <date day="8" month="5" year="2005"/>
      <date day="14" month="5" year="2006"/>
      <date day="13" month="5" year="2007"/>
+     <date day="11" month="5" year="2008"/>
+     <date day="10" month="5" year="2009"/>
   </event>
   <event name="Victoria Day" type="public_holiday">
      <date day="20" month="5" year="2002"/>
@@ -81,6 +100,8 @@
      <date day="23" month="5" year="2005"/>
      <date day="22" month="5" year="2006"/>
      <date day="21" month="5" year="2007"/>
+     <date day="19" month="5" year="2008"/>
+     <date day="18" month="5" year="2009"/>
   </event>
   <event name="Father's Day" type="public_holiday">
      <date day="16" month="6" year="2002"/>
@@ -89,6 +110,8 @@
      <date day="19" month="6" year="2005"/>
      <date day="18" month="6" year="2006"/>
      <date day="17" month="6" year="2007"/>
+     <date day="15" month="6" year="2008"/>
+     <date day="21" month="6" year="2009"/>
   </event>
   <event name="National Day (QC)" type="public_holiday">
      <date day="24" month="6"/>
@@ -103,12 +126,16 @@
      <date day="1" month="8" year="2005"/>
      <date day="7" month="8" year="2006"/>
      <date day="6" month="8" year="2007"/>
+     <date day="4" month="8" year="2008"/>
+     <date day="3" month="8" year="2009"/>
   </event>
   <event name="Discovery Day (YK)" type="public_holiday">
      <date day="16" month="8" year="2004"/>
      <date day="15" month="8" year="2005"/>
      <date day="21" month="8" year="2006"/>
      <date day="20" month="8" year="2007"/>
+     <date day="18" month="8" year="2008"/>
+     <date day="17" month="8" year="2009"/>
   </event>
   <event name="Labour Day" type="public_holiday">
      <date day="2" month="9" year="2002"/>
@@ -117,20 +144,24 @@
      <date day="5" month="9" year="2005"/>
      <date day="4" month="9" year="2006"/>
      <date day="3" month="9" year="2007"/>
+     <date day="1" month="9" year="2008"/>
+     <date day="7" month="9" year="2009"/>
   </event>
   <event name="Rosh Hashanah" type="public_holiday">
      <date day="7" month="9" year="2002"/>
      <date day="27" month="9" year="2003"/>
      <date day="16" month="9" year="2004"/>
      <date day="4" month="10" year="2005"/>
-
+     <date day="30" month="9" year="2008"/>
+     <date day="19" month="9" year="2009"/>
   </event>
   <event name="Yom Kippur" type="public_holiday">
      <date day="16" month="9" year="2002"/>
      <date day="6" month="10" year="2003"/>
      <date day="25" month="9" year="2004"/>
      <date day="13" month="10" year="2005"/>
-
+     <date day="9" month="10" year="2008"/>
+     <date day="28" month="9" year="2009"/>
   </event>
   <event name="Thanksgiving Day" type="public_holiday">
      <date day="14" month="10" year="2002"/>
@@ -139,6 +170,8 @@
      <date day="10" month="10" year="2005"/>
      <date day="9" month="10" year="2006"/>
      <date day="8" month="10" year="2007"/>
+     <date day="13" month="10" year="2008"/>
+     <date day="12" month="10" year="2009"/>
   </event>
   <event name="Eastern Standard Time Begins" type="public_holiday">
      <date day="27" month="10" year="2002"/>
@@ -147,6 +180,8 @@
      <date day="30" month="10" year="2005"/>
      <date day="29" month="10" year="2006"/>
      <date day="4" month="11" year="2007"/>
+     <date day="2" month="11" year="2008"/>
+     <date day="1" month="11" year="2009"/>
   </event>
   <event name="Halloween" type="public_holiday">
      <date day="31" month="10"/>
@@ -159,7 +194,8 @@
      <date day="20" month="12" year="2003"/>
      <date day="9" month="12" year="2004"/>
      <date day="26" month="12" year="2005"/>
-
+     <date day="22" month="12" year="2008"/>
+     <date day="12" month="12" year="2009"/>
   </event>
   <event name="Christmas Day" type="public_holiday">
      <date day="25" month="12"/>
