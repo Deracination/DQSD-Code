@@ -1,0 +1,197 @@
+/* theme_vista.css
+*
+*  This is a Vista theme file, created by Charlie Russel, with 
+*  help from Matt B. (THANKS, Matt!) who is a wiz with CSS files.
+*
+*  Install the Vista theme by replacing your existing theme.css file
+*  with this file. You will also need two .bmp files copied to your 
+*  DQSD directory, vistatoolbar1_vista.bmp and vistatoolbar2_vista.bmp
+*
+*  Version: .96 15 January, 2007 - fix calendar event colours and mouseover
+*         : .95 created 27 December, 2006
+*         
+*
+*  Submit updates, suggestions, and comments to the DQSD Users list
+* 
+* 
+*/
+
+body
+{
+ margin: 0px;
+ border: 0;
+ padding: 0;
+ background: #000000 url(vistatoolbar1_vista.bmp) repeat-x fixed top;
+ background-color: 181818;
+ color: menu;
+}
+
+.txtfld, .clock
+{
+ font : calibri;
+ font-size : 12;
+ font-weight:bold;
+ background-color: #000000;
+ color: #dddddd;
+ border-style: inset;
+ border-width:0px;
+ padding-top:7px;
+ padding-left:2px;
+ padding-right:5px;
+ padding-bottom:1px;
+ margin:0px;
+ position:absolute;
+ overflow:hidden;
+ word-break:break-all;
+}
+
+.clock
+{
+ background: #000000 url(vistatoolbar1_vista.bmp) repeat-x fixed top;
+ background-color: #000000;
+ color: #eeeeee;
+ cursor:hand;
+ text-align:right;
+ font-size : 12;
+ border-width:0px;
+ padding-top:7px;
+ padding-left:4px;
+ padding-right:4px;
+ padding-bottom:1px;
+}
+
+.txtfld
+{
+  background: #000000 transparent repeat-x fixed bottom;
+
+ border-width:0px;
+ padding-top:5px;
+ padding-left:4px;
+ padding-right:4px;
+ padding-bottom:1px;
+}
+
+.gobutton, .mogobutton, .mdgobutton
+{
+ font : menu;
+ padding-bottom:1px;
+ padding-top:1px;
+ padding-right:1px;
+ padding-left:1px;
+ border:0px;
+ border-color: #000000;
+ background: transparent repeat-x fixed bottom;
+ margin:0px;
+ color: menu;
+ position:absolute;
+}
+.mogobutton
+{
+ border-style:outset;
+ border- color: #000000;
+}
+.mdgobutton
+{
+ padding-bottom:0px;
+ padding-top:2px;
+ padding-right:0px;
+ padding-left:2px;
+ border-style:inset;
+}
+/*
+Styles for the calendar
+*/
+.cal
+{
+ background: gray url(vistatoolbar1_vista.bmp) repeat-x fixed top;
+ background-color:#181920;
+ color: menu;
+ border:2px;
+ border-style:outset;
+}
+.calnavmonth, .calnavmonthhigh, .calnavyear, .calnavyearhigh
+{
+  background: gray url(vistatoolbar1_vista.bmp) repeat-x fixed top;
+  font-weight:bold;
+  border-width:0;
+  border-color:menu;
+  border:0px;
+  color: yellow;
+  padding:1px;
+}
+.calnavyear, .calnavyearhigh
+{
+  background: gray url(vistatoolbar1_vista.bmp) repeat-x fixed top;
+  font-weight:bold;
+  border-width:0;
+  border-color:menu;
+  border:0px;
+  color: lightgreen;
+  padding:1px;
+}
+.calmonth, .calmonthhigh
+{
+  color:menu;
+  font-size : 14;
+  background: gray url(vistatoolbar1_vista.bmp) repeat-x fixed top;
+  font-weight:bold;
+}
+.caltodayevent, .caltodayeventhigh
+{
+  /*background: gray repeat-x fixed bottom; */
+  background: gray url(vistatoolbar1_vista.bmp) repeat-x fixed top;
+  background-color:#181920;
+  color:red;
+  border-width:0;
+  font-weight:bold;
+  border-style:solid;
+  border-color:threedshadow;
+}
+.caleventday, .caleventdayhigh, .localcaleventday, .localcaleventdayhigh
+{
+  background: gray url(vistatoolbar1_vista.bmp) repeat-x fixed top;
+  background-color:#181920;
+  color:red;
+  font-weight:bold;
+}
+.caltoday, .caltodayhigh
+{
+  background-color:#181920;
+  color:yellow;
+  border-width:1px;
+  border-style:solid;
+  border-color:threedshadow;
+}
+.calgray, .calgrayhigh
+{   
+  color:graytext;
+}
+.calmonth, .calnavmonth, .calnavyear, .calday, .caleventday, .caltodayevent, .caltoday, .calgray, .localcaleventday
+{
+  text-align:center;
+  cursor:hand;
+}
+.calmonthhigh, .calnavmonthhigh, .calnavyearhigh, .caldayhigh, .caleventdayhigh, .caltodayeventhigh, .caltodayhigh, .calgrayhigh 
+{
+  cursor:hand;
+  background-color: #46424b;
+  color:gray;
+  text-align:center;
+}
+.calgray, .helpboxCategoryExpanderSign, .helpboxCategoryCount, .helpboxCategoryTop, .helpboxLinkTop
+{
+    color:#707172;
+}
+.helpboxLinkTop,
+{
+    color:#0000b0;
+}
+/*
+Styles for the help box
+*/
+.helpboxBody
+{
+  background: window;
+}
+
+IMG#banner { cursor: hand; margin-top: 7px; }

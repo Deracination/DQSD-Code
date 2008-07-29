@@ -2,6 +2,7 @@
 
 Enhancements
 * Folded DQSDHost functionality into DQSDTools.dll, and removed DQSDHost (Kim Gräsman)
+* Added build environment and official support for DQSD on x64 (Kim Gräsman, Charlie Russel)
 
 New Searches
 
