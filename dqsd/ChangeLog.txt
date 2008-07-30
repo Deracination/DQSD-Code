@@ -8,6 +8,7 @@ Enhancements
 New Searches
 
 Bug Fixes
+* Fixed bug where resizing the toolbar horizontally would eventually yield a script error (Kim Gräsman)
 
 Modified Searches
 * imdb - corrects search functionality (Steve Poirier)
