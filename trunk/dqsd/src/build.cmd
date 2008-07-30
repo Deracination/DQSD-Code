@@ -15,8 +15,8 @@ set LIB=%SDKLIB%;%LIB%
 pushd %~dp0
 
 pushd DQSDTools
-devenv /useenv DQSDTools.sln /rebuild "Release MinDependency"
-copy /y ReleaseMinDependency\DQSDTools.dll ..\..\DQSDTools.dll
+devenv /useenv DQSDTools.sln /rebuild Release
+copy /y Release\DQSDTools.dll ..\..\DQSDTools.dll
 popd
 
 REM **** Build installer ****
