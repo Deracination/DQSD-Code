@@ -954,10 +954,10 @@ function handleResize()
   }
   else
   {
-    document.all.info.style.display="none";
-    document.deff.q.style.display="block";
-    document.deff.q.style.top=2; //5
-    document.deff.q.style.height = document.body.clientHeight-4; //-10
+    document.all.info.style.display = "none";
+    document.deff.q.style.display = "block";
+    document.deff.q.style.top = 2;
+    document.deff.q.style.height = Math.max(document.body.clientHeight - 4, 0); // no smaller than zero!
     document.getElementById('dqsdwrapper').style.height = document.body.clientHeight;
   }
 
@@ -1019,7 +1019,7 @@ function handleResize()
   else
     clockformat = clocklongform;
 
-  document.deff.q.style.width=(targetwidth < 0 ? 0 : targetwidth);
+  document.deff.q.style.width = Math.max(targetwidth, 0); // no smaller than zero!
 
   if (clockrunning)
      paintclock();
