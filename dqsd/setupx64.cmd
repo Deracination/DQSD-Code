@@ -1,57 +1,50 @@
-@Echo off
-REM ****************************************************************************************************
-REM *                                                                                                  *
-REM * Filename: setupx64.cmd                                                                           *
-REM *                                                                                                  *
-REM * A basic batch file install that copies the DQSD files to %ProgramFiles% and does the necessary   *
-REM * registry edits and DLL registration. It's not smart, or even vaguely robust, but it should work. *
-REM *                                                                                                  *
-REM * ModHist: 14 Aug, 2005 -- Initial (Charlie Russel)                                                *
-REM *        : 15 Aug, 2005 -- fix up path problem (charlie). Release to beta.                         *
-REM *        : 29 Dec, 2007 -- change to setlocal(charlie).                                            *
-REM *        : 21 Jul, 2008 -- Change for v4, and add Vista Check for CSS change                       *
-REM *        : 25 Jul, 2008 -- Change to use REG ADD, updated registry entries.                        *
-REM *        : 27 Jul, 2008 -- Fix bug of not saving off default theme files                           *
-REM *        : 28 Jul, 2008 -- fix bugs, VAR order,vista theme (charlie), rename cmd file (Kim)        *
-REM *                                                                                                  *
-REM ****************************************************************************************************
+@rem ****************************************************************************************************
+@rem * A basic batch file install that copies the DQSD files to %ProgramFiles% and does the necessary   *
+@rem * registry edits and DLL registration. It's not smart, or even vaguely robust, but it should work. *
+@rem * Note: MUST run as administrator in order to be able to perform all install steps.                *
+@rem ****************************************************************************************************
+@echo off
 
-@REM using setlocal to make sure variables don't end up out in the environment...
+rem Using setlocal to make sure vars don't end up out in the environment...
 setlocal
 
-@REM First, make sure we're on a 64-bit OS!
+:SetVARS
+set _REGSVR=%WinDir%\System32\regsvr32.exe
+set _DQSD_CLSID={EC9FE983-E520-4D8F-B1A7-ACBCA0439C70}
+set _DQSD_INSTDIR=%PROGRAMFILES%\Quick Search Deskbar
+set _CSS_Save=%_DQSD_INSTDIR%\CSS_SAVE
+
+rem Check OS version
+echo Checking Windows version...
+call :CheckOSVer
+echo Running on Windows %WINVER%
+
+rem Make sure we're on a 64-bit OS!
 if NOT "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto WrongArchitecture
 
-:SetVARS
-SET _REGSVR=%WinDir%\System32\regsvr32
-SET _FileCheck=%WinDir%\System32\SystemPropertiesAdvanced.exe
-SET _DQSD_CLSID={EC9FE983-E520-4D8F-B1A7-ACBCA0439C70}
-SET _DQSD_INSTDIR=%PROGRAMFILES%\Quick Search Deskbar
-SET _CSS_Save=%_DQSD_INSTDIR%\CSS_SAVE
+if /I "%1" equ "/d" set _DEBUG=TRUE
 
-IF /I "%1" equ "/d" SET _DEBUG=TRUE
+if "%_DEBUG%" neq "TRUE" goto DisplayOK
 
-if "%_DEBUG%" equ "TRUE" goto ShowVars
-rem echo if "%_DEBUG%" equals "TRUE" why are we here?
-goto DisplayOK
-
-:ShowVars
+:DebugShowVars
 echo RegSVR is: %_REGSVR%
-echo FileCheck is: %_FileCheck%
 echo CSS_Save is: %_CSS_Save%
 echo DQSD_CLSID is: %_DQSD_CLSID%
 echo DQDD_INSTDIR is: %_DQSD_INSTDIR%
 
 :DisplayOK
-Echo This batch file will install the x64 version of Dave's Quick Search Deskbar to: 
-Echo.
-Echo     %_DQSD_INSTDIR%
-Echo. 
-Echo. And, if you're running Vista, it will copy the Vista StyleSheet into place
-Echo.  so you don't have a funny blue DQSD in your taskbar. :-)
-Echo.
-Echo   If this is OK, then...
-Echo. 
+echo This batch file will install the x64 version of Dave's Quick Search Deskbar to: 
+echo.
+echo     %_DQSD_INSTDIR%
+echo. 
+echo And, if you're running Vista, it will copy the Vista StyleSheet into place
+echo so you don't have a funny blue DQSD in your taskbar. :-)
+echo.
+echo Please make sure you are running as an administrator, or most of the install
+echo steps will fail.
+echo.
+echo If this is OK, then...
+echo. 
 pause
 echo. 
 
@@ -59,38 +52,39 @@ echo.
 if exist "%_DQSD_INSTDIR%"\DQSDTools*.dll goto PreExisting
 if NOT exist DQSDTools64.dll goto FileError
 if "%_DEBUG%" equ "TRUE" echo "We are in %CD%" && pause
-xcopy *.* "%_DQSD_INSTDIR%" /i /e 
+echo Copying DQSD Files to %_DQSD_INSTDIR%...
+xcopy *.* "%_DQSD_INSTDIR%" /i /e /q
 
 :RegisterDLL
-REM Register the DQSD DLL
+rem Register the DQSD DLL
+echo Registering the DQSD DLL...
 cd "%_DQSD_INSTDIR%"
 if NOT exist DQSDTools64.dll goto CopyError
 %_REGSVR% /s DQSDTools64.dll
 
 :UpdateRegistry
-REM Add additional registry values
+rem Add additional registry values
+echo Adding necessary registry entries...
 reg.exe ADD "HKCR\CLSID\%_DQSD_CLSID%" /f /ve /d "Quick Search"
 reg.exe ADD "HKCR\CLSID\%_DQSD_CLSID%" /f /v InstallDir /d "%_DQSD_INSTDIR%"
 reg.exe ADD "HKCR\CLSID\%_DQSD_CLSID%" /f /v HelpText /d "Dave's Quick Search Deskbar"
 
 reg.exe ADD "HKCR\CLSID\%_DQSD_CLSID%\SecureFiles" /f /v "%_DQSD_INSTDIR%\search.htm" /t REG_DWORD /d 0
 
-:CheckVista
-if NOT exist %_FileCheck% goto EchoDone
-
 :BackupDefaultTheme
-@REM Copy the Vista CSS files over the top of the existing
-if NOT exist themes\vista\vistatoolbar1_vista.bmp goto CopyError
+if NOT "%WINVER%"=="Vista" GoTo Finish
+
+rem Backup any existing CSS files
 if NOT exist "%_CSS_Save%" mkdir "%_CSS_Save%"
 copy theme.css "%_CSS_Save%"
 copy search.css "%_CSS_Save%"
 copy dqsd.png "%_CSS_Save%"
 
 :InstallVistaTheme
-copy themes\vista\*.* /y
-copy theme_vista.css theme.css /y
-
-goto EchoDone
+rem Copy the Vista CSS files over the top of the existing
+if NOT exist themes\vista\vistatoolbar1_vista.bmp goto CopyError
+xcopy themes\vista\*.* . /q /y
+goto Finish
 
 :PreExisting
 echo. 
@@ -106,7 +100,7 @@ goto End
 echo. 
 echo.
 echo Failed to find necessary files in the current directory to copy. Please check your environment
-echo and be sure you are running this batch file from the source directory, and that the source has been
+echo and be sure you are running this batch file from the source directory, and that the source
 echo has been unzipped. We're just trying to keep this simple.
 echo. 
 echo.
@@ -132,34 +126,32 @@ echo.
 echo Please go to www.dqsd.net and download the current version for 32-bit Windows
 echo. 
 echo. 
+goto End
 
-:EchoDone
+:Finish
 echo. 
 echo.
+echo DQSD for x64 has been installed on your computer. 
+echo Please report any anomalies to the DQSD Users list or the DSQD Developers list. 
 echo. 
-echo.
-echo. 
-echo.
-echo. 
-echo.
-echo DQSD for x64, version 4.x has been installed on your computer. 
-echo. Note that this is an experimental version of 64-bit DQSD. Please report
-echo. any anomalies to the DQSD Users list or the DSQD Developers list. 
-echo. 
-echo.
-
-
-:unsetVARS
-ENDLOCAL
-echo.
-echo.
-echo. 
-echo. 
-echo.
-echo. 
-echo. 
-echo Done! We hope you enjoy DQSD and if you do, please tell your friends about it. 
+echo We hope you enjoy DQSD and if you do, please tell your friends about it. 
 echo.
 echo. 
 
 :End
+exit /B
+
+rem * Subroutines
+:CheckOSVer
+rem These files differ between Win2008 and Windows Vista, VER does not differentiate between server/workstation
+if exist %windir%\System32\oobefldr.dll (set WINVER=Vista) && goto :Eof
+if exist %windir%\System32\oobe.exe  (set WINVER=Server 2008) && goto :Eof
+
+rem For downlevel platforms, use VER command to check actual version
+ver | find "2003" > nul
+if %ERRORLEVEL% equ 0 (set WINVER=Server 2003) && goto :Eof
+
+ver | find "XP" > nul
+if %ERRORLEVEL% equ 0 (set WINVER=XP) && goto :Eof
+
+goto :Eof
