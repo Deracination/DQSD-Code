@@ -14,16 +14,21 @@ set _DQSD_CLSID={EC9FE983-E520-4D8F-B1A7-ACBCA0439C70}
 set _DQSD_INSTDIR=%PROGRAMFILES%\Quick Search Deskbar
 set _CSS_Save=%_DQSD_INSTDIR%\CSS_SAVE
 
+:PreReqChecks
+rem Make sure we're on a 64-bit OS!
+if NOT "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto WrongArchitecture 
+rem Check for pre-existing DQSD directory
+if exist "%_DQSD_INSTDIR%" goto PreExisting 
+rem Check to see if we have sufficient privilege to create a directory
+mkdir "%_DQSD_INSTDIR%" 2>NUL & If errorlevel 1 goto NotAdmin
+
 rem Check OS version
 echo Checking Windows version...
 call :CheckOSVer
 echo Running on Windows %WINVER%
 
-rem Make sure we're on a 64-bit OS!
-if NOT "%PROCESSOR_ARCHITECTURE%"=="AMD64" goto WrongArchitecture
-
+rem Check if running in debug mode
 if /I "%1" equ "/d" set _DEBUG=TRUE
-
 if "%_DEBUG%" neq "TRUE" goto DisplayOK
 
 :DebugShowVars
@@ -85,6 +90,16 @@ rem Copy the Vista CSS files over the top of the existing
 if NOT exist themes\vista\vistatoolbar1_vista.bmp goto CopyError
 xcopy themes\vista\*.* . /q /y
 goto Finish
+
+:NotAdmin
+Echo.
+Echo.
+Echo This installation script must be run as an administrator. If you're 
+Echo   trying to install on Windows Vista, or Windows 2008, you'll need to
+Echo   open a CMD window "As Administrator" and run the script from there. 
+Echo.
+Echo.
+Goto End
 
 :PreExisting
 echo. 
