@@ -1,8 +1,11 @@
 @ECHO OFF
 
 SET SRCDIR=%~dp0..
-SET OUTDIR=\DQSDx64
 SET XCOPY=XCOPY /EXCLUDE:build64.exclude.txt
+
+REM Had to put the output dir in the root, because zip.exe adds the full path to the archive.
+REM \DQSDx64 -> DQSDx64 as a root directory in the resulting zip.
+SET OUTDIR=\DQSDx64
 
 PUSHD %~dp0
 
