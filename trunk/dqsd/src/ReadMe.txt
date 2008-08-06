@@ -6,7 +6,6 @@ RELEASE PROCEDURE FOR DQSD - Kim Gräsman, Updated June, 2008
 		NSIS paths
 	- Make sure you have the NSISXML plug-in installed
 	- Update version resource in DQSDTools DLL
-	- Update version resource in DQSDHost DLL
 
 - Update version stuff in scripts
 	- Update version in version.xml
@@ -14,15 +13,11 @@ RELEASE PROCEDURE FOR DQSD - Kim Gräsman, Updated June, 2008
 	- Commit changes
 
 - Build DLL and installer
-	- Run build.cmd
-	or
-	- Build manually
-		- Build DQSDTools.dll from inside Visual Studio
-		- Build DQSDHost.dll from inside Visual Studio
-		- NSIS-compile search.nsi
-	- Generates dqsd.exe
+	- Run build_all.cmd
+	- Generates dqsd.exe and dqsdx64.zip
 	- Rename to dqsd-<ver>-<type>.exe, e.g. dqsd-318-beta.exe or 
 		dqsd-318.exe for a final version
+  - Rename the zip according to the same pattern
 		
 - Test newly-built installer
 
@@ -54,10 +49,6 @@ RELEASE PROCEDURE FOR DQSD - Kim Gräsman, Updated June, 2008
 		- [Submit/Refresh]
 	- [Send Notice]
 	
-- Commit all DQSD files
-- Set a CVS tag on the DQSD module called rel-<ver>-<type>, e.g. 
-	"rel-3-1-8-0-beta" or "rel-3-1-8-0" for a final version
-
 - Update the site
 	- Check out the dqsdweb folder from SVN
 	- Modify doc.htm
@@ -69,9 +60,12 @@ RELEASE PROCEDURE FOR DQSD - Kim Gräsman, Updated June, 2008
 		- Upload dqsd.exe (latest release must have this name)
 		- Upload dqsd<ver>.exe, e.g. dqsd318.exe
   - Copy version.xml from dqsd folder
-	- Commit changes to SVN - the files will be automatically distributed
-		to dqsd.net and update notification will be triggered by the new 
-		version.xml, in due time.
+
+- Commit all DQSD files, including the web site - the files will be 
+  automatically distributed to dqsd.net and update notification will be 
+  triggered by the new version.xml, in due time.
+- Set an SVN tag on the DQSD module called rel-<ver>-<type>, e.g. 
+	"rel-3-1-8-0-beta" or "rel-3-1-8-0" for a final version
 
 - Send an announcement to dqsd-announce@lists.sourceforge.net 
 	(see: http://sourceforge.net/mailarchive/forum.php?forum_id=8603)

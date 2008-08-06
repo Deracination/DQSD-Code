@@ -228,7 +228,6 @@ Section "Quick Search Deskbar (required)"
   File "search.ico"
   File "search.nsi"
   File "build.cmd"
-  File "clean.cmd"
   File "scrub.cmd"
   File "ReadMe.txt"
   
