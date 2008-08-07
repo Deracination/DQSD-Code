@@ -54,7 +54,6 @@ pause
 echo. 
 
 :CopyFiles
-if exist "%_DQSD_INSTDIR%"\DQSDTools*.dll goto PreExisting
 if NOT exist DQSDTools64.dll goto FileError
 if "%_DEBUG%" equ "TRUE" echo "We are in %CD%" && pause
 echo Copying DQSD Files to %_DQSD_INSTDIR%...
@@ -63,7 +62,7 @@ xcopy *.* "%_DQSD_INSTDIR%" /i /e /q
 :RegisterDLL
 rem Register the DQSD DLL
 echo Registering the DQSD DLL...
-cd "%_DQSD_INSTDIR%"
+cd /d "%_DQSD_INSTDIR%"
 if NOT exist DQSDTools64.dll goto CopyError
 %_REGSVR% /s DQSDTools64.dll
 
