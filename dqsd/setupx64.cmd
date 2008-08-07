@@ -104,9 +104,10 @@ Goto End
 :PreExisting
 echo. 
 echo.
-echo Found previous version of DQSD. This batch file isn't smart enough to save any customizations.
-echo Please save off any copies of localprefs.js or other custom files to a safe place. Then delete
-echo the current installation of DQSD and re-run the setupx64.cmd. 
+echo Found previous version of DQSD. This batch file isn't smart enough 
+echo   to save any customizations.  Please save off any copies of 
+echo   localprefs.js or other custom files to a safe place. Then delete
+echo   the current installation of DQSD and re-run the setupx64.cmd. 
 echo.
 echo.
 goto End
@@ -114,9 +115,10 @@ goto End
 :FileError
 echo. 
 echo.
-echo Failed to find necessary files in the current directory to copy. Please check your environment
-echo and be sure you are running this batch file from the source directory, and that the source
-echo has been unzipped. We're just trying to keep this simple.
+echo Failed to find necessary files in the current directory to copy. 
+echo   Please check your environment and be sure you are running this 
+echo   batch file from the source directory, and that the source
+echo   has been unzipped. We're just trying to keep this simple.
 echo. 
 echo.
 goto End
@@ -124,9 +126,9 @@ goto End
 :CopyError
 echo. 
 echo.
-echo Failed to find necessary files in the target directory. Something didn't copy correctly.
-echo We're exiting now so you can check the Variables in your environment and figure out what 
-echo went wrong. 
+echo Failed to find necessary files in the target directory. Something 
+echo   didn't copy correctly.  We're exiting now so you can check the 
+echo   Variables in your environment and figure out what echo went wrong. 
 echo. 
 echo.
 goto End
@@ -134,8 +136,8 @@ goto End
 :WrongArchitecture
 echo. 
 echo.
-echo This version of DQSD can only be installed on an x64 version of Windows, and 
-echo this installer has detected that you are not running a 64-bit version. 
+echo This version of DQSD can only be installed on an x64 version of Windows, 
+echo   and this installer has detected that you are not running a 64-bit version. 
 echo. 
 echo. 
 echo Please go to www.dqsd.net and download the current version for 32-bit Windows
