@@ -1,0 +1,53 @@
+<events>
+  /*holidays on a specific day */
+  <event name="Año Nuevo" type="public_holiday">
+     <date day="1" month="1"/>
+  </event>
+  <event name="Día de la Memoria" type="public_holiday">
+     <date day="24" month="3"/>
+  </event>
+  <event name="Guerra de Malvinas" type="public_holiday">
+     <date day="2" month="4"/>
+  </event>
+  <event name="Día del Trabajador" type="public_holiday">
+     <date day="1" month="5"/>
+  </event>
+  <event name="Primer Gobierno Patrio" type="public_holiday">
+     <date day="25" month="5"/>
+  </event>
+  <event name="Día de la Independencia" type="public_holiday">
+     <date day="9" month="7"/>
+  </event>
+  <event name="Concepción de María" type="public_holiday">
+     <date day="8" month="12" />
+  </event>
+  <event name="Navidad" type="public_holiday">
+     <date day="25" month="12"/>
+  </event>
+  
+/* holidays that float */
+  <event name="Viernes Santo" type="public_holiday">
+     <date day="21" month="3" year="2008"/>
+  </event> 
+  <event name="Día de la Bandera" type="public_holiday">
+     <date day="15" month="6" year="2008"/>
+  </event> 
+  <event name="Día de San Martín" type="public_holiday">
+     <date day="17" month="8" year="2008"/>
+  </event> 
+   <event name="Día de la Raza" type="public_holiday">
+     <date day="12" month="8" year="2008"/>
+  </event>
+ 
+  <event name="Viernes Santo" type="public_holiday">
+     <date day="10" month="4" year="2009"/>
+  </event> 
+  <event name="Día de la Bandera" type="public_holiday">
+     <date day="16" month="6" year="2009"/>
+  </event> 
+  <event name="Día de San Martín" type="public_holiday">
+     <date day="18" month="8" year="2009"/>
+  </event> 
+   <event name="Día de la Raza" type="public_holiday">
+     <date day="12" month="8" year="2009"/>
+  </event>
