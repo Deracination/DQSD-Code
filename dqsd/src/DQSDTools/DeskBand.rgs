@@ -11,7 +11,7 @@ HKCR
 	}
 	NoRemove CLSID
 	{
-		ForceRemove {EC9FE983-E520-4D8F-B1A7-ACBCA0439C70} = s 'DQSD Deskbar'
+		ForceRemove {EC9FE983-E520-4D8F-B1A7-ACBCA0439C70} = s 'Quick Search'
 		{
 			ProgID = s 'DQSDTools.DeskBand.1'
 			VersionIndependentProgID = s 'DQSDTools.DeskBand'
