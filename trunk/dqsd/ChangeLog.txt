@@ -15,6 +15,7 @@ Enhancements
 * Folded DQSDHost functionality into DQSDTools.dll, and removed DQSDHost (Kim Gräsman)
 * Added build environment and official support for DQSD on x64 (Kim Gräsman, Charlie Russel)
 * Canadian holidays for 2008-9 (Charlie Russel)
+* Argentinian holidays for 2008-9 (Carlos Atashian, via Charlie Russel)
 
 New Searches
 
