@@ -29,6 +29,6 @@ REM Add extra directories we want in the install folder
 MD %OUTDIR%\localsearches
 
 REM Create ZIP file
-ZIP -rm %SRCDIR%\dqsdx64.zip %OUTDIR%
+ZIP -rm9 %SRCDIR%\dqsdx64.zip %OUTDIR%
 
 POPD
