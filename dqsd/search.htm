@@ -1040,18 +1040,26 @@ function postStartup()
     else if(hotkeyVkCode != 0)
       keyboardHook.RegisterHotKey(hotkeyVkCode, hotkeyModifiers, document);
 
-    keyboardHook.MapKeyCode( historySearchVkCode, 2 ); // Map key to the history search
-
-//   keyboardHook.ShutdownBar();
-
     if ( refreshIconsAtStartup )
       refreshIcons();
   }
   catch(e)
   {
-      alert("There was a problem initializing the enhanced keyboard support - some key combinations and hotkeys may not work (Error '" + e.description + "')");
-      keyboardHook = null;
+    var message = "There was a problem initializing the enhanced keyboard support - some key combinations and hotkeys may not work.\n";
+    message += "Error details: 0x" + extractHresult(e).toString(16) + " - '" + e.description + "'.";
+    alert(message);
+    keyboardHook = null;
   }
+}
+
+function extractHresult(err)
+{
+  // This is a way of sign-extending the err.number property, from long to unsigned long
+  var hr = err.number;
+  hr ^= 0x80000000;
+  hr += 0x80000000;
+  
+  return hr;
 }
 
 

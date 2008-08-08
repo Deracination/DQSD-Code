@@ -311,24 +311,9 @@ STDMETHODIMP CLauncher::GetFiles(BSTR bstrFileSpec, BSTR *pbstrFiles)
 // This is nothing to do with the launcher - I've just piggybacked it on to save
 // creating another class/interface
 //
-STDMETHODIMP CLauncher::InstallKeyboardHook(LPDISPATCH pDispDocument)
-{
-	return KeyboardHookInstall(UtilitiesFindDQSDWindow(pDispDocument), m_hKeyboardHook);
-}
-
 STDMETHODIMP CLauncher::RegisterHotKey(long hotkeyVkCode, BSTR bstrModifierName, LPDISPATCH pDispDocument)
 {
 	return KeyboardInstallHotkey(hotkeyVkCode, CW2T(bstrModifierName), &m_hHotkeyNotificationWindow, pDispDocument);
-}
-
-//
-// This allows mapping of a virtual keycode to a character code
-// sent with WM_CHAR in KeyboardProc.  It prevents having to modify
-// KeyboardProc for every mapping
-STDMETHODIMP CLauncher::MapKeyCode(long lVKCode, long lCharCode)
-{
-	RegisterKeyCharMapping(lVKCode, lCharCode);
-	return S_OK;
 }
 
 STDMETHODIMP CLauncher::get_VersionIsCorrect(int v1, int v2, int v3, int v4, VARIANT_BOOL *pVal)
@@ -801,8 +786,6 @@ void CLauncher::FinalRelease()
     {
         DestroyWindow(m_hHotkeyNotificationWindow);
     }
-
-    KeyboardHookRemove(m_hKeyboardHook);
 }
 
 HRESULT CLauncher::GetFilename( LPCTSTR szName, LPTSTR szResult, LPCTSTR pszDefaultExt /*= _T(".txt")*/ )
