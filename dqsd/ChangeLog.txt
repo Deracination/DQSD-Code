@@ -17,6 +17,8 @@ Enhancements
 * Canadian holidays for 2008-9 (Charlie Russel)
 * Argentinian holidays for 2008-9 (Carlos Atashian, via Charlie Russel)
 * Better error reporting when we fail to register hotkeys (Kim Gräsman)
+* New US holidays up until 2010 (Steve Poirier)
+* Changed holidays.us.xml to use more compact format (Kim Gräsman)
 
 New Searches
 
