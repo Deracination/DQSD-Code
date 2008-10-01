@@ -3,11 +3,11 @@
 ; Installs Dave's Quick Search Deskbar Search Wizard
 ;
 
-!Define APPNAME       "Dave's Quick Search Deskbar Search Wizard"
-!Define ADDON_SUBDIR  "$INSTDIR\Search Wizard"
-!Define INSTALL_PKG   "..\dqsdwiz.exe"
+!include "dqsd_clsid.nsh"
 
-!Define DQSD_UUID     "{226b64e8-dc75-4eea-a6c8-abcb4d1d37ff}"
+!define APPNAME       "Dave's Quick Search Deskbar Search Wizard"
+!define ADDON_SUBDIR  "$INSTDIR\Search Wizard"
+!define INSTALL_PKG   "..\dqsdwiz.exe"
 
 ; The name of the installer
 Name "${APPNAME}"
@@ -23,7 +23,7 @@ ShowInstDetails show
 ; The installation package to create
 OutFile "${INSTALL_PKG}"
 
-InstallDirRegKey HKCR "CLSID\${DQSD_UUID}" "InstallDir"
+InstallDirRegKey HKCR "CLSID\${DQSD_CLSID}" "InstallDir"
 
 ; The stuff to install
 Section "DQSDSearchWizard"
@@ -43,7 +43,7 @@ Section "DQSDSearchWizard"
 
 Installed:
   StrCpy $R1 "${ADDON_SUBDIR}"
-  StrCpy $R3 "${DQSD_UUID}"
+  StrCpy $R3 "${DQSD_CLSID}"
 
   ; Set output path to the add-on installation directory.
   SetOutPath $R1
