@@ -413,38 +413,10 @@ function setSearchWindowText(text, autoselect)
   }
 }
 
-// Utility function - converts incoming string char by char to UTF-8
+// Utility function - converts incoming string to UTF-8
 // Necessary for new Google default encoding (Kim Gräsman)
-function utf8(str)
+function utf8_encode(str)
 {
-  str = str.replace(/\r\n/g,"\n");
-  var utftext = "";
-  for(var n = 0; n < str.length; ++n)
-  {
-    var c = str.charCodeAt(n);
-    if(c < 128)
-    {
-      // 0-127 -> 1 byte
-      utftext += String.fromCharCode(c);
-    }
-    else if(c > 127 && c < 2048)
-    {
-      // 127-2047 -> 2 bytes
-      utftext += String.fromCharCode((c >> 6) | 192);
-      utftext += String.fromCharCode((c & 63) | 128);
-    }
-    else if(c > 2047 && c < 65537)
-    {
-      // 2048-66536 -> 3 bytes
-      utftext += String.fromCharCode((c >> 12) | 224);
-      utftext += String.fromCharCode(((c >> 6) & 63) | 128);
-      utftext += String.fromCharCode((c & 63) | 128);
-    }
-    else
-    {
-      // skip char
-    }
-  }
-  
-  return utftext;
+  // http://ecmanaut.blogspot.com/2006/07/encoding-decoding-utf8-in-javascript.htmls
+  return unescape(encodeURIComponent(str));
 }
