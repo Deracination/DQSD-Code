@@ -1,25 +1,25 @@
 @echo off
 
-REM For this build to work, both the VC tools and
-REM the NSIS tools need to be on your path.
+REM Customize these paths to your local install
+set VSINSTALLDIR=C:\Program Files\Microsoft Visual Studio .NET 2003
+set NSISINSTALLDIR=C:\Program Files\NSIS
+set SDKINCLUDE=C:\Program Files\Microsoft SDKs\Windows\2003SP1\include
+set SDKLIB=C:\Program Files\Microsoft SDKs\Windows\2003SP1\lib
 
-REM This may not be needed for your environment
-call vcvars32.bat
+REM **** Configure VS command-line env ****
+call "%VSINSTALLDIR%\Common7\Tools\vsvars32.bat"
 
-REM This is the path to NSIS, may be different or unnecessary for your environment
-SET PATH=%PATH%;"C:\Program Files\NSIS"
+set INCLUDE=%SDKINCLUDE%;%INCLUDE%
+set LIB=%SDKLIB%;%LIB%
 
 pushd %~dp0
 
 pushd DQSDSearchWiz
-
-REM This seems to work sooo much better than NMAKE, and we don't need a makefile
-msdev DQSDSearchWiz.dsp /MAKE "DQSDSearchWiz - Win32 Release MinDependency" /REBUILD
-
-copy /y ReleaseMinDependency\DQSDSearchWiz.dll ..\..\DQSDSearchWiz.dll
+devenv /useenv DQSDSearchWiz.sln /rebuild Release
+copy /y Release\DQSDSearchWiz.dll ..\..\DQSDSearchWiz.dll
 popd
 
 REM The LZMA compressor should yield the smallest installer with NSIS 2.0
-makensis /X"SetCompressor /FINAL lzma" searchwiz.nsi
+"%NSISINSTALLDIR%\makensis" /X"SetCompressor /SOLID lzma" searchwiz.nsi
 
 popd

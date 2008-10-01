@@ -1,6 +1,8 @@
-Version 1.3.x
-* Fixed a bunch of spelling errors in error messages (enternal -> internal) (Kim Gräsman
+Version 1.4
+* Fixed a bunch of spelling errors in error messages (enternal -> internal) (Kim Gräsman)
 * Added SELECT elements as a valid selected field (Kim Gräsman)
+* Now builds with VS 2003 (Kim Gräsman)
+* Fixed installer to detect DQSD 4.1 installations properly -- NOTE: DQSDSearchWiz 1.4 only works with DQSD 4.1 and later, earlier versions will not be detected. (Kim Gräsman)
 
 Version 1.3 (final) 21-July-2003
 * Recognizes TEXTAREA as a valid selected field, requested by Tom Corcoran (Kim Gräsman)
