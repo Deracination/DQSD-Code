@@ -226,7 +226,7 @@
       else
       {
       	// Force UTF-8 encoding
-      	args.q = utf8(args.q);
+      	args.q = utf8_encode(args.q);
       	
         //apply the daterange specification
         if( args.switch_val["since"] == "" )

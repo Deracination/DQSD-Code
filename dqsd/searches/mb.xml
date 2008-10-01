@@ -46,7 +46,7 @@
       }
 
       // Force UTF-8 encoding
-      args.q = utf8(args.q);
+      args.q = utf8_encode(args.q);
       document.mbf.query.value = args.q;
 
       submitForm(mbf);

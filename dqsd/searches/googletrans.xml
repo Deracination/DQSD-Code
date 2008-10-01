@@ -74,7 +74,7 @@
       else
       {
          // Force UTF-8 encoding
-  	googletransfTEXT.text.value = utf8(args.q);
+  	    googletransfTEXT.text.value = utf8_encode(args.q);
         googletransfTEXT.langpair.value = args.switch_val["from"] + "|" + args.switch_val["to"];
         submitForm(googletransfTEXT);
       }
