@@ -8,6 +8,8 @@
 #include "ModulVer.h"
 #include "Options.h"
 
+#include "HtmlElement.h"
+
 void srch_repl( string& s, const string& to_find, const string& repl_with ) 
 {
 	try
@@ -163,7 +165,7 @@ LRESULT CDQSDWizardDlg::OnInitDialog(UINT uMsg, WPARAM wParam, LPARAM lParam, BO
 		ctl.SetWindowText( W2CT(bstrURL.m_str) );
 
 		// Save the base URL of this frame for later use
-		HR( m_spDoc2->get_URL( &bstrURL ) );
+		HR( m_spActiveFrameDoc->get_URL( &bstrURL ) );
 		m_strBaseURL = W2CT(bstrURL);
 
 		// Set up the list for the FORM elements
@@ -223,7 +225,7 @@ LRESULT CDQSDWizardDlg::OnInitDialog(UINT uMsg, WPARAM wParam, LPARAM lParam, BO
 		// Get the forms
 
 		CComPtr<IHTMLElementCollection> spFormCollection;
-		HR(m_spDoc2->get_forms(&spFormCollection));
+		HR(m_spActiveFrameDoc->get_forms(&spFormCollection));
 
 		long cForms = 0;
 		HR(spFormCollection->get_length( &cForms ));
@@ -233,49 +235,43 @@ LRESULT CDQSDWizardDlg::OnInitDialog(UINT uMsg, WPARAM wParam, LPARAM lParam, BO
 		// See if any of the fields in the form has focus
 
 		CComPtr< IHTMLElement > spActiveElement;
-		m_spDoc2->get_activeElement( &spActiveElement );
+		m_spActiveFrameDoc->get_activeElement( &spActiveElement );
 
 		for ( int iForm = 0; iForm < cForms; iForm++ )
 		{
 			CComPtr< IDispatch > spFormDisp;
 			spFormCollection->item( CComVariant( iForm ), CComVariant( 0 ), &spFormDisp );
 
-			string strName = _T("");
-			string strAction = _T("");
-
 			CComQIPtr< IHTMLElement > spForm( spFormDisp );
-			if ( spForm )
+			if (spForm)
 			{
-				_variant_t varAttributeValue;
-				if ( FAILED( spForm->getAttribute( _bstr_t(_T("action")), 0, &varAttributeValue ) ) ||
-					 !( VT_BSTR == varAttributeValue.vt && varAttributeValue.bstrVal != NULL ) )
-				{
-					varAttributeValue = _variant_t( ::SysAllocString( L"" ) );
-				}
+                auto_ptr<Form> form = BuildForm(spForm);
 
 				cDisplayedForms += 1;
 
-				strAction = EscapeXML( GetAbsoluteActionPath( varAttributeValue ) );
+                string strName = form->Name();
+                string strAction = EscapeXML(form->GetAbsoluteActionPath(m_strBaseURL));
 
-				CComPtr< IHTMLElement >* pspForm = new CComPtr< IHTMLElement >( spForm ); // these are deleted in the dialog's dtor
-				m_vecFormHTMLs.push_back( pspForm );
-
-				// If the current form contains the active element, then will select
+				// If the current form contains the active element, then we'll select
 				// it by default
 
 				VARIANT_BOOL bContainsActiveElement = VARIANT_FALSE;
 				spForm->contains( spActiveElement, &bContainsActiveElement );
 
 				// Add the form information to the list
-				
 				LVITEM lvi;
 				memset( &lvi, 0, sizeof lvi );
 
 				lvi.mask = LVIF_TEXT|LVIF_PARAM;
 				lvi.iItem = 256;
 				lvi.pszText = const_cast<LPTSTR>(strName.c_str());
-				lvi.lParam = reinterpret_cast<LPARAM>(pspForm);
+				lvi.lParam = reinterpret_cast<LPARAM>(spForm.p);
 				int iPos = ctlFormList2.SendMessage( LVM_INSERTITEM, 0, (LPARAM)&lvi );
+                
+                // AddRef the HTMLElement pointer to keep it alive as long as the
+                // LPARAM is connected to the list item. OnFormListItemDeleted
+                // Releases it.
+                spForm.p->AddRef();
 
 				ListView_SetCheckState( ctlFormList2.m_hWnd, iPos, bContainsActiveElement );
 
@@ -314,19 +310,12 @@ LRESULT CDQSDWizardDlg::OnFormListItemChanged(int idCtrl, LPNMHDR pNMHDR, BOOL& 
 		ATLTRACE( _T("pNMListView->uNewState = %d\n"), pNMListView->uNewState );
 		ATLTRACE( _T("pNMListView->iItem = %d\n"), pNMListView->iItem );
 
-		CWindow ctlFormList = GetDlgItem( IDC_FormList2 );
-
-		LVITEM lvi;
-		memset( &lvi, 0, sizeof lvi );
-		lvi.mask = LVIF_PARAM;
-		lvi.iItem = pNMListView->iItem;
-		ctlFormList.SendMessage( LVM_GETITEM, pNMListView->iItem, (LPARAM)&lvi );
-		CComPtr< IHTMLElement >* pspForm = reinterpret_cast<CComPtr< IHTMLElement >*>(lvi.lParam);
-
+		CWindow ctlFormList = GetDlgItem(idCtrl);
+        CComPtr<IHTMLElement> spForm = GetLParamHTMLElement(ctlFormList, pNMListView->iItem);
 		if ( pNMListView->uNewState == 3 )
 		{
 			BSTR bstr = NULL;
-			if ( SUCCEEDED( (*pspForm)->get_outerHTML( &bstr ) ) )
+			if ( SUCCEEDED( spForm->get_outerHTML( &bstr ) ) )
 			{
 				CWindow ctlForm = GetDlgItem( IDC_FormFields );
 				ctlForm.SetWindowText( W2T( bstr ) );
@@ -334,7 +323,7 @@ LRESULT CDQSDWizardDlg::OnFormListItemChanged(int idCtrl, LPNMHDR pNMHDR, BOOL& 
 			}
 
 			m_spSelectedStyle = NULL;
-			(*pspForm)->get_style( &m_spSelectedStyle );
+			spForm->get_style( &m_spSelectedStyle );
 
 			CComBSTR bstrStyleText;
 			m_spSelectedStyle->get_cssText( &bstrStyleText );
@@ -348,7 +337,7 @@ LRESULT CDQSDWizardDlg::OnFormListItemChanged(int idCtrl, LPNMHDR pNMHDR, BOOL& 
 		else if ( pNMListView->uNewState == 0 )
 		{
 			CComPtr< IHTMLStyle > spStyle;
-			(*pspForm)->get_style( &spStyle );
+			spForm->get_style( &spStyle );
 
 			spStyle->put_cssText( m_mapUnselectedStyle[ pNMListView->iItem ] );
 			return 1;
@@ -365,6 +354,17 @@ LRESULT CDQSDWizardDlg::OnFormListItemChanged(int idCtrl, LPNMHDR pNMHDR, BOOL& 
 	}
 
 	return 1;
+}
+
+LRESULT CDQSDWizardDlg::OnFormListItemDeleted( int idCtrl, LPNMHDR pNMHDR, BOOL& bHandled )
+{
+    NM_LISTVIEW* pNMListView = (NM_LISTVIEW*)pNMHDR;
+
+    IHTMLElement* pForm = GetLParamHTMLElement(GetDlgItem(idCtrl), pNMListView->iItem);
+    if (pForm != NULL)
+        pForm->Release();
+
+    return 1;
 }
 
 LRESULT CDQSDWizardDlg::OnOK(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHandled)
@@ -555,64 +555,37 @@ string CDQSDWizardDlg::GetForms( const string& rstrSearchName, string& rstrFormS
 {
 	USES_CONVERSION;
 
-	string strFormXML = _T("");
+	string strFormXML;
 
 	try
 	{
 		// Grab active element so we can assign 'q' to it in the gen'd script	
 		CComPtr< IHTMLElement > spActiveElement;
-		m_spDoc2->get_activeElement( &spActiveElement );
+		m_spActiveFrameDoc->get_activeElement( &spActiveElement );
 		CComPtr< IUnknown > spActiveElementUnk = spActiveElement;
 
 		CWindow ctlFormList = GetDlgItem( IDC_FormList2 );
-		int iSelectedForms = 0;
 		const int cForms = ctlFormList.SendMessage( LVM_GETITEMCOUNT, 0, 0 );
 		for ( int iForm = 0; iForm < cForms; iForm++ )
 		{
-			if ( ListView_GetCheckState( ctlFormList.m_hWnd, iForm ) )
+            int iSelectedForms = 0;
+
+			if (ListView_GetCheckState(ctlFormList.m_hWnd, iForm))
 			{
-				TCHAR szFormNum[ 32 ];
-				_stprintf( szFormNum, (iSelectedForms > 0 ? _T("%d") : _T("")), iSelectedForms + 1 );
-				string strFormName = rstrSearchName + _T("f") + string(szFormNum);
+                // Parse and re-generate form
+                CComPtr<IHTMLElement> spForm = GetLParamHTMLElement(ctlFormList, iForm);
+                auto_ptr<Form> form = BuildForm(spForm);
 
-				strFormXML += _T("\r\n  <form name=\"") + strFormName + _T("\"");
-
-				LVITEM lvi;
-				memset( &lvi, 0, sizeof lvi );
-				lvi.mask = LVIF_PARAM;
-				lvi.iItem = iForm;
-				ctlFormList.SendMessage( LVM_GETITEM, iForm, (LPARAM)&lvi );
-				CComPtr< IHTMLElement >* pspForm = reinterpret_cast<CComPtr< IHTMLElement >*>(lvi.lParam);
-
-				_variant_t varAttributeValue;
-
-				// method attribute
-				
-				string strMethod = _T("");
-				if ( SUCCEEDED( (*pspForm)->getAttribute( _bstr_t(_T("method")), 0, &varAttributeValue ) ) )
-				{
-					strMethod = W2A( varAttributeValue.bstrVal );
-				}
-				strFormXML += _T("\r\n        method=\"") + strMethod + _T("\"");;
-
-				// action attribute
-
-				string strAction = _T("");
-				if ( SUCCEEDED( (*pspForm)->getAttribute( _bstr_t(_T("action")), 0, &varAttributeValue ) ) )
-				{
-					strAction = EscapeXML( GetAbsoluteActionPath( varAttributeValue ) );
-				}
-				strFormXML += _T("\r\n        action=\"") + strAction + _T("\"");;
-
-
-				strFormXML += _T(">");
-
+                string formName = CreateFormName(iSelectedForms, rstrSearchName);
+				strFormXML += "\r\n  <form name=\"" + formName + "\"";
+                strFormXML += "\r\n        method=\"" + form->Method() + "\"";
+                strFormXML += "\r\n        action=\"" + EscapeXML(form->GetAbsoluteActionPath(m_strBaseURL)) + "\"";
+                strFormXML += ">";
 
 				// get form fields
-
 				rstrFormScript = _T("");
 
-				CComQIPtr< IHTMLFormElement > spFormElement( *pspForm );
+				CComQIPtr< IHTMLFormElement > spFormElement(spForm);
 				long cFormElements = 0;
 				if ( SUCCEEDED( spFormElement->get_length( &cFormElements ) ) )
 				{
@@ -621,7 +594,7 @@ string CDQSDWizardDlg::GetForms( const string& rstrSearchName, string& rstrFormS
 					typedef map< string, RadioButtonValues_t > RadioButtonMap_t;
 					RadioButtonMap_t mapRadioButtons;
 
-					rstrFormScript += _T("\r\n\r\n      // FORM variables for ") + strFormName;
+					rstrFormScript += _T("\r\n\r\n      // FORM variables for ") + formName;
 					
 					for ( int iFormElem = 0; iFormElem < cFormElements; iFormElem++ )
 					{
@@ -640,7 +613,7 @@ string CDQSDWizardDlg::GetForms( const string& rstrSearchName, string& rstrFormS
 
 						_variant_t varInputName;
 						string strInputName;
-						if ( SUCCEEDED( spElement->getAttribute( _bstr_t( _T("name") ), 0, &varInputName ) ) && varInputName.bstrVal )
+						if ( SUCCEEDED( spElement->getAttribute( _bstr_t( _T("name") ), 0, &varInputName ) ) && varInputName.vt == VT_BSTR && varInputName.bstrVal )
 						{
 							strInputName = W2T( varInputName.bstrVal );
 
@@ -706,11 +679,11 @@ string CDQSDWizardDlg::GetForms( const string& rstrSearchName, string& rstrFormS
 													 "\r\n      // The wizard assigned the search string to this form field value because"
 													 "\r\n      // this field was the active element when the search file was generated."
 													 "\r\n      // Change this to args.q if the search string is parsed with parseArgs."
-													 "\r\n      document.") + strFormName + GetScriptFieldName( strInputName ) + _T(" = q;");
+													 "\r\n      document.") + formName + GetScriptFieldName( strInputName ) + _T(" = q;");
 							}
 							else
 							{
-								rstrFormScript += _T("\r\n      //document.") + strFormName + GetScriptFieldName( strInputName ) + _T(" = \"\";");
+								rstrFormScript += _T("\r\n      //document.") + formName + GetScriptFieldName( strInputName ) + _T(" = \"\";");
 							}
 
 							if ( m_options.IncludeComments() && !_tcsicmp( _T("checkbox"), strInputType.c_str() ) )
@@ -791,7 +764,7 @@ string CDQSDWizardDlg::GetForms( const string& rstrSearchName, string& rstrFormS
 								}
 							}
 							
-							rstrFormScript += _T("\r\n      //document.") + strFormName + GetScriptFieldName( itElements->first ) + _T(" = \"\";");
+							rstrFormScript += _T("\r\n      //document.") + formName + GetScriptFieldName( itElements->first ) + _T(" = \"\";");
 
 							strRadioElement += _T("\" />");
 							strRadioValues += _T("\r\n    </COMMENT>\r\n");
@@ -837,61 +810,6 @@ string CDQSDWizardDlg::GetForms( const string& rstrSearchName, string& rstrFormS
 	}
 
 	return strFormXML;
-}
-
-string CDQSDWizardDlg::GetAbsoluteActionPath( _variant_t& varAction )
-{
-	try
-	{
-
-		USES_CONVERSION;
-
-		string strAction = W2T( varAction.bstrVal == 0 ? L"" : varAction.bstrVal );
-
-		if ( !_tcsnicmp( _T("http"), strAction.c_str(), 4 ) )
-			return strAction;
-
-		else if ( strAction.length() == 0 )
-			return m_strBaseURL;
-
-		URL_COMPONENTS uc;
-		memset( &uc, 0, sizeof uc );
-		uc.dwStructSize = sizeof(uc);
-		uc.dwHostNameLength = uc.dwSchemeLength = uc.dwUrlPathLength = 1;
-		InternetCrackUrl( m_strBaseURL.c_str(), 0, 0, &uc );
-		TCHAR szScheme[ 64 ], szHost[ 128 ], szPort[ 32 ];
-		_tcsncpy( szScheme, uc.lpszScheme, uc.dwSchemeLength ); szScheme[ uc.dwSchemeLength ] = _T('\0');
-		_tcsncpy( szHost, uc.lpszHostName, uc.dwHostNameLength ); szHost[ uc.dwHostNameLength ] = _T('\0');
-		if ( uc.nPort && uc.nPort != 80 )
-			_stprintf( szPort, _T(":%d"), uc.nPort );
-		else
-			szPort[ 0 ] = _T('\0');
-
-		string strActionPath = strAction;
-		if ( strActionPath[0] == _T('/') )
-		{
-			strAction = string( szScheme ) + _T("://") + szHost + string( szPort ) + strActionPath;
-		}
-		else
-		{
-			string strBaseURL = m_strBaseURL;
-			int i, j;
-			int nPos = __max( i = (int)strBaseURL.find_last_of( _T('/') ), j = (int)strBaseURL.find_last_of( _T('\\') ) );
-			if ( nPos != -1 )
-			{
-				strBaseURL.erase( nPos, strBaseURL.length() );
-			}
-			strAction = strBaseURL + ( strBaseURL[ strBaseURL.length() - 1 ] == _T('/') ? _T("") : _T("/") ) + strActionPath;
-		}
-
-		return strAction;
-	}
-	catch ( ... )
-	{
-		MessageBox( _T("An internal error was encountered:  CDQSDWizardDlg::GetAbsoluteActionPath"), _T("DQSD Search Wizard Exception"), MB_OK|MB_ICONERROR );
-	}
-
-	return _T("");
 }
 
 string CDQSDWizardDlg::GetSwitches( vector< string >& rvecSwitches )
@@ -1249,3 +1167,38 @@ string CDQSDWizardDlg::ParseCategory( LPCTSTR sz )
 
 	return XMLCategory;
 }
+
+IHTMLElement* CDQSDWizardDlg::GetLParamHTMLElement(CWindow &formListControl, int index)
+{
+    LVITEM lvi = {0};
+    lvi.mask = LVIF_PARAM;
+    lvi.iItem = index;
+    formListControl.SendMessage(LVM_GETITEM, index, (LPARAM)&lvi);
+    IHTMLElement* pForm = reinterpret_cast<IHTMLElement*>(lvi.lParam);
+
+    return pForm;
+}
+
+string CDQSDWizardDlg::CreateFormName(int formIndex, const string& searchName)
+{
+    char szFormNum[32] = {0};
+    if (formIndex > 0)
+    {
+        sprintf(szFormNum, "%d", formIndex + 1);
+    }
+
+    return (searchName + "f" + string(szFormNum));
+}
+
+auto_ptr<Form> CDQSDWizardDlg::BuildForm(IHTMLElement* pElement)
+{
+    HtmlElement element(pElement);
+
+    string name, method, action;
+    element.GetAttribute(L"name", name);
+    element.GetAttribute(L"method", method);
+    element.GetAttribute(L"action", action);
+
+    return auto_ptr<Form>(new Form(name, method, action));
+}
+
