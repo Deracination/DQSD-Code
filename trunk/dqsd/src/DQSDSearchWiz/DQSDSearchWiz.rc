@@ -1,4 +1,4 @@
-//Microsoft Developer Studio generated resource script.
+// Microsoft Visual C++ generated resource script.
 //
 #include "resource.h"
 
@@ -27,18 +27,18 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 // TEXTINCLUDE
 //
 
-1 TEXTINCLUDE MOVEABLE PURE 
+1 TEXTINCLUDE 
 BEGIN
     "resource.h\0"
 END
 
-2 TEXTINCLUDE MOVEABLE PURE 
+2 TEXTINCLUDE 
 BEGIN
     "#include ""winres.h""\r\n"
     "\0"
 END
 
-3 TEXTINCLUDE MOVEABLE PURE 
+3 TEXTINCLUDE 
 BEGIN
     "1 TYPELIB ""DQSDSearchWiz.tlb""\r\n"
     "\0"
@@ -47,15 +47,14 @@ END
 #endif    // APSTUDIO_INVOKED
 
 
-#ifndef _MAC
 /////////////////////////////////////////////////////////////////////////////
 //
 // Version
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 0,1,3,0
- PRODUCTVERSION 0,1,3,0
+ FILEVERSION 0,1,4,0
+ PRODUCTVERSION 0,1,4,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -70,18 +69,14 @@ BEGIN
     BEGIN
         BLOCK "040904b0"
         BEGIN
-            VALUE "Comments", "\0"
-            VALUE "CompanyName", "http://www.glenncarr.com/\0"
-            VALUE "FileDescription", "Dave's Quick Search Deskbar Search Wizard\0"
-            VALUE "FileVersion", "1.3\0"
-            VALUE "InternalName", "DQSDSearchWiz\0"
-            VALUE "LegalCopyright", "Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2\0"
-            VALUE "LegalTrademarks", "\0"
-            VALUE "OriginalFilename", "DQSDSearchWiz.DLL\0"
-            VALUE "PrivateBuild", "\0"
-            VALUE "ProductName", "Dave's Quick Search Deskbar Search Wizard\0"
-            VALUE "ProductVersion", "1.3\0"
-            VALUE "SpecialBuild", "\0"
+            VALUE "CompanyName", "http://www.glenncarr.com/"
+            VALUE "FileDescription", "Dave's Quick Search Deskbar Search Wizard"
+            VALUE "FileVersion", "1.4"
+            VALUE "InternalName", "DQSDSearchWiz"
+            VALUE "LegalCopyright", "Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2"
+            VALUE "OriginalFilename", "DQSDSearchWiz.DLL"
+            VALUE "ProductName", "Dave's Quick Search Deskbar Search Wizard"
+            VALUE "ProductVersion", "1.4"
         END
     END
     BLOCK "VarFileInfo"
@@ -90,15 +85,13 @@ BEGIN
     END
 END
 
-#endif    // !_MAC
-
 
 /////////////////////////////////////////////////////////////////////////////
 //
 // REGISTRY
 //
 
-IDR_SEARCHWIZARD        REGISTRY MOVEABLE PURE  "SearchWizard.rgs"
+IDR_SEARCHWIZARD        REGISTRY                "SearchWizard.rgs"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -107,9 +100,9 @@ IDR_SEARCHWIZARD        REGISTRY MOVEABLE PURE  "SearchWizard.rgs"
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDI_NORMAL              ICON    DISCARDABLE     "normal.ico"
-IDI_HOT                 ICON    DISCARDABLE     "hot.ico"
-IDI_WIZARD              ICON    DISCARDABLE     "wizard.ico"
+IDI_NORMAL              ICON                    "normal.ico"
+IDI_HOT                 ICON                    "hot.ico"
+IDI_WIZARD              ICON                    "wizard.ico"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -117,7 +110,7 @@ IDI_WIZARD              ICON    DISCARDABLE     "wizard.ico"
 //
 
 IDD_DQSDWIZARDDLG DIALOGEX 0, 0, 394, 271
-STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 FONT 8, "MS Sans Serif", 0, 0, 0x1
 BEGIN
     RTEXT           "* &Abbreviation:",IDC_STATIC,29,9,49,8
@@ -164,7 +157,7 @@ BEGIN
 END
 
 IDD_OPTIONSDLG DIALOGEX 0, 0, 253, 110
-STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "DQSD Search Wizard Options"
 FONT 8, "MS Sans Serif", 0, 0, 0x1
 BEGIN
@@ -187,8 +180,8 @@ BEGIN
                     BS_PUSHLIKE | WS_TABSTOP,197,40,50,14,WS_EX_STATICEDGE
 END
 
-IDD_ABOUTDLG DIALOG DISCARDABLE  0, 0, 242, 114
-STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+IDD_ABOUTDLG DIALOG  0, 0, 242, 114
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
 CAPTION "About DQSD Search Wizard..."
 FONT 8, "MS Sans Serif"
 BEGIN
@@ -214,7 +207,7 @@ END
 //
 
 #ifdef APSTUDIO_INVOKED
-GUIDELINES DESIGNINFO MOVEABLE PURE 
+GUIDELINES DESIGNINFO 
 BEGIN
     IDD_DQSDWIZARDDLG, DIALOG
     BEGIN
@@ -249,25 +242,25 @@ END
 // TEXT
 //
 
-IDR_CHANGELOG           TEXT    DISCARDABLE     "ChangeLog.txt"
+IDR_CHANGELOG           TEXT                    "ChangeLog.txt"
 
 /////////////////////////////////////////////////////////////////////////////
 //
 // String Table
 //
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE 
 BEGIN
     IDS_PROJNAME            "DQSDSearchWiz"
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE 
 BEGIN
     IDS_AboutURL            "http://www.dqsd.net/searchwizard.htm"
     IDS_MailToGlennCarr     "mailto:glenn@glenncarr.com"
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE 
 BEGIN
     1001                    "Enter the abbreviation for the search.  This is used to invoke the search and should be a short abbreviation which isn't a common word.  You also won't be able to enter uppercase or non-alphanumeric characters."
     1002                    "Enter the title or name of the search.  This is what will be displayed in the menu."
@@ -278,7 +271,7 @@ BEGIN
     1007                    "Enter a helpful description for this search.  It can be as long or as short as you prefer."
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE 
 BEGIN
     1008                    "Enter switches, if any, that you want to use with this search.  Script will be generated for parsing the switches if you do enter some."
     1009                    "Do you want to include examples in the description?  If so, check this box and some placeholders with the standard formatting will be inserted in the description."
@@ -292,7 +285,7 @@ BEGIN
     1017                    "Show help in the form of tool tips."
 END
 
-STRINGTABLE DISCARDABLE 
+STRINGTABLE 
 BEGIN
     2001                    "Check this box if you want to edit the new search after the wizard generates it."
     2002                    "Choose the editor your want to use here.  If none is specified, then Notepad will be used."

@@ -8,6 +8,7 @@
 #include "Options.h"
 #include "resource.h"       // main symbols
 #include "DialogToolTipCtrl.h"
+#include "Form.h"
 
 /////////////////////////////////////////////////////////////////////////////
 // CDQSDWizardDlg
@@ -20,13 +21,6 @@ public:
 	{
 	}
 
-	~CDQSDWizardDlg()
-	{
-		vector< CComPtr< IHTMLElement >* >::iterator it = m_vecFormHTMLs.begin();
-		for ( ; it != m_vecFormHTMLs.end(); it++ )
-			delete *it;
-	}
-
 	enum { IDD = IDD_DQSDWIZARDDLG };
 
 BEGIN_MSG_MAP(CDQSDWizardDlg)
@@ -36,6 +30,7 @@ BEGIN_MSG_MAP(CDQSDWizardDlg)
 	COMMAND_ID_HANDLER(IDOK, OnOK)
 	COMMAND_ID_HANDLER(IDCANCEL, OnCancel)
 	NOTIFY_HANDLER(IDC_FormList2, LVN_ITEMCHANGED, OnFormListItemChanged)
+    NOTIFY_HANDLER(IDC_FormList2, LVN_DELETEITEM, OnFormListItemDeleted)
 	COMMAND_HANDLER(IDC_About, BN_CLICKED, OnClickedAbout)
 	COMMAND_HANDLER(IDC_Options, BN_CLICKED, OnClickedOptions)
 	COMMAND_HANDLER(IDC_ShowHideHTML, BN_CLICKED, OnClickedShowHideHTML)
@@ -64,6 +59,7 @@ END_MSG_MAP()
 		return 0;
 	}
 	LRESULT OnFormListItemChanged(int idCtrl, LPNMHDR pNMHDR, BOOL& bHandled);
+    LRESULT OnFormListItemDeleted(int idCtrl, LPNMHDR pNMHDR, BOOL& bHandled);
 	LRESULT OnClickedAbout(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHandled);
 	LRESULT OnClickedOptions(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHandled);
 	LRESULT OnClickedShowHideHTML(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHandled);
@@ -75,12 +71,11 @@ END_MSG_MAP()
 	}
 
 public:
-	CComPtr<IHTMLDocument2> m_spDoc2;
+	CComPtr<IHTMLDocument2> m_spActiveFrameDoc;
 	CComPtr<IHTMLDocument2> m_spMainDoc;
 	CComPtr<IWebBrowser2> m_spWB2;
 
 private:
-	vector< CComPtr< IHTMLElement >* > m_vecFormHTMLs;
 	string m_strInstallDir;
 	string m_strBaseURL;
 	string m_strVersion;
@@ -94,8 +89,12 @@ private:
 	CDialogToolTipCtrl m_tip;
 
 private:
-	string GetAbsoluteActionPath( _variant_t& varAction );
-	string GetForms( const string& rstrSearchName, string& rstrFormScript );
+	string GetForms(const string& rstrSearchName, string& rstrFormScript);
+
+    string CreateFormName(int formIndex, const string& searchName);
+    IHTMLElement* GetLParamHTMLElement(CWindow &formListControl, int index);
+    auto_ptr<Form> BuildForm(IHTMLElement* pElement);
+
 	string GetSwitches( vector< string >& rvecSwitches );
 	string GetExamples( vector< string >& rvecSwitches );
 	string EscapeXML( string& xml );
