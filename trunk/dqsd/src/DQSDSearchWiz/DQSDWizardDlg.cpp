@@ -270,7 +270,7 @@ LRESULT CDQSDWizardDlg::OnInitDialog(UINT uMsg, WPARAM wParam, LPARAM lParam, BO
                 
                 // AddRef the HTMLElement pointer to keep it alive as long as the
                 // LPARAM is connected to the list item. OnFormListItemDeleted
-                // Releases it.
+                // does the corresponding Release
                 spForm.p->AddRef();
 
 				ListView_SetCheckState( ctlFormList2.m_hWnd, iPos, bContainsActiveElement );
@@ -284,9 +284,8 @@ LRESULT CDQSDWizardDlg::OnInitDialog(UINT uMsg, WPARAM wParam, LPARAM lParam, BO
 		}
 
 		// If there's only one form, select it
-
-		if ( cDisplayedForms == 1 )
-			ListView_SetCheckState( ctlFormList2.m_hWnd, 0, TRUE );
+		if (cDisplayedForms == 1)
+			ListView_SetCheckState(ctlFormList2.m_hWnd, 0, TRUE);
 
 	}
 	catch ( ... )
@@ -576,8 +575,10 @@ string CDQSDWizardDlg::GetForms( const string& rstrSearchName, string& rstrFormS
                 CComPtr<IHTMLElement> spForm = GetLParamHTMLElement(ctlFormList, iForm);
                 auto_ptr<Form> form = BuildForm(spForm);
 
-                string formName = CreateFormName(iSelectedForms, rstrSearchName);
-				strFormXML += "\r\n  <form name=\"" + formName + "\"";
+                // Set a new form name based on the search name
+                form->SetName(CreateFormName(iSelectedForms, rstrSearchName));
+
+                strFormXML += "\r\n  <form name=\"" + form->Name() + "\"";
                 strFormXML += "\r\n        method=\"" + form->Method() + "\"";
                 strFormXML += "\r\n        action=\"" + EscapeXML(form->GetAbsoluteActionPath(m_strBaseURL)) + "\"";
                 strFormXML += ">";
@@ -594,7 +595,7 @@ string CDQSDWizardDlg::GetForms( const string& rstrSearchName, string& rstrFormS
 					typedef map< string, RadioButtonValues_t > RadioButtonMap_t;
 					RadioButtonMap_t mapRadioButtons;
 
-					rstrFormScript += _T("\r\n\r\n      // FORM variables for ") + formName;
+					rstrFormScript += _T("\r\n\r\n      // FORM variables for ") + form->Name();
 					
 					for ( int iFormElem = 0; iFormElem < cFormElements; iFormElem++ )
 					{
@@ -679,11 +680,11 @@ string CDQSDWizardDlg::GetForms( const string& rstrSearchName, string& rstrFormS
 													 "\r\n      // The wizard assigned the search string to this form field value because"
 													 "\r\n      // this field was the active element when the search file was generated."
 													 "\r\n      // Change this to args.q if the search string is parsed with parseArgs."
-													 "\r\n      document.") + formName + GetScriptFieldName( strInputName ) + _T(" = q;");
+													 "\r\n      document.") + form->Name() + GetScriptFieldName( strInputName ) + _T(" = q;");
 							}
 							else
 							{
-								rstrFormScript += _T("\r\n      //document.") + formName + GetScriptFieldName( strInputName ) + _T(" = \"\";");
+								rstrFormScript += _T("\r\n      //document.") + form->Name() + GetScriptFieldName( strInputName ) + _T(" = \"\";");
 							}
 
 							if ( m_options.IncludeComments() && !_tcsicmp( _T("checkbox"), strInputType.c_str() ) )
@@ -764,7 +765,7 @@ string CDQSDWizardDlg::GetForms( const string& rstrSearchName, string& rstrFormS
 								}
 							}
 							
-							rstrFormScript += _T("\r\n      //document.") + formName + GetScriptFieldName( itElements->first ) + _T(" = \"\";");
+							rstrFormScript += _T("\r\n      //document.") + form->Name() + GetScriptFieldName( itElements->first ) + _T(" = \"\";");
 
 							strRadioElement += _T("\" />");
 							strRadioValues += _T("\r\n    </COMMENT>\r\n");
