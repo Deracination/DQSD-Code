@@ -1,11 +1,7 @@
 ; search.nsi
 ;
 ; Installs Dave's Quick Search Deskbar
-;
 
-; The nsis plugin requires the following file in the %PROGRAMFILES%\NSIS\Include and NSISdl.dll the %PROGRAMFILES%\NSIS\Plugins directory. 
-; Both of these files are available in dqsd\src\NSIS\nsisxml.zip
-!include "nsisXML.nsh"
 !include "dqsd_clsid.nsh"
 
 ; The name of the installer
@@ -88,14 +84,17 @@ Section "Quick Search Deskbar (required)"
   ; If the currently installed version is less 4.0, then force them to uninstall before proceeding.
   IfFileExists "$INSTDIR\search.htm" +1 noUninstallNeeded ; If they don't have a search.htm, assume this is a clean installation
   IfFileExists "$INSTDIR\version.xml" +1 uninstallNeeded  ; If they don't have a version.xml, this is really old installation
-  ${nsisXML->xPath} "$INSTDIR\version.xml" "/dqsd_version_info/version/majorhi" ${VAR_1} ; Check version in version.xml
-  IntCmp $1 4 noUninstallNeeded +1 noUninstallNeeded
+  IfFileExists "$INSTDIR\DQSDTools.dll" +1 uninstallNeeded  ; If they don't have a DQSDTools.dll, this is really old installation
+  GetDLLVersion "$INSTDIR\DQSDTools.dll" $R0 $R1
+  IntOp $R2 $R0 >> 16
+  IntOp $R2 $R2 & 0x0000FFFF ; $R2 now contains major version
+  IntCmp $R2 4 noUninstallNeeded +1 noUninstallNeeded
   uninstallNeeded:
     MessageBox MB_OK|MB_ICONINFORMATION "Before installing this version of ${DQSD_TITLE}, you must uninstall the current installation."
     Abort
   noUninstallNeeded:
 
-  ; Check if Administrator
+  ; Check if Administrators
   # call userInfo plugin to get user info.  The plugin puts the result in the stack
   userInfo::getAccountType
   pop $0

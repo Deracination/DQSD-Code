@@ -21,6 +21,7 @@ Enhancements
 * Changed holidays.us.xml to use more compact format (Kim Gräsman)
 * Changed name of function utf8 -> utf8_encode, and reimplemented using native JavaScript facilities. Should handle multibyte sequences better. (Kim Gräsman)
 * Extracted definition of DQSD CLSID out into dqsd_clsid.nsh, to be able to share definition between DQSD and search wizard (Kim Gräsman)
+* Removed need for NSISXML to be installed on build machine (Kim Gräsman)
 
 New Searches
 
