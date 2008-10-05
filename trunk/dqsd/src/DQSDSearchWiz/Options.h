@@ -14,32 +14,31 @@ class COptions
 {
 public:
 	COptions();
-	virtual ~COptions();
 
 public:
 	void Load();
 	void Save();
 
-	BOOL EditResults() { return m_bEditResults; }
-	void EditResults( BOOL bEditResults ) { m_bEditResults = bEditResults; }
+	bool EditResults() { return m_bEditResults; }
+	void EditResults( bool bEditResults ) { m_bEditResults = bEditResults; }
 	
 	string Editor() { return m_strEditor; }
 	void Editor( const string& rstrEditor ) { m_strEditor = rstrEditor; }
 
-	BOOL WarnNotActive() { return m_bWarnNotActive; }
-	void WarnNotActive( BOOL bWarnNotActive ) { m_bWarnNotActive = bWarnNotActive; }
+	bool WarnNotActive() { return m_bWarnNotActive; }
+	void WarnNotActive( bool bWarnNotActive ) { m_bWarnNotActive = bWarnNotActive; }
 
-	BOOL IncludeComments() { return m_bIncludeComments; }
-	void IncludeComments( BOOL bIncludeComments ) { m_bIncludeComments = bIncludeComments; }
+	bool IncludeComments() { return m_bIncludeComments; }
+	void IncludeComments( bool bIncludeComments ) { m_bIncludeComments = bIncludeComments; }
 
 	string FormCSS() { return m_strFormCSS; }
 	void FormCSS( const string& rstrFormCSS ) { m_strFormCSS = rstrFormCSS; }
 
 private:
-	BOOL m_bEditResults;
+	bool m_bEditResults;
 	string m_strEditor;
-	BOOL m_bWarnNotActive;
-	BOOL m_bIncludeComments;
+	bool m_bWarnNotActive;
+	bool m_bIncludeComments;
 	string m_strFormCSS;
 };
 

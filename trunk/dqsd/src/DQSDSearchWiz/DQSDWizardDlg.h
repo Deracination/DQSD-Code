@@ -99,6 +99,12 @@ private:
 	string GetExamples( vector< string >& rvecSwitches );
 	string EscapeXML( string& xml );
 	void SaveFields();
+
+    std::string GetDlgItemText(UINT idCtrl);
+    LRESULT GetDlgItemCheck(UINT idCtrl);
+    void SetDlgItemCheck(UINT idCtrl, WORD checkState);
+    void SetDlgItemCheck(UINT idCtrl, bool checkState);
+
 	void RestoreFields();
 	string GetScriptFieldName( const string& rstrFieldName );
 	void ShrinkDialog();

@@ -118,7 +118,6 @@ echo regsvr32 exec. time &gt; &quot;$(OutDir)\regsvr32.trg&quot;
 				Name="VCLinkerTool"
 				AdditionalDependencies="odbc32.lib odbccp32.lib wininet.lib Shlwapi.lib"
 				OutputFile=".\$(ConfigurationName)\DQSDSearchWiz.dll"
-				LinkIncremental="1"
 				SuppressStartupBanner="TRUE"
 				ModuleDefinitionFile=".\DQSDSearchWiz.def"
 				GenerateDebugInformation="TRUE"
@@ -408,6 +407,9 @@ echo regsvr32 exec. time &gt; &quot;$(OutDir)\regsvr32.trg&quot;
 			</File>
 			<File
 				RelativePath="OptionsDlg.h">
+			</File>
+			<File
+				RelativePath=".\Registry.h">
 			</File>
 			<File
 				RelativePath="Resource.h">
