@@ -22,6 +22,11 @@ public:
     return m_name;
   }
 
+  void SetName(const std::string& name)
+  {
+    m_name = name;
+  }
+
   std::string Method() const
   {
     return m_method;

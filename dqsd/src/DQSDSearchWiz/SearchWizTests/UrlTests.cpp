@@ -5,12 +5,12 @@
 class UrlTests : public CPPUNIT_NS::TestCase
 {
   CPPUNIT_TEST_SUITE(UrlTests);
-  CPPUNIT_TEST(testParseValid);
-  CPPUNIT_TEST(testParseNonStandardPort);
-  CPPUNIT_TEST(testEndPoint);
-  CPPUNIT_TEST(testDirectoryOfBlankPath);
-  CPPUNIT_TEST(testDirectoryOfDirectoryPath);
-  CPPUNIT_TEST(testDirectoryOfFullPath);
+    CPPUNIT_TEST(testParseValid);
+    CPPUNIT_TEST(testParseNonStandardPort);
+    CPPUNIT_TEST(testEndPoint);
+    CPPUNIT_TEST(testDirectoryOfBlankPath);
+    CPPUNIT_TEST(testDirectoryOfDirectoryPath);
+    CPPUNIT_TEST(testDirectoryOfFullPath);
   CPPUNIT_TEST_SUITE_END();
 
   void testParseValid()

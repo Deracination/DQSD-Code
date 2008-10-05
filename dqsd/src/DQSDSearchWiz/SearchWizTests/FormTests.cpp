@@ -13,6 +13,7 @@ class FormTests : public CPPUNIT_NS::TestCase
     CPPUNIT_TEST(testGetAbsoluteActionPathWithExcitingBaseUrl);
     CPPUNIT_TEST(testGetAbsoluteActionPathWithNonRootedActionAndPathLessBaseUrl);
     CPPUNIT_TEST(testEchoMembers);
+    CPPUNIT_TEST(testGetAbsoluteActionPathWithRootedAction);
   CPPUNIT_TEST_SUITE_END();
 
   void testConstructFromValidData()
@@ -42,6 +43,15 @@ class FormTests : public CPPUNIT_NS::TestCase
   {
     Form form("name", "get", "search");
     std::string actual = form.GetAbsoluteActionPath("http://www.example.com");
+
+    const std::string expected = "http://www.example.com/search";
+    CPPUNIT_ASSERT_EQUAL(expected, actual);
+  }
+
+  void testGetAbsoluteActionPathWithRootedAction()
+  {
+    Form form("name", "get", "/search");
+    std::string actual = form.GetAbsoluteActionPath("http://www.example.com/");
 
     const std::string expected = "http://www.example.com/search";
     CPPUNIT_ASSERT_EQUAL(expected, actual);
@@ -84,6 +94,14 @@ class FormTests : public CPPUNIT_NS::TestCase
     CPPUNIT_ASSERT_EQUAL(std::string("name"), form.Name());
     CPPUNIT_ASSERT_EQUAL(std::string("get"), form.Method());
     CPPUNIT_ASSERT_EQUAL(std::string("/action"), form.Action());
+  }
+
+  void testChangeFormName()
+  {
+    Form form("before", "get", "/action");
+    form.SetName("after");
+
+    CPPUNIT_ASSERT_EQUAL(std::string("after"), form.Name());
 
   }
 
