@@ -9,6 +9,7 @@
 #include "Options.h"
 
 #include "HtmlElement.h"
+#include "Registry.h"
 
 void srch_repl( string& s, const string& to_find, const string& repl_with ) 
 {
@@ -144,17 +145,11 @@ LRESULT CDQSDWizardDlg::OnInitDialog(UINT uMsg, WPARAM wParam, LPARAM lParam, BO
 		}
 
 		// Get DQSD install dir
-
 		CRegKey rk;
-		TCHAR szInstallDir[ MAX_PATH + 1 ];
-		memset( szInstallDir, 0, sizeof szInstallDir );
-		if ( ERROR_SUCCESS == rk.Open( HKEY_CLASSES_ROOT, _T("CLSID\\{226b64e8-dc75-4eea-a6c8-abcb4d1d37ff}") ) )
+		if ( ERROR_SUCCESS == rk.Open( HKEY_CLASSES_ROOT, _T("CLSID\\{EC9FE983-E520-4D8F-B1A7-ACBCA0439C70}") ) )
 		{
-			DWORD dwLength = LENGTHOF( szInstallDir );
-			rk.QueryValue( szInstallDir, _T("InstallDir"), &dwLength );
-			szInstallDir[ dwLength ] = _T('\0');
+            QueryRegValue(rk, "InstallDir", m_strInstallDir);
 		}
-		m_strInstallDir = szInstallDir;
 
 		// Get the base URL and put it in the 'Link' element
 
@@ -958,27 +953,15 @@ void CDQSDWizardDlg::SaveFields()
 {
 	try
 	{
-		USES_CONVERSION;
-
 		CRegKey rk;
-		rk.Create( HKEY_CURRENT_USER, _T("SOFTWARE\\Dave's Quick Search Deskbar\\DQSDSearchWizard\\Settings") );
+		rk.Create(HKEY_CURRENT_USER, _T("SOFTWARE\\Dave's Quick Search Deskbar\\DQSDSearchWizard\\Settings"));
 
-		BSTR bstr = NULL;
-		CWindow( GetDlgItem( IDC_Contributor ) ).GetWindowText( &bstr );
-		rk.SetValue( W2T( bstr ), _T("Contributor") );
-		::SysFreeString( bstr );
-
-		CWindow( GetDlgItem( IDC_Email ) ).GetWindowText( &bstr );
-		rk.SetValue( W2T( bstr ), _T("Email") );
-		::SysFreeString( bstr );
-
-		rk.SetValue( CWindow( GetDlgItem( IDC_MutuallyExclusiveSwitches ) ).SendMessage( BM_GETCHECK, 0, 0 ) == BST_CHECKED, _T("MutuallyExclusiveSwitches") );
-
-		rk.SetValue( CWindow( GetDlgItem( IDC_DescSwitches ) ).SendMessage( BM_GETCHECK, 0, 0 ) == BST_CHECKED, _T("IncludeDescriptionSwitches") );
-
-		rk.SetValue( CWindow( GetDlgItem( IDC_DescExamples ) ).SendMessage( BM_GETCHECK, 0, 0 ) == BST_CHECKED, _T("IncludeDescriptionExamples") );
-
-		rk.SetValue( CWindow( GetDlgItem( IDC_ShowTips ) ).SendMessage( BM_GETCHECK, 0, 0 ) == BST_CHECKED, _T("ShowTips") );
+        SetRegValue(rk, "Contributor", GetDlgItemText(IDC_Contributor));
+        SetRegValue(rk, "Email", GetDlgItemText(IDC_Email));
+        SetRegValue(rk, "MutuallyExclusiveSwitches", GetDlgItemCheck(IDC_MutuallyExclusiveSwitches) == BST_CHECKED);
+        SetRegValue(rk, "IncludeDescriptionSwitches", GetDlgItemCheck(IDC_DescSwitches) == BST_CHECKED);
+        SetRegValue(rk, "IncludeDescriptionExamples", GetDlgItemCheck(IDC_DescExamples) == BST_CHECKED);
+        SetRegValue(rk, "ShowTips", GetDlgItemCheck(IDC_ShowTips) == BST_CHECKED);
 
 		rk.Close();
 	}
@@ -992,52 +975,43 @@ void CDQSDWizardDlg::RestoreFields()
 {
 	try
 	{
-		USES_CONVERSION;
-
-		DWORD dwSize = 0;
-		TCHAR szValue[ 1024 ];
-
 		CRegKey rk;
-		if ( ERROR_SUCCESS == rk.Open( HKEY_CURRENT_USER, _T("SOFTWARE\\Dave's Quick Search Deskbar\\DQSDSearchWizard\\Settings") ) )
+		if (ERROR_SUCCESS == rk.Open(HKEY_CURRENT_USER, _T("SOFTWARE\\Dave's Quick Search Deskbar\\DQSDSearchWizard\\Settings")))
 		{
-			dwSize = LENGTHOF( szValue );
-			if ( ERROR_SUCCESS == rk.QueryValue( szValue, _T("Contributor"), &dwSize ) )
-			{
-				CWindow( GetDlgItem( IDC_Contributor ) ).SetWindowText( szValue );
-			}
+            string contributor;
+            if (ERROR_SUCCESS == QueryRegValue(rk, _T("Contributor"), contributor))
+                SetDlgItemText(IDC_Contributor, contributor.c_str());
 
-			dwSize = LENGTHOF( szValue );
-			if ( ERROR_SUCCESS == rk.QueryValue( szValue, _T("Email"), &dwSize ) )
-			{
-				CWindow( GetDlgItem( IDC_Email ) ).SetWindowText( szValue );
-			}
+            string email;
+            if (ERROR_SUCCESS == QueryRegValue(rk, _T("Email"), email))
+                SetDlgItemText(IDC_Email, email.c_str());
 
-			DWORD dwValue = 1;
-			rk.QueryValue( dwValue, _T("IncludeComments") );
-			CWindow( GetDlgItem( IDC_MutuallyExclusiveSwitches ) ).SendMessage( BM_SETCHECK, dwValue ? BST_CHECKED : BST_UNCHECKED );
+            // TODO: this is probably a bug, should check MutuallyExclusiveSwitches.
+            bool includeComments = true;
+            QueryRegValue(rk, "IncludeComments", includeComments);
+            SetDlgItemCheck(IDC_MutuallyExclusiveSwitches, includeComments);
 
-			dwValue = 1;
-			rk.QueryValue( dwValue, _T("IncludeDescriptionSwitches") );
-			CWindow( GetDlgItem( IDC_DescSwitches ) ).SendMessage( BM_SETCHECK, dwValue ? BST_CHECKED : BST_UNCHECKED );
+            bool includeDescriptiveSwitches = true;
+            QueryRegValue(rk, "IncludeDescriptionSwitches", includeDescriptiveSwitches);
+            SetDlgItemCheck(IDC_DescSwitches, includeDescriptiveSwitches);
 
-			dwValue = 1;
-			rk.QueryValue( dwValue, _T("IncludeDescriptionExamples") );
-			CWindow( GetDlgItem( IDC_DescExamples ) ).SendMessage( BM_SETCHECK, dwValue ? BST_CHECKED : BST_UNCHECKED );
+            bool includeDescriptionExamples = true;
+            QueryRegValue(rk, "IncludeDescriptionExamples", includeDescriptionExamples);
+            SetDlgItemCheck(IDC_DescExamples, includeDescriptionExamples);
 
-			dwValue = 0;
-			rk.QueryValue( dwValue, _T("ShowTips") );
-			CWindow( GetDlgItem( IDC_ShowTips ) ).SendMessage( BM_SETCHECK, dwValue ? BST_CHECKED : BST_UNCHECKED );
-			m_tip.Activate( dwValue );
+            bool showTips = false;
+            QueryRegValue(rk, "ShowTips", showTips);
+            SetDlgItemCheck(IDC_ShowTips, showTips);
+
+            m_tip.Activate(showTips);
 		}
 		else
 		{
-			rk.Open( HKEY_CURRENT_USER, _T("Software\\Microsoft\\MS Setup (ACME)\\User Info"), KEY_READ );
+			rk.Open(HKEY_CURRENT_USER, _T("Software\\Microsoft\\MS Setup (ACME)\\User Info"), KEY_READ);
 
-			dwSize = LENGTHOF( szValue );
-			if ( ERROR_SUCCESS == rk.QueryValue( szValue, _T("DefName"), &dwSize ) )
-			{
-				CWindow( GetDlgItem( IDC_Contributor ) ).SetWindowText( szValue );
-			}
+            string contributor;
+            if (ERROR_SUCCESS == QueryRegValue(rk, _T("DefName"), contributor))
+                SetDlgItemText(IDC_Contributor, contributor.c_str());
 		}
 	}
 	catch ( ... )
@@ -1203,3 +1177,25 @@ auto_ptr<Form> CDQSDWizardDlg::BuildForm(IHTMLElement* pElement)
     return auto_ptr<Form>(new Form(name, method, action));
 }
 
+LRESULT CDQSDWizardDlg::GetDlgItemCheck(UINT idCtrl)
+{
+    return GetDlgItem(idCtrl).SendMessage(BM_GETCHECK, 0, 0);
+}
+
+std::string CDQSDWizardDlg::GetDlgItemText(UINT idCtrl)
+{
+    CComBSTR text;
+    GetDlgItem(idCtrl).GetWindowText(&text);
+
+    return std::string(CW2A(text));
+}
+
+void CDQSDWizardDlg::SetDlgItemCheck(UINT idCtrl, WORD checkState)
+{
+    GetDlgItem(idCtrl).SendMessage(BM_SETCHECK, checkState);
+}
+
+void CDQSDWizardDlg::SetDlgItemCheck(UINT idCtrl, bool checkState)
+{
+    GetDlgItem(idCtrl).SendMessage(BM_SETCHECK, checkState ? BST_CHECKED : BST_UNCHECKED);
+}

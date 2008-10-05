@@ -6,23 +6,20 @@
 #include "stdafx.h"
 #include "Options.h"
 
+#include "Registry.h"
+
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
 COptions::COptions()
-	: m_bEditResults( TRUE )
+	: m_bEditResults( true )
 	, m_strEditor( _T("notepad.exe") )
-	, m_bWarnNotActive( TRUE )
-	, m_bIncludeComments( TRUE )
+	, m_bWarnNotActive( true )
+	, m_bIncludeComments( true )
 	, m_strFormCSS( _T("background: yellow; border: 1px dotted red") )
 {
 	Load();
-}
-
-COptions::~COptions()
-{
-
 }
 
 void COptions::Load()
@@ -30,31 +27,15 @@ void COptions::Load()
 	try
 	{
 		CRegKey rk;
-		BOOL bEditResult = TRUE;
-		if ( ERROR_SUCCESS != rk.Open( HKEY_CURRENT_USER, _T("SOFTWARE\\Dave's Quick Search Deskbar\\DQSDSearchWizard\\Settings") ) )
+		if (ERROR_SUCCESS != rk.Open(HKEY_CURRENT_USER, _T("SOFTWARE\\Dave's Quick Search Deskbar\\DQSDSearchWizard\\Settings"), KEY_READ))
 			return;
 
 		DWORD dwValue = 0;
-		if ( ERROR_SUCCESS == rk.QueryValue( dwValue, _T("EditResult") ) )
-			m_bEditResults = dwValue;
-
-		TCHAR szValue[ MAX_PATH + 1 ];
-		DWORD dwSize = LENGTHOF( szValue );
-		if ( ERROR_SUCCESS == rk.QueryValue( szValue, _T("ResultEditor"), &dwSize ) )
-			m_strEditor = string( szValue );
-
-		dwValue = 0;
-		if ( ERROR_SUCCESS == rk.QueryValue( dwValue, _T("WarnNotActive") ) )
-			m_bWarnNotActive = dwValue;
-
-		dwValue = 0;
-		if ( ERROR_SUCCESS == rk.QueryValue( dwValue, _T("IncludeComments") ) )
-			m_bIncludeComments = dwValue;
-
-		dwSize = LENGTHOF( szValue );
-		if ( ERROR_SUCCESS == rk.QueryValue( szValue, _T("FormCSS"), &dwSize ) )
-			m_strFormCSS = string( szValue );
-
+		QueryRegValue(rk, _T("EditResult"), m_bEditResults);
+        QueryRegValue(rk, _T("ResultEditor"), m_strEditor);
+        QueryRegValue(rk, _T("WarnNotActive"), m_bWarnNotActive);
+        QueryRegValue(rk, _T("IncludeComments"), m_bIncludeComments);
+        QueryRegValue(rk, _T("FormCSS"), m_strFormCSS);
 	}
 	catch ( ... )
 	{
@@ -67,15 +48,14 @@ void COptions::Save()
 	try
 	{
 		CRegKey rk;
-		BOOL bEditResult = TRUE;
-		if ( ERROR_SUCCESS != rk.Open( HKEY_CURRENT_USER, _T("SOFTWARE\\Dave's Quick Search Deskbar\\DQSDSearchWizard\\Settings") ) )
+		if (ERROR_SUCCESS != rk.Open(HKEY_CURRENT_USER, _T("SOFTWARE\\Dave's Quick Search Deskbar\\DQSDSearchWizard\\Settings"), KEY_WRITE))
 			return;
 
-		rk.SetValue( m_bEditResults, _T("EditResult") );
-		rk.SetValue( m_strEditor.c_str(), _T("ResultEditor") );
-		rk.SetValue( m_bIncludeComments, _T("IncludeComments") );
-		rk.SetValue( m_bWarnNotActive, _T("WarnNotActive") );
-		rk.SetValue( m_strFormCSS.c_str(), _T("FormCSS") );
+		SetRegValue(rk, _T("EditResult"), m_bEditResults);
+		SetRegValue(rk, _T("ResultEditor"), m_strEditor);
+		SetRegValue(rk, _T("IncludeComments"), m_bIncludeComments);
+		SetRegValue(rk, _T("WarnNotActive"), m_bWarnNotActive);
+		SetRegValue(rk, _T("FormCSS"), m_strFormCSS);
 	}
 	catch ( ... )
 	{
