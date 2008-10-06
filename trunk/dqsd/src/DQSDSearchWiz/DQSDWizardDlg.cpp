@@ -10,6 +10,7 @@
 
 #include "HtmlElement.h"
 #include "Registry.h"
+#include "FormElement.h"
 
 void srch_repl( string& s, const string& to_find, const string& repl_with ) 
 {
@@ -80,7 +81,7 @@ LRESULT CDQSDWizardDlg::OnInitDialog(UINT uMsg, WPARAM wParam, LPARAM lParam, BO
 			IDC_DescExamples,
 			IDC_MutuallyExclusiveSwitches,
 			IDC_DescSwitches,
-			IDC_FormList2,
+			IDC_FormList,
 			IDC_ShowHideHTML,
 			IDC_FormFields,
 			IDC_Options,
@@ -152,21 +153,18 @@ LRESULT CDQSDWizardDlg::OnInitDialog(UINT uMsg, WPARAM wParam, LPARAM lParam, BO
 		}
 
 		// Get the base URL and put it in the 'Link' element
-
 		CComBSTR bstrURL;
-		HR( m_spMainDoc->get_URL( &bstrURL ) );
-
-		CWindow ctl = GetDlgItem( IDC_Link );
-		ctl.SetWindowText( W2CT(bstrURL.m_str) );
+		HR(m_spMainDoc->get_URL(&bstrURL));
+        SetDlgItemText(IDC_Link, CW2CT(bstrURL));
 
 		// Save the base URL of this frame for later use
-		HR( m_spActiveFrameDoc->get_URL( &bstrURL ) );
-		m_strBaseURL = W2CT(bstrURL);
+        CComBSTR bstrFrameBaseURL;
+		HR(m_spActiveFrameDoc->get_URL(&bstrFrameBaseURL));
+		m_strBaseURL = W2CT(bstrFrameBaseURL);
 
 		// Set up the list for the FORM elements
-
-		CWindow ctlFormList2 = GetDlgItem( IDC_FormList2 );
-		ctlFormList2.SendMessage( LVM_SETEXTENDEDLISTVIEWSTYLE, 
+		CWindow ctlFormList = GetDlgItem(IDC_FormList);
+		ctlFormList.SendMessage( LVM_SETEXTENDEDLISTVIEWSTYLE, 
 								  0, 
 								  LVS_EX_CHECKBOXES|LVS_EX_FULLROWSELECT|LVS_EX_HEADERDRAGDROP );
 		LVCOLUMN lvc;
@@ -174,14 +172,14 @@ LRESULT CDQSDWizardDlg::OnInitDialog(UINT uMsg, WPARAM wParam, LPARAM lParam, BO
 		lvc.mask = LVCF_TEXT|LVCF_ORDER|LVCF_WIDTH;
 
 		lvc.pszText = _T("");
-		lvc.cx = 25;
+		lvc.cx = 64;
 		lvc.iOrder = 0;
-		ctlFormList2.SendMessage( LVM_INSERTCOLUMN, 0, (LPARAM)&lvc );
+		ctlFormList.SendMessage( LVM_INSERTCOLUMN, 0, (LPARAM)&lvc );
 		
 		lvc.pszText = _T("action");
 		lvc.cx = 420;
 		lvc.iOrder = 1;
-		ctlFormList2.SendMessage( LVM_INSERTCOLUMN, 1, (LPARAM)&lvc );
+		ctlFormList.SendMessage( LVM_INSERTCOLUMN, 1, (LPARAM)&lvc );
 
 		// Set up the combobox
 		// ??? It would be really cool to actually base these on the current
@@ -232,55 +230,30 @@ LRESULT CDQSDWizardDlg::OnInitDialog(UINT uMsg, WPARAM wParam, LPARAM lParam, BO
 		CComPtr< IHTMLElement > spActiveElement;
 		m_spActiveFrameDoc->get_activeElement( &spActiveElement );
 
-		for ( int iForm = 0; iForm < cForms; iForm++ )
+		for (int iForm = 0; iForm < cForms; iForm++)
 		{
-			CComPtr< IDispatch > spFormDisp;
-			spFormCollection->item( CComVariant( iForm ), CComVariant( 0 ), &spFormDisp );
+			CComPtr<IDispatch> spFormDisp;
+			spFormCollection->item(CComVariant(iForm), CComVariant(0), &spFormDisp);
 
-			CComQIPtr< IHTMLElement > spForm( spFormDisp );
+			CComQIPtr< IHTMLElement > spForm(spFormDisp);
 			if (spForm)
 			{
                 auto_ptr<Form> form = BuildForm(spForm);
-
-				cDisplayedForms += 1;
-
-                string strName = form->Name();
-                string strAction = EscapeXML(form->GetAbsoluteActionPath(m_strBaseURL));
+                string action = form->GetAbsoluteActionPath(m_strBaseURL);
 
 				// If the current form contains the active element, then we'll select
 				// it by default
-
 				VARIANT_BOOL bContainsActiveElement = VARIANT_FALSE;
-				spForm->contains( spActiveElement, &bContainsActiveElement );
+				spForm->contains(spActiveElement, &bContainsActiveElement);
 
-				// Add the form information to the list
-				LVITEM lvi;
-				memset( &lvi, 0, sizeof lvi );
-
-				lvi.mask = LVIF_TEXT|LVIF_PARAM;
-				lvi.iItem = 256;
-				lvi.pszText = const_cast<LPTSTR>(strName.c_str());
-				lvi.lParam = reinterpret_cast<LPARAM>(spForm.p);
-				int iPos = ctlFormList2.SendMessage( LVM_INSERTITEM, 0, (LPARAM)&lvi );
-                
-                // AddRef the HTMLElement pointer to keep it alive as long as the
-                // LPARAM is connected to the list item. OnFormListItemDeleted
-                // does the corresponding Release
-                spForm.p->AddRef();
-
-				ListView_SetCheckState( ctlFormList2.m_hWnd, iPos, bContainsActiveElement );
-
-				lvi.mask = LVIF_TEXT;
-				lvi.iItem = iPos;
-				lvi.iSubItem = 1;
-				lvi.pszText = const_cast<LPTSTR>(strAction.c_str());
-				ctlFormList2.SendMessage( LVM_SETITEM, iPos, (LPARAM)&lvi );
+                AddToFormList(form->Name(), action, spForm, bContainsActiveElement == VARIANT_TRUE);
+                cDisplayedForms++;
 			}
 		}
 
 		// If there's only one form, select it
 		if (cDisplayedForms == 1)
-			ListView_SetCheckState(ctlFormList2.m_hWnd, 0, TRUE);
+			ListView_SetCheckState(ctlFormList.m_hWnd, 0, TRUE);
 
 	}
 	catch ( ... )
@@ -323,10 +296,7 @@ LRESULT CDQSDWizardDlg::OnFormListItemChanged(int idCtrl, LPNMHDR pNMHDR, BOOL& 
 			m_spSelectedStyle->get_cssText( &bstrStyleText );
 			m_mapUnselectedStyle[ pNMListView->iItem ] = bstrStyleText;
 
-			COptions options;
-			options.Load();
-
-			m_spSelectedStyle->put_cssText( _bstr_t( options.FormCSS().c_str() ) );
+			m_spSelectedStyle->put_cssText( _bstr_t(m_options.FormCSS().c_str() ) );
 		}
 		else if ( pNMListView->uNewState == 0 )
 		{
@@ -389,12 +359,12 @@ LRESULT CDQSDWizardDlg::OnOK(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHa
 			return 0;
 		}
 
-		CWindow ctlFormList = GetDlgItem( IDC_FormList2 );
+		CWindow ctlFormList = GetDlgItem( IDC_FormList );
 		const int cItems = ctlFormList.SendMessage( LVM_GETITEMCOUNT, 0, 0 );
 		BOOL bChecked = FALSE;
 		for ( int i = 0; i < cItems && !bChecked; i++ )
 		{
-			if ( ListView_GetCheckState( GetDlgItem( IDC_FormList2 ), i ) )
+			if ( ListView_GetCheckState( GetDlgItem( IDC_FormList ), i ) )
 				bChecked = TRUE;
 		}
 		if ( !bChecked && cItems > 0 )
@@ -523,14 +493,13 @@ LRESULT CDQSDWizardDlg::OnOK(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHa
 				::CloseHandle( hFile );
 
 				// Throw the file up in an editor if they so choose
-
-				COptions options;
-				options.Load();
-				if ( options.EditResults() )
+				if (m_options.EditResults() )
 				{
-					TCHAR szCommandLine[ 1024 ];
-					_tcscpy( szCommandLine, ( _T("\"") + options.Editor() + _T("\" \"") + string( ofn.lpstrFile ) + _T("\"") ).c_str() );
-					::WinExec( szCommandLine, SW_SHOW );
+                    string commandLine;
+                    commandLine += "\"" + m_options.Editor() + "\"";
+                    commandLine += " ";
+                    commandLine += "\"" + string(ofn.lpstrFile) + "\"";
+					::WinExec(commandLine.c_str(), SW_SHOW );
 				}
 			}
 
@@ -547,18 +516,15 @@ LRESULT CDQSDWizardDlg::OnOK(WORD wNotifyCode, WORD wID, HWND hWndCtl, BOOL& bHa
 
 string CDQSDWizardDlg::GetForms( const string& rstrSearchName, string& rstrFormScript )
 {
-	USES_CONVERSION;
-
 	string strFormXML;
 
 	try
 	{
 		// Grab active element so we can assign 'q' to it in the gen'd script	
-		CComPtr< IHTMLElement > spActiveElement;
-		m_spActiveFrameDoc->get_activeElement( &spActiveElement );
-		CComPtr< IUnknown > spActiveElementUnk = spActiveElement;
+		CComPtr<IHTMLElement> spActiveElement;
+		m_spActiveFrameDoc->get_activeElement(&spActiveElement);
 
-		CWindow ctlFormList = GetDlgItem( IDC_FormList2 );
+		CWindow ctlFormList = GetDlgItem( IDC_FormList );
 		const int cForms = ctlFormList.SendMessage( LVM_GETITEMCOUNT, 0, 0 );
 		for ( int iForm = 0; iForm < cForms; iForm++ )
 		{
@@ -602,137 +568,114 @@ string CDQSDWizardDlg::GetForms( const string& rstrSearchName, string& rstrFormS
 						if ( !spElement )
 							continue;
 
-						BSTR bstrTagName = NULL;
-						spElement->get_tagName( &bstrTagName );
+                        HtmlElement domElement(spElement);
 
-						// Skip if the element doesn't have a name
+                        std::string tag, inputName, inputType, inputValue;
+                        bool checked = false;
 
-						_variant_t varInputName;
-						string strInputName;
-						if ( SUCCEEDED( spElement->getAttribute( _bstr_t( _T("name") ), 0, &varInputName ) ) && varInputName.vt == VT_BSTR && varInputName.bstrVal )
-						{
-							strInputName = W2T( varInputName.bstrVal );
+                        domElement.GetTagName(tag);
+                        domElement.GetAttribute(L"name", inputName);
+                        domElement.GetAttribute(L"type", inputType);
+                        domElement.GetAttribute(L"value", inputValue);
+                        domElement.GetAttribute(L"checked", checked);
 
-							string strInputType = _T("");
+                        FormElement element(tag, "", inputName, inputValue, checked);
 
-							// Was this the active element?
+                        if (!element.Name().empty())
+                        {
+                            // Was this the active element?
+                            BOOL bActiveElement = spElement.IsEqualObject(spActiveElement);
 
-							CComPtr< IUnknown > spElementUnk = spElement;
-							BOOL bActiveElement = spElementUnk.IsEqualObject( spActiveElementUnk );
+                            // Stick the value of the field in as well for two reasons... some hidden fields are required 
+                            // and the user can enter a string in a visible field to see which field to use.
+                            if (element.Type() == "radio")
+                            {
+                                CRadioButtonInfo buttonInfo(element.Value(), bActiveElement, checked);
 
+                                RadioButtonMap_t::iterator itFound = mapRadioButtons.find(element.Name());
+                                if (itFound != mapRadioButtons.end())
+                                {
+                                    itFound->second.push_back(buttonInfo);
+                                }
+                                else
+                                {
+                                    RadioButtonValues_t radioValues;
+                                    radioValues.push_back(buttonInfo);
+                                    mapRadioButtons.insert(RadioButtonMap_t::value_type(element.Name(), radioValues));
+                                }
+                            }
+                            else
+                            {
+                                if (bActiveElement && m_options.IncludeComments())
+                                {
+                                    strFormXML += _T("\r\n\r\n    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>\r\n");
+                                }
 
-							// Get the value
+                                strFormXML += _T("\r\n    <input type=\"hidden\" name=\"") + element.Name() + _T("\" value=\"") + element.Value() + _T("\" />");
 
-							_variant_t varInputValue;
-							string strInputValue = _T("");
-							if ( SUCCEEDED( spElement->getAttribute( _bstr_t( _T("value") ), 0, &varInputValue ) ) && varInputValue.bstrVal )
-							{
-								strInputValue = EscapeXML( string( W2T( varInputValue.bstrVal ) ) );
-							}
+                                // Only set the search string to the form field if it was a text field
+                                if ( bActiveElement && 
+                                    element.Type() != "radio" &&
+                                    element.Type() != "checkbox" &&
+                                    element.Tag() != "select")
+                                {
+                                    rstrFormScript += _T("\r\n"
+                                        "\r\n      // The wizard assigned the search string to this form field value because"
+                                        "\r\n      // this field was the active element when the search file was generated."
+                                        "\r\n      // Change this to args.q if the search string is parsed with parseArgs."
+                                        "\r\n      document.") + form->Name() + GetScriptFieldName(element.Name()) + _T(" = q;");
+                                }
+                                else
+                                {
+                                    rstrFormScript += _T("\r\n      //document.") + form->Name() + GetScriptFieldName(element.Name()) + _T(" = \"\";");
+                                }
 
-							BOOL bChecked = FALSE;
-							_variant_t varChecked;
-							if ( SUCCEEDED( spElement->getAttribute( _bstr_t( _T("checked") ), 0, &varChecked ) ) )
-							{
-								bChecked = varChecked.boolVal;
-							}
+                                if (m_options.IncludeComments() && element.Type() == "checkbox")
+                                {
+                                    strFormXML += _T("\r\n    <COMMENT>"
+                                        "\r\n      The input element above, \"") + element.Name() + _T("\", was a checkbox that was ") + 
+                                        string( checked ? _T("checked.") : _T("unchecked.") );
+                                    strFormXML += _T("\r\n    </COMMENT>\r\n");
+                                }
 
-							// Stick the value of the field in as well for two reasons... some hidden fields are required 
-							// and the user can enter a string in a visible field to see which field to use.
-							
-							if ( !_tcsicmp( _T("radio"), strInputType.c_str() ) )
-							{
-								RadioButtonMap_t::iterator itFound = mapRadioButtons.find( strInputName );
-								RadioButtonValues_t radioValues;
-								if ( itFound != mapRadioButtons.end() )
-								{
-									itFound->second.push_back( CRadioButtonInfo( strInputValue, bActiveElement, bChecked ) );
-									ATLTRACE( _T("%s = %d\n"), strInputName.c_str(), itFound->second.size() );
-								}
-								else
-								{
-									radioValues.push_back( CRadioButtonInfo( strInputValue, bActiveElement, bChecked ) );
-									mapRadioButtons.insert( RadioButtonMap_t::value_type( strInputName, radioValues ) );
-								}
-								continue;
-							}
+                                if (m_options.IncludeComments() && element.Tag() == "select")
+                                {
+                                    strFormXML += _T("\r\n    <COMMENT>"
+                                        "\r\n      The input element above, \"") + element.Name() + _T("\", was a SELECT element with the following options..."
+                                        "\r\n      <select name=\"" + element.Name() + "\">");
 
-							if ( bActiveElement && m_options.IncludeComments() )
-							{
-								strFormXML += _T("\r\n\r\n    <COMMENT> The following field was active (i.e. had focus) when the search was generated. </COMMENT>\r\n");
-							}
+                                    CComQIPtr<IHTMLSelectElement> spSelect(spElement);
+                                    if (spSelect)
+                                    {
+                                        long cOptions = 0;
+                                        spSelect->get_length(&cOptions);
+                                        for (int iOption = 0; iOption < cOptions; iOption++)
+                                        {
+                                            CComPtr<IDispatch> spOptionDisp;
+                                            _variant_t varOption( static_cast<long>(iOption), VT_I4 );
+                                            spSelect->item(varOption, varOption, &spOptionDisp);
 
-							strFormXML += _T("\r\n    <input type=\"hidden\" name=\"") + strInputName + _T("\" value=\"") + strInputValue + _T("\" />");
+                                            CComQIPtr<IHTMLOptionElement> spOption(spOptionDisp);
 
-							// Only set the search string to the form field if it was a text field
+                                            CComBSTR bstrOptionValue;
+                                            spOption->get_value(&bstrOptionValue);
 
-							if ( bActiveElement && 
-								 _tcsicmp( _T("radio"), strInputType.c_str() ) && 
-								 _tcsicmp( _T("checkbox"), strInputType.c_str() ) &&
-								 _tcsicmp( W2T( bstrTagName ), _T("SELECT") ) )
-							{
-								rstrFormScript += _T("\r\n"
-													 "\r\n      // The wizard assigned the search string to this form field value because"
-													 "\r\n      // this field was the active element when the search file was generated."
-													 "\r\n      // Change this to args.q if the search string is parsed with parseArgs."
-													 "\r\n      document.") + form->Name() + GetScriptFieldName( strInputName ) + _T(" = q;");
-							}
-							else
-							{
-								rstrFormScript += _T("\r\n      //document.") + form->Name() + GetScriptFieldName( strInputName ) + _T(" = \"\";");
-							}
+                                            CComBSTR bstrOptionText;
+                                            spOption->get_text(&bstrOptionText);
 
-							if ( m_options.IncludeComments() && !_tcsicmp( _T("checkbox"), strInputType.c_str() ) )
-							{
-								strFormXML += _T("\r\n    <COMMENT>"
-												 "\r\n      The input element above, \"") + strInputName + _T("\", was a checkbox that was ") + 
-												 string( bChecked ? _T("checked.") : _T("unchecked.") );
-								strFormXML += _T("\r\n    </COMMENT>\r\n");
-							}
+                                            strFormXML += _T("\r\n        <option");
+                                            if (bstrOptionValue)
+                                                strFormXML += _T(" value=\"") + EscapeXML( string( CW2T( bstrOptionValue ) ) ) + _T("\"");
+                                            strFormXML += _T(">");
+                                            strFormXML += (bstrOptionText ? EscapeXML( string( CW2T( bstrOptionText ) ) ) : string(_T("")) ) + _T("</option>");
+                                        }
+                                    }
 
-							if ( m_options.IncludeComments() && !_tcsicmp( W2T( bstrTagName ), _T("SELECT") ) )
-							{
-								strFormXML += _T("\r\n    <COMMENT>"
-												 "\r\n      The input element above, \"") + strInputName + _T("\", was a SELECT element with the following options..."
-												 "\r\n      <select name=\"" + strInputName + "\">");
-								
-								CComQIPtr< IHTMLSelectElement > spSelect( spElement );
-								if ( spSelect )
-								{
-									long cOptions = 0;
-									spSelect->get_length( &cOptions );
-									for ( int iOption = 0; iOption < cOptions; iOption++ )
-									{
-										CComPtr< IDispatch > spOptionDisp;
-										_variant_t varOption( static_cast<long>(iOption), VT_I4 );
-										spSelect->item( varOption, varOption, &spOptionDisp );
-
-										CComQIPtr< IHTMLOptionElement > spOption( spOptionDisp );
-										
-										BSTR bstrOptionValue = NULL;
-										spOption->get_value( &bstrOptionValue );
-										
-										BSTR bstrOptionText = NULL;
-										spOption->get_text( &bstrOptionText );
-										
-										strFormXML += _T("\r\n        <option");
-										if ( bstrOptionValue )
-											strFormXML += _T(" value=\"") + EscapeXML( string( W2T( bstrOptionValue ) ) ) + _T("\"");
-										strFormXML += _T(">");
-										strFormXML += (bstrOptionText ? EscapeXML( string( W2T( bstrOptionText ) ) ) : string(_T("")) ) + _T("</option>");
-
-										::SysFreeString( bstrOptionValue );
-									}
-								}
-
-								strFormXML += _T("\r\n      </select>"
-												 "\r\n    </COMMENT>\r\n");
-							
-							} // end-if SELECT
-						
-						} // end-if INPUT element had a 'name' attribute
-
-						::SysFreeString( bstrTagName );
+                                    strFormXML += _T("\r\n      </select>"
+                                        "\r\n    </COMMENT>\r\n");
+                                } // end-if SELECT
+                            } // end-else is radio
+                        } // end-if INPUT element had a 'name' attribute
 					
 					} // end-for each form element
 
@@ -1198,4 +1141,30 @@ void CDQSDWizardDlg::SetDlgItemCheck(UINT idCtrl, WORD checkState)
 void CDQSDWizardDlg::SetDlgItemCheck(UINT idCtrl, bool checkState)
 {
     GetDlgItem(idCtrl).SendMessage(BM_SETCHECK, checkState ? BST_CHECKED : BST_UNCHECKED);
+}
+
+void CDQSDWizardDlg::AddToFormList(const string& name, const string& action, IHTMLElement* pForm, bool checkState)
+{
+    CWindow formListControl = GetDlgItem(IDC_FormList);
+
+    // Add the form information to the list
+    LVITEM lvi = {0};
+    lvi.mask = LVIF_TEXT|LVIF_PARAM;
+    lvi.iItem = 256;
+    lvi.pszText = const_cast<LPTSTR>(name.c_str());
+    lvi.lParam = reinterpret_cast<LPARAM>(pForm);
+    int iPos = formListControl.SendMessage( LVM_INSERTITEM, 0, (LPARAM)&lvi );
+
+    // AddRef the HTMLElement pointer to keep it alive as long as the
+    // LPARAM is connected to the list item. OnFormListItemDeleted
+    // does the corresponding Release
+    pForm->AddRef();
+
+    lvi.mask = LVIF_TEXT;
+    lvi.iItem = iPos;
+    lvi.iSubItem = 1;
+    lvi.pszText = const_cast<LPTSTR>(action.c_str());
+    formListControl.SendMessage( LVM_SETITEM, iPos, (LPARAM)&lvi );
+
+    ListView_SetCheckState(formListControl.m_hWnd, iPos, checkState);
 }

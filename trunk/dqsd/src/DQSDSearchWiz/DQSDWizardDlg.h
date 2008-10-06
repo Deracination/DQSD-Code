@@ -29,8 +29,8 @@ BEGIN_MSG_MAP(CDQSDWizardDlg)
 	MESSAGE_HANDLER(WM_DESTROY, OnDestroy)
 	COMMAND_ID_HANDLER(IDOK, OnOK)
 	COMMAND_ID_HANDLER(IDCANCEL, OnCancel)
-	NOTIFY_HANDLER(IDC_FormList2, LVN_ITEMCHANGED, OnFormListItemChanged)
-    NOTIFY_HANDLER(IDC_FormList2, LVN_DELETEITEM, OnFormListItemDeleted)
+	NOTIFY_HANDLER(IDC_FormList, LVN_ITEMCHANGED, OnFormListItemChanged)
+    NOTIFY_HANDLER(IDC_FormList, LVN_DELETEITEM, OnFormListItemDeleted)
 	COMMAND_HANDLER(IDC_About, BN_CLICKED, OnClickedAbout)
 	COMMAND_HANDLER(IDC_Options, BN_CLICKED, OnClickedOptions)
 	COMMAND_HANDLER(IDC_ShowHideHTML, BN_CLICKED, OnClickedShowHideHTML)
@@ -43,6 +43,8 @@ END_MSG_MAP()
 //  LRESULT NotifyHandler(int idCtrl, LPNMHDR pnmh, BOOL& bHandled);
 
 	LRESULT OnInitDialog(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled);
+
+    void AddToFormList(const string& name, const string& action, IHTMLElement* pForm, bool checkState);
 	LRESULT OnHelp(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
 	{
 		LPHELPINFO lphi = (LPHELPINFO)lParam;

@@ -139,7 +139,7 @@ BEGIN
     CONTROL         "&Include in description",IDC_DescSwitches,"Button",
                     BS_AUTOCHECKBOX | WS_TABSTOP,194,107,104,10
     LTEXT           "* &FORMs on current page:",IDC_STATIC,7,123,84,8
-    CONTROL         "List2",IDC_FormList2,"SysListView32",LVS_REPORT | 
+    CONTROL         "List2",IDC_FormList,"SysListView32",LVS_REPORT | 
                     LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_NOSORTHEADER | 
                     WS_BORDER | WS_TABSTOP,6,133,330,49,WS_EX_CLIENTEDGE
     DEFPUSHBUTTON   "OK",IDOK,338,6,50,14

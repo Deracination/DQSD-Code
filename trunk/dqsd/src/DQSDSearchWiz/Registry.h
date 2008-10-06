@@ -5,10 +5,17 @@ static LONG QueryRegValue(CRegKey& key, const char* name, std::string& value)
     DWORD length = 0;
     key.QueryStringValue(name, NULL, &length);
 
-    std::string buffer(length, 0);
+    std::string buffer(length, '\0');
     LONG result = key.QueryStringValue(name, &buffer[0], &length);
     if (result == ERROR_SUCCESS)
+    {
+        // Trim trailing NUL
+        std::string::iterator last = --buffer.end();
+        if (*last == '\0')
+            buffer.erase(last);
+
         value = buffer;
+    }
 
     return result;
 }
