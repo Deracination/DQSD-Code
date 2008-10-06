@@ -10,7 +10,6 @@
 #define IDD_DWMESSAGEBOX                105
 #define IDS_AboutURL                    200
 #define IDI_NORMAL                      201
-#define IDC_FormList                    201
 #define IDS_MailToGlennCarr             201
 #define IDI_HOT                         202
 #define IDI_WIZARD                      204
@@ -33,7 +32,7 @@
 #define IDC_DescExamples                1009
 #define IDC_MutuallyExclusiveSwitches   1010
 #define IDC_DescSwitches                1011
-#define IDC_FormList2                   1012
+#define IDC_FormList                   1012
 #define IDC_ShowHideHTML                1013
 #define IDC_FormFields                  1014
 #define IDC_Options                     1015

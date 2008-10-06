@@ -397,6 +397,9 @@ echo regsvr32 exec. time &gt; &quot;$(OutDir)\regsvr32.trg&quot;
 				RelativePath=".\Form.h">
 			</File>
 			<File
+				RelativePath=".\FormElement.h">
+			</File>
+			<File
 				RelativePath=".\HtmlElement.h">
 			</File>
 			<File
