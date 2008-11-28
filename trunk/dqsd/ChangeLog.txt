@@ -3,6 +3,7 @@
 Enhancements
 
 New Searches
+* search deezer.com's music library (mll)
 
 Bug Fixes
 
