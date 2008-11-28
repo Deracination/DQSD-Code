@@ -1,0 +1,23 @@
+<search function="dee">
+  <name>Deezer</name>
+  <description>
+    Listen to music on deezer.com.<br/>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+  		<tr><td>dee baggy trousers</td></tr>
+  	</table>
+  </description>
+  <category>Entertainment<category>Music</category></category>
+  <link>http://www.deezer.com/</link>
+
+  <script><![CDATA[
+    function dee(q)
+    {
+      if( nullArgs("php",q) )
+        return false;
+
+	openSearchWindow("http://www.deezer.com/s.php?s=" + q.replace(/\s+/g, "+"));
+    }
+  ]]></script>
+
+</search>
