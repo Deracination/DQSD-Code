@@ -1,5 +1,8 @@
-CALCMEM_FILE = DQSDLauncher.AppDataDirectory + '\\calcmem.txt';
 
+function buildCalcMemPath()
+{
+  return DQSDLauncher.AppDataDirectory + '\\calcmem.txt';
+}
 
 // offline calculator
 function calculate(expr)
@@ -184,12 +187,12 @@ function savevars()
        savetext += varname + "\t" + vartype + "\t" + escape(eval(varname)) + "\r\n";
     }
   }
-  writeFile( CALCMEM_FILE, savetext);
+  writeFile( buildCalcMemPath(), savetext);
 }
 
 function loadvars()
 {
-  var values = readTabDelimitedFile( CALCMEM_FILE )
+  var values = readTabDelimitedFile( buildCalcMemPath() )
   for (var ii = 0; ii < values.length; ii++)
   {
     var value = values[ii];
