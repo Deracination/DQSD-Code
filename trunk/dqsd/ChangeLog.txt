@@ -3,7 +3,6 @@
 Enhancements
 
 New Searches
-* search deezer.com's music library (mll)
 
 Bug Fixes
 
@@ -25,9 +24,11 @@ Enhancements
 * Removed need for NSISXML to be installed on build machine (Kim Gräsman)
 
 New Searches
+* search deezer.com's music library (mll)
 
 Bug Fixes
 * Fixed bug where resizing the toolbar horizontally would eventually yield a script error (Kim Gräsman)
+* Fixed bug #2497377: Script error on startup on Windows Vista. Changed global vars based on DQSDLauncher.AppDataDirectory to builder functions, so that DQSDLauncher isn't used until it's been initialized (Kim Gräsman)
 
 Modified Searches
 * imdb - corrects search functionality (Steve Poirier)

@@ -3,8 +3,16 @@
 histarray = [];
 histedit = new Array(historylength + 1);
 histcurr = 0;
-HISTORY_FILE = DQSDLauncher.AppDataDirectory + '\\history.txt';
-FREQUENCY_LOG = DQSDLauncher.AppDataDirectory + '\\frequency_log.txt';
+
+function buildHistoryPath()
+{
+  return DQSDLauncher.AppDataDirectory + '\\history.txt';
+}
+
+function buildFrequencyLogPath()
+{
+  return DQSDLauncher.AppDataDirectory + '\\frequency_log.txt';
+}
 
 restoreHistory();
 
@@ -23,7 +31,7 @@ function saveHistory()
 {
   try
   {
-    writeFile( HISTORY_FILE, histarray.join('\r\n'));
+    writeFile( buildHistoryPath(), histarray.join('\r\n'));
   }
   catch(e) { }
 }
@@ -31,7 +39,7 @@ function saveHistory()
 // restore at most historylength entries from the saved history
 function restoreHistory()
 {
-  var historyFileContent = loadHistoryFile(HISTORY_FILE);
+  var historyFileContent = loadHistoryFile(buildHistoryPath());
   if (historyFileContent == null)
   {
     // Legacy location
@@ -275,7 +283,7 @@ function logFrequency( s )
   var dateSeconds = Date.parse(dateNow);
   try
   {
-    var frequencyLogContent = readFile( FREQUENCY_LOG );
+    var frequencyLogContent = readFile( buildFrequencyLogPath() );
   }
   catch(e) { }
 
@@ -302,7 +310,7 @@ function logFrequency( s )
   recentSearches.sort( sortFrequencyDataByDate );
   try
   {
-    writeFile( FREQUENCY_LOG, recentSearches.join('\r\n'));
+    writeFile( buildFrequencyLogPath(), recentSearches.join('\r\n'));
   }
   catch(e) { }
 }
@@ -321,7 +329,7 @@ function loadHistoryFile(filename)
 {
   try
   {
-    return readFile( HISTORY_FILE );
+    return readFile( buildHistoryPath() );
   }
   catch (e)
   {
