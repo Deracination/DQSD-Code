@@ -1,0 +1,29 @@
+<search function="twit">
+  <name>Summize - search twitter</name>
+  <category>Search the Web</category>
+  <contributor>Tom Corcoran</contributor>
+  <link>http://search.twitter.com/</link>
+  <email>tom@moonbade.com</email>
+  <description>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+      <tr><td>twit grails</td></tr>
+    </table>
+  </description>
+  <form name="twitf"
+        method="get"
+        action="http://search.twitter.com/search">
+    <input type="hidden" name="q" value="" />
+  </form>
+
+  <script><![CDATA[
+    function twit(q)
+    {
+      if( nullArgs("twit", q) )
+        return;
+
+      document.twitf.q.value = q;
+      submitForm(twitf);
+    }
+  ]]></script>
+</search>

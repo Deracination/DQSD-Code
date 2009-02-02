@@ -25,6 +25,7 @@ Enhancements
 
 New Searches
 * search deezer.com's music library (mll)
+* twit - Twitter search (Tom Corcoran)
 
 Bug Fixes
 * Fixed bug where resizing the toolbar horizontally would eventually yield a script error (Kim Gräsman)
