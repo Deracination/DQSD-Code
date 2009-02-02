@@ -1,35 +1,70 @@
 <search function="ths">
+
   <name>Thesaurus.com</name>
+
   <description>Search for synonyms
+
   <div class="helpboxDescLabels">Example:</div> 
+
   <table class="helpboxDescTable">
+
     <tr>
+
       <td>ths frothy</td>
+
     </tr>
+
   </table>
+
   </description>
+
   <category>Reference<category>Language</category></category>
-  <link>http://www.thesaurus.com/</link>
+
+  <link>http://thesaurus.reference.com</link>
+
   <form name="thsf"
-        action="http://www.thesaurus.com/cgi-bin/search"
+
+        action="http://thesaurus.reference.com/the"
+
         method="get">
-    <input type="hidden" name="config" value="roget"/>
+
+    <input type="hidden" name="q" value=""/>
+
     <input type="hidden" name="words"/>
+
   </form>
+
   <script><![CDATA[
+
     function ths(q)
+
     {
+
       if( nullArgs("ths", q) )
+
         return false;
 
- 	  document.thsf.words.value=q;
+
+
+ 	  document.thsf.q.value=q;
+
 	  submitForm(thsf);
+
     }
+
   ]]></script>
 
+
+
   <copyright>
+
 	Copyright (c) 2002 David Bau
+
 	Distributed under the terms of the
+
 	GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+
   </copyright>
+
 </search>
+
