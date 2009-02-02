@@ -9,7 +9,7 @@ Bug Fixes
 Modified Searches
 
 
--- What's new for 4.1.0.0 (Aug 06, 2008)
+-- What's new for 4.1.0.0 (mmm dd, yyyy)
 
 Enhancements
 * Folded DQSDHost functionality into DQSDTools.dll, and removed DQSDHost (Kim Gräsman)
@@ -32,6 +32,7 @@ Bug Fixes
 
 Modified Searches
 * imdb - corrects search functionality (Steve Poirier)
+* ths - adjusted to new site (Tom Corcoran)
 
 -- What's new for 4.0.0.6 (Jul 04, 2008)
 
