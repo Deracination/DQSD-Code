@@ -1,0 +1,120 @@
+<search function="df">
+  <name>DictService from Aonaware</name>
+  <description>
+    Search for word definitions.  Recommended it is used with ":|df" in localaliases.txt, so that "word:" brings up its definition.
+    <div class="helpboxDescLabels">Switches:</div>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>df idempotent</td></tr>
+      <tr><td>idempotent:</td></tr>
+    </table>
+  </description>
+  <category>Reference<category>Language</category></category>
+  <link>http://www.aonaware.com/services.htm</link>
+  
+  <form name="dff"
+        action="http://services.aonaware.com"
+        method="post">
+    <input type="hidden" name="book" value="Dictionary"/>
+    <input type="hidden" name="va"/>
+  </form>
+  
+  <script>
+   <![CDATA[
+  
+    function df(q)
+    {
+      var dicts = ["gcide","foldoc"];
+      var definitions;
+      try
+      {
+        var xmlHttp = new ActiveXObject("Microsoft.XmlHttp");
+        for( var d in dicts ) {
+          xmlHttp.open("GET", "http://services.aonaware.com/DictService/DictService.asmx/DefineInDict?dictId=" + dicts[d] + "&word=" + q, false);
+          xmlHttp.send();      
+          var xmlDoc = xmlHttp.responseXML.documentElement;
+          definitions = xmlDoc.getElementsByTagName("WordDefinition")          
+          if( definitions.length > 0 )
+            break;
+        }
+      }
+      catch ( e )
+      {
+        alert( "Exception thrown: " + e.description );
+        return;
+      }
+      
+      var windowW = 440;
+
+      if ( definitions.length > 0 ) {
+          var html = "";
+          for( var i=0; i < definitions.length; i++ ) {
+            html += '<p><b>' + q + '</b></p>';
+            var body = definitions[i].text.replace( /[\r\n]/gi, "<br />" );
+            body = body.replace( /  /gi, " &nbsp;" );
+            html += '<p>' + body + '</p>';
+          }
+      }
+      else
+      {
+          var html = '<center><b>' + q + '</b> not found</center><br/>';
+      }
+
+      if ( typeof dictPopup == 'undefined' )
+        dictPopup = window.createPopup();
+      var dictPopupBody = dictPopup.document.body;
+
+      // Let's concat on a local variable first for easier debugging - let's also copy over a couple of styles from linked "entry.css"
+      var dictPopupBodyInnerHTML = '<table id=dfTable style="font-size: 70%; border: inset 2px" height="100%" width="100%"><style type="text/css">img { border-width: 0 } .variant { font-weight: bold; } .verb_class { display: block; } .unicode{font-family:"Lucida Sans Unicode";}</style><tr><td style="padding: 5px 20px 5px 5px">' + html + "</td></tr></table>";
+
+      // This assignment will reformat the HTML extensively
+      dictPopupBody.innerHTML = dictPopupBodyInnerHTML;
+
+      dictPopup.document.body.style.border="outset 2px";
+      dictPopup.document.body.style.padding="1px 1px; background: navy";
+      dictPopup.document.body.style.background='menu';
+      dictPopup.document.body.style.overflowY='auto';
+      dictPopup.document.body.style.fontFamily='Verdana';
+      dictPopup.document.body.attachEvent('onmouseup',dfCopySelection);
+
+      // Temporarily show the popup to determine the proper final height for the popup.
+      dictPopup.show(0, 0, windowW, 0);
+      var windowH = dictPopupBody.scrollHeight + 6;
+      dictPopup.hide();
+      dictPopup.document.all.dfTable.style.width = windowW - 5;
+      windowH = windowH > window.screen.height/2 ? window.screen.height/2 : windowH;
+      dictPopup_x = (buttonalign == "left" ? 0 : document.body.clientWidth - windowW);
+      dictPopup_y = -windowH;
+      dictPopup_width = windowW;
+      dictPopup_height = windowH;
+      if ( typeof dictPopup_ring == 'undefined' )
+        dictPopup_ring = new Array();
+      dictPopup_ring.push( { x:dictPopup_x, y:dictPopup_y, width:dictPopup_width, height:dictPopup_height, html:dictPopupBody.innerHTML } );
+      dictPopup_sp = dictPopup_ring.length - 1;
+      dictPopup.show(dictPopup_x, dictPopup_y, dictPopup_width, dictPopup_height, document.body);
+    }
+    
+    function dfCopySelection()
+    {
+      dictPopup.document.execCommand( "Copy" );
+      dictPopup.document.selection.empty();
+    }
+    
+    function dfGoToWord(w)
+    {
+      if ( dictPopup.document.selection.type == "Text" )
+      {
+        dfCopySelection();
+      }
+      else
+      {
+        df(w);
+      }
+    }
+  ]]></script>
+  <copyright>
+  Copyright (c) 2009 David Blume
+  Distributed under the terms of the
+  GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>

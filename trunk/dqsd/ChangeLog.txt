@@ -1,13 +1,3 @@
--- What's new for 4.x.x.x (mmm dd, yyyy)
-
-Enhancements
-
-New Searches
-
-Bug Fixes
-
-Modified Searches
-
 
 -- What's new for 4.1.0.0 (mmm dd, yyyy)
 
@@ -26,6 +16,7 @@ Enhancements
 New Searches
 * search deezer.com's music library (mll)
 * twit - Twitter search (Tom Corcoran)
+* df - Word definition popup search (David Blume)
 
 Bug Fixes
 * Fixed bug where resizing the toolbar horizontally would eventually yield a script error (Kim Gräsman)
