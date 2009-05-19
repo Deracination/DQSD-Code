@@ -1,0 +1,38 @@
+<search function="ww">
+  <name>Wolfram Alpha</name>
+  <category>Computers<category>Reference</category></category>
+  <contributor>Shawn K. Hall</contributor>
+  <link>http://www.wolframalpha.com/</link>
+  <email>shawn@reliableanswers.com</email>
+  <description>
+	Wolfram|Alpha aims to bring expert-level knowledge and capabilities to the broadest possible 
+	range of people. The goal is to accept completely free-form input, and to serve as a 
+	knowledge engine that generates powerful results and presents them with maximum clarity.
+    <div class="helpboxDescLabels">Switches:</div>
+    <div class="helpboxDescLabels">Examples:</div>
+    <table class="helpboxDescTable">
+      <tr><td>ww what is the meaning of life</td></tr>
+      <tr><td>ww 2001-09-11</td></tr>
+      <tr><td>ww wdc</td></tr>
+    </table>
+  </description>
+  <form name="wolframf"
+        method="get"
+        action="http://www.wolframalpha.com/input/">
+	<input type="hidden" name="i" value="" />
+  </form>
+  <script><![CDATA[
+    function ww(q)
+    {
+      if( nullArgs("ww", q) )
+        return;
+
+      document.wolframf.i.value = q;
+      submitForm(wolframf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+</search>

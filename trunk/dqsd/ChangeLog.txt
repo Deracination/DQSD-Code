@@ -17,6 +17,7 @@ New Searches
 * search deezer.com's music library (mll)
 * twit - Twitter search (Tom Corcoran)
 * df - Word definition popup search (David Blume)
+* ww - WolframAlpha.com search (Shawn K. Hall)
 
 Bug Fixes
 * Fixed bug where resizing the toolbar horizontally would eventually yield a script error (Kim Gräsman)
