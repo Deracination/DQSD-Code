@@ -1,0 +1,33 @@
+<search function="robtex">
+  <name>Robtex DNS and IP tools</name>
+  <category>Computers<category>Networking</category></category>
+  <contributor>mll</contributor>
+  <link>http://www.robtex.com/</link>
+  <email>http://mll2.free.fr</email>
+  <description>Find info about a hostname or an IP address.</description>
+  <form name="robtexf"
+        method="get"
+        action="http://www.robtex.com/r/x">
+    <input type="hidden" name="q" value="" />
+  </form>
+  <script><![CDATA[
+    function robtex(q)
+    {
+      if( nullArgs("robtex", q) )
+        return;
+
+      document.robtexf.q.value = q;
+
+      submitForm(robtexf);
+    }
+  ]]></script>
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 05/29/09 at 11:26:36
+    by Dave's Quick Search Deskbar Search Wizard version 1.3,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>
