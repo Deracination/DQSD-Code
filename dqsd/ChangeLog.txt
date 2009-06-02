@@ -14,10 +14,11 @@ Enhancements
 * Removed need for NSISXML to be installed on build machine (Kim Gräsman)
 
 New Searches
-* search deezer.com's music library (mll)
+* dee - search deezer.com's music library (mll)
 * twit - Twitter search (Tom Corcoran)
 * df - Word definition popup search (David Blume)
 * ww - WolframAlpha.com search (Shawn K. Hall)
+* robtex - Find info about a hostname or an IP address through robtex.com (mll)
 
 Bug Fixes
 * Fixed bug where resizing the toolbar horizontally would eventually yield a script error (Kim Gräsman)
