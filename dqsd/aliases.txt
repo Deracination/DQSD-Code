@@ -20,3 +20,4 @@
 //
 !|gg %s /ifl|I'm Feeling Lucky!|Go directly to Google's top-ranked result.|Search the Web
 ?|qsfind
+whois|whi
