@@ -28,6 +28,7 @@ Modified Searches
 * imdb - corrects search functionality (Steve Poirier)
 * ths - adjusted to new site (Tom Corcoran)
 * whois - now an alias for whi -- whois search required CAPTCHA, so removed it. (Kim Gräsman)
+* dee - changed to fit site changes (MLL)
 
 -- What's new for 4.0.0.6 (Jul 04, 2008)
 
