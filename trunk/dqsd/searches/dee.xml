@@ -16,7 +16,7 @@
       if( nullArgs("php",q) )
         return false;
 
-	openSearchWindow("http://www.deezer.com/s.php?s=" + q.replace(/\s+/g, "+"));
+	openSearchWindow("http://www.deezer.com/music/result/all/" + q.replace(/\s+/g, "+"));
     }
   ]]></script>
 
