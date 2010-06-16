@@ -1,0 +1,65 @@
+<search function="ypfr">
+  <name>French Yellow Pages</name>
+  <category>People and Places</category>
+  <link>http://www.pagesjaunes.fr</link>
+  <contributor>MLL</contributor>
+  <email>http://mll2.free.fr</email>
+  <description>
+  Get an address for a professional in France
+    <div class="helpboxDescLabels">Usage:</div>
+    <table class="helpboxDescTable">
+      <tr><td>ypfr what /ou</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Switches:</div>
+    <table class="helpboxDescTable">
+      <tr><td>/ou</td><td> - </td><td>where : address or location or zip code or département or région</td></tr>
+    </table>
+    <div class="helpboxDescLabels">Example:</div>
+    <table class="helpboxDescTable">
+      <tr><td>ypfr médecin /ou:75</td></tr>
+    </table>
+  </description>
+  <form name="ypfrf"
+        method="post"
+        action="http://www.pagesjaunes.fr/trouverlesprofessionnels/rechercheClassique.do?portail=PJ">
+    <input type="hidden" name="quoiqui" value="" />
+    <input type="hidden" name="ou" value="" />
+    <input type="hidden" name="proximite" value="" />
+  </form>
+  <script><![CDATA[
+    function ypfr(q)
+    {
+      var args = parseArgs(q, "ou");
+      if( nullArgs("ypfr", args.q) )
+        return;
+
+      document.ypfrf.ou.value = "";
+
+      for (var iSwitch = 0; iSwitch < args.switches.length; iSwitch++)
+      {
+        switch( args.switches[iSwitch].name )
+        {
+          case "ou":
+            document.ypfrf.ou.value = args.switches[iSwitch].value;
+            break;
+          default:
+            break;
+        }
+      }
+
+      document.ypfrf.quoiqui.value = args.q;
+
+      submitForm(ypfrf);
+    }
+  ]]></script>
+
+  <copyright>
+    The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
+    Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
+  </copyright>
+  <created_by>
+    This search file was initially created on 06/16/10
+    by Dave's Quick Search Deskbar Search Wizard version 1.3,
+    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
+  </created_by>
+</search>

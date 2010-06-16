@@ -1,60 +1,45 @@
 <search function="wpfr">
-  <name>French white pages</name>
+  <name>French White Pages</name>
   <category>People and Places</category>
+  <link>http://www.pagesjaunes.fr/pagesblanches/</link>
   <contributor>MLL</contributor>
-  <link>http://www.pagesjaunes.fr/trouverunnom/RecherchePagesBlanches.do</link>
+  <email>http://mll2.free.fr</email>
   <description>
   Get an address from a name in France
     <div class="helpboxDescLabels">Usage:</div>
     <table class="helpboxDescTable">
-      <tr><td>wpfr name [/prenom] [/adresse] /localite|/departement</td></tr>
+      <tr><td>wpfr name [/prenom] /ou</td></tr>
     </table>
     <div class="helpboxDescLabels">Switches:</div>
     <table class="helpboxDescTable">
       <tr><td>/prenom</td><td> - </td><td>first name</td></tr>
-      <tr><td>/adresse</td><td> - </td><td>address</td></tr>
-      <tr><td>/localite</td><td> - </td><td>location or zip code</td></tr>
-      <tr><td>/departement</td><td> - </td><td>department or region</td></tr>
+      <tr><td>/ou</td><td> - </td><td>where : address or location or zip code or département or région</td></tr>
     </table>
     <div class="helpboxDescLabels">Example:</div>
     <table class="helpboxDescTable">
-      <tr><td>wpfr mus&#233;e du louvre /localite:paris</td></tr>
+      <tr><td>wpfr musée du louvre /ou:75</td></tr>
     </table>
   </description>
 
   <form name="wpfrf"
         method="post"
-        action="http://www.pagesjaunes.fr/trouverunnom/RecherchePagesBlanches.do;jsessionid=87BB2BBBCB20738C7322EBD96D2963F4.yas12f">
-    <input type="hidden" name="actionForwardName" value="reponse" />
-    <input type="hidden" name="codeLieu" value="" />
-    <input type="hidden" name="codeLieu" value="" />
+        action="http://www.pagesjaunes.fr/trouverunnom/RecherchePagesBlanchesExpress.do?portail=PJ">
+
     <input type="hidden" name="nom" value="" />
     <input type="hidden" name="prenom" value="" />
-    <input type="hidden" name="prenom" value="" />
-    <input type="hidden" name="voieLibelle" value="" />
-    <input type="hidden" name="voieInitiale" value="" />
-    <input type="hidden" name="voieCode" value="" />
-    <input type="hidden" name="numeroVoie" value="" />
-    <input type="hidden" name="localiteLibelle" value="" />
-    <input type="hidden" name="localiteInitiale" value="" />
-    <input type="hidden" name="localiteCode" value="" />
-    <input type="hidden" name="depRegLibelle" value="" />
-    <input type="hidden" name="departementInitiale" value="" />
-    <input type="hidden" name="departementCode" value="" />
-    <input type="hidden" name="regionCode" value="" />
+    <input type="hidden" name="ou" value="" />
+    <input type="hidden" name="proximite" value="" />
   </form>
-
+  
   <script><![CDATA[
     function wpfr(q)
     {
-      var args = parseArgs(q, "prenom, adresse, localite, departement");
+      var args = parseArgs(q, "prenom, ou");
       if( nullArgs("wpfr", args.q) )
         return;
 
       document.wpfrf.prenom.value = "";
-      document.wpfrf.voieLibelle.value = "";
-      document.wpfrf.localiteLibelle.value = "";
-      document.wpfrf.depRegLibelle.value = "";
+      document.wpfrf.ou.value = "";
 
       for (var iSwitch = 0; iSwitch < args.switches.length; iSwitch++)
       {
@@ -63,14 +48,8 @@
           case "prenom":
             document.wpfrf.prenom.value = args.switches[iSwitch].value;
             break;
-          case "adresse":
-            document.wpfrf.voieLibelle.value = args.switches[iSwitch].value;
-            break;
-          case "localite":
-            document.wpfrf.localiteLibelle.value = args.switches[iSwitch].value;
-            break;
-          case "departement":
-            document.wpfrf.depRegLibelle.value = args.switches[iSwitch].value;
+          case "ou":
+            document.wpfrf.ou.value = args.switches[iSwitch].value;
             break;
           default:
             break;
