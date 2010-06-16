@@ -19,6 +19,7 @@ New Searches
 * df - Word definition popup search (David Blume)
 * ww - WolframAlpha.com search (Shawn K. Hall)
 * robtex - Find info about a hostname or an IP address through robtex.com (mll)
+* ypfr - Get an address for a professional in France (MLL)
 
 Bug Fixes
 * Fixed bug where resizing the toolbar horizontally would eventually yield a script error (Kim Gräsman)
@@ -28,7 +29,8 @@ Modified Searches
 * imdb - corrects search functionality (Steve Poirier)
 * ths - adjusted to new site (Tom Corcoran)
 * whois - now an alias for whi -- whois search required CAPTCHA, so removed it. (Kim Gräsman)
-* dee - changed to fit site changes (MLL)
+* wpfr - changed to fit site changes (MLL)
+* viam - changed to fit site changes (MLL)
 
 -- What's new for 4.0.0.6 (Jul 04, 2008)
 
