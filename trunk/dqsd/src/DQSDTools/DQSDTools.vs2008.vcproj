@@ -5,8 +5,6 @@
 	Name="DQSDTools"
 	ProjectGUID="{5E5A706B-D94A-4392-9A41-264EBA01218A}"
 	RootNamespace="DQSDTools"
-	SccProjectName="&quot;$/DQSDTools&quot;, ECAAAAAA"
-	SccLocalPath="."
 	Keyword="AtlProj"
 	TargetFrameworkVersion="131072"
 	>
