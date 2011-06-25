@@ -11,7 +11,7 @@ Name "Dave's Quick Search Deskbar"
 !define IE_MAJOR_REQUIRED  5
 !define IE_MINOR_REQUIRED  5
 !define HOW_TO_TURN_ON_TOOLBAR "Right-click in your taskbar and select$\n$\n    Toolbars > Quick Search$\n$\nto add the Quick Search Deskbar to your taskbar."
-!define TITLE_AND_COPYRIGHT "Dave's Quick Search Deskbar$\nCopyright © 2002-2008 David Bau$\nDistributed under the terms of the$\nGNU General Public License, Version 2"
+!define TITLE_AND_COPYRIGHT "Dave's Quick Search Deskbar$\nCopyright © 2002-2011 David Bau$\nDistributed under the terms of the$\nGNU General Public License, Version 2"
 !define DQSD_TITLE "Dave's Quick Search Deskbar"
 
 ; Silent install
