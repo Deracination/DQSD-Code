@@ -5,12 +5,12 @@ RELEASE PROCEDURE FOR DQSD - Kim Gräsman, Updated June, 2008
 	- Make sure the paths in build.cmd match your private VS.NET, Windows SDK and 
 		NSIS paths
 	- Make sure you have the NSISXML plug-in installed
-	- Update version resource in DQSDTools DLL
 
-- Update version stuff in scripts
+- Update version stuff
+	- Update version resource in DQSDTools DLL
 	- Update version in version.xml
 	- Set date for latest changes in ChangeLog.txt
-	- Commit changes
+	- Commit changes (???)
 
 - Build DLL and installer
 	- Run build_all.cmd
@@ -48,7 +48,7 @@ RELEASE PROCEDURE FOR DQSD - Kim Gräsman, Updated June, 2008
 		- Set status to Active
 		- [Submit/Refresh]
 	- [Send Notice]
-	
+
 - Update the site
 	- Check out the dqsdweb folder from SVN
 	- Modify doc.htm
@@ -69,3 +69,4 @@ RELEASE PROCEDURE FOR DQSD - Kim Gräsman, Updated June, 2008
 
 - Send an announcement to dqsd-announce@lists.sourceforge.net 
 	(see: http://sourceforge.net/mailarchive/forum.php?forum_id=8603)
+
