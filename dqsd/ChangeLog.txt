@@ -1,5 +1,16 @@
+-- What's new for 4.n.n.n (mmm dd, yyyy)
 
--- What's new for 4.1.0.0 (mmm dd, yyyy)
+Enhancements
+
+New Searches
+
+Bug Fixes
+
+Modified Searches
+
+Removed Searches
+
+-- What's new for 4.1.0.0 (Jun 25, 2011)
 
 Enhancements
 * Folded DQSDHost functionality into DQSDTools.dll, and removed DQSDHost (Kim Gräsman)
