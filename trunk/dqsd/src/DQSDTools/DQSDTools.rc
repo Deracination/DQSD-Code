@@ -75,7 +75,7 @@ BEGIN
             VALUE "FileDescription", "ActiveX Tools for Dave's Quick Search Bar "
             VALUE "FileVersion", "4, 1, 0, 0"
             VALUE "InternalName", "DQSDTools"
-            VALUE "LegalCopyright", "Copyright (c) 2002-2008 David Bau. GNU Public License Version 2 applies."
+            VALUE "LegalCopyright", "Copyright (c) 2002-2011 David Bau. GNU Public License Version 2 applies."
             VALUE "OriginalFilename", "DQSDTools.DLL"
             VALUE "ProductName", "DQSDTools ActiveX Components"
             VALUE "ProductVersion", "4, 1, 0, 0"
