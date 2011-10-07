@@ -3,6 +3,7 @@
 Enhancements
 
 New Searches
+* dd - DuckDuckGo is a general purpose search engine like Google or Bing, but that doesnt track you.
 
 Bug Fixes
 
