@@ -4,11 +4,13 @@ Enhancements
 
 New Searches
 * dd - DuckDuckGo is a general purpose search engine like Google or Bing, but that doesnt track you. (MLL)
-* viai - have ViaMichelin (search viam) calculate an intinerary for you (MLL) (note: this quickly hacked search need optimization [redundant code, mostly])
+* viai - have ViaMichelin (search viam) calculate an intinerary for you (MLL)
+
 
 Bug Fixes
 
 Modified Searches
+* viam - will work better with non-european searches
 
 Removed Searches
 
