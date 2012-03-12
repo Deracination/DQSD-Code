@@ -1,13 +1,13 @@
 <search function="viai">
-  <name>Maps with viamichelin.com</name>
+  <name>Itineraries with viamichelin.com</name>
   <category>People and Places</category>
   <contributor>MLL</contributor>
-  <link>http://www.viamichelin.fr/web/Itineraires</link>
+  <link>http://www.viamichelin.com/web/Itineraires</link>
   <description>
   Find a map to any place in Europe with viamichelin.com
-    <div class="helpboxDescLabels">Optional switch:</div>
+    <div class="helpboxDescLabels">Switch:</div>
     <table class="helpboxDescTable">
-      <tr><td></td><td> - </td><td></td></tr>
+      <tr><td>/to address</td><td> - </td><td>Destination address</td></tr>
     </table>
     <div class="helpboxDescLabels">Examples:</div>
     <table class="helpboxDescTable">
@@ -18,132 +18,93 @@
         method="get"
         action="http://www.viamichelin.com/web/Itineraires">
     <input type="hidden" name="strDepartureMerged" value="" />
-    <input type="hidden" name="strDepartureCountry" value="EUR" />
+    <input type="hidden" name="strDepartureCountry" value="" />
     <input type="hidden" name="strDepartureAddress" value="" />
     <input type="hidden" name="strArrivalMerged" value="" />
-    <input type="hidden" name="strArrivalCountry" value="EUR" />
+    <input type="hidden" name="strArrivalCountry" value="" />
     <input type="hidden" name="strArrivalAddress" value="" />
   </form>
 
   <script><![CDATA[
+    function parseAddress(myAddress)
+	{
+      // What follows is a fairly "ergonomic" parser for addresses I got & simplified from mp.xml.
+
+      var address = "";
+      var city = "";
+
+      // detect leading ### w w w st
+      var res = myAddress.match(/^\s*(\d+(\s+\w+)+\s+(st|ave|rd|ln|dr|blvd|cir|ct|pkwy|pl|way|aly|pk|sq|ter|plz|rue|bd))[\s\.,;]*(.*)$/i);
+      if (res && res[1])
+      {
+        address = res[1];
+        city = res[4];
+      }
+
+      // detect trailing comma or semicolon; prefer this way of finding city
+      res = myAddress.match(/[\.,;]\s*([^\d][^,;]+)[\s\.,;]*$/i);
+      if (res && res[1])
+      {
+        city = res[1];
+        address = myAddress.substring(0, res.index);
+      }
+
+      // last resorts: we really want a city
+      if (city == "")
+      {
+        // drop requirement for street number and precise abbreviation and look for street
+        res = myAddress.match(/^\s*((\w+\s+)+(st|ave|rd|ln|dr|blvd|cir|ct|pkwy|pl|way|aly|pk|sq|ter|plz|street|avenue|road|lane|drive|boulevard|circle|court|parkway|place|loop|alley|park|square|terrace|plaza|mall))[\s\.,;]*(.*)$/i);
+        if (res && res[1])
+        {
+          address = res[1];
+          city = res[4];
+        }
+        // has a number: city is last word
+        else if (myAddress.match(/^\s*\d/))
+        {
+          res = myAddress.match(/(\w+)[\s\.,;]*$/);
+          city = res[1];
+          address = myAddress.substring(0, res.index);
+        }
+        // otherwise, looks like it doesn't have a street; city is whole thing
+        else
+        {
+          city = myAddress;
+          address = "";
+        }
+      }
+
+      return {address : address, city : city};
+
+	}
+  
+  
     function viai(q)
     {
-      /*
-      todo:
-      - add support for their very powerful driving directions
-        (but wonder if it's worth it : *lots* of switches needed)
-      */
-      
+	
+	//TODO: support accents
+	
       var args = parseArgsEx(q, "to");
 
       if( nullArgs("viai", args.q) )
         return;
+      // Force UTF-8 encoding
+	  //commented, because I can't get it to work :(
+      //args.q = utf8_encode(args.q);
 
       var to = "0";
       if( !( typeof args.switch_val["to"] == "undefined" || args.switch_val["to"] == "" ) )
       {
         to=args.switch_val["to"];
       }
+      
+	  var Departure = parseAddress(args.q);
+      document.viaif.strDepartureAddress.value = Departure.address;
+      document.viaif.strDepartureMerged.value = Departure.city;
 
-      // What follows is a fairly "ergonomic" parser for addresses I got & simplified from mp.xml.
-
-      var address = "";
-      var city = "";
-
-      // detect leading ### w w w st
-      var res = args.q.match(/^\s*(\d+(\s+\w+)+\s+(st|ave|rd|ln|dr|blvd|cir|ct|pkwy|pl|way|aly|pk|sq|ter|plz|rue|bd))[\s\.,;]*(.*)$/i);
-      if (res && res[1])
-      {
-        address = res[1];
-        city = res[4];
-      }
-
-      // detect trailing comma or semicolon; prefer this way of finding city
-      res = args.q.match(/[\.,;]\s*([^\d][^,;]+)[\s\.,;]*$/i);
-      if (res && res[1])
-      {
-        city = res[1];
-        address = args.q.substring(0, res.index);
-      }
-
-      // last resorts: we really want a city
-      if (city == "")
-      {
-        // drop requirement for street number and precise abbreviation and look for street
-        res = args.q.match(/^\s*((\w+\s+)+(st|ave|rd|ln|dr|blvd|cir|ct|pkwy|pl|way|aly|pk|sq|ter|plz|street|avenue|road|lane|drive|boulevard|circle|court|parkway|place|loop|alley|park|square|terrace|plaza|mall))[\s\.,;]*(.*)$/i);
-        if (res && res[1])
-        {
-          address = res[1];
-          city = res[4];
-        }
-        // has a number: city is last word
-        else if (args.q.match(/^\s*\d/))
-        {
-          res = args.q.match(/(\w+)[\s\.,;]*$/);
-          city = res[1];
-          address = args.q.substring(0, res.index);
-        }
-        // otherwise, looks like it doesn't have a street; city is whole thing
-        else
-        {
-          city = q;
-          address = "";
-        }
-      }
-
-      document.viaif.strDepartureAddress.value = address;
-      document.viaif.strDepartureMerged.value = city;
-
-	  
-      // What follows is a fairly "ergonomic" parser for addresses I got & simplified from mp.xml.
-
-      var address = "";
-      var city = "";
-
-      // detect leading ### w w w st
-      var res = to.match(/^\s*(\d+(\s+\w+)+\s+(st|ave|rd|ln|dr|blvd|cir|ct|pkwy|pl|way|aly|pk|sq|ter|plz|rue|bd))[\s\.,;]*(.*)$/i);
-      if (res && res[1])
-      {
-        address = res[1];
-        city = res[4];
-      }
-
-      // detect trailing comma or semicolon; prefer this way of finding city
-      res = to.match(/[\.,;]\s*([^\d][^,;]+)[\s\.,;]*$/i);
-      if (res && res[1])
-      {
-        city = res[1];
-        address = to.substring(0, res.index);
-      }
-
-      // last resorts: we really want a city
-      if (city == "")
-      {
-        // drop requirement for street number and precise abbreviation and look for street
-        res = to.match(/^\s*((\w+\s+)+(st|ave|rd|ln|dr|blvd|cir|ct|pkwy|pl|way|aly|pk|sq|ter|plz|street|avenue|road|lane|drive|boulevard|circle|court|parkway|place|loop|alley|park|square|terrace|plaza|mall))[\s\.,;]*(.*)$/i);
-        if (res && res[1])
-        {
-          address = res[1];
-          city = res[4];
-        }
-        // has a number: city is last word
-        else if (to.match(/^\s*\d/))
-        {
-          res = to.match(/(\w+)[\s\.,;]*$/);
-          city = res[1];
-          address = to.substring(0, res.index);
-        }
-        // otherwise, looks like it doesn't have a street; city is whole thing
-        else
-        {
-          city = to;
-          address = "";
-        }
-      }
-
-      document.viaif.strArrivalAddress.value = address;
-      document.viaif.strArrivalMerged.value = city;
-
+	  var Arrival = parseAddress(to);
+      document.viaif.strArrivalAddress.value = Arrival.address;
+      document.viaif.strArrivalMerged.value = Arrival.city;
 	  
       submitForm(viaif);
     }
@@ -152,9 +113,4 @@
     The following applies if this file is included and distributed with Dave's Quick Search Deskbar:
     Copyright (c) 2002 David Bau; Distributed under the terms of the GNU Public License, Version 2 (http://www.gnu.org/copyleft/gpl.txt)
   </copyright>
-  <created_by>
-    This search file was initially created on 10/14/02 at 15:04:31
-    by Dave's Quick Search Deskbar Search Wizard version 0.9.1 (beta),
-    Copyright (c) 2002 Glenn Carr; Distributed under the terms of the GNU General Public License, Version 2
-  </created_by>
 </search>
