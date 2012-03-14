@@ -11,6 +11,7 @@ Bug Fixes
 
 Modified Searches
 * viam - will work better with non-european searches
+* alm - updated to work with new site (Kim Gräsman)
 
 Removed Searches
 
