@@ -14,7 +14,7 @@ CALL "%PROGRAMFILES%\Microsoft Visual Studio 9.0\Common7\Tools\vsvars32.bat"
 
 REM Build DQSDTools for x64
 PUSHD DQSDTools
-  DEVENV DQSDTools.vs2008.sln /rebuild "Release|x64"
+  DEVENV DQSDTools.sln /rebuild "Release|x64"
   COPY /y "x64\Release\DQSDTools.dll" ..\..\DQSDTools64.dll
 POPD
 
