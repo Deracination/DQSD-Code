@@ -9,7 +9,7 @@ call "%PROGRAMFILES%\Microsoft Visual Studio 9.0\Common7\Tools\vsvars32.bat"
 pushd %~dp0
 
 pushd DQSDTools
-DEVENV DQSDTools.vs2008.sln /rebuild "Release|Win32"
+DEVENV DQSDTools.sln /rebuild "Release|Win32"
 copy /y Win32\Release\DQSDTools.dll ..\..\DQSDTools.dll
 popd
 
