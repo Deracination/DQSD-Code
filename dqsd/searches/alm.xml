@@ -1,13 +1,13 @@
 <search function="alm">
   <name>All Music Guide (AMG)</name>
   <description>
-    Search the AMG for album reviews, track listings, artist discographies and more. Searches for artists by default.<br/>
+    Search the AMG for album reviews, track listings, artist discographies and more.<br/>
     <div class="helpboxDescLabels">Switches:</div>
   	<table class="helpboxDescTable">
-  		<tr><td>/song</td><td> - </td><td>Search for a specific song.</td></tr>
-  		<tr><td>/album</td><td> - </td><td>Search for a specific album.</td></tr>
-  		<tr><td>/style</td><td> - </td><td>Lookup the history of a particular music style.</td></tr>
-  		<tr><td>/label</td><td> - </td><td>Lookup information on a major record label.</td></tr>
+  		<tr><td>/artist</td><td> - </td><td>Search for an artist (default).</td></tr>
+  		<tr><td>/song</td><td> - </td><td>Search for a song.</td></tr>
+  		<tr><td>/album</td><td> - </td><td>Search for an album.</td></tr>
+  		<tr><td>/work</td><td> - </td><td>Search for a classical work.</td></tr>
   	</table>
     <div class="helpboxDescLabels">Examples:</div>
     <table class="helpboxDescTable">
@@ -17,52 +17,37 @@
   </description>
   <category>Entertainment</category>
   <link>http://www.allmusic.com/</link>
-  <contributor>Peter Risser, Ryan Edwards</contributor>
+  <contributor>Peter Risser, Ryan Edwards, Kim Gr&#228;sman</contributor>
   
   <form name="almf"
-        action="http://www.allmusic.com/cg/amg.dll"
+        action="http://www.allmusic.com/search"
         method="post">
-    <input type="hidden" name="P" value="amg"/>
-    <input type="hidden" name="uid" value="SEARCH"/>
-    <input type="hidden" name="opt1"/>
-    <input type="hidden" name="sql"/>
+    <input type="hidden" name="search_term" id="search_txt" value=""/>
+    <input type="hidden" name="search_button"/>
+    <input type="hidden" name="search_type" id="search_opt" value="artist" />
   </form>
   
   <script><![CDATA[
     function alm(q)
     {
-      var args = parseArgs(q, "album, song, style, label");
+      var args = parseArgs(q, "artist, album, song, work");
       
       if( nullArgs("alm", q) )
          return false;
-      else if( args.switches.length == 1 )
+
+      if( args.switches.length > 1 )
       {
-        switch( args.switches[0].name )
-        {
-          case "album": 
-            document.almf.opt1.value="2"; 
-            break;
-          case "song":
-            document.almf.opt1.value="3";
-            break;
-          case "label":
-            document.almf.opt1.value="4"; 
-            break;
-          case "style":
-            document.almf.opt1.value="5"; 
-            break;
-        }
-        document.almf.sql.value = args.q;
-        submitForm(almf);
-      }
-      else if( args.switches.length > 1 )
         nullArgs("alm","?");
-      else
-      {
-        document.almf.opt1.value="1";
-        document.almf.sql.value = args.q;
-        submitForm(almf);
+        return false;
       }
+      
+      if( args.switches.length == 1 )
+      {
+        document.almf.search_opt.value = args.switches[0].name
+      }
+
+      document.almf.search_txt.value = args.q;
+      submitForm(almf);
     }
   ]]></script>
 
