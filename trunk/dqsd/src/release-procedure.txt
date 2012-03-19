@@ -1,0 +1,37 @@
+RELEASE PROCEDURE FOR DQSD - Kim Gräsman, Updated March, 2012
+=============================================================
+- Prepare for build
+  - SVN update, so you have the latest changes
+	- Make sure the paths in build.cmd match your private VS.NET, Windows SDK and 
+		NSIS paths
+
+  - Update version stuff
+    - Update version resource in DQSDTools DLL
+    - Update version in version.xml
+    - Set date for latest changes in ChangeLog.txt
+
+  - Write condensed release notes in README.MD, based on ChangeLog.txt
+
+- Update the site
+	- Check out the dqsdweb folder from SVN
+	- Modify doc.htm
+    - Latest stable -> Sourceforge release
+    - Latest beta -> Sourceforge release
+    - Order them with the newest release at the top
+  - Copy version.xml from dqsd folder
+
+- Build DLL and installer
+	- Run build_all.cmd
+	- Generates dqsd.exe and dqsdx64.zip
+		
+- Test newly-built installer
+
+- Publish the installers and web site, using publish_release.cmd
+
+- Commit all DQSD files, including the web site. Message: "Release <ver>-<type>"
+- Set an SVN tag on the trunk called rel-<ver>-<type>, e.g. 
+	"rel-3-1-8-0-beta" or "rel-3-1-8-0" for a final version
+
+- Send an announcement to dqsd-announce@lists.sourceforge.net 
+	(see: http://sourceforge.net/mailarchive/forum.php?forum_id=8603)
+
