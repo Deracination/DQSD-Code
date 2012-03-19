@@ -74,7 +74,7 @@ function checkWebForUpdateNotifyAll()
 // asynchronous load to work properly.
 var checkUpdateOnlineVersionDOM = null;
 var checkUpdateQuiet = true;
-var DQSD_CHECKUPDATE_URL = "http://www.dqsd.net/version.xml";
+var DQSD_CHECKUPDATE_URL = "http://dqsd.sourceforge.net/version.xml";
 
 function checkWebForUpdate()
 {
@@ -123,7 +123,7 @@ function onVersionLoadReadyStateChange()
       }
       else if ( !checkUpdateQuiet )
       {
-        rversion.htmlDescription = "You are using the latest version.<br/>For more details visit <a tabindex=-1 href='http://www.dqsd.net' onclick='window.close();'>www.dqsd.net</a>."
+        rversion.htmlDescription = "You are using the latest version.<br/>For more details visit <a tabindex=-1 href='http://dqsd.sourceforge.net' onclick='window.close();'>dqsd.sourceforge.net</a>."
         window.showModalDialog("versiondialog.htm", { lversion:lversion, rversion:rversion }, "dialogHeight: 100px; dialogWidth: 300px; dialogTop: " + (screen.height / 2 - 50) + "px; dialogLeft: " + (screen.width / 2 - 150) + "px; edge: Raised; center: Yes; help: No; resizable: Yes; status: No; scroll: No;");
       }
     }

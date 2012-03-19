@@ -3,6 +3,19 @@
 Enhancements
 
 New Searches
+
+Bug Fixes
+
+Modified Searches
+
+Removed Searches
+
+-- What's new for 4.1.1.0 (Mar 19, 2012)
+
+Enhancements
+* Trying new build/release procedure
+
+New Searches
 * dd - DuckDuckGo is a general purpose search engine like Google or Bing, but that doesnt track you. (MLL)
 * viai - have ViaMichelin (search viam) calculate an intinerary for you (MLL)
 

@@ -225,10 +225,24 @@ Section "Quick Search Deskbar (required)"
   
   SetOutPath "$INSTDIR\src"
   File "search.ico"
+  File "button-dqsd.gif"
+  File "button-dqsd2.gif"
+
   File "search.nsi"
-  File "build.cmd"
+  File "dqsd_clsid.nsh"
+
+  File "build32.cmd"
+  File "build64.cmd"
+  File "build64.exclude.txt"
+  File "build_all.cmd"
+  File "publish_release.cmd"
   File "scrub.cmd"
-  File "ReadMe.txt"
+  
+  File "release-procedure.txt"
+
+  File "zip.exe"
+  File "pscp.exe"
+  
   
   SetOutPath "$INSTDIR\src\DQSDTools"
   File "DQSDTools\*.cpp"
