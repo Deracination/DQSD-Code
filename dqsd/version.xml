@@ -3,14 +3,14 @@
     <version>
         <majorhi>4</majorhi>
         <majorlo>1</majorlo>
-        <minorhi>0</minorhi>
+        <minorhi>1</minorhi>
         <minorlo>0</minorlo>
     </version>
     <date>
-        June 25, 2011
+        March 19, 2012
     </date>
     <html_description>
-        You are currently running version %lv %lt <nobr>(%ld)</nobr> of <a href="http://www.dqsd.net" onclick="window.close();">Dave's Quick Search Deskbar</a>.<br/><br/>
-        Version %rv %rt <nobr>(%rd)</nobr> is now available for download at <a href="http://www.dqsd.net" onclick="window.close();">www.dqsd.net</a>.<br/>
+        You are currently running version %lv %lt <nobr>(%ld)</nobr> of <a href="http://dqsd.sourceforge.net" onclick="window.close();">Dave's Quick Search Deskbar</a>.<br/><br/>
+        Version %rv %rt <nobr>(%rd)</nobr> is now available for download at <a href="http://dqsd.sourceforge.net" onclick="window.close();">dqsd.sourceforge.net</a>.<br/>
     </html_description>
 </dqsd_version_info>

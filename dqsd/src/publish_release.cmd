@@ -47,10 +47,9 @@ COPY ..\README.md "%RELEASE%\README.md"
 %PSCP% -r "%RELEASE%" kimgrasman@frs.sourceforge.net:/home/pfs/project/dqsd/dqsd/
 
 RD /S /Q "%RELEASE%"
-POPD
 
 REM Publish web site
-PUSHD %~dp0..\..\dqsdweb
+CD ..\..\dqsdweb
 
 SET TMPDIR=%TEMP%\dqsdweb
 IF EXIST %TMPDIR% RD /s /q %TMPDIR%
