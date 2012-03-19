@@ -53,8 +53,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 4,1,0,0
- PRODUCTVERSION 4,1,0,0
+ FILEVERSION 4,1,1,0
+ PRODUCTVERSION 4,1,1,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -71,14 +71,14 @@ BEGIN
         BEGIN
             VALUE "Comments", "Distributed under the terms of the GNU Public License, Version 2: http://www.gnu.org/copyleft/gpl.txt"
             VALUE "CompanyName", "Dave's Quick Search Deskbar"
-            VALUE "ContributingAuthors", "Koen Mannaerts (WhirlyWiryWeb.com), David Bau (notesbydave.com), Glenn Carr (glenncarr.com), Will Dean (indcomp.co.uk), Brent Beardsley, Kim Gräsman (winwonk.com)"
+            VALUE "ContributingAuthors", "Koen Mannaerts (WhirlyWiryWeb.com), David Bau (notesbydave.com), Glenn Carr (glenncarr.com), Will Dean (indcomp.co.uk), Brent Beardsley, Kim Gräsman (kontrollbehov.com)"
             VALUE "FileDescription", "ActiveX Tools for Dave's Quick Search Bar "
-            VALUE "FileVersion", "4, 1, 0, 0"
+            VALUE "FileVersion", "4, 1, 1, 0"
             VALUE "InternalName", "DQSDTools"
             VALUE "LegalCopyright", "Copyright (c) 2002-2011 David Bau. GNU Public License Version 2 applies."
             VALUE "OriginalFilename", "DQSDTools.DLL"
             VALUE "ProductName", "DQSDTools ActiveX Components"
-            VALUE "ProductVersion", "4, 1, 0, 0"
+            VALUE "ProductVersion", "4, 1, 1, 0"
         END
     END
     BLOCK "VarFileInfo"
