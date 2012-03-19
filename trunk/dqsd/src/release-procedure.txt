@@ -13,7 +13,6 @@ RELEASE PROCEDURE FOR DQSD - Kim Gräsman, Updated March, 2012
   - Write condensed release notes in README.MD, based on ChangeLog.txt
 
 - Update the site
-	- Check out the dqsdweb folder from SVN
 	- Modify doc.htm
     - Latest stable -> Sourceforge release
     - Latest beta -> Sourceforge release
